@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Wash List — Chalk — April 09, 2026</title>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+               color: #333; padding: 20px; max-width: 1100px; margin: 0 auto; }
+        h1 { font-size: 24px; font-weight: 300; margin-bottom: 4px; }
+        h2 { font-size: 18px; font-weight: 400; color: #666; margin-bottom: 16px; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 20px; }
+        .kpi-row { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+        .kpi { background: #f8f9fa; border-radius: 8px; padding: 16px 20px;
+               flex: 1; min-width: 140px; }
+        .kpi-value { font-size: 28px; font-weight: 600; color: #2c3e50; }
+        .kpi-label { font-size: 12px; color: #888; text-transform: uppercase; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+        th { background: #f1f3f5; padding: 8px 12px; text-align: left;
+             font-size: 12px; text-transform: uppercase; color: #666;
+             border-bottom: 2px solid #dee2e6; }
+        td { padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+        tr:hover { background: #f8f9fa; }
+        .section-header { background: #2c3e50; color: white; padding: 10px 14px;
+                          font-size: 14px; font-weight: 600; margin-top: 20px;
+                          border-radius: 4px 4px 0 0; }
+        .rack-info { color: #888; font-size: 12px; }
+        .qty { font-weight: 600; font-size: 16px; }
+        .rack-count { color: #e67e22; font-weight: 500; }
+        .adjustment { color: #e74c3c; font-style: italic; }
+        .order-card { border: 1px solid #dee2e6; border-radius: 8px;
+                      padding: 16px; margin-bottom: 12px; }
+        .order-header { font-weight: 600; font-size: 16px; margin-bottom: 8px; }
+        .order-customer { color: #666; font-size: 13px; }
+        .order-products { margin-top: 8px; }
+        .chart-container { max-width: 800px; margin: 0 auto 30px; }
+        @media print {
+            body { padding: 0; font-size: 12px; }
+            .kpi-row { display: none; }
+            .chart-container { display: none; }
+            .no-print { display: none; }
+            table { font-size: 11px; }
+            .section-header { background: #333 !important; -webkit-print-color-adjust: exact; }
+            .order-card { page-break-inside: avoid; }
+            h1 { font-size: 18px; }
+        }
+    
+
+        .color-banner { padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; }
+        .color-banner h1 { margin: 0; font-size: 22px; font-weight: 600; }
+        .color-banner .date { margin: 4px 0 0; font-size: 13px; opacity: 0.85; }
+        .tab-bar { display: flex; gap: 0; margin: 20px 0 0; }
+        .tab { padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer;
+               border: 1px solid #dee2e6; border-bottom: none; border-radius: 6px 6px 0 0;
+               background: #f1f3f5; color: #666; }
+        .tab.active { background: #fff; color: #2c3e50; border-bottom: 1px solid #fff;
+                      margin-bottom: -1px; position: relative; z-index: 1; }
+        .tab-content { border-top: 1px solid #dee2e6; padding-top: 12px; }
+        .view { display: none; }
+        .view.active { display: block; }
+        .parts-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
+                      align-items: flex-start; }
+        .parts-section { flex: 0 0 auto; min-width: 120px; }
+        .parts-section .section-header { margin-top: 0; font-size: 11px;
+                                          padding: 5px 8px; border-radius: 3px 3px 0 0; }
+        .parts-table { width: 100%; border-collapse: collapse; margin: 0;
+                       border: 1px solid #dee2e6; border-top: none; }
+        .parts-table td { padding: 2px 6px; border-bottom: 1px solid #f0f0f0;
+                          font-size: 13px; line-height: 1.3; }
+        .parts-table td:first-child { font-weight: 500; white-space: nowrap; }
+        .parts-table td:last-child { text-align: right; font-weight: 600;
+                                      font-size: 13px; padding-left: 10px;
+                                      font-variant-numeric: tabular-nums; }
+        .parts-table tr:last-child td { border-bottom: none; }
+        .mask { background: #d4edda; }
+        .orders-table { width: 100%; border-collapse: collapse; }
+        .orders-table th { text-align: left; }
+        .orders-table td { padding: 4px 10px; border-bottom: 1px solid #eee;
+                           font-size: 13px; vertical-align: top; }
+        .orders-table .col-order { white-space: nowrap; width: 80px; }
+        .orders-table .col-date { white-space: nowrap; width: 60px; color: #999;
+                                   font-size: 12px; }
+        .orders-table .col-sku { font-family: monospace; font-size: 12px;
+                                  font-weight: 600; white-space: nowrap; width: 120px; }
+        .orders-table .col-name { color: #555; }
+        .orders-table .col-qty { text-align: right; width: 36px; font-weight: 600;
+                                  font-variant-numeric: tabular-nums; }
+        .exp-tag { display: inline-block; background: #e74c3c; color: #fff;
+                   font-size: 9px; font-weight: 700; padding: 1px 4px;
+                   border-radius: 3px; margin-left: 5px; vertical-align: middle;
+                   letter-spacing: 0.5px; }
+        .exp-row { background: #fdf0ef; }
+        .legend { margin: 12px 0 4px; font-size: 12px; color: #666; }
+        .legend span { display: inline-block; padding: 2px 8px; border-radius: 3px;
+                       margin-right: 10px; }
+        .legend .lg-mask { background: #d4edda; }
+        .legend .lg-exp { background: #e74c3c; color: #fff; }
+        .sort-order { border: 1px solid #dee2e6; border-radius: 6px;
+                      margin-bottom: 14px; overflow: hidden; background: #fff; }
+        .sort-order-header { padding: 10px 14px;
+                              display: flex; justify-content: space-between;
+                              align-items: center; border-bottom: 1px solid #eee; }
+        .sort-order-header .oname { font-weight: 600; font-size: 15px; }
+        .sort-order-header .cust { color: #888; font-size: 12px; }
+        .sort-order-header .total-parts { background: #2c3e50; color: #fff;
+                              font-size: 11px; font-weight: 600; padding: 2px 8px;
+                              border-radius: 10px; margin-left: 8px; }
+        .sort-product { padding: 8px 14px; border-bottom: 1px solid #f5f5f5; }
+        .sort-product:last-child { border-bottom: none; }
+        .sort-prod-header { display: flex; justify-content: space-between;
+                            align-items: baseline; margin-bottom: 4px; }
+        .sort-prod-header .pname { font-size: 13px; font-weight: 500; }
+        .sort-prod-header .pqty { font-size: 13px; font-weight: 600; color: #2c3e50; }
+        .sort-parts-grid { display: flex; flex-wrap: wrap; gap: 0; }
+        .sort-part { display: inline-flex; align-items: baseline; gap: 4px;
+                     padding: 2px 10px 2px 0; font-size: 12px; color: #555; }
+        .sort-part .sp-name { font-weight: 500; }
+        .sort-part .sp-qty { font-weight: 600; color: #2c3e50;
+                             font-variant-numeric: tabular-nums; }
+        @media print {
+            .tab-bar { display: none; }
+            .view { display: block !important; page-break-before: always; }
+            .view:first-child { page-break-before: auto; }
+            .parts-grid { gap: 4px; }
+            .parts-section { page-break-inside: avoid; }
+            .parts-section .section-header { font-size: 10px; padding: 3px 5px;
+                        background: #333 !important; -webkit-print-color-adjust: exact; }
+            .parts-table td { padding: 1px 4px; font-size: 11px; }
+            .color-banner, .mask, .exp-tag, .exp-row {
+                -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .sort-order { page-break-inside: avoid; }
+        }
+    </style>
+</head><body>
+
+<div class="color-banner" style="background:#D0D0D0;color:#333;">
+    <h1>Parts Wash List — Chalk</h1>
+    <div class="date">April 09, 2026</div>
+</div>
+
+<div class="kpi-row">
+    <div class="kpi"><div class="kpi-value">15</div><div class="kpi-label">Orders</div></div>
+    <div class="kpi"><div class="kpi-value">48</div><div class="kpi-label">Total Items</div></div>
+    <div class="kpi"><div class="kpi-value">19</div><div class="kpi-label">Lighting</div></div>
+    <div class="kpi"><div class="kpi-value">29</div><div class="kpi-label">Hardware</div></div>
+    <div class="kpi"><div class="kpi-value">85</div><div class="kpi-label">Total Parts</div></div>
+</div>
+
+<div class="legend">
+    <span class="lg-mask">Green = mask before coating</span>
+    <span class="lg-exp">EXP = expedite</span>
+</div>
+
+<div class="tab-bar">
+    <div class="tab active" onclick="switchTab('parts')">Parts Wash List</div>
+    <div class="tab" onclick="switchTab('sort')">Sort Back</div>
+</div>
+
+<div class="tab-content">
+    <div id="view-parts" class="view active">
+        <div class="parts-grid">
+        <div class="parts-section">
+<div class="section-header">Pipes</div>
+<table class="parts-table"><tbody>
+<tr><td>PM3</td><td>8</td></tr>
+<tr><td>PF4</td><td>1</td></tr>
+<tr><td>PF6</td><td>15</td></tr>
+<tr><td>PF12</td><td>14</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section">
+<div class="section-header">Lamp Cups</div>
+<table class="parts-table"><tbody>
+<tr><td>LC1</td><td>2</td></tr>
+<tr><td>LC2</td><td>4</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section">
+<div class="section-header">Canopies</div>
+<table class="parts-table"><tbody>
+<tr><td>CA5</td><td>3</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section">
+<div class="section-header">Pipes / PATs</div>
+<table class="parts-table"><tbody>
+<tr><td>PA6-M2</td><td>1</td></tr>
+<tr><td>PA12-M2</td><td>1</td></tr>
+<tr><td>PA18-M2</td><td>1</td></tr>
+<tr><td>PA24-M2</td><td>1</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section">
+<div class="section-header">Caps / Canopies</div>
+<table class="parts-table"><tbody>
+<tr><td>GC6</td><td>11</td></tr>
+<tr><td>GC8</td><td>2</td></tr>
+<tr><td>FPS2</td><td>4</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section">
+<div class="section-header">Misc</div>
+<table class="parts-table"><tbody>
+<tr><td>PAT12-M1</td><td>2</td></tr>
+<tr><td>NB0-3/4</td><td>1</td></tr>
+<tr><td>MO3</td><td>2</td></tr>
+<tr><td>FC1</td><td>6</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section">
+<div class="section-header">Bodies / Shades</div>
+<table class="parts-table"><tbody>
+<tr class="mask"><td>BOP3</td><td>1</td></tr>
+<tr><td>BOP3L</td><td>1</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section">
+<div class="section-header">Domes (small)</div>
+<table class="parts-table"><tbody>
+<tr><td>DO8-M1</td><td>1</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section">
+<div class="section-header">Domes (large)</div>
+<table class="parts-table"><tbody>
+<tr><td>DO10</td><td>3</td></tr>
+</tbody></table>
+</div>
+
+        </div>
+
+        <h2 style="margin-top:30px;">Orders in This Batch</h2>
+        <table class="orders-table">
+        <thead><tr><th>Order</th><th>Date</th><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
+        <tbody><tr><td class="col-order">32611</td><td class="col-date">Oct 17</td><td class="col-sku">SAC-ALL</td><td class="col-name">Color Samples - All Colors</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">34875</td><td class="col-date">Mar 25</td><td class="col-sku">H32-12-1L</td><td class="col-name">Color Caliber Pull - Brass - 12" (C-C 10") / Chalk</td><td class="col-qty">6</td></tr>
+<tr><td class="col-order">34875</td><td class="col-date">Mar 25</td><td class="col-sku">H32-6-1L</td><td class="col-name">Color Caliber Pull - Brass - 6" (C-C 4") / Chalk</td><td class="col-qty">6</td></tr>
+<tr><td class="col-order">34890</td><td class="col-date">Mar 26</td><td class="col-sku">60222-1L</td><td class="col-name">Color Monarch Sconce - Brass / Chalk</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">34921</td><td class="col-date">Mar 27</td><td class="col-sku">30223-2L</td><td class="col-name">Color Legend 2 Sconce - Nickel / Chalk</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">34952</td><td class="col-date">Mar 30</td><td class="col-sku">30402-1L</td><td class="col-name">Color Orbi Chandelier - Brass / Chalk</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35019</td><td class="col-date">Apr 05</td><td class="col-sku">30112F-8-1L</td><td class="col-name">Color Lure Flush Mount 8" - Brass / Chalk / White Glass</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35029</td><td class="col-date">Apr 06</td><td class="col-sku">H32-6-2L</td><td class="col-name">Color Caliber Pull - Nickel - 6" (C-C 4") / Chalk</td><td class="col-qty">4</td></tr>
+<tr><td class="col-order">35029</td><td class="col-date">Apr 06</td><td class="col-sku">H20-1L</td><td class="col-name">Color Persona Knob - Nickel / Chalk</td><td class="col-qty">1</td></tr>
+<tr class="exp-row"><td class="col-order">35031<span class="exp-tag">EXP</span></td><td class="col-date">Apr 06</td><td class="col-sku">H20-1L</td><td class="col-name">Color Persona Knob - Nickel / Chalk</td><td class="col-qty">2</td></tr>
+<tr class="exp-row"><td class="col-order">35031<span class="exp-tag">EXP</span></td><td class="col-date">Apr 06</td><td class="col-sku">H32-12-2L</td><td class="col-name">Color Caliber Pull - Nickel - 12" (C-C 10") / Chalk</td><td class="col-qty">7</td></tr>
+<tr class="exp-row"><td class="col-order">35031<span class="exp-tag">EXP</span></td><td class="col-date">Apr 06</td><td class="col-sku">H32-6-2L</td><td class="col-name">Color Caliber Pull - Nickel - 6" (C-C 4") / Chalk</td><td class="col-qty">3</td></tr>
+<tr><td class="col-order">35055</td><td class="col-date">Apr 07</td><td class="col-sku">60226-11-1L</td><td class="col-name">Color Pilot Sconce 11" - Brass / Chalk</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35056</td><td class="col-date">Apr 07</td><td class="col-sku">50120-10-1L</td><td class="col-name">Color Cadbury Sconce 10" - Brass / Chalk</td><td class="col-qty">3</td></tr>
+<tr><td class="col-order">35074</td><td class="col-date">Apr 08</td><td class="col-sku">30332-2L</td><td class="col-name">Color Supreme Flush Mount - Nickel / Chalk</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35092</td><td class="col-date">Apr 09</td><td class="col-sku">SAF-ALL</td><td class="col-name">Finish Samples - All Finishes</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35092</td><td class="col-date">Apr 09</td><td class="col-sku">SAC-ALL</td><td class="col-name">Color Samples - All Colors</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35096</td><td class="col-date">Apr 09</td><td class="col-sku">SAF-ALL</td><td class="col-name">Finish Samples - All Finishes</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35096</td><td class="col-date">Apr 09</td><td class="col-sku">SAC-ALL</td><td class="col-name">Color Samples - All Colors</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35099</td><td class="col-date">Apr 09</td><td class="col-sku">SAC-ALL</td><td class="col-name">Color Samples - All Colors</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35106</td><td class="col-date">Apr 09</td><td class="col-sku">SAF-ALL</td><td class="col-name">Finish Samples - All Finishes</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35106</td><td class="col-date">Apr 09</td><td class="col-sku">SAC-ALL</td><td class="col-name">Color Samples - All Colors</td><td class="col-qty">1</td></tr>
+</tbody>
+        </table>
+    </div>
+
+    <div id="view-sort" class="view">
+        <p class="subtitle">Sort coated parts back to their original orders.</p>
+        <div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">32611</span><span class="total-parts">0 parts</span></div>
+                <span class="cust">SESCO Lighting</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Samples - All Colors</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">34875</span><span class="total-parts">12 parts</span></div>
+                <span class="cust">Elissa Grayer</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Caliber Pull - Brass - 12" (C-C 10") / Chalk</span>
+                    <span class="pqty">x6</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">PF12</span> <span class="sp-qty">6</span></span></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Caliber Pull - Brass - 6" (C-C 4") / Chalk</span>
+                    <span class="pqty">x6</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">PF6</span> <span class="sp-qty">6</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">34890</span><span class="total-parts">4 parts</span></div>
+                <span class="cust">Kenneth Nagin</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Monarch Sconce - Brass / Chalk</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">LC2</span> <span class="sp-qty">4</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">34921</span><span class="total-parts">14 parts</span></div>
+                <span class="cust">Jana Phillipy</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Legend 2 Sconce - Nickel / Chalk</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">CA5</span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name">FPS2</span> <span class="sp-qty">4</span></span><span class="sort-part"><span class="sp-name">GC6</span> <span class="sp-qty">4</span></span><span class="sort-part"><span class="sp-name">MO3</span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name">PAT12-M1</span> <span class="sp-qty">2</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">34952</span><span class="total-parts">14 parts</span></div>
+                <span class="cust">Kaoru Hudachek</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Orbi Chandelier - Brass / Chalk</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">BOP3</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">BOP3L</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">GC6</span> <span class="sp-qty">4</span></span><span class="sort-part"><span class="sp-name">GC8</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">PF12</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">PF6</span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name">PM3</span> <span class="sp-qty">4</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35019</span><span class="total-parts">1 parts</span></div>
+                <span class="cust">Rddhima Golyan</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Lure Flush Mount 8" - Brass / Chalk / White Glass</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">DO8-M1</span> <span class="sp-qty">1</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35029</span><span class="total-parts">6 parts</span></div>
+                <span class="cust">Claudia Leonard</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Caliber Pull - Nickel - 6" (C-C 4") / Chalk</span>
+                    <span class="pqty">x4</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">PF6</span> <span class="sp-qty">4</span></span></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Persona Knob - Nickel / Chalk</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">FC1</span> <span class="sp-qty">2</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="border-left: 4px solid #e74c3c;">
+            <div class="sort-order-header">
+                <div><span class="oname">35031</span> <span class="exp-tag">EXP</span><span class="total-parts">14 parts</span></div>
+                <span class="cust">Elissa Grayer</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Persona Knob - Nickel / Chalk</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">FC1</span> <span class="sp-qty">4</span></span></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Caliber Pull - Nickel - 12" (C-C 10") / Chalk</span>
+                    <span class="pqty">x7</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">PF12</span> <span class="sp-qty">7</span></span></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Caliber Pull - Nickel - 6" (C-C 4") / Chalk</span>
+                    <span class="pqty">x3</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">PF6</span> <span class="sp-qty">3</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35055</span><span class="total-parts">8 parts</span></div>
+                <span class="cust">Michael Roland</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Pilot Sconce 11" - Brass / Chalk</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">CA5</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">LC1</span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name">NB0-3/4</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">PA12-M2</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">PA18-M2</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">PA24-M2</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">PA6-M2</span> <span class="sp-qty">1</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35056</span><span class="total-parts">3 parts</span></div>
+                <span class="cust">Michael Roland</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Cadbury Sconce 10" - Brass / Chalk</span>
+                    <span class="pqty">x3</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">DO10</span> <span class="sp-qty">3</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35074</span><span class="total-parts">9 parts</span></div>
+                <span class="cust">Elizabeth Wilkes</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Supreme Flush Mount - Nickel / Chalk</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name">GC6</span> <span class="sp-qty">3</span></span><span class="sort-part"><span class="sp-name">GC8</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">PF4</span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name">PM3</span> <span class="sp-qty">4</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35092</span><span class="total-parts">0 parts</span></div>
+                <span class="cust">Caroline Olson</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Finish Samples - All Finishes</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Samples - All Colors</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35096</span><span class="total-parts">0 parts</span></div>
+                <span class="cust">Elizabeth Rutherfurd</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Finish Samples - All Finishes</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Samples - All Colors</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35099</span><span class="total-parts">0 parts</span></div>
+                <span class="cust">Lucy Oneill</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Samples - All Colors</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35106</span><span class="total-parts">0 parts</span></div>
+                <span class="cust">Michele Spivak</span>
+            </div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Finish Samples - All Finishes</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Samples - All Colors</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"></div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+function switchTab(view) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + view).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
+</body></html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Wash List — Orange — April 09, 2026</title>
+<title>Wash List — Orange — April 10, 2026</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -56,9 +56,9 @@
         .tab-content { border-top: 1px solid #dee2e6; padding-top: 12px; }
         .view { display: none; }
         .view.active { display: block; }
-        .parts-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
-                      align-items: flex-start; }
-        .parts-section { flex: 0 0 auto; min-width: 120px; }
+        .parts-grid { display: grid; grid-template-columns: repeat(6, 1fr);
+                      gap: 10px; margin-top: 8px; align-items: flex-start; }
+        .parts-section { min-width: 0; }
         .parts-section .section-header { margin-top: 0; font-size: 11px;
                                           padding: 5px 8px; border-radius: 3px 3px 0 0; }
         .parts-table { width: 100%; border-collapse: collapse; margin: 0;
@@ -133,7 +133,7 @@
 
 <div class="color-banner" style="background:#D4713B;color:#fff;">
     <h1>Parts Wash List — Orange</h1>
-    <div class="date">April 09, 2026</div>
+    <div class="date">April 10, 2026</div>
 </div>
 
 <div class="kpi-row">
@@ -157,7 +157,7 @@
 <div class="tab-content">
     <div id="view-parts" class="view active">
         <div class="parts-grid">
-        <div class="parts-section">
+        <div class="parts-section" style="grid-column: 1; grid-row: 1;">
 <div class="section-header">Pipes</div>
 <table class="parts-table"><tbody>
 <tr><td>PFB2</td><td>5</td></tr>
@@ -167,14 +167,14 @@
 <tr><td>PF12</td><td>5</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
+<div class="parts-section" style="grid-column: 2; grid-row: 1;">
 <div class="section-header">Lamp Cups</div>
 <table class="parts-table"><tbody>
 <tr><td>LC1</td><td>172</td></tr>
 <tr><td>LC2</td><td>6</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
+<div class="parts-section" style="grid-column: 3; grid-row: 1;">
 <div class="section-header">Pipes (2)</div>
 <table class="parts-table"><tbody>
 <tr><td>PA6-M1</td><td>4</td></tr>
@@ -185,16 +185,7 @@
 <tr><td>PA36-M1</td><td>13</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
-<div class="section-header">Canopies</div>
-<table class="parts-table"><tbody>
-<tr><td>CA5</td><td>11</td></tr>
-<tr class="mask"><td>CAT5-M2</td><td>7</td></tr>
-<tr class="mask"><td>CAT5-M3</td><td>3</td></tr>
-<tr class="mask"><td>CA10-M1</td><td>2</td></tr>
-</tbody></table>
-</div>
-<div class="parts-section">
+<div class="parts-section" style="grid-column: 4; grid-row: 1;">
 <div class="section-header">Pipes / PATs</div>
 <table class="parts-table"><tbody>
 <tr><td>PA6-M2</td><td>2</td></tr>
@@ -206,7 +197,7 @@
 <tr><td>PAT18</td><td>3</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
+<div class="parts-section" style="grid-column: 5; grid-row: 1;">
 <div class="section-header">Caps / Canopies</div>
 <table class="parts-table"><tbody>
 <tr><td>GC6</td><td>54</td></tr>
@@ -214,7 +205,7 @@
 <tr><td>FPS2</td><td>18</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
+<div class="parts-section" style="grid-column: 6; grid-row: 1;">
 <div class="section-header">Misc</div>
 <table class="parts-table"><tbody>
 <tr><td>BE1</td><td>372</td></tr>
@@ -226,13 +217,22 @@
 <tr><td>FP1</td><td>1</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
+<div class="parts-section" style="grid-column: 1; grid-row: 2;">
 <div class="section-header">Racks / Rods</div>
 <table class="parts-table"><tbody>
 <tr><td>PUF24</td><td>2</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
+<div class="parts-section" style="grid-column: 2; grid-row: 2;">
+<div class="section-header">Canopies</div>
+<table class="parts-table"><tbody>
+<tr><td>CA5</td><td>11</td></tr>
+<tr class="mask"><td>CAT5-M2</td><td>7</td></tr>
+<tr class="mask"><td>CAT5-M3</td><td>3</td></tr>
+<tr class="mask"><td>CA10-M1</td><td>2</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section" style="grid-column: 1; grid-row: 3;">
 <div class="section-header">Bodies / Shades</div>
 <table class="parts-table"><tbody>
 <tr class="mask"><td>BOS18-M2</td><td>4</td></tr>
@@ -244,14 +244,14 @@
 <tr><td>BOP3L</td><td>4</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
-<div class="section-header">Domes (small)</div>
+<div class="parts-section" style="grid-column: 2; grid-row: 3;">
+<div class="section-header">Domes</div>
 <table class="parts-table"><tbody>
 <tr><td>DO10-M1</td><td>3</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section">
-<div class="section-header">Domes (large)</div>
+<div class="parts-section" style="grid-column: 4; grid-row: 3;">
+<div class="section-header">Domes (large hole)</div>
 <table class="parts-table"><tbody>
 <tr><td>DO6</td><td>20</td></tr>
 <tr><td>DO10</td><td>2</td></tr>
