@@ -1,0 +1,3230 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>BOM Matrix — Dutton Brown</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; color: #4A4A4A; background: #FAFAF9;
+           padding: 24px; max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 20px; font-weight: 600; }
+    .timestamp { font-size: 12px; color: #999; margin-top: 4px; }
+    .kpi-row { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
+    .kpi { background: #fff; border: 1px solid #E0DDD9; border-radius: 6px;
+           padding: 12px 16px; flex: 1; min-width: 120px; }
+    .kpi-value { font-size: 24px; font-weight: 600; color: #2c3e50; }
+    .kpi-label { font-size: 11px; color: #999; text-transform: uppercase; }
+    .filter-bar { margin: 16px 0; }
+    .filter-bar input { padding: 8px 14px; font-size: 13px; border: 1px solid #ddd;
+                         border-radius: 4px; width: 300px; font-family: inherit; }
+    .grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .product-card { flex: 0 0 auto; min-width: 200px; max-width: 320px;
+                     border: 1px solid #E0DDD9; border-radius: 6px; overflow: hidden;
+                     background: #fff; }
+    .product-card.no-color { opacity: 0.5; }
+    .prod-header { background: #f8f7f5; padding: 6px 10px; font-size: 13px;
+                    border-bottom: 1px solid #eee; display: flex;
+                    justify-content: space-between; align-items: center; }
+    .prod-sku { font-weight: 600; font-family: monospace; font-size: 13px; }
+    .other-count { font-size: 10px; color: #999; font-weight: 400; }
+    .bom-table { width: 100%; border-collapse: collapse; }
+    .bom-table th { font-size: 10px; text-transform: uppercase; color: #888;
+                     padding: 3px 8px; text-align: left; }
+    .bom-table td { padding: 2px 8px; font-size: 12px; border-bottom: 1px solid #f5f5f5; }
+    .bom-table .qty { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .bom-table .sec { color: #aaa; font-size: 11px; }
+    .bom-table tr:last-child td { border-bottom: none; }
+    .no-color-msg { padding: 8px 10px; font-size: 11px; color: #bbb; }
+    .dl-link { display: inline-block; margin-top: 16px; font-size: 12px;
+               color: #3498db; text-decoration: none; }
+    .dl-link:hover { text-decoration: underline; }
+    @media print {
+        .filter-bar { display: none; }
+        .product-card.no-color { display: none; }
+        .product-card { page-break-inside: avoid; }
+    }
+</style>
+</head><body>
+<h1>Dutton Brown — BOM Matrix</h1>
+<div class="timestamp">Exported April 09, 2026 at 08:30 PM</div>
+
+<div class="kpi-row">
+    <div class="kpi"><div class="kpi-value">297</div><div class="kpi-label">Products</div></div>
+    <div class="kpi"><div class="kpi-value">242</div><div class="kpi-label">Unique Parts</div></div>
+    <div class="kpi"><div class="kpi-value">806</div><div class="kpi-label">Color BOM Entries</div></div>
+    <div class="kpi"><div class="kpi-value">6862</div><div class="kpi-label">Total BOM Rows</div></div>
+</div>
+
+<div class="filter-bar">
+    <input type="text" id="search" placeholder="Search by SKU or part name..." oninput="filterCards()">
+</div>
+
+<a class="dl-link" href="bom-matrix.csv" download>Download CSV</a>
+
+<div class="grid" id="grid">
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">10401-20</span> <span class="other-count">+30 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">10401-27</span> <span class="other-count">+30 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">10401F-20</span> <span class="other-count">+29 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">10401F-27</span> <span class="other-count">+29 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">10403-20</span> <span class="other-count">+31 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BE1</td><td class="qty">62</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">10403-27</span> <span class="other-count">+30 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BE1</td><td class="qty">124</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">10403F-20</span> <span class="other-count">+30 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BE1</td><td class="qty">62</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">10403F-27</span> <span class="other-count">+29 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BE1</td><td class="qty">124</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">20620</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO6-M2</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>LC3</td><td class="qty">6</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF2</td><td class="qty">6</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">20630</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO6-M2</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>LC3</td><td class="qty">6</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF2</td><td class="qty">6</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">21800</span> <span class="other-count">+33 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC3</td><td class="qty">18</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PM10</td><td class="qty">6</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PM7</td><td class="qty">12</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>SPC1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>SPC2</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">21800F</span> <span class="other-count">+29 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC3</td><td class="qty">18</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PM10</td><td class="qty">6</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PM7</td><td class="qty">12</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>SPC1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>SPC2</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30110-10</span> <span class="other-count">+29 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30110-10 (C)</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC10</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF12</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30110-12</span> <span class="other-count">+29 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30110-12 (C)</span> <span class="other-count">+24 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC10</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF12</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30110-6</span> <span class="other-count">+29 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30110-6 (C)</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC6</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF12</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30110-8</span> <span class="other-count">+29 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30110-8 (C)</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF12</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30112-10</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO10-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30112-12</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO12-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30112-6</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO6-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30112-8</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO8-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30112F-10</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO10-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30112F-12</span> <span class="other-count">+24 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO12-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30112F-6</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO6-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30112F-8</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO8-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30120</span> <span class="other-count">+22 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30120 (C)</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC6</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30121</span> <span class="other-count">+23 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30121 (C)</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30130-10</span> <span class="other-count">+21 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30130-10 (C)</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC10</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30130-12</span> <span class="other-count">+22 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30130-12 (C)</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC10</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30130-6</span> <span class="other-count">+21 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30130-6 (C)</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC6</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30130-8</span> <span class="other-count">+21 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30130-8 (C)</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30220</span> <span class="other-count">+24 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30220 (C)</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC6</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30221</span> <span class="other-count">+26 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30221 (C)</span> <span class="other-count">+25 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC8</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30222</span> <span class="other-count">+23 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30222 (C)</span> <span class="other-count">+22 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC6</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30223</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>FPS2</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC6</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>MO3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PAT12-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30224</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>FPS2</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC6</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>MO3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PAT12</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30230</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>FPS2</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC6</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>MO3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PAT12</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30320</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>FPS2</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC6</td><td class="qty">3</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>MO3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PAT18-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30321</span> <span class="other-count">+22 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>FPS2</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC6</td><td class="qty">3</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>MO3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PAT18</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30330</span> <span class="other-count">+28 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA10-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>DO6-M1</td><td class="qty">3</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30332</span> <span class="other-count">+25 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30332 (C)</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC6</td><td class="qty">3</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF4</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PM3</td><td class="qty">4</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30333</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>FPS2</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC6</td><td class="qty">3</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>MO3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PAT18</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30402</span> <span class="other-count">+31 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOP3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>BOP3L</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30402 (C)</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOP3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>BOP3L</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC6</td><td class="qty">4</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF12</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF6</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PM3</td><td class="qty">4</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30402F</span> <span class="other-count">+30 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOP3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>BOP3L</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30402F (C)</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOP3</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>BOP3L</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC6</td><td class="qty">4</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PF6</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PM3</td><td class="qty">4</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30403</span> <span class="other-count">+33 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOP3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOP3L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30403 (C)</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOP3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOP3L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>C14</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+<tr><td>PF12</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PF2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF6</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PM6</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30403F</span> <span class="other-count">+32 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOP3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOP3L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30403F (C)</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOP3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOP3L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>C14</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+<tr><td>PF2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF6</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PM6</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30404</span> <span class="other-count">+30 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30404 (C)</span> <span class="other-count">+28 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC8</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">30404F</span> <span class="other-count">+28 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30404F (C)</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC8</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30405</span> <span class="other-count">+34 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS18-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS18L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC6</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>QS6-M1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30405F</span> <span class="other-count">+32 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS18-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS18L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC6</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>QS6-M1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30407</span> <span class="other-count">+33 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS18-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS18L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+<tr><td>QS6-M1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30407F</span> <span class="other-count">+31 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS18-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS18L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+<tr><td>QS6-M1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30502</span> <span class="other-count">+34 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS18-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS18L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC6</td><td class="qty">5</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>QS3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>QS6-M1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30503</span> <span class="other-count">+32 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS18-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS18L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">5</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+<tr><td>QS3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>QS6-M1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30605</span> <span class="other-count">+33 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS30-M6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS30L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+<tr><td>GC6</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">30606</span> <span class="other-count">+33 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS30-M6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS30L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+<tr><td>GC8</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">31000</span> <span class="other-count">+42 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">31000 (C)</span> <span class="other-count">+40 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC6</td><td class="qty">12</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">31000F</span> <span class="other-count">+41 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">31000F (C)</span> <span class="other-count">+39 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC6</td><td class="qty">12</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">31001</span> <span class="other-count">+43 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">31001 (C)</span> <span class="other-count">+41 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC8</td><td class="qty">12</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">31001F</span> <span class="other-count">+42 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">31001F (C)</span> <span class="other-count">+40 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>GC8</td><td class="qty">12</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-13</span> <span class="other-count">+29 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-13-23</span> <span class="other-count">+29 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-13-29</span> <span class="other-count">+29 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-13-35</span> <span class="other-count">+29 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-13-47</span> <span class="other-count">+29 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-8</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-8-23</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-8-29</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-8-35</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40111-8-47</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>PA12-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40120-0</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BS1-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>KN1</td><td class="qty">1</td><td class="sec">Switch Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40120-10</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BS1-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>KN1</td><td class="qty">1</td><td class="sec">Switch Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40120-3</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BS1-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>KN1</td><td class="qty">1</td><td class="sec">Switch Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40120-6</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BS1-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>KN1</td><td class="qty">1</td><td class="sec">Switch Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40121-17</span> <span class="other-count">+36 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BS1-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5-M6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>KN1</td><td class="qty">1</td><td class="sec">Switch Parts</td></tr>
+<tr><td>MO1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PC4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40121-9</span> <span class="other-count">+35 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BS1-M0</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5-M6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>KN1</td><td class="qty">1</td><td class="sec">Switch Parts</td></tr>
+<tr><td>MO1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PC4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40131-13</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA2-M1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">40131-8</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA2-M1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50110-10</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO10</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50110-12</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO12</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50110-8</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO8</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50111-10</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO10</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 3</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50111-12</span> <span class="other-count">+22 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO12</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC10</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50111-8</span> <span class="other-count">+22 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO8</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50120-10</span> <span class="other-count">+22 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO10</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50120-8</span> <span class="other-count">+22 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO8</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50121-10</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO10</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50121-8</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50130-10</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO10</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50130-12</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO12</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50130-8</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO8</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50131-10</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO10</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50131-12</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO12</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50131-8</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50220</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO6</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">50221</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO6</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">51000</span> <span class="other-count">+39 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO6</td><td class="qty">10</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC6</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">51000F</span> <span class="other-count">+41 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>DO6</td><td class="qty">10</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC6</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>GC8</td><td class="qty">1</td><td class="sec">Canopy Configuration 2</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60110</span> <span class="other-count">+24 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60111</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">60112</span> <span class="other-count">+18 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60112 (C)</span> <span class="other-count">+15 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Configuration 1</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF12</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">60121</span> <span class="other-count">+17 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60121 (C)</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PFB2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">60123</span> <span class="other-count">+19 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60123 (C)</span> <span class="other-count">+15 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PFB2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60124-0</span> <span class="other-count">+18 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60124-10</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60124-3</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60124-6</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">60125</span> <span class="other-count">+14 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60125 (C)</span> <span class="other-count">+12 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60127</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>FC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC2-M1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>MO2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60128-17</span> <span class="other-count">+37 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5-M6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>KN1</td><td class="qty">1</td><td class="sec">Switch Parts</td></tr>
+<tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>MO1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PC4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60128-9</span> <span class="other-count">+37 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5-M6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>KN1</td><td class="qty">1</td><td class="sec">Switch Parts</td></tr>
+<tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>MO1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PC4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60129-15</span> <span class="other-count">+17 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>C18-2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60129-21</span> <span class="other-count">+17 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>C18-2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60129-9</span> <span class="other-count">+17 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>C18-2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M3</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60130</span> <span class="other-count">+15 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60131</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">60132</span> <span class="other-count">+14 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60132 (C)</span> <span class="other-count">+12 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60210</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60210-16</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60210-28</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60210-34</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60210-40</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60210-46</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60210-52</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60210-58</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60211</span> <span class="other-count">+23 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60211-16</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60211-28</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60211-34</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60211-40</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60211-46</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60211-52</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60211-58</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">60220</span> <span class="other-count">+20 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60220 (C)</span> <span class="other-count">+18 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">60221</span> <span class="other-count">+20 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60221 (C)</span> <span class="other-count">+18 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC1</td><td class="qty">2</td><td class="sec">Parts List (For Assembly)</td></tr>
+<tr><td>PF6</td><td class="qty">2</td><td class="sec">Parts List (For Assembly)</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60222</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60224</span> <span class="other-count">+21 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60226-11</span> <span class="other-count">+16 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60226-17</span> <span class="other-count">+16 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60226-23</span> <span class="other-count">+16 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60226-29</span> <span class="other-count">+16 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60230</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60231</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration KL1B</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA42-M2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60330</span> <span class="other-count">+24 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA10-M1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>LC2</td><td class="qty">3</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60400-18</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60400-24</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60400-36</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60400-48</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60400-60</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60400-72</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60400-84</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">4</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60401-18</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60401-24</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60401-36</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60401-48</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60401-60</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60401-72</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60401-84</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">4</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60420</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS18-M5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS18L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60430</span> <span class="other-count">+25 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Assembly</td></tr>
+<tr><td>FC1</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>PA2-M1</td><td class="qty">1</td><td class="sec">Extension Rod Assembly</td></tr>
+<tr><td>PA24-M2</td><td class="qty">2</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Canopy Assembly</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rod Assembly</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60431</span> <span class="other-count">+25 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M2</td><td class="qty">1</td><td class="sec">Canopy Assembly</td></tr>
+<tr><td>FC1</td><td class="qty">1</td><td class="sec">Canopy Configuration KL3A</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">2</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>PA2-M1</td><td class="qty">1</td><td class="sec">Extension Rod Assembly</td></tr>
+<tr><td>PA42-M2</td><td class="qty">2</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>SWR1F</td><td class="qty">2</td><td class="sec">Canopy Assembly</td></tr>
+<tr><td>SWR1M</td><td class="qty">2</td><td class="sec">Extension Rod Assembly</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60432</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS18-M5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS18L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60600-24</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60600-36</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60600-48</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60600-60</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA36-M1</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60600-72</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60600-84</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA24-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">5</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60601-24</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60601-36</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60601-48</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">2</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60601-60</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA12-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60601-72</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA18-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA24-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60601-84</span> <span class="other-count">+26 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA30-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA36-M1</td><td class="qty">5</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>PA42-M2</td><td class="qty">3</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PA6-M1</td><td class="qty">1</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Installation Parts</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rods Assembled Prior to Testing</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60630</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Canopy Assembly</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>PA2-M1</td><td class="qty">1</td><td class="sec">Extension Rod Assembly</td></tr>
+<tr><td>PA24-M2</td><td class="qty">3</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Canopy Assembly</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rod Assembly</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60631</span> <span class="other-count">+27 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CAT5-M3</td><td class="qty">1</td><td class="sec">Canopy Assembly</td></tr>
+<tr><td>LC1</td><td class="qty">6</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>NB0-3/4</td><td class="qty">3</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>PA2-M1</td><td class="qty">1</td><td class="sec">Extension Rod Assembly</td></tr>
+<tr><td>PA42-M2</td><td class="qty">3</td><td class="sec">Tier Assembly</td></tr>
+<tr><td>SWR1F</td><td class="qty">3</td><td class="sec">Canopy Assembly</td></tr>
+<tr><td>SWR1M</td><td class="qty">3</td><td class="sec">Extension Rod Assembly</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60720</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS30-M8</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS30L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">7</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">60730</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>BOS30-M8</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>BOS30L</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">7</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">70110</span> <span class="other-count">+24 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">70110 (C)</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Canopy Configuration 1</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF12</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>PF2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">70110F</span> <span class="other-count">+20 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">70110F (C)</span> <span class="other-count">+17 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CA5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">70122</span> <span class="other-count">+16 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">70122 (C)</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CRC5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">70130</span> <span class="other-count">+16 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">70130 (C)</span> <span class="other-count">+14 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CRC5</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>LC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">70220</span> <span class="other-count">+22 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">70220 (C)</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CRC5</td><td class="qty">1</td><td class="sec">Installation Parts</td></tr>
+<tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF2</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">70221</span> <span class="other-count">+20 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">70221 (C)</span> <span class="other-count">+19 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PM5</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">70222</span> <span class="other-count">+22 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">70222 (C)</span> <span class="other-count">+20 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>LC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+<tr><td>PF6</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">90220</span> <span class="other-count">+26 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">90221</span> <span class="other-count">+26 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">91000</span> <span class="other-count">+43 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H10</span> <span class="other-count">+6 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H10 (C)</span> <span class="other-count">+5 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FC1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H13</span> <span class="other-count">+11 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H13 (C)</span> <span class="other-count">+10 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FC1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H15</span> <span class="other-count">+9 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FPK1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H16</span> <span class="other-count">+12 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H16 (C)</span> <span class="other-count">+11 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PFB2</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H18</span> <span class="other-count">+10 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H18 (C)</span> <span class="other-count">+7 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>C38</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>FC1</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+<tr><td>PM1.5</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H19</span> <span class="other-count">+14 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H19 (C)</span> <span class="other-count">+13 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PF2</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H1A</span> <span class="other-count">+13 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H1A (C)</span> <span class="other-count">+12 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H1C-5</span> <span class="other-count">+12 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H1C-8</span> <span class="other-count">+12 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H1D</span> <span class="other-count">+11 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H20</span> <span class="other-count">+6 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H20 (C)</span> <span class="other-count">+5 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FC1</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H25</span> <span class="other-count">+3 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FPK1</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H26</span> <span class="other-count">+6 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H26 (C)</span> <span class="other-count">+5 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>CRT3/4</td><td class="qty">2</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H27</span> <span class="other-count">+5 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H27 (C)</span> <span class="other-count">+4 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H28</span> <span class="other-count">+2 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>ROK5/8</td><td class="qty">1</td><td class="sec">🔩 Parts List</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H30</span> <span class="other-count">+7 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H30 (C)</span> <span class="other-count">+7 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H30-13</span> <span class="other-count">+7 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H30-13 (C)</span> <span class="other-count">+6 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PF12</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H30-5</span> <span class="other-count">+7 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H30-5 (C)</span> <span class="other-count">+6 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PF4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H30-7</span> <span class="other-count">+7 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H30-7 (C)</span> <span class="other-count">+6 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PF6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H32</span> <span class="other-count">+6 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H32 (C)</span> <span class="other-count">+6 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H32-12</span> <span class="other-count">+6 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H32-12 (C)</span> <span class="other-count">+5 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PF12</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H32-4</span> <span class="other-count">+6 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H32-4 (C)</span> <span class="other-count">+5 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PF4</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H32-6</span> <span class="other-count">+6 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H32-6 (C)</span> <span class="other-count">+5 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PF6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H33</span> <span class="other-count">+3 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H33-10</span> <span class="other-count">+2 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>RO5/8x10</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H33-14</span> <span class="other-count">+2 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>RO5/8x14</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H33-5</span> <span class="other-count">+3 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H33-6</span> <span class="other-count">+2 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>RO5/8x6</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H33-8</span> <span class="other-count">+2 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>RO5/8x8</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H43</span> <span class="other-count">+13 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H43 (C)</span> <span class="other-count">+12 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H44</span> <span class="other-count">+12 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H50-24</span> <span class="other-count">+11 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H52</span> <span class="other-count">+11 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H52 (C)</span> <span class="other-count">+10 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H52-18</span> <span class="other-count">+11 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H52-18 (C)</span> <span class="other-count">+10 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H52-24</span> <span class="other-count">+11 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H52-24 (C)</span> <span class="other-count">+10 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H60</span> <span class="other-count">+13 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H60-18</span> <span class="other-count">+13 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H60-24</span> <span class="other-count">+13 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H60-36</span> <span class="other-count">+14 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H61-24</span> <span class="other-count">+6 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PUF24</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H61-36</span> <span class="other-count">+6 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>PUF36</td><td class="qty">2</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H62</span> <span class="other-count">+12 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H62 (C)</span> <span class="other-count">+11 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H62-18</span> <span class="other-count">+12 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H62-18 (C)</span> <span class="other-count">+11 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H62-24</span> <span class="other-count">+12 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H62-24 (C)</span> <span class="other-count">+11 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">4</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H63</span> <span class="other-count">+12 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H71</span> <span class="other-count">+11 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card no-color">
+    <div class="prod-header">
+        <span class="prod-sku">H72</span> <span class="other-count">+13 non-color</span>
+    </div><div class="no-color-msg">No color parts</div>
+</div>
+<div class="product-card">
+    <div class="prod-header">
+        <span class="prod-sku">H72 (C)</span> <span class="other-count">+12 non-color</span>
+    </div>
+    <table class="bom-table">
+    <thead><tr><th>Part</th><th>Qty</th><th>Section</th></tr></thead>
+    <tbody><tr><td>FP1</td><td class="qty">1</td><td class="sec">Assembly Parts</td></tr>
+</tbody>
+    </table>
+</div>
+
+</div>
+
+<script>
+function filterCards() {
+    const q = document.getElementById('search').value.toLowerCase();
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+}
+</script>
+</body></html>
