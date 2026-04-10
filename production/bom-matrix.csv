@@ -4462,24 +4462,24 @@ parent_sku,section,part_family,qty,part_role
 60220 (C),Installation Parts,SCT1,2,Standard
 60220 (C),Installation Parts,WNY,3,Standard
 60221,Installation Parts,MP1,1,Standard
-60221,Installation Parts,SCF,3,Standard
+60221,Installation Parts,SCF,3,Finish
 60221,Installation Parts,SCT1,2,Standard
 60221,Installation Parts,WNY,3,Standard
 60221,Parts List (For Assembly),BU8,12,Standard
-60221,Parts List (For Assembly),C18,1,Standard
-60221,Parts List (For Assembly),CA5,1,Standard
+60221,Parts List (For Assembly),C18,1,Finish
+60221,Parts List (For Assembly),CA5,1,Finish
 60221,Parts List (For Assembly),L-A,2,Standard
-60221,Parts List (For Assembly),LC1,2,Standard
+60221,Parts List (For Assembly),LC1,2,Finish
 60221,Parts List (For Assembly),LU8P,1,Standard
 60221,Parts List (For Assembly),LW8,3,Standard
 60221,Parts List (For Assembly),NH2,1,Standard
 60221,Parts List (For Assembly),NI0-3/4,5,Standard
-60221,Parts List (For Assembly),NK1,2,Standard
-60221,Parts List (For Assembly),PF6,2,Standard
-60221,Parts List (For Assembly),PM1.5,1,Standard
-60221,Parts List (For Assembly),PT1S,1,Standard
+60221,Parts List (For Assembly),NK1,2,Finish
+60221,Parts List (For Assembly),PF6,2,Finish
+60221,Parts List (For Assembly),PM1.5,1,Finish
+60221,Parts List (For Assembly),PT1S,1,Finish
 60221,Parts List (For Assembly),SO1D-24,2,Standard
-60221,Parts List (For Assembly),SS3/16,2,Standard
+60221,Parts List (For Assembly),SS3/16,2,Finish
 60221,Parts List (For Assembly),WA2,1,Standard
 60221 (C),Installation Parts,MP1,1,Standard
 60221 (C),Installation Parts,SCF,3,Finish
@@ -6176,10 +6176,10 @@ parent_sku,section,part_family,qty,part_role
 90221,🔩 Parts List,WA2,1,Standard
 90221,🔩 Parts List,WNY,3,Standard
 91000,Assembly Parts,BU8,82,Standard
-91000,Assembly Parts,C14,11,Standard
-91000,Assembly Parts,CY1,5,Standard
-91000,Assembly Parts,FC1,1,Standard
-91000,Assembly Parts,GC6,12,Standard
+91000,Assembly Parts,C14,11,Finish
+91000,Assembly Parts,CY1,5,Finish
+91000,Assembly Parts,FC1,1,Finish
+91000,Assembly Parts,GC6,12,Finish
 91000,Assembly Parts,HI0-1/2,1,Standard
 91000,Assembly Parts,HO1,10,Standard
 91000,Assembly Parts,L-A15,10,Standard
@@ -6192,32 +6192,32 @@ parent_sku,section,part_family,qty,part_role
 91000,Assembly Parts,NI1-1/4,1,Standard
 91000,Assembly Parts,NI2,1,Standard
 91000,Assembly Parts,NL1,5,Standard
-91000,Assembly Parts,PF2,10,Standard
-91000,Assembly Parts,PF6,5,Standard
-91000,Assembly Parts,PM1.5,10,Standard
-91000,Assembly Parts,RB2,1,Standard
+91000,Assembly Parts,PF2,10,Finish
+91000,Assembly Parts,PF6,5,Finish
+91000,Assembly Parts,PM1.5,10,Finish
+91000,Assembly Parts,RB2,1,Finish
 91000,Assembly Parts,RE84X3/4,11,Standard
 91000,Assembly Parts,RES84,1,Standard
 91000,Assembly Parts,SO1D-24,10,Standard
-91000,Assembly Parts,SS1/8,15,Standard
+91000,Assembly Parts,SS1/8,15,Finish
 91000,Assembly Parts,WA3,2,Standard
 91000,Assembly Parts,WIB,1,Standard
 91000,Assembly Parts,WIW,4,Standard
 91000,Assembly Parts,WNY,4,Standard
 91000,Canopy Configuration 2,CB1/8,1,Standard
-91000,Canopy Configuration 2,GC8,1,Standard
+91000,Canopy Configuration 2,GC8,1,Finish
 91000,Canopy Configuration 2,HK5/64,1,Standard
 91000,Canopy Configuration 2,SCG,1,Standard
 91000,Canopy Configuration 2,SCT1,2,Standard
-91000,Canopy Configuration 2,SR1,1,Standard
-91000,Canopy Configuration 2,SS3/16,1,Standard
+91000,Canopy Configuration 2,SR1,1,Finish
+91000,Canopy Configuration 2,SS3/16,1,Finish
 91000,Canopy Configuration 2,WNY,2,Standard
 91000,Installation Parts,BU8,6,Standard
 91000,Installation Parts,BULB-A15,10,Standard
 91000,Installation Parts,G6,10,Standard
 91000,Installation Parts,NI0-7/8,3,Standard
-91000,Installation Parts,PF12,1,Standard
-91000,Installation Parts,PF6,2,Standard
+91000,Installation Parts,PF12,1,Finish
+91000,Installation Parts,PF6,2,Finish
 H10,Assembly Parts,C18,1,Finish
 H10,Assembly Parts,FC1,1,Finish
 H10,Assembly Parts,PM1.5,1,Finish
