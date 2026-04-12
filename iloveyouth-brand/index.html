@@ -2027,24 +2027,32 @@
         </p>
 
         <div class="exploratory-hero">
-          <img class="wordmark-color" src="logos/ily-wordmark-white+blue+rect.svg" alt="iloveyouth. with frosted blue dots on shadow grey">
+          <img class="wordmark-color" src="logos/ily-wordmark-white+blue-rect.svg" alt="iloveyouth. with frosted blue dots on shadow grey">
           <img class="brandmark-color" src="logos/ily-brandmark-white+blue-square.svg" alt="ily. with frosted blue dots on shadow grey">
         </div>
 
         <div class="exploratory-grid">
           <div class="exploratory-tile tile--good">
             <span class="tile-label">approved · shadow grey</span>
-            <img class="wordmark-color" src="logos/ily-wordmark-white+blue+rect.svg" alt="approved use on shadow grey">
+            <img class="wordmark-color" src="logos/ily-wordmark-white+blue-rect.svg" alt="approved use on shadow grey">
           </div>
           <div class="exploratory-tile tile--bad">
             <span class="tile-label">avoid · ghost white</span>
-            <img class="wordmark-color" src="logos/ily-wordmark-white+blue+rect.svg" alt="failure mode on ghost white">
+            <img class="wordmark-color" src="logos/ily-wordmark-white+blue-rect.svg" alt="failure mode on ghost white">
           </div>
         </div>
 
-        <p style="margin: var(--ily-space-8) 0 var(--ily-space-4); font-size: var(--ily-text-xs); font-weight: var(--ily-font-medium); letter-spacing: var(--ily-tracking-wider); color: var(--ily-text-muted);">full parked inventory · all four colored variants</p>
+        <p style="margin: var(--ily-space-8) 0 var(--ily-space-4); font-size: var(--ily-text-xs); font-weight: var(--ily-font-medium); letter-spacing: var(--ily-tracking-wider); color: var(--ily-text-muted);">full parked inventory · six colored variants</p>
 
         <div class="brandmark-grid">
+          <div class="brandmark-tile brandmark-tile--shadow">
+            <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-white+blue-rect.svg" alt="iloveyouth. rect, white letters + blue dots, on shadow grey">
+            <span class="tag">wordmark · rect · white+blue</span>
+          </div>
+          <div class="brandmark-tile brandmark-tile--ghost">
+            <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-dark+blue-rect.svg" alt="iloveyouth. rect, dark letters + blue dots, on ghost white">
+            <span class="tag">wordmark · rect · dark+blue</span>
+          </div>
           <div class="brandmark-tile brandmark-tile--shadow">
             <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-white+blue-square.svg" alt="iloveyouth. square, white letters + blue dots, on shadow grey">
             <span class="tag">wordmark · square · white+blue</span>
@@ -2093,7 +2101,7 @@
           </ul>
 
           <p class="footnote">
-            <strong>current parked file inventory:</strong> <code>ily-wordmark-white+blue+rect</code>, <code>ily-wordmark-white+blue-square</code>, <code>ily-wordmark-dark+blue-square</code>, <code>ily-brandmark-white+blue-square</code>, <code>ily-brandmark-dark+blue-square</code>. three source-file issues must be resolved at the illustrator source before any production adoption: (1) the dot fill is <code>#b0e2f3</code>, not the locked frosted blue <code>#ADE8F9</code> — re-fill from the saved swatch; (2) the white+blue svgs include a redundant dark-letters layer underneath the visible version — delete the hidden group; (3) <code>ily-wordmark-white+blue+rect</code> uses a <code>+rect</code> suffix instead of the standard <code>-rect</code> separator used everywhere else — rename for consistency. (4) <code>ily-brandmark-white+blue-square.png</code> is not yet exported; only the svg exists.
+            <strong>current parked file inventory — production-clean:</strong> <code>ily-wordmark-white+blue-rect</code>, <code>ily-wordmark-white+blue-square</code>, <code>ily-wordmark-dark+blue-rect</code>, <code>ily-wordmark-dark+blue-square</code>, <code>ily-brandmark-white+blue-square</code>, <code>ily-brandmark-dark+blue-square</code>. all six variants use the locked frosted blue <code>#ADE8F9</code> and shadow grey <code>#2A2220</code>. no redundant layers, no color drift, no naming inconsistencies. the colored direction is <strong>fully production-ready</strong> — awaiting only the team adoption decision.
           </p>
         </div>
       </div>
