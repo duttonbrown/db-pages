@@ -248,6 +248,109 @@
       color: var(--ily-text-muted);
       line-height: var(--ily-leading-relaxed);
     }
+
+    /* ============ MOBILE ============ */
+    @media (max-width: 720px) {
+      .page {
+        padding: var(--ily-space-10) var(--ily-space-5);
+      }
+
+      header {
+        margin-bottom: var(--ily-space-10);
+        padding-bottom: var(--ily-space-6);
+      }
+
+      header h1 {
+        font-size: var(--ily-text-3xl);
+      }
+
+      header p {
+        font-size: var(--ily-text-base);
+      }
+
+      section {
+        margin-bottom: var(--ily-space-16);
+      }
+
+      .section-label {
+        margin-bottom: var(--ily-space-5);
+      }
+
+      .hero-stage {
+        padding: var(--ily-space-16) var(--ily-space-5);
+        min-height: 220px;
+      }
+
+      .surface {
+        padding: var(--ily-space-12) var(--ily-space-5);
+        min-height: 200px;
+      }
+
+      .surface .wordmark-img {
+        height: clamp(3rem, 14vw, 4.5rem);
+      }
+
+      .sizes {
+        padding: var(--ily-space-8) var(--ily-space-5);
+        gap: var(--ily-space-8);
+      }
+
+      .size-row {
+        grid-template-columns: 1fr;
+        gap: var(--ily-space-3);
+        padding-bottom: var(--ily-space-5);
+      }
+
+      .wordmark-img--display {
+        height: 4rem;
+      }
+
+      .nav-mockup {
+        padding: var(--ily-space-5);
+        flex-wrap: wrap;
+        gap: var(--ily-space-4);
+        justify-content: space-between;
+      }
+
+      .nav-mockup .links {
+        display: none;
+      }
+
+      .nav-mockup .cta {
+        font-size: var(--ily-text-xs);
+        padding: var(--ily-space-2) var(--ily-space-5);
+      }
+
+      footer {
+        margin-top: var(--ily-space-12);
+        padding-top: var(--ily-space-6);
+        font-size: var(--ily-text-xs);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .page {
+        padding: var(--ily-space-8) var(--ily-space-4);
+      }
+
+      header h1 {
+        font-size: var(--ily-text-2xl);
+      }
+
+      .hero-stage {
+        padding: var(--ily-space-12) var(--ily-space-4);
+        min-height: 180px;
+      }
+
+      .surface {
+        padding: var(--ily-space-10) var(--ily-space-4);
+        min-height: 170px;
+      }
+
+      .wordmark-img--display {
+        height: 3rem;
+      }
+    }
   </style>
 </head>
 <body>
