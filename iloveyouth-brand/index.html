@@ -1086,6 +1086,158 @@
       color: var(--ily-frosted-blue);
     }
 
+    /* Idea #03 — tagline lockup as a secondary mark */
+    .lockup-hero {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-20) var(--ily-space-10);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ily-space-5);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .lockup-hero img {
+      height: clamp(3rem, 9vw, 6rem);
+      width: auto;
+    }
+
+    .lockup-hero .lockup-rule {
+      width: 32px;
+      height: 1px;
+      background: var(--ily-shadow-grey);
+      opacity: 0.25;
+    }
+
+    .lockup-hero .lockup-tagline {
+      font-size: clamp(0.875rem, 1.6vw, 1.25rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-wide);
+      color: var(--ily-text-muted);
+      margin: 0;
+    }
+
+    /* Stacked vertical variant */
+    .lockup-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ily-space-3);
+    }
+
+    .lockup-stack img {
+      height: clamp(2.25rem, 5vw, 3.25rem);
+      width: auto;
+    }
+
+    .lockup-stack .lockup-tagline {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-wider);
+      color: currentColor;
+      opacity: 0.65;
+      margin: 0;
+    }
+
+    /* Horizontal lockup — wordmark on left, tagline on right */
+    .lockup-row {
+      display: flex;
+      align-items: center;
+      gap: var(--ily-space-6);
+      flex-wrap: nowrap;
+    }
+
+    .lockup-row img {
+      height: clamp(2rem, 4vw, 2.75rem);
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    .lockup-row .lockup-divider {
+      width: 1px;
+      align-self: stretch;
+      background: currentColor;
+      opacity: 0.2;
+    }
+
+    .lockup-row .lockup-tagline {
+      font-size: var(--ily-text-sm);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-wide);
+      color: currentColor;
+      opacity: 0.7;
+      margin: 0;
+    }
+
+    /* Context tiles for the three lockup demonstrations */
+    .lockup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ily-space-4);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .lockup-tile {
+      padding: var(--ily-space-12) var(--ily-space-8);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      position: relative;
+    }
+
+    .lockup-tile .tile-context {
+      position: absolute;
+      top: var(--ily-space-4);
+      left: var(--ily-space-4);
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      opacity: 0.55;
+    }
+
+    .lockup-tile--almond {
+      background: var(--ily-almond-silk);
+      color: var(--ily-shadow-grey);
+    }
+
+    .lockup-tile--shadow {
+      background: var(--ily-shadow-grey);
+      color: var(--ily-ghost-white);
+    }
+
+    .lockup-tile--shadow .tile-context {
+      color: var(--ily-ghost-white);
+    }
+
+    /* Footer-style horizontal lockup row */
+    .lockup-footer-row {
+      background: var(--ily-shadow-grey);
+      color: var(--ily-ghost-white);
+      padding: var(--ily-space-8) var(--ily-space-10);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--ily-space-8);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .lockup-footer-row .lockup-row {
+      flex-shrink: 0;
+    }
+
+    .lockup-footer-row .footer-meta {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-light);
+      color: rgba(240, 243, 250, 0.55);
+      letter-spacing: var(--ily-tracking-wide);
+      text-align: right;
+    }
+
     @media (max-width: 720px) {
       .vibe-hero {
         padding: var(--ily-space-8) var(--ily-space-6) var(--ily-space-12);
@@ -1113,6 +1265,20 @@
       }
       .ts-pair {
         grid-template-columns: 1fr;
+      }
+      .lockup-grid {
+        grid-template-columns: 1fr;
+      }
+      .lockup-hero {
+        padding: var(--ily-space-12) var(--ily-space-6);
+      }
+      .lockup-footer-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--ily-space-4);
+      }
+      .lockup-footer-row .footer-meta {
+        text-align: left;
       }
       .idea-card {
         padding: var(--ily-space-6);
@@ -1588,7 +1754,48 @@
               <span class="idea-num">03</span>
               <h5 class="idea-title">tagline lockup as a secondary mark</h5>
             </div>
-            <p class="idea-body"><code>iloveyouth.</code> with <code>youth starts with you.</code> set underneath in a smaller weight, locked-up as a single composition for hero contexts (packaging back panels, email headers, footers). pairs the tagline visually with the wordmark so they reinforce each other.</p>
+            <p class="idea-body"><code>iloveyouth.</code> with <code>youth starts with you.</code> set underneath in a smaller weight, locked-up as a single composition for hero contexts (packaging back panels, email headers, footers). pairs the tagline visually with the wordmark so they reinforce each other — the locked tagline gets the same visual permanence as the locked wordmark.</p>
+
+            <div class="idea-expansion">
+              <!-- Centered hero lockup -->
+              <div class="lockup-hero">
+                <img src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+                <span class="lockup-rule"></span>
+                <p class="lockup-tagline">youth starts with you.</p>
+              </div>
+
+              <!-- Two contextual applications -->
+              <div class="lockup-grid">
+                <div class="lockup-tile lockup-tile--almond">
+                  <span class="tile-context">packaging · back panel</span>
+                  <div class="lockup-stack">
+                    <img src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+                    <p class="lockup-tagline">youth starts with you.</p>
+                  </div>
+                </div>
+                <div class="lockup-tile lockup-tile--shadow">
+                  <span class="tile-context">welcome screen · dark</span>
+                  <div class="lockup-stack">
+                    <img src="logos/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+                    <p class="lockup-tagline">youth starts with you.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Horizontal footer-style lockup -->
+              <div class="lockup-footer-row">
+                <div class="lockup-row">
+                  <img src="logos/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+                  <span class="lockup-divider"></span>
+                  <p class="lockup-tagline">youth starts with you.</p>
+                </div>
+                <p class="footer-meta">© 2026 · made with care</p>
+              </div>
+
+              <div class="ts-rule">
+                <strong>the rule:</strong> the lockup is a saved asset, not a live composition. produce three svg files — centered (for hero contexts), stacked (for vertical formats like packaging back panels), and horizontal (for footers and email banners). the proportional relationship between the wordmark and tagline is fixed in the file: the tagline cap-height is roughly <em>20% of the wordmark x-height</em> in the stacked variants. tagline always sits in shadow grey, almond silk, or ghost white — never frosted blue (contrast). the lockup never replaces the standalone wordmark in primary nav contexts; it's a secondary mark for moments where the brand wants to declare itself fully.
+              </div>
+            </div>
           </div>
 
           <!-- IDEA 04 — "named." as a campaign signature -->
