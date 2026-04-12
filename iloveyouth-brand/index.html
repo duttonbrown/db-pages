@@ -1502,17 +1502,31 @@
       color: rgba(240, 243, 250, 0.7);
     }
 
-    /* Idea #02 — animated wordmark for digital */
+    /* Idea #02 — animated wordmark for digital
+       Liquid fill: Frosted Blue rises through the wordmark from
+       bottom to top, then settles to Shadow Grey at the end.
+       The brand IS hydration. */
+    @property --fill-level {
+      syntax: '<percentage>';
+      initial-value: 0%;
+      inherits: false;
+    }
+
+    @property --fill-color {
+      syntax: '<color>';
+      initial-value: #ADE8F9;
+      inherits: false;
+    }
+
     .anim-stage {
       background: var(--ily-ghost-white);
       border: 1px solid var(--ily-border);
       border-radius: 2px;
-      padding: var(--ily-space-24) var(--ily-space-10);
+      padding: var(--ily-space-12) var(--ily-space-10);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--ily-space-10);
-      min-height: 320px;
+      gap: var(--ily-space-8);
       margin-bottom: var(--ily-space-6);
     }
 
@@ -1520,47 +1534,54 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 9rem;
+      width: 100%;
     }
 
     .anim-wordmark {
-      height: clamp(4rem, 10vw, 8rem);
-      width: auto;
-      display: block;
-      opacity: 0;
-      -webkit-clip-path: inset(0 100% 0 0);
-              clip-path: inset(0 100% 0 0);
-      transform-origin: center center;
-      will-change: clip-path, opacity, transform;
+      width: clamp(18rem, 48vw, 32rem);
+      aspect-ratio: 985.09 / 355.28;
+      --fill-level: 0%;
+      --fill-color: #ADE8F9;
+      background: linear-gradient(
+        to top,
+        var(--fill-color) 0%,
+        var(--fill-color) var(--fill-level),
+        transparent var(--fill-level),
+        transparent 100%
+      );
+      -webkit-mask-image: url('logos/ily-wordmark-white-rect.svg');
+              mask-image: url('logos/ily-wordmark-white-rect.svg');
+      -webkit-mask-size: 100% 100%;
+              mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+              mask-position: center;
+      -webkit-mask-mode: luminance;
+              mask-mode: luminance;
+      will-change: --fill-level, --fill-color;
     }
 
     .anim-wordmark.is-playing {
-      animation: wordmark-reveal 1200ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+      animation: liquid-fill 1700ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
     }
 
-    @keyframes wordmark-reveal {
+    @keyframes liquid-fill {
       0% {
-        opacity: 0;
-        -webkit-clip-path: inset(0 100% 0 0);
-                clip-path: inset(0 100% 0 0);
-        transform: scale(1);
+        --fill-level: 0%;
+        --fill-color: #ADE8F9;
       }
-      8% {
-        opacity: 1;
+      55% {
+        --fill-level: 100%;
+        --fill-color: #ADE8F9;
       }
       75% {
-        -webkit-clip-path: inset(0 0 0 0);
-                clip-path: inset(0 0 0 0);
-        transform: scale(1);
-      }
-      85% {
-        transform: scale(0.985);
+        --fill-level: 100%;
+        --fill-color: #ADE8F9;
       }
       100% {
-        opacity: 1;
-        -webkit-clip-path: inset(0 0 0 0);
-                clip-path: inset(0 0 0 0);
-        transform: scale(1);
+        --fill-level: 100%;
+        --fill-color: #2A2220;
       }
     }
 
@@ -1614,9 +1635,8 @@
 
     @media (prefers-reduced-motion: reduce) {
       .anim-wordmark {
-        opacity: 1;
-        -webkit-clip-path: inset(0 0 0 0);
-                clip-path: inset(0 0 0 0);
+        --fill-level: 100%;
+        --fill-color: #2A2220;
       }
       .anim-wordmark.is-playing {
         animation: none;
@@ -2159,12 +2179,12 @@
               <span class="idea-num">02</span>
               <h5 class="idea-title">animated wordmark for digital</h5>
             </div>
-            <p class="idea-body">letters reveal left to right with the two dots arriving in their natural positions as the wipe passes them, then the whole mark settles with a tiny scale beat. plays once when the section enters the viewport. subtle, never autoloops, never explained. costs nothing to make and adds a single moment of personality on the site without changing any static asset.</p>
+            <p class="idea-body">hydration fills the wordmark. frosted blue rises through the letters from bottom to top like water filling a vessel, then settles into shadow grey — the brand's identity color — once the mark is fully "hydrated." the animation IS the product promise: the mark literally fills with the brand's hero accent before becoming itself. plays once when the section enters the viewport. never explained.</p>
 
             <div class="idea-expansion">
               <div class="anim-stage" id="anim-stage">
                 <div class="anim-wordmark-wrap">
-                  <img class="anim-wordmark" id="anim-wordmark" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+                  <div class="anim-wordmark" id="anim-wordmark" role="img" aria-label="iloveyouth."></div>
                 </div>
                 <button class="anim-replay" id="anim-replay" type="button">↻ replay</button>
               </div>
@@ -2172,20 +2192,20 @@
               <div class="anim-spec">
                 <div class="anim-spec-card">
                   <span class="label">duration</span>
-                  <span class="value">1200ms</span>
+                  <span class="value">1700ms</span>
                 </div>
                 <div class="anim-spec-card">
-                  <span class="label">easing</span>
-                  <span class="value">cubic-bezier(.22, .61, .36, 1)</span>
+                  <span class="label">fill phase</span>
+                  <span class="value">frosted blue → 100% · 0–55%</span>
                 </div>
                 <div class="anim-spec-card">
-                  <span class="label">trigger</span>
-                  <span class="value">on enter viewport · once</span>
+                  <span class="label">settle phase</span>
+                  <span class="value">frosted blue → shadow grey · 75–100%</span>
                 </div>
               </div>
 
               <div class="ts-rule">
-                <strong>the rule:</strong> implemented as a single css clip-path animation on the existing svg asset — no separate animation file, no js dependency beyond the intersection observer trigger, no font loading required. plays exactly once per page load and never autoloops. respects <code>prefers-reduced-motion</code> — users who've opted out of animation see the static wordmark immediately. the replay button above is for the brand preview only and would not ship to production. on the live site this is a one-time hello, not a feature you interact with.
+                <strong>the rule:</strong> implemented with css <code>mask-image</code> + animated <code>@property</code> custom properties driving a linear-gradient fill level. no separate animation asset, no lottie, no gif, no js dependency beyond the intersection observer trigger. plays exactly once per page load and never autoloops. respects <code>prefers-reduced-motion</code> — users who've opted out see the fully-settled shadow grey wordmark immediately with no animation. the replay button above is for the brand preview only and would not ship to production. the animation is a one-time hello on first hero load, not a feature you interact with. on slower devices the rendering stays cheap because it's a single masked div with a gradient transform — no per-letter path animation, no heavy rendering cost.
               </div>
             </div>
           </div>
