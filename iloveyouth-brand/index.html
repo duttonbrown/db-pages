@@ -1502,6 +1502,127 @@
       color: rgba(240, 243, 250, 0.7);
     }
 
+    /* Idea #02 — animated wordmark for digital */
+    .anim-stage {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-24) var(--ily-space-10);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ily-space-10);
+      min-height: 320px;
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .anim-wordmark-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 9rem;
+    }
+
+    .anim-wordmark {
+      height: clamp(4rem, 10vw, 8rem);
+      width: auto;
+      display: block;
+      opacity: 0;
+      -webkit-clip-path: inset(0 100% 0 0);
+              clip-path: inset(0 100% 0 0);
+      transform-origin: center center;
+      will-change: clip-path, opacity, transform;
+    }
+
+    .anim-wordmark.is-playing {
+      animation: wordmark-reveal 1200ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    }
+
+    @keyframes wordmark-reveal {
+      0% {
+        opacity: 0;
+        -webkit-clip-path: inset(0 100% 0 0);
+                clip-path: inset(0 100% 0 0);
+        transform: scale(1);
+      }
+      8% {
+        opacity: 1;
+      }
+      75% {
+        -webkit-clip-path: inset(0 0 0 0);
+                clip-path: inset(0 0 0 0);
+        transform: scale(1);
+      }
+      85% {
+        transform: scale(0.985);
+      }
+      100% {
+        opacity: 1;
+        -webkit-clip-path: inset(0 0 0 0);
+                clip-path: inset(0 0 0 0);
+        transform: scale(1);
+      }
+    }
+
+    .anim-replay {
+      font-family: var(--ily-font-primary);
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      padding: var(--ily-space-3) var(--ily-space-6);
+      background: transparent;
+      border: 1px solid var(--ily-border-strong);
+      border-radius: 9999px;
+      color: var(--ily-text-muted);
+      cursor: pointer;
+      transition: border-color var(--ily-transition-fast), color var(--ily-transition-fast);
+    }
+
+    .anim-replay:hover {
+      border-color: var(--ily-shadow-grey);
+      color: var(--ily-shadow-grey);
+    }
+
+    .anim-spec {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--ily-space-4);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .anim-spec-card {
+      background: var(--ily-surface-mid);
+      border-radius: 2px;
+      padding: var(--ily-space-6);
+    }
+
+    .anim-spec-card .label {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      display: block;
+      margin-bottom: var(--ily-space-2);
+    }
+
+    .anim-spec-card .value {
+      font-size: var(--ily-text-base);
+      font-weight: var(--ily-font-light);
+      color: var(--ily-shadow-grey);
+      letter-spacing: var(--ily-tracking-tight);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .anim-wordmark {
+        opacity: 1;
+        -webkit-clip-path: inset(0 0 0 0);
+                clip-path: inset(0 0 0 0);
+      }
+      .anim-wordmark.is-playing {
+        animation: none;
+      }
+    }
+
     @media (max-width: 720px) {
       .vibe-hero {
         padding: var(--ily-space-8) var(--ily-space-6) var(--ily-space-12);
@@ -1554,6 +1675,13 @@
       .stat-card {
         padding: var(--ily-space-8) var(--ily-space-6);
         min-height: auto;
+      }
+      .anim-stage {
+        padding: var(--ily-space-16) var(--ily-space-6);
+        min-height: auto;
+      }
+      .anim-spec {
+        grid-template-columns: 1fr;
       }
       .lockup-hero {
         padding: var(--ily-space-12) var(--ily-space-6);
@@ -2031,7 +2159,35 @@
               <span class="idea-num">02</span>
               <h5 class="idea-title">animated wordmark for digital</h5>
             </div>
-            <p class="idea-body">letters fade in left to right, then the two dots drop into place last — tittle first, period second — over about 800ms. plays once on first hero load. subtle, never autoloops, never explained. costs nothing to make and adds a single moment of personality on the site without changing any static asset.</p>
+            <p class="idea-body">letters reveal left to right with the two dots arriving in their natural positions as the wipe passes them, then the whole mark settles with a tiny scale beat. plays once when the section enters the viewport. subtle, never autoloops, never explained. costs nothing to make and adds a single moment of personality on the site without changing any static asset.</p>
+
+            <div class="idea-expansion">
+              <div class="anim-stage" id="anim-stage">
+                <div class="anim-wordmark-wrap">
+                  <img class="anim-wordmark" id="anim-wordmark" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+                </div>
+                <button class="anim-replay" id="anim-replay" type="button">↻ replay</button>
+              </div>
+
+              <div class="anim-spec">
+                <div class="anim-spec-card">
+                  <span class="label">duration</span>
+                  <span class="value">1200ms</span>
+                </div>
+                <div class="anim-spec-card">
+                  <span class="label">easing</span>
+                  <span class="value">cubic-bezier(.22, .61, .36, 1)</span>
+                </div>
+                <div class="anim-spec-card">
+                  <span class="label">trigger</span>
+                  <span class="value">on enter viewport · once</span>
+                </div>
+              </div>
+
+              <div class="ts-rule">
+                <strong>the rule:</strong> implemented as a single css clip-path animation on the existing svg asset — no separate animation file, no js dependency beyond the intersection observer trigger, no font loading required. plays exactly once per page load and never autoloops. respects <code>prefers-reduced-motion</code> — users who've opted out of animation see the static wordmark immediately. the replay button above is for the brand preview only and would not ship to production. on the live site this is a one-time hello, not a feature you interact with.
+              </div>
+            </div>
           </div>
 
           <!-- IDEA 03 — tagline lockup -->
@@ -2144,19 +2300,10 @@
             </div>
           </div>
 
-          <!-- IDEA 05 — packaging as anti-packaging (caveat: best done in real packaging files) -->
+          <!-- IDEA 05 — hydration as a number (was 06; packaging moved to its own effort) -->
           <div class="idea-card">
             <div class="idea-head">
               <span class="idea-num">05</span>
-              <h5 class="idea-title">packaging as anti-packaging</h5>
-            </div>
-            <p class="idea-body">the bottle wears almost nothing — just <code>ily.</code> on the cap, <code>iloveyouth.</code> on the front, the ingredient name as the loudest typographic moment, and the tagline running quietly down the back panel. stand it next to a competitor on a clean retail shelf and the restraint is the loudest thing on the shelf. <em>note: this idea is best mocked up against real packaging dieline files, not vibe-coded as a flat html rectangle. happy to do an abstract version when the rest are done if helpful.</em></p>
-          </div>
-
-          <!-- IDEA 06 — hydration as a number -->
-          <div class="idea-card">
-            <div class="idea-head">
-              <span class="idea-num">06</span>
               <h5 class="idea-title">hydration as a number, not a claim</h5>
             </div>
             <p class="idea-body">a homepage stat moment: a single huge number ("96%") in light weight with the tagline beneath. the number ties to a specific clinical or self-reported result — never vague, always sourced. proof, not promise.</p>
@@ -2202,5 +2349,41 @@
     </footer>
 
   </div>
+
+  <script>
+    // Wordmark animation trigger — plays once on viewport enter, replays on button click.
+    // No dependencies. Respects prefers-reduced-motion via the CSS media query.
+    (function () {
+      var stage = document.getElementById('anim-stage');
+      var wordmark = document.getElementById('anim-wordmark');
+      var replay = document.getElementById('anim-replay');
+      if (!stage || !wordmark) return;
+
+      function play() {
+        wordmark.classList.remove('is-playing');
+        // Force reflow so the animation restarts cleanly
+        void wordmark.offsetWidth;
+        wordmark.classList.add('is-playing');
+      }
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              play();
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.4 });
+        observer.observe(stage);
+      } else {
+        play();
+      }
+
+      if (replay) {
+        replay.addEventListener('click', play);
+      }
+    })();
+  </script>
 </body>
 </html>
