@@ -1,0 +1,173 @@
+/* ==========================================================================
+   ILOVEYOUTH — Design Tokens
+   The single source of truth for colors, typography, spacing, and more.
+   ========================================================================== */
+
+:root {
+  /* -------------------------------------------------------------------
+     BRAND PALETTE
+     Four-color system. Frosted Blue is the hero accent (maps to the
+     brand's hydration product truth). Almond Silk is a supporting
+     accent only — used sparingly for warmth moments, never at equal
+     weight with Frosted Blue.
+
+     PURE WHITE (#FFFFFF) IS PERMITTED IN EXACTLY TWO CASES:
+       1. The inverse logo mark, so it renders cleanly on dark surfaces
+          inside and outside the brand system (photos, press, retailers).
+       2. Print/production where Ghost White cannot be reproduced (foil,
+          vinyl, embroidery, spot-white ink).
+     Every digital surface, background, card, and container must use
+     Ghost White — never pure white. See brand-identity.md → Color →
+     Usage Rules → rule 4 for the full rationale.
+     ------------------------------------------------------------------- */
+  --ily-shadow-grey:  #2A2220;  /* warm near-black — primary text & base */
+  --ily-frosted-blue: #ADE8F9;  /* hero accent — CTAs, hydration cue */
+  --ily-ghost-white:  #F0F3FA;  /* surface — page backgrounds (never pure white) */
+  --ily-almond-silk:  #FFD5C6;  /* supporting accent — sparing use only */
+  --ily-logo-inverse: #FFFFFF;  /* pure white — LOGO MARK ONLY, never a surface */
+
+  /* -------------------------------------------------------------------
+     SEMANTIC TOKENS
+     Use these in components. Never reference raw brand palette
+     variables in UI code — always go through a semantic token so
+     palette swaps remain centralized.
+     ------------------------------------------------------------------- */
+  --ily-primary:       var(--ily-shadow-grey);
+  --ily-accent:        var(--ily-frosted-blue);
+  --ily-accent-hover:  #7DD3F0;            /* darker cyan for hover */
+  --ily-accent-soft:   #D9F2FC;            /* lighter tint for badges/backgrounds */
+  --ily-support:       var(--ily-almond-silk);
+  --ily-support-soft:  #FFE8DD;            /* lighter peach tint */
+
+  --ily-surface:       var(--ily-ghost-white);
+  --ily-surface-mid:   #E4E8F1;            /* slightly deeper surface */
+
+  --ily-text:          var(--ily-shadow-grey);
+  --ily-text-muted:    #6B5C54;            /* warm mid-gray — secondary copy */
+  --ily-text-light:    #A89B92;            /* warm light gray — tertiary/meta */
+  --ily-text-inverse:  var(--ily-ghost-white);
+
+  --ily-border:        #E5E7EE;            /* cool light border */
+  --ily-border-strong: #C8CCD6;
+
+  /* -------------------------------------------------------------------
+     NEUTRAL RAMP — Warm Grey
+     Derived from Shadow Grey. Warm-leaning (brown undertone) to pair
+     with the warm near-black base. Use for UI hierarchy, dividers,
+     disabled states. 100 = lightest, 900 = darkest.
+     ------------------------------------------------------------------- */
+  --ily-grey-100: #F5F0EB;
+  --ily-grey-200: #E5DED7;
+  --ily-grey-300: #C8BDB5;
+  --ily-grey-400: #A89B92;
+  --ily-grey-500: #8A7A71;
+  --ily-grey-600: #6B5C54;
+  --ily-grey-700: #52453F;
+  --ily-grey-800: #3D332F;
+  --ily-grey-900: #2A2220;
+
+  /* -------------------------------------------------------------------
+     INGREDIENT / PRODUCT ACCENTS — RESERVED
+     Optional. Use only if the product system warrants per-hero-ingredient
+     or per-SKU color coding, and only with Thomas's explicit sign-off.
+     Not for general UI. Left empty intentionally.
+     ------------------------------------------------------------------- */
+  /* --ily-niacinamide: ; */
+  /* --ily-ceramide:    ; */
+  /* --ily-hyaluronic:  ; */
+
+  /* -------------------------------------------------------------------
+     TYPOGRAPHY — Satoshi
+     Single family. Load via Fontshare @import in the <head> of any
+     page that uses this file:
+       @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500&display=swap');
+     Ship 300, 400, 500 only. The heavier Satoshi cuts (700, 900) are
+     intentionally excluded — they push too bold for iloveyouth's
+     clean/premium skincare aesthetic.
+     ------------------------------------------------------------------- */
+  --ily-font-primary: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Scale */
+  --ily-text-xs:   0.75rem;    /* 12px */
+  --ily-text-sm:   0.875rem;   /* 14px */
+  --ily-text-base: 1rem;       /* 16px */
+  --ily-text-lg:   1.125rem;   /* 18px */
+  --ily-text-xl:   1.25rem;    /* 20px */
+  --ily-text-2xl:  1.5rem;     /* 24px */
+  --ily-text-3xl:  1.875rem;   /* 30px */
+  --ily-text-4xl:  2.25rem;    /* 36px */
+  --ily-text-5xl:  3rem;       /* 48px */
+  --ily-text-6xl:  3.75rem;    /* 60px */
+  --ily-text-7xl:  4.5rem;     /* 72px */
+
+  /* Weights — Ship 300, 400, 500 only.
+     Light (300) is the dominant voice — used for display headlines and
+     large display type, gives the airy/premium feel skincare needs.
+     Regular (400) for body and functional UI.
+     Medium (500) for UI emphasis, buttons, nav, and ingredient callouts
+     — Satoshi's 500 is its most distinctive cut and carries meaningful
+     weight without feeling heavy. No 700 or 900 in production. */
+  --ily-font-light:   300;
+  --ily-font-regular: 400;
+  --ily-font-medium:  500;
+
+  /* Line Heights */
+  --ily-leading-tight:   1.15;
+  --ily-leading-snug:    1.3;
+  --ily-leading-normal:  1.5;
+  --ily-leading-relaxed: 1.65;
+
+  /* Letter Spacing */
+  --ily-tracking-tight:  -0.02em;
+  --ily-tracking-normal: 0;
+  --ily-tracking-wide:   0.05em;
+  --ily-tracking-wider:  0.1em;
+
+  /* -------------------------------------------------------------------
+     SPACING
+     ------------------------------------------------------------------- */
+  --ily-space-1:  0.25rem;  /* 4px  */
+  --ily-space-2:  0.5rem;   /* 8px  */
+  --ily-space-3:  0.75rem;  /* 12px */
+  --ily-space-4:  1rem;     /* 16px */
+  --ily-space-5:  1.25rem;  /* 20px */
+  --ily-space-6:  1.5rem;   /* 24px */
+  --ily-space-8:  2rem;     /* 32px */
+  --ily-space-10: 2.5rem;   /* 40px */
+  --ily-space-12: 3rem;     /* 48px */
+  --ily-space-16: 4rem;     /* 64px */
+  --ily-space-20: 5rem;     /* 80px */
+  --ily-space-24: 6rem;     /* 96px */
+  --ily-space-32: 8rem;     /* 128px */
+
+  /* -------------------------------------------------------------------
+     BORDERS & RADII — TBD
+     Lock the radius philosophy once identity is set (soft/round for
+     skincare-friendly feel vs. minimal for premium feel).
+     ------------------------------------------------------------------- */
+  /* --ily-radius:      ; */
+  --ily-radius-full:    9999px;
+
+  /* -------------------------------------------------------------------
+     SHADOWS
+     ------------------------------------------------------------------- */
+  --ily-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --ily-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --ily-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.10);
+  --ily-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+
+  /* -------------------------------------------------------------------
+     TRANSITIONS
+     ------------------------------------------------------------------- */
+  --ily-transition-fast:   150ms ease;
+  --ily-transition-normal: 250ms ease;
+  --ily-transition-slow:   400ms ease;
+
+  /* -------------------------------------------------------------------
+     LAYOUT
+     ------------------------------------------------------------------- */
+  --ily-max-width:    1200px;
+  --ily-max-width-sm: 640px;
+  --ily-max-width-md: 768px;
+  --ily-max-width-lg: 1024px;
+}

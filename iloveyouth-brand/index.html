@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iloveyouth — Logo Preview</title>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--ily-font-primary);
+      font-weight: var(--ily-font-regular);
+      color: var(--ily-text);
+      background: var(--ily-surface);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: var(--ily-max-width);
+      margin: 0 auto;
+      padding: var(--ily-space-16) var(--ily-space-8);
+    }
+
+    header {
+      margin-bottom: var(--ily-space-16);
+      padding-bottom: var(--ily-space-8);
+      border-bottom: 1px solid var(--ily-border);
+    }
+
+    header .eyebrow {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      text-transform: uppercase;
+      color: var(--ily-text-muted);
+      margin: 0 0 var(--ily-space-3);
+    }
+
+    header h1 {
+      font-size: var(--ily-text-5xl);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: var(--ily-leading-tight);
+      margin: 0 0 var(--ily-space-4);
+    }
+
+    header p {
+      font-size: var(--ily-text-lg);
+      font-weight: var(--ily-font-light);
+      line-height: var(--ily-leading-relaxed);
+      color: var(--ily-text-muted);
+      max-width: 60ch;
+      margin: 0;
+    }
+
+    section {
+      margin-bottom: var(--ily-space-24);
+    }
+
+    .section-label {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      text-transform: uppercase;
+      color: var(--ily-text-muted);
+      margin: 0 0 var(--ily-space-6);
+      padding-bottom: var(--ily-space-3);
+      border-bottom: 1px solid var(--ily-border);
+    }
+
+    /* ============ THE WORDMARK ============ */
+    /* Real SVG assets from logos/. Height-based sizing so the aspect
+       ratio stays locked to the file's viewBox. */
+    .wordmark-img {
+      display: block;
+      width: auto;
+      height: auto;
+    }
+
+    .wordmark-img--hero {
+      height: clamp(6rem, 16vw, 14rem);
+    }
+
+    .wordmark-img--display {
+      height: 6.5rem;
+    }
+
+    .wordmark-img--nav {
+      height: 2.25rem;
+    }
+
+    .wordmark-img--small {
+      height: 1.5rem;
+    }
+
+    /* ============ SURFACE SWATCHES ============ */
+    .surfaces {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--ily-space-6);
+    }
+
+    .surface {
+      padding: var(--ily-space-16) var(--ily-space-8);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .surface .tag {
+      position: absolute;
+      bottom: var(--ily-space-4);
+      left: var(--ily-space-4);
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .surface--ghost {
+      background: var(--ily-ghost-white);
+      color: var(--ily-shadow-grey);
+      border: 1px solid var(--ily-border);
+    }
+
+    .surface--shadow {
+      background: var(--ily-shadow-grey);
+      color: var(--ily-ghost-white);
+    }
+
+    .surface--frosted {
+      background: var(--ily-frosted-blue);
+      color: var(--ily-shadow-grey);
+    }
+
+    .surface--almond {
+      background: var(--ily-almond-silk);
+      color: var(--ily-shadow-grey);
+    }
+
+    .surface .wordmark-img {
+      height: clamp(4rem, 8vw, 6rem);
+    }
+
+    /* ============ HERO ============ */
+    .hero-stage {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-24) var(--ily-space-8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+    }
+
+    .hero-stage .wordmark {
+      color: var(--ily-shadow-grey);
+    }
+
+    /* ============ SIZE LADDER ============ */
+    .sizes {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ily-space-10);
+      padding: var(--ily-space-10) var(--ily-space-8);
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+    }
+
+    .size-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      align-items: center;
+      gap: var(--ily-space-6);
+      padding-bottom: var(--ily-space-6);
+      border-bottom: 1px dashed var(--ily-border);
+    }
+
+    .size-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .size-row .meta {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      text-transform: uppercase;
+      color: var(--ily-text-muted);
+    }
+
+    .size-row .meta .detail {
+      display: block;
+      margin-top: var(--ily-space-1);
+      font-weight: var(--ily-font-regular);
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ily-text-light);
+    }
+
+    /* ============ NAV MOCKUP ============ */
+    .nav-mockup {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-6) var(--ily-space-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-mockup .links {
+      display: flex;
+      gap: var(--ily-space-8);
+      font-size: var(--ily-text-sm);
+      font-weight: var(--ily-font-regular);
+      color: var(--ily-text-muted);
+    }
+
+    .nav-mockup .cta {
+      font-size: var(--ily-text-sm);
+      font-weight: var(--ily-font-medium);
+      padding: var(--ily-space-3) var(--ily-space-6);
+      background: var(--ily-frosted-blue);
+      color: var(--ily-shadow-grey);
+      border-radius: 9999px;
+      text-decoration: none;
+    }
+
+    /* ============ FOOTER NOTE ============ */
+    footer {
+      margin-top: var(--ily-space-16);
+      padding-top: var(--ily-space-8);
+      border-top: 1px solid var(--ily-border);
+      font-size: var(--ily-text-sm);
+      font-weight: var(--ily-font-light);
+      color: var(--ily-text-muted);
+      line-height: var(--ily-leading-relaxed);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <p class="eyebrow">iloveyouth · brand · logo preview</p>
+      <h1>The wordmark is the typeface.</h1>
+      <p>Satoshi Light (300), lowercase, one word. Shadow Grey on Ghost White. This is the primary mark — no custom lettering, no brush, no illustration. The airy humanist-geometric feel <em>is</em> the brand.</p>
+    </header>
+
+    <!-- HERO -->
+    <section>
+      <p class="section-label">Primary wordmark · hero</p>
+      <div class="hero-stage">
+        <img class="wordmark-img wordmark-img--hero" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+      </div>
+    </section>
+
+    <!-- SURFACES -->
+    <section>
+      <p class="section-label">On-brand surfaces</p>
+      <div class="surfaces">
+        <div class="surface surface--ghost">
+          <img class="wordmark-img" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <span class="tag">Ghost White · primary</span>
+        </div>
+        <div class="surface surface--shadow">
+          <img class="wordmark-img" src="logos/iloveyouth-logo-white.svg" alt="iloveyouth.">
+          <span class="tag">Shadow Grey · inverse</span>
+        </div>
+        <div class="surface surface--frosted">
+          <img class="wordmark-img" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <span class="tag">Frosted Blue · hero accent</span>
+        </div>
+        <div class="surface surface--almond">
+          <img class="wordmark-img" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <span class="tag">Almond Silk · supporting</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIZE LADDER -->
+    <section>
+      <p class="section-label">Size ladder</p>
+      <div class="sizes">
+        <div class="size-row">
+          <div class="meta">
+            Display
+            <span class="detail">~104px tall · SVG</span>
+          </div>
+          <img class="wordmark-img wordmark-img--display" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+        </div>
+        <div class="size-row">
+          <div class="meta">
+            Nav
+            <span class="detail">~36px tall · SVG</span>
+          </div>
+          <img class="wordmark-img wordmark-img--nav" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+        </div>
+        <div class="size-row">
+          <div class="meta">
+            Footer / inline
+            <span class="detail">~24px tall · SVG</span>
+          </div>
+          <img class="wordmark-img wordmark-img--small" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV IN CONTEXT -->
+    <section>
+      <p class="section-label">In context · site navigation</p>
+      <div class="nav-mockup">
+        <img class="wordmark-img wordmark-img--nav" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+        <nav class="links">
+          <span>Shop</span>
+          <span>Ingredients</span>
+          <span>Journal</span>
+          <span>About</span>
+        </nav>
+        <a class="cta" href="#">Shop hydration</a>
+      </div>
+    </section>
+
+    <!-- MONOGRAM -->
+    <section>
+      <p class="section-label">Secondary mark · <code>ily.</code> monogram · awaiting export</p>
+      <div style="padding: var(--ily-space-16) var(--ily-space-8); background: var(--ily-ghost-white); border: 1px dashed var(--ily-border-strong); border-radius: 2px; text-align: center; color: var(--ily-text-muted); font-size: var(--ily-text-sm); font-weight: var(--ily-font-light); line-height: var(--ily-leading-relaxed);">
+        Monogram SVGs not yet exported. Once <code>iloveyouth-monogram-dark.svg</code> and <code>iloveyouth-monogram-light.svg</code> are drawn, this section will show the monogram across Ghost White, Shadow Grey, and Frosted Blue surfaces plus app-icon and favicon sizes.
+      </div>
+    </section>
+
+    <footer>
+      Wordmark rendered from real SVG assets — dark variant (<code>#2A2220</code> Shadow Grey) on light surfaces, white variant (<code>#FFFFFF</code> pure white) on dark surfaces. Page chrome (nav text, CTAs, body) set in Satoshi 300 / 400 / 500 via Fontshare. Colors pulled from <code>tokens.css</code>. Canonical spec lives in the private <code>ily-brand</code> repo.
+    </footer>
+
+  </div>
+</body>
+</html>
