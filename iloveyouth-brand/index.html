@@ -99,6 +99,135 @@
       height: 1.5rem;
     }
 
+    /* ============ BRANDMARK (square ily.) ============ */
+    .brandmark-img {
+      display: block;
+      width: auto;
+      height: auto;
+    }
+
+    .brandmark-img--xl {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+    }
+
+    .brandmark-img--app {
+      width: 88px;
+      height: 88px;
+    }
+
+    .brandmark-img--favicon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .brandmark-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--ily-space-6);
+    }
+
+    .brandmark-tile {
+      aspect-ratio: 1 / 1;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--ily-space-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brandmark-tile .tag {
+      position: absolute;
+      bottom: var(--ily-space-4);
+      left: var(--ily-space-4);
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .brandmark-tile--ghost {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+    }
+
+    .brandmark-tile--shadow {
+      background: var(--ily-shadow-grey);
+    }
+
+    .brandmark-tile--frosted {
+      background: var(--ily-frosted-blue);
+    }
+
+    .brandmark-tile--almond {
+      background: var(--ily-almond-silk);
+    }
+
+    .icon-strip {
+      margin-top: var(--ily-space-10);
+      padding: var(--ily-space-10) var(--ily-space-8);
+      background: var(--ily-surface-mid);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ily-space-10);
+      flex-wrap: wrap;
+    }
+
+    .icon-strip .icon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ily-space-3);
+    }
+
+    .icon-strip .icon-card .label {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      text-transform: uppercase;
+      color: var(--ily-text-muted);
+    }
+
+    .icon-frame {
+      border-radius: 18px;
+      box-shadow: var(--ily-shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .icon-frame--ghost {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+    }
+
+    .icon-frame--shadow {
+      background: var(--ily-shadow-grey);
+    }
+
+    .icon-frame--frosted {
+      background: var(--ily-frosted-blue);
+    }
+
+    .icon-frame--app {
+      width: 88px;
+      height: 88px;
+    }
+
+    .icon-frame--favicon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      box-shadow: none;
+    }
+
     /* ============ SURFACE SWATCHES ============ */
     .surfaces {
       display: grid;
@@ -366,7 +495,7 @@
     <section>
       <p class="section-label">Primary wordmark · hero</p>
       <div class="hero-stage">
-        <img class="wordmark-img wordmark-img--hero" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+        <img class="wordmark-img wordmark-img--hero" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
       </div>
     </section>
 
@@ -375,19 +504,19 @@
       <p class="section-label">On-brand surfaces</p>
       <div class="surfaces">
         <div class="surface surface--ghost">
-          <img class="wordmark-img" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <img class="wordmark-img" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
           <span class="tag">Ghost White · primary</span>
         </div>
         <div class="surface surface--shadow">
-          <img class="wordmark-img" src="logos/iloveyouth-logo-white.svg" alt="iloveyouth.">
+          <img class="wordmark-img" src="logos/ily-wordmark-white-rect.svg" alt="iloveyouth.">
           <span class="tag">Shadow Grey · inverse</span>
         </div>
         <div class="surface surface--frosted">
-          <img class="wordmark-img" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <img class="wordmark-img" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
           <span class="tag">Frosted Blue · hero accent</span>
         </div>
         <div class="surface surface--almond">
-          <img class="wordmark-img" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <img class="wordmark-img" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
           <span class="tag">Almond Silk · supporting</span>
         </div>
       </div>
@@ -402,21 +531,21 @@
             Display
             <span class="detail">~104px tall · SVG</span>
           </div>
-          <img class="wordmark-img wordmark-img--display" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <img class="wordmark-img wordmark-img--display" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
         </div>
         <div class="size-row">
           <div class="meta">
             Nav
             <span class="detail">~36px tall · SVG</span>
           </div>
-          <img class="wordmark-img wordmark-img--nav" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <img class="wordmark-img wordmark-img--nav" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
         </div>
         <div class="size-row">
           <div class="meta">
             Footer / inline
             <span class="detail">~24px tall · SVG</span>
           </div>
-          <img class="wordmark-img wordmark-img--small" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+          <img class="wordmark-img wordmark-img--small" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
         </div>
       </div>
     </section>
@@ -425,7 +554,7 @@
     <section>
       <p class="section-label">In context · site navigation</p>
       <div class="nav-mockup">
-        <img class="wordmark-img wordmark-img--nav" src="logos/iloveyouth-logo-dark.svg" alt="iloveyouth.">
+        <img class="wordmark-img wordmark-img--nav" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
         <nav class="links">
           <span>Shop</span>
           <span>Ingredients</span>
@@ -436,16 +565,59 @@
       </div>
     </section>
 
-    <!-- MONOGRAM -->
+    <!-- BRANDMARK -->
     <section>
-      <p class="section-label">Secondary mark · <code>ily.</code> monogram · awaiting export</p>
-      <div style="padding: var(--ily-space-16) var(--ily-space-8); background: var(--ily-ghost-white); border: 1px dashed var(--ily-border-strong); border-radius: 2px; text-align: center; color: var(--ily-text-muted); font-size: var(--ily-text-sm); font-weight: var(--ily-font-light); line-height: var(--ily-leading-relaxed);">
-        Monogram SVGs not yet exported. Once <code>iloveyouth-monogram-dark.svg</code> and <code>iloveyouth-monogram-light.svg</code> are drawn, this section will show the monogram across Ghost White, Shadow Grey, and Frosted Blue surfaces plus app-icon and favicon sizes.
+      <p class="section-label">Secondary mark · <code>ily.</code> brandmark</p>
+
+      <div class="brandmark-grid">
+        <div class="brandmark-tile brandmark-tile--ghost">
+          <img class="brandmark-img brandmark-img--xl" src="logos/ily-brandmark-dark-square.svg" alt="ily.">
+          <span class="tag">Ghost White</span>
+        </div>
+        <div class="brandmark-tile brandmark-tile--shadow">
+          <img class="brandmark-img brandmark-img--xl" src="logos/ily-brandmark-white-square.svg" alt="ily.">
+          <span class="tag">Shadow Grey</span>
+        </div>
+        <div class="brandmark-tile brandmark-tile--frosted">
+          <img class="brandmark-img brandmark-img--xl" src="logos/ily-brandmark-dark-square.svg" alt="ily.">
+          <span class="tag">Frosted Blue</span>
+        </div>
+        <div class="brandmark-tile brandmark-tile--almond">
+          <img class="brandmark-img brandmark-img--xl" src="logos/ily-brandmark-dark-square.svg" alt="ily.">
+          <span class="tag">Almond Silk</span>
+        </div>
+      </div>
+
+      <div class="icon-strip">
+        <div class="icon-card">
+          <div class="icon-frame icon-frame--ghost icon-frame--app">
+            <img class="brandmark-img brandmark-img--app" src="logos/ily-brandmark-dark-square.svg" alt="ily.">
+          </div>
+          <span class="label">App icon · 88px</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-frame icon-frame--shadow icon-frame--app">
+            <img class="brandmark-img brandmark-img--app" src="logos/ily-brandmark-white-square.svg" alt="ily.">
+          </div>
+          <span class="label">App icon · dark</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-frame icon-frame--frosted icon-frame--app">
+            <img class="brandmark-img brandmark-img--app" src="logos/ily-brandmark-dark-square.svg" alt="ily.">
+          </div>
+          <span class="label">App icon · accent</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-frame icon-frame--shadow icon-frame--favicon">
+            <img class="brandmark-img brandmark-img--favicon" src="logos/ily-brandmark-white-square.svg" alt="ily.">
+          </div>
+          <span class="label">Favicon · 32px</span>
+        </div>
       </div>
     </section>
 
     <footer>
-      Wordmark rendered from real SVG assets — dark variant (<code>#2A2220</code> Shadow Grey) on light surfaces, white variant (<code>#FFFFFF</code> pure white) on dark surfaces. Page chrome (nav text, CTAs, body) set in Satoshi 300 / 400 / 500 via Fontshare. Colors pulled from <code>tokens.css</code>. Canonical spec lives in the private <code>ily-brand</code> repo.
+      Wordmark (<code>ily-wordmark-*-rect.svg</code>) and brandmark (<code>ily-brandmark-*-square.svg</code>) rendered from real SVG assets — dark variant (<code>#2A2220</code> Shadow Grey) on light surfaces, white variant (<code>#FFFFFF</code> pure white) on dark surfaces. Page chrome (nav text, CTAs, body) set in Satoshi 300 / 400 / 500 via Fontshare. Colors pulled from <code>tokens.css</code>. Canonical spec lives in the private <code>ily-brand</code> repo.
     </footer>
 
   </div>
