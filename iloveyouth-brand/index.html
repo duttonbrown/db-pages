@@ -374,6 +374,217 @@
       text-decoration: none;
     }
 
+    /* ============ EXPLORATORY SECTION ============ */
+    .exploratory {
+      background: var(--ily-ghost-white);
+      border: 1px dashed var(--ily-border-strong);
+      border-radius: 2px;
+      padding: var(--ily-space-10) var(--ily-space-8);
+    }
+
+    .exploratory-status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ily-space-2);
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      padding: var(--ily-space-2) var(--ily-space-4);
+      background: var(--ily-surface-mid);
+      border-radius: 9999px;
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .exploratory-status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ily-frosted-blue);
+      box-shadow: 0 0 0 3px rgba(173, 232, 249, 0.3);
+    }
+
+    .exploratory h3 {
+      font-size: var(--ily-text-2xl);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: var(--ily-leading-tight);
+      margin: 0 0 var(--ily-space-3);
+      color: var(--ily-text);
+    }
+
+    .exploratory p.intro {
+      font-size: var(--ily-text-base);
+      font-weight: var(--ily-font-light);
+      line-height: var(--ily-leading-relaxed);
+      color: var(--ily-text-muted);
+      max-width: 65ch;
+      margin: 0 0 var(--ily-space-10);
+    }
+
+    .exploratory-hero {
+      background: var(--ily-shadow-grey);
+      border-radius: 2px;
+      padding: var(--ily-space-16) var(--ily-space-8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ily-space-10);
+      margin-bottom: var(--ily-space-8);
+    }
+
+    .exploratory-hero img.wordmark-color {
+      height: clamp(4rem, 11vw, 9rem);
+      width: auto;
+    }
+
+    .exploratory-hero img.brandmark-color {
+      width: clamp(7rem, 18vw, 11rem);
+      height: auto;
+    }
+
+    .exploratory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ily-space-6);
+      margin-bottom: var(--ily-space-10);
+    }
+
+    .exploratory-tile {
+      padding: var(--ily-space-12) var(--ily-space-6);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ily-space-6);
+      position: relative;
+      min-height: 220px;
+      justify-content: center;
+    }
+
+    .exploratory-tile .tile-label {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      position: absolute;
+      top: var(--ily-space-4);
+      left: var(--ily-space-4);
+    }
+
+    .exploratory-tile.tile--good {
+      background: var(--ily-shadow-grey);
+    }
+
+    .exploratory-tile.tile--good .tile-label {
+      color: rgba(240, 243, 250, 0.7);
+    }
+
+    .exploratory-tile.tile--good .tile-label::before {
+      content: "✓ ";
+      color: var(--ily-frosted-blue);
+    }
+
+    .exploratory-tile.tile--bad {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+    }
+
+    .exploratory-tile.tile--bad .tile-label::before {
+      content: "✕ ";
+      color: var(--ily-grey-500);
+    }
+
+    .exploratory-tile img {
+      max-width: 100%;
+      width: auto;
+      height: auto;
+    }
+
+    .exploratory-tile.tile--good img.wordmark-color {
+      height: clamp(2.5rem, 6vw, 4rem);
+    }
+
+    .exploratory-tile.tile--bad img.wordmark-color {
+      height: clamp(2.5rem, 6vw, 4rem);
+    }
+
+    .rules-card {
+      background: var(--ily-surface);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-8);
+    }
+
+    .rules-card h4 {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      margin: 0 0 var(--ily-space-4);
+    }
+
+    .rules-card h4:not(:first-child) {
+      margin-top: var(--ily-space-8);
+    }
+
+    .rules-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .rules-card li {
+      font-size: var(--ily-text-sm);
+      font-weight: var(--ily-font-light);
+      line-height: var(--ily-leading-relaxed);
+      color: var(--ily-text);
+      padding: var(--ily-space-2) 0 var(--ily-space-2) var(--ily-space-6);
+      position: relative;
+      max-width: 75ch;
+    }
+
+    .rules-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.85em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ily-frosted-blue);
+    }
+
+    .rules-card li strong {
+      font-weight: var(--ily-font-medium);
+      color: var(--ily-text);
+    }
+
+    .rules-card .footnote {
+      margin-top: var(--ily-space-6);
+      padding-top: var(--ily-space-5);
+      border-top: 1px dashed var(--ily-border);
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-light);
+      color: var(--ily-text-light);
+      line-height: var(--ily-leading-relaxed);
+      max-width: 75ch;
+    }
+
+    @media (max-width: 720px) {
+      .exploratory {
+        padding: var(--ily-space-8) var(--ily-space-5);
+      }
+      .exploratory-grid {
+        grid-template-columns: 1fr;
+      }
+      .exploratory-hero {
+        padding: var(--ily-space-12) var(--ily-space-5);
+        gap: var(--ily-space-6);
+      }
+    }
+
     /* ============ FOOTER NOTE ============ */
     footer {
       margin-top: var(--ily-space-16);
@@ -563,22 +774,22 @@
       <div class="nav-mockup">
         <img class="wordmark-img wordmark-img--nav" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
         <nav class="links">
-          <span>Shop</span>
-          <span>Ingredients</span>
-          <span>Journal</span>
-          <span>About</span>
+          <span>shop</span>
+          <span>ingredients</span>
+          <span>journal</span>
+          <span>about</span>
         </nav>
-        <a class="cta" href="#">Shop hydration</a>
+        <a class="cta" href="#">shop hydration</a>
       </div>
       <div class="nav-mockup nav-mockup--dark">
         <img class="wordmark-img wordmark-img--nav" src="logos/ily-wordmark-white-rect.svg" alt="iloveyouth.">
         <nav class="links">
-          <span>Shop</span>
-          <span>Ingredients</span>
-          <span>Journal</span>
-          <span>About</span>
+          <span>shop</span>
+          <span>ingredients</span>
+          <span>journal</span>
+          <span>about</span>
         </nav>
-        <a class="cta" href="#">Shop hydration</a>
+        <a class="cta" href="#">shop hydration</a>
       </div>
     </section>
 
@@ -629,6 +840,66 @@
             <img class="brandmark-img brandmark-img--favicon" src="logos/ily-brandmark-white-square.svg" alt="ily.">
           </div>
           <span class="label">Favicon · 32px</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLORATORY · COLORED PERIOD ACCENTS -->
+    <section>
+      <p class="section-label">Exploratory direction · colored period accents</p>
+
+      <div class="exploratory">
+        <span class="exploratory-status">exploratory · not yet adopted</span>
+
+        <h3>The dots become drops.</h3>
+        <p class="intro">
+          A two-color variant where the letters stay quiet and the two period-sized dots — the tittle on the <code>i</code> and the period after the <code>h</code> — flip to Frosted Blue. The dots literally encode the brand's product truth (hydration → droplets) into the wordmark itself, without ever saying the word. Bookended dots, brand-colored. No competitor in the Aesop / Necessaire / Dieux lane is doing this. The concept is parked pending team review and contrast resolution — see rules below.
+        </p>
+
+        <div class="exploratory-hero">
+          <img class="wordmark-color" src="logos/ily-wordmark-white+blue+rect.svg" alt="iloveyouth. with Frosted Blue dots on Shadow Grey">
+          <img class="brandmark-color" src="logos/ily-brandmark-white+blue-square.svg" alt="ily. with Frosted Blue dots on Shadow Grey">
+        </div>
+
+        <div class="exploratory-grid">
+          <div class="exploratory-tile tile--good">
+            <span class="tile-label">approved · Shadow Grey</span>
+            <img class="wordmark-color" src="logos/ily-wordmark-white+blue+rect.svg" alt="Approved use on Shadow Grey">
+          </div>
+          <div class="exploratory-tile tile--bad">
+            <span class="tile-label">avoid · Ghost White</span>
+            <img class="wordmark-color" src="logos/ily-wordmark-white+blue+rect.svg" alt="Failure mode on Ghost White">
+          </div>
+        </div>
+
+        <div class="rules-card">
+          <h4>Where this variant may be used</h4>
+          <ul>
+            <li><strong>Shadow Grey backgrounds only.</strong> Frosted Blue on Shadow Grey is an 11:1 contrast ratio — the dots glow. This is the only context where the colored variant earns its place.</li>
+            <li><strong>Owned dark surfaces:</strong> hero sections with dark photo backgrounds, packaging back panels, dark-mode email headers, social tiles you control, video stings, branded merchandise with dark substrates.</li>
+            <li><strong>Hero contexts at scale.</strong> Display sizes (≥120px tall) where the dots are large enough to be unmistakable as a deliberate design element, not a printing artifact.</li>
+            <li><strong>The brandmark <code>ily.</code> square format</strong> is the strongest application — the proportionally larger dots survive smaller sizes than the wordmark does.</li>
+          </ul>
+
+          <h4>Where this variant may NOT be used</h4>
+          <ul>
+            <li><strong>Any light background.</strong> Frosted Blue on Ghost White is ~1.15:1 contrast — the dots vanish into the surface and read as a printing error or smudge. The "avoid" tile above demonstrates the failure mode.</li>
+            <li><strong>Any third-party context</strong> where the background can't be controlled — press kits, retail partner sites, Sephora brand portal thumbnails, paid media placements. Use the mono dark variant instead.</li>
+            <li><strong>Small sizes</strong> (below ~80px wordmark width / ~48px brandmark) on any background. The dots become indistinguishable from anti-aliasing artifacts.</li>
+            <li><strong>Print/production media</strong> that can't reproduce Frosted Blue accurately — single-color spot ink, foil stamping, vinyl, embroidery. Use the mono white variant instead.</li>
+            <li><strong>Anywhere alongside the mono mark in the same layout.</strong> Pick one variant per surface. Mixing reads as inconsistent, not deliberate.</li>
+          </ul>
+
+          <h4>Supporting rules</h4>
+          <ul>
+            <li><strong>Never explain the dots in copy.</strong> They are a visual signature, not a marketing message. Never captioned, decoded, or labeled as "hydration drops" in social posts, press, or product pages. The moment you explain them, they become a gimmick. They work because they're not explained.</li>
+            <li><strong>Never substitute another color.</strong> The whole point is the system tie-in to Frosted Blue as the locked hydration cue. Almond Silk dots, neutral dots, or any other color breaks the meaning entirely.</li>
+            <li><strong>Pair with the mono variant, not replace it.</strong> If adopted, the colored variant ships *alongside* the mono mark — used on dark surfaces only — never as the universal primary mark.</li>
+          </ul>
+
+          <p class="footnote">
+            Note on the current export: the dot fill in these files is <code>#b0e2f3</code>, which is close to but not exactly the locked Frosted Blue <code>#ADE8F9</code>. Production version (if adopted) will use the locked token. The white+blue SVGs also currently include a redundant dark-letters layer underneath; this should be cleaned up at the Illustrator source before re-export.
+          </p>
         </div>
       </div>
     </section>
