@@ -349,6 +349,19 @@
       justify-content: space-between;
     }
 
+    .nav-mockup + .nav-mockup {
+      margin-top: var(--ily-space-4);
+    }
+
+    .nav-mockup--dark {
+      background: var(--ily-shadow-grey);
+      border-color: var(--ily-shadow-grey);
+    }
+
+    .nav-mockup--dark .links {
+      color: rgba(240, 243, 250, 0.7);
+    }
+
     .nav-mockup .links {
       display: flex;
       gap: var(--ily-space-8);
@@ -555,6 +568,16 @@
       <p class="section-label">In context · site navigation</p>
       <div class="nav-mockup">
         <img class="wordmark-img wordmark-img--nav" src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+        <nav class="links">
+          <span>Shop</span>
+          <span>Ingredients</span>
+          <span>Journal</span>
+          <span>About</span>
+        </nav>
+        <a class="cta" href="#">Shop hydration</a>
+      </div>
+      <div class="nav-mockup nav-mockup--dark">
+        <img class="wordmark-img wordmark-img--nav" src="logos/ily-wordmark-white-rect.svg" alt="iloveyouth.">
         <nav class="links">
           <span>Shop</span>
           <span>Ingredients</span>
