@@ -1987,6 +1987,33 @@
       </div>
     </section>
 
+    <!-- SQUARE WORDMARK · FULL iloveyouth. ON 1:1 CANVAS -->
+    <section>
+      <p class="section-label">wordmark · square format</p>
+      <p style="font-size: var(--ily-text-sm); font-weight: var(--ily-font-light); line-height: var(--ily-leading-relaxed); color: var(--ily-text-muted); max-width: 60ch; margin: 0 0 var(--ily-space-6);">
+        the full wordmark, composed into a 1:1 square for social avatars, app store listings, profile images, and any context where the aspect ratio is fixed square. use this when the full <code>iloveyouth.</code> wordmark must appear but the canvas is square — otherwise use the <code>ily.</code> brandmark.
+      </p>
+
+      <div class="brandmark-grid">
+        <div class="brandmark-tile brandmark-tile--ghost">
+          <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-dark-square.svg" alt="iloveyouth. square">
+          <span class="tag">ghost white</span>
+        </div>
+        <div class="brandmark-tile brandmark-tile--shadow">
+          <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-white-square.svg" alt="iloveyouth. square">
+          <span class="tag">shadow grey</span>
+        </div>
+        <div class="brandmark-tile brandmark-tile--frosted">
+          <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-dark-square.svg" alt="iloveyouth. square">
+          <span class="tag">frosted blue</span>
+        </div>
+        <div class="brandmark-tile brandmark-tile--almond">
+          <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-dark-square.svg" alt="iloveyouth. square">
+          <span class="tag">almond silk</span>
+        </div>
+      </div>
+    </section>
+
     <!-- EXPLORATORY · COLORED PERIOD ACCENTS -->
     <section>
       <p class="section-label">exploratory direction · colored period accents</p>
@@ -2015,6 +2042,31 @@
           </div>
         </div>
 
+        <p style="margin: var(--ily-space-8) 0 var(--ily-space-4); font-size: var(--ily-text-xs); font-weight: var(--ily-font-medium); letter-spacing: var(--ily-tracking-wider); color: var(--ily-text-muted);">full parked inventory · all four colored variants</p>
+
+        <div class="brandmark-grid">
+          <div class="brandmark-tile brandmark-tile--shadow">
+            <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-white+blue-square.svg" alt="iloveyouth. square, white letters + blue dots, on shadow grey">
+            <span class="tag">wordmark · square · white+blue</span>
+          </div>
+          <div class="brandmark-tile brandmark-tile--ghost">
+            <img class="brandmark-img brandmark-img--xl" src="logos/ily-wordmark-dark+blue-square.svg" alt="iloveyouth. square, dark letters + blue dots, on ghost white">
+            <span class="tag">wordmark · square · dark+blue</span>
+          </div>
+          <div class="brandmark-tile brandmark-tile--shadow">
+            <img class="brandmark-img brandmark-img--xl" src="logos/ily-brandmark-white+blue-square.svg" alt="ily. square, white letters + blue dots, on shadow grey">
+            <span class="tag">brandmark · white+blue</span>
+          </div>
+          <div class="brandmark-tile brandmark-tile--ghost">
+            <img class="brandmark-img brandmark-img--xl" src="logos/ily-brandmark-dark+blue-square.svg" alt="ily. square, dark letters + blue dots, on ghost white">
+            <span class="tag">brandmark · dark+blue</span>
+          </div>
+        </div>
+
+        <p style="margin-top: var(--ily-space-5); font-size: var(--ily-text-xs); font-weight: var(--ily-font-light); line-height: var(--ily-leading-relaxed); color: var(--ily-text-muted); max-width: 70ch;">
+          note: the <code>dark+blue</code> variants sit on light surfaces above so you can see the parked inventory at a glance, but in production these colored dots would still fail contrast on ghost white. if the colored direction is adopted, the rule below applies: <strong>dark surfaces only, full stop.</strong>
+        </p>
+
         <div class="rules-card">
           <h4>where this variant may be used</h4>
           <ul>
@@ -2041,7 +2093,7 @@
           </ul>
 
           <p class="footnote">
-            note on the current export: the dot fill in these files is <code>#b0e2f3</code>, which is close to but not exactly the locked frosted blue <code>#ADE8F9</code>. production version (if adopted) will use the locked token. the white+blue svgs also currently include a redundant dark-letters layer underneath; this should be cleaned up at the source before re-export.
+            <strong>current parked file inventory:</strong> <code>ily-wordmark-white+blue+rect</code>, <code>ily-wordmark-white+blue-square</code>, <code>ily-wordmark-dark+blue-square</code>, <code>ily-brandmark-white+blue-square</code>, <code>ily-brandmark-dark+blue-square</code>. three source-file issues must be resolved at the illustrator source before any production adoption: (1) the dot fill is <code>#b0e2f3</code>, not the locked frosted blue <code>#ADE8F9</code> — re-fill from the saved swatch; (2) the white+blue svgs include a redundant dark-letters layer underneath the visible version — delete the hidden group; (3) <code>ily-wordmark-white+blue+rect</code> uses a <code>+rect</code> suffix instead of the standard <code>-rect</code> separator used everywhere else — rename for consistency. (4) <code>ily-brandmark-white+blue-square.png</code> is not yet exported; only the svg exists.
           </p>
         </div>
       </div>
@@ -2365,7 +2417,7 @@
     </section>
 
     <footer>
-      wordmark (<code>ily-wordmark-*-rect.svg</code>) and brandmark (<code>ily-brandmark-*-square.svg</code>) rendered from real svg assets — dark variant (<code>#2A2220</code> shadow grey) on light surfaces, white variant (<code>#FFFFFF</code> pure white) on dark surfaces. all colors pulled from <code>tokens.css</code>. canonical spec lives in the private <code>ily-brand</code> repo.
+      wordmark (<code>ily-wordmark-*-{rect,square}.svg</code>) and brandmark (<code>ily-brandmark-*-square.svg</code>) rendered from real svg assets — dark variant (<code>#2A2220</code> shadow grey) on light surfaces, white variant (<code>#FFFFFF</code> pure white) on dark surfaces. all colors pulled from <code>tokens.css</code>. canonical spec lives in the private <code>ily-brand</code> repo.
     </footer>
 
   </div>
