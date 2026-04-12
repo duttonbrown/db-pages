@@ -156,6 +156,14 @@
       background: var(--ily-shadow-grey);
     }
 
+    /* Any tag on a dark background must use light text — the warm
+       muted grey used for labels on light surfaces is invisible on
+       Shadow Grey. */
+    .brandmark-tile--shadow .tag {
+      color: var(--ily-ghost-white);
+      opacity: 0.7;
+    }
+
     .brandmark-tile--frosted {
       background: var(--ily-frosted-blue);
     }
@@ -262,6 +270,12 @@
     .surface--shadow {
       background: var(--ily-shadow-grey);
       color: var(--ily-ghost-white);
+    }
+
+    /* Any tag on a dark surface must use light text. */
+    .surface--shadow .tag {
+      color: var(--ily-ghost-white);
+      opacity: 0.7;
     }
 
     .surface--frosted {
