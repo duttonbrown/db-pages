@@ -800,53 +800,290 @@
 
     /* Vibe ideas list — text-only future explorations */
     .vibe-ideas {
-      background: var(--ily-surface);
-      border: 1px solid var(--ily-border);
-      border-radius: 2px;
-      padding: var(--ily-space-8);
       margin-top: var(--ily-space-8);
     }
 
-    .vibe-ideas h4 {
+    .vibe-ideas > h4 {
       font-size: var(--ily-text-xs);
       font-weight: var(--ily-font-medium);
       letter-spacing: var(--ily-tracking-wider);
       color: var(--ily-text-muted);
-      margin: 0 0 var(--ily-space-5);
+      margin: 0 0 var(--ily-space-6);
     }
 
-    .vibe-ideas ol {
+    .idea-card {
+      background: var(--ily-surface);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-8) var(--ily-space-8);
+      margin-bottom: var(--ily-space-5);
+    }
+
+    .idea-card .idea-head {
+      display: flex;
+      align-items: baseline;
+      gap: var(--ily-space-5);
+      margin-bottom: var(--ily-space-4);
+    }
+
+    .idea-card .idea-num {
+      font-size: var(--ily-text-2xl);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      color: var(--ily-shadow-grey);
+      line-height: 1;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .idea-card .idea-num::after {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--ily-frosted-blue);
+      margin-left: 0.45em;
+      vertical-align: 0.18em;
+    }
+
+    .idea-card .idea-title {
+      font-size: var(--ily-text-lg);
+      font-weight: var(--ily-font-medium);
+      color: var(--ily-text);
+      line-height: var(--ily-leading-snug);
       margin: 0;
-      padding: 0 0 0 var(--ily-space-6);
-      counter-reset: vibe-counter;
-      list-style: none;
     }
 
-    .vibe-ideas li {
-      counter-increment: vibe-counter;
+    .idea-card .idea-body {
       font-size: var(--ily-text-sm);
       font-weight: var(--ily-font-light);
       line-height: var(--ily-leading-relaxed);
-      color: var(--ily-text);
-      padding: var(--ily-space-3) 0 var(--ily-space-3) var(--ily-space-6);
+      color: var(--ily-text-muted);
+      max-width: 75ch;
+      margin: 0;
+    }
+
+    .idea-card .idea-expansion {
+      margin-top: var(--ily-space-8);
+      padding-top: var(--ily-space-8);
+      border-top: 1px dashed var(--ily-border);
+    }
+
+    /* Idea #1 — tagline as typographic system */
+    .ts-hero {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-16) var(--ily-space-10);
+      margin-bottom: var(--ily-space-6);
+      text-align: left;
+    }
+
+    .ts-hero .ts-eyebrow {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      margin-bottom: var(--ily-space-4);
+    }
+
+    .ts-hero .ts-display {
+      font-size: clamp(2.25rem, 6vw, 4.5rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1.05;
+      color: var(--ily-shadow-grey);
+      max-width: 14ch;
+      margin: 0 0 var(--ily-space-4);
+    }
+
+    .ts-hero .ts-supporting {
+      font-size: var(--ily-text-base);
+      font-weight: var(--ily-font-light);
+      color: var(--ily-text-muted);
+      max-width: 50ch;
+      line-height: var(--ily-leading-relaxed);
+      margin: 0;
+    }
+
+    .ts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--ily-space-4);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .ts-card {
+      padding: var(--ily-space-10) var(--ily-space-6);
+      border-radius: 2px;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: var(--ily-space-3);
       position: relative;
+    }
+
+    .ts-card .ts-context {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      opacity: 0.55;
+    }
+
+    .ts-card .ts-line {
+      font-size: clamp(1.25rem, 2.6vw, 1.85rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1.1;
+      max-width: 14ch;
+      margin: 0;
+    }
+
+    .ts-card.ts-card--ghost {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      color: var(--ily-shadow-grey);
+    }
+
+    .ts-card.ts-card--frosted {
+      background: var(--ily-frosted-blue);
+      color: var(--ily-shadow-grey);
+    }
+
+    .ts-card.ts-card--almond {
+      background: var(--ily-almond-silk);
+      color: var(--ily-shadow-grey);
+    }
+
+    .ts-card.ts-card--shadow {
+      background: var(--ily-shadow-grey);
+      color: var(--ily-ghost-white);
+    }
+
+    .ts-card.ts-card--shadow .ts-context {
+      color: var(--ily-ghost-white);
+    }
+
+    .ts-rule {
+      background: var(--ily-surface-mid);
+      border-radius: 2px;
+      padding: var(--ily-space-6) var(--ily-space-8);
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-light);
+      line-height: var(--ily-leading-relaxed);
+      color: var(--ily-text-muted);
       max-width: 75ch;
     }
 
-    .vibe-ideas li::before {
-      content: counter(vibe-counter, decimal-leading-zero);
-      position: absolute;
-      left: 0;
-      top: var(--ily-space-3);
-      font-size: var(--ily-text-xs);
-      font-weight: var(--ily-font-medium);
-      color: var(--ily-frosted-blue);
-      letter-spacing: var(--ily-tracking-wide);
-    }
-
-    .vibe-ideas li strong {
+    .ts-rule strong {
       font-weight: var(--ily-font-medium);
       color: var(--ily-text);
+    }
+
+    /* Ingredient-list-as-design demos */
+    .ts-divider {
+      margin: var(--ily-space-10) 0 var(--ily-space-6);
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      padding-bottom: var(--ily-space-3);
+      border-bottom: 1px solid var(--ily-border);
+    }
+
+    .ts-pair {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: var(--ily-space-4);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    /* Manifesto stack — large vertical ingredient list */
+    .ts-manifesto {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-16) var(--ily-space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--ily-space-2);
+    }
+
+    .ts-manifesto .label {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .ts-manifesto .ingredient {
+      font-size: clamp(2rem, 5.5vw, 4rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1.05;
+      color: var(--ily-shadow-grey);
+    }
+
+    /* Product back-panel — compact ingredient list */
+    .ts-backpanel {
+      background: var(--ily-almond-silk);
+      border-radius: 2px;
+      padding: var(--ily-space-10) var(--ily-space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--ily-space-2);
+      justify-content: center;
+    }
+
+    .ts-backpanel .label {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-shadow-grey);
+      opacity: 0.65;
+      margin-bottom: var(--ily-space-5);
+    }
+
+    .ts-backpanel .ingredient {
+      font-size: var(--ily-text-lg);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1.4;
+      color: var(--ily-shadow-grey);
+    }
+
+    /* Staccato headline — percussive period rhythm */
+    .ts-staccato {
+      background: var(--ily-shadow-grey);
+      border-radius: 2px;
+      padding: var(--ily-space-16) var(--ily-space-10);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .ts-staccato .label {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: rgba(240, 243, 250, 0.55);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .ts-staccato .line {
+      font-size: clamp(1.75rem, 4.5vw, 3.25rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1.15;
+      color: var(--ily-ghost-white);
+      max-width: 22ch;
+      margin: 0;
+    }
+
+    .ts-staccato .line .accent {
+      color: var(--ily-frosted-blue);
     }
 
     @media (max-width: 720px) {
@@ -861,6 +1098,24 @@
       }
       .vibe-row {
         grid-template-columns: 1fr;
+      }
+      .ts-grid {
+        grid-template-columns: 1fr;
+      }
+      .ts-hero {
+        padding: var(--ily-space-12) var(--ily-space-6);
+      }
+      .ts-manifesto {
+        padding: var(--ily-space-12) var(--ily-space-6);
+      }
+      .ts-staccato {
+        padding: var(--ily-space-12) var(--ily-space-6);
+      }
+      .ts-pair {
+        grid-template-columns: 1fr;
+      }
+      .idea-card {
+        padding: var(--ily-space-6);
       }
       .vibe-email {
         flex-direction: column;
@@ -1242,17 +1497,127 @@
           <span class="v-tagline">youth starts with you.</span>
         </div>
 
-        <!-- ideas list -->
+        <!-- ideas — expanded as cards, one visual demo per round -->
         <div class="vibe-ideas">
           <h4>more ideas worth exploring</h4>
-          <ol>
-            <li><strong>tagline as typographic system, not just a line.</strong> every long-form headline ends with a period in the same satoshi light voice. a homepage hero might say "hydration, named.", a product page might say "two ingredients. one result.", a journal post might say "ceramides, explained." the period becomes a brand-wide signature that ties every piece of copy to the wordmark.</li>
-            <li><strong>animated wordmark for digital.</strong> letters fade in left to right, then the two dots drop into place last — tittle first, period second — over about 800ms. plays once on first hero load. subtle, never autoloops, never explained. costs nothing to make and adds a single moment of personality on the site without changing any static asset.</li>
-            <li><strong>tagline lockup as a secondary mark.</strong> <code>iloveyouth.</code> with <code>youth starts with you.</code> set underneath in a smaller weight, locked-up as a single composition for hero contexts (packaging back panels, email headers, footers). pairs the tagline visually with the wordmark so they reinforce each other.</li>
-            <li><strong>"named." as a campaign signature.</strong> a campaign series where every visual is one ingredient at a time, set against ghost white with the ingredient name in display type plus a single line of plain-language explanation. <em>niacinamide. brightens. strengthens the barrier.</em> next slide: <em>ceramides. lock moisture in.</em> the campaign IS the voice.</li>
-            <li><strong>packaging as anti-packaging.</strong> the bottle wears almost nothing — just <code>ily.</code> on the cap, <code>iloveyouth.</code> on the front, the ingredient name as the loudest typographic moment, and the tagline running quietly down the back panel. stand it next to a competitor on a sephora shelf and the restraint is the loudest thing on the shelf.</li>
-            <li><strong>hydration as a number, not a claim.</strong> a homepage stat moment: a single huge number ("96%") in light weight with the tagline beneath. the number ties to a specific clinical or self-reported result — never vague, always sourced. proof, not promise.</li>
-          </ol>
+
+          <!-- IDEA 01 — tagline as typographic system -->
+          <div class="idea-card">
+            <div class="idea-head">
+              <span class="idea-num">01</span>
+              <h5 class="idea-title">tagline as typographic system, not just a line</h5>
+            </div>
+            <p class="idea-body">every long-form headline ends with a period in the same satoshi light voice. a homepage hero might say "hydration, named.", a product page might say "two ingredients. one result.", a journal post might say "ceramides, explained." the period becomes a brand-wide signature that ties every piece of copy to the wordmark.</p>
+
+            <div class="idea-expansion">
+              <div class="ts-hero">
+                <p class="ts-eyebrow">homepage hero</p>
+                <h2 class="ts-display">hydration, named.</h2>
+                <p class="ts-supporting">no proprietary blends. no marketing language. every ingredient called by its real name and explained in one sentence.</p>
+              </div>
+
+              <div class="ts-grid">
+                <div class="ts-card ts-card--ghost">
+                  <span class="ts-context">product page</span>
+                  <p class="ts-line">two ingredients. one result.</p>
+                </div>
+                <div class="ts-card ts-card--frosted">
+                  <span class="ts-context">journal post</span>
+                  <p class="ts-line">ceramides, explained.</p>
+                </div>
+                <div class="ts-card ts-card--almond">
+                  <span class="ts-context">about page</span>
+                  <p class="ts-line">the quiet routine.</p>
+                </div>
+                <div class="ts-card ts-card--shadow">
+                  <span class="ts-context">campaign banner</span>
+                  <p class="ts-line">no drying alcohols. ever.</p>
+                </div>
+              </div>
+
+              <p class="ts-divider">the period as ingredient list</p>
+
+              <div class="ts-pair">
+                <div class="ts-manifesto">
+                  <span class="label">what's in it</span>
+                  <span class="ingredient">niacinamide.</span>
+                  <span class="ingredient">ceramide-3.</span>
+                  <span class="ingredient">hyaluronic acid.</span>
+                  <span class="ingredient">glycerin.</span>
+                  <span class="ingredient">panthenol.</span>
+                  <span class="ingredient">squalane.</span>
+                </div>
+
+                <div class="ts-backpanel">
+                  <span class="label">back panel · daily hydrator</span>
+                  <span class="ingredient">niacinamide.</span>
+                  <span class="ingredient">ceramide-3.</span>
+                  <span class="ingredient">hyaluronic acid.</span>
+                  <span class="ingredient">glycerin.</span>
+                  <span class="ingredient">panthenol.</span>
+                  <span class="ingredient">squalane.</span>
+                  <span class="ingredient">that's it.</span>
+                </div>
+              </div>
+
+              <p class="ts-divider">the period as rhythm</p>
+
+              <div class="ts-staccato">
+                <span class="label">campaign banner · the rhythm</span>
+                <p class="line">no fillers. no fragrance. no fluff. <span class="accent">just ingredients.</span></p>
+              </div>
+
+              <div class="ts-rule">
+                <strong>the rule:</strong> every long-form headline is set in satoshi light, lowercase, ends with a period, no exceptions. body copy follows normal sentence rules — this is a <em>display type</em> system, not a punctuation overhaul. the period is doing two jobs at once: it ends the thought (declarative), and it visually rhymes with the period after the <code>h</code> in the wordmark (signature). once adopted, every hero, every campaign banner, every social tile speaks the same typographic voice as the logo.
+              </div>
+            </div>
+          </div>
+
+          <!-- IDEA 02 — animated wordmark -->
+          <div class="idea-card">
+            <div class="idea-head">
+              <span class="idea-num">02</span>
+              <h5 class="idea-title">animated wordmark for digital</h5>
+            </div>
+            <p class="idea-body">letters fade in left to right, then the two dots drop into place last — tittle first, period second — over about 800ms. plays once on first hero load. subtle, never autoloops, never explained. costs nothing to make and adds a single moment of personality on the site without changing any static asset.</p>
+          </div>
+
+          <!-- IDEA 03 — tagline lockup -->
+          <div class="idea-card">
+            <div class="idea-head">
+              <span class="idea-num">03</span>
+              <h5 class="idea-title">tagline lockup as a secondary mark</h5>
+            </div>
+            <p class="idea-body"><code>iloveyouth.</code> with <code>youth starts with you.</code> set underneath in a smaller weight, locked-up as a single composition for hero contexts (packaging back panels, email headers, footers). pairs the tagline visually with the wordmark so they reinforce each other.</p>
+          </div>
+
+          <!-- IDEA 04 — "named." as a campaign signature -->
+          <div class="idea-card">
+            <div class="idea-head">
+              <span class="idea-num">04</span>
+              <h5 class="idea-title">"named." as a campaign signature</h5>
+            </div>
+            <p class="idea-body">a campaign series where every visual is one ingredient at a time, set against ghost white with the ingredient name in display type plus a single line of plain-language explanation. <em>niacinamide. brightens. strengthens the barrier.</em> next slide: <em>ceramides. lock moisture in.</em> the campaign IS the voice.</p>
+          </div>
+
+          <!-- IDEA 05 — packaging as anti-packaging (caveat: best done in real packaging files) -->
+          <div class="idea-card">
+            <div class="idea-head">
+              <span class="idea-num">05</span>
+              <h5 class="idea-title">packaging as anti-packaging</h5>
+            </div>
+            <p class="idea-body">the bottle wears almost nothing — just <code>ily.</code> on the cap, <code>iloveyouth.</code> on the front, the ingredient name as the loudest typographic moment, and the tagline running quietly down the back panel. stand it next to a competitor on a clean retail shelf and the restraint is the loudest thing on the shelf. <em>note: this idea is best mocked up against real packaging dieline files, not vibe-coded as a flat html rectangle. happy to do an abstract version when the rest are done if helpful.</em></p>
+          </div>
+
+          <!-- IDEA 06 — hydration as a number -->
+          <div class="idea-card">
+            <div class="idea-head">
+              <span class="idea-num">06</span>
+              <h5 class="idea-title">hydration as a number, not a claim</h5>
+            </div>
+            <p class="idea-body">a homepage stat moment: a single huge number ("96%") in light weight with the tagline beneath. the number ties to a specific clinical or self-reported result — never vague, always sourced. proof, not promise.</p>
+          </div>
+
         </div>
 
       </div>
