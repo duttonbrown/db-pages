@@ -1238,6 +1238,270 @@
       text-align: right;
     }
 
+    /* Idea #04 — "named." campaign signature */
+    .campaign-hero {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-20) var(--ily-space-10);
+      margin-bottom: var(--ily-space-4);
+      position: relative;
+      min-height: 360px;
+    }
+
+    .campaign-hero .c-eyebrow {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      margin-bottom: var(--ily-space-8);
+    }
+
+    .campaign-hero .c-name {
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1;
+      color: var(--ily-shadow-grey);
+      margin: 0 0 var(--ily-space-5);
+    }
+
+    .campaign-hero .c-line {
+      font-size: clamp(1.125rem, 2.4vw, 1.625rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1.3;
+      color: var(--ily-text-muted);
+      margin: 0;
+      max-width: 30ch;
+    }
+
+    .campaign-hero .c-mark {
+      position: absolute;
+      bottom: var(--ily-space-8);
+      right: var(--ily-space-10);
+    }
+
+    .campaign-hero .c-mark img {
+      height: 1.5rem;
+      width: auto;
+      opacity: 0.55;
+    }
+
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--ily-space-4);
+      margin-bottom: var(--ily-space-4);
+    }
+
+    .campaign-card {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-12) var(--ily-space-6);
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .campaign-card .c-eyebrow {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+    }
+
+    .campaign-card .c-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ily-space-3);
+    }
+
+    .campaign-card .c-name {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1;
+      color: var(--ily-shadow-grey);
+      margin: 0;
+    }
+
+    .campaign-card .c-line {
+      font-size: var(--ily-text-sm);
+      font-weight: var(--ily-font-light);
+      line-height: var(--ily-leading-snug);
+      color: var(--ily-text-muted);
+      margin: 0;
+      max-width: 22ch;
+    }
+
+    .campaign-inverse {
+      background: var(--ily-shadow-grey);
+      border-radius: 2px;
+      padding: var(--ily-space-20) var(--ily-space-10);
+      position: relative;
+      min-height: 360px;
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .campaign-inverse .c-eyebrow {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: rgba(240, 243, 250, 0.55);
+      margin-bottom: var(--ily-space-8);
+    }
+
+    .campaign-inverse .c-name {
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1;
+      color: var(--ily-ghost-white);
+      margin: 0 0 var(--ily-space-5);
+    }
+
+    .campaign-inverse .c-line {
+      font-size: clamp(1.125rem, 2.4vw, 1.625rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1.3;
+      color: rgba(240, 243, 250, 0.7);
+      margin: 0;
+      max-width: 30ch;
+    }
+
+    .campaign-inverse .c-mark {
+      position: absolute;
+      bottom: var(--ily-space-8);
+      right: var(--ily-space-10);
+    }
+
+    .campaign-inverse .c-mark img {
+      height: 1.5rem;
+      width: auto;
+      opacity: 0.55;
+    }
+
+    /* Idea #06 — hydration as a number */
+    .stat-hero {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-20) var(--ily-space-10);
+      margin-bottom: var(--ily-space-4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--ily-space-4);
+      min-height: 380px;
+      justify-content: center;
+    }
+
+    .stat-hero .s-eyebrow {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-text-muted);
+      margin-bottom: var(--ily-space-2);
+    }
+
+    .stat-hero .s-number {
+      font-size: clamp(6rem, 18vw, 13rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 0.9;
+      color: var(--ily-shadow-grey);
+      margin: 0;
+    }
+
+    .stat-hero .s-claim {
+      font-size: clamp(1.125rem, 2.4vw, 1.625rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1.35;
+      color: var(--ily-text-muted);
+      max-width: 36ch;
+      margin: 0;
+    }
+
+    .stat-hero .s-disclaimer {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-light);
+      color: var(--ily-text-light);
+      letter-spacing: var(--ily-tracking-normal);
+      margin-top: var(--ily-space-4);
+      max-width: 40ch;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--ily-space-4);
+      margin-bottom: var(--ily-space-6);
+    }
+
+    .stat-card {
+      border-radius: 2px;
+      padding: var(--ily-space-12) var(--ily-space-6);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: var(--ily-space-3);
+    }
+
+    .stat-card .s-number {
+      font-size: clamp(2.75rem, 6vw, 4.5rem);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      line-height: 1;
+      margin: 0;
+    }
+
+    .stat-card .s-claim {
+      font-size: var(--ily-text-sm);
+      font-weight: var(--ily-font-light);
+      line-height: var(--ily-leading-snug);
+      max-width: 18ch;
+      margin: 0;
+    }
+
+    .stat-card--ghost {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      color: var(--ily-shadow-grey);
+    }
+
+    .stat-card--ghost .s-claim {
+      color: var(--ily-text-muted);
+    }
+
+    .stat-card--frosted {
+      background: var(--ily-frosted-blue);
+      color: var(--ily-shadow-grey);
+    }
+
+    .stat-card--frosted .s-claim {
+      color: var(--ily-shadow-grey);
+      opacity: 0.7;
+    }
+
+    .stat-card--shadow {
+      background: var(--ily-shadow-grey);
+      color: var(--ily-ghost-white);
+    }
+
+    .stat-card--shadow .s-claim {
+      color: rgba(240, 243, 250, 0.7);
+    }
+
     @media (max-width: 720px) {
       .vibe-hero {
         padding: var(--ily-space-8) var(--ily-space-6) var(--ily-space-12);
@@ -1268,6 +1532,28 @@
       }
       .lockup-grid {
         grid-template-columns: 1fr;
+      }
+      .campaign-grid {
+        grid-template-columns: 1fr;
+      }
+      .campaign-hero,
+      .campaign-inverse {
+        padding: var(--ily-space-12) var(--ily-space-6);
+        min-height: auto;
+      }
+      .campaign-card {
+        padding: var(--ily-space-8) var(--ily-space-6);
+      }
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+      .stat-hero {
+        padding: var(--ily-space-12) var(--ily-space-6);
+        min-height: auto;
+      }
+      .stat-card {
+        padding: var(--ily-space-8) var(--ily-space-6);
+        min-height: auto;
       }
       .lockup-hero {
         padding: var(--ily-space-12) var(--ily-space-6);
@@ -1805,6 +2091,57 @@
               <h5 class="idea-title">"named." as a campaign signature</h5>
             </div>
             <p class="idea-body">a campaign series where every visual is one ingredient at a time, set against ghost white with the ingredient name in display type plus a single line of plain-language explanation. <em>niacinamide. brightens. strengthens the barrier.</em> next slide: <em>ceramides. lock moisture in.</em> the campaign IS the voice.</p>
+
+            <div class="idea-expansion">
+              <!-- Hero campaign card — anchor ingredient at full scale -->
+              <div class="campaign-hero">
+                <p class="c-eyebrow">named · ingredient series · 01</p>
+                <h2 class="c-name">niacinamide.</h2>
+                <p class="c-line">brightens. strengthens the barrier.</p>
+                <div class="c-mark">
+                  <img src="logos/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+                </div>
+              </div>
+
+              <!-- Three supporting ingredient cards in the same template -->
+              <div class="campaign-grid">
+                <div class="campaign-card">
+                  <p class="c-eyebrow">02 · named</p>
+                  <div class="c-stack">
+                    <h3 class="c-name">ceramides.</h3>
+                    <p class="c-line">lock moisture in.</p>
+                  </div>
+                </div>
+                <div class="campaign-card">
+                  <p class="c-eyebrow">03 · named</p>
+                  <div class="c-stack">
+                    <h3 class="c-name">hyaluronic acid.</h3>
+                    <p class="c-line">draws water deep.</p>
+                  </div>
+                </div>
+                <div class="campaign-card">
+                  <p class="c-eyebrow">04 · named</p>
+                  <div class="c-stack">
+                    <h3 class="c-name">squalane.</h3>
+                    <p class="c-line">seals it all in.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Inverted hero on shadow grey for social/dark contexts -->
+              <div class="campaign-inverse">
+                <p class="c-eyebrow">named · ingredient series · 05</p>
+                <h2 class="c-name">panthenol.</h2>
+                <p class="c-line">soothes. quietly.</p>
+                <div class="c-mark">
+                  <img src="logos/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+                </div>
+              </div>
+
+              <div class="ts-rule">
+                <strong>the rule:</strong> every campaign visual uses the same template — eyebrow at top in muted small caps, ingredient name as the dominant typographic moment in display weight with a period, plain-language explanation in one or two short sentences underneath also ending with periods, wordmark anchored in the bottom corner. the only thing that changes from slide to slide is the ingredient and its sentence. the consistency IS the campaign — strangers see the third one and recognize it as ours before they read the word. ship it as a saved layout in figma so anyone on the team can produce a new ingredient slide in under five minutes without breaking the system.
+              </div>
+            </div>
           </div>
 
           <!-- IDEA 05 — packaging as anti-packaging (caveat: best done in real packaging files) -->
@@ -1823,6 +2160,36 @@
               <h5 class="idea-title">hydration as a number, not a claim</h5>
             </div>
             <p class="idea-body">a homepage stat moment: a single huge number ("96%") in light weight with the tagline beneath. the number ties to a specific clinical or self-reported result — never vague, always sourced. proof, not promise.</p>
+
+            <div class="idea-expansion">
+              <!-- Hero stat moment -->
+              <div class="stat-hero">
+                <p class="s-eyebrow">14-day study</p>
+                <h2 class="s-number">96%</h2>
+                <p class="s-claim">of users said skin felt more hydrated.</p>
+                <p class="s-disclaimer">self-reported, n=120 · independent panel · march 2026</p>
+              </div>
+
+              <!-- Three supporting stat cards showing the system -->
+              <div class="stat-grid">
+                <div class="stat-card stat-card--ghost">
+                  <h3 class="s-number">72hr.</h3>
+                  <p class="s-claim">lasting hydration in a single application.</p>
+                </div>
+                <div class="stat-card stat-card--frosted">
+                  <h3 class="s-number">0.</h3>
+                  <p class="s-claim">drying alcohols. ever.</p>
+                </div>
+                <div class="stat-card stat-card--shadow">
+                  <h3 class="s-number">2.</h3>
+                  <p class="s-claim">ingredients. one result.</p>
+                </div>
+              </div>
+
+              <div class="ts-rule">
+                <strong>the rule:</strong> every number in marketing copy must be sourced. clinical study, panel test, ingredient certification, self-report — something. the source goes in a small disclaimer line directly underneath the claim, not buried in a footer. <strong>never use a number we can't defend.</strong> the brand voice is "knowledgeable friend who tells you what actually works" — that voice falls apart the moment we use a marketing number with no provenance. when in doubt, use a smaller real number rather than a bigger fake one. the credibility compounds across every campaign that follows.
+              </div>
+            </div>
           </div>
 
         </div>
