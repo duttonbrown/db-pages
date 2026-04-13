@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing KPI Map — Q2 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #FF9912;
+    --accent-dark: #D97706;
+    --text: #4A4A4A;
+    --text-mid: #6A6A6A;
+    --text-light: #9A9A9A;
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --border: #EAEAEA;
+    --border-strong: #D5D5D5;
+    --diagnostic: #4A6FA5;
+    --pipeline: #D97706;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body { padding: 56px 24px; }
+
+  .container { max-width: 1180px; margin: 0 auto; }
+
+  /* ----- Header ----- */
+  header { margin-bottom: 40px; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-weight: 300;
+    font-size: 42px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: var(--text-mid);
+    font-weight: 300;
+  }
+
+  /* ----- Intro / legend ----- */
+  .intro {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .intro p {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .intro p:last-of-type { margin-bottom: 18px; }
+  .intro strong { font-weight: 600; color: var(--text); }
+
+  .legend {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-mid);
+  }
+  .legend-item { display: flex; align-items: center; gap: 10px; }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-diagnostic { background: var(--diagnostic); }
+  .dot-pipeline { background: var(--pipeline); }
+  .legend-item strong { color: var(--text); font-weight: 600; margin-right: 4px; }
+
+  /* ----- Section headers ----- */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .section-count {
+    font-size: 13px;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  /* ----- Tier 1 grid ----- */
+  .tier1-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+
+  .tier1 {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .tier1-head {
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tier1-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 6px;
+  }
+  .tier1-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+  .tier1-def {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .tier1-meta {
+    font-size: 11px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .tier1-meta span + span::before { content: "·"; margin: 0 8px; }
+
+  .tier2-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+  .tier2-list { list-style: none; }
+  .tier2-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .tier2-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .tier2-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .tier2-body { flex: 1; }
+  .tier2-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .tier2-desc {
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  /* ----- Standalone section ----- */
+  .standalone-intro {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+    max-width: 760px;
+  }
+  .standalone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-bottom: 56px;
+  }
+  .standalone {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text-light);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .standalone-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .standalone-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .standalone-meta {
+    font-size: 11px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* ----- Footer ----- */
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  footer p { margin-bottom: 4px; }
+
+  /* ----- Print ----- */
+  @media print {
+    body { padding: 24px; background: white; }
+    .tier1, .standalone, .intro { box-shadow: none; border-color: #ccc; }
+    .tier1-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 32px 16px; }
+    h1 { font-size: 32px; }
+    .tier1-grid { grid-template-columns: 1fr; }
+    .tier1 { padding: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="eyebrow">Dutton Brown · Marketing · Q2 2026</div>
+    <h1>Marketing KPI Map</h1>
+    <div class="subtitle">How the 4 Tier 1 KPIs relate to the supporting Tier 2 metrics — for discussion with Hannah</div>
+  </header>
+
+  <div class="intro">
+    <p><strong>4 Tier 1 KPIs</strong> drive the monthly review. Each one is either an aggregate rollup that captures a whole domain (Ads Revenue rolls up Meta + Google + Pinterest; Email Revenue rolls up flows + campaigns) or a single metric consequential enough on its own (Trade Revenue, New Trade Accounts).</p>
+    <p><strong>Tier 2 KPIs</strong> do one of two jobs — they either explain a Tier 1 movement after it happens (diagnostic) or signal a future Tier 1 movement before it shows up (pipeline).</p>
+    <p><strong>Report everything, discuss selectively.</strong> Every Tier 2 is pulled monthly alongside its parent Tier 1 — automated wherever possible — and sits right there on the review page. Hannah walks through the Tier 1s in the meeting and highlights whichever Tier 2s are worth the room's attention: ones that explain a Tier 1 shift, or ones that are sliding on their own. What to call out is her judgment, not a rule. The time-consuming part isn't gathering numbers; it's deciding what to do when they move.</p>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot dot-diagnostic"></span><span><strong>Diagnostic</strong> — explains a Tier 1 shift after it happens</span></div>
+      <div class="legend-item"><span class="legend-dot dot-pipeline"></span><span><strong>Pipeline</strong> — signals a future Tier 1 shift before it happens</span></div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">Tier 1 KPIs and their supporting Tier 2s</div>
+    <div class="section-count">4 Tier 1 · 17 Tier 2 supporters</div>
+  </div>
+
+  <div class="tier1-grid">
+
+    <!-- 1. Trade Revenue -->
+    <div class="tier1">
+      <div class="tier1-head">
+        <div class="tier1-label">Tier 1 · Revenue</div>
+        <div class="tier1-name">Trade Revenue</div>
+        <div class="tier1-def">Net revenue from trade-tagged orders in Shopify. The direct measure of trade program growth, which is our strategic focus for 2026.</div>
+        <div class="tier1-meta"><span>Source: Shopify</span><span>Monthly</span></div>
+      </div>
+      <div class="tier2-label">Supporting Tier 2</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Trade - AOV</div>
+            <div class="tier2-desc">Average basket size on trade orders. Tells you if a revenue shift is basket-size driven or volume driven.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-pipeline"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Trade - Repeat Rate</div>
+            <div class="tier2-desc">% of trade accounts with 2+ orders in 12 months. The loyalty / LTV lever — when this drops, future Trade Revenue will follow.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-pipeline"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Trade - Active Account Rate</div>
+            <div class="tier2-desc">% of trade accounts that have ordered in the last 12 months. The engagement base — a shrinking base is an early warning.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 2. New Trade Accounts -->
+    <div class="tier1">
+      <div class="tier1-head">
+        <div class="tier1-label">Tier 1 · Pipeline</div>
+        <div class="tier1-name">New Trade Accounts</div>
+        <div class="tier1-def">Count of trade accounts that placed their first order in the month. Not applications — activations. The pipeline leading indicator for future Trade Revenue.</div>
+        <div class="tier1-meta"><span>Source: Shopify</span><span>Monthly</span></div>
+      </div>
+      <div class="tier2-label">Supporting Tier 2</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-pipeline"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Trade - New Applicants</div>
+            <div class="tier2-desc">Top of funnel — trade applications submitted. If applicants rise but activations don't, the bottleneck is conversion, not acquisition.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 3. Email Revenue -->
+    <div class="tier1">
+      <div class="tier1-head">
+        <div class="tier1-label">Tier 1 · Owned channel</div>
+        <div class="tier1-name">Email Revenue</div>
+        <div class="tier1-def">Total revenue from all Omnisend email activity — automated flows and one-off campaigns combined. The single number for whether the owned email engine is producing.</div>
+        <div class="tier1-meta"><span>Source: Omnisend</span><span>Monthly</span></div>
+      </div>
+      <div class="tier2-label">Supporting Tier 2</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Email Revenue - Automations</div>
+            <div class="tier2-desc">Revenue from automated flows (welcome, abandoned cart, post-purchase, winback). The compounding half of the channel.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Email Revenue - Campaigns</div>
+            <div class="tier2-desc">Revenue from one-off email sends. The cadence / calendar half of the channel.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Email - Revenue per Recipient</div>
+            <div class="tier2-desc">Efficiency measure. Prevents inflating Email Revenue by just sending more.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-pipeline"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Email - List Size</div>
+            <div class="tier2-desc">Opted-in, deliverable contacts. The volume lever — future email revenue is bounded by this.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Email - CTOR (Click-to-Open Rate)</div>
+            <div class="tier2-desc">Engagement / creative effectiveness. Tells you if the content is working for the people who see it.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 4. Ads Revenue -->
+    <div class="tier1">
+      <div class="tier1-head">
+        <div class="tier1-label">Tier 1 · Paid channel</div>
+        <div class="tier1-name">Ads Revenue</div>
+        <div class="tier1-def">Aggregate paid channel revenue — Google + Meta + Pinterest combined. The single number for whether paid acquisition is producing.</div>
+        <div class="tier1-meta"><span>Source: Meta, Google, Pinterest</span><span>Monthly</span></div>
+      </div>
+      <div class="tier2-label">Supporting Tier 2 — revenue breakdowns</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Ads Revenue - Meta</div>
+            <div class="tier2-desc">Facebook + Instagram ads combined. First place to look if Ads Revenue moved and you need to know whether Meta was the driver.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Ads Revenue - Google</div>
+            <div class="tier2-desc">Google search + shopping. Platform rollup for paid search performance.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Ads Revenue - Pinterest</div>
+            <div class="tier2-desc">Pinterest ads platform rollup. Smaller channel but different audience — tracked separately to see when it's pulling weight.</div>
+          </div>
+        </li>
+      </ul>
+      <div class="tier2-label" style="margin-top: 16px;">Supporting Tier 2 — efficiency &amp; mechanics</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Ads - ROAS (Meta)</div>
+            <div class="tier2-desc">Return on ad spend for Meta. Is Meta's lift efficiency-driven or spend-driven?</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Ads - ROAS (Google)</div>
+            <div class="tier2-desc">Return on ad spend for Google. Same question as Meta, different platform.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Ads - ROAS (Pinterest)</div>
+            <div class="tier2-desc">Return on ad spend for Pinterest. Smaller but separately tracked because the dynamics differ.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Ads - CTR (Meta)</div>
+            <div class="tier2-desc">Click-through rate on Meta creative. The bridge between impression and site visit for paid social.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Ads - Branded vs Non-Branded Revenue</div>
+            <div class="tier2-desc">Are we buying demand we already have, or creating new demand? The answer changes how we think about growth vs. harvest.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">Standalone Tier 2 KPIs</div>
+    <div class="section-count">4 KPIs</div>
+  </div>
+  <p class="standalone-intro">
+    These don't drill cleanly into any single Tier 1 — they're cross-cutting signals for overall marketing health, pipeline, brand awareness, and non-trade retention.
+  </p>
+  <div class="standalone-grid">
+
+    <div class="standalone">
+      <div class="standalone-name">Samples Sold</div>
+      <div class="standalone-desc">Sample orders ($1K+ per order, 30–90 day conversion to full orders). Cross-cutting pipeline signal — samples convert to both trade and retail full orders, so it's a business-wide leading indicator, not a Trade-specific one.</div>
+      <div class="standalone-meta">Shopify · Pipeline leading indicator</div>
+    </div>
+
+    <div class="standalone">
+      <div class="standalone-name">Retail Repeat Customer Rate</div>
+      <div class="standalone-desc">% of non-trade (retail) customers with 2+ orders in 12 months. Distinct from Trade - Repeat Rate — measures whether non-trade customers return without the program incentives that drive trade repeats.</div>
+      <div class="standalone-meta">Shopify · Cross-cutting loyalty</div>
+    </div>
+
+    <div class="standalone">
+      <div class="standalone-name">MER (Marketing Efficiency Ratio)</div>
+      <div class="standalone-desc">Total Revenue ÷ Total Marketing Spend. Demoted from Tier 1 because the denominator is lumpy with large commercial projects — kept as Tier 2 for overall efficiency check.</div>
+      <div class="standalone-meta">QuickBooks + Shopify · Overall efficiency</div>
+    </div>
+
+    <div class="standalone">
+      <div class="standalone-name">Monthly Social Metrics</div>
+      <div class="standalone-desc">Aggregate Instagram + Facebook engagement (views, reach, interactions, follows). Organic brand awareness — rarely triggers a decision on its own, but explains Ads Revenue shifts when paid spend is flat.</div>
+      <div class="standalone-meta">Meta · Organic brand signal</div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Source of truth: Notion KPIs database. Framework: Pillar 2 — KPIs &amp; Goals (Dutton Brown 3.0).</p>
+    <p>Map prepared for Q2 2026 Marketing review conversation · 2026-04-13</p>
+  </footer>
+
+</div>
+</body>
+</html>
