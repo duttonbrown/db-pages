@@ -20,17 +20,20 @@
     --border-strong: #D5D5D5;
     --radius:        10px;
 
-    /* Department accent colours */
-    --dept-company:    #4A4A4A;
-    --dept-marketing:  #4A6FA5;
-    --dept-production: #6B8E5A;
-    --dept-operations: #D97706;
-    --dept-admin:      #8B6AA8;
-    --dept-design:     #C48A55;
+    --dept-company:     #4A4A4A;
+    --dept-marketing:   #4A6FA5;
+    --dept-production:  #6B8E5A;
+    --dept-operations:  #D97706;
+    --dept-admin:       #8B6AA8;
+    --dept-design:      #C48A55;
+    --dept-facilities:  #3A8080;
+
+    --status-doing:    #6B8E5A;
+    --status-planning: #4A6FA5;
+    --status-not:      #9A9A9A;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html, body {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     font-weight: 300;
@@ -39,454 +42,260 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
-
   body { padding: 56px 24px 96px; }
-  .container { max-width: 1180px; margin: 0 auto; }
+  .container { max-width: 1200px; margin: 0 auto; }
 
-  /* ── Header ───────────────────────────────────────────── */
+  /* ── Header ──────────────────────────────────── */
   header { margin-bottom: 40px; }
   .eyebrow {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    margin-bottom: 8px;
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--accent-dark); margin-bottom: 8px;
   }
-  h1 {
-    font-weight: 300;
-    font-size: 42px;
-    color: var(--text);
-    letter-spacing: -0.5px;
-    margin-bottom: 10px;
-  }
-  .header-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .subtitle {
-    font-size: 15px;
-    color: var(--text-mid);
-    font-weight: 300;
-  }
+  h1 { font-weight: 300; font-size: 42px; letter-spacing: -0.5px; margin-bottom: 10px; }
+  .header-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .subtitle { font-size: 15px; color: var(--text-mid); }
   .status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    background: #FFF7ED;
-    border: 1px solid #FDE68A;
-    border-radius: 20px;
-    padding: 3px 10px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 400; letter-spacing: 0.6px; text-transform: uppercase;
+    color: var(--accent-dark); background: #FFF7ED;
+    border: 1px solid #FDE68A; border-radius: 20px; padding: 3px 10px;
   }
-  .status-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
-  /* ── Intro card ───────────────────────────────────────── */
-  .intro {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px 32px;
-    margin-bottom: 56px;
-  }
-  .intro p {
-    font-size: 15px;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
-  .intro p:last-child { margin-bottom: 0; }
-  .intro strong { font-weight: 600; }
-
-  /* ── Section ──────────────────────────────────────────── */
-  .section { margin-bottom: 64px; }
+  /* ── Section shell ───────────────────────────── */
+  .section { margin-bottom: 72px; }
   .section-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 12px;
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 18px; padding-bottom: 12px;
     border-bottom: 2px solid var(--accent);
   }
-  .section-title {
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
-  .section-note {
-    font-size: 13px;
-    color: var(--text-light);
-    font-weight: 300;
-  }
-  .section-desc {
-    font-size: 14px;
-    color: var(--text-mid);
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
+  .section-title { font-size: 22px; font-weight: 400; letter-spacing: -0.3px; }
+  .section-note { font-size: 13px; color: var(--text-light); }
+  .section-desc { font-size: 14px; color: var(--text-mid); margin-bottom: 20px; line-height: 1.65; }
 
-  /* ── View 1: Focus Grid ───────────────────────────────── */
-  .grid-wrap {
-    overflow-x: auto;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
+  /* ── 6 Pillars ───────────────────────────────── */
+  .pillars-intro {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 32px; margin-bottom: 20px;
   }
+  .pillars-intro p { font-size: 15px; color: var(--text); margin-bottom: 6px; }
+  .pillars-intro p:last-child { margin-bottom: 0; }
+  .pillars-intro strong { font-weight: 600; }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 0;
+  }
+  @media (max-width: 860px) { .pillars-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 540px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+  .pillar-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .pillar-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #FFF7ED; border: 1px solid #FDE68A;
+    color: var(--accent-dark); font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .pillar-body {}
+  .pillar-name { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 5px; }
+  .pillar-purpose { font-size: 12px; color: var(--text-mid); line-height: 1.5; margin-bottom: 8px; }
+  .pillar-items { list-style: none; }
+  .pillar-items li {
+    font-size: 11px; color: var(--text-light);
+    padding: 2px 0 2px 10px; position: relative;
+  }
+  .pillar-items li::before {
+    content: "·"; position: absolute; left: 2px; color: var(--accent);
+  }
+  .notion-badge {
+    display: inline-block; margin-top: 8px;
+    font-size: 10px; font-weight: 400; letter-spacing: 0.4px;
+    color: var(--text-light); background: #F5F5F5;
+    border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px;
+  }
+  .notion-badge.live { color: var(--status-doing); background: #F0F7ED; border-color: #C8DFC0; }
+
+  /* ── Focus Grid ──────────────────────────────── */
+  .grid-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
   .focus-grid {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--card);
-    min-width: 700px;
+    width: 100%; border-collapse: collapse;
+    background: var(--card); min-width: 680px;
   }
   .focus-grid thead th {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-light);
-    padding: 14px 18px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-    background: var(--card);
-    white-space: nowrap;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-light); padding: 13px 18px; text-align: left;
+    border-bottom: 1px solid var(--border); white-space: nowrap;
   }
-  .focus-grid thead th.col-now {
-    color: var(--accent-dark);
-    background: #FFFBF2;
-    border-bottom-color: var(--accent);
+  .focus-grid thead th.col-now { color: var(--accent-dark); background: #FFFBF2; border-bottom-color: var(--accent); }
+  .focus-grid thead th.col-q { color: #C8C8C8; }
+  .now-pill {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-size: 9px; font-weight: 600; padding: 1px 6px;
+    border-radius: 8px; margin-left: 5px; vertical-align: middle; text-transform: uppercase;
   }
-  .focus-grid thead th.col-now .now-pill {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    padding: 1px 6px;
-    border-radius: 8px;
-    margin-left: 6px;
-    vertical-align: middle;
-    text-transform: uppercase;
-  }
-  .focus-grid tbody tr + tr td {
-    border-top: 1px solid var(--border);
-  }
+  .focus-grid tbody tr + tr td { border-top: 1px solid var(--border); }
   .focus-grid tbody tr:hover td { background: #FAFAF8; }
-  .focus-grid td {
-    padding: 14px 18px;
-    font-size: 14px;
-    color: var(--text);
-    vertical-align: middle;
-  }
+  .focus-grid td { padding: 13px 18px; font-size: 13px; color: var(--text); vertical-align: top; }
   .focus-grid td.col-now { background: #FFFBF2; }
+  .focus-grid td.col-q { color: var(--text-light); }
 
-  /* Department label column */
-  .dept-cell {
-    white-space: nowrap;
-    min-width: 160px;
+  .dept-cell { min-width: 175px; }
+  .dept-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 400;
   }
-  .dept-name {
-    font-weight: 400;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .dept-name .owner {
-    font-size: 11px;
-    font-weight: 300;
-    color: var(--text-light);
-  }
-  .dept-pip {
-    width: 3px;
-    height: 18px;
-    border-radius: 2px;
-    flex-shrink: 0;
+  .dept-label .owner { font-size: 11px; font-weight: 300; color: var(--text-light); }
+  .dept-pip { width: 3px; height: 18px; border-radius: 2px; flex-shrink: 0; }
+
+  .cell-items { display: flex; flex-direction: column; gap: 4px; }
+  .cell-item { font-size: 13px; font-weight: 300; }
+  .cell-item + .cell-item { padding-top: 4px; border-top: 1px dashed var(--border); }
+  .cell-placeholder { font-style: italic; color: var(--text-light); font-size: 12px; }
+  .cell-tbd {
+    display: inline-block; font-style: italic; color: var(--border-strong);
+    border: 1px dashed var(--border-strong); border-radius: 5px;
+    padding: 1px 7px; font-size: 11px;
   }
 
-  /* Cell states */
-  .cell-value { font-weight: 300; }
-  .cell-placeholder {
-    font-style: italic;
-    color: var(--text-light);
-    border: 1px dashed var(--border-strong);
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-size: 12px;
-    display: inline-block;
-  }
-  .cell-light {
-    font-style: italic;
-    color: var(--text-light);
-    font-size: 13px;
-  }
+  .grid-note { font-size: 13px; color: var(--text-mid); margin-top: 14px; line-height: 1.6; }
 
-  .grid-note {
-    font-size: 13px;
-    color: var(--text-mid);
-    margin-top: 14px;
-    line-height: 1.6;
+  /* ── Project Detail ──────────────────────────── */
+  .dept-group { margin-bottom: 28px; }
+  .dept-group-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px; margin-bottom: 2px;
+    border-radius: 8px 8px 0 0;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
   }
-  .grid-note strong { font-weight: 400; color: var(--text); }
+  .dept-group-head .owner-name { font-weight: 300; font-size: 11px; opacity: 0.7; }
 
-  /* ── View 2: Initiative Detail ────────────────────────── */
-  .initiative-list { display: flex; flex-direction: column; gap: 12px; }
-
-  .initiative-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    display: grid;
-    grid-template-columns: 24px 1fr auto;
-    gap: 0 16px;
-    align-items: start;
+  .project-table {
+    width: 100%; border-collapse: collapse;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
   }
-  .initiative-card:hover { border-color: var(--border-strong); }
-
-  .initiative-pip {
-    width: 3px;
-    border-radius: 2px;
-    align-self: stretch;
-    min-height: 24px;
+  .project-table thead th {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
+    color: var(--text-light); padding: 10px 14px; text-align: left;
+    border-bottom: 1px solid var(--border); background: #FAFAF8;
   }
-
-  .initiative-body {}
-  .initiative-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
+  .project-table tbody tr + tr td { border-top: 1px solid var(--border); }
+  .project-table tbody tr:hover td { background: #FAFAF8; }
+  .project-table td {
+    padding: 11px 14px; font-size: 13px; color: var(--text); vertical-align: middle;
   }
-  .initiative-dept {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .initiative-name {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--text);
-  }
-  .initiative-name.placeholder {
-    font-style: italic;
-    font-size: 14px;
-    color: var(--text-light);
-  }
-  .initiative-meta {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    font-size: 13px;
-    color: var(--text-mid);
-  }
-  .meta-item { display: flex; align-items: center; gap: 5px; }
-  .meta-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--text-light);
-  }
-  .meta-value { color: var(--text-mid); }
-  .meta-value.placeholder { font-style: italic; color: var(--text-light); }
-
-  .initiative-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-  }
-  .status-pill {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.4px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    white-space: nowrap;
-  }
-  .status-scoping   { background: #FFF7ED; color: var(--accent-dark); border: 1px solid #FDE68A; }
-  .status-notstarted{ background: #F5F5F5; color: var(--text-mid);    border: 1px solid var(--border-strong); }
-  .status-pending   { background: #F5F5F5; color: var(--text-light);  border: 1px solid var(--border); font-style: italic; }
-
-  .playbook-link {
-    font-size: 11px;
-    color: var(--text-light);
-    font-style: italic;
-  }
+  .project-table td.td-project { font-weight: 400; }
+  .project-table td.td-owner {}
+  .project-table td.td-timing { color: var(--text-mid); white-space: nowrap; }
+  .project-table td.td-cadence { color: var(--text-mid); font-size: 12px; }
+  .project-table td.td-status { white-space: nowrap; }
+  .project-table td.td-playbook { color: var(--text-light); font-size: 11px; font-style: italic; }
 
   .owner-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--text-mid);
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; color: var(--text-mid);
   }
-  .owner-avatar {
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    font-size: 10px;
-    font-weight: 600;
-    color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+  .owner-av {
+    width: 20px; height: 20px; border-radius: 50%;
+    font-size: 9px; font-weight: 600; color: #fff;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
+  .owner-slash { font-size: 11px; color: var(--text-light); margin: 0 1px; }
 
-  /* ── View 3: Backlog ──────────────────────────────────── */
-  .backlog-wrap {
-    overflow-x: auto;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
+  .status-pill {
+    display: inline-block; font-size: 10px; font-weight: 400;
+    letter-spacing: 0.4px; padding: 2px 9px; border-radius: 20px; white-space: nowrap;
   }
+  .sp-doing      { background: #F0F7ED; color: var(--status-doing);    border: 1px solid #C8DFC0; }
+  .sp-planning   { background: #EEF3FA; color: var(--status-planning);  border: 1px solid #C0CFEA; }
+  .sp-notstarted { background: #F5F5F5; color: var(--text-mid);         border: 1px solid var(--border-strong); }
+  .sp-pending    { background: #F5F5F5; color: var(--text-light);       border: 1px solid var(--border); font-style: italic; }
+
+  /* ── Backlog ──────────────────────────────────── */
+  .backlog-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 20px; }
   .backlog-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--card);
-    min-width: 640px;
+    width: 100%; border-collapse: collapse;
+    background: var(--card); min-width: 680px;
   }
   .backlog-table thead th {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-light);
-    padding: 13px 18px;
-    text-align: left;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase;
+    color: var(--text-light); padding: 12px 16px; text-align: left;
     border-bottom: 1px solid var(--border);
   }
   .backlog-table tbody tr + tr td { border-top: 1px solid var(--border); }
   .backlog-table tbody tr:hover td { background: #FAFAF8; }
-  .backlog-table td {
-    padding: 13px 18px;
-    font-size: 13px;
-    color: var(--text);
-    vertical-align: top;
+  .backlog-table td { padding: 11px 16px; font-size: 13px; color: var(--text); vertical-align: top; }
+  .backlog-table td.td-why { font-size: 12px; color: var(--text-mid); }
+  .backlog-table td.td-empty { color: var(--text-light); font-style: italic; font-size: 12px; }
+
+  .dept-pip-inline {
+    display: inline-block; width: 3px; height: 14px; border-radius: 2px;
+    vertical-align: middle; margin-right: 7px;
   }
-  .backlog-table td.empty {
-    color: var(--text-light);
-    font-style: italic;
+
+  .blocked-tag {
+    display: inline-block; font-size: 11px; color: #C04040;
+    background: #FEF2F2; border: 1px solid #FECACA;
+    border-radius: 6px; padding: 1px 7px;
   }
-  .backlog-table td.add {
-    color: var(--border-strong);
-    font-style: italic;
-    font-size: 12px;
+  .waiting-tag {
+    display: inline-block; font-size: 11px; color: var(--accent-dark);
+    background: #FFF7ED; border: 1px solid #FDE68A;
+    border-radius: 6px; padding: 1px 7px;
   }
 
   .priority-pill {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.4px;
-    padding: 2px 8px;
-    border-radius: 20px;
+    display: inline-block; font-size: 10px; font-weight: 400;
+    padding: 2px 8px; border-radius: 20px;
   }
-  .priority-medium { background: #FFF7ED; color: var(--accent-dark); border: 1px solid #FDE68A; }
-
-  .blocked-tag {
-    display: inline-block;
-    font-size: 11px;
-    color: #C04040;
-    background: #FEF2F2;
-    border: 1px solid #FECACA;
-    border-radius: 6px;
-    padding: 1px 7px;
-  }
+  .pp-high   { background: #FEF2F2; color: #C04040; border: 1px solid #FECACA; }
+  .pp-medium { background: #FFF7ED; color: var(--accent-dark); border: 1px solid #FDE68A; }
+  .pp-low    { background: #F5F5F5; color: var(--text-mid); border: 1px solid var(--border-strong); }
 
   .backlog-rules {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 24px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 24px;
   }
-  .backlog-rules .rules-title {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 12px;
+  .rules-title {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-light); margin-bottom: 12px;
   }
   .backlog-rules ul { list-style: none; }
   .backlog-rules li {
-    font-size: 13px;
-    color: var(--text-mid);
-    padding: 6px 0;
+    font-size: 13px; color: var(--text-mid);
+    padding: 6px 0 6px 16px;
     border-bottom: 1px dashed var(--border);
-    padding-left: 14px;
     position: relative;
   }
-  .backlog-rules li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--accent-dark);
-    font-size: 11px;
-  }
+  .backlog-rules li::before { content: "→"; position: absolute; left: 0; color: var(--accent-dark); font-size: 11px; }
   .backlog-rules li:last-child { border-bottom: none; }
   .backlog-rules strong { font-weight: 600; color: var(--text); }
 
-  /* ── How to use ───────────────────────────────────────── */
-  .usage-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-  }
+  /* ── How to Use ──────────────────────────────── */
+  .usage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 16px; }
   .usage-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 22px 22px 20px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px 22px 20px;
   }
-  .usage-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    margin-bottom: 8px;
-  }
-  .usage-title {
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-  .usage-desc {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.6;
-  }
+  .usage-label { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+  .usage-title { font-size: 15px; font-weight: 400; color: var(--text); margin-bottom: 8px; }
+  .usage-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
 
-  /* ── Footer ───────────────────────────────────────────── */
+  /* ── Footer ──────────────────────────────────── */
   footer {
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
-    margin-top: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+    border-top: 1px solid var(--border); padding-top: 24px; margin-top: 16px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
   }
-  footer span {
-    font-size: 12px;
-    color: var(--text-light);
-    font-weight: 300;
-  }
+  footer span { font-size: 12px; color: var(--text-light); }
 </style>
 </head>
 <body>
@@ -498,321 +307,647 @@
     <h1>2026 Roadmap</h1>
     <div class="header-meta">
       <span class="subtitle">What every team is focused on, and when — Q2 through Q4.</span>
-      <span class="status-badge"><span class="status-dot"></span>Draft</span>
+      <span class="status-badge"><span class="status-dot"></span>Live Draft</span>
     </div>
   </header>
 
-  <!-- ── Intro ── -->
-  <div class="intro">
-    <p>Q1 was spent standing up the Notion project management structure. Q2 shifts to <strong>populating the pillar team framework</strong> — giving each team a defined monthly focus tied to the new meeting cadences so we tackle priorities without overwhelming anyone.</p>
-    <p>This document is the <strong>"what"</strong> — what each team is focused on and when. A companion <strong>Playbook</strong> (to be built) will describe the "how." The roadmap is structured now so those Playbooks have a home when they're ready.</p>
-  </div>
+  <!-- ── 6 Pillars Framework ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Team Structure Framework</span>
+      <span class="section-note">6-Pillar Overview</span>
+    </div>
+    <div class="pillars-intro">
+      <p>Every department at Dutton Brown is structured around these <strong>6 pillars</strong> — designed for clarity, accountability, and scale. The roadmap below executes against this framework, department by department.</p>
+      <p style="margin-top:6px;font-size:13px;color:var(--text-mid)">Litmus test: if someone new joined tomorrow, could they understand this department using only what's in Notion? If not, we have work to do.</p>
+    </div>
+
+    <div class="pillars-grid">
+
+      <div class="pillar-card">
+        <div class="pillar-num">1</div>
+        <div class="pillar-body">
+          <p class="pillar-name">Core Responsibilities</p>
+          <p class="pillar-purpose">Defines ownership &amp; outcomes — what breaks if this department doesn't exist.</p>
+          <ul class="pillar-items">
+            <li>Why the department exists</li>
+            <li>4–8 owned outcomes</li>
+            <li>Key handoffs</li>
+          </ul>
+          <span class="notion-badge">Teams page body</span>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">2</div>
+        <div class="pillar-body">
+          <p class="pillar-name">KPIs &amp; Goals</p>
+          <p class="pillar-purpose">Creates measurable accountability with Tier 1 (Scores) and Tier 2 (KPIs).</p>
+          <ul class="pillar-items">
+            <li>Tier 1 &amp; Tier 2 KPIs</li>
+            <li>Quarterly targets</li>
+            <li>Monthly review cadence</li>
+          </ul>
+          <span class="notion-badge live">KPIs DB ✓</span>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">3</div>
+        <div class="pillar-body">
+          <p class="pillar-name">Roles &amp; People</p>
+          <p class="pillar-purpose">Enables clear delegation, hiring triggers, and performance management.</p>
+          <ul class="pillar-items">
+            <li>Current &amp; future roles</li>
+            <li>Primary outcomes per seat</li>
+            <li>Hiring triggers</li>
+          </ul>
+          <span class="notion-badge live">Roles DB ✓</span>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">4</div>
+        <div class="pillar-body">
+          <p class="pillar-name">Systems, SOPs &amp; Tools</p>
+          <p class="pillar-purpose">Ensures consistency, scalability, and documents the tech/contractor ecosystem.</p>
+          <ul class="pillar-items">
+            <li>SOPs &amp; work instructions</li>
+            <li>Tools &amp; automations</li>
+            <li>Contractors &amp; vendors</li>
+          </ul>
+          <span class="notion-badge live">Docs DB + Tools DB ✓</span>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">5</div>
+        <div class="pillar-body">
+          <p class="pillar-name">Meeting Rhythm &amp; Reporting</p>
+          <p class="pillar-purpose">Maintains alignment &amp; momentum through structured weekly/monthly/quarterly cadence.</p>
+          <ul class="pillar-items">
+            <li>Weekly alternating cadence</li>
+            <li>Quarterly planning process</li>
+            <li>Cross-functional alignment</li>
+          </ul>
+          <span class="notion-badge">Teams page body</span>
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">6</div>
+        <div class="pillar-body">
+          <p class="pillar-name">Growth, Risks &amp; Improvement</p>
+          <p class="pillar-purpose">Exposes limitations early and embeds continuous improvement.</p>
+          <ul class="pillar-items">
+            <li>Risks &amp; constraints</li>
+            <li>Improvement pipeline</li>
+            <li>12-month &amp; 2–3 year vision</li>
+          </ul>
+          <span class="notion-badge live">Projects DB ✓</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ── View 1: Monthly Focus Grid ── -->
   <section class="section">
     <div class="section-header">
       <span class="section-title">Monthly Focus Grid</span>
-      <span class="section-note">At a glance — one phrase per cell</span>
+      <span class="section-note">Q2 2026 — one phrase per cell</span>
     </div>
-    <p class="section-desc">Cross-cutting Company Theme anchors the top row. Department cells show the primary focus for that month. April is current.</p>
+    <p class="section-desc">The top-line "what each team is working on this month." Company Theme is the cross-cutting priority that ties department work together. April is current.</p>
 
     <div class="grid-wrap">
       <table class="focus-grid">
         <thead>
           <tr>
-            <th style="min-width:170px">Department</th>
+            <th style="min-width:180px">Department</th>
             <th class="col-now">April <span class="now-pill">Now</span></th>
             <th>May</th>
             <th>June</th>
-            <th>Q3</th>
-            <th>Q4</th>
+            <th class="col-q">Q3</th>
+            <th class="col-q">Q4</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Company Theme -->
           <tr>
             <td class="dept-cell">
-              <div class="dept-name">
+              <div class="dept-label">
                 <div class="dept-pip" style="background:var(--dept-company)"></div>
                 Company Theme
               </div>
             </td>
-            <td class="col-now"><span class="cell-value">Pillar team rollout</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
+            <td class="col-now">
+              <div class="cell-items">
+                <span class="cell-item">Rollout pillars &amp; reporting system</span>
+              </div>
+            </td>
+            <td><span class="cell-item">Developing dashboards</span></td>
+            <td><span class="cell-item">Automating KPIs</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
           </tr>
-          <!-- Marketing -->
           <tr>
             <td class="dept-cell">
-              <div class="dept-name">
+              <div class="dept-label">
                 <div class="dept-pip" style="background:var(--dept-marketing)"></div>
                 Marketing
                 <span class="owner">Hannah</span>
               </div>
             </td>
-            <td class="col-now"><span class="cell-placeholder">paste</span></td>
-            <td><span class="cell-placeholder">paste</span></td>
-            <td><span class="cell-placeholder">paste</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
+            <td class="col-now"><span class="cell-item">KPIs &amp; Goals</span></td>
+            <td><span class="cell-item">Email Automations</span></td>
+            <td><span class="cell-item">Trade Program Improvements</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
           </tr>
-          <!-- Production -->
           <tr>
             <td class="dept-cell">
-              <div class="dept-name">
+              <div class="dept-label">
                 <div class="dept-pip" style="background:var(--dept-production)"></div>
                 Production
                 <span class="owner">Catherine</span>
               </div>
             </td>
-            <td class="col-now"><span class="cell-placeholder">paste</span></td>
-            <td><span class="cell-placeholder">paste</span></td>
-            <td><span class="cell-placeholder">paste</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
+            <td class="col-now">
+              <div class="cell-items">
+                <span class="cell-item">KPIs &amp; Goals</span>
+                <span class="cell-item">Testing SOP</span>
+              </div>
+            </td>
+            <td><span class="cell-item">QC Process + SOPs</span></td>
+            <td><span class="cell-item">Assembly Process + SOPs</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
           </tr>
-          <!-- Operations -->
           <tr>
             <td class="dept-cell">
-              <div class="dept-name">
+              <div class="dept-label">
                 <div class="dept-pip" style="background:var(--dept-operations)"></div>
                 Operations
                 <span class="owner">Chase</span>
               </div>
             </td>
-            <td class="col-now"><span class="cell-value">ERP discovery</span></td>
-            <td><span class="cell-value">ERP shortlist</span></td>
-            <td><span class="cell-value">Site FAQs draft</span></td>
-            <td><span class="cell-value">ERP decision</span></td>
-            <td><span class="cell-value">ERP rollout prep</span></td>
+            <td class="col-now">
+              <div class="cell-items">
+                <span class="cell-item">KPIs &amp; Goals</span>
+                <span class="cell-item">SKU Development</span>
+              </div>
+            </td>
+            <td><span class="cell-item">Scope MRPEasy</span></td>
+            <td><span class="cell-item">Implement MRPEasy</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
           </tr>
-          <!-- Admin & HR -->
           <tr>
             <td class="dept-cell">
-              <div class="dept-name">
+              <div class="dept-label">
                 <div class="dept-pip" style="background:var(--dept-admin)"></div>
                 Admin &amp; HR
               </div>
             </td>
-            <td class="col-now"><span class="cell-light">Coming soon</span></td>
-            <td><span class="cell-light">Coming soon</span></td>
-            <td><span class="cell-light">Coming soon</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
+            <td class="col-now"><span class="cell-item">Rollout Updated Handbook</span></td>
+            <td><span class="cell-item">Performance Management structure</span></td>
+            <td><span class="cell-item">Company Hub buildout</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
           </tr>
-          <!-- Design & Dev -->
           <tr>
             <td class="dept-cell">
-              <div class="dept-name">
+              <div class="dept-label">
                 <div class="dept-pip" style="background:var(--dept-design)"></div>
                 Design &amp; Dev
               </div>
             </td>
-            <td class="col-now"><span class="cell-light">Coming soon</span></td>
-            <td><span class="cell-light">Coming soon</span></td>
-            <td><span class="cell-light">Coming soon</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
-            <td><span class="cell-placeholder">TBD</span></td>
+            <td class="col-now"><span class="cell-item">Content funnel — images &amp; .glb</span></td>
+            <td><span class="cell-item">Finalize Revit + product descriptions</span></td>
+            <td><span class="cell-item">Migrate legacy Shopify accounts</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
+            <td class="col-q"><span class="cell-tbd">TBD</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="grid-note">Q3 and Q4 will be set during the Q2 quarterly planning review. Operations ERP work (MRPEasy scoping + implementation) spans May–June and will inform Q3 decisions.</p>
+  </section>
+
+  <!-- ── View 2: Project Detail ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Project Detail</span>
+      <span class="section-note">Owner · cadence · status per project</span>
+    </div>
+    <p class="section-desc">Every project from the grid above, tied to an owner, a meeting cadence, and a future Playbook link. Grouped by department.</p>
+
+    <!-- Company-wide -->
+    <div class="dept-group">
+      <div class="dept-group-head" style="background:#F5F5F5; color:var(--dept-company)">
+        Company-wide
+        <span class="owner-name">Thomas</span>
+      </div>
+      <table class="project-table">
+        <thead><tr>
+          <th style="width:30%">Project</th><th>Owner</th><th>Timing</th>
+          <th>Meeting Cadence</th><th>Status</th><th>Playbook</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-project">6-Pillar Framework Rollout</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas</span></td>
+            <td class="td-timing">April</td>
+            <td class="td-cadence">Monthly mgmt (2nd Thu)</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Reporting System Development</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas</span></td>
+            <td class="td-timing">April – May</td>
+            <td class="td-cadence">Monthly mgmt (2nd Thu)</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Dashboard Development</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas</span></td>
+            <td class="td-timing">May</td>
+            <td class="td-cadence">Monthly mgmt (2nd Thu)</td>
+            <td class="td-status"><span class="status-pill sp-notstarted">Not started</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">KPI Automation</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas</span></td>
+            <td class="td-timing">June</td>
+            <td class="td-cadence">Monthly mgmt (2nd Thu)</td>
+            <td class="td-status"><span class="status-pill sp-notstarted">Not started</span></td>
+            <td class="td-playbook">Pending</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <p class="grid-note">
-      <strong>Dashed cells</strong> — waiting to be filled. Marketing &amp; Production Q2 cells will be updated after Thomas's meeting notes are added.
-      Operations cells are a working draft pending the Chase alignment meeting.
-      Admin &amp; HR and Design &amp; Dev Q2 cells will populate as those pillar teams come online.
-    </p>
-  </section>
-
-  <!-- ── View 2: Initiative Detail ── -->
-  <section class="section">
-    <div class="section-header">
-      <span class="section-title">Initiative Detail</span>
-      <span class="section-note">One row per initiative</span>
+    <!-- Marketing -->
+    <div class="dept-group">
+      <div class="dept-group-head" style="background:#EEF3FA; color:var(--dept-marketing)">
+        Marketing
+        <span class="owner-name">Hannah</span>
+      </div>
+      <table class="project-table">
+        <thead><tr>
+          <th style="width:30%">Project</th><th>Owner</th><th>Timing</th>
+          <th>Meeting Cadence</th><th>Status</th><th>Playbook</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-project">Develop KPIs</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas<span class="owner-slash">/</span><span class="owner-av" style="background:var(--dept-marketing)">H</span>Hannah</span></td>
+            <td class="td-timing">April</td>
+            <td class="td-cadence">Ad hoc — Week B</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Email Automations</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-marketing)">H</span>Hannah</span></td>
+            <td class="td-timing">May</td>
+            <td class="td-cadence">Ad hoc — Week B</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Trade Program Improvements</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-marketing)">H</span>Hannah<span class="owner-slash">/</span><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas</span></td>
+            <td class="td-timing">June</td>
+            <td class="td-cadence">Ad hoc — Week B</td>
+            <td class="td-status"><span class="status-pill sp-planning">Planning</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <p class="section-desc">Connects each focus area to an owner, a meeting cadence, and a future Playbook link. The Playbook column is empty today — the structure is here so those docs have a home when they're built.</p>
 
-    <div class="initiative-list">
-
-      <!-- Operations: ERP -->
-      <div class="initiative-card">
-        <div class="initiative-pip" style="background:var(--dept-operations)"></div>
-        <div class="initiative-body">
-          <div class="initiative-top">
-            <span class="initiative-dept" style="color:var(--dept-operations)">Operations</span>
-            <span class="initiative-name">ERP System Evaluation</span>
-          </div>
-          <div class="initiative-meta">
-            <div class="meta-item">
-              <span class="meta-label">Owner</span>
-              <span class="owner-chip">
-                <span class="owner-avatar" style="background:var(--dept-operations)">C</span>
-                Chase
-              </span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Timing</span>
-              <span class="meta-value">April – Q3</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Meeting Cadence</span>
-              <span class="meta-value placeholder">To be confirmed</span>
-            </div>
-          </div>
-        </div>
-        <div class="initiative-right">
-          <span class="status-pill status-scoping">Scoping</span>
-          <span class="playbook-link">Playbook pending</span>
-        </div>
+    <!-- Production -->
+    <div class="dept-group">
+      <div class="dept-group-head" style="background:#F0F7ED; color:var(--dept-production)">
+        Production
+        <span class="owner-name">Catherine</span>
       </div>
-
-      <!-- Operations: FAQs -->
-      <div class="initiative-card">
-        <div class="initiative-pip" style="background:var(--dept-operations)"></div>
-        <div class="initiative-body">
-          <div class="initiative-top">
-            <span class="initiative-dept" style="color:var(--dept-operations)">Operations</span>
-            <span class="initiative-name">Site FAQs Build-out</span>
-          </div>
-          <div class="initiative-meta">
-            <div class="meta-item">
-              <span class="meta-label">Owner</span>
-              <span class="owner-chip">
-                <span class="owner-avatar" style="background:var(--dept-operations)">C</span>
-                Chase
-              </span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Timing</span>
-              <span class="meta-value">June</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Meeting Cadence</span>
-              <span class="meta-value placeholder">To be confirmed</span>
-            </div>
-          </div>
-        </div>
-        <div class="initiative-right">
-          <span class="status-pill status-notstarted">Not started</span>
-          <span class="playbook-link">Playbook pending</span>
-        </div>
-      </div>
-
-      <!-- Marketing -->
-      <div class="initiative-card">
-        <div class="initiative-pip" style="background:var(--dept-marketing)"></div>
-        <div class="initiative-body">
-          <div class="initiative-top">
-            <span class="initiative-dept" style="color:var(--dept-marketing)">Marketing</span>
-            <span class="initiative-name placeholder">From Hannah meeting notes</span>
-          </div>
-          <div class="initiative-meta">
-            <div class="meta-item">
-              <span class="meta-label">Owner</span>
-              <span class="owner-chip">
-                <span class="owner-avatar" style="background:var(--dept-marketing)">H</span>
-                Hannah
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="initiative-right">
-          <span class="status-pill status-pending">Pending</span>
-          <span class="playbook-link">Playbook pending</span>
-        </div>
-      </div>
-
-      <!-- Production -->
-      <div class="initiative-card">
-        <div class="initiative-pip" style="background:var(--dept-production)"></div>
-        <div class="initiative-body">
-          <div class="initiative-top">
-            <span class="initiative-dept" style="color:var(--dept-production)">Production</span>
-            <span class="initiative-name placeholder">From Catherine meeting notes</span>
-          </div>
-          <div class="initiative-meta">
-            <div class="meta-item">
-              <span class="meta-label">Owner</span>
-              <span class="owner-chip">
-                <span class="owner-avatar" style="background:var(--dept-production)">C</span>
-                Catherine
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="initiative-right">
-          <span class="status-pill status-pending">Pending</span>
-          <span class="playbook-link">Playbook pending</span>
-        </div>
-      </div>
-
+      <table class="project-table">
+        <thead><tr>
+          <th style="width:30%">Project</th><th>Owner</th><th>Timing</th>
+          <th>Meeting Cadence</th><th>Status</th><th>Playbook</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-project">Develop KPIs</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas<span class="owner-slash">/</span><span class="owner-av" style="background:var(--dept-production)">C</span>Catherine</span></td>
+            <td class="td-timing">April</td>
+            <td class="td-cadence">Ad hoc — Week B</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Testing SOP</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas</span></td>
+            <td class="td-timing">April</td>
+            <td class="td-cadence">Ad hoc — Week B</td>
+            <td class="td-status"><span class="status-pill sp-notstarted">Not started</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">QC Process + SOPs</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas<span class="owner-slash">/</span><span class="owner-av" style="background:var(--dept-production)">C</span>Catherine</span></td>
+            <td class="td-timing">May</td>
+            <td class="td-cadence">Ad hoc — Week B</td>
+            <td class="td-status"><span class="status-pill sp-notstarted">Not started</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Assembly Process + SOPs</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas<span class="owner-slash">/</span><span class="owner-av" style="background:var(--dept-production)">C</span>Catherine</span></td>
+            <td class="td-timing">June</td>
+            <td class="td-cadence">Ad hoc — Week B</td>
+            <td class="td-status"><span class="status-pill sp-notstarted">Not started</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <!-- Operations -->
+    <div class="dept-group">
+      <div class="dept-group-head" style="background:#FFF7ED; color:var(--dept-operations)">
+        Operations
+        <span class="owner-name">Chase</span>
+      </div>
+      <table class="project-table">
+        <thead><tr>
+          <th style="width:30%">Project</th><th>Owner</th><th>Timing</th>
+          <th>Meeting Cadence</th><th>Status</th><th>Playbook</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-project">Product SKU Development</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas</span></td>
+            <td class="td-timing">April (ongoing)</td>
+            <td class="td-cadence" style="font-style:italic;color:var(--text-light)">TBD</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Launch ERP System (MRPEasy)</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-operations)">C</span>Chase</span></td>
+            <td class="td-timing">May – June</td>
+            <td class="td-cadence" style="font-style:italic;color:var(--text-light)">TBD</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Admin & HR -->
+    <div class="dept-group">
+      <div class="dept-group-head" style="background:#F5F0FA; color:var(--dept-admin)">
+        Admin &amp; HR
+        <span class="owner-name">Catherine (interim)</span>
+      </div>
+      <table class="project-table">
+        <thead><tr>
+          <th style="width:30%">Project</th><th>Owner</th><th>Timing</th>
+          <th>Meeting Cadence</th><th>Status</th><th>Playbook</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-project">Performance Management</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-production)">C</span>Catherine</span></td>
+            <td class="td-timing">May</td>
+            <td class="td-cadence" style="font-style:italic;color:var(--text-light)">TBD</td>
+            <td class="td-status"><span class="status-pill sp-planning">Planning</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Company Hub</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-company)">T</span>Thomas</span></td>
+            <td class="td-timing">June</td>
+            <td class="td-cadence" style="font-style:italic;color:var(--text-light)">TBD</td>
+            <td class="td-status"><span class="status-pill sp-planning">Planning</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Design & Dev -->
+    <div class="dept-group">
+      <div class="dept-group-head" style="background:#FAF4EE; color:var(--dept-design)">
+        Design &amp; Dev
+        <span class="owner-name">Thomas</span>
+      </div>
+      <table class="project-table">
+        <thead><tr>
+          <th style="width:30%">Project</th><th>Owner</th><th>Timing</th>
+          <th>Meeting Cadence</th><th>Status</th><th>Playbook</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-project">Product Renders (images &amp; .glb)</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-design)">T</span>Thomas</span></td>
+            <td class="td-timing">April (ongoing)</td>
+            <td class="td-cadence">—</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Revit Models + Product Descriptions</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-design)">T</span>Thomas</span></td>
+            <td class="td-timing">May</td>
+            <td class="td-cadence">—</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+          <tr>
+            <td class="td-project">Legacy Accounts Migration (Shopify)</td>
+            <td><span class="owner-chip"><span class="owner-av" style="background:var(--dept-design)">T</span>Thomas</span></td>
+            <td class="td-timing">June</td>
+            <td class="td-cadence">—</td>
+            <td class="td-status"><span class="status-pill sp-doing">Doing</span></td>
+            <td class="td-playbook">Pending</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </section>
 
   <!-- ── View 3: Backlog ── -->
   <section class="section">
     <div class="section-header">
-      <span class="section-title">Backlog &amp; Future Ideas</span>
+      <span class="section-title">Backlog &amp; Future Projects</span>
       <span class="section-note">Not committed — review first each quarter</span>
     </div>
-    <p class="section-desc">Parking lot for initiatives that matter but aren't yet scheduled. Items get promoted into the grid above when capacity opens up or a higher-priority effort wraps.</p>
+    <p class="section-desc">Parking lot for projects that matter but aren't yet scheduled. Items get promoted into the grid above when capacity opens or a higher-priority effort wraps. Review this section <strong>first</strong> during quarterly planning.</p>
 
     <div class="backlog-wrap">
       <table class="backlog-table">
         <thead>
           <tr>
-            <th>Department</th>
-            <th>Idea</th>
+            <th style="min-width:120px">Department</th>
+            <th style="min-width:200px">Project</th>
             <th>Why it matters</th>
-            <th>Blocked by</th>
-            <th>Priority</th>
+            <th style="min-width:180px">Blocked by</th>
+            <th style="min-width:80px">Priority</th>
           </tr>
         </thead>
         <tbody>
+          <!-- Production -->
           <tr>
-            <td><span class="dept-name" style="gap:6px"><span class="dept-pip" style="background:var(--dept-production);height:14px;width:3px;border-radius:2px;display:inline-block"></span>Production</span></td>
+            <td><span class="dept-pip-inline" style="background:var(--dept-production)"></span>Production</td>
             <td>Maintenance log &amp; schedule</td>
-            <td>Prevents downtime, extends equipment life</td>
+            <td class="td-why">Prevents downtime, extends equipment life</td>
             <td><span class="blocked-tag">Production SOPs first</span></td>
-            <td><span class="priority-pill priority-medium">Medium</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
           </tr>
           <tr>
-            <td><span class="dept-name" style="gap:6px"><span class="dept-pip" style="background:var(--dept-production);height:14px;width:3px;border-radius:2px;display:inline-block"></span>Production</span></td>
-            <td class="add">+ Add idea</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
+            <td><span class="dept-pip-inline" style="background:var(--dept-production)"></span>Production</td>
+            <td>Cross-training plan</td>
+            <td class="td-why">Reduces key-person dependency; builds team resilience</td>
+            <td><span class="blocked-tag">Testing SOP + QC docs</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
           </tr>
           <tr>
-            <td><span class="dept-name" style="gap:6px"><span class="dept-pip" style="background:var(--dept-operations);height:14px;width:3px;border-radius:2px;display:inline-block"></span>Operations</span></td>
-            <td class="add">+ Add idea</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
+            <td><span class="dept-pip-inline" style="background:var(--dept-production)"></span>Production</td>
+            <td>New hire onboarding structure</td>
+            <td class="td-why">Scottie &amp; Sarah need formalized ramp; sets template for future hires</td>
+            <td><span class="blocked-tag">SOPs + cross-training</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
           </tr>
           <tr>
-            <td><span class="dept-name" style="gap:6px"><span class="dept-pip" style="background:var(--dept-marketing);height:14px;width:3px;border-radius:2px;display:inline-block"></span>Marketing</span></td>
-            <td class="add">+ Add idea</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
+            <td><span class="dept-pip-inline" style="background:var(--dept-production)"></span>Production</td>
+            <td>Booth utilization &amp; capacity analysis</td>
+            <td class="td-why">Informs equipment investments (multi-gun, racks, additional booths)</td>
+            <td><span class="waiting-tag">KPI data from April</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <!-- Operations -->
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-operations)"></span>Operations</td>
+            <td>Parts ordering process &amp; inventory system</td>
+            <td class="td-why">Fixes communication gaps on overseas parts; gives ETA visibility</td>
+            <td><span class="waiting-tag">ERP scoping (May)</span></td>
+            <td><span class="priority-pill pp-high">High</span></td>
           </tr>
           <tr>
-            <td><span class="dept-name" style="gap:6px"><span class="dept-pip" style="background:var(--dept-admin);height:14px;width:3px;border-radius:2px;display:inline-block"></span>Admin &amp; HR</span></td>
-            <td class="add">+ Add idea</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
+            <td><span class="dept-pip-inline" style="background:var(--dept-operations)"></span>Operations</td>
+            <td>Customer FAQs</td>
+            <td class="td-why">Knowledge base for customers and future chatbot; reduces support load</td>
+            <td class="td-empty">—</td>
+            <td><span class="priority-pill pp-low">Low</span></td>
+          </tr>
+          <!-- Marketing -->
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-marketing)"></span>Marketing</td>
+            <td>Quarterly content shoots</td>
+            <td class="td-why">Organized photo/video production for product marketing and social</td>
+            <td class="td-empty">—</td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
           </tr>
           <tr>
-            <td><span class="dept-name" style="gap:6px"><span class="dept-pip" style="background:var(--dept-design);height:14px;width:3px;border-radius:2px;display:inline-block"></span>Design &amp; Dev</span></td>
-            <td class="add">+ Add idea</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
-            <td class="empty">—</td>
+            <td><span class="dept-pip-inline" style="background:var(--dept-marketing)"></span>Marketing</td>
+            <td>Trade show attendance</td>
+            <td class="td-why">Fall architect event confirmed; possible June show; direct trade growth channel</td>
+            <td><span class="waiting-tag">Confirm June show</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-marketing)"></span>Marketing</td>
+            <td>Blogs</td>
+            <td class="td-why">Content marketing channel; SEO value</td>
+            <td><span class="waiting-tag">Brand Guide completion</span></td>
+            <td><span class="priority-pill pp-low">Low</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-marketing)"></span>Marketing</td>
+            <td>Unboxing experience improvements</td>
+            <td class="td-why">Better packaging and touches to elevate the brand at delivery</td>
+            <td class="td-empty">—</td>
+            <td><span class="priority-pill pp-low">Low</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-marketing)"></span>Marketing</td>
+            <td>Local designer outreach</td>
+            <td class="td-why">Build relationships with local interior designers; personal touch delivery</td>
+            <td class="td-empty">—</td>
+            <td><span class="priority-pill pp-low">Low</span></td>
+          </tr>
+          <!-- Design & Dev -->
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-design)"></span>Design &amp; Dev</td>
+            <td>Trade Program Automation (Make · AI)</td>
+            <td class="td-why">Auto-approve 70–80% of trade applicants instantly vs. 1–2 day manual review</td>
+            <td><span class="waiting-tag">June trade program kickoff</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-design)"></span>Design &amp; Dev</td>
+            <td>3D Viewers (.glb / 360° turntables)</td>
+            <td class="td-why">Interactive product views for Shopify; AR-ready assets for trade and retail</td>
+            <td><span class="waiting-tag">Content funnel (April)</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-design)"></span>Design &amp; Dev</td>
+            <td>duttonbrown.com UX improvements</td>
+            <td class="td-why">Ongoing site UX, performance, and design updates from deep research audit</td>
+            <td class="td-empty">—</td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-design)"></span>Design &amp; Dev</td>
+            <td>Improved trade portal</td>
+            <td class="td-why">Better login, approval, and resource access for 6,500+ trade members</td>
+            <td><span class="waiting-tag">Trade Program (June)</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <!-- Admin & HR -->
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-admin)"></span>Admin &amp; HR</td>
+            <td>Write Offboarding SOP</td>
+            <td class="td-why">No documented exit process; needed for compliance and consistency</td>
+            <td class="td-empty">—</td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-admin)"></span>Admin &amp; HR</td>
+            <td>Escalation framework check-in</td>
+            <td class="td-why">Rolled out April 2026 — needs feedback loop to confirm adoption</td>
+            <td><span class="waiting-tag">1–2 months usage data</span></td>
+            <td><span class="priority-pill pp-low">Low</span></td>
+          </tr>
+          <!-- Facilities -->
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-facilities)"></span>Facilities</td>
+            <td>Landscape improvements</td>
+            <td class="td-why">Rock bed weed barrier + parking lot treatment; curb appeal and maintenance</td>
+            <td><span class="waiting-tag">Vendor quotes</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-facilities)"></span>Facilities</td>
+            <td>Skylight upgrade</td>
+            <td class="td-why">10 skylights need repair/replacement; quotes range $3.5K–$25K</td>
+            <td><span class="waiting-tag">Contract clarification</span></td>
+            <td><span class="priority-pill pp-medium">Medium</span></td>
+          </tr>
+          <tr>
+            <td><span class="dept-pip-inline" style="background:var(--dept-facilities)"></span>Facilities</td>
+            <td>Compressor &amp; dryer system</td>
+            <td class="td-why">Clean, dry air at 90–120 PSI for sandblasting and powder coating</td>
+            <td class="td-empty">—</td>
+            <td><span class="priority-pill pp-high">High</span></td>
           </tr>
         </tbody>
       </table>
@@ -823,7 +958,7 @@
       <ul>
         <li>Anything in the backlog is <strong>explicitly not committed</strong> — adding it here is not a promise to do it.</li>
         <li>Each item carries a <strong>"why it matters"</strong> line so priority can be re-evaluated later without re-thinking context.</li>
-        <li><strong>"Blocked by"</strong> captures dependencies so nothing gets promoted prematurely.</li>
+        <li><strong>"Blocked by"</strong> captures dependencies so nothing gets promoted prematurely. Red = hard dependency. Amber = waiting on timing or data.</li>
         <li>During quarterly planning, <strong>review this section first</strong> — promote items before adding anything brand new.</li>
       </ul>
     </div>
@@ -838,7 +973,7 @@
       <div class="usage-card">
         <p class="usage-label">Weekly</p>
         <p class="usage-title">1:1s</p>
-        <p class="usage-desc">Each DRI reviews their row in the Focus Grid and their initiative cards. Is the focus still right? Any blockers?</p>
+        <p class="usage-desc">Each DRI reviews their row in the Focus Grid and their projects in the detail table. Is the focus still right? Any blockers?</p>
       </div>
       <div class="usage-card">
         <p class="usage-label">Monthly</p>
@@ -853,7 +988,7 @@
       <div class="usage-card">
         <p class="usage-label">When a team finishes early</p>
         <p class="usage-title">Promote from Backlog</p>
-        <p class="usage-desc">Check the Backlog for a promotable item before inventing new work. Pull the highest-priority unblocked idea.</p>
+        <p class="usage-desc">Check the Backlog for a promotable unblocked item before inventing new work. Pull the highest-priority item with no red dependency.</p>
       </div>
     </div>
   </section>
