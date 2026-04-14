@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production KPI Map — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #FF9912;
+    --accent-dark: #D97706;
+    --text: #4A4A4A;
+    --text-mid: #6A6A6A;
+    --text-light: #9A9A9A;
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --border: #EAEAEA;
+    --border-strong: #D5D5D5;
+    --diagnostic: #4A6FA5;
+    --pipeline: #D97706;
+    --cat-output: #4A6FA5;
+    --cat-efficiency: #6B8E5A;
+    --cat-quality: #D97706;
+    --cat-fulfillment: #8B6AA8;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body { padding: 56px 24px; }
+
+  .container { max-width: 1180px; margin: 0 auto; }
+
+  /* ----- Header ----- */
+  header { margin-bottom: 40px; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-weight: 300;
+    font-size: 42px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: var(--text-mid);
+    font-weight: 300;
+  }
+
+  /* ----- Intro ----- */
+  .intro {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .intro p {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .intro p:last-of-type { margin-bottom: 18px; }
+  .intro strong { font-weight: 600; color: var(--text); }
+
+  .legend {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-mid);
+  }
+  .legend-item { display: flex; align-items: center; gap: 10px; }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-diagnostic { background: var(--diagnostic); }
+  .dot-pipeline { background: var(--pipeline); }
+  .legend-item strong { color: var(--text); font-weight: 600; margin-right: 4px; }
+
+  /* ----- Section headers ----- */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .section-count {
+    font-size: 13px;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  /* ----- Tier 1 grid ----- */
+  .tier1-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+
+  .tier1 {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .tier1-head {
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tier1-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 6px;
+  }
+  .tier1-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+  .tier1-def {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .tier1-meta {
+    font-size: 11px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .tier1-meta span + span::before { content: "·"; margin: 0 8px; }
+
+  .caveat {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    color: var(--text-light);
+    background: #F4F4F2;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+
+  .tier2-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+  .tier2-list { list-style: none; }
+  .tier2-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .tier2-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .tier2-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .tier2-body { flex: 1; }
+  .tier2-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .tier2-desc {
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  /* ----- Standalone section ----- */
+  .standalone-intro {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+    max-width: 760px;
+  }
+  .standalone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    margin-bottom: 56px;
+  }
+  .standalone {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text-light);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .standalone-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .standalone-desc {
+    font-size: 12.5px;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .standalone-meta {
+    font-size: 10px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* ----- Lens color accents ----- */
+  .lens-output   .tier1-label { color: var(--cat-output); }
+  .lens-efficiency .tier1-label { color: var(--cat-efficiency); }
+  .lens-quality  .tier1-label { color: var(--cat-quality); }
+  .lens-fulfillment .tier1-label { color: var(--cat-fulfillment); }
+
+  /* ----- Footer ----- */
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  footer p { margin-bottom: 4px; }
+
+  @media print {
+    body { padding: 24px; background: white; }
+    .tier1, .standalone, .intro { box-shadow: none; border-color: #ccc; }
+    .tier1-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 32px 16px; }
+    h1 { font-size: 32px; }
+    .tier1-grid { grid-template-columns: 1fr; }
+    .tier1 { padding: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="eyebrow">Dutton Brown · Production · 2026</div>
+    <h1>Production KPI Map</h1>
+    <div class="subtitle">The 4 Tier 1 KPIs that drive the monthly review, and the Tier 2 metrics that support them</div>
+  </header>
+
+  <div class="intro">
+    <p><strong>4 Tier 1 KPIs</strong> drive the monthly production review — one per operational lens: Output, Efficiency, Quality, and Fulfillment. Unlike Marketing's externally-sourced KPIs, Production's are almost entirely generated from Catherine's own operational logs and Dutton Brown's internal systems: Weekly Shipping Data, Assembly Log, Rework Log, Repaint Log, and Parts Request Log. The data is already being collected. This map connects it to decisions.</p>
+    <p><strong>Tier 2 KPIs</strong> do one of two jobs — they either explain a Tier 1 movement after it happens (diagnostic) or signal a future Tier 1 movement before it shows up (pipeline).</p>
+    <p><strong>Report everything, discuss selectively.</strong> Every Tier 2 is pulled monthly alongside its Tier 1 and sits on the review page. The owner walks through the Tier 1s in the meeting and highlights whichever Tier 2s are worth the room's attention. The time-consuming part isn't gathering the numbers — it's deciding what to do when they move.</p>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot dot-diagnostic"></span><span><strong>Diagnostic</strong> — explains a Tier 1 shift after it happens</span></div>
+      <div class="legend-item"><span class="legend-dot dot-pipeline"></span><span><strong>Pipeline</strong> — signals a future Tier 1 shift before it happens</span></div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">Tier 1 KPIs and their supporting Tier 2s</div>
+    <div class="section-count">4 Tier 1 · 12 Tier 2 supporters</div>
+  </div>
+
+  <div class="tier1-grid">
+
+    <!-- 1. Value Shipped -->
+    <div class="tier1 lens-output">
+      <div class="tier1-head">
+        <div class="tier1-label">Tier 1 · Output · Floor</div>
+        <div class="tier1-name">Value Shipped</div>
+        <div class="tier1-def">Sum of $ Shipped for weeks ending in the reporting month, net of returns. Pulled from Catherine's Weekly Shipping Data in Notion — 14 weeks already tracked. The single money-out number for the floor: everything that left the building with a price tag attached.</div>
+        <div class="tier1-meta"><span>Source: Notion Weekly Shipping Data</span><span>Monthly</span></div>
+      </div>
+      <div class="tier2-label">Supporting Tier 2</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Value Shipped - Items Built</div>
+            <div class="tier2-desc">Total items assembled in the month (Assembly Log Qty). Catherine's throughput target is 519 items/week (up from 432 avg in 2025). Differs from Items Shipped — built items may sit in backstock before shipping.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Value Shipped - Items Shipped</div>
+            <div class="tier2-desc">Count of items shipped in the month. Pairs with Value Shipped to detect mix shifts: same $ at fewer items = higher-value orders; same $ at more items = pure volume growth.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-pipeline"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Value Shipped - Capacity Gap</div>
+            <div class="tier2-desc">Orders Received minus Orders Shipped. When positive (received &gt; shipped), backlog is accumulating. The floor's leading indicator — when this goes positive for 2+ weeks, fulfillment pressure is building.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 2. Labor Cost % of Shipped Value -->
+    <div class="tier1 lens-efficiency">
+      <div class="tier1-head">
+        <div class="tier1-label">Tier 1 · Efficiency · Labor</div>
+        <div class="tier1-name">Labor Cost % of Shipped Value</div>
+        <div class="tier1-def">Total production labor cost (QuickBooks) ÷ Value Shipped × 100. The margin-efficiency signal for the floor. Sept 2025 baseline: 11.21%. In 2025: revenue +2.6%, payroll +5.7%, NOI −$61K. This is the metric that tells that story every month.</div>
+        <div class="tier1-meta"><span>Source: QuickBooks · Notion Weekly Shipping Data</span><span>Monthly</span></div>
+      </div>
+      <div class="tier2-label">Supporting Tier 2</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Labor - Items Shipped per FTE</div>
+            <div class="tier2-desc">Items Shipped ÷ production FTE count. Individual productivity proxy — Catherine weights this at 25% in performance reviews. Moves with headcount changes and product mix shifts.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Labor - FTE Utilization %</div>
+            <div class="tier2-desc">Actual hours worked ÷ scheduled hours. Sept 2025 baseline: 89.13%. Low utilization reveals workflow gaps — waiting for parts, idle between stations. High utilization with growing backlog signals a capacity ceiling.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 3. Total Yield Rate -->
+    <div class="tier1 lens-quality">
+      <div class="tier1-head">
+        <div class="tier1-label">Tier 1 · Quality · Build</div>
+        <div class="tier1-name">Total Yield Rate</div>
+        <div class="tier1-def">(Parts Processed − Rework entries − Repaint/Reclaim entries) ÷ Parts Processed. Combines assembly rework and powder coat reclaim into one build-quality %. Sept 2025 baseline: 95.1%. Every point of improvement directly reduces COGS.</div>
+        <div class="tier1-meta"><span>Source: Notion Rework Log · Repaint Log · Assembly Log</span><span>Monthly</span></div>
+        <span class="caveat">Log data maturing — Q2 baselines directional</span>
+      </div>
+      <div class="tier2-label">Supporting Tier 2</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Yield - Reworks</div>
+            <div class="tier2-desc">Raw count of assembly rework entries from the Rework Log. Pairs with Total Yield Rate: the count reveals whether the rate is moving because volume changed or because the defect rate changed.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Yield - Powder Coat Reclaim Rate</div>
+            <div class="tier2-desc">% of parts through powder coat that required a full repaint. Sept 2025 baseline: 2.66%. Isolates the coating station's contribution to Total Yield Rate.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Yield - Rework by Root Cause</div>
+            <div class="tier2-desc">Distribution of Rework Log entries by Issue field (wrong finish, alignment, missing hardware, etc.). Coaching and SOP tool — separates systemic defects from individual ones, and in-house from supplier-caused.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Yield - QC Pass Rate</div>
+            <div class="tier2-desc">% of items that passed final QC testing in the Assembly Log (Test Result = Pass). Station-specific quality at final test — directly measures whether items are passing before shipment. Identifies the testing bottleneck.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 4. Avg Order-to-Ship Time -->
+    <div class="tier1 lens-fulfillment">
+      <div class="tier1-head">
+        <div class="tier1-label">Tier 1 · Fulfillment · Customer</div>
+        <div class="tier1-name">Avg Order-to-Ship Time</div>
+        <div class="tier1-def">Mean days from Shopify order creation to ShipStation ship date, for all non-sample orders fulfilled in the month. Dutton Brown's promise is 1–3 weeks (7–21 days). This is the actual number — Production owns it.</div>
+        <div class="tier1-meta"><span>Source: Shopify · ShipStation</span><span>Monthly</span></div>
+      </div>
+      <div class="tier2-label">Supporting Tier 2</div>
+      <ul class="tier2-list">
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Fulfillment - On-Time Shipment Rate</div>
+            <div class="tier2-desc">% of orders shipped within 21 days of creation. Reveals the tail: a good average can hide a subset of orders that consistently run late. Target: 95%+.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-pipeline"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Fulfillment - Backlog Age</div>
+            <div class="tier2-desc">Count of open orders older than 14 days. A pressure gauge — when this rises, On-Time Rate falls 1–2 weeks later. Reviewed in the Monday meeting; flagged to Chase when persistent.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Fulfillment - Parts Wait Time</div>
+            <div class="tier2-desc">Average days a Parts Request Log entry remained open before resolution. The biggest internal driver of Order-to-Ship delays after floor capacity. Escalation threshold: avg wait &gt; 3 days → Chase is alerted.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">Standalone Tier 2 KPIs</div>
+    <div class="section-count">3 KPIs</div>
+  </div>
+  <p class="standalone-intro">
+    These don't roll up cleanly into a single Tier 1 — they're cross-cutting signals for floor capacity, parts availability, and equipment health. Reported monthly alongside the Tier 1s; highlighted in the review when something moves.
+  </p>
+  <div class="standalone-grid">
+
+    <div class="standalone">
+      <div class="standalone-name">Parked Requests</div>
+      <div class="standalone-desc">Count of currently open entries in the Parts Request Log — orders waiting on parts to arrive or be located. Cross-cutting pipeline signal: rises before Order-to-Ship Time degrades and before backlog builds. Catherine flagged accumulated parts and bins management as a Q2 priority.</div>
+      <div class="standalone-meta">Notion Parts Request Log · Pipeline</div>
+    </div>
+
+    <div class="standalone">
+      <div class="standalone-name">Cross-Training Coverage</div>
+      <div class="standalone-desc">% of production floor employees certified in 2+ assembly stations. When this rises, the floor absorbs volume shifts without adding headcount. Catherine named the Alex key-person dependency (testing/QC) as a Q2 risk — this metric tracks progress on resolving it.</div>
+      <div class="standalone-meta">Manual (People DB) · Pipeline</div>
+    </div>
+
+    <div class="standalone">
+      <div class="standalone-name">Equipment / Maintenance Adherence</div>
+      <div class="standalone-desc">% of scheduled maintenance tasks completed on time (from Maintenance Records). Preventive measure against unplanned downtime that disrupts floor throughput. Data is live but maturing — tracked for baseline through Q2.</div>
+      <div class="standalone-meta">Notion Maintenance Records · Diagnostic · Maturing</div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Source of truth: Notion KPIs database. Framework: Pillar 2 — KPIs &amp; Goals (Dutton Brown 3.0).</p>
+    <p>Production KPI Map · 2026 · Last updated 2026-04-14</p>
+  </footer>
+
+</div>
+</body>
+</html>
