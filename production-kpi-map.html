@@ -480,6 +480,35 @@
 
   </div>
 
+  <div class="section-header" style="margin-top: 16px;">
+    <div class="section-title">Future: Production &amp; Shipping Dashboard</div>
+    <div class="section-count">Planned</div>
+  </div>
+  <p class="standalone-intro">
+    The KPI Map above covers what the floor reports monthly. A separate automated dashboard is planned to give Production and Operations a richer operational view — pulling directly from existing data sources with no manual entry. Items below are candidates for that dashboard.
+  </p>
+  <div class="standalone-grid">
+
+    <div class="standalone" style="border-left-color: var(--accent);">
+      <div class="standalone-name">Production Mix — Items Built by Type</div>
+      <div class="standalone-desc">Monthly count of items assembled, broken out by product type (Pendant, Sconce, Chandelier, Flush Mount, Hardware, etc.). Pulled automatically from the Assembly Log via the SKU relation to the Products database. Helps Catherine plan coating batches and parts staging, and gives Operations visibility into what's coming off the floor before it ships.</div>
+      <div class="standalone-meta">Notion Assembly Log → Products · Automated · Planned</div>
+    </div>
+
+    <div class="standalone" style="border-left-color: var(--accent);">
+      <div class="standalone-name">Weekly Shipping Summary</div>
+      <div class="standalone-desc">Automated weekly view of the full shipping data Janet and Catherine currently enter manually: $ Shipped, Items Shipped, Orders Shipped vs. Received, $ per Order, Shipping Boxes, Hardware Boxes, Total Boxes, Pallets, and Returns. Same data — pulled directly from Shopify and ShipStation instead of entered by hand. Eliminates the manual step and enables trend views across any time window.</div>
+      <div class="standalone-meta">Shopify · ShipStation · Automated · Planned</div>
+    </div>
+
+    <div class="standalone" style="border-left-color: var(--accent);">
+      <div class="standalone-name">Shipping AOV &amp; Returns</div>
+      <div class="standalone-desc">$ per Order (shipped) and Returns count — two signals from the Weekly Shipping Data not surfaced in the monthly KPI review. Shipped AOV diagnoses whether Value Shipped shifts are mix-driven or volume-driven. Returns flag product quality or fulfillment issues before they show up in trade feedback. Candidates for Tier 2 promotion once the automated source is live.</div>
+      <div class="standalone-meta">Notion Weekly Shipping Data → Shopify · Candidate Tier 2</div>
+    </div>
+
+  </div>
+
   <footer>
     <p>Source of truth: Notion KPIs database. Framework: Pillar 2 — KPIs &amp; Goals (Dutton Brown 3.0).</p>
     <p>Production KPI Map · 2026 · Last updated 2026-04-14</p>
