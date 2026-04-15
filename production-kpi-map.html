@@ -314,7 +314,7 @@
 
   <div class="section-header">
     <div class="section-title">Tier 1 KPIs and their supporting Tier 2s</div>
-    <div class="section-count">4 Tier 1 · 11 Tier 2 supporters</div>
+    <div class="section-count">4 Tier 1 · 13 Tier 2 supporters</div>
   </div>
 
   <div class="tier1-grid">
@@ -348,6 +348,13 @@
           <div class="tier2-body">
             <div class="tier2-name">Value Shipped - Capacity Gap</div>
             <div class="tier2-desc">Orders Received minus Orders Shipped. When positive (received &gt; shipped), backlog is accumulating. The floor's leading indicator — when this goes positive for 2+ weeks, fulfillment pressure is building.</div>
+          </div>
+        </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Output - Powder Booth Utilization</div>
+            <div class="tier2-desc">% of scheduled production hours the powder booth is actively running. Catherine tracks this — currently at 58%, indicating meaningful headroom before a capacity ceiling. Key input for Operations when evaluating ad spend and quoting lead times.</div>
           </div>
         </li>
       </ul>
@@ -419,6 +426,13 @@
             <div class="tier2-desc">% of items that passed final QC testing in the Assembly Log (Test Result = Pass). Station-specific quality at final test — directly measures whether items are passing before shipment. Identifies the testing bottleneck.</div>
           </div>
         </li>
+        <li class="tier2-item">
+          <span class="tier2-dot dot-diagnostic"></span>
+          <div class="tier2-body">
+            <div class="tier2-name">Yield - Rework Time</div>
+            <div class="tier2-desc">Total hours spent on rework per month from the Rework Log. Pairs with Yield - Reworks count: the same number of rework events can mean very different labor cost depending on how long each fix takes. Sizes the actual cost of defects beyond just counting them.</div>
+          </div>
+        </li>
       </ul>
     </div>
 
@@ -447,35 +461,6 @@
           </div>
         </li>
       </ul>
-    </div>
-
-  </div>
-
-  <div class="section-header">
-    <div class="section-title">Standalone Tier 2 KPIs</div>
-    <div class="section-count">3 KPIs</div>
-  </div>
-  <p class="standalone-intro">
-    These don't roll up cleanly into a single Tier 1 — they're cross-cutting signals for floor capacity, parts availability, and equipment health. Reported monthly alongside the Tier 1s; highlighted in the review when something moves.
-  </p>
-  <div class="standalone-grid">
-
-    <div class="standalone">
-      <div class="standalone-name">Parked Requests</div>
-      <div class="standalone-desc">Count of currently open entries in the Parts Request Log — orders waiting on parts to arrive or be located. Cross-cutting pipeline signal: rises before Order-to-Ship Time degrades and before backlog builds. Catherine flagged accumulated parts and bins management as a Q2 priority.</div>
-      <div class="standalone-meta">Notion Parts Request Log · Pipeline</div>
-    </div>
-
-    <div class="standalone">
-      <div class="standalone-name">Cross-Training Coverage</div>
-      <div class="standalone-desc">An opportunity to discuss how Dutton Brown might measure training breadth and advancement across the production floor. Could take the form of a cross-training metric, an advanced skills metric, or another format — to be defined with Catherine.</div>
-      <div class="standalone-meta">Manual · To be defined</div>
-    </div>
-
-    <div class="standalone">
-      <div class="standalone-name">Equipment / Maintenance Adherence</div>
-      <div class="standalone-desc">% of scheduled maintenance tasks completed on time (from Maintenance Records). Preventive measure against unplanned downtime that disrupts floor throughput. Data is live but maturing — tracked for baseline through Q2.</div>
-      <div class="standalone-meta">Notion Maintenance Records · Diagnostic · Maturing</div>
     </div>
 
   </div>
@@ -511,7 +496,7 @@
 
   <footer>
     <p>Source of truth: Notion KPIs database. Framework: Pillar 2 — KPIs &amp; Goals (Dutton Brown 3.0).</p>
-    <p>Production KPI Map · 2026 · Last updated 2026-04-14</p>
+    <p>Production KPI Map · 2026 · Last updated 2026-04-15</p>
   </footer>
 
 </div>
