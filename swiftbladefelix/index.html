@@ -18,25 +18,20 @@
 </head>
 <body>
 
-  <!-- Film grain texture overlay -->
+  <!-- Film grain -->
   <div class="grain" aria-hidden="true"></div>
 
   <!-- ─── Navigation ─── -->
-  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
-    <a href="#top" class="nav-logo" aria-label="Swift Blade Hair — back to top">Swift Blade</a>
-    <a
-      href="https://www.swiftbladehair.com/s/appointments"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn-nav"
-      aria-label="Book an appointment (opens in new tab)"
-    >Book Now</a>
+  <nav class="nav" id="nav">
+    <a href="#top" class="nav-logo">
+      <img src="logo.png" alt="Swift Blade Hair" class="nav-logo-img">
+    </a>
+    <a href="https://www.swiftbladehair.com/s/appointments" target="_blank" rel="noopener noreferrer" class="btn btn-nav">Book Now</a>
   </nav>
 
   <!-- ─── Hero ─── -->
-  <section class="hero" id="top" aria-label="Hero">
+  <section class="hero" id="top">
 
-    <!-- Decorative corner frame -->
     <div class="hero-frame" aria-hidden="true">
       <span class="frame-corner frame-tl"></span>
       <span class="frame-corner frame-tr"></span>
@@ -46,22 +41,12 @@
 
     <div class="hero-inner">
 
-      <!-- Crossed-swords mark -->
-      <div class="hero-mark" aria-hidden="true">
-        <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Crossed blades">
-          <!-- Main blades -->
-          <line class="blade-line b1" x1="7"  y1="7"  x2="61" y2="61" stroke="#C9A026" stroke-width="1.5" stroke-linecap="round"/>
-          <line class="blade-line b3" x1="61" y1="7"  x2="7"  y2="61" stroke="#C9A026" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- Crossguards -->
-          <line class="blade-line b2" x1="20" y1="34" x2="44" y2="10" stroke="#C9A026" stroke-width="0.85" stroke-linecap="round" opacity="0.45"/>
-          <line class="blade-line b4" x1="48" y1="34" x2="24" y2="10" stroke="#C9A026" stroke-width="0.85" stroke-linecap="round" opacity="0.45"/>
-          <!-- Center gem -->
-          <rect class="blade-gem" x="30" y="30" width="8" height="8" transform="rotate(45 34 34)" fill="#C9A026"/>
-        </svg>
+      <!-- His actual logo — the brand centerpiece -->
+      <div class="hero-logo-wrap">
+        <img src="logo.png" alt="Swift Blade" class="hero-logo">
       </div>
 
-      <!-- Main headline -->
-      <h1 class="hero-title" aria-label="Swift Blade">
+      <h1 class="hero-title">
         <span class="hero-word">Swift</span>
         <span class="hero-rule" aria-hidden="true"></span>
         <span class="hero-word">Blade</span>
@@ -69,30 +54,16 @@
 
       <p class="hero-sub">Hair Design &nbsp;·&nbsp; Minneapolis</p>
 
-      <p class="hero-tagline">
-        Sharp cuts. Real vibes.<br>
-        Minneapolis made.
-      </p>
+      <p class="hero-tagline">Sharp cuts. Real vibes.<br>Minneapolis made.</p>
 
       <div class="hero-ctas">
-        <a
-          href="https://www.swiftbladehair.com/s/appointments"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-primary"
-        >Book Appointment</a>
-        <a
-          href="https://www.instagram.com/swiftbladefelix/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-ghost"
-        >@swiftbladefelix</a>
+        <a href="https://www.swiftbladehair.com/s/appointments" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book Appointment</a>
+        <a href="https://www.instagram.com/swiftbladefelix/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">@swiftbladefelix</a>
       </div>
 
       <p class="hero-location">2721 E Franklin Ave &nbsp;·&nbsp; Thu–Sun 11am–6pm</p>
     </div>
 
-    <!-- Scroll indicator -->
     <div class="hero-scroll" aria-hidden="true">
       <span class="scroll-line"></span>
     </div>
@@ -102,14 +73,14 @@
   <!-- Blade divider -->
   <div class="blade-divider" aria-hidden="true">
     <svg width="220" height="14" viewBox="0 0 220 14" fill="none">
-      <line x1="0"   y1="7" x2="96"  y2="7" stroke="#252018" stroke-width="0.75"/>
-      <polygon points="110,1 117,7 110,13 103,7" fill="#C9A026" opacity="0.75"/>
-      <line x1="124" y1="7" x2="220" y2="7" stroke="#252018" stroke-width="0.75"/>
+      <line x1="0"   y1="7" x2="96"  y2="7" stroke="#1a1a1a" stroke-width="0.75"/>
+      <polygon points="110,1 117,7 110,13 103,7" fill="#39FF14" opacity="0.7"/>
+      <line x1="124" y1="7" x2="220" y2="7" stroke="#1a1a1a" stroke-width="0.75"/>
     </svg>
   </div>
 
   <!-- ─── About ─── -->
-  <section class="section" id="about" aria-label="About Felix">
+  <section class="section" id="about">
     <div class="section-inner">
 
       <div class="reveal">
@@ -121,33 +92,14 @@
 
         <div class="about-text">
           <p class="about-lead">Swift Blade Hair is more than a salon — it's a place where everyone belongs.</p>
-
           <p>Felix Esuna has been crafting cuts and colors in Minneapolis for over a decade. His work is precise, personal, and always tuned to your vision. The space on East Franklin Avenue is intentionally eclectic: plants everywhere, a crystal ball on the shelf, a Frostmourne sword on the wall.</p>
-
           <p>Swift Blade Hair has always been a welcoming, safe space for every identity in the neighborhood. Whether you're coming in for a transformation or just to feel good, you'll leave looking like yourself — only sharper.</p>
-
-          <p>"Too nice &amp; too talented. Great cuts. Great vibes." — Google Review</p>
-
-          <a
-            href="https://www.instagram.com/swiftbladefelix/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="about-link"
-          >See the work on Instagram →</a>
+          <p class="about-quote">"Too nice &amp; too talented. Great cuts. Great vibes."</p>
+          <a href="https://www.instagram.com/swiftbladefelix/" target="_blank" rel="noopener noreferrer" class="about-link">See the work on Instagram →</a>
         </div>
 
-        <!-- Replace this placeholder with an <img> tag once you have a photo.
-             Example:
-             <img src="salon.jpg" alt="Inside the Swift Blade Hair salon" class="about-photo">
-        -->
-        <div class="about-photo" aria-hidden="true">
-          <div class="photo-inner">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-              <path d="M4 28 L18 8 L32 28 Z" stroke="#C9A026" stroke-width="1" fill="none" opacity="0.4"/>
-              <circle cx="18" cy="13" r="3" stroke="#C9A026" stroke-width="1" fill="none" opacity="0.4"/>
-            </svg>
-            <span>Add a salon photo here</span>
-          </div>
+        <div class="about-photo-wrap">
+          <img src="felix-salon.jpg" alt="Inside the Swift Blade Hair salon" class="about-photo">
         </div>
 
       </div>
@@ -157,14 +109,14 @@
   <!-- Blade divider -->
   <div class="blade-divider" aria-hidden="true">
     <svg width="220" height="14" viewBox="0 0 220 14" fill="none">
-      <line x1="0"   y1="7" x2="96"  y2="7" stroke="#252018" stroke-width="0.75"/>
-      <polygon points="110,1 117,7 110,13 103,7" fill="#C9A026" opacity="0.75"/>
-      <line x1="124" y1="7" x2="220" y2="7" stroke="#252018" stroke-width="0.75"/>
+      <line x1="0"   y1="7" x2="96"  y2="7" stroke="#1a1a1a" stroke-width="0.75"/>
+      <polygon points="110,1 117,7 110,13 103,7" fill="#39FF14" opacity="0.7"/>
+      <line x1="124" y1="7" x2="220" y2="7" stroke="#1a1a1a" stroke-width="0.75"/>
     </svg>
   </div>
 
   <!-- ─── Services ─── -->
-  <section class="section" id="services" aria-label="Services">
+  <section class="section" id="services">
     <div class="section-inner">
 
       <div class="reveal">
@@ -172,48 +124,19 @@
         <h2 class="section-heading">What We Do</h2>
       </div>
 
-      <ol class="services-grid" aria-label="List of services">
-        <li class="service-item reveal" style="--delay: 0.04s">
-          <span class="service-num" aria-hidden="true">I</span>
-          <span class="service-name">Balayage</span>
-        </li>
-        <li class="service-item reveal" style="--delay: 0.08s">
-          <span class="service-num" aria-hidden="true">II</span>
-          <span class="service-name">Blow Dry</span>
-        </li>
-        <li class="service-item reveal" style="--delay: 0.12s">
-          <span class="service-num" aria-hidden="true">III</span>
-          <span class="service-name">Curly Hair</span>
-        </li>
-        <li class="service-item reveal" style="--delay: 0.16s">
-          <span class="service-num" aria-hidden="true">IV</span>
-          <span class="service-name">Hair Coloring</span>
-        </li>
-        <li class="service-item reveal" style="--delay: 0.20s">
-          <span class="service-num" aria-hidden="true">V</span>
-          <span class="service-name">Hair Extensions</span>
-        </li>
-        <li class="service-item reveal" style="--delay: 0.24s">
-          <span class="service-num" aria-hidden="true">VI</span>
-          <span class="service-name">Highlights</span>
-        </li>
-        <li class="service-item reveal" style="--delay: 0.28s">
-          <span class="service-num" aria-hidden="true">VII</span>
-          <span class="service-name">Keratin Treatment</span>
-        </li>
-        <li class="service-item reveal" style="--delay: 0.32s">
-          <span class="service-num" aria-hidden="true">VIII</span>
-          <span class="service-name">Fades</span>
-        </li>
+      <ol class="services-grid">
+        <li class="service-item reveal" style="--delay: 0.04s"><span class="service-num">I</span><span class="service-name">Balayage</span></li>
+        <li class="service-item reveal" style="--delay: 0.08s"><span class="service-num">II</span><span class="service-name">Blow Dry</span></li>
+        <li class="service-item reveal" style="--delay: 0.12s"><span class="service-num">III</span><span class="service-name">Curly Hair</span></li>
+        <li class="service-item reveal" style="--delay: 0.16s"><span class="service-num">IV</span><span class="service-name">Hair Coloring</span></li>
+        <li class="service-item reveal" style="--delay: 0.20s"><span class="service-num">V</span><span class="service-name">Hair Extensions</span></li>
+        <li class="service-item reveal" style="--delay: 0.24s"><span class="service-num">VI</span><span class="service-name">Highlights</span></li>
+        <li class="service-item reveal" style="--delay: 0.28s"><span class="service-num">VII</span><span class="service-name">Keratin Treatment</span></li>
+        <li class="service-item reveal" style="--delay: 0.32s"><span class="service-num">VIII</span><span class="service-name">Fades</span></li>
       </ol>
 
       <div class="services-cta reveal" style="--delay: 0.36s">
-        <a
-          href="https://www.swiftbladehair.com/s/appointments"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-primary"
-        >Book Your Service</a>
+        <a href="https://www.swiftbladehair.com/s/appointments" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book Your Service</a>
       </div>
 
     </div>
@@ -222,14 +145,14 @@
   <!-- Blade divider -->
   <div class="blade-divider" aria-hidden="true">
     <svg width="220" height="14" viewBox="0 0 220 14" fill="none">
-      <line x1="0"   y1="7" x2="96"  y2="7" stroke="#252018" stroke-width="0.75"/>
-      <polygon points="110,1 117,7 110,13 103,7" fill="#C9A026" opacity="0.75"/>
-      <line x1="124" y1="7" x2="220" y2="7" stroke="#252018" stroke-width="0.75"/>
+      <line x1="0"   y1="7" x2="96"  y2="7" stroke="#1a1a1a" stroke-width="0.75"/>
+      <polygon points="110,1 117,7 110,13 103,7" fill="#39FF14" opacity="0.7"/>
+      <line x1="124" y1="7" x2="220" y2="7" stroke="#1a1a1a" stroke-width="0.75"/>
     </svg>
   </div>
 
   <!-- ─── Find Us ─── -->
-  <section class="section" id="find-us" aria-label="Location and hours">
+  <section class="section" id="find-us">
     <div class="section-inner">
       <div class="find-grid">
 
@@ -240,117 +163,220 @@
             <span class="address-line">2721 E Franklin Ave</span>
             <span class="address-line">Minneapolis, MN 55406</span>
           </div>
-          <a
-            href="https://maps.google.com/?q=2721+E+Franklin+Ave+Minneapolis+MN+55406"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="directions-link"
-            aria-label="Get directions (opens Google Maps)"
-          >Get Directions →</a>
+          <a href="https://maps.google.com/?q=2721+E+Franklin+Ave+Minneapolis+MN+55406" target="_blank" rel="noopener noreferrer" class="directions-link">Get Directions →</a>
         </div>
 
         <div class="reveal" style="--delay: 0.14s">
           <span class="section-label">Hours</span>
-          <div class="hours-table" role="table" aria-label="Hours of operation">
-            <div class="hours-row" role="row">
-              <span class="hours-day" role="cell">Thursday – Sunday</span>
-              <span class="hours-time" role="cell">11am – 6pm</span>
+          <div class="hours-table">
+            <div class="hours-row">
+              <span class="hours-day">Thursday – Sunday</span>
+              <span class="hours-time">11am – 6pm</span>
             </div>
-            <div class="hours-row" role="row">
-              <span class="hours-day" role="cell">Monday – Wednesday</span>
-              <span class="hours-time closed" role="cell">Closed</span>
+            <div class="hours-row">
+              <span class="hours-day">Monday – Wednesday</span>
+              <span class="hours-time closed">Closed</span>
             </div>
           </div>
-          <a href="tel:+19529179269" class="phone-link" aria-label="Call (952) 917-9269">
-            (952) 917-9269
-          </a>
+          <a href="tel:+19529179269" class="phone-link">(952) 917-9269</a>
         </div>
 
       </div>
     </div>
   </section>
 
+  <!-- Blade divider -->
+  <div class="blade-divider" aria-hidden="true">
+    <svg width="220" height="14" viewBox="0 0 220 14" fill="none">
+      <line x1="0"   y1="7" x2="96"  y2="7" stroke="#1a1a1a" stroke-width="0.75"/>
+      <polygon points="110,1 117,7 110,13 103,7" fill="#39FF14" opacity="0.7"/>
+      <line x1="124" y1="7" x2="220" y2="7" stroke="#1a1a1a" stroke-width="0.75"/>
+    </svg>
+  </div>
+
+  <!-- ─── Contact ─── -->
+  <section class="section contact" id="contact">
+    <div class="section-inner">
+
+      <div class="reveal">
+        <span class="section-label">Contact</span>
+        <h2 class="section-heading">Get in Touch</h2>
+      </div>
+
+      <div class="contact-grid">
+        <a href="https://www.swiftbladehair.com/s/appointments" target="_blank" rel="noopener noreferrer" class="contact-card reveal" style="--delay: 0.06s">
+          <span class="contact-card-label">Book a Session</span>
+          <span class="contact-card-value">Schedule online →</span>
+        </a>
+        <a href="tel:+19529179269" class="contact-card reveal" style="--delay: 0.12s">
+          <span class="contact-card-label">Call or Text</span>
+          <span class="contact-card-value">(952) 917-9269</span>
+        </a>
+        <a href="https://www.instagram.com/swiftbladefelix/" target="_blank" rel="noopener noreferrer" class="contact-card reveal" style="--delay: 0.18s">
+          <span class="contact-card-label">Instagram</span>
+          <span class="contact-card-value">@swiftbladefelix</span>
+        </a>
+        <a href="https://maps.google.com/?q=2721+E+Franklin+Ave+Minneapolis+MN+55406" target="_blank" rel="noopener noreferrer" class="contact-card reveal" style="--delay: 0.24s">
+          <span class="contact-card-label">Location</span>
+          <span class="contact-card-value">2721 E Franklin Ave, Minneapolis</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ─── Follow ─── -->
-  <section class="section follow" id="follow" aria-label="Social media">
+  <section class="section follow" id="follow">
     <div class="follow-inner reveal">
       <p class="follow-eyebrow">Follow the work</p>
-      <a
-        href="https://www.instagram.com/swiftbladefelix/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="follow-handle"
-        aria-label="Follow @swiftbladefelix on Instagram"
-      >@swiftbladefelix</a>
-      <nav class="socials" aria-label="Social media links">
-        <a
-          href="https://www.instagram.com/swiftbladefelix/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-link"
-        >Instagram</a>
+      <a href="https://www.instagram.com/swiftbladefelix/" target="_blank" rel="noopener noreferrer" class="follow-handle">@swiftbladefelix</a>
+      <nav class="socials">
+        <a href="https://www.instagram.com/swiftbladefelix/" target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
         <span class="social-sep" aria-hidden="true">⚔</span>
-        <a
-          href="https://www.tiktok.com/@swiftbladefelix"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-link"
-        >TikTok</a>
+        <a href="https://www.tiktok.com/@swiftbladefelix" target="_blank" rel="noopener noreferrer" class="social-link">TikTok</a>
         <span class="social-sep" aria-hidden="true">⚔</span>
-        <a
-          href="https://www.facebook.com/Swiftblade-Hair-103733402083191/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-link"
-        >Facebook</a>
+        <a href="https://www.facebook.com/Swiftblade-Hair-103733402083191/" target="_blank" rel="noopener noreferrer" class="social-link">Facebook</a>
       </nav>
     </div>
   </section>
 
   <!-- ─── Footer ─── -->
-  <footer class="footer" role="contentinfo">
+  <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo">Swift Blade</div>
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a
-          href="https://www.swiftbladehair.com/s/appointments"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Book Now</a>
-        <a
-          href="https://www.instagram.com/swiftbladefelix/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Instagram</a>
+      <nav class="footer-links">
+        <a href="https://www.swiftbladehair.com/s/appointments" target="_blank" rel="noopener noreferrer">Book Now</a>
+        <a href="https://www.instagram.com/swiftbladefelix/" target="_blank" rel="noopener noreferrer">Instagram</a>
         <a href="tel:+19529179269">(952) 917-9269</a>
+        <a href="#chatgpt-guide">Site Guide for Felix ↓</a>
       </nav>
       <p class="footer-copy">© 2026 Swift Blade Hair &nbsp;·&nbsp; Minneapolis, MN</p>
     </div>
   </footer>
 
+  <!-- ─── ChatGPT Guide for Felix ─── -->
+  <section class="chatgpt-guide" id="chatgpt-guide">
+    <div class="guide-inner">
+
+      <div class="guide-header">
+        <span class="guide-tag">For Felix</span>
+        <h2 class="guide-title">How to Update Your Site with ChatGPT</h2>
+        <p class="guide-intro">You don't need to know code. ChatGPT can make any change to this site for you — just tell it what you want. Here's exactly how.</p>
+      </div>
+
+      <div class="guide-steps">
+
+        <div class="guide-step">
+          <span class="step-num">01</span>
+          <h3 class="step-title">Open your site file</h3>
+          <p class="step-body">Find the file <code>index.html</code> on your computer (in the <code>swiftbladefelix-site</code> folder). Right-click → Open With → Notepad. Select all (Ctrl+A), copy (Ctrl+C).</p>
+        </div>
+
+        <div class="guide-step">
+          <span class="step-num">02</span>
+          <h3 class="step-title">Go to ChatGPT</h3>
+          <p class="step-body">Open <a href="https://chat.openai.com" target="_blank" rel="noopener">chat.openai.com</a> — free account works great. Start a new chat.</p>
+        </div>
+
+        <div class="guide-step">
+          <span class="step-num">03</span>
+          <h3 class="step-title">Use this prompt</h3>
+          <div class="prompt-block">I have a personal salon website as a single HTML file. I want to [<em>describe your change here</em>]. Please give me the complete updated index.html file with that change made. Keep everything else exactly the same. Here is the current file:<br><br>[<em>paste your index.html here</em>]</div>
+          <p class="step-body">ChatGPT gives you the updated file. Copy it, paste back into Notepad, save (Ctrl+S).</p>
+        </div>
+
+        <div class="guide-step">
+          <span class="step-num">04</span>
+          <h3 class="step-title">Go live instantly</h3>
+          <p class="step-body">Drag your <code>swiftbladefelix-site</code> folder onto <a href="https://netlify.com/drop" target="_blank" rel="noopener">netlify.com/drop</a>. Your site is live in seconds. Free, no account needed.</p>
+        </div>
+
+      </div>
+
+      <div class="guide-prompts">
+        <h3 class="guide-prompts-title">Ready-to-use prompts — just fill in the blanks</h3>
+        <ul class="prompt-list">
+          <li class="prompt-item">
+            <span class="prompt-label">Change hours</span>
+            <div class="prompt-text">"Update my business hours to: Thursday–Sunday [time]. Monday–Wednesday Closed. Keep everything else the same."</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Add a service</span>
+            <div class="prompt-text">"Add a new service called '[name]' to the services list. Give it the next roman numeral. Keep everything else the same."</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Remove a service</span>
+            <div class="prompt-text">"Remove '[service name]' from the services list and renumber the remaining services. Keep everything else the same."</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Update booking link</span>
+            <div class="prompt-text">"Change all booking links from 'swiftbladehair.com/s/appointments' to '[your new link]'. Keep everything else the same."</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Update address</span>
+            <div class="prompt-text">"Update my address to '[new address]' everywhere it appears, including the Google Maps link. Keep everything else the same."</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Change phone number</span>
+            <div class="prompt-text">"Update my phone number to [new number] everywhere it appears. Keep everything else the same."</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Add a review quote</span>
+            <div class="prompt-text">"Add a customer review quote '[review text]' in the about section below the current one. Keep everything else the same."</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Swap the photo</span>
+            <div class="prompt-text">"Replace the salon photo (felix-salon.jpg) with a new image file called '[your-photo.jpg]'. Keep everything else the same." (Put the new photo in the same folder as index.html first.)</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Change the tagline</span>
+            <div class="prompt-text">"Change the tagline 'Sharp cuts. Real vibes. Minneapolis made.' to '[your new tagline]'. Keep everything else the same."</div>
+          </li>
+          <li class="prompt-item">
+            <span class="prompt-label">Add a new section</span>
+            <div class="prompt-text">"Add a new section after [Services / About / Find Us] called '[section name]' with this content: [describe the content]. Match the style of the other sections. Keep everything else the same."</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="guide-tips">
+        <h3 class="guide-tips-title">Make ChatGPT work better for you</h3>
+        <ul class="tips-list">
+          <li><strong>Always say "keep everything else exactly the same"</strong> — stops ChatGPT from redesigning things you didn't ask it to touch.</li>
+          <li><strong>If it only gives you part of the file</strong>, say "Give me the complete file, not just the changed section."</li>
+          <li><strong>If something breaks</strong>, say "That broke something. Please revert to the original and only make the one change I asked for."</li>
+          <li><strong>Save a backup</strong> of index.html before every change (rename it to index-backup.html) so you can always go back.</li>
+          <li><strong>For bigger redesigns</strong>, paste the live site URL and say "Here's what it looks like: [URL]. I want to change the color / font / layout of [X]..."</li>
+          <li><strong>Claude (claude.ai) works too</strong> and is often better for longer files — same process, same prompts.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ─── Scripts ─── -->
   <script>
-    // Nav: add .scrolled class after 60px scroll
+    // Nav scroll effect
     const nav = document.getElementById('nav');
     const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // run once on load
+    onScroll();
 
-    // Scroll reveal: watch .reveal elements
-    const revealObserver = new IntersectionObserver(
+    // Scroll reveal
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const delay = entry.target.style.getPropertyValue('--delay') || '0s';
             entry.target.style.transitionDelay = delay;
             entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target); // fire once
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
     );
-
-    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
   </script>
 
 </body>
