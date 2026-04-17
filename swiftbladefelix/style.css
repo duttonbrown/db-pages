@@ -1049,18 +1049,12 @@ a.contact-info-value:hover {
     gap: 2.5rem;
   }
 
-  /* Show photo on mobile — use object-fit to prevent cropping */
-  .about-photo {
-    aspect-ratio: 3 / 4;
-    max-height: 480px;
-  }
-
-  .about-photo img,
-  .about-photo .photo-inner {
+  img.about-photo {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center top;
+    height: auto;
+    aspect-ratio: auto;
+    max-height: none;
+    object-fit: unset;
   }
 
   .services-grid {
