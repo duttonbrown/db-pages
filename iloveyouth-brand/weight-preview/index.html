@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iloveyouth. — Weight Preview</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ghost:  #F0F3FA;
+      --ink:    #2a2220;
+      --blue:   #ade8f9;
+      --muted:  #8e9ab0;
+      --rule:   #d4d8e4;
+    }
+
+    body {
+      background: var(--ghost);
+      font-family: 'Satoshi', sans-serif;
+      color: var(--ink);
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--ghost);
+      border-bottom: 1px solid var(--rule);
+      display: flex; gap: 32px;
+      padding: 14px 48px;
+    }
+    nav a {
+      font-size: 11px; font-weight: 400;
+      letter-spacing: .10em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+    }
+    nav a:hover { color: var(--ink); }
+
+    .page { padding: 64px 48px; max-width: 1200px; }
+    .section { margin-bottom: 80px; }
+
+    .section-head {
+      display: flex; align-items: baseline; gap: 16px;
+      margin-bottom: 36px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-head h2 {
+      font-size: 11px; font-weight: 400;
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+    .section-head p { font-size: 11px; color: var(--muted); }
+
+    /* ── Weight grid — overflow visible so SVG text can breathe if needed ── */
+    .weight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .weight-cell {
+      background: var(--ghost);
+      padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .weight-cell.hi { background: #fff; }
+
+    /* Dark panel — all cells share one uniform Shadow Grey bg.
+       No center-cell highlight variation: it creates the illusion that
+       text color shifts when it doesn't. Brand standard: Shadow Grey is
+       Shadow Grey, uniformly, across any dark panel. */
+    .dark-panel {
+      background: var(--ink);
+      border-radius: 4px; overflow: hidden; margin-bottom: 32px;
+    }
+    .dark-panel .weight-cell,
+    .dark-panel .weight-cell.hi { background: var(--ink); }
+
+    .wlabel {
+      font-size: 10px; font-weight: 400;
+      letter-spacing: .10em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    /* AA-compliant muted text on Shadow Grey.
+       Warm grey #A89B92 = 6.3:1 contrast on #2A2220 (AA body, AAA large).
+       Maps to --ily-text-muted-inverse in tokens.css. */
+    .dark-panel .wlabel { color: #A89B92; }
+
+    /* Live text — only used for small-size ramps where clipping isn't an issue */
+    .wm { font-family: 'Satoshi', sans-serif; line-height: 1; color: var(--ink); }
+    .w300 { font-weight: 300; }
+    .w400 { font-weight: 400; }
+    .w500 { font-weight: 500; }
+
+    /* ── Creative cards ── */
+    .creative-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--rule);
+      border-radius: 4px; overflow: hidden;
+    }
+    .creative-card {
+      background: var(--ghost);
+      padding: 48px 40px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .creative-card.dark  { background: var(--ink); }
+    .creative-card.white { background: #fff; }
+
+    .card-label {
+      font-size: 10px; font-weight: 400;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+    }
+    .creative-card.dark .card-label { color: #A89B92; }
+
+    .card-note {
+      font-size: 11px; font-weight: 300;
+      color: var(--muted); line-height: 1.6; max-width: 340px;
+    }
+    .creative-card.dark .card-note { color: #A89B92; }
+
+    /* ── Hero panels ── */
+    .hero-panel {
+      background: #fff; border-radius: 4px;
+      padding: 64px 72px; margin-bottom: 1px;
+    }
+    .hero-panel.dark-bg { background: var(--ink); border-radius: 0; }
+    .hero-panel:last-child { border-radius: 0 0 4px 4px; margin-bottom: 32px; }
+    .hero-panel:first-child { border-radius: 4px 4px 0 0; }
+
+    .hero-label {
+      font-size: 10px; font-weight: 400;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 24px;
+    }
+    .hero-panel.dark-bg .hero-label { color: #A89B92; }
+
+    .footnote {
+      font-size: 11px; font-weight: 300;
+      color: var(--muted); line-height: 1.8;
+      border-left: 2px solid var(--rule); padding-left: 18px;
+      max-width: 560px; margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#wordmark">Wordmark</a>
+  <a href="#brandmark">Brandmark</a>
+  <a href="#stacked">Stacked rect</a>
+  <a href="#creative">Creative directions</a>
+</nav>
+
+<div class="page">
+
+  <!-- ══════════════════════════════════════════
+       1. WORDMARK — iloveyouth.
+  ══════════════════════════════════════════ -->
+  <div class="section" id="wordmark">
+    <div class="section-head">
+      <h2>Wordmark — iloveyouth.</h2>
+      <p>SVG-rendered so text always fits — no clipping at any viewport width</p>
+    </div>
+
+    <!-- 3-col weight comparison, light -->
+    <div class="weight-grid">
+      <div class="weight-cell">
+        <span class="wlabel">Light 300 — current</span>
+        <div data-sl data-text="iloveyouth." data-weight="300" data-color="#2a2220"></div>
+      </div>
+      <div class="weight-cell hi">
+        <span class="wlabel">Regular 400 — Option A</span>
+        <div data-sl data-text="iloveyouth." data-weight="400" data-color="#2a2220"></div>
+      </div>
+      <div class="weight-cell">
+        <span class="wlabel">Medium 500 — Option B</span>
+        <div data-sl data-text="iloveyouth." data-weight="500" data-color="#2a2220"></div>
+      </div>
+    </div>
+
+    <!-- Small size ramp -->
+    <div class="weight-grid">
+      <div class="weight-cell">
+        <span class="wlabel">Light 300 — small</span>
+        <span class="wm w300" style="font-size:18px">iloveyouth.</span>
+        <span class="wm w300" style="font-size:13px">iloveyouth.</span>
+        <span class="wm w300" style="font-size:10px">iloveyouth.</span>
+      </div>
+      <div class="weight-cell hi">
+        <span class="wlabel">Regular 400 — small</span>
+        <span class="wm w400" style="font-size:18px">iloveyouth.</span>
+        <span class="wm w400" style="font-size:13px">iloveyouth.</span>
+        <span class="wm w400" style="font-size:10px">iloveyouth.</span>
+      </div>
+      <div class="weight-cell">
+        <span class="wlabel">Medium 500 — small</span>
+        <span class="wm w500" style="font-size:18px">iloveyouth.</span>
+        <span class="wm w500" style="font-size:13px">iloveyouth.</span>
+        <span class="wm w500" style="font-size:10px">iloveyouth.</span>
+      </div>
+    </div>
+
+    <!-- 3-col on dark -->
+    <div class="dark-panel">
+      <div class="weight-grid" style="border-radius:0;margin-bottom:0">
+        <div class="weight-cell">
+          <span class="wlabel">Light 300 — on dark</span>
+          <div data-sl data-text="iloveyouth." data-weight="300" data-color="#ffffff"></div>
+        </div>
+        <div class="weight-cell hi">
+          <span class="wlabel">Regular 400 — on dark</span>
+          <div data-sl data-text="iloveyouth." data-weight="400" data-color="#ffffff"></div>
+        </div>
+        <div class="weight-cell">
+          <span class="wlabel">Medium 500 — on dark</span>
+          <div data-sl data-text="iloveyouth." data-weight="500" data-color="#ffffff"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /wordmark -->
+
+
+  <!-- ══════════════════════════════════════════
+       2. BRANDMARK — ily.
+  ══════════════════════════════════════════ -->
+  <div class="section" id="brandmark">
+    <div class="section-head">
+      <h2>Brandmark — ily.</h2>
+      <p>Display and small sizes</p>
+    </div>
+
+    <div class="weight-grid">
+      <div class="weight-cell">
+        <span class="wlabel">Light 300 — current</span>
+        <div data-sl data-text="ily." data-weight="300" data-color="#2a2220"></div>
+      </div>
+      <div class="weight-cell hi">
+        <span class="wlabel">Regular 400 — Option A</span>
+        <div data-sl data-text="ily." data-weight="400" data-color="#2a2220"></div>
+      </div>
+      <div class="weight-cell">
+        <span class="wlabel">Medium 500 — Option B</span>
+        <div data-sl data-text="ily." data-weight="500" data-color="#2a2220"></div>
+      </div>
+    </div>
+
+    <div class="weight-grid">
+      <div class="weight-cell">
+        <span class="wlabel">Light 300 — small</span>
+        <span class="wm w300" style="font-size:32px">ily.</span>
+        <span class="wm w300" style="font-size:20px">ily.</span>
+        <span class="wm w300" style="font-size:14px">ily.</span>
+      </div>
+      <div class="weight-cell hi">
+        <span class="wlabel">Regular 400 — small</span>
+        <span class="wm w400" style="font-size:32px">ily.</span>
+        <span class="wm w400" style="font-size:20px">ily.</span>
+        <span class="wm w400" style="font-size:14px">ily.</span>
+      </div>
+      <div class="weight-cell">
+        <span class="wlabel">Medium 500 — small</span>
+        <span class="wm w500" style="font-size:32px">ily.</span>
+        <span class="wm w500" style="font-size:20px">ily.</span>
+        <span class="wm w500" style="font-size:14px">ily.</span>
+      </div>
+    </div>
+
+    <div class="dark-panel">
+      <div class="weight-grid" style="border-radius:0;margin-bottom:0">
+        <div class="weight-cell">
+          <span class="wlabel">Light 300 — on dark</span>
+          <div data-sl data-text="ily." data-weight="300" data-color="#ffffff"></div>
+        </div>
+        <div class="weight-cell hi">
+          <span class="wlabel">Regular 400 — on dark</span>
+          <div data-sl data-text="ily." data-weight="400" data-color="#ffffff"></div>
+        </div>
+        <div class="weight-cell">
+          <span class="wlabel">Medium 500 — on dark</span>
+          <div data-sl data-text="ily." data-weight="500" data-color="#ffffff"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /brandmark -->
+
+
+  <!-- ══════════════════════════════════════════
+       3. STACKED RECTANGULAR WORDMARK
+  ══════════════════════════════════════════ -->
+  <div class="section" id="stacked">
+    <div class="section-head">
+      <h2>Stacked rectangular wordmark</h2>
+      <p>ilove / youth. — both lines flush left and right, font-size scaled to match width</p>
+    </div>
+
+    <!-- 3-col on light -->
+    <div class="weight-grid">
+      <div class="weight-cell">
+        <span class="wlabel">Light 300</span>
+        <div data-stack data-weight="300" data-color="#2a2220"></div>
+      </div>
+      <div class="weight-cell hi">
+        <span class="wlabel">Regular 400 — Option A</span>
+        <div data-stack data-weight="400" data-color="#2a2220"></div>
+      </div>
+      <div class="weight-cell">
+        <span class="wlabel">Medium 500 — Option B</span>
+        <div data-stack data-weight="500" data-color="#2a2220"></div>
+      </div>
+    </div>
+
+    <!-- 3-col on dark -->
+    <div class="dark-panel">
+      <div class="weight-grid" style="border-radius:0;margin-bottom:0">
+        <div class="weight-cell">
+          <span class="wlabel">Light 300 — on dark</span>
+          <div data-stack data-weight="300" data-color="#ffffff"></div>
+        </div>
+        <div class="weight-cell hi">
+          <span class="wlabel">Regular 400 — on dark</span>
+          <div data-stack data-weight="400" data-color="#ffffff"></div>
+        </div>
+        <div class="weight-cell">
+          <span class="wlabel">Medium 500 — on dark</span>
+          <div data-stack data-weight="500" data-color="#ffffff"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Heroes -->
+    <div class="hero-panel" style="border-radius:4px 4px 0 0;margin-bottom:1px">
+      <p class="hero-label">Regular 400 — no period, tight spacing</p>
+      <div id="sh-plain" style="max-width:520px"></div>
+    </div>
+    <div class="hero-panel" style="border-radius:0;margin-bottom:1px">
+      <p class="hero-label">Regular 400 — blue i-tittle accent</p>
+      <div id="sh-blue-tittle" style="max-width:520px"></div>
+    </div>
+    <div class="hero-panel dark-bg" style="border-radius:0;margin-bottom:1px">
+      <p class="hero-label">Regular 400 — on dark, blue i-tittle</p>
+      <div id="sh-dark" style="max-width:520px"></div>
+    </div>
+    <div class="hero-panel" style="border-radius:0 0 4px 4px;margin-bottom:32px">
+      <p class="hero-label">Regular 400 — with thin rule divider</p>
+      <div id="sh-rule" style="max-width:520px"></div>
+    </div>
+
+  </div><!-- /stacked -->
+
+
+  <!-- ══════════════════════════════════════════
+       4. CREATIVE DIRECTIONS
+  ══════════════════════════════════════════ -->
+  <div class="section" id="creative">
+    <div class="section-head">
+      <h2>Creative directions</h2>
+      <p>Explorations — for consideration, not committed</p>
+    </div>
+
+    <div class="creative-grid">
+
+      <!-- A: Blue period + blue tittle, wordmark -->
+      <div class="creative-card white">
+        <span class="card-label">A — Blue period + blue i-tittle</span>
+        <div id="ca-a" style="max-width:440px"></div>
+        <p class="card-note">Regular 400 body, period and i-tittle both in brand blue. The two accent marks rhyme — same color, different positions — without changing letter weight. Works well at any size.</p>
+      </div>
+
+      <!-- B: Blue period + blue tittle, brandmark on dark -->
+      <div class="creative-card dark">
+        <span class="card-label" style="color:#A89B92">B — Blue period + blue i-tittle, inverse</span>
+        <div id="ca-b" style="max-width:440px"></div>
+        <p class="card-note" style="color:#A89B92">Same on dark — white letters, blue accents on both dots. Reads immediately as a designed system rather than a coincidence.</p>
+      </div>
+
+      <!-- C: Weight contrast — light word, heavy period -->
+      <div class="creative-card">
+        <span class="card-label">C — Weight contrast</span>
+        <div style="font-family:'Satoshi',sans-serif;font-size:72px;line-height:1">
+          <span style="font-weight:300;color:#2a2220">iloveyouth</span><span style="font-weight:700;color:#2a2220">.</span>
+        </div>
+        <p class="card-note">Light body, bold period. The period becomes a full typographic statement. More editorial and assertive. Best at large sizes; contrast disappears small.</p>
+      </div>
+
+      <!-- D: Tracked brandmark on dark -->
+      <div class="creative-card dark">
+        <span class="card-label" style="color:#A89B92">D — Tracked brandmark</span>
+        <div style="font-family:'Satoshi',sans-serif;font-weight:400;font-size:56px;letter-spacing:.28em;line-height:1;color:#fff">
+          ily.
+        </div>
+        <p class="card-note" style="color:#A89B92">Regular 400 with wide tracking. Feels architectural and premium — closer to a luxury fashion mark. Period gets breathing room in the tracking rhythm.</p>
+      </div>
+
+      <!-- E: Vertical stack on dark -->
+      <div class="creative-card dark">
+        <span class="card-label" style="color:#A89B92">E — Vertical letterstack</span>
+        <div style="font-family:'Satoshi',sans-serif;font-weight:300;font-size:56px;line-height:1.05;color:#fff;display:flex;flex-direction:column">
+          <span>i</span>
+          <span>l</span>
+          <span>y</span>
+          <span style="color:#ade8f9">.</span>
+        </div>
+        <p class="card-note" style="color:#A89B92">Reads as a monogram column. Works well as a narrow sidebar, box spine, or embossed edge.</p>
+      </div>
+
+      <!-- F: Scale contrast — small ily, oversized period -->
+      <div class="creative-card white">
+        <span class="card-label">F — Scale contrast</span>
+        <div style="font-family:'Satoshi',sans-serif;font-weight:300;line-height:1;display:flex;align-items:flex-end;color:#2a2220;gap:2px">
+          <span style="font-size:44px;padding-bottom:14px">ily</span><span style="font-size:140px">.</span>
+        </div>
+        <p class="card-note">Period dominates. Bold as a packaging graphic or campaign element — not a logo replacement but a strong brand moment.</p>
+      </div>
+
+      <!-- G: Recommended — Regular 400 + blue both dots, both marks -->
+      <div class="creative-card" style="grid-column:1/-1;background:#fff">
+        <span class="card-label">G — Suggested direction: Regular 400 + blue accent on both dots, both marks</span>
+        <div style="display:flex;align-items:center;gap:80px;flex-wrap:wrap;margin-top:8px">
+          <div id="ca-g-wm" style="width:340px"></div>
+          <div id="ca-g-bm" style="width:160px"></div>
+        </div>
+        <p class="card-note" style="margin-top:8px">Both marks at Regular 400. Blue lands on every dot — period and i-tittle — making it a repeatable system accent rather than a one-off flourish. This is the direction to take to Illustrator first.</p>
+      </div>
+
+    </div>
+  </div><!-- /creative -->
+
+  <p class="footnote">
+    Live Satoshi web font via Fontshare — needs internet to render. Letterforms will differ slightly from Illustrator-outlined SVGs once re-exported. Use this to pick a direction, then re-set and outline in Illustrator at the chosen weight.
+  </p>
+
+</div><!-- /page -->
+
+<script>
+  /* ── Shared helpers ─────────────────────────────────── */
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const BASE = 120; // px — offscreen measurement baseline
+
+  // Canvas advance-width measurement (for proportional i-position)
+  function canvasAdv(text, weight) {
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.font = `${weight} ${BASE}px "Satoshi", sans-serif`;
+    return ctx.measureText(text).width;
+  }
+
+  // DOM measurement (more accurate for full-word width/height)
+  function domW(text, weight) {
+    const d = document.createElement('span');
+    d.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;top:-9999px;left:-9999px;white-space:nowrap;font-family:'Satoshi',sans-serif;font-weight:${weight};font-size:${BASE}px;line-height:1`;
+    d.textContent = text;
+    document.body.appendChild(d);
+    const w = d.getBoundingClientRect().width;
+    document.body.removeChild(d);
+    return w;
+  }
+
+  function svgEl(tag, attrs) {
+    const el = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, String(v));
+    return el;
+  }
+
+  function svgText(attrs, content) {
+    const t = svgEl('text', attrs);
+    t.textContent = content;
+    return t;
+  }
+
+  /* ── Tittle ellipse ─────────────────────────────────── */
+  // Places a colored dot where the i's tittle sits.
+  // Uses canvas to find the i's proportional position within the word,
+  // then estimates cap-height from Satoshi's typical metrics (~0.73em).
+  function tittleEllipse(wordText, weight, baseline, fsize, textLen, color) {
+    const iAdv   = canvasAdv('i', weight);
+    const wordAdv = canvasAdv(wordText, weight);
+    const cx = Math.round((iAdv / 2 / wordAdv) * textLen);
+    const cy = Math.round(baseline - fsize * 0.765); // Satoshi cap-height ≈ 0.73em, tittle sits just above
+    const r  = Math.round(fsize * 0.068);             // Satoshi i-dot radius ≈ 0.07em
+    return svgEl('ellipse', { cx, cy, rx: r, ry: r, fill: color });
+  }
+
+  /* ── Single-line wordmark SVG ───────────────────────── */
+  // Renders fullText scaled to fill scaleW exactly.
+  // Options: periodColor, tittleColor (both optional accent colors)
+  function buildSingleLine(container, fullText, weight, fgColor, opts = {}) {
+    const scaleW = 600;
+    const hasPeriod  = opts.periodColor && fullText.endsWith('.');
+    const hasTittle  = opts.tittleColor && fullText[0] === 'i';
+
+    const mainText  = hasPeriod ? fullText.slice(0, -1) : fullText;
+    const svgStr    = hasTittle ? mainText.replace(/^i/, '\u0131') : mainText; // ı = dotless i
+
+    const naturalFull = domW(fullText,  weight);
+    const naturalMain = domW(mainText,  weight);
+    const scale  = scaleW / naturalFull;
+    const fsize  = Math.round(BASE * scale);
+    const scaleH = Math.round(fsize * 1.22);
+    const baseline = Math.round(fsize * 0.88);
+
+    // Main text length: if period is separate, shrink main textLength to leave room
+    const mainLen = hasPeriod
+      ? Math.round(scaleW * naturalMain / naturalFull)
+      : scaleW;
+
+    const svg = svgEl('svg', { viewBox: `0 0 ${scaleW} ${scaleH}`, width: '100%' });
+    svg.style.display = 'block';
+
+    // Main text
+    svg.appendChild(svgText({
+      x: 0, y: baseline,
+      'font-family': 'Satoshi, sans-serif', 'font-weight': weight,
+      'font-size': fsize, fill: fgColor,
+      textLength: mainLen, lengthAdjust: 'spacingAndGlyphs'
+    }, svgStr));
+
+    // Accent period
+    if (hasPeriod) {
+      svg.appendChild(svgText({
+        x: scaleW, y: baseline, 'text-anchor': 'end',
+        'font-family': 'Satoshi, sans-serif', 'font-weight': weight,
+        'font-size': fsize, fill: opts.periodColor
+      }, '.'));
+    }
+
+    // Accent tittle
+    if (hasTittle) {
+      svg.appendChild(tittleEllipse(mainText, weight, baseline, fsize, mainLen, opts.tittleColor));
+    }
+
+    container.appendChild(svg);
+  }
+
+  /* ── Stacked rectangular wordmark ──────────────────── */
+  // No period — the stacked lockup is period-free for a cleaner logo silhouette.
+  function buildStacked(container, weight, fgColor, opts = {}) {
+    const scaleW = 600;
+    const hasTittle = opts.tittleColor;
+
+    const line1raw = 'ilove';
+    const line2raw = 'youth';           // no period — tighter, more logo-like
+    const line1svg = hasTittle ? '\u0131love' : line1raw;
+
+    const w1 = domW(line1raw, weight);
+    const w2 = domW(line2raw, weight);
+    const wider = Math.max(w1, w2);
+
+    const sz1 = BASE * (wider / w1);
+    const sz2 = BASE * (wider / w2);
+    const fsize1 = Math.round(sz1 * (scaleW / wider));
+    const fsize2 = Math.round(sz2 * (scaleW / wider));
+
+    // Tight logo leading — top of "youth" sits just 4% of fsize2 below the ilove baseline
+    const y1     = Math.round(fsize1 * 0.88);
+    const y2     = y1 + Math.round(fsize2 * 0.76);
+    // Extra room for "y" descender (~0.22em) + a little breathing at the bottom
+    const scaleH = y2 + Math.round(fsize2 * 0.36);
+
+    const svg = svgEl('svg', { viewBox: `0 0 ${scaleW} ${scaleH}`, width: '100%' });
+    svg.style.display = 'block';
+
+    // Optional thin rule between lines — adds "brand lock" feeling
+    if (opts.rule) {
+      const ruleY = Math.round(y1 + (y2 - fsize2 * 0.72 - y1) / 2);
+      const ruleW = Math.round(fsize1 * 0.008);
+      svg.appendChild(svgEl('line', {
+        x1: 0, y1: ruleY, x2: scaleW, y2: ruleY,
+        stroke: fgColor, 'stroke-width': Math.max(ruleW, 1), opacity: '0.25'
+      }));
+    }
+
+    // Line 1 — ilove
+    svg.appendChild(svgText({
+      x: 0, y: y1,
+      'font-family': 'Satoshi, sans-serif', 'font-weight': weight,
+      'font-size': fsize1, fill: fgColor,
+      textLength: scaleW, lengthAdjust: 'spacingAndGlyphs'
+    }, line1svg));
+
+    // Accent tittle on i
+    if (hasTittle) {
+      svg.appendChild(tittleEllipse(line1raw, weight, y1, fsize1, scaleW, opts.tittleColor));
+    }
+
+    // Line 2 — youth
+    svg.appendChild(svgText({
+      x: 0, y: y2,
+      'font-family': 'Satoshi, sans-serif', 'font-weight': weight,
+      'font-size': fsize2, fill: fgColor,
+      textLength: scaleW, lengthAdjust: 'spacingAndGlyphs'
+    }, line2raw));
+
+    container.appendChild(svg);
+  }
+
+  /* ── Render all on fonts ready ──────────────────────── */
+  document.fonts.ready.then(() => {
+
+    // Wordmark + brandmark comparison grids
+    document.querySelectorAll('[data-sl]').forEach(el => {
+      buildSingleLine(el, el.dataset.text, el.dataset.weight, el.dataset.color);
+    });
+
+    // Stacked comparison grids
+    document.querySelectorAll('[data-stack]').forEach(el => {
+      buildStacked(el, el.dataset.weight, el.dataset.color);
+    });
+
+    // Stacked heroes
+    buildStacked(document.getElementById('sh-plain'),       400, '#2a2220');
+    buildStacked(document.getElementById('sh-blue-tittle'), 400, '#2a2220', { tittleColor: '#ade8f9' });
+    buildStacked(document.getElementById('sh-dark'),        400, '#ffffff', { tittleColor: '#ade8f9' });
+    buildStacked(document.getElementById('sh-rule'),        400, '#2a2220', { rule: true });
+
+    // Creative card A — wordmark, blue on both dots
+    buildSingleLine(document.getElementById('ca-a'),
+      'iloveyouth.', 400, '#2a2220',
+      { periodColor: '#ade8f9', tittleColor: '#ade8f9' });
+
+    // Creative card B — brandmark inverse, blue on both dots
+    buildSingleLine(document.getElementById('ca-b'),
+      'ily.', 400, '#ffffff',
+      { periodColor: '#ade8f9', tittleColor: '#ade8f9' });
+
+    // Creative card G — recommended direction, both marks
+    buildSingleLine(document.getElementById('ca-g-wm'),
+      'iloveyouth.', 400, '#2a2220',
+      { periodColor: '#ade8f9', tittleColor: '#ade8f9' });
+
+    buildSingleLine(document.getElementById('ca-g-bm'),
+      'ily.', 400, '#2a2220',
+      { periodColor: '#ade8f9', tittleColor: '#ade8f9' });
+  });
+</script>
+</body>
+</html>
