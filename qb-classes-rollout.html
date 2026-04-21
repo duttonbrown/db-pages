@@ -332,7 +332,7 @@
 <div class="summary">
   <div class="summary-item"><div class="label">Owner</div><div class="value">Chase Anderson</div></div>
   <div class="summary-item"><div class="label">Target go-live</div><div class="value">May 1, 2026 <em>(flexible)</em></div></div>
-  <div class="summary-item"><div class="label">Your effort</div><div class="value">7 hours</div></div>
+  <div class="summary-item"><div class="label">Your effort</div><div class="value">7 hrs &mdash; or ~2 with script</div></div>
   <div class="summary-item"><div class="label">Status</div><div class="value">Planning &mdash; awaiting sign-off</div></div>
 </div>
 
@@ -455,6 +455,22 @@
       <td>Confirm or propose a different rule</td>
     </tr>
   </table></div>
+</section>
+
+<!-- ====== FAST TRACK ====== -->
+<section>
+  <div class="section-header"><div class="section-title">Fast-track option &mdash; cut this to ~2 hours</div></div>
+  <p>The 7-hour estimate assumes you do it manually with QB&rsquo;s built-in Reclassify tool. Most of that is thinking &mdash; deciding which class each MIXED transaction belongs to.</p>
+  <p><strong>If you answer the 10 decisions above, Thomas can have Claude script the heavy lifting via the QBO API.</strong> The plan:</p>
+  <ul>
+    <li><strong>CLEAN accounts</strong> &mdash; script applies the 1:1 class mapping across all 2025 + YTD 2026 transactions (no per-account clicking)</li>
+    <li><strong>6010 Wages</strong> &mdash; pulls payroll by employee, applies the People &rarr; Class map, produces a CSV preview for you to spot-check</li>
+    <li><strong>6410 Dues &amp; Subscriptions</strong> ($71K, the biggest MIXED bucket) &mdash; pulls the 2025 Subscription Fees Notion page, matches to QB vendors, assigns class per line</li>
+    <li><strong>6236 Upwork</strong> &mdash; splits by contractor</li>
+    <li><strong>Validation</strong> &mdash; auto-reconciles P&amp;L by Class to total P&amp;L to catch anything missed</li>
+  </ul>
+  <p>You review the proposed classifications in a CSV, spot-check in QB, set up Banking Rules for ongoing, done. <strong>~2 hours of your time</strong> instead of 7.</p>
+  <div class="note"><strong>Prereq:</strong> your answers to the 10 decisions above &mdash; that&rsquo;s the data input the script needs. Without them, we can&rsquo;t automate anything.</div>
 </section>
 
 <!-- ====== ACCOUNT MAPPING ====== -->
