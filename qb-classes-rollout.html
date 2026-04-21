@@ -332,7 +332,7 @@
 <div class="summary">
   <div class="summary-item"><div class="label">Owner</div><div class="value">Chase Anderson</div></div>
   <div class="summary-item"><div class="label">Target go-live</div><div class="value">May 1, 2026 <em>(flexible)</em></div></div>
-  <div class="summary-item"><div class="label">Your effort</div><div class="value">7 hrs &mdash; or ~2 with script</div></div>
+  <div class="summary-item"><div class="label">Your effort</div><div class="value">7 hours</div></div>
   <div class="summary-item"><div class="label">Status</div><div class="value">Planning &mdash; awaiting sign-off</div></div>
 </div>
 
@@ -455,22 +455,6 @@
       <td>Confirm or propose a different rule</td>
     </tr>
   </table></div>
-</section>
-
-<!-- ====== FAST TRACK ====== -->
-<section>
-  <div class="section-header"><div class="section-title">Fast-track option &mdash; cut this to ~2 hours</div></div>
-  <p>The 7-hour estimate assumes you do it manually with QB&rsquo;s built-in Reclassify tool. Most of that is thinking &mdash; deciding which class each MIXED transaction belongs to.</p>
-  <p><strong>If you answer the 10 decisions above, Thomas can have Claude script the heavy lifting via the QBO API.</strong> The plan:</p>
-  <ul>
-    <li><strong>CLEAN accounts</strong> &mdash; script applies the 1:1 class mapping across all 2025 + YTD 2026 transactions (no per-account clicking)</li>
-    <li><strong>6010 Wages</strong> &mdash; pulls payroll by employee, applies the People &rarr; Class map, produces a CSV preview for you to spot-check</li>
-    <li><strong>6410 Dues &amp; Subscriptions</strong> ($71K, the biggest MIXED bucket) &mdash; pulls the 2025 Subscription Fees Notion page, matches to QB vendors, assigns class per line</li>
-    <li><strong>6236 Upwork</strong> &mdash; splits by contractor</li>
-    <li><strong>Validation</strong> &mdash; auto-reconciles P&amp;L by Class to total P&amp;L to catch anything missed</li>
-  </ul>
-  <p>You review the proposed classifications in a CSV, spot-check in QB, set up Banking Rules for ongoing, done. <strong>~2 hours of your time</strong> instead of 7.</p>
-  <div class="note"><strong>Prereq:</strong> your answers to the 10 decisions above &mdash; that&rsquo;s the data input the script needs. Without them, we can&rsquo;t automate anything.</div>
 </section>
 
 <!-- ====== ACCOUNT MAPPING ====== -->
@@ -692,6 +676,67 @@
   <div class="section-header"><div class="section-title">Next step</div></div>
   <p>Review the 10 decisions above and the CLEAN account mapping. Flag anything wrong, fill in the open decisions, and let Thomas know when you&rsquo;re ready to schedule the 4-day execution.</p>
   <p>Full Notion project page: <a href="https://www.notion.so/QB-Classes-Rollout-346ffa524c5b81a5b20df01138a3a3ac" target="_blank" rel="noopener">QB Classes Rollout</a></p>
+</section>
+
+<!-- ====== APPENDIX ====== -->
+<section>
+  <div class="section-header"><div class="section-title">Appendix &mdash; chart of accounts cleanup ideas</div></div>
+  <p>Optional. These aren&rsquo;t blockers for the Classes rollout &mdash; but if you&rsquo;re already in the chart of accounts, a few pieces of housekeeping would make reports significantly tighter. Review at your pace.</p>
+
+  <h3>A. Immediate fixes (misclassified QB detail types)</h3>
+  <p>These are wrong today and distort reports. All quick one-click fixes.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Account</th><th>Currently tagged</th><th>Should be</th><th>Why it matters</th></tr>
+    <tr><td><code>5500</code> Product Mold Fees</td><td><em>Expense</em></td><td><em>COGS</em></td><td>Molds are production tooling &mdash; the cost goes into product, not opex. Wrong tag understates COGS and overstates gross margin.</td></tr>
+    <tr><td><code>6238</code> Payroll Fees</td><td><em>Dues &amp; subscriptions</em></td><td><em>Legal &amp; Professional Fees</em></td><td>Payroll admin is a professional service, not a subscription.</td></tr>
+    <tr><td><code>6239</code> 401K Admin Fees</td><td><em>Dues &amp; subscriptions</em></td><td><em>Legal &amp; Professional Fees</em></td><td>Same &mdash; fiduciary admin is a pro service.</td></tr>
+    <tr><td>Melio Credit Card Fee</td><td><em>Utilities</em></td><td><em>Bank Charges</em></td><td>Nothing utility about it. See merge recommendation below.</td></tr>
+    <tr><td>Melio Services Fee</td><td><em>Utilities</em></td><td><em>Bank Charges</em></td><td>Same.</td></tr>
+    <tr><td><code>6700</code> Depreciation</td><td><em>Other Expense</em></td><td><em>Expense</em> (or renumber to 7100)</td><td>6000s should be Expense type; the mismatch makes P&amp;L comparison jumpy.</td></tr>
+  </table></div>
+
+  <h3>B. Number the unnumbered accounts</h3>
+  <p>Eleven accounts currently have no account number. Here&rsquo;s where each would go:</p>
+  <div class="table-wrap"><table>
+    <tr><th>Current name</th><th>Proposed #</th><th>Destination</th><th>Combine?</th></tr>
+    <tr><td>Amazon Credit</td><td><code>2103</code></td><td>Credit cards (with Amex 2100, US Bank 2101&ndash;2102)</td><td>No &mdash; but confirm what this actually is (card vs. LOC vs. deposit balance)</td></tr>
+    <tr><td>Billable Expense Income</td><td><code>4110</code></td><td>End of Service Income range</td><td>No &mdash; QBO auto-generates this</td></tr>
+    <tr><td>Restocking Fees</td><td><code>4120</code></td><td>Service Income range</td><td>No &mdash; positive revenue</td></tr>
+    <tr><td>Discounts</td><td><code>4900</code></td><td>Bottom of Income (by convention)</td><td>No &mdash; contra-revenue, different sign than Restocking</td></tr>
+    <tr><td>Cost of Goods Sold <em>(orphan)</em></td><td>&mdash;</td><td><strong>Deprecate</strong></td><td>Reclass transactions into 5010&ndash;5410, then archive &mdash; QBO default account, not legit</td></tr>
+    <tr><td>Scrapped Inventory</td><td><code>5310</code></td><td>Adjacent to 5300 Inventory Adjustment</td><td>No &mdash; keep separate for tax-treatment clarity</td></tr>
+    <tr><td>Melio Credit Card Fee</td><td>&mdash;</td><td><strong>Merge into 6420</strong></td><td>Yes &mdash; same thing as Bank &amp; Payment Processing Fees</td></tr>
+    <tr><td>Melio Services Fee</td><td>&mdash;</td><td><strong>Merge into 6420</strong></td><td>Yes &mdash; same</td></tr>
+    <tr><td>Purchases</td><td>&mdash;</td><td><strong>Deprecate</strong></td><td>Another QBO default catch-all; reclass into real accounts, then archive</td></tr>
+    <tr><td>Uncategorized Expense</td><td>&mdash;</td><td><strong>Archive</strong></td><td>QBO auto-created; never legitimate</td></tr>
+    <tr><td>Reconciliation Discrepancies</td><td><code>8030</code></td><td>Other Expense, with 8010/8020</td><td>No</td></tr>
+  </table></div>
+  <p><em>Net result: 11 floating accounts &rarr; 6 numbered + 5 eliminated. Tighter chart, no information loss.</em></p>
+
+  <h3>C. Retire zombie accounts</h3>
+  <p>Any account with zero 2024 + 2025 activity. 15-minute audit, bulk archive. Also kill anything labeled &ldquo;Uncategorized *&rdquo; and any other QBO auto-created defaults that never got used.</p>
+
+  <h3>D. Strategic cleanup (Q3 project, worth discussing with your outside accountant first)</h3>
+  <p>Structural changes that shouldn&rsquo;t be rushed because they can break year-over-year P&amp;L comparability if done incorrectly.</p>
+  <ul>
+    <li><strong>Add parent accounts for grouping:</strong> <em>Facilities</em> parent &rarr; 6310 Janitorial, 6320 Rent, 6330 Utilities, 6340 Insurance, 6440 Internet, 6450 Phone, 6610 R&amp;M. <em>Prepaid Insurance</em> parent &rarr; 1304&ndash;1307. <em>Vehicle</em> parent &rarr; 8010 + 8020.</li>
+    <li><strong>Split the <code>6233</code> mega-bucket</strong> (Website / Software / Product Development). Sub-accounts let D&amp;D actually see where its spend goes.</li>
+    <li><strong>Build Income hierarchy:</strong> <em>Product Sales</em> parent &rarr; 4000&ndash;4040. <em>Service Income</em> parent &rarr; 4050&ndash;4090 + Billable Expense + Restocking. Lets QB report product vs. service revenue natively.</li>
+    <li><strong>Move <code>6080</code> Independent Contractor Labor</strong> under the 6000 Payroll parent (currently orphaned between 6070 and 6090).</li>
+    <li><strong>Reconcile <code>6140</code> Marketing-Agency Fees vs. <code>6234</code> Marketing-PS.</strong> Agency fees are a professional service; either consolidate or write a clear rule for which invoice goes where.</li>
+    <li><strong><code>4040</code> Room &amp; Board Retail Sales is single-channel.</strong> If other retail channels exist (Etsy, Amazon, trade shows), each should have its own income account &mdash; or segment via Shopify tags.</li>
+  </ul>
+
+  <h3>E. Rename for plain English</h3>
+  <p>Small change, much easier onboarding for new hires:</p>
+  <ul>
+    <li>&ldquo;FF&amp;E&rdquo; &rarr; <strong>&ldquo;Furniture, Fixtures &amp; Equipment&rdquo;</strong></li>
+    <li>&ldquo;Business Meal Expense&rdquo; &rarr; <strong>&ldquo;Business Meals&rdquo;</strong> (drop the redundant &ldquo;Expense&rdquo;)</li>
+    <li>&ldquo;Marketing - PS&rdquo; &rarr; <strong>&ldquo;Marketing Professional Services&rdquo;</strong></li>
+    <li>Audit &ldquo;Misc. Marketing Expenses&rdquo; &mdash; what&rsquo;s actually in it? Most &ldquo;Misc&rdquo; accounts become catch-all junk drawers</li>
+  </ul>
+
+  <div class="note"><strong>Suggested sequencing:</strong> Sections A, B, and C are safe to bundle into the Classes rollout &mdash; you&rsquo;re already in the chart of accounts, ~45 minutes of extra work, immediate report accuracy improvement. Sections D and E are worth a 30-minute conversation with your outside accountant before executing, because incorrectly migrating accounts can break year-over-year comparability.</div>
 </section>
 
 <footer>
