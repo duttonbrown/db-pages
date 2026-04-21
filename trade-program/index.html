@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade Program Mockups — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --db-primary: #4A4A4A;
+    --db-text: #4A4A4A;
+    --db-text-muted: #6B6B6B;
+    --db-text-light: #8A8A8A;
+    --db-white: #FFFFFF;
+    --db-surface: #F7F5F2;
+    --db-surface-mid: #EDE9E3;
+    --db-border: #E6E6E6;
+    --db-accent: #FF9912;
+    --db-accent-hover: #D97706;
+    /* 13 signature powder coats */
+    --pc-pinkaboo: #F7B6C0;
+    --pc-bone: #E5E4CF;
+    --pc-spa: #A0AF9C;
+    --pc-python-green: #4E782F;
+    --pc-lagoon: #728384;
+    --pc-slate-blue: #2C4A56;
+    --pc-ochre: #B89111;
+    --pc-orange: #D4713B;
+    --pc-riding-hood-red: #9F2C00;
+    --pc-chalk: #D0D0D0;
+    --pc-cobalt: #1D1E33;
+    --pc-black: #000000;
+    --pc-white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300;
+    color: var(--db-text);
+    background: var(--db-surface);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-weight: 300; letter-spacing: -0.02em; line-height: 1.15; }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* Topbar */
+  .topbar {
+    padding: 18px 32px;
+    background: var(--db-white);
+    border-bottom: 1px solid var(--db-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    color: var(--db-primary);
+  }
+  .topbar-logo::before {
+    content: "";
+    width: 3px;
+    height: 22px;
+    background: var(--db-accent);
+    border-radius: 1px;
+  }
+  .topbar-right {
+    font-size: 12px;
+    color: var(--db-text-light);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 96px 0 72px;
+    background: var(--db-surface);
+    border-bottom: 1px solid var(--db-border);
+  }
+  .hero .overline {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--db-accent-hover);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    color: var(--db-primary);
+    margin-bottom: 20px;
+    max-width: 780px;
+  }
+  .hero h1 em { font-style: normal; color: var(--db-accent); font-weight: 300; }
+  .hero p {
+    font-size: 18px;
+    color: var(--db-text);
+    max-width: 720px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+    font-size: 13px;
+    color: var(--db-text-light);
+    letter-spacing: 0.05em;
+    flex-wrap: wrap;
+  }
+  .hero-meta strong { color: var(--db-primary); font-weight: 600; }
+
+  /* Version grid */
+  .versions {
+    padding: 72px 0 32px;
+  }
+  .versions-header {
+    margin-bottom: 40px;
+  }
+  .versions-header .overline {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--db-accent-hover);
+    margin-bottom: 12px;
+  }
+  .versions-header h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    color: var(--db-primary);
+    margin-bottom: 12px;
+  }
+  .versions-header p {
+    font-size: 16px;
+    color: var(--db-text-muted);
+    max-width: 640px;
+    font-weight: 300;
+  }
+
+  .version-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .version-card {
+    background: var(--db-white);
+    border: 1px solid var(--db-border);
+    border-radius: 4px;
+    padding: 32px 36px;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 32px;
+    align-items: center;
+    transition: all 250ms ease;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+  }
+  .version-card:hover {
+    border-color: var(--db-accent);
+    box-shadow: 0 8px 24px rgba(74,74,74,0.08);
+  }
+  .version-card--recommended {
+    border-color: var(--db-primary);
+    box-shadow: 0 4px 12px rgba(74,74,74,0.06);
+  }
+  .version-card--recommended::before {
+    content: "Recommended";
+    position: absolute;
+    top: -11px;
+    left: 32px;
+    background: var(--db-accent);
+    color: var(--db-white);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+  .version-num {
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--db-accent);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .version-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--db-primary);
+    margin-bottom: 6px;
+    letter-spacing: 0;
+  }
+  .version-content .subtitle {
+    font-size: 14px;
+    color: var(--db-text-muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+  }
+  .version-content p {
+    font-size: 15px;
+    color: var(--db-text);
+    line-height: 1.6;
+    max-width: 640px;
+    font-weight: 300;
+  }
+  .version-action {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--db-accent-hover);
+    white-space: nowrap;
+  }
+  .version-action::after {
+    content: " →";
+  }
+
+  /* Model comparison */
+  .models {
+    padding: 72px 0;
+    background: var(--db-white);
+    border-top: 1px solid var(--db-border);
+    border-bottom: 1px solid var(--db-border);
+    margin-top: 56px;
+  }
+  .models .overline {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--db-accent-hover);
+    margin-bottom: 12px;
+  }
+  .models h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    color: var(--db-primary);
+    margin-bottom: 44px;
+  }
+  .model-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .model-card {
+    padding: 28px 32px;
+    background: var(--db-surface);
+    border: 1px solid var(--db-border);
+    border-radius: 4px;
+  }
+  .model-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--db-primary);
+    margin-bottom: 8px;
+    letter-spacing: 0;
+  }
+  .model-card .meta {
+    font-size: 13px;
+    color: var(--db-text-light);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .model-card ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .model-card li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--db-border);
+    font-size: 14px;
+    color: var(--db-text);
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .model-card li:last-child { border-bottom: none; }
+  .model-card .plus { color: var(--db-accent); font-weight: 600; }
+  .model-card .neutral { color: var(--db-text-light); font-weight: 600; }
+
+  /* Decisions */
+  .decisions {
+    padding: 72px 0;
+  }
+  .decisions .overline {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--db-accent-hover);
+    margin-bottom: 12px;
+  }
+  .decisions h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    color: var(--db-primary);
+    margin-bottom: 24px;
+  }
+  .decisions p.intro {
+    font-size: 16px;
+    color: var(--db-text-muted);
+    max-width: 640px;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  .decision-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .decision {
+    background: var(--db-white);
+    border: 1px solid var(--db-border);
+    border-left: 3px solid var(--db-accent);
+    border-radius: 4px;
+    padding: 20px 28px;
+  }
+  .decision h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--db-primary);
+    margin-bottom: 4px;
+    letter-spacing: 0;
+  }
+  .decision p {
+    font-size: 14px;
+    color: var(--db-text);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* Footer */
+  .color-strip {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    height: 10px;
+  }
+  .color-strip > div { height: 100%; }
+  .signature-footer {
+    background: var(--db-primary);
+    color: var(--db-white);
+    padding: 48px 0;
+    text-align: center;
+  }
+  .signature-footer .tagline {
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--db-white);
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .signature-footer .tagline em {
+    color: var(--db-accent);
+    font-style: italic;
+  }
+  .signature-footer .meta {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  @media (max-width: 760px) {
+    .version-card { grid-template-columns: 60px 1fr; gap: 20px; padding: 24px 20px; }
+    .version-action { grid-column: 2; margin-top: 8px; }
+    .version-num { font-size: 40px; }
+    .model-grid { grid-template-columns: 1fr; }
+    .hero { padding: 64px 0 56px; }
+    .versions, .models, .decisions { padding: 56px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/" class="topbar-logo">DUTTON BROWN</a>
+  <div class="topbar-right">Internal review</div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <span class="overline">Trade Program · Landing page concepts</span>
+    <h1>Three directions for the <em>trade program</em> landing page.</h1>
+    <p>This is a working review. Open each version, scroll through, and tell us which direction feels most like Dutton Brown — or what needs to change. Your input shapes what ships on duttonbrown.com/trade.</p>
+    <div class="hero-meta">
+      <span><strong>Shared:</strong> April 2026</span>
+      <span><strong>Models shown:</strong> Flat discount + Tiered (two takes on the tiered)</span>
+      <span><strong>Decision pending:</strong> Which model, which visual direction</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VERSIONS ============ -->
+<section class="versions">
+  <div class="container">
+    <div class="versions-header">
+      <span class="overline">The three versions</span>
+      <h2>One flat, two tiered. Pick a favorite.</h2>
+      <p>Click any card to open the full mockup. Each page is a standalone prototype — no logins, no forms. Just design and copy.</p>
+    </div>
+
+    <div class="version-list">
+      <a href="v1-flat.html" class="version-card">
+        <div class="version-num">01</div>
+        <div class="version-content">
+          <h3>Flat discount model</h3>
+          <div class="subtitle">One tier · 20% off retail · Free to apply</div>
+          <p>The simplest version: every approved trade account gets 20% off. No paid tiers, no upgrades. This is what most competitor programs look like (Visual Comfort, Urban Electric, Arteriors). Lowest friction to ship, least distinctive.</p>
+        </div>
+        <div class="version-action">Open V1</div>
+      </a>
+
+      <a href="v2-tiered.html" class="version-card">
+        <div class="version-num">02</div>
+        <div class="version-content">
+          <h3>Tiered model — first pass</h3>
+          <div class="subtitle">Trade (free, 15%) + Power Designer ($200/yr, 20%)</div>
+          <p>Introduces the Power Designer paid tier. Free tier at 15%, paid at 20% with priority production, concierge service, unlimited samples, physical kit, founding-member promo ($149 for first 50). More ambitious model. Visual styling was a first pass — cinematic but not yet Dutton Brown.</p>
+        </div>
+        <div class="version-action">Open V2</div>
+      </a>
+
+      <a href="v3-brand.html" class="version-card version-card--recommended">
+        <div class="version-num">03</div>
+        <div class="version-content">
+          <h3>Tiered model — brand-aligned</h3>
+          <div class="subtitle">Same tiered content as V2, retooled in the Dutton Brown design system</div>
+          <p>V2's content and structure, now sitting on <strong>db-brand tokens</strong>: #4A4A4A primary (not pure black), #F7F5F2 surface, 4px radius, Poppins 300 headlines, sentence-case verb-first buttons, tagline footer, and the signature 13-powder-coat color strip before the footer. This is the version that looks and sounds most like Dutton Brown.</p>
+        </div>
+        <div class="version-action">Open V3</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODEL COMPARISON ============ -->
+<section class="models">
+  <div class="container">
+    <span class="overline">The models, side by side</span>
+    <h2>Flat vs. Tiered — what the trade-off actually is.</h2>
+
+    <div class="model-grid">
+      <div class="model-card">
+        <h3>Flat model (V1)</h3>
+        <div class="meta">One tier · 20% off</div>
+        <ul>
+          <li><span class="plus">+</span>Simplest to build, simplest to explain</li>
+          <li><span class="plus">+</span>No billing system, no renewals, no churn</li>
+          <li><span class="plus">+</span>Fastest to Phase 1 revenue</li>
+          <li><span class="neutral">—</span>Undifferentiated — every premium brand runs this</li>
+          <li><span class="neutral">—</span>No recurring revenue from the program itself</li>
+          <li><span class="neutral">—</span>Lower commitment signal from designers</li>
+        </ul>
+      </div>
+
+      <div class="model-card">
+        <h3>Tiered model (V2 / V3)</h3>
+        <div class="meta">Trade + Power Designer</div>
+        <ul>
+          <li><span class="plus">+</span>Paid tier filters higher-intent applicants</li>
+          <li><span class="plus">+</span>Recurring revenue: $200 × N Power Designers per year</li>
+          <li><span class="plus">+</span>Physical kit + concierge = memorable, distinctive</li>
+          <li><span class="plus">+</span>No peer brand runs a paid trade tier — press-worthy</li>
+          <li><span class="neutral">—</span>More operational commitments (priority queue, kit fulfillment, 2-hr SLA)</li>
+          <li><span class="neutral">—</span>Billing system + renewal workflows needed</li>
+          <li><span class="neutral">—</span>Existing wholesale accounts need careful handling at rollout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DECISIONS PENDING ============ -->
+<section class="decisions">
+  <div class="container">
+    <span class="overline">Decisions we need to make</span>
+    <h2>What we're waiting on.</h2>
+    <p class="intro">Once these are answered, we can commit to a direction and start the Shopify build. Nothing here is a blocker to reviewing the mockups — it's what comes after.</p>
+
+    <div class="decision-list">
+      <div class="decision">
+        <h4>Flat or tiered — which model ships?</h4>
+        <p>Flat is safer and faster to Phase 1. Tiered is more ambitious and potentially more valuable long-term. Big decision — this shapes the whole build.</p>
+      </div>
+      <div class="decision">
+        <h4>If tiered: V2 visual direction or V3 brand direction?</h4>
+        <p>V3 aligns to db-brand tokens and the live site look. V2 is more editorial/cinematic. V3 is the production-ready design direction if we keep the tiered model.</p>
+      </div>
+      <div class="decision">
+        <h4>Payment terms policy for trade orders</h4>
+        <p>Chase to confirm: check acceptance, 50% deposit for custom work, Net 30 gating rules. Needed before Phase 1 launch regardless of model.</p>
+      </div>
+      <div class="decision">
+        <h4>Named trade rep for the portal and welcome email</h4>
+        <p>Currently built with Chase as rep. Hannah as marketing voice on nurture. Confirm or swap.</p>
+      </div>
+      <div class="decision">
+        <h4>Samples workflow integration</h4>
+        <p>Existing free-sample workflow for trade. Need an SOP pointer to plug into the portal + Power concierge "unlimited samples" perk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 POWDER COATS STRIP ============ -->
+<div class="color-strip" aria-hidden="true">
+  <div style="background: var(--pc-bone);"></div>
+  <div style="background: var(--pc-spa);"></div>
+  <div style="background: var(--pc-python-green);"></div>
+  <div style="background: var(--pc-lagoon);"></div>
+  <div style="background: var(--pc-slate-blue);"></div>
+  <div style="background: var(--pc-ochre);"></div>
+  <div style="background: var(--pc-orange);"></div>
+  <div style="background: var(--pc-riding-hood-red);"></div>
+  <div style="background: var(--pc-pinkaboo);"></div>
+  <div style="background: var(--pc-chalk);"></div>
+  <div style="background: var(--pc-cobalt);"></div>
+  <div style="background: var(--pc-black);"></div>
+  <div style="background: var(--pc-white); border-left: 1px solid var(--db-border);"></div>
+</div>
+
+<!-- ============ SIGNATURE FOOTER ============ -->
+<footer class="signature-footer">
+  <div class="container">
+    <div class="tagline">Lighting that's <em>never boring.</em></div>
+    <div class="meta">Handcrafted in Minneapolis · Made to order</div>
+  </div>
+</footer>
+
+</body>
+</html>
