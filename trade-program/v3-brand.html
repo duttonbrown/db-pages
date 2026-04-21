@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade Program — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================================
+     DUTTON BROWN — Trade Program Landing V3
+     Tokens pulled from db-brand/tokens.css — single source of truth.
+     ========================================================================== */
+  :root {
+    /* Brand neutrals */
+    --db-primary: #4A4A4A;
+    --db-primary-hover: #3D3832;
+    --db-text: #4A4A4A;
+    --db-text-muted: #6B6B6B;
+    --db-text-light: #8A8A8A;
+    --db-white: #FFFFFF;
+    --db-surface: #F7F5F2;
+    --db-surface-mid: #EDE9E3;
+    --db-border: #E6E6E6;
+
+    /* Brand accent (orange) */
+    --db-accent: #FF9912;
+    --db-accent-hover: #D97706;
+    --db-accent-soft: #FFF4E0;
+
+    /* 13 signature powder coats — strictly for color strip / product graphics */
+    --pc-pinkaboo: #F7B6C0;
+    --pc-bone: #E5E4CF;
+    --pc-spa: #A0AF9C;
+    --pc-python-green: #4E782F;
+    --pc-lagoon: #728384;
+    --pc-slate-blue: #2C4A56;
+    --pc-ochre: #B89111;
+    --pc-orange: #D4713B;
+    --pc-riding-hood-red: #9F2C00;
+    --pc-chalk: #D0D0D0;
+    --pc-cobalt: #1D1E33;
+    --pc-black: #000000;
+    --pc-white: #FFFFFF;
+
+    /* Typography */
+    --db-font: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Shadows — gentle, brand-token sourced */
+    --db-shadow-sm: 0 1px 2px rgba(74,74,74,0.06);
+    --db-shadow-md: 0 4px 12px rgba(74,74,74,0.08);
+    --db-shadow-lg: 0 8px 24px rgba(74,74,74,0.10);
+    --db-shadow-xl: 0 16px 48px rgba(74,74,74,0.12);
+
+    /* Layout */
+    --radius: 4px;
+    --radius-full: 9999px;
+    --max-width: 1200px;
+    --max-width-lg: 1320px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: var(--db-font);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--db-text);
+    background: var(--db-white);
+  }
+
+  /* ==========================================================================
+     TYPOGRAPHY — Size creates hierarchy, weight 300 dominates
+     ========================================================================== */
+  h1, h2, h3, h4 { font-weight: 300; letter-spacing: -0.02em; line-height: 1.15; }
+  h1 { font-size: clamp(48px, 7vw, 88px); }
+  h2 { font-size: clamp(32px, 4.2vw, 52px); }
+  h3 { font-size: 24px; line-height: 1.3; font-weight: 400; letter-spacing: 0; }
+  h4 { font-size: 18px; line-height: 1.3; font-weight: 400; letter-spacing: 0; }
+  p { line-height: 1.65; }
+
+  .overline {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--db-accent-hover);
+  }
+  .overline-on-dark { color: var(--db-accent); }
+
+  /* ==========================================================================
+     BUTTONS — Sentence case, Poppins 600, verb-first, normal tracking
+     ========================================================================== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-family: var(--db-font);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 250ms ease;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--db-primary);
+    color: var(--db-white);
+    border-color: var(--db-primary);
+  }
+  .btn-primary:hover {
+    background: var(--db-accent);
+    border-color: var(--db-accent);
+    color: var(--db-white);
+  }
+  .btn-accent {
+    background: var(--db-accent);
+    color: var(--db-white);
+    border-color: var(--db-accent);
+  }
+  .btn-accent:hover {
+    background: var(--db-accent-hover);
+    border-color: var(--db-accent-hover);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--db-primary);
+    border-color: var(--db-primary);
+  }
+  .btn-outline:hover {
+    background: var(--db-primary);
+    color: var(--db-white);
+  }
+  .btn-outline-light {
+    background: transparent;
+    color: var(--db-white);
+    border-color: rgba(255,255,255,0.45);
+  }
+  .btn-outline-light:hover {
+    background: var(--db-white);
+    color: var(--db-primary);
+    border-color: var(--db-white);
+  }
+  .btn-lg { padding: 16px 36px; font-size: 16px; }
+
+  .container { max-width: var(--max-width-lg); margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+
+  /* ==========================================================================
+     HEADER (simple, brand-aligned)
+     ========================================================================== */
+  .topbar {
+    padding: 20px 32px;
+    background: var(--db-white);
+    border-bottom: 1px solid var(--db-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    color: var(--db-primary);
+  }
+  .topbar-logo::before {
+    content: "";
+    width: 3px;
+    height: 22px;
+    background: var(--db-accent);
+    border-radius: 1px;
+  }
+  .topbar-right {
+    font-size: 13px;
+    color: var(--db-text-muted);
+    font-weight: 400;
+  }
+  .topbar-right a {
+    color: var(--db-primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--db-accent);
+    padding-bottom: 1px;
+    transition: color 150ms ease;
+  }
+  .topbar-right a:hover { color: var(--db-accent-hover); }
+
+  /* ==========================================================================
+     HERO
+     ========================================================================== */
+  .hero {
+    padding: 120px 0 140px;
+    background: var(--db-surface);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 50%; height: 120%;
+    background: radial-gradient(ellipse, rgba(255,153,18,0.06), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero .overline { margin-bottom: 28px; }
+  .hero h1 { color: var(--db-primary); margin-bottom: 32px; }
+  .hero h1 em { font-style: normal; color: var(--db-accent); font-weight: 300; }
+  .hero-sub {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--db-text);
+    margin-bottom: 44px;
+    max-width: 540px;
+    line-height: 1.55;
+  }
+  .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-visual {
+    aspect-ratio: 3/4;
+    background:
+      linear-gradient(135deg, #3D3832 0%, #2A2622 100%);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--db-shadow-xl);
+  }
+  .hero-visual::after {
+    content: "[editorial product photo — cinematic, color-forward]";
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.3); font-size: 11px;
+    letter-spacing: 0.1em; padding: 40px; text-align: center;
+  }
+
+  /* ==========================================================================
+     TIER CARDS
+     ========================================================================== */
+  .tiers {
+    padding: 120px 0 80px;
+    background: var(--db-surface-mid);
+  }
+  .tiers-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 72px;
+  }
+  .tiers-header .overline { margin-bottom: 16px; }
+  .tiers-header h2 { color: var(--db-primary); margin-bottom: 20px; }
+  .tiers-header p {
+    font-size: 18px;
+    color: var(--db-text-muted);
+    font-weight: 300;
+  }
+  .tier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .tier-card {
+    background: var(--db-white);
+    padding: 48px 40px;
+    border-radius: var(--radius);
+    border: 1px solid var(--db-border);
+    display: flex;
+    flex-direction: column;
+    transition: all 250ms ease;
+  }
+  .tier-card--premium {
+    background: var(--db-primary);
+    color: var(--db-white);
+    border-color: var(--db-primary);
+    box-shadow: var(--db-shadow-xl);
+    transform: translateY(-8px);
+    position: relative;
+  }
+  .tier-card--premium::before {
+    content: "Recommended for repeat specifiers";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--db-accent);
+    color: var(--db-white);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 6px 18px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+  }
+  .tier-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--db-accent-hover);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .tier-card--premium .tier-tag { color: var(--db-accent); }
+  .tier-name {
+    font-size: 30px;
+    font-weight: 300;
+    color: var(--db-primary);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .tier-card--premium .tier-name { color: var(--db-white); }
+  .tier-name em { font-style: normal; color: var(--db-accent); font-weight: 300; }
+  .tier-tagline {
+    font-size: 15px;
+    color: var(--db-text-muted);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+  .tier-card--premium .tier-tagline { color: rgba(255,255,255,0.72); }
+  .tier-price-block {
+    padding: 24px 0;
+    border-top: 1px solid var(--db-border);
+    border-bottom: 1px solid var(--db-border);
+    margin-bottom: 28px;
+  }
+  .tier-card--premium .tier-price-block { border-color: rgba(255,255,255,0.15); }
+  .tier-discount {
+    font-size: 44px;
+    font-weight: 300;
+    color: var(--db-primary);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .tier-card--premium .tier-discount { color: var(--db-white); }
+  .tier-discount-accent { color: var(--db-accent); }
+  .tier-discount-sub {
+    font-size: 13px;
+    color: var(--db-text-muted);
+    margin-top: 6px;
+    font-weight: 300;
+  }
+  .tier-card--premium .tier-discount-sub { color: rgba(255,255,255,0.6); }
+  .tier-fee {
+    font-size: 16px;
+    color: var(--db-primary);
+    margin-top: 14px;
+    font-weight: 400;
+  }
+  .tier-card--premium .tier-fee { color: var(--db-white); }
+  .tier-fee em {
+    font-style: normal;
+    color: var(--db-accent);
+    font-weight: 600;
+  }
+  .tier-fee-sub {
+    font-size: 12px;
+    color: var(--db-text-muted);
+    margin-top: 4px;
+    font-weight: 300;
+  }
+  .tier-card--premium .tier-fee-sub { color: rgba(255,255,255,0.6); }
+  .tier-features {
+    list-style: none;
+    flex-grow: 1;
+    margin-bottom: 32px;
+  }
+  .tier-features li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--db-border);
+    font-size: 14.5px;
+    line-height: 1.5;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    align-items: start;
+    color: var(--db-text);
+  }
+  .tier-card--premium .tier-features li {
+    border-color: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.82);
+  }
+  .tier-features li:last-child { border-bottom: none; }
+  .feat-marker {
+    color: var(--db-accent);
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 2px;
+  }
+  .tier-features strong { color: var(--db-primary); font-weight: 600; }
+  .tier-card--premium .tier-features strong { color: var(--db-white); }
+  .tier-card .btn { display: flex; width: 100%; }
+
+  /* ==========================================================================
+     FOUNDING STRIPE
+     ========================================================================== */
+  .founders-stripe {
+    background: var(--db-primary);
+    color: var(--db-white);
+    padding: 32px;
+    text-align: center;
+  }
+  .founders-stripe-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .founders-stripe .overline { color: var(--db-accent); margin: 0; }
+  .founders-stripe span {
+    font-size: 15px;
+    font-weight: 300;
+  }
+  .founders-stripe strong {
+    color: var(--db-accent);
+    font-weight: 600;
+  }
+
+  /* ==========================================================================
+     COMPARISON TABLE
+     ========================================================================== */
+  .compare {
+    padding: 120px 0 80px;
+    background: var(--db-white);
+  }
+  .compare-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 64px;
+  }
+  .compare-header .overline { margin-bottom: 16px; }
+  .compare-header h2 { color: var(--db-primary); }
+  .compare-table {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .compare-row-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 20px 0;
+    border-bottom: 2px solid var(--db-primary);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--db-text-light);
+  }
+  .compare-row-header > div { padding: 0 16px; }
+  .compare-row-header > div:first-child { padding-left: 0; }
+  .compare-row-header .col { color: var(--db-primary); text-align: center; }
+  .compare-row-header .col.premium { color: var(--db-accent-hover); }
+  .compare-row-header .col-sub {
+    display: block;
+    font-size: 11px;
+    color: var(--db-text-light);
+    font-weight: 400;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .compare-category {
+    grid-column: 1 / -1;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--db-accent-hover);
+    padding: 32px 0 12px;
+    border-bottom: 1px solid var(--db-border);
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--db-border);
+    font-size: 15px;
+    align-items: center;
+  }
+  .compare-row > div { padding: 0 16px; }
+  .compare-row > div:first-child { padding-left: 0; }
+  .compare-feat { color: var(--db-primary); }
+  .compare-feat .sub {
+    font-size: 12px;
+    color: var(--db-text-muted);
+    margin-top: 4px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+  .compare-val {
+    text-align: center;
+    color: var(--db-text);
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .compare-val.highlight {
+    color: var(--db-primary);
+    font-weight: 400;
+  }
+  .compare-val.accent {
+    color: var(--db-accent-hover);
+    font-weight: 600;
+  }
+  .compare-dash {
+    color: var(--db-border);
+    font-weight: 300;
+    font-size: 18px;
+  }
+  .compare-check {
+    color: var(--db-accent-hover);
+    font-weight: 600;
+  }
+  .compare-star {
+    color: var(--db-accent);
+    font-weight: 600;
+  }
+
+  /* ==========================================================================
+     DECISION GUIDE
+     ========================================================================== */
+  .decide {
+    padding: 120px 0;
+    background: var(--db-surface);
+  }
+  .decide-inner { max-width: 1080px; margin: 0 auto; }
+  .decide-header {
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .decide-header .overline { margin-bottom: 16px; }
+  .decide-header h2 { color: var(--db-primary); }
+  .decide-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .decide-card {
+    background: var(--db-white);
+    padding: 40px 36px;
+    border-radius: var(--radius);
+    border: 1px solid var(--db-border);
+  }
+  .decide-card h3 {
+    font-size: 20px;
+    color: var(--db-primary);
+    margin-bottom: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .decide-card p {
+    font-size: 15px;
+    color: var(--db-text);
+    margin-bottom: 20px;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .decide-card .verdict {
+    padding-top: 22px;
+    margin-top: 4px;
+    border-top: 1px solid var(--db-border);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .decide-card .verdict.trade { color: var(--db-accent-hover); }
+  .decide-card .verdict.premium { color: var(--db-accent-hover); }
+  .decide-math {
+    margin-top: 56px;
+    background: var(--db-white);
+    padding: 36px 44px;
+    border-left: 3px solid var(--db-accent);
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--db-shadow-sm);
+  }
+  .decide-math .overline { margin-bottom: 12px; }
+  .decide-math p {
+    font-size: 16px;
+    color: var(--db-text);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .decide-math strong {
+    color: var(--db-primary);
+    font-weight: 600;
+  }
+  .decide-math .big-num {
+    font-size: 36px;
+    color: var(--db-accent);
+    font-weight: 300;
+    display: block;
+    margin: 10px 0 6px;
+    letter-spacing: -0.02em;
+  }
+
+  /* ==========================================================================
+     POWER KIT SPOTLIGHT
+     ========================================================================== */
+  .spotlight {
+    padding: 140px 0;
+    background: var(--db-primary);
+    color: var(--db-white);
+    position: relative;
+    overflow: hidden;
+  }
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 55%; height: 140%;
+    background: radial-gradient(circle, rgba(255,153,18,0.12), transparent 60%);
+    pointer-events: none;
+  }
+  .spotlight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .spotlight-visual {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #5C4A3A 0%, #2A1F14 100%);
+    border-radius: var(--radius);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 40px;
+    text-align: center;
+  }
+  .spotlight-visual::after {
+    content: "[Power Designer Kit — swatch deck, printed catalog, notebook, handwritten letter]";
+  }
+  .spotlight-content .overline { color: var(--db-accent); margin-bottom: 20px; }
+  .spotlight-content h2 {
+    color: var(--db-white);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .spotlight-content h2 em { font-style: normal; color: var(--db-accent); }
+  .spotlight-content .lede {
+    font-size: 18px;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 32px;
+    line-height: 1.55;
+    max-width: 540px;
+    font-weight: 300;
+  }
+  .spotlight-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 36px;
+    margin-bottom: 40px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .spot-feat h4 {
+    color: var(--db-accent);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .spot-feat p {
+    color: rgba(255,255,255,0.72);
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* ==========================================================================
+     CONCIERGE
+     ========================================================================== */
+  .concierge {
+    padding: 120px 0;
+    background: var(--db-white);
+  }
+  .concierge-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .concierge-content .overline { margin-bottom: 20px; }
+  .concierge-content h2 {
+    color: var(--db-primary);
+    margin-bottom: 28px;
+  }
+  .concierge-content p {
+    font-size: 17px;
+    color: var(--db-text);
+    margin-bottom: 20px;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .concierge-sla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--db-border);
+  }
+  .sla-item strong {
+    display: block;
+    font-size: 15px;
+    color: var(--db-primary);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .sla-item span {
+    display: block;
+    font-size: 13px;
+    color: var(--db-text-muted);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+  .concierge-visual {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--pc-ochre) 0%, #7A5F1C 100%);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 40px;
+    text-align: center;
+  }
+  .concierge-visual::after {
+    content: "[Chase at desk, natural light, phone in hand]";
+  }
+
+  /* ==========================================================================
+     FAQ
+     ========================================================================== */
+  .faq {
+    padding: 120px 0;
+    background: var(--db-surface);
+  }
+  .faq-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+  }
+  .faq-header .overline { margin-bottom: 16px; }
+  .faq-header h2 { color: var(--db-primary); }
+  .faq-list { max-width: 820px; margin: 0 auto; }
+  .faq-item {
+    border-top: 1px solid var(--db-border);
+    padding: 32px 0;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--db-border); }
+  .faq-q {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--db-primary);
+    margin-bottom: 10px;
+    letter-spacing: 0;
+  }
+  .faq-a {
+    font-size: 15px;
+    color: var(--db-text);
+    line-height: 1.7;
+    max-width: 700px;
+    font-weight: 300;
+  }
+
+  /* ==========================================================================
+     FINAL CTA
+     ========================================================================== */
+  .final-cta {
+    padding: 160px 0;
+    background: var(--db-primary);
+    color: var(--db-white);
+    text-align: center;
+    position: relative;
+  }
+  .final-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 60%, rgba(255,153,18,0.08), transparent 60%);
+  }
+  .final-cta .container-narrow { position: relative; z-index: 2; }
+  .final-cta .overline { color: var(--db-accent); margin-bottom: 24px; }
+  .final-cta h2 {
+    color: var(--db-white);
+    margin-bottom: 24px;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 300;
+  }
+  .final-cta h2 em { font-style: normal; color: var(--db-accent); font-weight: 300; }
+  .final-cta p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.72);
+    margin-bottom: 44px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .final-cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ==========================================================================
+     COLOR STRIP (signature DB element — 13 powder coats before footer)
+     ========================================================================== */
+  .color-strip {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    height: 10px;
+  }
+  .color-strip > div { height: 100%; }
+
+  /* ==========================================================================
+     FOOTER (tagline + signature)
+     ========================================================================== */
+  .signature-footer {
+    background: var(--db-primary);
+    color: var(--db-white);
+    padding: 56px 0;
+    text-align: center;
+  }
+  .signature-footer .tagline {
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--db-white);
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .signature-footer .tagline em {
+    color: var(--db-accent);
+    font-weight: 300;
+    font-style: italic;
+  }
+  .signature-footer .meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 960px) {
+    .hero-grid,
+    .tier-grid,
+    .decide-cards,
+    .spotlight-grid,
+    .concierge-inner { grid-template-columns: 1fr; gap: 48px; }
+    .tier-card--premium { transform: none; }
+    .tier-card--premium::before { top: -14px; left: 28px; transform: none; }
+    .spotlight-features { grid-template-columns: 1fr; gap: 20px; }
+    .concierge-sla { grid-template-columns: 1fr; }
+    .compare-row,
+    .compare-row-header { grid-template-columns: 2fr 1fr 1fr; font-size: 13px; }
+    .compare-row > div,
+    .compare-row-header > div { padding: 0 8px; }
+    .color-strip { height: 8px; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 80px 0 100px; }
+    .tiers, .compare, .decide, .spotlight, .concierge, .faq, .final-cta { padding: 96px 0; }
+    .tier-card { padding: 36px 24px; }
+    h1 { font-size: 44px; }
+    .topbar { padding: 16px 20px; }
+    .topbar-right { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================== TOP BAR ================== -->
+<header class="topbar">
+  <a href="/" class="topbar-logo">DUTTON BROWN</a>
+  <div class="topbar-right">
+    Trade program · <a href="/pages/trade-apply">Start your application</a>
+  </div>
+</header>
+
+<!-- ================== HERO ================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="overline">Dutton Brown — Trade Program</span>
+        <h1>Two ways in.<br>Pick <em>yours.</em></h1>
+        <p class="hero-sub">Every approved trade account gets real pricing, spec sheets, and a named rep. Power Designers get priority production, concierge service, and a physical kit. Made to order in Minneapolis, built for how you actually work.</p>
+        <div class="hero-cta-row">
+          <a href="#tiers" class="btn btn-primary btn-lg">See the tiers</a>
+          <a href="#compare" class="btn btn-outline btn-lg">Compare everything</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== TIER CARDS ================== -->
+<section class="tiers" id="tiers">
+  <div class="container">
+    <div class="tiers-header">
+      <span class="overline">The two tiers</span>
+      <h2>Free to apply. Paid if you want the whole kit.</h2>
+      <p>Start with Trade. Upgrade to Power Designer when your project volume — or your taste for priority — says it's time.</p>
+    </div>
+
+    <div class="tier-grid">
+
+      <!-- FREE TIER -->
+      <div class="tier-card">
+        <span class="tier-tag">Tier One</span>
+        <h3 class="tier-name">Trade</h3>
+        <p class="tier-tagline">Everything a specifier needs to work with us.</p>
+        <div class="tier-price-block">
+          <div class="tier-discount"><span class="tier-discount-accent">15%</span> off retail</div>
+          <div class="tier-discount-sub">Across every fixture. Every finish.</div>
+          <div class="tier-fee">Free to apply and use.</div>
+          <div class="tier-fee-sub">No commitments. No renewal.</div>
+        </div>
+        <ul class="tier-features">
+          <li><span class="feat-marker">+</span><div><strong>15% off retail</strong> on every fixture, every finish</div></li>
+          <li><span class="feat-marker">+</span><div><strong>CAD, Revit, PDF</strong> spec sheets per fixture</div></li>
+          <li><span class="feat-marker">+</span><div><strong>Three free samples</strong> per year — any of our 13 powder coats</div></li>
+          <li><span class="feat-marker">+</span><div><strong>Project quotes</strong> in 24 hours, valid 30 days</div></li>
+          <li><span class="feat-marker">+</span><div><strong>Net 30 terms</strong> after your first paid order</div></li>
+          <li><span class="feat-marker">+</span><div><strong>Tax exemption</strong> support in every state we collect in</div></li>
+          <li><span class="feat-marker">+</span><div><strong>Same-day email</strong> response from a named rep</div></li>
+        </ul>
+        <a href="/pages/trade-apply" class="btn btn-outline">Apply to Trade — free</a>
+      </div>
+
+      <!-- POWER TIER -->
+      <div class="tier-card tier-card--premium">
+        <span class="tier-tag">Tier Two</span>
+        <h3 class="tier-name">Power <em>Designer</em></h3>
+        <p class="tier-tagline">For designers specifying us by the project, not the piece.</p>
+        <div class="tier-price-block">
+          <div class="tier-discount"><span class="tier-discount-accent">20%</span> off retail</div>
+          <div class="tier-discount-sub">Plus priority production, concierge service, and a physical kit.</div>
+          <div class="tier-fee"><em>$200</em> / year</div>
+          <div class="tier-fee-sub">Founding members: $149 for year one (first 50).</div>
+        </div>
+        <ul class="tier-features">
+          <li><span class="feat-marker">★</span><div><strong>20% off retail</strong> (up from 15%)</div></li>
+          <li><span class="feat-marker">★</span><div><strong>Unlimited free samples</strong> — any finish, any time</div></li>
+          <li><span class="feat-marker">★</span><div><strong>Priority production queue</strong> — your project ships first</div></li>
+          <li><span class="feat-marker">★</span><div><strong>50% off expedites</strong> when timing gets tight</div></li>
+          <li><span class="feat-marker">★</span><div><strong>Trade concierge</strong> — direct phone, text, 2-hour response</div></li>
+          <li><span class="feat-marker">★</span><div><strong>Two free returns</strong> per year on miss-spec orders</div></li>
+          <li><span class="feat-marker">★</span><div><strong>Early access</strong> to new collections, two weeks before public</div></li>
+          <li><span class="feat-marker">★</span><div><strong>Featured</strong> on our Designer Directory + social co-marketing</div></li>
+          <li><span class="feat-marker">★</span><div><strong>Power Designer Kit</strong> — annual physical swatch deck, catalog, notebook</div></li>
+          <li><span class="feat-marker">★</span><div><strong>Factory tour invite</strong> + annual Power Summit</div></li>
+          <li><span class="feat-marker">★</span><div>Everything in Trade, too</div></li>
+        </ul>
+        <a href="/pages/trade-apply?tier=power" class="btn btn-accent">Join Power Designer</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================== FOUNDING STRIPE ================== -->
+<div class="founders-stripe">
+  <div class="founders-stripe-inner">
+    <span class="overline">Founding Members</span>
+    <span>First 50 Power Designers: <strong>$149</strong> for year one. Permanent founding-member badge.</span>
+  </div>
+</div>
+
+<!-- ================== COMPARISON TABLE ================== -->
+<section class="compare" id="compare">
+  <div class="container">
+    <div class="compare-header">
+      <span class="overline">Every perk, side by side</span>
+      <h2>The long list.</h2>
+    </div>
+    <div class="compare-table">
+
+      <div class="compare-row-header">
+        <div>Feature</div>
+        <div class="col">Trade<span class="col-sub">Free</span></div>
+        <div class="col premium">Power Designer<span class="col-sub">$200/yr</span></div>
+      </div>
+
+      <!-- DISCOUNT -->
+      <div class="compare-category">Discount & pricing</div>
+      <div class="compare-row">
+        <div class="compare-feat">Discount off retail<div class="sub">Applied automatically when logged in.</div></div>
+        <div class="compare-val highlight">15%</div>
+        <div class="compare-val accent">20%</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Volume loyalty bonus<div class="sub">Once annual spend crosses $25k.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent">+2%</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Payment terms<div class="sub">After first paid order on time.</div></div>
+        <div class="compare-val highlight">Net 30</div>
+        <div class="compare-val accent">Net 30 + Net 45 optional</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Project quote validity</div>
+        <div class="compare-val highlight">30 days</div>
+        <div class="compare-val accent">60 days</div>
+      </div>
+
+      <!-- SPEED & SERVICE -->
+      <div class="compare-category">Speed & service</div>
+      <div class="compare-row">
+        <div class="compare-feat">Support SLA<div class="sub">During business hours.</div></div>
+        <div class="compare-val highlight">Same-day email</div>
+        <div class="compare-val accent">2-hour response</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Named trade rep</div>
+        <div class="compare-val highlight"><span class="compare-check">✓</span></div>
+        <div class="compare-val accent"><span class="compare-star">★ Concierge tier</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Direct phone + text line</div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Priority production queue<div class="sub">Your project jumps to the top of the shop schedule.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Expedite pricing</div>
+        <div class="compare-val highlight">Standard rate</div>
+        <div class="compare-val accent">50% off</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Return policy<div class="sub">Made-to-order items — miss-spec only.</div></div>
+        <div class="compare-val">All final sale</div>
+        <div class="compare-val accent">2 free returns / year</div>
+      </div>
+
+      <!-- SAMPLES & TOOLS -->
+      <div class="compare-category">Samples & tools</div>
+      <div class="compare-row">
+        <div class="compare-feat">Free finish samples<div class="sub">All 13 powder coats available.</div></div>
+        <div class="compare-val highlight">3 per year</div>
+        <div class="compare-val accent">Unlimited</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Sample return shipping</div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent">Covered</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Per-fixture CAD, Revit, PDF downloads</div>
+        <div class="compare-val highlight"><span class="compare-check">✓</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">One-click full-catalog file bundle<div class="sub">Every CAD/Revit/spec sheet, one zip, updated quarterly.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Power Designer Kit<div class="sub">Physical swatch deck, catalog, notebook — mailed on join + annual refresh.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+
+      <!-- ACCESS -->
+      <div class="compare-category">Access & intel</div>
+      <div class="compare-row">
+        <div class="compare-feat">New collection access</div>
+        <div class="compare-val highlight">Public launch</div>
+        <div class="compare-val accent">2 weeks early</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Quarterly trend + finish preview<div class="sub">Before the public sees it.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Factory tour invite (Minneapolis)</div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent">Annual</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Power Summit (annual virtual event)</div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+
+      <!-- MARKETING -->
+      <div class="compare-category">Visibility & marketing</div>
+      <div class="compare-row">
+        <div class="compare-feat">Designer Directory feature<div class="sub">Public profile linked from collection pages.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Social co-marketing<div class="sub">Tag us, we repost and tag you. Quarterly round-ups.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Power Designer badge<div class="sub">For email signature, site, portfolio.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent"><span class="compare-check">✓</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Case study opportunity</div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent">Invite-priority</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Referral bonus<div class="sub">Bring another Power Designer, earn credit.</div></div>
+        <div class="compare-val"><span class="compare-dash">—</span></div>
+        <div class="compare-val accent">$500 credit each</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================== DECISION GUIDE ================== -->
+<section class="decide">
+  <div class="container">
+    <div class="decide-inner">
+      <div class="decide-header">
+        <span class="overline">Which is right for you?</span>
+        <h2>A 10-second decision.</h2>
+      </div>
+      <div class="decide-cards">
+        <div class="decide-card">
+          <h3>Start with Trade if you're…</h3>
+          <p>An occasional specifier — a few projects a year, single fixtures or small runs, flexible timelines. You want access to real pricing and spec tools without a subscription to manage.</p>
+          <p>Trade covers you. When volume grows, upgrade in one click.</p>
+          <div class="verdict trade">→ Free. Apply in four minutes.</div>
+        </div>
+        <div class="decide-card">
+          <h3>Go Power Designer if you're…</h3>
+          <p>Specifying Dutton Brown on more than a few projects a year. Your timelines matter. You want samples on demand, a rep with a direct line, and visibility into what's coming next.</p>
+          <p>At $200, it pays for itself at $4,000 annual spend — the 5% discount differential. Most Power Designers clear that on their first quote.</p>
+          <div class="verdict premium">→ $200 / year. $149 for the first 50.</div>
+        </div>
+      </div>
+      <div class="decide-math">
+        <span class="overline">The math, honestly</span>
+        <p>
+          Annual membership pays for itself at <strong>$4,000 of purchases</strong> (the 5% discount differential).
+          <span class="big-num">$4,000</span>
+          That's one mid-size residential project. After that, everything — the priority, the concierge, the unlimited samples, the early access — is pure upside.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== POWER KIT SPOTLIGHT ================== -->
+<section class="spotlight">
+  <div class="container">
+    <div class="spotlight-grid">
+      <div class="spotlight-visual" aria-hidden="true"></div>
+      <div class="spotlight-content">
+        <span class="overline">The Power Designer Kit</span>
+        <h2>You'll actually <em>hold</em> this tier.</h2>
+        <p class="lede">Every Power Designer gets a physical kit on sign-up. Not a swag bag — a working tool kit you'll keep on your desk.</p>
+        <div class="spotlight-features">
+          <div class="spot-feat">
+            <h4>Swatch deck</h4>
+            <p>All 13 powder coats on the actual substrate. Refreshed annually as finishes evolve.</p>
+          </div>
+          <div class="spot-feat">
+            <h4>Printed catalog</h4>
+            <p>Full product library, photographed properly. Good for client meetings.</p>
+          </div>
+          <div class="spot-feat">
+            <h4>DB notebook</h4>
+            <p>For your project notes. Yes, a real one.</p>
+          </div>
+          <div class="spot-feat">
+            <h4>Letter from Thomas</h4>
+            <p>Founder, co-owner, the person who signs your quotes. Handwritten.</p>
+          </div>
+        </div>
+        <a href="/pages/trade-apply?tier=power" class="btn btn-accent btn-lg">Join Power Designer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CONCIERGE ================== -->
+<section class="concierge">
+  <div class="container">
+    <div class="concierge-inner">
+      <div class="concierge-content">
+        <span class="overline">The Power concierge</span>
+        <h2>Chase — on call, not in a queue.</h2>
+        <p>Power Designers get direct access to Chase. Text, phone, email — same person, 2-hour response during business hours, same-day otherwise.</p>
+        <p>When you're on deadline, you don't need a ticket system. You need someone who knows your firm, your projects, your finishes. That's the concierge.</p>
+        <div class="concierge-sla">
+          <div class="sla-item">
+            <strong>2-hour response</strong>
+            <span>M–F, 8a–5p CT. Real answers, not auto-replies.</span>
+          </div>
+          <div class="sla-item">
+            <strong>Direct phone + text</strong>
+            <span>Use it. That's what it's for.</span>
+          </div>
+          <div class="sla-item">
+            <strong>Quarterly check-in call</strong>
+            <span>What's coming up, what to plan around.</span>
+          </div>
+          <div class="sla-item">
+            <strong>Finish + spec guidance</strong>
+            <span>Stuck between two options? Ask.</span>
+          </div>
+        </div>
+      </div>
+      <div class="concierge-visual" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== FAQ ================== -->
+<section class="faq">
+  <div class="container-narrow">
+    <div class="faq-header">
+      <span class="overline">Frequently asked</span>
+      <h2>The fee, the terms, the fine print.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Why pay for Power Designer? Isn't trade supposed to be free?</div>
+        <div class="faq-a">Trade is free. Fifteen percent, spec sheets, samples, a named rep — all free. Power Designer is for specifiers who want priority, concierge service, and the physical kit. The $200 isn't a gate on the program — it's the cost of the kit, the priority production time, and the concierge SLA. Most Power Designers clear the math on their first order.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I start with Trade and upgrade later?</div>
+        <div class="faq-a">Yes. Upgrade any time — we'll prorate. Downgrade at renewal if it's not working. No lock-in.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I already bought through the old wholesale program?</div>
+        <div class="faq-a">You're grandfathered in. Your existing discount is preserved. You can stay on the Trade tier (free) or upgrade to Power Designer at any time. Check your inbox — we've already sent you a welcome-back note.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I pay the $200 before or after I'm approved?</div>
+        <div class="faq-a">After. Everyone applies to Trade free first. If you're approved and want Power, we charge the fee then. You never pay for an application that didn't go through.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What does "priority production" actually mean?</div>
+        <div class="faq-a">Our Minneapolis shop has a queue. Power Designer orders enter the queue at the front — typically 1-2 weeks earlier than standard. On a 6-10 week lead time, that's real. We'll tell you the revised ETA when you place the order, not after.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's a "miss-spec return"?</div>
+        <div class="faq-a">Our fixtures are made to order, so we don't normally accept returns. Miss-spec returns are for the moments where a designer specifies the wrong finish, the wrong length, the wrong version — it happens. Power Designers get two per year at no restocking fee. We'll rework it into a new spec.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the founding-member rate for life?</div>
+        <div class="faq-a">The $149 rate applies to your first year. After that, standard $200/year. Founding members keep the badge forever — and the bragging rights.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How fast is approval?</div>
+        <div class="faq-a">Most approvals are automatic — minutes. Edge cases go to Chase for review, decided inside 48 hours. Power Designer upgrades are instant once Trade is approved.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can my whole firm share one Power Designer membership?</div>
+        <div class="faq-a">Yes. One fee covers the firm. Everyone on the team gets access under the same B2B company account. Add as many team members as you need.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What does the annual Power Summit cover?</div>
+        <div class="faq-a">A 60-minute virtual event each fall. What's launching next year, what we're seeing in the industry, Q&A with Thomas and the team. Replays go to all Power Designers who can't make it live.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== FINAL CTA ================== -->
+<section class="final-cta">
+  <div class="container-narrow">
+    <span class="overline">Apply once. Specify for years.</span>
+    <h2>Start <em>free.</em> Upgrade when you're ready.</h2>
+    <p>Trade is four minutes to apply. Power Designer is one more click after that.</p>
+    <div class="final-cta-buttons">
+      <a href="/pages/trade-apply" class="btn btn-accent btn-lg">Apply to Trade — free</a>
+      <a href="/pages/trade-apply?tier=power" class="btn btn-outline-light btn-lg">Join Power Designer</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================== COLOR STRIP (13 signature powder coats) ================== -->
+<div class="color-strip" aria-hidden="true">
+  <div style="background: var(--pc-bone);"></div>
+  <div style="background: var(--pc-spa);"></div>
+  <div style="background: var(--pc-python-green);"></div>
+  <div style="background: var(--pc-lagoon);"></div>
+  <div style="background: var(--pc-slate-blue);"></div>
+  <div style="background: var(--pc-ochre);"></div>
+  <div style="background: var(--pc-orange);"></div>
+  <div style="background: var(--pc-riding-hood-red);"></div>
+  <div style="background: var(--pc-pinkaboo);"></div>
+  <div style="background: var(--pc-chalk);"></div>
+  <div style="background: var(--pc-cobalt);"></div>
+  <div style="background: var(--pc-black);"></div>
+  <div style="background: var(--pc-white); border-left: 1px solid var(--db-border);"></div>
+</div>
+
+<!-- ================== SIGNATURE FOOTER ================== -->
+<footer class="signature-footer">
+  <div class="container">
+    <div class="tagline">Lighting that's <em>never boring.</em></div>
+    <div class="meta">Handcrafted in Minneapolis · Made to order</div>
+  </div>
+</footer>
+
+</body>
+</html>
