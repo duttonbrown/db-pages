@@ -29,8 +29,9 @@
     --db-accent-hover: #D97706;
     --db-accent-soft: #FFF4E0;
 
-    /* 13 signature powder coats — strictly for color strip / product graphics */
+    /* 14 signature powder coats — strictly for color strip / product graphics */
     --pc-pinkaboo: #F7B6C0;
+    --pc-barely: #CCB8B8;
     --pc-bone: #E5E4CF;
     --pc-spa: #A0AF9C;
     --pc-python-green: #4E782F;
@@ -846,7 +847,7 @@
      ========================================================================== */
   .color-strip {
     display: grid;
-    grid-template-columns: repeat(13, 1fr);
+    grid-template-columns: repeat(14, 1fr);
     height: 10px;
   }
   .color-strip > div { height: 100%; }
@@ -1330,21 +1331,22 @@
   </div>
 </section>
 
-<!-- ================== COLOR STRIP (13 signature powder coats) ================== -->
+<!-- ================== COLOR STRIP (14 signature powder coats, order: White → Black) ================== -->
 <div class="color-strip" aria-hidden="true">
+  <div style="background: var(--pc-white); border-left: 1px solid var(--db-border);"></div>
+  <div style="background: var(--pc-chalk);"></div>
   <div style="background: var(--pc-bone);"></div>
   <div style="background: var(--pc-spa);"></div>
   <div style="background: var(--pc-python-green);"></div>
   <div style="background: var(--pc-lagoon);"></div>
+  <div style="background: var(--pc-cobalt);"></div>
   <div style="background: var(--pc-slate-blue);"></div>
   <div style="background: var(--pc-ochre);"></div>
   <div style="background: var(--pc-orange);"></div>
   <div style="background: var(--pc-riding-hood-red);"></div>
   <div style="background: var(--pc-pinkaboo);"></div>
-  <div style="background: var(--pc-chalk);"></div>
-  <div style="background: var(--pc-cobalt);"></div>
+  <div style="background: var(--pc-barely);"></div>
   <div style="background: var(--pc-black);"></div>
-  <div style="background: var(--pc-white); border-left: 1px solid var(--db-border);"></div>
 </div>
 
 <!-- ================== SIGNATURE FOOTER ================== -->
