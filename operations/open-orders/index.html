@@ -15,6 +15,7 @@
   --muted:      #9b9a97;
   --accent:     #d97706;   /* amber — Orders + Expedites */
   --sub-text:   #37352f;
+  --page-bg:    #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,13 +26,14 @@
     --muted:      #787774;
     --accent:     #ff9912;
     --sub-text:   rgba(255, 255, 255, 0.82);
+    --page-bg:    #191919;
   }
 }
 
 /* ── Base ───────────────────────────────────────────────────────────────── */
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  background: transparent;
+  background: var(--page-bg);
   padding: 0;
   margin: 0;
   -webkit-font-smoothing: antialiased;
