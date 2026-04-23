@@ -1,10 +1,11 @@
 {
-  "updated_at": "2026-04-23T01:59:52.957351-05:00",
-  "order_count": 165,
+  "updated_at": "2026-04-23T02:15:41.961705-05:00",
+  "order_count": 163,
+  "zero_order_count": 2,
   "lighting": {
     "total": 838,
-    "color": 0,
-    "non_color": 838
+    "color": 800,
+    "non_color": 38
   },
   "hardware": {
     "total": 91,
