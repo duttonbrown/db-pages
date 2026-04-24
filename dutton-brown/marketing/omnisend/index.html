@@ -381,11 +381,12 @@ body {
   <table class="w-table" id="leaderboard" hidden>
     <thead>
       <tr>
-        <th style="width: 42%;">Campaign / Automation</th>
-        <th class="num" style="width: 12%;">CTR</th>
-        <th class="num" style="width: 12%;">Orders</th>
-        <th class="num" style="width: 17%;">Revenue</th>
-        <th class="num" style="width: 17%;">AOV</th>
+        <th style="width: 36%;">Campaign / Automation</th>
+        <th class="num" style="width: 11%;">Open</th>
+        <th class="num" style="width: 11%;">CTR</th>
+        <th class="num" style="width: 10%;">Orders</th>
+        <th class="num" style="width: 16%;">Revenue</th>
+        <th class="num" style="width: 16%;">AOV</th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -405,7 +406,7 @@ body {
         <li><strong>Email Revenue</strong> = Campaign Revenue + Automation Revenue</li>
         <li><strong>Automation Revenue</strong> is flow-level (all messages in a flow combined) — per-message breakdown requires Omnisend Statistics API beta</li>
         <li><strong>Open Rate / CTR</strong> are delivery-weighted averages across every sent campaign in the window. Unique opens/clicks are not exposed by Omnisend's API — these are totals</li>
-        <li><strong>Leaderboard CTR</strong> shows per-campaign CTR. Automations show <em>—</em> because Omnisend's v5 /automations endpoint doesn't expose click counters; the Statistics API beta would fill this in</li>
+        <li><strong>Leaderboard Open / CTR</strong> show per-campaign rates. Automations show <em>—</em> because Omnisend's v5 /automations endpoint doesn't expose open/click counters; the Statistics API beta would fill this in</li>
         <li><strong>Rev / Recipient</strong> = Email Revenue ÷ total sends (campaigns only — automation sends not individually trackable)</li>
         <li><strong>Older windows</strong> (Last Year, early YTD) may show smaller numbers than reality because Omnisend UTM tagging wasn't always consistent before 2025</li>
         <li><strong>KPI vocabulary</strong> follows <em>db-operations/docs/marketing-kpi-prep-q2-2026.md</em></li>
@@ -562,12 +563,16 @@ function renderActive() {
       const badge = row.type === "automation"
         ? '<span class="badge auto">auto</span>'
         : '<span class="badge">camp</span>';
+      const openCell = row.open_rate != null
+        ? `<td class="num">${pct(row.open_rate)}</td>`
+        : `<td class="num dash">—</td>`;
       const ctrCell = row.ctr != null
         ? `<td class="num">${pct2(row.ctr)}</td>`
         : `<td class="num dash">—</td>`;
       return `
         <tr>
           <td>${badge}${escapeHtml(row.name)}</td>
+          ${openCell}
           ${ctrCell}
           <td class="num">${row.orders}</td>
           <td class="num">${moneyDetail(row.revenue)}</td>

@@ -1,10 +1,14 @@
 {
-  "updated_at": "2026-04-24T04:33:28.488Z",
+  "updated_at": "2026-04-24T05:24:39.600Z",
   "default_range": "last_30d",
   "tabs": [
     {
       "key": "last_30d",
       "label": "Last 30D"
+    },
+    {
+      "key": "last_90d",
+      "label": "Last 90D"
     },
     {
       "key": "mtd",
@@ -26,8 +30,8 @@
   "ranges": {
     "last_30d": {
       "window": {
-        "from": "2026-03-25T04:33:28.488Z",
-        "to": "2026-04-24T04:33:28.488Z",
+        "from": "2026-03-25T05:24:39.600Z",
+        "to": "2026-04-24T05:24:39.600Z",
         "label": "Last 30D"
       },
       "revenue": {
@@ -46,7 +50,7 @@
         "based_on_campaigns": 6
       },
       "engagement": {
-        "avg_open_rate": 0.344983,
+        "avg_open_rate": 0.346408,
         "avg_ctr": 0.009642,
         "based_on_campaigns": 6
       },
@@ -65,6 +69,7 @@
           "orders": 2,
           "revenue": 819.98,
           "aov": 409.99,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -74,6 +79,7 @@
           "orders": 1,
           "revenue": 600,
           "aov": 600,
+          "open_rate": 0.365512,
           "ctr": 0.011854
         },
         {
@@ -83,6 +89,7 @@
           "orders": 1,
           "revenue": 400,
           "aov": 400,
+          "open_rate": 0.341515,
           "ctr": 0.007956
         },
         {
@@ -92,6 +99,7 @@
           "orders": 1,
           "revenue": 37,
           "aov": 37,
+          "open_rate": 0.465737,
           "ctr": 0.022311
         },
         {
@@ -101,6 +109,7 @@
           "orders": 3,
           "revenue": 12,
           "aov": 4,
+          "open_rate": 0.377571,
           "ctr": 0.031704
         },
         {
@@ -110,15 +119,153 @@
           "orders": 1,
           "revenue": 0,
           "aov": 0,
+          "open_rate": 0.434023,
           "ctr": 0.016871
         }
       ],
       "skipped_cancelled": 2
     },
+    "last_90d": {
+      "window": {
+        "from": "2026-01-24T05:24:39.600Z",
+        "to": "2026-04-24T05:24:39.600Z",
+        "label": "Last 90D"
+      },
+      "revenue": {
+        "email_total": 16425.93,
+        "email_orders": 33,
+        "campaigns_revenue": 11930.05,
+        "campaigns_orders": 23,
+        "campaigns_aov": 518.7,
+        "automations_revenue": 4495.88,
+        "automations_orders": 10,
+        "automations_aov": 449.59
+      },
+      "revenue_per_recipient": {
+        "value": 0.0827,
+        "total_sent_in_window": 198543,
+        "based_on_campaigns": 21
+      },
+      "engagement": {
+        "avg_open_rate": 0.357805,
+        "avg_ctr": 0.013515,
+        "based_on_campaigns": 21
+      },
+      "top_campaign": {
+        "name": "President's Day 2026 Reminder Email - Main Audience",
+        "type": "campaign",
+        "orders": 4,
+        "revenue": 3982.67,
+        "aov": 995.67
+      },
+      "leaderboard": [
+        {
+          "type": "campaign",
+          "id": "698cb86d56888fa29acdf312",
+          "name": "President's Day 2026 Reminder Email - Main Audience",
+          "orders": 4,
+          "revenue": 3982.67,
+          "aov": 995.67,
+          "open_rate": 0.343994,
+          "ctr": 0.019393
+        },
+        {
+          "type": "automation",
+          "id": "6568d2fbbba97031766e17d8",
+          "name": "Welcome",
+          "orders": 5,
+          "revenue": 2185.69,
+          "aov": 437.14,
+          "open_rate": null,
+          "ctr": null
+        },
+        {
+          "type": "automation",
+          "id": "6939e23c584cb7d57c0669ba",
+          "name": "Copy of: Trade Customer Welcome Email",
+          "orders": 4,
+          "revenue": 1988.96,
+          "aov": 497.24,
+          "open_rate": null,
+          "ctr": null
+        },
+        {
+          "type": "campaign",
+          "id": "69a73969bf78de96a0dd850b",
+          "name": "March 2026 Week 1 - Trade",
+          "orders": 3,
+          "revenue": 1664.21,
+          "aov": 554.74,
+          "open_rate": 0.433447,
+          "ctr": 0.029713
+        },
+        {
+          "type": "campaign",
+          "id": "69b99188ab0aea1b28da4dfa",
+          "name": "March 2026 Week 3 - Both Audiences",
+          "orders": 1,
+          "revenue": 1272,
+          "aov": 1272,
+          "open_rate": 0.352787,
+          "ctr": 0.00916
+        },
+        {
+          "type": "campaign",
+          "id": "69af28c373ab435f64480340",
+          "name": "March 2026 Week 2 - Meet Status - Trade",
+          "orders": 1,
+          "revenue": 1137.48,
+          "aov": 1137.48,
+          "open_rate": 0.434285,
+          "ctr": 0.016479
+        },
+        {
+          "type": "campaign",
+          "id": "698de5d956888fa29ace03a4",
+          "name": "President's Day 2026 Last Chance Email - Main Audience",
+          "orders": 2,
+          "revenue": 1075.48,
+          "aov": 537.74,
+          "open_rate": 0.33964,
+          "ctr": 0.020344
+        },
+        {
+          "type": "campaign",
+          "id": "698b9f686b0986d9478139d7",
+          "name": "President's Day 2026 Announcement Email - Main Audience",
+          "orders": 2,
+          "revenue": 744,
+          "aov": 372,
+          "open_rate": 0.337358,
+          "ctr": 0.009639
+        },
+        {
+          "type": "campaign",
+          "id": "699c8710e59d9c1803a6a909",
+          "name": "Week 4: Feb 2026 (Main)",
+          "orders": 2,
+          "revenue": 695.98,
+          "aov": 347.99,
+          "open_rate": 0.341515,
+          "ctr": 0.007956
+        },
+        {
+          "type": "campaign",
+          "id": "6980e24ca324b7dff8451af3",
+          "name": "TPS Feb Dutton Brown feature: Trade Audience",
+          "orders": 1,
+          "revenue": 682.23,
+          "aov": 682.23,
+          "open_rate": 0.445562,
+          "ctr": 0.016502
+        }
+      ],
+      "skipped_cancelled": 10
+    },
     "mtd": {
       "window": {
         "from": "2026-04-01T05:00:00.000Z",
-        "to": "2026-04-24T04:33:28.488Z",
+        "to": "2026-04-24T05:24:39.600Z",
         "label": "MTD"
       },
       "revenue": {
@@ -137,7 +284,7 @@
         "based_on_campaigns": 5
       },
       "engagement": {
-        "avg_open_rate": 0.338142,
+        "avg_open_rate": 0.340041,
         "avg_ctr": 0.008905,
         "based_on_campaigns": 5
       },
@@ -156,6 +303,7 @@
           "orders": 2,
           "revenue": 819.98,
           "aov": 409.99,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -165,6 +313,7 @@
           "orders": 1,
           "revenue": 600,
           "aov": 600,
+          "open_rate": 0.365512,
           "ctr": 0.011854
         },
         {
@@ -174,6 +323,7 @@
           "orders": 1,
           "revenue": 400,
           "aov": 400,
+          "open_rate": 0.341515,
           "ctr": 0.007956
         },
         {
@@ -183,6 +333,7 @@
           "orders": 1,
           "revenue": 37,
           "aov": 37,
+          "open_rate": 0.465737,
           "ctr": 0.022311
         },
         {
@@ -192,6 +343,7 @@
           "orders": 1,
           "revenue": 0,
           "aov": 0,
+          "open_rate": 0.434023,
           "ctr": 0.016871
         }
       ],
@@ -238,6 +390,7 @@
           "orders": 3,
           "revenue": 1664.21,
           "aov": 554.74,
+          "open_rate": 0.433447,
           "ctr": 0.029713
         },
         {
@@ -247,6 +400,7 @@
           "orders": 1,
           "revenue": 1272,
           "aov": 1272,
+          "open_rate": 0.352787,
           "ctr": 0.00916
         },
         {
@@ -256,6 +410,7 @@
           "orders": 1,
           "revenue": 1137.48,
           "aov": 1137.48,
+          "open_rate": 0.434285,
           "ctr": 0.016479
         },
         {
@@ -265,6 +420,7 @@
           "orders": 1,
           "revenue": 321.23,
           "aov": 321.23,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -274,6 +430,7 @@
           "orders": 3,
           "revenue": 12,
           "aov": 4,
+          "open_rate": 0.377571,
           "ctr": 0.031704
         }
       ],
@@ -282,7 +439,7 @@
     "ytd": {
       "window": {
         "from": "2026-01-01T06:00:00.000Z",
-        "to": "2026-04-24T04:33:28.488Z",
+        "to": "2026-04-24T05:24:39.600Z",
         "label": "YTD"
       },
       "revenue": {
@@ -301,7 +458,7 @@
         "based_on_campaigns": 22
       },
       "engagement": {
-        "avg_open_rate": 0.358757,
+        "avg_open_rate": 0.359165,
         "avg_ctr": 0.013348,
         "based_on_campaigns": 22
       },
@@ -320,6 +477,7 @@
           "orders": 4,
           "revenue": 3982.67,
           "aov": 995.67,
+          "open_rate": 0.343994,
           "ctr": 0.019393
         },
         {
@@ -329,6 +487,7 @@
           "orders": 8,
           "revenue": 3828.88,
           "aov": 478.61,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -338,6 +497,7 @@
           "orders": 4,
           "revenue": 1988.96,
           "aov": 497.24,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -347,6 +507,7 @@
           "orders": 3,
           "revenue": 1664.21,
           "aov": 554.74,
+          "open_rate": 0.433447,
           "ctr": 0.029713
         },
         {
@@ -356,6 +517,7 @@
           "orders": 1,
           "revenue": 1272,
           "aov": 1272,
+          "open_rate": 0.352787,
           "ctr": 0.00916
         },
         {
@@ -365,6 +527,7 @@
           "orders": 1,
           "revenue": 1137.48,
           "aov": 1137.48,
+          "open_rate": 0.434285,
           "ctr": 0.016479
         },
         {
@@ -374,6 +537,7 @@
           "orders": 2,
           "revenue": 1075.48,
           "aov": 537.74,
+          "open_rate": 0.33964,
           "ctr": 0.020344
         },
         {
@@ -383,6 +547,7 @@
           "orders": 2,
           "revenue": 968.96,
           "aov": 484.48,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -392,6 +557,7 @@
           "orders": 2,
           "revenue": 744,
           "aov": 372,
+          "open_rate": 0.337358,
           "ctr": 0.009639
         },
         {
@@ -401,6 +567,7 @@
           "orders": 2,
           "revenue": 695.98,
           "aov": 347.99,
+          "open_rate": 0.341515,
           "ctr": 0.007956
         }
       ],
@@ -447,6 +614,7 @@
           "orders": 31,
           "revenue": 15674.9,
           "aov": 505.64,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -456,6 +624,7 @@
           "orders": 13,
           "revenue": 9968.08,
           "aov": 766.78,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -465,6 +634,7 @@
           "orders": 14,
           "revenue": 5879.88,
           "aov": 419.99,
+          "open_rate": null,
           "ctr": null
         },
         {
@@ -474,6 +644,7 @@
           "orders": 1,
           "revenue": 3080,
           "aov": 3080,
+          "open_rate": 0.34644,
           "ctr": 0.022086
         },
         {
@@ -483,6 +654,7 @@
           "orders": 6,
           "revenue": 3002.71,
           "aov": 500.45,
+          "open_rate": 0.353233,
           "ctr": 0.015875
         },
         {
@@ -492,6 +664,7 @@
           "orders": 5,
           "revenue": 2406.42,
           "aov": 481.28,
+          "open_rate": 0.296405,
           "ctr": 0.008326
         },
         {
@@ -501,6 +674,7 @@
           "orders": 3,
           "revenue": 1931.23,
           "aov": 643.74,
+          "open_rate": 0.398655,
           "ctr": 0.023334
         },
         {
@@ -510,6 +684,7 @@
           "orders": 4,
           "revenue": 1360.19,
           "aov": 340.05,
+          "open_rate": 0.327856,
           "ctr": 0.007912
         },
         {
@@ -519,6 +694,7 @@
           "orders": 1,
           "revenue": 1215.48,
           "aov": 1215.48,
+          "open_rate": 0.373073,
           "ctr": 0.019588
         },
         {
@@ -528,6 +704,7 @@
           "orders": 2,
           "revenue": 1209.46,
           "aov": 604.73,
+          "open_rate": 0.495607,
           "ctr": 0.059305
         }
       ],
@@ -542,13 +719,14 @@
     "currency": "USD",
     "attribution_basis": "shopify_utm_source_omnisend",
     "revenue_basis": "subtotal_price",
-    "shopify_orders_scanned": 6753,
+    "shopify_orders_scanned": 6754,
     "shopify_pages_fetched": 28,
     "shopify_truncated": false,
     "omnisend_campaigns_fetched": 84,
     "frozen_keys": [],
     "recomputed_keys": [
       "last_30d",
+      "last_90d",
       "mtd",
       "last_month",
       "ytd",
