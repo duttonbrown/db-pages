@@ -279,9 +279,10 @@ body {
         <li>Excludes orders where Shopify <strong>financial status</strong> is <em>refunded</em> or <em>voided</em> — these were cancelled without using the Cancel button and would otherwise appear as open</li>
         <li><strong>$0 orders</strong> are tracked separately and excluded from order count, unit counts, open value, and oldest-order age</li>
         <li><strong>Lighting</strong> = titles containing: pendant, sconce, chandelier, flush mount, wall light, wall lamp, lantern</li>
-        <li><strong>Hardware</strong> = titles containing: bracket, rod, finial, canopy, ring, hardware, socket, bulb</li>
-        <li><strong>Color</strong> = variant title contains "Color" (powder-coat); all other lighting/hardware units are non-color</li>
+        <li><strong>Hardware</strong> = titles containing: bracket, rod, finial, canopy, ring, hardware, socket, bulb, pull, knob, hook, towel, tissue</li>
+        <li><strong>Color</strong> = product title contains "color" (Dutton Brown names powder-coat variants with a "Color" prefix, e.g. "Color Legend 3 Sconce")</li>
         <li><strong>Expedites</strong> = orders tagged with "expedit" (case-insensitive)</li>
+        <li><strong>Oldest open order</strong> = oldest order with at least one line item still having fulfillable quantity &gt; 0 AND placed within the last 6 months. Orders older than 6 months are treated as stale (custom holds / data-quality issues) and excluded from this metric.</li>
         <li><strong>Avg days to fulfill</strong> = mean of (closed_at − created_at) for orders fulfilled in the last 30 days; excludes $0 orders</li>
       </ul>
     </div>
