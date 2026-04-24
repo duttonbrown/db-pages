@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>iloveyouth — Logo Preview</title>
+
+  <!-- Favicons — SVG auto-swaps with OS theme; PNG fallbacks have Ghost White baked in -->
+  <link rel="icon" type="image/svg+xml" href="logos/favicons/favicon.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/svg+xml" href="logos/favicons/favicon-white.svg" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" sizes="32x32" href="logos/favicons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="logos/favicons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="logos/favicons/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
@@ -230,6 +238,83 @@
       height: 32px;
       border-radius: 6px;
       box-shadow: none;
+    }
+
+    /* ============ WEIGHT SYSTEM ============ */
+    .weights {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--ily-space-6);
+    }
+
+    .weight-row {
+      background: var(--ily-ghost-white);
+      border: 1px solid var(--ily-border);
+      border-radius: 2px;
+      padding: var(--ily-space-10) var(--ily-space-8);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--ily-space-8);
+      align-items: center;
+    }
+
+    .weight-row .meta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ily-space-2);
+    }
+
+    .weight-row .meta .role {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-medium);
+      letter-spacing: var(--ily-tracking-wider);
+      color: var(--ily-frosted-blue);
+      padding: var(--ily-space-1) var(--ily-space-3);
+      background: var(--ily-shadow-grey);
+      border-radius: 9999px;
+      align-self: flex-start;
+    }
+
+    .weight-row .meta .role--alt {
+      color: var(--ily-text-muted);
+      background: var(--ily-surface-mid);
+    }
+
+    .weight-row .meta .weight-name {
+      font-size: var(--ily-text-xl);
+      font-weight: var(--ily-font-light);
+      letter-spacing: var(--ily-tracking-tight);
+      color: var(--ily-shadow-grey);
+      line-height: var(--ily-leading-snug);
+    }
+
+    .weight-row .meta .weight-detail {
+      font-size: var(--ily-text-xs);
+      font-weight: var(--ily-font-light);
+      line-height: var(--ily-leading-relaxed);
+      color: var(--ily-text-muted);
+      max-width: 24ch;
+    }
+
+    .weight-row .specimen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+    }
+
+    .weight-row .specimen img {
+      display: block;
+      width: auto;
+    }
+
+    .weight-row--wordmark .specimen img {
+      height: clamp(3rem, 7vw, 5.5rem);
+    }
+
+    .weight-row--brandmark .specimen img {
+      width: auto;
+      height: clamp(4rem, 10vw, 7rem);
     }
 
     /* ============ SURFACE SWATCHES ============ */
@@ -1549,8 +1634,8 @@
         transparent var(--fill-level),
         transparent 100%
       );
-      -webkit-mask-image: url('logos/ily-wordmark-white-rect.svg');
-              mask-image: url('logos/ily-wordmark-white-rect.svg');
+      -webkit-mask-image: url('logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-rect-400.svg');
+              mask-image: url('logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-rect-400.svg');
       -webkit-mask-size: 100% 100%;
               mask-size: 100% 100%;
       -webkit-mask-repeat: no-repeat;
@@ -1795,6 +1880,16 @@
         height: 4rem;
       }
 
+      .weight-row {
+        grid-template-columns: 1fr;
+        gap: var(--ily-space-5);
+        padding: var(--ily-space-8) var(--ily-space-5);
+      }
+
+      .weight-row .specimen {
+        min-height: auto;
+      }
+
       .nav-mockup {
         padding: var(--ily-space-5);
         flex-wrap: wrap;
@@ -1849,14 +1944,46 @@
     <header>
       <p class="eyebrow">iloveyouth · brand · logo preview</p>
       <h1>the wordmark is the typeface.</h1>
-      <p>light weight, lowercase, one word. shadow grey on ghost white. this is the primary mark — no custom lettering, no brush, no illustration. the airy humanist-geometric feel <em>is</em> the brand.</p>
+      <p>lowercase, one word, shadow grey on ghost white. this is the primary mark — no custom lettering, no brush, no illustration. the humanist-geometric feel <em>is</em> the brand. the wordmark is set in <strong>satoshi regular 400</strong>; the <code>ily.</code> brandmark is set in <strong>satoshi medium 500</strong>.</p>
     </header>
 
     <!-- HERO -->
     <section>
       <p class="section-label">primary wordmark · hero</p>
       <div class="hero-stage">
-        <img class="wordmark-img wordmark-img--hero" src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+        <img class="wordmark-img wordmark-img--hero" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
+      </div>
+    </section>
+
+    <!-- CANONICAL WEIGHTS -->
+    <section>
+      <p class="section-label">canonical weights · one file for each mark</p>
+      <p style="font-size: var(--ily-text-sm); font-weight: var(--ily-font-light); line-height: var(--ily-leading-relaxed); color: var(--ily-text-muted); max-width: 65ch; margin: 0 0 var(--ily-space-8);">
+        the wordmark is <strong>satoshi regular 400</strong>. the <code>ily.</code> brandmark is <strong>satoshi medium 500</strong>. these are the only two weights the brand uses — no alternates, no display cuts, no bold. both share the same modified-tittle construction and bookending period.
+      </p>
+
+      <div class="weights">
+        <div class="weight-row weight-row--wordmark">
+          <div class="meta">
+            <span class="role">wordmark</span>
+            <span class="weight-name">satoshi regular · 400</span>
+            <span class="weight-detail">every wordmark context — web, email, nav, footer, packaging, retail.</span>
+          </div>
+          <div class="specimen">
+            <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth. in satoshi regular 400">
+          </div>
+        </div>
+
+        <div class="weight-row weight-row--brandmark">
+          <div class="meta">
+            <span class="role">brandmark</span>
+            <span class="weight-name">satoshi medium · 500</span>
+            <span class="weight-detail">every brandmark context — favicons, avatars, embroidery, app icons, packaging caps.</span>
+          </div>
+          <div class="specimen">
+            <img src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-dark-square-500.svg" alt="ily. brandmark in satoshi medium 500">
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1865,19 +1992,19 @@
       <p class="section-label">on-brand surfaces</p>
       <div class="surfaces">
         <div class="surface surface--ghost">
-          <img class="wordmark-img" src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+          <img class="wordmark-img" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
           <span class="tag">ghost white · primary</span>
         </div>
         <div class="surface surface--shadow">
-          <img class="wordmark-img" src="logos/wordmark/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+          <img class="wordmark-img" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-rect-400.svg" alt="iloveyouth.">
           <span class="tag">shadow grey · inverse</span>
         </div>
         <div class="surface surface--frosted">
-          <img class="wordmark-img" src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+          <img class="wordmark-img" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
           <span class="tag">frosted blue · hero accent</span>
         </div>
         <div class="surface surface--almond">
-          <img class="wordmark-img" src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+          <img class="wordmark-img" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
           <span class="tag">almond silk · supporting</span>
         </div>
       </div>
@@ -1892,21 +2019,21 @@
             display
             <span class="detail">~104px tall · svg</span>
           </div>
-          <img class="wordmark-img wordmark-img--display" src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+          <img class="wordmark-img wordmark-img--display" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
         </div>
         <div class="size-row">
           <div class="meta">
             nav
             <span class="detail">~36px tall · svg</span>
           </div>
-          <img class="wordmark-img wordmark-img--nav" src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+          <img class="wordmark-img wordmark-img--nav" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
         </div>
         <div class="size-row">
           <div class="meta">
             footer / inline
             <span class="detail">~24px tall · svg</span>
           </div>
-          <img class="wordmark-img wordmark-img--small" src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+          <img class="wordmark-img wordmark-img--small" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
         </div>
       </div>
     </section>
@@ -1915,7 +2042,7 @@
     <section>
       <p class="section-label">in context · site navigation</p>
       <div class="nav-mockup">
-        <img class="wordmark-img wordmark-img--nav" src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+        <img class="wordmark-img wordmark-img--nav" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
         <nav class="links">
           <span>shop</span>
           <span>ingredients</span>
@@ -1925,7 +2052,7 @@
         <a class="cta" href="#">shop hydration</a>
       </div>
       <div class="nav-mockup nav-mockup--dark">
-        <img class="wordmark-img wordmark-img--nav" src="logos/wordmark/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+        <img class="wordmark-img wordmark-img--nav" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-rect-400.svg" alt="iloveyouth.">
         <nav class="links">
           <span>shop</span>
           <span>ingredients</span>
@@ -1942,19 +2069,19 @@
 
       <div class="brandmark-grid">
         <div class="brandmark-tile brandmark-tile--ghost">
-          <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/ily-brandmark-dark-square.svg" alt="ily.">
+          <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-dark-square-500.svg" alt="ily.">
           <span class="tag">ghost white</span>
         </div>
         <div class="brandmark-tile brandmark-tile--shadow">
-          <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/ily-brandmark-white-square.svg" alt="ily.">
+          <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-white-square-500.svg" alt="ily.">
           <span class="tag">shadow grey</span>
         </div>
         <div class="brandmark-tile brandmark-tile--frosted">
-          <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/ily-brandmark-dark-square.svg" alt="ily.">
+          <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-dark-square-500.svg" alt="ily.">
           <span class="tag">frosted blue</span>
         </div>
         <div class="brandmark-tile brandmark-tile--almond">
-          <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/ily-brandmark-dark-square.svg" alt="ily.">
+          <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-dark-square-500.svg" alt="ily.">
           <span class="tag">almond silk</span>
         </div>
       </div>
@@ -1962,25 +2089,25 @@
       <div class="icon-strip">
         <div class="icon-card">
           <div class="icon-frame icon-frame--ghost icon-frame--app">
-            <img class="brandmark-img brandmark-img--app" src="logos/brandmark/ily-brandmark-dark-square.svg" alt="ily.">
+            <img class="brandmark-img brandmark-img--app" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-dark-square-500.svg" alt="ily.">
           </div>
           <span class="label">app icon · 88px</span>
         </div>
         <div class="icon-card">
           <div class="icon-frame icon-frame--shadow icon-frame--app">
-            <img class="brandmark-img brandmark-img--app" src="logos/brandmark/ily-brandmark-white-square.svg" alt="ily.">
+            <img class="brandmark-img brandmark-img--app" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-white-square-500.svg" alt="ily.">
           </div>
           <span class="label">app icon · dark</span>
         </div>
         <div class="icon-card">
           <div class="icon-frame icon-frame--frosted icon-frame--app">
-            <img class="brandmark-img brandmark-img--app" src="logos/brandmark/ily-brandmark-dark-square.svg" alt="ily.">
+            <img class="brandmark-img brandmark-img--app" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-dark-square-500.svg" alt="ily.">
           </div>
           <span class="label">app icon · accent</span>
         </div>
         <div class="icon-card">
           <div class="icon-frame icon-frame--shadow icon-frame--favicon">
-            <img class="brandmark-img brandmark-img--favicon" src="logos/brandmark/ily-brandmark-white-square.svg" alt="ily.">
+            <img class="brandmark-img brandmark-img--favicon" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-white-square-500.svg" alt="ily.">
           </div>
           <span class="label">favicon · 32px</span>
         </div>
@@ -1996,19 +2123,19 @@
 
       <div class="brandmark-grid">
         <div class="brandmark-tile brandmark-tile--ghost">
-          <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/ily-wordmark-dark-square.svg" alt="iloveyouth. square">
+          <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-square-400.svg" alt="iloveyouth. square">
           <span class="tag">ghost white</span>
         </div>
         <div class="brandmark-tile brandmark-tile--shadow">
-          <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/ily-wordmark-white-square.svg" alt="iloveyouth. square">
+          <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-square-400.svg" alt="iloveyouth. square">
           <span class="tag">shadow grey</span>
         </div>
         <div class="brandmark-tile brandmark-tile--frosted">
-          <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/ily-wordmark-dark-square.svg" alt="iloveyouth. square">
+          <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-square-400.svg" alt="iloveyouth. square">
           <span class="tag">frosted blue</span>
         </div>
         <div class="brandmark-tile brandmark-tile--almond">
-          <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/ily-wordmark-dark-square.svg" alt="iloveyouth. square">
+          <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-square-400.svg" alt="iloveyouth. square">
           <span class="tag">almond silk</span>
         </div>
       </div>
@@ -2027,18 +2154,18 @@
         </p>
 
         <div class="exploratory-hero">
-          <img class="wordmark-color" src="logos/wordmark/ily-wordmark-white+blue-rect.svg" alt="iloveyouth. with frosted blue dots on shadow grey">
-          <img class="brandmark-color" src="logos/brandmark/ily-brandmark-white+blue-square.svg" alt="ily. with frosted blue dots on shadow grey">
+          <img class="wordmark-color" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white+blue-rect-400.svg" alt="iloveyouth. with frosted blue dots on shadow grey">
+          <img class="brandmark-color" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-white+blue-square-500.svg" alt="ily. with frosted blue dots on shadow grey">
         </div>
 
         <div class="exploratory-grid">
           <div class="exploratory-tile tile--good">
             <span class="tile-label">approved · shadow grey</span>
-            <img class="wordmark-color" src="logos/wordmark/ily-wordmark-white+blue-rect.svg" alt="approved use on shadow grey">
+            <img class="wordmark-color" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white+blue-rect-400.svg" alt="approved use on shadow grey">
           </div>
           <div class="exploratory-tile tile--bad">
             <span class="tile-label">avoid · ghost white</span>
-            <img class="wordmark-color" src="logos/wordmark/ily-wordmark-white+blue-rect.svg" alt="failure mode on ghost white">
+            <img class="wordmark-color" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white+blue-rect-400.svg" alt="failure mode on ghost white">
           </div>
         </div>
 
@@ -2046,27 +2173,27 @@
 
         <div class="brandmark-grid">
           <div class="brandmark-tile brandmark-tile--shadow">
-            <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/ily-wordmark-white+blue-rect.svg" alt="iloveyouth. rect, white letters + blue dots, on shadow grey">
+            <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white+blue-rect-400.svg" alt="iloveyouth. rect, white letters + blue dots, on shadow grey">
             <span class="tag">wordmark · rect · white+blue</span>
           </div>
           <div class="brandmark-tile brandmark-tile--ghost">
-            <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/ily-wordmark-dark+blue-rect.svg" alt="iloveyouth. rect, dark letters + blue dots, on ghost white">
+            <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark+blue-rect-400.svg" alt="iloveyouth. rect, dark letters + blue dots, on ghost white">
             <span class="tag">wordmark · rect · dark+blue</span>
           </div>
           <div class="brandmark-tile brandmark-tile--shadow">
-            <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/ily-wordmark-white+blue-square.svg" alt="iloveyouth. square, white letters + blue dots, on shadow grey">
+            <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white+blue-square-400.svg" alt="iloveyouth. square, white letters + blue dots, on shadow grey">
             <span class="tag">wordmark · square · white+blue</span>
           </div>
           <div class="brandmark-tile brandmark-tile--ghost">
-            <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/ily-wordmark-dark+blue-square.svg" alt="iloveyouth. square, dark letters + blue dots, on ghost white">
+            <img class="brandmark-img brandmark-img--xl" src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark+blue-square-400.svg" alt="iloveyouth. square, dark letters + blue dots, on ghost white">
             <span class="tag">wordmark · square · dark+blue</span>
           </div>
           <div class="brandmark-tile brandmark-tile--shadow">
-            <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/ily-brandmark-white+blue-square.svg" alt="ily. square, white letters + blue dots, on shadow grey">
+            <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-white+blue-square-500.svg" alt="ily. square, white letters + blue dots, on shadow grey">
             <span class="tag">brandmark · white+blue</span>
           </div>
           <div class="brandmark-tile brandmark-tile--ghost">
-            <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/ily-brandmark-dark+blue-square.svg" alt="ily. square, dark letters + blue dots, on ghost white">
+            <img class="brandmark-img brandmark-img--xl" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-dark+blue-square-500.svg" alt="ily. square, dark letters + blue dots, on ghost white">
             <span class="tag">brandmark · dark+blue</span>
           </div>
         </div>
@@ -2116,7 +2243,7 @@
         <!-- 1 — full landing hero -->
         <div class="vibe-hero">
           <div class="v-nav">
-            <img src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+            <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
             <div class="v-nav-links">
               <span>shop</span>
               <span>ingredients</span>
@@ -2139,7 +2266,7 @@
             <h2 class="v-tagline">youth starts with you.</h2>
             <div class="v-bottom">
               <span class="v-eyebrow">launching soon</span>
-              <img class="v-brandmark" src="logos/brandmark/ily-brandmark-dark-square.svg" alt="ily.">
+              <img class="v-brandmark" src="logos/brandmark/Satoshi%20Medium%20-%20500/ily-brandmark-dark-square-500.svg" alt="ily.">
             </div>
           </div>
 
@@ -2153,7 +2280,7 @@
 
         <!-- 4 — email/banner header on Shadow Grey -->
         <div class="vibe-email">
-          <img src="logos/wordmark/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+          <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-rect-400.svg" alt="iloveyouth.">
           <span class="v-tagline">youth starts with you.</span>
         </div>
 
@@ -2281,7 +2408,7 @@
             <div class="idea-expansion">
               <!-- Centered hero lockup -->
               <div class="lockup-hero">
-                <img src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+                <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
                 <span class="lockup-rule"></span>
                 <p class="lockup-tagline">youth starts with you.</p>
               </div>
@@ -2291,14 +2418,14 @@
                 <div class="lockup-tile lockup-tile--almond">
                   <span class="tile-context">packaging · back panel</span>
                   <div class="lockup-stack">
-                    <img src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+                    <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
                     <p class="lockup-tagline">youth starts with you.</p>
                   </div>
                 </div>
                 <div class="lockup-tile lockup-tile--shadow">
                   <span class="tile-context">welcome screen · dark</span>
                   <div class="lockup-stack">
-                    <img src="logos/wordmark/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+                    <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-rect-400.svg" alt="iloveyouth.">
                     <p class="lockup-tagline">youth starts with you.</p>
                   </div>
                 </div>
@@ -2307,7 +2434,7 @@
               <!-- Horizontal footer-style lockup -->
               <div class="lockup-footer-row">
                 <div class="lockup-row">
-                  <img src="logos/wordmark/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+                  <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-rect-400.svg" alt="iloveyouth.">
                   <span class="lockup-divider"></span>
                   <p class="lockup-tagline">youth starts with you.</p>
                 </div>
@@ -2335,7 +2462,7 @@
                 <h2 class="c-name">niacinamide.</h2>
                 <p class="c-line">brightens. strengthens the barrier.</p>
                 <div class="c-mark">
-                  <img src="logos/wordmark/ily-wordmark-dark-rect.svg" alt="iloveyouth.">
+                  <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-dark-rect-400.svg" alt="iloveyouth.">
                 </div>
               </div>
 
@@ -2370,7 +2497,7 @@
                 <h2 class="c-name">panthenol.</h2>
                 <p class="c-line">soothes. quietly.</p>
                 <div class="c-mark">
-                  <img src="logos/wordmark/ily-wordmark-white-rect.svg" alt="iloveyouth.">
+                  <img src="logos/wordmark/Satoshi%20Regular%20-%20400/ily-wordmark-white-rect-400.svg" alt="iloveyouth.">
                 </div>
               </div>
 
@@ -2425,7 +2552,7 @@
     </section>
 
     <footer>
-      wordmark and brandmark rendered from real svg assets in <code>logos/wordmark/</code> and <code>logos/brandmark/</code> — dark variant (<code>#2A2220</code> shadow grey) on light surfaces, white variant (<code>#FFFFFF</code> pure white) on dark surfaces. all colors pulled from <code>tokens.css</code>. canonical spec lives in the private <code>ily-brand</code> repo.
+      wordmark (<code>ily-wordmark-*-rect-400.svg</code>) lives in <a href="logos/wordmark/Satoshi%20Regular%20-%20400/">wordmark/Satoshi Regular - 400/</a>. brandmark (<code>ily-brandmark-*-square-500.svg</code>) lives in <a href="logos/brandmark/Satoshi%20Medium%20-%20500/">brandmark/Satoshi Medium - 500/</a>. dark variant (<code>#2A2220</code> shadow grey) on light surfaces, white variant (<code>#FFFFFF</code> pure white) on dark surfaces. all colors pulled from <code>tokens.css</code>. canonical spec lives in the private <code>ily-brand</code> repo.
     </footer>
 
   </div>
