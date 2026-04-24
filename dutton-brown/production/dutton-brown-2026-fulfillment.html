@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dutton Brown — 2026 Fulfillment Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Poppins", sans-serif; font-weight: 300; color: #4A4A4A; background: #FAFAFA; line-height: 1.5; font-size: 14px; }
+  .header { background: #F7F5F2; padding: 28px 32px; text-align: center; border-bottom: 1px solid #E0DDD9; }
+  .header h1 { font-weight: 600; font-size: 1.4rem; letter-spacing: 0.02em; }
+  .header p { font-weight: 300; font-size: 0.85rem; margin-top: 4px; opacity: 0.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+  /* Tabs */
+  .tab-bar { display: flex; gap: 0; border-bottom: 2px solid #E0DDD9; margin-bottom: 24px; overflow-x: auto; }
+  .tab-btn { background: none; border: none; padding: 12px 20px; font-family: inherit; font-weight: 400; font-size: 0.9rem; color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+  .tab-btn:hover { color: #4A4A4A; }
+  .tab-btn.active { color: #4A4A4A; font-weight: 600; border-bottom-color: #4A4A4A; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .kpi { background: #fff; border: 1px solid #E0DDD9; border-radius: 8px; padding: 18px 14px; text-align: center; }
+  .kpi-val { font-weight: 600; font-size: 1.5rem; color: #4A4A4A; }
+  .kpi-label { font-weight: 400; font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+  .section { margin-bottom: 32px; }
+  .section h2 { font-weight: 600; font-size: 1.05rem; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #E0DDD9; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th { font-weight: 600; text-align: left; padding: 8px 10px; border-bottom: 2px solid #E0DDD9; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: #888; }
+  td { padding: 7px 10px; border-bottom: 1px solid #F0EDEA; }
+  tr:hover td { background: #FAFAF8; }
+  .r { text-align: right; }
+  .chart-container { position: relative; margin: 16px 0; }
+  @media (max-width: 700px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .tab-btn { padding: 10px 14px; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Dutton Brown — 2026 Fulfillment Report</h1>
+  <p>Fulfillment &amp; Shipping Dashboard &nbsp;&middot;&nbsp; Dutton Brown Design</p>
+</div>
+
+<div class="container">
+  <div class="tab-bar">
+    <button class="tab-btn" onclick="showTab('m01')" id="btn-m01">Jan</button>
+<button class="tab-btn" onclick="showTab('m02')" id="btn-m02">Feb</button>
+<button class="tab-btn" onclick="showTab('m03')" id="btn-m03">Mar</button>
+<button class="tab-btn" onclick="showTab('ytd')" id="btn-ytd">Year to Date</button>
+
+  </div>
+  
+<div class="tab-content" id="m01">
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">425</div><div class="kpi-label">Orders Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">$298,071</div><div class="kpi-label">Revenue Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">2,068</div><div class="kpi-label">Units Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">9.5</div><div class="kpi-label">Avg Days to Ship</div></div>
+    <div class="kpi"><div class="kpi-val">$701</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
+    <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Unfulfilled</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Fulfillment Time (Days to Ship)</h2>
+    <div class="chart-container"><canvas id="chart-fulfill-m01" height="200"></canvas></div>
+  </div>
+
+  <div class="section">
+    <h2>Product Mix Shipped</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-product-m01" height="280"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Product Type</th><th class="r">Units</th><th class="r">Qty Share</th><th class="r">Revenue</th><th class="r">Rev Share</th></tr></thead>
+          <tbody><tr><td>Sconce</td><td class="r">613</td><td class="r">29.6%</td><td class="r">$188,114</td><td class="r">52.9%</td></tr>
+<tr><td>Hardware</td><td class="r">325</td><td class="r">15.7%</td><td class="r">$20,884</td><td class="r">5.9%</td></tr>
+<tr><td>Other</td><td class="r">299</td><td class="r">14.5%</td><td class="r">$4,244</td><td class="r">1.2%</td></tr>
+<tr><td>Sample</td><td class="r">241</td><td class="r">11.7%</td><td class="r">$2,134</td><td class="r">0.6%</td></tr>
+<tr><td>Accessory</td><td class="r">153</td><td class="r">7.4%</td><td class="r">$4,169</td><td class="r">1.2%</td></tr>
+<tr><td>Bulb</td><td class="r">145</td><td class="r">7.0%</td><td class="r">$3,073</td><td class="r">0.9%</td></tr>
+<tr><td>Flush Mount</td><td class="r">140</td><td class="r">6.8%</td><td class="r">$54,290</td><td class="r">15.3%</td></tr>
+<tr><td>Pendant</td><td class="r">112</td><td class="r">5.4%</td><td class="r">$42,730</td><td class="r">12.0%</td></tr>
+<tr><td>Chandelier</td><td class="r">31</td><td class="r">1.5%</td><td class="r">$34,440</td><td class="r">9.7%</td></tr>
+<tr><td>Plug-In</td><td class="r">6</td><td class="r">0.3%</td><td class="r">$1,580</td><td class="r">0.4%</td></tr>
+<tr><td>Pillow</td><td class="r">3</td><td class="r">0.1%</td><td class="r">$75</td><td class="r">0.0%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Hardware Breakdown</h2>
+    <table style="max-width:400px">
+      <thead><tr><th>Type</th><th class="r">Units</th></tr></thead>
+      <tbody><tr><td>Pull</td><td class="r">108</td></tr>
+<tr><td>Hook</td><td class="r">97</td></tr>
+<tr><td>Knob</td><td class="r">52</td></tr>
+<tr><td>Towel Rack</td><td class="r">42</td></tr>
+<tr><td>Tissue Holder</td><td class="r">13</td></tr>
+<tr><td>Towel Bar</td><td class="r">13</td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Samples</h2>
+    <div class="kpi-row" style="max-width:500px">
+      <div class="kpi"><div class="kpi-val">95</div><div class="kpi-label">Sample Orders</div></div>
+      <div class="kpi"><div class="kpi-val">241</div><div class="kpi-label">Sample Units</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Carrier Mix</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-carrier-m01" height="250"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
+          <tbody><tr><td>FedEx</td><td class="r">324</td><td class="r">42.5%</td></tr>
+<tr><td>No carrier set</td><td class="r">264</td><td class="r">34.6%</td></tr>
+<tr><td>USPS</td><td class="r">168</td><td class="r">22.0%</td></tr>
+<tr><td>Other</td><td class="r">5</td><td class="r">0.7%</td></tr>
+<tr><td>UPS</td><td class="r">1</td><td class="r">0.1%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Top Shipping Destinations</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-state-m01" height="350"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>State</th><th class="r">Orders</th><th class="r">Share</th></tr></thead>
+          <tbody><tr><td>NY</td><td class="r">67</td><td class="r">15.8%</td></tr>
+<tr><td>CA</td><td class="r">65</td><td class="r">15.3%</td></tr>
+<tr><td>FL</td><td class="r">29</td><td class="r">6.8%</td></tr>
+<tr><td>TX</td><td class="r">28</td><td class="r">6.6%</td></tr>
+<tr><td>MA</td><td class="r">27</td><td class="r">6.4%</td></tr>
+<tr><td>NJ</td><td class="r">24</td><td class="r">5.6%</td></tr>
+<tr><td>IL</td><td class="r">19</td><td class="r">4.5%</td></tr>
+<tr><td>CT</td><td class="r">15</td><td class="r">3.5%</td></tr>
+<tr><td>GA</td><td class="r">12</td><td class="r">2.8%</td></tr>
+<tr><td>MN</td><td class="r">12</td><td class="r">2.8%</td></tr>
+<tr><td>VA</td><td class="r">11</td><td class="r">2.6%</td></tr>
+<tr><td>CO</td><td class="r">10</td><td class="r">2.4%</td></tr>
+<tr><td>MI</td><td class="r">8</td><td class="r">1.9%</td></tr>
+<tr><td>NC</td><td class="r">8</td><td class="r">1.9%</td></tr>
+<tr><td>WA</td><td class="r">7</td><td class="r">1.6%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Shipping Method</h2>
+    <table style="max-width:500px">
+      <thead><tr><th>Method</th><th class="r">Orders</th><th class="r">Share</th></tr></thead>
+      <tbody><tr><td>Free Ground Shipping Over $199 (1 - 4 days)</td><td class="r">253</td><td class="r">59.5%</td></tr>
+<tr><td>Ground Advantage</td><td class="r">141</td><td class="r">33.2%</td></tr>
+<tr><td>FedEx Ground®</td><td class="r">7</td><td class="r">1.6%</td></tr>
+<tr><td>FedEx Ground</td><td class="r">4</td><td class="r">0.9%</td></tr>
+<tr><td>Free Shipping</td><td class="r">4</td><td class="r">0.9%</td></tr>
+<tr><td>FedEx Home Delivery®</td><td class="r">3</td><td class="r">0.7%</td></tr>
+<tr><td>FedEx 2Day One Rate (2 Business Days)</td><td class="r">2</td><td class="r">0.5%</td></tr>
+<tr><td>Priority Mail</td><td class="r">2</td><td class="r">0.5%</td></tr>
+<tr><td>FedEx 2Day One Rate Medium Box</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>Redo Exchange Shipping</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx International Connect Plus</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>UPS Ground</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>Freight</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>First Class Package International</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>USPS Ground Advantage</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx Standard Overnight Saturday Delivery</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx 2Day® Saturday Delivery</td><td class="r">1</td><td class="r">0.2%</td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Order Tiers</h2>
+    <table style="max-width:400px">
+      <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
+      <tbody><tr><td>Core</td><td class="r">314</td></tr>
+<tr><td>Sample</td><td class="r">46</td></tr>
+<tr><td>Small Accessory</td><td class="r">56</td></tr>
+<tr><td>Large</td><td class="r">5</td></tr>
+<tr><td>Zero Dollar</td><td class="r">4</td></tr>
+</tbody>
+    </table>
+  </div>
+</div>
+
+<div class="tab-content" id="m02">
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">438</div><div class="kpi-label">Orders Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">$244,209</div><div class="kpi-label">Revenue Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">1,888</div><div class="kpi-label">Units Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">10.4</div><div class="kpi-label">Avg Days to Ship</div></div>
+    <div class="kpi"><div class="kpi-val">$558</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
+    <div class="kpi"><div class="kpi-val">1</div><div class="kpi-label">Unfulfilled</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Fulfillment Time (Days to Ship)</h2>
+    <div class="chart-container"><canvas id="chart-fulfill-m02" height="200"></canvas></div>
+  </div>
+
+  <div class="section">
+    <h2>Product Mix Shipped</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-product-m02" height="280"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Product Type</th><th class="r">Units</th><th class="r">Qty Share</th><th class="r">Revenue</th><th class="r">Rev Share</th></tr></thead>
+          <tbody><tr><td>Hardware</td><td class="r">446</td><td class="r">23.6%</td><td class="r">$23,160</td><td class="r">7.9%</td></tr>
+<tr><td>Sconce</td><td class="r">366</td><td class="r">19.4%</td><td class="r">$123,135</td><td class="r">41.9%</td></tr>
+<tr><td>Other</td><td class="r">334</td><td class="r">17.7%</td><td class="r">$4,763</td><td class="r">1.6%</td></tr>
+<tr><td>Sample</td><td class="r">262</td><td class="r">13.9%</td><td class="r">$2,169</td><td class="r">0.7%</td></tr>
+<tr><td>Flush Mount</td><td class="r">152</td><td class="r">8.1%</td><td class="r">$62,108</td><td class="r">21.1%</td></tr>
+<tr><td>Bulb</td><td class="r">120</td><td class="r">6.4%</td><td class="r">$2,810</td><td class="r">1.0%</td></tr>
+<tr><td>Pendant</td><td class="r">91</td><td class="r">4.8%</td><td class="r">$33,861</td><td class="r">11.5%</td></tr>
+<tr><td>Accessory</td><td class="r">76</td><td class="r">4.0%</td><td class="r">$1,584</td><td class="r">0.5%</td></tr>
+<tr><td>Chandelier</td><td class="r">31</td><td class="r">1.6%</td><td class="r">$36,760</td><td class="r">12.5%</td></tr>
+<tr><td>Plug-In</td><td class="r">10</td><td class="r">0.5%</td><td class="r">$3,460</td><td class="r">1.2%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Hardware Breakdown</h2>
+    <table style="max-width:400px">
+      <thead><tr><th>Type</th><th class="r">Units</th></tr></thead>
+      <tbody><tr><td>Pull</td><td class="r">187</td></tr>
+<tr><td>Knob</td><td class="r">138</td></tr>
+<tr><td>Hook</td><td class="r">68</td></tr>
+<tr><td>Towel Rack</td><td class="r">33</td></tr>
+<tr><td>Towel Bar</td><td class="r">13</td></tr>
+<tr><td>Tissue Holder</td><td class="r">7</td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Samples</h2>
+    <div class="kpi-row" style="max-width:500px">
+      <div class="kpi"><div class="kpi-val">99</div><div class="kpi-label">Sample Orders</div></div>
+      <div class="kpi"><div class="kpi-val">262</div><div class="kpi-label">Sample Units</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Carrier Mix</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-carrier-m02" height="250"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
+          <tbody><tr><td>FedEx</td><td class="r">339</td><td class="r">43.4%</td></tr>
+<tr><td>No carrier set</td><td class="r">260</td><td class="r">33.2%</td></tr>
+<tr><td>USPS</td><td class="r">171</td><td class="r">21.9%</td></tr>
+<tr><td>UPS</td><td class="r">6</td><td class="r">0.8%</td></tr>
+<tr><td>Other</td><td class="r">6</td><td class="r">0.8%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Top Shipping Destinations</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-state-m02" height="350"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>State</th><th class="r">Orders</th><th class="r">Share</th></tr></thead>
+          <tbody><tr><td>CA</td><td class="r">60</td><td class="r">13.7%</td></tr>
+<tr><td>NY</td><td class="r">58</td><td class="r">13.2%</td></tr>
+<tr><td>TX</td><td class="r">33</td><td class="r">7.5%</td></tr>
+<tr><td>FL</td><td class="r">29</td><td class="r">6.6%</td></tr>
+<tr><td>MA</td><td class="r">24</td><td class="r">5.5%</td></tr>
+<tr><td>NJ</td><td class="r">21</td><td class="r">4.8%</td></tr>
+<tr><td>IL</td><td class="r">19</td><td class="r">4.3%</td></tr>
+<tr><td>CT</td><td class="r">16</td><td class="r">3.6%</td></tr>
+<tr><td>WA</td><td class="r">15</td><td class="r">3.4%</td></tr>
+<tr><td>GA</td><td class="r">13</td><td class="r">3.0%</td></tr>
+<tr><td>VA</td><td class="r">13</td><td class="r">3.0%</td></tr>
+<tr><td>NC</td><td class="r">10</td><td class="r">2.3%</td></tr>
+<tr><td>PA</td><td class="r">10</td><td class="r">2.3%</td></tr>
+<tr><td>MN</td><td class="r">10</td><td class="r">2.3%</td></tr>
+<tr><td>OR</td><td class="r">9</td><td class="r">2.1%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Shipping Method</h2>
+    <table style="max-width:500px">
+      <thead><tr><th>Method</th><th class="r">Orders</th><th class="r">Share</th></tr></thead>
+      <tbody><tr><td>Free Ground Shipping Over $200 (1 - 4 days)</td><td class="r">219</td><td class="r">50.1%</td></tr>
+<tr><td>Ground Advantage</td><td class="r">142</td><td class="r">32.5%</td></tr>
+<tr><td>Free Ground Shipping Over $199 (1 - 4 days)</td><td class="r">41</td><td class="r">9.4%</td></tr>
+<tr><td>FedEx Ground®</td><td class="r">7</td><td class="r">1.6%</td></tr>
+<tr><td>Free Shipping</td><td class="r">6</td><td class="r">1.4%</td></tr>
+<tr><td>FedEx Ground</td><td class="r">5</td><td class="r">1.1%</td></tr>
+<tr><td>FedEx Ground® Economy</td><td class="r">3</td><td class="r">0.7%</td></tr>
+<tr><td>Freight</td><td class="r">3</td><td class="r">0.7%</td></tr>
+<tr><td>UPS Ground</td><td class="r">2</td><td class="r">0.5%</td></tr>
+<tr><td>Redo Exchange Shipping</td><td class="r">2</td><td class="r">0.5%</td></tr>
+<tr><td>FedEx Home Delivery®</td><td class="r">2</td><td class="r">0.5%</td></tr>
+<tr><td>FedEx 2Day One Rate (2 Business Days)</td><td class="r">2</td><td class="r">0.5%</td></tr>
+<tr><td>FedEx Priority Overnight</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>Local Pickup</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx International Connect Plus</td><td class="r">1</td><td class="r">0.2%</td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Order Tiers</h2>
+    <table style="max-width:400px">
+      <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
+      <tbody><tr><td>Core</td><td class="r">319</td></tr>
+<tr><td>Sample</td><td class="r">50</td></tr>
+<tr><td>Small Accessory</td><td class="r">56</td></tr>
+<tr><td>Large</td><td class="r">2</td></tr>
+<tr><td>Zero Dollar</td><td class="r">12</td></tr>
+</tbody>
+    </table>
+  </div>
+</div>
+
+<div class="tab-content" id="m03">
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">426</div><div class="kpi-label">Orders Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">$444,901</div><div class="kpi-label">Revenue Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">2,490</div><div class="kpi-label">Units Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">11.7</div><div class="kpi-label">Avg Days to Ship</div></div>
+    <div class="kpi"><div class="kpi-val">$1,044</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
+    <div class="kpi"><div class="kpi-val">20</div><div class="kpi-label">Unfulfilled</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Fulfillment Time (Days to Ship)</h2>
+    <div class="chart-container"><canvas id="chart-fulfill-m03" height="200"></canvas></div>
+  </div>
+
+  <div class="section">
+    <h2>Product Mix Shipped</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-product-m03" height="280"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Product Type</th><th class="r">Units</th><th class="r">Qty Share</th><th class="r">Revenue</th><th class="r">Rev Share</th></tr></thead>
+          <tbody><tr><td>Hardware</td><td class="r">738</td><td class="r">29.6%</td><td class="r">$33,920</td><td class="r">6.2%</td></tr>
+<tr><td>Sconce</td><td class="r">563</td><td class="r">22.6%</td><td class="r">$228,414</td><td class="r">41.9%</td></tr>
+<tr><td>Other</td><td class="r">365</td><td class="r">14.7%</td><td class="r">$6,752</td><td class="r">1.2%</td></tr>
+<tr><td>Flush Mount</td><td class="r">284</td><td class="r">11.4%</td><td class="r">$169,836</td><td class="r">31.1%</td></tr>
+<tr><td>Sample</td><td class="r">188</td><td class="r">7.6%</td><td class="r">$1,528</td><td class="r">0.3%</td></tr>
+<tr><td>Accessory</td><td class="r">114</td><td class="r">4.6%</td><td class="r">$2,330</td><td class="r">0.4%</td></tr>
+<tr><td>Bulb</td><td class="r">99</td><td class="r">4.0%</td><td class="r">$2,303</td><td class="r">0.4%</td></tr>
+<tr><td>Chandelier</td><td class="r">76</td><td class="r">3.1%</td><td class="r">$77,180</td><td class="r">14.1%</td></tr>
+<tr><td>Pendant</td><td class="r">58</td><td class="r">2.3%</td><td class="r">$21,685</td><td class="r">4.0%</td></tr>
+<tr><td>Plug-In</td><td class="r">5</td><td class="r">0.2%</td><td class="r">$1,660</td><td class="r">0.3%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Hardware Breakdown</h2>
+    <table style="max-width:400px">
+      <thead><tr><th>Type</th><th class="r">Units</th></tr></thead>
+      <tbody><tr><td>Pull</td><td class="r">369</td></tr>
+<tr><td>Knob</td><td class="r">217</td></tr>
+<tr><td>Hook</td><td class="r">100</td></tr>
+<tr><td>Towel Rack</td><td class="r">30</td></tr>
+<tr><td>Towel Bar</td><td class="r">13</td></tr>
+<tr><td>Tissue Holder</td><td class="r">9</td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Samples</h2>
+    <div class="kpi-row" style="max-width:500px">
+      <div class="kpi"><div class="kpi-val">69</div><div class="kpi-label">Sample Orders</div></div>
+      <div class="kpi"><div class="kpi-val">188</div><div class="kpi-label">Sample Units</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Carrier Mix</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-carrier-m03" height="250"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
+          <tbody><tr><td>FedEx</td><td class="r">315</td><td class="r">41.4%</td></tr>
+<tr><td>No carrier set</td><td class="r">273</td><td class="r">35.9%</td></tr>
+<tr><td>USPS</td><td class="r">171</td><td class="r">22.5%</td></tr>
+<tr><td>UPS</td><td class="r">2</td><td class="r">0.3%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Top Shipping Destinations</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-state-m03" height="350"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>State</th><th class="r">Orders</th><th class="r">Share</th></tr></thead>
+          <tbody><tr><td>NY</td><td class="r">70</td><td class="r">15.7%</td></tr>
+<tr><td>CA</td><td class="r">63</td><td class="r">14.1%</td></tr>
+<tr><td>MA</td><td class="r">38</td><td class="r">8.5%</td></tr>
+<tr><td>TX</td><td class="r">26</td><td class="r">5.8%</td></tr>
+<tr><td>FL</td><td class="r">23</td><td class="r">5.2%</td></tr>
+<tr><td>NJ</td><td class="r">23</td><td class="r">5.2%</td></tr>
+<tr><td>CT</td><td class="r">17</td><td class="r">3.8%</td></tr>
+<tr><td>NC</td><td class="r">15</td><td class="r">3.4%</td></tr>
+<tr><td>MN</td><td class="r">15</td><td class="r">3.4%</td></tr>
+<tr><td>GA</td><td class="r">15</td><td class="r">3.4%</td></tr>
+<tr><td>IL</td><td class="r">14</td><td class="r">3.1%</td></tr>
+<tr><td>VA</td><td class="r">14</td><td class="r">3.1%</td></tr>
+<tr><td>WA</td><td class="r">13</td><td class="r">2.9%</td></tr>
+<tr><td>CO</td><td class="r">12</td><td class="r">2.7%</td></tr>
+<tr><td>TN</td><td class="r">9</td><td class="r">2.0%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Shipping Method</h2>
+    <table style="max-width:500px">
+      <thead><tr><th>Method</th><th class="r">Orders</th><th class="r">Share</th></tr></thead>
+      <tbody><tr><td>Free Ground Shipping Over $200 (1 - 4 days)</td><td class="r">272</td><td class="r">61.1%</td></tr>
+<tr><td>Ground Advantage</td><td class="r">137</td><td class="r">30.8%</td></tr>
+<tr><td>Free Shipping</td><td class="r">6</td><td class="r">1.3%</td></tr>
+<tr><td>FedEx Home Delivery</td><td class="r">5</td><td class="r">1.1%</td></tr>
+<tr><td>FedEx Home Delivery®</td><td class="r">4</td><td class="r">0.9%</td></tr>
+<tr><td>Freight</td><td class="r">3</td><td class="r">0.7%</td></tr>
+<tr><td>FedEx 2Day One Rate</td><td class="r">3</td><td class="r">0.7%</td></tr>
+<tr><td>FedEx Ground</td><td class="r">3</td><td class="r">0.7%</td></tr>
+<tr><td>UPS Ground</td><td class="r">2</td><td class="r">0.4%</td></tr>
+<tr><td>FedEx Ground®</td><td class="r">2</td><td class="r">0.4%</td></tr>
+<tr><td>FedEx International Connect Plus®</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx Ground Home Delivery</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx 2Day</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx 2Day One Rate (2 Business Days)</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx First Overnight®</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx International Connect Plus</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>Redo Exchange Shipping</td><td class="r">1</td><td class="r">0.2%</td></tr>
+<tr><td>Freight Prepaid & Add</td><td class="r">1</td><td class="r">0.2%</td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Order Tiers</h2>
+    <table style="max-width:400px">
+      <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
+      <tbody><tr><td>Core</td><td class="r">352</td></tr>
+<tr><td>Sample</td><td class="r">36</td></tr>
+<tr><td>Small Accessory</td><td class="r">46</td></tr>
+<tr><td>Large</td><td class="r">2</td></tr>
+<tr><td>Zero Dollar</td><td class="r">10</td></tr>
+</tbody>
+    </table>
+  </div>
+</div>
+
+<div class="tab-content" id="ytd">
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">1,289</div><div class="kpi-label">Orders Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">$987,180</div><div class="kpi-label">Revenue Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">6,446</div><div class="kpi-label">Units Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">10.5</div><div class="kpi-label">Avg Days to Ship</div></div>
+    <div class="kpi"><div class="kpi-val">$766</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
+    <div class="kpi"><div class="kpi-val">21</div><div class="kpi-label">Unfulfilled</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Fulfillment Time (Days to Ship)</h2>
+    <div class="chart-container"><canvas id="chart-fulfill-ytd" height="200"></canvas></div>
+  </div>
+
+  <div class="section">
+    <h2>Product Mix Shipped</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-product-ytd" height="280"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Product Type</th><th class="r">Units</th><th class="r">Qty Share</th><th class="r">Revenue</th><th class="r">Rev Share</th></tr></thead>
+          <tbody><tr><td>Sconce</td><td class="r">1,542</td><td class="r">23.9%</td><td class="r">$539,663</td><td class="r">45.2%</td></tr>
+<tr><td>Hardware</td><td class="r">1,509</td><td class="r">23.4%</td><td class="r">$77,964</td><td class="r">6.5%</td></tr>
+<tr><td>Other</td><td class="r">998</td><td class="r">15.5%</td><td class="r">$15,759</td><td class="r">1.3%</td></tr>
+<tr><td>Sample</td><td class="r">691</td><td class="r">10.7%</td><td class="r">$5,831</td><td class="r">0.5%</td></tr>
+<tr><td>Flush Mount</td><td class="r">576</td><td class="r">8.9%</td><td class="r">$286,234</td><td class="r">23.9%</td></tr>
+<tr><td>Bulb</td><td class="r">364</td><td class="r">5.6%</td><td class="r">$8,186</td><td class="r">0.7%</td></tr>
+<tr><td>Accessory</td><td class="r">343</td><td class="r">5.3%</td><td class="r">$8,083</td><td class="r">0.7%</td></tr>
+<tr><td>Pendant</td><td class="r">261</td><td class="r">4.0%</td><td class="r">$98,276</td><td class="r">8.2%</td></tr>
+<tr><td>Chandelier</td><td class="r">138</td><td class="r">2.1%</td><td class="r">$148,380</td><td class="r">12.4%</td></tr>
+<tr><td>Plug-In</td><td class="r">21</td><td class="r">0.3%</td><td class="r">$6,700</td><td class="r">0.6%</td></tr>
+<tr><td>Pillow</td><td class="r">3</td><td class="r">0.0%</td><td class="r">$75</td><td class="r">0.0%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Hardware Breakdown</h2>
+    <table style="max-width:400px">
+      <thead><tr><th>Type</th><th class="r">Units</th></tr></thead>
+      <tbody><tr><td>Pull</td><td class="r">664</td></tr>
+<tr><td>Knob</td><td class="r">407</td></tr>
+<tr><td>Hook</td><td class="r">265</td></tr>
+<tr><td>Towel Rack</td><td class="r">105</td></tr>
+<tr><td>Towel Bar</td><td class="r">39</td></tr>
+<tr><td>Tissue Holder</td><td class="r">29</td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Samples</h2>
+    <div class="kpi-row" style="max-width:500px">
+      <div class="kpi"><div class="kpi-val">263</div><div class="kpi-label">Sample Orders</div></div>
+      <div class="kpi"><div class="kpi-val">691</div><div class="kpi-label">Sample Units</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Carrier Mix</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-carrier-ytd" height="250"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
+          <tbody><tr><td>FedEx</td><td class="r">978</td><td class="r">42.4%</td></tr>
+<tr><td>No carrier set</td><td class="r">797</td><td class="r">34.6%</td></tr>
+<tr><td>USPS</td><td class="r">510</td><td class="r">22.1%</td></tr>
+<tr><td>Other</td><td class="r">11</td><td class="r">0.5%</td></tr>
+<tr><td>UPS</td><td class="r">9</td><td class="r">0.4%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Top Shipping Destinations</h2>
+    <div class="grid-2">
+      <div class="chart-container"><canvas id="chart-state-ytd" height="350"></canvas></div>
+      <div>
+        <table>
+          <thead><tr><th>State</th><th class="r">Orders</th><th class="r">Share</th></tr></thead>
+          <tbody><tr><td>NY</td><td class="r">195</td><td class="r">14.9%</td></tr>
+<tr><td>CA</td><td class="r">188</td><td class="r">14.4%</td></tr>
+<tr><td>MA</td><td class="r">89</td><td class="r">6.8%</td></tr>
+<tr><td>TX</td><td class="r">87</td><td class="r">6.6%</td></tr>
+<tr><td>FL</td><td class="r">81</td><td class="r">6.2%</td></tr>
+<tr><td>NJ</td><td class="r">68</td><td class="r">5.2%</td></tr>
+<tr><td>IL</td><td class="r">52</td><td class="r">4.0%</td></tr>
+<tr><td>CT</td><td class="r">48</td><td class="r">3.7%</td></tr>
+<tr><td>GA</td><td class="r">40</td><td class="r">3.1%</td></tr>
+<tr><td>VA</td><td class="r">38</td><td class="r">2.9%</td></tr>
+<tr><td>MN</td><td class="r">37</td><td class="r">2.8%</td></tr>
+<tr><td>WA</td><td class="r">35</td><td class="r">2.7%</td></tr>
+<tr><td>NC</td><td class="r">33</td><td class="r">2.5%</td></tr>
+<tr><td>CO</td><td class="r">30</td><td class="r">2.3%</td></tr>
+<tr><td>PA</td><td class="r">24</td><td class="r">1.8%</td></tr>
+</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Shipping Method</h2>
+    <table style="max-width:500px">
+      <thead><tr><th>Method</th><th class="r">Orders</th><th class="r">Share</th></tr></thead>
+      <tbody><tr><td>Free Ground Shipping Over $200 (1 - 4 days)</td><td class="r">491</td><td class="r">37.6%</td></tr>
+<tr><td>Ground Advantage</td><td class="r">420</td><td class="r">32.1%</td></tr>
+<tr><td>Free Ground Shipping Over $199 (1 - 4 days)</td><td class="r">294</td><td class="r">22.5%</td></tr>
+<tr><td>FedEx Ground®</td><td class="r">16</td><td class="r">1.2%</td></tr>
+<tr><td>Free Shipping</td><td class="r">16</td><td class="r">1.2%</td></tr>
+<tr><td>FedEx Ground</td><td class="r">12</td><td class="r">0.9%</td></tr>
+<tr><td>FedEx Home Delivery®</td><td class="r">9</td><td class="r">0.7%</td></tr>
+<tr><td>Freight</td><td class="r">7</td><td class="r">0.5%</td></tr>
+<tr><td>FedEx 2Day One Rate (2 Business Days)</td><td class="r">5</td><td class="r">0.4%</td></tr>
+<tr><td>UPS Ground</td><td class="r">5</td><td class="r">0.4%</td></tr>
+<tr><td>FedEx Home Delivery</td><td class="r">5</td><td class="r">0.4%</td></tr>
+<tr><td>Redo Exchange Shipping</td><td class="r">4</td><td class="r">0.3%</td></tr>
+<tr><td>FedEx International Connect Plus</td><td class="r">3</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx Ground® Economy</td><td class="r">3</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx 2Day One Rate</td><td class="r">3</td><td class="r">0.2%</td></tr>
+<tr><td>Priority Mail</td><td class="r">2</td><td class="r">0.2%</td></tr>
+<tr><td>FedEx 2Day One Rate Medium Box</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>First Class Package International</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>USPS Ground Advantage</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>FedEx Standard Overnight Saturday Delivery</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>FedEx 2Day® Saturday Delivery</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>FedEx Priority Overnight</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>Local Pickup</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>FedEx International Connect Plus®</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>FedEx Ground Home Delivery</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>FedEx 2Day</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>FedEx First Overnight®</td><td class="r">1</td><td class="r">0.1%</td></tr>
+<tr><td>Freight Prepaid & Add</td><td class="r">1</td><td class="r">0.1%</td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Order Tiers</h2>
+    <table style="max-width:400px">
+      <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
+      <tbody><tr><td>Core</td><td class="r">985</td></tr>
+<tr><td>Sample</td><td class="r">132</td></tr>
+<tr><td>Small Accessory</td><td class="r">158</td></tr>
+<tr><td>Large</td><td class="r">9</td></tr>
+<tr><td>Zero Dollar</td><td class="r">26</td></tr>
+</tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<script>
+const COLORS = ['#D4726A','#8BB8D9','#C5B9A8','#7A9B76','#C9A84C','#A8A8A8','#3A3A3A','#E8B4B8','#B8D4E3','#D4C5A8'];
+Chart.defaults.font.family = '"Poppins", sans-serif';
+Chart.defaults.font.size = 12;
+Chart.defaults.color = '#888';
+
+const charts = {};
+
+function initChart(id, type, labels, datasets, colors, showLegend, yTitle, xTitle, horizontal) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const cfg = {
+    type: type,
+    data: {
+      labels: labels,
+      datasets: datasets.map((d, i) => ({
+        data: d,
+        backgroundColor: type === 'doughnut' ? colors : colors[i % colors.length],
+        borderRadius: type === 'bar' ? 4 : 0,
+      }))
+    },
+    options: {
+      responsive: true,
+      indexAxis: horizontal ? 'y' : 'x',
+      plugins: {
+        legend: { display: !!showLegend, position: 'bottom', labels: { usePointStyle: true, padding: 10, font: { size: 11 } } },
+      },
+      scales: type === 'doughnut' ? {} : {
+        y: { grid: { color: '#F0EDEA' }, title: yTitle ? { display: true, text: yTitle } : { display: false } },
+        x: { grid: { display: !horizontal }, title: xTitle ? { display: true, text: xTitle } : { display: false } },
+      }
+    }
+  };
+  charts[id] = new Chart(el, cfg);
+}
+
+function showTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const tab = document.getElementById(tabId);
+  const btn = document.getElementById('btn-' + tabId);
+  if (tab) tab.classList.add('active');
+  if (btn) btn.classList.add('active');
+
+  // Initialize charts on first view (they need visible canvas)
+  tab.querySelectorAll('canvas').forEach(c => {
+    if (!charts[c.id] && window['init_' + c.id]) {
+      window['init_' + c.id]();
+    }
+  });
+}
+
+// Deferred chart init — charts only render when tab is visible
+
+initChart('chart-fulfill-m01', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[136, 47, 130, 100, 4, 8]], ['#8BB8D9'], false, 'Orders', 'Days');
+initChart('chart-product-m01', 'doughnut', ["Sconce", "Hardware", "Other", "Sample", "Accessory", "Bulb", "Flush Mount", "Pendant", "Chandelier", "Plug-In"], [[613, 325, 299, 241, 153, 145, 140, 112, 31, 6]], COLORS, true);
+initChart('chart-carrier-m01', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[324, 264, 168, 5, 1]], COLORS, true);
+initChart('chart-state-m01', 'bar', ["NY", "CA", "FL", "TX", "MA", "NJ", "IL", "CT", "GA", "MN", "VA", "CO", "MI", "NC", "WA"], [[67, 65, 29, 28, 27, 24, 19, 15, 12, 12, 11, 10, 8, 8, 7]], ['#C5B9A8'], false, null, null, true);
+
+initChart('chart-fulfill-m02', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[153, 41, 81, 140, 8, 15]], ['#8BB8D9'], false, 'Orders', 'Days');
+initChart('chart-product-m02', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Bulb", "Pendant", "Accessory", "Chandelier", "Plug-In"], [[446, 366, 334, 262, 152, 120, 91, 76, 31, 10]], COLORS, true);
+initChart('chart-carrier-m02', 'doughnut', ["FedEx", "No carrier set", "USPS", "UPS", "Other"], [[339, 260, 171, 6, 6]], COLORS, true);
+initChart('chart-state-m02', 'bar', ["CA", "NY", "TX", "FL", "MA", "NJ", "IL", "CT", "WA", "GA", "VA", "NC", "PA", "MN", "OR"], [[60, 58, 33, 29, 24, 21, 19, 16, 15, 13, 13, 10, 10, 10, 9]], ['#C5B9A8'], false, null, null, true);
+
+initChart('chart-fulfill-m03', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[130, 33, 55, 175, 31, 2]], ['#8BB8D9'], false, 'Orders', 'Days');
+initChart('chart-product-m03', 'doughnut', ["Hardware", "Sconce", "Other", "Flush Mount", "Sample", "Accessory", "Bulb", "Chandelier", "Pendant", "Plug-In"], [[738, 563, 365, 284, 188, 114, 99, 76, 58, 5]], COLORS, true);
+initChart('chart-carrier-m03', 'doughnut', ["FedEx", "No carrier set", "USPS", "UPS"], [[315, 273, 171, 2]], COLORS, true);
+initChart('chart-state-m03', 'bar', ["NY", "CA", "MA", "TX", "FL", "NJ", "CT", "NC", "MN", "GA", "IL", "VA", "WA", "CO", "TN"], [[70, 63, 38, 26, 23, 23, 17, 15, 15, 15, 14, 14, 13, 12, 9]], ['#C5B9A8'], false, null, null, true);
+
+initChart('chart-fulfill-ytd', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[419, 121, 266, 415, 43, 25]], ['#8BB8D9'], false, 'Orders', 'Days');
+initChart('chart-product-ytd', 'doughnut', ["Sconce", "Hardware", "Other", "Sample", "Flush Mount", "Bulb", "Accessory", "Pendant", "Chandelier", "Plug-In"], [[1542, 1509, 998, 691, 576, 364, 343, 261, 138, 21]], COLORS, true);
+initChart('chart-carrier-ytd', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[978, 797, 510, 11, 9]], COLORS, true);
+initChart('chart-state-ytd', 'bar', ["NY", "CA", "MA", "TX", "FL", "NJ", "IL", "CT", "GA", "VA", "MN", "WA", "NC", "CO", "PA"], [[195, 188, 89, 87, 81, 68, 52, 48, 40, 38, 37, 35, 33, 30, 24]], ['#C5B9A8'], false, null, null, true);
+
+
+// Show first tab
+showTab('m01');
+</script>
+</body>
+</html>

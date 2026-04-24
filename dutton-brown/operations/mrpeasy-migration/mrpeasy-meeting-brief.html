@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MRPeasy Vendor Meeting Brief — Dutton Brown</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #2c2c2c;
+      background: #f5f4f1;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 48px auto;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .page-header {
+      background: #2c2c2c;
+      color: #fff;
+      padding: 40px 48px 36px;
+    }
+    .page-header .label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #aaa; margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-size: 28px; font-weight: 600; letter-spacing: -0.01em;
+      line-height: 1.2; margin-bottom: 8px;
+    }
+    .page-header .subtitle { font-size: 15px; color: #bbb; }
+    .page-header .meta {
+      margin-top: 20px; display: flex; gap: 32px; flex-wrap: wrap;
+    }
+    .page-header .meta-item { font-size: 13px; color: #bbb; }
+    .page-header .meta-item strong { color: #fff; font-weight: 600; display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; }
+
+    .page-body { padding: 40px 48px 56px; }
+
+    .section { margin-bottom: 48px; }
+    .section-title {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #888;
+      margin-bottom: 14px; padding-bottom: 8px;
+      border-bottom: 1px solid #e8e6e1;
+    }
+    .section h3 { font-size: 16px; font-weight: 600; color: #2c2c2c; margin-bottom: 8px; margin-top: 20px; }
+    .section h3:first-of-type { margin-top: 0; }
+    p { color: #444; margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    ul, ol { padding-left: 20px; color: #444; }
+    ul li, ol li { margin-bottom: 6px; }
+    strong { color: #2c2c2c; }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 4px; }
+    th {
+      background: #f5f4f1; text-align: left;
+      font-weight: 600; font-size: 11.5px; letter-spacing: 0.05em;
+      text-transform: uppercase; color: #666;
+      padding: 10px 14px; border-bottom: 2px solid #e0ddd7;
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid #eeece8; color: #3a3a3a; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #faf9f7; }
+    td.label-col { font-weight: 600; color: #2c2c2c; white-space: nowrap; }
+    td.bad  { color: #b84444; }
+    td.good { color: #3a7a4a; }
+    td.neutral { color: #555; }
+
+    /* Path boxes */
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+    .path-box {
+      border-radius: 4px; padding: 18px 20px; font-size: 14px;
+    }
+    .path-box.standard {
+      background: #f3f9f5; border: 1px solid #b8d9c2; border-left: 3px solid #3a7a4a;
+    }
+    .path-box.custom {
+      background: #fdf8f0; border: 1px solid #e0ccaa; border-left: 3px solid #b07a20;
+    }
+    .path-box .path-title {
+      font-weight: 700; font-size: 12px; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .path-box.standard .path-title { color: #2c6640; }
+    .path-box.custom   .path-title { color: #8a5c10; }
+    .path-box p { margin-bottom: 6px; color: #3a3a3a; }
+    .path-box p:last-child { margin-bottom: 0; }
+    .path-box ul { padding-left: 16px; }
+    .path-box ul li { margin-bottom: 5px; color: #444; }
+
+    /* Callouts */
+    .callout {
+      border-radius: 4px; padding: 14px 18px;
+      font-size: 14px; margin-top: 14px; line-height: 1.6;
+    }
+    .callout.warn {
+      background: #fdf5f5; border: 1px solid #e8c5c5;
+      border-left: 3px solid #c05050; color: #5a2020;
+    }
+    .callout.info {
+      background: #f0f7f2; border: 1px solid #b8d9c2;
+      border-left: 3px solid #3a7a4a; color: #2c6640;
+    }
+    .callout.neutral {
+      background: #f5f4f1; border: 1px solid #dddbd6;
+      border-left: 3px solid #aaa; color: #555;
+      font-style: italic;
+    }
+    .callout strong { font-weight: 700; }
+
+    /* Architecture code block */
+    .code-block {
+      background: #f5f4f1; border: 1px solid #e0ddd7;
+      border-left: 3px solid #888; border-radius: 4px;
+      padding: 16px 20px;
+      font-family: "SF Mono","Fira Code","Consolas",monospace;
+      font-size: 13px; line-height: 1.7; color: #3a3a3a;
+      margin: 14px 0 16px; white-space: pre; overflow-x: auto;
+    }
+
+    /* Pros / Cons grid */
+    .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+    .pc-card { border-radius: 4px; padding: 18px 20px; font-size: 14px; }
+    .pc-card.pros { background: #f3f9f5; border: 1px solid #b8d9c2; }
+    .pc-card.cons { background: #fdf5f5; border: 1px solid #e8c5c5; }
+    .pc-card .pc-title {
+      font-weight: 700; font-size: 12px; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .pc-card.pros .pc-title { color: #2c6640; }
+    .pc-card.cons .pc-title { color: #943030; }
+    .pc-card ul { padding-left: 16px; }
+    .pc-card ul li { margin-bottom: 7px; color: #444; line-height: 1.5; }
+
+    /* Questions */
+    .q-group { margin-bottom: 28px; }
+    .q-group-title {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #2c2c2c;
+      margin-bottom: 10px; padding: 8px 12px;
+      background: #f5f4f1; border-radius: 3px;
+      border-left: 3px solid #2c2c2c;
+    }
+    .q-list { list-style: none; padding: 0; }
+    .q-list li {
+      display: flex; gap: 12px; padding: 9px 0;
+      border-bottom: 1px solid #f0ede8; font-size: 14px; color: #3a3a3a;
+      align-items: flex-start;
+    }
+    .q-list li:last-child { border-bottom: none; }
+    .q-num {
+      font-size: 11px; font-weight: 700; color: #888;
+      background: #f0ede8; border-radius: 3px;
+      padding: 2px 6px; flex-shrink: 0; margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    .q-priority { font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 10px; flex-shrink: 0; margin-top: 2px; }
+    .q-priority.must { background: #fce8e8; color: #b84444; }
+    .q-priority.key  { background: #fdf3e0; color: #8a5c10; }
+
+    /* Success criteria */
+    .criteria-list { list-style: none; padding: 0; counter-reset: criteria; }
+    .criteria-list li {
+      counter-increment: criteria;
+      display: flex; gap: 14px; align-items: flex-start;
+      margin-bottom: 12px; font-size: 14px; color: #3a3a3a;
+    }
+    .criteria-list li::before {
+      content: counter(criteria);
+      background: #2c2c2c; color: #fff;
+      font-size: 12px; font-weight: 700;
+      width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* Timeline */
+    .timeline { list-style: none; padding: 0; }
+    .timeline li {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid #f0ede8;
+      font-size: 14px;
+    }
+    .timeline li:last-child { border-bottom: none; }
+    .tl-date { font-weight: 600; color: #2c2c2c; white-space: nowrap; min-width: 130px; font-size: 13px; }
+    .tl-milestone { color: #444; }
+    .tl-tag {
+      font-size: 11px; font-weight: 600; padding: 2px 7px;
+      border-radius: 10px; white-space: nowrap; flex-shrink: 0;
+    }
+    .tl-tag.done     { background: #e8f4eb; color: #2c6640; }
+    .tl-tag.next     { background: #fff3e0; color: #8a5c10; }
+    .tl-tag.upcoming { background: #f0ede8; color: #666; }
+    .tl-tag.goal     { background: #2c2c2c; color: #fff; }
+
+    .page-footer {
+      border-top: 1px solid #e8e6e1; padding: 16px 48px;
+      font-size: 12px; color: #aaa; display: flex; justify-content: space-between;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+      .page-header, .path-box, .callout, .pc-card, .q-group-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-header">
+    <div class="label">Manufacturing System Evaluation — Dutton Brown Design</div>
+    <h1>MRPeasy Vendor Meeting Brief</h1>
+    <div class="subtitle">Pre-trial evaluation to determine fit for our made-to-order manufacturing operation</div>
+    <div class="meta">
+      <div class="meta-item"><strong>Attendees</strong>Thomas Brown, Chase Anderson</div>
+      <div class="meta-item"><strong>Target Go-Live</strong>Q3 2026 (July)</div>
+      <div class="meta-item"><strong>Prepared</strong>March 2026</div>
+      <div class="meta-item"><strong>Reference Doc</strong>Fishbowl vs MRPeasy Comparison</div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- Section 1: Who We Are -->
+    <div class="section">
+      <div class="section-title">Who We Are</div>
+      <p>Dutton Brown is a made-to-order lighting and hardware manufacturer based in Minneapolis. We design and sell approximately <strong>275 products</strong> with up to <strong>39 color and finish variants each</strong>, sold primarily through our Shopify storefront. We process approximately <strong>500 orders per month</strong> and have a <strong>10-person team</strong> across operations, production, and admin.</p>
+      <p><strong>Everything we make is built to order. Nothing ships off a shelf.</strong></p>
+    </div>
+
+    <!-- Section 2: Manufacturing Workflow -->
+    <div class="section">
+      <div class="section-title">Our Manufacturing Workflow</div>
+      <p>We have two distinct production paths that any MRP system must handle simultaneously:</p>
+      <div class="path-grid">
+        <div class="path-box standard">
+          <div class="path-title">Path 1 — Standard Finishes</div>
+          <p><strong>Finishes:</strong> Brass, Nickel, Black</p>
+          <ul>
+            <li>Parts pre-finished, kept in stock</li>
+            <li>Order in → straight to assembly</li>
+            <li>Fast, no batching required</li>
+            <li>Black is sometimes ordered pre-finished from vendor due to high volume</li>
+          </ul>
+        </div>
+        <div class="path-box custom">
+          <div class="path-title">Path 2 — Custom Colors (Powder Coat)</div>
+          <p><strong>Finishes:</strong> Coral, Navy, Orange, Sage, and 30+ others</p>
+          <ul>
+            <li>Raw uncoated parts pulled from stock</li>
+            <li>Orders accumulate until enough of a color to batch</li>
+            <li>Powder coat run in-house by color</li>
+            <li>Coated parts returned to inventory</li>
+            <li>Waiting assembly MOs proceed</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:16px;">
+        <strong>Critical requirement:</strong> The system must generate a consolidated pick list by color — showing all open orders waiting for powder coat, grouped by finish, with aggregate part quantities across all waiting MOs. This is our single most operationally important workflow and the primary thing we need to validate.
+      </div>
+    </div>
+
+    <!-- Section 3: Current State -->
+    <div class="section">
+      <div class="section-title">Current State — Why We're Looking</div>
+      <table>
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Current Use</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label-col">Shopify</td>
+            <td>Storefront, order management</td>
+            <td class="good">Works well — must integrate</td>
+          </tr>
+          <tr>
+            <td class="label-col">Katana MRP</td>
+            <td>Purchase orders only — not full MRP</td>
+            <td class="bad">No configurable BOMs; pricing scales with volume; month-to-month</td>
+          </tr>
+          <tr>
+            <td class="label-col">Fishbowl</td>
+            <td>Incomplete setup — never fully implemented</td>
+            <td class="bad">Stalled due to BOM complexity, cost, QB sync issues. ~$6,600 spent since May 2024 with no operational return.</td>
+          </tr>
+          <tr>
+            <td class="label-col">ShipStation</td>
+            <td>Fulfillment</td>
+            <td class="good">Works well — must integrate</td>
+          </tr>
+          <tr>
+            <td class="label-col">QuickBooks Online</td>
+            <td>Accounting</td>
+            <td class="good">Works well — must integrate</td>
+          </tr>
+          <tr>
+            <td class="label-col">Notion</td>
+            <td>Team workflows, assembly logs, parts DB, labor tracking</td>
+            <td class="good">Works well — want to keep as team-facing layer</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout neutral" style="margin-top:14px;">
+        The core gap: no system of record for BOMs, manufacturing orders, or inventory. A 275-product, 500-part, 500-order/month operation currently runs largely on spreadsheets and institutional knowledge.
+      </div>
+    </div>
+
+    <!-- Section 4: Why MRPEasy -->
+    <div class="section">
+      <div class="section-title">Why MRPeasy Made the Shortlist</div>
+      <p>We evaluated seven platforms — Fishbowl, Craftybase, NetSuite, Odoo, Cin7, inFlow, and Katana — before landing here. MRPeasy stood out for three reasons:</p>
+
+      <h3>1. Matrix BOMs</h3>
+      <p>Instead of 39 separate BOMs per product, one BOM template with a "Finish" parameter that resolves the correct parts automatically on every order. For our catalog this is the difference between a manageable implementation and a ~10,000-record data entry project.</p>
+      <div class="code-block">Example — Aura Pendant (39 variants, 25 parts)
+
+Matrix BOM — one template:
+  Parameter: Finish = {BR, NI, BL, CORAL, NAVY, ORANGE, SAGE...}
+
+  Fixed parts (20 — same for all finishes):
+    Socket E26  ×1,  Nipple NI3 ×2,  Set Screw SS1 ×4,  Wire WR2 ×36"...
+
+  Parametric parts (5 — resolved by Finish):
+    Canopy    → {BR→CA5BR,  NI→CA5NI,  BL→CA5BL,  CORAL→CA5-CORAL...}
+    Globe Cap → {BR→GC6BR,  NI→GC6NI,  BL→GC6BL,  CORAL→GC6-CORAL...}
+    Lamp Cup  → {BR→LC1BR,  NI→LC1NI,  BL→LC1BL,  CORAL→LC1-CORAL...}</div>
+
+      <h3>2. Right-Sized for Our Operation</h3>
+      <p>Cloud-native, no server, no IT overhead. Shop Floor Kiosk means production workers don't need licenses. 2–3 licensed users covers our actual needs. Native Shopify, ShipStation, and QuickBooks integrations — not third-party plugins.</p>
+
+      <h3>3. Automation-Ready</h3>
+      <p>Full API access on Unlimited plan enables Make.com automations for real-time MO creation, powder coat pick lists, and Notion sync — which is our intended architecture.</p>
+    </div>
+
+    <!-- Section 5: Proposed Architecture -->
+    <div class="section">
+      <div class="section-title">Proposed Architecture</div>
+      <div class="code-block">Shopify (500 orders/mo)
+  → Make.com (real-time webhook → auto-create MOs via API)
+  → MRPeasy Unlimited (system of record: BOMs, inventory, MOs, POs)
+      ↕ Make.com (sync pick lists, alerts, KPI data)
+  → Notion (team-facing: powder coat queues, Kanban, SOPs, dashboard)
+  → ShipStation (fulfillment after assembly complete)
+  → QuickBooks (accounting sync)</div>
+      <table style="margin-top:14px;">
+        <thead>
+          <tr><th>Who</th><th>Touches</th><th>License</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label-col">Production Manager + 1–2 Leads</td>
+            <td>MRPeasy — BOMs, MOs, POs, inventory</td>
+            <td>2–3 Unlimited seats</td>
+          </tr>
+          <tr>
+            <td class="label-col">Shop Floor (Assemblers, Coaters)</td>
+            <td>MRPeasy Kiosk — clock in/out of operations</td>
+            <td>No license (kiosk)</td>
+          </tr>
+          <tr>
+            <td class="label-col">All 10 Team Members</td>
+            <td>Notion — production status, pick lists, SOPs, tasks</td>
+            <td>Existing</td>
+          </tr>
+          <tr>
+            <td class="label-col">Make.com</td>
+            <td>Automated bridge — no human interaction</td>
+            <td>~$16–29/mo</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout info" style="margin-top:14px;">
+        <strong>Total new monthly spend: ~$475/mo</strong> (3 Unlimited seats + Make.com Pro), assuming existing Notion, QuickBooks, ShipStation, and Shopify subscriptions remain unchanged.
+      </div>
+    </div>
+
+    <!-- Section 6: Pros and Cons -->
+    <div class="section">
+      <div class="section-title">What We've Validated — Pros &amp; Cons</div>
+      <div class="pc-grid">
+        <div class="pc-card pros">
+          <div class="pc-title">Pros — Validated Through Research</div>
+          <ul>
+            <li><strong>Matrix BOM</strong> — genuinely differentiated at this price point; no competitor offers it for &lt;$500/mo</li>
+            <li><strong>Native Shopify app</strong> — listed on Shopify App Store, not a third-party plugin</li>
+            <li><strong>Native ShipStation + QuickBooks</strong> integrations built in</li>
+            <li><strong>Shop Floor Kiosk</strong> included — shop workers clock in/out at no extra cost</li>
+            <li><strong>Month-to-month</strong> — no lock-in, no annual contract required</li>
+            <li><strong>Full API + Make.com access</strong> on Unlimited plan</li>
+            <li><strong>Support included</strong> — no hour blocks or annual support contract</li>
+            <li><strong>~1,500 customers</strong> at similar scale — not enterprise overkill</li>
+          </ul>
+        </div>
+        <div class="pc-card cons">
+          <div class="pc-title">Cons — Need Answers</div>
+          <ul>
+            <li><strong>No native powder coat pick list</strong> — grouping MOs by color requires a workaround; must validate API can support it</li>
+            <li><strong>Shopify sync is hourly</strong> — native polling; real-time requires Make.com + API (Unlimited plan)</li>
+            <li><strong>Reporting is adequate, not deep</strong> — need to understand what's available vs. what requires Power BI or export</li>
+            <li><strong>Part codes still multiply</strong> — Matrix BOM reduces BOM count, not part records; each color variant = own inventory item</li>
+            <li><strong>Smaller vendor</strong> — ~1,500 customers vs. larger platforms; fewer third-party consultants</li>
+            <li><strong>30-day trial may not be enough</strong> — need to discuss extension for our catalog size</li>
+            <li><strong>Cloud-only</strong> — no offline capability; internet-dependent</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 7: Questions -->
+    <div class="section">
+      <div class="section-title">Our Questions for MRPeasy</div>
+      <p style="font-size:13px; color:#888; margin-bottom:20px;">
+        <span style="background:#fce8e8; color:#b84444; font-weight:600; padding:2px 7px; border-radius:10px; font-size:11px; margin-right:6px;">MUST</span> = go/no-go requirement &nbsp;&nbsp;
+        <span style="background:#fdf3e0; color:#8a5c10; font-weight:600; padding:2px 7px; border-radius:10px; font-size:11px; margin-right:6px;">KEY</span> = important but not blocking
+      </p>
+
+      <div class="q-group">
+        <div class="q-group-title">Matrix BOMs &amp; Variants</div>
+        <ul class="q-list">
+          <li><span class="q-num">Q1</span><span class="q-priority must">MUST</span>Can you demo Matrix BOM live with a product that has 30+ color variants?</li>
+          <li><span class="q-num">Q2</span><span class="q-priority must">MUST</span>How does the system distinguish between pre-finished parts (Brass/Nickel/Black — always in stock) and powder-coated parts (custom colors — need batching)? Can the Finish parameter drive different production paths or statuses?</li>
+          <li><span class="q-num">Q3</span><span class="q-priority key">KEY</span>What happens operationally when we add a new color to an existing product — how much rework on the BOM?</li>
+          <li><span class="q-num">Q4</span><span class="q-priority key">KEY</span>If a single Shopify order contains 3 different products in 3 different colors, how does MRPeasy represent that — one customer order with 3 MOs, or something else?</li>
+        </ul>
+      </div>
+
+      <div class="q-group">
+        <div class="q-group-title">Powder Coat Pick List — Our #1 Requirement</div>
+        <ul class="q-list">
+          <li><span class="q-num">Q5</span><span class="q-priority must">MUST</span>Is there any native view today that groups open MOs by finish/color parameter?</li>
+          <li><span class="q-num">Q6</span><span class="q-priority must">MUST</span>What is your recommended approach for generating a consolidated pick list by color — API export via Make.com, two-tier MO approach, CSV filter, or something else? Can you walk us through it?</li>
+          <li><span class="q-num">Q7</span><span class="q-priority must">MUST</span>Can the MRPeasy API return the finish parameter value on open MOs so Make.com can group and aggregate parts by color across all waiting orders?</li>
+          <li><span class="q-num">Q8</span><span class="q-priority key">KEY</span>What does a Make.com scenario look like to generate a daily powder coat pick list and push it to Notion — is this something you've seen customers build?</li>
+        </ul>
+      </div>
+
+      <div class="q-group">
+        <div class="q-group-title">Reorder Intelligence &amp; Inventory</div>
+        <ul class="q-list">
+          <li><span class="q-num">Q9</span><span class="q-priority key">KEY</span>Does MRPeasy calculate reorder points automatically based on usage history, or are they set manually? Is there any demand forecasting or min/max calculation built in?</li>
+          <li><span class="q-num">Q10</span><span class="q-priority key">KEY</span>Can reorder points account for vendor-specific lead times per part?</li>
+          <li><span class="q-num">Q11</span><span class="q-priority key">KEY</span>What does the low stock alert workflow look like — email, in-app notification, or webhook we can route to Notion/Slack?</li>
+          <li><span class="q-num">Q12</span><span class="q-priority key">KEY</span>Can we import 500 existing parts via CSV with reorder points pre-populated?</li>
+        </ul>
+      </div>
+
+      <div class="q-group">
+        <div class="q-group-title">Reporting</div>
+        <ul class="q-list">
+          <li><span class="q-num">Q13</span><span class="q-priority key">KEY</span>What production reports are available out of the box — MO throughput, on-time completion rate, parts consumption by period, labor by order?</li>
+          <li><span class="q-num">Q14</span><span class="q-priority key">KEY</span>Can we export raw data from any report to CSV or Excel?</li>
+          <li><span class="q-num">Q15</span><span class="q-priority key">KEY</span>What does the Power BI integration look like — a native connector or a raw export?</li>
+          <li><span class="q-num">Q16</span><span class="q-priority key">KEY</span>Is there a report showing production lead time by product or order?</li>
+        </ul>
+      </div>
+
+      <div class="q-group">
+        <div class="q-group-title">Labor &amp; Shop Floor Kiosk</div>
+        <ul class="q-list">
+          <li><span class="q-num">Q17</span><span class="q-priority key">KEY</span>How does the Shop Floor Kiosk work in practice — do workers log start and end time per operation, or per MO as a whole?</li>
+          <li><span class="q-num">Q18</span><span class="q-priority key">KEY</span>Can we see actual vs. estimated labor time per MO in reporting?</li>
+          <li><span class="q-num">Q19</span><span class="q-priority key">KEY</span>Is the kiosk interface mobile or tablet-friendly, or desktop-only?</li>
+          <li><span class="q-num">Q20</span><span class="q-priority key">KEY</span>We're currently building labor tracking in Notion. We'd consider consolidating to the MRPeasy kiosk if it's intuitive and doesn't add to our monthly cost. What does onboarding shop floor workers to the kiosk typically look like?</li>
+        </ul>
+      </div>
+
+      <div class="q-group">
+        <div class="q-group-title">Shopify Integration &amp; Real-Time Sync</div>
+        <ul class="q-list">
+          <li><span class="q-num">Q21</span><span class="q-priority must">MUST</span>Walk us through exactly what happens in MRPeasy when a Shopify order is received — what gets created, in what state, and how quickly?</li>
+          <li><span class="q-num">Q22</span><span class="q-priority key">KEY</span>How does the system handle a Shopify product with no BOM yet — error, queue, or skip?</li>
+          <li><span class="q-num">Q23</span><span class="q-priority must">MUST</span>For real-time MO creation via Make.com + API: what's the endpoint, and does it accept the finish/variant parameter from the Shopify line item to pre-populate the Matrix BOM parameter?</li>
+          <li><span class="q-num">Q24</span><span class="q-priority key">KEY</span>We have Shopify line items that are fees, not physical products (expedite fees, Upcharge SKUs). How does MRPeasy handle those — do we need to filter them out upstream in Make.com?</li>
+        </ul>
+      </div>
+
+      <div class="q-group">
+        <div class="q-group-title">Migration, Onboarding &amp; Trial</div>
+        <ul class="q-list">
+          <li><span class="q-num">Q25</span><span class="q-priority key">KEY</span>What does a typical onboarding look like for a catalog our size — 275 products, 500 parts, up to 39 variants per product?</li>
+          <li><span class="q-num">Q26</span><span class="q-priority key">KEY</span>Do you have a Matrix BOM import template (CSV or Excel)? Can BOMs be imported in bulk?</li>
+          <li><span class="q-num">Q27</span><span class="q-priority key">KEY</span>Do you offer implementation support, and if so at what cost and format?</li>
+          <li><span class="q-num">Q28</span><span class="q-priority must">MUST</span>Can we get a trial extension beyond 30 days? Our catalog is large enough that a meaningful test realistically takes 6–8 weeks.</li>
+          <li><span class="q-num">Q29</span><span class="q-priority key">KEY</span>What's your recommended onboarding sequence — parts first, then BOMs, then Shopify connect, then Make.com?</li>
+        </ul>
+      </div>
+
+      <div class="q-group">
+        <div class="q-group-title">Pricing &amp; Contract</div>
+        <ul class="q-list">
+          <li><span class="q-num">Q30</span><span class="q-priority key">KEY</span>Unlimited plan — confirmed month-to-month with no lock-in?</li>
+          <li><span class="q-num">Q31</span><span class="q-priority key">KEY</span>Can we start with 2 users and add a third mid-cycle without a new contract?</li>
+          <li><span class="q-num">Q32</span><span class="q-priority key">KEY</span>Is there a discount for annual commitment, and can that be applied after we complete the trial?</li>
+          <li><span class="q-num">Q33</span><span class="q-priority key">KEY</span>What happens to our data if we cancel — full export available?</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 8: Success Criteria -->
+    <div class="section">
+      <div class="section-title">What Success Looks Like</div>
+      <p>We're not looking for a sales pitch. We need to answer three questions before starting the trial:</p>
+      <ol class="criteria-list" style="margin-top:16px;">
+        <li><strong>Powder coat pick list is buildable</strong> — either natively or via Make.com + API, we can generate a color-grouped, parts-aggregated pick list across all open orders waiting for powder coat.</li>
+        <li><strong>Matrix BOM works as documented</strong> — specifically for a product with 39 variants where some finishes are pre-stocked and some require custom powder coating, with the correct parts resolving automatically.</li>
+        <li><strong>Trial can be extended</strong> — 30 days is not enough to properly test with our catalog. We need confidence that we can run a real-world evaluation before committing.</li>
+      </ol>
+      <div class="callout info" style="margin-top:16px;">
+        If yes to all three, we start the trial immediately and target go-live by <strong>July 2026</strong>.
+      </div>
+    </div>
+
+    <!-- Section 9: Our Data Assets -->
+    <div class="section">
+      <div class="section-title">Our Data Assets — Available for Trial Import</div>
+      <table>
+        <thead>
+          <tr><th>Asset</th><th>Description</th><th>Format</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label-col">500 Parts</td>
+            <td>Part number, family, finish classification, 2025 usage quantities</td>
+            <td>CSV + Notion DB</td>
+          </tr>
+          <tr>
+            <td class="label-col">~275 Products</td>
+            <td>Full Shopify catalog with all variants and SKUs</td>
+            <td>Shopify export CSV</td>
+          </tr>
+          <tr>
+            <td class="label-col">2025 Usage Data</td>
+            <td>242 parts with annual consumption — for reorder point calculation</td>
+            <td>JSON / Excel</td>
+          </tr>
+          <tr>
+            <td class="label-col">Notion Parts DB</td>
+            <td>Parts already structured with family/finish relationships and role tags (Standard vs Finish-specific)</td>
+            <td>Notion (API-accessible)</td>
+          </tr>
+          <tr>
+            <td class="label-col">Parts Glossary</td>
+            <td>500+ parts with images, descriptions, and numbering nomenclature</td>
+            <td>DOCX + images</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 10: Timeline -->
+    <div class="section">
+      <div class="section-title">Timeline</div>
+      <ul class="timeline">
+        <li>
+          <span class="tl-date">March 2026</span>
+          <span class="tl-milestone">MRPeasy vendor meeting — this document</span>
+          <span class="tl-tag next">Next</span>
+        </li>
+        <li>
+          <span class="tl-date">Within 1 week</span>
+          <span class="tl-milestone">Trial signup — connect Shopify, ShipStation, QuickBooks</span>
+          <span class="tl-tag next">Next</span>
+        </li>
+        <li>
+          <span class="tl-date">Trial Weeks 1–2</span>
+          <span class="tl-milestone">Import 500 parts with reorder points; verify all ~275 products visible</span>
+          <span class="tl-tag upcoming">Upcoming</span>
+        </li>
+        <li>
+          <span class="tl-date">Trial Weeks 2–3</span>
+          <span class="tl-milestone">Build Matrix BOMs for top 20 products by volume; test MO creation and BOM resolution across both production paths</span>
+          <span class="tl-tag upcoming">Upcoming</span>
+        </li>
+        <li>
+          <span class="tl-date">Trial Week 3</span>
+          <span class="tl-milestone">Build Make.com Scenario 1 — real-time Shopify webhook → MO creation; validate powder coat pick list approach</span>
+          <span class="tl-tag upcoming">Upcoming</span>
+        </li>
+        <li>
+          <span class="tl-date">Trial Week 4</span>
+          <span class="tl-milestone">Full workflow test — order through assembly through ship; confirm ShipStation + QuickBooks sync; evaluate reporting</span>
+          <span class="tl-tag upcoming">Upcoming</span>
+        </li>
+        <li>
+          <span class="tl-date">End of Trial</span>
+          <span class="tl-milestone">Go / no-go decision</span>
+          <span class="tl-tag upcoming">Upcoming</span>
+        </li>
+        <li>
+          <span class="tl-date">July 2026</span>
+          <span class="tl-milestone">Full go-live — all 275 products with Matrix BOMs; Make.com automations live; Katana and Fishbowl cancelled</span>
+          <span class="tl-tag goal">Goal</span>
+        </li>
+      </ul>
+    </div>
+
+  </div><!-- /page-body -->
+
+  <div class="page-footer">
+    <span>Dutton Brown Design &mdash; Confidential</span>
+    <span>Prepared March 2026 &mdash; Thomas Brown &amp; Chase Anderson</span>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
