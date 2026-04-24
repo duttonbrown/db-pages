@@ -67,7 +67,13 @@ body {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--text);
-  white-space: nowrap;
+  min-width: 0;
+}
+.w-title .w-source {
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-left: 8px;
 }
 .w-ts {
   font-size: 10px;
@@ -308,7 +314,7 @@ body {
 
   <!-- Header -->
   <div class="w-header">
-    <span class="w-title">Omnisend Scoreboard</span>
+    <span class="w-title">Omnisend Scoreboard <span class="w-source">(via Shopify UTM · must request Omnisend beta access)</span></span>
     <span class="w-ts" id="ts">Loading…</span>
   </div>
 
