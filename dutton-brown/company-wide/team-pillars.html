@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Structure Framework — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent:        #FF9912;
+    --accent-dark:   #D97706;
+    --text:          #4A4A4A;
+    --text-mid:      #6A6A6A;
+    --text-light:    #9A9A9A;
+    --bg:            #FAFAF8;
+    --card:          #FFFFFF;
+    --border:        #EAEAEA;
+    --border-strong: #D5D5D5;
+    --radius:        10px;
+
+    --c-company:    #4A4A4A;
+    --c-marketing:  #4A6FA5;
+    --c-production: #6B8E5A;
+    --c-operations: #D97706;
+    --c-admin:      #8B6AA8;
+    --c-design:     #C48A55;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-weight: 300; color: var(--text); background: var(--bg);
+    line-height: 1.55; -webkit-font-smoothing: antialiased;
+  }
+  body { padding: 56px 24px 96px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ── Header ── */
+  header { margin-bottom: 40px; }
+  .eyebrow { font-size: 12px; font-weight: 400; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+  h1 { font-weight: 300; font-size: 40px; letter-spacing: -0.5px; margin-bottom: 10px; }
+  .header-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
+  .subtitle { font-size: 15px; color: var(--text-mid); }
+  .back-link { font-size: 13px; color: var(--accent-dark); text-decoration: none; font-weight: 400; }
+  .back-link:hover { text-decoration: underline; }
+
+  .intro-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px 28px; margin-bottom: 36px;
+  }
+  .intro-card p { font-size: 14px; color: var(--text-mid); margin-bottom: 8px; }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card strong { font-weight: 600; color: var(--text); }
+
+  /* ── Tab bar ── */
+  .tab-bar {
+    display: flex; gap: 0; flex-wrap: wrap;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .tab-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 11px 20px; font-size: 13px; font-weight: 400;
+    font-family: inherit; color: var(--text-mid);
+    background: none; border: none; cursor: pointer;
+    border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { font-weight: 600; border-bottom-color: var(--tab-color, var(--accent)); color: var(--text); }
+  .tab-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--tab-color, var(--accent-dark));
+    flex-shrink: 0;
+  }
+
+  /* ── Tab panels ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── Purpose banner ── */
+  .purpose-banner {
+    border-radius: var(--radius); padding: 22px 28px; margin-bottom: 28px;
+    border-left: 4px solid var(--dept-color);
+    background: var(--card); border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 20px;
+  }
+  .purpose-banner.empty { opacity: 0.65; }
+  .purpose-dept {
+    font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--dept-color); margin-bottom: 6px;
+  }
+  .purpose-text { font-size: 15px; color: var(--text); font-weight: 300; }
+  .purpose-status {
+    margin-left: auto; flex-shrink: 0;
+    font-size: 11px; color: var(--text-light); font-style: italic;
+    padding: 3px 9px; border-radius: 20px;
+    background: #F5F5F5; border: 1px solid var(--border-strong);
+    white-space: nowrap; align-self: flex-start;
+  }
+  .purpose-status.live { color: #6B8E5A; background: #F0F7ED; border-color: #C8DFC0; font-style: normal; }
+
+  /* ── Pillar grid ── */
+  .pillars-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 800px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+  .pillar-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 20px 22px; display: flex; flex-direction: column; gap: 10px;
+    border: 1px solid var(--border); position: relative;
+  }
+  .pillar-card.empty {
+    border-style: dashed; border-color: var(--border-strong);
+    background: #FAFAF8;
+  }
+  .pillar-card.partial { border-left: 3px solid var(--accent); }
+  .pillar-card.live { border-left: 3px solid #6B8E5A; }
+
+  .pillar-head { display: flex; align-items: center; gap: 10px; }
+  .pillar-num {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    background: #F5F5F5; color: var(--text-mid);
+    border: 1px solid var(--border-strong);
+  }
+  .pillar-num.live { background: #F0F7ED; color: #6B8E5A; border-color: #C8DFC0; }
+  .pillar-num.partial { background: #FFF7ED; color: var(--accent-dark); border-color: #FDE68A; }
+  .pillar-name { font-size: 14px; font-weight: 400; color: var(--text); }
+  .pillar-desc { font-size: 12px; color: var(--text-mid); line-height: 1.55; }
+
+  .pillar-state {
+    margin-top: auto; padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    display: flex; align-items: center; gap: 8px; justify-content: space-between;
+  }
+  .state-tag {
+    font-size: 10px; font-weight: 400; letter-spacing: 0.3px;
+    padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+  }
+  .st-empty   { color: var(--text-light); background: #F5F5F5; border: 1px solid var(--border-strong); font-style: italic; }
+  .st-partial { color: var(--accent-dark); background: #FFF7ED; border: 1px solid #FDE68A; }
+  .st-live    { color: #6B8E5A; background: #F0F7ED; border: 1px solid #C8DFC0; }
+
+  .notion-cta {
+    font-size: 11px; color: var(--text-light); text-decoration: none;
+    font-weight: 300;
+  }
+  .notion-cta:hover { color: var(--accent-dark); text-decoration: underline; }
+
+  /* ── Meeting cadence table (Pillar 5 shared) ── */
+  .cadence-table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); margin-top: 16px; }
+  .cadence-table { width: 100%; border-collapse: collapse; background: var(--card); min-width: 560px; }
+  .cadence-table thead th {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase;
+    color: var(--text-light); padding: 11px 16px; text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .cadence-table tbody tr + tr td { border-top: 1px solid var(--border); }
+  .cadence-table td { padding: 11px 16px; font-size: 13px; color: var(--text); vertical-align: top; }
+  .cadence-table td.td-freq { color: var(--accent-dark); font-weight: 400; white-space: nowrap; }
+  .cadence-table td.td-desc { font-size: 12px; color: var(--text-mid); }
+
+  /* ── Footer ── */
+  footer { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  footer span { font-size: 12px; color: var(--text-light); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <p class="eyebrow">Dutton Brown · Team Structure</p>
+    <div class="header-row">
+      <h1>Team Structure Framework</h1>
+      <a class="back-link" href="2026-roadmap.html">← 2026 Roadmap</a>
+    </div>
+  </header>
+
+  <div class="intro-card">
+    <p>Every department at Dutton Brown is structured around <strong>6 pillars</strong> — the same framework applied to every team so anyone can onboard, delegate, and scale consistently. This page shows the current state of each team's pillars.</p>
+    <p>Select a team tab below. Where content is marked <strong>"Not yet filled in"</strong> that section exists in Notion but hasn't been written yet — those are the Q2 priorities. Pillars marked <strong>"Live"</strong> have content in Notion; <strong>"Partial"</strong> means some data exists (e.g. KPI database records) but the narrative isn't written.</p>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar" role="tablist">
+    <button class="tab-btn active" style="--tab-color: var(--c-company)"   onclick="switchTab(this,'company')"    role="tab">
+      <span class="tab-dot" style="--tab-color: var(--c-company)"></span>Company-wide
+    </button>
+    <button class="tab-btn" style="--tab-color: var(--c-marketing)"  onclick="switchTab(this,'marketing')"  role="tab">
+      <span class="tab-dot" style="--tab-color: var(--c-marketing)"></span>Marketing
+    </button>
+    <button class="tab-btn" style="--tab-color: var(--c-production)" onclick="switchTab(this,'production')" role="tab">
+      <span class="tab-dot" style="--tab-color: var(--c-production)"></span>Production
+    </button>
+    <button class="tab-btn" style="--tab-color: var(--c-operations)" onclick="switchTab(this,'operations')" role="tab">
+      <span class="tab-dot" style="--tab-color: var(--c-operations)"></span>Operations
+    </button>
+    <button class="tab-btn" style="--tab-color: var(--c-admin)"      onclick="switchTab(this,'admin')"      role="tab">
+      <span class="tab-dot" style="--tab-color: var(--c-admin)"></span>Admin &amp; HR
+    </button>
+    <button class="tab-btn" style="--tab-color: var(--c-design)"     onclick="switchTab(this,'design')"     role="tab">
+      <span class="tab-dot" style="--tab-color: var(--c-design)"></span>Design &amp; Dev
+    </button>
+  </div>
+
+  <!-- ══ COMPANY-WIDE ══ -->
+  <div class="tab-panel active" id="tab-company">
+    <div class="purpose-banner" style="--dept-color: var(--c-company)">
+      <div>
+        <p class="purpose-dept">Company-wide</p>
+        <p class="purpose-text">The 6-Pillar Team Structure Framework is the operating system for how every department at Dutton Brown is built, managed, and scaled — applied consistently so leadership and team members share the same vocabulary and structure.</p>
+      </div>
+      <span class="purpose-status live">Framework live</span>
+    </div>
+
+    <div class="pillars-grid">
+      <!-- P1 -->
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">1</span><span class="pillar-name">Core Responsibilities</span></div>
+        <p class="pillar-desc">What each department exists to do — its purpose, non-negotiable outcomes, and how it connects to other teams. Answers: Why does this exist? What breaks without it? What do we hand off?</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in per team</span>
+          <a class="notion-cta" href="https://www.notion.so/810b8acfeec24e4eb8c3df7f3c8bef15" target="_blank">Open in Notion →</a>
+        </div>
+      </div>
+      <!-- P2 -->
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">2</span><span class="pillar-name">KPIs &amp; Goals</span></div>
+        <p class="pillar-desc">Measurable performance indicators that show whether the department is succeeding. Turns activity into data — creating accountability and visibility essential for scale. Tier 1 = Score; Tier 2 = KPIs.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">KPI DB active — narratives pending</span>
+          <a class="notion-cta" href="https://www.notion.so/810b8acfeec24e4eb8c3df7f3c8bef15" target="_blank">Open in Notion →</a>
+        </div>
+      </div>
+      <!-- P3 -->
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">3</span><span class="pillar-name">Roles &amp; People</span></div>
+        <p class="pillar-desc">Current and future roles with each person's primary outcome — not just job duties. Clarifies who owns each result, enabling hiring triggers and performance conversations.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">Roles DB active — outcomes pending</span>
+          <a class="notion-cta" href="https://www.notion.so/810b8acfeec24e4eb8c3df7f3c8bef15" target="_blank">Open in Notion →</a>
+        </div>
+      </div>
+      <!-- P4 -->
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">4</span><span class="pillar-name">Systems, SOPs &amp; Tools</span></div>
+        <p class="pillar-desc">Repeatable processes, software, automations, and external partners the department relies on. SOPs turn tacit knowledge into teachable systems — critical for delegating or scaling.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">Docs DB active — SOPs in progress</span>
+          <a class="notion-cta" href="https://www.notion.so/810b8acfeec24e4eb8c3df7f3c8bef15" target="_blank">Open in Notion →</a>
+        </div>
+      </div>
+      <!-- P5 -->
+      <div class="pillar-card live">
+        <div class="pillar-head"><span class="pillar-num live">5</span><span class="pillar-name">Meeting Rhythm &amp; Reporting</span></div>
+        <p class="pillar-desc">Scheduled cadence for reviewing KPIs, resolving blockers, and aligning across departments. Establishes momentum and the communication structure that sustains growth.</p>
+        <div class="cadence-table-wrap">
+          <table class="cadence-table">
+            <thead><tr><th>Tier</th><th>Cadence</th><th>Format</th></tr></thead>
+            <tbody>
+              <tr><td class="td-freq">Weekly — A</td><td>1:1 Check-in</td><td class="td-desc">Status, progress vs. goals, blockers, quick decisions</td></tr>
+              <tr><td class="td-freq">Weekly — B</td><td>1:1 Ad Hoc Topic</td><td class="td-desc">One focused topic per session, scoped to resolve in 1–2 weeks</td></tr>
+              <tr><td class="td-freq">Monthly</td><td>Mgmt meeting (2nd Thu)</td><td class="td-desc">Cross-department KPI review and company-level priorities</td></tr>
+              <tr><td class="td-freq">Quarterly</td><td>Planning session</td><td class="td-desc">Focus projects, ad hoc slots, goals, standing deliverables (2 SOPs/dept)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pillar-state">
+          <span class="state-tag st-live">Live — cadence active</span>
+          <a class="notion-cta" href="https://www.notion.so/d8502f8937314e008b413a443afe67d2" target="_blank">TSF Reference →</a>
+        </div>
+      </div>
+      <!-- P6 -->
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">6</span><span class="pillar-name">Growth, Risks &amp; Improvement</span></div>
+        <p class="pillar-desc">Forward-looking view: where the department is headed, what could slow it down, and what's actively being improved. Connects to Projects DB for improvement tracking.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">Projects DB active — strategy narratives pending</span>
+          <a class="notion-cta" href="https://www.notion.so/810b8acfeec24e4eb8c3df7f3c8bef15" target="_blank">Open in Notion →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MARKETING ══ -->
+  <div class="tab-panel" id="tab-marketing">
+    <div class="purpose-banner" style="--dept-color: var(--c-marketing)">
+      <div>
+        <p class="purpose-dept">Marketing · Hannah</p>
+        <p class="purpose-text">Grow awareness, drive sales, and deliver great customer experiences through clear communication and branding.</p>
+      </div>
+      <span class="purpose-status live">Purpose live</span>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">1</span><span class="pillar-name">Core Responsibilities</span></div>
+        <p class="pillar-desc">What Marketing exists to do: owned channels, brand voice, customer lifecycle, trade program, and creative output. What breaks if Marketing isn't functioning?</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8085a44fe57765fd2336" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card partial">
+        <div class="pillar-head"><span class="pillar-num partial">2</span><span class="pillar-name">KPIs &amp; Goals</span></div>
+        <p class="pillar-desc">Marketing KPIs being developed April 2026 (Q2 priority with Thomas &amp; Hannah). Likely: ROAS, email revenue %, trade program members, conversion rate.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">In progress — April Q2 priority</span>
+          <a class="notion-cta" href="https://www.notion.so/343ffa524c5b80a681a5e814dbcf9054" target="_blank">KPIs in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">3</span><span class="pillar-name">Roles &amp; People</span></div>
+        <p class="pillar-desc">Current team: Hannah (Marketing Manager). Future roles as the team scales. Primary outcome per seat not yet documented.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8085a44fe57765fd2336" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">4</span><span class="pillar-name">Systems, SOPs &amp; Tools</span></div>
+        <p class="pillar-desc">Tools likely include: AdScale, Klaviyo, Canva, Google Ads, Shopify. Email automation SOPs are a May priority. No formal SOPs documented yet.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8085a44fe57765fd2336" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card live">
+        <div class="pillar-head"><span class="pillar-num live">5</span><span class="pillar-name">Meeting Rhythm &amp; Reporting</span></div>
+        <p class="pillar-desc">Weekly 1:1 with Thomas alternating Week A (check-in) and Week B (ad hoc topic). Monthly management meeting 2nd Thursday. Q2 ad hoc topics include: KPI development, email automation, trade program improvements.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-live">Cadence active</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8085a44fe57765fd2336" target="_blank">Open in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">6</span><span class="pillar-name">Growth, Risks &amp; Improvement</span></div>
+        <p class="pillar-desc">Backlog includes: quarterly content shoots, trade show attendance (fall confirmed), blogs (blocked on Brand Guide), local designer outreach, unboxing experience. Not yet formally documented.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8085a44fe57765fd2336" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PRODUCTION ══ -->
+  <div class="tab-panel" id="tab-production">
+    <div class="purpose-banner" style="--dept-color: var(--c-production)">
+      <div>
+        <p class="purpose-dept">Production · Catherine</p>
+        <p class="purpose-text">Transform made-to-order specifications into finished, quality-verified products — and fulfill them accurately, safely, and on time through repeatable systems.</p>
+      </div>
+      <span class="purpose-status live">Purpose live</span>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">1</span><span class="pillar-name">Core Responsibilities</span></div>
+        <p class="pillar-desc">Powder coating, assembly, QC, fulfillment, and sandblasting. The department that converts sales into physical product. Key handoffs: receives from Operations (orders/parts), delivers to Shipping/Fulfillment.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b800198ded5759dd8278a" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card partial">
+        <div class="pillar-head"><span class="pillar-num partial">2</span><span class="pillar-name">KPIs &amp; Goals</span></div>
+        <p class="pillar-desc">KPIs being developed April 2026 (Q2 priority with Thomas &amp; Catherine). Production Master Scorecard exists in Notion. Likely KPIs: on-time fulfillment %, defect/rework rate, booth utilization, output per day.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">In progress — April Q2 priority</span>
+          <a class="notion-cta" href="https://www.notion.so/34bffa524c5b817c854ce1c1e65b5d93" target="_blank">Scorecard in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">3</span><span class="pillar-name">Roles &amp; People</span></div>
+        <p class="pillar-desc">Team includes Catherine, Alex, Scottie, Sarah. Scottie &amp; Sarah are newer hires without a formal onboarding structure yet. Cross-training plan (reducing key-person dependency on Alex) is in the backlog.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b800198ded5759dd8278a" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card partial">
+        <div class="pillar-head"><span class="pillar-num partial">4</span><span class="pillar-name">Systems, SOPs &amp; Tools</span></div>
+        <p class="pillar-desc">SOPs are the Q2 core focus: Testing SOP (April), QC Process (May), Assembly Process (June). MRPEasy is being scoped for ERP. Maintenance Procedures and Rework Log exist in Notion.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">SOPs in progress — Q2 priority</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b800198ded5759dd8278a" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card live">
+        <div class="pillar-head"><span class="pillar-num live">5</span><span class="pillar-name">Meeting Rhythm &amp; Reporting</span></div>
+        <p class="pillar-desc">Weekly 1:1 with Thomas alternating Week A (check-in) and Week B (ad hoc topic). Monthly management meeting 2nd Thursday. Q2 ad hoc topics: KPI development, Testing SOP, QC process, Assembly SOP.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-live">Cadence active</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b800198ded5759dd8278a" target="_blank">Open in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">6</span><span class="pillar-name">Growth, Risks &amp; Improvement</span></div>
+        <p class="pillar-desc">Backlog includes: booth utilization analysis (waiting on KPI data), maintenance log &amp; schedule (blocked on SOPs), cross-training plan, new hire onboarding. Compressor &amp; dryer system is a high-priority facilities item.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b800198ded5759dd8278a" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ OPERATIONS ══ -->
+  <div class="tab-panel" id="tab-operations">
+    <div class="purpose-banner" style="--dept-color: var(--c-operations)">
+      <div>
+        <p class="purpose-dept">Operations · Chase</p>
+        <p class="purpose-text">Manage company cash flow, logistics, and daily operations efficiently to support growth.</p>
+      </div>
+      <span class="purpose-status live">Purpose live</span>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">1</span><span class="pillar-name">Core Responsibilities</span></div>
+        <p class="pillar-desc">Purchasing, parts ordering, vendor relationships, inventory visibility, ERP administration, and logistics. Bridges Production's material needs with supplier/vendor execution.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8046ba2be1e065dd7f01" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card partial">
+        <div class="pillar-head"><span class="pillar-num partial">2</span><span class="pillar-name">KPIs &amp; Goals</span></div>
+        <p class="pillar-desc">KPIs being developed April 2026. Operations KPI pages exist (Budget Variance %, Vendor Software Spend). Likely KPIs: on-time parts delivery %, budget variance, vendor lead time accuracy.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">In progress — April Q2 priority</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8046ba2be1e065dd7f01" target="_blank">KPIs in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">3</span><span class="pillar-name">Roles &amp; People</span></div>
+        <p class="pillar-desc">Primary: Chase. Currently handling purchasing, inventory, and vendor management. Role outcomes and future hiring triggers not yet documented.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8046ba2be1e065dd7f01" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card partial">
+        <div class="pillar-head"><span class="pillar-num partial">4</span><span class="pillar-name">Systems, SOPs &amp; Tools</span></div>
+        <p class="pillar-desc">MRPEasy ERP is being scoped (May) and implemented (June) — this is the central Q2 effort for Operations. Parts ordering process &amp; inventory system is a high-priority backlog item once ERP is scoped. No formal SOPs yet.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">ERP in progress — key Q2 initiative</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8046ba2be1e065dd7f01" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card live">
+        <div class="pillar-head"><span class="pillar-num live">5</span><span class="pillar-name">Meeting Rhythm &amp; Reporting</span></div>
+        <p class="pillar-desc">Weekly 1:1 with Thomas alternating Week A (check-in) and Week B (ad hoc topic). Monthly management meeting 2nd Thursday. Q2 ad hoc topics: KPI development, SKU development, MRPEasy scoping and implementation. Meeting cadence not yet fully confirmed.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">Cadence started — formally confirm with Chase</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8046ba2be1e065dd7f01" target="_blank">Open in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">6</span><span class="pillar-name">Growth, Risks &amp; Improvement</span></div>
+        <p class="pillar-desc">High-priority backlog: parts ordering process &amp; inventory system. Lower priority: customer FAQs. Key risk: communication gaps between Production and Chase on overseas parts / ETA visibility. Not yet documented.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8046ba2be1e065dd7f01" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ADMIN & HR ══ -->
+  <div class="tab-panel" id="tab-admin">
+    <div class="purpose-banner" style="--dept-color: var(--c-admin)">
+      <div>
+        <p class="purpose-dept">Admin &amp; HR</p>
+        <p class="purpose-text">Keep the business organized and the team supported through systems, hiring, and internal coordination.</p>
+      </div>
+      <span class="purpose-status live">Purpose live</span>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">1</span><span class="pillar-name">Core Responsibilities</span></div>
+        <p class="pillar-desc">Onboarding/offboarding, compliance, payroll coordination, team handbook, company policies, and internal communication infrastructure. Department owner not yet assigned.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8025bd89e9d35c838256" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">2</span><span class="pillar-name">KPIs &amp; Goals</span></div>
+        <p class="pillar-desc">KPIs not yet developed. No April Q2 milestone scoped for Admin &amp; HR KPIs. Likely candidates: handbook acknowledgement rate, open role time-to-fill, onboarding completion.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet developed</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8025bd89e9d35c838256" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">3</span><span class="pillar-name">Roles &amp; People</span></div>
+        <p class="pillar-desc">No dedicated Admin &amp; HR headcount yet — functions distributed across Thomas and Catherine. Role definition and eventual hiring trigger not documented.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8025bd89e9d35c838256" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card partial">
+        <div class="pillar-head"><span class="pillar-num partial">4</span><span class="pillar-name">Systems, SOPs &amp; Tools</span></div>
+        <p class="pillar-desc">2026 Team Handbook exists and was updated this quarter. Rollout underway (April). Handbook acknowledgement form in progress. Escalation Framework rolled out April 2026. Offboarding SOP is a backlog item.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">Handbook live — other SOPs pending</span>
+          <a class="notion-cta" href="https://www.notion.so/fcf39b8ecfac4f93b08ee21420331282" target="_blank">Team Handbook →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">5</span><span class="pillar-name">Meeting Rhythm &amp; Reporting</span></div>
+        <p class="pillar-desc">No dedicated Admin &amp; HR meeting cadence established. Q2 items (Handbook rollout, Performance Management, Company Hub) are handled through existing 1:1s with Thomas. Formal cadence TBD once a department owner is assigned.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Cadence not yet established</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8025bd89e9d35c838256" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">6</span><span class="pillar-name">Growth, Risks &amp; Improvement</span></div>
+        <p class="pillar-desc">Backlog: Offboarding SOP (no documented exit process), Escalation Framework check-in (needs feedback loop after 1–2 months). Biggest risk: no assigned department owner means Admin &amp; HR gaps fall to Thomas by default.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2adffa524c5b8025bd89e9d35c838256" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DESIGN & DEV ══ -->
+  <div class="tab-panel" id="tab-design">
+    <div class="purpose-banner" style="--dept-color: var(--c-design)">
+      <div>
+        <p class="purpose-dept">Design &amp; Dev · Thomas</p>
+        <p class="purpose-text">Design, develop, and continually improve Dutton Brown's physical products and digital presence — from CAD/BIM and product design to web development and digital asset production.</p>
+      </div>
+      <span class="purpose-status live">Purpose live</span>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">1</span><span class="pillar-name">Core Responsibilities</span></div>
+        <p class="pillar-desc">Product design (CAD/Revit), digital product assets (.glb, renders, spec sheets), Shopify theme development, and duttonbrown.com. The department that defines the product &amp; brand experience.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2f6ffa524c5b809eae83ccc52f53a819" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">2</span><span class="pillar-name">KPIs &amp; Goals</span></div>
+        <p class="pillar-desc">No KPIs developed yet. Q2 doesn't include a formal KPI development milestone for D&amp;D. Likely candidates: products with complete .glb assets, Revit file accuracy rate, site performance scores, legacy account migration completion.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet developed — future quarter</span>
+          <a class="notion-cta" href="https://www.notion.so/2f6ffa524c5b809eae83ccc52f53a819" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">3</span><span class="pillar-name">Roles &amp; People</span></div>
+        <p class="pillar-desc">Currently Thomas-only. Future: contractor or in-house designer as volume scales. Content funnel (April) is the first step toward a repeatable production workflow that others could contribute to.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2f6ffa524c5b809eae83ccc52f53a819" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card partial">
+        <div class="pillar-head"><span class="pillar-num partial">4</span><span class="pillar-name">Systems, SOPs &amp; Tools</span></div>
+        <p class="pillar-desc">Tools: Revit (product modeling), Shopify (storefront), Canva, db-development repo (Liquid/CSS/JS theme). No formal D&amp;D SOPs yet. Content funnel for images &amp; .glb files is an April milestone — establishes the first repeatable workflow.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-partial">Content funnel in progress (April)</span>
+          <a class="notion-cta" href="https://www.notion.so/2f6ffa524c5b809eae83ccc52f53a819" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">5</span><span class="pillar-name">Meeting Rhythm &amp; Reporting</span></div>
+        <p class="pillar-desc">No structured D&amp;D 1:1 cadence (Thomas owns this dept). Work is tracked via Projects DB and weekly self-review. Could benefit from a monthly self-audit once KPIs are defined.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">No formal cadence yet</span>
+          <a class="notion-cta" href="https://www.notion.so/2f6ffa524c5b809eae83ccc52f53a819" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+      <div class="pillar-card empty">
+        <div class="pillar-head"><span class="pillar-num">6</span><span class="pillar-name">Growth, Risks &amp; Improvement</span></div>
+        <p class="pillar-desc">Backlog: 3D viewers / .glb turntables (waiting on content funnel), duttonbrown.com UX improvements (ongoing), improved trade portal (after June trade program), Trade Program Automation (Make + AI). Single-person dept is the primary risk.</p>
+        <div class="pillar-state">
+          <span class="state-tag st-empty">Not yet filled in</span>
+          <a class="notion-cta" href="https://www.notion.so/2f6ffa524c5b809eae83ccc52f53a819" target="_blank">Fill in Notion →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Dutton Brown · Team Structure Framework</span>
+    <span>Last updated April 2026 · <a href="2026-roadmap.html" style="color:var(--text-light)">← 2026 Roadmap</a></span>
+  </footer>
+
+</div>
+
+<script>
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>

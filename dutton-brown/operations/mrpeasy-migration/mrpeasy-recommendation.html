@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fishbowl vs MRPeasy — Manufacturing System Evaluation</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #2c2c2c;
+      background: #f5f4f1;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 48px auto;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .page-header {
+      background: #2c2c2c;
+      color: #fff;
+      padding: 40px 48px 36px;
+    }
+    .page-header .label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #aaa; margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-size: 28px; font-weight: 600; letter-spacing: -0.01em;
+      line-height: 1.2; margin-bottom: 8px;
+    }
+    .page-header .subtitle { font-size: 15px; color: #bbb; }
+
+    .page-body { padding: 40px 48px 56px; }
+
+    .section { margin-bottom: 48px; }
+    .section-title {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #888;
+      margin-bottom: 14px; padding-bottom: 8px;
+      border-bottom: 1px solid #e8e6e1;
+    }
+    .section h3 { font-size: 17px; font-weight: 600; color: #2c2c2c; margin-bottom: 10px; }
+    p { color: #444; margin-bottom: 12px; }
+    ul, ol { padding-left: 20px; color: #444; }
+    ul li, ol li { margin-bottom: 6px; }
+
+    /* --- Tables --- */
+    table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 4px; }
+    th {
+      background: #f5f4f1; text-align: left;
+      font-weight: 600; font-size: 11.5px; letter-spacing: 0.05em;
+      text-transform: uppercase; color: #666;
+      padding: 10px 14px; border-bottom: 2px solid #e0ddd7;
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid #eeece8; color: #3a3a3a; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #faf9f7; }
+    td.label-col { font-weight: 600; color: #2c2c2c; white-space: nowrap; width: 190px; }
+    td.quotes { font-style: italic; color: #666; }
+
+    /* Cost table */
+    .cost-table td.item { color: #444; }
+    .cost-table td.amt { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; width: 120px; }
+    .cost-table td.amt.bad  { color: #b84444; font-weight: 600; }
+    .cost-table td.amt.good { color: #3a7a4a; font-weight: 600; }
+    .cost-table td.amt.neutral { color: #555; font-weight: 600; }
+    .cost-table tr.subtotal td { background: #f5f4f1; font-weight: 700; border-top: 2px solid #e0ddd7; }
+    .cost-table tr.subtotal td.amt { font-size: 15px; }
+    .cost-table td.note { font-size: 12.5px; color: #888; font-style: italic; }
+    .cost-table th.fish-col { color: #943030; }
+    .cost-table th.mrp-col  { color: #2c6640; }
+
+    /* Comparison table */
+    .comparison th:first-child { width: 240px; }
+    .comparison th:nth-child(2), .comparison th:nth-child(3) { text-align: center; width: 180px; }
+    .comparison td:nth-child(2), .comparison td:nth-child(3) { text-align: center; }
+    .comparison td.feature { font-weight: 500; color: #2c2c2c; text-align: left; }
+    .val-no   { color: #b84444; font-weight: 500; }
+    .val-yes  { color: #3a7a4a; font-weight: 500; }
+    .val-both { color: #555; }
+    .val-cost-bad  { color: #b84444; font-weight: 600; }
+    .val-cost-good { color: #3a7a4a; font-weight: 600; }
+
+    /* Pain point callouts */
+    .pain-box {
+      border-radius: 4px; padding: 18px 20px; margin-bottom: 14px; font-size: 14px;
+    }
+    .pain-box.fishbowl {
+      background: #fdf5f5; border: 1px solid #e8c5c5; border-left: 3px solid #c05050;
+    }
+    .pain-box.mrpeasy {
+      background: #f3f9f5; border: 1px solid #b8d9c2; border-left: 3px solid #3a7a4a;
+    }
+    .pain-box .pain-title {
+      font-weight: 700; font-size: 12px; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .pain-box.fishbowl .pain-title { color: #943030; }
+    .pain-box.mrpeasy  .pain-title { color: #2c6640; }
+    .pain-box p { margin-bottom: 6px; color: #3a3a3a; }
+    .pain-box p:last-child { margin-bottom: 0; }
+
+    /* UX grid */
+    .ux-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+    .ux-card { border-radius: 4px; padding: 18px 20px; font-size: 14px; }
+    .ux-card.bad  { background: #fdf5f5; border: 1px solid #e8c5c5; }
+    .ux-card.good { background: #f3f9f5; border: 1px solid #b8d9c2; }
+    .ux-card .ux-title {
+      font-weight: 700; font-size: 12px; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .ux-card.bad  .ux-title { color: #943030; }
+    .ux-card.good .ux-title { color: #2c6640; }
+    .ux-card ul { padding-left: 16px; }
+    .ux-card ul li { margin-bottom: 7px; color: #444; line-height: 1.5; }
+    .ux-quote {
+      font-style: italic; color: #666; font-size: 13px;
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,0.08); line-height: 1.5;
+    }
+
+    /* Callouts */
+    .callout-warn {
+      background: #fdf5f5; border: 1px solid #e8c5c5;
+      border-left: 3px solid #c05050; border-radius: 4px;
+      padding: 14px 18px; font-size: 14px; color: #5a2020;
+      margin-top: 14px; line-height: 1.6;
+    }
+    .callout-warn strong { font-weight: 700; }
+    .cost-callout {
+      background: #f0f7f2; border: 1px solid #b8d9c2;
+      border-radius: 4px; padding: 14px 18px; margin-top: 12px;
+      font-size: 14px; color: #2c6640;
+    }
+    .cost-callout strong { font-weight: 700; }
+
+    /* Code block */
+    .code-block {
+      background: #f5f4f1; border: 1px solid #e0ddd7;
+      border-left: 3px solid #888; border-radius: 4px;
+      padding: 16px 20px; font-family: "SF Mono","Fira Code","Consolas",monospace;
+      font-size: 13px; line-height: 1.7; color: #3a3a3a;
+      margin: 14px 0 16px; white-space: pre; overflow-x: auto;
+    }
+
+    /* Flow diagram */
+    .flow { display: flex; flex-direction: column; margin: 16px 0 24px; align-items: flex-start; }
+    .flow-row { display: flex; align-items: center; }
+    .flow-box {
+      background: #f5f4f1; border: 1px solid #d8d5cf; border-radius: 4px;
+      padding: 9px 16px; font-size: 14px; font-weight: 500; color: #2c2c2c; white-space: nowrap;
+    }
+    .flow-box.primary { background: #2c2c2c; color: #fff; border-color: #2c2c2c; }
+    .flow-arrow-h { font-size: 18px; color: #aaa; padding: 0 8px; line-height: 1; }
+    .flow-branch {
+      display: flex; flex-direction: column; gap: 8px;
+      margin-top: 10px; padding-left: 40px;
+      border-left: 2px solid #d8d5cf; margin-left: 80px;
+    }
+    .flow-branch-item { display: flex; align-items: center; gap: 10px; }
+    .flow-branch-arrow { font-size: 14px; color: #aaa; }
+    .flow-sub-box {
+      background: #faf9f7; border: 1px solid #e0ddd7; border-radius: 4px;
+      padding: 7px 14px; font-size: 13.5px; color: #444;
+    }
+    .flow-sub-box .sub-label { font-weight: 600; color: #2c2c2c; }
+    .flow-sub-box .sub-desc { font-weight: 400; color: #777; font-size: 12.5px; }
+
+    /* Next steps */
+    .next-steps ol { counter-reset: steps; list-style: none; padding: 0; }
+    .next-steps ol li {
+      counter-increment: steps; display: flex; align-items: flex-start;
+      gap: 14px; margin-bottom: 12px;
+    }
+    .next-steps ol li::before {
+      content: counter(steps); background: #2c2c2c; color: #fff;
+      font-size: 12px; font-weight: 700; width: 24px; height: 24px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    .closing-note {
+      background: #f5f4f1; border-radius: 4px; padding: 16px 20px;
+      margin-top: 20px; font-size: 14px; color: #555;
+      font-style: italic; border-left: 3px solid #aaa;
+    }
+
+    .page-footer {
+      border-top: 1px solid #e8e6e1; padding: 16px 48px;
+      font-size: 12px; color: #aaa; display: flex; justify-content: space-between;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+      .page-header, th, .cost-callout, .callout-warn, .ux-card, .pain-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-header">
+    <div class="label">Manufacturing System Evaluation &mdash; Dutton Brown</div>
+    <h1>Fishbowl vs. MRPeasy</h1>
+    <div class="subtitle">A balanced comparison to determine if MRPeasy is worth considering as an alternative</div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- Section 1: Problem -->
+    <div class="section">
+      <div class="section-title">The Problem We're Solving</div>
+      <p>We need a manufacturing system that can:</p>
+      <ul>
+        <li>Receive Shopify orders and auto-create manufacturing orders</li>
+        <li>Track raw material inventory across 500+ parts</li>
+        <li>Handle BOMs for ~275 products with up to 39 finish/color variants each</li>
+        <li>Support our powder coat batching workflow</li>
+        <li>Connect to ShipStation and QuickBooks</li>
+      </ul>
+    </div>
+
+    <!-- Section 2: Our specific pain points with Fishbowl -->
+    <div class="section">
+      <div class="section-title">Our Specific Pain Points with Fishbowl</div>
+
+      <div class="pain-box fishbowl">
+        <div class="pain-title">Pain Point 1 &mdash; Constant Freezes, Server Restarts &amp; Backup Deletion</div>
+        <p>Fishbowl is a Windows desktop application that runs on a dedicated server. It must stay running in interactive login mode (it cannot run as a background Windows service) or QuickBooks integration breaks. In practice this means:</p>
+        <ul style="padding-left:18px; margin-top:6px;">
+          <li>The server requires frequent manual restarts to stay functional</li>
+          <li>Backup files accumulate and must be manually purged to free space</li>
+          <li>After updates, some teams report 4-minute response times or daily hangs</li>
+          <li>Shipping functions are described as &ldquo;very buggy&rdquo; with inaccurate packing lists</li>
+          <li>Buggy releases are pushed without adequate testing — multiple reviewers confirm this pattern</li>
+        </ul>
+      </div>
+
+      <div class="pain-box mrpeasy">
+        <div class="pain-title">MRPeasy on Pain Point 1</div>
+        <p><strong>No server. No restarts. No backup management.</strong> MRPeasy is fully browser-based SaaS — it runs in any browser on any device. There is no software to install, no server to maintain, no backup files to delete. Updates happen silently in the background. No documented stability or crash issues from users.</p>
+      </div>
+
+      <div class="pain-box fishbowl" style="margin-top: 20px;">
+        <div class="pain-title">Pain Point 2 &mdash; Part Code Explosion for Color Variants</div>
+        <p>In Fishbowl, every combination of part &times; finish must be created as a separate inventory item with its own code. If a canopy comes in 13 colors and size &ndash;L, you need 13 separate part records. Then you need a separate BOM for each of the 39 product variants. For 275 products &times; 39 variants, this is potentially <strong>10,000+ BOMs</strong> and thousands of duplicated part entries — all entered and maintained by hand.</p>
+        <p style="color:#666; font-style:italic; font-size:13px;">&ldquo;Not suitable for highly customized products or non-standard operations.&rdquo; &mdash; SoftwareConnect on Fishbowl</p>
+      </div>
+
+      <div class="pain-box mrpeasy">
+        <div class="pain-title">MRPeasy on Pain Point 2 &mdash; Matrix BOM (Partially Solves This)</div>
+        <p><strong>What it eliminates:</strong> Instead of 39 BOMs per product, you create <strong>one BOM template</strong> per product with a &ldquo;Finish&rdquo; parameter. The color&rarr;part mapping is defined <strong>once globally</strong> as a &ldquo;Relation&rdquo; — e.g., &ldquo;Canopy generic &rarr; CA5-MB when Finish = Matte Black.&rdquo; That mapping applies to every product automatically. 275 products &times; 39 variants becomes 275 BOMs total.</p>
+        <p><strong>What it doesn&rsquo;t eliminate:</strong> The individual part codes still need to exist as inventory items (CA5-MB, CA5-CO, etc. still need to be in the system). But you define each color&rarr;part mapping only once, not once per product. The BOM data entry burden drops by roughly 97%.</p>
+        <p><strong>Net result:</strong> The up-front setup is still real work — but it&rsquo;s a one-time mapping exercise, not an endless multiplication of records every time you add a product or color.</p>
+      </div>
+    </div>
+
+    <!-- Section 3: Ongoing cost comparison -->
+    <div class="section">
+      <div class="section-title">True Ongoing Cost Comparison</div>
+
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">Fishbowl&rsquo;s cost has three separate layers that keep accumulating. MRPeasy has one flat monthly fee.</p>
+
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>Cost item</th>
+            <th class="fish-col" style="text-align:right; width:160px">Fishbowl</th>
+            <th class="mrp-col" style="text-align:right; width:160px">MRPeasy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="item"><strong>Server / hosting</strong><br><span style="font-size:12.5px; color:#888;">Dedicated server running 24/7 in interactive login mode</span></td>
+            <td class="amt bad">$50–$200+/mo</td>
+            <td class="amt good">$0</td>
+          </tr>
+          <tr>
+            <td class="item"><strong>User licenses</strong><br><span style="font-size:12.5px; color:#888;">Named seats, not shared or concurrent</span></td>
+            <td class="amt bad">$329/user/mo<br><span style="font-size:12px; color:#b84444;">(5 users = $1,645/mo)</span></td>
+            <td class="amt good">$149/user/mo<br><span style="font-size:12px; color:#3a7a4a;">(3 users = $447/mo)</span></td>
+          </tr>
+          <tr>
+            <td class="item"><strong>Shop floor workers</strong><br><span style="font-size:12.5px; color:#888;">Production team logging work</span></td>
+            <td class="amt bad">$329/user/mo each</td>
+            <td class="amt good">$0<br><span style="font-size:12px; color:#3a7a4a;">(free kiosk mode)</span></td>
+          </tr>
+          <tr>
+            <td class="item"><strong>Support</strong><br><span style="font-size:12.5px; color:#888;">Access to help when something breaks</span></td>
+            <td class="amt bad">$225/hr or $2,947/day<br><span style="font-size:12px; color:#888;">+ mandatory annual contract $1,500–$10K</span></td>
+            <td class="amt good">Included<br><span style="font-size:12px; color:#3a7a4a;">ticket-based, no hour blocks</span></td>
+          </tr>
+          <tr>
+            <td class="item"><strong>Custom reports</strong></td>
+            <td class="amt bad">$150–$2,000 each</td>
+            <td class="amt good">Included<br><span style="font-size:12px; color:#3a7a4a;">+ Power BI integration</span></td>
+          </tr>
+          <tr>
+            <td class="item"><strong>Contract obligation</strong></td>
+            <td class="amt bad">Annual required<br><span style="font-size:12px; color:#888;">Dropping it disables QB &amp; integrations</span></td>
+            <td class="amt good">Month-to-month<br><span style="font-size:12px; color:#3a7a4a;">no contracts</span></td>
+          </tr>
+          <tr class="subtotal">
+            <td><strong>Actual monthly (ongoing, per QB)</strong></td>
+            <td class="amt bad">~$200–$290/mo<br><span style="font-size:12px; color:#888;">$200 hosting + support contract as needed; ~$2,400–$3,500/yr actual</span></td>
+            <td class="amt good">~$475/mo</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-warn">
+        <strong>Note:</strong> The $14,000–$36,000 year-one estimate applies to new Fishbowl customers (licenses + implementation + training + hardware). Dutton Brown already owns licenses — actual QB spend has been <strong>$3,449 (2024)</strong> and <strong>$2,787 (2025)</strong>, consisting of a support/maintenance contract and $200/mo hosting. Extra hours and custom reports are available at $225/hr but have not been billed to date.
+      </div>
+      <div class="cost-callout">
+        <strong>MRPeasy year one: ~$5,700.</strong> No implementation fees. No training fees. No hour blocks. No server.
+      </div>
+    </div>
+
+    <!-- Section 4: Pros / Cons -->
+    <div class="section">
+      <div class="section-title">Pros &amp; Cons</div>
+      <div class="ux-grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
+        <div class="ux-card bad">
+          <div class="ux-title">Fishbowl — Cons</div>
+          <ul>
+            <li><strong>Server required</strong> — Windows desktop app, must run 24/7, frequent restarts and backup purges</li>
+            <li><strong>Freezes and crashes</strong> — daily hangs reported; 4-min response times after updates</li>
+            <li><strong>No matrix BOMs</strong> — one BOM per variant = 10,000+ BOMs for our catalog</li>
+            <li><strong>Part code explosion</strong> — every color &times; every size must be a separate inventory item, repeated manually</li>
+            <li><strong>Expensive and layered</strong> — server + per-seat + support hours + annual contract + custom report fees</li>
+            <li><strong>Shopify connector is &ldquo;Unsupported&rdquo;</strong> by Shopify (plugin-based, not native)</li>
+            <li><strong>QB sync breaks constantly</strong> — one-way only, known to break every few days, has caused $700K discrepancies</li>
+            <li><strong>Dated UI</strong> — &ldquo;looks from the 90s,&rdquo; 1–2 weeks to reach basic proficiency</li>
+            <li><strong>Not for custom manufacturers</strong> — explicitly flagged as &ldquo;not suitable for highly customized or non-standard operations&rdquo;</li>
+          </ul>
+          <div class="ux-quote">&ldquo;We can no longer recommend Fishbowl due to the persistent decline in product quality, misleading sales practices, and substandard support.&rdquo;</div>
+        </div>
+        <div class="ux-card good">
+          <div class="ux-title">MRPeasy — Pros</div>
+          <ul>
+            <li><strong>Browser-based SaaS</strong> — no server, no install, works from any device, no restarts</li>
+            <li><strong>Matrix BOM</strong> — one BOM per product, color&rarr;part mapping defined once globally, applies everywhere</li>
+            <li><strong>Flat, predictable cost</strong> — one monthly fee covers everything; no surprise support invoices</li>
+            <li><strong>Shop floor kiosk free</strong> — production workers clock in/out without a paid seat</li>
+            <li><strong>Support included</strong> — no hour blocks, no annual contract required</li>
+            <li><strong>Native Shopify app</strong> — well-reviewed in the Shopify App Store</li>
+            <li><strong>Native ShipStation integration</strong></li>
+            <li><strong>Month-to-month</strong> — cancel anytime, no lock-in</li>
+            <li><strong>Purpose-built for small manufacturers</strong> — used by 1,500+ companies in our size range</li>
+          </ul>
+          <div class="ux-quote">&ldquo;Highest bang per buck for small manufacturers.&rdquo; &ldquo;Everything we need.&rdquo;</div>
+        </div>
+      </div>
+
+      <div class="ux-card bad" style="margin-top:16px;">
+        <div class="ux-title">MRPeasy — Cons</div>
+        <ul>
+          <li><strong>Part codes still multiply</strong> — each color variant still needs its own inventory item (Matrix BOM reduces BOM count, not part records)</li>
+          <li><strong>Full automation requires Unlimited plan</strong> ($149/user/mo) — the Professional plan ($69/user/mo) has only basic Zapier triggers; Make.com and API access require Unlimited</li>
+          <li><strong>No native powder coat batch pick list</strong> — grouping open orders by color requires a workaround (two-tier MO approach, API export, or CSV filter); it&rsquo;s not a built-in view</li>
+          <li><strong>Shopify sync is hourly, not real-time</strong> — the native integration polls on a schedule; real-time requires Make.com via API (Unlimited plan)</li>
+          <li><strong>Reporting is adequate, not deep</strong> — self-service reports cover the basics; Power BI integration available but adds complexity</li>
+          <li><strong>Smaller vendor</strong> — ~1,500 customers vs Fishbowl&rsquo;s much larger install base; fewer third-party consultants and community resources</li>
+          <li><strong>UI feels dated</strong> — browser-based and functional, but not a modern interface by current standards</li>
+          <li><strong>Cloud-only</strong> — fully internet-dependent; no offline capability if connectivity goes down</li>
+          <li><strong>30-day trial may not be enough</strong> — fully testing Matrix BOMs and automation for a catalog our size realistically takes longer than a month</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 5: The key feature -->
+    <div class="section">
+      <div class="section-title">The Feature That Decided It — Matrix BOM</div>
+      <p>Instead of creating 39 separate BOMs per product, you create <strong>one BOM template</strong> with a &ldquo;Finish&rdquo; parameter. The color&rarr;part mapping is set up once globally, then the system resolves the correct parts automatically on every order.</p>
+      <div class="code-block">Aura Pendant — one BOM template:
+  Fixed parts (20): socket, nipple, wire, crossbar... [same for all finishes]
+  Parametric parts (5): canopy, globe cap, lamp cup, dome, arms
+
+    Global Relations (defined once, apply to all products):
+      Canopy generic → CA5-MB  when Finish = Matte Black
+      Canopy generic → CA5-CO  when Finish = Coral
+      Canopy generic → CA5-NV  when Finish = Navy
+      ... (defined once, not repeated per product)
+
+    → Order comes in for Aura - Matte Black:
+      MRPeasy auto-resolves all 5 parametric parts to their -MB variants
+    → Order comes in for Aura - Coral:
+      MRPeasy auto-resolves all 5 parametric parts to their -CO variants
+    → 39 finishes handled by 1 template + 1 set of global mappings</div>
+      <p style="color:#666; font-size:14px;">We evaluated 15 systems. Only MRPeasy and Odoo handle this. Odoo requires significantly more setup and a non-native Shopify integration. MRPeasy is purpose-built for manufacturers our size.</p>
+    </div>
+
+    <!-- Section 6: Comparison table -->
+    <div class="section">
+      <div class="section-title">Side-by-Side</div>
+      <table class="comparison">
+        <thead>
+          <tr><th></th><th>Fishbowl</th><th>MRPeasy</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature">Year-one cost</td>
+            <td class="val-cost-bad">$3,449 actual (2024)<br><span style="font-size:12px; color:#888;">New customer est: $14,000–$36,000+</span></td>
+            <td class="val-cost-good">~$5,700</td>
+          </tr>
+          <tr>
+            <td class="feature">Ongoing monthly (all-in)</td>
+            <td class="val-cost-bad">~$200–$290/mo actual<br><span style="font-size:12px; color:#888;">Per QB: $200 hosting + support contract as needed</span></td>
+            <td class="val-cost-good">~$475/mo</td>
+          </tr>
+          <tr>
+            <td class="feature">Deployment</td>
+            <td class="val-no">Windows app on server</td>
+            <td class="val-yes">Browser-based SaaS</td>
+          </tr>
+          <tr>
+            <td class="feature">Matrix / configurable BOMs</td>
+            <td class="val-no">No</td>
+            <td class="val-yes">Yes — standout feature</td>
+          </tr>
+          <tr>
+            <td class="feature">Stability</td>
+            <td class="val-no">Daily crashes; restarts required</td>
+            <td class="val-yes">No documented issues</td>
+          </tr>
+          <tr>
+            <td class="feature">Native Shopify integration</td>
+            <td class="val-no">No (plugin; listed as &ldquo;Unsupported&rdquo;)</td>
+            <td class="val-yes">Yes</td>
+          </tr>
+          <tr>
+            <td class="feature">Native ShipStation integration</td>
+            <td class="val-yes">Yes</td>
+            <td class="val-yes">Yes</td>
+          </tr>
+          <tr>
+            <td class="feature">QuickBooks integration</td>
+            <td class="val-no">Yes, but fragile &amp; one-way</td>
+            <td class="val-yes">Yes</td>
+          </tr>
+          <tr>
+            <td class="feature">Shop floor workers</td>
+            <td class="val-no">$329/user/mo each</td>
+            <td class="val-yes">Free kiosk mode</td>
+          </tr>
+          <tr>
+            <td class="feature">Support cost</td>
+            <td class="val-no">$225/hr; annual contract required</td>
+            <td class="val-yes">Included; no hour blocks</td>
+          </tr>
+          <tr>
+            <td class="feature">Custom reports</td>
+            <td class="val-no">$150–$2,000 each</td>
+            <td class="val-yes">Included + Power BI</td>
+          </tr>
+          <tr>
+            <td class="feature">Contract / lock-in</td>
+            <td class="val-no">Annual; dropping it disables integrations</td>
+            <td class="val-yes">Month-to-month</td>
+          </tr>
+          <tr>
+            <td class="feature">Suitable for custom/variant products</td>
+            <td class="val-no">Explicitly not recommended</td>
+            <td class="val-yes">Purpose-built for this</td>
+          </tr>
+          <tr>
+            <td class="feature">30-day free trial</td>
+            <td class="val-no">No</td>
+            <td class="val-yes">Yes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 7: Stack -->
+    <div class="section">
+      <div class="section-title">What the Full Stack Looks Like</div>
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-box">Shopify orders</div>
+          <div class="flow-arrow-h">→</div>
+          <div class="flow-box">Make.com</div>
+          <div class="flow-arrow-h">→</div>
+          <div class="flow-box primary">MRPeasy&ensp;(system of record)</div>
+        </div>
+        <div class="flow-branch">
+          <div class="flow-branch-item">
+            <div class="flow-branch-arrow">↳</div>
+            <div class="flow-sub-box">
+              <span class="sub-label">Notion</span>
+              <span class="sub-desc"> &mdash; team dashboards, powder coat queues, SOPs</span>
+            </div>
+          </div>
+          <div class="flow-branch-item">
+            <div class="flow-branch-arrow">↳</div>
+            <div class="flow-sub-box">
+              <span class="sub-label">ShipStation</span>
+              <span class="sub-desc"> &mdash; fulfillment when MO is complete</span>
+            </div>
+          </div>
+          <div class="flow-branch-item">
+            <div class="flow-branch-arrow">↳</div>
+            <div class="flow-sub-box">
+              <span class="sub-label">QuickBooks</span>
+              <span class="sub-desc"> &mdash; accounting sync</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul style="font-size:14px; color:#444;">
+        <li><strong>MRPeasy:</strong> 2–3 licensed users (production leads) at $447/mo — shop floor workers use free kiosk</li>
+        <li><strong>Make.com:</strong> auto-creates MOs, syncs pick lists to Notion, low stock alerts ($16–29/mo)</li>
+        <li><strong>Notion:</strong> whole team sees production status and queues — no new logins required</li>
+      </ul>
+      <div class="cost-callout" style="margin-top:14px;">
+        <strong>Total new spend: ~$475/mo</strong> &mdash; vs. Fishbowl&rsquo;s actual ~$200–$290/mo ongoing (hosting + support contract per QB data)
+      </div>
+    </div>
+
+    <!-- Section 8: Next steps -->
+    <div class="section next-steps" style="margin-bottom:0;">
+      <div class="section-title">What We Do Next</div>
+      <ol>
+        <li>Sign up for the <strong>30-day free trial</strong> (free, no credit card required)</li>
+        <li>Import 3 products and test Matrix BOMs with real finish variants</li>
+        <li>Connect Shopify and run a test order end-to-end</li>
+        <li>If it works as expected, migrate from Katana (~$300/mo we&rsquo;re already paying)</li>
+      </ol>
+      <div class="closing-note">
+        The trial either proves it out or it doesn&rsquo;t &mdash; zero cost to find out.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Dutton Brown &mdash; Internal</span>
+    <span>March 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

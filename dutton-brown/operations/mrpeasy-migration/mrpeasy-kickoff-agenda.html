@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MRPeasy Kickoff — Meeting Agenda</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px; line-height: 1.6; color: #2c2c2c; background: #f5f4f1;
+    }
+    .page {
+      max-width: 860px; margin: 48px auto; background: #fff;
+      border-radius: 6px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); overflow: hidden;
+    }
+    .page-header {
+      background: #2c2c2c; color: #fff; padding: 40px 48px 36px;
+    }
+    .page-header .label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #aaa; margin-bottom: 10px;
+    }
+    .page-header h1 { font-size: 26px; font-weight: 600; line-height: 1.2; margin-bottom: 6px; }
+    .page-header .subtitle { font-size: 15px; color: #bbb; }
+    .page-header .meta {
+      margin-top: 16px; font-size: 13px; color: #999;
+      display: flex; gap: 24px;
+    }
+    .page-header .meta strong { color: #ccc; }
+
+    .page-body { padding: 40px 48px 56px; }
+
+    .section { margin-bottom: 44px; }
+    .section-title {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #888;
+      margin-bottom: 14px; padding-bottom: 8px;
+      border-bottom: 1px solid #e8e6e1;
+    }
+    h3 { font-size: 17px; font-weight: 600; color: #2c2c2c; margin-bottom: 10px; }
+    p { color: #444; margin-bottom: 12px; }
+    ul, ol { padding-left: 20px; color: #444; }
+    li { margin-bottom: 8px; }
+
+    /* Agenda items */
+    .agenda-item {
+      background: #faf9f7; border: 1px solid #e8e6e1;
+      border-radius: 4px; padding: 18px 22px; margin-bottom: 14px;
+    }
+    .agenda-item .item-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 10px;
+    }
+    .agenda-item .item-num {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; color: #888;
+    }
+    .agenda-item .item-time {
+      font-size: 12px; color: #aaa; font-weight: 500;
+    }
+    .agenda-item h4 {
+      font-size: 15px; font-weight: 600; color: #2c2c2c; margin-bottom: 8px;
+    }
+    .agenda-item p { font-size: 14px; margin-bottom: 8px; }
+    .agenda-item ul { font-size: 14px; padding-left: 18px; }
+    .agenda-item li { margin-bottom: 5px; }
+
+    /* Decision / question boxes */
+    .decision-box {
+      border-radius: 4px; padding: 16px 20px;
+      margin-bottom: 12px; font-size: 14px;
+    }
+    .decision-box.question {
+      background: #fdf8f0; border: 1px solid #e8d9b8; border-left: 3px solid #c9a033;
+    }
+    .decision-box.answered {
+      background: #f3f9f5; border: 1px solid #b8d9c2; border-left: 3px solid #3a7a4a;
+    }
+    .decision-box.internal {
+      background: #f5f0fa; border: 1px solid #d4c5e8; border-left: 3px solid #7a5aaa;
+    }
+    .decision-box .box-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .decision-box.question  .box-label { color: #a07820; }
+    .decision-box.answered  .box-label { color: #2c6640; }
+    .decision-box.internal  .box-label { color: #6a4a9a; }
+    .decision-box p { margin-bottom: 6px; color: #3a3a3a; }
+    .decision-box p:last-child { margin-bottom: 0; }
+
+    /* Info table */
+    table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 4px; }
+    th {
+      background: #f5f4f1; text-align: left;
+      font-weight: 600; font-size: 11.5px; letter-spacing: 0.05em;
+      text-transform: uppercase; color: #666;
+      padding: 10px 14px; border-bottom: 2px solid #e0ddd7;
+    }
+    td {
+      padding: 10px 14px; border-bottom: 1px solid #eeece8;
+      color: #3a3a3a; vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .page-footer {
+      border-top: 1px solid #e8e6e1; padding: 16px 48px;
+      font-size: 12px; color: #aaa; display: flex; justify-content: space-between;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+      .page-header, .agenda-item, .decision-box, th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-header">
+    <div class="label">Dutton Brown &mdash; Operations</div>
+    <h1>MRPeasy Evaluation Kickoff</h1>
+    <div class="subtitle">Meeting agenda &amp; open questions for discussion</div>
+    <div class="meta">
+      <span><strong>Attendees:</strong> Thomas, Chase</span>
+      <span><strong>Prep doc:</strong> Fishbowl vs. MRPeasy evaluation (separate file)</span>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- GOAL -->
+    <div class="section">
+      <div class="section-title">Meeting Goal</div>
+      <p>Decide whether to start the MRPeasy 30-day trial as a replacement for Fishbowl. If yes, align on who does what during the trial so we don&rsquo;t waste the window.</p>
+    </div>
+
+    <!-- AGENDA -->
+    <div class="section">
+      <div class="section-title">Agenda</div>
+
+      <!-- Item 1 -->
+      <div class="agenda-item">
+        <div class="item-header">
+          <span class="item-num">1</span>
+          <span class="item-time">10 min</span>
+        </div>
+        <h4>Level-set: Where we are with Fishbowl</h4>
+        <p>Quick alignment on our current pain points before discussing alternatives.</p>
+        <ul>
+          <li>Freezing, server restarts, backup deletion — how often is this happening now?</li>
+          <li>Part code explosion for color variants — how much time is Chase spending on this?</li>
+          <li>What&rsquo;s Fishbowl actually costing us monthly right now? (server + seats + support hours)</li>
+          <li>Are there things Fishbowl does well that we absolutely need to keep?</li>
+        </ul>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="agenda-item">
+        <div class="item-header">
+          <span class="item-num">2</span>
+          <span class="item-time">10 min</span>
+        </div>
+        <h4>MRPeasy overview &amp; comparison walkthrough</h4>
+        <p>Walk through the <em>Fishbowl vs. MRPeasy</em> evaluation doc together. Key highlights:</p>
+        <ul>
+          <li><strong>Matrix BOM</strong> — one BOM per product with a Finish parameter instead of 39 separate BOMs</li>
+          <li><strong>Browser-based</strong> — no server, no restarts, no backup management</li>
+          <li><strong>Cost</strong> — ~$475/mo all-in vs. current Fishbowl spend</li>
+          <li><strong>Free kiosk</strong> — shop floor workers don&rsquo;t need paid seats</li>
+          <li>Honest cons: part codes still exist, reporting is adequate not great, smaller vendor</li>
+        </ul>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="agenda-item">
+        <div class="item-header">
+          <span class="item-num">3</span>
+          <span class="item-time">15 min</span>
+        </div>
+        <h4>Open questions &amp; decisions</h4>
+        <p>Some questions have answers from research. Others need Chase&rsquo;s input or we need to ask MRPeasy directly during the trial.</p>
+      </div>
+
+    </div>
+
+    <!-- QUESTIONS ALREADY ANSWERED -->
+    <div class="section">
+      <div class="section-title">Questions We Can Already Answer</div>
+
+      <div class="decision-box answered">
+        <div class="box-label">Answered &mdash; API Rate Limits</div>
+        <p><strong>100 requests per 10 seconds</strong> (10/sec), 1 concurrent request at a time. Returns 429 if exceeded.</p>
+        <p>At 500 orders/month (~17/day), normal MO creation is fine. Bulk operations (initial parts import, batch queries for pick lists) will need throttle-aware scripting. This is a known constraint, not a blocker.</p>
+      </div>
+
+      <div class="decision-box answered">
+        <div class="box-label">Answered &mdash; Sandbox / Test Environment</div>
+        <p><strong>No dedicated sandbox.</strong> The trial connects to your live Shopify store, but with a key safeguard: <strong>only new paid orders created after setup are imported</strong> — existing/historical orders are not pulled in.</p>
+        <p><strong>Recommended approach:</strong> Connect a Shopify development store (with generated test data) during the trial to avoid any risk to real orders. Shopify dev stores are free and come with test order generators.</p>
+      </div>
+
+      <div class="decision-box answered">
+        <div class="box-label">Answered &mdash; Data Export / Ownership</div>
+        <p><strong>Yes, you can export everything.</strong> CSV export available from every module (items, BOMs, MOs, POs, inventory). Full database backup at Settings &rarr; Database Maintenance &rarr; Create a Backup. No vendor lock-in on data.</p>
+      </div>
+
+      <div class="decision-box answered">
+        <div class="box-label">Answered &mdash; Trial Duration</div>
+        <p><strong>15 + 15 days</strong> (30 total). No credit card required. If 30 days isn&rsquo;t enough for our catalog size, research suggests MRPeasy commonly grants extensions for complex setups — worth asking on day 1.</p>
+      </div>
+
+      <div class="decision-box answered">
+        <div class="box-label">Answered &mdash; Contract &amp; Lock-In</div>
+        <p><strong>Month-to-month, no contract, no hidden fees.</strong> Cancel anytime. Annual billing saves ~8% (1 month free). No mandatory support contract — dropping it does NOT disable integrations (unlike Fishbowl).</p>
+      </div>
+    </div>
+
+    <!-- QUESTIONS FOR CHASE -->
+    <div class="section">
+      <div class="section-title">Questions for Chase</div>
+
+      <div class="decision-box internal">
+        <div class="box-label">Chase &mdash; Current Fishbowl Costs</div>
+        <p>What are we actually paying monthly for Fishbowl right now?</p>
+        <ul style="padding-left:18px; margin-top:6px;">
+          <li>Server hosting cost?</li>
+          <li>How many licensed seats and cost per seat?</li>
+          <li>Support hour blocks — how many hours/month are we buying?</li>
+          <li>Annual maintenance/support contract amount?</li>
+          <li>Any recent custom report or consultant costs?</li>
+        </ul>
+        <p><em>This helps us calculate the real savings vs. MRPeasy.</em></p>
+      </div>
+
+      <div class="decision-box internal">
+        <div class="box-label">Chase &mdash; What Works in Fishbowl</div>
+        <p>Before we rip it out — is there anything Fishbowl does well that MRPeasy needs to match? Specific workflows, reports, or features Chase relies on daily?</p>
+      </div>
+
+      <div class="decision-box internal">
+        <div class="box-label">Chase &mdash; BOM &amp; Part Code Reality Check</div>
+        <p>How many hours/week does Chase estimate the team spends on creating and maintaining per-variant BOMs and part codes? If we reduce BOM count by ~97% with Matrix BOMs, but part codes still need to exist individually — is that still a meaningful improvement?</p>
+      </div>
+
+      <div class="decision-box internal">
+        <div class="box-label">Chase &mdash; Powder Coat Batching Workflow</div>
+        <p>MRPeasy doesn&rsquo;t have a native &ldquo;batch by color&rdquo; pick list. The workaround is a two-tier MO approach: a batch &ldquo;Powder Coat&rdquo; MO whose BOM <em>is</em> the pick list, then individual assembly MOs consume the coated parts.</p>
+        <p>Does that workflow map to how the shop floor actually operates? Or does Chase see a gap?</p>
+      </div>
+
+      <div class="decision-box internal">
+        <div class="box-label">Chase &mdash; Who Needs Licensed Seats</div>
+        <p>MRPeasy plan: 2&ndash;3 licensed users (production leads) + free kiosk for shop floor. Who specifically needs a full seat?</p>
+      </div>
+    </div>
+
+    <!-- QUESTIONS TO ASK MRPEASY -->
+    <div class="section">
+      <div class="section-title">Questions to Ask MRPeasy (During Trial or Demo Call)</div>
+
+      <div class="decision-box question">
+        <div class="box-label">Ask MRPeasy &mdash; Trial Extension</div>
+        <p>We have ~275 products and 500 parts to evaluate with Matrix BOMs. Can the 30-day trial be extended if we need more time to properly test?</p>
+      </div>
+
+      <div class="decision-box question">
+        <div class="box-label">Ask MRPeasy &mdash; Shopify Dev Store for Testing</div>
+        <p>Can we connect a Shopify development store during the trial instead of our live store? Want to test order flow without risk to real orders.</p>
+      </div>
+
+      <div class="decision-box question">
+        <div class="box-label">Ask MRPeasy &mdash; Bulk BOM Import</div>
+        <p>We have ~275 products and BOM data structured in Notion and CSV. What&rsquo;s the most efficient way to bulk-import Matrix BOMs? Is there a CSV template or API workflow for this?</p>
+      </div>
+
+      <div class="decision-box question">
+        <div class="box-label">Ask MRPeasy &mdash; ShipStation V2 API Compatibility</div>
+        <p>ShipStation deprecated their V1 API in May 2025. Has MRPeasy&rsquo;s ShipStation integration been updated to V2?</p>
+      </div>
+
+      <div class="decision-box question">
+        <div class="box-label">Ask MRPeasy &mdash; Powder Coat Batch Workflow</div>
+        <p>We batch powder coat parts across multiple customer orders by color, then assemble per-order. Is the two-tier MO approach (batch coating MO &rarr; individual assembly MOs) the recommended pattern? Or is there a better way?</p>
+      </div>
+
+      <div class="decision-box question">
+        <div class="box-label">Ask MRPeasy &mdash; Make.com Community Module</div>
+        <p>Research found a community-contributed Make.com module (not first-party). Is it reliable? Or should we use Make.com&rsquo;s HTTP module directly against the API?</p>
+      </div>
+
+      <div class="decision-box question">
+        <div class="box-label">Ask MRPeasy &mdash; QuickBooks Online Integration Reliability</div>
+        <p>One of our biggest Fishbowl problems is fragile QB sync. How does MRPeasy&rsquo;s QuickBooks integration work? Real-time or scheduled? One-way or bidirectional? Any known issues?</p>
+      </div>
+    </div>
+
+    <!-- IF WE PROCEED -->
+    <div class="section">
+      <div class="section-title">If We Decide to Proceed &mdash; Trial Plan</div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:100px">Week</th>
+            <th>What we test</th>
+            <th style="width:120px">Who</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Week 1</strong></td>
+            <td>Sign up, connect Shopify dev store, import 50 test parts, explore the UI</td>
+            <td>Thomas + Chase</td>
+          </tr>
+          <tr>
+            <td><strong>Week 2</strong></td>
+            <td>Create 3 Matrix BOMs (one per product type), test MO creation for different finishes</td>
+            <td>Chase</td>
+          </tr>
+          <tr>
+            <td><strong>Week 3</strong></td>
+            <td>Test Shopify order &rarr; MO flow, try powder coat batch workflow, connect ShipStation</td>
+            <td>Chase + Thomas</td>
+          </tr>
+          <tr>
+            <td><strong>Week 4</strong></td>
+            <td>Full workflow test: order &rarr; MO &rarr; assembly &rarr; ship. Evaluate reporting. Connect QuickBooks.</td>
+            <td>Chase + Thomas</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:14px; font-size:14px; color:#666; font-style:italic;">Critical test: Create 10 orders across 3 different custom colors. Verify the system correctly resolves the right parts per color via Matrix BOM. Export and confirm the pick list matches what the team would expect.</p>
+    </div>
+
+    <!-- DECISION -->
+    <div class="section" style="margin-bottom:0;">
+      <div class="section-title">Decision to Make Today</div>
+      <div class="agenda-item" style="background:#f5f4f1; border-color:#d8d5cf;">
+        <h4 style="margin-bottom:6px;">Do we start the 30-day free trial?</h4>
+        <p>If yes: no cost, no credit card, no commitment. We use a Shopify dev store to test without risk. If it doesn&rsquo;t work out, we&rsquo;ve lost nothing but time.</p>
+        <p>If no: what information do we need before we&rsquo;re comfortable trying it?</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Dutton Brown &mdash; Internal</span>
+    <span>April 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

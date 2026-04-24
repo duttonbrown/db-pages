@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dutton Brown — 2025 Parts Usage Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  :root {
+    --warm-gray: #F7F5F2;
+    --text: #4A4A4A;
+    --brass: #C9A94E;
+    --nickel: #A8A9AD;
+    --black: #333333;
+    --color: #D4726A;
+    --no-finish: #8B9DAF;
+    --border: #E0DDD9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', -apple-system, sans-serif;
+    color: var(--text);
+    background: #FAFAF9;
+    line-height: 1.5;
+  }
+
+  header {
+    background: var(--warm-gray);
+    padding: 2rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 { font-weight: 600; font-size: 1.5rem; letter-spacing: 0.02em; }
+  header p { font-weight: 300; font-size: 0.9rem; margin-top: 0.25rem; opacity: 0.7; }
+
+  .dashboard { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .kpi-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .kpi-card .label { font-size: 0.75rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.6; }
+  .kpi-card .value { font-size: 1.75rem; font-weight: 600; margin-top: 0.25rem; }
+  .kpi-card .value.brass { color: var(--brass); }
+  .kpi-card .value.nickel { color: var(--nickel); }
+  .kpi-card .value.black { color: var(--black); }
+  .kpi-card .value.color { color: var(--color); }
+  .kpi-card .value.no-finish { color: var(--no-finish); }
+
+  .chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .chart-panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+  .chart-panel.full { grid-column: 1 / -1; }
+  .chart-panel h2 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+
+  .category-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .category-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+  }
+  .category-table th.num { text-align: right; }
+  .category-table td { padding: 0.4rem 0.75rem; border-bottom: 1px solid #f0eeeb; }
+  .category-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .category-table tr.category-row { cursor: pointer; background: var(--warm-gray); font-weight: 600; }
+  .category-table tr.category-row:hover { background: #EDE9E4; }
+  .category-table tr.part-row { font-weight: 300; }
+  .category-table tr.part-row.hidden { display: none; }
+  .category-table tr.part-row td:first-child { padding-left: 2rem; }
+  .toggle-icon { display: inline-block; width: 1em; transition: transform 0.15s; }
+  .toggle-icon.open { transform: rotate(90deg); }
+
+  .finish-bar {
+    display: flex;
+    height: 14px;
+    border-radius: 3px;
+    overflow: hidden;
+    min-width: 120px;
+  }
+  .finish-bar span { display: block; }
+  .finish-bar .fb-brass { background: var(--brass); }
+  .finish-bar .fb-nickel { background: var(--nickel); }
+  .finish-bar .fb-black { background: var(--black); }
+  .finish-bar .fb-color { background: var(--color); }
+  .finish-bar .fb-nf { background: var(--no-finish); }
+
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.35rem; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 2px; }
+
+  .controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .controls label { font-size: 0.8rem; font-weight: 400; }
+  .controls select, .controls input {
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: white;
+  }
+
+  @media (max-width: 800px) {
+    .chart-row { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(3, 1fr); }
+    header { padding: 1.5rem; }
+    .dashboard { padding: 1rem; }
+  }
+  @media print {
+    .controls { display: none; }
+    .chart-panel { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Dutton Brown — 2025 Parts Usage</h1>
+  <p>Annual part consumption by finish type &middot; Categories from Parts Glossary</p>
+</header>
+
+<div class="dashboard">
+
+  <div class="kpi-row" id="kpi-row"></div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--brass)"></div> Brass</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--nickel)"></div> Nickel</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--black)"></div> Black</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--color)"></div> Color (powder coat)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--no-finish)"></div> No Finish (standard)</div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-panel">
+      <h2>Finish Mix — All Parts</h2>
+      <canvas id="chart-finish-mix" height="260"></canvas>
+    </div>
+    <div class="chart-panel">
+      <h2>Top 15 Parts by Total Volume</h2>
+      <canvas id="chart-top-parts" height="260"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-panel full">
+      <h2>Glossary Term Usage — Stacked by Finish</h2>
+      <canvas id="chart-category-stacked" height="400"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-panel full" style="margin-bottom:2rem">
+    <h2>Parts by Glossary Term — Click to Expand</h2>
+    <div class="controls">
+      <label>Sort by:</label>
+      <select id="sort-select">
+        <option value="total-desc">Total (high to low)</option>
+        <option value="total-asc">Total (low to high)</option>
+        <option value="name">Term (A-Z)</option>
+        <option value="brass-desc">Brass (high to low)</option>
+        <option value="color-desc">Color (high to low)</option>
+        <option value="count-desc">Part count (high to low)</option>
+      </select>
+      <label>Search:</label>
+      <input type="text" id="search-input" placeholder="Part name or term..." />
+    </div>
+    <div style="max-height:700px;overflow-y:auto">
+      <table class="category-table" id="cat-table">
+        <thead>
+          <tr>
+            <th style="width:28%">Term / Part</th>
+            <th class="num">Brass</th>
+            <th class="num">Nickel</th>
+            <th class="num">Black</th>
+            <th class="num">Color</th>
+            <th class="num">No Finish</th>
+            <th class="num">Total</th>
+            <th style="width:15%">Mix</th>
+          </tr>
+        </thead>
+        <tbody id="cat-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-panel">
+      <h2>Procurement Summary</h2>
+      <canvas id="chart-procurement" height="260"></canvas>
+      <p style="font-size:0.75rem;margin-top:0.75rem;font-weight:300;opacity:0.6">
+        Pre-finished = brass + nickel + black from supplier.<br>
+        Raw for coating = color (in-house powder coat).<br>
+        Standard = no-finish hardware, ordered as-is.
+      </p>
+    </div>
+    <div class="chart-panel">
+      <h2>Top 10 Color Parts (Powder Coat Volume)</h2>
+      <canvas id="chart-top-color" height="260"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const RAW = {"SO1D-10": {"no_finish": 3094.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WIW": {"no_finish": 33556.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WIB": {"no_finish": 33082.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "BU8": {"no_finish": 83392.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "LC1": {"no_finish": 136.0, "brass": 1088.0, "nickel": 723.0, "black": 427.0, "color": 3519.0}, "LW8": {"no_finish": 20360.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NK1": {"no_finish": 136.0, "brass": 1692.0, "nickel": 1579.0, "black": 598.0, "color": 0}, "PM3": {"no_finish": 0, "brass": 755.0, "nickel": 392.0, "black": 253.0, "color": 788.0}, "BU1": {"no_finish": 0, "brass": 54.0, "nickel": 0.0, "black": 0.0, "color": 0}, "SU6X1": {"no_finish": 0, "brass": 10368.0, "nickel": 0.0, "black": 0.0, "color": 0}, "SU8.5X1": {"no_finish": 0, "brass": 1178.0, "nickel": 0.0, "black": 0.0, "color": 0}, "NH1": {"no_finish": 10237.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WNY": {"no_finish": 22453.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "BU1L": {"no_finish": 0, "brass": 54.0, "nickel": 0.0, "black": 0.0, "color": 0}, "NI1": {"no_finish": 3376.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PF4": {"no_finish": 0, "brass": 864.0, "nickel": 435.0, "black": 377.0, "color": 697.0}, "NI0-7/8": {"no_finish": 13048.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "L-A": {"no_finish": 9134.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PF6": {"no_finish": 325.0, "brass": 978.0, "nickel": 491.0, "black": 405.0, "color": 1155.0}, "PF12": {"no_finish": 27.0, "brass": 683.0, "nickel": 356.0, "black": 396.0, "color": 849.0}, "GC8": {"no_finish": 27.0, "brass": 546.0, "nickel": 239.0, "black": 264.0, "color": 2484.0}, "CB1/8": {"no_finish": 2482.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SCG": {"no_finish": 2113.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SCT1": {"no_finish": 22094.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SR1": {"no_finish": 27.0, "brass": 1305.0, "nickel": 1000.0, "black": 493.0, "color": 0}, "SS3/16": {"no_finish": 163.0, "brass": 2290.0, "nickel": 2294.0, "black": 1006.0, "color": 0}, "HK5/64": {"no_finish": 2086.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SU12X1": {"no_finish": 0, "brass": 992.0, "nickel": 0.0, "black": 0.0, "color": 0}, "SU8.5X2": {"no_finish": 0, "brass": 682.0, "nickel": 0.0, "black": 0.0, "color": 0}, "BE1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 4526.0}, "SU12X2": {"no_finish": 0, "brass": 3844.0, "nickel": 0.0, "black": 0.0, "color": 0}, "SO2S": {"no_finish": 216.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "LC3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 216.0}, "PF2": {"no_finish": 270.0, "brass": 728.0, "nickel": 435.0, "black": 311.0, "color": 573.0}, "DO6-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 21.0}, "NH2": {"no_finish": 10629.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "LU8P": {"no_finish": 5083.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "L-G": {"no_finish": 216.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "FC1": {"no_finish": 27.0, "brass": 1344.0, "nickel": 1823.0, "black": 612.0, "color": 1954.0}, "NI3-3/4": {"no_finish": 21.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PM7": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 60.0}, "PM10": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 30.0}, "NO1": {"no_finish": 0, "brass": 775.0, "nickel": 925.0, "black": 207.0, "color": 0}, "SPC1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 5.0}, "SPC2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 5.0}, "LU8": {"no_finish": 10.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WNR": {"no_finish": 24.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WC2": {"no_finish": 387.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "HI1": {"no_finish": 5.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NI3": {"no_finish": 472.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NI2-1/2": {"no_finish": 353.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "C18": {"no_finish": 68.0, "brass": 735.0, "nickel": 800.0, "black": 384.0, "color": 0}, "WIG": {"no_finish": 918.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WNB": {"no_finish": 2.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SO1D": {"no_finish": 1752.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "HO1": {"no_finish": 5062.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "RE84X3/4": {"no_finish": 8075.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PM1.5": {"no_finish": 338.0, "brass": 1864.0, "nickel": 1978.0, "black": 1185.0, "color": 50.0}, "GC6": {"no_finish": 324.0, "brass": 241.0, "nickel": 148.0, "black": 114.0, "color": 4399.0}, "C14": {"no_finish": 297.0, "brass": 2797.0, "nickel": 2137.0, "black": 1514.0, "color": 300.0}, "L-A15": {"no_finish": 4730.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "G6": {"no_finish": 5062.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NI1-1/2": {"no_finish": 2546.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "HO2": {"no_finish": 1647.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "G8": {"no_finish": 1433.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "GC10": {"no_finish": 0, "brass": 149.0, "nickel": 85.0, "black": 93.0, "color": 312.0}, "G10": {"no_finish": 214.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "HO3": {"no_finish": 286.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "RE84X1": {"no_finish": 391.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PM2": {"no_finish": 0, "brass": 265.0, "nickel": 213.0, "black": 133.0, "color": 0}, "G12": {"no_finish": 286.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "DO6-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 153.0}, "CA5": {"no_finish": 68.0, "brass": 566.0, "nickel": 562.0, "black": 320.0, "color": 2943.0}, "MP1": {"no_finish": 4883.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SCF": {"no_finish": 204.0, "brass": 5637.0, "nickel": 5745.0, "black": 3075.0, "color": 69.0}, "WA2": {"no_finish": 5069.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "DO8-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 52.0}, "DO10-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 59.0}, "DO12-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 74.0}, "SO1D-24": {"no_finish": 9767.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PFB2": {"no_finish": 0, "brass": 638.0, "nickel": 645.0, "black": 282.0, "color": 387.0}, "PT1S": {"no_finish": 68.0, "brass": 296.0, "nickel": 379.0, "black": 171.0, "color": 0}, "NI0-3/4": {"no_finish": 11119.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WA3": {"no_finish": 848.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "CY1": {"no_finish": 135.0, "brass": 629.0, "nickel": 289.0, "black": 196.0, "color": 0}, "SS1/8": {"no_finish": 405.0, "brass": 3521.0, "nickel": 2571.0, "black": 1636.0, "color": 2108.0}, "A-CA6": {"no_finish": 146.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "CRC5": {"no_finish": 0, "brass": 36.0, "nickel": 36.0, "black": 11.0, "color": 63.0}, "NI1-1/4": {"no_finish": 1174.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NR1": {"no_finish": 0, "brass": 432.0, "nickel": 433.0, "black": 161.0, "color": 0}, "PAT12-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 243.0}, "NL1": {"no_finish": 2248.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "FPS2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 1752.0}, "WNO": {"no_finish": 1810.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "MO3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 876.0}, "NI1-1/8": {"no_finish": 1758.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PAT12": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 250.0}, "PAT18-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 180.0}, "PAT18": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 203.0}, "NH4": {"no_finish": 144.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "CA10-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 79.0}, "WA1": {"no_finish": 237.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WC4": {"no_finish": 158.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WFW": {"no_finish": 1400.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NI0-5/8": {"no_finish": 2242.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "BOP3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 173.0}, "BOP3L": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 173.0}, "SS1/8BL": {"no_finish": 0, "brass": 674.0, "nickel": 324.0, "black": 208.0, "color": 0}, "SCB": {"no_finish": 1226.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PM6": {"no_finish": 0, "brass": 186.0, "nickel": 172.0, "black": 93.0, "color": 300.0}, "BO3": {"no_finish": 0, "brass": 15.0, "nickel": 5.0, "black": 9.0, "color": 0}, "PM5": {"no_finish": 0, "brass": 218.0, "nickel": 166.0, "black": 112.0, "color": 80.0}, "NS1": {"no_finish": 0, "brass": 823.0, "nickel": 625.0, "black": 572.0, "color": 0}, "BOS18-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 177.0}, "BOS18L": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 353.0}, "QS6-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 226.0}, "SS1/4": {"no_finish": 0, "brass": 428.0, "nickel": 253.0, "black": 253.0, "color": 0}, "BOS18-M3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 49.0}, "QS3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 49.0}, "BOS30-M6": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 31.0}, "BOS30L": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 87.0}, "CAT5-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 254.0}, "RB2": {"no_finish": 27.0, "brass": 93.0, "nickel": 40.0, "black": 30.0, "color": 0}, "NI2": {"no_finish": 688.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "HI0-1/2": {"no_finish": 190.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "RES84": {"no_finish": 190.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NI2-1/4": {"no_finish": 35.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SO8": {"no_finish": 69.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SL6": {"no_finish": 414.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "ST2": {"no_finish": 69.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "LWX8": {"no_finish": 809.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "RE84X7/16": {"no_finish": 2761.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PA12-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 161.0}, "PA18-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 101.0}, "PA24-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 79.0}, "PA36-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 112.0}, "SHD8": {"no_finish": 22.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SHD13": {"no_finish": 47.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "GA1": {"no_finish": 293.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "BS1-M0": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 293.0}, "SJ2": {"no_finish": 0, "brass": 373.0, "nickel": 328.0, "black": 159.0, "color": 0}, "CA5-M0": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 225.0}, "SW4": {"no_finish": 384.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "KN1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 384.0}, "PM9": {"no_finish": 0, "brass": 35.0, "nickel": 43.0, "black": 21.0, "color": 0}, "SO1G": {"no_finish": 202.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SJ3": {"no_finish": 0, "brass": 53.0, "nickel": 53.0, "black": 53.0, "color": 0}, "RE84X1/4": {"no_finish": 1138.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PC4": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 159.0}, "MO1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 159.0}, "CA5-M6": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 159.0}, "SCS": {"no_finish": 159.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "LW8-32": {"no_finish": 159.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PA2-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 182.0}, "LCZ1": {"no_finish": 0, "brass": 362.0, "nickel": 244.0, "black": 146.0, "color": 0}, "DO8": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 247.0}, "DO10": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 330.0}, "NI1-3/4": {"no_finish": 1010.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "DO12": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 175.0}, "CRT1": {"no_finish": 0, "brass": 554.0, "nickel": 253.0, "black": 197.0, "color": 0}, "SS3/16\\(not found in 🔩 Parts DB)\\": {"no_finish": 104.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "CRT5/8": {"no_finish": 0, "brass": 105.0, "nickel": 52.0, "black": 34.0, "color": 0}, "PF3": {"no_finish": 0, "brass": 484.0, "nickel": 560.0, "black": 222.0, "color": 27}, "LC4": {"no_finish": 0, "brass": 578.0, "nickel": 264.0, "black": 278.0, "color": 0}, "DO6": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 1120.0}, "NO1RB (not found in 🔩 Parts DB)": {"no_finish": 70.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "LC2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 1548.0}, "L-PAR16": {"no_finish": 1411.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "BULB-PAR16": {"no_finish": 1320.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "LC2-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 357.0}, "SO1S-18": {"no_finish": 357.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "MO2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 357.0}, "PA6-M3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 102.0}, "PA12-M3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 102.0}, "PA18-M3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 102.0}, "FC2": {"no_finish": 0, "brass": 142.0, "nickel": 124.0, "black": 84.0, "color": 0}, "NB0-3/4": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 979.0}, "C18-2": {"no_finish": 0, "brass": 131.0, "nickel": 212.0, "black": 101.0, "color": 102.0}, "NI2-3/4": {"no_finish": 100.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NI4": {"no_finish": 27.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "MP1 (not found in 🔩 Parts DB)": {"no_finish": 27.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PA24-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 641.0}, "NQ1": {"no_finish": 437.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PA30-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 25.0}, "PA42-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 236.0}, "PA6-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 431.0}, "PA12-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 431.0}, "PA18-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 431.0}, "PA6-M1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 33.0}, "SWR1M": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 422.0}, "BU4": {"no_finish": 844.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SWR1F": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 422.0}, "WA0-3/4": {"no_finish": 422.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "BOS18-M5": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 127.0}, "FP2": {"no_finish": 0, "brass": 190.0, "nickel": 116.0, "black": 60.0, "color": 0}, "CAT5-M3": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 84.0}, "BOS30-M8": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 56.0}, "A-DI6": {"no_finish": 43.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "A-DI3": {"no_finish": 255.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SO6": {"no_finish": 34.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NI3-1/4": {"no_finish": 34.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "WA0-5/8": {"no_finish": 34.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "A-CO1": {"no_finish": 100.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PC8L": {"no_finish": 0, "brass": 18.0, "nickel": 19.0, "black": 18.0, "color": 0}, "FP1": {"no_finish": 0, "brass": 576.0, "nickel": 1073.0, "black": 452.0, "color": 419.0}, "BULB-A15": {"no_finish": 414.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PC8R": {"no_finish": 0, "brass": -1.0, "nickel": 18.0, "black": 0.0, "color": 0}, "PT1": {"no_finish": 0, "brass": 351.0, "nickel": 342.0, "black": 166.0, "color": 0}, "NO2": {"no_finish": 0, "brass": 13.0, "nickel": 9.0, "black": 10.0, "color": 0}, "AR1": {"no_finish": 0, "brass": 810.0, "nickel": 1779.0, "black": 564.0, "color": 0}, "CR3": {"no_finish": 0, "brass": 435.0, "nickel": 503.0, "black": 223.0, "color": 0}, "BR1": {"no_finish": 1161.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SSC3/16": {"no_finish": 0, "brass": 435.0, "nickel": 503.0, "black": 223.0, "color": 464.0}, "SCA6": {"no_finish": 2322.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "AN6": {"no_finish": 2322.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "HK3/32": {"no_finish": 1103.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "PMB5": {"no_finish": 0, "brass": 14.0, "nickel": 5.0, "black": 8.0, "color": 0}, "RE1/4-27": {"no_finish": 84.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "AN8": {"no_finish": 1802.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SCA8": {"no_finish": 1802.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "NI0-3/8": {"no_finish": 926.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "FPK1": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 236.0}, "FPS1": {"no_finish": 0, "brass": 121.0, "nickel": 151.0, "black": 49.0, "color": 0}, "A-DI1.5": {"no_finish": 66.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "C38": {"no_finish": 0, "brass": 437.0, "nickel": 569.0, "black": 198.0, "color": 50.0}, "BUK8": {"no_finish": 2182.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "SR2": {"no_finish": 0, "brass": 1213.0, "nickel": 2228.0, "black": 702.0, "color": 0}, "RA1": {"no_finish": 0, "brass": 1213.0, "nickel": 2228.0, "black": 702.0, "color": 0}, "SS3/16BL": {"no_finish": 0, "brass": 1059.0, "nickel": 1944.0, "black": 631.0, "color": 0}, "CRT3/4": {"no_finish": 0, "brass": 2.0, "nickel": 0.0, "black": 8.0, "color": 16.0}, "RE8-32": {"no_finish": 102.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "ROK5/8": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 592.0}, "RO5/8x5": {"no_finish": 310.0, "brass": 0, "nickel": 0, "black": 0, "color": 0}, "RO5/8x6": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 317.0}, "RO5/8x8": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 353.0}, "RO5/8x10": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 183.0}, "RO5/8x14": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 63.0}, "PF24": {"no_finish": 0, "brass": 266.0, "nickel": 226.0, "black": 174.0, "color": 76}, "PMB1.5": {"no_finish": 0, "brass": 436.0, "nickel": 558.0, "black": 198.0, "color": 0}, "PF18": {"no_finish": 0, "brass": 163.0, "nickel": 228.0, "black": 73.0, "color": 0}, "PUF24": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 186.0}, "PUF36": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 46.0}, "CA5-M2": {"no_finish": 0, "brass": 0, "nickel": 0, "black": 0, "color": 67.0}};
+const TERM_MAP = {"FPK1": "Finial Plug with Shoulder", "PM2": "Pipe Male", "SJ2": "Swivel", "SO6": "Socket", "HK3/32": "Hex Key", "PA12-M1": "Pipe Aluminum", "DO8": "Dome", "L-PAR16": "Label", "BOS18L": "Body Lid", "PA42-M2": "Pipe Aluminum", "PA6-M1": "Pipe Aluminum", "SCG": "Screw", "PLG1": "Plug", "MO2": "Mount", "FPS2": "Finial Plug with Shoulder", "RA1": "Reducer Arm", "FP1": "Finial Plug", "SS1/8": "Set Screw", "SCF": "Screw", "PA6-M2": "Pipe Aluminum", "NI1": "Nipple", "NQ1": "Nipple", "NB0-3/4": "Neck Break", "CRC5": "Check Ring", "PC8R": "Pipe Custom", "PM5": "Pipe Male", "BE1": "Bead", "ST2": "Strain Relief", "A-DI1.5": "Disc", "L-A15": "Label", "PF12": "Pipe Female", "LW8-32": "Lock Washer", "CR3": "Check Ring", "PM3": "Pipe Male", "C38": "Coupling", "NI2-1/2": "Nipple", "SWR1M": "Swivel", "PF24": "Pipe Female", "G10": "Globe", "CAT5-M3": "Canopy", "DO6": "Dome", "NI1-1/8": "Nipple", "PC4": "Pipe Custom", "PC8L": "Pipe Custom", "BO1": "Body", "PF2": "Pipe Female", "PA2-M1": "Pipe Aluminum", "SW2": "Switch", "CY1": "Connector, Y", "RO5/8x10": "Rod", "C18": "Coupling", "RE84X3/4": "Reducer", "SO1D": "Socket", "FC1": "Finial Cap", "FC2": "Finial Cap", "LW8": "Lock Washer", "CR1": "Check Ring", "WIPW": "Wire", "NO2": "Nozzle", "SW4": "Switch", "G12": "Globe", "CA5-M1": "Canopy", "DO6-M1": "Dome", "RE84X1": "Reducer", "WNY": "Wire Nut", "PM7": "Pipe Male", "PA24-M2": "Pipe Aluminum", "HO3": "Holder", "CRT5/8": "Check Ring", "BU1": "Body", "WA3": "Washer", "BU1L": "Body Lid", "BOS30-M8": "Body", "PAT18": "Pipe Aluminum Thick", "PFB2": "Pipe Female Bent", "NL1": "Nut", "FP2": "Finial Plug", "DO12-M1": "Dome", "PA12-M3": "Pipe Aluminum", "GC8-M1": "Globe Cap", "DO8-M1": "Dome", "HT2": "Hang Tag", "RB1": "Ring Body", "RE84X7/16": "Reducer", "RO5/8x6": "Rod", "NH2": "Nut", "SR2": "Slip Ring", "HK5/64": "Hex Key", "NH4": "Nut", "NI0-1/2": "Nipple", "LU8": "Lug", "GA1": "Gas Attachment", "NI3-3/4": "Nipple", "LC4": "Lamp Cup", "NI1-1/4": "Nipple", "NB0-1/2": "Neck Break", "WNB": "Wire Nut", "LCZ1": "Lamp Cup", "SPC2": "Sputnik Core", "BS1-M0": "Bullet Shade", "SCA8": "Screw", "SO1G": "Socket", "SSC3/16": "Set Screw", "LC3": "Lamp Cup", "SHD13": "Shade", "RB2": "Ring Body", "NK1": "Nut", "DO6-M2": "Dome", "BOS18-M2": "Body", "CA5-M8": "Canopy", "RES84": "Reducer with Shoulder", "NI1-3/4": "Nipple", "DO12": "Dome", "FC4": "Finial Cap", "PT1": "Pipe Tee", "BOS30-M6": "Body", "CA5-M3": "Canopy", "SCT1": "Screw", "SU12X1": "Spine, Urchin", "WC4": "Wire Connector", "GC10": "Globe Cap", "DO10-M1": "Dome", "LWX8": "Lock Washer", "SPC1": "Sputnik Core", "LW4": "Lock Washer", "G6": "Globe", "SO1S-18": "Socket", "WIB": "Wire", "NI0-3/8": "Nipple", "SO1D-10": "Socket", "RI3": "Ring", "WC2": "Wire Connector", "AN8": "Anchor", "PM9": "Pipe Male", "L-A": "Label", "SO2S": "Socket", "QS3": "Body", "PAT12-M1": "Pipe Aluminum Thick", "NI0-5/8": "Nipple", "PF8": "Pipe Female", "HT1": "Hang Tag", "BOS18": "Body", "NO1": "Nozzle", "A-DI3": "Disc", "CB1/8": "Crossbar", "PM6": "Pipe Male", "C18-2": "Coupling", "RO5/8x14": "Rod", "WNR": "Wire Nut", "AN6": "Anchor", "WA1": "Washer", "L-G": "Label", "SU6X1": "Spine, Urchin", "PA6-M3": "Pipe Aluminum", "SU8.5X1": "Spine, Urchin", "ST1": "Strain Relief", "PAT12": "Pipe Aluminum", "BUK8": "Mount", "RE84X1/4": "Reducer", "CA10-M1": "Canopy", "BOS18-M5": "Body", "NI1-1/2": "Nipple", "PF18": "Pipe Female", "MO1": "Mount", "NI2": "Nipple", "NS1": "Nozzle", "BOS18-M3": "Body", "HO2": "Holder", "SS1/4": "Set Screw", "CA5-M6": "Canopy", "PT1S": "Pipe Tee", "CA5": "Canopy", "PM10": "Pipe Male", "PA30-M1": "Pipe Aluminum", "PA12-M2": "Pipe Aluminum", "FC3": "Finial Cap", "SR1": "Slip Ring", "PF4": "Pipe Female", "RO5/8x8": "Rod", "LC1": "Lamp Cup", "C14": "Coupling", "PA18-M2": "Pipe Aluminum", "BO3": "Body", "PUF24": "Pipe U-Shaped Female", "MO3": "Mount", "A-CA6": "Canopy", "PF6": "Pipe Female", "PMB1.5": "Pipe Male Bent", "CRS5-M1": "Check Ring", "SO8": "Socket", "PUF36": "Pipe U-Shaped Female", "SCA6": "Screw", "QS6-M1": "Square Pipe", "WFW": "Wire Ferrule", "SS3/16": "Set Screw", "PA24-M1": "Pipe Aluminum", "SL6": "Sleeve", "CAT5-M2": "Canopy", "FPS1": "Finial Plug with Shoulder", "CRT3/4": "Check Ring", "WIG": "Wire, Ground", "PM1.5": "Pipe Male", "PA18-M3": "Pipe Aluminum", "PA18-M1": "Pipe Aluminum", "G8": "Globe", "GC6": "Globe Cap", "WIW": "Wire", "WA0-5/8": "Washer", "CA5-M7": "Canopy", "RO5/8x5": "Rod", "HI1": "Hickey", "WNO": "Wire Nut", "A-DI6": "Disc", "LC2": "Lamp Cup", "WA2": "Washer", "BOS30": "Body", "AR1": "Reducer Arm", "NH1": "Nut", "NI0-7/8": "Nipple", "PA36-M1": "Pipe Aluminum", "NR1": "Nut", "WC3": "Wire Connector", "GC8": "Globe Cap", "LU8P": "Lug", "BOS30L": "Body", "SWR1F": "Swivel", "WA1-1/2": "Washer", "HO1": "Holder", "NH3": "Nut", "SU8.5X2": "Spine, Urchin", "BU8": "Bushing", "NI0-3/4": "Nipple", "CA5-M2": "Canopy", "BU4": "Bushing", "BR1": "Bracket", "PF3": "Pipe Female", "KN1": "Knob", "CRT1": "Check Ring", "HS2": "Hang-Straight", "DO10": "Dome", "LC2-M1": "Lamp Cup", "SU12X2": "Spine, Urchin", "CA5-M0": "Canopy", "PA10-M1": "Pipe Aluminum", "SHD8": "Shade", "SO1D-24": "Socket", "SCB": "Screw", "HTS1": "Hang Tag String", "PAT18-M1": "Pipe Aluminum Thick", "SO1S": "Socket", "MP1": "Mounting Plate", "NI3": "Nipple", "SS1/8BL": "Set Screw", "BOP3": "Body", "BOP3L": "Body Lid", "HI0-1/2": "Hickey", "SCS": "Screw", "SJ3": "Swivel", "SL3": "Sleeve", "A-CO1": "Acrylic Cone", "NI3-1/4": "Nipple", "WA0-3/4": "Washer", "CRS5": "Check Ring", "PMB5": "Pipe Male Bent", "RE8-32": "Reducer", "RE1/4-27": "Reducer", "SS3/16BL": "Set Screw", "RO5/8x20": "Rod", "RO5/8x26": "Rod", "BULB-A15": "Bulb", "NI2-3/4": "Nipple", "BULB-PAR16": "Bulb", "ROK5/8": "Rod Knob", "NI4": "Nipple", "PF6NI": "(no term)", "NI2-1/4": "Nipple", "GC8NI": "(no term)"};
+
+// ── Build structured data using glossary terms ──────────────────────────────────
+const parts = [];
+const categories = {};
+let totals = { brass: 0, nickel: 0, black: 0, color: 0, no_finish: 0 };
+
+for (const [name, counts] of Object.entries(RAW)) {
+  if (name.includes("(not found")) continue;
+  const total = counts.brass + counts.nickel + counts.black + counts.color + counts.no_finish;
+  if (total === 0) continue;
+
+  const term = TERM_MAP[name] || "(no term)";
+  const part = { name, ...counts, total, category: term };
+  parts.push(part);
+
+  if (!categories[term]) categories[term] = { parts: [], brass: 0, nickel: 0, black: 0, color: 0, no_finish: 0, total: 0 };
+  categories[term].parts.push(part);
+  for (const k of ["brass","nickel","black","color","no_finish","total"]) {
+    categories[term][k] += part[k];
+    if (k !== "total") totals[k] += part[k];
+  }
+}
+
+const grandTotal = totals.brass + totals.nickel + totals.black + totals.color + totals.no_finish;
+const partCount = parts.length;
+const termCount = Object.keys(categories).length;
+
+// Update subtitle
+document.querySelector("header p").textContent =
+  `Annual part consumption by finish type \u00b7 ${partCount} parts across ${termCount} glossary terms \u00b7 268 products processed`;
+
+// ── KPIs ────────────────────────────────────────────────────────────────────────
+const kpiRow = document.getElementById("kpi-row");
+const kpis = [
+  { label: "Total Units", value: grandTotal.toLocaleString(), cls: "" },
+  { label: "Brass", value: totals.brass.toLocaleString(), cls: "brass" },
+  { label: "Nickel", value: totals.nickel.toLocaleString(), cls: "nickel" },
+  { label: "Black", value: totals.black.toLocaleString(), cls: "black" },
+  { label: "Color", value: totals.color.toLocaleString(), cls: "color" },
+  { label: "No Finish", value: totals.no_finish.toLocaleString(), cls: "no-finish" },
+];
+for (const k of kpis) {
+  kpiRow.innerHTML += `<div class="kpi-card"><div class="label">${k.label}</div><div class="value ${k.cls}">${k.value}</div></div>`;
+}
+
+// ── Chart colors ────────────────────────────────────────────────────────────────
+const COLORS = {
+  brass: "#C9A94E",
+  nickel: "#A8A9AD",
+  black: "#333333",
+  color: "#D4726A",
+  no_finish: "#8B9DAF",
+};
+
+// ── Finish mix doughnut ─────────────────────────────────────────────────────────
+new Chart(document.getElementById("chart-finish-mix"), {
+  type: "doughnut",
+  data: {
+    labels: ["Brass", "Nickel", "Black", "Color", "No Finish"],
+    datasets: [{
+      data: [totals.brass, totals.nickel, totals.black, totals.color, totals.no_finish],
+      backgroundColor: [COLORS.brass, COLORS.nickel, COLORS.black, COLORS.color, COLORS.no_finish],
+      borderWidth: 1, borderColor: "#fff",
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { font: { family: "Poppins", size: 12 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const pct = ((ctx.parsed / grandTotal) * 100).toFixed(1);
+            return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${pct}%)`;
+          }
+        }
+      }
+    }
+  }
+});
+
+// ── Top 15 parts bar ────────────────────────────────────────────────────────────
+const top15 = [...parts].sort((a, b) => b.total - a.total).slice(0, 15);
+new Chart(document.getElementById("chart-top-parts"), {
+  type: "bar",
+  data: {
+    labels: top15.map(p => p.name),
+    datasets: [
+      { label: "Brass",     data: top15.map(p => p.brass),     backgroundColor: COLORS.brass },
+      { label: "Nickel",    data: top15.map(p => p.nickel),    backgroundColor: COLORS.nickel },
+      { label: "Black",     data: top15.map(p => p.black),     backgroundColor: COLORS.black },
+      { label: "Color",     data: top15.map(p => p.color),     backgroundColor: COLORS.color },
+      { label: "No Finish", data: top15.map(p => p.no_finish), backgroundColor: COLORS.no_finish },
+    ]
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true,
+    scales: {
+      x: { stacked: true, ticks: { font: { family: "Poppins" } } },
+      y: { stacked: true, ticks: { font: { family: "Poppins", size: 11 } } },
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { afterTitle: ctx => `Total: ${top15[ctx[0].dataIndex].total.toLocaleString()}` } }
+    }
+  }
+});
+
+// ── Category stacked bar (top 25 terms by volume) ───────────────────────────────
+const catEntries = Object.entries(categories).sort((a, b) => b[1].total - a[1].total);
+const topCats = catEntries.slice(0, 25);
+new Chart(document.getElementById("chart-category-stacked"), {
+  type: "bar",
+  data: {
+    labels: topCats.map(([name]) => name),
+    datasets: [
+      { label: "Brass",     data: topCats.map(([,c]) => c.brass),     backgroundColor: COLORS.brass },
+      { label: "Nickel",    data: topCats.map(([,c]) => c.nickel),    backgroundColor: COLORS.nickel },
+      { label: "Black",     data: topCats.map(([,c]) => c.black),     backgroundColor: COLORS.black },
+      { label: "Color",     data: topCats.map(([,c]) => c.color),     backgroundColor: COLORS.color },
+      { label: "No Finish", data: topCats.map(([,c]) => c.no_finish), backgroundColor: COLORS.no_finish },
+    ]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: { stacked: true, ticks: { font: { family: "Poppins", size: 10 }, maxRotation: 55 } },
+      y: { stacked: true, ticks: { font: { family: "Poppins" } } },
+    },
+    plugins: {
+      legend: { position: "bottom", labels: { font: { family: "Poppins", size: 12 } } },
+    }
+  }
+});
+
+// ── Procurement doughnut ────────────────────────────────────────────────────────
+const preFinished = totals.brass + totals.nickel + totals.black;
+new Chart(document.getElementById("chart-procurement"), {
+  type: "doughnut",
+  data: {
+    labels: ["Pre-finished (supplier)", "Raw for powder coat", "Standard hardware"],
+    datasets: [{
+      data: [preFinished, totals.color, totals.no_finish],
+      backgroundColor: ["#7A8B6F", COLORS.color, COLORS.no_finish],
+      borderWidth: 1, borderColor: "#fff",
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { font: { family: "Poppins", size: 12 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const pct = ((ctx.parsed / grandTotal) * 100).toFixed(1);
+            return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${pct}%)`;
+          }
+        }
+      }
+    }
+  }
+});
+
+// ── Top color parts bar ─────────────────────────────────────────────────────────
+const topColor = [...parts].filter(p => p.color > 0).sort((a, b) => b.color - a.color).slice(0, 10);
+new Chart(document.getElementById("chart-top-color"), {
+  type: "bar",
+  data: {
+    labels: topColor.map(p => p.name),
+    datasets: [{
+      label: "Color units",
+      data: topColor.map(p => p.color),
+      backgroundColor: COLORS.color,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true,
+    scales: {
+      x: { ticks: { font: { family: "Poppins" } } },
+      y: { ticks: { font: { family: "Poppins", size: 11 } } },
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// ── Category drill-down table ───────────────────────────────────────────────────
+function finishBar(p) {
+  const t = p.brass + p.nickel + p.black + p.color + p.no_finish;
+  if (t === 0) return "";
+  const pct = v => ((v / t) * 100).toFixed(1);
+  return `<div class="finish-bar" title="B:${pct(p.brass)}% N:${pct(p.nickel)}% Bl:${pct(p.black)}% C:${pct(p.color)}% NF:${pct(p.no_finish)}%">` +
+    (p.brass > 0 ? `<span class="fb-brass" style="width:${pct(p.brass)}%"></span>` : "") +
+    (p.nickel > 0 ? `<span class="fb-nickel" style="width:${pct(p.nickel)}%"></span>` : "") +
+    (p.black > 0 ? `<span class="fb-black" style="width:${pct(p.black)}%"></span>` : "") +
+    (p.color > 0 ? `<span class="fb-color" style="width:${pct(p.color)}%"></span>` : "") +
+    (p.no_finish > 0 ? `<span class="fb-nf" style="width:${pct(p.no_finish)}%"></span>` : "") +
+    `</div>`;
+}
+
+function num(v) { return Math.round(v).toLocaleString(); }
+
+function renderTable(sortKey) {
+  const tbody = document.getElementById("cat-tbody");
+  let sorted = [...catEntries];
+  if (sortKey === "total-desc") sorted.sort((a, b) => b[1].total - a[1].total);
+  else if (sortKey === "total-asc") sorted.sort((a, b) => a[1].total - b[1].total);
+  else if (sortKey === "name") sorted.sort((a, b) => a[0].localeCompare(b[0]));
+  else if (sortKey === "brass-desc") sorted.sort((a, b) => b[1].brass - a[1].brass);
+  else if (sortKey === "color-desc") sorted.sort((a, b) => b[1].color - a[1].color);
+  else if (sortKey === "count-desc") sorted.sort((a, b) => b[1].parts.length - a[1].parts.length);
+
+  let html = "";
+  for (const [catName, cat] of sorted) {
+    const catId = catName.replace(/[^a-zA-Z0-9]/g, "_");
+    html += `<tr class="category-row" data-cat="${catId}" onclick="toggleCat('${catId}')">
+      <td><span class="toggle-icon" id="icon-${catId}">&#9654;</span> ${catName} <span style="font-weight:400;opacity:0.5">(${cat.parts.length})</span></td>
+      <td class="num">${num(cat.brass)}</td>
+      <td class="num">${num(cat.nickel)}</td>
+      <td class="num">${num(cat.black)}</td>
+      <td class="num">${num(cat.color)}</td>
+      <td class="num">${num(cat.no_finish)}</td>
+      <td class="num">${num(cat.total)}</td>
+      <td>${finishBar(cat)}</td>
+    </tr>`;
+    const sortedParts = [...cat.parts].sort((a, b) => b.total - a.total);
+    for (const p of sortedParts) {
+      html += `<tr class="part-row hidden" data-cat="${catId}">
+        <td>${p.name}</td>
+        <td class="num">${num(p.brass)}</td>
+        <td class="num">${num(p.nickel)}</td>
+        <td class="num">${num(p.black)}</td>
+        <td class="num">${num(p.color)}</td>
+        <td class="num">${num(p.no_finish)}</td>
+        <td class="num">${num(p.total)}</td>
+        <td>${finishBar(p)}</td>
+      </tr>`;
+    }
+  }
+  tbody.innerHTML = html;
+}
+
+function toggleCat(catId) {
+  const rows = document.querySelectorAll(`tr.part-row[data-cat="${catId}"]`);
+  const icon = document.getElementById(`icon-${catId}`);
+  const isOpen = !rows[0]?.classList.contains("hidden");
+  rows.forEach(r => r.classList.toggle("hidden", isOpen));
+  icon?.classList.toggle("open", !isOpen);
+}
+
+document.getElementById("sort-select").addEventListener("change", e => renderTable(e.target.value));
+
+document.getElementById("search-input").addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  if (!q) {
+    // Reset: collapse all
+    document.querySelectorAll("tr.part-row").forEach(r => r.classList.add("hidden"));
+    document.querySelectorAll(".toggle-icon").forEach(i => i.classList.remove("open"));
+    document.querySelectorAll("tr.category-row").forEach(r => r.style.display = "");
+    return;
+  }
+  // Show matching parts and their category rows
+  const visibleCats = new Set();
+  document.querySelectorAll("tr.part-row").forEach(r => {
+    const name = r.children[0].textContent.toLowerCase();
+    if (name.includes(q)) {
+      r.classList.remove("hidden");
+      visibleCats.add(r.dataset.cat);
+    } else {
+      r.classList.add("hidden");
+    }
+  });
+  // Also match category/term names
+  document.querySelectorAll("tr.category-row").forEach(r => {
+    const catName = r.children[0].textContent.toLowerCase();
+    const catId = r.dataset.cat;
+    if (catName.includes(q)) {
+      visibleCats.add(catId);
+      // Expand all parts in this category
+      document.querySelectorAll(`tr.part-row[data-cat="${catId}"]`).forEach(pr => pr.classList.remove("hidden"));
+    }
+    r.style.display = visibleCats.has(catId) ? "" : "none";
+    const icon = document.getElementById(`icon-${catId}`);
+    icon?.classList.toggle("open", visibleCats.has(catId));
+  });
+});
+
+renderTable("total-desc");
+</script>
+
+</body>
+</html>
