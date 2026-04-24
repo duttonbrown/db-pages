@@ -1,0 +1,100 @@
+{
+  "updated_at": "2026-04-24T04:12:37.863Z",
+  "window": {
+    "days": 30,
+    "from": "2026-03-25",
+    "to": "2026-04-24"
+  },
+  "revenue": {
+    "email_total": 1868.98,
+    "email_orders": 9,
+    "campaigns_revenue": 1049,
+    "campaigns_orders": 7,
+    "campaigns_aov": 149.86,
+    "automations_revenue": 819.98,
+    "automations_orders": 2,
+    "automations_aov": 409.99,
+    "currency": "USD"
+  },
+  "revenue_per_recipient": {
+    "value": 0.0305,
+    "total_sent_in_window": 61356,
+    "based_on_campaigns": 6
+  },
+  "engagement": {
+    "avg_open_rate": 0.33716,
+    "avg_ctr": 0.008905,
+    "based_on_last_n": 5,
+    "campaigns_sent_in_window": 6
+  },
+  "top_campaign": {
+    "name": "Welcome",
+    "type": "automation",
+    "orders": 2,
+    "revenue": 819.98,
+    "aov": 409.99
+  },
+  "automations": {
+    "active": 3,
+    "total": 24
+  },
+  "leaderboard": [
+    {
+      "type": "automation",
+      "id": "6568d2fbbba97031766e17d8",
+      "name": "Welcome",
+      "orders": 2,
+      "revenue": 819.98,
+      "aov": 409.99
+    },
+    {
+      "type": "campaign",
+      "id": "69c4439f191fcfc7f019ec3e",
+      "name": "Pinkaboo Launch Email - Both audiences",
+      "orders": 1,
+      "revenue": 600,
+      "aov": 600
+    },
+    {
+      "type": "campaign",
+      "id": "699c8710e59d9c1803a6a909",
+      "name": "Week 4: Feb 2026 (Main)",
+      "orders": 1,
+      "revenue": 400,
+      "aov": 400
+    },
+    {
+      "type": "campaign",
+      "id": "68b86744424c740cb3141556",
+      "name": "Sept. Email 1 - Trade Audience (custom colors 50% off)",
+      "orders": 1,
+      "revenue": 37,
+      "aov": 37
+    },
+    {
+      "type": "campaign",
+      "id": "69b466aad9da56c6b0f46efb",
+      "name": "Pinkaboo Teaser - Both Audiences",
+      "orders": 3,
+      "revenue": 12,
+      "aov": 4
+    },
+    {
+      "type": "campaign",
+      "id": "69d40167f9011fcc587922d6",
+      "name": "April Week 2 Campaign - Trade",
+      "orders": 1,
+      "revenue": 0,
+      "aov": 0
+    }
+  ],
+  "meta": {
+    "attribution_basis": "shopify_utm_source_omnisend",
+    "revenue_basis": "subtotal_price",
+    "cancelled_orders_excluded": 2,
+    "shopify_orders_scanned": 460,
+    "shopify_pages_fetched": 2,
+    "shopify_truncated": false,
+    "engagement_sample_size": 5
+  }
+}

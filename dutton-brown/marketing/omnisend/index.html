@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<!--
+  Omnisend Marketing Scoreboard — Dutton Brown
+  Spec: db-brand/dashboards/spec.md
+  Data source: db-marketing/projects/omnisend-scoreboard/fetch_data.js (refreshed daily via GitHub Actions)
+  KPI vocabulary: db-operations/docs/marketing-kpi-prep-q2-2026.md
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omnisend Scoreboard — Dutton Brown</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Design tokens ──────────────────────────────────────────────────────── */
+:root {
+  --border:     #e9e9e7;
+  --header-bg:  #f7f6f3;
+  --text:       #37352f;
+  --muted:      #9b9a97;
+  --accent:     #d97706;
+  --sub-text:   #37352f;
+  --page-bg:    #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border:     #373737;
+    --header-bg:  #252525;
+    --text:       rgba(255, 255, 255, 0.82);
+    --muted:      #787774;
+    --accent:     #ff9912;
+    --sub-text:   rgba(255, 255, 255, 0.82);
+    --page-bg:    #191919;
+  }
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--page-bg);
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Widget shell ───────────────────────────────────────────────────────── */
+.widget {
+  max-width: 820px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.w-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+}
+.w-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+}
+.w-title .w-win {
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-left: 8px;
+}
+.w-ts {
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ── Tile grids ─────────────────────────────────────────────────────────── */
+.row1 {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1.25fr;
+}
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Individual tile ─────────────────────────────────────────────────────── */
+.tile {
+  padding: 12px 14px 13px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.tile:last-child { border-right: none; }
+
+.t-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.t-big {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.t-big.accent { color: var(--accent); }
+.t-unit {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 1px;
+}
+.t-sub {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  line-height: 1.65;
+  gap: 6px;
+}
+.sl { color: var(--muted); white-space: nowrap; }
+.sv { color: var(--sub-text); font-weight: 500; }
+.t-note {
+  font-size: 9.5px;
+  color: var(--muted);
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Leaderboard table ──────────────────────────────────────────────────── */
+.w-table {
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.w-table thead th {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  padding: 8px 14px;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+}
+.w-table thead th.num { text-align: right; }
+.w-table tbody td {
+  padding: 7px 14px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.w-table tbody td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.w-table tbody td.muted { color: var(--muted); }
+.w-table tbody tr:last-child td { border-bottom: none; }
+
+.badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-right: 6px;
+  vertical-align: 1px;
+}
+.badge.auto { color: var(--accent); border-color: var(--accent); }
+
+.w-empty {
+  padding: 18px 14px;
+  font-size: 11px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+/* ── Assumptions toggle ─────────────────────────────────────────────────── */
+.assumptions {
+  border-top: 1px solid var(--border);
+  padding: 0;
+}
+.assumptions summary {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 14px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+}
+.assumptions summary::-webkit-details-marker { display: none; }
+.assumptions summary::before {
+  content: "▶";
+  font-size: 7px;
+  transition: transform 0.15s;
+  display: inline-block;
+}
+.assumptions[open] summary::before { transform: rotate(90deg); }
+.assumptions-body {
+  padding: 0 14px 12px;
+  font-size: 10.5px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.assumptions-body ul {
+  margin: 0;
+  padding-left: 14px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 620px) {
+  .t-big   { font-size: 1.5rem; }
+  .t-sub   { font-size: 10px; }
+  .tile    { padding: 10px 10px 11px; }
+  .w-table thead th, .w-table tbody td { padding: 6px 10px; font-size: 10.5px; }
+}
+
+@media (max-width: 460px) {
+  .row1 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .tile-email { grid-column: 1 / 3; grid-row: 1; border-right: none; border-bottom: 1px solid var(--border); }
+  .tile-auto  { grid-column: 1; grid-row: 2; border-bottom: 1px solid var(--border); }
+  .tile-camp  { grid-column: 2; grid-row: 2; border-right: none; border-bottom: 1px solid var(--border); }
+  .tile-rpr   { grid-column: 1; grid-row: 3; }
+  .tile-top   { grid-column: 2; grid-row: 3; border-right: none; }
+  .row2 { grid-template-columns: 1fr 1fr; }
+  .tile-active { grid-column: 1 / 3; border-right: none; border-top: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<div class="widget">
+
+  <!-- Header -->
+  <div class="w-header">
+    <span class="w-title">Omnisend Scoreboard<span class="w-win" id="w-win">— loading</span></span>
+    <span class="w-ts" id="ts">Loading…</span>
+  </div>
+
+  <!-- Row 1: revenue tiles -->
+  <div class="row1">
+
+    <div class="tile tile-email">
+      <div class="t-label">Email Revenue</div>
+      <div class="t-big accent" id="v-email-rev">—</div>
+      <div class="t-sub"><span class="sl">Campaigns</span><span class="sv" id="v-camp-rev">—</span></div>
+      <div class="t-sub"><span class="sl">Automations</span><span class="sv" id="v-auto-rev">—</span></div>
+    </div>
+
+    <div class="tile tile-auto">
+      <div class="t-label">Automation Rev</div>
+      <div class="t-big" id="v-auto-rev-big">—</div>
+      <div class="t-sub"><span class="sl">Orders</span><span class="sv" id="v-auto-orders">—</span></div>
+      <div class="t-sub"><span class="sl">AOV</span><span class="sv" id="v-auto-aov">—</span></div>
+    </div>
+
+    <div class="tile tile-camp">
+      <div class="t-label">Campaign Rev</div>
+      <div class="t-big" id="v-camp-rev-big">—</div>
+      <div class="t-sub"><span class="sl">Orders</span><span class="sv" id="v-camp-orders">—</span></div>
+      <div class="t-sub"><span class="sl">AOV</span><span class="sv" id="v-camp-aov">—</span></div>
+    </div>
+
+    <div class="tile tile-rpr">
+      <div class="t-label">Rev / Recipient</div>
+      <div class="t-big" id="v-rpr">—</div>
+      <div class="t-note" id="v-rpr-note">—</div>
+    </div>
+
+    <div class="tile tile-top">
+      <div class="t-label">Top Performer</div>
+      <div class="t-big" id="v-top-rev">—</div>
+      <div class="t-note" id="v-top-name">—</div>
+    </div>
+
+  </div><!-- /row1 -->
+
+  <!-- Row 2: engagement tiles -->
+  <div class="row2">
+
+    <div class="tile">
+      <div class="t-label">Avg Open Rate</div>
+      <div class="t-big" id="v-open">—</div>
+      <div class="t-note">last 5 sent campaigns</div>
+    </div>
+
+    <div class="tile">
+      <div class="t-label">Avg CTR</div>
+      <div class="t-big" id="v-ctr">—</div>
+      <div class="t-note">last 5 sent campaigns</div>
+    </div>
+
+    <div class="tile tile-active">
+      <div class="t-label">Active Automations</div>
+      <div class="t-big" id="v-auto-active">—</div>
+      <div class="t-note" id="v-auto-active-note">—</div>
+    </div>
+
+  </div><!-- /row2 -->
+
+  <!-- Leaderboard -->
+  <table class="w-table" id="leaderboard" hidden>
+    <thead>
+      <tr>
+        <th style="width: 52%;">Campaign / Automation</th>
+        <th class="num" style="width: 14%;">Orders</th>
+        <th class="num" style="width: 17%;">Revenue</th>
+        <th class="num" style="width: 17%;">AOV</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div class="w-empty" id="empty" hidden>No Omnisend-attributed orders in this window.</div>
+
+  <!-- Assumptions -->
+  <details class="assumptions">
+    <summary>Assumptions</summary>
+    <div class="assumptions-body">
+      <ul>
+        <li><strong>Window:</strong> rolling 30 days, refreshed daily at ~6am CT</li>
+        <li><strong>Revenue basis:</strong> Shopify <em>subtotal_price</em> (pre-tax, pre-shipping — closest match to Omnisend's own math)</li>
+        <li><strong>Attribution:</strong> Shopify orders where <em>landing_site</em> carries <em>utm_source=Omnisend</em>. Omnisend embeds the campaign or automation ID in the UTM; we group revenue by that ID</li>
+        <li><strong>Attribution is a floor</strong> — Omnisend's own dashboard uses a 5-day click window and will typically report 20–40% higher for the same campaign. This view is deliberately conservative</li>
+        <li><strong>Cancelled orders excluded</strong> from revenue totals</li>
+        <li><strong>Email Revenue</strong> = Campaign Revenue + Automation Revenue</li>
+        <li><strong>Automation Revenue</strong> is flow-level (all messages in a flow combined) — per-message breakdown requires Omnisend Statistics API beta</li>
+        <li><strong>Open Rate / CTR</strong> averaged across the last 5 sent campaigns inside the window, weighted by delivered count. Unique opens/clicks are not exposed by the Omnisend API — these are totals</li>
+        <li><strong>Rev / Recipient</strong> = Email Revenue ÷ total sends across campaigns in the window. A rough efficiency metric; ignores automation sends</li>
+        <li><strong>KPI vocabulary</strong> follows <em>db-operations/docs/marketing-kpi-prep-q2-2026.md</em></li>
+      </ul>
+    </div>
+  </details>
+
+</div><!-- /widget -->
+
+<script>
+const DATA_URL = "./data.json";
+
+// ── Helpers ──────────────────────────────────────────────────────────────
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = (val != null) ? String(val) : "—";
+}
+
+function money(n) {
+  if (n == null) return "—";
+  if (n >= 1e6) return "$" + (n / 1e6).toFixed(1) + "M";
+  if (n >= 1e3) return "$" + Math.round(n / 1e3) + "k";
+  if (n >= 100) return "$" + Math.round(n);
+  if (n >= 10)  return "$" + n.toFixed(0);
+  return "$" + n.toFixed(2);
+}
+
+function moneyDetail(n) {
+  if (n == null) return "—";
+  if (n >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M";
+  if (n >= 1e3) return "$" + (n / 1e3).toFixed(1) + "k";
+  return "$" + Math.round(n).toLocaleString();
+}
+
+function moneyCents(n) {
+  if (n == null) return "—";
+  // Small-denomination value like RPR — format with cents
+  if (n >= 100) return "$" + Math.round(n);
+  if (n >= 10)  return "$" + n.toFixed(1);
+  if (n >= 1)   return "$" + n.toFixed(2);
+  return "$" + n.toFixed(2);
+}
+
+function pct(n) {
+  return (n != null) ? (n * 100).toFixed(1) + "%" : "—";
+}
+
+function fmtTs(iso) {
+  try {
+    return "Updated " + new Date(iso).toLocaleString("en-US", {
+      month: "short", day: "numeric",
+      hour: "numeric", minute: "2-digit",
+      timeZone: "America/Chicago",
+      timeZoneName: "short",
+    });
+  } catch { return iso; }
+}
+
+function fmtWindow(w) {
+  if (!w) return "";
+  return "— last " + w.days + "d";
+}
+
+function truncate(s, n) {
+  if (!s) return "";
+  return s.length > n ? s.slice(0, n - 1) + "…" : s;
+}
+
+// ── Render ───────────────────────────────────────────────────────────────
+async function load() {
+  const bust = Math.floor(Date.now() / 60000);
+  try {
+    const r = await fetch(`${DATA_URL}?v=${bust}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const d = await r.json();
+
+    document.getElementById("ts").textContent = fmtTs(d.updated_at);
+    document.getElementById("w-win").textContent = fmtWindow(d.window);
+
+    // Row 1
+    set("v-email-rev",    money(d.revenue?.email_total));
+    set("v-camp-rev",     moneyDetail(d.revenue?.campaigns_revenue));
+    set("v-auto-rev",     moneyDetail(d.revenue?.automations_revenue));
+
+    set("v-auto-rev-big", money(d.revenue?.automations_revenue));
+    set("v-auto-orders",  d.revenue?.automations_orders);
+    set("v-auto-aov",     moneyDetail(d.revenue?.automations_aov));
+
+    set("v-camp-rev-big", money(d.revenue?.campaigns_revenue));
+    set("v-camp-orders",  d.revenue?.campaigns_orders);
+    set("v-camp-aov",     moneyDetail(d.revenue?.campaigns_aov));
+
+    const rpr = d.revenue_per_recipient?.value;
+    set("v-rpr", moneyCents(rpr));
+    const rprSent = d.revenue_per_recipient?.total_sent_in_window;
+    const rprN = d.revenue_per_recipient?.based_on_campaigns;
+    set("v-rpr-note", rprSent != null && rprN != null
+      ? `over ${rprSent.toLocaleString()} sends / ${rprN} campaign${rprN === 1 ? "" : "s"}`
+      : "—");
+
+    if (d.top_campaign) {
+      set("v-top-rev", money(d.top_campaign.revenue));
+      const tag = d.top_campaign.type === "automation" ? "automation" : "campaign";
+      set("v-top-name", `${tag}: ${truncate(d.top_campaign.name, 24)}`);
+    } else {
+      set("v-top-rev", "—");
+      set("v-top-name", "no attributed orders yet");
+    }
+
+    // Row 2
+    set("v-open", pct(d.engagement?.avg_open_rate));
+    set("v-ctr",  pct(d.engagement?.avg_ctr));
+    set("v-auto-active", d.automations?.active);
+    set("v-auto-active-note",
+      d.automations?.total != null ? `of ${d.automations.total} total` : "—");
+
+    // Leaderboard
+    const rows = d.leaderboard ?? [];
+    const tbody = document.getElementById("tbody");
+    const table = document.getElementById("leaderboard");
+    const empty = document.getElementById("empty");
+    if (rows.length === 0) {
+      table.hidden = true;
+      empty.hidden = false;
+    } else {
+      tbody.innerHTML = rows.map((r) => {
+        const badge = r.type === "automation"
+          ? '<span class="badge auto">auto</span>'
+          : '<span class="badge">camp</span>';
+        return `
+          <tr>
+            <td>${badge}${escapeHtml(r.name)}</td>
+            <td class="num">${r.orders}</td>
+            <td class="num">${moneyDetail(r.revenue)}</td>
+            <td class="num">${moneyDetail(r.aov)}</td>
+          </tr>`;
+      }).join("");
+      table.hidden = false;
+      empty.hidden = true;
+    }
+
+  } catch (err) {
+    document.getElementById("ts").innerHTML =
+      '<span style="color:var(--muted)">⚠ Unable to load — showing last known data</span>';
+    console.warn("omnisend-scoreboard: fetch failed", err);
+  }
+}
+
+function escapeHtml(s) {
+  return String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+load();
+setInterval(load, 5 * 60 * 1000);
+</script>
+</body>
+</html>
