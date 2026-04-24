@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-23T23:19:07.101017-05:00",
+  "updated_at": "2026-04-23T23:38:50.511562-05:00",
   "order_count": 151,
   "zero_order_count": 1,
   "lighting": {
@@ -8,9 +8,9 @@
     "non_color": 11
   },
   "hardware": {
-    "total": 86,
-    "color": 0,
-    "non_color": 86
+    "total": 253,
+    "color": 163,
+    "non_color": 90
   },
   "expedites": 1,
   "open_value": 438662.14,
