@@ -1,100 +1,558 @@
 {
-  "updated_at": "2026-04-24T04:12:37.863Z",
-  "window": {
-    "days": 30,
-    "from": "2026-03-25",
-    "to": "2026-04-24"
-  },
-  "revenue": {
-    "email_total": 1868.98,
-    "email_orders": 9,
-    "campaigns_revenue": 1049,
-    "campaigns_orders": 7,
-    "campaigns_aov": 149.86,
-    "automations_revenue": 819.98,
-    "automations_orders": 2,
-    "automations_aov": 409.99,
-    "currency": "USD"
-  },
-  "revenue_per_recipient": {
-    "value": 0.0305,
-    "total_sent_in_window": 61356,
-    "based_on_campaigns": 6
-  },
-  "engagement": {
-    "avg_open_rate": 0.33716,
-    "avg_ctr": 0.008905,
-    "based_on_last_n": 5,
-    "campaigns_sent_in_window": 6
-  },
-  "top_campaign": {
-    "name": "Welcome",
-    "type": "automation",
-    "orders": 2,
-    "revenue": 819.98,
-    "aov": 409.99
+  "updated_at": "2026-04-24T04:33:28.488Z",
+  "default_range": "last_30d",
+  "tabs": [
+    {
+      "key": "last_30d",
+      "label": "Last 30D"
+    },
+    {
+      "key": "mtd",
+      "label": "MTD"
+    },
+    {
+      "key": "last_month",
+      "label": "Last Month"
+    },
+    {
+      "key": "ytd",
+      "label": "YTD"
+    },
+    {
+      "key": "last_year",
+      "label": "Last Year"
+    }
+  ],
+  "ranges": {
+    "last_30d": {
+      "window": {
+        "from": "2026-03-25T04:33:28.488Z",
+        "to": "2026-04-24T04:33:28.488Z",
+        "label": "Last 30D"
+      },
+      "revenue": {
+        "email_total": 1868.98,
+        "email_orders": 9,
+        "campaigns_revenue": 1049,
+        "campaigns_orders": 7,
+        "campaigns_aov": 149.86,
+        "automations_revenue": 819.98,
+        "automations_orders": 2,
+        "automations_aov": 409.99
+      },
+      "revenue_per_recipient": {
+        "value": 0.0305,
+        "total_sent_in_window": 61356,
+        "based_on_campaigns": 6
+      },
+      "engagement": {
+        "avg_open_rate": 0.344983,
+        "avg_ctr": 0.009642,
+        "based_on_campaigns": 6
+      },
+      "top_campaign": {
+        "name": "Welcome",
+        "type": "automation",
+        "orders": 2,
+        "revenue": 819.98,
+        "aov": 409.99
+      },
+      "leaderboard": [
+        {
+          "type": "automation",
+          "id": "6568d2fbbba97031766e17d8",
+          "name": "Welcome",
+          "orders": 2,
+          "revenue": 819.98,
+          "aov": 409.99,
+          "ctr": null
+        },
+        {
+          "type": "campaign",
+          "id": "69c4439f191fcfc7f019ec3e",
+          "name": "Pinkaboo Launch Email - Both audiences",
+          "orders": 1,
+          "revenue": 600,
+          "aov": 600,
+          "ctr": 0.011854
+        },
+        {
+          "type": "campaign",
+          "id": "699c8710e59d9c1803a6a909",
+          "name": "Week 4: Feb 2026 (Main)",
+          "orders": 1,
+          "revenue": 400,
+          "aov": 400,
+          "ctr": 0.007956
+        },
+        {
+          "type": "campaign",
+          "id": "68b86744424c740cb3141556",
+          "name": "Sept. Email 1 - Trade Audience (custom colors 50% off)",
+          "orders": 1,
+          "revenue": 37,
+          "aov": 37,
+          "ctr": 0.022311
+        },
+        {
+          "type": "campaign",
+          "id": "69b466aad9da56c6b0f46efb",
+          "name": "Pinkaboo Teaser - Both Audiences",
+          "orders": 3,
+          "revenue": 12,
+          "aov": 4,
+          "ctr": 0.031704
+        },
+        {
+          "type": "campaign",
+          "id": "69d40167f9011fcc587922d6",
+          "name": "April Week 2 Campaign - Trade",
+          "orders": 1,
+          "revenue": 0,
+          "aov": 0,
+          "ctr": 0.016871
+        }
+      ],
+      "skipped_cancelled": 2
+    },
+    "mtd": {
+      "window": {
+        "from": "2026-04-01T05:00:00.000Z",
+        "to": "2026-04-24T04:33:28.488Z",
+        "label": "MTD"
+      },
+      "revenue": {
+        "email_total": 1856.98,
+        "email_orders": 6,
+        "campaigns_revenue": 1037,
+        "campaigns_orders": 4,
+        "campaigns_aov": 259.25,
+        "automations_revenue": 819.98,
+        "automations_orders": 2,
+        "automations_aov": 409.99
+      },
+      "revenue_per_recipient": {
+        "value": 0.0403,
+        "total_sent_in_window": 46022,
+        "based_on_campaigns": 5
+      },
+      "engagement": {
+        "avg_open_rate": 0.338142,
+        "avg_ctr": 0.008905,
+        "based_on_campaigns": 5
+      },
+      "top_campaign": {
+        "name": "Welcome",
+        "type": "automation",
+        "orders": 2,
+        "revenue": 819.98,
+        "aov": 409.99
+      },
+      "leaderboard": [
+        {
+          "type": "automation",
+          "id": "6568d2fbbba97031766e17d8",
+          "name": "Welcome",
+          "orders": 2,
+          "revenue": 819.98,
+          "aov": 409.99,
+          "ctr": null
+        },
+        {
+          "type": "campaign",
+          "id": "69c4439f191fcfc7f019ec3e",
+          "name": "Pinkaboo Launch Email - Both audiences",
+          "orders": 1,
+          "revenue": 600,
+          "aov": 600,
+          "ctr": 0.011854
+        },
+        {
+          "type": "campaign",
+          "id": "699c8710e59d9c1803a6a909",
+          "name": "Week 4: Feb 2026 (Main)",
+          "orders": 1,
+          "revenue": 400,
+          "aov": 400,
+          "ctr": 0.007956
+        },
+        {
+          "type": "campaign",
+          "id": "68b86744424c740cb3141556",
+          "name": "Sept. Email 1 - Trade Audience (custom colors 50% off)",
+          "orders": 1,
+          "revenue": 37,
+          "aov": 37,
+          "ctr": 0.022311
+        },
+        {
+          "type": "campaign",
+          "id": "69d40167f9011fcc587922d6",
+          "name": "April Week 2 Campaign - Trade",
+          "orders": 1,
+          "revenue": 0,
+          "aov": 0,
+          "ctr": 0.016871
+        }
+      ],
+      "skipped_cancelled": 1
+    },
+    "last_month": {
+      "window": {
+        "from": "2026-03-01T06:00:00.000Z",
+        "to": "2026-04-01T04:59:59.999Z",
+        "label": "Last Month"
+      },
+      "revenue": {
+        "email_total": 4406.92,
+        "email_orders": 9,
+        "campaigns_revenue": 4085.69,
+        "campaigns_orders": 8,
+        "campaigns_aov": 510.71,
+        "automations_revenue": 321.23,
+        "automations_orders": 1,
+        "automations_aov": 321.23
+      },
+      "revenue_per_recipient": {
+        "value": 0.0575,
+        "total_sent_in_window": 76697,
+        "based_on_campaigns": 7
+      },
+      "engagement": {
+        "avg_open_rate": 0.365092,
+        "avg_ctr": 0.016512,
+        "based_on_campaigns": 7
+      },
+      "top_campaign": {
+        "name": "March 2026 Week 1 - Trade",
+        "type": "campaign",
+        "orders": 3,
+        "revenue": 1664.21,
+        "aov": 554.74
+      },
+      "leaderboard": [
+        {
+          "type": "campaign",
+          "id": "69a73969bf78de96a0dd850b",
+          "name": "March 2026 Week 1 - Trade",
+          "orders": 3,
+          "revenue": 1664.21,
+          "aov": 554.74,
+          "ctr": 0.029713
+        },
+        {
+          "type": "campaign",
+          "id": "69b99188ab0aea1b28da4dfa",
+          "name": "March 2026 Week 3 - Both Audiences",
+          "orders": 1,
+          "revenue": 1272,
+          "aov": 1272,
+          "ctr": 0.00916
+        },
+        {
+          "type": "campaign",
+          "id": "69af28c373ab435f64480340",
+          "name": "March 2026 Week 2 - Meet Status - Trade",
+          "orders": 1,
+          "revenue": 1137.48,
+          "aov": 1137.48,
+          "ctr": 0.016479
+        },
+        {
+          "type": "automation",
+          "id": "695e8ea1eb3ca99e6eaed438",
+          "name": "Copy of: Abandoned Cart",
+          "orders": 1,
+          "revenue": 321.23,
+          "aov": 321.23,
+          "ctr": null
+        },
+        {
+          "type": "campaign",
+          "id": "69b466aad9da56c6b0f46efb",
+          "name": "Pinkaboo Teaser - Both Audiences",
+          "orders": 3,
+          "revenue": 12,
+          "aov": 4,
+          "ctr": 0.031704
+        }
+      ],
+      "skipped_cancelled": 7
+    },
+    "ytd": {
+      "window": {
+        "from": "2026-01-01T06:00:00.000Z",
+        "to": "2026-04-24T04:33:28.488Z",
+        "label": "YTD"
+      },
+      "revenue": {
+        "email_total": 19358.79,
+        "email_orders": 41,
+        "campaigns_revenue": 12321.01,
+        "campaigns_orders": 26,
+        "campaigns_aov": 473.88,
+        "automations_revenue": 7037.78,
+        "automations_orders": 15,
+        "automations_aov": 469.19
+      },
+      "revenue_per_recipient": {
+        "value": 0.0905,
+        "total_sent_in_window": 213930,
+        "based_on_campaigns": 22
+      },
+      "engagement": {
+        "avg_open_rate": 0.358757,
+        "avg_ctr": 0.013348,
+        "based_on_campaigns": 22
+      },
+      "top_campaign": {
+        "name": "President's Day 2026 Reminder Email - Main Audience",
+        "type": "campaign",
+        "orders": 4,
+        "revenue": 3982.67,
+        "aov": 995.67
+      },
+      "leaderboard": [
+        {
+          "type": "campaign",
+          "id": "698cb86d56888fa29acdf312",
+          "name": "President's Day 2026 Reminder Email - Main Audience",
+          "orders": 4,
+          "revenue": 3982.67,
+          "aov": 995.67,
+          "ctr": 0.019393
+        },
+        {
+          "type": "automation",
+          "id": "6568d2fbbba97031766e17d8",
+          "name": "Welcome",
+          "orders": 8,
+          "revenue": 3828.88,
+          "aov": 478.61,
+          "ctr": null
+        },
+        {
+          "type": "automation",
+          "id": "6939e23c584cb7d57c0669ba",
+          "name": "Copy of: Trade Customer Welcome Email",
+          "orders": 4,
+          "revenue": 1988.96,
+          "aov": 497.24,
+          "ctr": null
+        },
+        {
+          "type": "campaign",
+          "id": "69a73969bf78de96a0dd850b",
+          "name": "March 2026 Week 1 - Trade",
+          "orders": 3,
+          "revenue": 1664.21,
+          "aov": 554.74,
+          "ctr": 0.029713
+        },
+        {
+          "type": "campaign",
+          "id": "69b99188ab0aea1b28da4dfa",
+          "name": "March 2026 Week 3 - Both Audiences",
+          "orders": 1,
+          "revenue": 1272,
+          "aov": 1272,
+          "ctr": 0.00916
+        },
+        {
+          "type": "campaign",
+          "id": "69af28c373ab435f64480340",
+          "name": "March 2026 Week 2 - Meet Status - Trade",
+          "orders": 1,
+          "revenue": 1137.48,
+          "aov": 1137.48,
+          "ctr": 0.016479
+        },
+        {
+          "type": "campaign",
+          "id": "698de5d956888fa29ace03a4",
+          "name": "President's Day 2026 Last Chance Email - Main Audience",
+          "orders": 2,
+          "revenue": 1075.48,
+          "aov": 537.74,
+          "ctr": 0.020344
+        },
+        {
+          "type": "automation",
+          "id": "695e8ea1eb3ca99e6eaed438",
+          "name": "Copy of: Abandoned Cart",
+          "orders": 2,
+          "revenue": 968.96,
+          "aov": 484.48,
+          "ctr": null
+        },
+        {
+          "type": "campaign",
+          "id": "698b9f686b0986d9478139d7",
+          "name": "President's Day 2026 Announcement Email - Main Audience",
+          "orders": 2,
+          "revenue": 744,
+          "aov": 372,
+          "ctr": 0.009639
+        },
+        {
+          "type": "campaign",
+          "id": "699c8710e59d9c1803a6a909",
+          "name": "Week 4: Feb 2026 (Main)",
+          "orders": 2,
+          "revenue": 695.98,
+          "aov": 347.99,
+          "ctr": 0.007956
+        }
+      ],
+      "skipped_cancelled": 13
+    },
+    "last_year": {
+      "window": {
+        "from": "2025-01-01T06:00:00.000Z",
+        "to": "2026-01-01T05:59:59.999Z",
+        "label": "Last Year"
+      },
+      "revenue": {
+        "email_total": 55230.72,
+        "email_orders": 115,
+        "campaigns_revenue": 23707.86,
+        "campaigns_orders": 57,
+        "campaigns_aov": 415.93,
+        "automations_revenue": 31522.86,
+        "automations_orders": 58,
+        "automations_aov": 543.5
+      },
+      "revenue_per_recipient": {
+        "value": 0.1488,
+        "total_sent_in_window": 371291,
+        "based_on_campaigns": 43
+      },
+      "engagement": {
+        "avg_open_rate": 0.38538,
+        "avg_ctr": 0.018643,
+        "based_on_campaigns": 43
+      },
+      "top_campaign": {
+        "name": "Welcome",
+        "type": "automation",
+        "orders": 31,
+        "revenue": 15674.9,
+        "aov": 505.64
+      },
+      "leaderboard": [
+        {
+          "type": "automation",
+          "id": "6568d2fbbba97031766e17d8",
+          "name": "Welcome",
+          "orders": 31,
+          "revenue": 15674.9,
+          "aov": 505.64,
+          "ctr": null
+        },
+        {
+          "type": "automation",
+          "id": "656f7845a33be06c9929243c",
+          "name": "Abandoned Cart",
+          "orders": 13,
+          "revenue": 9968.08,
+          "aov": 766.78,
+          "ctr": null
+        },
+        {
+          "type": "automation",
+          "id": "66d36070bc20725b6ff43358",
+          "name": "Trade Customer Welcome Email",
+          "orders": 14,
+          "revenue": 5879.88,
+          "aov": 419.99,
+          "ctr": null
+        },
+        {
+          "type": "campaign",
+          "id": "68a72cb121ee908fcc51eb6c",
+          "name": "Labor Day 2025 Mid-Week Reminder",
+          "orders": 1,
+          "revenue": 3080,
+          "aov": 3080,
+          "ctr": 0.022086
+        },
+        {
+          "type": "campaign",
+          "id": "682cc7e9cbc76c5b2fcff887",
+          "name": "Memorial Day Sale 2025",
+          "orders": 6,
+          "revenue": 3002.71,
+          "aov": 500.45,
+          "ctr": 0.015875
+        },
+        {
+          "type": "campaign",
+          "id": "682de78bcbc76c5b2fcfff4b",
+          "name": "Booster: Memorial Day Sale 2025",
+          "orders": 5,
+          "revenue": 2406.42,
+          "aov": 481.28,
+          "ctr": 0.008326
+        },
+        {
+          "type": "campaign",
+          "id": "68361309a5617d11d2670757",
+          "name": "Trade Program Email Campaign (May 2025)",
+          "orders": 3,
+          "revenue": 1931.23,
+          "aov": 643.74,
+          "ctr": 0.023334
+        },
+        {
+          "type": "campaign",
+          "id": "6914ea52bd6eb8033d43cc62",
+          "name": "Main Last chance: Color Friday 2025 - Main Audience (Not Purchased in 30 Days)",
+          "orders": 4,
+          "revenue": 1360.19,
+          "aov": 340.05,
+          "ctr": 0.007912
+        },
+        {
+          "type": "campaign",
+          "id": "68a7374c21ee908fcc51ec0f",
+          "name": "Labor Day 2025 Sale Extended Email",
+          "orders": 1,
+          "revenue": 1215.48,
+          "aov": 1215.48,
+          "ctr": 0.019588
+        },
+        {
+          "type": "campaign",
+          "id": "6908ebb3bd6eb8033d4337e1",
+          "name": "November 2025 Campaign 1 - Trade Audience",
+          "orders": 2,
+          "revenue": 1209.46,
+          "aov": 604.73,
+          "ctr": 0.059305
+        }
+      ],
+      "skipped_cancelled": 49
+    }
   },
   "automations": {
     "active": 3,
     "total": 24
   },
-  "leaderboard": [
-    {
-      "type": "automation",
-      "id": "6568d2fbbba97031766e17d8",
-      "name": "Welcome",
-      "orders": 2,
-      "revenue": 819.98,
-      "aov": 409.99
-    },
-    {
-      "type": "campaign",
-      "id": "69c4439f191fcfc7f019ec3e",
-      "name": "Pinkaboo Launch Email - Both audiences",
-      "orders": 1,
-      "revenue": 600,
-      "aov": 600
-    },
-    {
-      "type": "campaign",
-      "id": "699c8710e59d9c1803a6a909",
-      "name": "Week 4: Feb 2026 (Main)",
-      "orders": 1,
-      "revenue": 400,
-      "aov": 400
-    },
-    {
-      "type": "campaign",
-      "id": "68b86744424c740cb3141556",
-      "name": "Sept. Email 1 - Trade Audience (custom colors 50% off)",
-      "orders": 1,
-      "revenue": 37,
-      "aov": 37
-    },
-    {
-      "type": "campaign",
-      "id": "69b466aad9da56c6b0f46efb",
-      "name": "Pinkaboo Teaser - Both Audiences",
-      "orders": 3,
-      "revenue": 12,
-      "aov": 4
-    },
-    {
-      "type": "campaign",
-      "id": "69d40167f9011fcc587922d6",
-      "name": "April Week 2 Campaign - Trade",
-      "orders": 1,
-      "revenue": 0,
-      "aov": 0
-    }
-  ],
   "meta": {
+    "currency": "USD",
     "attribution_basis": "shopify_utm_source_omnisend",
     "revenue_basis": "subtotal_price",
-    "cancelled_orders_excluded": 2,
-    "shopify_orders_scanned": 460,
-    "shopify_pages_fetched": 2,
+    "shopify_orders_scanned": 6753,
+    "shopify_pages_fetched": 28,
     "shopify_truncated": false,
-    "engagement_sample_size": 5
+    "omnisend_campaigns_fetched": 84,
+    "frozen_keys": [],
+    "recomputed_keys": [
+      "last_30d",
+      "mtd",
+      "last_month",
+      "ytd",
+      "last_year"
+    ]
   }
 }

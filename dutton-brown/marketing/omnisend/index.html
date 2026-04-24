@@ -69,16 +69,54 @@ body {
   color: var(--text);
   white-space: nowrap;
 }
-.w-title .w-win {
-  color: var(--muted);
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  margin-left: 8px;
-}
 .w-ts {
   font-size: 10px;
   color: var(--muted);
   white-space: nowrap;
+}
+.w-ts .frozen-mark {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--page-bg);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 1 1 auto;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  padding: 9px 6px 8px;
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.12s, background 0.12s;
+}
+.tab:last-child { border-right: none; }
+.tab:hover { color: var(--text); }
+.tab.active {
+  color: var(--text);
+  background: var(--header-bg);
+}
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--accent);
 }
 
 /* ── Tile grids ─────────────────────────────────────────────────────────── */
@@ -101,7 +139,6 @@ body {
   min-width: 0;
 }
 .tile:last-child { border-right: none; }
-
 .t-label {
   font-size: 9.5px;
   font-weight: 600;
@@ -178,7 +215,7 @@ body {
   font-variant-numeric: tabular-nums;
   color: var(--text);
 }
-.w-table tbody td.muted { color: var(--muted); }
+.w-table tbody td.num.dash { color: var(--muted); }
 .w-table tbody tr:last-child td { border-bottom: none; }
 
 .badge {
@@ -248,6 +285,7 @@ body {
   .t-sub   { font-size: 10px; }
   .tile    { padding: 10px 10px 11px; }
   .w-table thead th, .w-table tbody td { padding: 6px 10px; font-size: 10.5px; }
+  .tab { font-size: 10px; padding: 8px 4px; }
 }
 
 @media (max-width: 460px) {
@@ -271,9 +309,12 @@ body {
 
   <!-- Header -->
   <div class="w-header">
-    <span class="w-title">Omnisend Scoreboard<span class="w-win" id="w-win">— loading</span></span>
+    <span class="w-title">Omnisend Scoreboard</span>
     <span class="w-ts" id="ts">Loading…</span>
   </div>
+
+  <!-- Tabs -->
+  <div class="tabs" id="tabs"></div>
 
   <!-- Row 1: revenue tiles -->
   <div class="row1">
@@ -319,13 +360,13 @@ body {
     <div class="tile">
       <div class="t-label">Avg Open Rate</div>
       <div class="t-big" id="v-open">—</div>
-      <div class="t-note">last 5 sent campaigns</div>
+      <div class="t-note" id="v-open-note">—</div>
     </div>
 
     <div class="tile">
       <div class="t-label">Avg CTR</div>
       <div class="t-big" id="v-ctr">—</div>
-      <div class="t-note">last 5 sent campaigns</div>
+      <div class="t-note" id="v-ctr-note">—</div>
     </div>
 
     <div class="tile tile-active">
@@ -340,8 +381,9 @@ body {
   <table class="w-table" id="leaderboard" hidden>
     <thead>
       <tr>
-        <th style="width: 52%;">Campaign / Automation</th>
-        <th class="num" style="width: 14%;">Orders</th>
+        <th style="width: 42%;">Campaign / Automation</th>
+        <th class="num" style="width: 12%;">CTR</th>
+        <th class="num" style="width: 12%;">Orders</th>
         <th class="num" style="width: 17%;">Revenue</th>
         <th class="num" style="width: 17%;">AOV</th>
       </tr>
@@ -355,15 +397,17 @@ body {
     <summary>Assumptions</summary>
     <div class="assumptions-body">
       <ul>
-        <li><strong>Window:</strong> rolling 30 days, refreshed daily at ~6am CT</li>
+        <li><strong>Windows:</strong> Last 30D and MTD are rolling; Last Month, YTD, and Last Year are calendar-aligned. Last Month and Last Year are <strong>frozen</strong> once the period closes — numbers stay stable for exec reports</li>
         <li><strong>Revenue basis:</strong> Shopify <em>subtotal_price</em> (pre-tax, pre-shipping — closest match to Omnisend's own math)</li>
         <li><strong>Attribution:</strong> Shopify orders where <em>landing_site</em> carries <em>utm_source=Omnisend</em>. Omnisend embeds the campaign or automation ID in the UTM; we group revenue by that ID</li>
         <li><strong>Attribution is a floor</strong> — Omnisend's own dashboard uses a 5-day click window and will typically report 20–40% higher for the same campaign. This view is deliberately conservative</li>
         <li><strong>Cancelled orders excluded</strong> from revenue totals</li>
         <li><strong>Email Revenue</strong> = Campaign Revenue + Automation Revenue</li>
         <li><strong>Automation Revenue</strong> is flow-level (all messages in a flow combined) — per-message breakdown requires Omnisend Statistics API beta</li>
-        <li><strong>Open Rate / CTR</strong> averaged across the last 5 sent campaigns inside the window, weighted by delivered count. Unique opens/clicks are not exposed by the Omnisend API — these are totals</li>
-        <li><strong>Rev / Recipient</strong> = Email Revenue ÷ total sends across campaigns in the window. A rough efficiency metric; ignores automation sends</li>
+        <li><strong>Open Rate / CTR</strong> are delivery-weighted averages across every sent campaign in the window. Unique opens/clicks are not exposed by Omnisend's API — these are totals</li>
+        <li><strong>Leaderboard CTR</strong> shows per-campaign CTR. Automations show <em>—</em> because Omnisend's v5 /automations endpoint doesn't expose click counters; the Statistics API beta would fill this in</li>
+        <li><strong>Rev / Recipient</strong> = Email Revenue ÷ total sends (campaigns only — automation sends not individually trackable)</li>
+        <li><strong>Older windows</strong> (Last Year, early YTD) may show smaller numbers than reality because Omnisend UTM tagging wasn't always consistent before 2025</li>
         <li><strong>KPI vocabulary</strong> follows <em>db-operations/docs/marketing-kpi-prep-q2-2026.md</em></li>
       </ul>
     </div>
@@ -374,12 +418,11 @@ body {
 <script>
 const DATA_URL = "./data.json";
 
-// ── Helpers ──────────────────────────────────────────────────────────────
-function set(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = (val != null) ? String(val) : "—";
-}
+// ── State ────────────────────────────────────────────────────────────────
+let DATA = null;
+let currentRange = null;
 
+// ── Formatters ──────────────────────────────────────────────────────────
 function money(n) {
   if (n == null) return "—";
   if (n >= 1e6) return "$" + (n / 1e6).toFixed(1) + "M";
@@ -388,134 +431,169 @@ function money(n) {
   if (n >= 10)  return "$" + n.toFixed(0);
   return "$" + n.toFixed(2);
 }
-
 function moneyDetail(n) {
   if (n == null) return "—";
   if (n >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M";
   if (n >= 1e3) return "$" + (n / 1e3).toFixed(1) + "k";
   return "$" + Math.round(n).toLocaleString();
 }
-
 function moneyCents(n) {
   if (n == null) return "—";
-  // Small-denomination value like RPR — format with cents
   if (n >= 100) return "$" + Math.round(n);
   if (n >= 10)  return "$" + n.toFixed(1);
-  if (n >= 1)   return "$" + n.toFixed(2);
   return "$" + n.toFixed(2);
 }
-
 function pct(n) {
   return (n != null) ? (n * 100).toFixed(1) + "%" : "—";
 }
-
-function fmtTs(iso) {
+function pct2(n) {
+  return (n != null) ? (n * 100).toFixed(2) + "%" : "—";
+}
+function fmtTs(iso, frozenAt) {
+  const label = frozenAt ? "Frozen " : "Updated ";
+  const base = frozenAt ?? iso;
   try {
-    return "Updated " + new Date(iso).toLocaleString("en-US", {
+    return label + new Date(base).toLocaleString("en-US", {
       month: "short", day: "numeric",
       hour: "numeric", minute: "2-digit",
       timeZone: "America/Chicago",
       timeZoneName: "short",
     });
-  } catch { return iso; }
+  } catch { return base; }
 }
-
-function fmtWindow(w) {
-  if (!w) return "";
-  return "— last " + w.days + "d";
-}
-
 function truncate(s, n) {
   if (!s) return "";
   return s.length > n ? s.slice(0, n - 1) + "…" : s;
 }
-
-// ── Render ───────────────────────────────────────────────────────────────
-async function load() {
-  const bust = Math.floor(Date.now() / 60000);
-  try {
-    const r = await fetch(`${DATA_URL}?v=${bust}`);
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const d = await r.json();
-
-    document.getElementById("ts").textContent = fmtTs(d.updated_at);
-    document.getElementById("w-win").textContent = fmtWindow(d.window);
-
-    // Row 1
-    set("v-email-rev",    money(d.revenue?.email_total));
-    set("v-camp-rev",     moneyDetail(d.revenue?.campaigns_revenue));
-    set("v-auto-rev",     moneyDetail(d.revenue?.automations_revenue));
-
-    set("v-auto-rev-big", money(d.revenue?.automations_revenue));
-    set("v-auto-orders",  d.revenue?.automations_orders);
-    set("v-auto-aov",     moneyDetail(d.revenue?.automations_aov));
-
-    set("v-camp-rev-big", money(d.revenue?.campaigns_revenue));
-    set("v-camp-orders",  d.revenue?.campaigns_orders);
-    set("v-camp-aov",     moneyDetail(d.revenue?.campaigns_aov));
-
-    const rpr = d.revenue_per_recipient?.value;
-    set("v-rpr", moneyCents(rpr));
-    const rprSent = d.revenue_per_recipient?.total_sent_in_window;
-    const rprN = d.revenue_per_recipient?.based_on_campaigns;
-    set("v-rpr-note", rprSent != null && rprN != null
-      ? `over ${rprSent.toLocaleString()} sends / ${rprN} campaign${rprN === 1 ? "" : "s"}`
-      : "—");
-
-    if (d.top_campaign) {
-      set("v-top-rev", money(d.top_campaign.revenue));
-      const tag = d.top_campaign.type === "automation" ? "automation" : "campaign";
-      set("v-top-name", `${tag}: ${truncate(d.top_campaign.name, 24)}`);
-    } else {
-      set("v-top-rev", "—");
-      set("v-top-name", "no attributed orders yet");
-    }
-
-    // Row 2
-    set("v-open", pct(d.engagement?.avg_open_rate));
-    set("v-ctr",  pct(d.engagement?.avg_ctr));
-    set("v-auto-active", d.automations?.active);
-    set("v-auto-active-note",
-      d.automations?.total != null ? `of ${d.automations.total} total` : "—");
-
-    // Leaderboard
-    const rows = d.leaderboard ?? [];
-    const tbody = document.getElementById("tbody");
-    const table = document.getElementById("leaderboard");
-    const empty = document.getElementById("empty");
-    if (rows.length === 0) {
-      table.hidden = true;
-      empty.hidden = false;
-    } else {
-      tbody.innerHTML = rows.map((r) => {
-        const badge = r.type === "automation"
-          ? '<span class="badge auto">auto</span>'
-          : '<span class="badge">camp</span>';
-        return `
-          <tr>
-            <td>${badge}${escapeHtml(r.name)}</td>
-            <td class="num">${r.orders}</td>
-            <td class="num">${moneyDetail(r.revenue)}</td>
-            <td class="num">${moneyDetail(r.aov)}</td>
-          </tr>`;
-      }).join("");
-      table.hidden = false;
-      empty.hidden = true;
-    }
-
-  } catch (err) {
-    document.getElementById("ts").innerHTML =
-      '<span style="color:var(--muted)">⚠ Unable to load — showing last known data</span>';
-    console.warn("omnisend-scoreboard: fetch failed", err);
-  }
-}
-
 function escapeHtml(s) {
   return String(s ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = (val != null) ? String(val) : "—";
+}
+
+// ── Rendering ───────────────────────────────────────────────────────────
+function renderTabs() {
+  const host = document.getElementById("tabs");
+  host.innerHTML = (DATA.tabs ?? []).map((t) =>
+    `<button class="tab${t.key === currentRange ? " active" : ""}" data-range="${t.key}">${escapeHtml(t.label)}</button>`
+  ).join("");
+  for (const btn of host.querySelectorAll(".tab")) {
+    btn.addEventListener("click", () => {
+      currentRange = btn.dataset.range;
+      renderActive();
+    });
+  }
+}
+
+function renderActive() {
+  const r = DATA?.ranges?.[currentRange];
+  if (!r) return;
+
+  // Tabs: update active class
+  for (const btn of document.querySelectorAll(".tab")) {
+    btn.classList.toggle("active", btn.dataset.range === currentRange);
+  }
+
+  // Timestamp (show frozen marker for closed windows)
+  const frozenAt = r.frozen_at ?? null;
+  const tsEl = document.getElementById("ts");
+  if (frozenAt) {
+    tsEl.innerHTML = `<span class="frozen-mark">● Frozen</span> &nbsp;${fmtTs(null, frozenAt)}`;
+  } else {
+    tsEl.textContent = fmtTs(DATA.updated_at);
+  }
+
+  // Row 1: revenue
+  set("v-email-rev",    money(r.revenue?.email_total));
+  set("v-camp-rev",     moneyDetail(r.revenue?.campaigns_revenue));
+  set("v-auto-rev",     moneyDetail(r.revenue?.automations_revenue));
+  set("v-auto-rev-big", money(r.revenue?.automations_revenue));
+  set("v-auto-orders",  r.revenue?.automations_orders);
+  set("v-auto-aov",     moneyDetail(r.revenue?.automations_aov));
+  set("v-camp-rev-big", money(r.revenue?.campaigns_revenue));
+  set("v-camp-orders",  r.revenue?.campaigns_orders);
+  set("v-camp-aov",     moneyDetail(r.revenue?.campaigns_aov));
+
+  // RPR
+  const rpr = r.revenue_per_recipient?.value;
+  set("v-rpr", moneyCents(rpr));
+  const rprSent = r.revenue_per_recipient?.total_sent_in_window;
+  const rprN = r.revenue_per_recipient?.based_on_campaigns;
+  set("v-rpr-note", rprSent != null && rprN != null && rprN > 0
+    ? `over ${rprSent.toLocaleString()} sends / ${rprN} campaign${rprN === 1 ? "" : "s"}`
+    : "no campaigns in window");
+
+  // Top performer
+  if (r.top_campaign) {
+    set("v-top-rev", money(r.top_campaign.revenue));
+    const tag = r.top_campaign.type === "automation" ? "automation" : "campaign";
+    set("v-top-name", `${tag}: ${truncate(r.top_campaign.name, 24)}`);
+  } else {
+    set("v-top-rev", "—");
+    set("v-top-name", "no attributed orders in this window");
+  }
+
+  // Row 2
+  set("v-open", pct(r.engagement?.avg_open_rate));
+  const engN = r.engagement?.based_on_campaigns ?? 0;
+  set("v-open-note", engN > 0 ? `${engN} sent campaign${engN === 1 ? "" : "s"}` : "no campaigns in window");
+  set("v-ctr",  pct2(r.engagement?.avg_ctr));
+  set("v-ctr-note", engN > 0 ? `${engN} sent campaign${engN === 1 ? "" : "s"}` : "no campaigns in window");
+  set("v-auto-active", DATA.automations?.active);
+  set("v-auto-active-note",
+    DATA.automations?.total != null ? `of ${DATA.automations.total} total` : "—");
+
+  // Leaderboard
+  const rows = r.leaderboard ?? [];
+  const tbody = document.getElementById("tbody");
+  const table = document.getElementById("leaderboard");
+  const empty = document.getElementById("empty");
+  if (rows.length === 0) {
+    table.hidden = true;
+    empty.hidden = false;
+  } else {
+    tbody.innerHTML = rows.map((row) => {
+      const badge = row.type === "automation"
+        ? '<span class="badge auto">auto</span>'
+        : '<span class="badge">camp</span>';
+      const ctrCell = row.ctr != null
+        ? `<td class="num">${pct2(row.ctr)}</td>`
+        : `<td class="num dash">—</td>`;
+      return `
+        <tr>
+          <td>${badge}${escapeHtml(row.name)}</td>
+          ${ctrCell}
+          <td class="num">${row.orders}</td>
+          <td class="num">${moneyDetail(row.revenue)}</td>
+          <td class="num">${moneyDetail(row.aov)}</td>
+        </tr>`;
+    }).join("");
+    table.hidden = false;
+    empty.hidden = true;
+  }
+}
+
+// ── Fetch ───────────────────────────────────────────────────────────────
+async function load() {
+  const bust = Math.floor(Date.now() / 60000);
+  try {
+    const r = await fetch(`${DATA_URL}?v=${bust}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    DATA = await r.json();
+    if (!currentRange) currentRange = DATA.default_range ?? DATA.tabs?.[0]?.key ?? "last_30d";
+    renderTabs();
+    renderActive();
+  } catch (err) {
+    document.getElementById("ts").innerHTML =
+      '<span style="color:var(--muted)">⚠ Unable to load — showing last known data</span>';
+    console.warn("omnisend-scoreboard: fetch failed", err);
+  }
 }
 
 load();
