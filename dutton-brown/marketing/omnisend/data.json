@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-24T05:24:39.600Z",
+  "updated_at": "2026-04-24T05:34:33.824Z",
   "default_range": "last_30d",
   "tabs": [
     {
@@ -30,8 +30,8 @@
   "ranges": {
     "last_30d": {
       "window": {
-        "from": "2026-03-25T05:24:39.600Z",
-        "to": "2026-04-24T05:24:39.600Z",
+        "from": "2026-03-25T05:34:33.824Z",
+        "to": "2026-04-24T05:34:33.824Z",
         "label": "Last 30D"
       },
       "revenue": {
@@ -44,14 +44,9 @@
         "automations_orders": 2,
         "automations_aov": 409.99
       },
-      "revenue_per_recipient": {
-        "value": 0.0305,
-        "total_sent_in_window": 61356,
-        "based_on_campaigns": 6
-      },
       "engagement": {
-        "avg_open_rate": 0.346408,
-        "avg_ctr": 0.009642,
+        "avg_open_rate": 0.346653,
+        "avg_ctr": 0.009658,
         "based_on_campaigns": 6
       },
       "top_campaign": {
@@ -127,8 +122,8 @@
     },
     "last_90d": {
       "window": {
-        "from": "2026-01-24T05:24:39.600Z",
-        "to": "2026-04-24T05:24:39.600Z",
+        "from": "2026-01-24T05:34:33.824Z",
+        "to": "2026-04-24T05:34:33.824Z",
         "label": "Last 90D"
       },
       "revenue": {
@@ -141,14 +136,9 @@
         "automations_orders": 10,
         "automations_aov": 449.59
       },
-      "revenue_per_recipient": {
-        "value": 0.0827,
-        "total_sent_in_window": 198543,
-        "based_on_campaigns": 21
-      },
       "engagement": {
-        "avg_open_rate": 0.357805,
-        "avg_ctr": 0.013515,
+        "avg_open_rate": 0.357881,
+        "avg_ctr": 0.01352,
         "based_on_campaigns": 21
       },
       "top_campaign": {
@@ -265,7 +255,7 @@
     "mtd": {
       "window": {
         "from": "2026-04-01T05:00:00.000Z",
-        "to": "2026-04-24T05:24:39.600Z",
+        "to": "2026-04-24T05:34:33.824Z",
         "label": "MTD"
       },
       "revenue": {
@@ -278,14 +268,9 @@
         "automations_orders": 2,
         "automations_aov": 409.99
       },
-      "revenue_per_recipient": {
-        "value": 0.0403,
-        "total_sent_in_window": 46022,
-        "based_on_campaigns": 5
-      },
       "engagement": {
-        "avg_open_rate": 0.340041,
-        "avg_ctr": 0.008905,
+        "avg_open_rate": 0.340368,
+        "avg_ctr": 0.008927,
         "based_on_campaigns": 5
       },
       "top_campaign": {
@@ -365,11 +350,6 @@
         "automations_orders": 1,
         "automations_aov": 321.23
       },
-      "revenue_per_recipient": {
-        "value": 0.0575,
-        "total_sent_in_window": 76697,
-        "based_on_campaigns": 7
-      },
       "engagement": {
         "avg_open_rate": 0.365092,
         "avg_ctr": 0.016512,
@@ -439,7 +419,7 @@
     "ytd": {
       "window": {
         "from": "2026-01-01T06:00:00.000Z",
-        "to": "2026-04-24T05:24:39.600Z",
+        "to": "2026-04-24T05:34:33.824Z",
         "label": "YTD"
       },
       "revenue": {
@@ -452,14 +432,9 @@
         "automations_orders": 15,
         "automations_aov": 469.19
       },
-      "revenue_per_recipient": {
-        "value": 0.0905,
-        "total_sent_in_window": 213930,
-        "based_on_campaigns": 22
-      },
       "engagement": {
-        "avg_open_rate": 0.359165,
-        "avg_ctr": 0.013348,
+        "avg_open_rate": 0.359235,
+        "avg_ctr": 0.013352,
         "based_on_campaigns": 22
       },
       "top_campaign": {
@@ -588,11 +563,6 @@
         "automations_revenue": 31522.86,
         "automations_orders": 58,
         "automations_aov": 543.5
-      },
-      "revenue_per_recipient": {
-        "value": 0.1488,
-        "total_sent_in_window": 371291,
-        "based_on_campaigns": 43
       },
       "engagement": {
         "avg_open_rate": 0.38538,
