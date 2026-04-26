@@ -2,8 +2,8 @@
 
 Public static HTML hosted via GitHub Pages. Dutton Brown content organized by team under `dutton-brown/`. Other brands (iloveyouth, etc.) get their own top-level folders.
 
-- URL: https://duttonbrown.github.io/pages/
-- Repo: https://github.com/duttonbrown/pages
+- URL: https://duttonbrown.github.io/db-pages/
+- Repo: https://github.com/duttonbrown/db-pages
 - Branch: `main`
 
 ## Structure
