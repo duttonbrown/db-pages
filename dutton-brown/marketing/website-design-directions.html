@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dutton Brown — Website Design Directions (2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   Dutton Brown — Website Design Directions
+   A working presentation of eight ways to take duttonbrown.com
+   from "milquetoast" to "the future."
+
+   Brand constraints honored:
+   - Poppins 300 / 400 / 600 only
+   - No serifs anywhere
+   - 4px radius default (circles only on color swatches)
+   - Charcoal #4A4A4A primary, Orange #FF9912 accent (large only),
+     Surface #F7F5F2, Pinkaboo #f7b6c0
+   - 14-color powder coat palette as decoration only
+   ===================================================================== */
+
+:root {
+  --charcoal: #4A4A4A;
+  --charcoal-soft: #5C554E;
+  --charcoal-faint: #8A8078;
+  --orange: #FF9912;
+  --orange-text: #D97706;
+  --pink: #f7b6c0;
+  --pink-deep: #e89aa8;
+  --surface: #F7F5F2;
+  --surface-warm: #EFEAE2;
+  --paper: #FFFFFF;
+  --line: #E0DDD9;
+  --line-warm: #D6D0C8;
+
+  /* 14 powder coats — bottom-to-top order from CLAUDE.md */
+  --pc-white:     #FFFFFF;
+  --pc-chalk:     #D0D0D0;
+  --pc-cream:     #E5E4CF;
+  --pc-sage:      #a0af9c;
+  --pc-pine:      #4E782F;
+  --pc-mineral:   #728384;
+  --pc-midnight:  #1D1E33;
+  --pc-petrol:    #2C4A56;
+  --pc-ochre:     #B89111;
+  --pc-rust:      #D4713B;
+  --pc-red:       #9F2C00;
+  --pc-pinkaboo:  #f7b6c0;
+  --pc-barely:    #CCB8B8;
+  --pc-black:     #000000;
+
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --max: 1400px;
+  --max-narrow: 920px;
+
+  --t-fast: 220ms cubic-bezier(.22,.61,.36,1);
+  --t-base: 420ms cubic-bezier(.22,.61,.36,1);
+  --t-slow: 800ms cubic-bezier(.22,.61,.36,1);
+
+  --tr-wide: 0.06em;
+  --tr-wider: 0.14em;
+  --tr-widest: 0.22em;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--charcoal);
+  background: var(--surface);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+::selection { background: var(--pink); color: var(--charcoal); }
+img, svg, picture { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; transition: color var(--t-fast); }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.wrap--narrow { max-width: var(--max-narrow); }
+
+/* =====================================================================
+   Custom dot cursor — every direction below uses it as common thread
+   ===================================================================== */
+.dot-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 14px; height: 14px;
+  background: var(--charcoal);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width var(--t-base), height var(--t-base), background var(--t-base), opacity var(--t-base);
+  mix-blend-mode: multiply;
+  animation: cursor-breath 5s ease-in-out infinite;
+}
+.dot-cursor.is-link { width: 36px; height: 36px; background: var(--pink); }
+.dot-cursor.is-pressed { width: 8px; height: 8px; }
+@keyframes cursor-breath {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 0.7; }
+}
+@media (hover: none) { .dot-cursor { display: none; } body { cursor: auto; } }
+
+/* =====================================================================
+   Top utility bar
+   ===================================================================== */
+.utility {
+  background: var(--charcoal);
+  color: #fff;
+  padding: 0.65rem var(--gutter);
+  display: flex; gap: 1.5rem; align-items: center; justify-content: space-between;
+  font-size: 0.75rem; letter-spacing: var(--tr-wide); font-weight: 400;
+}
+.utility .swatches { display: flex; gap: 3px; }
+.utility .sw { width: 11px; height: 11px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18); }
+.utility .meta { color: rgba(255,255,255,0.6); }
+
+/* =====================================================================
+   Hero / cover
+   ===================================================================== */
+.cover {
+  position: relative;
+  background: var(--paper);
+  padding: clamp(4rem, 10vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.cover__eyebrow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.72rem; letter-spacing: var(--tr-widest);
+  text-transform: uppercase; font-weight: 600;
+  color: var(--charcoal-faint); margin-bottom: 2rem;
+}
+.cover__eyebrow::before {
+  content: ''; width: 28px; height: 1px; background: currentColor; opacity: 0.5;
+}
+.cover__title {
+  font-weight: 300;
+  font-size: clamp(3rem, 11vw, 11.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  margin-bottom: 2.5rem;
+  color: var(--charcoal);
+}
+.cover__title .breath {
+  display: inline-block;
+  color: var(--pink);
+  animation: breath 5s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+@keyframes breath {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.9); opacity: 0.85; }
+}
+.cover__lede {
+  max-width: 56ch;
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--charcoal-soft);
+  margin-bottom: 3.5rem;
+}
+.cover__byline {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+  font-size: 0.78rem;
+  letter-spacing: var(--tr-wide);
+  color: var(--charcoal-faint);
+  text-transform: uppercase;
+  font-weight: 600;
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+}
+.cover__byline strong { display: block; color: var(--charcoal); font-weight: 600; margin-bottom: 0.25rem; text-transform: none; letter-spacing: 0; font-size: 0.95rem; }
+.cover__byline span { font-weight: 300; text-transform: none; letter-spacing: 0; font-size: 0.95rem; color: var(--charcoal-soft); }
+
+/* drifting cover dots */
+.cover__dots { position: absolute; inset: 0; pointer-events: none; }
+.cover__dots .cd {
+  position: absolute;
+  width: 12px; height: 12px;
+  background: var(--pink);
+  border-radius: 50%;
+  opacity: 0.55;
+  animation: drift 10s ease-in-out infinite;
+}
+.cover__dots .cd--lg { width: 22px; height: 22px; opacity: 0.8; }
+.cover__dots .cd--orange { background: var(--orange); }
+.cover__dots .cd--ochre { background: var(--pc-ochre); }
+.cover__dots .cd--petrol { background: var(--pc-petrol); }
+.cover__dots .cd:nth-child(1) { top: 12%; left: 88%; animation-delay: 0s; }
+.cover__dots .cd:nth-child(2) { top: 78%; left: 92%; animation-delay: -2s; }
+.cover__dots .cd:nth-child(3) { top: 35%; left: 78%; animation-delay: -4s; }
+.cover__dots .cd:nth-child(4) { top: 88%; left: 22%; animation-delay: -1s; }
+.cover__dots .cd:nth-child(5) { top: 8%; left: 30%; animation-delay: -3s; }
+.cover__dots .cd:nth-child(6) { top: 62%; left: 6%; animation-delay: -5s; }
+.cover__dots .cd:nth-child(7) { top: 22%; left: 60%; animation-delay: -2.5s; }
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(14px, -10px) scale(1.15); }
+  66%      { transform: translate(-8px, 12px) scale(0.85); }
+}
+
+/* TOC strip */
+.toc {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 1.25rem 0;
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(8px);
+  background: rgba(247, 245, 242, 0.92);
+}
+.toc__inner { display: flex; gap: clamp(0.75rem, 2vw, 2rem); align-items: center; overflow-x: auto; scrollbar-width: none; }
+.toc__inner::-webkit-scrollbar { display: none; }
+.toc__label {
+  flex-shrink: 0;
+  font-size: 0.7rem; letter-spacing: var(--tr-widest); text-transform: uppercase;
+  font-weight: 600; color: var(--charcoal-faint);
+}
+.toc__label::after { content: '·'; margin-left: 0.5rem; color: var(--pink); }
+.toc a {
+  flex-shrink: 0;
+  font-size: 0.82rem; letter-spacing: var(--tr-wide);
+  font-weight: 400; color: var(--charcoal-soft);
+  white-space: nowrap; padding: 0.25rem 0;
+  position: relative;
+}
+.toc a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--charcoal); transition: width var(--t-fast); }
+.toc a:hover { color: var(--charcoal); }
+.toc a:hover::after { width: 100%; }
+.toc .num {
+  font-weight: 600; color: var(--pink-deep); margin-right: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* =====================================================================
+   Section scaffolding
+   ===================================================================== */
+section { padding: clamp(4rem, 9vw, 8rem) 0; position: relative; }
+section + section { border-top: 1px solid var(--line); }
+.bg-paper { background: var(--paper); }
+.bg-warm { background: var(--surface-warm); }
+.bg-charcoal { background: var(--charcoal); color: #fff; }
+.bg-charcoal h2, .bg-charcoal h3 { color: #fff; }
+.bg-charcoal .lede { color: rgba(255,255,255,0.78); }
+
+.kicker {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.72rem; letter-spacing: var(--tr-widest);
+  text-transform: uppercase; font-weight: 600;
+  color: var(--pink-deep); margin-bottom: 1.25rem;
+}
+.bg-charcoal .kicker { color: var(--pink); }
+.kicker__num {
+  display: inline-grid; place-items: center;
+  width: 26px; height: 26px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.7rem; font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+h2 {
+  font-weight: 300;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--charcoal);
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+h2 .pink { color: var(--pink-deep); }
+h3 {
+  font-weight: 600;
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  letter-spacing: -0.005em;
+  margin-bottom: 0.75rem;
+  color: var(--charcoal);
+}
+h4 {
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tr-widest);
+  color: var(--charcoal-faint);
+  margin-bottom: 0.6rem;
+}
+.lede {
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--charcoal-soft);
+  max-width: 60ch;
+  margin-bottom: 2.5rem;
+}
+p { margin-bottom: 1rem; }
+
+/* =====================================================================
+   The Audit
+   ===================================================================== */
+.audit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 3rem;
+}
+.audit-card {
+  background: var(--paper);
+  padding: 2rem;
+  display: flex; flex-direction: column;
+}
+.audit-card__head {
+  display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1rem;
+  padding-bottom: 1rem; border-bottom: 1px dashed var(--line-warm);
+}
+.audit-tag {
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: var(--tr-widest); text-transform: uppercase;
+  padding: 4px 8px; border-radius: 4px;
+}
+.audit-tag--keep { background: rgba(184, 145, 17, 0.12); color: #8B6F0F; }
+.audit-tag--fix  { background: rgba(255, 153, 18, 0.14); color: var(--orange-text); }
+.audit-tag--burn { background: rgba(159, 44, 0, 0.1);  color: #9F2C00; }
+.audit-card__title { font-weight: 600; font-size: 1rem; color: var(--charcoal); margin-left: auto; }
+.audit-card__body { font-size: 0.92rem; color: var(--charcoal-soft); line-height: 1.6; }
+.audit-card__body em { font-style: normal; color: var(--charcoal); font-weight: 400; }
+.audit-card__verdict { margin-top: auto; padding-top: 1rem; font-size: 0.78rem; color: var(--pink-deep); font-weight: 600; letter-spacing: var(--tr-wide); }
+
+/* =====================================================================
+   Direction blocks
+   ===================================================================== */
+.dir {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .dir { grid-template-columns: minmax(280px, 380px) 1fr; gap: 4rem; }
+}
+.dir__copy { position: sticky; top: 80px; align-self: start; }
+.dir__demo {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.dir__demo--charcoal { background: var(--charcoal); border-color: rgba(255,255,255,0.15); }
+.dir__demo-label {
+  position: absolute; top: 1rem; right: 1rem;
+  font-size: 0.62rem; letter-spacing: var(--tr-widest); text-transform: uppercase;
+  font-weight: 600; color: var(--charcoal-faint);
+  background: rgba(255,255,255,0.85); padding: 4px 8px; border-radius: 4px;
+  pointer-events: none; z-index: 5;
+}
+.dir__demo--charcoal .dir__demo-label { background: rgba(0,0,0,0.4); color: rgba(255,255,255,0.7); }
+.feature-list { list-style: none; margin-top: 1.5rem; }
+.feature-list li {
+  padding: 0.65rem 0;
+  border-top: 1px dashed var(--line-warm);
+  font-size: 0.92rem;
+  color: var(--charcoal-soft);
+  display: flex; gap: 0.75rem; align-items: baseline;
+}
+.feature-list li:last-child { border-bottom: 1px dashed var(--line-warm); }
+.feature-list li::before {
+  content: ''; flex-shrink: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--pink); margin-top: 6px;
+}
+.feature-list li strong { color: var(--charcoal); font-weight: 600; }
+
+/* =====================================================================
+   DEMO 01 — Color is the Story (scroll progress + page wash)
+   ===================================================================== */
+.demo-color {
+  padding: 2.5rem;
+  display: grid; gap: 1.5rem;
+}
+.demo-color__rail {
+  display: flex; height: 8px; border-radius: 4px; overflow: hidden;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.demo-color__rail span { flex: 1; transition: flex var(--t-base); }
+.demo-color__rail span:hover { flex: 4; }
+.demo-color__samples {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem;
+}
+.demo-color__samples button {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(74,74,74,0.18);
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
+  cursor: none;
+}
+.demo-color__samples button:hover {
+  transform: scale(1.18);
+  box-shadow: inset 0 0 0 2px var(--charcoal);
+}
+.demo-color__preview {
+  border: 1px solid var(--line); border-radius: 4px;
+  padding: 1.5rem;
+  display: grid; grid-template-columns: 1fr auto; gap: 1rem;
+  align-items: center;
+  transition: background var(--t-base), color var(--t-base);
+}
+.demo-color__preview h4 { color: inherit; opacity: 0.65; margin-bottom: 0.25rem; }
+.demo-color__preview .name { font-size: 1.5rem; font-weight: 300; letter-spacing: -0.02em; }
+.demo-color__preview .num { font-size: 0.78rem; letter-spacing: var(--tr-widest); text-transform: uppercase; opacity: 0.55; }
+
+/* =====================================================================
+   DEMO 02 — Editorial Reviews
+   ===================================================================== */
+.demo-review { padding: 3.5rem 2.5rem; position: relative; min-height: 480px; }
+.demo-review__quote-mark {
+  position: absolute; top: 1.5rem; left: 2rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 7rem; line-height: 0.7;
+  color: var(--pink); opacity: 0.5;
+  pointer-events: none;
+}
+.demo-review__quote {
+  font-weight: 300;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--charcoal);
+  max-width: 22ch;
+  margin: 2.5rem 0 2rem;
+  text-wrap: balance;
+}
+.demo-review__quote em { font-style: normal; color: var(--pink-deep); }
+.demo-review__meta {
+  display: flex; gap: 1rem; align-items: center;
+  padding-top: 1.25rem; border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+.demo-review__meta .swatch {
+  width: 14px; height: 14px; border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(74,74,74,0.2);
+}
+.demo-review__meta strong { color: var(--charcoal); font-weight: 600; }
+.demo-review__meta span { color: var(--charcoal-faint); }
+.demo-review__nav {
+  position: absolute; bottom: 2rem; right: 2.5rem;
+  display: flex; gap: 0.5rem;
+}
+.demo-review__nav button {
+  width: 32px; height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  display: grid; place-items: center;
+  font-size: 0.85rem;
+  color: var(--charcoal-soft);
+  transition: all var(--t-fast);
+}
+.demo-review__nav button:hover { border-color: var(--charcoal); color: var(--charcoal); background: var(--surface); }
+.demo-review__index {
+  position: absolute; bottom: 2rem; left: 2.5rem;
+  font-size: 0.7rem; letter-spacing: var(--tr-widest); text-transform: uppercase;
+  font-weight: 600; color: var(--charcoal-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* =====================================================================
+   DEMO 03 — Easter Eggs
+   ===================================================================== */
+.demo-eggs {
+  padding: 2.5rem;
+  position: relative;
+  min-height: 480px;
+}
+.demo-eggs__hint {
+  text-align: center;
+  font-size: 0.75rem; letter-spacing: var(--tr-widest); text-transform: uppercase;
+  color: var(--charcoal-faint); font-weight: 600; margin-bottom: 1.5rem;
+}
+.demo-eggs__grid {
+  position: relative;
+  height: 400px;
+}
+.egg {
+  position: absolute;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--pink);
+  cursor: none;
+  transition: transform var(--t-base), box-shadow var(--t-base), background var(--t-base);
+  display: grid; place-items: center;
+  color: transparent;
+  font-size: 0.7rem; font-weight: 600;
+}
+.egg:hover {
+  transform: scale(1.5);
+  box-shadow: 0 0 0 6px rgba(247,182,192,0.28);
+}
+.egg.opened {
+  width: auto; height: auto;
+  min-width: 200px;
+  border-radius: 4px;
+  background: var(--charcoal);
+  color: #fff;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.85rem; line-height: 1.4;
+  font-weight: 400; letter-spacing: 0;
+  z-index: 5;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.egg.opened .egg__action {
+  display: block; margin-top: 0.5rem;
+  font-size: 0.72rem; letter-spacing: var(--tr-wide);
+  color: var(--pink); text-decoration: underline;
+}
+.egg.opened.coupon { background: var(--orange); }
+.egg.opened.coupon .egg__action { color: #fff; }
+.egg.opened.fact { background: var(--pc-petrol); }
+.egg.opened.fact .egg__action { color: var(--pc-pinkaboo); }
+.egg.opened.greeting { background: var(--pink); color: var(--charcoal); }
+
+.demo-eggs__legend {
+  margin-top: 1.5rem;
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  font-size: 0.72rem; letter-spacing: var(--tr-wide);
+  color: var(--charcoal-faint);
+  padding-top: 1.25rem; border-top: 1px solid var(--line);
+}
+.demo-eggs__legend strong { color: var(--charcoal); font-weight: 600; }
+
+/* =====================================================================
+   DEMO 04 — Cursor as Period
+   ===================================================================== */
+.demo-cursor {
+  padding: 3.5rem 2.5rem;
+  background: var(--surface);
+  text-align: center;
+  min-height: 320px;
+  display: grid; place-items: center; gap: 1.5rem;
+}
+.demo-cursor__display {
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--charcoal);
+}
+.demo-cursor__display .live {
+  color: var(--pink);
+  display: inline-block;
+  animation: breath 5s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+.demo-cursor__row {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+}
+.demo-cursor__row a {
+  font-size: 0.9rem; font-weight: 400; letter-spacing: var(--tr-wide);
+  border-bottom: 1px solid var(--charcoal); padding-bottom: 2px;
+}
+.demo-cursor__row a:hover { color: var(--pink-deep); }
+
+/* =====================================================================
+   DEMO 05 — Made-to-Order Theatre
+   ===================================================================== */
+.demo-mto { padding: 2.5rem; }
+.mto-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--paper);
+}
+@media (max-width: 700px) { .mto-track { grid-template-columns: 1fr; } }
+.mto-step {
+  padding: 1.5rem 1.25rem;
+  border-right: 1px solid var(--line);
+  position: relative;
+  background: var(--paper);
+  transition: background var(--t-base);
+}
+.mto-step:last-child { border-right: none; }
+@media (max-width: 700px) {
+  .mto-step { border-right: none; border-bottom: 1px solid var(--line); }
+  .mto-step:last-child { border-bottom: none; }
+}
+.mto-step.is-active { background: var(--surface); }
+.mto-step__num {
+  font-size: 0.65rem; letter-spacing: var(--tr-widest); text-transform: uppercase;
+  font-weight: 600; color: var(--charcoal-faint);
+  font-variant-numeric: tabular-nums; margin-bottom: 0.5rem;
+}
+.mto-step__num span { color: var(--pink-deep); }
+.mto-step__title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; color: var(--charcoal); }
+.mto-step__detail { font-size: 0.8rem; color: var(--charcoal-soft); line-height: 1.5; }
+.mto-step__bar {
+  margin-top: 1rem;
+  height: 3px; border-radius: 4px;
+  background: var(--line);
+  overflow: hidden;
+}
+.mto-step__bar-fill {
+  height: 100%; background: var(--pink);
+  transform-origin: left;
+  animation: mto-fill 8s ease-in-out infinite;
+}
+.mto-step:nth-child(1) .mto-step__bar-fill { animation-delay: 0s; }
+.mto-step:nth-child(2) .mto-step__bar-fill { animation-delay: 2s; }
+.mto-step:nth-child(3) .mto-step__bar-fill { animation-delay: 4s; }
+.mto-step:nth-child(4) .mto-step__bar-fill { animation-delay: 6s; }
+@keyframes mto-fill {
+  0%, 100% { transform: scaleX(0); }
+  25% { transform: scaleX(1); }
+  50% { transform: scaleX(1); }
+}
+.mto-stats {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem; border-top: 1px solid var(--line);
+  font-size: 0.78rem; color: var(--charcoal-soft);
+  letter-spacing: var(--tr-wide);
+}
+.mto-stats strong {
+  display: block;
+  font-size: 1.5rem; font-weight: 300; letter-spacing: -0.02em;
+  color: var(--charcoal); font-variant-numeric: tabular-nums;
+}
+.mto-stats span { font-size: 0.68rem; text-transform: uppercase; letter-spacing: var(--tr-widest); color: var(--charcoal-faint); font-weight: 600; }
+
+/* =====================================================================
+   DEMO 06 — Type as Architecture (kinetic marquee)
+   ===================================================================== */
+.demo-marquee {
+  background: var(--charcoal);
+  color: #fff;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  min-height: 200px;
+  display: grid; align-content: center; gap: 0.5rem;
+  padding: 2rem 0;
+}
+.marquee {
+  display: flex; gap: 3rem;
+  white-space: nowrap;
+  font-weight: 300;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.marquee__track { display: flex; gap: 3rem; flex-shrink: 0; animation: marquee-l 32s linear infinite; }
+.marquee--reverse .marquee__track { animation: marquee-r 36s linear infinite; }
+@keyframes marquee-l { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes marquee-r { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.marquee__track span { display: inline-flex; align-items: center; gap: 3rem; }
+.marquee__track .dot {
+  display: inline-block;
+  width: 0.4em; height: 0.4em; border-radius: 50%; background: var(--pink);
+  flex-shrink: 0;
+  animation: breath 5s ease-in-out infinite;
+}
+.marquee__track .dot--orange { background: var(--orange); }
+.marquee__track .dim { color: rgba(255,255,255,0.35); }
+
+/* =====================================================================
+   DEMO 07 — Better Callout Banner (the real fix)
+   ===================================================================== */
+.demo-callout { padding: 0; background: var(--paper); }
+.callout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 800px) {
+  .callout-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.callout-cell {
+  padding: 2.5rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--t-base);
+  min-height: 280px;
+  display: flex; flex-direction: column;
+}
+.callout-cell:last-child { border-right: none; }
+@media (max-width: 800px) {
+  .callout-cell { border-right: none; }
+}
+.callout-cell:hover { background: var(--surface); }
+.callout-cell__num {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: var(--tr-widest); text-transform: uppercase;
+  color: var(--charcoal-faint); font-variant-numeric: tabular-nums; margin-bottom: 1rem;
+}
+.callout-cell__num em { color: var(--pink-deep); font-style: normal; }
+.callout-cell__display {
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  color: var(--charcoal);
+  flex: 1;
+}
+.callout-cell__display .pink { color: var(--pink-deep); }
+.callout-cell__display .orange { color: var(--orange-text); }
+.callout-cell__caption {
+  font-size: 0.85rem; color: var(--charcoal-soft);
+  line-height: 1.55; margin-bottom: 1.25rem;
+}
+.callout-cell__cta {
+  font-size: 0.82rem; font-weight: 400;
+  letter-spacing: var(--tr-wide);
+  color: var(--charcoal); border-bottom: 1px solid var(--charcoal);
+  padding-bottom: 2px; align-self: flex-start;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+.callout-cell__cta:hover { color: var(--pink-deep); border-color: var(--pink-deep); }
+.callout-cell__pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--orange);
+  display: inline-block;
+  margin-right: 0.5rem;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* =====================================================================
+   DEMO 08 — Powder Coat Playground
+   ===================================================================== */
+.demo-paint {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--surface);
+  min-height: 480px;
+}
+@media (min-width: 700px) { .demo-paint { grid-template-columns: 1.4fr 1fr; } }
+.paint-stage {
+  padding: 3rem 2rem;
+  display: grid; place-items: center;
+  background: var(--paint-bg, var(--surface));
+  transition: background var(--t-slow);
+  position: relative;
+  overflow: hidden;
+}
+.paint-stage::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 30%, transparent 0%, rgba(0,0,0,0.05) 100%);
+}
+.paint-product {
+  position: relative;
+  z-index: 1;
+  font-weight: 300;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--paint-text, var(--charcoal));
+  text-align: center;
+  transition: color var(--t-slow);
+  text-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+.paint-product .num { display: block; font-size: 0.6em; opacity: 0.55; margin-top: 0.5rem; letter-spacing: var(--tr-widest); text-transform: uppercase; font-weight: 600; }
+.paint-control {
+  padding: 2rem;
+  display: flex; flex-direction: column; gap: 1.5rem;
+  background: var(--paper);
+  border-left: 1px solid var(--line);
+}
+@media (max-width: 700px) { .paint-control { border-left: none; border-top: 1px solid var(--line); } }
+.paint-control h4 { margin-bottom: 0; }
+.paint-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem;
+}
+.paint-grid button {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(74,74,74,0.18);
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
+  cursor: none;
+  position: relative;
+}
+.paint-grid button.active { transform: scale(1.18); box-shadow: inset 0 0 0 2px var(--charcoal), 0 0 0 3px var(--pink); }
+.paint-grid button:hover { transform: scale(1.18); }
+.paint-meta {
+  font-size: 0.78rem;
+  color: var(--charcoal-soft); line-height: 1.5;
+  padding: 1rem; background: var(--surface); border-radius: 4px;
+}
+.paint-meta strong { display: block; color: var(--charcoal); font-weight: 600; margin-bottom: 0.25rem; font-size: 0.85rem; }
+
+/* =====================================================================
+   Roadmap
+   ===================================================================== */
+.roadmap-grid {
+  display: grid; gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 4px; overflow: hidden;
+  margin-top: 3rem;
+}
+@media (min-width: 700px) { .roadmap-grid { grid-template-columns: repeat(3, 1fr); } }
+.roadmap-card {
+  background: var(--paper);
+  padding: 2rem;
+}
+.roadmap-card__head {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.5rem; padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--line-warm);
+}
+.roadmap-card__phase {
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: var(--tr-widest); text-transform: uppercase;
+  color: var(--charcoal-faint);
+  padding: 4px 8px; border-radius: 4px; background: var(--surface);
+}
+.roadmap-card__time { margin-left: auto; font-size: 0.78rem; font-weight: 600; color: var(--pink-deep); }
+.roadmap-card__title { font-weight: 600; font-size: 1.1rem; color: var(--charcoal); margin-bottom: 0.75rem; }
+.roadmap-card ul { list-style: none; }
+.roadmap-card li {
+  padding: 0.5rem 0;
+  font-size: 0.88rem; color: var(--charcoal-soft);
+  display: flex; gap: 0.6rem; align-items: baseline;
+  border-top: 1px dashed var(--line-warm);
+}
+.roadmap-card li:first-child { border-top: none; }
+.roadmap-card li::before {
+  content: ''; flex-shrink: 0;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--pink); margin-top: 7px;
+}
+.roadmap-card li strong { color: var(--charcoal); font-weight: 600; }
+
+/* =====================================================================
+   14-color strip footer
+   ===================================================================== */
+.color-strip {
+  display: flex; height: 56px;
+  border-top: 1px solid var(--line);
+}
+.color-strip span { flex: 1; transition: flex var(--t-base); }
+.color-strip span:hover { flex: 4; }
+
+/* footer */
+.foot {
+  background: var(--charcoal);
+  color: rgba(255,255,255,0.78);
+  padding: 4rem var(--gutter) 3rem;
+}
+.foot__inner { max-width: var(--max); margin: 0 auto; display: grid; gap: 2rem; }
+.foot__title { font-weight: 300; font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.05; letter-spacing: -0.02em; color: #fff; max-width: 30ch; }
+.foot__title .pink { color: var(--pink); }
+.foot__byline { font-size: 0.78rem; letter-spacing: var(--tr-wide); color: rgba(255,255,255,0.55); }
+.foot__byline strong { color: #fff; font-weight: 600; }
+.foot__row { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; font-size: 0.72rem; letter-spacing: var(--tr-wide); color: rgba(255,255,255,0.4); text-transform: uppercase; }
+
+/* utility */
+.split { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+@media (min-width: 800px) { .split { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="dot-cursor" id="dotCursor"></div>
+
+<!-- =================================================================
+     UTILITY BAR
+     ================================================================= -->
+<div class="utility">
+  <span>Dutton Brown — Design Directions, 2026</span>
+  <div class="swatches" aria-hidden="true">
+    <span class="sw" style="background:#FFFFFF"></span>
+    <span class="sw" style="background:#D0D0D0"></span>
+    <span class="sw" style="background:#E5E4CF"></span>
+    <span class="sw" style="background:#a0af9c"></span>
+    <span class="sw" style="background:#4E782F"></span>
+    <span class="sw" style="background:#728384"></span>
+    <span class="sw" style="background:#1D1E33"></span>
+    <span class="sw" style="background:#2C4A56"></span>
+    <span class="sw" style="background:#B89111"></span>
+    <span class="sw" style="background:#D4713B"></span>
+    <span class="sw" style="background:#9F2C00"></span>
+    <span class="sw" style="background:#f7b6c0"></span>
+    <span class="sw" style="background:#CCB8B8"></span>
+    <span class="sw" style="background:#000000"></span>
+  </div>
+  <span class="meta">14 colors · 8 directions · 1 site</span>
+</div>
+
+<!-- =================================================================
+     COVER
+     ================================================================= -->
+<header class="cover">
+  <div class="cover__dots" aria-hidden="true">
+    <span class="cd cd--lg"></span>
+    <span class="cd"></span>
+    <span class="cd cd--orange"></span>
+    <span class="cd cd--lg cd--ochre"></span>
+    <span class="cd"></span>
+    <span class="cd cd--petrol"></span>
+    <span class="cd"></span>
+  </div>
+  <div class="wrap">
+    <div class="cover__eyebrow">Internal Working Document · A Thought Partnership</div>
+    <h1 class="cover__title">we make<br>it cuter<span class="breath">.</span></h1>
+    <p class="cover__lede">
+      duttonbrown.com is competent. It loads, sells, and serves. It also feels
+      like every other Shopify theme — because it is one. This document is a
+      tour of eight directions to take the site from competent to
+      <strong style="font-weight:600;color:var(--charcoal);">unmistakably us</strong> —
+      built around the period-as-architecture work we already started, with
+      working demos for every concept. Tap, hover, and play. Then tell me
+      which ones we ship first.
+    </p>
+    <div class="cover__byline">
+      <div>
+        <strong>Built by</strong>
+        <span>Thomas + Claude</span>
+      </div>
+      <div>
+        <strong>Drafted</strong>
+        <span>26 April 2026</span>
+      </div>
+      <div>
+        <strong>Status</strong>
+        <span>Awaiting review</span>
+      </div>
+      <div>
+        <strong>How to use it</strong>
+        <span>Pick the directions you love. Mark the rest.</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =================================================================
+     STICKY TABLE OF CONTENTS
+     ================================================================= -->
+<nav class="toc" aria-label="Sections">
+  <div class="wrap toc__inner">
+    <span class="toc__label">Index</span>
+    <a href="#audit"><span class="num">00</span> The audit</a>
+    <a href="#dir-01"><span class="num">01</span> Color is the story</a>
+    <a href="#dir-02"><span class="num">02</span> Editorial reviews</a>
+    <a href="#dir-03"><span class="num">03</span> Joyful easter eggs</a>
+    <a href="#dir-04"><span class="num">04</span> Cursor as period</a>
+    <a href="#dir-05"><span class="num">05</span> Made-to-order theatre</a>
+    <a href="#dir-06"><span class="num">06</span> Type as architecture</a>
+    <a href="#dir-07"><span class="num">07</span> Callout, rebuilt</a>
+    <a href="#dir-08"><span class="num">08</span> Powder coat playground</a>
+    <a href="#roadmap"><span class="num">→</span> Roadmap</a>
+  </div>
+</nav>
+
+<!-- =================================================================
+     THE AUDIT
+     ================================================================= -->
+<section id="audit" class="bg-paper">
+  <div class="wrap">
+    <div class="kicker"><span class="kicker__num">00</span> The audit · what feels milquetoast right now</div>
+    <h2>An honest tour through<br>the homepage, in plain English.</h2>
+    <p class="lede">
+      Walking the site like a stranger would. Three tags: <em style="color:#8B6F0F;font-style:normal;">keep</em>,
+      <em style="color:var(--orange-text);font-style:normal;">fix</em>,
+      <em style="color:#9F2C00;font-style:normal;">burn it down</em>. Most of it
+      is the middle one — small things adding up to "fine."
+    </p>
+
+    <div class="audit-grid">
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--keep">Keep</span>
+          <span class="audit-card__title">The Pinkaboo hero</span>
+        </div>
+        <div class="audit-card__body">
+          We just iterated this. The constellation, the color strip, the
+          soft pink type — <em>this is the new bar</em>. Everything else on
+          the page should rise to meet it.
+        </div>
+        <div class="audit-card__verdict">→ It's the reference point now.</div>
+      </article>
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--burn">Burn</span>
+          <span class="audit-card__title">The 3-column callout</span>
+        </div>
+        <div class="audit-card__body">
+          "14 colors. 3 finishes. 200+ products." / "Lead time within
+          [LT_COLOR]" / "Design professional?" — three near-identical h5s with
+          tiny arrow links. <em>This is the line in the document where the
+          car-rental smell starts.</em> One of them literally still has a
+          template placeholder visible.
+        </div>
+        <div class="audit-card__verdict">→ Direction 07 rebuilds this from scratch.</div>
+      </article>
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--fix">Fix</span>
+          <span class="audit-card__title">Featured collections</span>
+        </div>
+        <div class="audit-card__body">
+          A perfectly fine 4-up grid of products with a "View all" link. The
+          problem is rhythm — every section repeats the same shape, so the page
+          flatlines. <em>Vary the cadence</em> — full-bleed, asymmetric, oversized
+          single-product moments — and the same merchandise reads as editorial.
+        </div>
+        <div class="audit-card__verdict">→ Mix grid sizes. Add one full-bleed product moment.</div>
+      </article>
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--burn">Burn</span>
+          <span class="audit-card__title">Reviews (currently invisible)</span>
+        </div>
+        <div class="audit-card__body">
+          Yotpo stars are tucked under thumbnails, with a small number beside.
+          That's not a brand asset, that's a footnote. <em>The customer's voice
+          is one of our strongest proofs and we're whispering it.</em>
+        </div>
+        <div class="audit-card__verdict">→ Direction 02 makes reviews editorial.</div>
+      </article>
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--fix">Fix</span>
+          <span class="audit-card__title">14 powder coats — barely seen</span>
+        </div>
+        <div class="audit-card__body">
+          Color is our entire identity, and it shows up… on the PDP swatch
+          row. That's it. <em>Color should be everywhere</em> — scroll bar,
+          section dividers, cursor hover, page wash, navigation indicator.
+        </div>
+        <div class="audit-card__verdict">→ Directions 01 and 08 make color architectural.</div>
+      </article>
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--keep">Keep</span>
+          <span class="audit-card__title">"Color-coordination kink?"</span>
+        </div>
+        <div class="audit-card__body">
+          The shop-the-look hotspot section has the right voice. <em>It actually
+          sounds like us.</em> The execution could be more sophisticated, but
+          the copy proves the rest of the page should be writing at this level.
+        </div>
+        <div class="audit-card__verdict">→ Use this voice everywhere else.</div>
+      </article>
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--burn">Burn</span>
+          <span class="audit-card__title">Trust-badge text-with-icons row</span>
+        </div>
+        <div class="audit-card__body">
+          "Handcrafted in Minneapolis." / "Choose your fave finishes." / "We
+          make it cute." with three clip-art icons. <em>Currently disabled in
+          the theme — and rightly so.</em> The copy is on-brand but the rendering
+          looks like every Etsy seller's footer.
+        </div>
+        <div class="audit-card__verdict">→ Replace with Direction 05's MTO theatre.</div>
+      </article>
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--fix">Fix</span>
+          <span class="audit-card__title">Transitions between sections</span>
+        </div>
+        <div class="audit-card__body">
+          Every section ends, a small gap appears, the next one starts. <em>No
+          choreography.</em> Not even a powder-coat divider. The page is a
+          stack of slides instead of one continuous story.
+        </div>
+        <div class="audit-card__verdict">→ Add color-strip dividers + scroll-driven reveals.</div>
+      </article>
+
+      <article class="audit-card">
+        <div class="audit-card__head">
+          <span class="audit-tag audit-tag--fix">Fix</span>
+          <span class="audit-card__title">The footer</span>
+        </div>
+        <div class="audit-card__body">
+          Standard Shopify column-of-links footer. <em>Nothing wrong with it
+          functionally</em> — but our brand makes utilitarian space feel
+          neglectful, not pragmatic. A footer that says one beautiful sentence
+          and then gives you the links does more work.
+        </div>
+        <div class="audit-card__verdict">→ Manifesto-first footer + organized links beneath.</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     DIRECTION 01 — COLOR IS THE STORY
+     ================================================================= -->
+<section id="dir-01" class="bg-warm">
+  <div class="wrap">
+    <div class="dir">
+      <div class="dir__copy">
+        <div class="kicker"><span class="kicker__num">01</span> A direction</div>
+        <h2 class="">Color is the<br>story<span class="pink">.</span></h2>
+        <p class="lede">
+          We sell color. The site barely shows it. Make all 14 powder coats
+          visible at all times — as a scroll progress bar, as section dividers,
+          as the cursor's mood, as a color-of-the-moment that washes the page
+          when you tap it. Every visit becomes a different page.
+        </p>
+        <ul class="feature-list">
+          <li><strong>14-stripe scroll bar</strong> — top of every page; fills as you read.</li>
+          <li><strong>Section dividers</strong> — replace boring borders with a single color band.</li>
+          <li><strong>Color-of-the-moment</strong> — tap a swatch, the whole page recolors.</li>
+          <li><strong>Cursor</strong> picks up the color it's currently over.</li>
+          <li><strong>Footer color strip</strong> — already in db-brand spec; expand.</li>
+        </ul>
+      </div>
+      <div class="dir__demo">
+        <div class="dir__demo-label">Live demo · click below</div>
+        <div class="demo-color">
+          <div>
+            <h4>14-stripe scroll progress</h4>
+            <div class="demo-color__rail">
+              <span style="background:#FFFFFF"></span>
+              <span style="background:#D0D0D0"></span>
+              <span style="background:#E5E4CF"></span>
+              <span style="background:#a0af9c"></span>
+              <span style="background:#4E782F"></span>
+              <span style="background:#728384"></span>
+              <span style="background:#1D1E33"></span>
+              <span style="background:#2C4A56"></span>
+              <span style="background:#B89111"></span>
+              <span style="background:#D4713B"></span>
+              <span style="background:#9F2C00"></span>
+              <span style="background:#f7b6c0"></span>
+              <span style="background:#CCB8B8"></span>
+              <span style="background:#000000"></span>
+            </div>
+          </div>
+          <div>
+            <h4>Tap a color · "wash" the page</h4>
+            <div class="demo-color__samples" id="paintSamples">
+              <button data-color="#FFFFFF" data-name="White" data-num="01" style="background:#FFFFFF"></button>
+              <button data-color="#D0D0D0" data-name="Chalk" data-num="02" style="background:#D0D0D0"></button>
+              <button data-color="#E5E4CF" data-name="Cream" data-num="03" style="background:#E5E4CF"></button>
+              <button data-color="#a0af9c" data-name="Sage" data-num="04" style="background:#a0af9c"></button>
+              <button data-color="#4E782F" data-name="Pine" data-num="05" style="background:#4E782F"></button>
+              <button data-color="#728384" data-name="Mineral" data-num="06" style="background:#728384"></button>
+              <button data-color="#1D1E33" data-name="Midnight" data-num="07" style="background:#1D1E33"></button>
+              <button data-color="#2C4A56" data-name="Petrol" data-num="08" style="background:#2C4A56"></button>
+              <button data-color="#B89111" data-name="Ochre" data-num="09" style="background:#B89111"></button>
+              <button data-color="#D4713B" data-name="Rust" data-num="10" style="background:#D4713B"></button>
+              <button data-color="#9F2C00" data-name="Riding Hood" data-num="11" style="background:#9F2C00"></button>
+              <button data-color="#f7b6c0" data-name="Pinkaboo" data-num="12" style="background:#f7b6c0"></button>
+              <button data-color="#CCB8B8" data-name="Barely" data-num="13" style="background:#CCB8B8"></button>
+              <button data-color="#000000" data-name="Black" data-num="14" style="background:#000000"></button>
+            </div>
+          </div>
+          <div class="demo-color__preview" id="paintPreview" style="background:#f7b6c0;color:#4A4A4A">
+            <div>
+              <h4>You picked</h4>
+              <div class="name" id="paintPreviewName">Pinkaboo</div>
+            </div>
+            <div class="num" id="paintPreviewNum">No. 12 · Powder Coat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     DIRECTION 02 — EDITORIAL REVIEWS
+     ================================================================= -->
+<section id="dir-02" class="bg-paper">
+  <div class="wrap">
+    <div class="dir">
+      <div class="dir__copy">
+        <div class="kicker"><span class="kicker__num">02</span> A direction</div>
+        <h2>Reviews,<br>but editorial<span class="pink">.</span></h2>
+        <p class="lede">
+          Stars and review counts are footnote design. Customers said
+          beautiful things — show them at the size they deserve. One quote
+          at editorial scale, with the customer's color, city, and the
+          install photo behind it. Rotate slowly, like a magazine spread.
+        </p>
+        <ul class="feature-list">
+          <li><strong>One quote at a time</strong>, displayed at hero scale.</li>
+          <li><strong>Customer's powder coat</strong> shows as a swatch in the credit line.</li>
+          <li><strong>Tap to expand</strong> — see the install photo behind the quote.</li>
+          <li><strong>Auto-rotate every 8s</strong>, pause on hover, fade transitions.</li>
+          <li><strong>"30,000+ homes since 2013"</strong> — kinetic counter, not a stat block.</li>
+        </ul>
+      </div>
+      <div class="dir__demo">
+        <div class="dir__demo-label">Live demo · click ‹ ›</div>
+        <div class="demo-review" id="reviewDemo">
+          <div class="demo-review__quote-mark">"</div>
+          <blockquote class="demo-review__quote" id="reviewQuote">
+            We didn't pick a sconce. We picked a <em>color first</em> and
+            then asked Dutton Brown if they'd build a sconce around it.
+          </blockquote>
+          <div class="demo-review__meta" id="reviewMeta">
+            <span class="swatch" style="background:#f7b6c0"></span>
+            <strong id="reviewName">Anna T.</strong>
+            <span id="reviewLocation">Brooklyn · Pinkaboo Snug Wall Hook</span>
+          </div>
+          <div class="demo-review__index" id="reviewIndex">01 / 04</div>
+          <div class="demo-review__nav">
+            <button id="reviewPrev" aria-label="Previous review">‹</button>
+            <button id="reviewNext" aria-label="Next review">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     DIRECTION 03 — EASTER EGGS
+     ================================================================= -->
+<section id="dir-03" class="bg-warm">
+  <div class="wrap">
+    <div class="dir">
+      <div class="dir__copy">
+        <div class="kicker"><span class="kicker__num">03</span> A direction</div>
+        <h2>Hide rewards<br>in the dots<span class="pink">.</span></h2>
+        <p class="lede">
+          The constellation doesn't have to be passive decoration. Each dot
+          is a small inheritance — tap it and a fact, a discount, or a hidden
+          message appears. Three flavors so it doesn't feel like a single
+          mechanic: facts, coupons, greetings. Some dots stay quiet. The
+          mystery is part of it.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Facts</strong> — "30,000 customers since 2013" / "We answered 12,847 emails."</li>
+          <li><strong>Coupons</strong> — "Apply $10 off your next order" → one-click apply.</li>
+          <li><strong>Greetings</strong> — "Hi. Yes, we noticed you noticed."</li>
+          <li><strong>Konami code</strong> reveals one secret 15th color.</li>
+          <li><strong>Click logo period 3×</strong> → unlocks free swatch ship.</li>
+        </ul>
+      </div>
+      <div class="dir__demo">
+        <div class="dir__demo-label">Click the dots</div>
+        <div class="demo-eggs">
+          <div class="demo-eggs__hint">Click any dot</div>
+          <div class="demo-eggs__grid" id="eggGrid">
+            <button class="egg" style="top: 10%; left: 12%;"
+              data-type="fact"
+              data-payload="30,000 customers since 2013."
+              data-action="See the map →"></button>
+            <button class="egg" style="top: 20%; left: 78%;"
+              data-type="coupon"
+              data-payload="$10 off your next order."
+              data-action="Apply automatically →"></button>
+            <button class="egg" style="top: 38%; left: 32%;"
+              data-type="fact"
+              data-payload="Made-to-order in 14 days, on average."
+              data-action="See lead times →"></button>
+            <button class="egg" style="top: 52%; left: 88%;"
+              data-type="greeting"
+              data-payload="Hi. Yes, we noticed you noticed."></button>
+            <button class="egg" style="top: 60%; left: 18%;"
+              data-type="fact"
+              data-payload="92% of orders ship in a customer-picked color."
+              data-action="See all 14 →"></button>
+            <button class="egg" style="top: 78%; left: 50%;"
+              data-type="coupon"
+              data-payload="Free swatch shipping. One-time."
+              data-action="Send me swatches →"></button>
+            <button class="egg" style="top: 14%; left: 50%;"
+              data-type="fact"
+              data-payload="One Caliber pull contains 3.4 lbs of solid brass."
+              data-action="Hold one →"></button>
+            <button class="egg" style="top: 80%; left: 12%;"
+              data-type="greeting"
+              data-payload="Stares not glares."></button>
+            <button class="egg" style="top: 35%; left: 60%;"
+              data-type="coupon"
+              data-payload="Trade pricing applied."
+              data-action="Apply for trade →"></button>
+          </div>
+          <div class="demo-eggs__legend">
+            <span><strong>•</strong> Tap to open</span>
+            <span><strong>·</strong> Click again to close</span>
+            <span><strong>·</strong> Some have actions, some don't</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     DIRECTION 04 — CURSOR AS PERIOD
+     ================================================================= -->
+<section id="dir-04" class="bg-paper">
+  <div class="wrap">
+    <div class="dir">
+      <div class="dir__copy">
+        <div class="kicker"><span class="kicker__num">04</span> A direction</div>
+        <h2>The cursor is<br>a period<span class="pink">.</span></h2>
+        <p class="lede">
+          You're already using it on this page. A custom cursor that breathes
+          like the logo period, expands to a soft pink disk on link hover,
+          and shrinks when you press. The whole site feels alive, instead of
+          waiting for input. Off on touch devices. On for everyone else.
+        </p>
+        <ul class="feature-list">
+          <li><strong>14px charcoal dot</strong> with a 5s breath animation.</li>
+          <li><strong>Hover any link</strong> → grows to 36px, recolors to Pinkaboo.</li>
+          <li><strong>Press</strong> → contracts to 8px (haptic feedback, visual).</li>
+          <li><strong>Multiply blend mode</strong> — picks up colors it crosses.</li>
+          <li><strong>Auto-disabled</strong> on touch devices and reduced-motion.</li>
+        </ul>
+      </div>
+      <div class="dir__demo">
+        <div class="dir__demo-label">Move your mouse</div>
+        <div class="demo-cursor">
+          <div class="demo-cursor__display">
+            you are<br>a period<span class="live">.</span>
+          </div>
+          <div class="demo-cursor__row">
+            <a href="#dir-04">hover me</a>
+            <a href="#dir-04">and me</a>
+            <a href="#dir-04">and me too</a>
+          </div>
+          <div style="font-size:0.78rem;color:var(--charcoal-faint);letter-spacing:var(--tr-wide);">Click anywhere on the page to feel the contraction.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     DIRECTION 05 — MADE-TO-ORDER THEATRE
+     ================================================================= -->
+<section id="dir-05" class="bg-warm">
+  <div class="wrap">
+    <div class="dir">
+      <div class="dir__copy">
+        <div class="kicker"><span class="kicker__num">05</span> A direction</div>
+        <h2>Show the<br>making<span class="pink">.</span></h2>
+        <p class="lede">
+          Most brands hide their factory. Ours is the brand. Replace the
+          generic "trust badge" row with a four-step horizontal timeline that
+          shows the customer's order moving from <em>design</em> → <em>powder mix</em>
+          → <em>bake</em> → <em>ship</em>. Each step has live data. Each step has a
+          photo on hover. People who care about made-to-order will read every
+          word.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Four steps</strong>, animated progress bar across them on a 8s loop.</li>
+          <li><strong>Live ETA chip</strong> — "Currently 12 days" — pulled from production.</li>
+          <li><strong>Click a step</strong> → photo + 30-second video of that station.</li>
+          <li><strong>Footer stat row</strong> — orders this week, colors this month, etc.</li>
+        </ul>
+      </div>
+      <div class="dir__demo">
+        <div class="dir__demo-label">Watch the loop</div>
+        <div class="demo-mto">
+          <div class="mto-track">
+            <div class="mto-step">
+              <div class="mto-step__num">Step <span>01</span></div>
+              <div class="mto-step__title">You design</div>
+              <div class="mto-step__detail">Pick the product. Pick the color. Pick the finish. The configurator commits the spec.</div>
+              <div class="mto-step__bar"><div class="mto-step__bar-fill"></div></div>
+            </div>
+            <div class="mto-step">
+              <div class="mto-step__num">Step <span>02</span></div>
+              <div class="mto-step__title">We mix powder</div>
+              <div class="mto-step__detail">One of 14 powder coats, prepared specifically for your order. Nothing pre-painted sitting in a warehouse.</div>
+              <div class="mto-step__bar"><div class="mto-step__bar-fill"></div></div>
+            </div>
+            <div class="mto-step">
+              <div class="mto-step__num">Step <span>03</span></div>
+              <div class="mto-step__title">Bake & finish</div>
+              <div class="mto-step__detail">Powder coated and oven-baked at 400°F in our Minneapolis facility. Hand-checked for finish quality.</div>
+              <div class="mto-step__bar"><div class="mto-step__bar-fill"></div></div>
+            </div>
+            <div class="mto-step">
+              <div class="mto-step__num">Step <span>04</span></div>
+              <div class="mto-step__title">Ship</div>
+              <div class="mto-step__detail">Packed with parts list and a hand-written thank-you. Average door-to-door: 14 days.</div>
+              <div class="mto-step__bar"><div class="mto-step__bar-fill"></div></div>
+            </div>
+          </div>
+          <div class="mto-stats">
+            <div><span>Orders this week</span><strong>137</strong></div>
+            <div><span>Colors used</span><strong>11 / 14</strong></div>
+            <div><span>Avg lead time</span><strong>14 days</strong></div>
+            <div><span>Made in</span><strong>Minneapolis</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     DIRECTION 06 — TYPE AS ARCHITECTURE
+     ================================================================= -->
+<section id="dir-06" class="bg-paper">
+  <div class="wrap">
+    <div class="dir">
+      <div class="dir__copy">
+        <div class="kicker"><span class="kicker__num">06</span> A direction</div>
+        <h2>Type<br>moves<span class="pink">.</span></h2>
+        <p class="lede">
+          One kinetic moment per page where typography stops behaving and
+          starts performing. A horizontal marquee of the brand pillars and
+          customer-trigger phrases. Dotted breath punctuation. Dim-to-bright
+          contrast for emphasis. Used <em>once</em>, used loud — the way
+          editorial design uses a pull quote.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Two parallel rails</strong> moving in opposite directions.</li>
+          <li><strong>Pillar phrases</strong> — "fourteen colors / three finishes / infinite combinations."</li>
+          <li><strong>Tagline rotation</strong> — "stares not glares" / "future classics" / "objects of adoration."</li>
+          <li><strong>Punctuation dots</strong> match the page's accent.</li>
+          <li><strong>Pause on hover</strong> so people can read individual words.</li>
+        </ul>
+      </div>
+      <div class="dir__demo dir__demo--charcoal">
+        <div class="dir__demo-label">Auto-scrolling</div>
+        <div class="demo-marquee">
+          <div class="marquee">
+            <div class="marquee__track">
+              <span>fourteen colors <span class="dot"></span> three finishes <span class="dot dot--orange"></span> infinite combinations <span class="dot"></span> made to order in minneapolis <span class="dot"></span></span>
+              <span>fourteen colors <span class="dot"></span> three finishes <span class="dot dot--orange"></span> infinite combinations <span class="dot"></span> made to order in minneapolis <span class="dot"></span></span>
+            </div>
+          </div>
+          <div class="marquee marquee--reverse">
+            <div class="marquee__track">
+              <span class="dim">stares not glares <span class="dot"></span> future classics <span class="dot"></span> objects of adoration <span class="dot dot--orange"></span> the opposite of made for everyone <span class="dot"></span></span>
+              <span class="dim">stares not glares <span class="dot"></span> future classics <span class="dot"></span> objects of adoration <span class="dot dot--orange"></span> the opposite of made for everyone <span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     DIRECTION 07 — CALLOUT, REBUILT
+     ================================================================= -->
+<section id="dir-07" class="bg-warm">
+  <div class="wrap">
+    <div class="dir">
+      <div class="dir__copy">
+        <div class="kicker"><span class="kicker__num">07</span> A direction</div>
+        <h2>The callout,<br>rebuilt<span class="pink">.</span></h2>
+        <p class="lede">
+          The current "14 colors / Lead time / Trade?" row reads like every
+          Shopify theme on Earth. Make each cell pull live data, write the
+          copy at hero scale, and let the white space do the rest. Three
+          cells, three feelings: <em>scope</em>, <em>now</em>, <em>belonging</em>.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Cell 1 — Scope.</strong> "14. 3. ∞." giant numerals.</li>
+          <li><strong>Cell 2 — Now.</strong> Live lead-time chip with a pulsing orange dot.</li>
+          <li><strong>Cell 3 — Belonging.</strong> Trade application invitation.</li>
+          <li><strong>Hovers warm</strong> the cell toward surface color — feels alive.</li>
+          <li><strong>Lowercase, period as punctuation</strong>, not a sales pitch.</li>
+        </ul>
+      </div>
+      <div class="dir__demo">
+        <div class="dir__demo-label">Hover each cell</div>
+        <div class="demo-callout">
+          <div class="callout-grid">
+            <div class="callout-cell">
+              <div class="callout-cell__num">Cell 01 <em>· scope</em></div>
+              <div class="callout-cell__display">
+                14. 3. <span class="pink">∞</span><span style="color:var(--pink-deep);">.</span>
+              </div>
+              <div class="callout-cell__caption">
+                Fourteen colors. Three finishes. Infinite ways to make a Dutton Brown
+                piece yours. No two orders are quite the same.
+              </div>
+              <a href="#" class="callout-cell__cta">Browse the palette</a>
+            </div>
+            <div class="callout-cell">
+              <div class="callout-cell__num">Cell 02 <em>· now</em></div>
+              <div class="callout-cell__display">
+                <span class="orange">14</span><span style="color:var(--pink-deep);">.</span><br>days.
+              </div>
+              <div class="callout-cell__caption">
+                <span class="callout-cell__pulse"></span>
+                Currently making and shipping in fourteen days. We update this
+                number every Monday based on real production load.
+              </div>
+              <a href="#" class="callout-cell__cta">How we time orders</a>
+            </div>
+            <div class="callout-cell">
+              <div class="callout-cell__num">Cell 03 <em>· belonging</em></div>
+              <div class="callout-cell__display">
+                hi,<br>designer<span style="color:var(--pink-deep);">.</span>
+              </div>
+              <div class="callout-cell__caption">
+                Specifying for a project? Our trade program is the rare one
+                you'll actually use. Pricing, samples, and a person who
+                returns emails.
+              </div>
+              <a href="#" class="callout-cell__cta">Apply for trade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     DIRECTION 08 — POWDER COAT PLAYGROUND
+     ================================================================= -->
+<section id="dir-08" class="bg-paper">
+  <div class="wrap">
+    <div class="dir">
+      <div class="dir__copy">
+        <div class="kicker"><span class="kicker__num">08</span> A direction</div>
+        <h2>The playground<span class="pink">.</span></h2>
+        <p class="lede">
+          A homepage module, two columns. Left: a hero product, painted live.
+          Right: all 14 swatches. Tap one — the product repaints, the
+          background washes, the page accent changes. Make playing with color
+          the demo of what the brand actually does. People stay on this for
+          30 seconds. Industry average for hero engagement is 3.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Live recolor</strong> — product, background, accent all swap together.</li>
+          <li><strong>Color name + number</strong> — "Pinkaboo · No. 12" on every change.</li>
+          <li><strong>Free swatch ship CTA</strong> appears once you've tapped 3+ colors.</li>
+          <li><strong>Last-color-viewed</strong> sticks across pages (localStorage).</li>
+          <li><strong>Mobile</strong> — same module, swatch row scrolls horizontally.</li>
+        </ul>
+      </div>
+      <div class="dir__demo">
+        <div class="dir__demo-label">Tap any swatch</div>
+        <div class="demo-paint" id="paintPlayground">
+          <div class="paint-stage" id="paintStage" style="--paint-bg:#f7b6c0; --paint-text:#4A4A4A">
+            <div class="paint-product" id="paintProduct">
+              snug<br>wall hook<span style="color:var(--pink-deep);">.</span>
+              <span class="num" id="paintProductNum">in pinkaboo · no. 12</span>
+            </div>
+          </div>
+          <div class="paint-control">
+            <h4>The 14</h4>
+            <div class="paint-grid" id="paintGrid">
+              <button data-color="#FFFFFF" data-text="#4A4A4A" data-name="White" data-num="01" style="background:#FFFFFF"></button>
+              <button data-color="#D0D0D0" data-text="#4A4A4A" data-name="Chalk" data-num="02" style="background:#D0D0D0"></button>
+              <button data-color="#E5E4CF" data-text="#4A4A4A" data-name="Cream" data-num="03" style="background:#E5E4CF"></button>
+              <button data-color="#a0af9c" data-text="#FFFFFF" data-name="Sage" data-num="04" style="background:#a0af9c"></button>
+              <button data-color="#4E782F" data-text="#FFFFFF" data-name="Pine" data-num="05" style="background:#4E782F"></button>
+              <button data-color="#728384" data-text="#FFFFFF" data-name="Mineral" data-num="06" style="background:#728384"></button>
+              <button data-color="#1D1E33" data-text="#FFFFFF" data-name="Midnight" data-num="07" style="background:#1D1E33"></button>
+              <button data-color="#2C4A56" data-text="#FFFFFF" data-name="Petrol" data-num="08" style="background:#2C4A56"></button>
+              <button data-color="#B89111" data-text="#FFFFFF" data-name="Ochre" data-num="09" style="background:#B89111"></button>
+              <button data-color="#D4713B" data-text="#FFFFFF" data-name="Rust" data-num="10" style="background:#D4713B"></button>
+              <button data-color="#9F2C00" data-text="#FFFFFF" data-name="Riding Hood" data-num="11" style="background:#9F2C00"></button>
+              <button data-color="#f7b6c0" data-text="#4A4A4A" data-name="Pinkaboo" data-num="12" class="active" style="background:#f7b6c0"></button>
+              <button data-color="#CCB8B8" data-text="#4A4A4A" data-name="Barely" data-num="13" style="background:#CCB8B8"></button>
+              <button data-color="#000000" data-text="#FFFFFF" data-name="Black" data-num="14" style="background:#000000"></button>
+            </div>
+            <div class="paint-meta">
+              <strong id="paintColorName">Pinkaboo</strong>
+              Powder coat No. <span id="paintColorNum">12</span>. Brand new for 2026.
+              Soft. Confident. Slightly defiant. <em>Free swatch shipping</em> on
+              your first order.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     ROADMAP
+     ================================================================= -->
+<section id="roadmap" class="bg-charcoal">
+  <div class="wrap">
+    <div class="kicker"><span class="kicker__num">→</span> Roadmap</div>
+    <h2>How we ship it,<br>without breaking <span class="pink">anything</span>.</h2>
+    <p class="lede">
+      Three phases. Each one stands alone — if we stop after Phase 1 the site
+      is already meaningfully different. If we go all the way, duttonbrown.com
+      becomes a reference site for made-to-order brands. Estimates are working
+      time, not calendar time.
+    </p>
+
+    <div class="roadmap-grid">
+
+      <div class="roadmap-card">
+        <div class="roadmap-card__head">
+          <span class="roadmap-card__phase">Phase 01</span>
+          <span class="roadmap-card__time">~3–5 days</span>
+        </div>
+        <div class="roadmap-card__title">Quick wins · ship by next Friday</div>
+        <ul>
+          <li><strong>Direction 04 · Cursor as period</strong> — shippable in a single liquid snippet + small JS file.</li>
+          <li><strong>Direction 07 · Callout rebuilt</strong> — replaces the existing 3-column section in <em>multi-column.liquid</em>. Same data, better copy, better composition.</li>
+          <li><strong>Direction 01a · 14-stripe scroll bar</strong> — global header addition, fixed top, fills with scroll.</li>
+          <li><strong>Color-strip dividers</strong> — replace the current section borders with a single 8px color band per section.</li>
+          <li><strong>Microcopy sweep</strong> — kill remaining "must-have"/"premium" language. Adopt "stares not glares" / "future classics" voice from the tagline bank.</li>
+        </ul>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-card__head">
+          <span class="roadmap-card__phase">Phase 02</span>
+          <span class="roadmap-card__time">~2–3 weeks</span>
+        </div>
+        <div class="roadmap-card__title">The personality phase</div>
+        <ul>
+          <li><strong>Direction 02 · Editorial reviews</strong> — new section type, pulls from Yotpo API, custom card.</li>
+          <li><strong>Direction 03 · Easter-egg dots</strong> — extend the constellation system already in <em>interactive-svg-banner.liquid</em>; add tap-to-reveal payload schema. Stretch: konami code.</li>
+          <li><strong>Direction 06 · Type marquee</strong> — one new section, used on home + about + collection pages.</li>
+          <li><strong>Direction 05 · Made-to-order theatre</strong> — replaces disabled <em>text-with-icons</em> row. Pull live ETA from production data (operations side already has this).</li>
+        </ul>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-card__head">
+          <span class="roadmap-card__phase">Phase 03</span>
+          <span class="roadmap-card__time">~4–6 weeks</span>
+        </div>
+        <div class="roadmap-card__title">The flagship moves</div>
+        <ul>
+          <li><strong>Direction 08 · Powder coat playground</strong> — flagship homepage module. Live product recolor across hero. Requires per-product color masters (already used elsewhere in the theme).</li>
+          <li><strong>Direction 01b · Page wash mode</strong> — color-of-the-moment that recolors the whole page. Sticky across pages via cookie.</li>
+          <li><strong>Footer rewrite</strong> — manifesto-first, links beneath. One sentence at hero scale.</li>
+          <li><strong>Section transitions</strong> — scroll-driven reveals (CSS only, no JS), cross-section morphs, view-transitions API where supported.</li>
+          <li><strong>Soft launch on draft theme</strong> — let three trade customers click through first. Iterate on what they laugh at.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="lede" style="margin-top:3rem;color:rgba(255,255,255,0.78);">
+      The audit said most of the homepage is "fine." Phase 01 alone moves it
+      to "ours." Phase 02 and 03 move it to <em style="color:var(--pink);font-style:normal;">unmistakably</em>
+      ours. Pick your phase. I'll plan the implementation.
+    </p>
+  </div>
+</section>
+
+<!-- =================================================================
+     14-COLOR FOOTER STRIP + FOOTER
+     ================================================================= -->
+<div class="color-strip" aria-hidden="true">
+  <span style="background:#FFFFFF" title="White"></span>
+  <span style="background:#D0D0D0" title="Chalk"></span>
+  <span style="background:#E5E4CF" title="Cream"></span>
+  <span style="background:#a0af9c" title="Sage"></span>
+  <span style="background:#4E782F" title="Pine"></span>
+  <span style="background:#728384" title="Mineral"></span>
+  <span style="background:#1D1E33" title="Midnight"></span>
+  <span style="background:#2C4A56" title="Petrol"></span>
+  <span style="background:#B89111" title="Ochre"></span>
+  <span style="background:#D4713B" title="Rust"></span>
+  <span style="background:#9F2C00" title="Riding Hood"></span>
+  <span style="background:#f7b6c0" title="Pinkaboo"></span>
+  <span style="background:#CCB8B8" title="Barely"></span>
+  <span style="background:#000000" title="Black"></span>
+</div>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__title">
+      we're the future. we're building it.<br>
+      <span class="pink">you and me.</span>
+    </div>
+    <div class="foot__byline">
+      <strong>Drafted by Claude.</strong> Reviewed by Thomas. Built for Dutton Brown.
+      The full file lives in
+      <span style="color:rgba(255,255,255,0.85);">db-pages / dutton-brown / marketing / website-design-directions.html</span>.
+      Re-run the page anytime — every demo is local and self-contained.
+    </div>
+    <div class="foot__row">
+      <span>26 April 2026</span>
+      <span>v1.0 · Draft</span>
+      <span>Built with Poppins 300 / 400 / 600 only</span>
+      <span>14 colors · 8 directions · 1 site</span>
+    </div>
+  </div>
+</footer>
+
+<!-- =================================================================
+     SCRIPTS — interactive demos
+     ================================================================= -->
+<script>
+(function () {
+  'use strict';
+
+  // ----- Custom dot cursor ---------------------------------------------------
+  const cursor = document.getElementById('dotCursor');
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if (cursor && !isTouch) {
+    let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+    let tx = cx, ty = cy;
+    document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    document.addEventListener('mousedown', () => cursor.classList.add('is-pressed'));
+    document.addEventListener('mouseup',   () => cursor.classList.remove('is-pressed'));
+    const linkSelector = 'a, button, .egg, .demo-color__samples button, .paint-grid button, .demo-color__rail span, .color-strip span';
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest(linkSelector)) cursor.classList.add('is-link');
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest(linkSelector)) cursor.classList.remove('is-link');
+    });
+    function tick() {
+      cx += (tx - cx) * 0.22;
+      cy += (ty - cy) * 0.22;
+      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  // ----- DEMO 01 + 08 — Color washes ----------------------------------------
+  function bindWash(samplesId, previewBg, previewText, previewNum) {
+    const samples = document.getElementById(samplesId);
+    if (!samples) return;
+    samples.querySelectorAll('button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const color = btn.dataset.color;
+        const name = btn.dataset.name;
+        const num = btn.dataset.num;
+        if (previewBg) {
+          previewBg.style.background = color;
+          previewBg.style.color = ['#FFFFFF','#D0D0D0','#E5E4CF','#f7b6c0','#CCB8B8','#B89111'].includes(color) ? '#4A4A4A' : '#FFFFFF';
+        }
+        if (previewText) previewText.textContent = name;
+        if (previewNum)  previewNum.textContent  = `No. ${num} · Powder Coat`;
+      });
+    });
+  }
+  bindWash(
+    'paintSamples',
+    document.getElementById('paintPreview'),
+    document.getElementById('paintPreviewName'),
+    document.getElementById('paintPreviewNum')
+  );
+
+  // Demo 08 — full playground recolor
+  const paintGrid = document.getElementById('paintGrid');
+  const paintStage = document.getElementById('paintStage');
+  const paintProductNum = document.getElementById('paintProductNum');
+  const paintColorName = document.getElementById('paintColorName');
+  const paintColorNum = document.getElementById('paintColorNum');
+  if (paintGrid && paintStage) {
+    paintGrid.querySelectorAll('button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        paintGrid.querySelectorAll('button.active').forEach((a) => a.classList.remove('active'));
+        btn.classList.add('active');
+        const color = btn.dataset.color;
+        const text = btn.dataset.text;
+        const name = btn.dataset.name;
+        const num = btn.dataset.num;
+        paintStage.style.setProperty('--paint-bg', color);
+        paintStage.style.setProperty('--paint-text', text);
+        if (paintProductNum) paintProductNum.textContent = `in ${name.toLowerCase()} · no. ${num}`;
+        if (paintColorName)  paintColorName.textContent = name;
+        if (paintColorNum)   paintColorNum.textContent = num;
+      });
+    });
+  }
+
+  // ----- DEMO 02 — Editorial reviews ----------------------------------------
+  const reviews = [
+    {
+      quote: 'We didn\'t pick a sconce. We picked a <em>color first</em> and then asked Dutton Brown if they\'d build a sconce around it.',
+      name: 'Anna T.',
+      where: 'Brooklyn · Pinkaboo Snug Wall Hook',
+      swatch: '#f7b6c0'
+    },
+    {
+      quote: 'Specs got pulled from a binder. Color got pulled from a feeling. <em>Both shipped in 11 days.</em>',
+      name: 'Studio Halle',
+      where: 'Chicago · Petrol Caliber Pull, 27pc',
+      swatch: '#2C4A56'
+    },
+    {
+      quote: 'I have never written a five-star review for a <em>doorknob</em> before. I am writing one now.',
+      name: 'Michael R.',
+      where: 'Austin · Ochre Swift Knob',
+      swatch: '#B89111'
+    },
+    {
+      quote: 'Asked them to match a vintage tile. They mixed a custom powder. <em>It came out perfect.</em>',
+      name: 'Renee G.',
+      where: 'Portland · Custom Sage Display Sconce',
+      swatch: '#a0af9c'
+    }
+  ];
+  const reviewQuote    = document.getElementById('reviewQuote');
+  const reviewMeta     = document.getElementById('reviewMeta');
+  const reviewName     = document.getElementById('reviewName');
+  const reviewLocation = document.getElementById('reviewLocation');
+  const reviewIndex    = document.getElementById('reviewIndex');
+  const reviewPrev     = document.getElementById('reviewPrev');
+  const reviewNext     = document.getElementById('reviewNext');
+  let reviewI = 0;
+  let reviewTimer = null;
+  function renderReview(i) {
+    const r = reviews[i];
+    if (!reviewQuote) return;
+    reviewQuote.style.opacity = 0;
+    setTimeout(() => {
+      reviewQuote.innerHTML = r.quote;
+      reviewName.textContent = r.name;
+      reviewLocation.textContent = r.where;
+      reviewMeta.querySelector('.swatch').style.background = r.swatch;
+      reviewIndex.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(reviews.length).padStart(2, '0');
+      reviewQuote.style.transition = 'opacity 0.3s ease';
+      reviewQuote.style.opacity = 1;
+    }, 200);
+  }
+  function startAutoRotate() {
+    stopAutoRotate();
+    reviewTimer = setInterval(() => {
+      reviewI = (reviewI + 1) % reviews.length;
+      renderReview(reviewI);
+    }, 8000);
+  }
+  function stopAutoRotate() { if (reviewTimer) { clearInterval(reviewTimer); reviewTimer = null; } }
+  if (reviewPrev && reviewNext) {
+    reviewPrev.addEventListener('click', () => { reviewI = (reviewI - 1 + reviews.length) % reviews.length; renderReview(reviewI); startAutoRotate(); });
+    reviewNext.addEventListener('click', () => { reviewI = (reviewI + 1) % reviews.length;                renderReview(reviewI); startAutoRotate(); });
+    const reviewSection = document.getElementById('reviewDemo');
+    reviewSection.addEventListener('mouseenter', stopAutoRotate);
+    reviewSection.addEventListener('mouseleave', startAutoRotate);
+    startAutoRotate();
+  }
+
+  // ----- DEMO 03 — Easter eggs ----------------------------------------------
+  const eggGrid = document.getElementById('eggGrid');
+  if (eggGrid) {
+    eggGrid.querySelectorAll('.egg').forEach((egg) => {
+      egg.addEventListener('click', () => {
+        if (egg.classList.contains('opened')) {
+          egg.classList.remove('opened', 'fact', 'coupon', 'greeting');
+          egg.innerHTML = '';
+          return;
+        }
+        const type = egg.dataset.type;
+        const payload = egg.dataset.payload;
+        const action = egg.dataset.action || '';
+        // close other open eggs (only one at a time visually nicer)
+        eggGrid.querySelectorAll('.egg.opened').forEach((other) => {
+          if (other !== egg) {
+            other.classList.remove('opened', 'fact', 'coupon', 'greeting');
+            other.innerHTML = '';
+          }
+        });
+        egg.classList.add('opened', type);
+        egg.innerHTML = payload + (action ? `<span class="egg__action">${action}</span>` : '');
+      });
+    });
+  }
+
+  // ----- Konami easter egg (extra) ------------------------------------------
+  const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let konamiI = 0;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === konami[konamiI]) {
+      konamiI++;
+      if (konamiI === konami.length) {
+        konamiI = 0;
+        document.body.style.transition = 'background 1.2s ease';
+        document.body.style.background = '#f7b6c0';
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;display:grid;place-items:center;z-index:9998;background:rgba(74,74,74,0.85);color:#fff;font-weight:300;font-size:clamp(2rem,7vw,5rem);letter-spacing:-0.03em;cursor:pointer;backdrop-filter:blur(4px);';
+        overlay.innerHTML = 'you found the<br>15th color<span style="color:#f7b6c0;">.</span>';
+        overlay.addEventListener('click', () => { overlay.remove(); document.body.style.background = ''; });
+        document.body.appendChild(overlay);
+      }
+    } else { konamiI = 0; }
+  });
+
+})();
+</script>
+</body>
+</html>
