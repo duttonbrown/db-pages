@@ -50,11 +50,16 @@ function fmtReorder(v) {
   return `Reorder ${v}`;
 }
 
-function metaLine(item) {
-  return [item.vendor && `Vendor: ${item.vendor}`,
-          fmtReorder(item.reorderQty),
-          item.use2025 != null && `2025 Use: ${item.use2025}`]
-    .filter(Boolean).join("   |   ");
+function vendorLine(item) {
+  return item.vendor ? `Vendor: ${item.vendor}` : "";
+}
+
+function statsLine(item) {
+  return [
+    item.use2025 != null && `2025 Use: ${item.use2025}`,
+    fmtReorder(item.reorderQty),
+    item.leadTime && `Lead Time: ${item.leadTime}`,
+  ].filter(Boolean).join("   |   ");
 }
 
 async function loadRequestors() {
@@ -137,20 +142,29 @@ function renderResults(items) {
       const li = document.createElement("li");
       li.dataset.index = i;
       const icon = item.type === "Part" ? "🔩" : "📦";
+      const thumb = item.image
+        ? `<img class="thumb" src="${item.image}" alt="">`
+        : `<span class="icon">${icon}</span>`;
       li.innerHTML = `
-        <span class="icon">${icon}</span>
+        ${thumb}
         <span class="meta">
           <span class="title-row">
             <strong class="title-text"></strong>
             <span class="title-desc"></span>
           </span>
-          <small class="meta-line"></small>
+          <small class="vendor-line"></small>
+          <small class="stats-line"></small>
         </span>
       `;
       li.querySelector(".title-text").textContent = item.title || "(untitled)";
       const desc = item.description || item.subtitle || "";
       li.querySelector(".title-desc").textContent = desc ? `— ${desc}` : "";
-      li.querySelector(".meta-line").textContent = metaLine(item);
+      const vLine = vendorLine(item);
+      const sLine = statsLine(item);
+      li.querySelector(".vendor-line").textContent = vLine;
+      li.querySelector(".vendor-line").hidden = !vLine;
+      li.querySelector(".stats-line").textContent = sLine;
+      li.querySelector(".stats-line").hidden = !sLine;
       li.addEventListener("click", () => pickItem(item));
       resultsList.appendChild(li);
     });
@@ -164,7 +178,20 @@ function pickItem(item) {
   pickedImage.hidden = !item.image;
   const desc = item.description || item.subtitle || "";
   pickedTitle.textContent = desc ? `${item.title} — ${desc}` : item.title;
-  pickedSub.textContent = metaLine(item);
+  pickedSub.innerHTML = "";
+  const v = vendorLine(item);
+  const s = statsLine(item);
+  if (v) {
+    const vEl = document.createElement("span");
+    vEl.textContent = v;
+    pickedSub.appendChild(vEl);
+  }
+  if (s) {
+    const sEl = document.createElement("span");
+    sEl.textContent = s;
+    sEl.style.display = "block";
+    pickedSub.appendChild(sEl);
+  }
   pickedType.textContent = item.type;
   pickedNoteCheckbox.checked = false;
   pickedNoteInput.value = "";
@@ -197,6 +224,7 @@ function addPickedToCart() {
     vendor: pickedItem.vendor,
     reorderQty: pickedItem.reorderQty,
     use2025: pickedItem.use2025,
+    leadTime: pickedItem.leadTime,
     image: pickedItem.image,
   });
   cancelPicked();
@@ -246,14 +274,18 @@ function renderCart() {
     li.className = "cart-item";
     const icon = it.notInDb ? (it.type === "Other" ? "🛠️" : (it.type === "Part" ? "🔩" : "📦"))
                             : (it.type === "Part" ? "🔩" : "📦");
+    const cartThumb = it.image
+      ? `<img class="thumb" src="${it.image}" alt="">`
+      : `<span class="icon">${icon}</span>`;
     li.innerHTML = `
-      <span class="icon">${icon}</span>
+      ${cartThumb}
       <div class="cart-meta">
         <span class="title-row">
           <strong class="title-text"></strong>
           <span class="title-desc"></span>
         </span>
-        <small class="cart-meta-line"></small>
+        <small class="vendor-line"></small>
+        <small class="stats-line"></small>
         <div class="cart-note-row">
           <button type="button" class="link-btn cart-note-toggle"></button>
           <input type="text" class="cart-note-input" placeholder="Note for purchaser" hidden>
@@ -264,12 +296,12 @@ function renderCart() {
     li.querySelector(".title-text").textContent = it.title;
     const desc = it.description || it.subtitle || "";
     li.querySelector(".title-desc").textContent = desc ? `— ${desc}` : "";
-    const meta = [
-      it.vendor && `Vendor: ${it.vendor}`,
-      (it.reorderQty != null && it.reorderQty !== "") && `Reorder: ${it.reorderQty}`,
-      (it.use2025 != null) && `2025 Use: ${it.use2025}`,
-    ].filter(Boolean).join("   |   ");
-    li.querySelector(".cart-meta-line").textContent = meta;
+    const vLine = vendorLine(it);
+    const sLine = statsLine(it);
+    li.querySelector(".vendor-line").textContent = vLine;
+    li.querySelector(".vendor-line").hidden = !vLine;
+    li.querySelector(".stats-line").textContent = sLine;
+    li.querySelector(".stats-line").hidden = !sLine;
 
     const noteToggle = li.querySelector(".cart-note-toggle");
     const noteInput  = li.querySelector(".cart-note-input");
