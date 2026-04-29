@@ -2,13 +2,26 @@
 
 This folder is for your dashboards, reports, and pages that you want to share.
 
-## How to add a page
+You can publish your own pages — you don't need to ask Thomas. Read [SETUP-FOR-HANNAH.md](SETUP-FOR-HANNAH.md) for the full setup. Quick version below.
 
-1. Create an `index.html` file in a new subfolder (e.g., `hb/q2-report/index.html`)
-2. Build it however you want
-3. Test it locally by opening the file in your browser
-4. When ready to publish, tell Thomas: "Push my Q2 report" or send him a message with the folder name
-5. Thomas will push it to GitHub, and it goes live at: `https://duttonbrown.github.io/db-pages/marketing/hb/q2-report/`
+## How to add and publish a page
+
+1. Make a new folder inside `marketing/hb/` — e.g. `hb/q2-report/`
+2. Create a file called `index.html` inside it
+3. Build your page (copy `hb/example-page/index.html` as a starting point)
+4. Test locally — double-click `index.html` to open it in your browser
+5. When ready, push it live with these commands in Terminal (Cmd+Space → "Terminal"):
+
+```bash
+cd ~/repos/db-pages
+git pull
+git add marketing/hb/
+git commit -m "Add Q2 report"
+git push
+```
+
+Within a minute, your page is live at:
+`https://duttonbrown.github.io/db-pages/marketing/hb/q2-report/`
 
 ## Examples
 
@@ -20,9 +33,13 @@ Use subfolders to organize however makes sense to you.
 
 ## What you need
 
-1. A copy of the `db-pages` repo (ask Thomas)
-2. A text editor (VS Code, Notepad++, even Notepad works)
-3. No git knowledge needed — just edit files and tell Thomas when to push
+1. A copy of the `db-pages` repo cloned to `~/repos/db-pages` (one-time setup — see SETUP-FOR-HANNAH.md)
+2. Terminal (built into macOS — Cmd+Space → "Terminal")
+3. A text editor (VS Code recommended)
+
+## Important: this repo is public
+
+`db-pages` is a public GitHub repo. Anything you push is visible on the internet. Never put API keys, passwords, customer PII, or sensitive financial data in here. Dashboards, mockups, reports, and anonymized data are all fine.
 
 ## Questions?
 
