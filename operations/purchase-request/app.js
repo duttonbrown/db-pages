@@ -84,7 +84,7 @@ const LOADING_MESSAGES = [
   "Drink some water. Stretch your shoulders. We'll be ready in a sec.",
   "Take a deep breath in… and out. Catalog incoming.",
   "Did you know that none of this business could exist without you? Thanks for that… and your patience.",
-  "Stand up and roll your neck. Future-you will thank present-you.",
+  "Knock knock. Who's there? Lettuce. Lettuce who? Lettuce in, the parts list is loading!",
   "Have you smiled today? Try one now while we load.",
   "Text someone you've been meaning to text. Yes, that someone.",
   "Look out a window for ten seconds. The catalog will still be here.",
