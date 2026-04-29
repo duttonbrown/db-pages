@@ -12,6 +12,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 body {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
