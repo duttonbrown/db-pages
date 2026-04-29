@@ -49,7 +49,7 @@ function clearError() { errorBox.hidden = true; }
 function fmtUse(n)   { return (n === null || n === undefined) ? "" : `${n}/yr`; }
 function fmtReorder(v) {
   if (v === null || v === undefined || v === "") return "";
-  return `Reorder ${v}`;
+  return `Reorder Qty: ${v}`;
 }
 
 function vendorLine(item) {
