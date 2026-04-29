@@ -59,6 +59,17 @@ h2.cart-heading {
   margin: 0;
 }
 
+.note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  background: #FFF7EB;
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+
 .field { margin-bottom: 16px; position: relative; }
 
 label {
