@@ -408,6 +408,17 @@ textarea { resize: vertical; min-height: 70px; }
   border-radius: 3px;
   background: var(--accent);
   color: white;
+}
+
+.badge-category {
+  background: #EAEAEA;
+  color: var(--text);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
   margin-bottom: 4px;
 }
 

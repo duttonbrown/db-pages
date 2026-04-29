@@ -34,7 +34,10 @@
       <div class="picked-row">
         <img id="picked-image" alt="" hidden>
         <div class="picked-body">
-          <span id="picked-type" class="badge"></span>
+          <div class="chip-row">
+            <span id="picked-type" class="badge"></span>
+            <span id="picked-category" class="badge badge-category" hidden></span>
+          </div>
           <strong id="picked-title"></strong>
           <small id="picked-subtitle"></small>
         </div>
@@ -59,7 +62,7 @@
     <div class="field checkbox-field">
       <label>
         <input type="checkbox" id="not-in-db">
-        <span>Item not in database</span>
+        <span>Add item not in database</span>
       </label>
     </div>
 
