@@ -13,12 +13,14 @@ const pickedSub     = $("picked-subtitle");
 const pickedType    = $("picked-type");
 const pickedNoteCheckbox = $("picked-note-checkbox");
 const pickedNoteInput    = $("picked-note");
+const pickedOutOfStock   = $("picked-out-of-stock");
 const addBtn        = $("add-btn");
 const cancelPick    = $("cancel-pick");
 const notInDb       = $("not-in-db");
 const customFields  = $("custom-fields");
 const customName    = $("custom-name");
 const customNotes   = $("custom-notes");
+const customOutOfStock = $("custom-out-of-stock");
 const addCustomBtn  = $("add-custom-btn");
 const cartSection   = $("cart-section");
 const cartList      = $("cart");
@@ -196,6 +198,7 @@ function pickItem(item) {
   pickedNoteCheckbox.checked = false;
   pickedNoteInput.value = "";
   pickedNoteInput.hidden = true;
+  pickedOutOfStock.checked = false;
   picked.hidden = false;
   search.hidden = true;
   resultsList.hidden = true;
@@ -218,6 +221,7 @@ function addPickedToCart() {
     notInDb: false,
     qty: 1,
     notes: note,
+    outOfStock: pickedOutOfStock.checked,
     title: pickedItem.title,
     description: pickedItem.description,
     subtitle: pickedItem.subtitle,
@@ -241,12 +245,14 @@ function addCustomToCart() {
     customName: name,
     qty: 1,
     notes: customNotes.value.trim(),
+    outOfStock: customOutOfStock.checked,
     title: name,
     subtitle: "(not in database)",
     vendor: "",
   });
   customName.value = "";
   customNotes.value = "";
+  customOutOfStock.checked = false;
   document.querySelector('input[name="custom-type"][value="Part"]').checked = true;
   notInDb.checked = false;
   toggleNotInDb();
@@ -283,13 +289,15 @@ function renderCart() {
         <span class="title-row">
           <strong class="title-text"></strong>
           <span class="title-desc"></span>
+          <span class="urgent-tag" hidden>URGENT — out of stock</span>
         </span>
         <small class="vendor-line"></small>
         <small class="stats-line"></small>
-        <div class="cart-note-row">
+        <div class="cart-row-actions">
           <button type="button" class="link-btn cart-note-toggle"></button>
-          <input type="text" class="cart-note-input" placeholder="Note for purchaser" hidden>
+          <button type="button" class="link-btn cart-urgent-toggle"></button>
         </div>
+        <input type="text" class="cart-note-input" placeholder="Note for purchaser" hidden>
       </div>
       <button type="button" class="link-btn cart-remove" aria-label="Remove">✕</button>
     `;
@@ -305,6 +313,22 @@ function renderCart() {
 
     const noteToggle = li.querySelector(".cart-note-toggle");
     const noteInput  = li.querySelector(".cart-note-input");
+    const urgentTag    = li.querySelector(".urgent-tag");
+    const urgentToggle = li.querySelector(".cart-urgent-toggle");
+
+    const setUrgentUI = () => {
+      urgentTag.hidden = !it.outOfStock;
+      urgentToggle.textContent = it.outOfStock ? "✓ Marked urgent (clear)" : "Mark out of stock — urgent";
+      urgentToggle.classList.toggle("urgent-active", !!it.outOfStock);
+      li.classList.toggle("cart-item-urgent", !!it.outOfStock);
+    };
+    setUrgentUI();
+    urgentToggle.addEventListener("click", () => {
+      cart[i].outOfStock = !cart[i].outOfStock;
+      it.outOfStock = cart[i].outOfStock;
+      setUrgentUI();
+    });
+
     const setNoteUI = () => {
       const has = !!(it.notes && it.notes.trim());
       if (has) {
@@ -378,6 +402,7 @@ async function handleSubmit() {
       customName: it.customName,
       qty: it.qty,
       notes: it.notes,
+      outOfStock: !!it.outOfStock,
     })),
   };
 
