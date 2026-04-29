@@ -80,19 +80,38 @@ async function loadRequestors() {
 }
 
 async function loadCatalog() {
-  search.placeholder = "Loading catalog (10–20 seconds for instant search after)…";
+  const loadingBar = $("loading-bar");
+  const loadingFill = loadingBar.querySelector(".loading-fill");
+  search.placeholder = "Loading…";
   search.disabled = true;
+  loadingBar.hidden = false;
+
+  // Estimate-based animation: creep to 95% over ~18s, then complete on done
+  let pct = 0;
+  const tick = () => {
+    if (catalogReady) return;
+    // Logistic-ish curve: fast start, slow tail at 95
+    pct = pct + Math.max(0.3, (95 - pct) * 0.04);
+    if (pct > 95) pct = 95;
+    loadingFill.style.width = pct + "%";
+  };
+  const interval = setInterval(tick, 200);
+
   try {
     const res = await fetch(`${WORKER_URL}/catalog`);
     const data = await res.json();
     catalog.parts = data.parts || [];
     catalog.supplies = data.supplies || [];
     catalogReady = true;
+    loadingFill.style.width = "100%";
     search.placeholder = `Search ${catalog.parts.length} parts + ${catalog.supplies.length} supplies…`;
+    setTimeout(() => { loadingBar.hidden = true; }, 400);
   } catch (e) {
     search.placeholder = "Search part number, name, or description";
+    loadingBar.hidden = true;
     showError("Couldn't load catalog. Search may be slower.");
   } finally {
+    clearInterval(interval);
     search.disabled = false;
   }
 }
