@@ -82,19 +82,45 @@
   color: var(--muted);
   letter-spacing: 0.05em;
 }
-.pending-row .item-line {
-  margin-top: 2px;
-  font-size: 14px;
-}
-.pending-row .item-line strong { font-weight: 600; }
-.pending-row .item-line .item-desc { color: var(--muted); font-weight: 300; margin-left: 4px; }
 .pending-row .row-tags {
-  margin-top: 6px;
+  margin-top: 4px;
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
 }
-.pending-row .row-meta {
+/* URGENT — out of stock — red, overrides any base .badge color */
+.pending-row .urgent-tag {
+  background: var(--error);
+  color: white;
+}
+.pending-row .title-row {
+  margin-top: 6px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pending-row .title-text {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+.pending-row .title-desc {
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--muted);
+}
+.pending-row .vendor-line {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text);
+}
+.pending-row .stats-line {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--accent-dark);
+}
+.pending-row .row-extra {
   margin-top: 6px;
   font-size: 12px;
   color: var(--muted);
@@ -102,11 +128,19 @@
   flex-wrap: wrap;
   gap: 12px;
 }
-.pending-row .row-meta strong { color: var(--text); font-weight: 400; }
+.pending-row .row-extra strong { color: var(--text); font-weight: 400; }
 .pending-row .notes {
-  margin-top: 6px;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: var(--bg);
+  border-radius: 4px;
   font-size: 12px;
   color: var(--text);
+}
+.pending-row .submitted-at {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--muted);
   font-style: italic;
 }
 
