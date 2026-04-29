@@ -38,10 +38,16 @@
           <button type="button" id="cancel-pick" class="link-btn">Cancel</button>
         </div>
       </div>
-      <label class="picked-note-toggle">
-        <input type="checkbox" id="picked-note-checkbox">
-        <span>Add note for purchaser</span>
-      </label>
+      <div class="picked-toggles">
+        <label class="picked-toggle urgent">
+          <input type="checkbox" id="picked-out-of-stock">
+          <span>Out of stock — urgent</span>
+        </label>
+        <label class="picked-toggle">
+          <input type="checkbox" id="picked-note-checkbox">
+          <span>Add note for purchaser</span>
+        </label>
+      </div>
       <input type="text" id="picked-note" class="picked-note-input" placeholder="e.g. needed by Friday, specific finish, link to spec…" hidden>
     </div>
 
@@ -68,6 +74,12 @@
       <div class="field">
         <label for="custom-notes">Note for purchaser <span class="muted">(optional)</span></label>
         <input type="text" id="custom-notes" placeholder="Spec, color, link…">
+      </div>
+      <div class="field checkbox-field">
+        <label class="urgent-label">
+          <input type="checkbox" id="custom-out-of-stock">
+          <span>Out of stock — urgent</span>
+        </label>
       </div>
       <button type="button" id="add-custom-btn" class="primary" disabled>Add to request</button>
     </div>
