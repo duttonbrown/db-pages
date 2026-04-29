@@ -83,13 +83,13 @@ const LOADING_MESSAGES = [
   "Don't forget to eat your veggies and remember to say something nice to someone you love.",
   "Drink some water. Stretch your shoulders. We'll be ready in a sec.",
   "Take a deep breath in… and out. Catalog incoming.",
-  "Compliment the next person who walks by. They'll need it.",
+  "Did you know that none of this business could exist without you? Thanks for that… and your patience.",
   "Stand up and roll your neck. Future-you will thank present-you.",
   "Have you smiled today? Try one now while we load.",
   "Text someone you've been meaning to text. Yes, that someone.",
   "Look out a window for ten seconds. The catalog will still be here.",
   "Refill your water bottle. Hydration > requisitions.",
-  "Be kind to yourself today. The boxes can wait a moment.",
+  "Every fixture that leaves our shop has your fingerprints on it — literal or otherwise. Thank you.",
 ];
 
 async function loadCatalog() {
