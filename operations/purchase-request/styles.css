@@ -320,6 +320,18 @@ textarea { resize: vertical; min-height: 70px; }
 
 .picked-note-input { margin-top: 8px; }
 
+.picked-pref-qty {
+  margin-top: 12px;
+}
+.picked-pref-qty label {
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.picked-pref-qty input {
+  max-width: 200px;
+}
+
 .urgent-label { color: var(--error); font-weight: 400; }
 .urgent-label input { accent-color: var(--error); }
 
