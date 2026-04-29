@@ -73,7 +73,7 @@ async function loadRequestors() {
 }
 
 async function loadCatalog() {
-  search.placeholder = "Loading catalog…";
+  search.placeholder = "Loading catalog (10–20 seconds for instant search after)…";
   search.disabled = true;
   try {
     const res = await fetch(`${WORKER_URL}/catalog`);
