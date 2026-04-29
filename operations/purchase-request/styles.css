@@ -504,3 +504,19 @@ textarea { resize: vertical; min-height: 70px; }
   color: var(--error);
   font-size: 13px;
 }
+
+.card-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+}
+.card-footer a {
+  color: var(--accent-dark);
+  text-decoration: none;
+  font-weight: 400;
+}
+.card-footer a:hover { text-decoration: underline; }
