@@ -57,6 +57,10 @@
         </label>
       </div>
       <input type="text" id="picked-note" class="picked-note-input" placeholder="e.g. needed by Friday, specific finish, link to spec…" hidden>
+      <div class="picked-pref-qty">
+        <label for="picked-pref-qty-input">Preferred quantity <span class="muted">(optional — purchaser decides actual qty)</span></label>
+        <input type="number" id="picked-pref-qty-input" min="1" placeholder="e.g. 50">
+      </div>
     </div>
 
     <div class="field checkbox-field">
@@ -82,6 +86,10 @@
       <div class="field">
         <label for="custom-notes">Note for purchaser <span class="muted">(optional)</span></label>
         <input type="text" id="custom-notes" placeholder="Spec, color, link…">
+      </div>
+      <div class="field">
+        <label for="custom-pref-qty">Preferred quantity <span class="muted">(optional — purchaser decides actual qty)</span></label>
+        <input type="number" id="custom-pref-qty" min="1" placeholder="e.g. 50">
       </div>
       <div class="field checkbox-field">
         <label class="urgent-label">
@@ -127,7 +135,11 @@
   <div id="error" class="error" hidden></div>
 
   <footer class="card-footer">
-    View all requests in the <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">Purchase Request Log</a>.
+    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=351ffa524c5b81f298b0000c54368340" target="_blank" rel="noopener">Track my requests</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">Purchase Request Log</a>
+    &nbsp;·&nbsp;
+    <a href="manage.html">Purchaser Console</a>
   </footer>
 </main>
 

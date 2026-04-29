@@ -14,6 +14,7 @@ const pickedType    = $("picked-type");
 const pickedNoteCheckbox = $("picked-note-checkbox");
 const pickedNoteInput    = $("picked-note");
 const pickedOutOfStock   = $("picked-out-of-stock");
+const pickedPrefQty      = $("picked-pref-qty-input");
 const addBtn        = $("add-btn");
 const cancelPick    = $("cancel-pick");
 const notInDb       = $("not-in-db");
@@ -21,6 +22,7 @@ const customFields  = $("custom-fields");
 const customName    = $("custom-name");
 const customNotes   = $("custom-notes");
 const customOutOfStock = $("custom-out-of-stock");
+const customPrefQty    = $("custom-pref-qty");
 const addCustomBtn  = $("add-custom-btn");
 const cartSection   = $("cart-section");
 const cartList      = $("cart");
@@ -258,6 +260,7 @@ function pickItem(item) {
   pickedNoteInput.value = "";
   pickedNoteInput.hidden = true;
   pickedOutOfStock.checked = false;
+  pickedPrefQty.value = "";
   picked.hidden = false;
   search.hidden = true;
   resultsList.hidden = true;
@@ -273,7 +276,12 @@ function cancelPicked() {
 
 function addPickedToCart() {
   if (!pickedItem) return;
-  const note = pickedNoteCheckbox.checked ? pickedNoteInput.value.trim() : "";
+  let note = pickedNoteCheckbox.checked ? pickedNoteInput.value.trim() : "";
+  const prefQty = parseInt(pickedPrefQty.value, 10);
+  if (!Number.isNaN(prefQty) && prefQty > 0) {
+    const tag = `[Preferred qty: ${prefQty}]`;
+    note = note ? `${note} ${tag}` : tag;
+  }
   cart.push({
     type: pickedItem.type,
     relationId: pickedItem.id,
@@ -299,12 +307,18 @@ function addCustomToCart() {
   const name = customName.value.trim();
   if (!name) return;
   const t = document.querySelector('input[name="custom-type"]:checked').value;
+  let note = customNotes.value.trim();
+  const prefQty = parseInt(customPrefQty.value, 10);
+  if (!Number.isNaN(prefQty) && prefQty > 0) {
+    const tag = `[Preferred qty: ${prefQty}]`;
+    note = note ? `${note} ${tag}` : tag;
+  }
   cart.push({
     type: t,
     notInDb: true,
     customName: name,
     qty: 1,
-    notes: customNotes.value.trim(),
+    notes: note,
     outOfStock: customOutOfStock.checked,
     title: name,
     subtitle: "(not in database)",
@@ -312,6 +326,7 @@ function addCustomToCart() {
   });
   customName.value = "";
   customNotes.value = "";
+  customPrefQty.value = "";
   customOutOfStock.checked = false;
   document.querySelector('input[name="custom-type"][value="Part"]').checked = true;
   notInDb.checked = false;
