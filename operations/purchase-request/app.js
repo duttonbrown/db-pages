@@ -79,9 +79,24 @@ async function loadRequestors() {
   }
 }
 
+const LOADING_MESSAGES = [
+  "Don't forget to eat your veggies and remember to say something nice to someone you love.",
+  "Drink some water. Stretch your shoulders. We'll be ready in a sec.",
+  "Take a deep breath in… and out. Catalog incoming.",
+  "Compliment the next person who walks by. They'll need it.",
+  "Stand up and roll your neck. Future-you will thank present-you.",
+  "Have you smiled today? Try one now while we load.",
+  "Text someone you've been meaning to text. Yes, that someone.",
+  "Look out a window for ten seconds. The catalog will still be here.",
+  "Refill your water bottle. Hydration > requisitions.",
+  "Be kind to yourself today. The boxes can wait a moment.",
+];
+
 async function loadCatalog() {
   const loadingBar = $("loading-bar");
   const loadingFill = loadingBar.querySelector(".loading-fill");
+  const loadingMessage = $("loading-message");
+  loadingMessage.textContent = LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)];
   search.placeholder = "Loading…";
   search.disabled = true;
   loadingBar.hidden = false;
