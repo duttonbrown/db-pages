@@ -63,6 +63,8 @@ function statsLine(item) {
     item.leadTime && `Lead Time: ${item.leadTime}`,
   ].filter(Boolean).join("   |   ");
 }
+// Note: fmtReorder still appears here so requester sees MOQ context, but the
+// MOQ value also flows into the dedicated MOQ Qty Notion column on submit.
 
 async function loadRequestors() {
   try {
@@ -481,7 +483,7 @@ async function handleSubmit() {
       relationId: it.relationId,
       notInDb: it.notInDb,
       customName: it.customName,
-      qty: it.qty,
+      moq: it.reorderQty,
       notes: it.notes,
       outOfStock: !!it.outOfStock,
     })),
