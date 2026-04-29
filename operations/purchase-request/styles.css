@@ -205,10 +205,16 @@ textarea { resize: vertical; min-height: 70px; }
 .results li:hover,
 .results li.active { background: #FFF7EB; }
 
-.results .icon { font-size: 18px; line-height: 1.4; flex-shrink: 0; width: 36px; text-align: center; }
+.results .icon {
+  font-size: 28px;
+  line-height: 1.4;
+  flex-shrink: 0;
+  width: 64px;
+  text-align: center;
+}
 .thumb {
-  width: 36px;
-  height: 36px;
+  width: 64px;
+  height: 64px;
   object-fit: cover;
   border-radius: 4px;
   flex-shrink: 0;
@@ -280,10 +286,10 @@ textarea { resize: vertical; min-height: 70px; }
 }
 
 .picked img {
-  width: 56px;
-  height: 56px;
+  width: 88px;
+  height: 88px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
   flex-shrink: 0;
 }
 
@@ -381,7 +387,15 @@ textarea { resize: vertical; min-height: 70px; }
 }
 .cart-item:last-child { border-bottom: none; }
 
-.cart-item .icon { font-size: 18px; flex-shrink: 0; line-height: 1.4; align-self: flex-start; padding-top: 2px; width: 36px; text-align: center; }
+.cart-item .icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1.4;
+  align-self: flex-start;
+  padding-top: 2px;
+  width: 64px;
+  text-align: center;
+}
 .cart-item .thumb { align-self: flex-start; }
 .cart-meta { flex: 1; min-width: 0; }
 .cart-meta small { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
