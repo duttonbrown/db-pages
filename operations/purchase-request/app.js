@@ -149,7 +149,14 @@ function localSearch(q) {
   return all
     .map(r => ({ r, s: score(r) }))
     .filter(x => x.s > 0)
-    .sort((a, b) => b.s - a.s)
+    .sort((a, b) => {
+      // Primary: match score (higher is better)
+      if (b.s !== a.s) return b.s - a.s;
+      // Secondary: 2025 Use desc; nulls last
+      const au = a.r.use2025 ?? -1;
+      const bu = b.r.use2025 ?? -1;
+      return bu - au;
+    })
     .slice(0, 20)
     .map(x => x.r);
 }
