@@ -52,6 +52,17 @@ function ageDays(dateISO) {
   return Math.max(0, Math.floor(ms / 86400000));
 }
 
+function formatSubmittedAt(iso) {
+  if (!iso) return "";
+  const dt = new Date(iso);
+  if (Number.isNaN(dt.getTime())) return "";
+  // e.g. "Apr 29, 2026 at 3:42 PM"
+  return dt.toLocaleString(undefined, {
+    month: "short", day: "numeric", year: "numeric",
+    hour: "numeric", minute: "2-digit",
+  }).replace(/, (\d)/, " at $1").replace(/, /, " at ");
+}
+
 async function loadPeople() {
   try {
     const res = await fetch(`${WORKER_URL}/people`);
@@ -143,50 +154,76 @@ function renderRow(r) {
   if (r.outOfStock) li.classList.add("urgent");
 
   const itemTitle = r.itemName || r.customItemName || "(unnamed)";
+  const description = r.description || "";
   const age = ageDays(r.dateRequested);
+  const submittedAt = formatSubmittedAt(r.createdTime);
 
   li.innerHTML = `
     <div class="pending-meta">
       <div class="order-num"></div>
-      <div class="item-line"></div>
       <div class="row-tags"></div>
-      <div class="row-meta"></div>
+      <div class="title-row">
+        <strong class="title-text"></strong>
+        <span class="title-desc"></span>
+      </div>
+      <div class="vendor-line"></div>
+      <div class="stats-line"></div>
+      <div class="row-extra"></div>
       <div class="notes"></div>
+      <div class="submitted-at"></div>
     </div>
     <div class="row-actions"></div>
   `;
   li.querySelector(".order-num").textContent = r.orderNum;
-  const itemLine = li.querySelector(".item-line");
-  itemLine.innerHTML = `<strong></strong><span class="item-desc"></span>`;
-  itemLine.querySelector("strong").textContent = itemTitle;
-  // For database items, the "item-desc" stays empty since itemName is the resolved name; we surface vendor in row-meta below.
+  li.querySelector(".title-text").textContent = itemTitle;
+  li.querySelector(".title-desc").textContent = description ? `— ${description}` : "";
 
-  // Tags
+  // Chip row (matches requester form): TYPE + Category + URGENT + NEW ITEM
   const tags = li.querySelector(".row-tags");
   tags.appendChild(makeBadge(r.type.toUpperCase(), "badge"));
+  if (r.category) tags.appendChild(makeBadge(r.category.toUpperCase(), "badge badge-category"));
+  if (r.notInDb)  tags.appendChild(makeBadge("NEW ITEM REQUEST", "badge badge-category"));
   if (r.outOfStock) tags.appendChild(makeBadge("URGENT — OUT OF STOCK", "urgent-tag"));
-  if (r.notInDb) tags.appendChild(makeBadge("NEW ITEM REQUEST", "badge-category"));
 
-  // Meta line: vendor, requestor, age, MOQ
-  const meta = li.querySelector(".row-meta");
-  const metaParts = [];
-  metaParts.push(`<span><strong>Vendor:</strong> ${escapeHtml(r.vendor || "—")}</span>`);
-  metaParts.push(`<span><strong>Requested by:</strong> ${escapeHtml(r.requestor || "—")}</span>`);
-  if (age != null) metaParts.push(`<span><strong>Age:</strong> ${age}d</span>`);
-  if (r.moqQty != null) metaParts.push(`<span><strong>MOQ:</strong> ${r.moqQty}</span>`);
-  if (r.qtyOrdered != null) metaParts.push(`<span><strong>Ordered:</strong> ${r.qtyOrdered}</span>`);
-  if (r.poNumber) metaParts.push(`<span><strong>PO:</strong> ${escapeHtml(r.poNumber)}</span>`);
-  if (r.eta) metaParts.push(`<span><strong>ETA:</strong> ${r.eta}</span>`);
-  meta.innerHTML = metaParts.join("");
+  // Vendor line (matches requester form)
+  const vendorEl = li.querySelector(".vendor-line");
+  vendorEl.textContent = r.vendor ? `Vendor: ${r.vendor}` : "";
+  vendorEl.hidden = !r.vendor;
 
-  // Notes block (combined requestor and purchaser context)
+  // Stats line (matches requester form): 2025 Use | Reorder Qty | Lead Time
+  const statsEl = li.querySelector(".stats-line");
+  const statsParts = [
+    r.use2025 != null && `2025 Use: ${r.use2025}`,
+    (r.moqQty != null) ? `MOQ: ${r.moqQty}` :
+      ((r.reorderQty != null && r.reorderQty !== "") ? `Reorder Qty: ${r.reorderQty}` : null),
+    r.leadTime && `Lead Time: ${r.leadTime}`,
+  ].filter(Boolean);
+  statsEl.textContent = statsParts.join("   |   ");
+  statsEl.hidden = statsParts.length === 0;
+
+  // Extra: requester / age / Qty Ordered / PO / ETA
+  const extra = li.querySelector(".row-extra");
+  const extraParts = [];
+  extraParts.push(`<span><strong>Requested by:</strong> ${escapeHtml(r.requestor || "—")}</span>`);
+  if (age != null) extraParts.push(`<span><strong>Age:</strong> ${age}d</span>`);
+  if (r.qtyOrdered != null) extraParts.push(`<span><strong>Qty Ordered:</strong> ${r.qtyOrdered}</span>`);
+  if (r.poNumber) extraParts.push(`<span><strong>PO:</strong> ${escapeHtml(r.poNumber)}</span>`);
+  if (r.eta) extraParts.push(`<span><strong>ETA:</strong> ${r.eta}</span>`);
+  extra.innerHTML = extraParts.join("");
+
+  // Notes block (combined requester and purchaser context)
   const notesEl = li.querySelector(".notes");
   const noteParts = [];
-  if (r.notes) noteParts.push(`Requester note: ${r.notes}`);
-  if (r.purchaserNotes) noteParts.push(`Your note: ${r.purchaserNotes}`);
-  if (r.reason) noteParts.push(`Reason: ${r.reason}`);
-  notesEl.textContent = noteParts.join(" · ");
+  if (r.notes) noteParts.push(`<strong>Requester note:</strong> ${escapeHtml(r.notes)}`);
+  if (r.purchaserNotes) noteParts.push(`<strong>Your note:</strong> ${escapeHtml(r.purchaserNotes)}`);
+  if (r.reason) noteParts.push(`<strong>Reason:</strong> ${escapeHtml(r.reason)}`);
+  notesEl.innerHTML = noteParts.join(" · ");
   notesEl.hidden = noteParts.length === 0;
+
+  // Submission timestamp
+  const submittedEl = li.querySelector(".submitted-at");
+  submittedEl.textContent = submittedAt ? `Submitted ${submittedAt}` : "";
+  submittedEl.hidden = !submittedAt;
 
   // Action buttons depend on current status
   const actions = li.querySelector(".row-actions");
