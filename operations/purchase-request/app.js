@@ -191,6 +191,10 @@ function renderResults(items) {
           <small class="vendor-line"></small>
           <small class="stats-line"></small>
         </span>
+        <span class="source-tag">
+          <small class="source-db"></small>
+          <small class="source-type"></small>
+        </span>
       `;
       li.querySelector(".title-text").textContent = item.title || "(untitled)";
       const desc = item.description || item.subtitle || "";
@@ -201,6 +205,11 @@ function renderResults(items) {
       li.querySelector(".vendor-line").hidden = !vLine;
       li.querySelector(".stats-line").textContent = sLine;
       li.querySelector(".stats-line").hidden = !sLine;
+      li.querySelector(".source-db").textContent =
+        item.type === "Part" ? "Database: Parts" : "Database: Supplies";
+      const cat = item.category || "";
+      li.querySelector(".source-type").textContent = cat ? `Type: ${cat}` : "";
+      li.querySelector(".source-type").hidden = !cat;
       li.addEventListener("click", () => pickItem(item));
       resultsList.appendChild(li);
     });
@@ -263,6 +272,7 @@ function addPickedToCart() {
     reorderQty: pickedItem.reorderQty,
     use2025: pickedItem.use2025,
     leadTime: pickedItem.leadTime,
+    category: pickedItem.category,
     image: pickedItem.image,
   });
   cancelPicked();
@@ -333,6 +343,10 @@ function renderCart() {
         </div>
         <input type="text" class="cart-note-input" placeholder="Note for purchaser" hidden>
       </div>
+      <span class="source-tag">
+        <small class="source-db"></small>
+        <small class="source-type"></small>
+      </span>
       <button type="button" class="link-btn cart-remove" aria-label="Remove">✕</button>
     `;
     li.querySelector(".title-text").textContent = it.title;
@@ -344,6 +358,15 @@ function renderCart() {
     li.querySelector(".vendor-line").hidden = !vLine;
     li.querySelector(".stats-line").textContent = sLine;
     li.querySelector(".stats-line").hidden = !sLine;
+    const dbLabel = it.notInDb
+      ? "Database: (not in DB)"
+      : (it.type === "Part" ? "Database: Parts"
+         : it.type === "Supply" ? "Database: Supplies"
+         : "Database: " + it.type);
+    li.querySelector(".source-db").textContent = dbLabel;
+    const cat = it.category || "";
+    li.querySelector(".source-type").textContent = cat ? `Type: ${cat}` : "";
+    li.querySelector(".source-type").hidden = !cat;
 
     const noteToggle = li.querySelector(".cart-note-toggle");
     const noteInput  = li.querySelector(".cart-note-input");
