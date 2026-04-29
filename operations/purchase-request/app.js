@@ -244,7 +244,14 @@ function pickItem(item) {
     sEl.style.display = "block";
     pickedSub.appendChild(sEl);
   }
-  pickedType.textContent = item.type;
+  pickedType.textContent = item.type.toUpperCase();
+  const pickedCategory = $("picked-category");
+  if (item.category) {
+    pickedCategory.textContent = item.category.toUpperCase();
+    pickedCategory.hidden = false;
+  } else {
+    pickedCategory.hidden = true;
+  }
   pickedNoteCheckbox.checked = false;
   pickedNoteInput.value = "";
   pickedNoteInput.hidden = true;
@@ -337,6 +344,10 @@ function renderCart() {
     li.innerHTML = `
       ${cartThumb}
       <div class="cart-meta">
+        <div class="chip-row">
+          <span class="badge"></span>
+          <span class="badge badge-category" hidden></span>
+        </div>
         <span class="title-row">
           <strong class="title-text"></strong>
           <span class="title-desc"></span>
@@ -356,6 +367,12 @@ function renderCart() {
       </span>
       <button type="button" class="link-btn cart-remove" aria-label="Remove">✕</button>
     `;
+    li.querySelector(".badge").textContent = it.type.toUpperCase();
+    const catChip = li.querySelector(".badge-category");
+    if (it.category) {
+      catChip.textContent = it.category.toUpperCase();
+      catChip.hidden = false;
+    }
     li.querySelector(".title-text").textContent = it.title;
     const desc = it.description || it.subtitle || "";
     li.querySelector(".title-desc").textContent = desc ? `— ${desc}` : "";
