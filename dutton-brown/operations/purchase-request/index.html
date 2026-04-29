@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit a Purchase Request — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="card">
+  <header>
+    <h1>Submit a Purchase Request</h1>
+    <p class="subtitle">Search for items and add them to your request. Submit them all at once.</p>
+  </header>
+
+  <!-- ITEM PICKER -->
+  <section id="picker">
+    <div class="field" id="search-field">
+      <label for="search">Search part number, name, or description</label>
+      <input type="text" id="search" placeholder="e.g. WNR, wire nut, powder coat…" autofocus autocomplete="off">
+      <ul id="results" class="results" hidden></ul>
+    </div>
+
+    <div id="picked" class="picked" hidden>
+      <div class="picked-row">
+        <img id="picked-image" alt="" hidden>
+        <div class="picked-body">
+          <span id="picked-type" class="badge"></span>
+          <strong id="picked-title"></strong>
+          <small id="picked-subtitle"></small>
+        </div>
+        <div class="picked-actions">
+          <button type="button" id="add-btn" class="primary">Add</button>
+          <button type="button" id="cancel-pick" class="link-btn">Cancel</button>
+        </div>
+      </div>
+      <label class="picked-note-toggle">
+        <input type="checkbox" id="picked-note-checkbox">
+        <span>Add note for purchaser</span>
+      </label>
+      <input type="text" id="picked-note" class="picked-note-input" placeholder="e.g. needed by Friday, specific finish, link to spec…" hidden>
+    </div>
+
+    <div class="field checkbox-field">
+      <label>
+        <input type="checkbox" id="not-in-db">
+        <span>Item not in database</span>
+      </label>
+    </div>
+
+    <div id="custom-fields" hidden>
+      <div class="field">
+        <label for="custom-name">What is the item?</label>
+        <input type="text" id="custom-name" placeholder="Item name or description">
+      </div>
+      <div class="field">
+        <label>Type</label>
+        <div class="inline-radio">
+          <label><input type="radio" name="custom-type" value="Part" checked> Part</label>
+          <label><input type="radio" name="custom-type" value="Supply"> Supply</label>
+          <label><input type="radio" name="custom-type" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="custom-notes">Note for purchaser <span class="muted">(optional)</span></label>
+        <input type="text" id="custom-notes" placeholder="Spec, color, link…">
+      </div>
+      <button type="button" id="add-custom-btn" class="primary" disabled>Add to request</button>
+    </div>
+  </section>
+
+  <!-- CART -->
+  <section id="cart-section" hidden>
+    <h2 class="cart-heading">Your request <span id="cart-count" class="muted"></span></h2>
+    <ul id="cart" class="cart"></ul>
+  </section>
+
+  <!-- SHARED FIELDS -->
+  <section id="shared-section" hidden>
+    <div class="row">
+      <div class="field">
+        <label for="requestor">Your name</label>
+        <select id="requestor" required>
+          <option value="">Select…</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="shared-notes">Notes for purchaser <span class="muted">(applies to all)</span></label>
+        <input type="text" id="shared-notes" placeholder="Optional">
+      </div>
+    </div>
+    <button type="button" id="submit-btn" class="primary" disabled>Submit purchase request</button>
+  </section>
+
+  <!-- SUCCESS -->
+  <div id="success" class="success" hidden>
+    <div class="check">✓</div>
+    <h2 id="success-heading">Request submitted</h2>
+    <ul id="success-list" class="success-list"></ul>
+    <button type="button" id="new-request" class="secondary">Start a new request</button>
+  </div>
+
+  <div id="error" class="error" hidden></div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
