@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operations — Dutton Brown</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; color: #4A4A4A; background: #FAFAF9; }
+  header { background: #F7F5F2; padding: 2.5rem 2rem; text-align: center; border-bottom: 1px solid #E0DDD9; }
+  header h1 { font-weight: 600; font-size: 1.4rem; letter-spacing: 0.02em; }
+  header p { font-weight: 300; font-size: 0.9rem; margin-top: 0.25rem; opacity: 0.6; }
+  header a { color: #8A8078; font-size: 0.8rem; text-decoration: none; font-weight: 300; }
+  header a:hover { color: #4A4A4A; }
+  main { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+  section { margin-bottom: 2.5rem; }
+  h2.team { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8A8078; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #E0DDD9; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+  a.card { display: block; background: white; border: 1px solid #E0DDD9; border-radius: 6px; padding: 1.25rem; text-decoration: none; color: inherit; transition: border-color 0.2s; }
+  a.card:hover { border-color: #C9A94E; }
+  .card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .card p { font-size: 0.8rem; font-weight: 300; opacity: 0.7; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Operations</h1>
+    <p>Orders, parts, ERP migration, and procurement</p>
+    <p style="margin-top: 0.75rem;"><a href="../index.html">&larr; All team pages</a></p>
+  </header>
+  <main>
+    <section>
+      <h2 class="team">Orders & Pipeline</h2>
+      <div class="grid">
+        <a class="card" href="open-orders/index.html"><h3>Open Orders</h3><p>Live Shopify order pipeline, refreshed hourly</p></a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="team">Parts Usage</h2>
+      <div class="grid">
+        <a class="card" href="parts-usage/parts_usage_report.html"><h3>2025 Parts Usage</h3><p>Annual parts consumption by finish type</p></a>
+        <a class="card" href="parts-usage/sales_report_2025.html"><h3>2025 Product Sales</h3><p>Product sales by SKU with finish breakdown</p></a>
+        <a class="card" href="parts-usage/yoy_comparison_dashboard.html"><h3>YoY Comparison</h3><p>Year-over-year sales and parts trends</p></a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="team">Procurement</h2>
+      <div class="grid">
+        <a class="card" href="purchase-request/index.html"><h3>Purchase Request</h3><p>Submit a purchase request</p></a>
+        <a class="card" href="purchase-request/manage.html"><h3>Purchaser Console</h3><p>Manage open purchase requests</p></a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="team">ERP Migration</h2>
+      <div class="grid">
+        <a class="card" href="mrpeasy-migration/mrpeasy-recommendation.html"><h3>MrPeasy Recommendation</h3><p>ERP transition brief</p></a>
+        <a class="card" href="mrpeasy-migration/mrpeasy-meeting-brief.html"><h3>MrPeasy Meeting Brief</h3><p>Background materials for kickoff</p></a>
+        <a class="card" href="mrpeasy-migration/mrpeasy-kickoff-agenda.html"><h3>MrPeasy Kickoff Agenda</h3><p>Agenda for the kickoff meeting</p></a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="team">Accounting</h2>
+      <div class="grid">
+        <a class="card" href="qb-classes-rollout.html"><h3>QuickBooks Classes — Rollout Brief</h3><p>Primer + decisions + full account map</p></a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
