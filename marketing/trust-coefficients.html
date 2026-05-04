@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust Coefficients — Marketing Truth Audit | Dutton Brown</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; color: #4A4A4A; background: #FAFAF9; line-height: 1.55; }
+
+  header { background: #F7F5F2; padding: 3rem 2rem 2.5rem; text-align: center; border-bottom: 1px solid #E0DDD9; }
+  header .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #8A8078; margin-bottom: 0.75rem; }
+  header h1 { font-weight: 300; font-size: 2.25rem; letter-spacing: -0.01em; line-height: 1.15; }
+  header h1 .accent { color: #FF9912; font-weight: 600; }
+  header p.sub { font-weight: 300; font-size: 0.95rem; margin-top: 0.75rem; opacity: 0.75; max-width: 640px; margin-left: auto; margin-right: auto; }
+  header a.back { display: inline-block; margin-top: 1.25rem; color: #8A8078; font-size: 0.78rem; text-decoration: none; font-weight: 400; letter-spacing: 0.04em; }
+  header a.back:hover { color: #4A4A4A; }
+
+  main { max-width: 920px; margin: 2.5rem auto 0; padding: 0 2rem; }
+  section { margin-bottom: 3rem; }
+  h2 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8078; margin-bottom: 1.25rem; padding-bottom: 0.6rem; border-bottom: 1px solid #E0DDD9; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #4A4A4A; }
+  p { font-size: 0.95rem; font-weight: 400; margin-bottom: 0.85rem; }
+  p.lead { font-size: 1.05rem; font-weight: 300; line-height: 1.55; color: #5C554E; }
+
+  .formula { background: white; border: 1px solid #E0DDD9; border-left: 3px solid #FF9912; border-radius: 4px; padding: 1.25rem 1.5rem; margin: 1.25rem 0; font-family: 'Courier New', monospace; font-size: 0.9rem; color: #4A4A4A; }
+  .formula strong { font-weight: 600; color: #D97706; font-family: 'Poppins', sans-serif; }
+
+  .scale { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+  .scale-item { background: white; border: 1px solid #E0DDD9; border-radius: 4px; padding: 0.85rem 1rem; }
+  .scale-item .num { font-size: 1.4rem; font-weight: 600; color: #4A4A4A; }
+  .scale-item .lbl { font-size: 0.75rem; font-weight: 400; color: #8A8078; margin-top: 0.2rem; }
+  .scale-item.good { border-left: 3px solid #4A4A4A; }
+  .scale-item.ok { border-left: 3px solid #D97706; }
+  .scale-item.bad { border-left: 3px solid #9F2C00; }
+
+  table.compare { width: 100%; border-collapse: collapse; background: white; border: 1px solid #E0DDD9; border-radius: 4px; overflow: hidden; }
+  table.compare th { background: #F7F5F2; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.85rem 1rem; text-align: left; color: #5C554E; border-bottom: 1px solid #E0DDD9; }
+  table.compare th.num, table.compare td.num { text-align: right; }
+  table.compare td { padding: 0.95rem 1rem; font-size: 0.92rem; font-weight: 400; border-bottom: 1px solid #F0EDE8; vertical-align: middle; }
+  table.compare tr:last-child td { border-bottom: none; }
+  table.compare .platform { font-weight: 600; }
+  table.compare .coef { font-weight: 600; font-family: 'Courier New', monospace; }
+  table.compare .verdict { font-weight: 400; font-size: 0.85rem; }
+  table.compare .v-good { color: #4A4A4A; font-weight: 600; }
+  table.compare .v-ok { color: #D97706; font-weight: 600; }
+  table.compare .v-bad { color: #9F2C00; font-weight: 600; }
+  table.compare .v-na { color: #8A8078; }
+
+  .platform-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .pcard { background: white; border: 1px solid #E0DDD9; border-radius: 4px; padding: 1.25rem; }
+  .pcard .ptitle { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; display: flex; justify-content: space-between; align-items: baseline; }
+  .pcard .pcoef { font-family: 'Courier New', monospace; font-size: 0.82rem; color: #8A8078; font-weight: 400; }
+  .pcard .puse { font-size: 0.85rem; font-weight: 400; color: #4A4A4A; margin-bottom: 0.4rem; }
+  .pcard .pavoid { font-size: 0.8rem; font-weight: 300; color: #8A8078; }
+  .pcard .pavoid strong { font-weight: 600; color: #5C554E; }
+
+  .caveat { background: #F7F5F2; border: 1px solid #E0DDD9; border-left: 3px solid #FF9912; border-radius: 4px; padding: 1.1rem 1.4rem; margin: 1rem 0; }
+  .caveat .ctitle { font-weight: 600; font-size: 0.85rem; color: #B8730A; margin-bottom: 0.4rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .caveat p { font-size: 0.88rem; font-weight: 400; margin-bottom: 0.5rem; color: #5C554E; }
+  .caveat p:last-child { margin-bottom: 0; }
+
+  ol.actions { padding-left: 1.25rem; }
+  ol.actions li { font-size: 0.92rem; font-weight: 400; margin-bottom: 0.5rem; padding-left: 0.4rem; }
+  ol.actions li strong { font-weight: 600; }
+
+  .color-strip { display: flex; height: 12px; margin-top: 4rem; }
+  .color-strip span { flex: 1; }
+
+  footer { padding: 2rem; text-align: center; font-size: 0.75rem; font-weight: 300; color: #8A8078; }
+  footer a { color: #8A8078; text-decoration: none; }
+  footer a:hover { color: #4A4A4A; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.7rem; }
+    main { padding: 0 1.25rem; }
+    table.compare th, table.compare td { padding: 0.7rem 0.6rem; font-size: 0.82rem; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Marketing Truth Audit · Q1 2026</p>
+    <h1>What we can <span class="accent">actually trust</span> from each ad platform</h1>
+    <p class="sub">Every ad platform claims credit for sales it influenced — and they all double-claim. Trust coefficients tell us how much of each platform's reported revenue is real.</p>
+    <a class="back" href="index.html">&larr; Back to Marketing</a>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>The idea in one line</h2>
+      <p class="lead">A <strong>trust coefficient</strong> is the fraction of a platform's claimed revenue that an independent referee (GA4) actually agrees was theirs.</p>
+      <div class="formula">
+        Trust Coefficient = <strong>GA4-attributed revenue</strong> ÷ <strong>Platform-reported revenue</strong>
+      </div>
+      <p>Below 1.0 means the platform is over-claiming. Below 0.1 means most of what they report is fiction.</p>
+
+      <div class="scale">
+        <div class="scale-item good"><div class="num">1.0</div><div class="lbl">Honest reporting</div></div>
+        <div class="scale-item good"><div class="num">~0.85</div><div class="lbl">Mostly trustworthy</div></div>
+        <div class="scale-item ok"><div class="num">0.50</div><div class="lbl">Double-claiming half</div></div>
+        <div class="scale-item bad"><div class="num">0.10</div><div class="lbl">Largely fantasy</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What we found — Q1 2026</h2>
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th class="num">Spend</th>
+            <th class="num">Their ROAS</th>
+            <th class="num">Real ROAS (GA4)</th>
+            <th class="num">Trust</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="platform">Email (Omnisend)</td>
+            <td class="num">~$0</td>
+            <td class="num">—</td>
+            <td class="num">∞</td>
+            <td class="num coef v-good">~1.0</td>
+            <td class="verdict v-good">Highest leverage by miles</td>
+          </tr>
+          <tr>
+            <td class="platform">Google paid</td>
+            <td class="num">$25,066</td>
+            <td class="num">8.47×</td>
+            <td class="num">~7.5×</td>
+            <td class="num coef v-good">~0.85</td>
+            <td class="verdict v-good">Honest. Workhorse channel.</td>
+          </tr>
+          <tr>
+            <td class="platform">Pinterest paid</td>
+            <td class="num">$18,613</td>
+            <td class="num">5.50×</td>
+            <td class="num">1.27×</td>
+            <td class="num coef v-ok">0.23</td>
+            <td class="verdict v-ok">Inflated. Tolerable for awareness.</td>
+          </tr>
+          <tr>
+            <td class="platform">Meta paid</td>
+            <td class="num">$26,900</td>
+            <td class="num">10.67×</td>
+            <td class="num">0.36×</td>
+            <td class="num coef v-bad">0.034</td>
+            <td class="verdict v-bad">Catastrophic. Losing money.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 1.25rem;">Said plainly: every $1 we spend on Meta returns <strong>36 cents</strong> of GA4-attributable revenue. Pinterest returns <strong>$1.27</strong>. Google returns <strong>~$7.50</strong>. Email is effectively free.</p>
+    </section>
+
+    <section>
+      <h2>Why each platform inflates differently</h2>
+      <div class="platform-cards">
+        <div class="pcard">
+          <div class="ptitle">Meta <span class="pcoef">0.034</span></div>
+          <p class="puse">iOS 14.5 (April 2021) gutted Meta's tracking. Most "conversions" today are statistical models — algorithmic guesses, not observed events.</p>
+          <p class="pavoid"><strong>Tell:</strong> we scaled Meta spend 60% Jan→Mar, but GA4-attributed Meta revenue stayed flat at ~$3K/mo.</p>
+        </div>
+        <div class="pcard">
+          <div class="ptitle">Pinterest <span class="pcoef">0.23</span></div>
+          <p class="puse">Pinterest's 7-day-click / 1-day-view window claims credit for casual exposure. Someone scrolls past a pin, then buys via Google search five days later — Pinterest claims it.</p>
+          <p class="pavoid"><strong>Tell:</strong> "17× retargeting ROAS" is largely customers who'd have bought anyway.</p>
+        </div>
+        <div class="pcard">
+          <div class="ptitle">Google <span class="pcoef">~0.85</span></div>
+          <p class="puse">Mostly click-based at moments of high purchase intent. People searching "modern brass chandelier" are genuinely shopping. GA4 mostly agrees.</p>
+          <p class="pavoid"><strong>Caveat:</strong> brand search ("dutton brown") may overlap with organic — worth a pause test.</p>
+        </div>
+        <div class="pcard">
+          <div class="ptitle">Email <span class="pcoef">~1.0</span></div>
+          <p class="puse">First-party action — someone clicked a link in an email we sent. No third-party tracking gymnastics, no double-claiming.</p>
+          <p class="pavoid"><strong>Caveat:</strong> Omnisend self-reported revenue still pending — coefficient is estimated, not yet verified.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Methodology — and where to be skeptical</h2>
+      <div class="caveat">
+        <div class="ctitle">Window mismatch — to fix on next run</div>
+        <p>Meta and Google spend numbers were Q1 strict (Jan–Mar). Pinterest used a rolling 90-day window (Jan 30–Apr 30). GA4 revenue was pulled on the 90-day window for all channels. Same-window comparisons would shift Meta's coefficient slightly (toward 0.021 — even worse) and would make Google look marginally better.</p>
+        <p><strong>Bottom line:</strong> the directional finding (Meta is broken, Google is honest, Pinterest is in between) is solid. The exact numbers will move when we re-run with strict matching windows + multiple attribution models.</p>
+      </div>
+
+      <h3>Data sources used</h3>
+      <p style="font-size: 0.88rem; font-weight: 400;">Meta spend from AdScale CSV (monthly rollup). Google spend via Pipeboard / Google Ads API. Pinterest via Pinterest Marketing API v5. GA4 via Data API, property 342056181, last-non-direct cross-channel. Shopify ground-truth not yet pulled — every coefficient has an uncertainty band.</p>
+    </section>
+
+    <section>
+      <h2>What to do next</h2>
+      <ol class="actions">
+        <li><strong>Quadruple down on email.</strong> $47K Q1 revenue at near-zero cost. Every other budget decision should ask: does this build the email list?</li>
+        <li><strong>Apply for Meta + Pinterest Conversion Lift Studies.</strong> Free, ~3 weeks. The only way to prove incrementality vs. attribution. Don't scale either platform until results are in.</li>
+        <li><strong>Run a 30-day Meta pause test.</strong> If GA4 Meta revenue stays flat when we cut Meta spend in half, the inflation thesis is confirmed.</li>
+        <li><strong>Pivot Pinterest paid toward trade leads + sample SKUs.</strong> Quality-over-quantity bets that fit Pinterest's nature as a discovery platform.</li>
+        <li><strong>Re-run the audit with matched windows + multiple GA4 attribution models</strong> (data-driven, last-click, first-click) to see how channel ranking shifts under different assumptions.</li>
+        <li><strong>Pull Shopify ground-truth Q1 revenue</strong> so we know how much GA4 itself is missing — then every coefficient gets an honest uncertainty range.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <div class="color-strip" aria-hidden="true">
+    <span style="background:#FFFFFF;border-top:1px solid #E0DDD9"></span>
+    <span style="background:#D0D0D0"></span>
+    <span style="background:#E5E4CF"></span>
+    <span style="background:#a0af9c"></span>
+    <span style="background:#4E782F"></span>
+    <span style="background:#728384"></span>
+    <span style="background:#1D1E33"></span>
+    <span style="background:#2C4A56"></span>
+    <span style="background:#B89111"></span>
+    <span style="background:#D4713B"></span>
+    <span style="background:#9F2C00"></span>
+    <span style="background:#f7b6c0"></span>
+    <span style="background:#CCB8B8"></span>
+    <span style="background:#000000"></span>
+  </div>
+
+  <footer>
+    <p>Marketing Truth Audit · 2026-04-30 · Sources: Pinterest API, Pipeboard, AdScale, GA4 · <a href="index.html">Back to Marketing</a></p>
+  </footer>
+
+</body>
+</html>
