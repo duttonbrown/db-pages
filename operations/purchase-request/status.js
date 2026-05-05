@@ -44,6 +44,16 @@ function escapeHtml(s) {
     ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" })[c]);
 }
 
+// The vendor field arrives as a comma-separated list when a part has multiple
+// linked vendors (e.g. "Grand Brass, Ami"). Treat the first as primary — that's
+// where the purchase will most likely land. The Purchaser Console uses the same
+// rule for the consolidation digest.
+function primaryVendor(row) {
+  if (!row || !row.vendor) return "";
+  const first = String(row.vendor).split(",")[0];
+  return (first || "").trim();
+}
+
 function fmtDate(iso) {
   if (!iso) return "";
   const d = new Date(iso);
@@ -302,7 +312,7 @@ function renderCard(r, idx) {
           ${r.type ? `<span class="badge">${escapeHtml(r.type.toUpperCase())}</span>` : ""}
           ${r.category ? `<span class="badge badge-category">${escapeHtml(r.category.toUpperCase())}</span>` : ""}
           ${r.notInDb ? `<span class="badge badge-category">NEW ITEM</span>` : ""}
-          ${r.vendor ? `<span class="badge badge-category">${escapeHtml(r.vendor.toUpperCase())}</span>` : ""}
+          ${primaryVendor(r) ? `<span class="badge badge-category">${escapeHtml(primaryVendor(r).toUpperCase())}</span>` : ""}
         </div>
       </div>
       <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(r.status || "—")}</span>
@@ -575,7 +585,7 @@ function renderSpotlight(r) {
   }
 
   // Always-on secondary cells
-  if (r.vendor)        cells.push({ label: "Vendor", value: r.vendor });
+  if (primaryVendor(r)) cells.push({ label: "Vendor", value: primaryVendor(r) });
   if (r.moqQty != null) cells.push({ label: "MOQ", value: r.moqQty, numeric: true });
   if (r.leadTime)      cells.push({ label: "Lead time", value: r.leadTime });
 
