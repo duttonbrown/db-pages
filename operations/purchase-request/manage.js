@@ -360,7 +360,7 @@ function fieldsFor(action, row) {
         <input id="f-orderedDate" name="orderedDate" type="date" value="${today}">
       </div>
       <div class="field">
-        <label for="f-eta">ETA <span class="muted">(optional)</span></label>
+        <label for="f-eta">ETA<span class="req">*</span></label>
         <input id="f-eta" name="eta" type="date">
       </div>
       <div class="field">
