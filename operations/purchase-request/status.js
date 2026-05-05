@@ -7,36 +7,36 @@ const WORKER_URL = (window.WORKER_URL_OVERRIDE) || "https://inventory-request-fo
 const $ = (id) => document.getElementById(id);
 
 // ----- DOM refs -----
-const refreshBtn   = $("refresh-btn");
-const pillsEl      = $("status-pills");
-const heroSubEl    = $("hero-sub");
-const loadingEl    = $("loading");
-const errorEl      = $("error");
-const emptyEl      = $("empty");
-const activeEl     = $("active");
-const activeListEl = $("active-list");
-const archiveEl    = $("archive-section");
-const archiveListEl= $("archive-list");
-const lastRefEl    = $("last-refreshed");
+const refreshBtn    = $("refresh-btn");
+const pillsEl       = $("status-pills");
+const heroSubEl     = $("hero-sub");
+const loadingBar    = $("loading-bar");
+const loadingFill   = loadingBar?.querySelector(".loading-fill");
+const loadingMsgEl  = $("loading-message");
+const errorEl       = $("error");
+const emptyEl       = $("empty");
+const activeEl      = $("active");
+const activeListEl  = $("active-list");
+const archiveEl     = $("archive-section");
+const archiveListEl = $("archive-list");
+const lastRefEl     = $("last-refreshed");
+
+// Keep this list in sync with app.js LOADING_MESSAGES.
+const LOADING_MESSAGES = [
+  "Don't forget to eat your veggies and remember to say something nice to someone you love.",
+  "Drink some water. Stretch your shoulders. We'll be ready in a sec.",
+  "Take a deep breath in… and out. Catalog incoming.",
+  "Do the macarena. By the time you finish, the list should be loaded.",
+  "Wiggle your toes for 10 seconds while this loads. Surprisingly underrated.",
+];
 
 // ----- State -----
 let allRows = [];          // every request returned from /requests
 let activeFilter = "all";  // one of: all | Submitted | Waiting to Order | Backordered | Ordered | archive
 
-const STAGE_DEF = [
-  { key: "Submitted",         label: "Submitted" },
-  { key: "Waiting to Order",  label: "Waiting" },
-  { key: "Backordered",       label: "Backordered" },
-  { key: "Ordered",           label: "Ordered" },
-  { key: "Received",          label: "Received" },
-];
-const STAGE_INDEX = {
-  "Submitted": 0,
-  "Waiting to Order": 1,
-  "Backordered": 1,
-  "Ordered": 2,
-  "Received": 4,
-};
+// The rail is built per-row, not from a fixed pipeline. Slot 2 ("Middle")
+// reflects what actually happened — Ordered, Backordered, Waiting, or
+// (for terminal cancellations) Cancelled. See buildStages() below.
 
 // ----- Utilities -----
 function escapeHtml(s) {
@@ -100,11 +100,22 @@ pillsEl.addEventListener("click", (e) => {
 });
 
 async function loadAndRender() {
-  loadingEl.hidden = false;
   errorEl.hidden = true;
   emptyEl.hidden = true;
   activeEl.hidden = true;
   archiveEl.hidden = true;
+
+  if (loadingMsgEl) {
+    loadingMsgEl.textContent = LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)];
+  }
+  if (loadingFill) loadingFill.style.width = "0%";
+  loadingBar.hidden = false;
+  let pct = 0;
+  const tick = setInterval(() => {
+    if (!loadingFill) return;
+    pct = Math.min(95, pct + Math.max(2, (95 - pct) * 0.10));
+    loadingFill.style.width = pct + "%";
+  }, 150);
 
   try {
     const res = await fetch(`${WORKER_URL}/requests`);
@@ -112,16 +123,23 @@ async function loadAndRender() {
     if (!res.ok) throw new Error(data.error || "Failed to load");
     allRows = data.rows || [];
     lastRefEl.textContent = new Date().toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    if (loadingFill) loadingFill.style.width = "100%";
     renderRows();
   } catch (e) {
     errorEl.textContent = e.message || "Couldn't load the request log.";
     errorEl.hidden = false;
   } finally {
-    loadingEl.hidden = true;
+    clearInterval(tick);
+    setTimeout(() => { loadingBar.hidden = true; }, 250);
   }
 }
 
 // ----- Counts + rendering -----
+//
+// Buckets:
+//   - "In motion" (all): everything that's not Received or Cancelled
+//   - Received:  its own filter (the "I got my stuff" view)
+//   - Archive:   Cancelled only — the dead end
 function updateCounts(rows) {
   const counts = {
     all: 0,
@@ -129,11 +147,14 @@ function updateCounts(rows) {
     "Waiting to Order": 0,
     Backordered: 0,
     Ordered: 0,
+    Received: 0,
     archive: 0,
   };
   for (const r of rows) {
-    if (r.status === "Received" || r.status === "Cancelled") {
+    if (r.status === "Cancelled") {
       counts.archive++;
+    } else if (r.status === "Received") {
+      counts.Received++;
     } else if (counts[r.status] !== undefined) {
       counts[r.status]++;
       counts.all++;
@@ -146,17 +167,21 @@ function updateCounts(rows) {
   $("count-Waiting-to-Order").textContent = counts["Waiting to Order"];
   $("count-Backordered").textContent = counts.Backordered;
   $("count-Ordered").textContent = counts.Ordered;
+  $("count-Received").textContent = counts.Received;
   $("count-archive").textContent = counts.archive;
   return counts;
 }
 
 function updateHeroSub(counts) {
-  if (counts.all === 0 && counts.archive === 0) {
+  if (counts.all === 0 && counts.Received === 0 && counts.archive === 0) {
     heroSubEl.textContent = `No requests yet.`;
     return;
   }
   if (counts.all === 0) {
-    heroSubEl.textContent = `Nothing in motion. ${counts.archive} closed.`;
+    const tail = [];
+    if (counts.Received) tail.push(`${counts.Received} received`);
+    if (counts.archive)  tail.push(`${counts.archive} cancelled`);
+    heroSubEl.textContent = `Nothing in motion${tail.length ? " — " + tail.join(", ") : "."}`;
     return;
   }
   const word = counts.all === 1 ? "request" : "requests";
@@ -168,9 +193,11 @@ function renderRows() {
   const counts = updateCounts(allRows);
   updateHeroSub(counts);
 
-  // Partition by archive vs active
-  const active = allRows.filter(r => r.status !== "Received" && r.status !== "Cancelled");
-  const archive = allRows.filter(r => r.status === "Received" || r.status === "Cancelled");
+  // Partition: active = in motion (excludes Received + Cancelled).
+  //            Received and Cancelled each get their own dedicated view.
+  const active   = allRows.filter(r => r.status !== "Received" && r.status !== "Cancelled");
+  const received = allRows.filter(r => r.status === "Received");
+  const archive  = allRows.filter(r => r.status === "Cancelled");
 
   let visibleActive = active;
   let visibleArchive = [];
@@ -178,6 +205,9 @@ function renderRows() {
   if (activeFilter === "archive") {
     visibleActive = [];
     visibleArchive = archive;
+  } else if (activeFilter === "Received") {
+    visibleActive = [];
+    visibleArchive = received;
   } else if (activeFilter !== "all") {
     visibleActive = active.filter(r => r.status === activeFilter);
   }
@@ -194,9 +224,21 @@ function renderRows() {
     activeEl.hidden = true;
   }
 
-  // Archive list
+  // Archive list (also hosts Received view)
   archiveListEl.innerHTML = "";
   if (visibleArchive.length > 0) {
+    const titleEl = $("archive-title");
+    const subEl   = $("archive-sub");
+    if (activeFilter === "Received") {
+      titleEl.textContent = "Received";
+      subEl.textContent = "Items that have arrived";
+    } else if (activeFilter === "archive") {
+      titleEl.textContent = "Cancelled";
+      subEl.textContent = "Requests that won't be filled";
+    } else {
+      titleEl.textContent = "Closed";
+      subEl.textContent = "Already received or cancelled";
+    }
     visibleArchive.forEach((r, i) => {
       archiveListEl.appendChild(renderArchiveCard(r, i));
     });
@@ -222,9 +264,11 @@ function renderCard(r, idx) {
   const itemTitle = r.itemName || r.customItemName || "(unnamed item)";
   const description = r.description || "";
 
-  // Stages
+  // Stages — built per-row; rail length and middle-slot label are dynamic.
+  const built = buildStages(r);
   const stages = renderStages(r);
-  const progressPct = stagePctFor(r);
+  const progressPct = built.progressPct;
+  const stageCount = built.stages.length;
 
   // Status-specific spotlight detail
   const spotlight = renderSpotlight(r);
@@ -259,7 +303,7 @@ function renderCard(r, idx) {
     </div>
 
     <div class="process-rail ${r.status === "Cancelled" ? "is-cancelled" : ""}" style="--rail-progress: ${progressPct}%;">
-      <div class="rail-stages">${stages}</div>
+      <div class="rail-stages" data-stage-count="${stageCount}" style="grid-template-columns: repeat(${stageCount}, 1fr);">${stages}</div>
     </div>
 
     ${spotlight}
@@ -316,60 +360,165 @@ function renderArchiveCard(r, idx) {
 }
 
 // ----- Process rail rendering -----
-function stagePctFor(row) {
-  if (row.status === "Cancelled") return 100;
-  const idx = STAGE_INDEX[row.status];
-  if (idx === undefined || idx === null) return 0;
-  return (idx / (STAGE_DEF.length - 1)) * 100;
+//
+// The rail's middle slot is dynamic — it reflects what actually happened to
+// THIS request, not a fixed pipeline. Active rows always show 3 slots:
+//
+//   Submitted → (Waiting | Backordered | Ordered) → Received
+//
+// Cancelled rows are terminal and only show 2 slots:
+//
+//   Submitted → Cancelled (with reason underneath)
+
+function buildStages(r) {
+  const status = r.status;
+  const isCancelled = status === "Cancelled";
+
+  if (isCancelled) {
+    // Terminal 2-stage rail: Submitted ✓ → Cancelled
+    const reason = r.reasonCode || r.cancellationReason || "Cancelled";
+    return {
+      stages: [
+        { state: "done",      label: "Submitted", detail: r.dateRequested ? fmtDate(r.dateRequested) : "" },
+        { state: "cancelled", label: "Cancelled", detail: reason },
+      ],
+      progressPct: 100,
+      cancelled: true,
+    };
+  }
+
+  // 3-stage rail. Slot 2's label depends on current status.
+  const middle = stageForMiddle(r);
+  const isReceived = status === "Received";
+
+  // First slot — Submitted — always done because the row exists.
+  const submitted = {
+    state: "done",
+    label: "Submitted",
+    detail: r.dateRequested ? fmtDate(r.dateRequested) : "",
+  };
+
+  // Third slot — Received. "active" once received; otherwise "upcoming"
+  // (rendered as faded but visible so the next step is clear).
+  const received = {
+    state: isReceived ? "done" : "upcoming",
+    label: "Received",
+    detail: isReceived && r.receivedDate ? fmtDate(r.receivedDate) : "",
+  };
+
+  // Progress fill: 0% at Submitted, 50% at middle (active), 100% at Received.
+  let progressPct = 0;
+  if (status === "Submitted")          progressPct = 0;
+  else if (isReceived)                 progressPct = 100;
+  else                                 progressPct = 50; // Waiting / Backordered / Ordered
+
+  return {
+    stages: [submitted, middle, received],
+    progressPct,
+    cancelled: false,
+  };
+}
+
+// Builds the dynamic middle slot. The label reflects what's actually
+// happening: Waiting / Backordered / Ordered / (or "Submitted" placeholder
+// when the row hasn't moved yet).
+function stageForMiddle(r) {
+  const status = r.status;
+
+  if (status === "Submitted") {
+    // No second event has happened yet — render as a faded "Ordered"
+    // placeholder so the user can see what comes next.
+    return { state: "upcoming", label: "Ordered", detail: "" };
+  }
+
+  if (status === "Waiting to Order") {
+    return {
+      state: "active",
+      label: "Waiting",
+      detail: r.reason || (r.eta ? `ETA ${fmtDate(r.eta)}` : ""),
+    };
+  }
+
+  if (status === "Backordered") {
+    return {
+      state: "active",
+      label: "Backordered",
+      detail: r.eta ? `ETA ${fmtDate(r.eta)}` : (r.reason || ""),
+    };
+  }
+
+  if (status === "Ordered") {
+    // Slot is "done" because the order has been placed. ETA shows underneath.
+    return {
+      state: "active",
+      label: "Ordered",
+      detail: r.eta ? `ETA ${fmtDate(r.eta)}` : (r.orderedDate ? fmtDate(r.orderedDate) : ""),
+    };
+  }
+
+  if (status === "Received") {
+    // Items move through Ordered before being received — show that as done.
+    return {
+      state: "done",
+      label: "Ordered",
+      detail: r.orderedDate ? fmtDate(r.orderedDate) : "",
+    };
+  }
+
+  // Defensive fallback for unknown statuses
+  return { state: "upcoming", label: status || "—", detail: "" };
 }
 
 function renderStages(r) {
-  const currentIdx = STAGE_INDEX[r.status] ?? -1;
-  const isCancelled = r.status === "Cancelled";
-  const isBackordered = r.status === "Backordered";
-  const isWaiting = r.status === "Waiting to Order";
+  const { stages } = buildStages(r);
+  const checkSvg = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l3.5 3.5L13 5"/></svg>`;
+  const cancelSvg = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>`;
 
-  return STAGE_DEF.map((stage, i) => {
+  return stages.map((s, i) => {
     let cls = "stage";
-    let detail = "";
+    if (s.state === "done")      cls += " done";
+    else if (s.state === "active") cls += " active";
+    else if (s.state === "cancelled") cls += " cancelled";
+    else if (s.state === "upcoming")  cls += " upcoming";
 
-    if (isCancelled) {
-      // Cancelled: mark all stages up to where it died as done, the rest as cancelled
-      cls += " cancelled";
-    } else if (i < currentIdx) {
-      cls += " done";
-    } else if (i === currentIdx) {
-      cls += " active";
-    }
-
-    // Stage-specific detail under each marker (so the "story" is visible at a glance)
-    if (i === 0 && r.dateRequested)              detail = fmtDate(r.dateRequested);
-    else if (i === 1 && (isWaiting || isBackordered) && r.eta) detail = `ETA ${fmtDate(r.eta)}`;
-    else if (i === 2 && r.orderedDate)           detail = fmtDate(r.orderedDate);
-    else if (i === 2 && r.eta && r.status === "Ordered") detail = `ETA ${fmtDate(r.eta)}`;
-    else if (i === 3 && r.tracking)              detail = "In transit";
-    else if (i === 4 && r.receivedDate)          detail = fmtDate(r.receivedDate);
-
-    let labelText = stage.label;
-    if (i === 1) {
-      if (isBackordered) labelText = "Backordered";
-      else if (isWaiting) labelText = "Waiting";
-      else labelText = "Waiting";
-    }
-    if (i === 3) labelText = "In Transit";
-
-    const checkSvg = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l3.5 3.5L13 5"/></svg>`;
+    const icon = s.state === "cancelled" ? cancelSvg : checkSvg;
     return `
       <div class="${cls}">
         <div class="stage-marker">
-          ${checkSvg}
+          ${icon}
           <span class="num">${i + 1}</span>
         </div>
-        <div class="stage-label">${escapeHtml(labelText)}</div>
-        ${detail ? `<div class="stage-detail">${escapeHtml(detail)}</div>` : ""}
+        <div class="stage-label">${escapeHtml(s.label)}</div>
+        ${s.detail ? `<div class="stage-detail">${escapeHtml(s.detail)}</div>` : ""}
       </div>
     `;
   }).join("");
+}
+
+// ----- Carrier detection from tracking number -----
+//
+// Heuristic match against known carrier formats. Returns null if the
+// pattern is ambiguous or unknown — caller falls back to plain text.
+const CARRIERS = [
+  { name: "UPS",        re: /^1Z[0-9A-Z]{16}$/i,                                      url: (n) => `https://www.ups.com/track?tracknum=${encodeURIComponent(n)}` },
+  { name: "USPS",       re: /^(94|93|92|95)\d{20}$/,                                  url: (n) => `https://tools.usps.com/go/TrackConfirmAction?tLabels=${encodeURIComponent(n)}` },
+  { name: "USPS",       re: /^E[A-Z]\d{9}US$/i,                                       url: (n) => `https://tools.usps.com/go/TrackConfirmAction?tLabels=${encodeURIComponent(n)}` },
+  { name: "USPS Intl",  re: /^[A-Z]{2}\d{9}[A-Z]{2}$/,                                url: (n) => `https://tools.usps.com/go/TrackConfirmAction?tLabels=${encodeURIComponent(n)}` },
+  { name: "Amazon",     re: /^TBA\d{12}$/i,                                           url: (n) => `https://track.amazon.com/tracking/${encodeURIComponent(n)}` },
+  { name: "FedEx",      re: /^\d{12}$/,                                               url: (n) => `https://www.fedex.com/fedextrack/?trknbr=${encodeURIComponent(n)}` },
+  { name: "FedEx",      re: /^\d{15}$/,                                               url: (n) => `https://www.fedex.com/fedextrack/?trknbr=${encodeURIComponent(n)}` },
+  { name: "FedEx",      re: /^\d{20}$/,                                               url: (n) => `https://www.fedex.com/fedextrack/?trknbr=${encodeURIComponent(n)}` },
+  { name: "OnTrac",     re: /^[CD]\d{14}$/,                                           url: (n) => `https://www.ontrac.com/tracking?number=${encodeURIComponent(n)}` },
+  { name: "DHL",        re: /^\d{10,11}$/,                                            url: (n) => `https://www.dhl.com/us-en/home/tracking/tracking-express.html?submit=1&tracking-id=${encodeURIComponent(n)}` },
+];
+
+function detectCarrier(tracking) {
+  if (!tracking) return null;
+  const clean = String(tracking).replace(/[\s-]/g, "");
+  for (const c of CARRIERS) {
+    if (c.re.test(clean)) return { name: c.name, url: c.url(clean), clean };
+  }
+  return null;
 }
 
 // Status-specific detail spotlight grid — shows the most relevant fields
@@ -391,7 +540,7 @@ function renderSpotlight(r) {
     if (r.qtyOrdered != null) cells.push({ label: "Qty ordered", value: r.qtyOrdered, numeric: true, highlight: true });
     if (r.eta)         cells.push({ label: "Expected",     value: fmtDate(r.eta) });
     if (r.orderedDate) cells.push({ label: "Ordered",      value: fmtDate(r.orderedDate) });
-    if (r.tracking)    cells.push({ label: "Tracking #",   value: r.tracking });
+    if (r.tracking)    cells.push(trackingCell(r.tracking));
   }
 
   // Always-on secondary cells
@@ -404,9 +553,22 @@ function renderSpotlight(r) {
   return `<div class="detail-grid">${cells.map(c => `
     <div class="detail ${c.highlight ? "highlight" : ""}">
       <span class="detail-label">${escapeHtml(c.label)}</span>
-      <span class="detail-value ${c.numeric ? "numeric" : ""}">${escapeHtml(c.value)}</span>
+      <span class="detail-value ${c.numeric ? "numeric" : ""}">${c.html || escapeHtml(c.value)}</span>
     </div>
   `).join("")}</div>`;
+}
+
+// Tracking cell — when the number matches a known carrier syntax, surface the
+// carrier name and a clickable link to that carrier's tracking page. Otherwise
+// just show the raw number (no link, since we'd be guessing wrong).
+function trackingCell(tracking) {
+  const carrier = detectCarrier(tracking);
+  if (!carrier) {
+    return { label: "Tracking #", value: tracking };
+  }
+  const html = `<a href="${escapeHtml(carrier.url)}" target="_blank" rel="noopener" class="tracking-link">`
+    + `${escapeHtml(carrier.clean)} <span class="tracking-carrier">${escapeHtml(carrier.name)}</span></a>`;
+  return { label: "Tracking #", html };
 }
 
 function renderNotes(r) {

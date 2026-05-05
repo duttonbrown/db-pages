@@ -309,7 +309,7 @@
 
 .rail-stages {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  /* grid-template-columns is set inline based on per-row stage count (2 or 3) */
   gap: 4px;
   position: relative;
   z-index: 2;
@@ -356,10 +356,44 @@
 }
 
 .stage.cancelled .stage-marker {
-  background: var(--bg);
+  background: white;
+  border-color: var(--error, #c0392b);
+  color: var(--error, #c0392b);
+}
+.stage.cancelled .stage-marker svg { display: block; }
+.stage.cancelled .stage-marker .num { display: none; }
+.stage.cancelled .stage-label { color: var(--error, #c0392b); }
+.stage.cancelled .stage-detail { color: var(--error, #c0392b); }
+
+/* Upcoming = future stage that hasn't happened yet (faded, visible) */
+.stage.upcoming .stage-marker {
+  background: white;
   border-color: var(--border);
-  border-style: dashed;
   color: var(--muted);
+}
+.stage.upcoming .stage-label,
+.stage.upcoming .stage-detail { color: var(--muted); }
+
+/* Tracking link with carrier badge */
+.tracking-link {
+  color: var(--accent-dark);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  font-weight: 500;
+}
+.tracking-link:hover { color: var(--text); }
+.tracking-carrier {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--bg);
+  color: var(--muted);
+  border-radius: 999px;
+  vertical-align: 1px;
 }
 
 .stage-label {
@@ -506,7 +540,7 @@
     overflow: hidden;
   }
   .stage.active .stage-label,
-  .stage.done:last-child .stage-label {
+  .stage.cancelled .stage-label {
     font-size: 9px;
     height: auto;
   }

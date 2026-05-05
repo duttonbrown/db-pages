@@ -559,3 +559,105 @@ textarea { resize: vertical; min-height: 70px; }
   margin-bottom: 6px;
 }
 .brand-header-row h1 { margin: 0; }
+
+/* "How to use this form" disclosure — sits just above the footer */
+.how-to {
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.how-to summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.how-to summary::-webkit-details-marker { display: none; }
+.how-to summary:hover { color: var(--text); }
+.how-to[open] summary { color: var(--text); }
+.how-to-chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.how-to[open] .how-to-chevron { transform: rotate(180deg); }
+.how-to-body {
+  padding: 8px 0 4px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+  font-weight: 300;
+}
+.how-to-steps {
+  list-style: decimal;
+  padding-left: 22px;
+  margin: 8px 0 18px;
+  display: grid;
+  gap: 10px;
+}
+.how-to-steps li { padding-left: 4px; }
+.how-to-steps li strong {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.how-to-steps em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text);
+}
+.how-to-callout {
+  display: block;
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: #FFF7EB;
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-dark);
+}
+.how-to-tips {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-top: 4px;
+}
+.how-to-tips strong {
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.how-to-tips ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 12.5px;
+}
+.how-to-tips li strong {
+  display: inline;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text);
+  margin-bottom: 0;
+  font-size: inherit;
+}
+.how-to-tips em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text);
+}

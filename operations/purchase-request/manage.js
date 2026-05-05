@@ -87,8 +87,21 @@ purchaserSel.addEventListener("change", () => {
   if (purchaserSel.value) localStorage.setItem("purchaser-name", purchaserSel.value);
 });
 
+// Keep this list in sync with app.js LOADING_MESSAGES.
+const LOADING_MESSAGES = [
+  "Don't forget to eat your veggies and remember to say something nice to someone you love.",
+  "Drink some water. Stretch your shoulders. We'll be ready in a sec.",
+  "Take a deep breath in… and out. Catalog incoming.",
+  "Do the macarena. By the time you finish, the list should be loaded.",
+  "Wiggle your toes for 10 seconds while this loads. Surprisingly underrated.",
+];
+
 async function loadPending() {
   clearError();
+  const loadingMsgEl = loadingBar.querySelector(".loading-message");
+  if (loadingMsgEl) {
+    loadingMsgEl.textContent = LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)];
+  }
   loadingBar.hidden = false;
   let pct = 0;
   loadingFill.style.width = "0%";
