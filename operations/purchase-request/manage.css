@@ -265,3 +265,98 @@
 .status-pill[data-status="Backordered"]    { background: #FDECEA; color: var(--error); }
 .status-pill[data-status="Waiting to Order"] { background: #E8F0FE; color: #1A56C7; }
 .status-pill[data-status="Ordered"]        { background: #FFF7EB; color: var(--accent-dark); }
+
+/* Vendor digest — bubbles surface vendors with 2+ open requests so the
+   purchaser can batch-order on the same day. Click to filter the queue. */
+.vendor-digest {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  background: linear-gradient(180deg, #FFFAF0, #FFFFFF);
+  border: 1px solid #F3E0BF;
+  border-radius: var(--radius);
+}
+.vendor-digest-header { margin-bottom: 10px; }
+.vendor-digest-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-dark);
+}
+.vendor-digest-sub {
+  margin: 2px 0 0;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+}
+.vendor-digest-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.vendor-bubble {
+  appearance: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 180px;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.vendor-bubble:hover {
+  border-color: var(--accent);
+  box-shadow: 0 1px 4px rgba(255, 153, 18, 0.15);
+  transform: translateY(-1px);
+}
+.vendor-bubble.active {
+  border-color: var(--accent-dark);
+  background: #FFF7EB;
+  box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.18);
+}
+.vendor-bubble-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.vendor-bubble-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.vendor-bubble-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.vendor-bubble-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.vendor-bubble-age {
+  color: var(--accent-dark);
+  font-weight: 500;
+}
+.vendor-bubble-last {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+  font-size: 11px;
+  color: var(--muted);
+}
