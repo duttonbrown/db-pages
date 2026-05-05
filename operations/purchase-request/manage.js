@@ -338,8 +338,9 @@ function renderRow(r) {
 
   // Vendor line (matches requester form)
   const vendorEl = li.querySelector(".vendor-line");
-  vendorEl.textContent = r.vendor ? `Vendor: ${r.vendor}` : "";
-  vendorEl.hidden = !r.vendor;
+  const v = primaryVendor(r);
+  vendorEl.textContent = v ? `Vendor: ${v}` : "";
+  vendorEl.hidden = !v;
 
   // Stats line (matches requester form): 2025 Use | Reorder Qty | Lead Time
   const statsEl = li.querySelector(".stats-line");
@@ -461,7 +462,7 @@ function openModal(action, row) {
   modalTitle.textContent = ACTION_TITLES[action];
   modalContext.innerHTML =
     `<strong>${escapeHtml(row.orderNum)}</strong> — ${escapeHtml(row.itemName || row.customItemName || "(unnamed)")}` +
-    (row.vendor ? ` · Vendor: ${escapeHtml(row.vendor)}` : "");
+    (primaryVendor(row) ? ` · Vendor: ${escapeHtml(primaryVendor(row))}` : "");
   modalForm.innerHTML = fieldsFor(action, row);
   modalErr.hidden = true;
   modal.hidden = false;

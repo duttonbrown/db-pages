@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Receive Shipments — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="manage.css">
+<link rel="stylesheet" href="receive.css">
+</head>
+<body>
+<main class="card card-wide">
+  <header>
+    <div class="brand-header-row">
+      <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
+      <h1>Receive Shipments</h1>
+    </div>
+    <p class="subtitle">Confirm what arrived. Grouped by PO so a whole box can be received in one click.</p>
+  </header>
+
+  <div class="purchaser-bar">
+    <label for="receiver-name">You are:</label>
+    <select id="receiver-name">
+      <option value="">Select your name…</option>
+    </select>
+    <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
+  </div>
+
+  <div id="loading-bar" class="loading-bar" hidden>
+    <div class="loading-message">Loading shipments…</div>
+    <div class="loading-track"><div class="loading-fill"></div></div>
+  </div>
+
+  <div id="error" class="error" hidden></div>
+
+  <div id="empty" class="empty-state" hidden>
+    <p>📦 Nothing waiting to be received. The dock is clear.</p>
+  </div>
+
+  <section id="po-list"></section>
+
+  <footer class="card-footer">
+    <a href="index.html">Submit Request</a>
+    &nbsp;·&nbsp;
+    <a href="manage.html">Purchaser Console</a>
+    &nbsp;·&nbsp;
+    <a href="receive.html" aria-current="page">Receive Shipments</a>
+    &nbsp;·&nbsp;
+    <a href="status.html">See Request Status</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion</a>
+  </footer>
+</main>
+
+<script src="receive.js"></script>
+</body>
+</html>
