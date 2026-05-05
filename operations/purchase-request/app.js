@@ -14,7 +14,6 @@ const pickedType    = $("picked-type");
 const pickedNoteCheckbox = $("picked-note-checkbox");
 const pickedNoteInput    = $("picked-note");
 const pickedOutOfStock   = $("picked-out-of-stock");
-const pickedPrefQty      = $("picked-pref-qty-input");
 const addBtn        = $("add-btn");
 const cancelPick    = $("cancel-pick");
 const notInDb       = $("not-in-db");
@@ -22,7 +21,6 @@ const customFields  = $("custom-fields");
 const customName    = $("custom-name");
 const customNotes   = $("custom-notes");
 const customOutOfStock = $("custom-out-of-stock");
-const customPrefQty    = $("custom-pref-qty");
 const addCustomBtn  = $("add-custom-btn");
 const cartSection   = $("cart-section");
 const cartList      = $("cart");
@@ -87,13 +85,8 @@ const LOADING_MESSAGES = [
   "Don't forget to eat your veggies and remember to say something nice to someone you love.",
   "Drink some water. Stretch your shoulders. We'll be ready in a sec.",
   "Take a deep breath in… and out. Catalog incoming.",
-  "Did you know that none of this business could exist without you? Thanks for that… and your patience.",
-  "Knock knock. Who's there? Lettuce. Lettuce who? Lettuce in, the parts list is loading!",
   "Do the macarena. By the time you finish, the list should be loaded.",
-  "Text someone you've been meaning to text. Yes, that someone.",
-  "Wiggle your toes for 10 seconds. Surprisingly underrated.",
-  "Refill your water bottle. Hydration > requisitions.",
-  "Every fixture that leaves our shop has your fingerprints on it — literal or otherwise. Thank you.",
+  "Wiggle your toes for 10 seconds while this loads. Surprisingly underrated.",
 ];
 
 async function loadCatalog() {
@@ -260,7 +253,6 @@ function pickItem(item) {
   pickedNoteInput.value = "";
   pickedNoteInput.hidden = true;
   pickedOutOfStock.checked = false;
-  pickedPrefQty.value = "";
   picked.hidden = false;
   search.hidden = true;
   resultsList.hidden = true;
@@ -276,12 +268,7 @@ function cancelPicked() {
 
 function addPickedToCart() {
   if (!pickedItem) return;
-  let note = pickedNoteCheckbox.checked ? pickedNoteInput.value.trim() : "";
-  const prefQty = parseInt(pickedPrefQty.value, 10);
-  if (!Number.isNaN(prefQty) && prefQty > 0) {
-    const tag = `[Preferred qty: ${prefQty}]`;
-    note = note ? `${note} ${tag}` : tag;
-  }
+  const note = pickedNoteCheckbox.checked ? pickedNoteInput.value.trim() : "";
   cart.push({
     type: pickedItem.type,
     relationId: pickedItem.id,
@@ -307,12 +294,7 @@ function addCustomToCart() {
   const name = customName.value.trim();
   if (!name) return;
   const t = document.querySelector('input[name="custom-type"]:checked').value;
-  let note = customNotes.value.trim();
-  const prefQty = parseInt(customPrefQty.value, 10);
-  if (!Number.isNaN(prefQty) && prefQty > 0) {
-    const tag = `[Preferred qty: ${prefQty}]`;
-    note = note ? `${note} ${tag}` : tag;
-  }
+  const note = customNotes.value.trim();
   cart.push({
     type: t,
     notInDb: true,
@@ -326,7 +308,6 @@ function addCustomToCart() {
   });
   customName.value = "";
   customNotes.value = "";
-  customPrefQty.value = "";
   customOutOfStock.checked = false;
   document.querySelector('input[name="custom-type"][value="Part"]').checked = true;
   notInDb.checked = false;

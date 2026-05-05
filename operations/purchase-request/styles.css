@@ -35,6 +35,7 @@ body {
   max-width: 720px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
 }
+.card-wide { max-width: 960px; }
 
 header { margin-bottom: 24px; }
 
@@ -326,18 +327,6 @@ textarea { resize: vertical; min-height: 70px; }
 
 .picked-note-input { margin-top: 8px; }
 
-.picked-pref-qty {
-  margin-top: 12px;
-}
-.picked-pref-qty label {
-  font-size: 13px;
-  font-weight: 400;
-  margin-bottom: 6px;
-}
-.picked-pref-qty input {
-  max-width: 200px;
-}
-
 .urgent-label { color: var(--error); font-weight: 400; }
 .urgent-label input { accent-color: var(--error); }
 
@@ -546,3 +535,27 @@ textarea { resize: vertical; min-height: 70px; }
   font-weight: 400;
 }
 .card-footer a:hover { text-decoration: underline; }
+.card-footer a[aria-current="page"] {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: default;
+}
+
+/* db brandmark — official Dutton Brown icon. PNG sits beside the page title. */
+.brandmark {
+  display: block;
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Page header row — brandmark + title side by side */
+.brand-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.brand-header-row h1 { margin: 0; }
