@@ -273,8 +273,11 @@ function renderCard(r, idx) {
   // Status-specific spotlight detail
   const spotlight = renderSpotlight(r);
 
-  // Tracking row (Ordered + has tracking) — dedicated panel below spotlight
-  const trackingRow = (r.status === "Ordered") ? renderTrackingRow(r.tracking) : "";
+  // Tracking row — dedicated panel below the spotlight when a tracking
+  // number is on file. Shows on Ordered and Received cards.
+  const trackingRow = (r.status === "Ordered" || r.status === "Received")
+    ? renderTrackingRow(r.tracking)
+    : "";
 
   // Notes
   const notesHtml = renderNotes(r);
@@ -374,6 +377,14 @@ function renderArchiveCard(r, idx) {
 //
 //   Submitted → Cancelled (with reason underneath)
 
+// Each slot has one of these states:
+//   done     — confirmed, shows a check
+//   active   — currently in progress (no check, accent ring)
+//   upcoming — future step (faded, visible so the path is clear)
+//   cancelled — terminal X marker, only for Cancelled rows
+//
+// A check appears on every "done" slot, so as a request advances you see the
+// timeline fill in: Submitted ✓ → Ordered ✓ → In Transit ✓ → Received ✓.
 function buildStages(r) {
   const status = r.status;
   const isCancelled = status === "Cancelled";
@@ -391,47 +402,66 @@ function buildStages(r) {
     };
   }
 
-  // 3-stage rail. Slot 2's label depends on current status.
+  // 4-stage rail: Submitted → (middle) → In Transit → Received
+  // Middle slot relabels per row: Waiting / Backordered / Ordered.
   const middle = stageForMiddle(r);
   const isReceived = status === "Received";
+  const isOrderedOrBeyond = status === "Ordered" || isReceived;
 
-  // First slot — Submitted — always done because the row exists.
+  // First slot — always done because the row exists.
   const submitted = {
     state: "done",
     label: "Submitted",
     detail: r.dateRequested ? fmtDate(r.dateRequested) : "",
   };
 
-  // Third slot — Received. "active" once received; otherwise "upcoming"
-  // (rendered as faded but visible so the next step is clear).
+  // Third slot — In Transit. Auto-checked when a carrier-detected tracking
+  // number is on file (presence of a real tracking number = "this is moving").
+  // Only meaningful once the order has actually been placed.
+  const carrier = (isOrderedOrBeyond && r.tracking) ? detectCarrier(r.tracking) : null;
+  let inTransit;
+  if (isReceived) {
+    inTransit = { state: "done", label: "In Transit", detail: carrier ? carrier.name : "" };
+  } else if (status === "Ordered" && carrier) {
+    inTransit = { state: "done", label: "In Transit", detail: carrier.name };
+  } else if (status === "Ordered") {
+    // Ordered but no tracking yet — this is the active "what comes next" slot
+    inTransit = { state: "active", label: "In Transit", detail: "Awaiting tracking" };
+  } else {
+    inTransit = { state: "upcoming", label: "In Transit", detail: "" };
+  }
+
+  // Fourth slot — Received.
   const received = {
     state: isReceived ? "done" : "upcoming",
     label: "Received",
     detail: isReceived && r.receivedDate ? fmtDate(r.receivedDate) : "",
   };
 
-  // Progress fill: 0% at Submitted, 50% at middle (active), 100% at Received.
-  let progressPct = 0;
-  if (status === "Submitted")          progressPct = 0;
-  else if (isReceived)                 progressPct = 100;
-  else                                 progressPct = 50; // Waiting / Backordered / Ordered
+  // Progress fill: 0%, 33%, 66%, 100% across the four slots.
+  let progressPct;
+  if (status === "Submitted")        progressPct = 0;
+  else if (isReceived)               progressPct = 100;
+  else if (status === "Ordered" && carrier) progressPct = 75; // past the In-Transit check
+  else if (status === "Ordered")     progressPct = 50;        // through Ordered
+  else                                progressPct = 33;        // Waiting / Backordered
 
   return {
-    stages: [submitted, middle, received],
+    stages: [submitted, middle, inTransit, received],
     progressPct,
     cancelled: false,
   };
 }
 
-// Builds the dynamic middle slot. The label reflects what's actually
-// happening: Waiting / Backordered / Ordered / (or "Submitted" placeholder
-// when the row hasn't moved yet).
+// Builds the dynamic middle slot. Label and state reflect the row's status.
+//   - Submitted: middle is upcoming "Ordered" (faded preview of next step)
+//   - Waiting / Backordered: middle is active (in progress, no check)
+//   - Ordered: middle is done (the order is confirmed → check)
+//   - Received: middle is done (Ordered is in the past)
 function stageForMiddle(r) {
   const status = r.status;
 
   if (status === "Submitted") {
-    // No second event has happened yet — render as a faded "Ordered"
-    // placeholder so the user can see what comes next.
     return { state: "upcoming", label: "Ordered", detail: "" };
   }
 
@@ -452,17 +482,7 @@ function stageForMiddle(r) {
   }
 
   if (status === "Ordered") {
-    // Show when the order was placed underneath the marker so the timeline
-    // reads like a story (Submitted May 1 → Ordered May 1 → Received …).
-    return {
-      state: "active",
-      label: "Ordered",
-      detail: r.orderedDate ? fmtDate(r.orderedDate) : "",
-    };
-  }
-
-  if (status === "Received") {
-    // Items move through Ordered before being received — show that as done.
+    // The order is confirmed → done check. Date underneath tells the story.
     return {
       state: "done",
       label: "Ordered",
@@ -470,7 +490,14 @@ function stageForMiddle(r) {
     };
   }
 
-  // Defensive fallback for unknown statuses
+  if (status === "Received") {
+    return {
+      state: "done",
+      label: "Ordered",
+      detail: r.orderedDate ? fmtDate(r.orderedDate) : "",
+    };
+  }
+
   return { state: "upcoming", label: status || "—", detail: "" };
 }
 
