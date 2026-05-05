@@ -314,6 +314,20 @@ function openModal(action, row) {
   modalForm.innerHTML = fieldsFor(action, row);
   modalErr.hidden = true;
   modal.hidden = false;
+
+  // Cancellation: only show "Cancellation reason" when reason code is "Other"
+  if (action === "cancelled") {
+    const reasonSel = modalForm.querySelector("#f-reasonCode");
+    const reasonField = modalForm.querySelector("#cancellation-reason-field");
+    const reasonInput = modalForm.querySelector("#f-cancellationReason");
+    reasonSel.addEventListener("change", () => {
+      const isOther = reasonSel.value === "Other";
+      reasonField.hidden = !isOther;
+      if (!isOther) reasonInput.value = "";
+      if (isOther) reasonInput.focus();
+    });
+  }
+
   // Auto-focus first input
   const firstInput = modalForm.querySelector("input, select, textarea");
   if (firstInput) firstInput.focus();
@@ -414,7 +428,7 @@ function fieldsFor(action, row) {
           ${opts}
         </select>
       </div>
-      <div class="field">
+      <div class="field" id="cancellation-reason-field" hidden>
         <label for="f-cancellationReason">Cancellation reason<span class="req">*</span></label>
         <input id="f-cancellationReason" name="cancellationReason" type="text" placeholder="Visible to the requester">
       </div>
