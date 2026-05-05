@@ -23,24 +23,20 @@
   <div class="filter-bar">
     <div class="status-pills" id="status-pills" role="tablist" aria-label="Filter by status">
       <button type="button" class="pill active" data-status="all" role="tab" aria-selected="true">
-        <span>In motion</span>
+        <span>All</span>
         <span class="pill-count" id="count-all">—</span>
       </button>
       <button type="button" class="pill" data-status="Submitted" role="tab" aria-selected="false">
         <span>Submitted</span>
         <span class="pill-count" id="count-Submitted">—</span>
       </button>
-      <button type="button" class="pill" data-status="Waiting to Order" role="tab" aria-selected="false">
-        <span>Waiting</span>
-        <span class="pill-count" id="count-Waiting-to-Order">—</span>
-      </button>
-      <button type="button" class="pill" data-status="Backordered" role="tab" aria-selected="false">
-        <span>Backordered</span>
-        <span class="pill-count" id="count-Backordered">—</span>
-      </button>
       <button type="button" class="pill" data-status="Ordered" role="tab" aria-selected="false">
         <span>Ordered</span>
         <span class="pill-count" id="count-Ordered">—</span>
+      </button>
+      <button type="button" class="pill" data-status="waitingOrBackordered" role="tab" aria-selected="false">
+        <span>Backordered / Waiting</span>
+        <span class="pill-count" id="count-waitingOrBackordered">—</span>
       </button>
       <button type="button" class="pill" data-status="Received" role="tab" aria-selected="false">
         <span>Received</span>
