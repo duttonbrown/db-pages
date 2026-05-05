@@ -165,7 +165,8 @@ function updateCounts(rows) {
   $("count-all").textContent = counts.all;
   $("count-Submitted").textContent = counts.Submitted;
   $("count-Ordered").textContent = counts.Ordered;
-  $("count-waitingOrBackordered").textContent = counts.Backordered + counts["Waiting to Order"];
+  $("count-Backordered").textContent = counts.Backordered;
+  $("count-Waiting-to-Order").textContent = counts["Waiting to Order"];
   $("count-Received").textContent = counts.Received;
   $("count-archive").textContent = counts.archive;
   return counts;
@@ -207,8 +208,6 @@ function renderRows() {
   } else if (activeFilter === "Received") {
     visibleActive = [];
     visibleArchive = received;
-  } else if (activeFilter === "waitingOrBackordered") {
-    visibleActive = active.filter(r => r.status === "Waiting to Order" || r.status === "Backordered");
   } else if (activeFilter !== "all") {
     visibleActive = active.filter(r => r.status === activeFilter);
   }
@@ -274,6 +273,9 @@ function renderCard(r, idx) {
   // Status-specific spotlight detail
   const spotlight = renderSpotlight(r);
 
+  // Tracking row (Ordered + has tracking) — dedicated panel below spotlight
+  const trackingRow = (r.status === "Ordered") ? renderTrackingRow(r.tracking) : "";
+
   // Notes
   const notesHtml = renderNotes(r);
 
@@ -308,6 +310,7 @@ function renderCard(r, idx) {
     </div>
 
     ${spotlight}
+    ${trackingRow}
     ${notesHtml}
 
     <div class="card-footer-row">
@@ -449,11 +452,12 @@ function stageForMiddle(r) {
   }
 
   if (status === "Ordered") {
-    // Slot is "done" because the order has been placed. ETA shows underneath.
+    // Show when the order was placed underneath the marker so the timeline
+    // reads like a story (Submitted May 1 → Ordered May 1 → Received …).
     return {
       state: "active",
       label: "Ordered",
-      detail: r.eta ? `ETA ${fmtDate(r.eta)}` : (r.orderedDate ? fmtDate(r.orderedDate) : ""),
+      detail: r.orderedDate ? fmtDate(r.orderedDate) : "",
     };
   }
 
@@ -539,9 +543,8 @@ function renderSpotlight(r) {
   } else if (r.status === "Ordered") {
     if (r.poNumber)    cells.push({ label: "PO #",         value: r.poNumber,            highlight: true });
     if (r.qtyOrdered != null) cells.push({ label: "Qty ordered", value: r.qtyOrdered, numeric: true, highlight: true });
-    if (r.eta)         cells.push({ label: "Expected",     value: fmtDate(r.eta) });
     if (r.orderedDate) cells.push({ label: "Ordered",      value: fmtDate(r.orderedDate) });
-    if (r.tracking)    cells.push(trackingCell(r.tracking));
+    if (r.eta)         cells.push({ label: "Expected",     value: fmtDate(r.eta) });
   }
 
   // Always-on secondary cells
@@ -554,22 +557,29 @@ function renderSpotlight(r) {
   return `<div class="detail-grid">${cells.map(c => `
     <div class="detail ${c.highlight ? "highlight" : ""}">
       <span class="detail-label">${escapeHtml(c.label)}</span>
-      <span class="detail-value ${c.numeric ? "numeric" : ""}">${c.html || escapeHtml(c.value)}</span>
+      <span class="detail-value ${c.numeric ? "numeric" : ""}">${escapeHtml(c.value)}</span>
     </div>
   `).join("")}</div>`;
 }
 
-// Tracking cell — when the number matches a known carrier syntax, surface the
-// carrier name and a clickable link to that carrier's tracking page. Otherwise
-// just show the raw number (no link, since we'd be guessing wrong).
-function trackingCell(tracking) {
+// Tracking row — dedicated panel below the spotlight when a tracking number
+// is on file. Auto-detects carrier from the number's syntax; if detected,
+// surfaces the carrier name and a deep link to that carrier's tracking page.
+// Falls back to plain text when the pattern is ambiguous.
+function renderTrackingRow(tracking) {
+  if (!tracking) return "";
   const carrier = detectCarrier(tracking);
-  if (!carrier) {
-    return { label: "Tracking #", value: tracking };
-  }
-  const html = `<a href="${escapeHtml(carrier.url)}" target="_blank" rel="noopener" class="tracking-link">`
-    + `${escapeHtml(carrier.clean)} <span class="tracking-carrier">${escapeHtml(carrier.name)}</span></a>`;
-  return { label: "Tracking #", html };
+  const numberHtml = carrier
+    ? `<a href="${escapeHtml(carrier.url)}" target="_blank" rel="noopener" class="tracking-link">`
+      + `${escapeHtml(carrier.clean)} <span class="tracking-carrier">${escapeHtml(carrier.name)}</span>`
+      + ` <span class="tracking-cta">Track ↗</span></a>`
+    : escapeHtml(tracking);
+  return `
+    <div class="tracking-row">
+      <div class="tracking-label">Tracking</div>
+      <div class="tracking-value">${numberHtml}</div>
+    </div>
+  `;
 }
 
 function renderNotes(r) {

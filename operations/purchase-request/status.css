@@ -374,17 +374,45 @@
 .stage.upcoming .stage-label,
 .stage.upcoming .stage-detail { color: var(--muted); }
 
+/* Tracking row — dedicated panel below the spotlight on Ordered cards */
+.tracking-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: linear-gradient(0deg, var(--bg), white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.tracking-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.tracking-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  word-break: break-word;
+}
+
 /* Tracking link with carrier badge */
 .tracking-link {
   color: var(--accent-dark);
   text-decoration: none;
-  border-bottom: 1px solid var(--accent);
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
-.tracking-link:hover { color: var(--text); }
+.tracking-link:hover .tracking-cta { color: var(--text); }
 .tracking-carrier {
   display: inline-block;
-  margin-left: 4px;
   padding: 1px 6px;
   font-size: 9px;
   font-weight: 600;
@@ -393,7 +421,21 @@
   background: var(--bg);
   color: var(--muted);
   border-radius: 999px;
-  vertical-align: 1px;
+}
+.tracking-cta {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent-dark);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  transition: color 0.15s;
+}
+
+@media (max-width: 480px) {
+  .tracking-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
 }
 
 .stage-label {
