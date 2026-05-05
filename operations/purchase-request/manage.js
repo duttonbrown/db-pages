@@ -10,6 +10,15 @@ const errorEl      = $("error");
 const emptyEl      = $("empty");
 const loadingBar   = $("loading-bar");
 const loadingFill  = loadingBar.querySelector(".loading-fill");
+const digestEl     = $("vendor-digest");
+const digestListEl = $("vendor-digest-list");
+
+// Vendor filter state. When set, only rows whose primary vendor matches are
+// shown in the queue. Click an active digest bubble again (or the same one)
+// to clear.
+let vendorFilter = null;
+// Holds the most recent /pending payload so refresh-less filtering is cheap.
+let allRows = [];
 
 // Modal
 const modal        = $("modal");
@@ -115,7 +124,9 @@ async function loadPending() {
     const data = await res.json();
     loadingFill.style.width = "100%";
     setTimeout(() => { loadingBar.hidden = true; }, 300);
-    renderQueue(data.rows || []);
+    allRows = data.rows || [];
+    renderDigest(allRows);
+    renderQueue(filteredRows());
   } catch (e) {
     showError("Couldn't load pending requests.");
     loadingBar.hidden = true;
@@ -124,11 +135,138 @@ async function loadPending() {
   }
 }
 
+// ----- Vendor digest -----
+//
+// Surfaces vendors with 2+ open requests (Submitted + Waiting only — these
+// are the ones a purchaser can still consolidate before placing an order).
+// Backordered and Ordered rows already have a vendor commitment, so they're
+// excluded from the count but Ordered rows are scanned to compute "last
+// ordered: <date>" so the purchaser can see if today's batch already shipped.
+
+// Each row's vendor field is a comma-separated list (e.g. "Grand Brass, Ami").
+// Treat the first non-blank entry as the primary vendor — that's where the
+// row is most likely to actually be placed.
+function primaryVendor(row) {
+  if (!row.vendor) return "";
+  const first = String(row.vendor).split(",")[0];
+  return (first || "").trim();
+}
+
+function filteredRows() {
+  if (!vendorFilter) return allRows;
+  return allRows.filter(r => primaryVendor(r) === vendorFilter);
+}
+
+function renderDigest(rows) {
+  // Group consolidatable rows by primary vendor (Submitted + Waiting only)
+  const buckets = new Map(); // vendor -> { submitted, waiting, oldestAge }
+  // Track most recent Ordered date per vendor for the "last ordered" hint
+  const lastOrdered = new Map(); // vendor -> ISO date string (latest)
+
+  for (const r of rows) {
+    const v = primaryVendor(r);
+    if (!v) continue;
+
+    if (r.status === "Ordered" && r.orderedDate) {
+      const prev = lastOrdered.get(v);
+      if (!prev || r.orderedDate > prev) lastOrdered.set(v, r.orderedDate);
+    }
+
+    if (r.status !== "Submitted" && r.status !== "Waiting to Order") continue;
+    if (!buckets.has(v)) buckets.set(v, { submitted: 0, waiting: 0, oldestAge: null });
+    const b = buckets.get(v);
+    if (r.status === "Submitted") b.submitted++;
+    else b.waiting++;
+    const age = ageDays(r.dateRequested);
+    if (age != null && (b.oldestAge == null || age > b.oldestAge)) b.oldestAge = age;
+  }
+
+  // Only show vendors with 2+ open requests
+  const entries = [...buckets.entries()]
+    .filter(([, b]) => (b.submitted + b.waiting) >= 2)
+    .sort((a, b) => (b[1].submitted + b[1].waiting) - (a[1].submitted + a[1].waiting));
+
+  if (entries.length === 0) {
+    digestEl.hidden = true;
+    digestListEl.innerHTML = "";
+    // Filter may still be set on a vendor that no longer has 2+ — clear it.
+    if (vendorFilter && !buckets.has(vendorFilter)) vendorFilter = null;
+    return;
+  }
+
+  digestEl.hidden = false;
+  digestListEl.innerHTML = "";
+  for (const [vendor, b] of entries) {
+    const total = b.submitted + b.waiting;
+    const lastOrd = lastOrdered.get(vendor);
+    const lastOrdLabel = lastOrd ? lastOrderedLabel(lastOrd) : "";
+    const breakdown = [
+      b.submitted > 0 ? `${b.submitted} submitted` : null,
+      b.waiting   > 0 ? `${b.waiting} waiting`     : null,
+    ].filter(Boolean).join(" · ");
+    const isActive = vendorFilter === vendor;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "vendor-bubble" + (isActive ? " active" : "");
+    btn.setAttribute("role", "tab");
+    btn.setAttribute("aria-selected", isActive ? "true" : "false");
+    btn.dataset.vendor = vendor;
+    btn.innerHTML = `
+      <div class="vendor-bubble-row">
+        <span class="vendor-bubble-name">${escapeHtml(vendor)}</span>
+        <span class="vendor-bubble-count">${total}</span>
+      </div>
+      <div class="vendor-bubble-meta">
+        <span>${escapeHtml(breakdown)}</span>
+        ${b.oldestAge != null ? `<span class="vendor-bubble-age">oldest ${b.oldestAge}d</span>` : ""}
+      </div>
+      ${lastOrdLabel ? `<div class="vendor-bubble-last">Last ordered ${escapeHtml(lastOrdLabel)}</div>` : ""}
+    `;
+    btn.addEventListener("click", () => toggleVendorFilter(vendor));
+    digestListEl.appendChild(btn);
+  }
+
+  // If the active filter's vendor disappeared, clear it
+  if (vendorFilter && !buckets.has(vendorFilter)) {
+    vendorFilter = null;
+  }
+}
+
+function toggleVendorFilter(vendor) {
+  vendorFilter = (vendorFilter === vendor) ? null : vendor;
+  // Re-render bubbles to update the active state and re-render the queue
+  renderDigest(allRows);
+  renderQueue(filteredRows());
+}
+
+// Friendly relative label for the "Last ordered" hint
+function lastOrderedLabel(iso) {
+  if (!iso) return "";
+  const today = todayISO();
+  if (iso === today) return "today";
+  const diffDays = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+  if (diffDays === 1) return "yesterday";
+  if (diffDays > 0 && diffDays < 7) return `${diffDays} days ago`;
+  // Use formatted date for older
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
 refreshBtn.addEventListener("click", loadPending);
 
 function renderQueue(rows) {
   queueEl.innerHTML = "";
   if (rows.length === 0) {
+    if (vendorFilter) {
+      // Filter to a vendor that has no remaining rows — show a contextual
+      // empty state rather than the cheerful "queue is clear" celebration.
+      emptyEl.innerHTML = `<p>No open requests for <strong>${escapeHtml(vendorFilter)}</strong>. <button type="button" class="link-btn" id="clear-vendor-filter">Clear filter</button></p>`;
+      const clearBtn = $("clear-vendor-filter");
+      if (clearBtn) clearBtn.addEventListener("click", () => toggleVendorFilter(vendorFilter));
+    } else {
+      emptyEl.innerHTML = `<p>🎉 No active requests. The queue is clear.</p>`;
+    }
     emptyEl.hidden = false;
     return;
   }
