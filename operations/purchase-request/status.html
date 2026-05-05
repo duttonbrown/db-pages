@@ -42,8 +42,12 @@
         <span>Ordered</span>
         <span class="pill-count" id="count-Ordered">—</span>
       </button>
+      <button type="button" class="pill" data-status="Received" role="tab" aria-selected="false">
+        <span>Received</span>
+        <span class="pill-count" id="count-Received">—</span>
+      </button>
       <button type="button" class="pill" data-status="archive" role="tab" aria-selected="false">
-        <span>Archive</span>
+        <span>Cancelled</span>
         <span class="pill-count" id="count-archive">—</span>
       </button>
     </div>
@@ -57,7 +61,10 @@
     </button>
   </div>
 
-  <div id="loading" class="loading-state">Loading requests…</div>
+  <div id="loading-bar" class="loading-bar">
+    <div class="loading-message" id="loading-message">Loading requests…</div>
+    <div class="loading-track"><div class="loading-fill"></div></div>
+  </div>
   <div id="error" class="error" hidden></div>
   <div id="empty" class="empty-state" hidden>
     <h2>Nothing here.</h2>
@@ -71,8 +78,8 @@
 
   <section id="archive-section" class="requests-section archive-section" hidden>
     <header class="section-header">
-      <h2 class="section-title">Closed</h2>
-      <p class="section-sub">Already received or cancelled</p>
+      <h2 class="section-title" id="archive-title">Closed</h2>
+      <p class="section-sub" id="archive-sub">Already received or cancelled</p>
     </header>
     <ul class="request-list" id="archive-list"></ul>
   </section>
