@@ -20,11 +20,189 @@ body {
   color: var(--text);
   background: var(--bg);
   margin: 0;
-  padding: 24px 16px;
   min-height: 100vh;
+}
+
+/* Page shell — wraps the top nav + main column. Body no longer flex-centers
+   so the sticky nav can span full width while the main column stays centered. */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.app-main {
+  flex: 1;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  padding: 24px 16px 48px;
+}
+
+/* ─── Top nav ─── Sticky header that spans the page. Brand mark + wordmark on
+   the left, four section tabs on the right. Below: a thin divider that the
+   active-tab orange underline rides on, sliding between tabs on hover. */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(140%) blur(8px);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.top-nav.is-scrolled {
+  box-shadow: 0 6px 24px -16px rgba(0, 0, 0, 0.18), 0 1px 0 rgba(0,0,0,0.02);
+  border-bottom-color: transparent;
+}
+.top-nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 14px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.top-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.top-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.top-nav-brand .brandmark {
+  height: 26px;
+  width: auto;
+}
+.top-nav-wordmark {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding-top: 1px;
+}
+.top-nav-spacer { flex: 1; }
+.top-nav-external {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.top-nav-external:hover { color: var(--accent-dark); }
+.top-nav-external::after {
+  content: "↗";
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Tab strip — uses a relative positioned ul so the active underline can be
+   absolutely positioned and animated. */
+.top-nav-tabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0;
+  position: relative;
+  border-bottom: 1px solid transparent; /* we draw our own line via .top-nav border-bottom */
+}
+.top-nav-tabs li { margin: 0; }
+.top-nav-tab {
+  display: inline-block;
+  padding: 10px 18px 12px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  position: relative;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+.top-nav-tab:first-child { padding-left: 0; }
+.top-nav-tab:hover { color: var(--text); }
+.top-nav-tab[aria-current="page"] {
+  color: var(--text);
+  font-weight: 600;
+}
+/* Active underline — quiet 2px bar in accent color. No animation — switching
+   tabs is a navigation event, not a moment that needs flourish. */
+.top-nav-tab[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .top-nav-inner { padding: 12px 16px 0; }
+  .top-nav-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 0; }
+  .top-nav-tabs::-webkit-scrollbar { display: none; }
+  .top-nav-tab { padding: 10px 14px 12px; font-size: 12px; }
+  .top-nav-external { display: none; }
+  .top-nav-wordmark { display: none; }
+}
+
+/* Bottom anchor — replaces the old footer nav. Just a quiet "View in Notion"
+   link at the very bottom of the card so the external escape hatch stays
+   reachable on long pages. */
+.card-bottom-link {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.card-bottom-link a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 400;
+}
+.card-bottom-link a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+/* Page eyebrow + lead — replaces the old big H1 + subtitle pair on each page.
+   Keeps content title-of-record on the tab; this shows what the page is for
+   in a single confident sentence. */
+.page-intro {
+  margin-bottom: 28px;
+}
+.page-eyebrow {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.page-lead {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--text);
+  letter-spacing: -0.005em;
+  max-width: 56ch;
+}
+.page-lead strong { font-weight: 500; color: var(--text); }
+@media (max-width: 640px) {
+  .page-lead { font-size: 16px; }
 }
 
 .card {

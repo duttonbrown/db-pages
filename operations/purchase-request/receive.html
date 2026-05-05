@@ -12,13 +12,32 @@
 <link rel="stylesheet" href="receive.css">
 </head>
 <body>
-<main class="card card-wide">
-  <header>
-    <div class="brand-header-row">
-      <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
-      <h1>Receive Shipments</h1>
+<div class="app-shell">
+
+<nav class="top-nav" id="top-nav" aria-label="Inventory">
+  <div class="top-nav-inner">
+    <div class="top-nav-row">
+      <a class="top-nav-brand" href="index.html">
+        <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
+        <span class="top-nav-wordmark">Inventory</span>
+      </a>
+      <span class="top-nav-spacer"></span>
+      <a class="top-nav-external" href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion</a>
     </div>
-    <p class="subtitle">Confirm what arrived. Grouped by PO so a whole box can be received in one click.</p>
+    <ul class="top-nav-tabs" role="tablist">
+      <li><a class="top-nav-tab" href="index.html">Submit</a></li>
+      <li><a class="top-nav-tab" href="manage.html">Purchaser</a></li>
+      <li><a class="top-nav-tab" href="receive.html" aria-current="page">Receive</a></li>
+      <li><a class="top-nav-tab" href="status.html">Status</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="app-main">
+<main class="card card-wide">
+  <header class="page-intro">
+    <p class="page-eyebrow">Receive shipments</p>
+    <h1 class="page-lead">Confirm what arrived. Grouped by PO so a whole box can be received in one click.</h1>
   </header>
 
   <div class="purchaser-bar">
@@ -42,19 +61,26 @@
 
   <section id="po-list"></section>
 
-  <footer class="card-footer">
-    <a href="index.html">Submit Request</a>
-    &nbsp;·&nbsp;
-    <a href="manage.html">Purchaser Console</a>
-    &nbsp;·&nbsp;
-    <a href="receive.html" aria-current="page">Receive Shipments</a>
-    &nbsp;·&nbsp;
-    <a href="status.html">See Request Status</a>
-    &nbsp;·&nbsp;
-    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion</a>
-  </footer>
+  <div class="card-bottom-link">
+    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion ↗</a>
+  </div>
 </main>
+</div>
+
+</div>
 
 <script src="receive.js"></script>
+<script>
+  (function () {
+    var nav = document.getElementById("top-nav");
+    if (!nav) return;
+    var update = function () {
+      if (window.scrollY > 4) nav.classList.add("is-scrolled");
+      else nav.classList.remove("is-scrolled");
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  })();
+</script>
 </body>
 </html>

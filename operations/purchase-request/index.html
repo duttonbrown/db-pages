@@ -10,13 +10,32 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<main class="card card-wide">
-  <header>
-    <div class="brand-header-row">
-      <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
-      <h1>Submit a Purchase Request</h1>
+<div class="app-shell">
+
+<nav class="top-nav" id="top-nav" aria-label="Inventory">
+  <div class="top-nav-inner">
+    <div class="top-nav-row">
+      <a class="top-nav-brand" href="index.html">
+        <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
+        <span class="top-nav-wordmark">Inventory</span>
+      </a>
+      <span class="top-nav-spacer"></span>
+      <a class="top-nav-external" href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion</a>
     </div>
-    <p class="subtitle">Search for items and add them to your request. Submit them all at once.</p>
+    <ul class="top-nav-tabs" role="tablist">
+      <li><a class="top-nav-tab" href="index.html" aria-current="page">Submit</a></li>
+      <li><a class="top-nav-tab" href="manage.html">Purchaser</a></li>
+      <li><a class="top-nav-tab" href="receive.html">Receive</a></li>
+      <li><a class="top-nav-tab" href="status.html">Status</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="app-main">
+<main class="card card-wide">
+  <header class="page-intro">
+    <p class="page-eyebrow">Submit a request</p>
+    <h1 class="page-lead">Search for items, add them to your request, and submit them all at once.</h1>
     <div id="loading-bar" class="loading-bar" hidden>
       <div class="loading-message" id="loading-message">Loading…</div>
       <div class="loading-track">
@@ -166,7 +185,7 @@
         </li>
         <li>
           <strong>Track it.</strong>
-          Use <em>See Request Status</em> in the footer to watch each item move through Submitted → Waiting / Backordered → Ordered → Received.
+          Use the <em>Status</em> tab at the top to watch each item move through Submitted → Waiting / Backordered → Ordered → Received.
         </li>
       </ol>
       <div class="how-to-tips">
@@ -180,19 +199,28 @@
     </div>
   </details>
 
-  <footer class="card-footer">
-    <a href="index.html" aria-current="page">Submit Request</a>
-    &nbsp;·&nbsp;
-    <a href="manage.html">Purchaser Console</a>
-    &nbsp;·&nbsp;
-    <a href="receive.html">Receive Shipments</a>
-    &nbsp;·&nbsp;
-    <a href="status.html">See Request Status</a>
-    &nbsp;·&nbsp;
-    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion</a>
-  </footer>
+  <div class="card-bottom-link">
+    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion ↗</a>
+  </div>
 </main>
+</div>
+
+</div>
 
 <script src="app.js"></script>
+<script>
+  // Subtle scroll-shadow on sticky nav — the bar feels weightless at rest,
+  // weighted-in once the user has moved off the top.
+  (function () {
+    var nav = document.getElementById("top-nav");
+    if (!nav) return;
+    var update = function () {
+      if (window.scrollY > 4) nav.classList.add("is-scrolled");
+      else nav.classList.remove("is-scrolled");
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  })();
+</script>
 </body>
 </html>
