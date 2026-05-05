@@ -164,9 +164,8 @@ function updateCounts(rows) {
   }
   $("count-all").textContent = counts.all;
   $("count-Submitted").textContent = counts.Submitted;
-  $("count-Waiting-to-Order").textContent = counts["Waiting to Order"];
-  $("count-Backordered").textContent = counts.Backordered;
   $("count-Ordered").textContent = counts.Ordered;
+  $("count-waitingOrBackordered").textContent = counts.Backordered + counts["Waiting to Order"];
   $("count-Received").textContent = counts.Received;
   $("count-archive").textContent = counts.archive;
   return counts;
@@ -208,6 +207,8 @@ function renderRows() {
   } else if (activeFilter === "Received") {
     visibleActive = [];
     visibleArchive = received;
+  } else if (activeFilter === "waitingOrBackordered") {
+    visibleActive = active.filter(r => r.status === "Waiting to Order" || r.status === "Backordered");
   } else if (activeFilter !== "all") {
     visibleActive = active.filter(r => r.status === activeFilter);
   }
