@@ -1,5 +1,5 @@
 /* Status — request log dashboard.
-   Inherits styles.css (Inter, brand orange, neutral palette).
+   Inherits styles.css (Inter, slate accent, internal-tool palette).
    This file only adds layout + status-specific patterns. */
 
 /* Header */
@@ -52,7 +52,7 @@
 .status-search-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.12);
+  box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.12);
 }
 .status-search-input::placeholder { color: var(--muted); font-weight: 400; }
 .status-search-clear {
@@ -319,7 +319,7 @@
 .card-status-badge[data-status="Submitted"]        { background: #E8E8E8; color: var(--text); }
 .card-status-badge[data-status="Waiting to Order"] { background: #E8F0FE; color: #1A56C7; }
 .card-status-badge[data-status="Backordered"]      { background: #FDECEA; color: var(--error); }
-.card-status-badge[data-status="Ordered"]          { background: #FFF7EB; color: var(--accent-dark); }
+.card-status-badge[data-status="Ordered"]          { background: #f1f3f5; color: var(--accent-dark); }
 .card-status-badge[data-status="Received"]         { background: #E8F5E9; color: var(--success); }
 .card-status-badge[data-status="Cancelled"]        { background: #F0F0F0; color: var(--muted); }
 
@@ -402,7 +402,7 @@
   background: white;
   border-color: var(--accent);
   color: var(--accent-dark);
-  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.15);
+  box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.15);
 }
 
 .stage.cancelled .stage-marker {
