@@ -173,10 +173,15 @@ function renderPOGroup(poKey, g) {
   const ageLabel = age != null ? ` · ${age}d ago` : "";
   const eta = g.eta ? ` · ETA ${fmtDate(g.eta)}` : "";
 
+  // Render "(no PO)" without the "PO:" prefix — it'd read awkwardly.
+  const poDisplay = poKey === "__NO_PO__"
+    ? escapeHtml(g.displayPO)
+    : `<span class="po-prefix">PO:</span> ${escapeHtml(g.displayPO)}`;
+
   section.innerHTML = `
     <header class="po-header">
       <div class="po-meta">
-        <span class="po-num">${escapeHtml(g.displayPO)}</span>
+        <span class="po-num">${poDisplay}</span>
         ${g.vendor ? `<span class="po-vendor">${escapeHtml(g.vendor)}</span>` : ""}
         <span class="po-when">Ordered ${escapeHtml(fmtDate(g.orderedDate))}${ageLabel}${eta}</span>
       </div>
@@ -260,6 +265,7 @@ function renderItemRow(r) {
       </label>
     </div>
     <div class="item-issue-wrap">
+      <span class="item-issue-spacer" aria-hidden="true"></span>
       <label class="item-issue-label">
         <input type="checkbox" class="item-issue">
         <span>Issue</span>

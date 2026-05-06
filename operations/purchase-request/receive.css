@@ -2,7 +2,7 @@
    Inherits styles.css + manage.css for the brand and bar treatments. */
 
 .po-group {
-  margin-bottom: 18px;
+  margin-bottom: 12px;
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -15,7 +15,7 @@
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
-  padding: 12px 16px;
+  padding: 8px 14px;
   background: linear-gradient(180deg, #FFF7EB, #ffffff);
   border-bottom: 1px solid var(--border);
 }
@@ -26,25 +26,33 @@
   flex-wrap: wrap;
 }
 .po-num {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text);
   letter-spacing: 0.02em;
 }
+.po-prefix {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 1px;
+}
 .po-vendor {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--accent-dark);
 }
 .po-when {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--muted);
 }
 .po-actions { display: flex; gap: 6px; align-items: center; }
 .po-actions .primary,
 .po-actions .secondary {
   font-size: 12px;
-  padding: 6px 12px;
+  padding: 5px 12px;
   white-space: nowrap;
 }
 .po-actions .secondary:disabled {
@@ -57,35 +65,44 @@
   margin: 0;
   padding: 0;
 }
+
+/* Each row is a single horizontal strip. Every cell uses the SAME vertical
+   structure (label on top, value/control below) so the labels share a row
+   and the values/controls share a row — no more mismatched heights. */
 .item-row {
   display: grid;
-  grid-template-columns: 28px 1fr auto auto;
+  grid-template-columns: 24px 1fr auto auto auto;
   gap: 14px;
-  align-items: center;
-  padding: 12px 16px;
+  align-items: start;
+  padding: 8px 14px;
   border-bottom: 1px solid var(--border);
 }
 .item-row:last-child { border-bottom: none; }
 
+/* Column 1 — include checkbox. Sits beside the value row of the qty
+   columns by matching their offset (label height + label gap). */
 .item-include-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 18px;
 }
 .item-include {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
   accent-color: var(--accent);
 }
 
-.item-body { min-width: 0; }
+/* Column 2 — item body. Title + meta stacked. Vertically centered by
+   making the body fill the row. */
+.item-body { min-width: 0; padding-top: 2px; }
 .item-title-row {
   display: flex;
   gap: 6px;
   align-items: baseline;
   flex-wrap: wrap;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .item-title {
   font-size: 13px;
@@ -118,15 +135,22 @@
   font-weight: 400;
 }
 
+/* Columns 3 & 4 — Ordered / Received. Stacked label-on-top (uniform height). */
 .item-qty {
   display: flex;
-  gap: 16px;
-  align-items: end;
+  gap: 12px;
 }
 .item-qty label {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  align-items: center;
+  min-width: 56px;
+}
+.item-qty .meta-label {
+  margin-right: 0;
+  height: 14px;       /* fixed label row height so all columns line up */
+  display: flex;
   align-items: center;
 }
 .qty-ordered {
@@ -134,10 +158,13 @@
   font-weight: 500;
   color: var(--text);
   font-variant-numeric: tabular-nums;
-  padding-top: 2px;
+  height: 28px;       /* matches the input height so values align */
+  display: flex;
+  align-items: center;
 }
 .item-qty-received {
   width: 70px;
+  height: 28px;
   padding: 4px 6px;
   font-size: 14px;
   font-family: inherit;
@@ -145,6 +172,7 @@
   border: 1px solid var(--border);
   border-radius: 4px;
   font-variant-numeric: tabular-nums;
+  box-sizing: border-box;
 }
 .item-qty-received:focus {
   outline: 2px solid var(--accent);
@@ -152,25 +180,32 @@
   border-color: var(--accent);
 }
 
+/* Column 5 — Issue checkbox. Same label/value rhythm as the qty columns
+   (invisible spacer label → checkbox), so it lines up with the inputs. */
 .item-issue-wrap {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  min-width: 100px;
+  gap: 2px;
+  min-width: 70px;
+}
+.item-issue-spacer {
+  height: 14px;       /* matches .item-qty .meta-label height */
 }
 .item-issue-label {
   display: inline-flex;
-  gap: 5px;
+  gap: 6px;
   align-items: center;
   font-size: 12px;
   color: var(--muted);
   cursor: pointer;
   font-weight: 500;
+  height: 28px;       /* matches qty-ordered + input value-row height */
 }
 .item-issue:checked + span { color: var(--error); font-weight: 600; }
 .item-issue-note {
   width: 200px;
+  margin-top: 4px;
 }
 .item-issue-text {
   width: 100%;
