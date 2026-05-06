@@ -14,6 +14,11 @@
   .header { background: #F7F5F2; padding: 28px 32px; text-align: center; border-bottom: 1px solid #E0DDD9; }
   .header h1 { font-weight: 600; font-size: 1.4rem; }
   .header p { font-weight: 300; font-size: 0.85rem; margin-top: 4px; opacity: 0.6; }
+  .header .updated { font-weight: 300; font-size: 0.72rem; margin-top: 6px; color: #999; letter-spacing: 0.04em; text-transform: uppercase; }
+  .report-nav { display: flex; gap: 8px; justify-content: center; padding: 14px 24px 0; background: #FAFAFA; }
+  .report-nav a { font-size: 0.78rem; font-weight: 400; color: #888; text-decoration: none; padding: 6px 14px; border-radius: 999px; border: 1px solid #E0DDD9; background: #fff; transition: all 0.15s; }
+  .report-nav a:hover { color: #4A4A4A; border-color: #4A4A4A; }
+  .report-nav a.current { color: #4A4A4A; font-weight: 600; border-color: #4A4A4A; background: #F7F5F2; }
   .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
   .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 28px; }
   .kpi { background: #fff; border: 1px solid #E0DDD9; border-radius: 8px; padding: 18px 14px; text-align: center; }
@@ -43,6 +48,12 @@
 <div class="header">
   <h1>Dutton Brown — 2025 vs 2026 Fulfillment Comparison</h1>
   <p>Jan–Apr &nbsp;&middot;&nbsp; Dutton Brown Design</p>
+  <div class="updated">Updated May 06, 2026 — through April</div>
+</div>
+
+<div class="report-nav">
+  <a href="dutton-brown-2026-fulfillment.html">2026 Monthly</a>
+  <a href="dutton-brown-fulfillment-2025-vs-2026.html" class="current">2025 vs 2026 YoY</a>
 </div>
 
 <div class="container">
@@ -75,7 +86,7 @@
     <div class="kpi-label">Avg Fulfillment Time</div>
   </div>
   <div class="kpi">
-    <div class="kpi-val">$769</div>
+    <div class="kpi-val">$768</div>
     <div class="kpi-sub">vs $607</div>
     <div class="kpi-label">Avg Revenue / Shipment</div>
   </div>
@@ -183,8 +194,8 @@
   <h2>Carrier Mix Comparison</h2>
   <table style="max-width:600px">
     <thead><tr><th>Carrier</th><th class="r">2025</th><th class="r">2026</th><th class="r">YoY</th></tr></thead>
-    <tbody><tr><td>FedEx</td><td class="r">1,358</td><td class="r">1,225</td><td class="r">-9.8%</td></tr>
-<tr><td>No carrier set</td><td class="r">902</td><td class="r">1,006</td><td class="r">+11.5%</td></tr>
+    <tbody><tr><td>FedEx</td><td class="r">1,358</td><td class="r">1,227</td><td class="r">-9.6%</td></tr>
+<tr><td>No carrier set</td><td class="r">902</td><td class="r">1,009</td><td class="r">+11.9%</td></tr>
 <tr><td>USPS</td><td class="r">668</td><td class="r">679</td><td class="r">+1.6%</td></tr>
 <tr><td>Other</td><td class="r">12</td><td class="r">15</td><td class="r">+25.0%</td></tr>
 <tr><td>UPS</td><td class="r">9</td><td class="r">10</td><td class="r">+11.1%</td></tr>
@@ -216,8 +227,8 @@
 <tr><td>GA</td><td class="r">38</td><td class="r">51</td><td class="r">+34.2%</td></tr>
 <tr><td>VA</td><td class="r">37</td><td class="r">45</td><td class="r">+21.6%</td></tr>
 <tr><td>CO</td><td class="r">37</td><td class="r">42</td><td class="r">+13.5%</td></tr>
-<tr><td>PA</td><td class="r">44</td><td class="r">32</td><td class="r">-27.3%</td></tr>
 <tr><td>NC</td><td class="r">33</td><td class="r">43</td><td class="r">+30.3%</td></tr>
+<tr><td>PA</td><td class="r">44</td><td class="r">32</td><td class="r">-27.3%</td></tr>
 </tbody>
       </table>
     </div>
@@ -324,10 +335,10 @@ new Chart(document.getElementById('typeChart'), {
 new Chart(document.getElementById('stateChart'), {
   type: 'bar',
   data: {
-    labels: ["NY", "CA", "TX", "FL", "MA", "NJ", "IL", "WA", "CT", "MN", "GA", "VA", "CO", "PA", "NC"],
+    labels: ["NY", "CA", "TX", "FL", "MA", "NJ", "IL", "WA", "CT", "MN", "GA", "VA", "CO", "NC", "PA"],
     datasets: [
-      { label: '2025', data: [279, 225, 131, 120, 101, 89, 71, 65, 42, 50, 38, 37, 37, 44, 33], backgroundColor: C_A, borderRadius: 3 },
-      { label: '2026', data: [261, 239, 125, 107, 111, 96, 73, 58, 70, 52, 51, 45, 42, 32, 43], backgroundColor: C_B, borderRadius: 3 },
+      { label: '2025', data: [279, 225, 131, 120, 101, 89, 71, 65, 42, 50, 38, 37, 37, 33, 44], backgroundColor: C_A, borderRadius: 3 },
+      { label: '2026', data: [261, 239, 125, 107, 111, 96, 73, 58, 70, 52, 51, 45, 42, 43, 32], backgroundColor: C_B, borderRadius: 3 },
     ]
   },
   options: {
