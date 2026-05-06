@@ -181,14 +181,11 @@ function renderPOGroup(poKey, g) {
         <span class="po-when">Ordered ${escapeHtml(fmtDate(g.orderedDate))}${ageLabel}${eta}</span>
       </div>
       <div class="po-actions">
-        <button type="button" class="po-receive-all primary">Receive all in this PO</button>
+        <button type="button" class="po-receive-selected secondary" disabled>Receive selected</button>
+        <button type="button" class="po-receive-all primary">Receive all</button>
       </div>
     </header>
     <ul class="po-items"></ul>
-    <footer class="po-footer">
-      <button type="button" class="po-receive-selected secondary" disabled>Receive selected</button>
-      <span class="po-selected-count">0 selected</span>
-    </footer>
   `;
 
   const itemsEl = section.querySelector(".po-items");
@@ -223,9 +220,9 @@ function renderPOGroup(poKey, g) {
 
 function updateSelectedCount(section) {
   const checked = section.querySelectorAll(".item-include:checked").length;
-  section.querySelector(".po-selected-count").textContent =
-    checked === 1 ? "1 selected" : `${checked} selected`;
-  section.querySelector(".po-receive-selected").disabled = checked === 0;
+  const btn = section.querySelector(".po-receive-selected");
+  btn.disabled = checked === 0;
+  btn.textContent = checked > 0 ? `Receive selected (${checked})` : "Receive selected";
 }
 
 function renderItemRow(r) {

@@ -388,13 +388,6 @@ function renderRow(r) {
     btn.addEventListener("click", () => openModal(b.action, r));
     actions.appendChild(btn);
   }
-  const link = document.createElement("a");
-  link.className = "open-notion";
-  link.href = r.url;
-  link.target = "_blank";
-  link.rel = "noopener";
-  link.textContent = "Open in Notion ↗";
-  actions.appendChild(link);
 
   return li;
 }
