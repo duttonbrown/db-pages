@@ -14,7 +14,14 @@
   .header { background: #F7F5F2; padding: 28px 32px; text-align: center; border-bottom: 1px solid #E0DDD9; }
   .header h1 { font-weight: 600; font-size: 1.4rem; letter-spacing: 0.02em; }
   .header p { font-weight: 300; font-size: 0.85rem; margin-top: 4px; opacity: 0.6; }
+  .header .updated { font-weight: 300; font-size: 0.72rem; margin-top: 6px; color: #999; letter-spacing: 0.04em; text-transform: uppercase; }
   .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+  /* Report nav (cross-link between fulfillment reports) */
+  .report-nav { display: flex; gap: 8px; justify-content: center; padding: 14px 24px 0; background: #FAFAFA; }
+  .report-nav a { font-size: 0.78rem; font-weight: 400; color: #888; text-decoration: none; padding: 6px 14px; border-radius: 999px; border: 1px solid #E0DDD9; background: #fff; transition: all 0.15s; }
+  .report-nav a:hover { color: #4A4A4A; border-color: #4A4A4A; }
+  .report-nav a.current { color: #4A4A4A; font-weight: 600; border-color: #4A4A4A; background: #F7F5F2; }
 
   /* Tabs */
   .tab-bar { display: flex; gap: 0; border-bottom: 2px solid #E0DDD9; margin-bottom: 24px; overflow-x: auto; }
@@ -49,6 +56,12 @@
 <div class="header">
   <h1>Dutton Brown — 2026 Fulfillment Report</h1>
   <p>Fulfillment &amp; Shipping Dashboard &nbsp;&middot;&nbsp; Dutton Brown Design</p>
+  <div class="updated">Updated May 06, 2026 — through April</div>
+</div>
+
+<div class="report-nav">
+  <a href="dutton-brown-2026-fulfillment.html" class="current">2026 Monthly</a>
+  <a href="dutton-brown-fulfillment-2025-vs-2026.html">2025 vs 2026 YoY</a>
 </div>
 
 <div class="container">
@@ -498,12 +511,12 @@
 
 <div class="tab-content" id="m04">
   <div class="kpi-row">
-    <div class="kpi"><div class="kpi-val">344</div><div class="kpi-label">Orders Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">352</div><div class="kpi-label">Orders Shipped</div></div>
     <div class="kpi"><div class="kpi-val">$288,505</div><div class="kpi-label">Revenue Shipped</div></div>
     <div class="kpi"><div class="kpi-val">1,870</div><div class="kpi-label">Units Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">8.1</div><div class="kpi-label">Avg Days to Ship</div></div>
-    <div class="kpi"><div class="kpi-val">$839</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
-    <div class="kpi"><div class="kpi-val">107</div><div class="kpi-label">Unfulfilled</div></div>
+    <div class="kpi"><div class="kpi-val">8.2</div><div class="kpi-label">Avg Days to Ship</div></div>
+    <div class="kpi"><div class="kpi-val">$820</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
+    <div class="kpi"><div class="kpi-val">99</div><div class="kpi-label">Unfulfilled</div></div>
   </div>
 
   <div class="section">
@@ -564,9 +577,9 @@
       <div>
         <table>
           <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
-          <tbody><tr><td>FedEx</td><td class="r">222</td><td class="r">37.8%</td></tr>
-<tr><td>No carrier set</td><td class="r">198</td><td class="r">33.7%</td></tr>
-<tr><td>USPS</td><td class="r">164</td><td class="r">27.9%</td></tr>
+          <tbody><tr><td>FedEx</td><td class="r">227</td><td class="r">37.7%</td></tr>
+<tr><td>No carrier set</td><td class="r">205</td><td class="r">34.1%</td></tr>
+<tr><td>USPS</td><td class="r">167</td><td class="r">27.7%</td></tr>
 <tr><td>Other</td><td class="r">2</td><td class="r">0.3%</td></tr>
 <tr><td>UPS</td><td class="r">1</td><td class="r">0.2%</td></tr>
 </tbody>
@@ -644,12 +657,12 @@
 
 <div class="tab-content" id="ytd">
   <div class="kpi-row">
-    <div class="kpi"><div class="kpi-val">1,653</div><div class="kpi-label">Orders Shipped</div></div>
+    <div class="kpi"><div class="kpi-val">1,661</div><div class="kpi-label">Orders Shipped</div></div>
     <div class="kpi"><div class="kpi-val">$1,275,685</div><div class="kpi-label">Revenue Shipped</div></div>
     <div class="kpi"><div class="kpi-val">8,316</div><div class="kpi-label">Units Shipped</div></div>
     <div class="kpi"><div class="kpi-val">10.2</div><div class="kpi-label">Avg Days to Ship</div></div>
-    <div class="kpi"><div class="kpi-val">$772</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
-    <div class="kpi"><div class="kpi-val">108</div><div class="kpi-label">Unfulfilled</div></div>
+    <div class="kpi"><div class="kpi-val">$768</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
+    <div class="kpi"><div class="kpi-val">100</div><div class="kpi-label">Unfulfilled</div></div>
   </div>
 
   <div class="section">
@@ -710,9 +723,9 @@
       <div>
         <table>
           <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
-          <tbody><tr><td>FedEx</td><td class="r">1,222</td><td class="r">41.8%</td></tr>
-<tr><td>No carrier set</td><td class="r">1,002</td><td class="r">34.3%</td></tr>
-<tr><td>USPS</td><td class="r">676</td><td class="r">23.1%</td></tr>
+          <tbody><tr><td>FedEx</td><td class="r">1,227</td><td class="r">41.7%</td></tr>
+<tr><td>No carrier set</td><td class="r">1,009</td><td class="r">34.3%</td></tr>
+<tr><td>USPS</td><td class="r">679</td><td class="r">23.1%</td></tr>
 <tr><td>Other</td><td class="r">15</td><td class="r">0.5%</td></tr>
 <tr><td>UPS</td><td class="r">10</td><td class="r">0.3%</td></tr>
 </tbody>
@@ -873,14 +886,14 @@ initChart('chart-product-m03', 'doughnut', ["Hardware", "Sconce", "Other", "Flus
 initChart('chart-carrier-m03', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[336, 279, 173, 2, 2]], COLORS, true);
 initChart('chart-state-m03', 'bar', ["NY", "CA", "MA", "TX", "FL", "NJ", "CT", "NC", "MN", "GA", "IL", "VA", "WA", "CO", "TN"], [[70, 63, 38, 26, 23, 23, 17, 15, 15, 15, 14, 14, 13, 12, 9]], ['#C5B9A8'], false, null, null, true);
 
-initChart('chart-fulfill-m04', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[128, 36, 109, 69, 2, 0]], ['#8BB8D9'], false, 'Orders', 'Days');
+initChart('chart-fulfill-m04', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[128, 36, 116, 70, 2, 0]], ['#8BB8D9'], false, 'Orders', 'Days');
 initChart('chart-product-m04', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Pendant", "Bulb", "Accessory", "Chandelier", "Plug-In"], [[517, 431, 318, 191, 110, 89, 85, 78, 43, 6]], COLORS, true);
-initChart('chart-carrier-m04', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[222, 198, 164, 2, 1]], COLORS, true);
+initChart('chart-carrier-m04', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[227, 205, 167, 2, 1]], COLORS, true);
 initChart('chart-state-m04', 'bar', ["NY", "CA", "TX", "NJ", "FL", "WA", "CT", "MA", "IL", "MN", "CO", "GA", "TN", "NC", "PA"], [[66, 51, 38, 28, 26, 23, 22, 22, 21, 15, 12, 11, 11, 10, 8]], ['#C5B9A8'], false, null, null, true);
 
-initChart('chart-fulfill-ytd', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[547, 157, 375, 499, 47, 28]], ['#8BB8D9'], false, 'Orders', 'Days');
+initChart('chart-fulfill-ytd', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[547, 157, 382, 500, 47, 28]], ['#8BB8D9'], false, 'Orders', 'Days');
 initChart('chart-product-ytd', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Bulb", "Accessory", "Pendant", "Chandelier", "Plug-In"], [[2026, 1973, 1316, 882, 686, 449, 421, 350, 181, 27]], COLORS, true);
-initChart('chart-carrier-ytd', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[1222, 1002, 676, 15, 10]], COLORS, true);
+initChart('chart-carrier-ytd', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[1227, 1009, 679, 15, 10]], COLORS, true);
 initChart('chart-state-ytd', 'bar', ["NY", "CA", "TX", "MA", "FL", "NJ", "IL", "CT", "WA", "MN", "GA", "VA", "NC", "CO", "PA"], [[261, 239, 125, 111, 107, 96, 73, 70, 58, 52, 51, 45, 43, 42, 32]], ['#C5B9A8'], false, null, null, true);
 
 
