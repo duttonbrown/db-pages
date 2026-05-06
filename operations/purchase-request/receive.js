@@ -62,10 +62,12 @@ function normalizePO(po) {
 }
 
 async function loadReceivers() {
+  // Mirrors the Submit form's requestor list — anyone who can submit a request
+  // can also receive a shipment. (Was previously the narrower /people pool.)
   try {
-    const res = await fetch(`${WORKER_URL}/people`);
+    const res = await fetch(`${WORKER_URL}/requestors`);
     const data = await res.json();
-    for (const name of data.people || []) {
+    for (const name of data.requestors || []) {
       const opt = document.createElement("option");
       opt.value = name;
       opt.textContent = name;
