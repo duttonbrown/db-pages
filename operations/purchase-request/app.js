@@ -14,6 +14,8 @@ const pickedType    = $("picked-type");
 const pickedNoteCheckbox = $("picked-note-checkbox");
 const pickedNoteInput    = $("picked-note");
 const pickedOutOfStock   = $("picked-out-of-stock");
+const pickedLastBox      = $("picked-last-box");
+const pickedLastBoxQty   = $("picked-last-box-qty");
 const addBtn        = $("add-btn");
 const cancelPick    = $("cancel-pick");
 const notInDb       = $("not-in-db");
@@ -253,6 +255,9 @@ function pickItem(item) {
   pickedNoteInput.value = "";
   pickedNoteInput.hidden = true;
   pickedOutOfStock.checked = false;
+  pickedLastBox.checked = false;
+  pickedLastBoxQty.value = "";
+  pickedLastBoxQty.hidden = true;
   picked.hidden = false;
   search.hidden = true;
   resultsList.hidden = true;
@@ -268,7 +273,8 @@ function cancelPicked() {
 
 function addPickedToCart() {
   if (!pickedItem) return;
-  const note = pickedNoteCheckbox.checked ? pickedNoteInput.value.trim() : "";
+  const userNote = pickedNoteCheckbox.checked ? pickedNoteInput.value.trim() : "";
+  const note = composeNote(userNote, pickedLastBox.checked, pickedLastBoxQty.value.trim());
   cart.push({
     type: pickedItem.type,
     relationId: pickedItem.id,
@@ -288,6 +294,20 @@ function addPickedToCart() {
   });
   cancelPicked();
   renderCart();
+}
+
+// Combine the user's free-text note with the optional "last box opened" tag
+// into a single note string. The tag is prepended so it's the first thing the
+// purchaser sees. (No Notion schema change — it just lands in the existing
+// Notes/Description field.)
+function composeNote(userNote, lastBoxOpened, lastBoxQty) {
+  const parts = [];
+  if (lastBoxOpened) {
+    const qty = (lastBoxQty || "").toString().trim();
+    parts.push(qty ? `Last box opened — ~${qty} left` : "Last box opened");
+  }
+  if (userNote) parts.push(userNote);
+  return parts.join(" — ");
 }
 
 function addCustomToCart() {
@@ -563,6 +583,11 @@ pickedNoteCheckbox.addEventListener("change", () => {
   pickedNoteInput.hidden = !pickedNoteCheckbox.checked;
   if (pickedNoteCheckbox.checked) pickedNoteInput.focus();
   else pickedNoteInput.value = "";
+});
+pickedLastBox.addEventListener("change", () => {
+  pickedLastBoxQty.hidden = !pickedLastBox.checked;
+  if (pickedLastBox.checked) pickedLastBoxQty.focus();
+  else pickedLastBoxQty.value = "";
 });
 notInDb.addEventListener("change", toggleNotInDb);
 customName.addEventListener("input", updateAddCustomState);

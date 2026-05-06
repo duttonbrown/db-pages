@@ -22,7 +22,7 @@
     </div>
     <ul class="top-nav-tabs" role="tablist">
       <li><a class="top-nav-tab" href="index.html" aria-current="page">Submit</a></li>
-      <li><a class="top-nav-tab" href="manage.html">Purchaser</a></li>
+      <li><a class="top-nav-tab" href="manage.html">Purchase</a></li>
       <li><a class="top-nav-tab" href="receive.html">Receive</a></li>
       <li><a class="top-nav-tab" href="status.html">Status</a></li>
     </ul>
@@ -72,10 +72,15 @@
           <span>Out of stock — urgent</span>
         </label>
         <label class="picked-toggle">
+          <input type="checkbox" id="picked-last-box">
+          <span>Last box opened</span>
+        </label>
+        <label class="picked-toggle">
           <input type="checkbox" id="picked-note-checkbox">
           <span>Add note for purchaser</span>
         </label>
       </div>
+      <input type="number" id="picked-last-box-qty" class="picked-note-input" placeholder="Approx. units left (optional)" min="0" hidden>
       <input type="text" id="picked-note" class="picked-note-input" placeholder="e.g. needed by Friday, specific finish, link to spec…" hidden>
     </div>
 
