@@ -16,7 +16,7 @@
   gap: 12px;
   flex-wrap: wrap;
   padding: 12px 16px;
-  background: linear-gradient(180deg, #f1f3f5, #ffffff);
+  background: linear-gradient(180deg, #FFF7EB, #ffffff);
   border-bottom: 1px solid var(--border);
 }
 .po-meta {

@@ -4,7 +4,7 @@
   gap: 12px;
   margin-bottom: 16px;
   padding: 12px 14px;
-  background: #f1f3f5;
+  background: #FFF7EB;
   border: 1px solid var(--accent);
   border-radius: var(--radius);
 }
@@ -163,7 +163,7 @@
   transition: background 0.1s, border-color 0.1s;
 }
 .row-actions .action-btn:hover {
-  background: #f1f3f5;
+  background: #FFF7EB;
   border-color: var(--accent);
 }
 .row-actions .action-btn.action-cancel:hover {
@@ -264,7 +264,7 @@
 .status-pill[data-status="Submitted"]      { background: #E8E8E8; color: var(--text); }
 .status-pill[data-status="Backordered"]    { background: #FDECEA; color: var(--error); }
 .status-pill[data-status="Waiting to Order"] { background: #E8F0FE; color: #1A56C7; }
-.status-pill[data-status="Ordered"]        { background: #f1f3f5; color: var(--accent-dark); }
+.status-pill[data-status="Ordered"]        { background: #FFF7EB; color: var(--accent-dark); }
 
 /* Inline checkbox sitting under a text input in the same .field block —
    used by the "No PO #" toggle on the Mark Ordered modal. */
@@ -323,13 +323,13 @@
 }
 .vendor-bubble:hover {
   border-color: var(--accent);
-  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.15);
+  box-shadow: 0 1px 4px rgba(255, 153, 18, 0.15);
   transform: translateY(-1px);
 }
 .vendor-bubble.active {
   border-color: var(--accent-dark);
-  background: #f1f3f5;
-  box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.18);
+  background: #FFF7EB;
+  box-shadow: 0 0 0 2px rgba(255, 153, 18, 0.18);
 }
 .vendor-bubble-row {
   display: flex;

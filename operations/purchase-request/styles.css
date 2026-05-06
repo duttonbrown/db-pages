@@ -1,18 +1,20 @@
 :root {
-  /* Internal-tools palette. The brand warm orange is reserved for marketing
-     surfaces; staff dashboards use a cool gray + slate emphasis so data
-     reads cleanly and without sales energy. */
-  --accent:      #2c3e50;   /* slate — primary CTA, active tab, focus ring */
-  --accent-dark: #1f2d3d;   /* hover/pressed slate */
-  --text:        #333333;
-  --muted:       #6c757d;
-  --border:      #dee2e6;
-  --bg:          #f8f9fa;
+  /* Internal-tools palette. Brand-leaning charcoal grounds + warm orange
+     reserved for *moments of intent* (CTAs, active progress). Charcoal
+     handles structural roles (text, dark surfaces, active tab); orange
+     marks where to act. Two-color system: charcoal carries the UI,
+     orange punctuates it. */
+  --accent:      #FF9912;   /* warm orange — primary CTA, loading, active progress */
+  --accent-dark: #D97706;   /* hover/pressed CTA */
+  --text:        #4A4A4A;   /* brand charcoal — body text */
+  --ink:         #2A2A2A;   /* darker charcoal — headers, active tab text, emphasis */
+  --muted:       #888888;
+  --border:      #E0DDD9;   /* warm-neutral border, plays with charcoal */
+  --bg:          #FAFAFA;
   --card:        #ffffff;
   --success:     #2E7D32;
   --error:       #c0392b;
-  /* Brand orange retained as a single decorative token for urgency only. */
-  --urgent:      #e67e22;
+  --urgent:      #e67e22;   /* still here for decorative urgent flag */
   --radius:      8px;
 }
 
@@ -328,7 +330,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.12);
+  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.12);
 }
 
 textarea { resize: vertical; min-height: 70px; }
@@ -339,6 +341,11 @@ textarea { resize: vertical; min-height: 70px; }
   gap: 12px;
 }
 
+/* Standalone checkbox row (e.g. "Add item not in database") — needs more
+   breathing room than a checkbox sitting *inside* a card or modal. */
+.checkbox-field {
+  margin-top: 18px;
+}
 .checkbox-field label {
   display: flex;
   align-items: center;
@@ -391,7 +398,7 @@ textarea { resize: vertical; min-height: 70px; }
 
 .results li:last-child { border-bottom: none; }
 .results li:hover,
-.results li.active { background: #f1f3f5; }
+.results li.active { background: #FFF7EB; }
 
 .results .icon {
   font-size: 28px;
@@ -462,7 +469,7 @@ textarea { resize: vertical; min-height: 70px; }
   padding: 14px;
   border: 1px solid var(--accent);
   border-radius: var(--radius);
-  background: #f1f3f5;
+  background: #FFF7EB;
   margin-top: 4px;
 }
 
@@ -497,7 +504,9 @@ textarea { resize: vertical; min-height: 70px; }
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-top: 12px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
 }
 .picked-toggle {
   display: flex;
@@ -804,7 +813,7 @@ textarea { resize: vertical; min-height: 70px; }
   display: block;
   margin-top: 6px;
   padding: 8px 12px;
-  background: #f1f3f5;
+  background: #FFF7EB;
   border-left: 3px solid var(--accent);
   border-radius: 4px;
   font-size: 12px;
