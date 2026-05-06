@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dutton Brown — 2025 vs 2026 Fulfillment Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Poppins", sans-serif; font-weight: 300; color: #4A4A4A; background: #FAFAFA; line-height: 1.5; font-size: 14px; }
+  .header { background: #F7F5F2; padding: 28px 32px; text-align: center; border-bottom: 1px solid #E0DDD9; }
+  .header h1 { font-weight: 600; font-size: 1.4rem; }
+  .header p { font-weight: 300; font-size: 0.85rem; margin-top: 4px; opacity: 0.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .kpi { background: #fff; border: 1px solid #E0DDD9; border-radius: 8px; padding: 18px 14px; text-align: center; }
+  .kpi-val { font-weight: 600; font-size: 1.4rem; }
+  .kpi-sub { font-size: 0.8rem; margin-top: 2px; }
+  .kpi-label { font-weight: 400; font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+  .pos { color: #7A9B76; }
+  .neg { color: #D4726A; }
+  .section { margin-bottom: 36px; }
+  .section h2 { font-weight: 600; font-size: 1.1rem; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #E0DDD9; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th { font-weight: 600; text-align: left; padding: 8px 10px; border-bottom: 2px solid #E0DDD9; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: #888; }
+  td { padding: 7px 10px; border-bottom: 1px solid #F0EDEA; }
+  tr:hover td { background: #FAFAF8; }
+  .r { text-align: right; }
+  .chart-container { position: relative; margin: 16px 0; }
+  .legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; font-size: 0.85rem; }
+  .legend span { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+  tfoot td { font-weight: 600; border-top: 2px solid #E0DDD9; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Dutton Brown — 2025 vs 2026 Fulfillment Comparison</h1>
+  <p>Jan–Apr &nbsp;&middot;&nbsp; Dutton Brown Design</p>
+</div>
+
+<div class="container">
+
+<!-- Summary KPIs -->
+<div class="legend">
+  <span><div class="legend-dot" style="background:#8BB8D9"></div> 2025</span>
+  <span><div class="legend-dot" style="background:#D4726A"></div> 2026</span>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="kpi-val">1,761</div>
+    <div class="kpi-sub pos">+1.3% vs 1,738</div>
+    <div class="kpi-label">Orders (Jan–Apr)</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val">8,316</div>
+    <div class="kpi-sub pos">+9.9% vs 7,569</div>
+    <div class="kpi-label">Units Shipped</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val">$1,275,685</div>
+    <div class="kpi-sub pos">+21.0% vs $1,054,307</div>
+    <div class="kpi-label">Revenue Shipped</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val">10.2 days</div>
+    <div class="kpi-sub">vs 12.9 days</div>
+    <div class="kpi-label">Avg Fulfillment Time</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-val">$769</div>
+    <div class="kpi-sub">vs $607</div>
+    <div class="kpi-label">Avg Revenue / Shipment</div>
+  </div>
+</div>
+
+<!-- Monthly Comparison Table -->
+<div class="section">
+  <h2>Month-by-Month Comparison</h2>
+  <div style="overflow-x:auto">
+  <table>
+    <thead><tr>
+      <th></th>
+      <th colspan="3" style="text-align:center; border-bottom:2px solid #8BB8D9">Orders</th>
+      <th colspan="3" style="text-align:center; border-bottom:2px solid #7A9B76">Units</th>
+      <th colspan="3" style="text-align:center; border-bottom:2px solid #C9A84C">Revenue</th>
+    </tr>
+    <tr>
+      <th>Month</th>
+      <th class="r">2025</th><th class="r">2026</th><th class="r">YoY</th>
+      <th class="r">2025</th><th class="r">2026</th><th class="r">YoY</th>
+      <th class="r">2025</th><th class="r">2026</th><th class="r">YoY</th>
+    </tr></thead>
+    <tbody><tr>
+            <td style="font-weight:600">Jan</td>
+            <td class="r">455</td><td class="r">425</td><td class="r" style="color:#D4726A">-6.6%</td>
+            <td class="r">2,085</td><td class="r">2,068</td><td class="r" style="color:#D4726A">-0.8%</td>
+            <td class="r">$245,523</td><td class="r">$298,071</td><td class="r" style="color:#7A9B76">+21.4%</td>
+        </tr>
+<tr>
+            <td style="font-weight:600">Feb</td>
+            <td class="r">461</td><td class="r">439</td><td class="r" style="color:#D4726A">-4.8%</td>
+            <td class="r">2,132</td><td class="r">1,888</td><td class="r" style="color:#D4726A">-11.4%</td>
+            <td class="r">$321,683</td><td class="r">$244,209</td><td class="r" style="color:#D4726A">-24.1%</td>
+        </tr>
+<tr>
+            <td style="font-weight:600">Mar</td>
+            <td class="r">379</td><td class="r">446</td><td class="r" style="color:#7A9B76">+17.7%</td>
+            <td class="r">1,594</td><td class="r">2,490</td><td class="r" style="color:#7A9B76">+56.2%</td>
+            <td class="r">$229,937</td><td class="r">$444,901</td><td class="r" style="color:#7A9B76">+93.5%</td>
+        </tr>
+<tr>
+            <td style="font-weight:600">Apr</td>
+            <td class="r">443</td><td class="r">451</td><td class="r" style="color:#7A9B76">+1.8%</td>
+            <td class="r">1,758</td><td class="r">1,870</td><td class="r" style="color:#7A9B76">+6.4%</td>
+            <td class="r">$257,164</td><td class="r">$288,505</td><td class="r" style="color:#7A9B76">+12.2%</td>
+        </tr>
+</tbody>
+    <tfoot><tr>
+      <td>Total</td>
+      <td class="r">1,738</td><td class="r">1,761</td><td class="r">+1.3%</td>
+      <td class="r">7,569</td><td class="r">8,316</td><td class="r">+9.9%</td>
+      <td class="r">$1,054,307</td><td class="r">$1,275,685</td><td class="r">+21.0%</td>
+    </tr></tfoot>
+  </table>
+  </div>
+</div>
+
+<!-- Revenue Trend -->
+<div class="section">
+  <h2>Cumulative Revenue</h2>
+  <div class="chart-container"><canvas id="cumRevChart" height="300"></canvas></div>
+</div>
+
+<!-- Orders & Units Trend -->
+<div class="section">
+  <h2>Monthly Orders &amp; Units</h2>
+  <div class="grid-2">
+    <div class="chart-container"><canvas id="ordersChart" height="260"></canvas></div>
+    <div class="chart-container"><canvas id="unitsChart" height="260"></canvas></div>
+  </div>
+</div>
+
+<!-- Fulfillment Time Trend -->
+<div class="section">
+  <h2>Average Days to Ship</h2>
+  <div class="chart-container"><canvas id="daysChart" height="250"></canvas></div>
+</div>
+
+<!-- Product Type Comparison -->
+<div class="section">
+  <h2>Product Mix Comparison (Jan–Apr)</h2>
+  <div class="grid-2">
+    <div class="chart-container"><canvas id="typeChart" height="300"></canvas></div>
+    <div>
+      <table>
+        <thead><tr><th>Type</th><th class="r">2025</th><th class="r">2026</th><th class="r">YoY</th><th class="r">Rev 2025</th><th class="r">Rev 2026</th></tr></thead>
+        <tbody><tr><td>Hardware</td><td class="r">1,745</td><td class="r">2,026</td><td class="r" style="color:#7A9B76">+16.1%</td><td class="r">$98,578</td><td class="r">$105,441</td></tr>
+<tr><td>Sconce</td><td class="r">1,538</td><td class="r">1,973</td><td class="r" style="color:#7A9B76">+28.3%</td><td class="r">$508,624</td><td class="r">$690,502</td></tr>
+<tr><td>Other</td><td class="r">1,280</td><td class="r">1,321</td><td class="r" style="color:#7A9B76">+3.2%</td><td class="r">$33,350</td><td class="r">$23,914</td></tr>
+<tr><td>Sample</td><td class="r">722</td><td class="r">882</td><td class="r" style="color:#7A9B76">+22.2%</td><td class="r">$6,419</td><td class="r">$7,632</td></tr>
+<tr><td>Flush Mount</td><td class="r">490</td><td class="r">686</td><td class="r" style="color:#7A9B76">+40.0%</td><td class="r">$246,916</td><td class="r">$345,864</td></tr>
+<tr><td>Bulb</td><td class="r">634</td><td class="r">449</td><td class="r" style="color:#D4726A">-29.2%</td><td class="r">$12,051</td><td class="r">$10,226</td></tr>
+<tr><td>Accessory</td><td class="r">573</td><td class="r">421</td><td class="r" style="color:#D4726A">-26.5%</td><td class="r">$15,745</td><td class="r">$9,926</td></tr>
+<tr><td>Pendant</td><td class="r">342</td><td class="r">350</td><td class="r" style="color:#7A9B76">+2.3%</td><td class="r">$115,183</td><td class="r">$131,516</td></tr>
+<tr><td>Chandelier</td><td class="r">174</td><td class="r">181</td><td class="r" style="color:#7A9B76">+4.0%</td><td class="r">$193,689</td><td class="r">$200,890</td></tr>
+<tr><td>Plug-In</td><td class="r">71</td><td class="r">27</td><td class="r" style="color:#D4726A">-62.0%</td><td class="r">$25,760</td><td class="r">$8,740</td></tr>
+</tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Carrier Comparison -->
+<div class="section">
+  <h2>Carrier Mix Comparison</h2>
+  <table style="max-width:600px">
+    <thead><tr><th>Carrier</th><th class="r">2025</th><th class="r">2026</th><th class="r">YoY</th></tr></thead>
+    <tbody><tr><td>FedEx</td><td class="r">1,358</td><td class="r">1,225</td><td class="r">-9.8%</td></tr>
+<tr><td>No carrier set</td><td class="r">902</td><td class="r">1,006</td><td class="r">+11.5%</td></tr>
+<tr><td>USPS</td><td class="r">668</td><td class="r">679</td><td class="r">+1.6%</td></tr>
+<tr><td>Other</td><td class="r">12</td><td class="r">15</td><td class="r">+25.0%</td></tr>
+<tr><td>UPS</td><td class="r">9</td><td class="r">10</td><td class="r">+11.1%</td></tr>
+<tr><td>TForce Logistics</td><td class="r">6</td><td class="r">0</td><td class="r">-100.0%</td></tr>
+<tr><td>Dropoff</td><td class="r">2</td><td class="r">0</td><td class="r">-100.0%</td></tr>
+<tr><td>TForce Final Mile</td><td class="r">1</td><td class="r">0</td><td class="r">-100.0%</td></tr>
+</tbody>
+  </table>
+</div>
+
+<!-- Destination Comparison -->
+<div class="section">
+  <h2>Top Destinations</h2>
+  <div class="grid-2">
+    <div class="chart-container"><canvas id="stateChart" height="350"></canvas></div>
+    <div>
+      <table>
+        <thead><tr><th>State</th><th class="r">2025</th><th class="r">2026</th><th class="r">YoY</th></tr></thead>
+        <tbody><tr><td>NY</td><td class="r">279</td><td class="r">261</td><td class="r">-6.5%</td></tr>
+<tr><td>CA</td><td class="r">225</td><td class="r">239</td><td class="r">+6.2%</td></tr>
+<tr><td>TX</td><td class="r">131</td><td class="r">125</td><td class="r">-4.6%</td></tr>
+<tr><td>FL</td><td class="r">120</td><td class="r">107</td><td class="r">-10.8%</td></tr>
+<tr><td>MA</td><td class="r">101</td><td class="r">111</td><td class="r">+9.9%</td></tr>
+<tr><td>NJ</td><td class="r">89</td><td class="r">96</td><td class="r">+7.9%</td></tr>
+<tr><td>IL</td><td class="r">71</td><td class="r">73</td><td class="r">+2.8%</td></tr>
+<tr><td>WA</td><td class="r">65</td><td class="r">58</td><td class="r">-10.8%</td></tr>
+<tr><td>CT</td><td class="r">42</td><td class="r">70</td><td class="r">+66.7%</td></tr>
+<tr><td>MN</td><td class="r">50</td><td class="r">52</td><td class="r">+4.0%</td></tr>
+<tr><td>GA</td><td class="r">38</td><td class="r">51</td><td class="r">+34.2%</td></tr>
+<tr><td>VA</td><td class="r">37</td><td class="r">45</td><td class="r">+21.6%</td></tr>
+<tr><td>CO</td><td class="r">37</td><td class="r">42</td><td class="r">+13.5%</td></tr>
+<tr><td>PA</td><td class="r">44</td><td class="r">32</td><td class="r">-27.3%</td></tr>
+<tr><td>NC</td><td class="r">33</td><td class="r">43</td><td class="r">+30.3%</td></tr>
+</tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const C_A = '#8BB8D9', C_B = '#D4726A', C_GREEN = '#7A9B76', C_SAND = '#C5B9A8';
+const COLORS = ['#D4726A','#8BB8D9','#C5B9A8','#7A9B76','#C9A84C','#A8A8A8','#3A3A3A','#E8B4B8','#B8D4E3','#D4C5A8'];
+Chart.defaults.font.family = '"Poppins", sans-serif';
+Chart.defaults.font.size = 12;
+Chart.defaults.color = '#888';
+
+const labels = ["Jan", "Feb", "Mar", "Apr"];
+
+// Cumulative Revenue
+new Chart(document.getElementById('cumRevChart'), {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      { label: '2025', data: [245523, 567206, 797143, 1054307], borderColor: C_A, backgroundColor: C_A+'22', fill: true, tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
+      { label: '2026', data: [298071, 542280, 987180, 1275685], borderColor: C_B, backgroundColor: C_B+'22', fill: true, tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 20 } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.raw.toLocaleString() } } },
+    scales: { y: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' }, grid: { color: '#F0EDEA' } }, x: { grid: { display: false } } }
+  }
+});
+
+// Monthly Orders
+new Chart(document.getElementById('ordersChart'), {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [
+      { label: '2025', data: [455, 461, 379, 443], backgroundColor: C_A, borderRadius: 4 },
+      { label: '2026', data: [425, 439, 446, 451], backgroundColor: C_B, borderRadius: 4 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } }, title: { display: true, text: 'Orders', font: { weight: 600 } } },
+    scales: { y: { grid: { color: '#F0EDEA' } }, x: { grid: { display: false } } }
+  }
+});
+
+// Monthly Units
+new Chart(document.getElementById('unitsChart'), {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [
+      { label: '2025', data: [2085, 2132, 1594, 1758], backgroundColor: C_A, borderRadius: 4 },
+      { label: '2026', data: [2068, 1888, 2490, 1870], backgroundColor: C_B, borderRadius: 4 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } }, title: { display: true, text: 'Units', font: { weight: 600 } } },
+    scales: { y: { grid: { color: '#F0EDEA' } }, x: { grid: { display: false } } }
+  }
+});
+
+// Avg Days to Ship
+new Chart(document.getElementById('daysChart'), {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      { label: '2025', data: [12.2, 11.8, 14.9, 13.1], borderColor: C_A, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
+      { label: '2026', data: [9.5, 10.5, 12.0, 8.2], borderColor: C_B, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 20 } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + ' days' } } },
+    scales: { y: { title: { display: true, text: 'Days' }, grid: { color: '#F0EDEA' } }, x: { grid: { display: false } } }
+  }
+});
+
+// Product Type grouped bar
+new Chart(document.getElementById('typeChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Bulb", "Accessory", "Pendant", "Chandelier", "Plug-In"],
+    datasets: [
+      { label: '2025', data: [1745, 1538, 1280, 722, 490, 634, 573, 342, 174, 71], backgroundColor: C_A, borderRadius: 3 },
+      { label: '2026', data: [2026, 1973, 1321, 882, 686, 449, 421, 350, 181, 27], backgroundColor: C_B, borderRadius: 3 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } } },
+    scales: { y: { grid: { color: '#F0EDEA' } }, x: { grid: { display: false } } }
+  }
+});
+
+// Top States
+new Chart(document.getElementById('stateChart'), {
+  type: 'bar',
+  data: {
+    labels: ["NY", "CA", "TX", "FL", "MA", "NJ", "IL", "WA", "CT", "MN", "GA", "VA", "CO", "PA", "NC"],
+    datasets: [
+      { label: '2025', data: [279, 225, 131, 120, 101, 89, 71, 65, 42, 50, 38, 37, 37, 44, 33], backgroundColor: C_A, borderRadius: 3 },
+      { label: '2026', data: [261, 239, 125, 107, 111, 96, 73, 58, 70, 52, 51, 45, 42, 32, 43], backgroundColor: C_B, borderRadius: 3 },
+    ]
+  },
+  options: {
+    indexAxis: 'y', responsive: true,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } } },
+    scales: { x: { grid: { color: '#F0EDEA' } }, y: { grid: { display: false } } }
+  }
+});
+</script>
+</body>
+</html>
