@@ -94,7 +94,7 @@
 }
 .item-desc {
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--muted);
 }
 .item-meta {
@@ -115,7 +115,7 @@
 .item-note {
   color: var(--text);
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .item-qty {
