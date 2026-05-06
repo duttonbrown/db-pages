@@ -480,6 +480,26 @@ function openModal(action, row) {
     });
   }
 
+  // Mark Ordered: "No PO #" disables the PO input and satisfies the required
+  // PO check at submit time. Useful when a vendor doesn't issue PO numbers.
+  if (action === "ordered") {
+    const noPOBox = modalForm.querySelector("#f-noPO");
+    const poInput = modalForm.querySelector("#f-poNumber");
+    if (noPOBox && poInput) {
+      noPOBox.addEventListener("change", () => {
+        if (noPOBox.checked) {
+          poInput.value = "";
+          poInput.disabled = true;
+          poInput.placeholder = "Not provided";
+        } else {
+          poInput.disabled = false;
+          poInput.placeholder = "e.g. PO-2026-0042";
+          poInput.focus();
+        }
+      });
+    }
+  }
+
   // Auto-focus first input
   const firstInput = modalForm.querySelector("input, select, textarea");
   if (firstInput) firstInput.focus();
@@ -502,6 +522,10 @@ function fieldsFor(action, row) {
       <div class="field">
         <label for="f-poNumber">PO #<span class="req">*</span></label>
         <input id="f-poNumber" name="poNumber" type="text" placeholder="e.g. PO-2026-0042">
+        <label class="field-checkbox">
+          <input type="checkbox" id="f-noPO" name="noPO" value="1">
+          <span>No PO # available</span>
+        </label>
       </div>
       <div class="field">
         <label for="f-qtyOrdered">Qty Ordered<span class="req">*</span></label>

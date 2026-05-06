@@ -217,22 +217,9 @@ function updateCounts(rows) {
   return counts;
 }
 
-function updateHeroSub(counts) {
-  if (counts.all === 0 && counts.Received === 0 && counts.archive === 0) {
-    heroSubEl.textContent = `No requests yet.`;
-    return;
-  }
-  if (counts.all === 0) {
-    const tail = [];
-    if (counts.Received) tail.push(`${counts.Received} received`);
-    if (counts.archive)  tail.push(`${counts.archive} cancelled`);
-    heroSubEl.textContent = `Nothing in motion${tail.length ? " — " + tail.join(", ") : "."}`;
-    return;
-  }
-  const word = counts.all === 1 ? "request" : "requests";
-  const waiting = counts.Backordered + counts["Waiting to Order"];
-  heroSubEl.innerHTML = `<strong>${counts.all}</strong> ${word} in motion — ${counts.Submitted} submitted, ${counts.Ordered} on a PO, ${waiting} waiting.`;
-}
+// Counts already live on each filter pill — no need to restate them in the
+// page lead. Left as a no-op so the call sites don't change.
+function updateHeroSub(/* counts */) {}
 
 function renderRows() {
   const counts = updateCounts(allRows);

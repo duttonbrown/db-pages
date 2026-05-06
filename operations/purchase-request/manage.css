@@ -266,6 +266,20 @@
 .status-pill[data-status="Waiting to Order"] { background: #E8F0FE; color: #1A56C7; }
 .status-pill[data-status="Ordered"]        { background: #FFF7EB; color: var(--accent-dark); }
 
+/* Inline checkbox sitting under a text input in the same .field block —
+   used by the "No PO #" toggle on the Mark Ordered modal. */
+.field-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  cursor: pointer;
+}
+.field-checkbox input { width: auto; margin: 0; cursor: pointer; }
+
 /* Vendor digest — bubbles surface vendors with 2+ open requests so the
    purchaser can batch-order on the same day. Click to filter the queue. */
 .vendor-digest {
