@@ -23,6 +23,56 @@
 
 
 /* Filter bar */
+/* Search bar — sits above the filter pills as the first scope-down. */
+.status-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+.status-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.status-search-input {
+  width: 100%;
+  padding: 8px 36px 8px 36px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: white;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.status-search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.12);
+}
+.status-search-input::placeholder { color: var(--muted); font-weight: 300; }
+.status-search-clear {
+  position: absolute;
+  right: 8px;
+  appearance: none;
+  background: transparent;
+  border: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.status-search-clear:hover { background: var(--bg); color: var(--text); }
+
 .filter-bar {
   display: flex;
   align-items: center;
@@ -152,10 +202,10 @@
 /* Request list */
 .request-list {
   list-style: none;
-  margin: 0 0 24px;
+  margin: 0 0 18px;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: 6px;
 }
 
 /* Request card — same visual world as the form's cart-item */
@@ -163,7 +213,7 @@
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px 18px;
+  padding: 12px 14px;
   position: relative;
 }
 .request-card.urgent {
@@ -174,27 +224,27 @@
 .card-row {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 14px;
+  gap: 12px;
   align-items: start;
 }
 
 .card-thumb {
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
   border-radius: 4px;
   object-fit: cover;
   background: #F0F0F0;
   flex-shrink: 0;
 }
 .card-thumb-fallback {
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
   border-radius: 4px;
   background: #F0F0F0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 20px;
   flex-shrink: 0;
 }
 
@@ -208,7 +258,7 @@
   font-size: 11px;
   font-weight: 400;
   color: var(--muted);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .order-num {
   font-size: 11px;
@@ -235,13 +285,13 @@
   margin-bottom: 2px;
 }
 .card-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text);
   margin: 0;
 }
 .card-title-desc {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 300;
   color: var(--muted);
 }
@@ -250,8 +300,8 @@
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
-  margin-top: 6px;
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 0;
 }
 
 /* Card-level status badge — matches the manage page's .status-pill */
@@ -276,13 +326,13 @@
 /* Process rail — the page's signature visual */
 .process-rail {
   position: relative;
-  margin-top: 14px;
-  padding: 10px 0 18px;
+  margin-top: 10px;
+  padding: 6px 0 8px;
 }
 .process-rail::before {
   content: "";
   position: absolute;
-  top: 28px;
+  top: 19px;
   left: 12px;
   right: 12px;
   height: 2px;
@@ -293,7 +343,7 @@
 .process-rail::after {
   content: "";
   position: absolute;
-  top: 28px;
+  top: 19px;
   left: 12px;
   height: 2px;
   width: var(--rail-progress, 0%);
@@ -318,20 +368,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 3px;
   text-align: center;
-  padding-top: 6px;
+  padding-top: 4px;
 }
 .stage-marker {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: white;
   border: 2px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: var(--muted);
   transition: all 0.2s;
@@ -344,7 +394,7 @@
   color: white;
 }
 .stage.done .stage-marker svg { display: block; }
-.stage-marker svg { display: none; width: 12px; height: 12px; }
+.stage-marker svg { display: none; width: 10px; height: 10px; }
 .stage-marker .num { display: inline; }
 .stage.done .stage-marker .num { display: none; }
 
@@ -376,15 +426,15 @@
 
 /* Tracking row — dedicated panel below the spotlight on Ordered cards */
 .tracking-row {
-  display: grid;
-  grid-template-columns: 90px 1fr;
+  display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-  padding: 10px 14px;
-  background: linear-gradient(0deg, var(--bg), white);
+  gap: 10px;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 4px;
+  font-size: 12px;
 }
 .tracking-label {
   font-size: 10px;
@@ -392,9 +442,10 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted);
+  flex-shrink: 0;
 }
 .tracking-value {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 500;
   color: var(--text);
   word-break: break-word;
@@ -455,20 +506,23 @@
 }
 .stage.active .stage-detail { color: var(--accent-dark); font-weight: 500; }
 
-/* Detail grid — what's the latest info on this request */
+/* Detail grid — what's the latest info on this request. Inline label/value
+   on the same line to keep the card short. */
 .detail-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 10px 18px;
-  padding-top: 12px;
-  margin-top: 4px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2px 18px;
+  padding-top: 8px;
+  margin-top: 2px;
   border-top: 1px solid var(--border);
 }
 .detail {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: baseline;
+  gap: 6px;
   min-width: 0;
+  font-size: 12px;
+  line-height: 1.4;
 }
 .detail-label {
   font-size: 10px;
@@ -476,9 +530,10 @@
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  flex-shrink: 0;
 }
 .detail-value {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 400;
   color: var(--text);
   word-break: break-word;
@@ -488,14 +543,15 @@
 
 /* Notes block — matches the manage console's notes treatment */
 .notes-block {
-  margin-top: 10px;
-  padding: 8px 12px;
+  margin-top: 6px;
+  padding: 6px 10px;
   background: var(--bg);
   border-radius: 4px;
   font-size: 12px;
+  line-height: 1.4;
   color: var(--text);
 }
-.notes-block + .notes-block { margin-top: 6px; }
+.notes-block + .notes-block { margin-top: 4px; }
 .notes-block .note-label {
   display: inline;
   font-weight: 600;
@@ -512,8 +568,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
-  padding-top: 8px;
+  margin-top: 6px;
+  padding-top: 6px;
   border-top: 1px solid var(--border);
   font-size: 11px;
   color: var(--muted);

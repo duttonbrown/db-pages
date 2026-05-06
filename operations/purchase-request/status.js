@@ -33,6 +33,7 @@ const LOADING_MESSAGES = [
 // ----- State -----
 let allRows = [];          // every request returned from /requests
 let activeFilter = "all";  // one of: all | Submitted | Waiting to Order | Backordered | Ordered | archive
+let searchQuery = "";      // free-text filter — matches across item/order/requestor/vendor/PO/notes
 
 // The rail is built per-row, not from a fixed pipeline. Slot 2 ("Middle")
 // reflects what actually happened — Ordered, Backordered, Waiting, or
@@ -108,6 +109,40 @@ pillsEl.addEventListener("click", (e) => {
   activeFilter = btn.dataset.status;
   renderRows();
 });
+
+// Search input — re-renders on each keystroke. Matches across the fields a
+// user is most likely to remember: item, order #, requestor, vendor, PO, notes.
+const searchInput = $("status-search");
+const searchClear = $("status-search-clear");
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    searchQuery = searchInput.value.trim().toLowerCase();
+    searchClear.hidden = searchQuery.length === 0;
+    renderRows();
+  });
+  searchClear.addEventListener("click", () => {
+    searchInput.value = "";
+    searchQuery = "";
+    searchClear.hidden = true;
+    searchInput.focus();
+    renderRows();
+  });
+}
+
+// Returns true if the row matches the current search query. An empty query
+// matches everything — keep the row in the list.
+function matchesSearch(r) {
+  if (!searchQuery) return true;
+  const q = searchQuery;
+  const haystack = [
+    r.itemName, r.customItemName, r.description,
+    r.orderNum, r.requestor, r.vendor, r.poNumber,
+    r.tracking, r.notes, r.purchaserNotes,
+    r.reason, r.reasonCode, r.cancellationReason,
+    r.category, r.type,
+  ].filter(Boolean).join(" ").toLowerCase();
+  return haystack.includes(q);
+}
 
 async function loadAndRender() {
   errorEl.hidden = true;
@@ -220,6 +255,12 @@ function renderRows() {
     visibleArchive = received;
   } else if (activeFilter !== "all") {
     visibleActive = active.filter(r => r.status === activeFilter);
+  }
+
+  // Search filter applies on top of the status filter
+  if (searchQuery) {
+    visibleActive  = visibleActive.filter(matchesSearch);
+    visibleArchive = visibleArchive.filter(matchesSearch);
   }
 
   // Active list
