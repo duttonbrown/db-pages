@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Overview — May 07, 2026 at 04:57 PM</title>
+<title>Production Overview — May 07, 2026 at 04:59 PM</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -351,7 +351,8 @@
                         letter-spacing: 0.06em; font-weight: 600; }
         .slice-items { font-size: 26px; font-weight: 600; color: #2c3e50; margin-top: 2px; }
         .slice-sub { font-size: 11px; color: #666; margin-top: 2px; }
-        .slice-meta { font-size: 10px; color: #999; margin-top: 6px; }
+        .slice-meta { font-size: 13px; color: #495057; font-weight: 500;
+                       margin-top: 8px; }
         .section-title { font-size: 11px; font-weight: 600; text-transform: uppercase;
                           letter-spacing: 0.08em; color: #495057; margin: 22px 0 8px;
                           padding-bottom: 6px; border-bottom: 1px solid #dee2e6; }
@@ -392,7 +393,7 @@
         <div class="kpi-divider"></div>
         <div class="kpi-bottom-row">
             <div>
-                <div class="kpi-value kpi-date">May 07, 2026 at 04:57 PM</div>
+                <div class="kpi-value kpi-date">May 07, 2026 at 04:59 PM</div>
                 <div class="kpi-label">Last Update</div>
             </div>
             <button class="schedule-info-toggle" onclick="toggleScheduleInfo()"
@@ -402,11 +403,14 @@
             </button>
         </div>
         <div id="schedule-info" class="schedule-info" hidden>
-            <strong>Refresh schedule:</strong> this page is regenerated whenever
-            <code>wash_list.py snapshot</code> runs. Currently triggered
-            manually — automated daily n8n schedule planned. The historical
-            Day / Week / Month windows pull from a daily cache that refreshes
-            the most recent 3 days on every run.
+            <strong>Refresh schedule:</strong> this page regenerates
+            <strong>hourly from 7 AM to 3 PM (CT)</strong>, every workday,
+            via Windows Task Scheduler. Off-hours: stale until the next 7 AM
+            run. Manual refresh: re-run <code>wash_list.py snapshot</code>.
+            <br><br>
+            The historical Day / Week / Month windows pull from a daily cache
+            that refreshes the most recent 3 days on every run, so late
+            fulfillment events backfill automatically.
         </div>
     </div>
     <div class="kpi kpi-wide">
@@ -474,7 +478,7 @@
     </div>
 </div>
 
-<div class="tab-pane" data-tab="overall"><div class="overall-grid"><div class="slice-card slice-clickable" data-slice="Color" onclick="jumpToTab('color')" role="button" tabindex="0" title="Click to jump to the Color tab" style="border-top:3px solid #FF9912;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Color</div><div class="slice-items">942</div><div class="slice-sub">844 lighting &middot; 98 hardware</div><div class="slice-meta">14 groups &middot; 145 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-exp"><span class="card-pill-tag">EXP</span><span class="card-pill-num">3</span></div><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">2</span></div><div class="card-pill card-pill-large"><span class="card-pill-tag">LARGE</span><span class="card-pill-num">1</span></div><div class="card-pill card-pill-hold"><span class="card-pill-tag">HOLD</span><span class="card-pill-num">1</span></div><div class="card-pill card-pill-trade"><span class="card-pill-tag">TRADE</span><span class="card-pill-num">71</span></div><div class="card-pill card-pill-vip"><span class="card-pill-tag">VIP</span><span class="card-pill-num">6</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Brass" onclick="jumpToTab('brass')" role="button" tabindex="0" title="Click to jump to the Brass tab" style="border-top:3px solid #b8860b;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Brass</div><div class="slice-items">1</div><div class="slice-sub">1 lighting</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Nickel" onclick="jumpToTab('nickel')" role="button" tabindex="0" title="Click to jump to the Nickel tab" style="border-top:3px solid #9CA3AF;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Nickel</div><div class="slice-items">2</div><div class="slice-sub">2 hardware</div><div class="slice-meta">1 groups &middot; 2 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">2</span></div><div class="card-pill card-pill-trade"><span class="card-pill-tag">TRADE</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Black" onclick="jumpToTab('black')" role="button" tabindex="0" title="Click to jump to the Black tab" style="border-top:3px solid #2c3e50;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Black</div><div class="slice-items">1</div><div class="slice-sub">1 hardware</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Accessories" onclick="jumpToTab('accessories')" role="button" tabindex="0" title="Click to jump to the Accessories tab" style="border-top:3px solid #6B7280;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Accessories</div><div class="slice-items">45</div><div class="slice-sub">45 accessories</div><div class="slice-meta">9 groups &middot; 10 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-large"><span class="card-pill-tag">LARGE</span><span class="card-pill-num">1</span></div></div></div></div></div><h3 class="section-title">Quick Build</h3><div class="color-grid"><div class="color-column" data-color="Brass"
+<div class="tab-pane" data-tab="overall"><div class="overall-grid"><div class="slice-card slice-clickable" data-slice="Color" onclick="jumpToTab('color')" role="button" tabindex="0" title="Click to jump to the Color tab" style="border-top:3px solid #FF9912;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Color</div><div class="slice-items">942</div><div class="slice-sub">844 lighting &middot; 98 hardware</div><div class="slice-meta">145 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-exp"><span class="card-pill-tag">EXP</span><span class="card-pill-num">3</span></div><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">2</span></div><div class="card-pill card-pill-large"><span class="card-pill-tag">LARGE</span><span class="card-pill-num">1</span></div><div class="card-pill card-pill-hold"><span class="card-pill-tag">HOLD</span><span class="card-pill-num">1</span></div><div class="card-pill card-pill-trade"><span class="card-pill-tag">TRADE</span><span class="card-pill-num">71</span></div><div class="card-pill card-pill-vip"><span class="card-pill-tag">VIP</span><span class="card-pill-num">6</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Brass" onclick="jumpToTab('brass')" role="button" tabindex="0" title="Click to jump to the Brass tab" style="border-top:3px solid #b8860b;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Brass</div><div class="slice-items">1</div><div class="slice-sub">1 lighting</div><div class="slice-meta">1 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Nickel" onclick="jumpToTab('nickel')" role="button" tabindex="0" title="Click to jump to the Nickel tab" style="border-top:3px solid #9CA3AF;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Nickel</div><div class="slice-items">2</div><div class="slice-sub">2 hardware</div><div class="slice-meta">2 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">2</span></div><div class="card-pill card-pill-trade"><span class="card-pill-tag">TRADE</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Black" onclick="jumpToTab('black')" role="button" tabindex="0" title="Click to jump to the Black tab" style="border-top:3px solid #2c3e50;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Black</div><div class="slice-items">1</div><div class="slice-sub">1 hardware</div><div class="slice-meta">1 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Accessories" onclick="jumpToTab('accessories')" role="button" tabindex="0" title="Click to jump to the Accessories tab" style="border-top:3px solid #6B7280;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Accessories</div><div class="slice-items">45</div><div class="slice-sub">45 accessories</div><div class="slice-meta">10 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-large"><span class="card-pill-tag">LARGE</span><span class="card-pill-num">1</span></div></div></div></div></div><h3 class="section-title">Quick Build</h3><div class="color-grid"><div class="color-column" data-color="Brass"
     data-slice="Brass"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="1" data-base-hardware="0"
@@ -2914,7 +2918,7 @@
             const subEl = card.querySelector('.slice-sub');
             if (subEl) subEl.innerHTML = subParts.length ? subParts.join(' · ') : '&nbsp;';
             const metaEl = card.querySelector('.slice-meta');
-            if (metaEl) metaEl.innerHTML = t.groups + ' groups · ' + t.orders.size + ' orders';
+            if (metaEl) metaEl.innerHTML = t.orders.size + ' orders';
             // Slice pill column (EXP/QUICK/LARGE/TRADE/VIP) recompute
             const pillsEl = card.querySelector('.card-pills');
             if (pillsEl) {
