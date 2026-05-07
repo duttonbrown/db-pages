@@ -1,0 +1,1585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Print Queue — Manager Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --text:#4a4a4a;
+    --text-soft:#7a7a7a;
+    --bg:#fafafa;
+    --bg-card:#ffffff;
+    --border:#e8e6e1;
+    --accent:#ff9912;
+    --accent-strong:#d97706;
+    --color:#7c5cff;
+    --finish:#4a4a4a;
+    --simple:#0e9f6e;
+    --warn:#c0392b;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Poppins',system-ui,-apple-system,sans-serif;
+    font-weight:300;
+    color:var(--text);
+    background:var(--bg);
+    font-size:14px;
+    line-height:1.5;
+  }
+  header{
+    background:var(--bg-card);
+    border-bottom:1px solid var(--border);
+    padding:24px 40px;
+    display:flex;justify-content:space-between;align-items:center;
+    position:sticky;top:0;z-index:10;
+  }
+  header h1{
+    margin:0;font-weight:300;font-size:22px;letter-spacing:-0.01em;
+  }
+  header .built-at{font-size:12px;color:var(--text-soft)}
+  .totals{
+    display:flex;gap:24px;padding:20px 40px;
+    background:var(--bg-card);border-bottom:1px solid var(--border);
+    font-size:13px;
+  }
+  .totals .stat{display:flex;align-items:baseline;gap:8px}
+  .totals .stat strong{font-size:20px;font-weight:300;color:var(--text)}
+  .totals .stat .accent strong{color:var(--accent-strong)}
+  .toolbar{
+    display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+    padding:16px 40px;background:var(--bg-card);border-bottom:1px solid var(--border);
+  }
+  .toolbar .label{color:var(--text-soft);font-size:12px;text-transform:uppercase;letter-spacing:0.04em;margin-right:8px}
+  button{
+    font-family:inherit;font-weight:400;font-size:13px;
+    padding:8px 14px;border:1px solid var(--border);background:#fff;color:var(--text);
+    border-radius:4px;cursor:pointer;transition:all 0.15s;
+  }
+  button:hover{border-color:var(--text)}
+  button.active{background:var(--text);color:#fff;border-color:var(--text)}
+  button.release{
+    background:var(--accent);color:#fff;border-color:var(--accent);
+    font-weight:400;padding:10px 18px;margin-left:auto;font-size:14px;
+  }
+  button.release:hover{background:var(--accent-strong);border-color:var(--accent-strong)}
+  main{padding:24px 40px 80px}
+  .order{
+    background:var(--bg-card);border:1px solid var(--border);border-radius:6px;
+    margin-bottom:10px;overflow:hidden;
+  }
+  .order-head{
+    display:grid;grid-template-columns:110px 1fr auto auto;gap:14px;
+    padding:10px 16px;align-items:center;border-bottom:1px solid var(--border);
+  }
+  .order-head .num{font-weight:400;font-size:14px}
+  .order-head .num a{color:var(--text);text-decoration:none}
+  .order-head .num a:hover{color:var(--accent-strong)}
+  .order-head .cust{color:var(--text-soft);font-size:12px}
+  .order-head .meta{
+    display:flex;flex-direction:column;gap:3px;align-items:flex-end;
+    font-size:10px;
+  }
+  .pill{
+    padding:1px 8px;border-radius:99px;font-size:10px;font-weight:400;
+    border:1px solid var(--border);letter-spacing:0.02em;
+  }
+  .pill.exp{border-color:var(--warn);color:var(--warn)}
+  .pill.large{border-color:#888;color:#888}
+  .pill.printed{border-color:var(--simple);color:var(--simple)}
+  .pill.trade{border-color:#d44a8a;color:#d44a8a}
+  .pill.redo{border-color:#a36ac8;color:#a36ac8}
+  .pill.quick{border-color:var(--simple);color:var(--simple)}
+  .pages{
+    display:flex;align-items:baseline;gap:5px;
+  }
+  .pages strong{font-size:20px;font-weight:300;color:var(--accent-strong)}
+  .pages .lbl{font-size:10px;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.04em}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{padding:7px 16px;text-align:left;border-top:1px solid var(--border)}
+  th{font-weight:400;color:var(--text-soft);font-size:10px;text-transform:uppercase;letter-spacing:0.04em;background:#fcfbf9}
+  tr.printout td{background:#fff}
+  tr.row td{background:#fdfcfa;font-size:11px;color:var(--text-soft)}
+  .qty-input{
+    width:48px;text-align:center;padding:4px;font-family:inherit;font-size:13px;
+    border:1px solid var(--border);border-radius:3px;
+  }
+  .qty-input:focus{outline:none;border-color:var(--accent)}
+  .badge{
+    display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:400;
+    margin-right:4px;
+  }
+  .badge.color{background:#efe9ff;color:var(--color)}
+  .badge.finish{background:#eee;color:var(--finish)}
+  .badge.simple{background:#e1f6ec;color:var(--simple)}
+  .badge.location{background:#fff3e0;color:var(--accent-strong);border:1px solid #ffe0b2}
+  .badge.location.shipping{background:#e1f6ec;color:var(--simple);border-color:#c0e6d3}
+  .badge.location.assembly{background:#eee;color:var(--finish);border-color:#ddd}
+  .review-note{color:var(--warn);font-size:11px;margin-top:4px}
+  .empty{padding:60px 40px;text-align:center;color:var(--text-soft)}
+  .split-btn{
+    background:none;border:1px solid var(--border);padding:2px 8px;font-size:11px;
+    cursor:pointer;border-radius:3px;color:var(--text-soft);
+  }
+  .split-btn:hover{border-color:var(--accent);color:var(--accent-strong)}
+  details{font-size:12px;color:var(--text-soft);margin-top:4px}
+  summary{cursor:pointer;outline:none}
+  details ul{margin:4px 0 0;padding-left:18px}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Print Queue — Manager Review</h1>
+    <div class="built-at" id="builtAt"></div>
+  </div>
+  <button class="release" id="releaseBtn" onclick="downloadRelease()">Download release.json →</button>
+</header>
+<div id="publicBanner" style="display:none;background:#fff3e0;border-bottom:1px solid #ffe0b2;color:#d97706;padding:10px 40px;font-size:12px">
+  Public preview — customer names and admin links are stripped. For the full editable view, open the local copy at <code>db-operations/projects/work-order-sync/print-queue.html</code>.
+</div>
+
+<section class="totals" id="totals"></section>
+
+<section class="toolbar">
+  <span class="label">Sort</span>
+  <button data-sort="chrono" class="active" onclick="setSort(this,'chrono')">Chronological</button>
+  <button data-sort="samplesfirst" onclick="setSort(this,'samplesfirst')">Samples + Quick-Builds First</button>
+  <button data-sort="bycolor" onclick="setSort(this,'bycolor')">Group Remaining by Color</button>
+</section>
+
+<main id="orders"></main>
+
+<script>
+const QUEUE = {
+  "built_at": "2026-05-07T16:41:19",
+  "orders": [
+    {
+      "shopify_order_id": "6941035593810",
+      "shopify_order_name": "35537",
+      "shopify_order_number": "35537",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T16:31:53-05:00",
+      "tags": "redo",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6941035593810",
+          "shopify_order_name": "35537",
+          "shopify_order_number": "35537",
+          "key": [
+            "finish",
+            "H62-18",
+            "Nickel"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": "Nickel",
+          "parent_skus": [
+            "H62-18"
+          ],
+          "variant_skus": [
+            "H62-18-2"
+          ],
+          "line_item_titles": [
+            "Head Towel Rack 18\""
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "finish"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6941035593810",
+          "shopify_order_name": "35537",
+          "shopify_order_number": "35537",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T16:31:53-05:00",
+          "parent_sku": "H62-18",
+          "color": null,
+          "finish": "Nickel",
+          "qty": 1,
+          "line_item_ids": [
+            16780554960978
+          ],
+          "item_titles": [
+            "Head Towel Rack 18\""
+          ],
+          "variant_skus": [
+            "H62-18-2"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Finish-Only",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940929359954",
+      "shopify_order_name": "35536",
+      "shopify_order_number": "35536",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T15:19:37-05:00",
+      "tags": "redo",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940929359954",
+          "shopify_order_name": "35536",
+          "shopify_order_number": "35536",
+          "key": [
+            "color",
+            "Slate Blue"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Slate Blue",
+          "finish": null,
+          "parent_skus": [
+            "30321"
+          ],
+          "variant_skus": [
+            "30321-1F"
+          ],
+          "line_item_titles": [
+            "Color Icon 3 Sconce"
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940929359954",
+          "shopify_order_name": "35536",
+          "shopify_order_number": "35536",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T15:19:37-05:00",
+          "parent_sku": "30321",
+          "color": "Slate Blue",
+          "finish": "Brass",
+          "qty": 1,
+          "line_item_ids": [
+            16780315590738
+          ],
+          "item_titles": [
+            "Color Icon 3 Sconce"
+          ],
+          "variant_skus": [
+            "30321-1F"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940870344786",
+      "shopify_order_name": "35535",
+      "shopify_order_number": "35535",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T14:40:17-05:00",
+      "tags": "redo, trade",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 2,
+      "printouts": [
+        {
+          "shopify_order_id": "6940870344786",
+          "shopify_order_name": "35535",
+          "shopify_order_number": "35535",
+          "key": [
+            "color",
+            "Spa"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Spa",
+          "finish": null,
+          "parent_skus": [
+            "30223"
+          ],
+          "variant_skus": [
+            "30223-1B"
+          ],
+          "line_item_titles": [
+            "Color Legend 2 Sconce"
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color"
+        },
+        {
+          "shopify_order_id": "6940870344786",
+          "shopify_order_name": "35535",
+          "shopify_order_number": "35535",
+          "key": [
+            "color",
+            "Slate Blue"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Slate Blue",
+          "finish": null,
+          "parent_skus": [
+            "30502"
+          ],
+          "variant_skus": [
+            "30502-1F"
+          ],
+          "line_item_titles": [
+            "Color Prisma Chandelier 35\""
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940870344786",
+          "shopify_order_name": "35535",
+          "shopify_order_number": "35535",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T14:40:17-05:00",
+          "parent_sku": "30223",
+          "color": "Spa",
+          "finish": "Brass",
+          "qty": 2,
+          "line_item_ids": [
+            16780177145938
+          ],
+          "item_titles": [
+            "Color Legend 2 Sconce"
+          ],
+          "variant_skus": [
+            "30223-1B"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6940870344786",
+          "shopify_order_name": "35535",
+          "shopify_order_number": "35535",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T14:40:17-05:00",
+          "parent_sku": "30502",
+          "color": "Slate Blue",
+          "finish": "Brass",
+          "qty": 1,
+          "line_item_ids": [
+            16780177178706
+          ],
+          "item_titles": [
+            "Color Prisma Chandelier 35\""
+          ],
+          "variant_skus": [
+            "30502-1F"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940778987602",
+      "shopify_order_name": "35534",
+      "shopify_order_number": "35534",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T13:45:10-05:00",
+      "tags": "redo, trade",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940778987602",
+          "shopify_order_name": "35534",
+          "shopify_order_number": "35534",
+          "key": [
+            "color",
+            "Lagoon"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "parent_skus": [
+            "H32-6"
+          ],
+          "variant_skus": [
+            "H32-6-1D"
+          ],
+          "line_item_titles": [
+            "Color Caliber Pull - Brass"
+          ],
+          "total_qty": 5,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940778987602",
+          "shopify_order_name": "35534",
+          "shopify_order_number": "35534",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T13:45:10-05:00",
+          "parent_sku": "H32-6",
+          "color": "Lagoon",
+          "finish": "Brass",
+          "qty": 5,
+          "line_item_ids": [
+            16779982438482
+          ],
+          "item_titles": [
+            "Color Caliber Pull - Brass"
+          ],
+          "variant_skus": [
+            "H32-6-1D"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940742451282",
+      "shopify_order_name": "35533",
+      "shopify_order_number": "35533",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T13:22:32-05:00",
+      "tags": "trade",
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940742451282",
+          "shopify_order_name": "35533",
+          "shopify_order_number": "35533",
+          "key": [
+            "color",
+            "Python Green"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Python Green",
+          "finish": null,
+          "parent_skus": [
+            "40120-6"
+          ],
+          "variant_skus": [
+            "40120-6-1PG"
+          ],
+          "line_item_titles": [
+            "Color Boom Sconce - 6\" Arm"
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940742451282",
+          "shopify_order_name": "35533",
+          "shopify_order_number": "35533",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T13:22:32-05:00",
+          "parent_sku": "40120-6",
+          "color": "Python Green",
+          "finish": "Brass",
+          "qty": 1,
+          "line_item_ids": [
+            16779893538898
+          ],
+          "item_titles": [
+            "Color Boom Sconce - 6\" Arm"
+          ],
+          "variant_skus": [
+            "40120-6-1PG"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940699164754",
+      "shopify_order_name": "35532",
+      "shopify_order_number": "35532",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T13:09:58-05:00",
+      "tags": "redo",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Sample"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940699164754",
+          "shopify_order_name": "35532",
+          "shopify_order_number": "35532",
+          "key": [
+            "sample-only",
+            "6940699164754"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "parent_skus": [
+            "SAC-K"
+          ],
+          "variant_skus": [
+            "SAC-K"
+          ],
+          "line_item_titles": [
+            "Color Samples"
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "sample-only"
+        }
+      ],
+      "notion_rows": []
+    },
+    {
+      "shopify_order_id": "6940672622674",
+      "shopify_order_name": "35531",
+      "shopify_order_number": "35531",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T12:53:59-05:00",
+      "tags": "redo",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940672622674",
+          "shopify_order_name": "35531",
+          "shopify_order_number": "35531",
+          "key": [
+            "color",
+            "Black"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Black",
+          "finish": null,
+          "parent_skus": [
+            "H60-36"
+          ],
+          "variant_skus": [
+            "H60-36-3"
+          ],
+          "line_item_titles": [
+            "Throne Towel Rack 36\""
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940672622674",
+          "shopify_order_name": "35531",
+          "shopify_order_number": "35531",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T12:53:59-05:00",
+          "parent_sku": "H60-36",
+          "color": "Black",
+          "finish": "Black",
+          "qty": 1,
+          "line_item_ids": [
+            16779749195858
+          ],
+          "item_titles": [
+            "Throne Towel Rack 36\""
+          ],
+          "variant_skus": [
+            "H60-36-3"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940646015058",
+      "shopify_order_name": "35530",
+      "shopify_order_number": "35530",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T12:36:57-05:00",
+      "tags": "redo, trade",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 2,
+      "printouts": [
+        {
+          "shopify_order_id": "6940646015058",
+          "shopify_order_name": "35530",
+          "shopify_order_number": "35530",
+          "key": [
+            "color",
+            "Python Green"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Python Green",
+          "finish": null,
+          "parent_skus": [
+            "50131-8",
+            "60224"
+          ],
+          "variant_skus": [
+            "50131-8-2PG",
+            "60224-2PG"
+          ],
+          "line_item_titles": [
+            "Color Hemi Flush Mount 8\"",
+            "Color Ruler Sconce"
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color"
+        },
+        {
+          "shopify_order_id": "6940646015058",
+          "shopify_order_name": "35530",
+          "shopify_order_number": "35530",
+          "key": [
+            "color",
+            "Riding Hood Red"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Riding Hood Red",
+          "finish": null,
+          "parent_skus": [
+            "30407FC"
+          ],
+          "variant_skus": [
+            "30407FC-1RH"
+          ],
+          "line_item_titles": [
+            "Color Big Status Flush Mount 42\""
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940646015058",
+          "shopify_order_name": "35530",
+          "shopify_order_number": "35530",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T12:36:57-05:00",
+          "parent_sku": "50131-8",
+          "color": "Python Green",
+          "finish": "Nickel",
+          "qty": 1,
+          "line_item_ids": [
+            16779690934354
+          ],
+          "item_titles": [
+            "Color Hemi Flush Mount 8\""
+          ],
+          "variant_skus": [
+            "50131-8-2PG"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6940646015058",
+          "shopify_order_name": "35530",
+          "shopify_order_number": "35530",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T12:36:57-05:00",
+          "parent_sku": "30407FC",
+          "color": "Riding Hood Red",
+          "finish": "Brass",
+          "qty": 1,
+          "line_item_ids": [
+            16779690967122
+          ],
+          "item_titles": [
+            "Color Big Status Flush Mount 42\""
+          ],
+          "variant_skus": [
+            "30407FC-1RH"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6940646015058",
+          "shopify_order_name": "35530",
+          "shopify_order_number": "35530",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T12:36:57-05:00",
+          "parent_sku": "60224",
+          "color": "Python Green",
+          "finish": "Nickel",
+          "qty": 1,
+          "line_item_ids": [
+            16779690999890
+          ],
+          "item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "variant_skus": [
+            "60224-2PG"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940613312594",
+      "shopify_order_name": "35529",
+      "shopify_order_number": "35529",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T12:16:32-05:00",
+      "tags": "expedite, redo",
+      "priority": "Expedites",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Plug-In"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940613312594",
+          "shopify_order_name": "35529",
+          "shopify_order_number": "35529",
+          "key": [
+            "color",
+            "Spa"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Spa",
+          "finish": null,
+          "parent_skus": [
+            "60226S-11"
+          ],
+          "variant_skus": [
+            "60226S-11-1B"
+          ],
+          "line_item_titles": [
+            "Color Pilot Sconce 11\""
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940613312594",
+          "shopify_order_name": "35529",
+          "shopify_order_number": "35529",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T12:16:32-05:00",
+          "parent_sku": "60226S-11",
+          "color": "Spa",
+          "finish": "Brass",
+          "qty": 2,
+          "line_item_ids": [
+            16779616452690
+          ],
+          "item_titles": [
+            "Color Pilot Sconce 11\""
+          ],
+          "variant_skus": [
+            "60226S-11-1B"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Expedites",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940607676498",
+      "shopify_order_name": "35528",
+      "shopify_order_number": "35528",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T12:12:41-05:00",
+      "tags": "redo",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Sample"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940607676498",
+          "shopify_order_name": "35528",
+          "shopify_order_number": "35528",
+          "key": [
+            "sample-only",
+            "6940607676498"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "parent_skus": [
+            "SAC-ALL"
+          ],
+          "variant_skus": [
+            "SAC-ALL"
+          ],
+          "line_item_titles": [
+            "Color Samples"
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "sample-only"
+        }
+      ],
+      "notion_rows": []
+    },
+    {
+      "shopify_order_id": "6940567175250",
+      "shopify_order_name": "35527",
+      "shopify_order_number": "35527",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T11:46:43-05:00",
+      "tags": "trade",
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Sample"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940567175250",
+          "shopify_order_name": "35527",
+          "shopify_order_number": "35527",
+          "key": [
+            "sample-only",
+            "6940567175250"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "parent_skus": [
+            "SAC-ALL",
+            "SAF-ALL"
+          ],
+          "variant_skus": [
+            "SAF-ALL",
+            "SAC-ALL"
+          ],
+          "line_item_titles": [
+            "Finish Samples",
+            "Color Samples"
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "sample-only"
+        }
+      ],
+      "notion_rows": []
+    },
+    {
+      "shopify_order_id": "6940500525138",
+      "shopify_order_name": "35526",
+      "shopify_order_number": "35526",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T11:11:38-05:00",
+      "tags": "trade",
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Bulb-Only",
+        "Color"
+      ],
+      "predicted_page_count": 0,
+      "printouts": [],
+      "notion_rows": []
+    },
+    {
+      "shopify_order_id": "6940466118738",
+      "shopify_order_name": "35525",
+      "shopify_order_number": "35525",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T10:48:50-05:00",
+      "tags": "trade",
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Finish-Only",
+        "Hardware-Only"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940466118738",
+          "shopify_order_name": "35525",
+          "shopify_order_number": "35525",
+          "key": [
+            "finish",
+            "H60-18",
+            "Nickel"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": "Nickel",
+          "parent_skus": [
+            "H60-18"
+          ],
+          "variant_skus": [
+            "H60-18-2"
+          ],
+          "line_item_titles": [
+            "Throne Towel Rack 18\""
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "finish"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940466118738",
+          "shopify_order_name": "35525",
+          "shopify_order_number": "35525",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T10:48:50-05:00",
+          "parent_sku": "H60-18",
+          "color": null,
+          "finish": "Nickel",
+          "qty": 1,
+          "line_item_ids": [
+            16779294703698
+          ],
+          "item_titles": [
+            "Throne Towel Rack 18\""
+          ],
+          "variant_skus": [
+            "H60-18-2"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Finish-Only",
+            "Hardware-Only"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940349268050",
+      "shopify_order_name": "35524",
+      "shopify_order_number": "35524",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T09:36:31-05:00",
+      "tags": "trade",
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Sample"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940349268050",
+          "shopify_order_name": "35524",
+          "shopify_order_number": "35524",
+          "key": [
+            "sample-only",
+            "6940349268050"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "parent_skus": [
+            "SAC-ALL",
+            "SAF-ALL"
+          ],
+          "variant_skus": [
+            "SAF-ALL",
+            "SAC-ALL"
+          ],
+          "line_item_titles": [
+            "Finish Samples",
+            "Color Samples"
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "sample-only"
+        }
+      ],
+      "notion_rows": []
+    },
+    {
+      "shopify_order_id": "6940328263762",
+      "shopify_order_name": "35523",
+      "shopify_order_number": "35523",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T09:21:29-05:00",
+      "tags": "$20K Club, redo, trade",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940328263762",
+          "shopify_order_name": "35523",
+          "shopify_order_number": "35523",
+          "key": [
+            "color",
+            "Orange"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Orange",
+          "finish": null,
+          "parent_skus": [
+            "60226-11"
+          ],
+          "variant_skus": [
+            "60226-11-2I"
+          ],
+          "line_item_titles": [
+            "Color Pilot Sconce 11\""
+          ],
+          "total_qty": 8,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940328263762",
+          "shopify_order_name": "35523",
+          "shopify_order_number": "35523",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T09:21:29-05:00",
+          "parent_sku": "60226-11",
+          "color": "Orange",
+          "finish": "Nickel",
+          "qty": 8,
+          "line_item_ids": [
+            16778986389586
+          ],
+          "item_titles": [
+            "Color Pilot Sconce 11\""
+          ],
+          "variant_skus": [
+            "60226-11-2I"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6940272590930",
+      "shopify_order_name": "35522",
+      "shopify_order_number": "35522",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T08:38:49-05:00",
+      "tags": "trade",
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6940272590930",
+          "shopify_order_name": "35522",
+          "shopify_order_number": "35522",
+          "key": [
+            "color",
+            "Riding Hood Red"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Riding Hood Red",
+          "finish": null,
+          "parent_skus": [
+            "40120-0"
+          ],
+          "variant_skus": [
+            "40120-0-1RH"
+          ],
+          "line_item_titles": [
+            "Color Boom Sconce - No Arm"
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6940272590930",
+          "shopify_order_name": "35522",
+          "shopify_order_number": "35522",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T08:38:49-05:00",
+          "parent_sku": "40120-0",
+          "color": "Riding Hood Red",
+          "finish": "Brass",
+          "qty": 1,
+          "line_item_ids": [
+            16778859315282
+          ],
+          "item_titles": [
+            "Color Boom Sconce - No Arm"
+          ],
+          "variant_skus": [
+            "40120-0-1RH"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "orders": 16,
+    "printouts": 17,
+    "notion_rows": 14,
+    "skipped_already_printed": 143
+  },
+  "public_redacted": true
+};
+let SORT = "chrono";
+
+function fmtDate(s){
+  if(!s) return "";
+  try{ return new Date(s).toISOString().slice(0,10); }catch(e){ return s; }
+}
+function isQuickBuild(o){
+  return (o.auto_tags||[]).some(t => /quick.build/i.test(t));
+}
+function isSampleOnly(o){
+  return (o.printouts||[]).every(p => p.source === "sample-only");
+}
+function dominantColor(o){
+  const colors = (o.printouts||[]).filter(p=>p.color).map(p=>p.color);
+  return colors[0] || "";
+}
+
+function sortOrders(orders){
+  const copy = orders.slice();
+  if(SORT === "chrono"){
+    copy.sort((a,b)=>(a.created_at||"").localeCompare(b.created_at||""));
+  }else if(SORT === "samplesfirst"){
+    copy.sort((a,b)=>{
+      const ka = isSampleOnly(a) ? 0 : isQuickBuild(a) ? 1 : 2;
+      const kb = isSampleOnly(b) ? 0 : isQuickBuild(b) ? 1 : 2;
+      if(ka !== kb) return ka - kb;
+      return (a.created_at||"").localeCompare(b.created_at||"");
+    });
+  }else if(SORT === "bycolor"){
+    copy.sort((a,b)=>{
+      const ka = isSampleOnly(a) ? 0 : isQuickBuild(a) ? 1 : 2;
+      const kb = isSampleOnly(b) ? 0 : isQuickBuild(b) ? 1 : 2;
+      if(ka !== kb) return ka - kb;
+      const ca = dominantColor(a), cb = dominantColor(b);
+      if(ca !== cb) return ca.localeCompare(cb);
+      return (a.created_at||"").localeCompare(b.created_at||"");
+    });
+  }
+  return copy;
+}
+
+function setSort(btn, mode){
+  document.querySelectorAll(".toolbar button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  SORT = mode;
+  render();
+}
+
+function locationClass(loc){
+  if(loc === "Shipping") return "shipping";
+  if(loc === "Assembly") return "assembly";
+  return "";
+}
+
+function renderOrder(o){
+  const printouts = (o.printouts||[]).map((p,idx) => `
+    <tr class="printout">
+      <td>
+        <span class="badge ${p.source}">${p.source.toUpperCase()}</span>
+        ${p.color ? `<span class="badge color">${p.color}</span>` : ""}
+        ${p.finish ? `<span class="badge finish">${p.finish}</span>` : ""}
+        <span class="badge location ${locationClass(p.location)}">${p.location}</span>
+        <strong>${(p.parent_skus||[]).join(", ") || "—"}</strong>
+        <details><summary>${(p.line_item_titles||[]).length} line item${(p.line_item_titles||[]).length===1?"":"s"} · qty ${p.total_qty}</summary>
+          <ul>${(p.line_item_titles||[]).map(t=>`<li>${t}</li>`).join("")}</ul>
+        </details>
+        ${p.notes ? `<div class="review-note">⚠ ${p.notes}</div>` : ""}
+      </td>
+      <td>
+        <input class="qty-input" type="number" min="1" max="50"
+          value="${p.page_count}"
+          data-order="${o.shopify_order_id}" data-printout="${idx}"
+          onchange="updatePages(this)" />
+        <button class="split-btn" onclick="splitPage('${o.shopify_order_id}', ${idx})">Split +1</button>
+      </td>
+    </tr>
+  `).join("");
+
+  const rows = (o.notion_rows||[]).map(r => `
+    <tr class="row">
+      <td colspan="2">
+        <span class="badge location ${locationClass(r.location)}">${r.location}</span>
+        Notion row · ${r.parent_sku} · qty ${r.qty}
+        ${r.color ? `<span class="badge color">${r.color}</span>` : ""}
+        ${r.finish && !r.color ? `<span class="badge finish">${r.finish}</span>` : ""}
+        ${r.review_note ? `<div class="review-note">⚠ ${r.review_note}</div>` : ""}
+      </td>
+    </tr>
+  `).join("");
+
+  const tags = (o.tags||"").toLowerCase();
+  const pills = [];
+  if(o.priority === "Expedites") pills.push(`<span class="pill exp">EXPEDITE</span>`);
+  if(isQuickBuild(o)) pills.push(`<span class="pill quick">QUICK</span>`);
+  if(o.is_large_order) pills.push(`<span class="pill large">LARGE</span>`);
+  if(tags.includes("trade")) pills.push(`<span class="pill trade">TRADE</span>`);
+  if(tags.includes("redo")) pills.push(`<span class="pill redo">REDO</span>`);
+  if(tags.includes("printed")) pills.push(`<span class="pill printed">PRINTED</span>`);
+
+  const orderLabel = o.shopify_url
+    ? `<a href="${o.shopify_url}" target="_blank">${o.shopify_order_name}</a>`
+    : o.shopify_order_name;
+  const meta = o.customer_name
+    ? `${o.customer_name} · ${fmtDate(o.created_at)}`
+    : fmtDate(o.created_at);
+  return `
+    <article class="order">
+      <div class="order-head">
+        <div class="num">${orderLabel}</div>
+        <div class="cust">${meta}</div>
+        <div class="meta">${pills.join("")}</div>
+        <div class="pages"><strong id="pc-${o.shopify_order_id}">${o.predicted_page_count}</strong><span class="lbl">pages</span></div>
+      </div>
+      <table>
+        <thead><tr><th>Printout / Notion Row</th><th>Pages</th></tr></thead>
+        <tbody>${printouts}${rows}</tbody>
+      </table>
+    </article>
+  `;
+}
+
+function render(){
+  if(!QUEUE){
+    document.querySelector("main").innerHTML = `<div class="empty">No queue data loaded. Run <code>python print_queue.py</code> first.</div>`;
+    return;
+  }
+  if(QUEUE.public_redacted){
+    document.getElementById("publicBanner").style.display = "block";
+    const rb = document.getElementById("releaseBtn");
+    if(rb){ rb.style.display = "none"; }
+  }
+  document.getElementById("builtAt").textContent = "Built " + (QUEUE.built_at || "—");
+  const t = QUEUE.totals || {};
+  document.getElementById("totals").innerHTML = `
+    <div class="stat"><strong>${t.orders||0}</strong> orders</div>
+    <div class="stat accent"><strong>${t.printouts||0}</strong> predicted pages</div>
+    <div class="stat"><strong>${t.notion_rows||0}</strong> Notion rows</div>
+    <div class="stat"><strong>${t.skipped_already_printed||0}</strong> skipped (already printed)</div>
+  `;
+  const sorted = sortOrders(QUEUE.orders || []);
+  document.getElementById("orders").innerHTML = sorted.map(renderOrder).join("") || `<div class="empty">No orders pending print.</div>`;
+}
+
+function updatePages(input){
+  const orderId = input.dataset.order;
+  const idx = +input.dataset.printout;
+  const newCount = parseInt(input.value, 10);
+  const order = QUEUE.orders.find(o=>o.shopify_order_id === orderId);
+  if(!order) return;
+  order.printouts[idx].page_count = newCount;
+  // Track adjustments for training-data log
+  order.printouts[idx].manager_adjusted = true;
+  recalcOrderTotal(order);
+}
+function splitPage(orderId, idx){
+  const order = QUEUE.orders.find(o=>o.shopify_order_id === orderId);
+  if(!order) return;
+  order.printouts[idx].page_count += 1;
+  order.printouts[idx].manager_adjusted = true;
+  recalcOrderTotal(order);
+  render();
+}
+function recalcOrderTotal(order){
+  order.predicted_page_count = order.printouts.reduce((s,p)=>s+(p.page_count||0),0);
+  const el = document.getElementById("pc-"+order.shopify_order_id);
+  if(el) el.textContent = order.predicted_page_count;
+  // Update overall total too
+  const tot = QUEUE.orders.reduce((s,o)=>s+(o.predicted_page_count||0),0);
+  document.getElementById("totals").querySelector(".accent strong").textContent = tot;
+  if(QUEUE.totals) QUEUE.totals.printouts = tot;
+}
+function downloadRelease(){
+  const payload = {
+    released_at: new Date().toISOString(),
+    sort_mode: SORT,
+    queue: QUEUE,
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "release.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+render();
+</script>
+
+</body>
+</html>
