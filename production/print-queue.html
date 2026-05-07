@@ -323,6 +323,90 @@
     border: 1px solid rgba(0,0,0,0.18);
     flex-shrink: 0;
   }
+  /* Inline finish/color dot used next to a SKU pill in the line list */
+  .swatch-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--swatch-color, #ccc);
+    border: 1px solid rgba(0,0,0,0.22);
+    flex-shrink: 0;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  .group-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* Per-row Location override: 3 small bubbles (Powder / Assembly / Shipping). */
+  .loc-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px;
+    flex-shrink: 0;
+  }
+  .loc-btn {
+    appearance: none;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.1s, color 0.1s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .loc-btn:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+  .loc-btn::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--btn-dot, var(--muted));
+    opacity: 0.7;
+  }
+  .loc-btn.active {
+    background: white;
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  }
+  .loc-btn.active::before { opacity: 1; }
+  .loc-btn.overridden {
+    color: var(--accent-dark);
+  }
+  .loc-btn[data-loc="powder"]   { --btn-dot: #FF9912; }
+  .loc-btn[data-loc="assembly"] { --btn-dot: #2A2A2A; }
+  .loc-btn[data-loc="shipping"] { --btn-dot: #2E7D32; }
+  /* Stock-list highlight (wired but waiting on Catherine's source list) */
+  .stock-flag {
+    display: inline-block;
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #BFE5C5;
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    margin-left: 4px;
+  }
   .group-stats {
     font-size: 11px;
     color: var(--muted);
@@ -355,8 +439,9 @@
     font-weight: 600;
   }
 
-  /* Order block — order header on top, then a vertical list of line items, with the
-     pages-control floated to the right of the header row. */
+  /* Order block — single horizontal row per order, with line items in a
+     tight tabular sub-grid below. Designed to be scannable left-to-right
+     instead of asking the eye to walk down a tall vertical column. */
   .order-block {
     padding: 6px 4px 8px;
     border-top: 1px solid var(--border);
@@ -368,16 +453,22 @@
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 4px;
+    flex-wrap: wrap;
   }
-  .order-block-head-left { min-width: 0; flex: 1; }
-  .order-eyebrow {
+  .order-block-head-left { min-width: 0; flex: 1; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .order-block-controls {
     display: flex;
     align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .order-eyebrow {
+    display: inline-flex;
+    align-items: center;
     gap: 6px;
-    flex-wrap: wrap;
-    font-size: 10px;
+    flex-wrap: nowrap;
+    font-size: 11px;
     color: var(--muted);
-    margin-bottom: 2px;
   }
   .order-num {
     font-weight: 600;
@@ -395,38 +486,25 @@
     display: inline-block;
   }
   .order-customer { font-weight: 500; color: var(--text); font-size: 11px; }
-  /* Line items: each line is title (top) + sku · qty (bottom) */
+  /* Line items: ONE HORIZONTAL ROW per line — [SKU][title][qty]
+     Designed for scannability. */
   .line-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 2px;
+    gap: 0;
   }
   .line-item {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(110px, max-content) minmax(0, 1fr) 50px;
     gap: 10px;
-    align-items: baseline;
-    padding: 2px 0;
-  }
-  .line-title {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .line-sub {
-    display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 0;
-    flex-wrap: wrap;
+    padding: 3px 4px;
+    border-radius: 4px;
+    font-size: 12px;
   }
+  .line-item + .line-item { border-top: 1px dotted var(--border); }
   .line-sku {
     font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
     font-size: 11px;
@@ -436,12 +514,27 @@
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 1px 6px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .line-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.25;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .line-qty {
     font-size: 12px;
     font-weight: 600;
     color: var(--ink);
     font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
   }
   .line-qty .lbl {
     font-size: 9px;
@@ -449,7 +542,7 @@
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-left: 3px;
+    margin-left: 2px;
   }
   .pages-cell {
     display: inline-flex;
@@ -595,7 +688,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T18:19:34",
+  "built_at": "2026-05-07T18:28:09",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
@@ -1671,8 +1764,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -1840,8 +1933,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2070,6 +2163,16 @@ const COLOR_HEX = {
   "Riding Hood Red":"#9F2C00","Pinkaboo":"#F7B6C0","Barely":"#CCB8B8",
   "Black":"#000000"
 };
+// Metal finishes get their own swatch behind the name, same chip pattern.
+const FINISH_HEX = {
+  "Brass":  "#B5895C",   // antique brass tone
+  "Nickel": "#B0B5BB",   // brushed nickel
+  "Black":  "#1A1A1A"    // matte black
+};
+function finishHex(name){ return FINISH_HEX[name] || null; }
+function swatchHexFor(name){
+  return COLOR_HEX[name] || FINISH_HEX[name] || null;
+}
 function colorIndex(name){
   if(!name) return 9999;
   const i = COLOR_ORDER.indexOf(name);
@@ -2095,13 +2198,12 @@ function contrastRatio(hexA, hexB){
 // Strategy: always use the swatch color *as a swatch dot* (so the user sees the
 // real color), but render the chip background as a desaturated tint and the
 // text in the most readable of {ink, white}. Tested against every color in
-// COLOR_HEX — every one hits >= 4.5:1 between text and background.
+// COLOR_HEX + FINISH_HEX — every one hits >= 4.5:1 between text and background.
 function chipStyle(name){
-  const hex = COLOR_HEX[name];
+  const hex = swatchHexFor(name);
   if(!hex) return "";
-  // Background: a soft tint of the color over white (12% color). For very dark
-  // colors we use 14% so it remains visible. Both versions are pale enough
-  // that ink (#2A2A2A) text always passes AA on them.
+  // Background: a soft tint of the color over white (12% color). Both versions
+  // are pale enough that ink (#2A2A2A) text always passes AA on them.
   const tintBg = `${hex}1F`;       // ~12% alpha
   const text   = "#2A2A2A";        // ink — always AA on tints this light
   const border = `${hex}66`;       // ~40% alpha border, picks up the hue
@@ -2110,6 +2212,71 @@ function chipStyle(name){
 
 // ── Edit persistence (so hourly auto-refresh doesn't clobber edits) ─────────
 const EDIT_KEY = "db-print-queue-edits-v1";
+const LOC_OVERRIDE_KEY = "db-print-queue-loc-overrides-v1";
+const LOC_LOG_KEY = "db-print-queue-loc-log-v1";
+
+function loadLocOverrides(){
+  try { return JSON.parse(localStorage.getItem(LOC_OVERRIDE_KEY) || "{}"); }
+  catch(e){ return {}; }
+}
+function saveLocOverride(orderId, idx, newLoc, ctx){
+  const overrides = loadLocOverrides();
+  const k = `${orderId}::${idx}`;
+  if(newLoc === null){
+    delete overrides[k];          // null means "revert to auto"
+  } else {
+    overrides[k] = newLoc;
+  }
+  localStorage.setItem(LOC_OVERRIDE_KEY, JSON.stringify(overrides));
+  // Append to a structured log for later mining ("teach the rules").
+  const log = JSON.parse(localStorage.getItem(LOC_LOG_KEY) || "[]");
+  log.push({
+    ts: new Date().toISOString(),
+    order_id: orderId,
+    printout_idx: idx,
+    from: ctx.from,
+    to: newLoc,                  // null when reverting
+    sku_keys: ctx.sku_keys,
+    parent_skus: ctx.parent_skus,
+    color: ctx.color || null,
+    finish: ctx.finish || null,
+    source: ctx.source,           // 'color' / 'finish' / 'accessory' / 'sample-only'
+    line_titles: ctx.line_titles,
+  });
+  // Keep last 500 entries to keep storage modest.
+  if(log.length > 500) log.splice(0, log.length - 500);
+  localStorage.setItem(LOC_LOG_KEY, JSON.stringify(log));
+}
+function applyLocOverrides(){
+  if(!QUEUE || !QUEUE.orders) return 0;
+  const overrides = loadLocOverrides();
+  let touched = 0;
+  for(const o of QUEUE.orders){
+    (o.printouts||[]).forEach((p,idx)=>{
+      const k = `${o.shopify_order_id}::${idx}`;
+      if(k in overrides){
+        if(!p._auto_location) p._auto_location = p.location;
+        p.location = overrides[k];
+        touched++;
+      }
+    });
+  }
+  return touched;
+}
+function clearLocOverrides(){
+  localStorage.removeItem(LOC_OVERRIDE_KEY);
+  location.reload();
+}
+function downloadOverrideLog(){
+  const log = localStorage.getItem(LOC_LOG_KEY) || "[]";
+  const blob = new Blob([log], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `loc-overrides-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 function loadEdits(){
   try { return JSON.parse(localStorage.getItem(EDIT_KEY) || "{}"); }
   catch(e){ return {}; }
@@ -2176,7 +2343,7 @@ function buildGroups(){
       if(p.color){ label = p.color; labelType = "color"; eyebrow = "Color"; }
       else if(p.finish){
         label = (p.parent_skus||[]).join(", "); labelType = "finish";
-        eyebrow = `${p.finish} finish`;
+        eyebrow = `Finish-only`;
       }
       else if(p.source === "sample-only"){ label = "Samples"; labelType = "sample"; eyebrow = "Samples"; }
       else { label = (p.parent_skus||[]).join(", ") || "Accessory"; labelType = "accessory"; eyebrow = "Accessory"; }
@@ -2185,6 +2352,7 @@ function buildGroups(){
         groups[key] = {
           location: loc, label, labelType, eyebrow,
           color: p.color || null,
+          finishName: p.finish || null,
           page_count: 0, total_qty: 0, orders_set: new Set(),
           rows: [],
         };
@@ -2235,20 +2403,40 @@ function sortRows(rows){
 }
 
 // ── Render ──────────────────────────────────────────────────────────────────
-function renderLine(line){
+function renderLine(line, ctxColor, ctxFinish){
   const title = line.title || "—";
   const sku = line.variant_sku || "";
   const qty = line.qty != null ? line.qty : 0;
+  const dotColor = ctxColor || ctxFinish;
+  const dotHex = dotColor ? swatchHexFor(dotColor) : null;
+  const dot = dotHex
+    ? `<span class="swatch-dot" style="--swatch-color:${dotHex}" title="${dotColor}"></span>`
+    : "";
   return `
     <li class="line-item">
-      <div>
-        <div class="line-title">${title}</div>
-        <div class="line-sub">
-          ${sku ? `<span class="line-sku">${sku}</span>` : ""}
-          <span class="line-qty">${qty}<span class="lbl">qty</span></span>
-        </div>
-      </div>
+      <span class="line-sku">${dot}${sku || "—"}</span>
+      <span class="line-title" title="${title}">${title}</span>
+      <span class="line-qty">${qty}<span class="lbl">×</span></span>
     </li>`;
+}
+
+function locToggleHtml(orderId, idx, currentLocName, autoLocName){
+  const isOverride = currentLocName !== autoLocName;
+  const map = [
+    { key: "powder",   name: "Powder Coating", short: "Powder" },
+    { key: "assembly", name: "Assembly",       short: "Assembly" },
+    { key: "shipping", name: "Shipping",       short: "Shipping" },
+  ];
+  const buttons = map.map(m => {
+    const active = m.name === currentLocName;
+    const cls = ["loc-btn", active ? "active" : "", (isOverride && active) ? "overridden" : ""].filter(Boolean).join(" ");
+    const tooltip = m.name === autoLocName
+      ? `Auto-assigned: ${m.name}`
+      : `Switch to ${m.name}`;
+    return `<button class="${cls}" data-loc="${m.key}" title="${tooltip}"
+             onclick="setLocation('${orderId}', ${idx}, '${m.key}')">${m.short}</button>`;
+  }).join("");
+  return `<div class="loc-toggle" role="group" aria-label="Location">${buttons}</div>`;
 }
 
 function renderRow(r){
@@ -2264,6 +2452,7 @@ function renderRow(r){
   const lines = (p.lines && p.lines.length) ? p.lines : (p.line_item_titles||[]).map((t,i)=>(
     {title:t, variant_sku:(p.variant_skus||[])[i]||"", qty: i===0 ? p.total_qty : 0}
   ));
+  const autoLoc = p._auto_location || p.location;
   return `
     <div class="order-block">
       <div class="order-block-head">
@@ -2271,15 +2460,18 @@ function renderRow(r){
           <div class="order-eyebrow">${orderLink}${cust}${date}</div>
           ${tagsFor(o)}
         </div>
-        <div class="pages-cell">
-          <span class="lbl">Pages</span>
-          <input class="qty-input" type="number" min="1" max="50" value="${p.page_count}"
-                 data-order="${o.shopify_order_id}" data-printout="${idx}" onchange="updatePages(this)" />
-          <button class="split-btn" onclick="splitPage('${o.shopify_order_id}', ${idx})">+1</button>
+        <div class="order-block-controls">
+          ${locToggleHtml(o.shopify_order_id, idx, p.location, autoLoc)}
+          <div class="pages-cell">
+            <span class="lbl">Pages</span>
+            <input class="qty-input" type="number" min="1" max="50" value="${p.page_count}"
+                   data-order="${o.shopify_order_id}" data-printout="${idx}" onchange="updatePages(this)" />
+            <button class="split-btn" onclick="splitPage('${o.shopify_order_id}', ${idx})">+1</button>
+          </div>
         </div>
       </div>
       <ul class="line-list">
-        ${lines.map(renderLine).join("")}
+        ${lines.map(l => renderLine(l, p.color, p.finish)).join("")}
       </ul>
       ${p.notes ? `<div class="review-note">⚠ ${p.notes}</div>` : ""}
     </div>`;
@@ -2290,6 +2482,13 @@ function renderGroup(g){
   let nameHtml;
   if(g.labelType === "color" && COLOR_HEX[g.color]){
     nameHtml = `<span class="color-chip" style="${chipStyle(g.color)}"><span class="color-chip-swatch"></span>${g.color}</span>`;
+  } else if(g.labelType === "finish" && FINISH_HEX[g.finishName]){
+    // Finish group card: show "<SKUs>" plus a Brass/Nickel/Black chip for the finish
+    nameHtml = `
+      <div class="group-name-row">
+        <div class="group-name">${g.label}</div>
+        <span class="color-chip" style="${chipStyle(g.finishName)}"><span class="color-chip-swatch"></span>${g.finishName}</span>
+      </div>`;
   } else {
     nameHtml = `<div class="group-name">${g.label}</div>`;
   }
@@ -2345,6 +2544,27 @@ function updatePages(input){
   saveEdit(orderId, idx, newCount);
   recalcOrderTotal(order);
 }
+
+const LOC_KEY_TO_NAME = { powder: "Powder Coating", assembly: "Assembly", shipping: "Shipping" };
+function setLocation(orderId, idx, locKey){
+  const order = QUEUE.orders.find(o=>o.shopify_order_id === orderId);
+  if(!order) return;
+  const p = order.printouts[idx];
+  const newLocName = LOC_KEY_TO_NAME[locKey];
+  if(!newLocName) return;
+  const auto = p._auto_location || p.location;
+  if(!p._auto_location) p._auto_location = p.location;
+  const isRevert = newLocName === auto;
+  saveLocOverride(orderId, idx, isRevert ? null : newLocName, {
+    from: p.location,
+    sku_keys: (p.variant_skus||[]),
+    parent_skus: (p.parent_skus||[]),
+    color: p.color, finish: p.finish, source: p.source,
+    line_titles: (p.line_item_titles||[]),
+  });
+  p.location = newLocName;
+  render();
+}
 function splitPage(orderId, idx){
   const order = QUEUE.orders.find(o=>o.shopify_order_id === orderId);
   if(!order) return;
@@ -2378,9 +2598,13 @@ function init(){
     if(rh) rh.style.display = "none";
   }
   const restored = applyStoredEdits();
+  const movedCount = applyLocOverrides();
   let suffix = QUEUE && QUEUE.built_at ? `Built ${QUEUE.built_at}` : "—";
   if(restored > 0){
-    suffix += ` · <span style="color:var(--accent-dark)">${restored} edit${restored===1?"":"s"} restored</span> · <a href="#" onclick="clearStoredEdits();return false;">reset</a>`;
+    suffix += ` · <span style="color:var(--accent-dark)">${restored} page edit${restored===1?"":"s"} restored</span> · <a href="#" onclick="clearStoredEdits();return false;">reset</a>`;
+  }
+  if(movedCount > 0){
+    suffix += ` · <span style="color:var(--accent-dark)">${movedCount} location override${movedCount===1?"":"s"}</span> · <a href="#" onclick="clearLocOverrides();return false;">reset</a> · <a href="#" onclick="downloadOverrideLog();return false;">export log</a>`;
   }
   document.getElementById("pageSub").innerHTML = suffix;
   render();
