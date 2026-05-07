@@ -475,7 +475,17 @@
     margin-bottom: 4px;
     flex-wrap: wrap;
   }
-  .order-block-head-left { min-width: 0; flex: 1; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  /* Single horizontal strip: order# · date · customer · tags  */
+  .order-block-head-left {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--text);
+  }
   .order-block-controls {
     display: flex;
     align-items: center;
@@ -487,12 +497,14 @@
     align-items: center;
     gap: 6px;
     flex-wrap: nowrap;
-    font-size: 11px;
-    color: var(--muted);
+    font-size: 12px;
+    color: var(--text);
   }
+  .order-eyebrow-date     { color: var(--muted); font-size: 12px; }
+  .order-eyebrow-customer { color: var(--text); font-size: 12px; font-weight: 500; }
   .order-num {
     font-weight: 600;
-    color: var(--text);
+    color: var(--ink);
     letter-spacing: 0.02em;
     text-decoration: none;
     font-size: 12px;
@@ -504,8 +516,8 @@
     border-radius: 50%;
     background: var(--border);
     display: inline-block;
+    flex-shrink: 0;
   }
-  .order-customer { font-weight: 500; color: var(--text); font-size: 11px; }
   /* Line items: ONE HORIZONTAL ROW per line — [SKU][title][qty]
      Designed for scannability. */
   .line-list {
@@ -969,7 +981,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T18:38:53",
+  "built_at": "2026-05-07T18:40:41",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
@@ -2057,8 +2069,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2229,8 +2241,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2780,10 +2792,11 @@ function renderRow(r){
   const orderLink = o.shopify_url
     ? `<a class="order-num" href="${o.shopify_url}" target="_blank">${orderName}</a>`
     : `<span class="order-num">${orderName}</span>`;
+  // Strip layout: order# · date · customer · tags — same row, same size
+  const date = `<span class="eyebrow-dot"></span><span class="order-eyebrow-date">${fmtMonthDay(o.created_at)}</span>`;
   const cust = o.customer_name
-    ? `<span class="eyebrow-dot"></span><span class="order-customer">${o.customer_name}</span>`
+    ? `<span class="eyebrow-dot"></span><span class="order-eyebrow-customer">${o.customer_name}</span>`
     : "";
-  const date = `<span class="eyebrow-dot"></span><span>${fmtMonthDay(o.created_at)}</span>`;
   const lines = (p.lines && p.lines.length) ? p.lines : (p.line_item_titles||[]).map((t,i)=>(
     {title:t, variant_sku:(p.variant_skus||[])[i]||"", qty: i===0 ? p.total_qty : 0}
   ));
@@ -2792,8 +2805,7 @@ function renderRow(r){
     <div class="order-block">
       <div class="order-block-head">
         <div class="order-block-head-left">
-          <div class="order-eyebrow">${orderLink}${cust}${date}</div>
-          ${tagsFor(o)}
+          ${orderLink}${date}${cust}${tagsFor(o)}
         </div>
         <div class="order-block-controls">
           ${locToggleHtml(o.shopify_order_id, idx, p.location, autoLoc)}
