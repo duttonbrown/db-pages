@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Snapshot — May 07, 2026 at 01:11 PM</title>
+<title>Production Snapshot — May 07, 2026 at 01:13 PM</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +19,24 @@
         .kpi-aside-num { font-weight: 600; color: #495057; }
         .kpi-aside-line em { color: #999; font-style: italic; }
         .kpi-wide { flex: 3 1 0; min-width: 380px; }
-        .kpi-narrow { flex: 1 1 0; min-width: 160px; }
+        .kpi-narrow { flex: 1 1 0; min-width: 180px; }
+        .kpi-divider { height: 1px; background: #dee2e6; margin: 14px 0 10px; }
+        .kpi-date { font-size: 18px; line-height: 1.2; letter-spacing: -0.01em; }
+        .page-head { display: flex; align-items: center; gap: 10px;
+                      margin-bottom: 8px; }
+        .page-head h1 { margin: 0; }
+        .info-toggle { width: 22px; height: 22px; border-radius: 50%;
+                        border: 1px solid #c5cdd6; background: #fff;
+                        color: #6c757d; font-family: serif; font-style: italic;
+                        font-size: 13px; cursor: pointer; line-height: 1;
+                        padding: 0; }
+        .info-toggle:hover { border-color: #2c3e50; color: #2c3e50; }
+        .info-toggle.active { background: #2c3e50; color: #fff; border-color: #2c3e50; }
+        .info-panel { background: #fff; border: 1px solid #dee2e6;
+                       border-radius: 6px; padding: 12px 16px; margin: 8px 0 14px;
+                       font-size: 12px; color: #4a4a4a; }
+        .info-panel p { margin: 0 0 6px; }
+        .info-panel p:last-child { margin-bottom: 0; }
         .items-matrix { width: 100%; border-collapse: collapse; margin-top: 8px;
                          font-variant-numeric: tabular-nums; }
         .items-matrix th { font-size: 10px; color: #888; text-transform: uppercase;
@@ -190,20 +207,27 @@
         }
     </style>
 </head><body>
-<h1>Dutton Brown — Production Snapshot</h1>
-<h2>May 07, 2026 at 01:11 PM</h2>
-<p class="subtitle">All unfulfilled open orders from Shopify, sliced by Color powder-coat and metal finish. Click any row to expand and see the contributing orders.</p>
-<p class="subtitle" style="font-style:italic;">Note: Quantities do not yet reflect adjustments for hang-straights and plug-ins. Additional SKUs to address these are coming soon.</p>
+<div class="page-head">
+    <h1>Dutton Brown — Production Snapshot</h1>
+    <button class="info-toggle" onclick="toggleInfo()" aria-label="Show details">i</button>
+</div>
+<div id="info-panel" class="info-panel" hidden>
+    <p>All unfulfilled open orders from Shopify, sliced by Color powder-coat and metal finish. Click any row to expand and see the contributing orders.</p>
+    <p><em>Note: Quantities do not yet reflect adjustments for hang-straights and plug-ins. Additional SKUs to address these are coming soon.</em></p>
+</div>
 
 <div class="kpi-row">
-    <div class="kpi kpi-wide">
-        <div class="kpi-label">Items</div>
-        <table class="items-matrix"><thead><tr><th></th><th>Open</th><th>Day<span class="col-sub">Rec / Ful</span></th><th>Week<span class="col-sub">Rec / Ful</span></th><th>Month<span class="col-sub">Rec / Ful</span></th></tr></thead><tbody><tr><th class="row-label">Lighting</th><td class="cell-open">848</td><td><div class="cell-pair"><span class="cell-rf">28/4</span><span class="cell-delta cell-delta-pos">+24</span></div></td><td><div class="cell-pair"><span class="cell-rf">175/99</span><span class="cell-delta cell-delta-pos">+76</span></div></td><td><div class="cell-pair"><span class="cell-rf">755/435</span><span class="cell-delta cell-delta-pos">+320</span></div></td></tr><tr><th class="row-label">Hardware</th><td class="cell-open">95</td><td><div class="cell-pair"><span class="cell-rf">16/8</span><span class="cell-delta cell-delta-pos">+8</span></div></td><td><div class="cell-pair"><span class="cell-rf">79/113</span><span class="cell-delta cell-delta-neg">-34</span></div></td><td><div class="cell-pair"><span class="cell-rf">469/518</span><span class="cell-delta cell-delta-neg">-49</span></div></td></tr><tr><th class="row-label">Accessories</th><td class="cell-open">45</td><td><div class="cell-pair"><span class="cell-rf">5/0</span><span class="cell-delta cell-delta-pos">+5</span></div></td><td><div class="cell-pair"><span class="cell-rf">11/8</span><span class="cell-delta cell-delta-pos">+3</span></div></td><td><div class="cell-pair"><span class="cell-rf">104/96</span><span class="cell-delta cell-delta-pos">+8</span></div></td></tr><tr><th class="row-label">Samples (Kits)</th><td class="cell-open">7</td><td><div class="cell-pair"><span class="cell-rf">8/3</span><span class="cell-delta cell-delta-pos">+5</span></div></td><td><div class="cell-pair"><span class="cell-rf">17/17</span><span class="cell-delta">&nbsp;</span></div></td><td><div class="cell-pair"><span class="cell-rf">92/89</span><span class="cell-delta cell-delta-pos">+3</span></div></td></tr><tr><th class="row-label">Samples (Single)</th><td class="cell-open">1</td><td><div class="cell-pair"><span class="cell-rf">16/1</span><span class="cell-delta cell-delta-pos">+15</span></div></td><td><div class="cell-pair"><span class="cell-rf">47/50</span><span class="cell-delta cell-delta-neg">-3</span></div></td><td><div class="cell-pair"><span class="cell-rf">127/126</span><span class="cell-delta cell-delta-pos">+1</span></div></td></tr></tbody></table><div class="matrix-note">Day = Wed May 6. Numbers in parens show queue change (received minus fulfilled). Pillows not included.</div>
-    </div>
     <div class="kpi kpi-narrow">
         <div class="kpi-value" id="kpi-orders">148</div>
         <div class="kpi-label">Orders</div>
         <div class="kpi-flags" id="kpi-orders-flags"><span class="kpi-pill kpi-pill-exp" id="kpi-pill-exp"><span class="kpi-pill-num">3</span> expedites</span><span class="kpi-pill kpi-pill-large" id="kpi-pill-large"><span class="kpi-pill-num">1</span> large</span><span class="kpi-pill kpi-pill-quick" id="kpi-pill-quick"><span class="kpi-pill-num">5</span> quick build</span></div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-value kpi-date">May 07, 2026 at 01:13 PM</div>
+        <div class="kpi-label">Last Update</div>
+    </div>
+    <div class="kpi kpi-wide">
+        <div class="kpi-label">Items</div>
+        <table class="items-matrix"><thead><tr><th></th><th>Open</th><th>Day<span class="col-sub">Rec / Ful</span></th><th>Week<span class="col-sub">Rec / Ful</span></th><th>Month<span class="col-sub">Rec / Ful</span></th></tr></thead><tbody><tr><th class="row-label">Lighting</th><td class="cell-open">848</td><td><div class="cell-pair"><span class="cell-rf">28/4</span><span class="cell-delta cell-delta-pos">+24</span></div></td><td><div class="cell-pair"><span class="cell-rf">175/99</span><span class="cell-delta cell-delta-pos">+76</span></div></td><td><div class="cell-pair"><span class="cell-rf">755/435</span><span class="cell-delta cell-delta-pos">+320</span></div></td></tr><tr><th class="row-label">Hardware</th><td class="cell-open">95</td><td><div class="cell-pair"><span class="cell-rf">16/8</span><span class="cell-delta cell-delta-pos">+8</span></div></td><td><div class="cell-pair"><span class="cell-rf">79/113</span><span class="cell-delta cell-delta-neg">-34</span></div></td><td><div class="cell-pair"><span class="cell-rf">469/518</span><span class="cell-delta cell-delta-neg">-49</span></div></td></tr><tr><th class="row-label">Accessories</th><td class="cell-open">45</td><td><div class="cell-pair"><span class="cell-rf">5/0</span><span class="cell-delta cell-delta-pos">+5</span></div></td><td><div class="cell-pair"><span class="cell-rf">11/8</span><span class="cell-delta cell-delta-pos">+3</span></div></td><td><div class="cell-pair"><span class="cell-rf">104/96</span><span class="cell-delta cell-delta-pos">+8</span></div></td></tr><tr><th class="row-label">Samples (Kits)</th><td class="cell-open">7</td><td><div class="cell-pair"><span class="cell-rf">8/3</span><span class="cell-delta cell-delta-pos">+5</span></div></td><td><div class="cell-pair"><span class="cell-rf">17/17</span><span class="cell-delta">&nbsp;</span></div></td><td><div class="cell-pair"><span class="cell-rf">92/89</span><span class="cell-delta cell-delta-pos">+3</span></div></td></tr><tr><th class="row-label">Samples (Single)</th><td class="cell-open">1</td><td><div class="cell-pair"><span class="cell-rf">16/1</span><span class="cell-delta cell-delta-pos">+15</span></div></td><td><div class="cell-pair"><span class="cell-rf">47/50</span><span class="cell-delta cell-delta-neg">-3</span></div></td><td><div class="cell-pair"><span class="cell-rf">127/126</span><span class="cell-delta cell-delta-pos">+1</span></div></td></tr></tbody></table><div class="matrix-note">Day = Wed May 6. Numbers in parens show queue change (received minus fulfilled). Pillows not included.</div>
     </div>
 </div>
 
@@ -1975,6 +1999,20 @@
         document.querySelectorAll('.' + cls).forEach(function(el) {
             el.classList.toggle('show');
         });
+    }
+
+    function toggleInfo() {
+        const panel = document.getElementById('info-panel');
+        const btn = document.querySelector('.info-toggle');
+        if (!panel) return;
+        const showing = panel.hasAttribute('hidden');
+        if (showing) {
+            panel.removeAttribute('hidden');
+            if (btn) btn.classList.add('active');
+        } else {
+            panel.setAttribute('hidden', '');
+            if (btn) btn.classList.remove('active');
+        }
     }
 
     let largeFilter = 'all'; // 'all' | 'only' | 'without'
