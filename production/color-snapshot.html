@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Snapshot — May 07, 2026 at 11:39 AM</title>
+<title>Production Snapshot — May 07, 2026 at 11:57 AM</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -18,6 +18,28 @@
                            padding-top: 8px; border-top: 1px dashed #dee2e6; }
         .kpi-aside-num { font-weight: 600; color: #495057; }
         .kpi-aside-line em { color: #999; font-style: italic; }
+        .kpi-wide { flex: 3 1 0; min-width: 380px; }
+        .kpi-narrow { flex: 1 1 0; min-width: 160px; }
+        .items-matrix { width: 100%; border-collapse: collapse; margin-top: 8px;
+                         font-variant-numeric: tabular-nums; }
+        .items-matrix th { font-size: 10px; color: #888; text-transform: uppercase;
+                            letter-spacing: 0.05em; font-weight: 600; padding: 4px 8px;
+                            text-align: right; border-bottom: 1px solid #dee2e6; }
+        .items-matrix th.row-label { text-align: left; color: #495057;
+                                      text-transform: none; letter-spacing: 0;
+                                      font-weight: 500; font-size: 12px; }
+        .items-matrix th:first-child { text-align: left; }
+        .items-matrix td { font-size: 13px; padding: 5px 8px; text-align: right;
+                            border-bottom: 1px solid #f1f3f5; }
+        .items-matrix tr:last-child td,
+        .items-matrix tr:last-child th { border-bottom: none; }
+        .items-matrix .cell-open { font-weight: 700; color: #2c3e50; font-size: 14px; }
+        .items-matrix .cell-rf { color: #4a4a4a; }
+        .items-matrix .cell-delta { font-size: 11px; color: #888; margin-left: 2px; }
+        .items-matrix .cell-zero { color: #c5c5c5; }
+        .matrix-note { font-size: 10px; color: #888; margin-top: 8px;
+                        padding-top: 8px; border-top: 1px dashed #dee2e6;
+                        font-style: italic; }
         .kpi-flags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
         .kpi-pill { display: inline-flex; align-items: center; gap: 5px;
                      padding: 4px 9px; border-radius: 12px; font-size: 11px;
@@ -157,18 +179,16 @@
     </style>
 </head><body>
 <h1>Dutton Brown — Production Snapshot</h1>
-<h2>May 07, 2026 at 11:39 AM</h2>
+<h2>May 07, 2026 at 11:57 AM</h2>
 <p class="subtitle">All unfulfilled open orders from Shopify, sliced by Color powder-coat and metal finish. Click any row to expand and see the contributing orders.</p>
 <p class="subtitle" style="font-style:italic;">Note: Quantities do not yet reflect adjustments for hang-straights and plug-ins. Additional SKUs to address these are coming soon.</p>
 
 <div class="kpi-row">
-    <div class="kpi">
-        <div class="kpi-value" id="kpi-items">955</div>
-        <div class="kpi-label">Total Items</div>
-        <div class="kpi-sub" id="kpi-items-sub">843 lighting &middot; 112 hardware</div>
-        <div class="kpi-aside" id="kpi-items-aside"><div class="kpi-aside-line"><span class="kpi-aside-num">45</span> accessories <em>(not in total)</em></div></div>
+    <div class="kpi kpi-wide">
+        <div class="kpi-label">Items</div>
+        <table class="items-matrix"><thead><tr><th></th><th>Open</th><th>Day</th><th>Week</th><th>Month</th></tr></thead><tbody><tr><th class="row-label">Lighting</th><td class="cell-open">843</td><td><span class="cell-rf">28/14</span> <span class="cell-delta">(+14)</span></td><td><span class="cell-rf">170/207</span> <span class="cell-delta">(-37)</span></td><td><span class="cell-rf">750/543</span> <span class="cell-delta">(+207)</span></td></tr><tr><th class="row-label">Hardware</th><td class="cell-open">112</td><td><span class="cell-rf">16/52</span> <span class="cell-delta">(-36)</span></td><td><span class="cell-rf">78/179</span> <span class="cell-delta">(-101)</span></td><td><span class="cell-rf">468/584</span> <span class="cell-delta">(-116)</span></td></tr><tr><th class="row-label">Accessories</th><td class="cell-open">45</td><td><span class="cell-rf">5/5</span></td><td><span class="cell-rf">11/22</span> <span class="cell-delta">(-11)</span></td><td><span class="cell-rf">104/110</span> <span class="cell-delta">(-6)</span></td></tr><tr><th class="row-label">Samples</th><td class="cell-open">6</td><td><span class="cell-rf">24/4</span> <span class="cell-delta">(+20)</span></td><td><span class="cell-rf">62/67</span> <span class="cell-delta">(-5)</span></td><td><span class="cell-rf">217/215</span> <span class="cell-delta">(+2)</span></td></tr></tbody></table><div class="matrix-note">Day = Wed May 6. Week / Month windows show received / fulfilled (queue change). Pillows not included.</div>
     </div>
-    <div class="kpi">
+    <div class="kpi kpi-narrow">
         <div class="kpi-value" id="kpi-orders">146</div>
         <div class="kpi-label">Orders</div>
         <div class="kpi-flags" id="kpi-orders-flags"><span class="kpi-pill kpi-pill-exp" id="kpi-pill-exp"><span class="kpi-pill-num">2</span> expedites</span><span class="kpi-pill kpi-pill-large" id="kpi-pill-large"><span class="kpi-pill-num">1</span> large</span></div>
