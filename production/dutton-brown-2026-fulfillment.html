@@ -50,6 +50,17 @@
   table.kpi-compare tr:first-child td { font-weight: 600; font-size: 1.05rem; }
   table.kpi-compare td.kpi-period-label { font-weight: 600; font-size: 0.72rem; color: #888; text-transform: uppercase; letter-spacing: 0.06em; text-align: left; }
   table.kpi-compare .kpi-cell-sub { font-size: 0.7rem; font-weight: 400; color: #999; margin-top: 2px; letter-spacing: 0.02em; }
+
+  /* Inline info bubble (hover/focus tooltip) */
+  .info-bubble { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; margin-left: 8px; border-radius: 50%; background: #E0DDD9; color: #4A4A4A; font-size: 0.65rem; font-weight: 600; font-style: italic; cursor: help; position: relative; vertical-align: middle; outline: none; }
+  .info-bubble:hover, .info-bubble:focus { background: #4A4A4A; color: #fff; }
+  .info-bubble .info-tip { display: none; position: absolute; left: 24px; top: 50%; transform: translateY(-50%); width: 320px; background: #4A4A4A; color: #fff; padding: 12px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 300; font-style: normal; line-height: 1.5; letter-spacing: normal; text-transform: none; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .info-bubble .info-tip code { background: rgba(255,255,255,0.15); padding: 1px 5px; border-radius: 3px; font-size: 0.72rem; }
+  .info-bubble .info-tip strong { color: #FFD9A8; font-weight: 600; }
+  .info-bubble:hover .info-tip, .info-bubble:focus .info-tip { display: block; }
+  @media (max-width: 700px) {
+    .info-bubble .info-tip { left: auto; right: 0; top: 24px; transform: none; width: 260px; }
+  }
   .section { margin-bottom: 32px; }
   .section h2 { font-weight: 600; font-size: 1.05rem; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #E0DDD9; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -215,7 +226,13 @@
   </div>
 
   <div class="section">
-    <h2>Order Tiers</h2>
+    <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
+      <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
+      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
+    </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
       <tbody><tr><td>Core</td><td class="r">314</td></tr>
@@ -351,7 +368,13 @@
   </div>
 
   <div class="section">
-    <h2>Order Tiers</h2>
+    <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
+      <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
+      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
+    </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
       <tbody><tr><td>Core</td><td class="r">319</td></tr>
@@ -490,7 +513,13 @@
   </div>
 
   <div class="section">
-    <h2>Order Tiers</h2>
+    <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
+      <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
+      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
+    </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
       <tbody><tr><td>Core</td><td class="r">352</td></tr>
@@ -629,7 +658,13 @@
   </div>
 
   <div class="section">
-    <h2>Order Tiers</h2>
+    <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
+      <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
+      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
+    </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
       <tbody><tr><td>Core</td><td class="r">341</td></tr>
@@ -782,7 +817,13 @@
   </div>
 
   <div class="section">
-    <h2>Order Tiers</h2>
+    <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
+      <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
+      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
+    </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
       <tbody><tr><td>Core</td><td class="r">1,326</td></tr>
