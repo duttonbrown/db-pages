@@ -55,6 +55,15 @@
   table.kpi-compare td.kpi-period-label { font-weight: 600; font-size: 0.72rem; color: #888; text-transform: uppercase; letter-spacing: 0.06em; text-align: left; }
   table.kpi-compare .kpi-cell-sub { font-size: 0.7rem; font-weight: 400; color: #999; margin-top: 2px; letter-spacing: 0.02em; }
 
+  /* Filter pills above each tab */
+  .pill-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 14px; }
+  .pill { background: #fff; border: 1px solid #E0DDD9; border-radius: 999px; padding: 6px 14px; font-family: inherit; font-size: 0.8rem; font-weight: 400; color: #888; cursor: pointer; transition: all 0.15s; }
+  .pill:hover { color: #4A4A4A; border-color: #4A4A4A; }
+  .pill.active { background: #4A4A4A; color: #fff; border-color: #4A4A4A; font-weight: 600; }
+  .pill .pill-note { font-weight: 300; opacity: 0.7; margin-left: 4px; }
+  .pill-hint { font-size: 0.7rem; color: #999; font-weight: 300; margin-left: auto; }
+  @media (max-width: 700px) { .pill-hint { display: none; } }
+
   /* Collapsible "Other" row in shipping-method table */
   tr.other-toggle { cursor: pointer; user-select: none; color: #4A4A4A; }
   tr.other-toggle:hover td { background: #F7F5F2; }
@@ -111,10 +120,18 @@
   
 <div class="tab-content" id="m01">
   <div class="tab-subtitle">January 2026 — <strong>20 working days</strong> (-2 vs 22 in 2025)</div>
-  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">January 2026</td><td class="r">425 <span style="color:#D4726A;font-weight:400">(-6.6%)</span><div class="kpi-cell-sub">vs 455 in 2025</div></td><td class="r">2,068 <span style="color:#D4726A;font-weight:400">(-0.8%)</span><div class="kpi-cell-sub">vs 2,085 in 2025</div></td><td class="r">$298,071 <span style="color:#7A9B76;font-weight:400">(+21.4%)</span><div class="kpi-cell-sub">vs $245,523 in 2025</div></td><td class="r">9.5 <span style="color:#7A9B76;font-weight:400">(-22.2%)</span><div class="kpi-cell-sub">vs 12.2 in 2025</div></td><td class="r">$701 <span style="color:#7A9B76;font-weight:400">(+30.0%)</span><div class="kpi-cell-sub">vs $540 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through January</td><td class="r">425 <span style="color:#D4726A;font-weight:400">(-6.6%)</span><div class="kpi-cell-sub">vs 455 in 2025</div></td><td class="r">2,068 <span style="color:#D4726A;font-weight:400">(-0.8%)</span><div class="kpi-cell-sub">vs 2,085 in 2025</div></td><td class="r">$298,071 <span style="color:#7A9B76;font-weight:400">(+21.4%)</span><div class="kpi-cell-sub">vs $245,523 in 2025</div></td><td class="r">9.5 <span style="color:#7A9B76;font-weight:400">(-22.2%)</span><div class="kpi-cell-sub">vs 12.2 in 2025</div></td><td class="r">$701 <span style="color:#7A9B76;font-weight:400">(+30.0%)</span><div class="kpi-cell-sub">vs $540 in 2025</div></td></tr></tbody></table></div>
+  <div class="pill-bar" data-tab="m01">
+    <button class="pill active" data-pill="all" onclick="setPill('m01', 'all')">All Orders</button>
+    <button class="pill" data-pill="core" onclick="setPill('m01', 'core')">Core <span class="pill-note">($40–$10k)</span></button>
+    <button class="pill" data-pill="large" onclick="setPill('m01', 'large')">Large <span class="pill-note">(&gt;$10k)</span></button>
+    <span class="pill-hint">Filters KPIs &amp; fulfillment-time chart</span>
+  </div>
+  <div class="kpi-compare-wrap kpi-views" data-tab="m01"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">January 2026</td><td class="r">425 <span style="color:#D4726A;font-weight:400">(-6.6%)</span><div class="kpi-cell-sub">vs 455 in 2025</div></td><td class="r">2,068 <span style="color:#D4726A;font-weight:400">(-0.8%)</span><div class="kpi-cell-sub">vs 2,085 in 2025</div></td><td class="r">$298,071 <span style="color:#7A9B76;font-weight:400">(+21.4%)</span><div class="kpi-cell-sub">vs $245,523 in 2025</div></td><td class="r">9.5 <span style="color:#7A9B76;font-weight:400">(-22.2%)</span><div class="kpi-cell-sub">vs 12.2 in 2025</div></td><td class="r">$701 <span style="color:#7A9B76;font-weight:400">(+30.0%)</span><div class="kpi-cell-sub">vs $540 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through January</td><td class="r">425 <span style="color:#D4726A;font-weight:400">(-6.6%)</span><div class="kpi-cell-sub">vs 455 in 2025</div></td><td class="r">2,068 <span style="color:#D4726A;font-weight:400">(-0.8%)</span><div class="kpi-cell-sub">vs 2,085 in 2025</div></td><td class="r">$298,071 <span style="color:#7A9B76;font-weight:400">(+21.4%)</span><div class="kpi-cell-sub">vs $245,523 in 2025</div></td><td class="r">9.5 <span style="color:#7A9B76;font-weight:400">(-22.2%)</span><div class="kpi-cell-sub">vs 12.2 in 2025</div></td><td class="r">$701 <span style="color:#7A9B76;font-weight:400">(+30.0%)</span><div class="kpi-cell-sub">vs $540 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">January 2026</td><td class="r">374 <span style="color:#D4726A;font-weight:400">(-2.6%)</span><div class="kpi-cell-sub">vs 384 in 2025</div></td><td class="r">1,650 <span style="color:#D4726A;font-weight:400">(-10.0%)</span><div class="kpi-cell-sub">vs 1,834 in 2025</div></td><td class="r">$230,176 <span style="color:#D4726A;font-weight:400">(-0.5%)</span><div class="kpi-cell-sub">vs $231,411 in 2025</div></td><td class="r">10.5 <span style="color:#7A9B76;font-weight:400">(-25.2%)</span><div class="kpi-cell-sub">vs 14.0 in 2025</div></td><td class="r">$615 <span style="color:#7A9B76;font-weight:400">(+2.1%)</span><div class="kpi-cell-sub">vs $603 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through January</td><td class="r">374 <span style="color:#D4726A;font-weight:400">(-2.6%)</span><div class="kpi-cell-sub">vs 384 in 2025</div></td><td class="r">1,650 <span style="color:#D4726A;font-weight:400">(-10.0%)</span><div class="kpi-cell-sub">vs 1,834 in 2025</div></td><td class="r">$230,176 <span style="color:#D4726A;font-weight:400">(-0.5%)</span><div class="kpi-cell-sub">vs $231,411 in 2025</div></td><td class="r">10.5 <span style="color:#7A9B76;font-weight:400">(-25.2%)</span><div class="kpi-cell-sub">vs 14.0 in 2025</div></td><td class="r">$615 <span style="color:#7A9B76;font-weight:400">(+2.1%)</span><div class="kpi-cell-sub">vs $603 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">January 2026</td><td class="r">1 <span style="color:#999;font-weight:400">(0.0%)</span><div class="kpi-cell-sub">vs 1 in 2025</div></td><td class="r">313 <span style="color:#7A9B76;font-weight:400">(+259.8%)</span><div class="kpi-cell-sub">vs 87 in 2025</div></td><td class="r">$67,593 <span style="color:#7A9B76;font-weight:400">(+388.0%)</span><div class="kpi-cell-sub">vs $13,850 in 2025</div></td><td class="r">54.0 <span style="color:#D4726A;font-weight:400">(+1250.0%)</span><div class="kpi-cell-sub">vs 4.0 in 2025</div></td><td class="r">$67,593 <span style="color:#7A9B76;font-weight:400">(+388.0%)</span><div class="kpi-cell-sub">vs $13,850 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through January</td><td class="r">1 <span style="color:#999;font-weight:400">(0.0%)</span><div class="kpi-cell-sub">vs 1 in 2025</div></td><td class="r">313 <span style="color:#7A9B76;font-weight:400">(+259.8%)</span><div class="kpi-cell-sub">vs 87 in 2025</div></td><td class="r">$67,593 <span style="color:#7A9B76;font-weight:400">(+388.0%)</span><div class="kpi-cell-sub">vs $13,850 in 2025</div></td><td class="r">54.0 <span style="color:#D4726A;font-weight:400">(+1250.0%)</span><div class="kpi-cell-sub">vs 4.0 in 2025</div></td><td class="r">$67,593 <span style="color:#7A9B76;font-weight:400">(+388.0%)</span><div class="kpi-cell-sub">vs $13,850 in 2025</div></td></tr></tbody></table></div></div>
 
   <div class="section">
-    <h2>Fulfillment Time (Days to Ship)</h2>
+    <h2>Fulfillment Time (Days to Ship) <span class="info-bubble" tabindex="0" aria-label="How this is computed">i<span class="info-tip">
+      Bars show count of orders falling into each ship-time bucket. Counts are filtered by the active pill above. Numbers above each bar = count in that bucket.
+    </span></span></h2>
     <div class="chart-container"><canvas id="chart-fulfill-m01" height="200"></canvas></div>
   </div>
 
@@ -238,17 +255,17 @@
   <div class="section">
     <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
       <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
-      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $10,000 (primary metric, excludes samples and large orders)<br>
       <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
-      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Large</strong> — order subtotal greater than $10,000 (reported separately so they don't skew AOV)<br>
       <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
     </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
-      <tbody><tr><td>Core</td><td class="r">314</td></tr>
+      <tbody><tr><td>Core</td><td class="r">318</td></tr>
 <tr><td>Sample</td><td class="r">46</td></tr>
 <tr><td>Small Accessory</td><td class="r">56</td></tr>
-<tr><td>Large</td><td class="r">5</td></tr>
+<tr><td>Large</td><td class="r">1</td></tr>
 <tr><td>Zero Dollar</td><td class="r">4</td></tr>
 </tbody>
     </table>
@@ -257,10 +274,18 @@
 
 <div class="tab-content" id="m02">
   <div class="tab-subtitle">February 2026 — <strong>20 working days</strong> (same as 2025)</div>
-  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">February 2026</td><td class="r">439 <span style="color:#D4726A;font-weight:400">(-4.8%)</span><div class="kpi-cell-sub">vs 461 in 2025</div></td><td class="r">1,888 <span style="color:#D4726A;font-weight:400">(-11.4%)</span><div class="kpi-cell-sub">vs 2,132 in 2025</div></td><td class="r">$244,209 <span style="color:#D4726A;font-weight:400">(-24.1%)</span><div class="kpi-cell-sub">vs $321,683 in 2025</div></td><td class="r">10.5 <span style="color:#7A9B76;font-weight:400">(-11.6%)</span><div class="kpi-cell-sub">vs 11.8 in 2025</div></td><td class="r">$556 <span style="color:#D4726A;font-weight:400">(-20.3%)</span><div class="kpi-cell-sub">vs $698 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through February</td><td class="r">864 <span style="color:#D4726A;font-weight:400">(-5.7%)</span><div class="kpi-cell-sub">vs 916 in 2025</div></td><td class="r">3,956 <span style="color:#D4726A;font-weight:400">(-6.2%)</span><div class="kpi-cell-sub">vs 4,217 in 2025</div></td><td class="r">$542,280 <span style="color:#D4726A;font-weight:400">(-4.4%)</span><div class="kpi-cell-sub">vs $567,206 in 2025</div></td><td class="r">10.0 <span style="color:#7A9B76;font-weight:400">(-16.9%)</span><div class="kpi-cell-sub">vs 12.0 in 2025</div></td><td class="r">$628 <span style="color:#7A9B76;font-weight:400">(+1.4%)</span><div class="kpi-cell-sub">vs $619 in 2025</div></td></tr></tbody></table></div>
+  <div class="pill-bar" data-tab="m02">
+    <button class="pill active" data-pill="all" onclick="setPill('m02', 'all')">All Orders</button>
+    <button class="pill" data-pill="core" onclick="setPill('m02', 'core')">Core <span class="pill-note">($40–$10k)</span></button>
+    <button class="pill" data-pill="large" onclick="setPill('m02', 'large')">Large <span class="pill-note">(&gt;$10k)</span></button>
+    <span class="pill-hint">Filters KPIs &amp; fulfillment-time chart</span>
+  </div>
+  <div class="kpi-compare-wrap kpi-views" data-tab="m02"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">February 2026</td><td class="r">439 <span style="color:#D4726A;font-weight:400">(-4.8%)</span><div class="kpi-cell-sub">vs 461 in 2025</div></td><td class="r">1,888 <span style="color:#D4726A;font-weight:400">(-11.4%)</span><div class="kpi-cell-sub">vs 2,132 in 2025</div></td><td class="r">$244,209 <span style="color:#D4726A;font-weight:400">(-24.1%)</span><div class="kpi-cell-sub">vs $321,683 in 2025</div></td><td class="r">10.5 <span style="color:#7A9B76;font-weight:400">(-11.6%)</span><div class="kpi-cell-sub">vs 11.8 in 2025</div></td><td class="r">$556 <span style="color:#D4726A;font-weight:400">(-20.3%)</span><div class="kpi-cell-sub">vs $698 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through February</td><td class="r">864 <span style="color:#D4726A;font-weight:400">(-5.7%)</span><div class="kpi-cell-sub">vs 916 in 2025</div></td><td class="r">3,956 <span style="color:#D4726A;font-weight:400">(-6.2%)</span><div class="kpi-cell-sub">vs 4,217 in 2025</div></td><td class="r">$542,280 <span style="color:#D4726A;font-weight:400">(-4.4%)</span><div class="kpi-cell-sub">vs $567,206 in 2025</div></td><td class="r">10.0 <span style="color:#7A9B76;font-weight:400">(-16.9%)</span><div class="kpi-cell-sub">vs 12.0 in 2025</div></td><td class="r">$628 <span style="color:#7A9B76;font-weight:400">(+1.4%)</span><div class="kpi-cell-sub">vs $619 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">February 2026</td><td class="r">376 <span style="color:#D4726A;font-weight:400">(-5.8%)</span><div class="kpi-cell-sub">vs 399 in 2025</div></td><td class="r">1,712 <span style="color:#D4726A;font-weight:400">(-4.1%)</span><div class="kpi-cell-sub">vs 1,785 in 2025</div></td><td class="r">$233,791 <span style="color:#D4726A;font-weight:400">(-15.5%)</span><div class="kpi-cell-sub">vs $276,800 in 2025</div></td><td class="r">11.9 <span style="color:#7A9B76;font-weight:400">(-10.1%)</span><div class="kpi-cell-sub">vs 13.3 in 2025</div></td><td class="r">$622 <span style="color:#D4726A;font-weight:400">(-10.4%)</span><div class="kpi-cell-sub">vs $694 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through February</td><td class="r">750 <span style="color:#D4726A;font-weight:400">(-4.2%)</span><div class="kpi-cell-sub">vs 783 in 2025</div></td><td class="r">3,362 <span style="color:#D4726A;font-weight:400">(-7.1%)</span><div class="kpi-cell-sub">vs 3,619 in 2025</div></td><td class="r">$463,967 <span style="color:#D4726A;font-weight:400">(-8.7%)</span><div class="kpi-cell-sub">vs $508,210 in 2025</div></td><td class="r">11.2 <span style="color:#7A9B76;font-weight:400">(-17.8%)</span><div class="kpi-cell-sub">vs 13.6 in 2025</div></td><td class="r">$619 <span style="color:#D4726A;font-weight:400">(-4.7%)</span><div class="kpi-cell-sub">vs $649 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">February 2026</td><td class="r">1 <span style="color:#D4726A;font-weight:400">(-66.7%)</span><div class="kpi-cell-sub">vs 3 in 2025</div></td><td class="r">40 <span style="color:#D4726A;font-weight:400">(-78.4%)</span><div class="kpi-cell-sub">vs 185 in 2025</div></td><td class="r">$10,208 <span style="color:#D4726A;font-weight:400">(-77.2%)</span><div class="kpi-cell-sub">vs $44,733 in 2025</div></td><td class="r">24.1 <span style="color:#7A9B76;font-weight:400">(-32.8%)</span><div class="kpi-cell-sub">vs 35.9 in 2025</div></td><td class="r">$10,208 <span style="color:#D4726A;font-weight:400">(-31.5%)</span><div class="kpi-cell-sub">vs $14,911 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through February</td><td class="r">2 <span style="color:#D4726A;font-weight:400">(-50.0%)</span><div class="kpi-cell-sub">vs 4 in 2025</div></td><td class="r">353 <span style="color:#7A9B76;font-weight:400">(+29.8%)</span><div class="kpi-cell-sub">vs 272 in 2025</div></td><td class="r">$77,801 <span style="color:#7A9B76;font-weight:400">(+32.8%)</span><div class="kpi-cell-sub">vs $58,583 in 2025</div></td><td class="r">39.0 <span style="color:#D4726A;font-weight:400">(+40.0%)</span><div class="kpi-cell-sub">vs 27.9 in 2025</div></td><td class="r">$38,900 <span style="color:#7A9B76;font-weight:400">(+165.6%)</span><div class="kpi-cell-sub">vs $14,646 in 2025</div></td></tr></tbody></table></div></div>
 
   <div class="section">
-    <h2>Fulfillment Time (Days to Ship)</h2>
+    <h2>Fulfillment Time (Days to Ship) <span class="info-bubble" tabindex="0" aria-label="How this is computed">i<span class="info-tip">
+      Bars show count of orders falling into each ship-time bucket. Counts are filtered by the active pill above. Numbers above each bar = count in that bucket.
+    </span></span></h2>
     <div class="chart-container"><canvas id="chart-fulfill-m02" height="200"></canvas></div>
   </div>
 
@@ -381,17 +406,17 @@
   <div class="section">
     <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
       <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
-      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $10,000 (primary metric, excludes samples and large orders)<br>
       <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
-      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Large</strong> — order subtotal greater than $10,000 (reported separately so they don't skew AOV)<br>
       <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
     </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
-      <tbody><tr><td>Core</td><td class="r">319</td></tr>
+      <tbody><tr><td>Core</td><td class="r">320</td></tr>
 <tr><td>Sample</td><td class="r">50</td></tr>
 <tr><td>Small Accessory</td><td class="r">56</td></tr>
-<tr><td>Large</td><td class="r">2</td></tr>
+<tr><td>Large</td><td class="r">1</td></tr>
 <tr><td>Zero Dollar</td><td class="r">12</td></tr>
 </tbody>
     </table>
@@ -400,10 +425,18 @@
 
 <div class="tab-content" id="m03">
   <div class="tab-subtitle">March 2026 — <strong>22 working days</strong> (+1 vs 21 in 2025)</div>
-  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">March 2026</td><td class="r">445 <span style="color:#7A9B76;font-weight:400">(+17.4%)</span><div class="kpi-cell-sub">vs 379 in 2025</div></td><td class="r">2,490 <span style="color:#7A9B76;font-weight:400">(+56.2%)</span><div class="kpi-cell-sub">vs 1,594 in 2025</div></td><td class="r">$444,901 <span style="color:#7A9B76;font-weight:400">(+93.5%)</span><div class="kpi-cell-sub">vs $229,937 in 2025</div></td><td class="r">12.0 <span style="color:#7A9B76;font-weight:400">(-19.6%)</span><div class="kpi-cell-sub">vs 14.9 in 2025</div></td><td class="r">$1,000 <span style="color:#7A9B76;font-weight:400">(+64.8%)</span><div class="kpi-cell-sub">vs $607 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through March</td><td class="r">1,309 <span style="color:#7A9B76;font-weight:400">(+1.1%)</span><div class="kpi-cell-sub">vs 1,295 in 2025</div></td><td class="r">6,446 <span style="color:#7A9B76;font-weight:400">(+10.9%)</span><div class="kpi-cell-sub">vs 5,811 in 2025</div></td><td class="r">$987,180 <span style="color:#7A9B76;font-weight:400">(+23.8%)</span><div class="kpi-cell-sub">vs $797,143 in 2025</div></td><td class="r">10.7 <span style="color:#7A9B76;font-weight:400">(-17.1%)</span><div class="kpi-cell-sub">vs 12.9 in 2025</div></td><td class="r">$754 <span style="color:#7A9B76;font-weight:400">(+22.5%)</span><div class="kpi-cell-sub">vs $616 in 2025</div></td></tr></tbody></table></div>
+  <div class="pill-bar" data-tab="m03">
+    <button class="pill active" data-pill="all" onclick="setPill('m03', 'all')">All Orders</button>
+    <button class="pill" data-pill="core" onclick="setPill('m03', 'core')">Core <span class="pill-note">($40–$10k)</span></button>
+    <button class="pill" data-pill="large" onclick="setPill('m03', 'large')">Large <span class="pill-note">(&gt;$10k)</span></button>
+    <span class="pill-hint">Filters KPIs &amp; fulfillment-time chart</span>
+  </div>
+  <div class="kpi-compare-wrap kpi-views" data-tab="m03"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">March 2026</td><td class="r">445 <span style="color:#7A9B76;font-weight:400">(+17.4%)</span><div class="kpi-cell-sub">vs 379 in 2025</div></td><td class="r">2,490 <span style="color:#7A9B76;font-weight:400">(+56.2%)</span><div class="kpi-cell-sub">vs 1,594 in 2025</div></td><td class="r">$444,901 <span style="color:#7A9B76;font-weight:400">(+93.5%)</span><div class="kpi-cell-sub">vs $229,937 in 2025</div></td><td class="r">12.0 <span style="color:#7A9B76;font-weight:400">(-19.6%)</span><div class="kpi-cell-sub">vs 14.9 in 2025</div></td><td class="r">$1,000 <span style="color:#7A9B76;font-weight:400">(+64.8%)</span><div class="kpi-cell-sub">vs $607 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through March</td><td class="r">1,309 <span style="color:#7A9B76;font-weight:400">(+1.1%)</span><div class="kpi-cell-sub">vs 1,295 in 2025</div></td><td class="r">6,446 <span style="color:#7A9B76;font-weight:400">(+10.9%)</span><div class="kpi-cell-sub">vs 5,811 in 2025</div></td><td class="r">$987,180 <span style="color:#7A9B76;font-weight:400">(+23.8%)</span><div class="kpi-cell-sub">vs $797,143 in 2025</div></td><td class="r">10.7 <span style="color:#7A9B76;font-weight:400">(-17.1%)</span><div class="kpi-cell-sub">vs 12.9 in 2025</div></td><td class="r">$754 <span style="color:#7A9B76;font-weight:400">(+22.5%)</span><div class="kpi-cell-sub">vs $616 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">March 2026</td><td class="r">398 <span style="color:#7A9B76;font-weight:400">(+20.6%)</span><div class="kpi-cell-sub">vs 330 in 2025</div></td><td class="r">1,876 <span style="color:#7A9B76;font-weight:400">(+29.0%)</span><div class="kpi-cell-sub">vs 1,454 in 2025</div></td><td class="r">$240,504 <span style="color:#7A9B76;font-weight:400">(+12.5%)</span><div class="kpi-cell-sub">vs $213,862 in 2025</div></td><td class="r">13.2 <span style="color:#7A9B76;font-weight:400">(-21.5%)</span><div class="kpi-cell-sub">vs 16.8 in 2025</div></td><td class="r">$604 <span style="color:#D4726A;font-weight:400">(-6.8%)</span><div class="kpi-cell-sub">vs $648 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through March</td><td class="r">1,148 <span style="color:#7A9B76;font-weight:400">(+3.1%)</span><div class="kpi-cell-sub">vs 1,113 in 2025</div></td><td class="r">5,238 <span style="color:#7A9B76;font-weight:400">(+3.3%)</span><div class="kpi-cell-sub">vs 5,073 in 2025</div></td><td class="r">$704,472 <span style="color:#D4726A;font-weight:400">(-2.4%)</span><div class="kpi-cell-sub">vs $722,073 in 2025</div></td><td class="r">11.9 <span style="color:#7A9B76;font-weight:400">(-18.4%)</span><div class="kpi-cell-sub">vs 14.6 in 2025</div></td><td class="r">$614 <span style="color:#D4726A;font-weight:400">(-5.4%)</span><div class="kpi-cell-sub">vs $649 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">March 2026</td><td class="r">1 <span style="color:#999;font-weight:400">(0.0%)</span><div class="kpi-cell-sub">vs 1 in 2025</div></td><td class="r">474 <span style="color:#7A9B76;font-weight:400">(+1028.6%)</span><div class="kpi-cell-sub">vs 42 in 2025</div></td><td class="r">$204,095 <span style="color:#7A9B76;font-weight:400">(+1184.6%)</span><div class="kpi-cell-sub">vs $15,888 in 2025</div></td><td class="r">30.8 <span style="color:#7A9B76;font-weight:400">(-29.8%)</span><div class="kpi-cell-sub">vs 43.9 in 2025</div></td><td class="r">$204,095 <span style="color:#7A9B76;font-weight:400">(+1184.6%)</span><div class="kpi-cell-sub">vs $15,888 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through March</td><td class="r">3 <span style="color:#D4726A;font-weight:400">(-40.0%)</span><div class="kpi-cell-sub">vs 5 in 2025</div></td><td class="r">827 <span style="color:#7A9B76;font-weight:400">(+163.4%)</span><div class="kpi-cell-sub">vs 314 in 2025</div></td><td class="r">$281,896 <span style="color:#7A9B76;font-weight:400">(+278.5%)</span><div class="kpi-cell-sub">vs $74,471 in 2025</div></td><td class="r">36.3 <span style="color:#D4726A;font-weight:400">(+16.7%)</span><div class="kpi-cell-sub">vs 31.1 in 2025</div></td><td class="r">$93,965 <span style="color:#7A9B76;font-weight:400">(+530.9%)</span><div class="kpi-cell-sub">vs $14,894 in 2025</div></td></tr></tbody></table></div></div>
 
   <div class="section">
-    <h2>Fulfillment Time (Days to Ship)</h2>
+    <h2>Fulfillment Time (Days to Ship) <span class="info-bubble" tabindex="0" aria-label="How this is computed">i<span class="info-tip">
+      Bars show count of orders falling into each ship-time bucket. Counts are filtered by the active pill above. Numbers above each bar = count in that bucket.
+    </span></span></h2>
     <div class="chart-container"><canvas id="chart-fulfill-m03" height="200"></canvas></div>
   </div>
 
@@ -527,9 +560,9 @@
   <div class="section">
     <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
       <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
-      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $10,000 (primary metric, excludes samples and large orders)<br>
       <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
-      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Large</strong> — order subtotal greater than $10,000 (reported separately so they don't skew AOV)<br>
       <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
     </span></span></h2>
     <table style="max-width:400px">
@@ -546,10 +579,18 @@
 
 <div class="tab-content" id="m04">
   <div class="tab-subtitle">April 2026 — <strong>22 working days</strong> (same as 2025)</div>
-  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">April 2026</td><td class="r">373 <span style="color:#D4726A;font-weight:400">(-15.8%)</span><div class="kpi-cell-sub">vs 443 in 2025</div></td><td class="r">1,870 <span style="color:#7A9B76;font-weight:400">(+6.4%)</span><div class="kpi-cell-sub">vs 1,758 in 2025</div></td><td class="r">$288,505 <span style="color:#7A9B76;font-weight:400">(+12.2%)</span><div class="kpi-cell-sub">vs $257,164 in 2025</div></td><td class="r">8.4 <span style="color:#7A9B76;font-weight:400">(-35.8%)</span><div class="kpi-cell-sub">vs 13.1 in 2025</div></td><td class="r">$773 <span style="color:#7A9B76;font-weight:400">(+33.2%)</span><div class="kpi-cell-sub">vs $581 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through April</td><td class="r">1,682 <span style="color:#D4726A;font-weight:400">(-3.2%)</span><div class="kpi-cell-sub">vs 1,738 in 2025</div></td><td class="r">8,316 <span style="color:#7A9B76;font-weight:400">(+9.9%)</span><div class="kpi-cell-sub">vs 7,569 in 2025</div></td><td class="r">$1,275,685 <span style="color:#7A9B76;font-weight:400">(+21.0%)</span><div class="kpi-cell-sub">vs $1,054,307 in 2025</div></td><td class="r">10.2 <span style="color:#7A9B76;font-weight:400">(-21.3%)</span><div class="kpi-cell-sub">vs 12.9 in 2025</div></td><td class="r">$758 <span style="color:#7A9B76;font-weight:400">(+25.0%)</span><div class="kpi-cell-sub">vs $607 in 2025</div></td></tr></tbody></table></div>
+  <div class="pill-bar" data-tab="m04">
+    <button class="pill active" data-pill="all" onclick="setPill('m04', 'all')">All Orders</button>
+    <button class="pill" data-pill="core" onclick="setPill('m04', 'core')">Core <span class="pill-note">($40–$10k)</span></button>
+    <button class="pill" data-pill="large" onclick="setPill('m04', 'large')">Large <span class="pill-note">(&gt;$10k)</span></button>
+    <span class="pill-hint">Filters KPIs &amp; fulfillment-time chart</span>
+  </div>
+  <div class="kpi-compare-wrap kpi-views" data-tab="m04"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">April 2026</td><td class="r">373 <span style="color:#D4726A;font-weight:400">(-15.8%)</span><div class="kpi-cell-sub">vs 443 in 2025</div></td><td class="r">1,870 <span style="color:#7A9B76;font-weight:400">(+6.4%)</span><div class="kpi-cell-sub">vs 1,758 in 2025</div></td><td class="r">$288,505 <span style="color:#7A9B76;font-weight:400">(+12.2%)</span><div class="kpi-cell-sub">vs $257,164 in 2025</div></td><td class="r">8.4 <span style="color:#7A9B76;font-weight:400">(-35.8%)</span><div class="kpi-cell-sub">vs 13.1 in 2025</div></td><td class="r">$773 <span style="color:#7A9B76;font-weight:400">(+33.2%)</span><div class="kpi-cell-sub">vs $581 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through April</td><td class="r">1,682 <span style="color:#D4726A;font-weight:400">(-3.2%)</span><div class="kpi-cell-sub">vs 1,738 in 2025</div></td><td class="r">8,316 <span style="color:#7A9B76;font-weight:400">(+9.9%)</span><div class="kpi-cell-sub">vs 7,569 in 2025</div></td><td class="r">$1,275,685 <span style="color:#7A9B76;font-weight:400">(+21.0%)</span><div class="kpi-cell-sub">vs $1,054,307 in 2025</div></td><td class="r">10.2 <span style="color:#7A9B76;font-weight:400">(-21.3%)</span><div class="kpi-cell-sub">vs 12.9 in 2025</div></td><td class="r">$758 <span style="color:#7A9B76;font-weight:400">(+25.0%)</span><div class="kpi-cell-sub">vs $607 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">April 2026</td><td class="r">315 <span style="color:#D4726A;font-weight:400">(-22.2%)</span><div class="kpi-cell-sub">vs 405 in 2025</div></td><td class="r">1,643 <span style="color:#D4726A;font-weight:400">(-1.7%)</span><div class="kpi-cell-sub">vs 1,671 in 2025</div></td><td class="r">$249,316 <span style="color:#D4726A;font-weight:400">(-2.9%)</span><div class="kpi-cell-sub">vs $256,881 in 2025</div></td><td class="r">9.6 <span style="color:#7A9B76;font-weight:400">(-32.2%)</span><div class="kpi-cell-sub">vs 14.2 in 2025</div></td><td class="r">$791 <span style="color:#7A9B76;font-weight:400">(+24.8%)</span><div class="kpi-cell-sub">vs $634 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through April</td><td class="r">1,463 <span style="color:#D4726A;font-weight:400">(-3.6%)</span><div class="kpi-cell-sub">vs 1,518 in 2025</div></td><td class="r">6,881 <span style="color:#7A9B76;font-weight:400">(+2.0%)</span><div class="kpi-cell-sub">vs 6,744 in 2025</div></td><td class="r">$953,788 <span style="color:#D4726A;font-weight:400">(-2.6%)</span><div class="kpi-cell-sub">vs $978,954 in 2025</div></td><td class="r">11.4 <span style="color:#7A9B76;font-weight:400">(-21.2%)</span><div class="kpi-cell-sub">vs 14.5 in 2025</div></td><td class="r">$652 <span style="color:#7A9B76;font-weight:400">(+1.1%)</span><div class="kpi-cell-sub">vs $645 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">April 2026</td><td class="r">2<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">117<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">$39,004<div class="kpi-cell-sub">vs $0 in 2025</div></td><td class="r">16.9<div class="kpi-cell-sub">vs 0.0 in 2025</div></td><td class="r">$19,502<div class="kpi-cell-sub">vs $0 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through April</td><td class="r">5 <span style="color:#999;font-weight:400">(0.0%)</span><div class="kpi-cell-sub">vs 5 in 2025</div></td><td class="r">944 <span style="color:#7A9B76;font-weight:400">(+200.6%)</span><div class="kpi-cell-sub">vs 314 in 2025</div></td><td class="r">$320,900 <span style="color:#7A9B76;font-weight:400">(+330.9%)</span><div class="kpi-cell-sub">vs $74,471 in 2025</div></td><td class="r">28.6 <span style="color:#7A9B76;font-weight:400">(-8.2%)</span><div class="kpi-cell-sub">vs 31.1 in 2025</div></td><td class="r">$64,180 <span style="color:#7A9B76;font-weight:400">(+330.9%)</span><div class="kpi-cell-sub">vs $14,894 in 2025</div></td></tr></tbody></table></div></div>
 
   <div class="section">
-    <h2>Fulfillment Time (Days to Ship)</h2>
+    <h2>Fulfillment Time (Days to Ship) <span class="info-bubble" tabindex="0" aria-label="How this is computed">i<span class="info-tip">
+      Bars show count of orders falling into each ship-time bucket. Counts are filtered by the active pill above. Numbers above each bar = count in that bucket.
+    </span></span></h2>
     <div class="chart-container"><canvas id="chart-fulfill-m04" height="200"></canvas></div>
   </div>
 
@@ -673,17 +714,17 @@
   <div class="section">
     <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
       <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
-      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $10,000 (primary metric, excludes samples and large orders)<br>
       <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
-      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Large</strong> — order subtotal greater than $10,000 (reported separately so they don't skew AOV)<br>
       <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
     </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
-      <tbody><tr><td>Core</td><td class="r">341</td></tr>
+      <tbody><tr><td>Core</td><td class="r">345</td></tr>
 <tr><td>Sample</td><td class="r">52</td></tr>
 <tr><td>Small Accessory</td><td class="r">44</td></tr>
-<tr><td>Large</td><td class="r">7</td></tr>
+<tr><td>Large</td><td class="r">3</td></tr>
 <tr><td>Zero Dollar</td><td class="r">7</td></tr>
 </tbody>
     </table>
@@ -692,10 +733,18 @@
 
 <div class="tab-content" id="ytd">
   <div class="tab-subtitle">YTD 2026 — <strong>251 working days</strong> (-2 vs 253 in 2025)</div>
-  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">1,682 <span style="color:#D4726A;font-weight:400">(-3.2%)</span><div class="kpi-cell-sub">vs 1,738 in 2025</div></td><td class="r">8,316 <span style="color:#7A9B76;font-weight:400">(+9.9%)</span><div class="kpi-cell-sub">vs 7,569 in 2025</div></td><td class="r">$1,275,685 <span style="color:#7A9B76;font-weight:400">(+21.0%)</span><div class="kpi-cell-sub">vs $1,054,307 in 2025</div></td><td class="r">10.2 <span style="color:#7A9B76;font-weight:400">(-21.3%)</span><div class="kpi-cell-sub">vs 12.9 in 2025</div></td><td class="r">$758 <span style="color:#7A9B76;font-weight:400">(+25.0%)</span><div class="kpi-cell-sub">vs $607 in 2025</div></td></tr></tbody></table></div>
+  <div class="pill-bar" data-tab="ytd">
+    <button class="pill active" data-pill="all" onclick="setPill('ytd', 'all')">All Orders</button>
+    <button class="pill" data-pill="core" onclick="setPill('ytd', 'core')">Core <span class="pill-note">($40–$10k)</span></button>
+    <button class="pill" data-pill="large" onclick="setPill('ytd', 'large')">Large <span class="pill-note">(&gt;$10k)</span></button>
+    <span class="pill-hint">Filters KPIs &amp; fulfillment-time chart</span>
+  </div>
+  <div class="kpi-compare-wrap kpi-views" data-tab="ytd"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">1,682 <span style="color:#D4726A;font-weight:400">(-3.2%)</span><div class="kpi-cell-sub">vs 1,738 in 2025</div></td><td class="r">8,316 <span style="color:#7A9B76;font-weight:400">(+9.9%)</span><div class="kpi-cell-sub">vs 7,569 in 2025</div></td><td class="r">$1,275,685 <span style="color:#7A9B76;font-weight:400">(+21.0%)</span><div class="kpi-cell-sub">vs $1,054,307 in 2025</div></td><td class="r">10.2 <span style="color:#7A9B76;font-weight:400">(-21.3%)</span><div class="kpi-cell-sub">vs 12.9 in 2025</div></td><td class="r">$758 <span style="color:#7A9B76;font-weight:400">(+25.0%)</span><div class="kpi-cell-sub">vs $607 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">1,463 <span style="color:#D4726A;font-weight:400">(-3.6%)</span><div class="kpi-cell-sub">vs 1,518 in 2025</div></td><td class="r">6,881 <span style="color:#7A9B76;font-weight:400">(+2.0%)</span><div class="kpi-cell-sub">vs 6,744 in 2025</div></td><td class="r">$953,788 <span style="color:#D4726A;font-weight:400">(-2.6%)</span><div class="kpi-cell-sub">vs $978,954 in 2025</div></td><td class="r">11.4 <span style="color:#7A9B76;font-weight:400">(-21.2%)</span><div class="kpi-cell-sub">vs 14.5 in 2025</div></td><td class="r">$652 <span style="color:#7A9B76;font-weight:400">(+1.1%)</span><div class="kpi-cell-sub">vs $645 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">5 <span style="color:#999;font-weight:400">(0.0%)</span><div class="kpi-cell-sub">vs 5 in 2025</div></td><td class="r">944 <span style="color:#7A9B76;font-weight:400">(+200.6%)</span><div class="kpi-cell-sub">vs 314 in 2025</div></td><td class="r">$320,900 <span style="color:#7A9B76;font-weight:400">(+330.9%)</span><div class="kpi-cell-sub">vs $74,471 in 2025</div></td><td class="r">28.6 <span style="color:#7A9B76;font-weight:400">(-8.2%)</span><div class="kpi-cell-sub">vs 31.1 in 2025</div></td><td class="r">$64,180 <span style="color:#7A9B76;font-weight:400">(+330.9%)</span><div class="kpi-cell-sub">vs $14,894 in 2025</div></td></tr></tbody></table></div></div>
 
   <div class="section">
-    <h2>Fulfillment Time (Days to Ship)</h2>
+    <h2>Fulfillment Time (Days to Ship) <span class="info-bubble" tabindex="0" aria-label="How this is computed">i<span class="info-tip">
+      Bars show count of orders falling into each ship-time bucket. Counts are filtered by the active pill above. Numbers above each bar = count in that bucket.
+    </span></span></h2>
     <div class="chart-container"><canvas id="chart-fulfill-ytd" height="200"></canvas></div>
   </div>
 
@@ -833,17 +882,17 @@
   <div class="section">
     <h2>Order Tiers <span class="info-bubble" tabindex="0" aria-label="How tiers are defined">i<span class="info-tip">
       <strong>Sample</strong> — only sample line items (SKU starts <code>SAC</code> or name contains "sample")<br>
-      <strong>Core</strong> — order subtotal between $40.01 and $5,000 (primary metric, excludes samples and large orders)<br>
+      <strong>Core</strong> — order subtotal between $40.01 and $10,000 (primary metric, excludes samples and large orders)<br>
       <strong>Small Accessory</strong> — order subtotal $0.01–$40 (bulbs, rods, small hardware)<br>
-      <strong>Large</strong> — order subtotal greater than $5,000 (reported separately so they don't skew AOV)<br>
+      <strong>Large</strong> — order subtotal greater than $10,000 (reported separately so they don't skew AOV)<br>
       <strong>Zero Dollar</strong> — non-sample order with $0 subtotal (free items, replacements)
     </span></span></h2>
     <table style="max-width:400px">
       <thead><tr><th>Tier</th><th class="r">Orders</th></tr></thead>
-      <tbody><tr><td>Core</td><td class="r">1,326</td></tr>
+      <tbody><tr><td>Core</td><td class="r">1,335</td></tr>
 <tr><td>Sample</td><td class="r">184</td></tr>
 <tr><td>Small Accessory</td><td class="r">202</td></tr>
-<tr><td>Large</td><td class="r">16</td></tr>
+<tr><td>Large</td><td class="r">7</td></tr>
 <tr><td>Zero Dollar</td><td class="r">33</td></tr>
 </tbody>
     </table>
@@ -859,6 +908,79 @@ Chart.defaults.font.size = 12;
 Chart.defaults.color = '#888';
 
 const charts = {};
+const fulfillData = {};   // tabId -> {pill: [bucket counts]}
+const fulfillLabels = {}; // tabId -> [bucket label strings]
+
+// Plugin: print the bar value above each bar (used for the fulfillment-time chart).
+const barTopLabels = {
+  id: 'barTopLabels',
+  afterDatasetsDraw(chart, _, opts) {
+    const { ctx, data, scales: { y } } = chart;
+    if (chart.config.type !== 'bar' || (chart.options.indexAxis === 'y')) return;
+    if (!opts || opts.enabled === false) return;
+    ctx.save();
+    ctx.fillStyle = '#4A4A4A';
+    ctx.font = '600 11px "Inter", sans-serif';
+    ctx.textAlign = 'center';
+    data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di);
+      meta.data.forEach((bar, i) => {
+        const v = ds.data[i];
+        if (!v) return;
+        ctx.fillText(String(v), bar.x, bar.y - 6);
+      });
+    });
+    ctx.restore();
+  }
+};
+
+function initFulfillChart(tabId, pill) {
+  const id = 'chart-fulfill-' + tabId;
+  const el = document.getElementById(id);
+  if (!el) return;
+  const data = (fulfillData[tabId] || {})[pill] || [];
+  const labels = fulfillLabels[tabId] || [];
+  if (charts[id]) charts[id].destroy();
+  charts[id] = new Chart(el, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: '#8BB8D9',
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      layout: { padding: { top: 18 } },  // room for bar-top labels
+      plugins: {
+        legend: { display: false },
+        barTopLabels: { enabled: true },
+      },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#F0EDEA' }, title: { display: true, text: 'Orders' } },
+        x: { grid: { display: false }, title: { display: true, text: 'Days' } },
+      }
+    },
+    plugins: [barTopLabels],
+  });
+}
+
+function setPill(tabId, pill) {
+  const tab = document.getElementById(tabId);
+  if (!tab) return;
+  // Pills active state
+  tab.querySelectorAll('.pill-bar .pill').forEach(b => {
+    b.classList.toggle('active', b.dataset.pill === pill);
+  });
+  // KPI views toggle
+  tab.querySelectorAll('.kpi-views .kpi-view').forEach(v => {
+    v.style.display = (v.dataset.pill === pill) ? 'block' : 'none';
+  });
+  // Re-render fulfillment chart for this pill
+  initFulfillChart(tabId, pill);
+}
 
 function initChart(id, type, labels, datasets, colors, showLegend, yTitle, xTitle, horizontal) {
   const el = document.getElementById(id);
@@ -917,27 +1039,37 @@ function showTab(tabId) {
 
 // Deferred chart init — charts only render when tab is visible
 
-initChart('chart-fulfill-m01', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[136, 47, 130, 100, 4, 8]], ['#8BB8D9'], false, 'Orders', 'Days');
+fulfillData['m01'] = {"all": [136, 47, 130, 100, 4, 8], "core": [90, 43, 130, 100, 4, 7], "large": [0, 0, 0, 0, 0, 1]};
+fulfillLabels['m01'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
+initFulfillChart('m01', 'all');
 initChart('chart-product-m01', 'doughnut', ["Sconce", "Hardware", "Other", "Sample", "Accessory", "Bulb", "Flush Mount", "Pendant", "Chandelier", "Plug-In"], [[613, 325, 299, 241, 153, 145, 140, 112, 31, 6]], COLORS, true);
 initChart('chart-carrier-m01', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[324, 264, 168, 5, 1]], COLORS, true);
 initChart('chart-state-m01', 'bar', ["NY", "CA", "FL", "TX", "MA", "NJ", "IL", "CT", "GA", "MN", "VA", "CO", "MI", "NC", "WA"], [[67, 65, 29, 28, 27, 24, 19, 15, 12, 12, 11, 10, 8, 8, 7]], ['#C5B9A8'], false, null, null, true);
 
-initChart('chart-fulfill-m02', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[153, 41, 81, 140, 8, 16]], ['#8BB8D9'], false, 'Orders', 'Days');
+fulfillData['m02'] = {"all": [153, 41, 81, 140, 8, 16], "core": [96, 37, 80, 140, 7, 16], "large": [0, 0, 0, 0, 1, 0]};
+fulfillLabels['m02'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
+initFulfillChart('m02', 'all');
 initChart('chart-product-m02', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Bulb", "Pendant", "Accessory", "Chandelier", "Plug-In"], [[446, 366, 334, 262, 152, 120, 91, 76, 31, 10]], COLORS, true);
 initChart('chart-carrier-m02', 'doughnut', ["FedEx", "No carrier set", "USPS", "UPS", "Other"], [[340, 261, 171, 6, 6]], COLORS, true);
 initChart('chart-state-m02', 'bar', ["CA", "NY", "TX", "FL", "MA", "NJ", "IL", "CT", "WA", "GA", "VA", "NC", "PA", "MN", "OR"], [[60, 58, 33, 29, 24, 21, 19, 16, 15, 13, 13, 10, 10, 10, 9]], ['#C5B9A8'], false, null, null, true);
 
-initChart('chart-fulfill-m03', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[130, 33, 55, 190, 33, 4]], ['#8BB8D9'], false, 'Orders', 'Days');
+fulfillData['m03'] = {"all": [130, 33, 55, 190, 33, 4], "core": [86, 32, 54, 190, 33, 3], "large": [0, 0, 0, 0, 0, 1]};
+fulfillLabels['m03'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
+initFulfillChart('m03', 'all');
 initChart('chart-product-m03', 'doughnut', ["Hardware", "Sconce", "Other", "Flush Mount", "Sample", "Accessory", "Bulb", "Chandelier", "Pendant", "Plug-In"], [[738, 563, 365, 284, 188, 114, 99, 76, 58, 5]], COLORS, true);
 initChart('chart-carrier-m03', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[336, 279, 173, 2, 2]], COLORS, true);
 initChart('chart-state-m03', 'bar', ["NY", "CA", "MA", "TX", "FL", "NJ", "CT", "NC", "MN", "GA", "IL", "VA", "WA", "CO", "TN"], [[70, 63, 38, 26, 23, 23, 17, 15, 15, 15, 14, 14, 13, 12, 9]], ['#C5B9A8'], false, null, null, true);
 
-initChart('chart-fulfill-m04', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[128, 36, 130, 77, 2, 0]], ['#8BB8D9'], false, 'Orders', 'Days');
+fulfillData['m04'] = {"all": [128, 36, 130, 77, 2, 0], "core": [73, 35, 129, 77, 1, 0], "large": [0, 0, 1, 0, 1, 0]};
+fulfillLabels['m04'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
+initFulfillChart('m04', 'all');
 initChart('chart-product-m04', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Pendant", "Bulb", "Accessory", "Chandelier", "Plug-In"], [[517, 431, 318, 191, 110, 89, 85, 78, 43, 6]], COLORS, true);
 initChart('chart-carrier-m04', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[247, 223, 171, 2, 1]], COLORS, true);
 initChart('chart-state-m04', 'bar', ["NY", "CA", "TX", "NJ", "FL", "WA", "CT", "MA", "IL", "MN", "CO", "GA", "TN", "NC", "PA"], [[66, 51, 38, 28, 26, 23, 22, 22, 21, 15, 12, 11, 11, 10, 8]], ['#C5B9A8'], false, null, null, true);
 
-initChart('chart-fulfill-ytd', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[547, 157, 396, 507, 47, 28]], ['#8BB8D9'], false, 'Orders', 'Days');
+fulfillData['ytd'] = {"all": [547, 157, 396, 507, 47, 28], "core": [345, 147, 393, 507, 45, 26], "large": [0, 0, 1, 0, 2, 2]};
+fulfillLabels['ytd'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
+initFulfillChart('ytd', 'all');
 initChart('chart-product-ytd', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Bulb", "Accessory", "Pendant", "Chandelier", "Plug-In"], [[2026, 1973, 1316, 882, 686, 449, 421, 350, 181, 27]], COLORS, true);
 initChart('chart-carrier-ytd', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[1247, 1027, 683, 15, 10]], COLORS, true);
 initChart('chart-state-ytd', 'bar', ["NY", "CA", "TX", "MA", "FL", "NJ", "IL", "CT", "WA", "MN", "GA", "VA", "NC", "CO", "PA"], [[261, 239, 125, 111, 107, 96, 73, 70, 58, 52, 51, 45, 43, 42, 32]], ['#C5B9A8'], false, null, null, true);
