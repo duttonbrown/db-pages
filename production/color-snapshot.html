@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Snapshot — May 07, 2026 at 01:02 PM</title>
+<title>Production Snapshot — May 07, 2026 at 01:11 PM</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,7 +24,11 @@
                          font-variant-numeric: tabular-nums; }
         .items-matrix th { font-size: 10px; color: #888; text-transform: uppercase;
                             letter-spacing: 0.05em; font-weight: 600; padding: 4px 8px;
-                            text-align: right; border-bottom: 1px solid #dee2e6; }
+                            text-align: right; border-bottom: 1px solid #dee2e6;
+                            vertical-align: bottom; }
+        .items-matrix .col-sub { display: block; font-size: 9px; color: #b0b0b0;
+                                  font-weight: 400; text-transform: none;
+                                  letter-spacing: 0; margin-top: 2px; }
         .items-matrix th.row-label { text-align: left; color: #495057;
                                       text-transform: none; letter-spacing: 0;
                                       font-weight: 500; font-size: 12px; }
@@ -53,6 +57,7 @@
         .kpi-pill-num { font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; }
         .kpi-pill-exp { background: #fdebea; color: #c0392b; }
         .kpi-pill-large { background: #eef2f7; color: #2c3e50; }
+        .kpi-pill-quick { background: #e6f4ea; color: #1e7e34; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
         th { background: #f1f3f5; padding: 8px 12px; text-align: left;
              font-size: 12px; text-transform: uppercase; color: #666;
@@ -90,7 +95,8 @@
         .color-header { padding: 8px 12px; }
         .color-name { font-size: 15px; font-weight: 600; }
         .color-stats { font-size: 11px; margin-top: 1px; }
-        .color-oldest { font-size: 10px; margin-top: 2px; opacity: 0.75; }
+        .color-oldest { font-size: 10px; margin-top: 2px; opacity: 0.85; }
+        .oldest-large { font-weight: 600; opacity: 1; }
         .color-table { width: 100%; border-collapse: collapse; margin: 0;
                        table-layout: fixed; }
         .color-table th { font-size: 10px; padding: 3px 6px; }
@@ -185,19 +191,19 @@
     </style>
 </head><body>
 <h1>Dutton Brown — Production Snapshot</h1>
-<h2>May 07, 2026 at 01:02 PM</h2>
+<h2>May 07, 2026 at 01:11 PM</h2>
 <p class="subtitle">All unfulfilled open orders from Shopify, sliced by Color powder-coat and metal finish. Click any row to expand and see the contributing orders.</p>
 <p class="subtitle" style="font-style:italic;">Note: Quantities do not yet reflect adjustments for hang-straights and plug-ins. Additional SKUs to address these are coming soon.</p>
 
 <div class="kpi-row">
     <div class="kpi kpi-wide">
         <div class="kpi-label">Items</div>
-        <table class="items-matrix"><thead><tr><th></th><th>Open</th><th>Day</th><th>Week</th><th>Month</th></tr></thead><tbody><tr><th class="row-label">Lighting</th><td class="cell-open">848</td><td><div class="cell-pair"><span class="cell-rf">28/14</span><span class="cell-delta cell-delta-pos">+14</span></div></td><td><div class="cell-pair"><span class="cell-rf">175/207</span><span class="cell-delta cell-delta-neg">-32</span></div></td><td><div class="cell-pair"><span class="cell-rf">755/543</span><span class="cell-delta cell-delta-pos">+212</span></div></td></tr><tr><th class="row-label">Hardware</th><td class="cell-open">95</td><td><div class="cell-pair"><span class="cell-rf">16/52</span><span class="cell-delta cell-delta-neg">-36</span></div></td><td><div class="cell-pair"><span class="cell-rf">79/197</span><span class="cell-delta cell-delta-neg">-118</span></div></td><td><div class="cell-pair"><span class="cell-rf">469/602</span><span class="cell-delta cell-delta-neg">-133</span></div></td></tr><tr><th class="row-label">Accessories</th><td class="cell-open">45</td><td><div class="cell-pair"><span class="cell-rf">5/5</span><span class="cell-delta">&nbsp;</span></div></td><td><div class="cell-pair"><span class="cell-rf">11/22</span><span class="cell-delta cell-delta-neg">-11</span></div></td><td><div class="cell-pair"><span class="cell-rf">104/110</span><span class="cell-delta cell-delta-neg">-6</span></div></td></tr><tr><th class="row-label">Samples (Kits)</th><td class="cell-open">7</td><td><div class="cell-pair"><span class="cell-rf">8/3</span><span class="cell-delta cell-delta-pos">+5</span></div></td><td><div class="cell-pair"><span class="cell-rf">17/17</span><span class="cell-delta">&nbsp;</span></div></td><td><div class="cell-pair"><span class="cell-rf">92/89</span><span class="cell-delta cell-delta-pos">+3</span></div></td></tr><tr><th class="row-label">Samples (Single)</th><td class="cell-open">0</td><td><div class="cell-pair"><span class="cell-rf">16/1</span><span class="cell-delta cell-delta-pos">+15</span></div></td><td><div class="cell-pair"><span class="cell-rf">46/50</span><span class="cell-delta cell-delta-neg">-4</span></div></td><td><div class="cell-pair"><span class="cell-rf">126/126</span><span class="cell-delta">&nbsp;</span></div></td></tr></tbody></table><div class="matrix-note">Day = Wed May 6. Week / Month windows show received / fulfilled (queue change). Pillows not included.</div>
+        <table class="items-matrix"><thead><tr><th></th><th>Open</th><th>Day<span class="col-sub">Rec / Ful</span></th><th>Week<span class="col-sub">Rec / Ful</span></th><th>Month<span class="col-sub">Rec / Ful</span></th></tr></thead><tbody><tr><th class="row-label">Lighting</th><td class="cell-open">848</td><td><div class="cell-pair"><span class="cell-rf">28/4</span><span class="cell-delta cell-delta-pos">+24</span></div></td><td><div class="cell-pair"><span class="cell-rf">175/99</span><span class="cell-delta cell-delta-pos">+76</span></div></td><td><div class="cell-pair"><span class="cell-rf">755/435</span><span class="cell-delta cell-delta-pos">+320</span></div></td></tr><tr><th class="row-label">Hardware</th><td class="cell-open">95</td><td><div class="cell-pair"><span class="cell-rf">16/8</span><span class="cell-delta cell-delta-pos">+8</span></div></td><td><div class="cell-pair"><span class="cell-rf">79/113</span><span class="cell-delta cell-delta-neg">-34</span></div></td><td><div class="cell-pair"><span class="cell-rf">469/518</span><span class="cell-delta cell-delta-neg">-49</span></div></td></tr><tr><th class="row-label">Accessories</th><td class="cell-open">45</td><td><div class="cell-pair"><span class="cell-rf">5/0</span><span class="cell-delta cell-delta-pos">+5</span></div></td><td><div class="cell-pair"><span class="cell-rf">11/8</span><span class="cell-delta cell-delta-pos">+3</span></div></td><td><div class="cell-pair"><span class="cell-rf">104/96</span><span class="cell-delta cell-delta-pos">+8</span></div></td></tr><tr><th class="row-label">Samples (Kits)</th><td class="cell-open">7</td><td><div class="cell-pair"><span class="cell-rf">8/3</span><span class="cell-delta cell-delta-pos">+5</span></div></td><td><div class="cell-pair"><span class="cell-rf">17/17</span><span class="cell-delta">&nbsp;</span></div></td><td><div class="cell-pair"><span class="cell-rf">92/89</span><span class="cell-delta cell-delta-pos">+3</span></div></td></tr><tr><th class="row-label">Samples (Single)</th><td class="cell-open">1</td><td><div class="cell-pair"><span class="cell-rf">16/1</span><span class="cell-delta cell-delta-pos">+15</span></div></td><td><div class="cell-pair"><span class="cell-rf">47/50</span><span class="cell-delta cell-delta-neg">-3</span></div></td><td><div class="cell-pair"><span class="cell-rf">127/126</span><span class="cell-delta cell-delta-pos">+1</span></div></td></tr></tbody></table><div class="matrix-note">Day = Wed May 6. Numbers in parens show queue change (received minus fulfilled). Pillows not included.</div>
     </div>
     <div class="kpi kpi-narrow">
         <div class="kpi-value" id="kpi-orders">148</div>
         <div class="kpi-label">Orders</div>
-        <div class="kpi-flags" id="kpi-orders-flags"><span class="kpi-pill kpi-pill-exp" id="kpi-pill-exp"><span class="kpi-pill-num">3</span> expedites</span><span class="kpi-pill kpi-pill-large" id="kpi-pill-large"><span class="kpi-pill-num">1</span> large</span></div>
+        <div class="kpi-flags" id="kpi-orders-flags"><span class="kpi-pill kpi-pill-exp" id="kpi-pill-exp"><span class="kpi-pill-num">3</span> expedites</span><span class="kpi-pill kpi-pill-large" id="kpi-pill-large"><span class="kpi-pill-num">1</span> large</span><span class="kpi-pill kpi-pill-quick" id="kpi-pill-quick"><span class="kpi-pill-num">5</span> quick build</span></div>
     </div>
 </div>
 
@@ -218,13 +224,13 @@
     </div>
 </div>
 
-<div class="tab-pane" data-tab="overall"><div class="overall-grid"><div class="slice-card" data-slice="Color" style="border-top:3px solid #FF9912;"><div class="slice-label">Color</div><div class="slice-items">940</div><div class="slice-sub">847 lighting &middot; 93 hardware</div><div class="slice-quick">16 quick build</div><div class="slice-meta">14 groups &middot; 144 orders</div></div><div class="slice-card" data-slice="Brass" style="border-top:3px solid #b8860b;"><div class="slice-label">Brass</div><div class="slice-items">1</div><div class="slice-sub">1 lighting</div><div class="slice-quick">1 quick build</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="slice-card" data-slice="Nickel" style="border-top:3px solid #9CA3AF;"><div class="slice-label">Nickel</div><div class="slice-items">1</div><div class="slice-sub">1 hardware</div><div class="slice-quick">1 quick build</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="slice-card" data-slice="Black" style="border-top:3px solid #2c3e50;"><div class="slice-label">Black</div><div class="slice-items">1</div><div class="slice-sub">1 hardware</div><div class="slice-quick">1 quick build</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="slice-card" data-slice="Accessories" style="border-top:3px solid #6B7280;"><div class="slice-label">Accessories</div><div class="slice-items">45</div><div class="slice-sub">45 accessories</div><div class="slice-meta">9 groups &middot; 10 orders</div></div></div><h3 class="section-title">Quick Build</h3><div class="color-grid"><div class="color-column" data-color="Brass"
+<div class="tab-pane" data-tab="overall"><div class="overall-grid"><div class="slice-card" data-slice="Color" style="border-top:3px solid #FF9912;"><div class="slice-label">Color</div><div class="slice-items">940</div><div class="slice-sub">847 lighting &middot; 93 hardware</div><div class="slice-quick">16 quick build</div><div class="slice-meta">14 groups &middot; 144 orders</div></div><div class="slice-card" data-slice="Brass" style="border-top:3px solid #b8860b;"><div class="slice-label">Brass</div><div class="slice-items">1</div><div class="slice-sub">1 lighting</div><div class="slice-quick">1 quick build</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="slice-card" data-slice="Nickel" style="border-top:3px solid #9CA3AF;"><div class="slice-label">Nickel</div><div class="slice-items">1</div><div class="slice-sub">1 hardware</div><div class="slice-quick">1 quick build</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="slice-card" data-slice="Black" style="border-top:3px solid #2c3e50;"><div class="slice-label">Black</div><div class="slice-items">1</div><div class="slice-sub">1 hardware</div><div class="slice-quick">1 quick build</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="slice-card" data-slice="Accessories" style="border-top:3px solid #6B7280;"><div class="slice-label">Accessories</div><div class="slice-items">45</div><div class="slice-sub">45 accessories</div><div class="slice-meta">9 groups &middot; 10 orders</div></div></div><h3 class="section-title">Quick Build</h3><div class="color-grid"><div class="color-column" data-color="May 07"
     data-slice="Brass"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="1" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#b8860b;color:#fff;">
-        <div class="color-name">Brass</div>
+    <div class="color-header" style="background:#1A1A1A;color:#fff;">
+        <div class="color-name">May 07</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 07</div>
     </div>
@@ -239,13 +245,13 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Nickel"
+<div class="color-column" data-color="May 07"
     data-slice="Nickel"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="1"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#7d8b97;color:#fff;">
-        <div class="color-name">Nickel</div>
+    <div class="color-header" style="background:#1A1A1A;color:#fff;">
+        <div class="color-name">May 07</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 07</div>
     </div>
@@ -260,13 +266,13 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Black"
+<div class="color-column" data-color="May 07"
     data-slice="Black"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="1"
     data-base-expedite="0" data-base-large="0">
     <div class="color-header" style="background:#1A1A1A;color:#fff;">
-        <div class="color-name">Black</div>
+        <div class="color-name">May 07</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 07</div>
     </div>
@@ -281,15 +287,15 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-</div><h3 class="section-title">Color</h3><div class="color-grid"><div class="color-column" data-color="Python Green"
+</div><h3 class="section-title">Color</h3><div class="color-grid"><div class="color-column" data-color="Mar 02 <span class="oldest-large">(large)</span>"
     data-slice="Color"
     data-base-items="236" data-base-orders="15"
     data-base-lighting="190" data-base-hardware="46"
     data-base-expedite="0" data-base-large="1">
-    <div class="color-header" style="background:#4E782F;color:#fff;">
-        <div class="color-name">Python Green</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Mar 02 <span class="oldest-large">(large)</span></div>
         <div class="color-stats" style="opacity:0.85;">236 items (190 lighting, 46 hardware) &middot; 15 orders &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Mar 02, Apr 16</div>
+        <div class="color-oldest">Oldest: Apr 24, Apr 16, Mar 02 <span class="oldest-large">(large)</span></div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -357,15 +363,15 @@
             <span class="col-total" data-base="236">236</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Ochre"
+<div class="color-column" data-color="Sep 22"
     data-slice="Color"
     data-base-items="191" data-base-orders="10"
     data-base-lighting="189" data-base-hardware="2"
     data-base-expedite="0" data-base-large="1">
-    <div class="color-header" style="background:#B89111;color:#fff;">
-        <div class="color-name">Ochre</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Sep 22</div>
         <div class="color-stats" style="opacity:0.85;">191 items (189 lighting, 2 hardware) &middot; 10 orders &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Sep 22, Mar 02</div>
+        <div class="color-oldest">Oldest: Apr 16, Mar 02 <span class="oldest-large">(large)</span>, Sep 22</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -410,15 +416,15 @@
             <span class="col-total" data-base="191">191</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Orange"
+<div class="color-column" data-color="Dec 10"
     data-slice="Color"
     data-base-items="126" data-base-orders="12"
     data-base-lighting="126" data-base-hardware="0"
     data-base-expedite="1" data-base-large="1">
-    <div class="color-header" style="background:#D4713B;color:#fff;">
-        <div class="color-name">Orange</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Dec 10</div>
         <div class="color-stats" style="opacity:0.85;">126 items &middot; 12 orders &middot; 1 expedite &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Dec 10, Mar 02</div>
+        <div class="color-oldest">Oldest: Apr 08, Mar 02 <span class="oldest-large">(large)</span>, Dec 10</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -464,15 +470,15 @@
             <span class="col-total" data-base="126">126</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Lagoon"
+<div class="color-column" data-color="May 26"
     data-slice="Color"
     data-base-items="122" data-base-orders="23"
     data-base-lighting="119" data-base-hardware="3"
     data-base-expedite="1" data-base-large="0">
-    <div class="color-header" style="background:#728384;color:#fff;">
-        <div class="color-name">Lagoon</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">May 26</div>
         <div class="color-stats" style="opacity:0.85;">122 items (119 lighting, 3 hardware) &middot; 23 orders &middot; 1 expedite</div>
-        <div class="color-oldest">Oldest: May 26, Apr 08</div>
+        <div class="color-oldest">Oldest: Apr 14, Apr 08, May 26</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -540,15 +546,15 @@
             <span class="col-total" data-base="122">122</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="White"
+<div class="color-column" data-color="Nov 14"
     data-slice="Color"
     data-base-items="57" data-base-orders="15"
     data-base-lighting="43" data-base-hardware="14"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#FFFFFF;color:#333;">
-        <div class="color-name">White</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Nov 14</div>
         <div class="color-stats" style="opacity:0.85;">57 items (43 lighting, 14 hardware) &middot; 15 orders</div>
-        <div class="color-oldest">Oldest: Nov 14, Apr 08</div>
+        <div class="color-oldest">Oldest: Apr 09, Apr 08, Nov 14</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -601,15 +607,15 @@
             <span class="col-total" data-base="57">57</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Slate Blue"
+<div class="color-column" data-color="Apr 16"
     data-slice="Color"
     data-base-items="52" data-base-orders="22"
     data-base-lighting="51" data-base-hardware="1"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#2C4A56;color:#fff;">
-        <div class="color-name">Slate Blue</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 16</div>
         <div class="color-stats" style="opacity:0.85;">52 items (51 lighting, 1 hardware) &middot; 22 orders</div>
-        <div class="color-oldest">Oldest: Apr 16, Apr 21</div>
+        <div class="color-oldest">Oldest: Apr 21, Apr 21, Apr 16</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -672,15 +678,15 @@
             <span class="col-total" data-base="52">52</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Bone"
+<div class="color-column" data-color="Apr 24"
     data-slice="Color"
     data-base-items="31" data-base-orders="13"
     data-base-lighting="31" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#E5E4CF;color:#333;">
-        <div class="color-name">Bone</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 24</div>
         <div class="color-stats" style="opacity:0.85;">31 items &middot; 13 orders</div>
-        <div class="color-oldest">Oldest: Apr 24, Apr 27</div>
+        <div class="color-oldest">Oldest: Apr 28, Apr 27, Apr 24</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -721,15 +727,15 @@
             <span class="col-total" data-base="31">31</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Spa"
+<div class="color-column" data-color="Apr 20"
     data-slice="Color"
     data-base-items="30" data-base-orders="19"
     data-base-lighting="23" data-base-hardware="7"
     data-base-expedite="1" data-base-large="0">
-    <div class="color-header" style="background:#A0AF9C;color:#333;">
-        <div class="color-name">Spa</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 20</div>
         <div class="color-stats" style="opacity:0.85;">30 items (23 lighting, 7 hardware) &middot; 19 orders &middot; 1 expedite</div>
-        <div class="color-oldest">Oldest: Apr 20, Apr 21</div>
+        <div class="color-oldest">Oldest: Apr 24, Apr 21, Apr 20</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -780,15 +786,15 @@
             <span class="col-total" data-base="30">30</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Chalk"
+<div class="color-column" data-color="Apr 20"
     data-slice="Color"
     data-base-items="24" data-base-orders="11"
     data-base-lighting="14" data-base-hardware="10"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#D0D0D0;color:#333;">
-        <div class="color-name">Chalk</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 20</div>
         <div class="color-stats" style="opacity:0.85;">24 items (14 lighting, 10 hardware) &middot; 11 orders</div>
-        <div class="color-oldest">Oldest: Apr 20, Apr 24</div>
+        <div class="color-oldest">Oldest: Apr 30, Apr 24, Apr 20</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -824,15 +830,15 @@
             <span class="col-total" data-base="24">24</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Riding Hood Red"
+<div class="color-column" data-color="Apr 08"
     data-slice="Color"
     data-base-items="23" data-base-orders="12"
     data-base-lighting="23" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#9F2C00;color:#fff;">
-        <div class="color-name">Riding Hood Red</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 08</div>
         <div class="color-stats" style="opacity:0.85;">23 items &middot; 12 orders</div>
-        <div class="color-oldest">Oldest: Apr 08, Apr 21</div>
+        <div class="color-oldest">Oldest: Apr 21, Apr 21, Apr 08</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -873,15 +879,15 @@
             <span class="col-total" data-base="23">23</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Cobalt"
+<div class="color-column" data-color="Apr 20"
     data-slice="Color"
     data-base-items="19" data-base-orders="11"
     data-base-lighting="12" data-base-hardware="7"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#1D1E33;color:#fff;">
-        <div class="color-name">Cobalt</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 20</div>
         <div class="color-stats" style="opacity:0.85;">19 items (12 lighting, 7 hardware) &middot; 11 orders</div>
-        <div class="color-oldest">Oldest: Apr 20, Apr 24</div>
+        <div class="color-oldest">Oldest: Apr 26, Apr 24, Apr 20</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -914,15 +920,15 @@
             <span class="col-total" data-base="19">19</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Black"
+<div class="color-column" data-color="Apr 16"
     data-slice="Color"
     data-base-items="15" data-base-orders="10"
     data-base-lighting="15" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#1A1A1A;color:#fff;">
-        <div class="color-name">Black</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 16</div>
         <div class="color-stats" style="opacity:0.85;">15 items &middot; 10 orders</div>
-        <div class="color-oldest">Oldest: Apr 16, Apr 16</div>
+        <div class="color-oldest">Oldest: Apr 22, Apr 16, Apr 16</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -954,15 +960,15 @@
             <span class="col-total" data-base="15">15</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Pinkaboo"
+<div class="color-column" data-color="Apr 25"
     data-slice="Color"
     data-base-items="7" data-base-orders="3"
     data-base-lighting="4" data-base-hardware="3"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#F7B6C0;color:#333;">
-        <div class="color-name">Pinkaboo</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 25</div>
         <div class="color-stats" style="opacity:0.85;">7 items (4 lighting, 3 hardware) &middot; 3 orders</div>
-        <div class="color-oldest">Oldest: Apr 25, May 06</div>
+        <div class="color-oldest">Oldest: May 07, May 06, Apr 25</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -982,15 +988,15 @@
             <span class="col-total" data-base="7">7</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Barely"
+<div class="color-column" data-color="Apr 20"
     data-slice="Color"
     data-base-items="7" data-base-orders="5"
     data-base-lighting="7" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#E8DFD0;color:#333;">
-        <div class="color-name">Barely</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 20</div>
         <div class="color-stats" style="opacity:0.85;">7 items &middot; 5 orders</div>
-        <div class="color-oldest">Oldest: Apr 20, Apr 29</div>
+        <div class="color-oldest">Oldest: Apr 30, Apr 29, Apr 20</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1009,15 +1015,15 @@
             <span class="col-total" data-base="7">7</span></td></tr></tfoot>
     </table>
 </div>
-</div></div><div class="tab-pane" data-tab="color" style="display:none;"><div class="color-grid"><div class="color-column" data-color="Python Green"
+</div></div><div class="tab-pane" data-tab="color" style="display:none;"><div class="color-grid"><div class="color-column" data-color="Mar 02 <span class="oldest-large">(large)</span>"
     data-slice="Color"
     data-base-items="236" data-base-orders="15"
     data-base-lighting="190" data-base-hardware="46"
     data-base-expedite="0" data-base-large="1">
-    <div class="color-header" style="background:#4E782F;color:#fff;">
-        <div class="color-name">Python Green</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Mar 02 <span class="oldest-large">(large)</span></div>
         <div class="color-stats" style="opacity:0.85;">236 items (190 lighting, 46 hardware) &middot; 15 orders &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Mar 02, Apr 16</div>
+        <div class="color-oldest">Oldest: Apr 24, Apr 16, Mar 02 <span class="oldest-large">(large)</span></div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1085,15 +1091,15 @@
             <span class="col-total" data-base="236">236</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Ochre"
+<div class="color-column" data-color="Sep 22"
     data-slice="Color"
     data-base-items="191" data-base-orders="10"
     data-base-lighting="189" data-base-hardware="2"
     data-base-expedite="0" data-base-large="1">
-    <div class="color-header" style="background:#B89111;color:#fff;">
-        <div class="color-name">Ochre</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Sep 22</div>
         <div class="color-stats" style="opacity:0.85;">191 items (189 lighting, 2 hardware) &middot; 10 orders &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Sep 22, Mar 02</div>
+        <div class="color-oldest">Oldest: Apr 16, Mar 02 <span class="oldest-large">(large)</span>, Sep 22</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1138,15 +1144,15 @@
             <span class="col-total" data-base="191">191</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Orange"
+<div class="color-column" data-color="Dec 10"
     data-slice="Color"
     data-base-items="126" data-base-orders="12"
     data-base-lighting="126" data-base-hardware="0"
     data-base-expedite="1" data-base-large="1">
-    <div class="color-header" style="background:#D4713B;color:#fff;">
-        <div class="color-name">Orange</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Dec 10</div>
         <div class="color-stats" style="opacity:0.85;">126 items &middot; 12 orders &middot; 1 expedite &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Dec 10, Mar 02</div>
+        <div class="color-oldest">Oldest: Apr 08, Mar 02 <span class="oldest-large">(large)</span>, Dec 10</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1192,15 +1198,15 @@
             <span class="col-total" data-base="126">126</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Lagoon"
+<div class="color-column" data-color="May 26"
     data-slice="Color"
     data-base-items="122" data-base-orders="23"
     data-base-lighting="119" data-base-hardware="3"
     data-base-expedite="1" data-base-large="0">
-    <div class="color-header" style="background:#728384;color:#fff;">
-        <div class="color-name">Lagoon</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">May 26</div>
         <div class="color-stats" style="opacity:0.85;">122 items (119 lighting, 3 hardware) &middot; 23 orders &middot; 1 expedite</div>
-        <div class="color-oldest">Oldest: May 26, Apr 08</div>
+        <div class="color-oldest">Oldest: Apr 14, Apr 08, May 26</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1268,15 +1274,15 @@
             <span class="col-total" data-base="122">122</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="White"
+<div class="color-column" data-color="Nov 14"
     data-slice="Color"
     data-base-items="57" data-base-orders="15"
     data-base-lighting="43" data-base-hardware="14"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#FFFFFF;color:#333;">
-        <div class="color-name">White</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Nov 14</div>
         <div class="color-stats" style="opacity:0.85;">57 items (43 lighting, 14 hardware) &middot; 15 orders</div>
-        <div class="color-oldest">Oldest: Nov 14, Apr 08</div>
+        <div class="color-oldest">Oldest: Apr 09, Apr 08, Nov 14</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1329,15 +1335,15 @@
             <span class="col-total" data-base="57">57</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Slate Blue"
+<div class="color-column" data-color="Apr 16"
     data-slice="Color"
     data-base-items="52" data-base-orders="22"
     data-base-lighting="51" data-base-hardware="1"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#2C4A56;color:#fff;">
-        <div class="color-name">Slate Blue</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 16</div>
         <div class="color-stats" style="opacity:0.85;">52 items (51 lighting, 1 hardware) &middot; 22 orders</div>
-        <div class="color-oldest">Oldest: Apr 16, Apr 21</div>
+        <div class="color-oldest">Oldest: Apr 21, Apr 21, Apr 16</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1400,15 +1406,15 @@
             <span class="col-total" data-base="52">52</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Bone"
+<div class="color-column" data-color="Apr 24"
     data-slice="Color"
     data-base-items="31" data-base-orders="13"
     data-base-lighting="31" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#E5E4CF;color:#333;">
-        <div class="color-name">Bone</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 24</div>
         <div class="color-stats" style="opacity:0.85;">31 items &middot; 13 orders</div>
-        <div class="color-oldest">Oldest: Apr 24, Apr 27</div>
+        <div class="color-oldest">Oldest: Apr 28, Apr 27, Apr 24</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1449,15 +1455,15 @@
             <span class="col-total" data-base="31">31</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Spa"
+<div class="color-column" data-color="Apr 20"
     data-slice="Color"
     data-base-items="30" data-base-orders="19"
     data-base-lighting="23" data-base-hardware="7"
     data-base-expedite="1" data-base-large="0">
-    <div class="color-header" style="background:#A0AF9C;color:#333;">
-        <div class="color-name">Spa</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 20</div>
         <div class="color-stats" style="opacity:0.85;">30 items (23 lighting, 7 hardware) &middot; 19 orders &middot; 1 expedite</div>
-        <div class="color-oldest">Oldest: Apr 20, Apr 21</div>
+        <div class="color-oldest">Oldest: Apr 24, Apr 21, Apr 20</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1508,15 +1514,15 @@
             <span class="col-total" data-base="30">30</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Chalk"
+<div class="color-column" data-color="Apr 20"
     data-slice="Color"
     data-base-items="24" data-base-orders="11"
     data-base-lighting="14" data-base-hardware="10"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#D0D0D0;color:#333;">
-        <div class="color-name">Chalk</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 20</div>
         <div class="color-stats" style="opacity:0.85;">24 items (14 lighting, 10 hardware) &middot; 11 orders</div>
-        <div class="color-oldest">Oldest: Apr 20, Apr 24</div>
+        <div class="color-oldest">Oldest: Apr 30, Apr 24, Apr 20</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1552,15 +1558,15 @@
             <span class="col-total" data-base="24">24</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Riding Hood Red"
+<div class="color-column" data-color="Apr 08"
     data-slice="Color"
     data-base-items="23" data-base-orders="12"
     data-base-lighting="23" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#9F2C00;color:#fff;">
-        <div class="color-name">Riding Hood Red</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 08</div>
         <div class="color-stats" style="opacity:0.85;">23 items &middot; 12 orders</div>
-        <div class="color-oldest">Oldest: Apr 08, Apr 21</div>
+        <div class="color-oldest">Oldest: Apr 21, Apr 21, Apr 08</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1601,15 +1607,15 @@
             <span class="col-total" data-base="23">23</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Cobalt"
+<div class="color-column" data-color="Apr 20"
     data-slice="Color"
     data-base-items="19" data-base-orders="11"
     data-base-lighting="12" data-base-hardware="7"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#1D1E33;color:#fff;">
-        <div class="color-name">Cobalt</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 20</div>
         <div class="color-stats" style="opacity:0.85;">19 items (12 lighting, 7 hardware) &middot; 11 orders</div>
-        <div class="color-oldest">Oldest: Apr 20, Apr 24</div>
+        <div class="color-oldest">Oldest: Apr 26, Apr 24, Apr 20</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1642,15 +1648,15 @@
             <span class="col-total" data-base="19">19</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Black"
+<div class="color-column" data-color="Apr 16"
     data-slice="Color"
     data-base-items="15" data-base-orders="10"
     data-base-lighting="15" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#1A1A1A;color:#fff;">
-        <div class="color-name">Black</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 16</div>
         <div class="color-stats" style="opacity:0.85;">15 items &middot; 10 orders</div>
-        <div class="color-oldest">Oldest: Apr 16, Apr 16</div>
+        <div class="color-oldest">Oldest: Apr 22, Apr 16, Apr 16</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1682,15 +1688,15 @@
             <span class="col-total" data-base="15">15</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Pinkaboo"
+<div class="color-column" data-color="Apr 25"
     data-slice="Color"
     data-base-items="7" data-base-orders="3"
     data-base-lighting="4" data-base-hardware="3"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#F7B6C0;color:#333;">
-        <div class="color-name">Pinkaboo</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 25</div>
         <div class="color-stats" style="opacity:0.85;">7 items (4 lighting, 3 hardware) &middot; 3 orders</div>
-        <div class="color-oldest">Oldest: Apr 25, May 06</div>
+        <div class="color-oldest">Oldest: May 07, May 06, Apr 25</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1710,15 +1716,15 @@
             <span class="col-total" data-base="7">7</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="Barely"
+<div class="color-column" data-color="Apr 20"
     data-slice="Color"
     data-base-items="7" data-base-orders="5"
     data-base-lighting="7" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#E8DFD0;color:#333;">
-        <div class="color-name">Barely</div>
+    <div class="color-header" style="background:#2c3e50;color:#fff;">
+        <div class="color-name">Apr 20</div>
         <div class="color-stats" style="opacity:0.85;">7 items &middot; 5 orders</div>
-        <div class="color-oldest">Oldest: Apr 20, Apr 29</div>
+        <div class="color-oldest">Oldest: Apr 30, Apr 29, Apr 20</div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1737,13 +1743,13 @@
             <span class="col-total" data-base="7">7</span></td></tr></tfoot>
     </table>
 </div>
-</div></div><div class="tab-pane" data-tab="brass" style="display:none;"><div class="color-grid"><div class="color-column" data-color="Brass"
+</div></div><div class="tab-pane" data-tab="brass" style="display:none;"><div class="color-grid"><div class="color-column" data-color="May 07"
     data-slice="Brass"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="1" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#b8860b;color:#fff;">
-        <div class="color-name">Brass</div>
+    <div class="color-header" style="background:#1A1A1A;color:#fff;">
+        <div class="color-name">May 07</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 07</div>
     </div>
@@ -1758,13 +1764,13 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-</div></div><div class="tab-pane" data-tab="nickel" style="display:none;"><div class="color-grid"><div class="color-column" data-color="Nickel"
+</div></div><div class="tab-pane" data-tab="nickel" style="display:none;"><div class="color-grid"><div class="color-column" data-color="May 07"
     data-slice="Nickel"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="1"
     data-base-expedite="0" data-base-large="0">
-    <div class="color-header" style="background:#7d8b97;color:#fff;">
-        <div class="color-name">Nickel</div>
+    <div class="color-header" style="background:#1A1A1A;color:#fff;">
+        <div class="color-name">May 07</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 07</div>
     </div>
@@ -1779,13 +1785,13 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-</div></div><div class="tab-pane" data-tab="black" style="display:none;"><div class="color-grid"><div class="color-column" data-color="Black"
+</div></div><div class="tab-pane" data-tab="black" style="display:none;"><div class="color-grid"><div class="color-column" data-color="May 07"
     data-slice="Black"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="1"
     data-base-expedite="0" data-base-large="0">
     <div class="color-header" style="background:#1A1A1A;color:#fff;">
-        <div class="color-name">Black</div>
+        <div class="color-name">May 07</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 07</div>
     </div>
@@ -1800,15 +1806,15 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-</div></div><div class="tab-pane" data-tab="accessories" style="display:none;"><div class="color-grid"><div class="color-column" data-color="ER1-12"
+</div></div><div class="tab-pane" data-tab="accessories" style="display:none;"><div class="color-grid"><div class="color-column" data-color="Mar 02 <span class="oldest-large">(large)</span>"
     data-slice="Accessories"
     data-base-items="14" data-base-orders="3"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="1">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">ER1-12</div>
+        <div class="color-name">Mar 02 <span class="oldest-large">(large)</span></div>
         <div class="color-stats" style="opacity:0.85;">14 items &middot; 3 orders &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Mar 02, Apr 21</div>
+        <div class="color-oldest">Oldest: Apr 25, Apr 21, Mar 02 <span class="oldest-large">(large)</span></div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1818,15 +1824,15 @@
             <span class="col-total" data-base="14">14</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="ER1-6"
+<div class="color-column" data-color="Mar 02 <span class="oldest-large">(large)</span>"
     data-slice="Accessories"
     data-base-items="13" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="1">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">ER1-6</div>
+        <div class="color-name">Mar 02 <span class="oldest-large">(large)</span></div>
         <div class="color-stats" style="opacity:0.85;">13 items &middot; 1 orders &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Mar 02</div>
+        <div class="color-oldest">Oldest: Mar 02 <span class="oldest-large">(large)</span></div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1836,15 +1842,15 @@
             <span class="col-total" data-base="13">13</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="ER1-3"
+<div class="color-column" data-color="Mar 02 <span class="oldest-large">(large)</span>"
     data-slice="Accessories"
     data-base-items="6" data-base-orders="2"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="1">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">ER1-3</div>
+        <div class="color-name">Mar 02 <span class="oldest-large">(large)</span></div>
         <div class="color-stats" style="opacity:0.85;">6 items &middot; 2 orders &middot; 1 large</div>
-        <div class="color-oldest">Oldest: Mar 02, Apr 28</div>
+        <div class="color-oldest">Oldest: Apr 28, Mar 02 <span class="oldest-large">(large)</span></div>
     </div>
     <table class="color-table">
     <thead><tr><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
@@ -1854,13 +1860,13 @@
             <span class="col-total" data-base="6">6</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="ER1-24"
+<div class="color-column" data-color="May 06"
     data-slice="Accessories"
     data-base-items="4" data-base-orders="2"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">ER1-24</div>
+        <div class="color-name">May 06</div>
         <div class="color-stats" style="opacity:0.85;">4 items &middot; 2 orders</div>
         <div class="color-oldest">Oldest: May 06, May 06</div>
     </div>
@@ -1872,13 +1878,13 @@
             <span class="col-total" data-base="4">4</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="ER1-4"
+<div class="color-column" data-color="Apr 29"
     data-slice="Accessories"
     data-base-items="4" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">ER1-4</div>
+        <div class="color-name">Apr 29</div>
         <div class="color-stats" style="opacity:0.85;">4 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: Apr 29</div>
     </div>
@@ -1890,13 +1896,13 @@
             <span class="col-total" data-base="4">4</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="HS2BR"
+<div class="color-column" data-color="May 06"
     data-slice="Accessories"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">HS2BR</div>
+        <div class="color-name">May 06</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 06</div>
     </div>
@@ -1908,13 +1914,13 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="SJ2BL"
+<div class="color-column" data-color="May 01"
     data-slice="Accessories"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">SJ2BL</div>
+        <div class="color-name">May 01</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 01</div>
     </div>
@@ -1926,13 +1932,13 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="HS2BL"
+<div class="color-column" data-color="May 01"
     data-slice="Accessories"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">HS2BL</div>
+        <div class="color-name">May 01</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 01</div>
     </div>
@@ -1944,13 +1950,13 @@
             <span class="col-total" data-base="1">1</span></td></tr></tfoot>
     </table>
 </div>
-<div class="color-column" data-color="ER1-2"
+<div class="color-column" data-color="May 01"
     data-slice="Accessories"
     data-base-items="1" data-base-orders="1"
     data-base-lighting="0" data-base-hardware="0"
     data-base-expedite="0" data-base-large="0">
     <div class="color-header" style="background:#34495e;color:#fff;">
-        <div class="color-name">ER1-2</div>
+        <div class="color-name">May 01</div>
         <div class="color-stats" style="opacity:0.85;">1 items &middot; 1 orders</div>
         <div class="color-oldest">Oldest: May 01</div>
     </div>
@@ -2006,7 +2012,7 @@
         const activePane = document.querySelector('.tab-pane[data-tab="' + activeTab + '"]');
         if (!activePane) return;
 
-        let pageItems = 0, pageOrders = new Set(), pageExp = new Set(), pageLarge = new Set();
+        let pageItems = 0, pageOrders = new Set(), pageExp = new Set(), pageLarge = new Set(), pageQuick = new Set();
         let pageLighting = 0, pageHardware = 0, pagePillows = 0, pageAccessories = 0;
         let visibleGroups = 0;
 
@@ -2048,6 +2054,11 @@
                         // Preserve existing 'show' state from user toggle
                         if (!keep) det.style.display = 'none';
                         else det.style.removeProperty('display');
+                        // Track this order as a quick-build order if its parent
+                        // item-row has the quick flag and the detail is visible.
+                        if (keep && isQuick && det.dataset.order) {
+                            pageQuick.add(det.dataset.order);
+                        }
                     });
                 }
                 if (visible) {
@@ -2233,6 +2244,10 @@
             if (pageLarge.size) pills.push(
                 '<span class="kpi-pill kpi-pill-large"><span class="kpi-pill-num">' +
                 pageLarge.size + '</span> large</span>'
+            );
+            if (pageQuick.size) pills.push(
+                '<span class="kpi-pill kpi-pill-quick"><span class="kpi-pill-num">' +
+                pageQuick.size + '</span> quick build</span>'
             );
             k('kpi-orders-flags').innerHTML = pills.join('');
         }
