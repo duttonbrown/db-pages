@@ -105,6 +105,8 @@
     color: var(--text);
     text-decoration: none;
     transition: background 0.1s, border-color 0.1s;
+    cursor: pointer;
+    font-family: inherit;
   }
   .nav-tab:hover { background: var(--bg); border-color: var(--muted); }
   .nav-tab.active {
@@ -113,6 +115,24 @@
     color: white;
     font-weight: 500;
   }
+  .nav-tab .tab-count {
+    display: inline-block;
+    min-width: 18px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .nav-tab.active .tab-count {
+    background: rgba(255,255,255,0.2);
+    color: white;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
 
   .public-banner {
     background: #FFF7EB;
@@ -623,6 +643,219 @@
     margin-top: 2px;
   }
 
+  /* ─────────── Order queue tab ─────────── */
+  .order-queue-list {
+    display: grid;
+    gap: 6px;
+  }
+  .oq-row {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) auto auto;
+    gap: 12px;
+    align-items: center;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  .oq-row.is-expedite { border-left: 3px solid var(--error); }
+  .oq-row.is-large    { border-left: 3px solid #2A2A2A; }
+  .oq-row.is-trade    { border-left: 3px solid #BE185D; }
+  .oq-row.is-printed  { opacity: 0.55; background: var(--bg); }
+  .oq-num {
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .oq-num:hover { color: var(--accent-dark); }
+  .oq-time {
+    font-size: 11px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .oq-summary {
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .oq-summary .qty {
+    font-weight: 600;
+    color: var(--ink);
+    margin-right: 4px;
+  }
+  .oq-tags { display: inline-flex; gap: 3px; flex-wrap: nowrap; }
+  .oq-amount {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    min-width: 60px;
+    text-align: right;
+  }
+  .oq-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+  }
+  .oq-empty strong { display: block; color: var(--text); font-size: 13px; margin-bottom: 4px; }
+  .oq-cutoff-info {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .oq-cutoff-info code {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* ─────────── Assembly queue tab ─────────── */
+  .asm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .asm-table th {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: left;
+    padding: 8px 8px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .asm-table th.right { text-align: right; }
+  .asm-table th.center { text-align: center; }
+  .asm-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .asm-table td.center { text-align: center; }
+  .asm-table td.right { text-align: right; }
+  .asm-table tr:hover td { background: rgba(255, 153, 18, 0.04); }
+  .asm-order {
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .asm-order:hover { color: var(--accent-dark); }
+  .asm-cust { color: var(--muted); font-size: 11px; margin-left: 4px; font-weight: 400; }
+  .asm-sku {
+    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+    font-size: 11px;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .asm-color-cell, .asm-finish-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .asm-qty-input {
+    width: 44px;
+    text-align: center;
+    padding: 3px 4px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    background: white;
+  }
+  .asm-qty-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.12);
+  }
+  .asm-split-btn, .asm-merge-btn {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-left: 4px;
+    font-family: inherit;
+  }
+  .asm-split-btn:hover { border-color: var(--accent); color: var(--accent-dark); }
+  .asm-merge-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .asm-assembler {
+    font-family: inherit;
+    font-size: 11px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 6px;
+    background: white;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .asm-assembler:focus { outline: none; border-color: var(--accent); }
+  .asm-row-tag { display: inline-flex; gap: 3px; }
+  .asm-summary-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 11px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .asm-summary-bar strong { color: var(--text); }
+  .asm-push-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: white;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .asm-loc-pill {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .asm-loc-powder   { background: #FFF7EB; color: var(--accent-dark); border: 1px solid #FCD9A6; }
+  .asm-loc-assembly { background: #E8E8E8; color: var(--ink);         border: 1px solid #D0D0D0; }
+  .asm-loc-shipping { background: #E8F5E9; color: #1F5F22;            border: 1px solid #BFE5C5; }
+
   .empty-state {
     text-align: center;
     padding: 60px 20px;
@@ -667,28 +900,76 @@
 
   <section class="kpi-row" id="kpiRow"></section>
 
-  <div class="filter-bar">
-    <span class="label">Sort</span>
-    <div class="filter-pills" id="sortPills">
-      <button type="button" class="filter-pill active" data-sort="chrono"
-              onclick="setSort(this,'chrono')">Chronological</button>
-      <button type="button" class="filter-pill" data-sort="samplesfirst"
-              onclick="setSort(this,'samplesfirst')">Samples + Quick first</button>
-      <button type="button" class="filter-pill" data-sort="bycolor"
-              onclick="setSort(this,'bycolor')">Group by color</button>
-    </div>
-    <span class="release-hint" id="releaseHint">
-      Release: run <code>python release_queue.py</code>
-    </span>
+  <!-- Internal tabs: Order queue / Print queue / Assembly queue. -->
+  <nav class="nav-bar" style="margin-bottom: 10px">
+    <button type="button" class="nav-tab" id="tab-order"   onclick="setTab('order')">
+      Order queue <span class="tab-count" id="cnt-order">—</span>
+    </button>
+    <button type="button" class="nav-tab active" id="tab-print" onclick="setTab('print')">
+      Print queue <span class="tab-count" id="cnt-print">—</span>
+    </button>
+    <button type="button" class="nav-tab" id="tab-assembly" onclick="setTab('assembly')">
+      Assembly queue <span class="tab-count" id="cnt-assembly">—</span>
+    </button>
+  </nav>
+
+  <!-- ── Order queue ── -->
+  <div class="tab-content" id="content-order">
+    <div class="oq-cutoff-info" id="oqCutoff"></div>
+    <div class="order-queue-list" id="orderQueue"></div>
   </div>
 
-  <div id="sections"></div>
+  <!-- ── Print queue (existing content) ── -->
+  <div class="tab-content active" id="content-print">
+    <div class="filter-bar">
+      <span class="label">Sort</span>
+      <div class="filter-pills" id="sortPills">
+        <button type="button" class="filter-pill active" data-sort="chrono"
+                onclick="setSort(this,'chrono')">Chronological</button>
+        <button type="button" class="filter-pill" data-sort="samplesfirst"
+                onclick="setSort(this,'samplesfirst')">Samples + Quick first</button>
+        <button type="button" class="filter-pill" data-sort="bycolor"
+                onclick="setSort(this,'bycolor')">Group by color</button>
+      </div>
+      <span class="release-hint" id="releaseHint">
+        Release: run <code>python release_queue.py</code>
+      </span>
+    </div>
+    <div id="sections"></div>
+  </div>
+
+  <!-- ── Assembly queue (preview rows that will go to Notion Assembly Log) ── -->
+  <div class="tab-content" id="content-assembly">
+    <div class="asm-summary-bar">
+      <span><strong id="asmRowCount">0</strong> row(s) will be created in the
+        <a href="https://www.notion.so/duttonbrown/Assembly-Log-31affa524c5b804dac05d9a261025303" target="_blank" style="color:var(--accent-dark)">Assembly Log</a>.
+        Split a row to assign halves to different assemblers.</span>
+      <button type="button" class="asm-push-btn" disabled
+              title="Release flow not yet wired — run python release_queue.py from the local copy.">
+        Push to Notion (run release script)
+      </button>
+    </div>
+    <table class="asm-table" id="asmTable">
+      <thead>
+        <tr>
+          <th>Order #</th>
+          <th>SKU / Title</th>
+          <th>Color</th>
+          <th>Finish</th>
+          <th class="right">Qty</th>
+          <th class="center">Location</th>
+          <th>Assembler</th>
+        </tr>
+      </thead>
+      <tbody id="asmBody"></tbody>
+    </table>
+  </div>
 </main>
 </div>
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T18:28:09",
+  "built_at": "2026-05-07T18:38:53",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
@@ -699,6 +980,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T17:54:02-05:00",
       "tags": "redo, trade",
+      "total_price": 488.23,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -784,6 +1066,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T16:31:53-05:00",
       "tags": "redo",
+      "total_price": 205.98,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -870,6 +1153,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T15:19:37-05:00",
       "tags": "redo",
+      "total_price": 667.73,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -955,6 +1239,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T14:40:17-05:00",
       "tags": "redo, trade",
+      "total_price": 1708.48,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -1104,6 +1389,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T13:45:10-05:00",
       "tags": "redo, trade",
+      "total_price": 209.36,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -1190,6 +1476,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T13:22:32-05:00",
       "tags": "trade",
+      "total_price": 288.0,
       "priority": null,
       "is_large_order": false,
       "auto_tags": [
@@ -1275,6 +1562,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T13:09:58-05:00",
       "tags": "redo",
+      "total_price": 10.75,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -1328,6 +1616,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T12:53:59-05:00",
       "tags": "redo",
+      "total_price": 245.98,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -1414,6 +1703,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T12:36:57-05:00",
       "tags": "redo, trade",
+      "total_price": 1433.48,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -1603,6 +1893,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T12:16:32-05:00",
       "tags": "expedite, redo",
+      "total_price": 966.78,
       "priority": "Expedites",
       "is_large_order": false,
       "auto_tags": [
@@ -1689,6 +1980,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T12:12:41-05:00",
       "tags": "redo",
+      "total_price": 38.0,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -1742,6 +2034,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T11:46:43-05:00",
       "tags": "trade",
+      "total_price": 5.62,
       "priority": null,
       "is_large_order": false,
       "auto_tags": [
@@ -1764,8 +2057,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -1803,6 +2096,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T11:11:38-05:00",
       "tags": "trade",
+      "total_price": 104.56,
       "priority": null,
       "is_large_order": false,
       "auto_tags": [
@@ -1823,6 +2117,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T10:48:50-05:00",
       "tags": "trade",
+      "total_price": 161.29,
       "priority": null,
       "is_large_order": false,
       "auto_tags": [
@@ -1911,6 +2206,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T09:36:31-05:00",
       "tags": "trade",
+      "total_price": 5.48,
       "priority": null,
       "is_large_order": false,
       "auto_tags": [
@@ -1933,8 +2229,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -1972,6 +2268,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T09:21:29-05:00",
       "tags": "$20K Club, redo, trade",
+      "total_price": 1946.23,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -2057,6 +2354,7 @@ const QUEUE = {
       "ship_by_date": null,
       "created_at": "2026-05-07T08:38:49-05:00",
       "tags": "trade",
+      "total_price": 256.0,
       "priority": null,
       "is_large_order": false,
       "auto_tags": [
@@ -2267,6 +2565,43 @@ function clearLocOverrides(){
   localStorage.removeItem(LOC_OVERRIDE_KEY);
   location.reload();
 }
+// Track when the queue was last "released" (= acknowledged by the manager).
+// Used by the Order queue tab as the cutoff for "new since".
+const LAST_RELEASE_KEY = "db-print-queue-last-release-v1";
+function getLastReleaseAt(){
+  return localStorage.getItem(LAST_RELEASE_KEY) || null;
+}
+function setLastReleaseNow(){
+  const now = new Date().toISOString();
+  localStorage.setItem(LAST_RELEASE_KEY, now);
+  return now;
+}
+
+// Assembler picks per row (so manager can assign before pushing).
+// Schema: { "<orderId>::<rowKey>": "Sarah" | "Alex" | ... }
+const ASM_ASSIGN_KEY = "db-print-queue-asm-assign-v1";
+function loadAssignments(){
+  try { return JSON.parse(localStorage.getItem(ASM_ASSIGN_KEY) || "{}"); }
+  catch(e){ return {}; }
+}
+function saveAssignment(rowKey, assembler){
+  const a = loadAssignments();
+  if(assembler) a[rowKey] = assembler; else delete a[rowKey];
+  localStorage.setItem(ASM_ASSIGN_KEY, JSON.stringify(a));
+}
+
+// Split-state — manager can split a single Notion row into multiple rows
+// before pushing. Stored as overrides keyed by the original row's identity.
+// Schema: { "<orderId>::<parent_sku>::<color>::<finish>": [qty1, qty2, ...] }
+const ASM_SPLIT_KEY = "db-print-queue-asm-split-v1";
+function loadSplits(){
+  try { return JSON.parse(localStorage.getItem(ASM_SPLIT_KEY) || "{}"); }
+  catch(e){ return {}; }
+}
+function saveSplits(map){
+  localStorage.setItem(ASM_SPLIT_KEY, JSON.stringify(map));
+}
+
 function downloadOverrideLog(){
   const log = localStorage.getItem(LOC_LOG_KEY) || "[]";
   const blob = new Blob([log], {type:"application/json"});
@@ -2573,6 +2908,236 @@ function splitPage(orderId, idx){
   saveEdit(orderId, idx, order.printouts[idx].page_count);
   recalcOrderTotal(order);
 }
+// ── Tab switching ────────────────────────────────────────────────────────────
+function setTab(name){
+  ["order","print","assembly"].forEach(n => {
+    const tab = document.getElementById(`tab-${n}`);
+    const content = document.getElementById(`content-${n}`);
+    if(!tab || !content) return;
+    tab.classList.toggle("active", n === name);
+    content.classList.toggle("active", n === name);
+  });
+  if(name === "order")    renderOrderQueue();
+  if(name === "assembly") renderAssemblyQueue();
+}
+
+// ── Order queue renderer ─────────────────────────────────────────────────────
+function fmtRelative(iso){
+  if(!iso) return "";
+  const d = new Date(iso);
+  const mins = (Date.now() - d.getTime()) / 60000;
+  if(mins < 1)   return "just now";
+  if(mins < 60)  return `${Math.round(mins)}m ago`;
+  const hrs = mins / 60;
+  if(hrs < 24)   return `${hrs.toFixed(1)}h ago`;
+  return `${Math.round(hrs/24)}d ago`;
+}
+function fmtMoney(n){
+  if(n == null) return "";
+  return `$${(+n).toLocaleString(undefined,{minimumFractionDigits:0, maximumFractionDigits:0})}`;
+}
+
+function renderOrderQueue(){
+  const cutoffEl = document.getElementById("oqCutoff");
+  const listEl = document.getElementById("orderQueue");
+  if(!QUEUE || !QUEUE.orders){ listEl.innerHTML = ""; return; }
+
+  // "Since last release" — falls back to today 6 AM if never released today.
+  let cutoff = getLastReleaseAt();
+  let cutoffLabel;
+  if(cutoff){
+    const d = new Date(cutoff);
+    cutoffLabel = `Showing orders since <code>${d.toLocaleString()}</code> (last release).`;
+  } else {
+    const today6 = new Date();
+    today6.setHours(6,0,0,0);
+    cutoff = today6.toISOString();
+    cutoffLabel = `No release recorded yet today — showing orders since <code>6:00 AM today</code>.`;
+  }
+  cutoffEl.innerHTML = cutoffLabel + ` <a href="#" onclick="setLastReleaseNow();renderOrderQueue();return false;" style="color:var(--accent-dark);font-weight:500">Mark released now</a>`;
+
+  const cutoffMs = new Date(cutoff).getTime();
+  const since = (QUEUE.orders||[])
+    .filter(o => new Date(o.created_at).getTime() >= cutoffMs)
+    .sort((a,b) => (b.created_at||"").localeCompare(a.created_at||""));
+
+  document.getElementById("cnt-order").textContent = since.length;
+
+  if(since.length === 0){
+    listEl.innerHTML = `<div class="oq-empty"><strong>No new orders since cutoff.</strong>You're caught up.</div>`;
+    return;
+  }
+  listEl.innerHTML = since.map(o => {
+    const tags = (o.tags||"").toLowerCase();
+    const isExp = o.priority === "Expedites";
+    const isLarge = o.is_large_order;
+    const isTrade = tags.includes("trade");
+    const isPrinted = tags.includes("printed");
+    const cls = ["oq-row",
+      isExp ? "is-expedite" : "",
+      isLarge ? "is-large" : "",
+      isTrade ? "is-trade" : "",
+      isPrinted ? "is-printed" : ""
+    ].filter(Boolean).join(" ");
+    const orderName = `#${o.shopify_order_name || o.shopify_order_number || "?"}`.replace("##","#");
+    const orderLink = o.shopify_url
+      ? `<a class="oq-num" href="${o.shopify_url}" target="_blank">${orderName}</a>`
+      : `<span class="oq-num">${orderName}</span>`;
+    const totalQty = (o.printouts||[]).reduce((s,p)=>s+(p.total_qty||0), 0);
+    const summary = (o.printouts||[]).map(p => {
+      if(p.color)        return p.color;
+      if(p.finish)       return `${p.finish}`;
+      if(p.source==="sample-only") return "Sample";
+      return (p.parent_skus||[]).join("/");
+    }).filter((v,i,arr)=>arr.indexOf(v)===i).join(" · ");
+    return `
+      <div class="${cls}">
+        <div>
+          ${orderLink}
+          <div class="oq-time">${fmtRelative(o.created_at)} · ${o.customer_name || ""}</div>
+        </div>
+        <div class="oq-summary"><span class="qty">${totalQty}×</span>${summary}</div>
+        <div class="oq-tags">${tagsFor(o)}</div>
+        <div class="oq-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
+      </div>`;
+  }).join("");
+}
+
+// ── Assembly queue renderer ─────────────────────────────────────────────────
+const ASSEMBLERS = ["", "Sarah", "Alex", "Eric", "Emma", "Back stock"];
+
+function _splitEven(qty){
+  // qty=4 → [2,2]; qty=5 → [2,3]; qty=10 → [5,5]; qty=1 → [1] (no-op)
+  if(qty <= 1) return [qty];
+  const half = Math.floor(qty / 2);
+  return [half, qty - half];
+}
+function asmSplitRow(rowKey, partIdx){
+  const splits = loadSplits();
+  const original = splits[rowKey];
+  if(!original) return;  // shouldn't happen — row should be in splits map already
+  const qty = original[partIdx];
+  if(qty <= 1) return;
+  const [a, b] = _splitEven(qty);
+  original.splice(partIdx, 1, a, b);
+  splits[rowKey] = original;
+  saveSplits(splits);
+  renderAssemblyQueue();
+}
+function asmMergeRow(rowKey){
+  const splits = loadSplits();
+  delete splits[rowKey];
+  saveSplits(splits);
+  renderAssemblyQueue();
+}
+function asmUpdateQty(rowKey, partIdx, newQty){
+  const splits = loadSplits();
+  const arr = splits[rowKey];
+  if(!arr) return;
+  arr[partIdx] = Math.max(1, parseInt(newQty,10) || 1);
+  splits[rowKey] = arr;
+  saveSplits(splits);
+  renderAssemblyQueue();
+}
+function asmAssign(rowKey, assembler){
+  saveAssignment(rowKey, assembler);
+}
+
+function renderAssemblyQueue(){
+  const body = document.getElementById("asmBody");
+  if(!QUEUE || !QUEUE.orders){ body.innerHTML = ""; return; }
+
+  // Flatten every Notion-row from every order into a single list.
+  // Apply splits + assignments from localStorage so manager edits persist.
+  const splits = loadSplits();
+  const assigns = loadAssignments();
+  const rows = [];
+  for(const o of QUEUE.orders){
+    for(const r of (o.notion_rows || [])){
+      const baseKey = `${o.shopify_order_id}::${r.parent_sku}::${r.color||""}::${r.finish||""}`;
+      const parts = splits[baseKey] || [r.qty || 1];
+      parts.forEach((qty, partIdx) => {
+        const partKey = parts.length === 1 ? baseKey : `${baseKey}::p${partIdx}`;
+        rows.push({
+          order: o,
+          row: r,
+          baseKey,
+          partKey,
+          partIdx,
+          partsTotal: parts.length,
+          qty,
+          canSplit: qty > 1,
+          assembler: assigns[partKey] || "",
+        });
+      });
+    }
+  }
+
+  document.getElementById("cnt-assembly").textContent = rows.length;
+  document.getElementById("asmRowCount").textContent = rows.length;
+
+  if(rows.length === 0){
+    body.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted)">
+      No Assembly rows pending. Once orders are in the print queue, their rows show up here.
+    </td></tr>`;
+    return;
+  }
+
+  body.innerHTML = rows.map(rec => {
+    const o = rec.order, r = rec.row;
+    const orderName = `#${o.shopify_order_name || o.shopify_order_number || "?"}`.replace("##","#");
+    const orderLink = o.shopify_url
+      ? `<a class="asm-order" href="${o.shopify_url}" target="_blank">${orderName}</a>`
+      : `<span class="asm-order">${orderName}</span>`;
+    const cust = o.customer_name ? `<span class="asm-cust">${o.customer_name}</span>` : "";
+    const title = (r.item_titles && r.item_titles[0]) || "";
+    const variantSku = (r.variant_skus && r.variant_skus[0]) || r.parent_sku;
+    const colorDot = r.color && swatchHexFor(r.color)
+      ? `<span class="swatch-dot" style="--swatch-color:${swatchHexFor(r.color)}" title="${r.color}"></span>` : "";
+    const finishDot = r.finish && finishHex(r.finish)
+      ? `<span class="swatch-dot" style="--swatch-color:${finishHex(r.finish)}" title="${r.finish}"></span>` : "";
+
+    // Location pill
+    const locKey = r.location === "Powder Coating" ? "powder"
+                 : r.location === "Shipping" ? "shipping" : "assembly";
+    const locPill = `<span class="asm-loc-pill asm-loc-${locKey}">${r.location || "Assembly"}</span>`;
+
+    // Split / merge controls
+    const isPart = rec.partsTotal > 1;
+    const splitBtn = rec.canSplit
+      ? `<button class="asm-split-btn" title="Split into halves" onclick="asmSplitRow('${rec.baseKey}', ${rec.partIdx})">split</button>`
+      : "";
+    const mergeBtn = isPart
+      ? `<button class="asm-merge-btn" title="Merge all parts back to one row" onclick="asmMergeRow('${rec.baseKey}')">merge</button>`
+      : "";
+
+    // Assembler dropdown
+    const opts = ASSEMBLERS.map(a => `<option value="${a}" ${rec.assembler===a?"selected":""}>${a||"— assign —"}</option>`).join("");
+
+    return `
+      <tr>
+        <td>${orderLink} ${cust}${isPart ? ` <span class="asm-cust">· part ${rec.partIdx+1}/${rec.partsTotal}</span>` : ""}</td>
+        <td>
+          <span class="asm-sku">${variantSku}</span>
+          <div class="asm-cust" style="margin-top:2px">${title}</div>
+        </td>
+        <td>${r.color ? `<span class="asm-color-cell">${colorDot}${r.color}</span>` : ""}</td>
+        <td>${r.finish ? `<span class="asm-finish-cell">${finishDot}${r.finish}</span>` : ""}</td>
+        <td class="right">
+          <input class="asm-qty-input" type="number" min="1" max="50" value="${rec.qty}"
+                 onchange="asmUpdateQty('${rec.baseKey}', ${rec.partIdx}, this.value)" />
+          ${splitBtn}${mergeBtn}
+        </td>
+        <td class="center">${locPill}</td>
+        <td>
+          <select class="asm-assembler" onchange="asmAssign('${rec.partKey}', this.value)">
+            ${opts}
+          </select>
+        </td>
+      </tr>`;
+  }).join("");
+}
+
 function render(){
   const sectionsEl = document.getElementById("sections");
   if(!QUEUE){
@@ -2588,6 +3153,17 @@ function render(){
   `;
   const html = LOCATIONS.map(renderSection).join("");
   sectionsEl.innerHTML = html || `<div class="empty-state"><h2>All clear</h2><p>No orders pending print.</p></div>`;
+
+  // Update tab counts (Order / Print / Assembly).
+  document.getElementById("cnt-print").textContent = t.printouts || 0;
+  // Assembly + Order counts are computed when their renderers run; pre-populate.
+  document.getElementById("cnt-assembly").textContent = t.notion_rows || 0;
+  // Order count: simple — orders since last release / 6 AM
+  let cutoff = getLastReleaseAt();
+  if(!cutoff){ const d = new Date(); d.setHours(6,0,0,0); cutoff = d.toISOString(); }
+  const cMs = new Date(cutoff).getTime();
+  const newCount = (QUEUE.orders||[]).filter(o => new Date(o.created_at).getTime() >= cMs).length;
+  document.getElementById("cnt-order").textContent = newCount;
 }
 
 function init(){
