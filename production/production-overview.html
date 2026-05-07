@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Overview — May 07, 2026 at 04:32 PM</title>
+<title>Production Overview — May 07, 2026 at 04:51 PM</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,10 +19,21 @@
         .kpi-aside-num { font-weight: 600; color: #495057; }
         .kpi-aside-line em { color: #999; font-style: italic; }
         .kpi-wide { flex: 3 1 0; min-width: 380px; }
-        .kpi-narrow { flex: 1 1 0; min-width: 200px; display: flex;
-                       flex-direction: column; justify-content: center; }
+        /* Orders KPI: info column on left (count + flags + date), pill column
+           on the right — same shape as the per-card pill column below. */
+        .kpi-narrow { flex: 1 1 0; min-width: 240px; display: flex;
+                       flex-direction: row; gap: 16px;
+                       justify-content: space-between; align-items: stretch; }
+        .kpi-narrow > .kpi-info { flex: 1; display: flex;
+                                    flex-direction: column; justify-content: center; }
         .kpi-narrow .kpi-value { font-size: 42px; line-height: 1; }
         .kpi-narrow .kpi-value.kpi-date { font-size: 16px; line-height: 1.2; }
+        .kpi-narrow .kpi-flags { display: flex; flex-direction: column;
+                                  gap: 3px; align-items: stretch;
+                                  justify-content: center; min-width: 100px;
+                                  margin-top: 0; flex-shrink: 0; }
+        .kpi-narrow .kpi-pill { width: 100%; }
+        .kpi-narrow .kpi-pill-tag { flex: 1; }
         .kpi-divider { height: 1px; background: #dee2e6; margin: 14px 0 10px; }
         .age-hist { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
         .age-row { display: grid; grid-template-columns: 50px 1fr 28px;
@@ -345,13 +356,15 @@
 
 <div class="kpi-row">
     <div class="kpi kpi-narrow">
-        <div class="kpi-value" id="kpi-orders">150</div>
-        <div class="kpi-label">Orders</div>
+        <div class="kpi-info">
+            <div class="kpi-value" id="kpi-orders">150</div>
+            <div class="kpi-label">Orders</div>
+            <div class="kpi-divider"></div><div class="kpi-label">Order Age</div><div class="age-hist"><div class="age-row" title="73 orders aged <7d"><div class="age-label"><7d</div><div class="age-bar"><div class="age-fill" style="width:45.9%;background:#2e7d32;"></div></div><div class="age-count">73</div></div><div class="age-row" title="81 orders aged 7-30d"><div class="age-label">7-30d</div><div class="age-bar"><div class="age-fill" style="width:50.9%;background:#b8860b;"></div></div><div class="age-count">81</div></div><div class="age-row" title="3 orders aged 30-60d"><div class="age-label">30-60d</div><div class="age-bar"><div class="age-fill" style="width:1.9%;background:#d97706;"></div></div><div class="age-count">3</div></div><div class="age-row" title="2 orders aged >60d"><div class="age-label">>60d</div><div class="age-bar"><div class="age-fill" style="width:1.3%;background:#c0392b;"></div></div><div class="age-count">2</div></div></div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-value kpi-date">May 07, 2026 at 04:51 PM</div>
+            <div class="kpi-label">Last Update</div>
+        </div>
         <div class="kpi-flags" id="kpi-orders-flags"><span class="kpi-pill kpi-pill-exp" title="Expedite: customer paid for expedited production. Prioritize on the floor."><span class="kpi-pill-tag">EXP</span><span class="kpi-pill-num">3</span></span><span class="kpi-pill kpi-pill-quick" title="Quick build: at least one product on this order is tagged &#39;quick build&#39; in Shopify."><span class="kpi-pill-tag">QUICK</span><span class="kpi-pill-num">6</span></span><span class="kpi-pill kpi-pill-large" title="Large order: tagged &#39;large order&#39; in Shopify."><span class="kpi-pill-tag">LARGE</span><span class="kpi-pill-num">1</span></span><span class="kpi-pill kpi-pill-hold" title="Hold: customer requested to delay this order."><span class="kpi-pill-tag">HOLD</span><span class="kpi-pill-num">1</span></span><span class="kpi-pill kpi-pill-trade" title="Trade: order from a Trade Program member."><span class="kpi-pill-tag">TRADE</span><span class="kpi-pill-num">77</span></span><span class="kpi-pill kpi-pill-vip" title="VIP: customer has spent $10K or more."><span class="kpi-pill-tag">VIP</span><span class="kpi-pill-num">6</span></span></div>
-        <div class="kpi-divider"></div><div class="kpi-label">Order Age</div><div class="age-hist"><div class="age-row" title="73 orders aged <7d"><div class="age-label"><7d</div><div class="age-bar"><div class="age-fill" style="width:45.9%;background:#2e7d32;"></div></div><div class="age-count">73</div></div><div class="age-row" title="81 orders aged 7-30d"><div class="age-label">7-30d</div><div class="age-bar"><div class="age-fill" style="width:50.9%;background:#b8860b;"></div></div><div class="age-count">81</div></div><div class="age-row" title="3 orders aged 30-60d"><div class="age-label">30-60d</div><div class="age-bar"><div class="age-fill" style="width:1.9%;background:#d97706;"></div></div><div class="age-count">3</div></div><div class="age-row" title="2 orders aged >60d"><div class="age-label">>60d</div><div class="age-bar"><div class="age-fill" style="width:1.3%;background:#c0392b;"></div></div><div class="age-count">2</div></div></div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-value kpi-date">May 07, 2026 at 04:32 PM</div>
-        <div class="kpi-label">Last Update</div>
     </div>
     <div class="kpi kpi-wide">
         <div class="kpi-label">Production Volume</div>
