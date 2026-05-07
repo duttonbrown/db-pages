@@ -58,8 +58,8 @@
   .toolbar .label{color:var(--text-soft);font-size:12px;text-transform:uppercase;letter-spacing:0.04em;margin-right:8px}
   button{
     font-family:inherit;font-weight:400;font-size:13px;
-    padding:8px 14px;border:1px solid var(--border);background:#fff;color:var(--text);
-    border-radius:4px;cursor:pointer;transition:all 0.15s;
+    padding:8px 16px;border:1px solid var(--border);background:#fff;color:var(--text);
+    border-radius:99px;cursor:pointer;transition:all 0.15s;
   }
   button:hover{border-color:var(--text)}
   button.active{background:var(--text);color:#fff;border-color:var(--text)}
@@ -158,7 +158,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T16:41:19",
+  "built_at": "2026-05-07T17:14:17",
   "orders": [
     {
       "shopify_order_id": "6941035593810",
@@ -1524,7 +1524,12 @@ function render(){
     const rb = document.getElementById("releaseBtn");
     if(rb){ rb.style.display = "none"; }
   }
-  document.getElementById("builtAt").textContent = "Built " + (QUEUE.built_at || "—");
+  const restored = applyStoredEdits();
+  let suffix = "";
+  if(restored > 0){
+    suffix = ` · <span style="color:var(--accent-strong)">${restored} manager edit${restored===1?"":"s"} restored</span> · <a href="#" onclick="clearStoredEdits();return false;" style="color:var(--text-soft)">reset</a>`;
+  }
+  document.getElementById("builtAt").innerHTML = "Built " + (QUEUE.built_at || "—") + suffix;
   const t = QUEUE.totals || {};
   document.getElementById("totals").innerHTML = `
     <div class="stat"><strong>${t.orders||0}</strong> orders</div>
@@ -1536,6 +1541,43 @@ function render(){
   document.getElementById("orders").innerHTML = sorted.map(renderOrder).join("") || `<div class="empty">No orders pending print.</div>`;
 }
 
+// Manager edits persist across hourly auto-refreshes via localStorage.
+// Key = (order_id, printout_idx). Value = adjusted page_count.
+const EDIT_KEY = "db-print-queue-edits-v1";
+function loadEdits(){
+  try { return JSON.parse(localStorage.getItem(EDIT_KEY) || "{}"); }
+  catch(e){ return {}; }
+}
+function saveEdit(orderId, idx, pageCount){
+  const edits = loadEdits();
+  edits[`${orderId}::${idx}`] = pageCount;
+  localStorage.setItem(EDIT_KEY, JSON.stringify(edits));
+}
+function applyStoredEdits(){
+  if(!QUEUE || !QUEUE.orders) return 0;
+  const edits = loadEdits();
+  let touched = 0;
+  for(const o of QUEUE.orders){
+    (o.printouts||[]).forEach((p,idx)=>{
+      const k = `${o.shopify_order_id}::${idx}`;
+      if(k in edits){
+        p.page_count = edits[k];
+        p.manager_adjusted = true;
+        touched++;
+      }
+    });
+    o.predicted_page_count = (o.printouts||[]).reduce((s,p)=>s+(p.page_count||0),0);
+  }
+  if(QUEUE.totals){
+    QUEUE.totals.printouts = QUEUE.orders.reduce((s,o)=>s+(o.predicted_page_count||0),0);
+  }
+  return touched;
+}
+function clearStoredEdits(){
+  localStorage.removeItem(EDIT_KEY);
+  location.reload();
+}
+
 function updatePages(input){
   const orderId = input.dataset.order;
   const idx = +input.dataset.printout;
@@ -1543,8 +1585,8 @@ function updatePages(input){
   const order = QUEUE.orders.find(o=>o.shopify_order_id === orderId);
   if(!order) return;
   order.printouts[idx].page_count = newCount;
-  // Track adjustments for training-data log
   order.printouts[idx].manager_adjusted = true;
+  saveEdit(orderId, idx, newCount);
   recalcOrderTotal(order);
 }
 function splitPage(orderId, idx){
@@ -1552,6 +1594,7 @@ function splitPage(orderId, idx){
   if(!order) return;
   order.printouts[idx].page_count += 1;
   order.printouts[idx].manager_adjusted = true;
+  saveEdit(orderId, idx, order.printouts[idx].page_count);
   recalcOrderTotal(order);
   render();
 }
