@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Overview — May 07, 2026 at 04:59 PM</title>
+<title>Production Overview — May 07, 2026 at 05:01 PM</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -393,7 +393,7 @@
         <div class="kpi-divider"></div>
         <div class="kpi-bottom-row">
             <div>
-                <div class="kpi-value kpi-date">May 07, 2026 at 04:59 PM</div>
+                <div class="kpi-value kpi-date">May 07, 2026 at 05:01 PM</div>
                 <div class="kpi-label">Last Update</div>
             </div>
             <button class="schedule-info-toggle" onclick="toggleScheduleInfo()"
@@ -429,11 +429,6 @@
            oninput="applyOrderSearch()" />
     <button class="search-clear" onclick="clearOrderSearch()" title="Clear search">&times;</button>
     <div class="filter-pills">
-        <button class="tag-filter card-pill card-pill-nolarge" data-tag="no-large"
-                onclick="setTagFilter('no-large', this)"
-                title="Hide all Large Orders. Click again to clear.">
-            <span class="card-pill-tag">NO LARGE</span>
-        </button>
         <button class="tag-filter card-pill card-pill-lighting" data-tag="lighting"
                 onclick="setTagFilter('lighting', this)"
                 title="Show only Lighting items. Click again to clear.">
@@ -459,6 +454,11 @@
                 onclick="setTagFilter('large', this)"
                 title="Show only Large Orders. Click again to clear.">
             <span class="card-pill-tag">LARGE</span>
+        </button>
+        <button class="tag-filter card-pill card-pill-nolarge" data-tag="no-large"
+                onclick="setTagFilter('no-large', this)"
+                title="Hide all Large Orders. Click again to clear.">
+            <span class="card-pill-tag">REMOVE LARGE</span>
         </button>
         <button class="tag-filter card-pill card-pill-hold" data-tag="hold"
                 onclick="setTagFilter('hold', this)"
