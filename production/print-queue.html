@@ -82,6 +82,38 @@
   .page-sub a { color: var(--muted); }
   .page-sub a:hover { color: var(--accent-dark); }
 
+  .nav-bar {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 0 24px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: white;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.1s, border-color 0.1s;
+  }
+  .nav-tab:hover { background: var(--bg); border-color: var(--muted); }
+  .nav-tab.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: white;
+    font-weight: 500;
+  }
+
   .public-banner {
     background: #FFF7EB;
     border: 1px solid #FCD9A6;
@@ -177,22 +209,24 @@
     border-color: var(--ink);
     color: white;
   }
-  .release-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
+  .release-hint {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px dashed var(--border);
     border-radius: 999px;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: white;
+    padding: 5px 14px;
     font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.1s, border-color 0.1s;
   }
-  .release-btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .release-hint code {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+  }
 
   /* Section header (Powder Coating / Assembly / Shipping) — matches purchase-request status.html */
   .section { margin-bottom: 28px; }
@@ -266,6 +300,29 @@
     line-height: 1.2;
     letter-spacing: -0.005em;
   }
+  /* Color swatch chip — used in place of group-name when the group is a color */
+  .color-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px 4px 4px;
+    border-radius: 999px;
+    background: var(--chip-bg, #f0f0f0);
+    color: var(--chip-text, var(--ink));
+    border: 1px solid var(--chip-border, var(--border));
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+  .color-chip-swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--swatch-color, #ccc);
+    border: 1px solid rgba(0,0,0,0.12);
+    flex-shrink: 0;
+  }
   .group-stats {
     font-size: 12px;
     color: var(--muted);
@@ -298,17 +355,21 @@
     font-weight: 600;
   }
 
-  /* Order rows inside a group */
-  .order-row {
-    display: grid;
-    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr) auto auto;
-    gap: 10px;
-    align-items: center;
-    padding: 8px 4px;
+  /* Order block — order header on top, then a vertical list of line items, with the
+     pages-control floated to the right of the header row. */
+  .order-block {
+    padding: 10px 4px;
     border-top: 1px solid var(--border);
-    font-size: 12px;
   }
-  .order-row:first-child { border-top: 1px solid var(--border); padding-top: 10px; }
+  .order-block:first-child { padding-top: 12px; }
+  .order-block-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .order-block-head-left { min-width: 0; flex: 1; }
   .order-eyebrow {
     display: flex;
     align-items: center;
@@ -316,12 +377,14 @@
     flex-wrap: wrap;
     font-size: 10px;
     color: var(--muted);
+    margin-bottom: 4px;
   }
   .order-num {
     font-weight: 600;
     color: var(--text);
     letter-spacing: 0.02em;
     text-decoration: none;
+    font-size: 12px;
   }
   .order-num:hover { color: var(--accent-dark); }
   .eyebrow-dot {
@@ -331,36 +394,76 @@
     background: var(--border);
     display: inline-block;
   }
-  .order-customer { font-weight: 400; color: var(--muted); }
-  .order-skus {
+  .order-customer { font-weight: 500; color: var(--text); font-size: 11px; }
+  /* Line items: each line is title (top) + sku · qty (bottom) */
+  .line-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+  .line-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: baseline;
+    padding: 4px 0;
+  }
+  .line-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .line-sub {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 1px;
+    flex-wrap: wrap;
+  }
+  .line-sku {
     font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
     font-size: 11px;
     color: var(--text);
     font-variant-numeric: tabular-nums;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
   }
-  .order-qty {
-    font-size: 13px;
+  .line-qty {
+    font-size: 12px;
     font-weight: 600;
     color: var(--ink);
     font-variant-numeric: tabular-nums;
-    text-align: right;
-    min-width: 32px;
   }
-  .order-qty .lbl {
+  .line-qty .lbl {
     font-size: 9px;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-left: 2px;
+    margin-left: 3px;
   }
   .pages-cell {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pages-cell .lbl {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 2px;
   }
   .qty-input {
     width: 36px;
@@ -459,6 +562,11 @@
     <p class="page-sub" id="pageSub">Loading…</p>
   </header>
 
+  <nav class="nav-bar">
+    <a class="nav-tab active" href="print-queue.html">Print queue</a>
+    <a class="nav-tab" href="print-queue-rules.html">Rules</a>
+  </nav>
+
   <div class="public-banner" id="publicBanner" hidden>
     Public preview — customer names and admin links are stripped. The full editable view lives at
     <code>db-operations/projects/work-order-sync/print-queue.html</code>.
@@ -476,8 +584,9 @@
       <button type="button" class="filter-pill" data-sort="bycolor"
               onclick="setSort(this,'bycolor')">Group by color</button>
     </div>
-    <button type="button" class="release-btn" id="releaseBtn"
-            onclick="downloadRelease()">Download release.json →</button>
+    <span class="release-hint" id="releaseHint">
+      Release: run <code>python release_queue.py</code>
+    </span>
   </div>
 
   <div id="sections"></div>
@@ -486,8 +595,93 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T17:30:37",
+  "built_at": "2026-05-07T18:13:43",
   "orders": [
+    {
+      "shopify_order_id": "6941141467218",
+      "shopify_order_name": "35538",
+      "shopify_order_number": "35538",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-07T17:54:02-05:00",
+      "tags": "redo, trade",
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6941141467218",
+          "shopify_order_name": "35538",
+          "shopify_order_number": "35538",
+          "key": [
+            "color",
+            "Cobalt"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Cobalt",
+          "finish": null,
+          "parent_skus": [
+            "30332"
+          ],
+          "variant_skus": [
+            "30332-1E"
+          ],
+          "line_item_titles": [
+            "Color Supreme Flush Mount"
+          ],
+          "lines": [
+            {
+              "title": "Color Supreme Flush Mount",
+              "variant_sku": "30332-1E",
+              "qty": 1
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6941141467218",
+          "shopify_order_name": "35538",
+          "shopify_order_number": "35538",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-07T17:54:02-05:00",
+          "parent_sku": "30332",
+          "color": "Cobalt",
+          "finish": "Brass",
+          "qty": 1,
+          "line_item_ids": [
+            16780788826194
+          ],
+          "item_titles": [
+            "Color Supreme Flush Mount"
+          ],
+          "variant_skus": [
+            "30332-1E"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
     {
       "shopify_order_id": "6941035593810",
       "shopify_order_name": "35537",
@@ -525,6 +719,13 @@ const QUEUE = {
           ],
           "line_item_titles": [
             "Head Towel Rack 18\""
+          ],
+          "lines": [
+            {
+              "title": "Head Towel Rack 18\"",
+              "variant_sku": "H62-18-2",
+              "qty": 1
+            }
           ],
           "total_qty": 1,
           "notes": null,
@@ -605,6 +806,13 @@ const QUEUE = {
           "line_item_titles": [
             "Color Icon 3 Sconce"
           ],
+          "lines": [
+            {
+              "title": "Color Icon 3 Sconce",
+              "variant_sku": "30321-1F",
+              "qty": 1
+            }
+          ],
           "total_qty": 1,
           "notes": null,
           "source": "color"
@@ -683,6 +891,13 @@ const QUEUE = {
           "line_item_titles": [
             "Color Legend 2 Sconce"
           ],
+          "lines": [
+            {
+              "title": "Color Legend 2 Sconce",
+              "variant_sku": "30223-1B",
+              "qty": 2
+            }
+          ],
           "total_qty": 2,
           "notes": null,
           "source": "color"
@@ -707,6 +922,13 @@ const QUEUE = {
           ],
           "line_item_titles": [
             "Color Prisma Chandelier 35\""
+          ],
+          "lines": [
+            {
+              "title": "Color Prisma Chandelier 35\"",
+              "variant_sku": "30502-1F",
+              "qty": 1
+            }
           ],
           "total_qty": 1,
           "notes": null,
@@ -818,6 +1040,13 @@ const QUEUE = {
           "line_item_titles": [
             "Color Caliber Pull - Brass"
           ],
+          "lines": [
+            {
+              "title": "Color Caliber Pull - Brass",
+              "variant_sku": "H32-6-1D",
+              "qty": 5
+            }
+          ],
           "total_qty": 5,
           "notes": null,
           "source": "color"
@@ -896,6 +1125,13 @@ const QUEUE = {
           ],
           "line_item_titles": [
             "Color Boom Sconce - 6\" Arm"
+          ],
+          "lines": [
+            {
+              "title": "Color Boom Sconce - 6\" Arm",
+              "variant_sku": "40120-6-1PG",
+              "qty": 1
+            }
           ],
           "total_qty": 1,
           "notes": null,
@@ -976,6 +1212,13 @@ const QUEUE = {
           "line_item_titles": [
             "Color Samples"
           ],
+          "lines": [
+            {
+              "title": "Color Samples",
+              "variant_sku": "SAC-K",
+              "qty": 1
+            }
+          ],
           "total_qty": 1,
           "notes": null,
           "source": "sample-only"
@@ -1020,6 +1263,13 @@ const QUEUE = {
           ],
           "line_item_titles": [
             "Throne Towel Rack 36\""
+          ],
+          "lines": [
+            {
+              "title": "Throne Towel Rack 36\"",
+              "variant_sku": "H60-36-3",
+              "qty": 1
+            }
           ],
           "total_qty": 1,
           "notes": null,
@@ -1103,6 +1353,18 @@ const QUEUE = {
             "Color Hemi Flush Mount 8\"",
             "Color Ruler Sconce"
           ],
+          "lines": [
+            {
+              "title": "Color Hemi Flush Mount 8\"",
+              "variant_sku": "50131-8-2PG",
+              "qty": 1
+            },
+            {
+              "title": "Color Ruler Sconce",
+              "variant_sku": "60224-2PG",
+              "qty": 1
+            }
+          ],
           "total_qty": 2,
           "notes": null,
           "source": "color"
@@ -1127,6 +1389,13 @@ const QUEUE = {
           ],
           "line_item_titles": [
             "Color Big Status Flush Mount 42\""
+          ],
+          "lines": [
+            {
+              "title": "Color Big Status Flush Mount 42\"",
+              "variant_sku": "30407FC-1RH",
+              "qty": 1
+            }
           ],
           "total_qty": 1,
           "notes": null,
@@ -1271,6 +1540,13 @@ const QUEUE = {
           "line_item_titles": [
             "Color Pilot Sconce 11\""
           ],
+          "lines": [
+            {
+              "title": "Color Pilot Sconce 11\"",
+              "variant_sku": "60226S-11-1B",
+              "qty": 2
+            }
+          ],
           "total_qty": 2,
           "notes": null,
           "source": "color"
@@ -1350,6 +1626,13 @@ const QUEUE = {
           "line_item_titles": [
             "Color Samples"
           ],
+          "lines": [
+            {
+              "title": "Color Samples",
+              "variant_sku": "SAC-ALL",
+              "qty": 1
+            }
+          ],
           "total_qty": 1,
           "notes": null,
           "source": "sample-only"
@@ -1388,8 +1671,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -1398,6 +1681,18 @@ const QUEUE = {
           "line_item_titles": [
             "Finish Samples",
             "Color Samples"
+          ],
+          "lines": [
+            {
+              "title": "Finish Samples",
+              "variant_sku": "SAF-ALL",
+              "qty": 1
+            },
+            {
+              "title": "Color Samples",
+              "variant_sku": "SAC-ALL",
+              "qty": 1
+            }
           ],
           "total_qty": 2,
           "notes": null,
@@ -1465,6 +1760,13 @@ const QUEUE = {
           ],
           "line_item_titles": [
             "Throne Towel Rack 18\""
+          ],
+          "lines": [
+            {
+              "title": "Throne Towel Rack 18\"",
+              "variant_sku": "H60-18-2",
+              "qty": 1
+            }
           ],
           "total_qty": 1,
           "notes": null,
@@ -1538,8 +1840,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -1548,6 +1850,18 @@ const QUEUE = {
           "line_item_titles": [
             "Finish Samples",
             "Color Samples"
+          ],
+          "lines": [
+            {
+              "title": "Finish Samples",
+              "variant_sku": "SAF-ALL",
+              "qty": 1
+            },
+            {
+              "title": "Color Samples",
+              "variant_sku": "SAC-ALL",
+              "qty": 1
+            }
           ],
           "total_qty": 2,
           "notes": null,
@@ -1593,6 +1907,13 @@ const QUEUE = {
           ],
           "line_item_titles": [
             "Color Pilot Sconce 11\""
+          ],
+          "lines": [
+            {
+              "title": "Color Pilot Sconce 11\"",
+              "variant_sku": "60226-11-2I",
+              "qty": 8
+            }
           ],
           "total_qty": 8,
           "notes": null,
@@ -1672,6 +1993,13 @@ const QUEUE = {
           "line_item_titles": [
             "Color Boom Sconce - No Arm"
           ],
+          "lines": [
+            {
+              "title": "Color Boom Sconce - No Arm",
+              "variant_sku": "40120-0-1RH",
+              "qty": 1
+            }
+          ],
           "total_qty": 1,
           "notes": null,
           "source": "color"
@@ -1714,9 +2042,9 @@ const QUEUE = {
     }
   ],
   "totals": {
-    "orders": 16,
-    "printouts": 17,
-    "notion_rows": 14,
+    "orders": 17,
+    "printouts": 18,
+    "notion_rows": 15,
     "skipped_already_printed": 143
   },
   "public_redacted": true
@@ -1728,6 +2056,38 @@ const LOCATIONS = [
   { name: "Assembly",       cls: "section-assembly", key: "assembly" },
   { name: "Shipping",       cls: "section-shipping", key: "shipping" }
 ];
+
+// Canonical color order from db-brand/brand-identity.md (white at bottom of
+// strip → black at top; we render bottom-up so this list is in display order).
+const COLOR_ORDER = [
+  "White","Chalk","Bone","Spa","Python Green","Lagoon","Cobalt","Slate Blue",
+  "Ochre","Orange","Riding Hood Red","Pinkaboo","Barely","Black"
+];
+const COLOR_HEX = {
+  "White":"#FFFFFF","Chalk":"#D0D0D0","Bone":"#E5E4CF","Spa":"#A0AF9C",
+  "Python Green":"#4E782F","Lagoon":"#728384","Cobalt":"#1D1E33",
+  "Slate Blue":"#2C4A56","Ochre":"#B89111","Orange":"#D4713B",
+  "Riding Hood Red":"#9F2C00","Pinkaboo":"#F7B6C0","Barely":"#CCB8B8",
+  "Black":"#000000"
+};
+function colorIndex(name){
+  if(!name) return 9999;
+  const i = COLOR_ORDER.indexOf(name);
+  return i === -1 ? 9999 : i;
+}
+// Picks a chip background + text color that has enough contrast for the color
+function chipStyle(name){
+  const hex = COLOR_HEX[name];
+  if(!hex) return "";
+  // Compute luminance to decide light/dark text
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  const lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+  const text = lum > 0.6 ? "#2A2A2A" : "#FFFFFF";
+  // For the chip's background we use a desaturated version: 14% color + 86% white-or-charcoal
+  const tintBg = lum > 0.6 ? hex : `${hex}22`; // dark color → translucent tint, light → use as-is
+  const border = lum > 0.6 ? "#00000022" : `${hex}66`;
+  return `--swatch-color:${hex};--chip-bg:${tintBg};--chip-text:${text};--chip-border:${border};`;
+}
 
 // ── Edit persistence (so hourly auto-refresh doesn't clobber edits) ─────────
 const EDIT_KEY = "db-print-queue-edits-v1";
@@ -1834,6 +2194,11 @@ function sortGroups(groups, location){
     const ta = a.labelType === "color" ? 0 : a.labelType === "finish" ? 1 : 2;
     const tb = b.labelType === "color" ? 0 : b.labelType === "finish" ? 1 : 2;
     if(ta !== tb) return ta - tb;
+    // bycolor sort: respect canonical white→black order for color groups
+    if(SORT === "bycolor" && a.labelType === "color" && b.labelType === "color"){
+      const ia = colorIndex(a.color), ib = colorIndex(b.color);
+      if(ia !== ib) return ia - ib;
+    }
     return a.label.localeCompare(b.label);
   });
   return list;
@@ -1851,6 +2216,22 @@ function sortRows(rows){
 }
 
 // ── Render ──────────────────────────────────────────────────────────────────
+function renderLine(line){
+  const title = line.title || "—";
+  const sku = line.variant_sku || "";
+  const qty = line.qty != null ? line.qty : 0;
+  return `
+    <li class="line-item">
+      <div>
+        <div class="line-title">${title}</div>
+        <div class="line-sub">
+          ${sku ? `<span class="line-sku">${sku}</span>` : ""}
+          <span class="line-qty">${qty}<span class="lbl">qty</span></span>
+        </div>
+      </div>
+    </li>`;
+}
+
 function renderRow(r){
   const o = r.order, p = r.printout, idx = r.idx;
   const orderName = `#${o.shopify_order_name || o.shopify_order_number || "?"}`.replace("##","#");
@@ -1861,31 +2242,44 @@ function renderRow(r){
     ? `<span class="eyebrow-dot"></span><span class="order-customer">${o.customer_name}</span>`
     : "";
   const date = `<span class="eyebrow-dot"></span><span>${fmtMonthDay(o.created_at)}</span>`;
-  const skus = (p.variant_skus||p.parent_skus||[]).join(", ");
+  const lines = (p.lines && p.lines.length) ? p.lines : (p.line_item_titles||[]).map((t,i)=>(
+    {title:t, variant_sku:(p.variant_skus||[])[i]||"", qty: i===0 ? p.total_qty : 0}
+  ));
   return `
-    <div class="order-row">
-      <div>
-        <div class="order-eyebrow">${orderLink}${cust}${date}</div>
-        ${tagsFor(o)}
+    <div class="order-block">
+      <div class="order-block-head">
+        <div class="order-block-head-left">
+          <div class="order-eyebrow">${orderLink}${cust}${date}</div>
+          ${tagsFor(o)}
+        </div>
+        <div class="pages-cell">
+          <span class="lbl">Pages</span>
+          <input class="qty-input" type="number" min="1" max="50" value="${p.page_count}"
+                 data-order="${o.shopify_order_id}" data-printout="${idx}" onchange="updatePages(this)" />
+          <button class="split-btn" onclick="splitPage('${o.shopify_order_id}', ${idx})">+1</button>
+        </div>
       </div>
-      <div class="order-skus" title="${skus}">${skus}</div>
-      <div class="order-qty">${p.total_qty}<span class="lbl">qty</span></div>
-      <div class="pages-cell">
-        <input class="qty-input" type="number" min="1" max="50" value="${p.page_count}"
-               data-order="${o.shopify_order_id}" data-printout="${idx}" onchange="updatePages(this)" />
-        <button class="split-btn" onclick="splitPage('${o.shopify_order_id}', ${idx})">+1</button>
-      </div>
+      <ul class="line-list">
+        ${lines.map(renderLine).join("")}
+      </ul>
       ${p.notes ? `<div class="review-note">⚠ ${p.notes}</div>` : ""}
     </div>`;
 }
+
 function renderGroup(g){
   const rows = sortRows(g.rows).map(renderRow).join("");
+  let nameHtml;
+  if(g.labelType === "color" && COLOR_HEX[g.color]){
+    nameHtml = `<span class="color-chip" style="${chipStyle(g.color)}"><span class="color-chip-swatch"></span>${g.color}</span>`;
+  } else {
+    nameHtml = `<div class="group-name">${g.label}</div>`;
+  }
   return `
     <div class="group-card">
       <div class="group-card-head">
         <div class="group-card-info">
           <div class="group-eyebrow">${g.eyebrow}</div>
-          <div class="group-name">${g.label}</div>
+          ${nameHtml}
           <div class="group-stats"><strong>${g.order_count}</strong> order${g.order_count===1?"":"s"} · <strong>${g.total_qty}</strong> unit${g.total_qty===1?"":"s"}</div>
         </div>
         <div class="group-pages"><strong>${g.page_count}</strong><span class="lbl">page${g.page_count===1?"":"s"}</span></div>
@@ -1940,15 +2334,6 @@ function splitPage(orderId, idx){
   saveEdit(orderId, idx, order.printouts[idx].page_count);
   recalcOrderTotal(order);
 }
-function downloadRelease(){
-  const payload = { released_at: new Date().toISOString(), sort_mode: SORT, queue: QUEUE };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "release.json"; a.click();
-  URL.revokeObjectURL(url);
-}
-
 function render(){
   const sectionsEl = document.getElementById("sections");
   if(!QUEUE){
@@ -1970,8 +2355,8 @@ function init(){
   if(QUEUE && QUEUE.public_redacted){
     const banner = document.getElementById("publicBanner");
     banner.hidden = false;
-    const rb = document.getElementById("releaseBtn");
-    if(rb) rb.style.display = "none";
+    const rh = document.getElementById("releaseHint");
+    if(rh) rh.style.display = "none";
   }
   const restored = applyStoredEdits();
   let suffix = QUEUE && QUEUE.built_at ? `Built ${QUEUE.built_at}` : "—";

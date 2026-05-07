@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Print Queue Rules — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent:      #FF9912;
+    --accent-dark: #D97706;
+    --text:        #4A4A4A;
+    --ink:         #2A2A2A;
+    --muted:       #888888;
+    --border:      #E0DDD9;
+    --bg:          #FAFAFA;
+    --card:        #ffffff;
+    --success:     #2E7D32;
+    --error:       #c0392b;
+    --radius:      8px;
+
+    /* Location colors — match print-queue.html section dots */
+    --loc-powder:   #FF9912;
+    --loc-assembly: #2A2A2A;
+    --loc-shipping: #2E7D32;
+  }
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    font-feature-settings: "cv11", "ss01";
+    color: var(--text);
+    background: var(--bg);
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  .app-main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 16px 48px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px;
+    width: 100%;
+    max-width: 1080px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  .page-intro { margin-bottom: 24px; text-align: center; }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+  h1.page-lead {
+    margin: 0 auto 6px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    max-width: 56ch;
+  }
+  .page-sub { font-size: 13px; color: var(--muted); margin: 0; }
+  .page-sub a { color: var(--accent-dark); text-decoration: none; font-weight: 500; }
+  .page-sub a:hover { text-decoration: underline; }
+
+  .nav-bar {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 18px 0 24px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: white;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.1s, border-color 0.1s;
+  }
+  .nav-tab:hover { background: var(--bg); border-color: var(--muted); }
+  .nav-tab.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: white;
+    font-weight: 500;
+  }
+
+  /* ─────────── Decision tree ─────────── */
+  .tree { display: flex; flex-direction: column; gap: 0; align-items: center; }
+  .tree-step {
+    display: flex; flex-direction: column; align-items: center; width: 100%;
+  }
+  .tree-q {
+    background: white;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 14px 22px;
+    text-align: center;
+    max-width: 580px;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .tree-q-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .tree-q-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .tree-q-detail {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* Vertical connector line */
+  .tree-line {
+    width: 2px;
+    height: 20px;
+    background: var(--border);
+  }
+
+  /* Branches: left/right or multi-way splits */
+  .tree-branches {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+    margin-top: 0;
+  }
+  .tree-branches.cols-2 { grid-template-columns: 1fr 1fr; }
+  .tree-branches.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .tree-branches.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 760px) {
+    .tree-branches.cols-2,
+    .tree-branches.cols-3,
+    .tree-branches.cols-4 { grid-template-columns: 1fr; }
+  }
+  .tree-branch {
+    display: flex; flex-direction: column; align-items: center;
+    position: relative;
+  }
+  .branch-label {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    z-index: 1;
+  }
+  .branch-label.yes  { color: var(--success);     border-color: #BFE5C5; background: #F1F8F2; }
+  .branch-label.no   { color: var(--muted);       border-color: var(--border); }
+  .branch-label.hot  { color: var(--accent-dark); border-color: #FCD9A6; background: #FFF7EB; }
+  .branch-label.warn { color: var(--error);       border-color: #F7C8C2; background: #FDECEA; }
+
+  /* Outcome cards (leaves of the tree) */
+  .outcome {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: white;
+    padding: 14px 16px;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .outcome-head {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px;
+  }
+  .outcome-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--ink);
+  }
+  .outcome.powder   .outcome-dot { background: var(--loc-powder); }
+  .outcome.assembly .outcome-dot { background: var(--loc-assembly); }
+  .outcome.shipping .outcome-dot { background: var(--loc-shipping); }
+  .outcome.skip     .outcome-dot { background: var(--muted); }
+  .outcome-loc {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .outcome.powder   .outcome-loc { color: var(--loc-powder); }
+  .outcome.assembly .outcome-loc { color: var(--loc-assembly); }
+  .outcome.shipping .outcome-loc { color: var(--loc-shipping); }
+  .outcome.skip     .outcome-loc { color: var(--muted); }
+  .outcome-meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .outcome-meta .lbl {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    align-self: center;
+  }
+  .outcome-meta .val { color: var(--text); }
+  .outcome-meta .val code {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+    font-size: 11px;
+  }
+  .outcome-warn {
+    color: var(--accent-dark);
+    font-size: 11px;
+    font-style: italic;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+  }
+
+  /* Section heading between phases */
+  .phase-heading {
+    width: 100%;
+    margin: 28px 0 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  .phase-heading h2 {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .phase-heading p {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 0 0;
+  }
+
+  /* Worked-example boxes */
+  .examples {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 12px;
+  }
+  @media (max-width: 760px) { .examples { grid-template-columns: 1fr; } }
+  .example {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .example-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .example-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .example-rule {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .example-rule strong { color: var(--accent-dark); }
+  .example-rule code {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+    font-size: 11px;
+  }
+
+  /* Summary / cheat-sheet table at the bottom */
+  .cheatsheet {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 12px;
+  }
+  .cheatsheet th, .cheatsheet td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .cheatsheet th {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 600;
+    background: var(--bg);
+  }
+  .cheatsheet code {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+    font-size: 11px;
+  }
+
+  @media print {
+    body { background: white; }
+    .app-main { padding: 0; }
+    .card { box-shadow: none; padding: 16px; max-width: none; }
+    .nav-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-main">
+<main class="card">
+  <header class="page-intro">
+    <p class="page-eyebrow">Production · Print queue</p>
+    <h1 class="page-lead">When does an order get its own page?</h1>
+    <p class="page-sub">A visual map of how the queue decides print pages and Notion rows for every line item.
+      Source of truth: <a href="https://github.com/duttonbrown/db-operations/blob/main/projects/db-production/parts-wash-list/work-order-classification.md" target="_blank">work-order-classification.md §8</a></p>
+  </header>
+
+  <nav class="nav-bar">
+    <a class="nav-tab" href="print-queue.html">← Print queue</a>
+    <a class="nav-tab active" href="print-queue-rules.html">Rules</a>
+  </nav>
+
+  <!-- ─────────── Phase 1: per-line decision tree ─────────── -->
+  <div class="phase-heading">
+    <h2>For each line on a Shopify order</h2>
+    <p>Walk the line through this tree. The leaf tells you where it lands and how it groups for printing.</p>
+  </div>
+
+  <div class="tree">
+
+    <!-- Q1: Is the line excluded? -->
+    <div class="tree-step">
+      <div class="tree-q">
+        <div class="tree-q-label">Step 1 · Excluded?</div>
+        <div class="tree-q-text">Is the SKU bulb / return label / fee / signature / package-protection?</div>
+        <div class="tree-q-detail">
+          <code>BULB*</code>, <code>X-*</code>, <code>EXP*</code>, <code>CUSTOM-*</code>, <code>SIG*</code>,
+          or names containing "package protection", "expedite your order", "signature requirement",
+          or starting with "rework fee" / "free return"
+        </div>
+      </div>
+    </div>
+
+    <div class="tree-line"></div>
+
+    <div class="tree-branches cols-2">
+      <div class="tree-branch">
+        <div class="branch-label warn">Yes — skip entirely</div>
+        <div class="outcome skip">
+          <div class="outcome-head"><span class="outcome-dot"></span><span class="outcome-loc">Excluded</span></div>
+          <div class="outcome-meta">
+            <span class="lbl">Pages</span><span class="val">0</span>
+            <span class="lbl">Notion row</span><span class="val">No</span>
+            <span class="lbl">Why</span><span class="val">Not a production item — counted nowhere.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-branch">
+        <div class="branch-label no">No — keep going</div>
+
+        <!-- Q2: Sample? -->
+        <div class="tree-q">
+          <div class="tree-q-label">Step 2 · Sample line?</div>
+          <div class="tree-q-text">Does the SKU start with <code>SAC</code> or the title contain "sample"?</div>
+        </div>
+        <div class="tree-line"></div>
+
+        <div class="tree-branches cols-2">
+          <!-- Sample yes -->
+          <div class="tree-branch">
+            <div class="branch-label yes">Sample line</div>
+            <div class="tree-q">
+              <div class="tree-q-label">Is the WHOLE order samples?</div>
+            </div>
+            <div class="tree-line"></div>
+            <div class="tree-branches cols-2">
+              <div class="tree-branch">
+                <div class="branch-label yes">Yes</div>
+                <div class="outcome shipping">
+                  <div class="outcome-head"><span class="outcome-dot"></span><span class="outcome-loc">Shipping</span></div>
+                  <div class="outcome-meta">
+                    <span class="lbl">Pages</span><span class="val">1 page</span>
+                    <span class="lbl">Group key</span><span class="val"><code>(order, "samples")</code></span>
+                    <span class="lbl">Notion row</span><span class="val">No</span>
+                  </div>
+                </div>
+              </div>
+              <div class="tree-branch">
+                <div class="branch-label no">No — mixed with fixture</div>
+                <div class="outcome skip">
+                  <div class="outcome-head"><span class="outcome-dot"></span><span class="outcome-loc">Held</span></div>
+                  <div class="outcome-meta">
+                    <span class="lbl">Pages</span><span class="val">0</span>
+                    <span class="lbl">Notion row</span><span class="val">No</span>
+                    <span class="lbl">Why</span><span class="val">Held until the fixture ships, then dropped in the box.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Not sample → Q3: Color or finish or accessory -->
+          <div class="tree-branch">
+            <div class="branch-label no">Not a sample</div>
+            <div class="tree-q">
+              <div class="tree-q-label">Step 3 · What kind of line?</div>
+              <div class="tree-q-text">By Shopify title + SKU shape</div>
+            </div>
+            <div class="tree-line"></div>
+
+            <div class="tree-branches cols-3">
+              <div class="tree-branch">
+                <div class="branch-label hot">Title starts "Color …"</div>
+                <div class="outcome powder">
+                  <div class="outcome-head"><span class="outcome-dot"></span><span class="outcome-loc">Powder Coating</span></div>
+                  <div class="outcome-meta">
+                    <span class="lbl">Pages</span><span class="val">Group by <strong>color only</strong> (across SKUs)</span>
+                    <span class="lbl">Group key</span><span class="val"><code>("color", color)</code></span>
+                    <span class="lbl">Notion row</span><span class="val">One per <code>(SKU, color, finish)</code></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tree-branch">
+                <div class="branch-label">SKU = <code>5 digits</code> or <code>H##</code></div>
+                <div class="outcome assembly">
+                  <div class="outcome-head"><span class="outcome-dot"></span><span class="outcome-loc">Assembly</span></div>
+                  <div class="outcome-meta">
+                    <span class="lbl">Pages</span><span class="val">Group by <strong>SKU + finish</strong></span>
+                    <span class="lbl">Group key</span><span class="val"><code>("finish", SKU, finish)</code></span>
+                    <span class="lbl">Notion row</span><span class="val">One per <code>(SKU, finish)</code></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tree-branch">
+                <div class="branch-label">Anything else (accessory)</div>
+                <div class="outcome shipping">
+                  <div class="outcome-head"><span class="outcome-dot"></span><span class="outcome-loc">Shipping or Assembly</span></div>
+                  <div class="outcome-meta">
+                    <span class="lbl">Pages</span><span class="val">Group by <strong>SKU</strong></span>
+                    <span class="lbl">Group key</span><span class="val"><code>("simple", SKU)</code></span>
+                    <span class="lbl">Notion row</span><span class="val">One per <code>SKU</code></span>
+                  </div>
+                  <div class="outcome-warn">If the order has any Lighting or Hardware too → Location flips to Assembly + flagged for Catherine.</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─────────── Phase 2: page-multiplication rule ─────────── -->
+  <div class="phase-heading">
+    <h2>Then how many pages?</h2>
+    <p>Every group keys above defaults to <strong>1 page</strong> regardless of qty. Manager splits manually.</p>
+  </div>
+
+  <div class="tree">
+    <div class="tree-q" style="max-width:680px">
+      <div class="tree-q-label">Default rule</div>
+      <div class="tree-q-text">1 page per group, no matter the quantity.</div>
+      <div class="tree-q-detail">
+        Qty 10 of one fixture in one color → still 1 page.
+        Lead clicks <strong>+1</strong> (Split) on the queue page if work needs to be parallelized.
+      </div>
+    </div>
+
+    <div class="tree-line"></div>
+
+    <div class="tree-q" style="max-width:680px; border-color: var(--accent);">
+      <div class="tree-q-label">Lead override</div>
+      <div class="tree-q-text">Edit the page number directly on the queue page.</div>
+      <div class="tree-q-detail">
+        Edits persist in your browser via localStorage — they survive the hourly auto-refresh.
+        A "reset" link in the page subheader clears them.
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────── Worked examples ─────────── -->
+  <div class="phase-heading">
+    <h2>Worked examples</h2>
+    <p>Same order, walked through the rules above.</p>
+  </div>
+
+  <div class="examples">
+
+    <div class="example">
+      <div class="example-eyebrow">Example A · Color, two finishes</div>
+      <div class="example-title">31000-1K (Brass + Barely) + 31000-2K (Black + Barely)</div>
+      <div class="example-rule">
+        Both lines are color products → Powder Coating.
+        Both share <code>color = Barely</code> → group key <code>("color", "Barely")</code>.<br>
+        <strong>1 printout</strong> (parts paint together).
+        <strong>2 Notion rows</strong> (Brass and Black builds are different).
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-eyebrow">Example B · Sample-only order</div>
+      <div class="example-title">SAC-PG (Python Green sample)</div>
+      <div class="example-rule">
+        Whole order is samples → short-circuit.<br>
+        <strong>1 printout · Shipping</strong>. <strong>0 Notion rows.</strong>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-eyebrow">Example C · Mixed sample + fixture</div>
+      <div class="example-title">SAC-PG + 31000-1K</div>
+      <div class="example-rule">
+        Sample is <strong>held</strong> — not its own page, not a Notion row.
+        Fixture line follows the color-product branch.<br>
+        <strong>1 printout · Powder Coating</strong>. <strong>1 Notion row.</strong>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-eyebrow">Example D · Two SKUs, same color</div>
+      <div class="example-title">30220-2F (47" Slate Blue) + 31000-1F (32" Slate Blue)</div>
+      <div class="example-rule">
+        Both color products in <code>Slate Blue</code> → one paint group across SKUs.<br>
+        <strong>1 printout</strong> (key <code>("color", "Slate Blue")</code> covers both).
+        <strong>2 Notion rows</strong> (different parent SKUs).
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-eyebrow">Example E · Accessories only</div>
+      <div class="example-title">ER1-3-1 (rod) + BU (bushing)</div>
+      <div class="example-rule">
+        No lighting or hardware in the order. Both lines = accessory.<br>
+        <strong>2 printouts · Shipping</strong> (one per SKU).
+        <strong>2 Notion rows.</strong>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-eyebrow">Example F · Mixed accessory + fixture</div>
+      <div class="example-title">ER1-3-1 (rod) + 31000-1 (chandelier)</div>
+      <div class="example-rule">
+        Rod row routes to <strong>Assembly</strong> + flagged for Catherine to confirm Shipping vs Assembly.
+        Chandelier row to Assembly normally.<br>
+        <strong>2 printouts · Assembly</strong>. <strong>2 Notion rows.</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─────────── Cheat sheet ─────────── -->
+  <div class="phase-heading">
+    <h2>Cheat sheet</h2>
+  </div>
+
+  <table class="cheatsheet">
+    <thead>
+      <tr>
+        <th>Line type</th>
+        <th>Page group key</th>
+        <th>Location</th>
+        <th>Notion row?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Color product</td>
+        <td><code>("color", color)</code></td>
+        <td><span style="color:var(--loc-powder); font-weight:600">Powder Coating</span></td>
+        <td>Yes — one per <code>(SKU, color, finish)</code></td>
+      </tr>
+      <tr>
+        <td>Lighting / Hardware finish-only</td>
+        <td><code>("finish", SKU, finish)</code></td>
+        <td><span style="color:var(--loc-assembly); font-weight:600">Assembly</span></td>
+        <td>Yes — one per <code>(SKU, finish)</code></td>
+      </tr>
+      <tr>
+        <td>Accessory in accessory-only order</td>
+        <td><code>("simple", SKU)</code></td>
+        <td><span style="color:var(--loc-shipping); font-weight:600">Shipping</span></td>
+        <td>Yes — one per SKU</td>
+      </tr>
+      <tr>
+        <td>Accessory in mixed order</td>
+        <td><code>("simple", SKU)</code></td>
+        <td><span style="color:var(--loc-assembly); font-weight:600">Assembly</span> ⚠</td>
+        <td>Yes — flagged for Catherine to confirm</td>
+      </tr>
+      <tr>
+        <td>Sample in sample-only order</td>
+        <td><code>("sample-only", order)</code></td>
+        <td><span style="color:var(--loc-shipping); font-weight:600">Shipping</span></td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>Sample mixed with fixture</td>
+        <td>—</td>
+        <td>Held</td>
+        <td>No (added to box at fulfillment)</td>
+      </tr>
+      <tr>
+        <td>Excluded (BULB / X-* / EXP* / SIG* / etc.)</td>
+        <td>—</td>
+        <td>—</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+
+</main>
+</div>
+
+</body>
+</html>
