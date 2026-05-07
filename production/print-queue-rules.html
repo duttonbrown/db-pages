@@ -605,6 +605,93 @@
 
   </div>
 
+  <!-- ─────────── How the rules learn ─────────── -->
+  <div class="phase-heading">
+    <h2>How the rules improve over time</h2>
+    <p>Manual overrides on the queue page are logged. We mine the log weekly to promote stable patterns.</p>
+  </div>
+
+  <div class="examples">
+    <div class="example">
+      <div class="example-eyebrow">Step 1 · Manager overrides on the queue page</div>
+      <div class="example-title">Click a different Location bubble on any row.</div>
+      <div class="example-rule">
+        Each click writes <code>{ts, sku, color, finish, from, to, source}</code> to the
+        browser's local log. Use <strong>"export log"</strong> in the page subheader to pull
+        the file down. The override sticks across hourly auto-refreshes via localStorage.
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-eyebrow">Step 2 · Weekly review</div>
+      <div class="example-title">Run a script that mines the log.</div>
+      <div class="example-rule">
+        Output: <em>"These (SKU pattern + finish) combinations were re-routed the same way
+        5+ times in 7 days."</em> Each candidate is a row you click <strong>Promote</strong>
+        on. Promoted rules land in <code>classification-rules.yaml</code> as SKU-pattern overrides.
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-eyebrow">Step 3 · Structural rules from Notion data</div>
+      <div class="example-title">Skip the override loop where a real signal already exists.</div>
+      <div class="example-rule">
+        The Notion Parts DB has <code>In-House Processes = Black Batch</code> on every part
+        we paint and stock. That flag is already in <code>bom-master.csv</code>. The right fix
+        is feeding it back into routing: <strong>if every part on the BOM is Black-Batch
+        stocked → skip Powder Coat, route to Assembly</strong>. Eliminates a whole class of
+        overrides without learning anything new.
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-eyebrow">Why human-in-the-loop, not auto-learning</div>
+      <div class="example-title">The rule space is small enough.</div>
+      <div class="example-rule">
+        ~14 colors × 3 finishes × 5 SKU classes ≈ a few hundred patterns. A model is overkill
+        and lets one anomalous override flip a rule overnight. A
+        <strong>weekly promotion step</strong> is fast, debuggable, and matches how Catherine
+        already thinks. The model can come later when there's enough signal to tune it.
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-heading">
+    <h2>Parked rules to evaluate</h2>
+    <p>Pattern noticed but not yet promoted. Resolved when there's enough override-log evidence or a structural source.</p>
+  </div>
+
+  <table class="cheatsheet">
+    <thead>
+      <tr>
+        <th>Pattern</th>
+        <th>Proposed routing</th>
+        <th>Source signal</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Hardware in <strong>Black</strong> finish (Throw Towel Rack, etc.)</td>
+        <td><span style="color:var(--loc-assembly); font-weight:600">Assembly</span> — black-batch parts in stock</td>
+        <td>Notion Parts DB <code>Black Batch</code> flag (already in <code>bom-master.csv</code>)</td>
+        <td>Parked — wire BOM-driven check before promoting</td>
+      </tr>
+      <tr>
+        <td>Accessory in mixed-with-fixture order</td>
+        <td>?</td>
+        <td>Override log — needs ~30 cases</td>
+        <td>Collecting evidence</td>
+      </tr>
+      <tr>
+        <td>SKU appears on Catherine's stock list</td>
+        <td><span style="color:var(--loc-shipping); font-weight:600">Shipping</span></td>
+        <td>Stock list (location TBD — ask Catherine)</td>
+        <td>Stub wired in UI; data source pending</td>
+      </tr>
+    </tbody>
+  </table>
+
   <!-- ─────────── Cheat sheet ─────────── -->
   <div class="phase-heading">
     <h2>Cheat sheet</h2>
