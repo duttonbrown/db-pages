@@ -39,6 +39,16 @@
   .kpi-sub.neg { color: #D4726A; }
   .kpi-sub.neu { color: #999; }
   .kpi-label { font-weight: 400; font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+
+  /* 3-row comparison table at top of each tab */
+  .kpi-compare-wrap { background: #fff; border: 1px solid #E0DDD9; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px; overflow-x: auto; }
+  table.kpi-compare { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  table.kpi-compare th { font-weight: 600; font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; border-bottom: 1px solid #E0DDD9; text-align: right; }
+  table.kpi-compare th.kpi-period-label { text-align: left; }
+  table.kpi-compare td { padding: 10px 12px; font-size: 0.95rem; border-bottom: 1px solid #F0EDEA; color: #4A4A4A; }
+  table.kpi-compare tr:last-child td { border-bottom: none; }
+  table.kpi-compare tr:first-child td { font-weight: 600; font-size: 1.05rem; }
+  table.kpi-compare td.kpi-period-label { font-weight: 600; font-size: 0.72rem; color: #888; text-transform: uppercase; letter-spacing: 0.06em; text-align: left; }
   .section { margin-bottom: 32px; }
   .section h2 { font-weight: 600; font-size: 1.05rem; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #E0DDD9; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -60,7 +70,7 @@
 <div class="header">
   <h1>Dutton Brown — 2026 Fulfillment Report</h1>
   <p>Fulfillment &amp; Shipping Dashboard &nbsp;&middot;&nbsp; Dutton Brown Design</p>
-  <div class="updated">Updated May 06, 2026 — through April</div>
+  <div class="updated">Updated May 07, 2026 — through April</div>
 </div>
 
 <div class="report-nav">
@@ -79,14 +89,7 @@
   </div>
   
 <div class="tab-content" id="m01">
-  <div class="kpi-row">
-    <div class="kpi"><div class="kpi-val">425</div><div class="kpi-sub neg">-6.6% vs 455 2025</div><div class="kpi-label">Orders Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">$298,071</div><div class="kpi-sub pos">+21.4% vs $245,523 2025</div><div class="kpi-label">Revenue Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">2,068</div><div class="kpi-sub neg">-0.8% vs 2,085 2025</div><div class="kpi-label">Units Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">9.5</div><div class="kpi-sub pos">-22.2% vs 12.2 2025</div><div class="kpi-label">Avg Days to Ship</div></div>
-    <div class="kpi"><div class="kpi-val">$701</div><div class="kpi-sub pos">+30.0% vs $540 2025</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
-    <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Unfulfilled</div></div>
-  </div>
+  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Revenue Shipped</th><th class="r">Units Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">425</td><td class="r">$298,071</td><td class="r">2,068</td><td class="r">9.5</td><td class="r">$701</td></tr><tr><td class="kpi-period-label">2025</td><td class="r">455 <span style="color:#D4726A;font-weight:400">(-6.6%)</span></td><td class="r">$245,523 <span style="color:#7A9B76;font-weight:400">(+21.4%)</span></td><td class="r">2,085 <span style="color:#D4726A;font-weight:400">(-0.8%)</span></td><td class="r">12.2 <span style="color:#7A9B76;font-weight:400">(-22.2%)</span></td><td class="r">$540 <span style="color:#7A9B76;font-weight:400">(+30.0%)</span></td></tr><tr><td class="kpi-period-label">YTD through January</td><td class="r">425 <span style="color:#D4726A;font-weight:400">(-6.6%)</span></td><td class="r">$298,071 <span style="color:#7A9B76;font-weight:400">(+21.4%)</span></td><td class="r">2,068 <span style="color:#D4726A;font-weight:400">(-0.8%)</span></td><td class="r">9.5 <span style="color:#7A9B76;font-weight:400">(-22.2%)</span></td><td class="r">$701 <span style="color:#7A9B76;font-weight:400">(+30.0%)</span></td></tr></tbody></table></div>
 
   <div class="section">
     <h2>Fulfillment Time (Days to Ship)</h2>
@@ -225,14 +228,7 @@
 </div>
 
 <div class="tab-content" id="m02">
-  <div class="kpi-row">
-    <div class="kpi"><div class="kpi-val">439</div><div class="kpi-sub neg">-4.8% vs 461 2025</div><div class="kpi-label">Orders Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">$244,209</div><div class="kpi-sub neg">-24.1% vs $321,683 2025</div><div class="kpi-label">Revenue Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">1,888</div><div class="kpi-sub neg">-11.4% vs 2,132 2025</div><div class="kpi-label">Units Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">10.5</div><div class="kpi-sub pos">-11.6% vs 11.8 2025</div><div class="kpi-label">Avg Days to Ship</div></div>
-    <div class="kpi"><div class="kpi-val">$556</div><div class="kpi-sub neg">-20.3% vs $698 2025</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
-    <div class="kpi"><div class="kpi-val">0</div><div class="kpi-label">Unfulfilled</div></div>
-  </div>
+  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Revenue Shipped</th><th class="r">Units Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">439</td><td class="r">$244,209</td><td class="r">1,888</td><td class="r">10.5</td><td class="r">$556</td></tr><tr><td class="kpi-period-label">2025</td><td class="r">461 <span style="color:#D4726A;font-weight:400">(-4.8%)</span></td><td class="r">$321,683 <span style="color:#D4726A;font-weight:400">(-24.1%)</span></td><td class="r">2,132 <span style="color:#D4726A;font-weight:400">(-11.4%)</span></td><td class="r">11.8 <span style="color:#7A9B76;font-weight:400">(-11.6%)</span></td><td class="r">$698 <span style="color:#D4726A;font-weight:400">(-20.3%)</span></td></tr><tr><td class="kpi-period-label">YTD through February</td><td class="r">864 <span style="color:#D4726A;font-weight:400">(-5.7%)</span></td><td class="r">$542,280 <span style="color:#D4726A;font-weight:400">(-4.4%)</span></td><td class="r">3,956 <span style="color:#D4726A;font-weight:400">(-6.2%)</span></td><td class="r">10.0 <span style="color:#7A9B76;font-weight:400">(-16.9%)</span></td><td class="r">$628 <span style="color:#7A9B76;font-weight:400">(+1.4%)</span></td></tr></tbody></table></div>
 
   <div class="section">
     <h2>Fulfillment Time (Days to Ship)</h2>
@@ -368,14 +364,7 @@
 </div>
 
 <div class="tab-content" id="m03">
-  <div class="kpi-row">
-    <div class="kpi"><div class="kpi-val">445</div><div class="kpi-sub pos">+17.4% vs 379 2025</div><div class="kpi-label">Orders Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">$444,901</div><div class="kpi-sub pos">+93.5% vs $229,937 2025</div><div class="kpi-label">Revenue Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">2,490</div><div class="kpi-sub pos">+56.2% vs 1,594 2025</div><div class="kpi-label">Units Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">12.0</div><div class="kpi-sub pos">-19.6% vs 14.9 2025</div><div class="kpi-label">Avg Days to Ship</div></div>
-    <div class="kpi"><div class="kpi-val">$1,000</div><div class="kpi-sub pos">+64.8% vs $607 2025</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
-    <div class="kpi"><div class="kpi-val">1</div><div class="kpi-label">Unfulfilled</div></div>
-  </div>
+  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Revenue Shipped</th><th class="r">Units Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">445</td><td class="r">$444,901</td><td class="r">2,490</td><td class="r">12.0</td><td class="r">$1,000</td></tr><tr><td class="kpi-period-label">2025</td><td class="r">379 <span style="color:#7A9B76;font-weight:400">(+17.4%)</span></td><td class="r">$229,937 <span style="color:#7A9B76;font-weight:400">(+93.5%)</span></td><td class="r">1,594 <span style="color:#7A9B76;font-weight:400">(+56.2%)</span></td><td class="r">14.9 <span style="color:#7A9B76;font-weight:400">(-19.6%)</span></td><td class="r">$607 <span style="color:#7A9B76;font-weight:400">(+64.8%)</span></td></tr><tr><td class="kpi-period-label">YTD through March</td><td class="r">1,309 <span style="color:#7A9B76;font-weight:400">(+1.1%)</span></td><td class="r">$987,180 <span style="color:#7A9B76;font-weight:400">(+23.8%)</span></td><td class="r">6,446 <span style="color:#7A9B76;font-weight:400">(+10.9%)</span></td><td class="r">10.7 <span style="color:#7A9B76;font-weight:400">(-17.1%)</span></td><td class="r">$754 <span style="color:#7A9B76;font-weight:400">(+22.5%)</span></td></tr></tbody></table></div>
 
   <div class="section">
     <h2>Fulfillment Time (Days to Ship)</h2>
@@ -514,14 +503,7 @@
 </div>
 
 <div class="tab-content" id="m04">
-  <div class="kpi-row">
-    <div class="kpi"><div class="kpi-val">352</div><div class="kpi-sub neg">-20.5% vs 443 2025</div><div class="kpi-label">Orders Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">$288,505</div><div class="kpi-sub pos">+12.2% vs $257,164 2025</div><div class="kpi-label">Revenue Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">1,870</div><div class="kpi-sub pos">+6.4% vs 1,758 2025</div><div class="kpi-label">Units Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">8.2</div><div class="kpi-sub pos">-37.5% vs 13.1 2025</div><div class="kpi-label">Avg Days to Ship</div></div>
-    <div class="kpi"><div class="kpi-val">$820</div><div class="kpi-sub pos">+41.2% vs $581 2025</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
-    <div class="kpi"><div class="kpi-val">99</div><div class="kpi-label">Unfulfilled</div></div>
-  </div>
+  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Revenue Shipped</th><th class="r">Units Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">369</td><td class="r">$288,505</td><td class="r">1,870</td><td class="r">8.4</td><td class="r">$782</td></tr><tr><td class="kpi-period-label">2025</td><td class="r">443 <span style="color:#D4726A;font-weight:400">(-16.7%)</span></td><td class="r">$257,164 <span style="color:#7A9B76;font-weight:400">(+12.2%)</span></td><td class="r">1,758 <span style="color:#7A9B76;font-weight:400">(+6.4%)</span></td><td class="r">13.1 <span style="color:#7A9B76;font-weight:400">(-35.8%)</span></td><td class="r">$581 <span style="color:#7A9B76;font-weight:400">(+34.7%)</span></td></tr><tr><td class="kpi-period-label">YTD through April</td><td class="r">1,678 <span style="color:#D4726A;font-weight:400">(-3.5%)</span></td><td class="r">$1,275,685 <span style="color:#7A9B76;font-weight:400">(+21.0%)</span></td><td class="r">8,316 <span style="color:#7A9B76;font-weight:400">(+9.9%)</span></td><td class="r">10.2 <span style="color:#7A9B76;font-weight:400">(-21.3%)</span></td><td class="r">$760 <span style="color:#7A9B76;font-weight:400">(+25.3%)</span></td></tr></tbody></table></div>
 
   <div class="section">
     <h2>Fulfillment Time (Days to Ship)</h2>
@@ -581,9 +563,9 @@
       <div>
         <table>
           <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
-          <tbody><tr><td>FedEx</td><td class="r">227</td><td class="r">37.7%</td></tr>
-<tr><td>No carrier set</td><td class="r">205</td><td class="r">34.1%</td></tr>
-<tr><td>USPS</td><td class="r">167</td><td class="r">27.7%</td></tr>
+          <tbody><tr><td>FedEx</td><td class="r">246</td><td class="r">38.6%</td></tr>
+<tr><td>No carrier set</td><td class="r">220</td><td class="r">34.5%</td></tr>
+<tr><td>USPS</td><td class="r">168</td><td class="r">26.4%</td></tr>
 <tr><td>Other</td><td class="r">2</td><td class="r">0.3%</td></tr>
 <tr><td>UPS</td><td class="r">1</td><td class="r">0.2%</td></tr>
 </tbody>
@@ -660,14 +642,7 @@
 </div>
 
 <div class="tab-content" id="ytd">
-  <div class="kpi-row">
-    <div class="kpi"><div class="kpi-val">1,661</div><div class="kpi-sub neg">-4.4% vs 1,738 2025</div><div class="kpi-label">Orders Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">$1,275,685</div><div class="kpi-sub pos">+21.0% vs $1,054,307 2025</div><div class="kpi-label">Revenue Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">8,316</div><div class="kpi-sub pos">+9.9% vs 7,569 2025</div><div class="kpi-label">Units Shipped</div></div>
-    <div class="kpi"><div class="kpi-val">10.2</div><div class="kpi-sub pos">-21.5% vs 12.9 2025</div><div class="kpi-label">Avg Days to Ship</div></div>
-    <div class="kpi"><div class="kpi-val">$768</div><div class="kpi-sub pos">+26.6% vs $607 2025</div><div class="kpi-label">Avg Revenue / Shipment</div></div>
-    <div class="kpi"><div class="kpi-val">100</div><div class="kpi-label">Unfulfilled</div></div>
-  </div>
+  <div class="kpi-compare-wrap"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Revenue Shipped</th><th class="r">Units Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">1,678</td><td class="r">$1,275,685</td><td class="r">8,316</td><td class="r">10.2</td><td class="r">$760</td></tr><tr><td class="kpi-period-label">2025</td><td class="r">1,738 <span style="color:#D4726A;font-weight:400">(-3.5%)</span></td><td class="r">$1,054,307 <span style="color:#7A9B76;font-weight:400">(+21.0%)</span></td><td class="r">7,569 <span style="color:#7A9B76;font-weight:400">(+9.9%)</span></td><td class="r">12.9 <span style="color:#7A9B76;font-weight:400">(-21.3%)</span></td><td class="r">$607 <span style="color:#7A9B76;font-weight:400">(+25.3%)</span></td></tr></tbody></table></div>
 
   <div class="section">
     <h2>Fulfillment Time (Days to Ship)</h2>
@@ -727,9 +702,9 @@
       <div>
         <table>
           <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
-          <tbody><tr><td>FedEx</td><td class="r">1,227</td><td class="r">41.7%</td></tr>
-<tr><td>No carrier set</td><td class="r">1,009</td><td class="r">34.3%</td></tr>
-<tr><td>USPS</td><td class="r">679</td><td class="r">23.1%</td></tr>
+          <tbody><tr><td>FedEx</td><td class="r">1,246</td><td class="r">41.9%</td></tr>
+<tr><td>No carrier set</td><td class="r">1,024</td><td class="r">34.4%</td></tr>
+<tr><td>USPS</td><td class="r">680</td><td class="r">22.9%</td></tr>
 <tr><td>Other</td><td class="r">15</td><td class="r">0.5%</td></tr>
 <tr><td>UPS</td><td class="r">10</td><td class="r">0.3%</td></tr>
 </tbody>
@@ -823,7 +798,7 @@
 
 <script>
 const COLORS = ['#D4726A','#8BB8D9','#C5B9A8','#7A9B76','#C9A84C','#A8A8A8','#3A3A3A','#E8B4B8','#B8D4E3','#D4C5A8'];
-Chart.defaults.font.family = '"Inter", -apple-system, "Segoe UI", sans-serif';
+Chart.defaults.font.family = '"Inter", -apple-system, sans-serif';
 Chart.defaults.font.size = 12;
 Chart.defaults.color = '#888';
 
@@ -890,14 +865,14 @@ initChart('chart-product-m03', 'doughnut', ["Hardware", "Sconce", "Other", "Flus
 initChart('chart-carrier-m03', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[336, 279, 173, 2, 2]], COLORS, true);
 initChart('chart-state-m03', 'bar', ["NY", "CA", "MA", "TX", "FL", "NJ", "CT", "NC", "MN", "GA", "IL", "VA", "WA", "CO", "TN"], [[70, 63, 38, 26, 23, 23, 17, 15, 15, 15, 14, 14, 13, 12, 9]], ['#C5B9A8'], false, null, null, true);
 
-initChart('chart-fulfill-m04', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[128, 36, 116, 70, 2, 0]], ['#8BB8D9'], false, 'Orders', 'Days');
+initChart('chart-fulfill-m04', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[128, 36, 126, 77, 2, 0]], ['#8BB8D9'], false, 'Orders', 'Days');
 initChart('chart-product-m04', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Pendant", "Bulb", "Accessory", "Chandelier", "Plug-In"], [[517, 431, 318, 191, 110, 89, 85, 78, 43, 6]], COLORS, true);
-initChart('chart-carrier-m04', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[227, 205, 167, 2, 1]], COLORS, true);
+initChart('chart-carrier-m04', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[246, 220, 168, 2, 1]], COLORS, true);
 initChart('chart-state-m04', 'bar', ["NY", "CA", "TX", "NJ", "FL", "WA", "CT", "MA", "IL", "MN", "CO", "GA", "TN", "NC", "PA"], [[66, 51, 38, 28, 26, 23, 22, 22, 21, 15, 12, 11, 11, 10, 8]], ['#C5B9A8'], false, null, null, true);
 
-initChart('chart-fulfill-ytd', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[547, 157, 382, 500, 47, 28]], ['#8BB8D9'], false, 'Orders', 'Days');
+initChart('chart-fulfill-ytd', 'bar', ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"], [[547, 157, 392, 507, 47, 28]], ['#8BB8D9'], false, 'Orders', 'Days');
 initChart('chart-product-ytd', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Bulb", "Accessory", "Pendant", "Chandelier", "Plug-In"], [[2026, 1973, 1316, 882, 686, 449, 421, 350, 181, 27]], COLORS, true);
-initChart('chart-carrier-ytd', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[1227, 1009, 679, 15, 10]], COLORS, true);
+initChart('chart-carrier-ytd', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[1246, 1024, 680, 15, 10]], COLORS, true);
 initChart('chart-state-ytd', 'bar', ["NY", "CA", "TX", "MA", "FL", "NJ", "IL", "CT", "WA", "MN", "GA", "VA", "NC", "CO", "PA"], [[261, 239, 125, 111, 107, 96, 73, 70, 58, 52, 51, 45, 43, 42, 32]], ['#C5B9A8'], false, null, null, true);
 
 
