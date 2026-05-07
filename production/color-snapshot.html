@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Snapshot — May 07, 2026 at 11:24 AM</title>
+<title>Production Snapshot — May 07, 2026 at 11:33 AM</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,6 +14,17 @@
         .kpi-value { font-size: 28px; font-weight: 600; color: #2c3e50; }
         .kpi-label { font-size: 12px; color: #888; text-transform: uppercase; }
         .kpi-sub { font-size: 11px; color: #6c757d; margin-top: 4px; font-weight: 300; }
+        .kpi-aside-line { font-size: 10px; color: #6c757d; margin-top: 8px;
+                           padding-top: 8px; border-top: 1px dashed #dee2e6; }
+        .kpi-aside-num { font-weight: 600; color: #495057; }
+        .kpi-aside-line em { color: #999; font-style: italic; }
+        .kpi-flags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+        .kpi-pill { display: inline-flex; align-items: center; gap: 5px;
+                     padding: 4px 9px; border-radius: 12px; font-size: 11px;
+                     font-weight: 500; }
+        .kpi-pill-num { font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; }
+        .kpi-pill-exp { background: #fdebea; color: #c0392b; }
+        .kpi-pill-large { background: #eef2f7; color: #2c3e50; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
         th { background: #f1f3f5; padding: 8px 12px; text-align: left;
              font-size: 12px; text-transform: uppercase; color: #666;
@@ -146,28 +157,25 @@
     </style>
 </head><body>
 <h1>Dutton Brown — Production Snapshot</h1>
-<h2>May 07, 2026 at 11:24 AM</h2>
+<h2>May 07, 2026 at 11:33 AM</h2>
 <p class="subtitle">All unfulfilled open orders from Shopify, sliced by Color powder-coat and metal finish. Click any row to expand and see the contributing orders.</p>
 <p class="subtitle" style="font-style:italic;">Note: Quantities do not yet reflect adjustments for hang-straights, plug-ins, and switches. Additional SKUs to address these are coming soon.</p>
 
 <div class="kpi-row">
     <div class="kpi">
-        <div class="kpi-value" id="kpi-groups">14</div>
-        <div class="kpi-label" id="kpi-groups-label">Colors</div>
-    </div>
-    <div class="kpi">
-        <div class="kpi-value" id="kpi-items">1000</div>
+        <div class="kpi-value" id="kpi-items">955</div>
         <div class="kpi-label">Total Items</div>
         <div class="kpi-sub" id="kpi-items-sub">843 lighting &middot; 112 hardware</div>
+        <div class="kpi-aside" id="kpi-items-aside"><div class="kpi-aside-line"><span class="kpi-aside-num">45</span> accessories <em>(not in total)</em></div></div>
     </div>
     <div class="kpi">
         <div class="kpi-value" id="kpi-orders">146</div>
         <div class="kpi-label">Orders</div>
-        <div class="kpi-sub" id="kpi-orders-sub">2 expedites &middot; 1 large</div>
+        <div class="kpi-flags" id="kpi-orders-flags"><span class="kpi-pill kpi-pill-exp" id="kpi-pill-exp"><span class="kpi-pill-num">2</span> expedites</span><span class="kpi-pill kpi-pill-large" id="kpi-pill-large"><span class="kpi-pill-num">1</span> large</span></div>
     </div>
 </div>
 
-<div class="tab-strip"><button class="tab-btn active" data-tab="overall" onclick="setTab('overall', this)">Overall <span class="tab-count">1000</span></button><button class="tab-btn" data-tab="color" onclick="setTab('color', this)">Color <span class="tab-count">953</span></button><button class="tab-btn" data-tab="brass" onclick="setTab('brass', this)">Brass <span class="tab-count">1</span></button><button class="tab-btn" data-tab="nickel" onclick="setTab('nickel', this)">Nickel <span class="tab-count">1</span></button><button class="tab-btn" data-tab="black" onclick="setTab('black', this)">Black</button><button class="tab-btn" data-tab="accessories" onclick="setTab('accessories', this)">Accessories <span class="tab-count">45</span></button></div>
+<div class="tab-strip"><button class="tab-btn active" data-tab="overall" onclick="setTab('overall', this)">Overall <span class="tab-count">955</span></button><button class="tab-btn" data-tab="color" onclick="setTab('color', this)">Color <span class="tab-count">953</span></button><button class="tab-btn" data-tab="brass" onclick="setTab('brass', this)">Brass <span class="tab-count">1</span></button><button class="tab-btn" data-tab="nickel" onclick="setTab('nickel', this)">Nickel <span class="tab-count">1</span></button><button class="tab-btn" data-tab="black" onclick="setTab('black', this)">Black</button><button class="tab-btn" data-tab="accessories" onclick="setTab('accessories', this)">Accessories <span class="tab-count">45</span></button></div>
 
 <div class="filter-bar">
     <span class="filter-label">Filter:</span>
@@ -1896,7 +1904,8 @@
         if (!activePane) return;
 
         let pageItems = 0, pageOrders = new Set(), pageExp = new Set(), pageLarge = new Set();
-        let pageLighting = 0, pageHardware = 0, visibleGroups = 0;
+        let pageLighting = 0, pageHardware = 0, pagePillows = 0, pageAccessories = 0;
+        let visibleGroups = 0;
 
         activePane.querySelectorAll('.color-column').forEach(col => {
             let visibleQty = 0, lighting = 0, hardware = 0;
@@ -1943,6 +1952,8 @@
                     visibleQty += qty;
                     if (row.dataset.cat === 'Lighting') lighting += qty;
                     else if (row.dataset.cat === 'Hardware') hardware += qty;
+                    else if (row.dataset.cat === 'Pillows') pagePillows += qty;
+                    else if (row.dataset.cat === 'Accessories') pageAccessories += qty;
                 }
             });
 
@@ -2005,17 +2016,30 @@
 
         // Update page-level KPIs
         const k = id => document.getElementById(id);
-        if (k('kpi-groups')) {
-            k('kpi-groups').textContent = visibleGroups;
-            const lbl = document.getElementById('kpi-groups-label');
-            if (lbl) lbl.textContent = (activeTab === 'color') ? 'Colors' : 'Products';
-        }
-        if (k('kpi-items')) k('kpi-items').textContent = pageItems;
+        // Total Items = lighting + hardware only (production-line items)
+        if (k('kpi-items')) k('kpi-items').textContent = pageLighting + pageHardware;
         if (k('kpi-items-sub')) k('kpi-items-sub').innerHTML = pageLighting + ' lighting · ' + pageHardware + ' hardware';
+        if (k('kpi-items-aside')) {
+            const parts = [];
+            if (pagePillows) parts.push('<span class="kpi-aside-num">' + pagePillows + '</span> pillows');
+            if (pageAccessories) parts.push('<span class="kpi-aside-num">' + pageAccessories + '</span> accessories');
+            k('kpi-items-aside').innerHTML = parts.length
+                ? '<div class="kpi-aside-line">' + parts.join(' · ') + ' <em>(not in total)</em></div>'
+                : '';
+        }
         if (k('kpi-orders')) k('kpi-orders').textContent = pageOrders.size;
-        if (k('kpi-orders-sub')) k('kpi-orders-sub').innerHTML =
-            pageExp.size + ' expedite' + (pageExp.size !== 1 ? 's' : '') +
-            ' · ' + pageLarge.size + ' large';
+        if (k('kpi-orders-flags')) {
+            const pills = [];
+            if (pageExp.size) pills.push(
+                '<span class="kpi-pill kpi-pill-exp"><span class="kpi-pill-num">' +
+                pageExp.size + '</span> expedite' + (pageExp.size !== 1 ? 's' : '') + '</span>'
+            );
+            if (pageLarge.size) pills.push(
+                '<span class="kpi-pill kpi-pill-large"><span class="kpi-pill-num">' +
+                pageLarge.size + '</span> large</span>'
+            );
+            k('kpi-orders-flags').innerHTML = pills.join('');
+        }
     }
     </script>
 </body></html>
