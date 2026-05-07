@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Overview — May 07, 2026 at 04:54 PM</title>
+<title>Production Overview — May 07, 2026 at 04:57 PM</title>
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -225,12 +225,15 @@
                           padding: 3px 6px; min-width: 22px; text-align: right;
                           display: flex; align-items: center;
                           justify-content: flex-end; }
-        .card-pill-exp   .card-pill-tag { background: #e74c3c; }
-        .card-pill-quick .card-pill-tag { background: #d4a017; }
-        .card-pill-large .card-pill-tag { background: #2c3e50; }
-        .card-pill-hold  .card-pill-tag { background: #6c757d; }
-        .card-pill-trade .card-pill-tag { background: #c2410c; }
-        .card-pill-vip   .card-pill-tag { background: #6f42c1; }
+        .card-pill-exp     .card-pill-tag { background: #e74c3c; }
+        .card-pill-quick   .card-pill-tag { background: #d4a017; }
+        .card-pill-large   .card-pill-tag { background: #2c3e50; }
+        .card-pill-hold    .card-pill-tag { background: #6c757d; }
+        .card-pill-trade   .card-pill-tag { background: #c2410c; }
+        .card-pill-vip     .card-pill-tag { background: #6f42c1; }
+        .card-pill-nolarge .card-pill-tag { background: #5a6268; }
+        .card-pill-lighting .card-pill-tag { background: #4a5568; }
+        .card-pill-hardware .card-pill-tag { background: #2d3748; }
         .oldest-large { font-weight: 600; opacity: 1; }
         .color-table { width: 100%; border-collapse: collapse; margin: 0;
                        table-layout: fixed; }
@@ -300,12 +303,10 @@
                       border-bottom: 2px solid #dee2e6; padding-bottom: 0;
                       align-items: flex-end; justify-content: space-between; }
         .tab-strip-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
-        .tab-strip-tags { display: flex; gap: 6px; flex-wrap: wrap;
-                           align-items: center; padding-bottom: 4px; }
-        .tab-strip-tags .filter-label { font-size: 11px; color: #666;
-                                          text-transform: uppercase;
-                                          letter-spacing: 0.05em;
-                                          font-weight: 600; margin-right: 2px; }
+        .filter-pills { display: flex; gap: 4px; flex-wrap: wrap;
+                         align-items: center; }
+        .filter-pills .filter-divider { width: 1px; height: 18px;
+                                          background: #dee2e6; margin: 0 4px; }
         .tag-filter { border: 1px solid transparent; cursor: pointer;
                        opacity: 0.55; transition: opacity 0.15s;
                        padding: 2px; background: transparent; }
@@ -313,9 +314,9 @@
         .tag-filter.active { opacity: 1; box-shadow: 0 0 0 2px #2c3e50;
                               border-radius: 4px; }
         .tag-filter .card-pill-tag { font-size: 11px; padding: 3px 8px; }
-        .search-bar { display: flex; gap: 6px; margin: 12px 0 0;
-                       align-items: center; }
-        .order-search-input { flex: 1; max-width: 320px; padding: 7px 12px;
+        .search-bar { display: flex; gap: 8px; margin: 12px 0 0;
+                       align-items: center; flex-wrap: wrap; }
+        .order-search-input { flex: 0 1 320px; min-width: 200px; padding: 7px 12px;
                                 font-size: 13px; border: 1px solid #ced4da;
                                 border-radius: 4px; font-family: inherit; }
         .order-search-input:focus { outline: 2px solid #2c3e50;
@@ -391,7 +392,7 @@
         <div class="kpi-divider"></div>
         <div class="kpi-bottom-row">
             <div>
-                <div class="kpi-value kpi-date">May 07, 2026 at 04:54 PM</div>
+                <div class="kpi-value kpi-date">May 07, 2026 at 04:57 PM</div>
                 <div class="kpi-label">Last Update</div>
             </div>
             <button class="schedule-info-toggle" onclick="toggleScheduleInfo()"
@@ -416,8 +417,30 @@
 
 <div class="tab-strip">
     <div class="tab-strip-tabs"><button class="tab-btn active" data-tab="overall" onclick="setTab('overall', this)">Overall <span class="tab-count">946</span></button><button class="tab-btn" data-tab="color" onclick="setTab('color', this)">Color <span class="tab-count">942</span></button><button class="tab-btn" data-tab="brass" onclick="setTab('brass', this)">Brass <span class="tab-count">1</span></button><button class="tab-btn" data-tab="nickel" onclick="setTab('nickel', this)">Nickel <span class="tab-count">2</span></button><button class="tab-btn" data-tab="black" onclick="setTab('black', this)">Black <span class="tab-count">1</span></button><button class="tab-btn" data-tab="accessories" onclick="setTab('accessories', this)">Accessories <span class="tab-count">45</span></button></div>
-    <div class="tab-strip-tags">
-        <span class="filter-label">Filter:</span>
+</div>
+
+<div class="search-bar">
+    <input type="text" id="order-search" class="order-search-input"
+           placeholder="Search by order # (e.g. 35472)..."
+           oninput="applyOrderSearch()" />
+    <button class="search-clear" onclick="clearOrderSearch()" title="Clear search">&times;</button>
+    <div class="filter-pills">
+        <button class="tag-filter card-pill card-pill-nolarge" data-tag="no-large"
+                onclick="setTagFilter('no-large', this)"
+                title="Hide all Large Orders. Click again to clear.">
+            <span class="card-pill-tag">NO LARGE</span>
+        </button>
+        <button class="tag-filter card-pill card-pill-lighting" data-tag="lighting"
+                onclick="setTagFilter('lighting', this)"
+                title="Show only Lighting items. Click again to clear.">
+            <span class="card-pill-tag">LIGHTING</span>
+        </button>
+        <button class="tag-filter card-pill card-pill-hardware" data-tag="hardware"
+                onclick="setTagFilter('hardware', this)"
+                title="Show only Hardware items. Click again to clear.">
+            <span class="card-pill-tag">HARDWARE</span>
+        </button>
+        <span class="filter-divider"></span>
         <button class="tag-filter card-pill card-pill-exp" data-tag="exp"
                 onclick="setTagFilter('exp', this)"
                 title="Show only orders tagged Expedite. Click again to clear.">
@@ -449,13 +472,6 @@
             <span class="card-pill-tag">VIP</span>
         </button>
     </div>
-</div>
-
-<div class="search-bar">
-    <input type="text" id="order-search" class="order-search-input"
-           placeholder="Search by order # (e.g. 35472)..."
-           oninput="applyOrderSearch()" />
-    <button class="search-clear" onclick="clearOrderSearch()" title="Clear search">&times;</button>
 </div>
 
 <div class="tab-pane" data-tab="overall"><div class="overall-grid"><div class="slice-card slice-clickable" data-slice="Color" onclick="jumpToTab('color')" role="button" tabindex="0" title="Click to jump to the Color tab" style="border-top:3px solid #FF9912;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Color</div><div class="slice-items">942</div><div class="slice-sub">844 lighting &middot; 98 hardware</div><div class="slice-meta">14 groups &middot; 145 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-exp"><span class="card-pill-tag">EXP</span><span class="card-pill-num">3</span></div><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">2</span></div><div class="card-pill card-pill-large"><span class="card-pill-tag">LARGE</span><span class="card-pill-num">1</span></div><div class="card-pill card-pill-hold"><span class="card-pill-tag">HOLD</span><span class="card-pill-num">1</span></div><div class="card-pill card-pill-trade"><span class="card-pill-tag">TRADE</span><span class="card-pill-num">71</span></div><div class="card-pill card-pill-vip"><span class="card-pill-tag">VIP</span><span class="card-pill-num">6</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Brass" onclick="jumpToTab('brass')" role="button" tabindex="0" title="Click to jump to the Brass tab" style="border-top:3px solid #b8860b;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Brass</div><div class="slice-items">1</div><div class="slice-sub">1 lighting</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Nickel" onclick="jumpToTab('nickel')" role="button" tabindex="0" title="Click to jump to the Nickel tab" style="border-top:3px solid #9CA3AF;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Nickel</div><div class="slice-items">2</div><div class="slice-sub">2 hardware</div><div class="slice-meta">1 groups &middot; 2 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">2</span></div><div class="card-pill card-pill-trade"><span class="card-pill-tag">TRADE</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Black" onclick="jumpToTab('black')" role="button" tabindex="0" title="Click to jump to the Black tab" style="border-top:3px solid #2c3e50;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Black</div><div class="slice-items">1</div><div class="slice-sub">1 hardware</div><div class="slice-meta">1 groups &middot; 1 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-quick"><span class="card-pill-tag">QUICK</span><span class="card-pill-num">1</span></div></div></div></div><div class="slice-card slice-clickable" data-slice="Accessories" onclick="jumpToTab('accessories')" role="button" tabindex="0" title="Click to jump to the Accessories tab" style="border-top:3px solid #6B7280;"><div class="slice-card-body"><div class="slice-card-info"><div class="slice-label">Accessories</div><div class="slice-items">45</div><div class="slice-sub">45 accessories</div><div class="slice-meta">9 groups &middot; 10 orders</div></div><div class="card-pills slice-pills"><div class="card-pill card-pill-large"><span class="card-pill-tag">LARGE</span><span class="card-pill-num">1</span></div></div></div></div></div><h3 class="section-title">Quick Build</h3><div class="color-grid"><div class="color-column" data-color="Brass"
@@ -2537,7 +2553,13 @@
         const sameClicked = (tagFilter === tag);
         tagFilter = sameClicked ? 'none' : tag;
         // Map to underlying filter state for compatibility with existing code
-        largeFilter = (tagFilter === 'large') ? 'only' : 'all';
+        if (tagFilter === 'large') {
+            largeFilter = 'only';
+        } else if (tagFilter === 'no-large') {
+            largeFilter = 'without';
+        } else {
+            largeFilter = 'all';
+        }
         quickFilter = (tagFilter === 'quick') ? 'only' : 'all';
         document.querySelectorAll('.tag-filter').forEach(b => b.classList.remove('active'));
         if (tagFilter !== 'none' && btn) btn.classList.add('active');
@@ -2629,6 +2651,10 @@
                 let quickGate = true;
                 if (quickFilter === 'only' && !isQuick) quickGate = false;
                 if (quickFilter === 'without' && isQuick) quickGate = false;
+
+                // Category gate (LIGHTING / HARDWARE tag toggles)
+                if (tagFilter === 'lighting' && row.dataset.cat !== 'Lighting') quickGate = false;
+                if (tagFilter === 'hardware' && row.dataset.cat !== 'Hardware') quickGate = false;
 
                 // Helper: does an order-detail pass the current tagFilter?
                 const detPasses = (det) => {
@@ -2817,6 +2843,8 @@
                 const isQuick = row.dataset.quick === '1';
                 if (quickFilter === 'only' && !isQuick) return;
                 if (quickFilter === 'without' && isQuick) return;
+                if (tagFilter === 'lighting' && row.dataset.cat !== 'Lighting') return;
+                if (tagFilter === 'hardware' && row.dataset.cat !== 'Hardware') return;
                 const orders = JSON.parse(row.dataset.orders || '[]');
                 let qty = 0;
                 for (const o of orders) {
@@ -2840,6 +2868,8 @@
                 const isQuick = row.dataset.quick === '1';
                 if (quickFilter === 'only' && !isQuick) return;
                 if (quickFilter === 'without' && isQuick) return;
+                if (tagFilter === 'lighting' && row.dataset.cat !== 'Lighting') return;
+                if (tagFilter === 'hardware' && row.dataset.cat !== 'Hardware') return;
                 const rid = row.dataset.rid;
                 if (!rid) return;
                 col.querySelectorAll('.order-detail.' + rid).forEach(det => {
