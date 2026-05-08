@@ -37,30 +37,34 @@ body {
 .app-shell {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;       /* sidebar stretches to match card height */
   gap: 0;
   min-height: 100vh;
   padding: 24px 24px 48px;
   width: 100%;
 }
 
-/* ─── Side nav ─── Sticky vertical sidebar attached to the left edge of
-   the work card. Brand mark + section title on top, tabs underneath. */
+/* ─── Side nav ─── The OUTER element is the stretched visual column —
+   carries the background, border, and rounded radius that visually meets
+   the card. It always grows to match the card's full height so the bottom
+   edges line up. Inside it, .side-nav-inner is what's sticky — the brand +
+   tabs follow you as you scroll, but the visual rail stays edge-to-edge. */
 .side-nav {
-  position: sticky;
-  top: 24px;
-  align-self: flex-start;
   width: 200px;
   flex-shrink: 0;
   background: white;
   border: 1px solid var(--border);
   border-right: none;
   border-radius: var(--radius) 0 0 var(--radius);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+}
+.side-nav-inner {
+  position: sticky;
+  top: 24px;
   padding: 22px 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
 }
 .side-nav-brand {
   display: flex;
@@ -152,18 +156,21 @@ body {
 @media (max-width: 900px) {
   .app-shell {
     flex-direction: column;
+    align-items: stretch;
     padding: 16px 16px 32px;
   }
   .side-nav {
-    position: relative;
-    top: auto;
     width: 100%;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 14px;
     border: 1px solid var(--border);
     border-radius: var(--radius) var(--radius) 0 0;
     box-shadow: none;
+  }
+  .side-nav-inner {
+    position: relative;
+    top: auto;
+    padding: 12px 14px;
+    flex-direction: column;
+    gap: 8px;
   }
   .side-nav-brand { padding: 0; }
   .side-nav-brand .brandmark { max-width: 120px; }
