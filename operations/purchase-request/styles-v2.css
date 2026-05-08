@@ -1,0 +1,363 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   styles-v2.css — Brand-leaning override layer.
+
+   Loaded AFTER styles.css. Only overrides the look — does not change layout
+   primitives, JS hooks, or CSS class names. So v1 and v2 share all logic
+   and only differ in typography + warmth.
+
+   Rules of thumb for v2:
+   - Poppins is used at ≥14px (page lead, sidebar section, card titles, buttons)
+   - Inter remains for ≤13px (data tables, status pills, qty inputs, metadata)
+   - Warm cream surfaces in place of stark white where it doesn't hurt density
+   - Warm taupe borders in place of cool gray
+   - Brand orange more present (active tab tint, eyebrow color, loading)
+   - Slightly softer corners + a touch more breathing room
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Warm surfaces — replace v1's cool grays */
+  --bg:          #F7F4EE;      /* page background — warm cream */
+  --card-warm:   #FDFBF6;      /* card background — softer than pure white */
+  --border:      #E8E2DA;      /* warm taupe instead of cool gray */
+  --border-soft: #F0EBE2;      /* even softer divider */
+  --text:        #3F3D3A;      /* slightly warmer charcoal */
+  --ink:         #232120;      /* darkest, used for emphasis only */
+  --muted:       #8A847C;      /* warm muted — plays with taupe */
+
+  /* Brand orange unchanged — it's the throughline */
+  --accent:      #FF9912;
+  --accent-dark: #D97706;
+  --accent-soft: #FCD9A6;      /* tint behind active states */
+  --accent-tint: #FFF7EB;      /* warm cream-orange surface */
+
+  /* Larger radius reads more crafted */
+  --radius:      10px;
+}
+
+/* ─── Type system ──────────────────────────────────────────────────────── */
+/* Poppins for headlines, Inter for everything else. Body stays Inter so
+   tables/forms remain dense and legible. Headers get the brand voice. */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Helper class for any text that should pick up the brand display face. */
+.brand-type,
+h1, h2, h3,
+.page-lead,
+.side-nav-eyebrow,
+.cart-heading,
+.success-heading,
+.po-num,
+.vendor-bubble-name,
+.vendor-digest-title,
+.section-title {
+  font-family: 'Poppins', 'Inter', -apple-system, sans-serif;
+  letter-spacing: -0.005em;
+}
+
+/* Buttons get the brand face too — they're the "moments of intent" — but
+   small UI buttons (.action-btn, .link-btn, the refresh icon) stay Inter
+   so they don't loosen up density. */
+.primary,
+.secondary {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+/* ─── Sidebar — warm tint + bigger brand title ─────────────────────────── */
+.side-nav {
+  background: var(--card-warm);
+  border-color: var(--border);
+  border-right: none;
+  box-shadow: 0 1px 3px rgba(60, 50, 30, 0.04), 0 4px 16px rgba(60, 50, 30, 0.06);
+}
+.side-nav-eyebrow {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 4px 0 8px;
+}
+.side-nav-tab {
+  font-family: 'Inter', sans-serif;          /* dense list — Inter wins */
+  color: var(--muted);
+}
+.side-nav-tab:hover {
+  background: var(--accent-tint);
+  color: var(--text);
+}
+.side-nav-tab.is-active,
+.side-nav-tab[aria-current="page"] {
+  background: var(--accent-tint);
+  color: var(--ink);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.side-nav-tab.is-active .tab-count,
+.side-nav-tab[aria-current="page"] .tab-count {
+  background: white;
+  color: var(--accent-dark);
+  border-color: var(--accent-soft);
+}
+
+/* ─── Card — softer warm surface ───────────────────────────────────────── */
+.card {
+  background: var(--card-warm);
+  border-color: var(--border);
+  box-shadow: 0 1px 3px rgba(60, 50, 30, 0.04), 0 4px 20px rgba(60, 50, 30, 0.06);
+}
+
+/* ─── Page intro — Poppins headline, more presence ─────────────────────── */
+.page-intro {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.page-eyebrow {
+  font-family: 'Inter', sans-serif;          /* tag is small — keep Inter */
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent-dark);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.page-lead {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  max-width: 60ch;
+}
+.page-lead strong { font-weight: 600; color: var(--ink); }
+@media (max-width: 640px) {
+  .page-lead { font-size: 22px; }
+}
+
+/* ─── h1 inside cards (less common — most pages use page-lead now) ────── */
+h1 {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  color: var(--ink);
+}
+
+/* ─── Buttons ──────────────────────────────────────────────────────────── */
+.primary {
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+.primary:hover:not(:disabled) {
+  box-shadow: 0 2px 0 rgba(0,0,0,0.06), 0 4px 8px rgba(217, 119, 6, 0.18);
+}
+.primary:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+.secondary {
+  border-radius: 8px;
+  padding: 9px 20px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  background: white;
+}
+
+/* ─── Inputs ───────────────────────────────────────────────────────────── */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.14);
+  outline: none;
+}
+
+/* ─── Cart heading + section titles get Poppins ────────────────────────── */
+h2.cart-heading,
+.success-heading,
+.section-title,
+.vendor-digest-title {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+/* ─── Status & receive — small UI stays Inter, kept explicitly ─────────── */
+/* These selectors are listed so the v2 cascade doesn't accidentally pick
+   up Poppins via a parent rule — keeps tabular numerals and dense data
+   on Inter where they belong. */
+.detail-label,
+.detail-value,
+.tracking-label,
+.tracking-value,
+.tracking-carrier,
+.card-status-badge,
+.status-pill,
+.pill,
+.pill-count,
+.tab-count,
+.stage-label,
+.stage-detail,
+.meta-label,
+.qty-ordered,
+.item-qty-received,
+.po-when,
+.po-vendor,
+.po-prefix,
+.vendor-bubble-meta,
+.vendor-bubble-last,
+.vendor-bubble-count,
+.notes-block,
+.card-eyebrow,
+.order-num,
+.requestor-name,
+.empty-state p,
+.empty-state h2,
+.refresh-btn,
+.action-btn,
+.link-btn,
+.loading-message,
+.tracking-cta {
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  letter-spacing: 0;
+}
+
+/* ─── Vendor digest — warmer to match the new palette ──────────────────── */
+.vendor-digest {
+  background: linear-gradient(180deg, var(--accent-tint), var(--card-warm));
+  border-color: var(--accent-soft);
+}
+.vendor-bubble {
+  background: white;
+  border-color: var(--border);
+}
+.vendor-bubble:hover {
+  border-color: var(--accent);
+  box-shadow: 0 1px 4px rgba(217, 119, 6, 0.18);
+}
+.vendor-bubble.active {
+  background: var(--accent-tint);
+  border-color: var(--accent-dark);
+}
+.vendor-bubble-name {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* ─── PO header / receive page ─────────────────────────────────────────── */
+.po-header {
+  background: linear-gradient(180deg, var(--accent-tint), var(--card-warm));
+}
+.po-num {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* ─── Status badges — keep their semantic colors but soften the borders ─ */
+.card-status-badge,
+.status-pill {
+  border: 1px solid transparent;
+}
+
+/* ─── Loading bar — keep orange gradient, just more saturated ──────────── */
+.loading-fill {
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+}
+
+/* ─── Search input on Status page — warm focus state ──────────────────── */
+.status-search-input {
+  background: white;
+  border-color: var(--border);
+}
+.status-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.14);
+}
+
+/* ─── Filter pill (Status page) — active uses ink not muted ────────────── */
+.pill.active {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* ─── How-to disclosure — warmer surface ───────────────────────────────── */
+.how-to-tips { background: var(--accent-tint); }
+.how-to-callout {
+  background: var(--accent-tint);
+  border-left-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+/* ─── Process rail — keep stage labels on Inter (small, dense) ─────────── */
+.stage-label,
+.stage-detail {
+  font-family: 'Inter', sans-serif;
+}
+
+/* ─── Cart-bottom-link — subtle warmth on the View in Notion anchor ────── */
+.card-bottom-link {
+  border-top-color: var(--border-soft);
+}
+
+/* ─── Top-of-card emphasis: a tiny brand mark trick. The page-eyebrow gets
+       a leading dot in accent color so it reads as "this section belongs to
+       Inventory" without adding a separate icon. */
+.page-eyebrow::before {
+  content: "● ";
+  color: var(--accent);
+  font-size: 9px;
+  vertical-align: 1px;
+}
+
+/* ─── v1 ↔ v2 version toggle in the sidebar ────────────────────────────── */
+.side-nav-toggle {
+  margin: 12px 22px 0;
+  padding: 10px 12px;
+  background: white;
+  border: 1px dashed var(--accent-soft);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+.side-nav-toggle-current {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  font-size: 9px;
+}
+.side-nav-toggle-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.side-nav-toggle-link:hover { color: var(--accent-dark); }
+@media (max-width: 900px) {
+  .side-nav-toggle {
+    margin: 6px 0 0;
+    padding: 6px 10px;
+  }
+}
