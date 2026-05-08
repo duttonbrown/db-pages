@@ -34,103 +34,71 @@ body {
   min-height: 100vh;
 }
 
-/* Page shell — left sidebar nav + main column. Sidebar sticky at the
-   viewport top on desktop, collapses to a horizontal bar on narrow screens. */
+/* App shell — sidebar + work card, BOTH centered together so the sidebar
+   hugs the work area (not the viewport edge). On wide screens this looks
+   like two panels in the middle of the page; on narrow screens the sidebar
+   collapses to a horizontal bar above. Mirrors the production print-queue. */
 .app-shell {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  min-height: 100vh;
-}
-.app-main {
   display: flex;
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+  min-height: 100vh;
   padding: 24px 24px 48px;
+  width: 100%;
 }
 
-/* ─── Side nav ─── Brand mark on top, vertical tab list below. Class names
-   kept as `.top-nav-*` so existing markup in index/manage/receive/status.html
-   doesn't have to change — they just render as a sidebar now. */
-.top-nav {
+/* ─── Side nav ─── Sticky vertical sidebar attached to the left edge of
+   the work card. Brand mark + section title on top, tabs underneath. */
+.side-nav {
   position: sticky;
-  top: 0;
-  align-self: start;
-  height: 100vh;
-  z-index: 50;
+  top: 24px;
+  align-self: flex-start;
+  width: 200px;
+  flex-shrink: 0;
   background: white;
-  border-right: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  padding: 22px 0;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding: 24px 0;
-  overflow-y: auto;
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
 }
-.top-nav.is-scrolled { box-shadow: none; }   /* legacy; not used in sidebar */
-.top-nav-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 0;
-}
-.top-nav-row {
-  display: flex;
-  align-items: center;
-  padding: 0 22px;
-}
-.top-nav-brand {
+.side-nav-brand {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 0 22px;
   text-decoration: none;
   color: var(--text);
-  width: 100%;
 }
-.top-nav-brand .brandmark {
+.side-nav-brand .brandmark {
   width: 100%;
   max-width: 156px;
   height: auto;
   display: block;
 }
-.top-nav-wordmark {
-  font-size: 10px;
+/* Section title — was a tiny all-caps eyebrow, now a real readable label.
+   Sentence case, larger, no aggressive letter-spacing. */
+.side-nav-eyebrow {
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
+  letter-spacing: -0.005em;
+  color: var(--ink);
   padding: 0 22px;
-  margin: -4px 0 4px;
+  margin: 2px 0 6px;
 }
-.top-nav-spacer { display: none; }
-.top-nav-external {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--muted);
-  text-decoration: none;
-  padding: 6px 22px;
-  border-top: 1px solid var(--border);
-  margin-top: auto;
-}
-.top-nav-external:hover { color: var(--accent-dark); }
-.top-nav-external::after {
-  content: "↗";
-  font-size: 11px;
-  opacity: 0.7;
-  margin-left: 2px;
-}
-
-/* Vertical tab list */
-.top-nav-tabs {
+.side-nav-tabs {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
 }
-.top-nav-tabs li { margin: 0; }
-.top-nav-tab {
+.side-nav-tabs li { margin: 0; }
+.side-nav-tab {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -141,55 +109,100 @@ body {
   color: var(--muted);
   text-decoration: none;
   letter-spacing: 0.01em;
+  position: relative;
   transition: color 0.15s ease, background 0.15s ease;
   white-space: nowrap;
-  border-left: 3px solid transparent;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
   text-align: left;
+  width: 100%;
+  border-left: 3px solid transparent;
+  padding-left: 19px;
 }
-.top-nav-tab:hover { color: var(--text); background: var(--bg); }
-.top-nav-tab[aria-current="page"] {
+.side-nav-tab:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+.side-nav-tab.is-active,
+.side-nav-tab[aria-current="page"] {
   color: var(--ink);
   font-weight: 600;
   background: var(--bg);
   border-left-color: var(--accent);
 }
+.side-nav-tab .tab-count {
+  display: inline-block;
+  min-width: 18px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--border);
+}
+.side-nav-tab.is-active .tab-count,
+.side-nav-tab[aria-current="page"] .tab-count {
+  background: white;
+  color: var(--accent-dark);
+  border-color: #FCD9A6;
+}
 
-/* Tablet/mobile: collapse to a horizontal top bar that scrolls if needed. */
-@media (max-width: 840px) {
-  .app-shell { grid-template-columns: 1fr; }
-  .top-nav {
+/* Tablet/mobile: sidebar collapses to a horizontal bar above the card */
+@media (max-width: 900px) {
+  .app-shell {
+    flex-direction: column;
+    padding: 16px 16px 32px;
+  }
+  .side-nav {
     position: relative;
     top: auto;
-    height: auto;
+    width: 100%;
     flex-direction: column;
     gap: 8px;
-    padding: 12px 16px 8px;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius) var(--radius) 0 0;
+    box-shadow: none;
   }
-  .top-nav-row { padding: 0; }
-  .top-nav-brand .brandmark { max-width: 120px; }
-  .top-nav-wordmark { display: none; }
-  .top-nav-tabs {
+  .side-nav-brand { padding: 0; }
+  .side-nav-brand .brandmark { max-width: 120px; }
+  .side-nav-eyebrow { padding: 0; margin: 0; }
+  .side-nav-tabs {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2px;
   }
-  .top-nav-tab {
+  .side-nav-tab {
     padding: 6px 12px;
     border-left: none;
+    width: auto;
     border-radius: 999px;
   }
-  .top-nav-tab[aria-current="page"] {
+  .side-nav-tab.is-active,
+  .side-nav-tab[aria-current="page"] {
     border-left: none;
     background: var(--ink);
     color: white;
   }
-  .top-nav-external {
-    border-top: none;
-    margin-top: 0;
-    padding: 4px 0;
+  .side-nav-tab.is-active .tab-count,
+  .side-nav-tab[aria-current="page"] .tab-count {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border-color: transparent;
   }
+}
+
+.app-main {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+  max-width: 1080px;
 }
 
 /* Bottom anchor — replaces the old footer nav. Just a quiet "View in Notion"
@@ -214,41 +227,51 @@ body {
    Keeps content title-of-record on the tab; this shows what the page is for
    in a single confident sentence. */
 .page-intro {
-  margin-bottom: 28px;
+  margin-bottom: 18px;
   text-align: left;
 }
 .page-eyebrow {
   display: inline-block;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--muted);
-  margin: 0 0 8px;
+  margin: 0 0 4px;
 }
 .page-lead {
   margin: 0;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.45;
-  color: var(--text);
-  letter-spacing: -0.005em;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  letter-spacing: -0.01em;
   max-width: 56ch;
 }
-.page-lead strong { font-weight: 500; color: var(--text); }
+.page-lead strong { font-weight: 600; color: var(--ink); }
 @media (max-width: 640px) {
-  .page-lead { font-size: 16px; }
+  .page-lead { font-size: 18px; }
 }
 
 .card {
   background: var(--card);
-  border-radius: var(--radius);
+  /* Square off the side that meets the sidebar so they read as one panel */
+  border-radius: 0 var(--radius) var(--radius) 0;
   padding: 32px;
   width: 100%;
-  max-width: 720px;
+  max-width: 880px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+  border: 1px solid var(--border);
+  border-left: none;
 }
-.card-wide { max-width: 960px; }
+.card-wide { max-width: 1080px; }
+
+@media (max-width: 900px) {
+  .card {
+    border-radius: 0 0 var(--radius) var(--radius);
+    border: 1px solid var(--border);
+    border-top: none;
+  }
+}
 
 header { margin-bottom: 24px; }
 
