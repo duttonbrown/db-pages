@@ -34,72 +34,73 @@ body {
   min-height: 100vh;
 }
 
-/* Page shell — wraps the top nav + main column. Body no longer flex-centers
-   so the sticky nav can span full width while the main column stays centered. */
+/* Page shell — left sidebar nav + main column. Sidebar sticky at the
+   viewport top on desktop, collapses to a horizontal bar on narrow screens. */
 .app-shell {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
   min-height: 100vh;
 }
 .app-main {
-  flex: 1;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 24px 16px 48px;
+  padding: 24px 24px 48px;
 }
 
-/* ─── Top nav ─── Sticky header that spans the page. Brand mark + wordmark on
-   the left, four section tabs on the right. Below: a thin divider that the
-   active-tab orange underline rides on, sliding between tabs on hover. */
+/* ─── Side nav ─── Brand mark on top, vertical tab list below. Class names
+   kept as `.top-nav-*` so existing markup in index/manage/receive/status.html
+   doesn't have to change — they just render as a sidebar now. */
 .top-nav {
   position: sticky;
   top: 0;
+  align-self: start;
+  height: 100vh;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: saturate(140%) blur(8px);
-  -webkit-backdrop-filter: saturate(140%) blur(8px);
-  border-bottom: 1px solid var(--border);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.top-nav.is-scrolled {
-  box-shadow: 0 6px 24px -16px rgba(0, 0, 0, 0.18), 0 1px 0 rgba(0,0,0,0.02);
-  border-bottom-color: transparent;
-}
-.top-nav-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 14px 24px 0;
+  background: white;
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 18px;
+  padding: 24px 0;
+  overflow-y: auto;
+}
+.top-nav.is-scrolled { box-shadow: none; }   /* legacy; not used in sidebar */
+.top-nav-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 0;
 }
 .top-nav-row {
   display: flex;
   align-items: center;
-  gap: 18px;
+  padding: 0 22px;
 }
 .top-nav-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
   color: var(--text);
-  flex-shrink: 0;
+  width: 100%;
 }
 .top-nav-brand .brandmark {
-  height: 26px;
-  width: auto;
+  width: 100%;
+  max-width: 156px;
+  height: auto;
+  display: block;
 }
 .top-nav-wordmark {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text);
-  padding-top: 1px;
+  color: var(--muted);
+  padding: 0 22px;
+  margin: -4px 0 4px;
 }
-.top-nav-spacer { flex: 1; }
+.top-nav-spacer { display: none; }
 .top-nav-external {
   display: inline-flex;
   align-items: center;
@@ -108,68 +109,87 @@ body {
   font-weight: 400;
   color: var(--muted);
   text-decoration: none;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+  padding: 6px 22px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
 }
 .top-nav-external:hover { color: var(--accent-dark); }
 .top-nav-external::after {
   content: "↗";
   font-size: 11px;
   opacity: 0.7;
+  margin-left: 2px;
 }
 
-/* Tab strip — uses a relative positioned ul so the active underline can be
-   absolutely positioned and animated. */
+/* Vertical tab list */
 .top-nav-tabs {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 0;
-  position: relative;
-  border-bottom: 1px solid transparent; /* we draw our own line via .top-nav border-bottom */
+  flex-direction: column;
 }
 .top-nav-tabs li { margin: 0; }
 .top-nav-tab {
-  display: inline-block;
-  padding: 10px 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 22px 10px 19px;
   font-size: 13px;
   font-weight: 400;
   color: var(--muted);
   text-decoration: none;
   letter-spacing: 0.01em;
-  position: relative;
-  transition: color 0.15s ease;
+  transition: color 0.15s ease, background 0.15s ease;
   white-space: nowrap;
+  border-left: 3px solid transparent;
+  text-align: left;
 }
-.top-nav-tab:hover { color: var(--text); }
+.top-nav-tab:hover { color: var(--text); background: var(--bg); }
 .top-nav-tab[aria-current="page"] {
-  color: var(--text);
+  color: var(--ink);
   font-weight: 600;
-}
-/* Active underline — centered under the tab text, not edge-to-edge across
-   the padded box (which made the first tab look off-center). 2px bar in
-   accent color. No animation — switching tabs is navigation, not flourish. */
-.top-nav-tab[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -1px;
-  width: calc(100% - 36px);
-  max-width: 100px;
-  height: 2px;
-  background: var(--accent);
-  border-radius: 1px;
+  background: var(--bg);
+  border-left-color: var(--accent);
 }
 
-@media (max-width: 640px) {
-  .top-nav-inner { padding: 12px 16px 0; }
-  .top-nav-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 0; }
-  .top-nav-tabs::-webkit-scrollbar { display: none; }
-  .top-nav-tab { padding: 10px 14px 12px; font-size: 12px; }
-  .top-nav-external { display: none; }
+/* Tablet/mobile: collapse to a horizontal top bar that scrolls if needed. */
+@media (max-width: 840px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .top-nav {
+    position: relative;
+    top: auto;
+    height: auto;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px 8px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .top-nav-row { padding: 0; }
+  .top-nav-brand .brandmark { max-width: 120px; }
   .top-nav-wordmark { display: none; }
+  .top-nav-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .top-nav-tab {
+    padding: 6px 12px;
+    border-left: none;
+    border-radius: 999px;
+  }
+  .top-nav-tab[aria-current="page"] {
+    border-left: none;
+    background: var(--ink);
+    color: white;
+  }
+  .top-nav-external {
+    border-top: none;
+    margin-top: 0;
+    padding: 4px 0;
+  }
 }
 
 /* Bottom anchor — replaces the old footer nav. Just a quiet "View in Notion"
@@ -195,7 +215,7 @@ body {
    in a single confident sentence. */
 .page-intro {
   margin-bottom: 28px;
-  text-align: center;
+  text-align: left;
 }
 .page-eyebrow {
   display: inline-block;
@@ -207,7 +227,7 @@ body {
   margin: 0 0 8px;
 }
 .page-lead {
-  margin: 0 auto;             /* horizontally centered when narrower than the card */
+  margin: 0;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.45;

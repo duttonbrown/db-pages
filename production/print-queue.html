@@ -36,106 +36,93 @@
     min-height: 100vh;
   }
 
-  /* App shell — mirrors purchase-request/index.html layout */
+  /* App shell — left sidebar nav + main content. Sidebar sticky on desktop,
+     collapses to a horizontal bar on narrow screens. */
   .app-shell {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
     min-height: 100vh;
   }
 
-  /* Sticky top nav with brand mark + tab strip, copied from purchase-request */
-  .top-nav {
+  .side-nav {
     position: sticky;
     top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: saturate(140%) blur(8px);
-    -webkit-backdrop-filter: saturate(140%) blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-  .top-nav-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 14px 24px 0;
+    align-self: start;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid var(--border);
+    padding: 24px 0 24px 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  .top-nav-row {
-    display: flex;
-    align-items: center;
     gap: 18px;
+    overflow-y: auto;
   }
-  .top-nav-brand {
+  .side-nav-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    padding: 0 22px;
     text-decoration: none;
     color: var(--text);
-    flex-shrink: 0;
   }
-  .top-nav-brand .brandmark {
-    height: 26px;
-    width: auto;
+  .side-nav-brand .brandmark {
+    width: 100%;
+    max-width: 156px;
+    height: auto;
     display: block;
   }
-  .top-nav-wordmark {
-    font-size: 12px;
+  .side-nav-eyebrow {
+    font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--text);
-    padding-top: 1px;
+    color: var(--muted);
+    padding: 0 22px;
+    margin: -4px 0 4px;
   }
-  .top-nav-tabs {
+  .side-nav-tabs {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 0;
-    position: relative;
+    flex-direction: column;
   }
-  .top-nav-tabs li { margin: 0; }
-  .top-nav-tab {
-    display: inline-flex;
+  .side-nav-tabs li { margin: 0; }
+  .side-nav-tab {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
-    padding: 10px 18px 12px;
+    padding: 10px 22px 10px 19px;       /* extra room on the right of the dot */
     font-size: 13px;
     font-weight: 400;
     color: var(--muted);
     text-decoration: none;
     letter-spacing: 0.01em;
     position: relative;
-    transition: color 0.15s ease;
+    transition: color 0.15s ease, background 0.15s ease;
     white-space: nowrap;
     background: transparent;
     border: none;
     font-family: inherit;
     cursor: pointer;
+    text-align: left;
+    width: 100%;
+    border-left: 3px solid transparent;
+    padding-left: 19px;
   }
-  .top-nav-tab:hover { color: var(--text); }
-  .top-nav-tab.is-active,
-  .top-nav-tab[aria-current="page"] {
+  .side-nav-tab:hover {
     color: var(--text);
+    background: var(--bg);
+  }
+  .side-nav-tab.is-active,
+  .side-nav-tab[aria-current="page"] {
+    color: var(--ink);
     font-weight: 600;
+    background: var(--bg);
+    border-left-color: var(--accent);
   }
-  /* Underline sits centered under the tab text, not edge-to-edge across the
-     padded box (which made the first/last tabs look off-center). */
-  .top-nav-tab.is-active::after,
-  .top-nav-tab[aria-current="page"]::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -1px;
-    width: calc(100% - 36px);
-    max-width: 100px;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 1px;
-  }
-  .top-nav-tab .tab-count {
+  .side-nav-tab .tab-count {
     display: inline-block;
     min-width: 18px;
     text-align: center;
@@ -146,25 +133,65 @@
     background: var(--bg);
     color: var(--muted);
     font-variant-numeric: tabular-nums;
+    border: 1px solid var(--border);
   }
-  .top-nav-tab.is-active .tab-count {
-    background: rgba(255, 153, 18, 0.12);
+  .side-nav-tab.is-active .tab-count,
+  .side-nav-tab[aria-current="page"] .tab-count {
+    background: white;
     color: var(--accent-dark);
+    border-color: #FCD9A6;
   }
-  @media (max-width: 640px) {
-    .top-nav-inner { padding: 12px 16px 0; }
-    .top-nav-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 0; }
-    .top-nav-tabs::-webkit-scrollbar { display: none; }
-    .top-nav-tab { padding: 10px 14px 12px; font-size: 12px; }
-    .top-nav-wordmark { display: none; }
+
+  /* Tablet/mobile: collapse to a horizontal top bar */
+  @media (max-width: 840px) {
+    .app-shell {
+      grid-template-columns: 1fr;
+    }
+    .side-nav {
+      position: relative;
+      top: auto;
+      height: auto;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px 16px 8px;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .side-nav-brand { padding: 0; }
+    .side-nav-brand .brandmark { max-width: 120px; }
+    .side-nav-eyebrow { display: none; }
+    .side-nav-tabs {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+    .side-nav-tab {
+      padding: 6px 12px;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      width: auto;
+      border-radius: 999px;
+    }
+    .side-nav-tab.is-active,
+    .side-nav-tab[aria-current="page"] {
+      border-left: none;
+      border-bottom-color: transparent;
+      background: var(--ink);
+      color: white;
+    }
+    .side-nav-tab.is-active .tab-count,
+    .side-nav-tab[aria-current="page"] .tab-count {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border-color: transparent;
+    }
   }
 
   .app-main {
-    flex: 1;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 24px 16px 48px;
+    padding: 24px 24px 48px;
   }
   .card {
     background: var(--card);
@@ -179,7 +206,7 @@
   /* Page intro — eyebrow + lead, mirrors purchase-request */
   .page-intro {
     margin-bottom: 14px;
-    text-align: center;
+    text-align: left;
   }
   .page-eyebrow {
     display: inline-block;
@@ -191,8 +218,8 @@
     margin: 0 0 4px;
   }
   h1.page-lead {
-    margin: 0 auto;
-    font-size: 20px;
+    margin: 0;
+    font-size: 22px;
     font-weight: 600;
     line-height: 1.25;
     color: var(--ink);
@@ -1129,36 +1156,32 @@
 
 <div class="app-shell">
 
-<nav class="top-nav" aria-label="Production">
-  <div class="top-nav-inner">
-    <div class="top-nav-row">
-      <a class="top-nav-brand" href="print-queue.html">
-        <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
-        <span class="top-nav-wordmark">Production</span>
-      </a>
-    </div>
-    <ul class="top-nav-tabs" role="tablist">
-      <li>
-        <button type="button" class="top-nav-tab" id="tab-order" role="tab" onclick="setTab('order')">
-          Order queue <span class="tab-count" id="cnt-order">—</span>
-        </button>
-      </li>
-      <li>
-        <button type="button" class="top-nav-tab is-active" id="tab-print" role="tab" onclick="setTab('print')">
-          Print queue <span class="tab-count" id="cnt-print">—</span>
-        </button>
-      </li>
-      <li>
-        <button type="button" class="top-nav-tab" id="tab-assembly" role="tab" onclick="setTab('assembly')">
-          Order triage <span class="tab-count" id="cnt-assembly">—</span>
-        </button>
-      </li>
-      <li>
-        <a class="top-nav-tab" href="print-queue-rules.html">Rules</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<aside class="side-nav" aria-label="Production navigation">
+  <a class="side-nav-brand" href="print-queue.html">
+    <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
+  </a>
+  <div class="side-nav-eyebrow">Production</div>
+  <ul class="side-nav-tabs" role="tablist">
+    <li>
+      <button type="button" class="side-nav-tab" id="tab-order" role="tab" onclick="setTab('order')">
+        Order queue <span class="tab-count" id="cnt-order">—</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="side-nav-tab is-active" id="tab-print" role="tab" onclick="setTab('print')">
+        Print queue <span class="tab-count" id="cnt-print">—</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="side-nav-tab" id="tab-assembly" role="tab" onclick="setTab('assembly')">
+        Order triage <span class="tab-count" id="cnt-assembly">—</span>
+      </button>
+    </li>
+    <li>
+      <a class="side-nav-tab" href="print-queue-rules.html">Rules</a>
+    </li>
+  </ul>
+</aside>
 
 <div class="app-main">
 <main class="card card-wide">
@@ -1235,7 +1258,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T19:30:26",
+  "built_at": "2026-05-07T19:38:15",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
