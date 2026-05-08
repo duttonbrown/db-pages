@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Overview — May 08, 2026 at 10:27 AM</title>
+<title>Production Overview — May 08, 2026 at 10:29 AM</title>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         :root {
@@ -495,6 +495,30 @@
         .search-clear { border-radius: 8px; border-color: #E0DDD9; }
         .search-bar { gap: 10px; }
 
+        /* Orders KPI: keep the pill column aligned right of the count, not
+           wrapping below it. The card-pill layout overrides earlier in the
+           cascade made these horizontal — re-stack them. */
+        .kpi-narrow .kpi-top-row {
+            display: flex; align-items: flex-start; gap: 16px;
+            justify-content: space-between;
+        }
+        .kpi-narrow .kpi-top-row .kpi-info { flex: 1; min-width: 0;
+                                               display: flex;
+                                               flex-direction: column;
+                                               justify-content: center; }
+        .kpi-narrow .kpi-top-row .kpi-flags {
+            display: flex !important;
+            flex-direction: column;
+            gap: 3px;
+            align-items: stretch;
+            min-width: 110px;
+            margin-top: 0;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
+        }
+        .kpi-narrow .kpi-top-row .kpi-pill { width: 100%; }
+        .kpi-narrow .kpi-top-row .kpi-pill-tag { flex: 1; }
+
         /* Filter pills — match the per-card pill style (rounded, two-tone,
            Poppins, lower opacity at rest). Override the base internal-tools
            treatment that was making them read like blocky buttons. */
@@ -566,7 +590,7 @@
         <div class="kpi-divider"></div>
         <div class="kpi-bottom-row">
             <div>
-                <div class="kpi-value kpi-date">May 08, 2026 at 10:27 AM</div>
+                <div class="kpi-value kpi-date">May 08, 2026 at 10:29 AM</div>
                 <div class="kpi-label">Last Update</div>
             </div>
             <button class="schedule-info-toggle" onclick="toggleScheduleInfo()"
