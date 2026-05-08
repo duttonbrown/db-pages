@@ -36,20 +36,136 @@
     min-height: 100vh;
   }
 
+  /* App shell — mirrors purchase-request/index.html layout */
+  .app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Sticky top nav with brand mark + tab strip, copied from purchase-request */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .top-nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 14px 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .top-nav-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .top-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+  .top-nav-wordmark {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding-top: 1px;
+  }
+  .top-nav-tabs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0;
+    position: relative;
+  }
+  .top-nav-tabs li { margin: 0; }
+  .top-nav-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px 12px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    position: relative;
+    transition: color 0.15s ease;
+    white-space: nowrap;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .top-nav-tab:first-child { padding-left: 0; }
+  .top-nav-tab:hover { color: var(--text); }
+  .top-nav-tab.is-active,
+  .top-nav-tab[aria-current="page"] {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .top-nav-tab.is-active::after,
+  .top-nav-tab[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .top-nav-tab .tab-count {
+    display: inline-block;
+    min-width: 18px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .top-nav-tab.is-active .tab-count {
+    background: rgba(255, 153, 18, 0.12);
+    color: var(--accent-dark);
+  }
+  @media (max-width: 640px) {
+    .top-nav-inner { padding: 12px 16px 0; }
+    .top-nav-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 0; }
+    .top-nav-tabs::-webkit-scrollbar { display: none; }
+    .top-nav-tab { padding: 10px 14px 12px; font-size: 12px; }
+    .top-nav-wordmark { display: none; }
+  }
+
   .app-main {
+    flex: 1;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 16px 16px 32px;
+    padding: 24px 16px 48px;
   }
   .card {
     background: var(--card);
     border-radius: var(--radius);
-    padding: 20px 28px 24px;
+    padding: 32px;
     width: 100%;
     max-width: 960px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
   }
+  .card-wide { max-width: 1080px; }
 
   /* Page intro — eyebrow + lead, mirrors purchase-request */
   .page-intro {
@@ -799,22 +915,83 @@
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.12);
   }
-  .asm-split-btn, .asm-merge-btn {
+  /* Qty cell layout: input + split controls in a tight row */
+  .asm-qty-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  .asm-split-group {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 0;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    box-shadow: 0 1px 2px rgba(217, 119, 6, 0.18);
+  }
+  .asm-split-btn {
+    appearance: none;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: inherit;
+    line-height: 1;
+    transition: background 0.1s;
+  }
+  .asm-split-btn:hover { background: var(--accent-dark); }
+  .asm-split-btn:disabled {
+    background: var(--bg);
+    color: var(--muted);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .asm-split-into-btn {
+    appearance: none;
+    border: none;
+    border-left: 1px solid rgba(255,255,255,0.35);
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    cursor: pointer;
+    line-height: 1;
+    font-family: inherit;
+    transition: background 0.1s;
+  }
+  .asm-split-into-btn:hover { background: var(--accent-dark); }
+  .asm-split-into-btn:disabled {
+    background: var(--bg);
+    color: var(--muted);
+    border-left-color: var(--border);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .asm-merge-btn {
     appearance: none;
     border: 1px solid var(--border);
     background: white;
     color: var(--muted);
     font-size: 10px;
     font-weight: 600;
-    padding: 3px 8px;
+    padding: 3px 9px;
     border-radius: 999px;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-left: 4px;
     font-family: inherit;
   }
-  .asm-split-btn:hover { border-color: var(--accent); color: var(--accent-dark); }
   .asm-merge-btn:hover { border-color: var(--ink); color: var(--ink); }
   .asm-assembler {
     font-family: inherit;
@@ -892,18 +1069,45 @@
 </head>
 <body>
 
+<div class="app-shell">
+
+<nav class="top-nav" aria-label="Production">
+  <div class="top-nav-inner">
+    <div class="top-nav-row">
+      <a class="top-nav-brand" href="print-queue.html">
+        <span class="top-nav-wordmark">Production</span>
+      </a>
+    </div>
+    <ul class="top-nav-tabs" role="tablist">
+      <li>
+        <button type="button" class="top-nav-tab" id="tab-order" role="tab" onclick="setTab('order')">
+          Order queue <span class="tab-count" id="cnt-order">—</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="top-nav-tab is-active" id="tab-print" role="tab" onclick="setTab('print')">
+          Print queue <span class="tab-count" id="cnt-print">—</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="top-nav-tab" id="tab-assembly" role="tab" onclick="setTab('assembly')">
+          Order triage <span class="tab-count" id="cnt-assembly">—</span>
+        </button>
+      </li>
+      <li>
+        <a class="top-nav-tab" href="print-queue-rules.html">Rules</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div class="app-main">
-<main class="card">
+<main class="card card-wide">
   <header class="page-intro">
     <p class="page-eyebrow">Production · Print queue</p>
     <h1 class="page-lead" id="pageLead">Today's printout plan</h1>
     <p class="page-sub" id="pageSub">Loading…</p>
   </header>
-
-  <nav class="nav-bar">
-    <a class="nav-tab active" href="print-queue.html">Print queue</a>
-    <a class="nav-tab" href="print-queue-rules.html">Rules</a>
-  </nav>
 
   <div class="public-banner" id="publicBanner" hidden>
     Public preview — customer names and admin links are stripped. The full editable view lives at
@@ -911,19 +1115,6 @@
   </div>
 
   <section class="kpi-row" id="kpiRow"></section>
-
-  <!-- Internal tabs: Order queue / Print queue / Assembly queue. -->
-  <nav class="nav-bar" style="margin-bottom: 10px">
-    <button type="button" class="nav-tab" id="tab-order"   onclick="setTab('order')">
-      Order queue <span class="tab-count" id="cnt-order">—</span>
-    </button>
-    <button type="button" class="nav-tab active" id="tab-print" onclick="setTab('print')">
-      Print queue <span class="tab-count" id="cnt-print">—</span>
-    </button>
-    <button type="button" class="nav-tab" id="tab-assembly" onclick="setTab('assembly')">
-      Assembly queue <span class="tab-count" id="cnt-assembly">—</span>
-    </button>
-  </nav>
 
   <!-- ── Order queue ── -->
   <div class="tab-content" id="content-order">
@@ -950,26 +1141,27 @@
     <div id="sections"></div>
   </div>
 
-  <!-- ── Assembly queue (preview rows that will go to Notion Assembly Log) ── -->
+  <!-- ── Order triage (preview rows that will go to Notion Assembly Log) ── -->
   <div class="tab-content" id="content-assembly">
     <div class="asm-summary-bar">
-      <span><strong id="asmRowCount">0</strong> row(s) will be created in the
-        <a href="https://www.notion.so/duttonbrown/Assembly-Log-31affa524c5b804dac05d9a261025303" target="_blank" style="color:var(--accent-dark)">Assembly Log</a>.
-        Split a row to assign halves to different assemblers.</span>
+      <span><strong id="asmRowCount">0</strong> row(s) preview the push to the
+        <a href="https://www.notion.so/duttonbrown/Assembly-Log-31affa524c5b804dac05d9a261025303" target="_blank" style="color:var(--accent-dark)">Notion Assembly Log</a>.
+        <strong>Split</strong> halves a row · <strong>÷N</strong> divides into N even parts ·
+        <strong>merge</strong> reverts.</span>
       <button type="button" class="asm-push-btn" disabled
               title="Release flow not yet wired — run python release_queue.py from the local copy.">
-        Push to Notion (run release script)
+        Push to Notion (release script pending)
       </button>
     </div>
     <table class="asm-table" id="asmTable">
       <thead>
         <tr>
-          <th>Order #</th>
+          <th>Order</th>
           <th>SKU / Title</th>
-          <th>Color</th>
           <th>Finish</th>
+          <th>Color</th>
           <th class="right">Qty</th>
-          <th class="center">Location</th>
+          <th class="center">Loc.</th>
           <th>Assembler</th>
         </tr>
       </thead>
@@ -979,9 +1171,11 @@
 </main>
 </div>
 
+</div><!-- /.app-shell -->
+
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T18:40:41",
+  "built_at": "2026-05-07T19:01:14",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
@@ -2069,8 +2263,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2241,8 +2435,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2754,14 +2948,18 @@ function renderLine(line, ctxColor, ctxFinish){
   const title = line.title || "—";
   const sku = line.variant_sku || "";
   const qty = line.qty != null ? line.qty : 0;
-  const dotColor = ctxColor || ctxFinish;
-  const dotHex = dotColor ? swatchHexFor(dotColor) : null;
-  const dot = dotHex
-    ? `<span class="swatch-dot" style="--swatch-color:${dotHex}" title="${dotColor}"></span>`
+  // Show BOTH dots when applicable: finish on the left, color on the right.
+  // Finish is always present on real lighting/hardware lines (Brass/Nickel/Black);
+  // color is only present on Color products. Order: finish-dot · color-dot · SKU.
+  const finishDot = ctxFinish && finishHex(ctxFinish)
+    ? `<span class="swatch-dot" style="--swatch-color:${finishHex(ctxFinish)}" title="Finish: ${ctxFinish}"></span>`
+    : "";
+  const colorDot = ctxColor && COLOR_HEX[ctxColor]
+    ? `<span class="swatch-dot" style="--swatch-color:${COLOR_HEX[ctxColor]}" title="Color: ${ctxColor}"></span>`
     : "";
   return `
     <li class="line-item">
-      <span class="line-sku">${dot}${sku || "—"}</span>
+      <span class="line-sku">${finishDot}${colorDot}${sku || "—"}</span>
       <span class="line-title" title="${title}">${title}</span>
       <span class="line-qty">${qty}<span class="lbl">×</span></span>
     </li>`;
@@ -2926,7 +3124,7 @@ function setTab(name){
     const tab = document.getElementById(`tab-${n}`);
     const content = document.getElementById(`content-${n}`);
     if(!tab || !content) return;
-    tab.classList.toggle("active", n === name);
+    tab.classList.toggle("is-active", n === name);
     content.classList.toggle("active", n === name);
   });
   if(name === "order")    renderOrderQueue();
@@ -3018,21 +3216,56 @@ function renderOrderQueue(){
 // ── Assembly queue renderer ─────────────────────────────────────────────────
 const ASSEMBLERS = ["", "Sarah", "Alex", "Eric", "Emma", "Back stock"];
 
-function _splitEven(qty){
-  // qty=4 → [2,2]; qty=5 → [2,3]; qty=10 → [5,5]; qty=1 → [1] (no-op)
-  if(qty <= 1) return [qty];
-  const half = Math.floor(qty / 2);
-  return [half, qty - half];
+// Distribute `qty` across `n` parts as evenly as possible.
+// 100/3 → [34,33,33]   (remainder lands in the early parts)
+// 100/4 → [25,25,25,25]
+// 7/3   → [3,2,2]
+// 4/2   → [2,2]
+// 5/2   → [3,2]
+function _distribute(qty, n){
+  qty = Math.max(1, +qty || 1);
+  n = Math.max(1, +n || 1);
+  if(n === 1) return [qty];
+  const base = Math.floor(qty / n);
+  const rem = qty - base * n;
+  const parts = new Array(n).fill(base);
+  for(let i = 0; i < rem; i++) parts[i] += 1;
+  return parts;
 }
+
 function asmSplitRow(rowKey, partIdx){
+  // Halve the targeted part: keep neighboring parts as-is.
   const splits = loadSplits();
   const original = splits[rowKey];
-  if(!original) return;  // shouldn't happen — row should be in splits map already
+  if(!original) return;
   const qty = original[partIdx];
   if(qty <= 1) return;
-  const [a, b] = _splitEven(qty);
-  original.splice(partIdx, 1, a, b);
+  const halves = _distribute(qty, 2);
+  original.splice(partIdx, 1, ...halves);
   splits[rowKey] = original;
+  saveSplits(splits);
+  renderAssemblyQueue();
+}
+function asmSplitIntoN(rowKey){
+  // Prompt for N and distribute the WHOLE row (across all current parts).
+  const splits = loadSplits();
+  const original = splits[rowKey] || [];
+  const totalQty = original.reduce((s,q)=>s+q, 0);
+  if(!totalQty) return;
+  const ans = window.prompt(
+    `Split a row of ${totalQty} units into how many assembly rows?\n` +
+    `Even distribution (e.g. 100 ÷ 3 → 34, 33, 33).`,
+    String(Math.max(2, original.length || 2))
+  );
+  if(ans == null) return;        // cancelled
+  const n = Math.max(1, parseInt(ans, 10) || 0);
+  if(n === 0) return;
+  if(n === 1){
+    // Effectively merge
+    splits[rowKey] = [totalQty];
+  } else {
+    splits[rowKey] = _distribute(totalQty, n);
+  }
   saveSplits(splits);
   renderAssemblyQueue();
 }
@@ -3097,11 +3330,11 @@ function renderAssemblyQueue(){
 
   body.innerHTML = rows.map(rec => {
     const o = rec.order, r = rec.row;
-    const orderName = `#${o.shopify_order_name || o.shopify_order_number || "?"}`.replace("##","#");
+    // Bare order number, no #, no customer.
+    const orderName = String(o.shopify_order_number || o.shopify_order_name || "?").replace(/^#/, "");
     const orderLink = o.shopify_url
       ? `<a class="asm-order" href="${o.shopify_url}" target="_blank">${orderName}</a>`
       : `<span class="asm-order">${orderName}</span>`;
-    const cust = o.customer_name ? `<span class="asm-cust">${o.customer_name}</span>` : "";
     const title = (r.item_titles && r.item_titles[0]) || "";
     const variantSku = (r.variant_skus && r.variant_skus[0]) || r.parent_sku;
     const colorDot = r.color && swatchHexFor(r.color)
@@ -3109,36 +3342,52 @@ function renderAssemblyQueue(){
     const finishDot = r.finish && finishHex(r.finish)
       ? `<span class="swatch-dot" style="--swatch-color:${finishHex(r.finish)}" title="${r.finish}"></span>` : "";
 
-    // Location pill
     const locKey = r.location === "Powder Coating" ? "powder"
                  : r.location === "Shipping" ? "shipping" : "assembly";
     const locPill = `<span class="asm-loc-pill asm-loc-${locKey}">${r.location || "Assembly"}</span>`;
 
-    // Split / merge controls
+    // Part-of-N suffix on the order # when the row is split
     const isPart = rec.partsTotal > 1;
-    const splitBtn = rec.canSplit
-      ? `<button class="asm-split-btn" title="Split into halves" onclick="asmSplitRow('${rec.baseKey}', ${rec.partIdx})">split</button>`
-      : "";
-    const mergeBtn = isPart
-      ? `<button class="asm-merge-btn" title="Merge all parts back to one row" onclick="asmMergeRow('${rec.baseKey}')">merge</button>`
+    const partSuffix = isPart
+      ? ` <span class="asm-cust">· ${rec.partIdx+1}/${rec.partsTotal}</span>`
       : "";
 
-    // Assembler dropdown
-    const opts = ASSEMBLERS.map(a => `<option value="${a}" ${rec.assembler===a?"selected":""}>${a||"— assign —"}</option>`).join("");
+    // Split controls — sit right of the qty input
+    const totalQty = (loadSplits()[rec.baseKey] || [r.qty || 1]).reduce((s,q)=>s+q, 0);
+    const splitDisabled = !rec.canSplit ? "disabled" : "";
+    const splitGroup = `
+      <span class="asm-split-group">
+        <button class="asm-split-btn" ${splitDisabled}
+                title="${rec.canSplit ? 'Split this row into two halves' : 'Cannot split a row of qty 1'}"
+                onclick="asmSplitRow('${rec.baseKey}', ${rec.partIdx})">Split</button>
+        <button class="asm-split-into-btn" ${totalQty <= 1 ? 'disabled' : ''}
+                title="Split this order's row into N parts of even quantity"
+                onclick="asmSplitIntoN('${rec.baseKey}')">÷N</button>
+      </span>`;
+    const mergeBtn = isPart
+      ? `<button class="asm-merge-btn" title="Merge all parts back to one row"
+                  onclick="asmMergeRow('${rec.baseKey}')">merge</button>`
+      : "";
+
+    const opts = ASSEMBLERS.map(a =>
+      `<option value="${a}" ${rec.assembler===a?"selected":""}>${a||"— assign —"}</option>`).join("");
 
     return `
       <tr>
-        <td>${orderLink} ${cust}${isPart ? ` <span class="asm-cust">· part ${rec.partIdx+1}/${rec.partsTotal}</span>` : ""}</td>
+        <td>${orderLink}${partSuffix}</td>
         <td>
           <span class="asm-sku">${variantSku}</span>
           <div class="asm-cust" style="margin-top:2px">${title}</div>
         </td>
-        <td>${r.color ? `<span class="asm-color-cell">${colorDot}${r.color}</span>` : ""}</td>
         <td>${r.finish ? `<span class="asm-finish-cell">${finishDot}${r.finish}</span>` : ""}</td>
+        <td>${r.color ? `<span class="asm-color-cell">${colorDot}${r.color}</span>` : ""}</td>
         <td class="right">
-          <input class="asm-qty-input" type="number" min="1" max="50" value="${rec.qty}"
-                 onchange="asmUpdateQty('${rec.baseKey}', ${rec.partIdx}, this.value)" />
-          ${splitBtn}${mergeBtn}
+          <span class="asm-qty-cell">
+            <input class="asm-qty-input" type="number" min="1" max="200" value="${rec.qty}"
+                   onchange="asmUpdateQty('${rec.baseKey}', ${rec.partIdx}, this.value)" />
+            ${splitGroup}
+            ${mergeBtn}
+          </span>
         </td>
         <td class="center">${locPill}</td>
         <td>
@@ -3196,6 +3445,12 @@ function init(){
   }
   document.getElementById("pageSub").innerHTML = suffix;
   render();
+
+  // Honor a #tab hash so cross-page links can land on Order queue / Order triage.
+  const hash = (location.hash || "").replace("#","");
+  if(["order","print","assembly"].includes(hash)){
+    setTab(hash);
+  }
 }
 init();
 </script>

@@ -77,36 +77,60 @@
   .page-sub a { color: var(--accent-dark); text-decoration: none; font-weight: 500; }
   .page-sub a:hover { text-decoration: underline; }
 
-  .nav-bar {
+  /* App shell + sticky top nav — mirrors purchase-request */
+  .app-shell {
     display: flex;
-    gap: 6px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 0 14px;
-    padding: 8px 0;
-    border-top: 1px solid var(--border);
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .top-nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-tab {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 14px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: white;
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--text);
-    text-decoration: none;
-    transition: background 0.1s, border-color 0.1s;
+  .top-nav-inner {
+    max-width: 1080px; margin: 0 auto;
+    padding: 14px 24px 0;
+    display: flex; flex-direction: column; gap: 10px;
   }
-  .nav-tab:hover { background: var(--bg); border-color: var(--muted); }
-  .nav-tab.active {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: white;
-    font-weight: 500;
+  .top-nav-row { display: flex; align-items: center; gap: 18px; }
+  .top-nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text); flex-shrink: 0;
+  }
+  .top-nav-wordmark {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text); padding-top: 1px;
+  }
+  .top-nav-tabs {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; gap: 0; position: relative;
+  }
+  .top-nav-tabs li { margin: 0; }
+  .top-nav-tab {
+    display: inline-block;
+    padding: 10px 18px 12px;
+    font-size: 13px; font-weight: 400;
+    color: var(--muted); text-decoration: none;
+    letter-spacing: 0.01em; position: relative;
+    transition: color 0.15s ease; white-space: nowrap;
+  }
+  .top-nav-tab:first-child { padding-left: 0; }
+  .top-nav-tab:hover { color: var(--text); }
+  .top-nav-tab[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .top-nav-tab[aria-current="page"]::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -1px;
+    height: 2px; background: var(--accent);
+  }
+  @media (max-width: 640px) {
+    .top-nav-inner { padding: 12px 16px 0; }
+    .top-nav-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .top-nav-tabs::-webkit-scrollbar { display: none; }
+    .top-nav-tab { padding: 10px 14px 12px; font-size: 12px; }
+    .top-nav-wordmark { display: none; }
   }
 
   /* ─────────── Decision tree ─────────── */
@@ -358,19 +382,32 @@
 </head>
 <body>
 
+<div class="app-shell">
+
+<nav class="top-nav" aria-label="Production">
+  <div class="top-nav-inner">
+    <div class="top-nav-row">
+      <a class="top-nav-brand" href="print-queue.html">
+        <span class="top-nav-wordmark">Production</span>
+      </a>
+    </div>
+    <ul class="top-nav-tabs" role="tablist">
+      <li><a class="top-nav-tab" href="print-queue.html#order">Order queue</a></li>
+      <li><a class="top-nav-tab" href="print-queue.html#print">Print queue</a></li>
+      <li><a class="top-nav-tab" href="print-queue.html#assembly">Order triage</a></li>
+      <li><a class="top-nav-tab" href="print-queue-rules.html" aria-current="page">Rules</a></li>
+    </ul>
+  </div>
+</nav>
+
 <div class="app-main">
 <main class="card">
   <header class="page-intro">
-    <p class="page-eyebrow">Production · Print queue</p>
+    <p class="page-eyebrow">Production · Rules</p>
     <h1 class="page-lead">When does an order get its own page?</h1>
     <p class="page-sub">A visual map of how the queue decides print pages and Notion rows for every line item.
       Source of truth: <a href="https://github.com/duttonbrown/db-operations/blob/main/projects/db-production/parts-wash-list/work-order-classification.md" target="_blank">work-order-classification.md §8</a></p>
   </header>
-
-  <nav class="nav-bar">
-    <a class="nav-tab" href="print-queue.html">← Print queue</a>
-    <a class="nav-tab active" href="print-queue-rules.html">Rules</a>
-  </nav>
 
   <!-- ─────────── Phase 1: per-line decision tree ─────────── -->
   <div class="phase-heading">
@@ -754,6 +791,8 @@
 
 </main>
 </div>
+
+</div><!-- /.app-shell -->
 
 </body>
 </html>
