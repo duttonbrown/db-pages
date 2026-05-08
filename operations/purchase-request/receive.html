@@ -14,22 +14,18 @@
 <body>
 <div class="app-shell">
 
-<nav class="top-nav" id="top-nav" aria-label="Inventory">
-  <div class="top-nav-inner">
-    <div class="top-nav-row">
-      <a class="top-nav-brand" href="index.html">
-        <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
-        <span class="top-nav-wordmark">Inventory</span>
-      </a>
-    </div>
-    <ul class="top-nav-tabs" role="tablist">
-      <li><a class="top-nav-tab" href="index.html">Submit</a></li>
-      <li><a class="top-nav-tab" href="manage.html">Purchase</a></li>
-      <li><a class="top-nav-tab" href="receive.html" aria-current="page">Receive</a></li>
-      <li><a class="top-nav-tab" href="status.html">Status</a></li>
-    </ul>
-  </div>
-</nav>
+<aside class="side-nav" aria-label="Inventory navigation">
+  <a class="side-nav-brand" href="index.html">
+    <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
+  </a>
+  <div class="side-nav-eyebrow">Inventory</div>
+  <ul class="side-nav-tabs" role="tablist">
+    <li><a class="side-nav-tab" href="index.html">Submit</a></li>
+    <li><a class="side-nav-tab" href="manage.html">Purchase</a></li>
+    <li><a class="side-nav-tab" href="receive.html" aria-current="page">Receive</a></li>
+    <li><a class="side-nav-tab" href="status.html">Status</a></li>
+  </ul>
+</aside>
 
 <div class="app-main">
 <main class="card card-wide">
@@ -68,17 +64,5 @@
 </div>
 
 <script src="receive.js"></script>
-<script>
-  (function () {
-    var nav = document.getElementById("top-nav");
-    if (!nav) return;
-    var update = function () {
-      if (window.scrollY > 4) nav.classList.add("is-scrolled");
-      else nav.classList.remove("is-scrolled");
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-  })();
-</script>
 </body>
 </html>
