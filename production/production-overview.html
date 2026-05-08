@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Overview — May 08, 2026 at 11:41 AM</title>
+<title>Production Overview — May 08, 2026 at 11:43 AM</title>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         :root {
@@ -607,10 +607,16 @@
         .color-chip-dot { display: inline-block; width: 12px; height: 12px;
                             border-radius: 50%; border: 1px solid rgba(0,0,0,0.15);
                             flex-shrink: 0; }
-        .color-chip-name { font-weight: 500; }
-        .color-chip-count { font-weight: 600; color: #4A4A4A;
-                              font-variant-numeric: tabular-nums;
-                              padding-left: 4px; }
+        .color-chip-name { font-weight: 500; padding-right: 2px; }
+        .color-chip-stats { display: inline-flex; align-items: center;
+                             gap: 4px; padding-left: 4px;
+                             border-left: 1px solid #E0DDD9; margin-left: 2px;
+                             font-variant-numeric: tabular-nums; }
+        .color-chip-stat { font-size: 11px; color: #4A4A4A;
+                            font-weight: 500; letter-spacing: 0.02em; }
+        .color-chip-stat b { display: inline-block; min-width: 9px;
+                              color: #888; font-weight: 600;
+                              margin-right: 1px; }
 
         /* Filter pills — match the per-card pill style (rounded, two-tone,
            Poppins, lower opacity at rest). Override the base internal-tools
@@ -709,7 +715,7 @@
         <div class="kpi-divider"></div>
         <div class="kpi-bottom-row">
             <div class="kpi-date-row">
-                <div class="kpi-value kpi-date">May 08, 2026 at 11:41 AM</div>
+                <div class="kpi-value kpi-date">May 08, 2026 at 11:43 AM</div>
                 <span class="refresh-info-tip" tabindex="0" role="button"
                       aria-label="Refresh info">
                     <span aria-hidden="true">i</span>
@@ -3391,7 +3397,11 @@
                 // Walk the per-tab Color pane to tally — same shape as the
                 // slice-tally pass. Apply quick/large/tag/search gates but
                 // NOT the colorFilter (we want to surface all options).
-                const colorTotals = {};
+                // Per color, track Lighting qty, Hardware qty, and the set of
+                // distinct order numbers contributing.
+                const colorL = {};
+                const colorH = {};
+                const colorOrders = {};
                 document.querySelectorAll(
                     '.tab-pane[data-tab="color"] .color-column .item-row'
                 ).forEach(row => {
@@ -3417,10 +3427,12 @@
                         }
                         if (!m) return;
                     }
-                    // Sum qty across kept (large + tag) order entries
+                    const cat = row.dataset.cat || '';
                     const orders = JSON.parse(row.dataset.orders || '[]');
                     let qty = 0;
                     const rid = row.dataset.rid;
+                    const cname = (card && card.dataset.color) || '';
+                    if (!cname) return;
                     if (rid) {
                         document.querySelectorAll('.order-detail.' + rid).forEach((det, i) => {
                             const o = orders[i] || {};
@@ -3431,17 +3443,26 @@
                             if (tagFilter === 'trade' && det.dataset.trade !== '1') return;
                             if (tagFilter === 'vip' && det.dataset.vip !== '1') return;
                             if (tagFilter === 'hold' && det.dataset.hold !== '1') return;
-                            qty += o.q || 0;
+                            const q = o.q || 0;
+                            if (q <= 0) return;
+                            qty += q;
+                            const ord = (det.dataset.order || '').trim();
+                            if (ord) {
+                                if (!colorOrders[cname]) colorOrders[cname] = new Set();
+                                colorOrders[cname].add(ord);
+                            }
                         });
                     }
                     if (qty <= 0) return;
-                    // Color label is the parent .color-column's data-color
-                    // (the powder coat name on the Color tab).
-                    const cname = (card && card.dataset.color) || '';
-                    if (!cname) return;
-                    colorTotals[cname] = (colorTotals[cname] || 0) + qty;
+                    if (cat === 'Lighting') colorL[cname] = (colorL[cname] || 0) + qty;
+                    else if (cat === 'Hardware') colorH[cname] = (colorH[cname] || 0) + qty;
                 });
-                const sorted = Object.entries(colorTotals)
+                const allNames = new Set([
+                    ...Object.keys(colorL),
+                    ...Object.keys(colorH)
+                ]);
+                const sorted = Array.from(allNames)
+                    .map(n => [n, (colorL[n] || 0) + (colorH[n] || 0)])
                     .filter(([_, q]) => q > 0)
                     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
                 if (!sorted.length) {
@@ -3449,16 +3470,23 @@
                     stripEl.innerHTML = '';
                 } else {
                     stripEl.removeAttribute('hidden');
-                    const chips = sorted.map(([name, qty]) => {
+                    const chips = sorted.map(([name, _qty]) => {
                         const hex = COLOR_HEX[name] || '#888';
                         const active = (colorFilter === name) ? ' active' : '';
+                        const lq = colorL[name] || 0;
+                        const hq = colorH[name] || 0;
+                        const oq = (colorOrders[name] && colorOrders[name].size) || 0;
+                        const stats = [];
+                        if (lq) stats.push('<span class="color-chip-stat" title="Lighting items"><b>L</b>' + lq + '</span>');
+                        if (hq) stats.push('<span class="color-chip-stat" title="Hardware items"><b>H</b>' + hq + '</span>');
+                        if (oq) stats.push('<span class="color-chip-stat" title="Distinct orders"><b>O</b>' + oq + '</span>');
                         return '<button class="color-chip' + active + '" ' +
                                'data-color="' + name + '" ' +
                                'onclick="setColorFilter(\'' + name + '\', this)" ' +
                                'title="Show only ' + name + ' items. Click again to clear.">' +
                                '<span class="color-chip-dot" style="background:' + hex + ';"></span>' +
                                '<span class="color-chip-name">' + name + '</span>' +
-                               '<span class="color-chip-count">' + qty + '</span>' +
+                               '<span class="color-chip-stats">' + stats.join('') + '</span>' +
                                '</button>';
                     });
                     stripEl.innerHTML = '<span class="chip-label">Color:</span>' + chips.join('');
