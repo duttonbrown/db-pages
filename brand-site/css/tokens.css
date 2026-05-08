@@ -10,11 +10,12 @@
      For product graphics, decorative color strips, and section separators
      only. NOT for UI elements, backgrounds, buttons, or text.
      ------------------------------------------------------------------- */
+  --db-barely:         #CCB8B8;
   --db-pinkaboo:       #f7b6c0;
   --db-black:          #000000;
   --db-bone:           #e5e4cf;
   --db-chalk:          #D0D0D0;
-  --db-cobalt:         #1D1E33;
+  --db-cobalt:         #203955;
   --db-lagoon:         #728384;
   --db-ochre:          #B89111;
   --db-orange:         #D4713B;
