@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production Scoreboard — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --ink: #4A4A4A;
+    --ink-soft: #6F6F6F;
+    --ink-mute: #A8A8A8;
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --line: #ECECE6;
+    --line-strong: #DCDAD2;
+    --accent: #FF9912;
+    --accent-deep: #D97706;
+    --green: #2F7D54;
+    --red: #B33A3A;
+    --amber: #C58A1A;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 48px 32px 96px; }
+
+  /* Masthead */
+  .masthead { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 56px; padding-bottom: 28px; border-bottom: 1px solid var(--line-strong); }
+  .masthead h1 { margin: 0; font-size: 40px; font-weight: 300; letter-spacing: -0.01em; }
+  .masthead h1 b { font-weight: 600; color: var(--accent-deep); }
+  .masthead .meta { text-align: right; font-size: 13px; color: var(--ink-soft); }
+  .masthead .meta b { color: var(--ink); font-weight: 600; }
+
+  /* Section */
+  section { margin-top: 64px; }
+  .section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
+  .section-head h2 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.005em; }
+  .section-head .pulse { font-size: 12px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.12em; }
+
+  /* Tile grid */
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .tile { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; transition: border-color .2s; }
+  .tile:hover { border-color: var(--line-strong); }
+  .tile.span-2 { grid-column: span 2; }
+  .tile-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft); font-weight: 400; margin-bottom: 10px; }
+  .tile-value { font-size: 30px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; line-height: 1.05; }
+  .tile-value .unit { font-size: 14px; font-weight: 300; color: var(--ink-mute); margin-left: 4px; }
+  .tile-delta { margin-top: 8px; font-size: 12px; font-weight: 400; color: var(--ink-mute); }
+  .tile-delta.up   { color: var(--green); }
+  .tile-delta.down { color: var(--red); }
+  .tile-delta.amber { color: var(--amber); }
+  .tile-spark { margin-top: 12px; height: 36px; }
+  .tile-foot { font-size: 11px; color: var(--ink-mute); margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--line); }
+
+  /* Chart row */
+  .chart-row { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 18px; }
+  .chart-row.even { grid-template-columns: 1fr 1fr; }
+  .chart-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .chart-card h3 { margin: 0 0 16px; font-size: 14px; font-weight: 600; letter-spacing: 0.005em; }
+  .chart-card .sub { font-size: 12px; color: var(--ink-mute); font-weight: 300; margin: -10px 0 14px; }
+  .chart-card canvas { max-height: 280px; }
+
+  /* Tables */
+  table.dense { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.dense th, table.dense td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  table.dense th:first-child, table.dense td:first-child { text-align: left; }
+  table.dense th { font-weight: 600; color: var(--ink-soft); border-bottom: 1px solid var(--line-strong); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+  table.dense tr:last-child td { border-bottom: none; }
+
+  /* Inventory matrix */
+  .matrix-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; overflow-x: auto; }
+  .matrix-card h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; }
+  .matrix-card .sub { font-size: 12px; color: var(--ink-mute); margin-bottom: 16px; }
+  .matrix { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .matrix th, .matrix td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .matrix th { font-weight: 600; color: var(--ink-soft); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; text-align: left; border-bottom: 1px solid var(--line-strong); }
+  .matrix td.metric { font-weight: 400; color: var(--ink); }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 400; letter-spacing: 0.04em; }
+  .pill.live   { background: #E6F2EC; color: var(--green); }
+  .pill.partial{ background: #FFF1DD; color: var(--accent-deep); }
+  .pill.manual { background: #F4F4F1; color: var(--ink-soft); }
+  .pill.todo   { background: #FBE6E6; color: var(--red); }
+
+  .legend { font-size: 11px; color: var(--ink-mute); margin-top: 12px; }
+  .legend .pill { margin-right: 4px; }
+
+  /* Toolbar */
+  .toolbar { position: sticky; top: 0; z-index: 5; background: rgba(250,250,248,0.92); backdrop-filter: blur(10px); margin: -16px -32px 32px; padding: 16px 32px; border-bottom: 1px solid var(--line); display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+  .toolbar .group { display: flex; gap: 6px; align-items: center; }
+  .toolbar label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-right: 6px; }
+  .toolbar .chip {
+    appearance: none; border: 1px solid var(--line-strong); background: #fff; padding: 6px 12px;
+    font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 12px; color: var(--ink-soft);
+    border-radius: 999px; cursor: pointer; transition: .15s; letter-spacing: 0.01em;
+  }
+  .toolbar .chip:hover { border-color: var(--ink-mute); color: var(--ink); }
+  .toolbar .chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .toolbar .chip.accent.active { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .toolbar select { font-family: 'Poppins'; font-weight: 400; font-size: 12px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line-strong); background: #fff; color: var(--ink); cursor: pointer; }
+
+  /* Filter banner — appears under hero when a non-default filter is active */
+  .filter-banner { display: none; margin-bottom: 24px; padding: 10px 16px; background: #FFF7E8; border: 1px solid #F4DBA1; border-radius: 8px; font-size: 12px; color: var(--accent-deep); }
+  .filter-banner.show { display: block; }
+  .filter-banner b { font-weight: 600; }
+
+  footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-mute); display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <h1>Production <b>Scoreboard</b></h1>
+      <div style="margin-top:6px; color: var(--ink-soft); font-size: 14px;">Live view of the floor — built, shipped, scrapped, fixed.</div>
+    </div>
+    <div class="meta">
+      <div>Owner: <b>Catherine</b></div>
+      <div>Generated: <span id="genDate">—</span></div>
+      <div>Latest month: <b><span id="latestMonth">—</span></b></div>
+    </div>
+  </header>
+
+  <!-- Toolbar — global filters & view toggles -->
+  <div class="toolbar">
+    <div class="group">
+      <label>Focus month</label>
+      <select id="ctlMonth"></select>
+    </div>
+    <div class="group">
+      <label>Finish</label>
+      <button class="chip active" data-finish="all">All</button>
+      <button class="chip" data-finish="Brass">Brass</button>
+      <button class="chip" data-finish="Nickel">Nickel</button>
+      <button class="chip" data-finish="Black">Black</button>
+    </div>
+    <div class="group">
+      <label>Kind</label>
+      <button class="chip" data-kind="all">All</button>
+      <button class="chip" data-kind="Fixture">Fixtures</button>
+      <button class="chip" data-kind="Hardware">Hardware</button>
+    </div>
+    <div class="group">
+      <label>Time view</label>
+      <button class="chip accent active" data-mix="pct">Percent</button>
+      <button class="chip accent" data-mix="abs">Minutes</button>
+    </div>
+    <div class="group">
+      <label>Compare</label>
+      <button class="chip" data-cmp="mom">vs prior month</button>
+      <button class="chip active" data-cmp="trend">5-mo trend</button>
+    </div>
+  </div>
+  <div class="filter-banner" id="filterBanner"></div>
+
+  <!-- =========== OUTPUT ============ -->
+  <section>
+    <div class="section-head">
+      <h2>① Output — what we built and shipped</h2>
+      <div class="pulse">Source: Weekly Shipping Data + Assembly Log</div>
+    </div>
+    <div class="tiles">
+      <div class="tile" id="tile-value-shipped"></div>
+      <div class="tile" id="tile-items-shipped"></div>
+      <div class="tile" id="tile-items-built"></div>
+      <div class="tile" id="tile-orders-shipped"></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>Value Shipped &amp; Items Shipped</h3>
+        <div class="sub">Bars = $ shipped (left axis). Line = items shipped (right axis).</div>
+        <canvas id="chartValueItems"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Items Built vs Shipped</h3>
+        <div class="sub">Built leads shipped — gap reveals WIP.</div>
+        <canvas id="chartBuiltShipped"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== YIELD ============ -->
+  <section>
+    <div class="section-head">
+      <h2>② Yield — how clean was the build</h2>
+      <div class="pulse">Source: Rework Log + Repaint Log + Assembly Log QC</div>
+    </div>
+    <div class="tiles">
+      <div class="tile" id="tile-yield"></div>
+      <div class="tile" id="tile-qc-pass"></div>
+      <div class="tile" id="tile-reworks"></div>
+      <div class="tile" id="tile-reclaim"></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>Total Yield Rate</h3>
+        <div class="sub">(Items Built – Reworks Qty – Repaint Qty) / Items Built.</div>
+        <canvas id="chartYield"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Repaint reasons (latest month)</h3>
+        <div class="sub">Quantities of parts repainted, by root cause.</div>
+        <canvas id="chartRepaint"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-row even">
+      <div class="chart-card">
+        <h3>Rework root cause (latest month)</h3>
+        <div class="sub">Buckets inferred from the Issue field.</div>
+        <canvas id="chartRework"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Parts request reasons (latest month)</h3>
+        <div class="sub">From Parts Request Log — what's holding orders up.</div>
+        <canvas id="chartPartsReq"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== TIME & MIX =========== -->
+  <section>
+    <div class="section-head">
+      <h2>③ Time &amp; mix — how the hours and parts split</h2>
+      <div class="pulse">Source: Assembly Log + Rework Log</div>
+    </div>
+    <div class="tiles">
+      <div class="tile" id="tile-pct-active"></div>
+      <div class="tile" id="tile-pct-break"></div>
+      <div class="tile" id="tile-finish-top"></div>
+      <div class="tile" id="tile-kind-split"></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>Time mix by month</h3>
+        <div class="sub">Stacked: Active assembly vs Breaks vs Rework. Toggle Percent/Minutes in the toolbar.</div>
+        <canvas id="chartTimeMix"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Finish mix by month</h3>
+        <div class="sub">Items built per finish — Brass, Nickel, Black.</div>
+        <canvas id="chartFinishTrend"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-row even">
+      <div class="chart-card">
+        <h3>Hardware vs Fixture (items built)</h3>
+        <div class="sub">SKU prefix "H" = Hardware kits. Everything else = fixture builds.</div>
+        <canvas id="chartKindTrend"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Top SKUs built — focus month</h3>
+        <div class="sub">Top 10 SKUs by quantity in <b><span class="focusMonthLabel">—</span></b>.</div>
+        <canvas id="chartTopSkus"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== LABOR / ASSEMBLY =========== -->
+  <section>
+    <div class="section-head">
+      <h2>④ Assembly &amp; Labor — where the hours go</h2>
+      <div class="pulse">Source: Assembly Log</div>
+    </div>
+    <div class="tiles">
+      <div class="tile" id="tile-asm-mins"></div>
+      <div class="tile" id="tile-asm-per-item"></div>
+      <div class="tile" id="tile-asm-rows"></div>
+      <div class="tile" id="tile-break-mins"></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>Assembler share of items built</h3>
+        <div class="sub">Items built credited to each assembler, stacked by month.</div>
+        <canvas id="chartAssembler"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Avg assembly minutes / item</h3>
+        <div class="sub">Lower is faster. Trend reveals process drift.</div>
+        <canvas id="chartMinPerItem"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== FULFILLMENT =========== -->
+  <section>
+    <div class="section-head">
+      <h2>⑤ Fulfillment — the floor's promise to customers</h2>
+      <div class="pulse">Source: Weekly Shipping Data + Shopify (planned)</div>
+    </div>
+    <div class="tiles">
+      <div class="tile" id="tile-orders-rcvd"></div>
+      <div class="tile" id="tile-cap-gap"></div>
+      <div class="tile" id="tile-pallets"></div>
+      <div class="tile" id="tile-returns"></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>Capacity gap — Orders Received vs Shipped</h3>
+        <div class="sub">Positive bars = backlog growing. Negative = floor catching up.</div>
+        <canvas id="chartCapGap"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Box &amp; pallet mix</h3>
+        <div class="sub">Shipping boxes, hardware boxes, pallets — operational load.</div>
+        <canvas id="chartBoxes"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== METRIC INVENTORY =========== -->
+  <section>
+    <div class="section-head">
+      <h2>⑥ Metric inventory — every signal we have, by source</h2>
+      <div class="pulse">31 metrics across 6 Notion DBs</div>
+    </div>
+    <div class="matrix-card">
+      <table class="matrix" id="matrix"></table>
+      <div class="legend">
+        <span class="pill live">Live</span> already auto-pullable from Notion now &nbsp;
+        <span class="pill partial">Partial</span> needs a small additional field or join &nbsp;
+        <span class="pill manual">Manual</span> Catherine logs by hand (booth utilization, FTE) &nbsp;
+        <span class="pill todo">Snapshot gap</span> KPI row exists in Snapshots DB but values are null
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Dutton Brown — Production Scoreboard prototype</div>
+    <div>Color tokens: Poppins · #FF9912 / #D97706 / #4A4A4A</div>
+  </footer>
+</div>
+
+<script>
+const POPPINS = "'Poppins', system-ui, sans-serif";
+Chart.defaults.font.family = POPPINS;
+Chart.defaults.font.weight = '300';
+Chart.defaults.color = '#6F6F6F';
+Chart.defaults.borderColor = '#ECECE6';
+const ACCENT = '#FF9912';
+const ACCENT_DEEP = '#D97706';
+const INK = '#4A4A4A';
+const GREEN = '#2F7D54';
+const RED = '#B33A3A';
+const AMBER = '#C58A1A';
+const GREY = '#A8A8A8';
+
+const PALETTE = [ACCENT_DEEP, INK, GREEN, AMBER, '#7A4FB6', '#3580B3', '#B33A3A', GREY];
+
+// Brand-specific colour assignments
+const FINISH_COLOR = { 'Brass': '#C9963B', 'Nickel': '#9DA0A8', 'Black': '#2C2C2C', 'Unknown': GREY };
+const KIND_COLOR   = { 'Fixture': INK, 'Hardware': ACCENT_DEEP };
+const TIMEMIX_COLOR = { 'Active assembly': ACCENT_DEEP, 'Breaks': '#C9963B', 'Rework': RED };
+
+// Live, mutable chart registry — destroy + recreate on each render() call so toggles work
+const CHARTS = {};
+function makeChart(canvasId, cfg) {
+  if (CHARTS[canvasId]) CHARTS[canvasId].destroy();
+  const el = document.getElementById(canvasId);
+  if (!el) return;
+  CHARTS[canvasId] = new Chart(el, cfg);
+}
+
+// Toolbar state
+const STATE = { month: null, finish: 'all', kind: 'all', mix: 'pct', cmp: 'trend' };
+
+function fmt(v, kind) {
+  if (v === null || v === undefined || isNaN(v)) return '—';
+  if (kind === 'money')   return '$' + Math.round(v).toLocaleString();
+  if (kind === 'money1k') return '$' + (v/1000).toFixed(1) + 'k';
+  if (kind === 'pct')     return v.toFixed(1) + '%';
+  if (kind === 'int')     return Math.round(v).toLocaleString();
+  if (kind === 'min')     return Math.round(v).toLocaleString() + ' min';
+  if (kind === 'dec1')    return Number(v).toFixed(1);
+  return v;
+}
+function delta(curr, prev) {
+  if (curr == null || prev == null || prev === 0) return null;
+  return ((curr - prev) / Math.abs(prev)) * 100;
+}
+function deltaText(d, goodIsUp = true) {
+  if (d === null) return '';
+  const arrow = d > 0 ? '▲' : d < 0 ? '▼' : '·';
+  const cls = (d > 0 && goodIsUp) || (d < 0 && !goodIsUp) ? 'up' : (d === 0 ? 'amber' : 'down');
+  return `<span class="${cls}">${arrow} ${Math.abs(d).toFixed(1)}% vs prior</span>`;
+}
+
+function buildTile(elId, opts) {
+  const { label, value, unit = '', delta = '', foot = '', spark = null } = opts;
+  const el = document.getElementById(elId);
+  if (!el) return;
+  el.innerHTML = `
+    <div class="tile-label">${label}</div>
+    <div class="tile-value">${value}${unit ? `<span class="unit">${unit}</span>` : ''}</div>
+    ${delta ? `<div class="tile-delta">${delta}</div>` : ''}
+    ${spark ? `<div class="tile-spark"><canvas></canvas></div>` : ''}
+    ${foot ? `<div class="tile-foot">${foot}</div>` : ''}
+  `;
+  if (spark) {
+    const c = el.querySelector('canvas');
+    new Chart(c, {
+      type: 'line',
+      data: { labels: spark.labels, datasets: [{ data: spark.values, borderColor: ACCENT, borderWidth: 1.5, pointRadius: 0, tension: 0.3, fill: { target: 'origin', above: 'rgba(255,153,18,0.08)' } }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } } }
+    });
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Mix-aware scaling helpers
+// ---------------------------------------------------------------------------
+// When a Finish or Kind filter is active, we scale Output/Time tiles by the
+// share of items built that match the filter — best-effort proxy since not
+// every metric has a finish/kind dimension at row level.
+function mixShare(monthRow, dim, key) {
+  if (key === 'all') return 1;
+  const mix = (dim === 'finish' ? monthRow['Finish Mix Qty'] : monthRow['Kind Mix Qty']) || {};
+  const total = Object.values(mix).reduce((a,b)=>a+b, 0);
+  if (!total) return 1;
+  return (mix[key] || 0) / total;
+}
+function combinedShare(monthRow) {
+  return mixShare(monthRow, 'finish', STATE.finish) * mixShare(monthRow, 'kind', STATE.kind);
+}
+function scaled(monthRow, key) {
+  const v = monthRow?.[key];
+  if (v == null) return null;
+  return v * combinedShare(monthRow);
+}
+
+// ---------------------------------------------------------------------------
+// Render
+// ---------------------------------------------------------------------------
+let DATA = null;
+let MONTHS = [];
+
+function render() {
+  if (!DATA) return;
+  const months = MONTHS;
+  const focus = STATE.month || months[months.length - 1];
+  const focusIdx = months.indexOf(focus);
+  const prevIdx = focusIdx > 0 ? focusIdx - 1 : -1;
+  const focusRow = DATA.months[focus] || {};
+  const prevRow  = prevIdx >= 0 ? DATA.months[months[prevIdx]] : {};
+
+  document.getElementById('genDate').textContent = DATA.generated_at;
+  document.getElementById('latestMonth').textContent = focus;
+  document.querySelectorAll('.focusMonthLabel').forEach(el => el.textContent = focus);
+
+  // Filter banner
+  const banner = document.getElementById('filterBanner');
+  const bits = [];
+  if (STATE.finish !== 'all') bits.push(`Finish = <b>${STATE.finish}</b>`);
+  if (STATE.kind   !== 'all') bits.push(`Kind = <b>${STATE.kind}</b>`);
+  if (bits.length) {
+    banner.innerHTML = `Output, time & yield tiles below are scaled by share of items built matching: ${bits.join(' · ')}.`;
+    banner.classList.add('show');
+  } else {
+    banner.classList.remove('show');
+  }
+
+  const pick = (key) => months.map(m => DATA.months[m][key] ?? null);
+  const pickScaled = (key) => months.map(m => {
+    const r = DATA.months[m]; if (!r) return null;
+    const v = r[key]; if (v == null) return null;
+    return Math.round(v * combinedShare(r) * 100) / 100;
+  });
+
+  // ============== ① Output tiles ==============
+  const valShipped = scaled(focusRow, '$ Shipped');
+  const valShippedPrev = scaled(prevRow, '$ Shipped');
+  buildTile('tile-value-shipped', {
+    label: 'Value Shipped',
+    value: fmt(valShipped, 'money'),
+    delta: deltaText(delta(valShipped, valShippedPrev), true),
+    foot: `Items shipped: ${fmt(scaled(focusRow,'Items Shipped'), 'int')}`,
+    spark: { labels: months, values: pickScaled('$ Shipped') }
+  });
+  buildTile('tile-items-shipped', {
+    label: 'Items Shipped',
+    value: fmt(scaled(focusRow,'Items Shipped'), 'int'),
+    delta: deltaText(delta(scaled(focusRow,'Items Shipped'), scaled(prevRow,'Items Shipped')), true),
+    foot: `$/item: ${fmt(focusRow['$ per Item'], 'money')}`,
+    spark: { labels: months, values: pickScaled('Items Shipped') }
+  });
+  buildTile('tile-items-built', {
+    label: 'Items Built',
+    value: fmt(scaled(focusRow,'Items Built'), 'int'),
+    delta: deltaText(delta(scaled(focusRow,'Items Built'), scaled(prevRow,'Items Built')), true),
+    foot: `Target: 519/wk · 2,250/mo`,
+    spark: { labels: months, values: pickScaled('Items Built') }
+  });
+  buildTile('tile-orders-shipped', {
+    label: 'Orders Shipped',
+    value: fmt(scaled(focusRow,'Orders Shipped'), 'int'),
+    delta: deltaText(delta(scaled(focusRow,'Orders Shipped'), scaled(prevRow,'Orders Shipped')), true),
+    foot: `$/order: ${fmt(focusRow['$ per Order'], 'money')}`,
+    spark: { labels: months, values: pickScaled('Orders Shipped') }
+  });
+
+  // ============== ① Output charts ==============
+  makeChart('chartValueItems', {
+    data: {
+      labels: months,
+      datasets: [
+        { type:'bar',  label:'$ Shipped',     data: pickScaled('$ Shipped'),     backgroundColor: ACCENT, yAxisID: 'y' },
+        { type:'line', label:'Items Shipped', data: pickScaled('Items Shipped'), borderColor: INK, backgroundColor: INK, tension: 0.25, yAxisID: 'y1' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: true,
+      scales: {
+        y:  { beginAtZero: true, ticks: { callback: v => '$' + (v/1000) + 'k' } },
+        y1: { position: 'right', beginAtZero: true, grid: { display: false } }
+      },
+      plugins: { legend: { position: 'bottom' } }
+    }
+  });
+  makeChart('chartBuiltShipped', {
+    data: {
+      labels: months,
+      datasets: [
+        { type:'bar', label:'Built',   data: pickScaled('Items Built'),    backgroundColor: ACCENT },
+        { type:'bar', label:'Shipped', data: pickScaled('Items Shipped'),  backgroundColor: INK }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // ============== ② Yield tiles & charts ==============
+  buildTile('tile-yield', {
+    label: 'Total Yield Rate',
+    value: fmt(focusRow['Total Yield Rate'] ?? null, 'pct'),
+    delta: deltaText(delta(focusRow['Total Yield Rate'], prevRow['Total Yield Rate']), true),
+    foot: 'Higher = cleaner build'
+  });
+  buildTile('tile-qc-pass', {
+    label: 'QC Pass Rate',
+    value: fmt(focusRow['QC Pass Rate'] ?? null, 'pct'),
+    delta: deltaText(delta(focusRow['QC Pass Rate'], prevRow['QC Pass Rate']), true),
+    foot: `Tested: ${fmt(focusRow['QC Tested'], 'int')}`
+  });
+  buildTile('tile-reworks', {
+    label: 'Reworks',
+    value: fmt(focusRow['Reworks'], 'int'),
+    delta: deltaText(delta(focusRow['Reworks'], prevRow['Reworks']), false),
+    foot: `Qty affected: ${fmt(focusRow['Reworks Qty'], 'int')}`
+  });
+  buildTile('tile-reclaim', {
+    label: 'Reclaim Rate',
+    value: fmt(focusRow['Reclaim Rate'] ?? null, 'pct'),
+    delta: deltaText(delta(focusRow['Reclaim Rate'], prevRow['Reclaim Rate']), false),
+    foot: `Repaints: ${fmt(focusRow['Repaint Events'], 'int')} events / ${fmt(focusRow['Repaint Qty'], 'int')} qty`
+  });
+
+  makeChart('chartYield', {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [{ label: 'Total Yield Rate', data: pick('Total Yield Rate'), borderColor: GREEN, backgroundColor: 'rgba(47,125,84,0.1)', tension: 0.25, fill: true }]
+    },
+    options: { responsive: true, maintainAspectRatio: true,
+      scales: { y: { suggestedMin: 90, suggestedMax: 100, ticks: { callback: v => v + '%' } } },
+      plugins: { legend: { display: false } }
+    }
+  });
+
+  function donut(canvasId, dict, colorMap = null) {
+    const labels = Object.keys(dict || {});
+    const values = Object.values(dict || {});
+    const colors = colorMap ? labels.map(l => colorMap[l] || GREY) : labels.map((_, i) => PALETTE[i % PALETTE.length]);
+    makeChart(canvasId, {
+      type: 'doughnut',
+      data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: '#fff', borderWidth: 2 }] },
+      options: { responsive: true, maintainAspectRatio: true,
+        plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 11 } } } }
+      }
+    });
+  }
+  donut('chartRepaint',  focusRow['Repaint Reasons']);
+  donut('chartRework',   focusRow['Rework Root Cause']);
+  donut('chartPartsReq', focusRow['Parts Request Reasons']);
+
+  // ============== ③ Time & Mix ==============
+  const timeMixPct = focusRow['Time Mix %'] || {};
+  const activePct = timeMixPct['Active assembly'];
+  const breakPct  = timeMixPct['Breaks'];
+  const finishMix = focusRow['Finish Mix Qty'] || {};
+  const topFinish = Object.entries(finishMix).sort((a,b) => b[1]-a[1])[0];
+  const kindMix = focusRow['Kind Mix Qty'] || {};
+  const fix = kindMix['Fixture'] || 0, hw = kindMix['Hardware'] || 0;
+  const kindTotal = fix + hw;
+
+  buildTile('tile-pct-active', {
+    label: '% Active assembly',
+    value: fmt(activePct, 'pct'),
+    delta: deltaText(delta(activePct, (prevRow['Time Mix %']||{})['Active assembly']), true),
+    foot: `${fmt((focusRow['Assembly Active Minutes']||0)/60, 'dec1')} hrs hands-on`
+  });
+  buildTile('tile-pct-break', {
+    label: '% Break time',
+    value: fmt(breakPct, 'pct'),
+    delta: deltaText(delta(breakPct, (prevRow['Time Mix %']||{})['Breaks']), false),
+    foot: `${fmt((focusRow['Assembly Break Minutes']||0)/60, 'dec1')} hrs in breaks`
+  });
+  buildTile('tile-finish-top', {
+    label: 'Top finish',
+    value: topFinish ? topFinish[0] : '—',
+    delta: topFinish ? `<span class="up">${fmt(topFinish[1], 'int')} items built</span>` : '',
+    foot: Object.entries(finishMix).map(([k,v]) => `${k}: ${fmt(v,'int')}`).join(' · ')
+  });
+  buildTile('tile-kind-split', {
+    label: 'Hardware vs Fixture',
+    value: kindTotal ? `${Math.round(100*hw/kindTotal)}% / ${Math.round(100*fix/kindTotal)}%` : '—',
+    delta: '',
+    foot: `Hardware: ${fmt(hw,'int')} · Fixture: ${fmt(fix,'int')}`
+  });
+
+  // Time-mix stacked bars (Percent or Minutes)
+  const useAbs = STATE.mix === 'abs';
+  const tmKey = useAbs ? 'Time Mix Minutes' : 'Time Mix %';
+  const tmCats = ['Active assembly','Breaks','Rework'];
+  makeChart('chartTimeMix', {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: tmCats.map(cat => ({
+        label: cat,
+        data: months.map(m => (DATA.months[m][tmKey] || {})[cat] ?? null),
+        backgroundColor: TIMEMIX_COLOR[cat]
+      }))
+    },
+    options: { responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom' },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}${useAbs ? ' min' : '%'}` } } },
+      scales: {
+        x: { stacked: true },
+        y: { stacked: true, beginAtZero: true,
+             ticks: { callback: v => useAbs ? v + ' min' : v + '%' },
+             max: useAbs ? undefined : 100 }
+      }
+    }
+  });
+
+  // Finish trend (stacked items built)
+  const finishKeys = ['Brass','Nickel','Black','Unknown'];
+  makeChart('chartFinishTrend', {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: finishKeys.map(f => ({
+        label: f,
+        data: months.map(m => (DATA.months[m]['Finish Mix Qty']||{})[f] || 0),
+        backgroundColor: FINISH_COLOR[f]
+      }))
+    },
+    options: { responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } }
+    }
+  });
+
+  // Hardware vs Fixture trend
+  const kindKeys = ['Fixture','Hardware'];
+  makeChart('chartKindTrend', {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: kindKeys.map(k => ({
+        label: k,
+        data: months.map(m => (DATA.months[m]['Kind Mix Qty']||{})[k] || 0),
+        backgroundColor: KIND_COLOR[k]
+      }))
+    },
+    options: { responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } }
+    }
+  });
+
+  // Top SKUs — focus month
+  const topSkus = focusRow['Top SKUs'] || {};
+  const skuLabels = Object.keys(topSkus);
+  makeChart('chartTopSkus', {
+    type: 'bar',
+    data: {
+      labels: skuLabels,
+      datasets: [{ label: 'Items built', data: Object.values(topSkus), backgroundColor: ACCENT_DEEP }]
+    },
+    options: { responsive: true, maintainAspectRatio: true, indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true } }
+    }
+  });
+
+  // ============== ④ Labor / Assembly ==============
+  buildTile('tile-asm-mins', {
+    label: 'Active Assembly Minutes',
+    value: fmt(focusRow['Assembly Active Minutes'], 'int'),
+    unit: 'min',
+    delta: deltaText(delta(focusRow['Assembly Active Minutes'], prevRow['Assembly Active Minutes']), true),
+    foot: `${fmt((focusRow['Assembly Active Minutes']||0)/60, 'dec1')} hrs hands-on`
+  });
+  buildTile('tile-asm-per-item', {
+    label: 'Avg Min / Item',
+    value: fmt(focusRow['Avg Assembly Minutes per Item'], 'dec1'),
+    unit: 'min',
+    delta: deltaText(delta(focusRow['Avg Assembly Minutes per Item'], prevRow['Avg Assembly Minutes per Item']), false),
+    foot: 'Process speed proxy'
+  });
+  buildTile('tile-asm-rows', {
+    label: 'Assembly Log Entries',
+    value: fmt(focusRow['Assembly Rows'], 'int'),
+    delta: deltaText(delta(focusRow['Assembly Rows'], prevRow['Assembly Rows']), true),
+    foot: `Build events logged`
+  });
+  buildTile('tile-break-mins', {
+    label: 'Break Minutes',
+    value: fmt(focusRow['Assembly Break Minutes'], 'int'),
+    unit: 'min',
+    delta: deltaText(delta(focusRow['Assembly Break Minutes'], prevRow['Assembly Break Minutes']), false),
+    foot: `${fmt((focusRow['Assembly Break Minutes']||0)/60, 'dec1')} hrs total`
+  });
+
+  // Assembler stack
+  const allAssemblers = new Set();
+  months.forEach(m => Object.keys(DATA.months[m]['Assembler Mix'] || {}).forEach(a => allAssemblers.add(a)));
+  const asmList = Array.from(allAssemblers);
+  makeChart('chartAssembler', {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: asmList.map((a, i) => ({
+        label: a,
+        data: months.map(m => (DATA.months[m]['Assembler Mix']||{})[a] || 0),
+        backgroundColor: PALETTE[i % PALETTE.length]
+      }))
+    },
+    options: { responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } }
+    }
+  });
+
+  makeChart('chartMinPerItem', {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [{ label:'Min/item', data: pick('Avg Assembly Minutes per Item'),
+                   borderColor: ACCENT_DEEP, backgroundColor: 'rgba(217,119,6,0.1)', tension:0.25, fill:true }]
+    },
+    options: { responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // ============== ⑤ Fulfillment ==============
+  buildTile('tile-orders-rcvd', {
+    label: 'Orders Received',
+    value: fmt(focusRow['Orders Received'], 'int'),
+    delta: deltaText(delta(focusRow['Orders Received'], prevRow['Orders Received']), true),
+    foot: 'Demand pacing'
+  });
+  buildTile('tile-cap-gap', {
+    label: 'Capacity Gap',
+    value: (focusRow['Capacity Gap'] >= 0 ? '+' : '') + fmt(focusRow['Capacity Gap'], 'int'),
+    delta: deltaText(delta(focusRow['Capacity Gap'], prevRow['Capacity Gap']), false),
+    foot: 'Received − Shipped (positive = backlog growing)'
+  });
+  buildTile('tile-pallets', {
+    label: 'Pallets shipped',
+    value: fmt(focusRow['Pallets'], 'int'),
+    delta: deltaText(delta(focusRow['Pallets'], prevRow['Pallets']), true),
+    foot: `Boxes: ${fmt((focusRow['Shipping Boxes']||0)+(focusRow['Hardware Boxes']||0), 'int')}`
+  });
+  buildTile('tile-returns', {
+    label: 'Returns',
+    value: fmt(focusRow['Returns'], 'int'),
+    delta: deltaText(delta(focusRow['Returns'], prevRow['Returns']), false),
+    foot: 'Quality / fulfillment leak'
+  });
+
+  makeChart('chartCapGap', {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [{ label:'Capacity gap', data: pick('Capacity Gap'),
+        backgroundColor: ctx => (ctx.parsed && ctx.parsed.y > 0) ? RED : GREEN }]
+    },
+    options: { responsive:true, maintainAspectRatio:true, plugins:{ legend:{ display:false } } }
+  });
+  makeChart('chartBoxes', {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [
+        { label:'Shipping boxes', data: pick('Shipping Boxes'), backgroundColor: INK },
+        { label:'Hardware boxes', data: pick('Hardware Boxes'), backgroundColor: ACCENT },
+        { label:'Pallets',        data: pick('Pallets'),        backgroundColor: GREEN }
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:true,
+      plugins:{ legend:{ position:'bottom' } },
+      scales:{ x:{ stacked:true }, y:{ stacked:true, beginAtZero:true } }
+    }
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Inventory matrix (rendered once)
+// ---------------------------------------------------------------------------
+function renderMatrix() {
+  const inv = [
+    { pillar:'Output', metric:'Value Shipped',                source:'Weekly Shipping Data',  status:'live',    cadence:'Weekly → Monthly',  owner:'Catherine' },
+    { pillar:'Output', metric:'Items Shipped',                source:'Weekly Shipping Data',  status:'live',    cadence:'Weekly → Monthly',  owner:'Catherine' },
+    { pillar:'Output', metric:'Items Built',                  source:'Assembly Log',          status:'live',    cadence:'Per-row → Monthly', owner:'Floor team' },
+    { pillar:'Output', metric:'Orders Shipped',               source:'Weekly Shipping Data',  status:'live',    cadence:'Weekly',            owner:'Catherine' },
+    { pillar:'Output', metric:'$ per Order',                  source:'Derived',               status:'live',    cadence:'Derived',           owner:'—' },
+    { pillar:'Output', metric:'$ per Item',                   source:'Derived',               status:'live',    cadence:'Derived',           owner:'—' },
+    { pillar:'Output', metric:'Powder Booth Utilization',     source:'Catherine\'s manual count', status:'manual', cadence:'Monthly',         owner:'Catherine' },
+
+    { pillar:'Yield',  metric:'Total Yield Rate',             source:'Built − (Reworks Qty + Repaint Qty) / Built', status:'live', cadence:'Monthly', owner:'Catherine' },
+    { pillar:'Yield',  metric:'QC Pass Rate',                 source:'Assembly Log Test Result', status:'live',  cadence:'Per-row → Monthly', owner:'QC team' },
+    { pillar:'Yield',  metric:'QC Corrections (volume)',      source:'Assembly Log QC Correction', status:'live', cadence:'Per-row → Monthly', owner:'QC team' },
+    { pillar:'Yield',  metric:'Reworks (count)',              source:'Rework Log',            status:'live',    cadence:'Per-row → Monthly', owner:'Catherine / QC' },
+    { pillar:'Yield',  metric:'Reworks Qty',                  source:'Rework Log',            status:'live',    cadence:'Per-row → Monthly', owner:'QC team' },
+    { pillar:'Yield',  metric:'Rework Time',                  source:'Rework Log',            status:'partial', cadence:'Monthly', owner:'QC team' },
+    { pillar:'Yield',  metric:'Rework by Root Cause',         source:'Rework Log Issue field', status:'partial', cadence:'Monthly', owner:'Catherine' },
+    { pillar:'Yield',  metric:'Repaint Events / Qty',         source:'Repaint Log',           status:'live',    cadence:'Per-row → Monthly', owner:'Powder coater' },
+    { pillar:'Yield',  metric:'Repaint Reasons',              source:'Repaint Log Reason Code', status:'live',  cadence:'Per-row → Monthly', owner:'Powder coater' },
+    { pillar:'Yield',  metric:'Reclaim Rate',                 source:'Repaint Qty / Items Built', status:'live', cadence:'Derived',         owner:'—' },
+
+    { pillar:'Labor / Assembly',  metric:'Assembly Minutes',            source:'Assembly Log Total Time',     status:'live',    cadence:'Per-row → Monthly', owner:'Assemblers' },
+    { pillar:'Labor / Assembly',  metric:'Avg Minutes / Item',          source:'Derived',                    status:'live',    cadence:'Derived',           owner:'—' },
+    { pillar:'Labor / Assembly',  metric:'Break Minutes',               source:'Assembly Log Break Minutes', status:'live',    cadence:'Per-row → Monthly', owner:'Assemblers' },
+    { pillar:'Labor / Assembly',  metric:'Assembler share',             source:'Assembly Log Assembler',     status:'live',    cadence:'Per-row → Monthly', owner:'—' },
+    { pillar:'Labor / Assembly',  metric:'FTE Utilization %',           source:'Manual + payroll',           status:'manual',  cadence:'Monthly',           owner:'Catherine' },
+    { pillar:'Labor / Assembly',  metric:'Items Shipped per FTE',       source:'Items Shipped / headcount',  status:'manual',  cadence:'Monthly',           owner:'Catherine' },
+    { pillar:'Labor / Assembly',  metric:'Labor Cost % of Shipped Value', source:'QuickBooks P&L + Shipped', status:'partial', cadence:'Monthly',           owner:'Thomas + Catherine' },
+
+    { pillar:'Fulfillment', metric:'Capacity Gap',            source:'Orders Received − Shipped', status:'live',  cadence:'Derived',  owner:'—' },
+    { pillar:'Fulfillment', metric:'Returns',                 source:'Weekly Shipping Data',     status:'live',  cadence:'Weekly',   owner:'Shipping' },
+    { pillar:'Fulfillment', metric:'Pallets / Boxes',         source:'Weekly Shipping Data',     status:'live',  cadence:'Weekly',   owner:'Shipping' },
+    { pillar:'Fulfillment', metric:'Avg Order-to-Ship Time',  source:'Shopify created_at + ShipStation shipped_at', status:'todo', cadence:'Monthly', owner:'Operations' },
+    { pillar:'Fulfillment', metric:'On-Time Shipment Rate',   source:'% shipped within 21d',     status:'todo',  cadence:'Monthly',  owner:'Operations' },
+    { pillar:'Fulfillment', metric:'Backlog Age',             source:'Open Shopify orders by age', status:'todo', cadence:'Snapshot', owner:'Operations' },
+    { pillar:'Fulfillment', metric:'Out of Stock Occurrences', source:'Shopify + Notion log',     status:'todo',  cadence:'Monthly',  owner:'Operations' },
+
+    { pillar:'Backlog / WIP', metric:'Parts Requests (count)',  source:'Parts Request Log',  status:'live',  cadence:'Per-row → Monthly', owner:'Floor team' },
+    { pillar:'Backlog / WIP', metric:'Parts Requests Open',     source:'Parts Request Log',  status:'live',  cadence:'Per-row → Monthly', owner:'Floor team' },
+    { pillar:'Backlog / WIP', metric:'Parts Request Reasons',   source:'Parts Request Log Reason Code', status:'live', cadence:'Per-row → Monthly', owner:'Floor team' },
+    { pillar:'Backlog / WIP', metric:'Ongoing Large Orders %',  source:'Ongoing Large Orders DB', status:'partial', cadence:'On change', owner:'Catherine' },
+    { pillar:'Backlog / WIP', metric:'Warranty Claims',         source:'Manual log',          status:'manual', cadence:'Monthly', owner:'Customer service' },
+  ];
+
+  const matrix = document.getElementById('matrix');
+  matrix.innerHTML = `
+    <thead>
+      <tr><th>Pillar</th><th>Metric</th><th>Source</th><th>Status</th><th>Cadence</th><th>Owner</th></tr>
+    </thead>
+    <tbody>
+      ${inv.map(r => `
+        <tr>
+          <td>${r.pillar}</td>
+          <td class="metric">${r.metric}</td>
+          <td>${r.source}</td>
+          <td><span class="pill ${r.status}">${r.status}</span></td>
+          <td>${r.cadence}</td>
+          <td>${r.owner}</td>
+        </tr>`).join('')}
+    </tbody>`;
+}
+
+// ---------------------------------------------------------------------------
+// Toolbar wiring
+// ---------------------------------------------------------------------------
+function setupToolbar() {
+  // Month selector
+  const sel = document.getElementById('ctlMonth');
+  sel.innerHTML = MONTHS.map(m => `<option value="${m}">${m}</option>`).join('');
+  sel.value = STATE.month || MONTHS[MONTHS.length - 1];
+  sel.addEventListener('change', () => { STATE.month = sel.value; render(); });
+
+  // Chip groups
+  function bindChips(attr, key) {
+    document.querySelectorAll(`.toolbar .chip[data-${attr}]`).forEach(b => {
+      b.addEventListener('click', () => {
+        const value = b.getAttribute(`data-${attr}`);
+        STATE[key] = value;
+        document.querySelectorAll(`.toolbar .chip[data-${attr}]`).forEach(x => x.classList.toggle('active', x === b));
+        render();
+      });
+    });
+  }
+  bindChips('finish', 'finish');
+  bindChips('kind',   'kind');
+  bindChips('mix',    'mix');
+  bindChips('cmp',    'cmp');
+}
+
+// ---------------------------------------------------------------------------
+// Bootstrap
+// ---------------------------------------------------------------------------
+fetch('data/dashboard.json').then(r => r.json()).then(data => {
+  DATA = data;
+  MONTHS = Object.keys(data.months).sort();
+  STATE.month = MONTHS[MONTHS.length - 1];
+  setupToolbar();
+  renderMatrix();
+  render();
+}).catch(err => {
+  document.body.insertAdjacentHTML('afterbegin', `<div style="padding:12px 16px; background:#FBE6E6; color:#B33A3A; font-family:${POPPINS};">Failed to load data/dashboard.json — ${err}</div>`);
+  console.error(err);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+{
+  "generated_at": "2026-05-07",
+  "months": {
+    "2026-01": {
+      "Items Shipped": 1090,
+      "Orders Shipped": 437,
+      "Orders Received": 474,
+      "$ Shipped": 185324.90999999997,
+      "Returns": 1,
+      "Shipping Boxes": 484,
+      "$ per Order": 424.08,
+      "$ per Item": 170.02,
+      "Capacity Gap": 37,
+      "Assembly Break Minutes": 0.0,
+      "Assembly Active Minutes": 0,
+      "Assembler Mix": {},
+      "Finish Mix Qty": {},
+      "Finish Mix Minutes": {},
+      "Kind Mix Qty": {},
+      "Kind Mix Minutes": {},
+      "Top SKUs": {},
+      "Rework Root Cause": {},
+      "Repaint Reasons": {},
+      "Parts Request Reasons": {},
+      "Time Mix Minutes": {
+        "Active assembly": 0,
+        "Breaks": 0.0,
+        "Rework": 0
+      },
+      "Time Mix %": {}
+    },
+    "2026-02": {
+      "Items Shipped": 1432,
+      "Orders Shipped": 439,
+      "Orders Received": 452,
+      "$ Shipped": 222067.68,
+      "Returns": 1,
+      "Shipping Boxes": 464,
+      "Hardware Boxes": 20,
+      "Pallets": 2,
+      "$ per Order": 505.85,
+      "$ per Item": 155.08,
+      "Capacity Gap": 13,
+      "Assembly Break Minutes": 0.0,
+      "Assembly Active Minutes": 0,
+      "Assembler Mix": {},
+      "Finish Mix Qty": {},
+      "Finish Mix Minutes": {},
+      "Kind Mix Qty": {},
+      "Kind Mix Minutes": {},
+      "Top SKUs": {},
+      "Rework Root Cause": {},
+      "Repaint Reasons": {},
+      "Parts Request Reasons": {},
+      "Time Mix Minutes": {
+        "Active assembly": 0,
+        "Breaks": 0.0,
+        "Rework": 0
+      },
+      "Time Mix %": {}
+    },
+    "2026-03": {
+      "Items Shipped": 1815,
+      "Orders Shipped": 379,
+      "Orders Received": 421,
+      "$ Shipped": 292842.73,
+      "Returns": 0,
+      "Hardware Boxes": 74,
+      "Shipping Boxes": 410,
+      "Pallets": 3,
+      "$ per Order": 772.67,
+      "$ per Item": 161.35,
+      "Capacity Gap": 42,
+      "Items Built": 701,
+      "Assembly Rows": 251,
+      "Assembly Minutes": 6654,
+      "QC Pass": 160,
+      "QC Tested": 160,
+      "Assembly Break Minutes": 3075.0,
+      "QC Pass Rate": 100.0,
+      "Avg Assembly Minutes per Item": 9.49,
+      "Assembly Active Minutes": 6654,
+      "Assembler Mix": {
+        "Eric": 134,
+        "Emma": 524,
+        "Alex": 29,
+        "Sarah": 9
+      },
+      "Finish Mix Qty": {
+        "Nickel": 202,
+        "Unknown": 18,
+        "Brass": 416,
+        "Black": 65
+      },
+      "Finish Mix Minutes": {
+        "Nickel": 961.0,
+        "Unknown": 95.0,
+        "Brass": 4168.0,
+        "Black": 1430.0
+      },
+      "Kind Mix Qty": {
+        "Fixture": 303,
+        "Hardware": 398
+      },
+      "Kind Mix Minutes": {
+        "Fixture": 5844.0,
+        "Hardware": 810.0
+      },
+      "Top SKUs": {
+        "H20": 89,
+        "H30-5": 47,
+        "H16": 41,
+        "H30-7": 32,
+        "H33-5": 29,
+        "60127": 26,
+        "H33-8": 26,
+        "H28": 24,
+        "H26": 22,
+        "30224": 18
+      },
+      "Reworks": 1,
+      "Reworks Qty": 1,
+      "Rework Minutes": 0,
+      "Rework Root Cause": {
+        "Cont. Fail": 1
+      },
+      "Repaint Reasons": {},
+      "Parts Requests": 3,
+      "Parts Requests Qty": 5,
+      "Parts Requests Open": 3,
+      "Parts Request Reasons": {
+        "Missing part": 2,
+        "Undercoated": 1
+      },
+      "Total Yield Rate": 99.86,
+      "Reclaim Rate": 0.0,
+      "Time Mix Minutes": {
+        "Active assembly": 6654,
+        "Breaks": 3075.0,
+        "Rework": 0
+      },
+      "Time Mix %": {
+        "Active assembly": 68.4,
+        "Breaks": 31.6,
+        "Rework": 0.0
+      }
+    },
+    "2026-04": {
+      "Items Shipped": 1658,
+      "Orders Shipped": 502,
+      "Orders Received": 423,
+      "$ Shipped": 247978.79,
+      "Returns": 1,
+      "Hardware Boxes": 109,
+      "Shipping Boxes": 413,
+      "Pallets": 1,
+      "$ per Order": 493.98,
+      "$ per Item": 149.57,
+      "Capacity Gap": -79,
+      "Items Built": 1520,
+      "Assembly Rows": 604,
+      "Assembly Minutes": 21713,
+      "QC Pass": 417,
+      "QC Tested": 417,
+      "Assembly Break Minutes": 13838.0,
+      "QC Pass Rate": 100.0,
+      "Avg Assembly Minutes per Item": 14.28,
+      "Assembly Active Minutes": 21713,
+      "Assembler Mix": {
+        "Alex": 91,
+        "Sarah": 492,
+        "Emma": 807,
+        "Eric": 144,
+        "Back stock": 8
+      },
+      "Finish Mix Qty": {
+        "Brass": 717,
+        "Nickel": 478,
+        "Black": 294,
+        "Unknown": 31
+      },
+      "Finish Mix Minutes": {
+        "Brass": 9288.0,
+        "Nickel": 7335.0,
+        "Black": 4043.0,
+        "Unknown": 1047.0
+      },
+      "Kind Mix Qty": {
+        "Hardware": 673,
+        "Fixture": 847
+      },
+      "Kind Mix Minutes": {
+        "Hardware": 1333.0,
+        "Fixture": 20380.0
+      },
+      "Top SKUs": {
+        "H33-5": 115,
+        "H32-6": 89,
+        "H28": 72,
+        "H33-8": 68,
+        "60221": 47,
+        "H20": 45,
+        "H33-6": 38,
+        "70221": 33,
+        "60221 (C)": 31,
+        "60125 (C)": 27
+      },
+      "Reworks": 11,
+      "Reworks Qty": 14,
+      "Rework Minutes": 0,
+      "Rework Root Cause": {
+        "Other": 2,
+        "Wrong part": 2,
+        "Scratched": 2,
+        "Loose / Tight": 3,
+        "Misalignment": 1
+      },
+      "Repaint Events": 29,
+      "Repaint Qty": 42,
+      "Repaint Reasons": {
+        "Cross contamination": 6,
+        "FOD": 2,
+        "Undercoated": 10,
+        "Missing part": 4,
+        "Bubbles fisheyes pinholes": 12,
+        "Defective from manufacturer": 1
+      },
+      "Parts Requests": 16,
+      "Parts Requests Qty": 18,
+      "Parts Requests Open": 16,
+      "Parts Request Reasons": {
+        "Back Stock Defective": 1,
+        "Defective from manufacturer": 4,
+        "Damaged in assembly - notes": 8,
+        "Bubbles fisheyes pinholes": 2,
+        "FOD": 1
+      },
+      "Total Yield Rate": 96.32,
+      "Reclaim Rate": 2.76,
+      "Time Mix Minutes": {
+        "Active assembly": 21713,
+        "Breaks": 13838.0,
+        "Rework": 0
+      },
+      "Time Mix %": {
+        "Active assembly": 61.1,
+        "Breaks": 38.9,
+        "Rework": 0.0
+      }
+    },
+    "2026-05": {
+      "Items Shipped": 176,
+      "Orders Shipped": 67,
+      "Orders Received": 104,
+      "$ Shipped": 52211.53,
+      "Returns": 0,
+      "Hardware Boxes": 9,
+      "Shipping Boxes": 67,
+      "Pallets": 2,
+      "$ per Order": 779.28,
+      "$ per Item": 296.66,
+      "Capacity Gap": 37,
+      "Items Built": 302,
+      "Assembly Rows": 142,
+      "Assembly Minutes": 4127,
+      "QC Pass": 48,
+      "QC Tested": 50,
+      "QC Fail": 2,
+      "QC Returned to Assembler": 1,
+      "Assembly Break Minutes": 3486.0,
+      "QC Pass Rate": 96.0,
+      "Avg Assembly Minutes per Item": 13.67,
+      "Assembly Active Minutes": 4127,
+      "Assembler Mix": {
+        "Sarah": 86,
+        "Eric": 45,
+        "Emma": 168,
+        "Back stock": 3
+      },
+      "Finish Mix Qty": {
+        "Brass": 148,
+        "Nickel": 97,
+        "Unknown": 6,
+        "Black": 51
+      },
+      "Finish Mix Minutes": {
+        "Brass": 2194.0,
+        "Nickel": 1065.0,
+        "Unknown": 102.0,
+        "Black": 766.0
+      },
+      "Kind Mix Qty": {
+        "Fixture": 172,
+        "Hardware": 130
+      },
+      "Kind Mix Minutes": {
+        "Fixture": 3804.0,
+        "Hardware": 323.0
+      },
+      "Top SKUs": {
+        "30402F": 26,
+        "H32-12": 22,
+        "H25": 20,
+        "H33-5": 17,
+        "40111-13-23": 12,
+        "30321": 9,
+        "H20": 8,
+        "60125": 8,
+        "50120-10": 7,
+        "60221": 7
+      },
+      "Reworks": 5,
+      "Reworks Qty": 5,
+      "Rework Minutes": 0,
+      "Rework Root Cause": {
+        "Hole / fitment": 1,
+        "Scratched": 1,
+        "Cont. Fail": 2,
+        "Other": 1
+      },
+      "Repaint Events": 3,
+      "Repaint Qty": 6,
+      "Repaint Reasons": {
+        "Wrong part": 4
+      },
+      "Parts Requests": 1,
+      "Parts Requests Qty": 2,
+      "Parts Requests Open": 1,
+      "Parts Request Reasons": {
+        "Undercoated": 1
+      },
+      "Total Yield Rate": 96.36,
+      "Reclaim Rate": 1.99,
+      "Time Mix Minutes": {
+        "Active assembly": 4127,
+        "Breaks": 3486.0,
+        "Rework": 0
+      },
+      "Time Mix %": {
+        "Active assembly": 54.2,
+        "Breaks": 45.8,
+        "Rework": 0.0
+      }
+    }
+  },
+  "sources": {
+    "Weekly Shipping Data": "808222ef8738431294c8e75bb71293cc",
+    "Assembly Log": "31affa524c5b804dac05d9a261025303",
+    "Rework Log": "4041eac70d48478b80ff7abce597cd9d",
+    "Repaint Log": "396145321f8c4852a015431a5cf7f36c",
+    "Parts Request Log": "882354a639ce429bacadf7598f16a2d9",
+    "Production Master Scorecard": "341ffa524c5b805b99f6ec77393db2ed"
+  }
+}
