@@ -40,7 +40,7 @@ body {
   align-items: stretch;       /* sidebar stretches to match card height */
   gap: 0;
   min-height: 100vh;
-  padding: 24px 24px 48px;
+  padding: 24px 24px 0;       /* no bottom padding — card extends to viewport edge */
   width: 100%;
 }
 
@@ -202,7 +202,7 @@ body {
 
 .app-main {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;       /* let the card grow to fill the column height */
   flex: 1;
   min-width: 0;
   max-width: 1080px;
@@ -233,26 +233,27 @@ body {
   margin-bottom: 18px;
   text-align: left;
 }
-.page-eyebrow {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  margin: 0 0 4px;
-}
+/* Title-first hierarchy: bold h1 leads, quiet subtitle supports. */
 .page-lead {
   margin: 0;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.2;
   color: var(--ink);
   letter-spacing: -0.01em;
-  max-width: 56ch;
 }
-.page-lead strong { font-weight: 600; color: var(--ink); }
+.page-sub {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--muted);
+  max-width: 64ch;
+}
+.page-sub strong { font-weight: 500; color: var(--text); }
 @media (max-width: 640px) {
-  .page-lead { font-size: 18px; }
+  .page-lead { font-size: 22px; }
+  .page-sub { font-size: 13px; }
 }
 
 .card {
