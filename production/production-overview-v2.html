@@ -399,7 +399,119 @@
             .order-detail { display: none !important; }
         }
     
-</style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        body {
+            font-family: 'Poppins', system-ui, sans-serif;
+            font-feature-settings: normal;
+            color: #4A4A4A;
+            background: #FAFAF9;
+            padding: 32px 28px 64px;
+            font-weight: 300;
+            max-width: 1280px;
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 28px;
+            letter-spacing: 0;
+            color: #2A2A2A;
+        }
+        h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 500; }
+        .subtitle { font-weight: 300; }
+
+        /* KPI tiles — softer surfaces, more breathing room */
+        .kpi {
+            background: #ffffff;
+            border-color: #E0DDD9;
+            border-radius: 12px;
+            padding: 22px 26px;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+        }
+        .kpi-value {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #2A2A2A;
+        }
+        .kpi-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: #888;
+            letter-spacing: 0.08em;
+        }
+
+        /* Active states — brand orange */
+        .tab-btn.active {
+            background: #fff;
+            color: #FF9912;
+            border-color: #E0DDD9;
+            border-bottom-color: #fff;
+            font-weight: 600;
+        }
+        .tab-btn.active .tab-count { background: #FF9912; }
+        .tag-filter.active { box-shadow: 0 0 0 2px #FF9912; }
+        .matrix-view-btn.active {
+            background: #FF9912;
+            border-color: #FF9912;
+        }
+        .info-toggle:hover, .info-toggle.active,
+        .matrix-info-toggle:hover, .matrix-info-toggle.active {
+            background: #FF9912;
+            border-color: #FF9912;
+        }
+        .schedule-info-toggle:hover, .schedule-info-toggle.active {
+            background: #FF9912;
+            border-color: #FF9912;
+        }
+        .order-search-input:focus {
+            outline-color: #FF9912;
+            border-color: #FF9912;
+        }
+
+        /* Tab strip — softer divider, more space */
+        .tab-strip { border-bottom: 1px solid #E0DDD9; gap: 16px; }
+        .tab-btn { font-family: 'Poppins', sans-serif; font-weight: 500;
+                    padding: 10px 18px; }
+
+        /* Color/finish cards — softer */
+        .color-column {
+            border-color: #E0DDD9;
+            border-radius: 10px;
+        }
+        .color-name { font-family: 'Poppins', sans-serif; font-weight: 600; }
+        .color-stats { font-family: 'Poppins', sans-serif; font-weight: 300; }
+
+        /* Slice cards (Overall) */
+        .slice-card { border-color: #E0DDD9; border-radius: 10px; padding: 16px 18px; }
+        .slice-label { font-family: 'Poppins', sans-serif; font-weight: 500;
+                        color: #888; letter-spacing: 0.08em; }
+        .slice-items { font-family: 'Poppins', sans-serif; font-weight: 600;
+                        color: #2A2A2A; }
+        .slice-clickable:hover { border-color: #FF9912; }
+
+        /* Search bar */
+        .order-search-input { border-radius: 8px; border-color: #E0DDD9;
+                               font-family: 'Poppins', sans-serif; font-weight: 300; }
+        .search-clear { border-radius: 8px; border-color: #E0DDD9; }
+        .search-bar { gap: 10px; }
+
+        /* Matrix table */
+        .items-matrix th { font-family: 'Poppins', sans-serif; font-weight: 600;
+                            color: #888; }
+        .items-matrix .row-label { color: #4A4A4A; font-weight: 400; }
+        .items-matrix .cell-open { color: #FF9912; font-weight: 600; }
+
+        /* Filter pills + buttons — slight rounding, brand-leaning hover */
+        .matrix-view-btn, .schedule-info-toggle, .search-clear {
+            font-family: 'Poppins', sans-serif; font-weight: 400;
+        }
+        .matrix-view-btn:hover { border-color: #FF9912; }
+
+        /* Top page header */
+        .page-head { gap: 12px; margin-bottom: 12px; }
+        .page-head h1 { letter-spacing: 0; }
+        h2 { color: #888; font-weight: 400; }
+    </style>
 </head><body>
 <div class="page-head">
     <h1>Production Overview</h1>
