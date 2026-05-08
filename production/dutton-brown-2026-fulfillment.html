@@ -115,6 +115,7 @@
 <button class="tab-btn" onclick="showTab('m03')" id="btn-m03">Mar</button>
 <button class="tab-btn" onclick="showTab('m04')" id="btn-m04">Apr</button>
 <button class="tab-btn" onclick="showTab('ytd')" id="btn-ytd">Year to Date</button>
+<button class="tab-btn" onclick="showTab('recon')" id="btn-recon">Reconciliation</button>
 
   </div>
   
@@ -896,6 +897,58 @@
 <tr><td>Zero Dollar</td><td class="r">33</td></tr>
 </tbody>
     </table>
+  </div>
+</div>
+
+<div class="tab-content" id="recon">
+  <div class="section">
+    <h2>Shopify ↔ QuickBooks Reconciliation</h2>
+    <p style="color:#666;font-size:0.85rem;margin:-6px 0 18px">
+      Shopify Subtotal = sum of <code>subtotal_price</code> on shipped orders (this report's "Revenue Shipped").
+      QB Total Income = QuickBooks P&amp;L Total Income line, accrual basis, including shipping/expedite/protection fees.
+      A persistent gap of 0–5% is normal and expected.
+    </p>
+    <table>
+      <thead><tr>
+        <th>Month</th>
+        <th class="r">Shopify Shipped<br><span style="font-weight:400;font-size:0.65rem">(subtotal, 2026)</span></th>
+        <th class="r">QB Total Income<br><span style="font-weight:400;font-size:0.65rem">(2026)</span></th>
+        <th class="r">Gap<br><span style="font-weight:400;font-size:0.65rem">(Shopify − QB)</span></th>
+        <th class="r">QB Total Income<br><span style="font-weight:400;font-size:0.65rem">(2025)</span></th>
+        <th class="r">QB YoY</th>
+      </tr></thead>
+      <tbody><tr><td>January</td><td class="r">$298,071</td><td class="r">$296,995</td><td class="r"><span style="color:#7A9B76">+$1,076 (+0.4%)</span></td><td class="r">$259,910</td><td class="r"><span style="color:#7A9B76">+14.3%</span></td></tr>
+<tr><td>February</td><td class="r">$244,209</td><td class="r">$238,972</td><td class="r"><span style="color:#7A9B76">+$5,236 (+2.2%)</span></td><td class="r">$272,905</td><td class="r"><span style="color:#D4726A">-12.4%</span></td></tr>
+<tr><td>March</td><td class="r">$444,901</td><td class="r">$445,008</td><td class="r"><span style="color:#7A9B76">-$108 (-0.0%)</span></td><td class="r">$256,823</td><td class="r"><span style="color:#7A9B76">+73.3%</span></td></tr>
+<tr><td>April</td><td class="r">$288,505</td><td class="r">$273,042</td><td class="r"><span style="color:#C9A84C">+$15,463 (+5.7%)</span></td><td class="r">$265,103</td><td class="r"><span style="color:#7A9B76">+3.0%</span></td></tr>
+<tr style="font-weight:600;border-top:2px solid #4A4A4A"><td>YTD</td><td class="r">$1,275,685</td><td class="r">$1,254,018</td><td class="r"><span style="color:#7A9B76">+$21,668 (+1.7%)</span></td><td class="r">$1,054,741</td><td class="r"><span style="color:#7A9B76">+18.9%</span></td></tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Why the two numbers differ <span class="info-bubble" tabindex="0" aria-label="Reconciling Shopify and QuickBooks">i<span class="info-tip">
+      <strong>Three forces drive the gap, all expected:</strong><br>
+      <strong>Timing</strong> — Shopify counts on the ship date; QB books on the invoice date. An order placed Mar 28 and shipped Apr 4 hits Shopify's April but QB's March. Cancels over a year, swings any single month.<br>
+      <strong>Refunds</strong> — Shopify <code>subtotal_price</code> excludes only fully-refunded orders. QB nets out partial refunds in the period they're issued.<br>
+      <strong>Income mix</strong> — QB Total Income includes shipping, expedite fees, package protection. Shopify subtotal does not. So even on the same order, QB will read $5–10 higher per shipping line.
+    </span></span></h2>
+    <p style="color:#666;font-size:0.85rem;line-height:1.6">
+      Treat <strong>Shopify</strong> as the operational truth — what shipped, when, by whom.<br>
+      Treat <strong>QuickBooks</strong> as the accounting truth — what's booked, what's recognized, what the accountant works from.<br>
+      The gap should be small and explained. A gap larger than ~10% in any month is worth investigating: probably a timing artifact, possibly a refund cluster, occasionally a wholesale invoice booked outside Shopify.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Data sources</h2>
+    <p style="color:#666;font-size:0.85rem;line-height:1.6">
+      <strong>Shopify</strong> — pulled live each report run via the Shopify Admin API.<br>
+      <strong>QuickBooks</strong> — read from <code>data/quickbooks/monthly-income.csv</code>. This file is updated when:
+      (a) new monthly P&amp;L CSVs are exported into <code>data/quickbooks/</code>, or
+      (b) the QB MCP server is queried for fresh data (most recent month-end may lag actuals).
+      The latest month often shows "—" while QB is still being closed.
+    </p>
   </div>
 </div>
 
