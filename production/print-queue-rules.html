@@ -57,6 +57,7 @@
     display: flex; align-items: center; gap: 10px;
     text-decoration: none; color: var(--text); flex-shrink: 0;
   }
+  .top-nav-brand .brandmark { height: 26px; width: auto; display: block; }
   .top-nav-wordmark {
     font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
     text-transform: uppercase; color: var(--text); padding-top: 1px;
@@ -72,12 +73,14 @@
     letter-spacing: 0.01em; position: relative;
     transition: color 0.15s ease; white-space: nowrap;
   }
-  .top-nav-tab:first-child { padding-left: 0; }
   .top-nav-tab:hover { color: var(--text); }
   .top-nav-tab[aria-current="page"] { color: var(--text); font-weight: 600; }
   .top-nav-tab[aria-current="page"]::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
-    height: 2px; background: var(--accent);
+    content: ""; position: absolute;
+    left: 50%; transform: translateX(-50%);
+    bottom: -1px;
+    width: calc(100% - 36px); max-width: 100px;
+    height: 2px; background: var(--accent); border-radius: 1px;
   }
   @media (max-width: 640px) {
     .top-nav-inner { padding: 12px 16px 0; }
@@ -103,28 +106,19 @@
   .page-intro { margin-bottom: 28px; text-align: center; }
   .page-eyebrow {
     display: inline-block;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 8px;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 8px;
   }
   h1.page-lead {
     margin: 0 auto 6px;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--ink);
-    letter-spacing: -0.01em;
+    font-size: 22px; font-weight: 600; line-height: 1.3;
+    color: var(--ink); letter-spacing: -0.01em;
     max-width: 50ch;
   }
   .page-sub {
-    font-size: 13px;
-    color: var(--muted);
-    margin: 0 auto;
-    max-width: 56ch;
-    line-height: 1.5;
+    font-size: 13px; color: var(--muted);
+    margin: 0 auto; max-width: 56ch; line-height: 1.5;
   }
   .page-sub a { color: var(--accent-dark); text-decoration: none; font-weight: 500; }
   .page-sub a:hover { text-decoration: underline; }
@@ -141,46 +135,284 @@
     border-bottom: 1px solid var(--border);
   }
 
-  /* ─────────── Step flow (linear, single column) ─────────── */
-  .steps {
+  /* ─────────── Decision-tree flowchart ───────────
+     Vertical spine of question-boxes, each with a yes-branch peeling off
+     to the right that lands on an outcome. The "no" path continues
+     straight down the spine.
+
+     Each step renders as a 3-column grid:
+       [ vertical-spine-col | gutter | yes-branch ]
+       Question box sits at the top of the spine column.
+       A short "↓ No" connector continues to the next step.
+  */
+  .flow {
     display: grid;
-    gap: 10px;
-    counter-reset: step;
+    gap: 0;
+    margin: 0;
   }
-  .step {
+  .flow-step {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 0;
+    align-items: stretch;
+  }
+  /* Question box — left column, top row */
+  .flow-q {
+    grid-column: 1;
+    grid-row: 1;
+    background: white;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    position: relative;
+    cursor: help;
+  }
+  .flow-q-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .flow-q .info-badge {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 10px; font-weight: 600;
+    line-height: 14px;
+    text-align: center;
+    margin-left: 6px;
+    vertical-align: middle;
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+  }
+  /* Hover tooltip on the question box */
+  .flow-q .tip {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: white;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 6px;
+    width: max-content;
+    max-width: 320px;
+    text-align: left;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+    z-index: 20;
+    white-space: normal;
+  }
+  .flow-q .tip::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: var(--ink);
+  }
+  .flow-q .tip code {
+    background: rgba(255,255,255,0.12);
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+    font-size: 10px;
+    color: white;
+  }
+  .flow-q:hover .tip,
+  .flow-q:focus-within .tip { opacity: 1; }
+
+  /* Yes-branch arrow + outcome — middle gutter + right column */
+  .flow-yes-line {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    align-self: center;
+  }
+  .flow-yes-line::after {
+    content: "→";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--success);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .flow-yes-line .label {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--success);
+    background: var(--bg);
+    padding: 0 4px;
+    letter-spacing: 0.06em;
+  }
+
+  /* Outcome box (right column) */
+  .flow-outcome {
+    grid-column: 3;
+    grid-row: 1;
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    align-self: center;
+    cursor: help;
+    position: relative;
+  }
+  .flow-outcome.powder   { border-left-color: var(--loc-powder); background: #FFFBF3; }
+  .flow-outcome.assembly { border-left-color: var(--loc-assembly); background: #F8F8F7; }
+  .flow-outcome.shipping { border-left-color: var(--loc-shipping); background: #F4FAF5; }
+  .flow-outcome.skip     { border-left-color: var(--muted); background: var(--bg); color: var(--muted); }
+  .flow-outcome-loc {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .flow-outcome.powder   .flow-outcome-loc { color: var(--loc-powder); }
+  .flow-outcome.shipping .flow-outcome-loc { color: var(--loc-shipping); }
+  .flow-outcome.skip     .flow-outcome-loc { color: var(--muted); }
+  .flow-outcome-detail {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+  .flow-outcome:hover .tip,
+  .flow-outcome:focus-within .tip { opacity: 1; }
+  .flow-outcome .tip {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: var(--ink);
+    color: white;
+    font-size: 11px; line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 6px;
+    width: max-content; max-width: 320px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.15s;
+    z-index: 20;
+    text-align: left;
+  }
+  .flow-outcome .tip code {
+    background: rgba(255,255,255,0.12);
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+    font-size: 10px;
+    color: white;
+  }
+
+  /* "No, keep going" connector — bottom row, left column only */
+  .flow-no-line {
+    grid-column: 1;
+    grid-row: 2;
+    height: 28px;
+    position: relative;
+    margin: 0 auto;
+    width: 2px;
+    background: var(--border);
+  }
+  .flow-no-line .label {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(6px, -50%);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .flow-no-line::after {
+    content: "▼";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--border);
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  /* Last step has no "no" arrow — it's the default branch */
+  .flow-step.terminal .flow-no-line { display: none; }
+
+  /* Sample step has a special two-outcome split (whole order vs mixed).
+     When .flow-step has the .has-sub class, the right column shows TWO
+     stacked outcome cards instead of one. */
+  .flow-outcome-stack {
+    grid-column: 3;
+    grid-row: 1;
+    display: grid;
+    gap: 8px;
+    align-self: center;
+  }
+
+  /* On narrow screens, collapse to a single column where everything stacks */
+  @media (max-width: 720px) {
+    .flow-step {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto;
+    }
+    .flow-q, .flow-outcome, .flow-outcome-stack {
+      grid-column: 1;
+    }
+    .flow-yes-line {
+      grid-column: 1;
+      height: 20px;
+      align-self: stretch;
+    }
+    .flow-yes-line::after {
+      content: "↓";
+      top: 50%;
+    }
+    .flow-yes-line .label { top: 0; }
+    .flow-no-line { grid-column: 1; }
+  }
+
+  /* ─────────── Cheat sheet ─────────── */
+  .cheatsheet {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
     background: white;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 14px 18px;
-    position: relative;
-    counter-increment: step;
+    overflow: hidden;
   }
-  .step::before {
-    content: counter(step);
-    position: absolute;
-    top: -10px; left: 16px;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background: var(--ink);
-    color: white;
-    font-size: 11px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    font-variant-numeric: tabular-nums;
+  .cheatsheet th, .cheatsheet td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
   }
-  .step-q {
-    font-size: 14px; font-weight: 600;
-    color: var(--ink);
-    line-height: 1.35;
-    margin: 0 0 6px;
-    letter-spacing: -0.005em;
+  .cheatsheet tr:last-child td { border-bottom: none; }
+  .cheatsheet th {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); font-weight: 600;
+    background: var(--bg);
   }
-  .step-detail {
-    font-size: 12px;
-    color: var(--muted);
-    margin: 0 0 10px;
-    line-height: 1.5;
-  }
-  .step-detail code {
+  .cheatsheet code {
     background: var(--bg);
     border: 1px solid var(--border);
     padding: 1px 5px;
@@ -188,48 +420,11 @@
     font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
     font-size: 11px;
   }
-  /* Outcomes inside a step: a tight horizontal row of pills,
-     each = a possible answer + its routing. */
-  .step-outcomes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .outcome-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 12px 5px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: white;
-    font-size: 12px;
-    line-height: 1.2;
-  }
-  .outcome-pill .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--ink);
-    flex-shrink: 0;
-  }
-  .outcome-pill.powder   { background: #FFF7EB; border-color: #FCD9A6; }
-  .outcome-pill.powder   .dot { background: var(--loc-powder); }
-  .outcome-pill.assembly { background: #F2F2F2; border-color: #D7D5D2; }
-  .outcome-pill.assembly .dot { background: var(--loc-assembly); }
-  .outcome-pill.shipping { background: #E8F5E9; border-color: #BFE5C5; }
-  .outcome-pill.shipping .dot { background: var(--loc-shipping); }
-  .outcome-pill.skip     { background: #F5F2EE; border-color: var(--border); color: var(--muted); }
-  .outcome-pill.skip     .dot { background: var(--muted); }
-  .outcome-pill .label {
-    color: var(--ink); font-weight: 600;
-  }
-  .outcome-pill .arrow { color: var(--muted); font-weight: 400; }
-  .outcome-pill .target {
-    font-weight: 500; color: var(--text);
-  }
-  .outcome-pill .target strong { color: var(--ink); }
+  .loc-powder   { color: var(--loc-powder);   font-weight: 600; }
+  .loc-assembly { color: var(--loc-assembly); font-weight: 600; }
+  .loc-shipping { color: var(--loc-shipping); font-weight: 600; }
 
-  /* Two-column callouts (default rule + override, learning steps) */
+  /* ─────────── Compact callout grid for examples / how-rules-learn ─────────── */
   .callout-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -251,9 +446,7 @@
   }
   .callout-title {
     font-size: 13px; font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 4px;
-    line-height: 1.3;
+    color: var(--ink); margin-bottom: 4px; line-height: 1.3;
   }
   .callout-body {
     font-size: 12px; color: var(--text); line-height: 1.5;
@@ -267,42 +460,6 @@
     font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
     font-size: 11px;
   }
-
-  /* Cheat sheet table at the bottom */
-  .cheatsheet {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .cheatsheet th, .cheatsheet td {
-    padding: 8px 12px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-  }
-  .cheatsheet tr:last-child td { border-bottom: none; }
-  .cheatsheet th {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    font-weight: 600;
-    background: var(--bg);
-  }
-  .cheatsheet code {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
-    font-size: 11px;
-  }
-  .loc-powder   { color: var(--loc-powder); font-weight: 600; }
-  .loc-assembly { color: var(--loc-assembly); font-weight: 600; }
-  .loc-shipping { color: var(--loc-shipping); font-weight: 600; }
 
   @media print {
     body { background: white; }
@@ -320,6 +477,7 @@
   <div class="top-nav-inner">
     <div class="top-nav-row">
       <a class="top-nav-brand" href="print-queue.html">
+        <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
         <span class="top-nav-wordmark">Production</span>
       </a>
     </div>
@@ -339,85 +497,158 @@
     <p class="page-eyebrow">Production · Rules</p>
     <h1 class="page-lead">When does an order get its own page?</h1>
     <p class="page-sub">
-      Walk each Shopify line through the steps below. Where it lands tells you
-      where it routes and how it groups for printing.
-      Source of truth: <a href="https://github.com/duttonbrown/db-operations/blob/main/projects/db-production/parts-wash-list/work-order-classification.md" target="_blank">work-order-classification.md §8</a>.
+      Walk each Shopify line down the diagram. The first <strong>Yes</strong>
+      decides where it lands. Hover any box for the why.
     </p>
   </header>
 
-  <!-- ─────────── 1. Step flow ─────────── -->
+  <!-- ─────────── Decision flowchart ─────────── -->
   <section class="block">
-    <h2 class="section-title">The decision, step by step</h2>
-    <div class="steps">
+    <h2 class="section-title">Decision flow</h2>
 
-      <div class="step">
-        <h3 class="step-q">Is the SKU excluded?</h3>
-        <p class="step-detail">
-          Bulbs (<code>BULB*</code>), return labels (<code>X-*</code>), expedite
-          fees (<code>EXP*</code>), custom-color line items (<code>CUSTOM-*</code>),
-          signature upcharges (<code>SIG*</code>), package protection, "expedite
-          your order", "rework fee", "free return".
-        </p>
-        <div class="step-outcomes">
-          <span class="outcome-pill skip"><span class="dot"></span><span class="label">Yes</span><span class="arrow">→</span><span class="target">skip</span></span>
-          <span class="outcome-pill"><span class="dot"></span><span class="label">No</span><span class="arrow">→</span><span class="target">continue</span></span>
+    <div class="flow">
+
+      <!-- Q1: Excluded? -->
+      <div class="flow-step">
+        <div class="flow-q" tabindex="0">
+          <div class="flow-q-text">Excluded SKU?<span class="info-badge">i</span></div>
+          <div class="tip">
+            <strong>Bulbs, return labels, fees, signature upcharges, package
+            protection.</strong><br>
+            Matches: <code>BULB*</code>, <code>X-*</code>, <code>EXP*</code>,
+            <code>CUSTOM-*</code>, <code>SIG*</code>, or names containing
+            "package protection", "expedite your order", "rework fee",
+            "free return".
+          </div>
         </div>
+        <div class="flow-yes-line"><span class="label">YES</span></div>
+        <div class="flow-outcome skip" tabindex="0">
+          <div class="flow-outcome-loc">Skip</div>
+          <div class="flow-outcome-detail">No page. No row.</div>
+          <div class="tip">Not a production item — counted nowhere.</div>
+        </div>
+        <div class="flow-no-line"><span class="label">NO</span></div>
       </div>
 
-      <div class="step">
-        <h3 class="step-q">Is it a sample?</h3>
-        <p class="step-detail">
-          SKU starts with <code>SAC</code> or the title contains "sample".
-        </p>
-        <div class="step-outcomes">
-          <span class="outcome-pill shipping"><span class="dot"></span><span class="label">Sample-only order</span><span class="arrow">→</span><span class="target"><strong>Shipping</strong> · 1 page · no Notion row</span></span>
-          <span class="outcome-pill skip"><span class="dot"></span><span class="label">Mixed with fixture</span><span class="arrow">→</span><span class="target">held until fixture ships</span></span>
-          <span class="outcome-pill"><span class="dot"></span><span class="label">Not a sample</span><span class="arrow">→</span><span class="target">continue</span></span>
+      <!-- Q2: Sample? Two-step (sample → whole-order check) -->
+      <div class="flow-step">
+        <div class="flow-q" tabindex="0">
+          <div class="flow-q-text">Is it a sample?<span class="info-badge">i</span></div>
+          <div class="tip">
+            <strong>SKU starts with <code>SAC</code> or title contains "sample".</strong><br>
+            Behavior depends on whether the rest of the order is also samples
+            or has fixtures too.
+          </div>
         </div>
+        <div class="flow-yes-line"><span class="label">YES</span></div>
+        <div class="flow-outcome-stack">
+          <div class="flow-outcome shipping" tabindex="0">
+            <div class="flow-outcome-loc">Shipping (sample-only order)</div>
+            <div class="flow-outcome-detail">1 page. No Notion row.</div>
+            <div class="tip">
+              <strong>Whole order is samples.</strong> One Shipping printout,
+              no Assembly Log row. Pre-packaged from sample inventory.
+            </div>
+          </div>
+          <div class="flow-outcome skip" tabindex="0">
+            <div class="flow-outcome-loc">Held (mixed with fixture)</div>
+            <div class="flow-outcome-detail">No page. No row.</div>
+            <div class="tip">
+              <strong>Sample shares an order with a fixture.</strong> Held in
+              sample inventory; fulfillment grabs it and drops it in the box
+              when the fixture ships.
+            </div>
+          </div>
+        </div>
+        <div class="flow-no-line"><span class="label">NO</span></div>
       </div>
 
-      <div class="step">
-        <h3 class="step-q">Does the title start with "Color"?</h3>
-        <p class="step-detail">
-          Color products group across SKUs by color (parts paint together). One
-          Notion row per <code>(SKU, color, finish)</code> because Brass-Barely
-          and Black-Barely are different builds even at the same paint job.
-        </p>
-        <div class="step-outcomes">
-          <span class="outcome-pill powder"><span class="dot"></span><span class="label">Yes</span><span class="arrow">→</span><span class="target"><strong>Powder Coating</strong> · group key <code>("color", color)</code></span></span>
-          <span class="outcome-pill"><span class="dot"></span><span class="label">No</span><span class="arrow">→</span><span class="target">continue</span></span>
+      <!-- Q3: Title starts "Color"? -->
+      <div class="flow-step">
+        <div class="flow-q" tabindex="0">
+          <div class="flow-q-text">Title starts with "Color"?<span class="info-badge">i</span></div>
+          <div class="tip">
+            <strong>Color products go through powder coat.</strong> They
+            group <em>across SKUs by color</em> — same color on different
+            fixtures = one paint group, one printout. The title prefix is
+            the source of truth (not the SKU).
+          </div>
         </div>
+        <div class="flow-yes-line"><span class="label">YES</span></div>
+        <div class="flow-outcome powder" tabindex="0">
+          <div class="flow-outcome-loc">Powder Coating</div>
+          <div class="flow-outcome-detail">Group by color · One Notion row per (SKU, color, finish)</div>
+          <div class="tip">
+            Page key: <code>("color", color)</code>.
+            Same paint color across SKUs = one printout (paints together).
+            Brass-Barely and Black-Barely are different builds, so each gets
+            its own Notion row even on the same paint page.
+          </div>
+        </div>
+        <div class="flow-no-line"><span class="label">NO</span></div>
       </div>
 
-      <div class="step">
-        <h3 class="step-q">Is the SKU a 5-digit fixture or H-prefixed hardware?</h3>
-        <p class="step-detail">
-          Lighting like <code>30220</code> or hardware like <code>H62-18</code>.
-          One page per <code>(SKU, finish)</code> — Brass and Nickel are
-          separate builds.
-        </p>
-        <div class="step-outcomes">
-          <span class="outcome-pill assembly"><span class="dot"></span><span class="label">Yes</span><span class="arrow">→</span><span class="target"><strong>Assembly</strong> · group key <code>("finish", SKU, finish)</code></span></span>
-          <span class="outcome-pill"><span class="dot"></span><span class="label">No</span><span class="arrow">→</span><span class="target">continue</span></span>
+      <!-- Q4: Lighting / Hardware SKU? -->
+      <div class="flow-step">
+        <div class="flow-q" tabindex="0">
+          <div class="flow-q-text">SKU is a 5-digit fixture or H-prefix hardware?<span class="info-badge">i</span></div>
+          <div class="tip">
+            <strong>Lighting:</strong> 5-digit base like <code>30220</code>,
+            <code>31000</code>.<br>
+            <strong>Hardware:</strong> <code>H</code> + 2 digits like
+            <code>H62-18</code>, <code>H10-2</code>.
+          </div>
         </div>
+        <div class="flow-yes-line"><span class="label">YES</span></div>
+        <div class="flow-outcome assembly" tabindex="0">
+          <div class="flow-outcome-loc">Assembly</div>
+          <div class="flow-outcome-detail">Group by SKU + finish · One Notion row per (SKU, finish)</div>
+          <div class="tip">
+            Finish-only build packet. Page key:
+            <code>("finish", SKU, finish)</code>.
+            Brass and Nickel are separate builds, so each gets its own row.
+          </div>
+        </div>
+        <div class="flow-no-line"><span class="label">NO</span></div>
       </div>
 
-      <div class="step">
-        <h3 class="step-q">Otherwise it's an accessory.</h3>
-        <p class="step-detail">
-          Extension rods, bushings, hang-straights, etc. Routing depends on
-          what else is in the order.
-        </p>
-        <div class="step-outcomes">
-          <span class="outcome-pill shipping"><span class="dot"></span><span class="label">Order is accessories-only</span><span class="arrow">→</span><span class="target"><strong>Shipping</strong></span></span>
-          <span class="outcome-pill assembly"><span class="dot"></span><span class="label">Mixed with fixtures</span><span class="arrow">→</span><span class="target"><strong>Assembly</strong> + flag for Catherine</span></span>
+      <!-- Q5: Default — accessory branch -->
+      <div class="flow-step terminal">
+        <div class="flow-q" tabindex="0">
+          <div class="flow-q-text">Order is accessories-only?<span class="info-badge">i</span></div>
+          <div class="tip">
+            <strong>Default branch.</strong> Anything that isn't an excluded
+            SKU, sample, color product, or 5-digit / H-prefix fixture is an
+            accessory: extension rods, bushings, hang-straights.
+          </div>
+        </div>
+        <div class="flow-yes-line"><span class="label">YES</span></div>
+        <div class="flow-outcome-stack">
+          <div class="flow-outcome shipping" tabindex="0">
+            <div class="flow-outcome-loc">Shipping (accessories only)</div>
+            <div class="flow-outcome-detail">Group by SKU · One Notion row per SKU</div>
+            <div class="tip">
+              Quick-pull from inventory. Page key:
+              <code>("simple", SKU)</code>.
+            </div>
+          </div>
+          <div class="flow-outcome assembly" tabindex="0">
+            <div class="flow-outcome-loc">Assembly + flag (mixed order)</div>
+            <div class="flow-outcome-detail">Goes with the fixture · Catherine confirms</div>
+            <div class="tip">
+              Accessory shares an order with a fixture. Defaults to
+              Assembly with a TODO note for Catherine to confirm
+              (Shipping vs Assembly). After ~30 cases we'll codify the
+              rule.
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ─────────── 2. How many pages ─────────── -->
+  <!-- ─────────── How many pages ─────────── -->
   <section class="block">
     <h2 class="section-title">How many pages per group?</h2>
     <div class="callout-grid">
@@ -442,112 +673,7 @@
     </div>
   </section>
 
-  <!-- ─────────── 3. Worked examples ─────────── -->
-  <section class="block">
-    <h2 class="section-title">Worked examples</h2>
-    <div class="callout-grid">
-
-      <div class="callout">
-        <div class="callout-eyebrow">A · One color, two finishes</div>
-        <div class="callout-title">31000-1K (Brass Barely) + 31000-2K (Black Barely)</div>
-        <div class="callout-body">
-          Both color products in <code>Barely</code> → one paint group.
-          <strong>1 printout · 2 Notion rows.</strong>
-        </div>
-      </div>
-
-      <div class="callout">
-        <div class="callout-eyebrow">B · Sample-only order</div>
-        <div class="callout-title">SAC-PG (Python Green sample)</div>
-        <div class="callout-body">
-          Short-circuit. <strong>1 printout · Shipping · 0 rows.</strong>
-        </div>
-      </div>
-
-      <div class="callout">
-        <div class="callout-eyebrow">C · Sample mixed with fixture</div>
-        <div class="callout-title">SAC-PG + 31000-1K</div>
-        <div class="callout-body">
-          Sample is <strong>held</strong>; fixture follows the color path.
-          <strong>1 printout · 1 row.</strong>
-        </div>
-      </div>
-
-      <div class="callout">
-        <div class="callout-eyebrow">D · Two SKUs, same color</div>
-        <div class="callout-title">30220-2F (47" Slate Blue) + 31000-1F (32" Slate Blue)</div>
-        <div class="callout-body">
-          Same paint color across SKUs → one page covers both.
-          <strong>1 printout · 2 rows.</strong>
-        </div>
-      </div>
-
-      <div class="callout">
-        <div class="callout-eyebrow">E · Accessories only</div>
-        <div class="callout-title">ER1-3-1 (rod) + BU (bushing)</div>
-        <div class="callout-body">
-          No fixtures in the order → both go to Shipping.
-          <strong>2 printouts · 2 rows.</strong>
-        </div>
-      </div>
-
-      <div class="callout">
-        <div class="callout-eyebrow">F · Accessory + fixture mixed</div>
-        <div class="callout-title">ER1-3-1 + 31000-1</div>
-        <div class="callout-body">
-          Rod row → <strong>Assembly</strong> + flagged for Catherine to
-          confirm. Fixture → Assembly normally.
-          <strong>2 printouts · 2 rows.</strong>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ─────────── 4. How rules learn ─────────── -->
-  <section class="block">
-    <h2 class="section-title">How the rules improve over time</h2>
-    <div class="callout-grid">
-      <div class="callout">
-        <div class="callout-eyebrow">Step 1</div>
-        <div class="callout-title">Manager overrides on the queue page.</div>
-        <div class="callout-body">
-          Click a different Location bubble on any row. Each click writes a log
-          entry the page can <strong>export</strong>. Survives the hourly
-          refresh.
-        </div>
-      </div>
-      <div class="callout">
-        <div class="callout-eyebrow">Step 2</div>
-        <div class="callout-title">Weekly mine.</div>
-        <div class="callout-body">
-          A small script surfaces patterns: "This (SKU + finish) was rerouted
-          5+ times this week." Each candidate is one-click <strong>Promote</strong>
-          to a real rule.
-        </div>
-      </div>
-      <div class="callout">
-        <div class="callout-eyebrow">Step 3</div>
-        <div class="callout-title">Structural rules from Notion data.</div>
-        <div class="callout-body">
-          The Notion Parts DB <code>Black Batch</code> flag is already in
-          <code>bom-master.csv</code>. Wire it back into routing →
-          black-finish hardware skips Powder Coat without anyone clicking.
-        </div>
-      </div>
-      <div class="callout accent">
-        <div class="callout-eyebrow">Why human-in-the-loop</div>
-        <div class="callout-title">~14 colors × 3 finishes × 5 SKU classes ≈ small.</div>
-        <div class="callout-body">
-          A model is overkill and lets one anomaly flip a rule overnight. A
-          weekly promotion step is fast, debuggable, and matches how Catherine
-          already thinks. Model later when there's signal to tune.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────── 5. Cheat sheet ─────────── -->
+  <!-- ─────────── Cheat sheet ─────────── -->
   <section class="block">
     <h2 class="section-title">Cheat sheet</h2>
     <table class="cheatsheet">
@@ -604,6 +730,49 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <!-- ─────────── How rules improve ─────────── -->
+  <section class="block">
+    <h2 class="section-title">How rules improve over time</h2>
+    <div class="callout-grid">
+      <div class="callout">
+        <div class="callout-eyebrow">Step 1</div>
+        <div class="callout-title">Manager overrides on the queue page.</div>
+        <div class="callout-body">
+          Click a different Location bubble on any row. Each click writes a
+          log entry the page can <strong>export</strong>. Survives the
+          hourly refresh.
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout-eyebrow">Step 2</div>
+        <div class="callout-title">Weekly mine.</div>
+        <div class="callout-body">
+          A small script surfaces patterns: "This (SKU + finish) was
+          rerouted 5+ times this week." Each candidate is one-click
+          <strong>Promote</strong> to a real rule.
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout-eyebrow">Step 3</div>
+        <div class="callout-title">Structural rules from Notion data.</div>
+        <div class="callout-body">
+          The Notion Parts DB <code>Black Batch</code> flag is already in
+          <code>bom-master.csv</code>. Wire it back into routing →
+          black-finish hardware skips Powder Coat without anyone clicking.
+        </div>
+      </div>
+      <div class="callout accent">
+        <div class="callout-eyebrow">Why human-in-the-loop</div>
+        <div class="callout-title">~14 colors × 3 finishes × 5 SKU classes = small.</div>
+        <div class="callout-body">
+          A model is overkill and lets one anomaly flip a rule overnight.
+          A weekly promotion step is fast, debuggable, and matches how
+          Catherine already thinks.
+        </div>
+      </div>
+    </div>
   </section>
 
 </main>
