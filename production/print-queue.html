@@ -644,15 +644,25 @@
     gap: 0;
   }
   .line-item {
-    display: grid;
-    grid-template-columns: minmax(110px, max-content) minmax(0, 1fr) 50px;
-    gap: 10px;
+    /* Inline strip: SKU pill, title, qty — all packed left so qty sits
+       immediately after the title rather than getting pushed to the far
+       right by a stretching middle column. */
+    display: flex;
     align-items: center;
+    gap: 10px;
     padding: 3px 4px;
     border-radius: 4px;
     font-size: 12px;
+    min-width: 0;
   }
   .line-item + .line-item { border-top: 1px dotted var(--border); }
+  .line-item .line-sku { flex-shrink: 0; }
+  .line-item .line-title {
+    flex-shrink: 1;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .line-item .line-qty { flex-shrink: 0; }
   .line-sku {
     font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
     font-size: 11px;
@@ -1175,7 +1185,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T19:01:14",
+  "built_at": "2026-05-07T19:04:11",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
@@ -2991,7 +3001,7 @@ function renderRow(r){
     ? `<a class="order-num" href="${o.shopify_url}" target="_blank">${orderName}</a>`
     : `<span class="order-num">${orderName}</span>`;
   // Strip layout: order# · date · customer · tags — same row, same size
-  const date = `<span class="eyebrow-dot"></span><span class="order-eyebrow-date">${fmtMonthDay(o.created_at)}</span>`;
+  const date = `<span class="eyebrow-dot"></span><span class="order-eyebrow-date">${fmtDateLong(o.created_at)}</span>`;
   const cust = o.customer_name
     ? `<span class="eyebrow-dot"></span><span class="order-eyebrow-customer">${o.customer_name}</span>`
     : "";
@@ -3142,6 +3152,27 @@ function fmtRelative(iso){
   if(hrs < 24)   return `${hrs.toFixed(1)}h ago`;
   return `${Math.round(hrs/24)}d ago`;
 }
+// "May 7, 2026 at 4:30 PM" — used for every visible date/time on the page.
+// 12-hour clock, no leading zero on the hour, AM/PM suffix.
+function fmtFull(iso){
+  if(!iso) return "";
+  try {
+    const d = new Date(iso);
+    if(isNaN(d)) return iso;
+    const date = d.toLocaleDateString(undefined, {month:"long", day:"numeric", year:"numeric"});
+    const time = d.toLocaleTimeString(undefined, {hour:"numeric", minute:"2-digit", hour12:true});
+    return `${date} at ${time}`;
+  } catch(e){ return iso; }
+}
+// "May 7, 2026" — used where time-of-day isn't useful (per-order rows).
+function fmtDateLong(iso){
+  if(!iso) return "";
+  try {
+    const d = new Date(iso);
+    if(isNaN(d)) return iso;
+    return d.toLocaleDateString(undefined, {month:"long", day:"numeric", year:"numeric"});
+  } catch(e){ return iso; }
+}
 function fmtMoney(n){
   if(n == null) return "";
   return `$${(+n).toLocaleString(undefined,{minimumFractionDigits:0, maximumFractionDigits:0})}`;
@@ -3156,8 +3187,7 @@ function renderOrderQueue(){
   let cutoff = getLastReleaseAt();
   let cutoffLabel;
   if(cutoff){
-    const d = new Date(cutoff);
-    cutoffLabel = `Showing orders since <code>${d.toLocaleString()}</code> (last release).`;
+    cutoffLabel = `Showing orders since <code>${fmtFull(cutoff)}</code> (last release).`;
   } else {
     const today6 = new Date();
     today6.setHours(6,0,0,0);
@@ -3436,7 +3466,7 @@ function init(){
   }
   const restored = applyStoredEdits();
   const movedCount = applyLocOverrides();
-  let suffix = QUEUE && QUEUE.built_at ? `Built ${QUEUE.built_at}` : "—";
+  let suffix = QUEUE && QUEUE.built_at ? `Built ${fmtFull(QUEUE.built_at)}` : "—";
   if(restored > 0){
     suffix += ` · <span style="color:var(--accent-dark)">${restored} page edit${restored===1?"":"s"} restored</span> · <a href="#" onclick="clearStoredEdits();return false;">reset</a>`;
   }
