@@ -38,56 +38,84 @@
     min-height: 100vh;
   }
 
-  /* App shell + sticky top nav — mirrors purchase-request */
-  .app-shell { display: flex; flex-direction: column; min-height: 100vh; }
-  .top-nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: saturate(140%) blur(8px);
-    -webkit-backdrop-filter: saturate(140%) blur(8px);
-    border-bottom: 1px solid var(--border);
+  /* App shell — left sidebar nav + main content */
+  .app-shell {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    min-height: 100vh;
   }
-  .top-nav-inner {
-    max-width: 880px; margin: 0 auto;
-    padding: 14px 24px 0;
-    display: flex; flex-direction: column; gap: 10px;
+  .side-nav {
+    position: sticky; top: 0; align-self: start;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    display: flex; flex-direction: column; gap: 18px;
+    overflow-y: auto;
   }
-  .top-nav-row { display: flex; align-items: center; gap: 18px; }
-  .top-nav-brand {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none; color: var(--text); flex-shrink: 0;
+  .side-nav-brand {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 22px;
+    text-decoration: none; color: var(--text);
   }
-  .top-nav-brand .brandmark { height: 26px; width: auto; display: block; }
-  .top-nav-wordmark {
-    font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--text); padding-top: 1px;
+  .side-nav-brand .brandmark {
+    width: 100%; max-width: 156px; height: auto; display: block;
   }
-  .top-nav-tabs {
+  .side-nav-eyebrow {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 22px;
+    margin: -4px 0 4px;
+  }
+  .side-nav-tabs {
     list-style: none; margin: 0; padding: 0;
-    display: flex; gap: 0; position: relative;
+    display: flex; flex-direction: column;
   }
-  .top-nav-tab {
-    display: inline-block; padding: 10px 18px 12px;
+  .side-nav-tabs li { margin: 0; }
+  .side-nav-tab {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    padding: 10px 22px 10px 19px;
     font-size: 13px; font-weight: 400;
-    color: var(--muted); text-decoration: none;
-    letter-spacing: 0.01em; position: relative;
-    transition: color 0.15s ease; white-space: nowrap;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+    background: transparent;
+    border: none; border-left: 3px solid transparent;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
   }
-  .top-nav-tab:hover { color: var(--text); }
-  .top-nav-tab[aria-current="page"] { color: var(--text); font-weight: 600; }
-  .top-nav-tab[aria-current="page"]::after {
-    content: ""; position: absolute;
-    left: 50%; transform: translateX(-50%);
-    bottom: -1px;
-    width: calc(100% - 36px); max-width: 100px;
-    height: 2px; background: var(--accent); border-radius: 1px;
+  .side-nav-tab:hover { color: var(--text); background: var(--bg); }
+  .side-nav-tab[aria-current="page"] {
+    color: var(--ink); font-weight: 600;
+    background: var(--bg);
+    border-left-color: var(--accent);
   }
-  @media (max-width: 640px) {
-    .top-nav-inner { padding: 12px 16px 0; }
-    .top-nav-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .top-nav-tabs::-webkit-scrollbar { display: none; }
-    .top-nav-tab { padding: 10px 14px 12px; font-size: 12px; }
-    .top-nav-wordmark { display: none; }
+  @media (max-width: 840px) {
+    .app-shell { grid-template-columns: 1fr; }
+    .side-nav {
+      position: relative; top: auto; height: auto;
+      flex-direction: column; gap: 8px;
+      padding: 12px 16px 8px;
+      border-right: none; border-bottom: 1px solid var(--border);
+    }
+    .side-nav-brand { padding: 0; }
+    .side-nav-brand .brandmark { max-width: 120px; }
+    .side-nav-eyebrow { display: none; }
+    .side-nav-tabs { flex-direction: row; flex-wrap: wrap; gap: 2px; }
+    .side-nav-tab {
+      padding: 6px 12px;
+      border-left: none; width: auto; border-radius: 999px;
+    }
+    .side-nav-tab[aria-current="page"] {
+      border-left: none;
+      background: var(--ink); color: white;
+    }
   }
 
   .app-main {
@@ -103,7 +131,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
   }
 
-  .page-intro { margin-bottom: 28px; text-align: center; }
+  .page-intro { margin-bottom: 28px; text-align: left; }
   .page-eyebrow {
     display: inline-block;
     font-size: 10px; font-weight: 600;
@@ -111,14 +139,14 @@
     color: var(--muted); margin: 0 0 8px;
   }
   h1.page-lead {
-    margin: 0 auto 6px;
+    margin: 0 0 6px;
     font-size: 22px; font-weight: 600; line-height: 1.3;
     color: var(--ink); letter-spacing: -0.01em;
-    max-width: 50ch;
+    max-width: 56ch;
   }
   .page-sub {
     font-size: 13px; color: var(--muted);
-    margin: 0 auto; max-width: 56ch; line-height: 1.5;
+    margin: 0; max-width: 64ch; line-height: 1.5;
   }
   .page-sub a { color: var(--accent-dark); text-decoration: none; font-weight: 500; }
   .page-sub a:hover { text-decoration: underline; }
@@ -263,7 +291,9 @@
     letter-spacing: 0.06em;
   }
 
-  /* Outcome box (right column) */
+  /* Outcome box (right column). Each one carries two side-by-side facts:
+     a Printouts answer and a Notion-rows answer, with a Location label on
+     top so we know where the work actually goes. */
   .flow-outcome {
     grid-column: 3;
     grid-row: 1;
@@ -271,7 +301,7 @@
     border: 1px solid var(--border);
     border-left: 4px solid var(--ink);
     border-radius: var(--radius);
-    padding: 10px 14px;
+    padding: 10px 12px;
     align-self: center;
     cursor: help;
     position: relative;
@@ -286,16 +316,44 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--ink);
-    margin-bottom: 2px;
+    margin-bottom: 6px;
   }
   .flow-outcome.powder   .flow-outcome-loc { color: var(--loc-powder); }
   .flow-outcome.shipping .flow-outcome-loc { color: var(--loc-shipping); }
   .flow-outcome.skip     .flow-outcome-loc { color: var(--muted); }
-  .flow-outcome-detail {
-    font-size: 12px;
+  /* Two-up answer block: Printouts | Notion rows */
+  .flow-outcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 10px;
+    align-items: start;
+  }
+  .flow-outcome-cell {
+    border-left: 2px solid var(--border);
+    padding-left: 8px;
+  }
+  .flow-outcome-cell .lbl {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .flow-outcome-cell .val {
+    font-size: 11px;
     color: var(--text);
     line-height: 1.35;
     font-weight: 500;
+  }
+  .flow-outcome-cell .val strong {
+    display: inline-block;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 4px;
+    font-variant-numeric: tabular-nums;
   }
   .flow-outcome:hover .tip,
   .flow-outcome:focus-within .tip { opacity: 1; }
@@ -473,32 +531,30 @@
 
 <div class="app-shell">
 
-<nav class="top-nav" aria-label="Production">
-  <div class="top-nav-inner">
-    <div class="top-nav-row">
-      <a class="top-nav-brand" href="print-queue.html">
-        <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
-        <span class="top-nav-wordmark">Production</span>
-      </a>
-    </div>
-    <ul class="top-nav-tabs" role="tablist">
-      <li><a class="top-nav-tab" href="print-queue.html#order">Order queue</a></li>
-      <li><a class="top-nav-tab" href="print-queue.html#print">Print queue</a></li>
-      <li><a class="top-nav-tab" href="print-queue.html#assembly">Order triage</a></li>
-      <li><a class="top-nav-tab" href="print-queue-rules.html" aria-current="page">Rules</a></li>
-    </ul>
-  </div>
-</nav>
+<aside class="side-nav" aria-label="Production navigation">
+  <a class="side-nav-brand" href="print-queue.html">
+    <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
+  </a>
+  <div class="side-nav-eyebrow">Production</div>
+  <ul class="side-nav-tabs" role="tablist">
+    <li><a class="side-nav-tab" href="print-queue.html#order">Order queue</a></li>
+    <li><a class="side-nav-tab" href="print-queue.html#print">Print queue</a></li>
+    <li><a class="side-nav-tab" href="print-queue.html#assembly">Order triage</a></li>
+    <li><a class="side-nav-tab" href="print-queue-rules.html" aria-current="page">Rules</a></li>
+  </ul>
+</aside>
 
 <div class="app-main">
 <main class="card">
 
   <header class="page-intro">
     <p class="page-eyebrow">Production · Rules</p>
-    <h1 class="page-lead">When does an order get its own page?</h1>
+    <h1 class="page-lead">How many traveler printouts? How do we split the Assembly Log?</h1>
     <p class="page-sub">
       Walk each Shopify line down the diagram. The first <strong>Yes</strong>
-      decides where it lands. Hover any box for the why.
+      decides where it lands. Each leaf shows <strong>two answers side by
+      side</strong>: how many traveler printouts to print, and how the row
+      splits in the Notion Assembly Log. Hover any box for the why.
     </p>
   </header>
 
@@ -524,7 +580,10 @@
         <div class="flow-yes-line"><span class="label">YES</span></div>
         <div class="flow-outcome skip" tabindex="0">
           <div class="flow-outcome-loc">Skip</div>
-          <div class="flow-outcome-detail">No page. No row.</div>
+          <div class="flow-outcome-grid">
+            <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>0</strong></span></div>
+            <div class="flow-outcome-cell"><span class="lbl">Assembly rows</span><span class="val"><strong>0</strong></span></div>
+          </div>
           <div class="tip">Not a production item — counted nowhere.</div>
         </div>
         <div class="flow-no-line"><span class="label">NO</span></div>
@@ -544,7 +603,10 @@
         <div class="flow-outcome-stack">
           <div class="flow-outcome shipping" tabindex="0">
             <div class="flow-outcome-loc">Shipping (sample-only order)</div>
-            <div class="flow-outcome-detail">1 page. No Notion row.</div>
+            <div class="flow-outcome-grid">
+              <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>1</strong> per order</span></div>
+              <div class="flow-outcome-cell"><span class="lbl">Assembly rows</span><span class="val"><strong>0</strong></span></div>
+            </div>
             <div class="tip">
               <strong>Whole order is samples.</strong> One Shipping printout,
               no Assembly Log row. Pre-packaged from sample inventory.
@@ -552,7 +614,10 @@
           </div>
           <div class="flow-outcome skip" tabindex="0">
             <div class="flow-outcome-loc">Held (mixed with fixture)</div>
-            <div class="flow-outcome-detail">No page. No row.</div>
+            <div class="flow-outcome-grid">
+              <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>0</strong></span></div>
+              <div class="flow-outcome-cell"><span class="lbl">Assembly rows</span><span class="val"><strong>0</strong></span></div>
+            </div>
             <div class="tip">
               <strong>Sample shares an order with a fixture.</strong> Held in
               sample inventory; fulfillment grabs it and drops it in the box
@@ -577,7 +642,10 @@
         <div class="flow-yes-line"><span class="label">YES</span></div>
         <div class="flow-outcome powder" tabindex="0">
           <div class="flow-outcome-loc">Powder Coating</div>
-          <div class="flow-outcome-detail">Group by color · One Notion row per (SKU, color, finish)</div>
+          <div class="flow-outcome-grid">
+            <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>1</strong> per unique color (across SKUs)</span></div>
+            <div class="flow-outcome-cell"><span class="lbl">Assembly rows</span><span class="val"><strong>1</strong> per (SKU, color, finish)</span></div>
+          </div>
           <div class="tip">
             Page key: <code>("color", color)</code>.
             Same paint color across SKUs = one printout (paints together).
@@ -602,7 +670,10 @@
         <div class="flow-yes-line"><span class="label">YES</span></div>
         <div class="flow-outcome assembly" tabindex="0">
           <div class="flow-outcome-loc">Assembly</div>
-          <div class="flow-outcome-detail">Group by SKU + finish · One Notion row per (SKU, finish)</div>
+          <div class="flow-outcome-grid">
+            <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>1</strong> per (SKU, finish)</span></div>
+            <div class="flow-outcome-cell"><span class="lbl">Assembly rows</span><span class="val"><strong>1</strong> per (SKU, finish)</span></div>
+          </div>
           <div class="tip">
             Finish-only build packet. Page key:
             <code>("finish", SKU, finish)</code>.
@@ -626,7 +697,10 @@
         <div class="flow-outcome-stack">
           <div class="flow-outcome shipping" tabindex="0">
             <div class="flow-outcome-loc">Shipping (accessories only)</div>
-            <div class="flow-outcome-detail">Group by SKU · One Notion row per SKU</div>
+            <div class="flow-outcome-grid">
+              <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>1</strong> per SKU</span></div>
+              <div class="flow-outcome-cell"><span class="lbl">Assembly rows</span><span class="val"><strong>1</strong> per SKU</span></div>
+            </div>
             <div class="tip">
               Quick-pull from inventory. Page key:
               <code>("simple", SKU)</code>.
@@ -634,7 +708,10 @@
           </div>
           <div class="flow-outcome assembly" tabindex="0">
             <div class="flow-outcome-loc">Assembly + flag (mixed order)</div>
-            <div class="flow-outcome-detail">Goes with the fixture · Catherine confirms</div>
+            <div class="flow-outcome-grid">
+              <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>1</strong> per SKU (with the fixture)</span></div>
+              <div class="flow-outcome-cell"><span class="lbl">Assembly rows</span><span class="val"><strong>1</strong> per SKU + ⚠ flag</span></div>
+            </div>
             <div class="tip">
               Accessory shares an order with a fixture. Defaults to
               Assembly with a TODO note for Catherine to confirm
