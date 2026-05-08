@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Overview — May 07, 2026 at 08:00 PM</title>
+<title>Production Overview — May 07, 2026 at 08:02 PM</title>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         :root {
@@ -360,13 +360,20 @@
                       border-radius: 10px; margin-left: 6px; vertical-align: middle; }
         .tab-btn.active .tab-count { background: var(--accent-dark); color: #fff; }
         .tab-pane { padding-top: 14px; }
-        .overall-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        .overall-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
                          gap: 12px; margin-top: 6px; }
         .slice-card { background: #fff; border: 1px solid var(--border); border-radius: 8px;
-                       padding: 12px 14px; }
-        .slice-card-body { display: flex; gap: 10px; align-items: flex-start; }
-        .slice-card-info { flex: 1; min-width: 0; }
-        .slice-pills .card-pill-num { background: #f1f3f5; color: var(--accent-dark); }
+                       padding: 12px 14px; min-width: 0; }
+        /* Stack: info block on top, pill row below — avoids side-by-side
+           crowding when pill labels (e.g. LARGE) overlap the slice label. */
+        .slice-card-body { display: flex; flex-direction: column; gap: 10px; }
+        .slice-card-info { min-width: 0; }
+        .slice-card .slice-label { white-space: nowrap; overflow: hidden;
+                                     text-overflow: ellipsis; }
+        .slice-card .card-pills { flex-direction: row; flex-wrap: wrap;
+                                    min-width: 0; gap: 4px; }
+        .slice-pills .card-pill-num { background: var(--bg); color: var(--ink); }
+        .slice-meta { white-space: nowrap; }
         .slice-clickable { cursor: pointer; transition: transform 0.1s, border-color 0.1s; }
         .slice-clickable:hover { border-color: var(--accent-dark); transform: translateY(-1px); }
         .slice-clickable:focus { outline: 2px solid var(--accent-dark); outline-offset: 1px; }
@@ -416,7 +423,7 @@
         <div class="kpi-divider"></div>
         <div class="kpi-bottom-row">
             <div>
-                <div class="kpi-value kpi-date">May 07, 2026 at 08:00 PM</div>
+                <div class="kpi-value kpi-date">May 07, 2026 at 08:02 PM</div>
                 <div class="kpi-label">Last Update</div>
             </div>
             <button class="schedule-info-toggle" onclick="toggleScheduleInfo()"
