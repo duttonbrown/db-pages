@@ -1185,7 +1185,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T19:04:11",
+  "built_at": "2026-05-07T19:06:15",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
@@ -2273,8 +2273,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2445,8 +2445,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2686,6 +2686,33 @@ const FINISH_HEX = {
 function finishHex(name){ return FINISH_HEX[name] || null; }
 function swatchHexFor(name){
   return COLOR_HEX[name] || FINISH_HEX[name] || null;
+}
+
+// Variant SKU → (finish, color). Mirrors lib/classify.py::parse_variant_sku.
+// Only applies to lighting (5-digit) and hardware (H##) SKUs; accessories
+// like ER1-3-1 are NOT decoded (the trailing "-1" there is part of the part
+// code, not a finish digit).
+const FINISH_DIGIT_TO_NAME = { "1": "Brass", "2": "Nickel", "3": "Black" };
+const COLOR_SUFFIX_TO_NAME = {
+  "RH":"Riding Hood Red","PG":"Python Green","BO":"Bone","PK":"Pinkaboo",
+  "A":"White","L":"Chalk","B":"Spa","D":"Lagoon","E":"Cobalt",
+  "F":"Slate Blue","H":"Ochre","I":"Orange","K":"Barely","3":"Black"
+};
+function decodeVariantSku(sku){
+  if(!sku) return {finish:null, color:null};
+  // Lighting: starts with non-zero digit + 4 digits. Hardware: H + 2 digits.
+  const isLighting = /^[1-9]\d{4}/.test(sku);
+  const isHardware = /^H\d{2}/i.test(sku);
+  if(!isLighting && !isHardware) return {finish:null, color:null};
+  // Last hyphen-token = "<digit>[suffix]"
+  const idx = sku.lastIndexOf("-");
+  if(idx < 0) return {finish:null, color:null};
+  const tail = sku.slice(idx + 1);
+  if(!tail || !/^\d/.test(tail)) return {finish:null, color:null};
+  const finish = FINISH_DIGIT_TO_NAME[tail[0]] || null;
+  const colorSuffix = tail.slice(1);
+  const color = colorSuffix ? (COLOR_SUFFIX_TO_NAME[colorSuffix] || null) : null;
+  return {finish, color};
 }
 function colorIndex(name){
   if(!name) return 9999;
@@ -2958,14 +2985,20 @@ function renderLine(line, ctxColor, ctxFinish){
   const title = line.title || "—";
   const sku = line.variant_sku || "";
   const qty = line.qty != null ? line.qty : 0;
-  // Show BOTH dots when applicable: finish on the left, color on the right.
-  // Finish is always present on real lighting/hardware lines (Brass/Nickel/Black);
-  // color is only present on Color products. Order: finish-dot · color-dot · SKU.
-  const finishDot = ctxFinish && finishHex(ctxFinish)
-    ? `<span class="swatch-dot" style="--swatch-color:${finishHex(ctxFinish)}" title="Finish: ${ctxFinish}"></span>`
+  // Decode finish + color from THIS line's SKU. Group context is a fallback
+  // (e.g. for sample lines or accessories where the SKU doesn't carry the
+  // finish digit).
+  const decoded = decodeVariantSku(sku);
+  const finishName = decoded.finish || ctxFinish || null;
+  const colorName  = decoded.color  || ctxColor  || null;
+  // Order on screen: finish-dot · color-dot · SKU pill. Both shown if both
+  // apply; only one shown if only one applies. Finish first because metal
+  // finish is "more upstream" than powder coat color in our process.
+  const finishDot = finishName && finishHex(finishName)
+    ? `<span class="swatch-dot" style="--swatch-color:${finishHex(finishName)}" title="Finish: ${finishName}"></span>`
     : "";
-  const colorDot = ctxColor && COLOR_HEX[ctxColor]
-    ? `<span class="swatch-dot" style="--swatch-color:${COLOR_HEX[ctxColor]}" title="Color: ${ctxColor}"></span>`
+  const colorDot = colorName && COLOR_HEX[colorName]
+    ? `<span class="swatch-dot" style="--swatch-color:${COLOR_HEX[colorName]}" title="Color: ${colorName}"></span>`
     : "";
   return `
     <li class="line-item">
@@ -3207,38 +3240,47 @@ function renderOrderQueue(){
     listEl.innerHTML = `<div class="oq-empty"><strong>No new orders since cutoff.</strong>You're caught up.</div>`;
     return;
   }
+  // Render each order using the SAME order-block layout as the Print queue
+  // (header strip on top, line-items as a horizontal list). No location
+  // toggle and no Pages control — Order queue is read-only triage.
+  // Aggregate all line items across the order's printouts so each Shopify
+  // line appears once with its own qty.
   listEl.innerHTML = since.map(o => {
-    const tags = (o.tags||"").toLowerCase();
-    const isExp = o.priority === "Expedites";
-    const isLarge = o.is_large_order;
-    const isTrade = tags.includes("trade");
-    const isPrinted = tags.includes("printed");
-    const cls = ["oq-row",
-      isExp ? "is-expedite" : "",
-      isLarge ? "is-large" : "",
-      isTrade ? "is-trade" : "",
-      isPrinted ? "is-printed" : ""
-    ].filter(Boolean).join(" ");
-    const orderName = `#${o.shopify_order_name || o.shopify_order_number || "?"}`.replace("##","#");
+    const orderName = String(o.shopify_order_number || o.shopify_order_name || "?").replace(/^#/, "");
     const orderLink = o.shopify_url
-      ? `<a class="oq-num" href="${o.shopify_url}" target="_blank">${orderName}</a>`
-      : `<span class="oq-num">${orderName}</span>`;
-    const totalQty = (o.printouts||[]).reduce((s,p)=>s+(p.total_qty||0), 0);
-    const summary = (o.printouts||[]).map(p => {
-      if(p.color)        return p.color;
-      if(p.finish)       return `${p.finish}`;
-      if(p.source==="sample-only") return "Sample";
-      return (p.parent_skus||[]).join("/");
-    }).filter((v,i,arr)=>arr.indexOf(v)===i).join(" · ");
+      ? `<a class="order-num" href="${o.shopify_url}" target="_blank">#${orderName}</a>`
+      : `<span class="order-num">#${orderName}</span>`;
+    const date = `<span class="eyebrow-dot"></span><span class="order-eyebrow-date">${fmtDateLong(o.created_at)}</span>`;
+    const relTime = `<span class="eyebrow-dot"></span><span class="order-eyebrow-date">${fmtRelative(o.created_at)}</span>`;
+    const cust = o.customer_name
+      ? `<span class="eyebrow-dot"></span><span class="order-eyebrow-customer">${o.customer_name}</span>`
+      : "";
+    const amount = o.total_price != null
+      ? `<span class="eyebrow-dot"></span><span class="order-eyebrow-date">${fmtMoney(o.total_price)}</span>`
+      : "";
+
+    // Flatten lines from all printouts on this order. Skip any held samples
+    // so the Order queue mirrors what's actually going to production.
+    const allLines = [];
+    for(const p of (o.printouts||[])){
+      const ls = (p.lines && p.lines.length) ? p.lines : (p.line_item_titles||[]).map((t,i)=>(
+        {title:t, variant_sku:(p.variant_skus||[])[i]||"", qty: 0}
+      ));
+      for(const l of ls){
+        allLines.push({line:l, color:p.color, finish:p.finish});
+      }
+    }
+
     return `
-      <div class="${cls}">
-        <div>
-          ${orderLink}
-          <div class="oq-time">${fmtRelative(o.created_at)} · ${o.customer_name || ""}</div>
+      <div class="order-block">
+        <div class="order-block-head">
+          <div class="order-block-head-left">
+            ${orderLink}${date}${relTime}${cust}${amount}${tagsFor(o)}
+          </div>
         </div>
-        <div class="oq-summary"><span class="qty">${totalQty}×</span>${summary}</div>
-        <div class="oq-tags">${tagsFor(o)}</div>
-        <div class="oq-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
+        <ul class="line-list">
+          ${allLines.map(({line,color,finish}) => renderLine(line, color, finish)).join("")}
+        </ul>
       </div>`;
   }).join("");
 }
