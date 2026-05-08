@@ -74,6 +74,11 @@
     color: var(--text);
     flex-shrink: 0;
   }
+  .top-nav-brand .brandmark {
+    height: 26px;
+    width: auto;
+    display: block;
+  }
   .top-nav-wordmark {
     font-size: 12px;
     font-weight: 600;
@@ -109,22 +114,26 @@
     font-family: inherit;
     cursor: pointer;
   }
-  .top-nav-tab:first-child { padding-left: 0; }
   .top-nav-tab:hover { color: var(--text); }
   .top-nav-tab.is-active,
   .top-nav-tab[aria-current="page"] {
     color: var(--text);
     font-weight: 600;
   }
+  /* Underline sits centered under the tab text, not edge-to-edge across the
+     padded box (which made the first/last tabs look off-center). */
   .top-nav-tab.is-active::after,
   .top-nav-tab[aria-current="page"]::after {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: -1px;
+    width: calc(100% - 36px);
+    max-width: 100px;
     height: 2px;
     background: var(--accent);
+    border-radius: 1px;
   }
   .top-nav-tab .tab-count {
     display: inline-block;
@@ -579,10 +588,13 @@
      tight tabular sub-grid below. Designed to be scannable left-to-right
      instead of asking the eye to walk down a tall vertical column. */
   .order-block {
-    padding: 6px 4px 8px;
-    border-top: 1px solid var(--border);
+    padding: 10px 4px 12px;
+    border-top: 1px solid #BAB6AF;  /* darker than --border, clearer break between orders */
   }
-  .order-block:first-child { padding-top: 8px; }
+  .order-block:first-child {
+    padding-top: 4px;
+    border-top: none;
+  }
   .order-block-head {
     display: flex;
     align-items: center;
@@ -1055,6 +1067,42 @@
   .asm-loc-assembly { background: #E8E8E8; color: var(--ink);         border: 1px solid #D0D0D0; }
   .asm-loc-shipping { background: #E8F5E9; color: #1F5F22;            border: 1px solid #BFE5C5; }
 
+  /* Split-row visual treatment: every part of a split row gets a coloured
+     left edge so it's unmistakable they share one parent. A "Part 1/3" pill
+     sits next to the order number. */
+  .asm-table tr.is-split-part td {
+    background: rgba(255, 153, 18, 0.04);
+  }
+  .asm-table tr.is-split-part td:first-child {
+    border-left: 3px solid var(--accent);
+    padding-left: 10px;
+  }
+  .asm-part-pill {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-left: 8px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .asm-split-banner {
+    background: #FFF7EB;
+    color: var(--accent-dark);
+    border: 1px solid #FCD9A6;
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    font-size: 11px;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .asm-split-banner strong { color: var(--ink); font-weight: 600; }
+
   .empty-state {
     text-align: center;
     padding: 60px 20px;
@@ -1085,6 +1133,7 @@
   <div class="top-nav-inner">
     <div class="top-nav-row">
       <a class="top-nav-brand" href="print-queue.html">
+        <img src="db-icon.png" class="brandmark" alt="Dutton Brown">
         <span class="top-nav-wordmark">Production</span>
       </a>
     </div>
@@ -1163,6 +1212,7 @@
         Push to Notion (release script pending)
       </button>
     </div>
+    <div class="asm-split-banner" id="asmSplitBanner" style="display:none"></div>
     <table class="asm-table" id="asmTable">
       <thead>
         <tr>
@@ -1185,7 +1235,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T19:16:48",
+  "built_at": "2026-05-07T19:30:26",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
@@ -2273,8 +2323,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2445,8 +2495,8 @@ const QUEUE = {
           "color": null,
           "finish": null,
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -3286,7 +3336,7 @@ function renderOrderQueue(){
 }
 
 // ── Assembly queue renderer ─────────────────────────────────────────────────
-const ASSEMBLERS = ["", "Sarah", "Alex", "Eric", "Emma", "Back stock"];
+const ASSEMBLERS = ["", "Sarah", "Alex", "Eric", "Emma"];
 
 // Distribute `qty` across `n` parts as evenly as possible.
 // 100/3 → [34,33,33]   (remainder lands in the early parts)
@@ -3393,6 +3443,22 @@ function renderAssemblyQueue(){
   document.getElementById("cnt-assembly").textContent = rows.length;
   document.getElementById("asmRowCount").textContent = rows.length;
 
+  // Show an explanatory banner when any row has been split.
+  const splitCount = rows.filter(r => r.partsTotal > 1).length;
+  const banner = document.getElementById("asmSplitBanner");
+  if(banner){
+    if(splitCount > 0){
+      banner.style.display = "block";
+      banner.innerHTML =
+        `<strong>${splitCount} row${splitCount===1?" has":"s have"} been split.</strong> ` +
+        `Each part will be pushed as a separate Notion Assembly Log row, with ` +
+        `<code style="background:white;border:1px solid var(--border);padding:1px 5px;border-radius:3px;font-family:'JetBrains Mono',Consolas,monospace;font-size:10px">Part i/N</code> ` +
+        `recorded so the split is traceable. The Order # stays the bare Shopify number.`;
+    } else {
+      banner.style.display = "none";
+    }
+  }
+
   if(rows.length === 0){
     body.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted)">
       No Assembly rows pending. Once orders are in the print queue, their rows show up here.
@@ -3418,11 +3484,12 @@ function renderAssemblyQueue(){
                  : r.location === "Shipping" ? "shipping" : "assembly";
     const locPill = `<span class="asm-loc-pill asm-loc-${locKey}">${r.location || "Assembly"}</span>`;
 
-    // Part-of-N suffix on the order # when the row is split
+    // Part-of-N pill on the order # when the row is split
     const isPart = rec.partsTotal > 1;
     const partSuffix = isPart
-      ? ` <span class="asm-cust">· ${rec.partIdx+1}/${rec.partsTotal}</span>`
+      ? ` <span class="asm-part-pill">Part ${rec.partIdx+1}/${rec.partsTotal}</span>`
       : "";
+    const trCls = isPart ? "is-split-part" : "";
 
     // Split controls — sit right of the qty input
     const totalQty = (loadSplits()[rec.baseKey] || [r.qty || 1]).reduce((s,q)=>s+q, 0);
@@ -3445,7 +3512,7 @@ function renderAssemblyQueue(){
       `<option value="${a}" ${rec.assembler===a?"selected":""}>${a||"— assign —"}</option>`).join("");
 
     return `
-      <tr>
+      <tr class="${trCls}">
         <td>${orderLink}${partSuffix}</td>
         <td>
           <span class="asm-sku">${variantSku}</span>

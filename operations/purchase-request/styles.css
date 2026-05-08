@@ -142,22 +142,25 @@ body {
   transition: color 0.15s ease;
   white-space: nowrap;
 }
-.top-nav-tab:first-child { padding-left: 0; }
 .top-nav-tab:hover { color: var(--text); }
 .top-nav-tab[aria-current="page"] {
   color: var(--text);
   font-weight: 600;
 }
-/* Active underline — quiet 2px bar in accent color. No animation — switching
-   tabs is a navigation event, not a moment that needs flourish. */
+/* Active underline — centered under the tab text, not edge-to-edge across
+   the padded box (which made the first tab look off-center). 2px bar in
+   accent color. No animation — switching tabs is navigation, not flourish. */
 .top-nav-tab[aria-current="page"]::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: -1px;
+  width: calc(100% - 36px);
+  max-width: 100px;
   height: 2px;
   background: var(--accent);
+  border-radius: 1px;
 }
 
 @media (max-width: 640px) {
