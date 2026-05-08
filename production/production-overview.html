@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Production Overview — May 08, 2026 at 11:51 AM</title>
+<title>Production Overview — May 08, 2026 at 11:55 AM</title>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         :root {
@@ -594,28 +594,27 @@
                                           text-transform: uppercase;
                                           letter-spacing: 0.06em;
                                           font-weight: 600; margin-right: 2px; }
-        .color-chip { display: inline-flex; align-items: center; gap: 6px;
-                       padding: 4px 10px 4px 6px; border-radius: 999px;
-                       background: #FAFAFA; border: 1px solid #E0DDD9;
+        .color-chip { display: inline-flex; align-items: center; gap: 8px;
+                       padding: 5px 10px; border-radius: 6px;
+                       border: 1px solid rgba(0,0,0,0.15);
                        cursor: pointer; font-family: 'Poppins', sans-serif;
-                       font-size: 12px; color: #2A2A2A; font-weight: 500;
-                       transition: border-color 0.1s ease,
-                                    transform 0.1s ease, opacity 0.15s ease; }
-        .color-chip:hover { border-color: #FF9912; transform: translateY(-1px); }
-        .color-chip.active { border-color: #FF9912;
-                              box-shadow: 0 0 0 2px #FF9912; opacity: 1; }
-        .color-chip-dot { display: inline-block; width: 12px; height: 12px;
-                            border-radius: 50%; border: 1px solid rgba(0,0,0,0.15);
-                            flex-shrink: 0; }
-        .color-chip-name { font-weight: 500; padding-right: 2px; }
+                       font-size: 12px; font-weight: 600;
+                       letter-spacing: 0.01em;
+                       transition: transform 0.1s ease,
+                                    box-shadow 0.15s ease; }
+        .color-chip:hover { transform: translateY(-1px);
+                             box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+        .color-chip.active { box-shadow: 0 0 0 2px #FF9912; }
+        .color-chip-name { font-weight: 600; }
         .color-chip-stats { display: inline-flex; align-items: center;
-                             gap: 4px; padding-left: 4px;
-                             border-left: 1px solid #E0DDD9; margin-left: 2px;
-                             font-variant-numeric: tabular-nums; }
-        .color-chip-stat { font-size: 11px; color: #4A4A4A;
-                            font-weight: 500; letter-spacing: 0.02em; }
+                             gap: 6px; padding-left: 8px;
+                             border-left: 1px solid currentColor;
+                             font-variant-numeric: tabular-nums;
+                             opacity: 0.85; }
+        .color-chip-stat { font-size: 11px; font-weight: 500;
+                            letter-spacing: 0.02em; }
         .color-chip-stat b { display: inline-block; min-width: 9px;
-                              color: #888; font-weight: 600;
+                              opacity: 0.7; font-weight: 600;
                               margin-right: 1px; }
 
         /* Filter pills — match the per-card pill style (rounded, two-tone,
@@ -715,7 +714,7 @@
         <div class="kpi-divider"></div>
         <div class="kpi-bottom-row">
             <div class="kpi-date-row">
-                <div class="kpi-value kpi-date">May 08, 2026 at 11:51 AM</div>
+                <div class="kpi-value kpi-date">May 08, 2026 at 11:55 AM</div>
                 <span class="refresh-info-tip" tabindex="0" role="button"
                       aria-label="Refresh info">
                     <span aria-hidden="true">i</span>
@@ -2816,7 +2815,7 @@
 </div></div>
 
 <script>
-    const COLOR_HEX = {"White": "#FFFFFF", "Chalk": "#D0D0D0", "Bone": "#E5E4CF", "Barely": "#E8DFD0", "Pinkaboo": "#F7B6C0", "Orange": "#D4713B", "Ochre": "#B89111", "Riding Hood Red": "#9F2C00", "Python Green": "#4E782F", "Lagoon": "#728384", "Spa": "#A0AF9C", "Cobalt": "#1D1E33", "Slate Blue": "#2C4A56", "Black": "#1A1A1A"};
+    const COLOR_HEX = {"White": {"bg": "#FFFFFF", "fg": "#333"}, "Chalk": {"bg": "#D0D0D0", "fg": "#333"}, "Bone": {"bg": "#E5E4CF", "fg": "#333"}, "Barely": {"bg": "#E8DFD0", "fg": "#333"}, "Pinkaboo": {"bg": "#F7B6C0", "fg": "#333"}, "Orange": {"bg": "#D4713B", "fg": "#fff"}, "Ochre": {"bg": "#B89111", "fg": "#fff"}, "Riding Hood Red": {"bg": "#9F2C00", "fg": "#fff"}, "Python Green": {"bg": "#4E782F", "fg": "#fff"}, "Lagoon": {"bg": "#728384", "fg": "#fff"}, "Spa": {"bg": "#A0AF9C", "fg": "#333"}, "Cobalt": {"bg": "#1D1E33", "fg": "#fff"}, "Slate Blue": {"bg": "#2C4A56", "fg": "#fff"}, "Black": {"bg": "#1A1A1A", "fg": "#fff"}};
     function toggle(cls) {
         document.querySelectorAll('.' + cls).forEach(function(el) {
             el.classList.toggle('show');
@@ -3487,7 +3486,7 @@
                 } else {
                     stripEl.removeAttribute('hidden');
                     const chips = sorted.map(([name, _qty]) => {
-                        const hex = COLOR_HEX[name] || '#888';
+                        const pal = COLOR_HEX[name] || {bg: '#888', fg: '#fff'};
                         const active = (colorFilter === name) ? ' active' : '';
                         const lq = colorL[name] || 0;
                         const hq = colorH[name] || 0;
@@ -3498,9 +3497,9 @@
                         if (oq) stats.push('<span class="color-chip-stat" title="Distinct orders"><b>O</b>' + oq + '</span>');
                         return '<button class="color-chip' + active + '" ' +
                                'data-color="' + name + '" ' +
+                               'style="background:' + pal.bg + ';color:' + pal.fg + ';" ' +
                                'onclick="setColorFilter(\'' + name + '\', this)" ' +
                                'title="Show only ' + name + ' items. Click again to clear.">' +
-                               '<span class="color-chip-dot" style="background:' + hex + ';"></span>' +
                                '<span class="color-chip-name">' + name + '</span>' +
                                '<span class="color-chip-stats">' + stats.join('') + '</span>' +
                                '</button>';
