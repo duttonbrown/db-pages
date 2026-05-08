@@ -205,6 +205,38 @@ body {
   max-width: 1080px;
 }
 
+/* v1 ↔ v2 toggle — neutral version for the v1 sidebar (v2 has its own override). */
+.side-nav-toggle {
+  margin: 12px 22px 0;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+.side-nav-toggle-current {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 9px;
+}
+.side-nav-toggle-link {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+.side-nav-toggle-link:hover { color: var(--accent-dark); }
+@media (max-width: 900px) {
+  .side-nav-toggle {
+    margin: 6px 0 0;
+    padding: 6px 10px;
+  }
+}
+
 /* Bottom anchor — replaces the old footer nav. Just a quiet "View in Notion"
    link at the very bottom of the card so the external escape hatch stays
    reachable on long pages. */
