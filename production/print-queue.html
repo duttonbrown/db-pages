@@ -656,14 +656,14 @@
   :root {
     /* Shared grid template for order header AND line items.
        Columns:
-         1. order# / dot+SKU      — 130px (fixed)
-         2. date                  — 110px
-         3. time-ago              — 80px
-         4. customer / title      — 1fr   (the long flexible field)
-         5. amount / qty          — 70px  (right-aligned)
-         6. tags                  — auto  (right edge)
+         1. order# / dot+SKU       — 130px (fixed)
+         2. date                   — 110px
+         3. time-ago               — 80px
+         4. customer / title       — 1fr   (the long flexible field)
+         5. tags                   — auto  (sits right of customer)
+         6. amount / qty           — auto  (right edge, right-aligned)
     */
-    --row-grid: 130px 110px 80px minmax(0, 1fr) 70px auto;
+    --row-grid: 130px 110px 80px minmax(0, 1fr) auto auto;
   }
   .order-block {
     padding: 10px 4px 12px;
@@ -697,9 +697,9 @@
   .col-time-ago   { grid-column: 3; font-size: 12px; color: var(--muted); }
   .col-customer   { grid-column: 4; font-size: 12px; color: var(--text); font-weight: 500;
                     overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .col-amount     { grid-column: 5; font-size: 12px; color: var(--text); font-weight: 600;
-                    font-variant-numeric: tabular-nums; text-align: right; }
-  .col-tags       { grid-column: 6; justify-self: end; }
+  .col-tags       { grid-column: 5; justify-self: start; }
+  .col-amount     { grid-column: 6; font-size: 12px; color: var(--text); font-weight: 600;
+                    font-variant-numeric: tabular-nums; text-align: right; justify-self: end; }
   .order-num {
     font-weight: 600;
     color: var(--ink);
@@ -738,10 +738,10 @@
   }
   .line-item + .line-item { border-top: 1px dotted var(--border); }
   .line-item .line-sku   { grid-column: 1; }
-  /* Title spans columns 2-4 so it has room to breathe; the line's qty stays
-     aligned with the order's amount column. */
-  .line-item .line-title { grid-column: 2 / span 3; }
-  .line-item .line-qty   { grid-column: 5; text-align: right; }
+  /* Title spans columns 2-5 (date, time-ago, customer, tags slots) so it
+     has room to breathe. Line qty stacks under the order's amount in col 6. */
+  .line-item .line-title { grid-column: 2 / span 4; }
+  .line-item .line-qty   { grid-column: 6; text-align: right; justify-self: end; }
   .line-sku {
     font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
     font-size: 11px;
@@ -1080,6 +1080,45 @@
     font-family: inherit;
   }
   .asm-merge-btn:hover { border-color: var(--ink); color: var(--ink); }
+  /* Delete-part button — only visible on split-part rows. Conservative
+     visual treatment because it reduces row count. */
+  .asm-delete-btn {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+  }
+  .asm-delete-btn:hover {
+    border-color: var(--error);
+    color: var(--error);
+    background: #FDECEA;
+  }
+  /* Total-locked reassurance chip — confirms split parts still sum to the
+     original Shopify quantity. */
+  .asm-total-hint {
+    display: inline-block;
+    font-size: 10px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    font-variant-numeric: tabular-nums;
+    cursor: help;
+  }
   .asm-assembler {
     font-family: inherit;
     font-size: 11px;
@@ -1296,7 +1335,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-07T19:46:30",
+  "built_at": "2026-05-07T19:57:43",
   "orders": [
     {
       "shopify_order_id": "6941141467218",
@@ -2957,14 +2996,50 @@ function saveAssignment(rowKey, assembler){
 
 // Split-state — manager can split a single Notion row into multiple rows
 // before pushing. Stored as overrides keyed by the original row's identity.
-// Schema: { "<orderId>::<parent_sku>::<color>::<finish>": [qty1, qty2, ...] }
+//
+// Two parallel maps so we can enforce qty conservation:
+//   splits[baseKey]    = [qty1, qty2, ...]  current parts
+//   splitTotals[baseKey] = N                the LOCKED original total qty
+//
+// Editing a part's qty rebalances the others so they always sum to N.
+// Splitting / merging / deleting a part also keep the sum at N.
+// If splitTotals isn't set yet, we lock it on first split using the row's
+// original qty.
 const ASM_SPLIT_KEY = "db-print-queue-asm-split-v1";
+const ASM_SPLIT_TOTAL_KEY = "db-print-queue-asm-split-total-v1";
 function loadSplits(){
   try { return JSON.parse(localStorage.getItem(ASM_SPLIT_KEY) || "{}"); }
   catch(e){ return {}; }
 }
 function saveSplits(map){
   localStorage.setItem(ASM_SPLIT_KEY, JSON.stringify(map));
+}
+function loadSplitTotals(){
+  try { return JSON.parse(localStorage.getItem(ASM_SPLIT_TOTAL_KEY) || "{}"); }
+  catch(e){ return {}; }
+}
+function saveSplitTotals(map){
+  localStorage.setItem(ASM_SPLIT_TOTAL_KEY, JSON.stringify(map));
+}
+function lockSplitTotal(rowKey, qty){
+  const totals = loadSplitTotals();
+  if(!(rowKey in totals)){
+    totals[rowKey] = qty;
+    saveSplitTotals(totals);
+  }
+  return totals[rowKey];
+}
+function getSplitTotal(rowKey, fallback){
+  const totals = loadSplitTotals();
+  return rowKey in totals ? totals[rowKey] : fallback;
+}
+function clearSplitState(rowKey){
+  const splits = loadSplits();
+  const totals = loadSplitTotals();
+  delete splits[rowKey];
+  delete totals[rowKey];
+  saveSplits(splits);
+  saveSplitTotals(totals);
 }
 
 function downloadOverrideLog(){
@@ -3186,8 +3261,8 @@ function renderRow(r){
         <div class="col-date">${fmtDateLong(o.created_at)}</div>
         <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
         <div class="col-customer">${o.customer_name || ""}</div>
-        <div class="col-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
         <div class="col-tags">${tagsFor(o)}</div>
+        <div class="col-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
       </div>
       <div class="order-block-controls">
         <span class="type-pill" data-type="${printoutType(p)}">${printoutType(p)}</span>
@@ -3408,8 +3483,8 @@ function renderOrderQueue(){
           <div class="col-date">${fmtDateLong(o.created_at)}</div>
           <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
           <div class="col-customer">${o.customer_name || ""}</div>
-          <div class="col-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
           <div class="col-tags">${tagsFor(o)}</div>
+          <div class="col-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
         </div>
         <ul class="line-list">
           ${allLines.map(({line,color,finish}) => renderLine(line, color, finish)).join("")}
@@ -3438,54 +3513,140 @@ function _distribute(qty, n){
   return parts;
 }
 
-function asmSplitRow(rowKey, partIdx){
-  // Halve the targeted part: keep neighboring parts as-is.
+// Helper: rebalance an array of part-qtys around a fixed total.
+// Holds the part at `pinIdx` at `pinValue` (capped 1..total-(others count)),
+// then distributes (total - pinValue) across the other parts proportional
+// to their current values, with a floor of 1 each.
+function _rebalance(arr, pinIdx, pinValue, total){
+  const n = arr.length;
+  if(n === 0) return arr;
+  const minOthers = n - 1;                // each other part must be >= 1
+  const maxPin = Math.max(1, total - minOthers);
+  const pinned = Math.min(maxPin, Math.max(1, pinValue));
+  arr[pinIdx] = pinned;
+  if(n === 1) return arr;
+  const remaining = total - pinned;
+  // Distribute remaining across other parts proportionally to their current values.
+  // If their sum is 0 (shouldn't happen with floor 1), even-distribute.
+  const others = [];
+  let sumOthers = 0;
+  for(let i = 0; i < n; i++){
+    if(i === pinIdx) continue;
+    others.push({i, prev: arr[i]});
+    sumOthers += arr[i];
+  }
+  if(sumOthers <= 0){
+    const even = _distribute(remaining, others.length);
+    others.forEach((o, k) => { arr[o.i] = even[k]; });
+    return arr;
+  }
+  // Proportional split, then floor at 1 + redistribute leftover
+  let allocated = 0;
+  others.forEach((o, k) => {
+    if(k === others.length - 1){
+      arr[o.i] = remaining - allocated;          // last gets the rounding remainder
+    } else {
+      const share = Math.max(1, Math.round(remaining * o.prev / sumOthers));
+      arr[o.i] = share;
+      allocated += share;
+    }
+  });
+  // Final pass: ensure no part is below 1 (push deficit to the largest)
+  for(let i = 0; i < n; i++){
+    if(arr[i] < 1){
+      const deficit = 1 - arr[i];
+      arr[i] = 1;
+      // pull deficit from the largest other part
+      let donorIdx = -1, donorQty = -1;
+      for(let j = 0; j < n; j++){
+        if(j === i) continue;
+        if(arr[j] - deficit >= 1 && arr[j] > donorQty){ donorIdx = j; donorQty = arr[j]; }
+      }
+      if(donorIdx >= 0) arr[donorIdx] -= deficit;
+    }
+  }
+  return arr;
+}
+
+function asmSplitRow(rowKey, partIdx, originalRowQty){
+  // Halve the targeted part. Locks the row's total on first split.
   const splits = loadSplits();
-  const original = splits[rowKey];
-  if(!original) return;
-  const qty = original[partIdx];
+  const arr = splits[rowKey] || [originalRowQty];
+  const total = lockSplitTotal(rowKey, arr.reduce((s,q)=>s+q, 0));
+  const qty = arr[partIdx];
   if(qty <= 1) return;
   const halves = _distribute(qty, 2);
-  original.splice(partIdx, 1, ...halves);
-  splits[rowKey] = original;
+  arr.splice(partIdx, 1, ...halves);
+  splits[rowKey] = arr;
   saveSplits(splits);
+  // Sanity check: total should still equal locked total (split conserves)
   renderAssemblyQueue();
 }
-function asmSplitIntoN(rowKey){
-  // Prompt for N and distribute the WHOLE row (across all current parts).
+function asmSplitIntoN(rowKey, originalRowQty){
   const splits = loadSplits();
-  const original = splits[rowKey] || [];
-  const totalQty = original.reduce((s,q)=>s+q, 0);
-  if(!totalQty) return;
+  const arr = splits[rowKey] || [originalRowQty];
+  const total = lockSplitTotal(rowKey, arr.reduce((s,q)=>s+q, 0));
   const ans = window.prompt(
-    `Split a row of ${totalQty} units into how many assembly rows?\n` +
+    `Split a row of ${total} units into how many assembly rows?\n` +
     `Even distribution (e.g. 100 ÷ 3 → 34, 33, 33).`,
-    String(Math.max(2, original.length || 2))
+    String(Math.max(2, arr.length || 2))
   );
-  if(ans == null) return;        // cancelled
+  if(ans == null) return;
   const n = Math.max(1, parseInt(ans, 10) || 0);
   if(n === 0) return;
   if(n === 1){
-    // Effectively merge
-    splits[rowKey] = [totalQty];
+    splits[rowKey] = [total];
+  } else if(n > total){
+    alert(`Can't split ${total} units into ${n} parts — minimum 1 per part.`);
+    return;
   } else {
-    splits[rowKey] = _distribute(totalQty, n);
+    splits[rowKey] = _distribute(total, n);
   }
   saveSplits(splits);
   renderAssemblyQueue();
 }
 function asmMergeRow(rowKey){
+  // Reverts every part back to one row at the locked original total.
+  clearSplitState(rowKey);
+  renderAssemblyQueue();
+}
+function asmDeletePart(rowKey, partIdx){
+  // "Oopsies undo" — delete a single part. Its qty pours into the
+  // part ABOVE it (partIdx - 1). If we're deleting the first part,
+  // qty pours into the part BELOW it (partIdx + 1) instead.
+  // Total stays conserved. If only one part left, clear split state
+  // entirely.
   const splits = loadSplits();
-  delete splits[rowKey];
+  const arr = splits[rowKey];
+  if(!arr || arr.length <= 1){
+    clearSplitState(rowKey);
+    renderAssemblyQueue();
+    return;
+  }
+  const removed = arr[partIdx];
+  arr.splice(partIdx, 1);
+  if(arr.length === 1){
+    // Just one part left → unlock split state, total returns to one row
+    arr[0] = arr[0] + removed;
+    clearSplitState(rowKey);
+    renderAssemblyQueue();
+    return;
+  }
+  // Pour removed qty into neighbor: above if exists, else below
+  const targetIdx = partIdx === 0 ? 0 : partIdx - 1;
+  arr[targetIdx] += removed;
+  splits[rowKey] = arr;
   saveSplits(splits);
   renderAssemblyQueue();
 }
 function asmUpdateQty(rowKey, partIdx, newQty){
+  // Editing a part rebalances the others so the locked total stays put.
   const splits = loadSplits();
   const arr = splits[rowKey];
   if(!arr) return;
-  arr[partIdx] = Math.max(1, parseInt(newQty,10) || 1);
-  splits[rowKey] = arr;
+  const total = getSplitTotal(rowKey, arr.reduce((s,q)=>s+q, 0));
+  const requested = Math.max(1, parseInt(newQty, 10) || 1);
+  splits[rowKey] = _rebalance(arr.slice(), partIdx, requested, total);
   saveSplits(splits);
   renderAssemblyQueue();
 }
@@ -3567,10 +3728,10 @@ function renderAssemblyQueue(){
                  : r.location === "Shipping" ? "shipping" : "assembly";
     const locPill = `<span class="asm-loc-pill asm-loc-${locKey}">${r.location || "Assembly"}</span>`;
 
-    // Part-of-N pill on the order # when the row is split
+    // Part-of-N pill — always shown when split, including basic 2-way
     const isPart = rec.partsTotal > 1;
     const partSuffix = isPart
-      ? ` <span class="asm-part-pill">Part ${rec.partIdx+1}/${rec.partsTotal}</span>`
+      ? ` <span class="asm-part-pill">${rec.partIdx+1}/${rec.partsTotal}</span>`
       : "";
     const trCls = isPart ? "is-split-part" : "";
 
@@ -3581,14 +3742,21 @@ function renderAssemblyQueue(){
       <span class="asm-split-group">
         <button class="asm-split-btn" ${splitDisabled}
                 title="${rec.canSplit ? 'Split this row into two halves' : 'Cannot split a row of qty 1'}"
-                onclick="asmSplitRow('${rec.baseKey}', ${rec.partIdx})">Split</button>
+                onclick="asmSplitRow('${rec.baseKey}', ${rec.partIdx}, ${r.qty || 1})">Split</button>
         <button class="asm-split-into-btn" ${totalQty <= 1 ? 'disabled' : ''}
                 title="Split this order's row into N parts of even quantity"
-                onclick="asmSplitIntoN('${rec.baseKey}')">÷N</button>
+                onclick="asmSplitIntoN('${rec.baseKey}', ${r.qty || 1})">÷N</button>
       </span>`;
-    const mergeBtn = isPart
-      ? `<button class="asm-merge-btn" title="Merge all parts back to one row"
-                  onclick="asmMergeRow('${rec.baseKey}')">merge</button>`
+    // On split-parts: show a Delete (×) button that returns this part's qty
+    // to the neighbor above. On the parent row (or unsplit row): show the
+    // merge button as a quick "undo all splits" affordance.
+    const partControls = isPart
+      ? `<button class="asm-delete-btn" title="Delete this part — its qty will return to the part above (or below if this is the first part). Total quantity is conserved."
+                  onclick="asmDeletePart('${rec.baseKey}', ${rec.partIdx})">×</button>` +
+        (rec.partIdx === rec.partsTotal - 1
+          ? ` <button class="asm-merge-btn" title="Merge all parts back to one row"
+                       onclick="asmMergeRow('${rec.baseKey}')">merge all</button>`
+          : "")
       : "";
 
     const opts = ASSEMBLERS.map(a =>
@@ -3608,7 +3776,8 @@ function renderAssemblyQueue(){
             <input class="asm-qty-input" type="number" min="1" max="200" value="${rec.qty}"
                    onchange="asmUpdateQty('${rec.baseKey}', ${rec.partIdx}, this.value)" />
             ${splitGroup}
-            ${mergeBtn}
+            ${partControls}
+            ${isPart ? `<span class="asm-total-hint" title="${totalQty} units split across ${rec.partsTotal} parts (locked at original total)">${totalQty} total</span>` : ""}
           </span>
         </td>
         <td class="center">${locPill}</td>
