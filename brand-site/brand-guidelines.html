@@ -599,7 +599,7 @@
           </div>
 
           <div class="role-tip">
-            <strong>The 13-Color Rule:</strong> Signature brand colors (Cobalt, Lagoon, Pinkaboo, Python Green, etc.)
+            <strong>The 14-Color Rule:</strong> Signature brand colors (Cobalt, Lagoon, Pinkaboo, Barely, Python Green, etc.)
             appear only in the color strip and on products. They are never used as hero backgrounds, section fills,
             benefit circle colors, testimonial backgrounds, or email template accents. This keeps them special &mdash;
             when a customer sees Python Green, they think of the product, not the UI.
@@ -833,7 +833,7 @@
                 </div>
                 <div class="color-pair-item">
                   <div class="color-pair-swatches">
-                    <span class="color-pair-swatch" style="background: linear-gradient(to right, #f7b6c0, #D4713B, #B89111, #4E782F, #728384, #1D1E33);"></span>
+                    <span class="color-pair-swatch" style="background: linear-gradient(to right, #f7b6c0, #CCB8B8, #D4713B, #B89111, #4E782F, #728384, #203955);"></span>
                   </div>
                   <span class="color-pair-text">Use the 13 powder coat colors in decorative strips &mdash; top-to-bottom gradients or thin section separators that showcase our range</span>
                 </div>
@@ -844,7 +844,7 @@
               <div class="db-voice-example db-voice-dont">
                 <div class="color-pair-item">
                   <div class="color-pair-swatches">
-                    <span class="color-pair-swatch" style="background: #1D1E33;"></span>
+                    <span class="color-pair-swatch" style="background: #203955;"></span>
                     <span class="color-pair-swatch" style="background: #728384;"></span>
                   </div>
                   <span class="color-pair-text">Use signature colors (Cobalt, Lagoon, etc.) as section backgrounds or UI fills &mdash; they belong on products only</span>
@@ -951,11 +951,11 @@
               <tr>
                 <td>
                   <span class="contrast-preview">
-                    <span class="contrast-dot" style="background: #1D1E33;"></span>
+                    <span class="contrast-dot" style="background: #203955;"></span>
                     White on Cobalt
                   </span>
                 </td>
-                <td><strong>15.4:1</strong></td>
+                <td><strong>11.2:1</strong></td>
                 <td><span class="contrast-badge contrast-badge-aaa">AAA</span></td>
                 <td>Trade CTA sections &mdash; excellent</td>
               </tr>
@@ -1455,13 +1455,14 @@
 
           <h3 class="db-h4" style="margin: var(--db-space-6) 0 var(--db-space-3);">Powder Coat Swatches <span style="font-size: var(--db-text-xs); font-weight: var(--db-font-regular); color: var(--db-text-muted);">(product graphics &amp; decorative separators only)</span></h3>
           <div class="token-block">
-<span class="comment">/* Powder Coat Swatches — 13 Product Colors */</span>
+<span class="comment">/* Powder Coat Swatches — 14 Product Colors */</span>
 <span class="comment">/* For product color graphics, decorative color strips, and separators ONLY */</span>
+<span class="prop">--db-barely:</span>         <span class="val">#CCB8B8</span>;
 <span class="prop">--db-pinkaboo:</span>       <span class="val">#f7b6c0</span>;
 <span class="prop">--db-black:</span>          <span class="val">#000000</span>;
 <span class="prop">--db-bone:</span>           <span class="val">#e5e4cf</span>;
 <span class="prop">--db-chalk:</span>          <span class="val">#D0D0D0</span>;
-<span class="prop">--db-cobalt:</span>         <span class="val">#1D1E33</span>;
+<span class="prop">--db-cobalt:</span>         <span class="val">#203955</span>;
 <span class="prop">--db-lagoon:</span>         <span class="val">#728384</span>;
 <span class="prop">--db-ochre:</span>          <span class="val">#B89111</span>;
 <span class="prop">--db-orange:</span>         <span class="val">#D4713B</span>;
@@ -1571,13 +1572,14 @@
     const brandGrid = document.getElementById('brandSwatchGrid');
     if (brandGrid) renderSwatches(brandColors, brandGrid);
 
-    // ---- POWDER COAT SWATCHES (13 product colors) ----
+    // ---- POWDER COAT SWATCHES (14 product colors) ----
     const powderCoatColors = [
+      { name: 'Barely',          hex: '#CCB8B8', var: '--db-barely',          dark: false },
       { name: 'Pinkaboo',        hex: '#f7b6c0', var: '--db-pinkaboo',        dark: false },
       { name: 'Black',           hex: '#000000', var: '--db-black',           dark: true },
       { name: 'Bone',            hex: '#e5e4cf', var: '--db-bone',            dark: false },
       { name: 'Chalk',           hex: '#D0D0D0', var: '--db-chalk',           dark: false },
-      { name: 'Cobalt',          hex: '#1D1E33', var: '--db-cobalt',          dark: true },
+      { name: 'Cobalt',          hex: '#203955', var: '--db-cobalt',          dark: true },
       { name: 'Lagoon',          hex: '#728384', var: '--db-lagoon',          dark: true },
       { name: 'Ochre',           hex: '#B89111', var: '--db-ochre',           dark: true },
       { name: 'Orange',          hex: '#D4713B', var: '--db-orange',          dark: false },
