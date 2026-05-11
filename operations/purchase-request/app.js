@@ -670,5 +670,15 @@ requestor.addEventListener("change", updateSubmitState);
 submitBtn.addEventListener("click", handleSubmit);
 newReqBtn.addEventListener("click", resetForm);
 
+// Stop the wheel from silently bumping focused number inputs ("5000 -> 5006"
+// bug Zach hit). When a number input has focus and the user scrolls, blur it
+// — the page scrolls and the value stays put.
+document.addEventListener("wheel", (e) => {
+  const el = document.activeElement;
+  if (el && el.tagName === "INPUT" && el.type === "number") {
+    el.blur();
+  }
+}, { passive: true });
+
 // Boot: fetch catalog + requestors in parallel
 Promise.all([loadCatalog(), loadRequestors()]).then(updateSubmitState);

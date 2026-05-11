@@ -298,3 +298,13 @@
   .po-actions { width: 100%; }
   .po-actions .primary { flex: 1; }
 }
+
+/* iPhone — tighten the search bar and the issue-note width so they don't
+   force horizontal scroll. */
+@media (max-width: 480px) {
+  .receive-search input[type="search"] { max-width: none; }
+  .item-issue-note { width: 100%; }
+  .item-thumb,
+  .item-thumb-fallback { width: 36px; height: 36px; font-size: 16px; }
+  .item-row { padding: 8px 10px; gap: 10px; }
+}
