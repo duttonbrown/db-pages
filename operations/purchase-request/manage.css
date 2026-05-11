@@ -18,6 +18,151 @@
   max-width: 240px;
 }
 .purchaser-bar .link-btn { margin-left: auto; }
+.purchaser-bar .link-btn + .link-btn { margin-left: 0; }
+.purchaser-bar .link-btn.active {
+  background: var(--accent);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Bulk-mode checkbox column — empty wrap when row isn't eligible so the
+   alignment stays uniform across the queue. */
+.bulk-checkbox-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  padding-top: 16px; /* aligns the checkbox with the title-row baseline */
+}
+.bulk-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.bulk-checkbox-disabled { width: 22px; }
+
+/* Sticky bulk action bar — appears at bottom of viewport when bulk mode is
+   on and ≥1 row is selected. Centered card so it doesn't fight the sidebar. */
+.bulk-action-bar {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* let the bar inner be the click target */
+}
+.bulk-action-bar-inner {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  background: var(--text);
+  color: white;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  max-width: 720px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.bulk-count {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.bulk-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.bulk-actions .link-btn {
+  color: rgba(255,255,255,0.75);
+  font-size: 12px;
+  text-decoration: underline;
+}
+.bulk-actions .link-btn:hover { color: white; }
+.bulk-actions .primary {
+  background: var(--accent);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: none;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+.bulk-actions .primary:disabled {
+  background: rgba(255,255,255,0.3);
+  cursor: not-allowed;
+}
+/* Keep the queue clear of the floating bar */
+body.bulk-mode .app-main { padding-bottom: 80px; }
+
+/* Per-item qty table inside the bulk modal */
+.bulk-items-table-wrap {
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+}
+.bulk-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.bulk-items-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.bulk-items-table tbody td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.bulk-items-table tbody tr:last-child td { border-bottom: none; }
+.bulk-items-id {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.bulk-items-title-text { font-weight: 500; color: var(--text); }
+.bulk-items-vendor { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.bulk-items-qty { width: 96px; text-align: right; }
+.bulk-items-qty-head { text-align: right; }
+.bulk-qty-input {
+  width: 84px;
+  padding: 6px 8px !important;
+  font-size: 13px !important;
+  text-align: right;
+}
+
+/* Mixed-vendor warning */
+.bulk-vendor-warning {
+  background: #FFF7EB;
+  border: 1px solid var(--accent);
+  color: var(--accent-dark);
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.bulk-vendor-warning strong { color: var(--text); }
 
 .empty-state {
   text-align: center;
@@ -65,6 +210,11 @@
   gap: 12px;
   padding: 10px 12px;
   border-bottom: 1px solid var(--border);
+}
+/* Bulk mode: prepend a checkbox column on the left; action column collapses
+   to nothing since per-row actions are hidden. */
+body.bulk-mode .pending-row {
+  grid-template-columns: auto auto 1fr;
 }
 .pending-row:last-child { border-bottom: none; }
 .pending-row .row-thumb,
@@ -514,6 +664,11 @@
   }
   .vendor-bubble { min-width: 0; flex: 1 1 220px; }
   .triage-bubble { flex: 1 1 220px; }
+  /* Bulk mode on iPad: checkbox + thumb + meta in one row (no actions). */
+  body.bulk-mode .pending-row {
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto;
+  }
 }
 
 /* iPhone — pull the thumb down a notch and let everything stack tighter. */

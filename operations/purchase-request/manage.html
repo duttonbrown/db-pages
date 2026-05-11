@@ -40,6 +40,7 @@
     <select id="purchaser-name">
       <option value="">Select your name…</option>
     </select>
+    <button type="button" id="bulk-toggle-btn" class="link-btn" aria-pressed="false">Bulk update</button>
     <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
   </div>
 
@@ -78,6 +79,18 @@
 </main>
 </div>
 
+</div>
+
+<!-- Sticky bulk action bar — appears at bottom of viewport when bulkMode is on and ≥1 row is selected. -->
+<div id="bulk-action-bar" class="bulk-action-bar" hidden>
+  <div class="bulk-action-bar-inner">
+    <span class="bulk-count" id="bulk-count">0 selected</span>
+    <div class="bulk-actions">
+      <button type="button" id="bulk-select-all" class="link-btn">Select all visible</button>
+      <button type="button" id="bulk-clear" class="link-btn">Clear</button>
+      <button type="button" id="bulk-ordered-btn" class="primary" disabled>Mark Ordered</button>
+    </div>
+  </div>
 </div>
 
 <!-- Action modal: fields swap in based on which action button was clicked -->

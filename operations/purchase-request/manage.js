@@ -14,6 +14,19 @@ const digestEl     = $("vendor-digest");
 const digestListEl = $("vendor-digest-list");
 const triageEl     = $("triage");
 const triageListEl = $("triage-list");
+const bulkToggleBtn   = $("bulk-toggle-btn");
+const bulkActionBar   = $("bulk-action-bar");
+const bulkCountEl     = $("bulk-count");
+const bulkSelectAllBtn = $("bulk-select-all");
+const bulkClearBtn    = $("bulk-clear");
+const bulkOrderedBtn  = $("bulk-ordered-btn");
+
+// Bulk mode: when on, every queue row shows a left-edge checkbox and the
+// sticky action bar appears at the bottom of the viewport once any row is
+// selected. Only Submitted / Backordered / Waiting rows can be selected for
+// the "Mark Ordered" action (matches the per-row action allow-list).
+let bulkMode = false;
+const bulkSelection = new Set(); // pageIds
 
 // Vendor filter state. When set, only rows whose primary vendor matches are
 // shown in the queue. Click an active digest bubble again (or the same one)
@@ -399,6 +412,62 @@ function lastOrderedLabel(iso) {
 
 refreshBtn.addEventListener("click", loadPending);
 
+// ----- Bulk mode wiring -----
+//
+// Only Submitted / Backordered / Waiting to Order rows can transition to
+// Ordered, so the checkbox only appears on those statuses. Ordered rows in
+// the queue are visible but not selectable.
+function bulkEligible(r) {
+  return r.status === "Submitted"
+      || r.status === "Backordered"
+      || r.status === "Waiting to Order";
+}
+
+function setBulkMode(on) {
+  bulkMode = !!on;
+  bulkToggleBtn.setAttribute("aria-pressed", bulkMode ? "true" : "false");
+  bulkToggleBtn.textContent = bulkMode ? "Exit bulk update" : "Bulk update";
+  bulkToggleBtn.classList.toggle("active", bulkMode);
+  if (!bulkMode) bulkSelection.clear();
+  document.body.classList.toggle("bulk-mode", bulkMode);
+  refreshBulkBar();
+  // Re-render so checkboxes appear / disappear
+  renderQueue(filteredRows());
+}
+
+bulkToggleBtn.addEventListener("click", () => setBulkMode(!bulkMode));
+
+function refreshBulkBar() {
+  const n = bulkSelection.size;
+  if (!bulkMode || n === 0) {
+    bulkActionBar.hidden = true;
+    return;
+  }
+  bulkActionBar.hidden = false;
+  bulkCountEl.textContent = `${n} selected`;
+  bulkOrderedBtn.disabled = n === 0;
+}
+
+bulkClearBtn.addEventListener("click", () => {
+  bulkSelection.clear();
+  // Uncheck DOM without a full re-render
+  document.querySelectorAll(".bulk-checkbox:checked").forEach(cb => cb.checked = false);
+  refreshBulkBar();
+});
+
+bulkSelectAllBtn.addEventListener("click", () => {
+  // "Visible" = currently rendered (respects vendor/triage filter). Only the
+  // bulk-eligible ones get added — Ordered rows in the queue are skipped.
+  const rows = filteredRows().filter(bulkEligible);
+  for (const r of rows) bulkSelection.add(r.pageId);
+  document.querySelectorAll(".bulk-checkbox").forEach(cb => {
+    if (bulkSelection.has(cb.dataset.pageId)) cb.checked = true;
+  });
+  refreshBulkBar();
+});
+
+bulkOrderedBtn.addEventListener("click", openBulkOrderedModal);
+
 function renderQueue(rows) {
   queueEl.innerHTML = "";
   if (rows.length === 0) {
@@ -462,7 +531,14 @@ function renderRow(r) {
     ? `<img class="row-thumb" src="${escapeHtml(r.image)}" alt="">`
     : `<div class="row-thumb-fallback">${r.type === "Supply" ? "📦" : r.type === "Other" ? "🛠️" : "🔩"}</div>`;
 
+  const bulkCheckboxHtml = bulkMode
+    ? (bulkEligible(r)
+        ? `<label class="bulk-checkbox-wrap"><input type="checkbox" class="bulk-checkbox" data-page-id="${escapeHtml(r.pageId)}"${bulkSelection.has(r.pageId) ? " checked" : ""}></label>`
+        : `<span class="bulk-checkbox-wrap bulk-checkbox-disabled" aria-hidden="true"></span>`)
+    : "";
+
   li.innerHTML = `
+    ${bulkCheckboxHtml}
     ${thumbHtml}
     <div class="pending-meta">
       <div class="title-row">
@@ -536,16 +612,31 @@ function renderRow(r) {
   notesEl.innerHTML = noteParts.join(" · ");
   notesEl.hidden = noteParts.length === 0;
 
-  // Action buttons depend on current status
+  // Action buttons depend on current status. In bulk mode, hide the per-row
+  // actions so the queue stays clean and people use the bulk bar instead.
   const actions = li.querySelector(".row-actions");
-  const buttons = actionsFor(r.status);
-  for (const b of buttons) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = `action-btn ${b.cls || ""}`;
-    btn.textContent = b.label;
-    btn.addEventListener("click", () => openModal(b.action, r));
-    actions.appendChild(btn);
+  if (bulkMode) {
+    actions.remove();
+  } else {
+    const buttons = actionsFor(r.status);
+    for (const b of buttons) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = `action-btn ${b.cls || ""}`;
+      btn.textContent = b.label;
+      btn.addEventListener("click", () => openModal(b.action, r));
+      actions.appendChild(btn);
+    }
+  }
+
+  // Wire bulk checkbox if present
+  const bulkCb = li.querySelector(".bulk-checkbox");
+  if (bulkCb) {
+    bulkCb.addEventListener("change", () => {
+      if (bulkCb.checked) bulkSelection.add(bulkCb.dataset.pageId);
+      else bulkSelection.delete(bulkCb.dataset.pageId);
+      refreshBulkBar();
+    });
   }
 
   return li;
@@ -826,6 +917,11 @@ function fieldsFor(action, row) {
 }
 
 modalSubmit.addEventListener("click", async () => {
+  // Bulk path uses a separate submit handler with its own per-item payload
+  // shape and its own POST endpoint.
+  if (modalAction === "__bulkOrdered") {
+    return submitBulkOrdered();
+  }
   if (!modalRow || !modalAction) return;
   const formData = new FormData(modalForm);
   const fields = {};
@@ -864,6 +960,247 @@ modalSubmit.addEventListener("click", async () => {
     modalSubmit.textContent = "Confirm";
   }
 });
+
+// ----- Bulk Mark Ordered modal -----
+//
+// Reuses the shared modal shell but swaps in a per-item qty table at the top
+// (one row per selected request, each with its own editable Qty Ordered) and
+// the same shared-field block (Order # / PO # / Ordered Date / ETA /
+// Tracking / Notes) below it.
+
+let bulkModalRows = []; // snapshot of selected rows at modal-open time
+
+function openBulkOrderedModal() {
+  if (!purchaserSel.value) {
+    alert("Please select your name in the top bar before bulk-ordering.");
+    purchaserSel.focus();
+    return;
+  }
+  // Snapshot the current selection so a refresh-after-submit doesn't strand it.
+  const selectedIds = [...bulkSelection];
+  bulkModalRows = allRows.filter(r => selectedIds.includes(r.pageId));
+  if (bulkModalRows.length === 0) return;
+
+  // Vendor mismatch: warn (not block) when selected rows have different
+  // primary vendors. Most bulk orders go to a single vendor; mixed selection
+  // is occasionally intentional but worth a heads-up.
+  const vendors = new Set(bulkModalRows.map(primaryVendor).filter(Boolean));
+  const vendorWarning = vendors.size > 1
+    ? `<div class="bulk-vendor-warning">
+         <strong>Heads up:</strong> these items have ${vendors.size} different vendors
+         (${[...vendors].map(escapeHtml).join(", ")}). Make sure you're putting them on
+         the right PO before confirming.
+       </div>`
+    : "";
+
+  // Lead time hint for ETA default — use the longest among selected items so
+  // the auto-defaulted ETA is conservative. Falls back to no default if no
+  // item has a parseable lead time.
+  const leadDaysList = bulkModalRows.map(r => leadTimeToDays(r.leadTime)).filter(d => d != null && d > 0);
+  const maxLead = leadDaysList.length ? Math.max(...leadDaysList) : null;
+  const today = todayISO();
+  const defaultETA = maxLead != null ? addDaysISO(today, maxLead) : "";
+  const etaHint = maxLead != null
+    ? ` <span class="muted">(longest lead = ${maxLead}d from order date)</span>`
+    : "";
+
+  // Per-item qty table — one editable row per selected request. Default to
+  // MOQ when known, else previously-recorded qtyOrdered, else blank.
+  const itemsTableRows = bulkModalRows.map(r => {
+    const title = r.itemName || r.customItemName || "(unnamed)";
+    const qtyDefault = r.moqQty ?? r.qtyOrdered ?? "";
+    const vendor = primaryVendor(r);
+    return `
+      <tr data-page-id="${escapeHtml(r.pageId)}">
+        <td class="bulk-items-id">${escapeHtml(r.orderNum)}</td>
+        <td class="bulk-items-title">
+          <div class="bulk-items-title-text">${escapeHtml(title)}</div>
+          ${vendor ? `<div class="bulk-items-vendor">${escapeHtml(vendor)}</div>` : ""}
+        </td>
+        <td class="bulk-items-qty">
+          <input type="number" class="bulk-qty-input" min="1" value="${qtyDefault}" aria-label="Qty Ordered for ${escapeHtml(r.orderNum)}">
+        </td>
+      </tr>
+    `;
+  }).join("");
+
+  modalTitle.textContent = `Mark ${bulkModalRows.length} items as Ordered`;
+  modalContext.innerHTML = vendors.size === 1
+    ? `<strong>${bulkModalRows.length} items</strong> · Vendor: ${escapeHtml([...vendors][0])}`
+    : `<strong>${bulkModalRows.length} items</strong> selected for bulk ordering`;
+  modalForm.innerHTML = `
+    ${vendorWarning}
+    <div class="bulk-items-table-wrap">
+      <table class="bulk-items-table">
+        <thead><tr>
+          <th>Request #</th>
+          <th>Item</th>
+          <th class="bulk-items-qty-head">Qty Ordered<span class="req">*</span></th>
+        </tr></thead>
+        <tbody>${itemsTableRows}</tbody>
+      </table>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="bf-orderNumber">Order #<span class="req">*</span></label>
+        <input id="bf-orderNumber" name="orderNumber" type="text" placeholder="e.g. #12345">
+        <label class="field-checkbox">
+          <input type="checkbox" id="bf-noOrderNumber" name="noOrderNumber" value="1">
+          <span>No Order # available</span>
+        </label>
+      </div>
+      <div class="field">
+        <label for="bf-poNumber">PO #<span class="req">*</span></label>
+        <input id="bf-poNumber" name="poNumber" type="text" placeholder="e.g. PO-2026-0042">
+        <label class="field-checkbox">
+          <input type="checkbox" id="bf-noPO" name="noPO" value="1">
+          <span>No PO # available</span>
+        </label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="bf-orderedDate">Ordered Date<span class="req">*</span></label>
+      <input id="bf-orderedDate" name="orderedDate" type="date" value="${today}">
+    </div>
+    <div class="field">
+      <label for="bf-eta">ETA<span class="req">*</span>${etaHint}</label>
+      <input id="bf-eta" name="eta" type="date" value="${defaultETA}" data-lead-days="${maxLead ?? ""}">
+    </div>
+    <div class="field">
+      <label for="bf-tracking">Tracking # <span class="muted">(optional, same for all)</span></label>
+      <input id="bf-tracking" name="tracking" type="text">
+    </div>
+    <div class="field">
+      <label for="bf-purchaserNotes">Purchaser notes <span class="muted">(optional, applied to all)</span></label>
+      <input id="bf-purchaserNotes" name="purchaserNotes" type="text">
+    </div>
+  `;
+  modalErr.hidden = true;
+  modal.hidden = false;
+
+  // Wire toggles
+  const wireNoToggle = (boxId, inputId, placeholderOn, placeholderOff) => {
+    const box = modalForm.querySelector(`#${boxId}`);
+    const input = modalForm.querySelector(`#${inputId}`);
+    if (!box || !input) return;
+    box.addEventListener("change", () => {
+      if (box.checked) {
+        input.value = "";
+        input.disabled = true;
+        input.placeholder = placeholderOn;
+      } else {
+        input.disabled = false;
+        input.placeholder = placeholderOff;
+        input.focus();
+      }
+    });
+  };
+  wireNoToggle("bf-noOrderNumber", "bf-orderNumber", "Not provided", "e.g. #12345");
+  wireNoToggle("bf-noPO",          "bf-poNumber",   "Not provided", "e.g. PO-2026-0042");
+
+  // ETA auto-slide on Ordered Date change (mirrors single-row modal)
+  const orderedInput = modalForm.querySelector("#bf-orderedDate");
+  const etaInput     = modalForm.querySelector("#bf-eta");
+  if (orderedInput && etaInput && maxLead != null) {
+    let etaTouched = false;
+    etaInput.addEventListener("input", () => { etaTouched = true; });
+    orderedInput.addEventListener("input", () => {
+      if (etaTouched) return;
+      if (!orderedInput.value) return;
+      etaInput.value = addDaysISO(orderedInput.value, maxLead);
+    });
+  }
+
+  // Flag the submit handler to take the bulk path
+  modalAction = "__bulkOrdered";
+  modalRow = null;
+
+  // Auto-focus the Order # input
+  const firstInput = modalForm.querySelector("#bf-orderNumber");
+  if (firstInput) firstInput.focus();
+}
+
+async function submitBulkOrdered() {
+  const f = (id) => modalForm.querySelector("#" + id);
+  const truthyBox = (id) => { const el = f(id); return !!el && el.checked; };
+  const sharedFields = {
+    orderNumber:   f("bf-orderNumber")?.value.trim() || "",
+    poNumber:      f("bf-poNumber")?.value.trim() || "",
+    orderedDate:   f("bf-orderedDate")?.value || "",
+    eta:           f("bf-eta")?.value || "",
+    tracking:      f("bf-tracking")?.value.trim() || "",
+    noPO:          truthyBox("bf-noPO"),
+    noOrderNumber: truthyBox("bf-noOrderNumber"),
+  };
+  // Strip empty/false so the worker's validator doesn't get confused
+  for (const k of Object.keys(sharedFields)) {
+    if (sharedFields[k] === "" || sharedFields[k] === false) delete sharedFields[k];
+  }
+
+  // Per-item qty pulled from the table rows; reject if any are blank/<=0
+  const qtyRows = [...modalForm.querySelectorAll(".bulk-items-table tbody tr")];
+  const items = [];
+  for (const tr of qtyRows) {
+    const pageId = tr.dataset.pageId;
+    const raw    = tr.querySelector(".bulk-qty-input").value.trim();
+    if (!raw) { return failBulk(`Qty Ordered is required on every row — check the table above.`); }
+    const n = Number(raw);
+    if (!Number.isFinite(n) || n <= 0) { return failBulk(`Qty must be a positive number — check the table above.`); }
+    items.push({ pageId, qtyOrdered: n });
+  }
+
+  const purchaserNotes = f("bf-purchaserNotes")?.value.trim() || "";
+
+  modalErr.hidden = true;
+  modalSubmit.disabled = true;
+  modalSubmit.textContent = "Saving…";
+  try {
+    const res = await fetch(`${WORKER_URL}/bulk-update`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "ordered",
+        sharedFields,
+        items,
+        purchaserName: purchaserSel.value,
+        purchaserNotes,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok && res.status !== 207) {
+      const firstErr = (data.results || []).find(r => !r.ok)?.error || data.error || "Bulk update failed";
+      throw new Error(firstErr);
+    }
+    // Surface per-row failures in the modal if any
+    const failures = (data.results || []).filter(r => !r.ok);
+    if (failures.length) {
+      const lines = failures.map(fr => {
+        const matched = bulkModalRows.find(r => r.pageId === fr.pageId);
+        const label = matched ? matched.orderNum : (fr.pageId || "?");
+        return `• ${label}: ${escapeHtml(fr.error || "unknown error")}`;
+      }).join("<br>");
+      modalErr.innerHTML = `${data.updated} updated, ${failures.length} failed:<br>${lines}`;
+      modalErr.hidden = false;
+    } else {
+      closeModal();
+    }
+    // Clear out succeeded selections so a follow-up bulk doesn't reapply
+    const succeededIds = new Set((data.results || []).filter(r => r.ok).map(r => r.pageId));
+    for (const id of succeededIds) bulkSelection.delete(id);
+    await loadPending();
+    refreshBulkBar();
+  } catch (e) {
+    failBulk(e.message || "Bulk update failed");
+  } finally {
+    modalSubmit.disabled = false;
+    modalSubmit.textContent = "Confirm";
+  }
+}
+
+function failBulk(msg) {
+  modalErr.textContent = msg;
+  modalErr.hidden = false;
+}
 
 // Stop the wheel from silently bumping focused number inputs ("5000 -> 5006"
 // bug Zach hit). When a number input has focus and the user scrolls, blur it
