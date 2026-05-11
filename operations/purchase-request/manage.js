@@ -61,6 +61,32 @@ function clearError() { errorEl.hidden = true; }
 
 function todayISO() { return new Date().toISOString().slice(0, 10); }
 
+// ----- Recent activity chip -----
+//
+// Mirrors app.js recentChip(). Reads from row.priorActivity (the worker
+// already excluded the current row's own occurrence so we don't get noise
+// like "Requested today" on every fresh Submitted row).
+function recentChip(activity) {
+  if (!activity) return null;
+  const now = Date.now();
+  const ageDays = (iso) => iso ? Math.floor((now - new Date(iso).getTime()) / 86400000) : null;
+  const candidates = [
+    { kind: "received",  label: "Received",  age: ageDays(activity.lastReceived) },
+    { kind: "ordered",   label: "Ordered",   age: ageDays(activity.lastOrdered) },
+    { kind: "requested", label: "Requested", age: ageDays(activity.lastRequested) },
+  ].filter(c => c.age != null && c.age >= 0);
+  if (candidates.length === 0) return null;
+  candidates.sort((a, b) => a.age - b.age);
+  const pick = candidates[0];
+  if (pick.age > 180) return null;
+  const tone = pick.age <= 30 ? "urgent" : "muted";
+  const ageText = pick.age === 0 ? "today"
+                : pick.age === 1 ? "yesterday"
+                : `${pick.age}d ago`;
+  const prefix = tone === "urgent" ? pick.label : `Last ${pick.label.toLowerCase()}`;
+  return { text: `${prefix} ${ageText}`, tone, kind: pick.kind, ageDays: pick.age };
+}
+
 // Parse a free-text lead time ("1 week", "2 weeks", "10 days", "3-4 weeks")
 // into a number of days. Returns null when nothing parseable is found so the
 // caller can decide whether to fall back to today. Range strings ("2-3 weeks")
@@ -452,6 +478,16 @@ function renderRow(r) {
   if (r.category) tags.appendChild(makeBadge(r.category.toUpperCase(), "badge badge-category"));
   if (r.notInDb)  tags.appendChild(makeBadge("NEW ITEM REQUEST", "badge badge-category"));
   if (r.outOfStock) tags.appendChild(makeBadge("URGENT — OUT OF STOCK", "urgent-tag"));
+  // Recent activity chip — warns the purchaser if this same item was just
+  // ordered/received recently so they don't re-order on top of an in-flight one.
+  const chip = recentChip(r.priorActivity);
+  if (chip) {
+    const span = document.createElement("span");
+    span.className = "recent-chip";
+    span.dataset.tone = chip.tone;
+    span.textContent = chip.text;
+    tags.appendChild(span);
+  }
 
   // Vendor line (matches requester form)
   const vendorEl = li.querySelector(".vendor-line");
