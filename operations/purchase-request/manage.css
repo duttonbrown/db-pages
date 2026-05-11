@@ -284,6 +284,94 @@
 }
 .field-checkbox input { width: auto; margin: 0; cursor: pointer; }
 
+/* Triage digest — two attention bubbles (Urgent / New item) above the
+   vendor digest. Same UX shape: click to filter, click again to clear.
+   Triage filter and vendor filter are mutually exclusive. */
+.triage {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #FFF5F5, #FFFFFF);
+  border: 1px solid #F8D7DA;
+  border-radius: var(--radius);
+}
+.triage-header { margin-bottom: 8px; }
+.triage-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--error);
+}
+.triage-sub {
+  margin: 2px 0 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.triage-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.triage-bubble {
+  appearance: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.triage-bubble:hover {
+  transform: translateY(-1px);
+}
+.triage-bubble-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.triage-bubble-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+/* Urgent — red pill, red active border. */
+.triage-bubble-urgent:hover {
+  border-color: var(--error);
+  box-shadow: 0 1px 4px rgba(220, 53, 69, 0.18);
+}
+.triage-bubble-urgent.active {
+  border-color: var(--error);
+  background: #FFF5F5;
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.18);
+}
+.triage-bubble-urgent .triage-bubble-count { background: var(--error); }
+/* New item — neutral charcoal pill so it reads as "needs review", not urgent. */
+.triage-bubble-newitem:hover {
+  border-color: var(--text);
+  box-shadow: 0 1px 4px rgba(74, 74, 74, 0.18);
+}
+.triage-bubble-newitem.active {
+  border-color: var(--text);
+  background: #F5F5F5;
+  box-shadow: 0 0 0 2px rgba(74, 74, 74, 0.18);
+}
+.triage-bubble-newitem .triage-bubble-count { background: var(--text); }
+
 /* Vendor digest — bubbles surface vendors with 2+ open requests so the
    purchaser can batch-order on the same day. Click to filter the queue. */
 .vendor-digest {

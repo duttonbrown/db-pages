@@ -12,11 +12,17 @@ const loadingBar   = $("loading-bar");
 const loadingFill  = loadingBar.querySelector(".loading-fill");
 const digestEl     = $("vendor-digest");
 const digestListEl = $("vendor-digest-list");
+const triageEl     = $("triage");
+const triageListEl = $("triage-list");
 
 // Vendor filter state. When set, only rows whose primary vendor matches are
 // shown in the queue. Click an active digest bubble again (or the same one)
 // to clear.
 let vendorFilter = null;
+// Triage filter state — mutually exclusive with vendorFilter. Values:
+// null | "urgent" | "newItem". Lives alongside vendor so the bubble UI
+// can show the active state without inventing another mode flag.
+let triageFilter = null;
 // Holds the most recent /pending payload so refresh-less filtering is cheap.
 let allRows = [];
 
@@ -125,6 +131,7 @@ async function loadPending() {
     loadingFill.style.width = "100%";
     setTimeout(() => { loadingBar.hidden = true; }, 300);
     allRows = data.rows || [];
+    renderTriage(allRows);
     renderDigest(allRows);
     renderQueue(filteredRows());
   } catch (e) {
@@ -153,8 +160,79 @@ function primaryVendor(row) {
 }
 
 function filteredRows() {
-  if (!vendorFilter) return allRows;
-  return allRows.filter(r => primaryVendor(r) === vendorFilter);
+  let rows = allRows;
+  if (triageFilter === "urgent") rows = rows.filter(r => r.outOfStock);
+  else if (triageFilter === "newItem") rows = rows.filter(r => r.notInDb);
+  if (vendorFilter) rows = rows.filter(r => primaryVendor(r) === vendorFilter);
+  return rows;
+}
+
+// ----- Triage digest -----
+//
+// Two bubbles: "Urgent — out of stock" and "New item requests" (rows with
+// Not in DB checked). Section auto-hides when both counts are zero.
+function renderTriage(rows) {
+  const urgentCount = rows.filter(r => r.outOfStock).length;
+  const newItemCount = rows.filter(r => r.notInDb).length;
+
+  if (urgentCount === 0 && newItemCount === 0) {
+    triageEl.hidden = true;
+    triageListEl.innerHTML = "";
+    // Clear stale filter if its bucket dried up
+    if (triageFilter === "urgent" && urgentCount === 0) triageFilter = null;
+    if (triageFilter === "newItem" && newItemCount === 0) triageFilter = null;
+    return;
+  }
+
+  triageEl.hidden = false;
+  triageListEl.innerHTML = "";
+
+  if (urgentCount > 0) {
+    triageListEl.appendChild(buildTriageBubble({
+      key: "urgent",
+      label: "Urgent — out of stock",
+      count: urgentCount,
+      modifier: "triage-bubble-urgent",
+    }));
+  }
+  if (newItemCount > 0) {
+    triageListEl.appendChild(buildTriageBubble({
+      key: "newItem",
+      label: "New item requests",
+      count: newItemCount,
+      modifier: "triage-bubble-newitem",
+    }));
+  }
+
+  // If the active triage filter's bucket disappeared after a refresh, drop it
+  if (triageFilter === "urgent" && urgentCount === 0) triageFilter = null;
+  if (triageFilter === "newItem" && newItemCount === 0) triageFilter = null;
+}
+
+function buildTriageBubble({ key, label, count, modifier }) {
+  const isActive = triageFilter === key;
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = `triage-bubble ${modifier}` + (isActive ? " active" : "");
+  btn.setAttribute("role", "tab");
+  btn.setAttribute("aria-selected", isActive ? "true" : "false");
+  btn.dataset.triage = key;
+  btn.innerHTML = `
+    <span class="triage-bubble-label">${escapeHtml(label)}</span>
+    <span class="triage-bubble-count">${count}</span>
+  `;
+  btn.addEventListener("click", () => toggleTriageFilter(key));
+  return btn;
+}
+
+function toggleTriageFilter(key) {
+  triageFilter = (triageFilter === key) ? null : key;
+  // Triage and vendor are mutually exclusive — picking one clears the other.
+  // Otherwise "Urgent + Grand Brass" can return zero rows for confusing reasons.
+  if (triageFilter) vendorFilter = null;
+  renderTriage(allRows);
+  renderDigest(allRows);
+  renderQueue(filteredRows());
 }
 
 function renderDigest(rows) {
@@ -235,7 +313,10 @@ function renderDigest(rows) {
 
 function toggleVendorFilter(vendor) {
   vendorFilter = (vendorFilter === vendor) ? null : vendor;
+  // Mutual exclusion with triage filter — see toggleTriageFilter.
+  if (vendorFilter) triageFilter = null;
   // Re-render bubbles to update the active state and re-render the queue
+  renderTriage(allRows);
   renderDigest(allRows);
   renderQueue(filteredRows());
 }
@@ -258,7 +339,12 @@ refreshBtn.addEventListener("click", loadPending);
 function renderQueue(rows) {
   queueEl.innerHTML = "";
   if (rows.length === 0) {
-    if (vendorFilter) {
+    if (triageFilter) {
+      const label = triageFilter === "urgent" ? "urgent" : "new-item";
+      emptyEl.innerHTML = `<p>No ${label} requests right now. <button type="button" class="link-btn" id="clear-triage-filter">Clear filter</button></p>`;
+      const clearBtn = $("clear-triage-filter");
+      if (clearBtn) clearBtn.addEventListener("click", () => toggleTriageFilter(triageFilter));
+    } else if (vendorFilter) {
       // Filter to a vendor that has no remaining rows — show a contextual
       // empty state rather than the cheerful "queue is clear" celebration.
       emptyEl.innerHTML = `<p>No open requests for <strong>${escapeHtml(vendorFilter)}</strong>. <button type="button" class="link-btn" id="clear-vendor-filter">Clear filter</button></p>`;
