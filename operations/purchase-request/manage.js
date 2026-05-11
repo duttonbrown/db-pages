@@ -213,10 +213,18 @@ function primaryVendor(row) {
   return (first || "").trim();
 }
 
+// Triage bubbles only apply to rows still in Submitted status — once a
+// purchaser has moved a request to Waiting / Ordered / Backordered, the
+// urgency or new-item flag has been acknowledged. The bubble counts and
+// the filter use this same predicate so they stay in sync.
+function isTriageEligible(r) {
+  return r.status === "Submitted";
+}
+
 function filteredRows() {
   let rows = allRows;
-  if (triageFilter === "urgent") rows = rows.filter(r => r.outOfStock);
-  else if (triageFilter === "newItem") rows = rows.filter(r => r.notInDb);
+  if (triageFilter === "urgent") rows = rows.filter(r => isTriageEligible(r) && r.outOfStock);
+  else if (triageFilter === "newItem") rows = rows.filter(r => isTriageEligible(r) && r.notInDb);
   if (vendorFilter) rows = rows.filter(r => primaryVendor(r) === vendorFilter);
   return rows;
 }
@@ -226,8 +234,9 @@ function filteredRows() {
 // Two bubbles: "Urgent — out of stock" and "New item requests" (rows with
 // Not in DB checked). Section auto-hides when both counts are zero.
 function renderTriage(rows) {
-  const urgentCount = rows.filter(r => r.outOfStock).length;
-  const newItemCount = rows.filter(r => r.notInDb).length;
+  const eligible = rows.filter(isTriageEligible);
+  const urgentCount = eligible.filter(r => r.outOfStock).length;
+  const newItemCount = eligible.filter(r => r.notInDb).length;
 
   if (urgentCount === 0 && newItemCount === 0) {
     triageEl.hidden = true;
