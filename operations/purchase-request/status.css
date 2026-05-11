@@ -213,7 +213,7 @@
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 12px 14px;
+  padding: 10px 14px;
   position: relative;
 }
 .request-card.urgent {
@@ -276,6 +276,29 @@
   color: var(--text);
   font-weight: 500;
 }
+/* Inline meta in the eyebrow (Vendor · MOQ · Lead) — replaces the bottom
+   spotlight cells that used to eat a whole row. */
+.eyebrow-meta {
+  color: var(--muted);
+}
+.eyebrow-age { cursor: help; }
+/* Eyebrow links (Remove request, Open in Notion) — used to live in the
+   bottom footer row. Tucked into the eyebrow so the footer can go away. */
+.eyebrow-link {
+  color: var(--muted);
+  text-decoration: underline;
+  font-size: 11px;
+}
+.eyebrow-link:hover { color: var(--accent-dark); }
+.remove-request-link.eyebrow-link {
+  color: var(--error);
+  text-decoration: underline;
+  font-weight: 500;
+}
+.remove-request-link.eyebrow-link:hover {
+  color: var(--error);
+  filter: brightness(0.85);
+}
 
 .card-title-row {
   display: flex;
@@ -326,13 +349,13 @@
 /* Process rail — the page's signature visual */
 .process-rail {
   position: relative;
-  margin-top: 10px;
-  padding: 6px 0 8px;
+  margin-top: 6px;
+  padding: 4px 0 4px;
 }
 .process-rail::before {
   content: "";
   position: absolute;
-  top: 19px;
+  top: 15px;
   left: 12px;
   right: 12px;
   height: 2px;
@@ -343,7 +366,7 @@
 .process-rail::after {
   content: "";
   position: absolute;
-  top: 19px;
+  top: 15px;
   left: 12px;
   height: 2px;
   width: var(--rail-progress, 0%);
@@ -368,20 +391,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   text-align: center;
-  padding-top: 4px;
+  padding-top: 3px;
 }
 .stage-marker {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: white;
   border: 2px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 600;
   color: var(--muted);
   transition: all 0.2s;
@@ -394,7 +417,7 @@
   color: white;
 }
 .stage.done .stage-marker svg { display: block; }
-.stage-marker svg { display: none; width: 10px; height: 10px; }
+.stage-marker svg { display: none; width: 8px; height: 8px; }
 .stage-marker .num { display: inline; }
 .stage.done .stage-marker .num { display: none; }
 
@@ -429,8 +452,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 8px;
-  padding: 6px 10px;
+  margin-top: 6px;
+  padding: 5px 10px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -494,15 +517,12 @@
   font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.02em;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 .stage.done .stage-label,
 .stage.active .stage-label { color: var(--text); }
 .stage-detail {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 1px;
-  line-height: 1.2;
+  display: none; /* Detail moved to eyebrow meta + spotlight; rail is rail-only */
 }
 .stage.active .stage-detail { color: var(--accent-dark); font-weight: 500; }
 
@@ -512,8 +532,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 2px 18px;
-  padding-top: 8px;
-  margin-top: 2px;
+  padding-top: 6px;
+  margin-top: 0;
   border-top: 1px solid var(--border);
 }
 .detail {
@@ -563,6 +583,8 @@
 .notes-block.kind-purchaser .note-label { color: #1A56C7; }
 
 /* Card footer — meta + open-in-notion */
+/* Footer row is no longer rendered on active cards (its info moved to the
+   eyebrow). Rules kept in case future card types need a bottom row. */
 .card-footer-row {
   display: flex;
   justify-content: space-between;

@@ -320,6 +320,31 @@ function renderCard(r, idx) {
   // Notes
   const notesHtml = renderNotes(r);
 
+  // Inline meta replaces the standalone Vendor/MOQ/Lead-time spotlight cells.
+  // These never change with status, so they belong in the eyebrow as quiet
+  // context — not eating a whole spotlight row of their own.
+  const eyebrowMetaParts = [];
+  if (primaryVendor(r)) eyebrowMetaParts.push(escapeHtml(primaryVendor(r)));
+  if (r.moqQty != null) eyebrowMetaParts.push(`MOQ ${r.moqQty}`);
+  if (r.leadTime)       eyebrowMetaParts.push(`Lead ${escapeHtml(r.leadTime)}`);
+  const eyebrowMeta = eyebrowMetaParts.length
+    ? `<span class="eyebrow-divider"></span><span class="eyebrow-meta">${eyebrowMetaParts.join(" · ")}</span>`
+    : "";
+
+  // Submitted-at lives on the relative-time chip's title= so the full timestamp
+  // is still discoverable on hover. The footer row goes away entirely.
+  const submittedTip = r.createdTime ? `Submitted ${fmtTimestamp(r.createdTime)}` : "";
+
+  // Eyebrow-side actions (Remove request, Open in Notion). Replace the
+  // bottom footer row so the card collapses by ~32px on every card.
+  const removeLink = (r.status === "Submitted" && r.pageId)
+    ? `<a href="#" class="remove-request-link eyebrow-link"
+          data-page-id="${escapeHtml(r.pageId)}"
+          data-order-num="${escapeHtml(r.orderNum || "")}"
+          data-item-name="${escapeHtml(itemTitle)}">Remove</a>`
+    : "";
+  const notionLink = `<a href="${escapeHtml(r.url)}" target="_blank" rel="noopener" class="eyebrow-link" title="Open in Notion">↗</a>`;
+
   li.innerHTML = `
     <div class="card-row">
       ${r.image
@@ -328,9 +353,14 @@ function renderCard(r, idx) {
       <div class="card-info">
         <div class="card-eyebrow">
           <span class="order-num">${escapeHtml(r.orderNum || "—")}</span>
+          ${notionLink}
           <span class="eyebrow-divider"></span>
           <span>Requested by <span class="requestor-name">${escapeHtml(r.requestor || "—")}</span></span>
-          ${r.dateRequested ? `<span class="eyebrow-divider"></span><span title="${fmtDate(r.dateRequested)}">${fmtRelative(r.dateRequested)}</span>` : ""}
+          ${r.dateRequested
+            ? `<span class="eyebrow-divider"></span><span class="eyebrow-age"${submittedTip ? ` title="${escapeHtml(submittedTip)}"` : ""}>${fmtRelative(r.dateRequested)}</span>`
+            : ""}
+          ${eyebrowMeta}
+          ${removeLink ? `<span class="eyebrow-divider"></span>${removeLink}` : ""}
         </div>
         <div class="card-title-row">
           <strong class="card-title">${escapeHtml(itemTitle)}</strong>
@@ -341,7 +371,6 @@ function renderCard(r, idx) {
           ${r.category ? `<span class="badge badge-category">${escapeHtml(r.category.toUpperCase())}</span>` : ""}
           ${r.notInDb ? `<span class="badge badge-category">NEW ITEM</span>` : ""}
           ${r.outOfStock ? `<span class="badge urgent-tag">URGENT — OUT OF STOCK</span>` : ""}
-          ${primaryVendor(r) ? `<span class="badge badge-category">${escapeHtml(primaryVendor(r).toUpperCase())}</span>` : ""}
         </div>
       </div>
       <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(r.status || "—")}</span>
@@ -354,19 +383,6 @@ function renderCard(r, idx) {
     ${spotlight}
     ${trackingRow}
     ${notesHtml}
-
-    <div class="card-footer-row">
-      <span>${r.createdTime ? `Submitted ${fmtTimestamp(r.createdTime)}` : ""}</span>
-      <span class="card-footer-actions">
-        ${r.status === "Submitted" && r.pageId
-          ? `<a href="#" class="remove-request-link"
-                data-page-id="${escapeHtml(r.pageId)}"
-                data-order-num="${escapeHtml(r.orderNum || "")}"
-                data-item-name="${escapeHtml(itemTitle)}">Remove request →</a>`
-          : ""}
-        <a href="${escapeHtml(r.url)}" target="_blank" rel="noopener">Open in Notion ↗</a>
-      </span>
-    </div>
   `;
   return li;
 }
@@ -621,10 +637,9 @@ function renderSpotlight(r) {
     if (r.eta)         cells.push({ label: "Expected",     value: fmtDate(r.eta) });
   }
 
-  // Always-on secondary cells
-  if (primaryVendor(r)) cells.push({ label: "Vendor", value: primaryVendor(r) });
-  if (r.moqQty != null) cells.push({ label: "MOQ", value: r.moqQty, numeric: true });
-  if (r.leadTime)      cells.push({ label: "Lead time", value: r.leadTime });
+  // Vendor / MOQ / Lead time intentionally NOT here — they've moved to the
+  // eyebrow meta line at the top of the card so they don't eat a spotlight
+  // row. Only status-relevant highlight cells live here now.
 
   if (cells.length === 0) return "";
 
