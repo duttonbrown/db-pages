@@ -289,6 +289,7 @@ function updateSelectedCount(section) {
 function renderItemRow(r) {
   const li = document.createElement("li");
   li.className = "item-row";
+  if (r.outOfStock) li.classList.add("urgent");
   li.dataset.pageId = r.pageId;
 
   const itemTitle = r.itemName || r.customItemName || "(unnamed)";
@@ -297,6 +298,9 @@ function renderItemRow(r) {
   const thumbHtml = r.image
     ? `<img class="item-thumb" src="${escapeHtml(r.image)}" alt="">`
     : `<div class="item-thumb-fallback">${r.type === "Supply" ? "📦" : r.type === "Other" ? "🛠️" : "🔩"}</div>`;
+  const urgentChip = r.outOfStock
+    ? `<span class="badge urgent-tag">URGENT — OUT OF STOCK</span>`
+    : "";
 
   li.innerHTML = `
     <label class="item-include-wrap">
@@ -307,6 +311,7 @@ function renderItemRow(r) {
       <div class="item-title-row">
         <strong class="item-title">${escapeHtml(itemTitle)}</strong>
         ${description ? `<span class="item-desc">— ${escapeHtml(description)}</span>` : ""}
+        ${urgentChip}
       </div>
       <div class="item-meta">
         <span><span class="meta-label">Order #</span> ${escapeHtml(r.orderNum || "—")}</span>

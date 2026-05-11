@@ -117,6 +117,14 @@
 }
 .item-row:last-child { border-bottom: none; }
 
+/* Out-of-stock urgency carries through from the purchaser console:
+   pink wash + red rail so it's obvious at a glance which boxes to open first. */
+.item-row.urgent {
+  background: #FFF5F5;
+  border-left: 3px solid var(--error);
+  padding-left: 11px; /* compensates for the 3px border so columns don't shift */
+}
+
 /* Column 2 — thumbnail. Falls back to a type emoji when the catalog has no image. */
 .item-thumb,
 .item-thumb-fallback {
