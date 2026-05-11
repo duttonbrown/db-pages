@@ -691,6 +691,14 @@ textarea { resize: vertical; min-height: 70px; }
   color: var(--text);
 }
 
+/* Urgent chip overrides .badge background when both classes are applied
+   (receive + status pages). Purchaser console uses .urgent-tag alone. */
+.badge.urgent-tag {
+  background: var(--error);
+  color: white;
+  margin-left: 0;
+}
+
 .chip-row {
   display: flex;
   flex-wrap: wrap;

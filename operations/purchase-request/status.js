@@ -340,6 +340,7 @@ function renderCard(r, idx) {
           ${r.type ? `<span class="badge">${escapeHtml(r.type.toUpperCase())}</span>` : ""}
           ${r.category ? `<span class="badge badge-category">${escapeHtml(r.category.toUpperCase())}</span>` : ""}
           ${r.notInDb ? `<span class="badge badge-category">NEW ITEM</span>` : ""}
+          ${r.outOfStock ? `<span class="badge urgent-tag">URGENT — OUT OF STOCK</span>` : ""}
           ${primaryVendor(r) ? `<span class="badge badge-category">${escapeHtml(primaryVendor(r).toUpperCase())}</span>` : ""}
         </div>
       </div>
