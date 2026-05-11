@@ -271,7 +271,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60226-23": {
       "parent_sku": "60226-23",
@@ -543,7 +544,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60226-17": {
       "parent_sku": "60226-17",
@@ -815,7 +817,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60226-11": {
       "parent_sku": "60226-11",
@@ -1087,7 +1090,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-13-47": {
       "parent_sku": "40111-13-47",
@@ -1515,7 +1519,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-13-35": {
       "parent_sku": "40111-13-35",
@@ -1943,7 +1948,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-13-29": {
       "parent_sku": "40111-13-29",
@@ -2371,7 +2377,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-13-23": {
       "parent_sku": "40111-13-23",
@@ -2799,7 +2806,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-13": {
       "parent_sku": "40111-13",
@@ -3214,7 +3222,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "40111-8-47": {
       "parent_sku": "40111-8-47",
@@ -3603,7 +3612,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-8-35": {
       "parent_sku": "40111-8-35",
@@ -3992,7 +4002,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-8-29": {
       "parent_sku": "40111-8-29",
@@ -4381,7 +4392,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-8-23": {
       "parent_sku": "40111-8-23",
@@ -4770,7 +4782,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40111-8": {
       "parent_sku": "40111-8",
@@ -5146,7 +5159,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "60129-21": {
       "parent_sku": "60129-21",
@@ -5444,7 +5458,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60129-15": {
       "parent_sku": "60129-15",
@@ -5742,7 +5757,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60129-9": {
       "parent_sku": "60129-9",
@@ -6040,7 +6056,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60600-60": {
       "parent_sku": "60600-60",
@@ -6520,7 +6537,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60601": {
       "parent_sku": "60601",
@@ -6531,7 +6549,8 @@
       "source_page_id": "0411fe97588442db93ca2891d01916f3",
       "source_page_url": "https://www.notion.so/60601-0411fe97588442db93ca2891d01916f3",
       "last_edited_at": "2026-02-19T21:28:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60401-72": {
       "parent_sku": "60401-72",
@@ -6998,7 +7017,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60601-72": {
       "parent_sku": "60601-72",
@@ -7478,7 +7498,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60601-60": {
       "parent_sku": "60601-60",
@@ -7958,7 +7979,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60400-72": {
       "parent_sku": "60400-72",
@@ -8425,7 +8447,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30320": {
       "parent_sku": "30320",
@@ -8853,7 +8876,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "10401F-20": {
       "parent_sku": "10401F-20",
@@ -9242,7 +9266,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30223": {
       "parent_sku": "30223",
@@ -9657,7 +9682,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60432": {
       "parent_sku": "60432",
@@ -9968,7 +9994,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "10403-20": {
       "parent_sku": "10403-20",
@@ -10396,7 +10423,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30110-8": {
       "parent_sku": "30110-8",
@@ -10785,7 +10813,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30333": {
       "parent_sku": "30333",
@@ -11161,7 +11190,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60128P-17": {
       "parent_sku": "60128P-17",
@@ -11172,7 +11202,8 @@
       "source_page_id": "2aeffa524c5b80099810eafdcc8b4706",
       "source_page_url": "https://www.notion.so/60128P-17-2aeffa524c5b80099810eafdcc8b4706",
       "last_edited_at": "2026-03-26T03:06:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "H50-24": {
       "parent_sku": "H50-24",
@@ -11327,7 +11358,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "10403-27": {
       "parent_sku": "10403-27",
@@ -11742,7 +11774,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60124-0": {
       "parent_sku": "60124-0",
@@ -12014,7 +12047,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70220": {
       "parent_sku": "70220",
@@ -12312,7 +12346,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H60-24": {
       "parent_sku": "H60-24",
@@ -12493,7 +12528,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H32-12": {
       "parent_sku": "H32-12",
@@ -12583,7 +12619,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50110-10": {
       "parent_sku": "50110-10",
@@ -12907,7 +12944,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "31001F": {
       "parent_sku": "31001F",
@@ -13465,7 +13503,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H18": {
       "parent_sku": "H18",
@@ -13607,7 +13646,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30221": {
       "parent_sku": "30221",
@@ -13957,7 +13997,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30502": {
       "parent_sku": "30502",
@@ -14476,7 +14517,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30224": {
       "parent_sku": "30224",
@@ -14852,7 +14894,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30503": {
       "parent_sku": "30503",
@@ -15358,7 +15401,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70110": {
       "parent_sku": "70110",
@@ -15682,7 +15726,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60631": {
       "parent_sku": "60631",
@@ -16136,7 +16181,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H26": {
       "parent_sku": "H26",
@@ -16226,7 +16272,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50131-8": {
       "parent_sku": "50131-8",
@@ -16433,7 +16480,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60730": {
       "parent_sku": "60730",
@@ -16757,7 +16805,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "PLO-8": {
       "parent_sku": "PLO-8",
@@ -16768,7 +16817,8 @@
       "source_page_id": "2aeffa524c5b8026a0fcff3f3ff8d5b5",
       "source_page_url": "https://www.notion.so/PLO-8-2aeffa524c5b8026a0fcff3f3ff8d5b5",
       "last_edited_at": "2026-03-26T03:06:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "30402": {
       "parent_sku": "30402",
@@ -17209,7 +17259,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60220": {
       "parent_sku": "60220",
@@ -17481,7 +17532,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H10": {
       "parent_sku": "H10",
@@ -17571,7 +17623,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60127": {
       "parent_sku": "60127",
@@ -17817,7 +17870,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30332": {
       "parent_sku": "30332",
@@ -18154,7 +18208,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60124P-0": {
       "parent_sku": "60124P-0",
@@ -18165,7 +18220,8 @@
       "source_page_id": "2aeffa524c5b80308784e4eaf7a1c746",
       "source_page_url": "https://www.notion.so/60124P-0-2aeffa524c5b80308784e4eaf7a1c746",
       "last_edited_at": "2026-03-26T03:06:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60131": {
       "parent_sku": "60131",
@@ -18372,7 +18428,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H44": {
       "parent_sku": "H44",
@@ -18540,7 +18597,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "PLS-10": {
       "parent_sku": "PLS-10",
@@ -18551,7 +18609,8 @@
       "source_page_id": "2aeffa524c5b803691aae83e672be180",
       "source_page_url": "https://www.notion.so/PLS-10-2aeffa524c5b803691aae83e672be180",
       "last_edited_at": "2026-03-04T01:57:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "30112-8": {
       "parent_sku": "30112-8",
@@ -18927,7 +18986,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70130": {
       "parent_sku": "70130",
@@ -19147,7 +19207,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60630": {
       "parent_sku": "60630",
@@ -19601,7 +19662,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60400": {
       "parent_sku": "60400",
@@ -19612,7 +19674,8 @@
       "source_page_id": "2aeffa524c5b803aa40bdc56c0098698",
       "source_page_url": "https://www.notion.so/60400-2aeffa524c5b803aa40bdc56c0098698",
       "last_edited_at": "2026-02-19T21:27:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "50120-8": {
       "parent_sku": "50120-8",
@@ -19923,7 +19986,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H28": {
       "parent_sku": "H28",
@@ -19974,7 +20038,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30112F-10": {
       "parent_sku": "30112F-10",
@@ -20272,7 +20337,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30404F": {
       "parent_sku": "30404F",
@@ -20648,7 +20714,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "20620": {
       "parent_sku": "20620",
@@ -20946,7 +21013,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60112": {
       "parent_sku": "60112",
@@ -21192,7 +21260,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70110F": {
       "parent_sku": "70110F",
@@ -21464,7 +21533,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60124-10": {
       "parent_sku": "60124-10",
@@ -21762,7 +21832,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60124P-6": {
       "parent_sku": "60124P-6",
@@ -21773,7 +21844,8 @@
       "source_page_id": "2aeffa524c5b803fb3e3d66f7b89bf17",
       "source_page_url": "https://www.notion.so/60124P-6-2aeffa524c5b803fb3e3d66f7b89bf17",
       "last_edited_at": "2026-03-26T03:06:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60123": {
       "parent_sku": "60123",
@@ -22032,7 +22104,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30405": {
       "parent_sku": "30405",
@@ -22538,7 +22611,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60401": {
       "parent_sku": "60401",
@@ -22549,7 +22623,8 @@
       "source_page_id": "2aeffa524c5b80468382e2e81c5f00bc",
       "source_page_url": "https://www.notion.so/60401-2aeffa524c5b80468382e2e81c5f00bc",
       "last_edited_at": "2026-02-19T21:28:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "30130-12": {
       "parent_sku": "30130-12",
@@ -22847,7 +22922,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30112-6": {
       "parent_sku": "30112-6",
@@ -23223,7 +23299,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H13": {
       "parent_sku": "H13",
@@ -23378,7 +23455,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30402F": {
       "parent_sku": "30402F",
@@ -23806,7 +23884,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "51000F": {
       "parent_sku": "51000F",
@@ -24390,7 +24469,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30110-10": {
       "parent_sku": "30110-10",
@@ -24779,7 +24859,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "10401-27": {
       "parent_sku": "10401-27",
@@ -25181,7 +25262,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70221": {
       "parent_sku": "70221",
@@ -25453,7 +25535,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50121-10": {
       "parent_sku": "50121-10",
@@ -25660,7 +25743,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H27": {
       "parent_sku": "H27",
@@ -25737,7 +25821,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30605": {
       "parent_sku": "30605",
@@ -26230,7 +26315,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "PLS-6": {
       "parent_sku": "PLS-6",
@@ -26241,7 +26327,8 @@
       "source_page_id": "2aeffa524c5b80558456fc8da01e9815",
       "source_page_url": "https://www.notion.so/PLS-6-2aeffa524c5b80558456fc8da01e9815",
       "last_edited_at": "2026-03-26T03:07:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60330": {
       "parent_sku": "60330",
@@ -26591,7 +26678,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40131-8": {
       "parent_sku": "40131-8",
@@ -26928,7 +27016,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "31000F": {
       "parent_sku": "31000F",
@@ -27473,7 +27562,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "SWO": {
       "parent_sku": "SWO",
@@ -27484,7 +27574,8 @@
       "source_page_id": "2aeffa524c5b805ab360d4e9d72a7ae3",
       "source_page_url": "https://www.notion.so/SWO-2aeffa524c5b805ab360d4e9d72a7ae3",
       "last_edited_at": "2026-03-26T03:07:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60211": {
       "parent_sku": "60211",
@@ -27834,7 +27925,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "H33-10": {
       "parent_sku": "H33-10",
@@ -27885,7 +27977,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40121P-9": {
       "parent_sku": "40121P-9",
@@ -27896,7 +27989,8 @@
       "source_page_id": "2aeffa524c5b80618733e975d51e1354",
       "source_page_url": "https://www.notion.so/40121P-9-2aeffa524c5b80618733e975d51e1354",
       "last_edited_at": "2026-03-15T22:50:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "H33-6": {
       "parent_sku": "H33-6",
@@ -27947,7 +28041,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50110-12": {
       "parent_sku": "50110-12",
@@ -28271,7 +28366,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30404": {
       "parent_sku": "30404",
@@ -28673,7 +28769,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H43": {
       "parent_sku": "H43",
@@ -28854,7 +28951,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30112F-8": {
       "parent_sku": "30112F-8",
@@ -29152,7 +29250,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60210-16": {
       "parent_sku": "60210-16",
@@ -29502,7 +29601,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50130-10": {
       "parent_sku": "50130-10",
@@ -29800,7 +29900,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40120P-10": {
       "parent_sku": "40120P-10",
@@ -29811,7 +29912,8 @@
       "source_page_id": "2aeffa524c5b80689051c9697348d5e3",
       "source_page_url": "https://www.notion.so/40120P-10-2aeffa524c5b80689051c9697348d5e3",
       "last_edited_at": "2026-03-26T03:07:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "H61-24": {
       "parent_sku": "H61-24",
@@ -29914,7 +30016,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50111-12": {
       "parent_sku": "50111-12",
@@ -30225,7 +30328,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50121-8": {
       "parent_sku": "50121-8",
@@ -30432,7 +30536,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H71": {
       "parent_sku": "H71",
@@ -30587,7 +30692,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "90221": {
       "parent_sku": "90221",
@@ -30937,7 +31043,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30407F": {
       "parent_sku": "30407F",
@@ -31417,7 +31524,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50131-10": {
       "parent_sku": "50131-10",
@@ -31624,7 +31732,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60128-9": {
       "parent_sku": "60128-9",
@@ -32182,7 +32291,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60231": {
       "parent_sku": "60231",
@@ -32519,7 +32629,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30130-8": {
       "parent_sku": "30130-8",
@@ -32804,7 +32915,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40120P-3": {
       "parent_sku": "40120P-3",
@@ -32815,7 +32927,8 @@
       "source_page_id": "2aeffa524c5b8078abdee8d9838a5b22",
       "source_page_url": "https://www.notion.so/40120P-3-2aeffa524c5b8078abdee8d9838a5b22",
       "last_edited_at": "2026-03-26T03:07:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60124-3": {
       "parent_sku": "60124-3",
@@ -33113,7 +33226,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "10403F-20": {
       "parent_sku": "10403F-20",
@@ -33528,7 +33642,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30321": {
       "parent_sku": "30321",
@@ -33891,7 +34006,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30112-10": {
       "parent_sku": "30112-10",
@@ -34267,7 +34383,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "PLO-6": {
       "parent_sku": "PLO-6",
@@ -34278,7 +34395,8 @@
       "source_page_id": "2aeffa524c5b807aa2bbeb336b3fa55b",
       "source_page_url": "https://www.notion.so/PLO-6-2aeffa524c5b807aa2bbeb336b3fa55b",
       "last_edited_at": "2026-03-04T01:57:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "91000": {
       "parent_sku": "91000",
@@ -34303,7 +34421,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "10403F-27": {
       "parent_sku": "10403F-27",
@@ -34705,7 +34824,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30407": {
       "parent_sku": "30407",
@@ -35211,7 +35331,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "10401-20": {
       "parent_sku": "10401-20",
@@ -35613,7 +35734,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50130-8": {
       "parent_sku": "50130-8",
@@ -35911,7 +36033,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H33-14": {
       "parent_sku": "H33-14",
@@ -35962,7 +36085,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70222": {
       "parent_sku": "70222",
@@ -36260,7 +36384,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H1C-5": {
       "parent_sku": "H1C-5",
@@ -36428,7 +36553,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "PLS-8": {
       "parent_sku": "PLS-8",
@@ -36439,7 +36565,8 @@
       "source_page_id": "2aeffa524c5b80878248cfa6a31005e0",
       "source_page_url": "https://www.notion.so/PLS-8-2aeffa524c5b80878248cfa6a31005e0",
       "last_edited_at": "2026-03-26T03:07:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "H32-6": {
       "parent_sku": "H32-6",
@@ -36529,7 +36656,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60124P-10": {
       "parent_sku": "60124P-10",
@@ -36540,7 +36668,8 @@
       "source_page_id": "2aeffa524c5b808c8edced45950d700c",
       "source_page_url": "https://www.notion.so/60124P-10-2aeffa524c5b808c8edced45950d700c",
       "last_edited_at": "2026-03-26T03:07:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "30606": {
       "parent_sku": "30606",
@@ -37033,7 +37162,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60221": {
       "parent_sku": "60221",
@@ -37044,7 +37174,8 @@
       "source_page_id": "2aeffa524c5b8092a926fe1c3f23d7a3",
       "source_page_url": "https://www.notion.so/60221-2aeffa524c5b8092a926fe1c3f23d7a3",
       "last_edited_at": "2026-03-26T03:07:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "30230": {
       "parent_sku": "30230",
@@ -37420,7 +37551,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40120-3": {
       "parent_sku": "40120-3",
@@ -37770,7 +37902,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H1C-8": {
       "parent_sku": "H1C-8",
@@ -37938,7 +38071,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30112F-12": {
       "parent_sku": "30112F-12",
@@ -38275,7 +38409,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H32": {
       "parent_sku": "H32",
@@ -38365,7 +38500,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "30330": {
       "parent_sku": "30330",
@@ -38767,7 +38903,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70122": {
       "parent_sku": "70122",
@@ -38987,7 +39124,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H52-24": {
       "parent_sku": "H52-24",
@@ -39142,7 +39280,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30120": {
       "parent_sku": "30120",
@@ -39440,7 +39579,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50110-8": {
       "parent_sku": "50110-8",
@@ -39764,7 +39904,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "10401F-27": {
       "parent_sku": "10401F-27",
@@ -40153,7 +40294,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "PLO-10": {
       "parent_sku": "PLO-10",
@@ -40164,7 +40306,8 @@
       "source_page_id": "2aeffa524c5b809da5f0ec05e36239fc",
       "source_page_url": "https://www.notion.so/PLO-10-2aeffa524c5b809da5f0ec05e36239fc",
       "last_edited_at": "2026-01-18T20:18:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60128-17": {
       "parent_sku": "60128-17",
@@ -40722,7 +40865,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30403F": {
       "parent_sku": "30403F",
@@ -41176,7 +41320,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30130-6": {
       "parent_sku": "30130-6",
@@ -41461,7 +41606,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40121-9": {
       "parent_sku": "40121-9",
@@ -41993,7 +42139,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40120-6": {
       "parent_sku": "40120-6",
@@ -42343,7 +42490,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H30": {
       "parent_sku": "H30",
@@ -42446,7 +42594,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "30112F-6": {
       "parent_sku": "30112F-6",
@@ -42744,7 +42893,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "20630": {
       "parent_sku": "20630",
@@ -43042,7 +43192,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50221": {
       "parent_sku": "50221",
@@ -43327,7 +43478,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60121": {
       "parent_sku": "60121",
@@ -43560,7 +43712,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60431": {
       "parent_sku": "60431",
@@ -44001,7 +44154,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40120-0": {
       "parent_sku": "40120-0",
@@ -44325,7 +44479,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50120-10": {
       "parent_sku": "50120-10",
@@ -44636,7 +44791,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50111-10": {
       "parent_sku": "50111-10",
@@ -44947,7 +45103,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "31000": {
       "parent_sku": "31000",
@@ -45505,7 +45662,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H15": {
       "parent_sku": "H15",
@@ -45647,7 +45805,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30130-10": {
       "parent_sku": "30130-10",
@@ -45932,7 +46091,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H33": {
       "parent_sku": "H33",
@@ -45983,7 +46143,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "60130": {
       "parent_sku": "60130",
@@ -46216,7 +46377,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "21800F": {
       "parent_sku": "21800F",
@@ -46670,7 +46832,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H60": {
       "parent_sku": "H60",
@@ -46851,7 +47014,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "40120P-6": {
       "parent_sku": "40120P-6",
@@ -46862,7 +47026,8 @@
       "source_page_id": "2aeffa524c5b80c0a0d6f536a76e229b",
       "source_page_url": "https://www.notion.so/40120P-6-2aeffa524c5b80c0a0d6f536a76e229b",
       "last_edited_at": "2026-03-26T03:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "31001": {
       "parent_sku": "31001",
@@ -47433,7 +47598,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H61-36": {
       "parent_sku": "H61-36",
@@ -47536,7 +47702,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60124-6": {
       "parent_sku": "60124-6",
@@ -47834,7 +48001,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30403": {
       "parent_sku": "30403",
@@ -48301,7 +48469,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60132": {
       "parent_sku": "60132",
@@ -48495,7 +48664,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60128P-9": {
       "parent_sku": "60128P-9",
@@ -48506,7 +48676,8 @@
       "source_page_id": "2aeffa524c5b80c890e0ece58c06a6fd",
       "source_page_url": "https://www.notion.so/60128P-9-2aeffa524c5b80c890e0ece58c06a6fd",
       "last_edited_at": "2026-03-04T01:57:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60222": {
       "parent_sku": "60222",
@@ -48778,7 +48949,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H19": {
       "parent_sku": "H19",
@@ -48972,7 +49144,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60720": {
       "parent_sku": "60720",
@@ -49296,7 +49469,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60224": {
       "parent_sku": "60224",
@@ -49594,7 +49768,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30112-12": {
       "parent_sku": "30112-12",
@@ -49970,7 +50145,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50131-12": {
       "parent_sku": "50131-12",
@@ -50177,7 +50353,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60230": {
       "parent_sku": "60230",
@@ -50514,7 +50691,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H30-13": {
       "parent_sku": "H30-13",
@@ -50617,7 +50795,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H16": {
       "parent_sku": "H16",
@@ -50785,7 +50964,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "21800": {
       "parent_sku": "21800",
@@ -51291,7 +51471,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30110-6": {
       "parent_sku": "30110-6",
@@ -51680,7 +51861,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40120-10": {
       "parent_sku": "40120-10",
@@ -52030,7 +52212,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30110-12": {
       "parent_sku": "30110-12",
@@ -52419,7 +52602,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "90220": {
       "parent_sku": "90220",
@@ -52769,7 +52953,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H62": {
       "parent_sku": "H62",
@@ -52937,7 +53122,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "40131-13": {
       "parent_sku": "40131-13",
@@ -53274,7 +53460,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50111-8": {
       "parent_sku": "50111-8",
@@ -53585,7 +53772,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H60-36": {
       "parent_sku": "H60-36",
@@ -53779,7 +53967,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30220": {
       "parent_sku": "30220",
@@ -54103,7 +54292,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60430": {
       "parent_sku": "60430",
@@ -54544,7 +54734,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H1A": {
       "parent_sku": "H1A",
@@ -54725,7 +54916,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30405F": {
       "parent_sku": "30405F",
@@ -55205,7 +55397,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30222": {
       "parent_sku": "30222",
@@ -55516,7 +55709,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30121": {
       "parent_sku": "30121",
@@ -55827,7 +56021,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60420": {
       "parent_sku": "60420",
@@ -56138,7 +56333,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60111": {
       "parent_sku": "60111",
@@ -56462,7 +56658,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50130-12": {
       "parent_sku": "50130-12",
@@ -56760,7 +56957,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "40121P-17": {
       "parent_sku": "40121P-17",
@@ -56771,7 +56969,8 @@
       "source_page_id": "2aeffa524c5b80ed82b8c5969c25cbed",
       "source_page_url": "https://www.notion.so/40121P-17-2aeffa524c5b80ed82b8c5969c25cbed",
       "last_edited_at": "2026-03-26T03:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "40121-17": {
       "parent_sku": "40121-17",
@@ -57316,7 +57515,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H62-24": {
       "parent_sku": "H62-24",
@@ -57484,7 +57684,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H33-8": {
       "parent_sku": "H33-8",
@@ -57535,7 +57736,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60125": {
       "parent_sku": "60125",
@@ -57729,7 +57931,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H72": {
       "parent_sku": "H72",
@@ -57910,7 +58113,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H20": {
       "parent_sku": "H20",
@@ -58000,7 +58204,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H25": {
       "parent_sku": "H25",
@@ -58064,7 +58269,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60124P-3": {
       "parent_sku": "60124P-3",
@@ -58075,7 +58281,8 @@
       "source_page_id": "2aeffa524c5b80f9a08bd6ce8d7380ae",
       "source_page_url": "https://www.notion.so/60124P-3-2aeffa524c5b80f9a08bd6ce8d7380ae",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "40120P-0": {
       "parent_sku": "40120P-0",
@@ -58086,7 +58293,8 @@
       "source_page_id": "2aeffa524c5b80fa95d0f25bfbeb6023",
       "source_page_url": "https://www.notion.so/40120P-0-2aeffa524c5b80fa95d0f25bfbeb6023",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "H30-7": {
       "parent_sku": "H30-7",
@@ -58189,7 +58397,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60110": {
       "parent_sku": "60110",
@@ -58513,7 +58722,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "51000": {
       "parent_sku": "51000",
@@ -59071,7 +59281,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "50220": {
       "parent_sku": "50220",
@@ -59343,7 +59554,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60401-48": {
       "parent_sku": "60401-48",
@@ -59797,7 +60009,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70222 (C)": {
       "parent_sku": "70222 (C)",
@@ -60095,7 +60308,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70130 (C)": {
       "parent_sku": "70130 (C)",
@@ -60315,7 +60529,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60123 (C)": {
       "parent_sku": "60123 (C)",
@@ -60574,7 +60789,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30403 (C)": {
       "parent_sku": "30403 (C)",
@@ -61041,7 +61257,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30110-6 (C)": {
       "parent_sku": "30110-6 (C)",
@@ -61430,7 +61647,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30222 (C)": {
       "parent_sku": "30222 (C)",
@@ -61741,7 +61959,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30130-8 (C)": {
       "parent_sku": "30130-8 (C)",
@@ -62026,7 +62245,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60112 (C)": {
       "parent_sku": "60112 (C)",
@@ -62272,7 +62492,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30332 (C)": {
       "parent_sku": "30332 (C)",
@@ -62609,7 +62830,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30130-10 (C)": {
       "parent_sku": "30130-10 (C)",
@@ -62894,7 +63116,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "31001 (C)": {
       "parent_sku": "31001 (C)",
@@ -63465,7 +63688,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30121 (C)": {
       "parent_sku": "30121 (C)",
@@ -63776,7 +64000,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60132 (C)": {
       "parent_sku": "60132 (C)",
@@ -63970,7 +64195,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30220 (C)": {
       "parent_sku": "30220 (C)",
@@ -64294,7 +64520,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30221 (C)": {
       "parent_sku": "30221 (C)",
@@ -64644,7 +64871,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30120 (C)": {
       "parent_sku": "30120 (C)",
@@ -64942,7 +65170,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30404 (C)": {
       "parent_sku": "30404 (C)",
@@ -65344,7 +65573,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70220 (C)": {
       "parent_sku": "70220 (C)",
@@ -65642,7 +65872,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30404F (C)": {
       "parent_sku": "30404F (C)",
@@ -66018,7 +66249,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30110-10 (C)": {
       "parent_sku": "30110-10 (C)",
@@ -66407,7 +66639,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60220 (C)": {
       "parent_sku": "60220 (C)",
@@ -66679,7 +66912,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70122 (C)": {
       "parent_sku": "70122 (C)",
@@ -66899,7 +67133,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70221 (C)": {
       "parent_sku": "70221 (C)",
@@ -67171,7 +67406,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "31000 (C)": {
       "parent_sku": "31000 (C)",
@@ -67729,7 +67965,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30110-8 (C)": {
       "parent_sku": "30110-8 (C)",
@@ -68118,7 +68355,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70110F (C)": {
       "parent_sku": "70110F (C)",
@@ -68390,7 +68628,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "70110 (C)": {
       "parent_sku": "70110 (C)",
@@ -68714,7 +68953,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60125 (C)": {
       "parent_sku": "60125 (C)",
@@ -68908,7 +69148,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "31000F (C)": {
       "parent_sku": "31000F (C)",
@@ -69453,7 +69694,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "31001F (C)": {
       "parent_sku": "31001F (C)",
@@ -70011,7 +70253,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30403F (C)": {
       "parent_sku": "30403F (C)",
@@ -70465,7 +70708,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30402F (C)": {
       "parent_sku": "30402F (C)",
@@ -70893,7 +71137,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60121 (C)": {
       "parent_sku": "60121 (C)",
@@ -71126,7 +71371,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30130-6 (C)": {
       "parent_sku": "30130-6 (C)",
@@ -71411,7 +71657,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "30130-12 (C)": {
       "parent_sku": "30130-12 (C)",
@@ -71709,7 +71956,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60221 (C)": {
       "parent_sku": "60221 (C)",
@@ -71720,7 +71968,8 @@
       "source_page_id": "2c8ffa524c5b80efaac4c945cef0de5b",
       "source_page_url": "https://www.notion.so/60221-C-2c8ffa524c5b80efaac4c945cef0de5b",
       "last_edited_at": "2026-04-10T00:56:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "30402 (C)": {
       "parent_sku": "30402 (C)",
@@ -72161,7 +72410,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H16 (C)": {
       "parent_sku": "H16 (C)",
@@ -72329,7 +72579,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H32-12 (C)": {
       "parent_sku": "H32-12 (C)",
@@ -72419,7 +72670,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H30-7 (C)": {
       "parent_sku": "H30-7 (C)",
@@ -72522,7 +72774,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H20 (C)": {
       "parent_sku": "H20 (C)",
@@ -72612,7 +72865,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H43 (C)": {
       "parent_sku": "H43 (C)",
@@ -72793,7 +73047,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H27 (C)": {
       "parent_sku": "H27 (C)",
@@ -72870,7 +73125,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H62-24 (C)": {
       "parent_sku": "H62-24 (C)",
@@ -73038,7 +73294,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H32 (C)": {
       "parent_sku": "H32 (C)",
@@ -73128,7 +73385,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H32-6 (C)": {
       "parent_sku": "H32-6 (C)",
@@ -73218,7 +73476,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H72 (C)": {
       "parent_sku": "H72 (C)",
@@ -73399,7 +73658,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H10 (C)": {
       "parent_sku": "H10 (C)",
@@ -73489,7 +73749,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H62-18 (C)": {
       "parent_sku": "H62-18 (C)",
@@ -73657,7 +73918,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H13 (C)": {
       "parent_sku": "H13 (C)",
@@ -73812,7 +74074,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H1A (C)": {
       "parent_sku": "H1A (C)",
@@ -73993,7 +74256,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H30-13 (C)": {
       "parent_sku": "H30-13 (C)",
@@ -74096,7 +74360,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H30 (C)": {
       "parent_sku": "H30 (C)",
@@ -74199,7 +74464,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H19 (C)": {
       "parent_sku": "H19 (C)",
@@ -74393,7 +74659,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H18 (C)": {
       "parent_sku": "H18 (C)",
@@ -74535,7 +74802,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H52 (C)": {
       "parent_sku": "H52 (C)",
@@ -74690,7 +74958,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H26 (C)": {
       "parent_sku": "H26 (C)",
@@ -74780,7 +75049,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60211-58": {
       "parent_sku": "60211-58",
@@ -75130,7 +75400,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60210-28": {
       "parent_sku": "60210-28",
@@ -75480,7 +75751,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60210-34": {
       "parent_sku": "60210-34",
@@ -75830,7 +76102,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60211-40": {
       "parent_sku": "60211-40",
@@ -76180,7 +76453,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60210-46": {
       "parent_sku": "60210-46",
@@ -76530,7 +76804,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60210-58": {
       "parent_sku": "60210-58",
@@ -76880,7 +77155,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60211-46": {
       "parent_sku": "60211-46",
@@ -77217,7 +77493,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60211-52": {
       "parent_sku": "60211-52",
@@ -77567,7 +77844,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60211-34": {
       "parent_sku": "60211-34",
@@ -77917,7 +78195,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60210-40": {
       "parent_sku": "60210-40",
@@ -78267,7 +78546,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60210-52": {
       "parent_sku": "60210-52",
@@ -78617,7 +78897,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60211-28": {
       "parent_sku": "60211-28",
@@ -78967,7 +79248,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H52-24 (C)": {
       "parent_sku": "H52-24 (C)",
@@ -79122,7 +79404,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H52-18": {
       "parent_sku": "H52-18",
@@ -79277,7 +79560,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60601-48": {
       "parent_sku": "60601-48",
@@ -79744,7 +80028,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H1D": {
       "parent_sku": "H1D",
@@ -79899,7 +80184,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H30-5 (C)": {
       "parent_sku": "H30-5 (C)",
@@ -80002,7 +80288,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60210": {
       "parent_sku": "60210",
@@ -80352,7 +80639,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "H62 (C)": {
       "parent_sku": "H62 (C)",
@@ -80520,7 +80808,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H32-4": {
       "parent_sku": "H32-4",
@@ -80610,7 +80899,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60211-16": {
       "parent_sku": "60211-16",
@@ -80960,7 +81250,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H60-18": {
       "parent_sku": "H60-18",
@@ -81141,7 +81432,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60601-24": {
       "parent_sku": "60601-24",
@@ -81608,7 +81900,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H62-18": {
       "parent_sku": "H62-18",
@@ -81776,7 +82069,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60400-18": {
       "parent_sku": "60400-18",
@@ -82230,7 +82524,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60401-18": {
       "parent_sku": "60401-18",
@@ -82684,7 +82979,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H52": {
       "parent_sku": "H52",
@@ -82839,7 +83135,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": true
     },
     "60600-24": {
       "parent_sku": "60600-24",
@@ -83306,7 +83603,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H33-5": {
       "parent_sku": "H33-5",
@@ -83357,7 +83655,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H32-4 (C)": {
       "parent_sku": "H32-4 (C)",
@@ -83447,7 +83746,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H30-5": {
       "parent_sku": "H30-5",
@@ -83550,7 +83850,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H52-18 (C)": {
       "parent_sku": "H52-18 (C)",
@@ -83705,7 +84006,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "G8W": {
       "parent_sku": "G8W",
@@ -83716,7 +84018,8 @@
       "source_page_id": "314ffa524c5b80099ef6df85b604e72b",
       "source_page_url": "https://www.notion.so/G8W-314ffa524c5b80099ef6df85b604e72b",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "G6W": {
       "parent_sku": "G6W",
@@ -83727,7 +84030,8 @@
       "source_page_id": "314ffa524c5b801cbabedef031785384",
       "source_page_url": "https://www.notion.so/G6W-314ffa524c5b801cbabedef031785384",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "G10W": {
       "parent_sku": "G10W",
@@ -83738,7 +84042,8 @@
       "source_page_id": "314ffa524c5b80dcacbbe10c4a5b0866",
       "source_page_url": "https://www.notion.so/G10W-314ffa524c5b80dcacbbe10c4a5b0866",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60600-36": {
       "parent_sku": "60600-36",
@@ -84205,7 +84510,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H63": {
       "parent_sku": "H63",
@@ -84373,7 +84679,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "H63-20": {
       "parent_sku": "H63-20",
@@ -84384,7 +84691,8 @@
       "source_page_id": "318ffa524c5b802394f6c148406d8818",
       "source_page_url": "https://www.notion.so/H63-20-318ffa524c5b802394f6c148406d8818",
       "last_edited_at": "2026-03-11T04:19:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "H63-26": {
       "parent_sku": "H63-26",
@@ -84395,7 +84703,8 @@
       "source_page_id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
       "source_page_url": "https://www.notion.so/H63-26-318ffa524c5b80ada4c5d5e1f6c7d7dc",
       "last_edited_at": "2026-03-11T04:19:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "30110-12 (C)": {
       "parent_sku": "30110-12 (C)",
@@ -84758,7 +85067,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "ER1-3": {
       "parent_sku": "ER1-3",
@@ -84769,7 +85079,8 @@
       "source_page_id": "324ffa524c5b811d983bc1701c6097c4",
       "source_page_url": "https://www.notion.so/ER1-3-324ffa524c5b811d983bc1701c6097c4",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "ER1-12": {
       "parent_sku": "ER1-12",
@@ -84780,7 +85091,8 @@
       "source_page_id": "324ffa524c5b812aaa0ecaef3e38c50c",
       "source_page_url": "https://www.notion.so/ER1-12-324ffa524c5b812aaa0ecaef3e38c50c",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "ER1-6": {
       "parent_sku": "ER1-6",
@@ -84791,7 +85103,8 @@
       "source_page_id": "324ffa524c5b8147b393d10bdc467756",
       "source_page_url": "https://www.notion.so/ER1-6-324ffa524c5b8147b393d10bdc467756",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "ER1": {
       "parent_sku": "ER1",
@@ -84802,7 +85115,8 @@
       "source_page_id": "324ffa524c5b817aae82d7312ebed61b",
       "source_page_url": "https://www.notion.so/ER1-324ffa524c5b817aae82d7312ebed61b",
       "last_edited_at": "2026-03-15T23:13:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "ER1-4": {
       "parent_sku": "ER1-4",
@@ -84813,7 +85127,8 @@
       "source_page_id": "324ffa524c5b817fa9d1f89377fcdcc1",
       "source_page_url": "https://www.notion.so/ER1-4-324ffa524c5b817fa9d1f89377fcdcc1",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "ER1-2": {
       "parent_sku": "ER1-2",
@@ -84824,7 +85139,8 @@
       "source_page_id": "324ffa524c5b81c99fc3fab4d9b06477",
       "source_page_url": "https://www.notion.so/ER1-2-324ffa524c5b81c99fc3fab4d9b06477",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "ER1-24": {
       "parent_sku": "ER1-24",
@@ -84835,7 +85151,8 @@
       "source_page_id": "324ffa524c5b81f0af39e10d3600e247",
       "source_page_url": "https://www.notion.so/ER1-24-324ffa524c5b81f0af39e10d3600e247",
       "last_edited_at": "2026-03-26T03:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60124S-0": {
       "parent_sku": "60124S-0",
@@ -84846,7 +85163,8 @@
       "source_page_id": "343ffa524c5b810ba2d4fd52837dddeb",
       "source_page_url": "https://www.notion.so/60124S-0-343ffa524c5b810ba2d4fd52837dddeb",
       "last_edited_at": "2026-04-15T00:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60129S-9": {
       "parent_sku": "60129S-9",
@@ -84857,7 +85175,8 @@
       "source_page_id": "343ffa524c5b810c85d3c60579e7b196",
       "source_page_url": "https://www.notion.so/60129S-9-343ffa524c5b810c85d3c60579e7b196",
       "last_edited_at": "2026-04-15T00:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60129S-21": {
       "parent_sku": "60129S-21",
@@ -84868,7 +85187,8 @@
       "source_page_id": "343ffa524c5b8118abb7cdd721b034be",
       "source_page_url": "https://www.notion.so/60129S-21-343ffa524c5b8118abb7cdd721b034be",
       "last_edited_at": "2026-04-15T00:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60123S (C)": {
       "parent_sku": "60123S (C)",
@@ -84879,7 +85199,8 @@
       "source_page_id": "343ffa524c5b8139ac93e8493fca79c9",
       "source_page_url": "https://www.notion.so/60123S-C-343ffa524c5b8139ac93e8493fca79c9",
       "last_edited_at": "2026-04-15T00:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60124S-10": {
       "parent_sku": "60124S-10",
@@ -84890,7 +85211,8 @@
       "source_page_id": "343ffa524c5b8139bca9f43245a4f95c",
       "source_page_url": "https://www.notion.so/60124S-10-343ffa524c5b8139bca9f43245a4f95c",
       "last_edited_at": "2026-04-15T00:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60226S-11": {
       "parent_sku": "60226S-11",
@@ -84901,7 +85223,8 @@
       "source_page_id": "343ffa524c5b813c8d38ca43376e3a03",
       "source_page_url": "https://www.notion.so/60226S-11-343ffa524c5b813c8d38ca43376e3a03",
       "last_edited_at": "2026-04-15T14:44:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60121S (C)": {
       "parent_sku": "60121S (C)",
@@ -84912,7 +85235,8 @@
       "source_page_id": "343ffa524c5b8144994ce1329baf6edb",
       "source_page_url": "https://www.notion.so/60121S-C-343ffa524c5b8144994ce1329baf6edb",
       "last_edited_at": "2026-04-15T00:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60226S-29": {
       "parent_sku": "60226S-29",
@@ -84923,7 +85247,8 @@
       "source_page_id": "343ffa524c5b8158bbd4fbf183ee09b9",
       "source_page_url": "https://www.notion.so/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9",
       "last_edited_at": "2026-04-15T14:44:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60124S-3": {
       "parent_sku": "60124S-3",
@@ -84934,7 +85259,8 @@
       "source_page_id": "343ffa524c5b81659ef8cf3b277517a8",
       "source_page_url": "https://www.notion.so/60124S-3-343ffa524c5b81659ef8cf3b277517a8",
       "last_edited_at": "2026-04-15T00:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60226S-23": {
       "parent_sku": "60226S-23",
@@ -84945,7 +85271,8 @@
       "source_page_id": "343ffa524c5b817db7f7e1137838d72f",
       "source_page_url": "https://www.notion.so/60226S-23-343ffa524c5b817db7f7e1137838d72f",
       "last_edited_at": "2026-04-15T14:44:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60127S": {
       "parent_sku": "60127S",
@@ -84956,7 +85283,8 @@
       "source_page_id": "343ffa524c5b81be86abcaa965e2e79f",
       "source_page_url": "https://www.notion.so/60127S-343ffa524c5b81be86abcaa965e2e79f",
       "last_edited_at": "2026-04-15T00:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60124S-6": {
       "parent_sku": "60124S-6",
@@ -84967,7 +85295,8 @@
       "source_page_id": "343ffa524c5b81df964de7593cfc6600",
       "source_page_url": "https://www.notion.so/60124S-6-343ffa524c5b81df964de7593cfc6600",
       "last_edited_at": "2026-04-15T00:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60226S-17": {
       "parent_sku": "60226S-17",
@@ -84978,7 +85307,8 @@
       "source_page_id": "343ffa524c5b81f2a369c58ccd74963e",
       "source_page_url": "https://www.notion.so/60226S-17-343ffa524c5b81f2a369c58ccd74963e",
       "last_edited_at": "2026-04-15T14:44:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60129S-15": {
       "parent_sku": "60129S-15",
@@ -84989,7 +85319,8 @@
       "source_page_id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
       "source_page_url": "https://www.notion.so/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1",
       "last_edited_at": "2026-04-15T00:09:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60125S (C)": {
       "parent_sku": "60125S (C)",
@@ -85000,7 +85331,8 @@
       "source_page_id": "343ffa524c5b81ff8c3ef45fb0e30929",
       "source_page_url": "https://www.notion.so/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929",
       "last_edited_at": "2026-04-15T00:08:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60401-24": {
       "parent_sku": "60401-24",
@@ -85454,7 +85786,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60400-36": {
       "parent_sku": "60400-36",
@@ -85908,7 +86241,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60600-48": {
       "parent_sku": "60600-48",
@@ -86375,7 +86709,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60601-36": {
       "parent_sku": "60601-36",
@@ -86842,7 +87177,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60400-24": {
       "parent_sku": "60400-24",
@@ -87296,7 +87632,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60400-48": {
       "parent_sku": "60400-48",
@@ -87750,7 +88087,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60600-72": {
       "parent_sku": "60600-72",
@@ -88230,7 +88568,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60600": {
       "parent_sku": "60600",
@@ -88241,7 +88580,8 @@
       "source_page_id": "9f079ee5158b459f8402f1f3f18ca9ad",
       "source_page_url": "https://www.notion.so/60600-9f079ee5158b459f8402f1f3f18ca9ad",
       "last_edited_at": "2026-02-19T21:28:00.000Z",
-      "parts": []
+      "parts": [],
+      "is_parent": false
     },
     "60400-84": {
       "parent_sku": "60400-84",
@@ -88695,7 +89035,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60400-60": {
       "parent_sku": "60400-60",
@@ -89162,7 +89503,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60601-84": {
       "parent_sku": "60601-84",
@@ -89629,7 +89971,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60600-84": {
       "parent_sku": "60600-84",
@@ -90096,7 +90439,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60401-84": {
       "parent_sku": "60401-84",
@@ -90550,7 +90894,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60401-60": {
       "parent_sku": "60401-60",
@@ -91017,7 +91362,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     },
     "60401-36": {
       "parent_sku": "60401-36",
@@ -91471,7 +91817,8 @@
           "rack_size": 1,
           "black_batch_stocked": false
         }
-      ]
+      ],
+      "is_parent": false
     }
   }
 }
