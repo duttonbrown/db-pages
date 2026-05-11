@@ -61,6 +61,34 @@ function clearError() { errorEl.hidden = true; }
 
 function todayISO() { return new Date().toISOString().slice(0, 10); }
 
+// Parse a free-text lead time ("1 week", "2 weeks", "10 days", "3-4 weeks")
+// into a number of days. Returns null when nothing parseable is found so the
+// caller can decide whether to fall back to today. Range strings ("2-3 weeks")
+// use the upper bound so the ETA defaults conservative, not optimistic.
+function leadTimeToDays(s) {
+  if (!s) return null;
+  const str = String(s).toLowerCase().trim();
+  // Pull the last number in the string (covers "2-3 weeks" -> 3, "approx 2 weeks" -> 2)
+  const nums = str.match(/\d+(?:\.\d+)?/g);
+  if (!nums) return null;
+  const n = parseFloat(nums[nums.length - 1]);
+  if (!Number.isFinite(n) || n <= 0) return null;
+  if (/month/.test(str))   return Math.round(n * 30);
+  if (/week/.test(str))    return Math.round(n * 7);
+  if (/day/.test(str))     return Math.round(n);
+  // Bare number with no unit — assume days
+  return Math.round(n);
+}
+
+// Add `days` to an ISO date (YYYY-MM-DD). Returns ISO. UTC math so we don't
+// shift the date around DST transitions.
+function addDaysISO(iso, days) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  dt.setUTCDate(dt.getUTCDate() + days);
+  return dt.toISOString().slice(0, 10);
+}
+
 function ageDays(dateISO) {
   if (!dateISO) return null;
   const ms = Date.now() - new Date(dateISO).getTime();
@@ -576,6 +604,26 @@ function openModal(action, row) {
         }
       });
     }
+
+    // Auto-slide ETA when Ordered Date changes — but only while the user
+    // hasn't manually touched the ETA. As soon as they pick a date there,
+    // we respect it and stop overriding. This way a default "today + 1 week"
+    // stays useful if the order date is backdated, but doesn't fight a
+    // purchaser who wants a specific ETA.
+    const orderedInput = modalForm.querySelector("#f-orderedDate");
+    const etaInput     = modalForm.querySelector("#f-eta");
+    if (orderedInput && etaInput) {
+      const leadDays = Number(etaInput.dataset.leadDays);
+      let etaTouched = false;
+      etaInput.addEventListener("input", () => { etaTouched = true; });
+      if (Number.isFinite(leadDays) && leadDays > 0) {
+        orderedInput.addEventListener("input", () => {
+          if (etaTouched) return;
+          if (!orderedInput.value) return;
+          etaInput.value = addDaysISO(orderedInput.value, leadDays);
+        });
+      }
+    }
   }
 
   // Auto-focus first input
@@ -596,6 +644,14 @@ function fieldsFor(action, row) {
   const today = todayISO();
   const moq = row.moqQty ?? "";
   if (action === "ordered") {
+    // Default ETA = orderedDate + lead time (parsed from row.leadTime).
+    // Falls back to empty when leadTime is missing/unparseable so the
+    // purchaser has to pick one explicitly instead of trusting a bad guess.
+    const leadDays = leadTimeToDays(row.leadTime);
+    const defaultETA = leadDays != null ? addDaysISO(today, leadDays) : "";
+    const etaHint = leadDays != null
+      ? ` <span class="muted">(${escapeHtml(row.leadTime)} from order date)</span>`
+      : "";
     return `
       <div class="field">
         <label for="f-poNumber">PO #<span class="req">*</span></label>
@@ -614,8 +670,8 @@ function fieldsFor(action, row) {
         <input id="f-orderedDate" name="orderedDate" type="date" value="${today}">
       </div>
       <div class="field">
-        <label for="f-eta">ETA<span class="req">*</span></label>
-        <input id="f-eta" name="eta" type="date">
+        <label for="f-eta">ETA<span class="req">*</span>${etaHint}</label>
+        <input id="f-eta" name="eta" type="date" value="${defaultETA}" data-lead-days="${leadDays ?? ""}">
       </div>
       <div class="field">
         <label for="f-tracking">Tracking # <span class="muted">(optional)</span></label>
