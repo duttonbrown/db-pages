@@ -316,17 +316,15 @@ function renderRow(r) {
   li.innerHTML = `
     ${thumbHtml}
     <div class="pending-meta">
-      <div class="order-num"></div>
-      <div class="row-tags"></div>
       <div class="title-row">
+        <span class="order-num"></span>
+        <span class="row-tags"></span>
         <strong class="title-text"></strong>
         <span class="title-desc"></span>
       </div>
       <div class="vendor-line"></div>
-      <div class="stats-line"></div>
       <div class="row-extra"></div>
       <div class="notes"></div>
-      <div class="submitted-at"></div>
     </div>
     <div class="row-actions"></div>
   `;
@@ -347,22 +345,23 @@ function renderRow(r) {
   vendorEl.textContent = v ? `Vendor: ${v}` : "";
   vendorEl.hidden = !v;
 
-  // Stats line (matches requester form): 2025 Use | Reorder Qty | Lead Time
-  const statsEl = li.querySelector(".stats-line");
-  const statsParts = [
-    r.use2025 != null && `2025 Use: ${r.use2025}`,
-    (r.moqQty != null) ? `MOQ: ${r.moqQty}` :
-      ((r.reorderQty != null && r.reorderQty !== "") ? `Reorder Qty: ${r.reorderQty}` : null),
-    r.leadTime && `Lead Time: ${r.leadTime}`,
-  ].filter(Boolean);
-  statsEl.textContent = statsParts.join("   |   ");
-  statsEl.hidden = statsParts.length === 0;
-
-  // Extra: requester / age / Qty Ordered / PO / ETA
+  // Single meta line: requester · age · 2025 use · MOQ/reorder · lead time · qty/po/eta.
+  // Submitted timestamp moves to a `title` tooltip on the age chip so it stays
+  // discoverable without taking a whole line.
   const extra = li.querySelector(".row-extra");
   const extraParts = [];
   extraParts.push(`<span><strong>Requested by:</strong> ${escapeHtml(r.requestor || "—")}</span>`);
-  if (age != null) extraParts.push(`<span><strong>Age:</strong> ${age}d</span>`);
+  if (age != null) {
+    const tip = submittedAt ? ` title="Submitted ${escapeHtml(submittedAt)}"` : "";
+    extraParts.push(`<span${tip}><strong>Age:</strong> ${age}d</span>`);
+  }
+  if (r.use2025 != null) extraParts.push(`<span><strong>2025 Use:</strong> ${r.use2025}</span>`);
+  if (r.moqQty != null) {
+    extraParts.push(`<span><strong>MOQ:</strong> ${r.moqQty}</span>`);
+  } else if (r.reorderQty != null && r.reorderQty !== "") {
+    extraParts.push(`<span><strong>Reorder Qty:</strong> ${r.reorderQty}</span>`);
+  }
+  if (r.leadTime) extraParts.push(`<span><strong>Lead Time:</strong> ${escapeHtml(r.leadTime)}</span>`);
   if (r.qtyOrdered != null) extraParts.push(`<span><strong>Qty Ordered:</strong> ${r.qtyOrdered}</span>`);
   if (r.poNumber) extraParts.push(`<span><strong>PO:</strong> ${escapeHtml(r.poNumber)}</span>`);
   if (r.eta) extraParts.push(`<span><strong>ETA:</strong> ${r.eta}</span>`);
@@ -376,11 +375,6 @@ function renderRow(r) {
   if (r.reason) noteParts.push(`<strong>Reason:</strong> ${escapeHtml(r.reason)}`);
   notesEl.innerHTML = noteParts.join(" · ");
   notesEl.hidden = noteParts.length === 0;
-
-  // Submission timestamp
-  const submittedEl = li.querySelector(".submitted-at");
-  submittedEl.textContent = submittedAt ? `Submitted ${submittedAt}` : "";
-  submittedEl.hidden = !submittedAt;
 
   // Action buttons depend on current status
   const actions = li.querySelector(".row-actions");
