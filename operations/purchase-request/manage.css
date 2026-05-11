@@ -146,12 +146,21 @@
   color: var(--text);
 }
 
+/* 2x2 grid keeps each row short. With ≤4 buttons, the column collapses to
+   ≤2 rows (≈70px) instead of stacking 4 vertical buttons (≈140px), so the
+   queue rows are roughly half the height. */
 .row-actions {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
   gap: 6px;
-  align-items: stretch;
-  min-width: 160px;
+  align-content: start;
+  min-width: 250px;
+}
+/* Rare case: <2 buttons collapse to a single column so they don't render
+   stretched across two grid tracks. */
+.row-actions:has(.action-btn:only-child) {
+  grid-template-columns: 1fr;
+  min-width: 140px;
 }
 .row-actions .action-btn {
   font-family: inherit;
@@ -163,7 +172,7 @@
   background: white;
   color: var(--text);
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   transition: background 0.1s, border-color 0.1s;
 }
 .row-actions .action-btn:hover {
@@ -465,4 +474,56 @@
   border-top: 1px dashed var(--border);
   font-size: 11px;
   color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+
+/* iPad portrait (and small laptops). Stack action buttons underneath the
+   row body so the row body gets full width; buttons keep the 2-up grid. */
+@media (max-width: 900px) {
+  .pending-row {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px 12px;
+  }
+  .pending-row .row-thumb,
+  .pending-row .row-thumb-fallback {
+    grid-row: span 2;
+  }
+  .pending-row .pending-meta { grid-column: 2; }
+  .row-actions {
+    grid-column: 1 / -1;
+    min-width: 0;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .vendor-bubble { min-width: 0; flex: 1 1 220px; }
+  .triage-bubble { flex: 1 1 220px; }
+}
+
+/* iPhone — pull the thumb down a notch and let everything stack tighter. */
+@media (max-width: 480px) {
+  .pending-row {
+    padding: 10px;
+    gap: 8px 10px;
+  }
+  .pending-row .row-thumb,
+  .pending-row .row-thumb-fallback {
+    width: 44px;
+    height: 44px;
+  }
+  .pending-row .title-text { font-size: 13px; }
+  .pending-row .title-desc { font-size: 12px; }
+  .row-actions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+  .row-actions .action-btn {
+    padding: 8px 6px;     /* taller tap target, slimmer label area */
+    font-size: 11px;
+  }
+  .purchaser-bar { flex-wrap: wrap; }
+  .purchaser-bar select { max-width: none; flex: 1 1 100%; }
+  .purchaser-bar .link-btn { margin-left: 0; }
+  .triage, .vendor-digest { padding: 10px 12px; }
+  .vendor-bubble, .triage-bubble { flex: 1 1 100%; }
 }

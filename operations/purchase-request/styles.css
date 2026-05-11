@@ -374,6 +374,20 @@ textarea {
   transition: border-color 0.15s;
 }
 
+/* Kill the up/down spinner arrows on number inputs across all browsers.
+   They invite accidental ±1 clicks, and combined with the wheel-blur handler
+   (in manage.js / receive.js / app.js) this prevents the "5000 -> 5006" bug
+   from accidental scroll/click while the field has focus. */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 input:disabled { background: #F5F5F5; cursor: wait; }
 
 input:focus,
