@@ -160,6 +160,39 @@ function localSearch(q) {
     .map(x => x.r);
 }
 
+// ----- Recent activity chip -----
+//
+// Returns { text, tone, kind } when the item has a recent enough touch to
+// be worth showing in the UI, or null otherwise. Tones:
+//   "urgent" — last activity within 30d (warn the user it's fresh)
+//   "muted"  — last activity 31-180d ago (FYI for planning)
+// Strongest signal wins: received > ordered > requested. So an item that was
+// "received 12d ago AND requested 3d ago" shows "Received 12d ago" — the
+// most decisive signal is "we have it in the building."
+function recentChip(item) {
+  if (!item) return null;
+  const now = Date.now();
+  const ageDays = (iso) => iso ? Math.floor((now - new Date(iso).getTime()) / 86400000) : null;
+  const candidates = [
+    { kind: "received",  label: "Received",  age: ageDays(item.lastReceived) },
+    { kind: "ordered",   label: "Ordered",   age: ageDays(item.lastOrdered) },
+    { kind: "requested", label: "Requested", age: ageDays(item.lastRequested) },
+  ].filter(c => c.age != null && c.age >= 0);
+  if (candidates.length === 0) return null;
+  // Use the freshest of the three (smallest age) — that's the strongest signal.
+  // Ties broken by the priority order above (received > ordered > requested)
+  // via stable sort.
+  candidates.sort((a, b) => a.age - b.age);
+  const pick = candidates[0];
+  if (pick.age > 180) return null; // too old to be useful as a flag
+  const tone = pick.age <= 30 ? "urgent" : "muted";
+  const ageText = pick.age === 0 ? "today"
+                : pick.age === 1 ? "yesterday"
+                : `${pick.age}d ago`;
+  const prefix = tone === "urgent" ? pick.label : `Last ${pick.label.toLowerCase()}`;
+  return { text: `${prefix} ${ageText}`, tone, kind: pick.kind, ageDays: pick.age };
+}
+
 function runSearch(q) {
   if (q.length < 2) { resultsList.hidden = true; return; }
   if (!catalogReady) {
@@ -193,6 +226,7 @@ function renderResults(items) {
           <span class="title-row">
             <strong class="title-text"></strong>
             <span class="title-desc"></span>
+            <span class="recent-chip" hidden></span>
           </span>
           <small class="vendor-line"></small>
           <small class="stats-line"></small>
@@ -205,6 +239,13 @@ function renderResults(items) {
       li.querySelector(".title-text").textContent = item.title || "(untitled)";
       const desc = item.description || item.subtitle || "";
       li.querySelector(".title-desc").textContent = desc ? `— ${desc}` : "";
+      const chip = recentChip(item);
+      const chipEl = li.querySelector(".recent-chip");
+      if (chip) {
+        chipEl.textContent = chip.text;
+        chipEl.dataset.tone = chip.tone;
+        chipEl.hidden = false;
+      }
       const vLine = vendorLine(item);
       const sLine = statsLine(item);
       li.querySelector(".vendor-line").textContent = vLine;
@@ -250,6 +291,16 @@ function pickItem(item) {
     pickedCategory.hidden = false;
   } else {
     pickedCategory.hidden = true;
+  }
+  const pickedRecent = $("picked-recent");
+  const chip = recentChip(item);
+  if (chip) {
+    pickedRecent.textContent = chip.text;
+    pickedRecent.dataset.tone = chip.tone;
+    pickedRecent.hidden = false;
+  } else {
+    pickedRecent.hidden = true;
+    pickedRecent.removeAttribute("data-tone");
   }
   pickedNoteCheckbox.checked = false;
   pickedNoteInput.value = "";

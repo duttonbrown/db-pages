@@ -706,6 +706,33 @@ textarea { resize: vertical; min-height: 70px; }
   margin-bottom: 4px;
 }
 
+/* Recent activity chip — surfaces "this item was just touched" warnings
+   across Submit, Purchase, and (eventually) Status pages. Two tones:
+   urgent (≤30d, red) and muted (31–180d, gray). The same DOM
+   convention (.recent-chip[data-tone]) is reused everywhere. */
+.recent-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.recent-chip[data-tone="urgent"] {
+  background: #FDECEA;
+  color: var(--error);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+}
+.recent-chip[data-tone="muted"] {
+  background: #F0F0F0;
+  color: var(--muted);
+}
+/* Results list — chip sits in the title-row beside the description */
+.results .recent-chip { margin-left: 4px; }
+
 .link-btn {
   background: none;
   border: none;
