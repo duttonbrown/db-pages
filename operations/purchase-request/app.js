@@ -485,15 +485,29 @@ function updateAddCustomState() {
   addCustomBtn.disabled = customName.value.trim().length === 0;
 }
 
+// Idempotency key for the current cart. Generated the first time the user
+// clicks Submit; reused on retry so the worker can deduplicate. Reset only
+// when the cart is cleared (resetForm or a successful full submit).
+let currentIdempotencyKey = null;
+
+function newIdempotencyKey() {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
+  // Fallback for older browsers — collision-resistant enough for a 60s window
+  return "k-" + Date.now() + "-" + Math.random().toString(36).slice(2, 12);
+}
+
 async function handleSubmit() {
   if (cart.length === 0 || !requestor.value) return;
   clearError();
   submitBtn.disabled = true;
   submitBtn.textContent = "Submitting…";
 
+  if (!currentIdempotencyKey) currentIdempotencyKey = newIdempotencyKey();
+
   const payload = {
     requestor: requestor.value,
     sharedNotes: sharedNotes.value.trim(),
+    idempotencyKey: currentIdempotencyKey,
     items: cart.map(it => ({
       type: it.type,
       relationId: it.relationId,
@@ -512,13 +526,71 @@ async function handleSubmit() {
       body: JSON.stringify(payload),
     });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Submit failed");
-    showSuccess(data);
+
+    // Treat 400 (validation) and 502 (all failed, no rows created) as full
+    // errors — nothing landed in Notion, user can fix and resubmit safely.
+    if (res.status === 400 || (res.status === 502 && !data.created?.length)) {
+      throw new Error(data.error || "Submit failed");
+    }
+
+    const created = data.created || [];
+    const failed = data.failed || [];
+
+    if (failed.length === 0) {
+      // Full success — clear key so the next batch gets a fresh one
+      currentIdempotencyKey = null;
+      showSuccess(data);
+    } else {
+      // Partial success — keep failed items in the cart so the user can retry
+      // them (with the SAME key, which the worker will deduplicate against).
+      const failedIndexes = new Set(failed.map(f => f.index));
+      cart = cart.filter((_, i) => failedIndexes.has(i));
+      renderCart();
+      showPartialError(created, failed);
+      cooldownSubmit();
+    }
   } catch (e) {
     showError(e.message || "Submit failed");
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit purchase request";
+    cooldownSubmit();
   }
+}
+
+// Disable + relabel the submit button for 3s after a failed/partial attempt.
+// Prevents the accidental double-click while the user is reading the error.
+function cooldownSubmit() {
+  let secondsLeft = 3;
+  submitBtn.disabled = true;
+  submitBtn.textContent = `Wait ${secondsLeft}s…`;
+  const tick = setInterval(() => {
+    secondsLeft -= 1;
+    if (secondsLeft <= 0) {
+      clearInterval(tick);
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit purchase request";
+    } else {
+      submitBtn.textContent = `Wait ${secondsLeft}s…`;
+    }
+  }, 1000);
+}
+
+function showPartialError(created, failed) {
+  const parts = [];
+  parts.push(`<strong>${created.length} item${created.length === 1 ? "" : "s"} submitted,`);
+  parts.push(` ${failed.length} failed.</strong><br>`);
+  parts.push("The failed items are still in your cart — fix any issues and click Submit again. ");
+  parts.push("Already-submitted items won't be duplicated.<br><br>");
+  parts.push("<em>Failures:</em><ul style='margin:4px 0 0;padding-left:20px;'>");
+  for (const f of failed) {
+    parts.push(`<li>${escapeHtmlSafe(f.label)} — <span style='color:var(--muted)'>${escapeHtmlSafe(f.error)}</span></li>`);
+  }
+  parts.push("</ul>");
+  errorBox.innerHTML = parts.join("");
+  errorBox.hidden = false;
+}
+
+function escapeHtmlSafe(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 }
 
 function showSuccess(data) {
@@ -538,6 +610,7 @@ function showSuccess(data) {
 
 function resetForm() {
   cart = [];
+  currentIdempotencyKey = null;
   cancelPicked();
   notInDb.checked = false;
   toggleNotInDb();
@@ -547,6 +620,7 @@ function resetForm() {
   successBox.hidden = true;
   requestor.value = "";
   sharedNotes.value = "";
+  submitBtn.disabled = false;
   submitBtn.textContent = "Submit purchase request";
   search.focus();
   clearError();
