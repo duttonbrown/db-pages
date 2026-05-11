@@ -245,6 +245,22 @@
 .modal-body { padding: 20px; }
 .modal-body .field { margin-bottom: 14px; }
 .modal-body .field:last-child { margin-bottom: 0; }
+
+/* Two fields side-by-side in the modal (used for Order # + PO # on Mark
+   Ordered so the two related identifiers sit on one line, not stacked). */
+.modal-body .field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.modal-body .field-row .field { margin-bottom: 0; }
+@media (max-width: 480px) {
+  .modal-body .field-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
 .modal-body label {
   font-size: 13px;
 }

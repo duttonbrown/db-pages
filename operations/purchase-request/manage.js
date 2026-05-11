@@ -477,6 +477,7 @@ function renderRow(r) {
   }
   if (r.leadTime) extraParts.push(`<span><strong>Lead Time:</strong> ${escapeHtml(r.leadTime)}</span>`);
   if (r.qtyOrdered != null) extraParts.push(`<span><strong>Qty Ordered:</strong> ${r.qtyOrdered}</span>`);
+  if (r.orderNumber) extraParts.push(`<span><strong>Order #:</strong> ${escapeHtml(r.orderNumber)}</span>`);
   if (r.poNumber) extraParts.push(`<span><strong>PO:</strong> ${escapeHtml(r.poNumber)}</span>`);
   if (r.eta) extraParts.push(`<span><strong>ETA:</strong> ${r.eta}</span>`);
   extra.innerHTML = extraParts.join("");
@@ -605,6 +606,24 @@ function openModal(action, row) {
       });
     }
 
+    // Same pattern for "No Order # available" — internal stock requests that
+    // aren't tied to a Shopify/customer order.
+    const noOrderBox = modalForm.querySelector("#f-noOrderNumber");
+    const orderInput = modalForm.querySelector("#f-orderNumber");
+    if (noOrderBox && orderInput) {
+      noOrderBox.addEventListener("change", () => {
+        if (noOrderBox.checked) {
+          orderInput.value = "";
+          orderInput.disabled = true;
+          orderInput.placeholder = "Not provided";
+        } else {
+          orderInput.disabled = false;
+          orderInput.placeholder = "e.g. #12345";
+          orderInput.focus();
+        }
+      });
+    }
+
     // Auto-slide ETA when Ordered Date changes — but only while the user
     // hasn't manually touched the ETA. As soon as they pick a date there,
     // we respect it and stop overriding. This way a default "today + 1 week"
@@ -653,13 +672,23 @@ function fieldsFor(action, row) {
       ? ` <span class="muted">(${escapeHtml(row.leadTime)} from order date)</span>`
       : "";
     return `
-      <div class="field">
-        <label for="f-poNumber">PO #<span class="req">*</span></label>
-        <input id="f-poNumber" name="poNumber" type="text" placeholder="e.g. PO-2026-0042">
-        <label class="field-checkbox">
-          <input type="checkbox" id="f-noPO" name="noPO" value="1">
-          <span>No PO # available</span>
-        </label>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-orderNumber">Order #<span class="req">*</span></label>
+          <input id="f-orderNumber" name="orderNumber" type="text" placeholder="e.g. #12345">
+          <label class="field-checkbox">
+            <input type="checkbox" id="f-noOrderNumber" name="noOrderNumber" value="1">
+            <span>No Order # available</span>
+          </label>
+        </div>
+        <div class="field">
+          <label for="f-poNumber">PO #<span class="req">*</span></label>
+          <input id="f-poNumber" name="poNumber" type="text" placeholder="e.g. PO-2026-0042">
+          <label class="field-checkbox">
+            <input type="checkbox" id="f-noPO" name="noPO" value="1">
+            <span>No PO # available</span>
+          </label>
+        </div>
       </div>
       <div class="field">
         <label for="f-qtyOrdered">Qty Ordered<span class="req">*</span></label>
