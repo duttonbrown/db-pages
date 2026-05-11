@@ -294,11 +294,15 @@ function renderItemRow(r) {
   const itemTitle = r.itemName || r.customItemName || "(unnamed)";
   const description = r.description || "";
   const qtyDefault = r.qtyOrdered != null ? r.qtyOrdered : "";
+  const thumbHtml = r.image
+    ? `<img class="item-thumb" src="${escapeHtml(r.image)}" alt="">`
+    : `<div class="item-thumb-fallback">${r.type === "Supply" ? "📦" : r.type === "Other" ? "🛠️" : "🔩"}</div>`;
 
   li.innerHTML = `
     <label class="item-include-wrap">
       <input type="checkbox" class="item-include" aria-label="Include in receive batch">
     </label>
+    ${thumbHtml}
     <div class="item-body">
       <div class="item-title-row">
         <strong class="item-title">${escapeHtml(itemTitle)}</strong>
