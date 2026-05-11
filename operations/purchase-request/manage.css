@@ -61,12 +61,27 @@
 }
 .pending-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: 16px;
   padding: 14px;
   border-bottom: 1px solid var(--border);
 }
 .pending-row:last-child { border-bottom: none; }
+.pending-row .row-thumb,
+.pending-row .row-thumb-fallback {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  background: #F0F0F0;
+  flex-shrink: 0;
+}
+.pending-row .row-thumb { object-fit: cover; }
+.pending-row .row-thumb-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
 .pending-row.urgent {
   background: #FFF5F5;
   border-left: 3px solid var(--error);
