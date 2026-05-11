@@ -16,6 +16,13 @@ const emptyEl      = $("empty");
 const loadingBar   = $("loading-bar");
 const loadingFill  = loadingBar.querySelector(".loading-fill");
 const loadingMsgEl = loadingBar.querySelector(".loading-message");
+const searchInput  = $("receive-search");
+const searchCount  = $("receive-search-count");
+
+// Cache of the most recent Ordered rows so the search box can re-render
+// without round-tripping the worker.
+let allOrdered = [];
+let searchQuery = "";
 
 // Keep this list in sync with app.js LOADING_MESSAGES.
 const LOADING_MESSAGES = [
@@ -106,8 +113,9 @@ async function loadShipments() {
     setTimeout(() => { loadingBar.hidden = true; }, 250);
     // /pending returns Submitted + Waiting + Backordered + Ordered. Receiving
     // only cares about Ordered — the rest aren't physically en route.
-    const ordered = (data.rows || []).filter(r => r.status === "Ordered");
-    renderShipments(ordered);
+    allOrdered = (data.rows || []).filter(r => r.status === "Ordered");
+    renderShipments(filteredOrdered());
+    updateSearchCount();
   } catch (e) {
     showError("Couldn't load shipments.");
     loadingBar.hidden = true;
@@ -118,10 +126,58 @@ async function loadShipments() {
 
 refreshBtn.addEventListener("click", loadShipments);
 
+function matchesSearch(r, q) {
+  if (!q) return true;
+  const haystack = [
+    r.orderNum, r.itemName, r.customItemName, r.description,
+    r.poNumber, r.tracking, r.requestor, r.vendor, r.notes,
+  ].filter(Boolean).join(" ").toLowerCase();
+  // Every space-separated term must appear so "grand brass" narrows correctly.
+  return q.split(/\s+/).every(term => haystack.includes(term));
+}
+
+function filteredOrdered() {
+  const q = searchQuery.trim().toLowerCase();
+  if (!q) return allOrdered;
+  return allOrdered.filter(r => matchesSearch(r, q));
+}
+
+function updateSearchCount() {
+  const total = allOrdered.length;
+  if (!searchQuery.trim()) {
+    searchCount.hidden = true;
+    return;
+  }
+  const shown = filteredOrdered().length;
+  searchCount.hidden = false;
+  searchCount.textContent = `${shown} of ${total}`;
+}
+
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    searchQuery = searchInput.value;
+    renderShipments(filteredOrdered());
+    updateSearchCount();
+  });
+}
+
 function renderShipments(rows) {
   poListEl.innerHTML = "";
 
   if (rows.length === 0) {
+    if (searchQuery.trim() && allOrdered.length > 0) {
+      emptyEl.innerHTML = `<p>No shipments match "<strong>${escapeHtml(searchQuery)}</strong>". <button type="button" class="link-btn" id="clear-receive-search">Clear search</button></p>`;
+      const clr = $("clear-receive-search");
+      if (clr) clr.addEventListener("click", () => {
+        searchInput.value = "";
+        searchQuery = "";
+        renderShipments(filteredOrdered());
+        updateSearchCount();
+        searchInput.focus();
+      });
+    } else {
+      emptyEl.innerHTML = `<p>📦 Nothing waiting to be received. The dock is clear.</p>`;
+    }
     emptyEl.hidden = false;
     return;
   }
@@ -326,6 +382,10 @@ async function submitGroup(section, g, selectedOnly = false) {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Receive failed");
+    // Drop received rows from the in-memory cache so search counts stay honest
+    const receivedIds = new Set(selected.map(li => li.dataset.pageId));
+    allOrdered = allOrdered.filter(r => !receivedIds.has(r.pageId));
+
     // Remove the received items from the DOM. If the group is now empty,
     // remove the whole section.
     for (const li of selected) li.remove();
@@ -335,8 +395,10 @@ async function submitGroup(section, g, selectedOnly = false) {
       updateSelectedCount(section);
     }
     if (poListEl.querySelectorAll(".po-group").length === 0) {
+      emptyEl.innerHTML = `<p>📦 Nothing waiting to be received. The dock is clear.</p>`;
       emptyEl.hidden = false;
     }
+    updateSearchCount();
   } catch (e) {
     showError(e.message || "Receive failed");
     allBtn.disabled = false;

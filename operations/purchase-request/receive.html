@@ -44,6 +44,16 @@
     <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
   </div>
 
+  <div class="receive-search">
+    <input
+      type="search"
+      id="receive-search"
+      placeholder="Search by PO, item, vendor, requestor, order #…"
+      aria-label="Search shipments"
+      autocomplete="off">
+    <span class="receive-search-count" id="receive-search-count" hidden></span>
+  </div>
+
   <div id="loading-bar" class="loading-bar" hidden>
     <div class="loading-message">Loading shipments…</div>
     <div class="loading-track"><div class="loading-fill"></div></div>

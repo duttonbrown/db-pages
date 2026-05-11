@@ -1,6 +1,31 @@
 /* Receive Shipments — receiving console.
    Inherits styles.css + manage.css for the brand and bar treatments. */
 
+.receive-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.receive-search input[type="search"] {
+  flex: 1;
+  max-width: 480px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font: inherit;
+  background: white;
+}
+.receive-search input[type="search"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.18);
+}
+.receive-search-count {
+  font-size: 12px;
+  color: var(--muted);
+}
+
 .po-group {
   margin-bottom: 12px;
   background: white;

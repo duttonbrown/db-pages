@@ -309,7 +309,12 @@ function renderRow(r) {
   const age = ageDays(r.dateRequested);
   const submittedAt = formatSubmittedAt(r.createdTime);
 
+  const thumbHtml = r.image
+    ? `<img class="row-thumb" src="${escapeHtml(r.image)}" alt="">`
+    : `<div class="row-thumb-fallback">${r.type === "Supply" ? "📦" : r.type === "Other" ? "🛠️" : "🔩"}</div>`;
+
   li.innerHTML = `
+    ${thumbHtml}
     <div class="pending-meta">
       <div class="order-num"></div>
       <div class="row-tags"></div>
