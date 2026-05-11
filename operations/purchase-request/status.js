@@ -356,7 +356,15 @@ function renderCard(r, idx) {
 
     <div class="card-footer-row">
       <span>${r.createdTime ? `Submitted ${fmtTimestamp(r.createdTime)}` : ""}</span>
-      <a href="${escapeHtml(r.url)}" target="_blank" rel="noopener">Open in Notion ↗</a>
+      <span class="card-footer-actions">
+        ${r.status === "Submitted" && r.pageId
+          ? `<a href="#" class="remove-request-link"
+                data-page-id="${escapeHtml(r.pageId)}"
+                data-order-num="${escapeHtml(r.orderNum || "")}"
+                data-item-name="${escapeHtml(itemTitle)}">Remove request →</a>`
+          : ""}
+        <a href="${escapeHtml(r.url)}" target="_blank" rel="noopener">Open in Notion ↗</a>
+      </span>
     </div>
   `;
   return li;
@@ -658,5 +666,132 @@ function renderNotes(r) {
   return blocks.join("");
 }
 
+// ----- Remove Request modal -----
+//
+// Requestor self-cancel. Opens on click of any "Remove request →" link in the
+// footer of a Submitted card. The link's data-* attributes carry the row's
+// pageId, orderNum, and itemName so the modal can target the right row and
+// show a confirmation summary. The dropdown is populated from /requestors so
+// it stays in sync with the Submit page's "Your name" list.
+const removeModal      = $("remove-modal");
+const removeModalCtx   = $("remove-modal-context");
+const removeReqSel     = $("remove-requestor");
+const removeReasonSel  = $("remove-reason-code");
+const removeReasonText = $("remove-reason-text");
+const removeReasonTextField = $("remove-reason-text-field");
+const removeModalErr   = $("remove-modal-error");
+const removeModalSubmit = $("remove-modal-submit");
+
+let removeTargetPageId  = null;
+let removeTargetSummary = null;
+
+async function loadRemoveRequestors() {
+  try {
+    const res = await fetch(`${WORKER_URL}/requestors`);
+    const data = await res.json();
+    for (const name of data.requestors || []) {
+      const opt = document.createElement("option");
+      opt.value = name;
+      opt.textContent = name;
+      removeReqSel.appendChild(opt);
+    }
+  } catch (e) {
+    // Non-fatal — modal still works, user can type… actually no, it's a select.
+    // If this fails the user just can't open Remove. Log silently; very unlikely.
+  }
+}
+
+function openRemoveModal(pageId, orderNum, itemName) {
+  removeTargetPageId = pageId;
+  removeTargetSummary = `${orderNum} — ${itemName}`;
+  removeModalCtx.innerHTML =
+    `Remove <strong>${escapeHtml(orderNum)}</strong> — ${escapeHtml(itemName)}?<br>` +
+    `<span style="color: var(--muted)">This sets the request to Cancelled. It stays visible under the Cancelled filter for the team.</span>`;
+  removeReqSel.value = "";
+  removeReasonSel.value = "";
+  removeReasonText.value = "";
+  removeReasonTextField.hidden = true;
+  removeModalErr.hidden = true;
+  removeModalSubmit.disabled = false;
+  removeModalSubmit.textContent = "Remove request";
+  removeModal.hidden = false;
+  removeReqSel.focus();
+}
+
+function closeRemoveModal() {
+  removeModal.hidden = true;
+  removeTargetPageId = null;
+  removeTargetSummary = null;
+}
+
+$("remove-modal-close").addEventListener("click", closeRemoveModal);
+$("remove-modal-cancel").addEventListener("click", closeRemoveModal);
+removeModal.addEventListener("click", (e) => { if (e.target === removeModal) closeRemoveModal(); });
+
+removeReasonSel.addEventListener("change", () => {
+  const isOther = removeReasonSel.value === "Other";
+  removeReasonTextField.hidden = !isOther;
+  if (!isOther) removeReasonText.value = "";
+  if (isOther) removeReasonText.focus();
+});
+
+removeModalSubmit.addEventListener("click", async () => {
+  if (!removeTargetPageId) return;
+  const requestor  = removeReqSel.value;
+  const reasonCode = removeReasonSel.value;
+  const reasonText = removeReasonText.value.trim();
+
+  if (!requestor) {
+    removeModalErr.textContent = "Please pick your name.";
+    removeModalErr.hidden = false;
+    return;
+  }
+  if (!reasonCode) {
+    removeModalErr.textContent = "Please pick a reason.";
+    removeModalErr.hidden = false;
+    return;
+  }
+  if (reasonCode === "Other" && !reasonText) {
+    removeModalErr.textContent = "Please describe the reason.";
+    removeModalErr.hidden = false;
+    return;
+  }
+  removeModalErr.hidden = true;
+  removeModalSubmit.disabled = true;
+  removeModalSubmit.textContent = "Removing…";
+
+  try {
+    const res = await fetch(`${WORKER_URL}/self-cancel/${removeTargetPageId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ requestor, reasonCode, reasonText }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Remove failed");
+    closeRemoveModal();
+    loadAndRender();
+  } catch (e) {
+    removeModalErr.textContent = e.message || "Remove failed";
+    removeModalErr.hidden = false;
+    removeModalSubmit.disabled = false;
+    removeModalSubmit.textContent = "Remove request";
+  }
+});
+
+// Event delegation: catch clicks on any "Remove request →" link anywhere
+// in the active list. Cards are re-rendered, so we can't bind to elements
+// at render time and expect the handlers to survive a refresh.
+document.addEventListener("click", (e) => {
+  const link = e.target.closest(".remove-request-link");
+  if (!link) return;
+  e.preventDefault();
+  openRemoveModal(
+    link.dataset.pageId,
+    link.dataset.orderNum || "",
+    link.dataset.itemName || ""
+  );
+});
+
 // ----- Init -----
 loadAndRender();
+loadRemoveRequestors();

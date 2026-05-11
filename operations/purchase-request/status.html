@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="manage.css">
 <link rel="stylesheet" href="status.css">
 </head>
 <body>
@@ -118,6 +119,45 @@
 </main>
 </div>
 
+</div>
+
+<!-- Remove Request modal — opened from the "Remove request →" link on Submitted cards -->
+<div id="remove-modal" class="modal" hidden>
+  <div class="modal-card">
+    <header class="modal-header">
+      <h2 id="remove-modal-title">Remove request</h2>
+      <button type="button" class="modal-close" id="remove-modal-close" aria-label="Close">✕</button>
+    </header>
+    <div class="modal-context" id="remove-modal-context"></div>
+    <form id="remove-modal-form" class="modal-body">
+      <div class="field">
+        <label for="remove-requestor">Your name<span class="req">*</span></label>
+        <select id="remove-requestor" name="requestor" required>
+          <option value="">Select your name…</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="remove-reason-code">Reason<span class="req">*</span></label>
+        <select id="remove-reason-code" name="reasonCode" required>
+          <option value="">Select…</option>
+          <option value="No longer needed">No longer needed</option>
+          <option value="Duplicate request">Duplicate request</option>
+          <option value="Wrong item">Wrong item</option>
+          <option value="Already in stock">Already in stock</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="field" id="remove-reason-text-field" hidden>
+        <label for="remove-reason-text">What's the reason?<span class="req">*</span></label>
+        <input type="text" id="remove-reason-text" name="reasonText" placeholder="Visible to the team">
+      </div>
+    </form>
+    <div id="remove-modal-error" class="error" hidden></div>
+    <footer class="modal-footer">
+      <button type="button" id="remove-modal-cancel" class="secondary">Keep request</button>
+      <button type="button" id="remove-modal-submit" class="primary">Remove request</button>
+    </footer>
+  </div>
 </div>
 
 <script src="status.js"></script>
