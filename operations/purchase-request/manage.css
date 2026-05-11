@@ -28,14 +28,14 @@
 
 /* Status group sections */
 .status-group {
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 .status-group-header {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin: 0 0 8px;
-  padding-bottom: 6px;
+  margin: 0 0 4px;
+  padding-bottom: 4px;
   border-bottom: 1px solid var(--border);
 }
 .status-group-header h3 {
@@ -62,8 +62,8 @@
 .pending-row {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 16px;
-  padding: 14px;
+  gap: 12px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--border);
 }
 .pending-row:last-child { border-bottom: none; }
@@ -89,6 +89,14 @@
 .pending-meta {
   min-width: 0;
 }
+/* Single inline header: REQ # · chips · NH1 — Hex nut. Baseline-aligned so
+   the small order-num and chips line up cleanly with the strong title. */
+.pending-row .title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
 .pending-row .order-num {
   font-size: 11px;
   font-weight: 600;
@@ -96,8 +104,7 @@
   letter-spacing: 0.05em;
 }
 .pending-row .row-tags {
-  margin-top: 4px;
-  display: flex;
+  display: inline-flex;
   gap: 4px;
   flex-wrap: wrap;
 }
@@ -105,13 +112,6 @@
 .pending-row .urgent-tag {
   background: var(--error);
   color: white;
-}
-.pending-row .title-row {
-  margin-top: 6px;
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  flex-wrap: wrap;
 }
 .pending-row .title-text {
   font-weight: 600;
@@ -124,37 +124,26 @@
   color: var(--muted);
 }
 .pending-row .vendor-line {
-  margin-top: 4px;
+  margin-top: 2px;
   font-size: 12px;
   color: var(--text);
 }
-.pending-row .stats-line {
-  margin-top: 2px;
-  font-size: 11px;
-  color: var(--accent-dark);
-}
 .pending-row .row-extra {
-  margin-top: 6px;
+  margin-top: 2px;
   font-size: 12px;
   color: var(--muted);
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 .pending-row .row-extra strong { color: var(--text); font-weight: 400; }
 .pending-row .notes {
-  margin-top: 8px;
-  padding: 6px 10px;
+  margin-top: 6px;
+  padding: 4px 8px;
   background: var(--bg);
   border-radius: 4px;
   font-size: 12px;
   color: var(--text);
-}
-.pending-row .submitted-at {
-  margin-top: 6px;
-  font-size: 11px;
-  color: var(--muted);
-  font-style: italic;
 }
 
 .row-actions {
