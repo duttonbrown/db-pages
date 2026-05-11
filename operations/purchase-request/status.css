@@ -582,6 +582,23 @@
 }
 .card-footer-row a:hover { color: var(--accent-dark); }
 
+/* Right-side grouping for the footer actions ("Remove request" + "Open in Notion") */
+.card-footer-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.remove-request-link {
+  color: var(--error) !important;
+  text-decoration: none !important;
+  border-bottom: 1px dashed currentColor;
+  padding-bottom: 1px;
+}
+.remove-request-link:hover {
+  color: var(--error) !important;
+  border-bottom-style: solid;
+}
+
 /* Archive variant — quieter */
 .archive-section .request-card {
   padding: 12px 14px;
