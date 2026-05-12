@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products Library — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-base.css">
+<link rel="stylesheet" href="parts.css">
+<link rel="stylesheet" href="products.css">
+</head>
+<body>
+<div class="app-shell">
+
+<aside class="side-nav" aria-label="Library navigation">
+  <div class="side-nav-inner">
+    <a class="side-nav-brand" href="../../index.html">
+      <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
+    </a>
+    <div class="side-nav-eyebrow">Library</div>
+    <ul class="side-nav-tabs" role="tablist">
+      <li><a class="side-nav-tab" href="products.html#lighting" data-tab="lighting">Lighting <span class="tab-count" id="lighting-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="products.html#hardware" data-tab="hardware">Hardware <span class="tab-count" id="hardware-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="parts.html">Parts <span class="tab-count" id="parts-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="parts.html#section-supplies">Supplies <span class="tab-count" id="supplies-count">—</span></a></li>
+    </ul>
+  </div>
+</aside>
+
+<div class="app-main">
+<main class="card card-wide">
+
+  <header class="page-intro">
+    <h1 class="page-lead" id="page-lead">Products Library</h1>
+    <p class="page-sub" id="page-sub">Every lighting fixture and hardware piece — image, BOM, certifications, downloads, and quality refs.</p>
+  </header>
+
+  <div class="lib-toolbar">
+    <div class="lib-search">
+      <input id="search" type="text" placeholder="Search SKU, handle, title, or type…" autocomplete="off" spellcheck="false">
+      <ul id="results" class="lib-results" hidden></ul>
+    </div>
+    <div class="lib-count" id="lib-count">Loading…</div>
+  </div>
+
+  <div class="recents-row hidden" id="recents-row">
+    <span class="recents-label">Recent</span>
+    <div id="recents-chips"></div>
+  </div>
+
+  <div class="glossary-strip-wrap">
+    <div class="glossary-strip" id="type-filters"></div>
+  </div>
+
+  <!-- Spec card slot (hidden until a product is picked) -->
+  <div id="spec-slot" hidden></div>
+
+  <!-- Browse grid slot -->
+  <div id="grid-slot">
+    <div class="loading-state">Loading products…</div>
+  </div>
+
+</main>
+</div>
+</div>
+
+<script src="products.js"></script>
+</body>
+</html>

@@ -42,6 +42,15 @@ async function bootstrap() {
   const sideSuppliesCount = $('supplies-count');
   if (sideSuppliesCount) sideSuppliesCount.textContent = (DATA.counts.supplies || 0).toLocaleString();
   $('lib-count').innerHTML = `<b>${DATA.counts.parts}</b> parts · <b>${DATA.counts.glossary}</b> categories`;
+  // Pull lighting/hardware counts so the sidebar shows them on parts.html too
+  fetch('products-library.json', { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : null)
+    .then(pl => {
+      if (!pl) return;
+      const navL = $('nav-lighting-count'); if (navL) navL.textContent = (pl.counts.lighting || 0).toLocaleString();
+      const navH = $('nav-hardware-count'); if (navH) navH.textContent = (pl.counts.hardware || 0).toLocaleString();
+    })
+    .catch(() => {});
 
   renderGlossary();
   renderRecents();
