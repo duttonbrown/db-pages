@@ -639,8 +639,328 @@
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ============================================================
+   REDESIGN — Spec card flattened layout
+   Replaces tabs with always-visible sections. Definition shows once.
+   In-house process pills + Demand are surfaced; Used In stays collapsible.
+   ============================================================ */
+
+/* --- Glossary chip beside title (replaces 'Glossary Type' field) --- */
+.spec-glossary-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #EEF2F7;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.spec-glossary-chip .abbr { color: var(--muted); font-weight: 400; }
+
+/* --- In-house process pills (THE operational tell) --- */
+.spec-ihp {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 16px;
+}
+.spec-ihp-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.spec-ihp-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ihp-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: white;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+/* Color-code the loudest processes so they're spottable at a glance */
+.ihp-pill[data-proc*="Powder" i] { background: #B85C00; }
+.ihp-pill[data-proc*="Black Batch" i],
+.ihp-pill[data-proc*="Black" i] { background: #2B2B2B; }
+.ihp-pill[data-proc*="Plat" i] { background: #6B5BA8; }
+.ihp-pill[data-proc*="Polish" i] { background: #8A7A30; }
+
+.spec-ihp-none .spec-ihp-empty {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* --- Key facts: 4-up grid (Lead Time / MOQ / Vendor / Last Ordered) --- */
+.spec-keyfacts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px 24px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+.keyfact {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.keyfact-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.keyfact-val {
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.3;
+}
+.keyfact-val.empty { color: var(--muted); font-weight: 300; }
+.keyfact-sub {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+/* --- Material + Raw/Pre-finished as small inline tags --- */
+.spec-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 12px;
+}
+.spec-tag {
+  font-size: 11px;
+  font-weight: 400;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #F0F0F0;
+  color: var(--text);
+}
+.spec-tag[data-kind="finish-state"] {
+  background: #EBF4F0;
+  color: #1A5A3A;
+}
+
+/* --- Generic section wrapper (Demand / Siblings / Used In) --- */
+.spec-section {
+  border-top: 1px solid var(--border);
+  padding: 18px 20px;
+}
+.spec-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.spec-section-head h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.spec-section-aside {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+}
+.spec-section-aside b { color: var(--text); font-weight: 500; }
+.spec-section-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 18px;
+  padding: 0 6px;
+  background: var(--ink);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-left: 6px;
+  vertical-align: 2px;
+}
+
+/* --- Demand block --- */
+.spec-demand {
+  background: linear-gradient(180deg, #FFF7EB 0%, #FFFFFF 60%);
+}
+.demand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 18px 32px;
+}
+.demand-grid.is-empty .demand-val { color: var(--muted); }
+.demand-cell { display: flex; flex-direction: column; gap: 4px; }
+.demand-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.demand-val {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.demand-val.empty { color: var(--muted); font-weight: 300; }
+.demand-yoy {
+  font-size: 18px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.demand-yoy.up   { color: #1A7F37; }
+.demand-yoy.down { color: var(--error, #C0392B); }
+.demand-yoy.flat { color: var(--muted); }
+
+/* --- Used In (collapsible) --- */
+.spec-usedin summary {
+  list-style: none;
+  cursor: pointer;
+}
+.spec-usedin summary::-webkit-details-marker { display: none; }
+.spec-usedin summary::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  transition: transform 0.15s;
+  vertical-align: 1px;
+}
+.spec-usedin[open] summary::before {
+  transform: rotate(90deg);
+}
+
+/* --- Admin footer (faded) --- */
+.spec-admin {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.spec-admin a { color: var(--muted); text-decoration: underline; }
+.spec-admin a:hover { color: var(--accent-dark); }
+
+/* --- Spec card status badges (broader treatment) --- */
+.spec-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #F0F0F0;
+  color: var(--muted);
+}
+.spec-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.spec-status.active { background: #E8F5E9; color: #1A7F37; }
+.spec-status.active::before { background: #1A7F37; }
+.spec-status.introducing { background: #E3EBFB; color: #1A56C7; }
+.spec-status.introducing::before { background: #1A56C7; }
+.spec-status.discontinuing { background: #FFF4E4; color: #B85C00; }
+.spec-status.discontinuing::before { background: #B85C00; }
+.spec-status.inactive { background: #FDECEA; color: #C0392B; }
+.spec-status.inactive::before { background: #C0392B; }
+
+/* --- Grid: In-house pills overlaid on the thumb, status flag ribbon --- */
+.preview-card { position: relative; }
+.preview-ihp {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  pointer-events: none;
+}
+.preview-ihp .ihp-pill {
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+}
+.preview-status-flag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+.preview-status-flag.discontinuing { background: #B85C00; color: white; }
+.preview-status-flag.inactive { background: #C0392B; color: white; }
+.preview-status-flag.introducing { background: #1A56C7; color: white; }
+
+/* Inactive parts: fade the whole card so they don't read as orderable.
+   Discontinuing: lighter wash — still in use but on the way out. */
+.preview-card.is-inactive {
+  opacity: 0.55;
+  background: #FAFAFA;
+}
+.preview-card.is-inactive .preview-image img { filter: grayscale(0.6); }
+.preview-card.is-inactive:hover { opacity: 0.8; }
+.preview-card.is-discontinuing .preview-image img { filter: grayscale(0.25); }
+.preview-card.is-discontinuing { background: #FFFCF5; }
+
+/* When the IHP ribbon would conflict with the status flag, push status into
+   the bottom-right of the image so they don't overlap. */
+.preview-card.is-inactive .preview-ihp,
+.preview-card.is-discontinuing .preview-ihp {
+  /* Push pills below the status ribbon if both present */
+  top: 28px;
+}
+
+/* --- Hide legacy CSS selectors that the old design used (kept as
+       defensive fallback in case any old caches still reference them) --- */
+.spec-tabs, .spec-tab, .spec-panel { display: none !important; }
+
 @media (max-width: 720px) {
   .spec-head { grid-template-columns: 1fr; gap: 16px; }
   .spec-summary { padding-left: 0; }
   .lib-toolbar { grid-template-columns: 1fr; }
+  .demand-val { font-size: 18px; }
 }
