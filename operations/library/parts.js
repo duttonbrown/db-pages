@@ -449,13 +449,18 @@ function renderSpec(p) {
     ? `<div class="spec-image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.part_number)}"></div>`
     : `<div class="spec-image no-img">No image</div>`;
 
-  // ---------- Header chips
+  // ---------- Header chips. Lives in the spec-num-row alongside the part #
+  // so the reader gets finish, status, category and material on the same
+  // line as the name. Saves a whole row vs. a separate tags strip below.
   const finishPill = p.finish
     ? `<span class="spec-finish-pill">${escapeHtml(p.finish)} finish</span>`
     : '';
   const glossaryChip = gloss.name
     ? `<span class="spec-glossary-chip" title="Glossary category">${escapeHtml(gloss.name)}${gloss.abbr ? ` <span class="abbr">(${gloss.abbr})</span>` : ''}</span>`
     : '';
+  const materialChips = (fam.materials || []).filter(Boolean).map(m =>
+    `<span class="spec-material-chip" title="Material">${escapeHtml(m)}</span>`
+  ).join('');
 
   // ---------- In-house processes — the operational tell (Powder Coat, Black
   // Batch, etc.). Pull from the part, falling back to the family. Most
@@ -533,12 +538,8 @@ function renderSpec(p) {
     </section>
   `;
 
-  // ---------- Material / Raw-or-Pre-finished as small inline tag strip
-  const tags = [];
-  for (const m of (fam.materials || [])) tags.push({ kind: 'material', val: m });
-  const tagsHtml = tags.length
-    ? `<div class="spec-tags">${tags.map(t => `<span class="spec-tag" data-kind="${t.kind}">${escapeHtml(t.val)}</span>`).join('')}</div>`
-    : '';
+  // (Material moved into the header chip row above — saves a row of vertical
+  // space that previously held a single tag.)
 
   // ---------- Siblings (same family)
   let siblingsHtml = '';
@@ -605,13 +606,13 @@ function renderSpec(p) {
             <span class="spec-num">${escapeHtml(p.part_number)}</span>
             <span class="spec-status ${statusClass(p.status)}">${escapeHtml(p.status || 'Status unknown')}</span>
             ${finishPill}
+            ${materialChips}
             ${glossaryChip}
           </div>
           <h2 class="spec-title">${escapeHtml(title)}</h2>
           ${definition ? `<p class="spec-definition">${escapeHtml(definition)}</p>` : ''}
           ${inHouseHtml}
           <div class="spec-keyfacts">${keyFactsHtml}</div>
-          ${tagsHtml}
         </div>
       </div>
 
