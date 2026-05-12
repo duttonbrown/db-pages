@@ -14,6 +14,16 @@ const digestEl     = $("vendor-digest");
 const digestListEl = $("vendor-digest-list");
 const triageEl     = $("triage");
 const triageListEl = $("triage-list");
+const filterStripEl = $("filter-strip");
+
+// Toggle the combined filter strip's visibility based on whether either
+// bubble group has any children. Called at the end of both render funcs so
+// the strip auto-hides when there's nothing to filter on.
+function refreshFilterStrip() {
+  if (!filterStripEl) return;
+  const hasBubbles = triageListEl.children.length > 0 || digestListEl.children.length > 0;
+  filterStripEl.hidden = !hasBubbles;
+}
 const bulkToggleBtn   = $("bulk-toggle-btn");
 const bulkActionBar   = $("bulk-action-bar");
 const bulkCountEl     = $("bulk-count");
@@ -278,6 +288,7 @@ function renderTriage(rows) {
     // Clear stale filter if its bucket dried up
     if (triageFilter === "urgent" && urgentCount === 0) triageFilter = null;
     if (triageFilter === "newItem" && newItemCount === 0) triageFilter = null;
+    refreshFilterStrip();
     return;
   }
 
@@ -304,6 +315,7 @@ function renderTriage(rows) {
   // If the active triage filter's bucket disappeared after a refresh, drop it
   if (triageFilter === "urgent" && urgentCount === 0) triageFilter = null;
   if (triageFilter === "newItem" && newItemCount === 0) triageFilter = null;
+  refreshFilterStrip();
 }
 
 function buildTriageBubble({ key, label, count, modifier }) {
@@ -366,6 +378,7 @@ function renderDigest(rows) {
     digestListEl.innerHTML = "";
     // Filter may still be set on a vendor that no longer has 2+ — clear it.
     if (vendorFilter && !buckets.has(vendorFilter)) vendorFilter = null;
+    refreshFilterStrip();
     return;
   }
 
@@ -387,16 +400,16 @@ function renderDigest(rows) {
     btn.setAttribute("role", "tab");
     btn.setAttribute("aria-selected", isActive ? "true" : "false");
     btn.dataset.vendor = vendor;
+    // Detail that used to live in a 2nd/3rd row of the bubble now lives in
+    // the native title tooltip so the bubble can sit inline in the filter
+    // strip without eating vertical space.
+    const tooltipParts = [breakdown];
+    if (lastOrdLabel) tooltipParts.push(`Last ordered ${lastOrdLabel}`);
+    btn.title = tooltipParts.join(" · ");
     btn.innerHTML = `
-      <div class="vendor-bubble-row">
-        <span class="vendor-bubble-name">${escapeHtml(vendor)}</span>
-        <span class="vendor-bubble-count">${total}</span>
-      </div>
-      <div class="vendor-bubble-meta">
-        <span>${escapeHtml(breakdown)}</span>
-        ${b.oldestAge != null ? `<span class="vendor-bubble-age">oldest ${b.oldestAge}d</span>` : ""}
-      </div>
-      ${lastOrdLabel ? `<div class="vendor-bubble-last">Last ordered ${escapeHtml(lastOrdLabel)}</div>` : ""}
+      <span class="vendor-bubble-name">${escapeHtml(vendor)}</span>
+      <span class="vendor-bubble-count">${total}</span>
+      ${b.oldestAge != null ? `<span class="vendor-bubble-age">${b.oldestAge}d</span>` : ""}
     `;
     btn.addEventListener("click", () => toggleVendorFilter(vendor));
     digestListEl.appendChild(btn);
@@ -406,6 +419,7 @@ function renderDigest(rows) {
   if (vendorFilter && !buckets.has(vendorFilter)) {
     vendorFilter = null;
   }
+  refreshFilterStrip();
 }
 
 function toggleVendorFilter(vendor) {

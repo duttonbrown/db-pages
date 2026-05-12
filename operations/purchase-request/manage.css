@@ -515,28 +515,33 @@ body.bulk-mode .pending-row {
 /* Triage digest — two attention bubbles (Urgent / New item) above the
    vendor digest. Same UX shape: click to filter, click again to clear.
    Triage filter and vendor filter are mutually exclusive. */
-.triage {
-  margin: 0 0 12px;
-  padding: 12px 14px;
-  background: linear-gradient(180deg, #FFF5F5, #FFFFFF);
-  border: 1px solid #F8D7DA;
+/* Combined filter strip — replaces the two stacked card sections. Bubbles
+   from both groups (triage + vendor-digest) flow inline after a small label.
+   Auto-hidden by JS when both groups are empty. */
+.filter-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
 }
-.triage-header { margin-bottom: 8px; }
-.triage-title {
-  margin: 0;
-  font-size: 12px;
+.filter-strip-label {
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--error);
-}
-.triage-sub {
-  margin: 2px 0 0;
-  font-size: 12px;
-  font-weight: 400;
   color: var(--muted);
+  margin-right: 2px;
 }
+.filter-group {
+  display: contents; /* let bubbles flow inline with siblings */
+}
+.filter-group:empty { display: none; }
+
 .triage-list {
   display: flex;
   flex-wrap: wrap;
@@ -549,28 +554,25 @@ body.bulk-mode .pending-row {
   cursor: pointer;
   border: 1px solid var(--border);
   background: white;
-  border-radius: 10px;
-  padding: 8px 12px;
+  border-radius: 999px;
+  padding: 4px 10px 4px 12px;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-}
-.triage-bubble:hover {
-  transform: translateY(-1px);
+  gap: 8px;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 .triage-bubble-label {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--text);
 }
 .triage-bubble-count {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 7px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
   border-radius: 999px;
   color: white;
   font-size: 11px;
@@ -600,34 +602,12 @@ body.bulk-mode .pending-row {
 }
 .triage-bubble-newitem .triage-bubble-count { background: var(--text); }
 
-/* Vendor digest — bubbles surface vendors with 2+ open requests so the
-   purchaser can batch-order on the same day. Click to filter the queue. */
-.vendor-digest {
-  margin: 0 0 18px;
-  padding: 14px 16px;
-  background: linear-gradient(180deg, #f8f9fa, #FFFFFF);
-  border: 1px solid #F3E0BF;
-  border-radius: var(--radius);
-}
-.vendor-digest-header { margin-bottom: 10px; }
-.vendor-digest-title {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--accent-dark);
-}
-.vendor-digest-sub {
-  margin: 2px 0 0;
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--muted);
-}
+/* Vendor digest list — flows inline inside .filter-strip via display:contents.
+   Bubble keeps its info (count, oldest age, last ordered) but collapses it
+   into one row with the long detail (breakdown, last ordered) tucked into
+   the native title tooltip on hover. */
 .vendor-digest-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: contents;
 }
 .vendor-bubble {
   appearance: none;
@@ -636,15 +616,16 @@ body.bulk-mode .pending-row {
   cursor: pointer;
   border: 1px solid var(--border);
   background: white;
-  border-radius: 10px;
-  padding: 10px 14px;
-  min-width: 180px;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  border-radius: 999px;
+  padding: 4px 10px 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 .vendor-bubble:hover {
   border-color: var(--accent);
   box-shadow: 0 1px 4px rgba(255, 153, 18, 0.15);
-  transform: translateY(-1px);
 }
 .vendor-bubble.active {
   border-color: var(--accent-dark);
@@ -652,23 +633,22 @@ body.bulk-mode .pending-row {
   box-shadow: 0 0 0 2px rgba(255, 153, 18, 0.18);
 }
 .vendor-bubble-row {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
 }
 .vendor-bubble-name {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--text);
 }
 .vendor-bubble-count {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 7px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
   border-radius: 999px;
   background: var(--accent);
   color: white;
@@ -676,23 +656,16 @@ body.bulk-mode .pending-row {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
-.vendor-bubble-meta {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
-  font-size: 11px;
-  color: var(--muted);
-}
 .vendor-bubble-age {
+  font-size: 11px;
   color: var(--accent-dark);
   font-weight: 500;
 }
+/* Meta/last lines from the old 3-row layout are hidden — info lives in the
+   bubble's title tooltip now (set in JS). */
+.vendor-bubble-meta,
 .vendor-bubble-last {
-  margin-top: 6px;
-  padding-top: 6px;
-  border-top: 1px dashed var(--border);
-  font-size: 11px;
-  color: var(--muted);
+  display: none;
 }
 
 /* ---------- Responsive ---------- */
@@ -715,8 +688,6 @@ body.bulk-mode .pending-row {
     min-width: 0;
     grid-template-columns: repeat(2, 1fr);
   }
-  .vendor-bubble { min-width: 0; flex: 1 1 220px; }
-  .triage-bubble { flex: 1 1 220px; }
   /* Bulk mode on iPad: checkbox + thumb + meta in one row (no actions). */
   body.bulk-mode .pending-row {
     grid-template-columns: auto auto 1fr;
@@ -748,8 +719,7 @@ body.bulk-mode .pending-row {
   .purchaser-bar { flex-wrap: wrap; }
   .purchaser-bar select { max-width: none; flex: 1 1 100%; }
   .purchaser-bar .link-btn { margin-left: 0; }
-  .triage, .vendor-digest { padding: 10px 12px; }
-  .vendor-bubble, .triage-bubble { flex: 1 1 100%; }
+  .filter-strip { padding: 8px; }
 }
 
 /* ----- + Add to queue (purchaser self-add) -----
