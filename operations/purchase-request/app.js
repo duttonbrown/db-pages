@@ -435,7 +435,7 @@ function renderCart() {
         <span class="title-row">
           <strong class="title-text"></strong>
           <span class="title-desc"></span>
-          <span class="urgent-tag" hidden>URGENT — out of stock</span>
+          <span class="urgent-tag" hidden>URGENT</span>
         </span>
         <small class="vendor-line"></small>
         <small class="stats-line"></small>
@@ -483,7 +483,7 @@ function renderCart() {
 
     const setUrgentUI = () => {
       urgentTag.hidden = !it.outOfStock;
-      urgentToggle.textContent = it.outOfStock ? "✓ Marked urgent (clear)" : "Mark out of stock — urgent";
+      urgentToggle.textContent = it.outOfStock ? "✓ Marked urgent (clear)" : "Mark urgent";
       urgentToggle.classList.toggle("urgent-active", !!it.outOfStock);
       li.classList.toggle("cart-item-urgent", !!it.outOfStock);
     };

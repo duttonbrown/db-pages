@@ -261,7 +261,7 @@ function filteredRows() {
 
 // ----- Triage digest -----
 //
-// Two bubbles: "Urgent — out of stock" and "New item requests" (rows with
+// Two bubbles: "Urgent" and "New item requests" (rows with
 // Not in DB checked). Section auto-hides when both counts are zero.
 function renderTriage(rows) {
   const eligible = rows.filter(isTriageEligible);
@@ -283,7 +283,7 @@ function renderTriage(rows) {
   if (urgentCount > 0) {
     triageListEl.appendChild(buildTriageBubble({
       key: "urgent",
-      label: "Urgent — out of stock",
+      label: "Urgent",
       count: urgentCount,
       modifier: "triage-bubble-urgent",
     }));
@@ -579,7 +579,7 @@ function renderRow(r) {
   tags.appendChild(makeBadge(r.type.toUpperCase(), "badge"));
   if (r.category) tags.appendChild(makeBadge(r.category.toUpperCase(), "badge badge-category"));
   if (r.notInDb)  tags.appendChild(makeBadge("NEW ITEM REQUEST", "badge badge-category"));
-  if (r.outOfStock) tags.appendChild(makeBadge("URGENT — OUT OF STOCK", "urgent-tag"));
+  if (r.outOfStock) tags.appendChild(makeBadge("URGENT", "urgent-tag"));
   // Recent activity chip — warns the purchaser if this same item was just
   // ordered/received recently so they don't re-order on top of an in-flight one.
   const chip = recentChip(r.priorActivity);

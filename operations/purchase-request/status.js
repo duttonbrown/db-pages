@@ -394,7 +394,7 @@ function renderCard(r, idx) {
           ${r.type ? `<span class="badge">${escapeHtml(r.type.toUpperCase())}</span>` : ""}
           ${r.category ? `<span class="badge badge-category">${escapeHtml(r.category.toUpperCase())}</span>` : ""}
           ${r.notInDb ? `<span class="badge badge-category">NEW ITEM</span>` : ""}
-          ${r.outOfStock ? `<span class="badge urgent-tag">URGENT — OUT OF STOCK</span>` : ""}
+          ${r.outOfStock ? `<span class="badge urgent-tag">URGENT</span>` : ""}
         </div>
       </div>
       <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(r.status || "—")}</span>

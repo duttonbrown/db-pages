@@ -312,7 +312,7 @@ function renderItemRow(r) {
     ? `<img class="item-thumb" src="${escapeHtml(r.image)}" alt="">`
     : `<div class="item-thumb-fallback">${r.type === "Supply" ? "📦" : r.type === "Other" ? "🛠️" : "🔩"}</div>`;
   const urgentChip = r.outOfStock
-    ? `<span class="badge urgent-tag">URGENT — OUT OF STOCK</span>`
+    ? `<span class="badge urgent-tag">URGENT</span>`
     : "";
 
   li.innerHTML = `
