@@ -33,7 +33,7 @@ const LOADING_MESSAGES = [
 
 // ----- State -----
 let allRows = [];          // every request returned from /requests
-let activeFilter = "all";  // one of: all | Submitted | Waiting to Order | Backordered | Ordered | archive
+let activeFilter = "Ordered";  // default: Ordered (most-visited view — "where are my orders"). Pills: all | Submitted | Waiting to Order | Backordered | Ordered | archive
 let searchQuery = "";      // free-text filter — matches across item/order/requestor/vendor/PO/notes
 
 // The rail is built per-row, not from a fixed pipeline. Slot 2 ("Middle")
