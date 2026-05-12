@@ -252,7 +252,11 @@ function isTriageEligible(r) {
 }
 
 function filteredRows() {
-  let rows = allRows;
+  // Hide Ordered rows from the visible queue — once a row is ordered, the
+  // purchaser is done with it. It lives in Receive + Status until it's
+  // received. Kept in allRows (not filtered upstream) so vendor-digest can
+  // still surface "last ordered" hints from this data.
+  let rows = allRows.filter(r => r.status !== "Ordered");
   if (triageFilter === "urgent") rows = rows.filter(r => isTriageEligible(r) && r.outOfStock);
   else if (triageFilter === "newItem") rows = rows.filter(r => isTriageEligible(r) && r.notInDb);
   if (vendorFilter) rows = rows.filter(r => primaryVendor(r) === vendorFilter);
@@ -589,10 +593,11 @@ function renderRow(r) {
   li.querySelector(".title-text").textContent = itemTitle;
   li.querySelector(".title-desc").textContent = description ? `— ${description}` : "";
 
-  // Chip row (matches requester form): TYPE + Category + URGENT + NEW ITEM
+  // Chip row: TYPE + URGENT. The "NEW ITEM REQUEST" badge is redundant — the
+  // worker prefixes the title with "New Item Request: …" for not-in-DB rows,
+  // so the badge would just repeat what the title already says.
   const tags = li.querySelector(".row-tags");
   tags.appendChild(makeBadge(r.type.toUpperCase(), "badge"));
-  if (r.notInDb)  tags.appendChild(makeBadge("NEW ITEM REQUEST", "badge badge-category"));
   if (r.outOfStock) tags.appendChild(makeBadge("URGENT", "urgent-tag"));
   // Recent activity chip — warns the purchaser if this same item was just
   // ordered/received recently so they don't re-order on top of an in-flight one.
