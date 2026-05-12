@@ -536,7 +536,6 @@ function renderSpec(p) {
   // ---------- Material / Raw-or-Pre-finished as small inline tag strip
   const tags = [];
   for (const m of (fam.materials || [])) tags.push({ kind: 'material', val: m });
-  if (fam.raw_or_prefinished) tags.push({ kind: 'finish-state', val: fam.raw_or_prefinished });
   const tagsHtml = tags.length
     ? `<div class="spec-tags">${tags.map(t => `<span class="spec-tag" data-kind="${t.kind}">${escapeHtml(t.val)}</span>`).join('')}</div>`
     : '';
