@@ -8,18 +8,6 @@ const escapeHtml = (s) =>
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-// Body HTML from Shopify is trusted-enough internal content. Sanitize lightly:
-// strip <script>/<style>/event handlers and keep the rest. We never accept
-// user input here — Shopify CSV is operator-controlled.
-function safeBodyHtml(html) {
-  if (!html) return '';
-  return html
-    .replace(/<\s*script[^>]*>[\s\S]*?<\s*\/\s*script\s*>/gi, '')
-    .replace(/<\s*style[^>]*>[\s\S]*?<\s*\/\s*style\s*>/gi, '')
-    .replace(/\son\w+\s*=\s*"[^"]*"/gi, '')
-    .replace(/\son\w+\s*=\s*'[^']*'/gi, '');
-}
-
 let DATA = null;
 let BY_HANDLE = {};
 let CURRENT = null;
@@ -105,11 +93,11 @@ function syncTabActive() {
 function updateLead() {
   const lead = $('page-lead'), sub = $('page-sub');
   if (activeBucket === 'hardware') {
-    lead.textContent = 'Hardware';
-    sub.textContent  = 'Pulls, knobs, hooks — finish options, materials, BOM, downloads, and certifications.';
+    lead.textContent = 'Hardware Library';
+    sub.textContent  = 'Pulls, knobs, hooks — assembly, BOM, finishes, downloads, and ship metrics.';
   } else {
-    lead.textContent = 'Lighting';
-    sub.textContent  = 'Sconces, pendants, chandeliers, flush mounts — UL/cUL, sockets, BOM, canopy kits, and downloads.';
+    lead.textContent = 'Lighting Library';
+    sub.textContent  = 'Sconces, pendants, chandeliers, flush mounts — assembly diagram, wire lengths, BOM, canopy kit, and sales.';
   }
   const c = DATA.counts;
   const total = activeBucket === 'hardware' ? c.hardware : c.lighting;
@@ -205,9 +193,13 @@ function cardHtml(p) {
     ? `<div class="preview-image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.image_alt || p.title)}" loading="lazy"></div>`
     : `<div class="preview-image no-img">No image</div>`;
 
+  // QC-relevant flags only. UL is in the spec card; not surfaced on tile.
+  // Sales pill is the loudest signal for a QC person — quick read on demand.
   const flags = [];
   if (p.has_canopy_kit)               flags.push(`<span class="preview-flag canopy" title="Canopy kit included">Canopy</span>`);
   if ((p.color_options || []).length) flags.push(`<span class="preview-flag colors" title="${p.color_options.length} color options">${p.color_options.length} colors</span>`);
+  const total25 = p.sales_2025_units || 0;
+  if (total25 > 0)                    flags.push(`<span class="preview-flag sales" title="2025 units sold">${total25.toLocaleString()} sold '25</span>`);
   const flagsHtml = flags.length ? `<div class="preview-flags">${flags.join('')}</div>` : '';
 
   let statusFlag = '';
@@ -216,18 +208,15 @@ function cardHtml(p) {
   }
   const cardCls = p.status && p.status !== 'active' ? 'preview-card is-inactive' : 'preview-card';
 
-  const price = p.price ? `$${escapeHtml(p.price)}` : '';
-
   return `<a class="${cardCls}" data-h="${escapeHtml(p.handle)}" href="#${encodeURIComponent(p.handle)}">
     ${imgHtml}
-    ${flagsHtml}
     ${statusFlag}
     <div class="preview-body">
       <div class="preview-num" title="${escapeHtml(p.title)}">${escapeHtml(p.title)}</div>
       <div class="preview-meta-row">
         <span class="preview-type">${escapeHtml(p.type)}</span>
-        ${price ? `<span class="preview-price">${price}</span>` : ''}
       </div>
+      ${flagsHtml}
     </div>
   </a>`;
 }
@@ -330,71 +319,29 @@ function fmtDate(iso) {
   } catch { return iso; }
 }
 
-// Map shopify color slug -> approximate hex for swatches. Best effort; if
-// we miss a color it just shows as a grey dot — still labeled.
-const COLOR_HEX = {
-  'white': '#FFFFFF', 'bone': '#EFE7D6', 'chalk': '#E9E4D6',
-  'barely': '#E8DACE', 'orange-1': '#E26A2C', 'orange': '#E26A2C',
-  'riding-hood-red': '#A52A2A', 'cobalt': '#1F45B4', 'spa': '#9FBFB8',
-  'python-green': '#5C7B3B', 'lagoon-1': '#3F8C9A', 'slate-blue': '#5D6C8B',
-  'ochre': '#C9952C', 'black': '#1A1A1A', 'brass': '#B08D57', 'nickel': '#C9CCCD',
-  'pink': '#E7AAB0', 'sage': '#A3B18A', 'navy': '#22335E'
-};
-
-function colorHex(slug) {
-  if (!slug) return '#DDD';
-  const s = slug.toLowerCase().replace(/\s+/g, '-');
-  return COLOR_HEX[s] || '#DDD';
-}
+// QC-focused spec view. The product listing on duttonbrown.com is the
+// customer view — this is the SHOP view. Everything here is meant to help
+// a builder/QC person know how the fixture is made: hero image, assembly
+// diagram, wire lengths, parts list, extension rods, canopy configurations,
+// testing notes, and 2024/2025 sales.
 
 function renderSpec(p) {
-  // ---- Hero + gallery
-  const hero = (p.gallery && p.gallery[0]) || { src: p.image, alt: p.image_alt || p.title };
-  const heroHtml = hero.src
-    ? `<div class="spec-image"><img id="hero-img" src="${escapeHtml(hero.src)}" alt="${escapeHtml(hero.alt || p.title)}"></div>`
+  // ---- Hero (one main image, no gallery scroll — we want the assembly
+  // diagram to be the second visual)
+  const heroSrc = p.image;
+  const heroHtml = heroSrc
+    ? `<div class="spec-image"><img src="${escapeHtml(heroSrc)}" alt="${escapeHtml(p.image_alt || p.title)}"></div>`
     : `<div class="spec-image no-img">No image</div>`;
-  const galleryThumbs = (p.gallery || []).slice(0, 12);
-  const galleryHtml = galleryThumbs.length > 1
-    ? `<div class="spec-gallery">${galleryThumbs.map((g, i) =>
-        `<button type="button" class="spec-thumb${i === 0 ? ' is-current' : ''}" data-src="${escapeHtml(g.src)}" data-alt="${escapeHtml(g.alt)}">
-           <img src="${escapeHtml(g.src)}" alt="" loading="lazy">
-         </button>`).join('')}</div>`
-    : '';
 
-  // ---- Title row
   const skuLabel = p.bom_parent_sku || (p.variants[0] && p.variants[0].sku) || p.handle;
   const statusCls = p.status === 'active' ? 'active' : 'inactive';
   const statusLabel = p.status === 'active' ? 'Active' : (p.status || 'Unknown');
+  const certShort = shortCert(p.certification);
+  const certPill = certShort
+    ? `<span class="spec-finish-pill cert-yes" title="${escapeHtml(p.certification)}">${escapeHtml(certShort)}</span>`
+    : '';
 
-  const certShort = /UL\s*listed/i.test(p.certification || '') ? 'UL Listed' : '';
-
-  const ctaRow = `
-    <div class="product-cta-row">
-      <a class="product-cta" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">
-        View on duttonbrown.com <span class="product-cta-icon">↗</span>
-      </a>
-      ${p.bom_page_url ? `<a class="product-cta secondary" href="${escapeHtml(p.bom_page_url)}" target="_blank" rel="noopener">Open BOM in Notion <span class="product-cta-icon">↗</span></a>` : ''}
-      ${p.downloads.collection ? `<a class="product-cta secondary" href="${escapeHtml(p.downloads.collection)}" target="_blank" rel="noopener">${escapeHtml(p.downloads.collection_title || 'See collection')} <span class="product-cta-icon">↗</span></a>` : ''}
-    </div>
-  `;
-
-  // ---- Price line
-  const priceRow = p.price ? `
-    <div class="product-price-row">
-      <div class="product-price">$${escapeHtml(p.price)}</div>
-      <div class="product-price-meta">starting · ${p.variant_count} variant${p.variant_count === 1 ? '' : 's'}${p.rating_count ? ` · ${escapeHtml(p.rating_count)} review${p.rating_count === '1' ? '' : 's'}` : ''}</div>
-    </div>` : '';
-
-  // ---- Tag strip (mounting / style / bulb)
-  const tagPills = [];
-  if (p.mounting_type)  tagPills.push(`<span class="spec-tag mounting">${escapeHtml(prettySlug(p.mounting_type))} mount</span>`);
-  if (p.knob_handle_design) tagPills.push(`<span class="spec-tag style">${escapeHtml(prettySlug(p.knob_handle_design))}</span>`);
-  if (p.bulb_cap_type)  tagPills.push(`<span class="spec-tag bulb">Cap ${escapeHtml(prettySlug(p.bulb_cap_type))}</span>`);
-  if (p.bulb_shape)     tagPills.push(`<span class="spec-tag bulb">${escapeHtml(prettySlug(p.bulb_shape))}</span>`);
-  if (p.style)          (p.style.split(';').slice(0, 3)).forEach(s => tagPills.push(`<span class="spec-tag style">${escapeHtml(prettySlug(s.trim()))}</span>`));
-  const tagStrip = tagPills.length ? `<div class="spec-tags">${tagPills.join('')}</div>` : '';
-
-  // ---- Quality strip — the operationally-loud facts
+  // ---- QC quality strip — the things a builder needs at a glance
   const quality = qualityCells(p);
   const qualityHtml = `<div class="product-quality">${quality.map(q => `
     <div class="quality-cell">
@@ -403,74 +350,36 @@ function renderSpec(p) {
       ${q.sub ? `<div class="quality-sub">${escapeHtml(q.sub)}</div>` : ''}
     </div>`).join('')}</div>`;
 
-  // ---- Downloads grid (always show all 5 slots so missing ones are visible)
-  const downloads = [
-    { key: 'tearsheet',          title: 'Tearsheet',          sub: 'PDF spec sheet',   icon: 'pdf' },
-    { key: 'installation_guide', title: 'Installation Guide', sub: 'PDF',              icon: 'pdf' },
-    { key: 'revit',              title: 'Revit / CAD',        sub: 'Architects',       icon: 'cad' },
-    { key: 'warehouse_3d',       title: '3D Warehouse',       sub: 'Sketchup',         icon: 'url' },
-  ];
-  if (p.care_guide) downloads.push({ key: 'care_guide_inline', title: 'Care Guide', sub: 'Text', icon: 'care' });
-  const downloadsHtml = `<div class="downloads-grid">${downloads.map(d => {
-    const url = d.key === 'care_guide_inline' ? '#care-guide' : p.downloads[d.key];
-    const cls = url ? '' : 'disabled';
-    const attrs = url && d.key !== 'care_guide_inline'
-      ? `href="${escapeHtml(url)}" target="_blank" rel="noopener"`
-      : (url ? `href="${escapeHtml(url)}"` : 'aria-disabled="true"');
-    return `<a class="download-btn ${cls}" ${attrs}>
-      <div class="download-icon ${d.icon}">${d.icon === 'pdf' ? 'PDF' : (d.icon === 'cad' ? 'CAD' : (d.icon === 'care' ? '♡' : '↗'))}</div>
-      <div class="download-meta">
-        <div class="download-title">${escapeHtml(d.title)}</div>
-        <div class="download-sub">${url ? escapeHtml(d.sub) : 'Not available'}</div>
-      </div>
-    </a>`;
-  }).join('')}</div>`;
-  const downloadsSection = `
-    <section class="spec-section">
-      <header class="spec-section-head"><h3>Downloads</h3></header>
-      ${downloadsHtml}
-    </section>`;
+  // ---- CTAs (open BOM in Notion + live product page)
+  const ctaRow = `
+    <div class="product-cta-row">
+      ${p.bom_page_url ? `<a class="product-cta" href="${escapeHtml(p.bom_page_url)}" target="_blank" rel="noopener">Open BOM in Notion <span class="product-cta-icon">↗</span></a>` : ''}
+      <a class="product-cta secondary" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">Customer-facing page <span class="product-cta-icon">↗</span></a>
+    </div>
+  `;
 
-  // ---- Color swatches (if any)
-  const colorsSection = (p.color_options && p.color_options.length) ? `
-    <section class="spec-section">
-      <header class="spec-section-head">
-        <h3>Color options <span class="spec-section-count">${p.color_options.length}</span></h3>
-      </header>
-      <div class="swatch-row">
-        ${p.color_options.map(c => `<span class="swatch">
-          <span class="swatch-dot" style="background:${colorHex(c)}"></span>${escapeHtml(prettySlug(c))}
-        </span>`).join('')}
-      </div>
-    </section>` : '';
+  // ---- Sales section — 2024 vs 2025 totals, units + revenue
+  const salesSection = renderSales(p);
 
-  // ---- Variants table
-  const variantsSection = renderVariants(p);
+  // ---- Assembly diagrams / downloads — assembly diagram and tearsheet
+  // are the visual references a QC person reaches for first.
+  const diagramsSection = renderDiagrams(p);
 
-  // ---- BOM tree (grouped by section, canopy highlighted)
+  // ---- QC callouts: wire lengths, extension rods, canopy configurations
+  const qcSection = renderQcCallouts(p);
+
+  // ---- Full BOM (grouped by section, canopy highlighted, parts link to parts.html)
   const bomSection = renderBomTree(p);
 
-  // ---- Configuration / Certification / Specs / Care prose
-  const proseSection = renderProse(p);
-
-  // ---- Body HTML (collapsible — the marketing copy)
-  const bodySection = p.body_html ? `
-    <section class="spec-section product-body">
-      <details ${p.body_html.length < 600 ? 'open' : ''}>
-        <summary><h3>Product page copy</h3></summary>
-        <div class="product-body-html">${safeBodyHtml(p.body_html)}</div>
-      </details>
-    </section>` : '';
-
-  // ---- Related / variation / complementary chips
-  const relatedSection = renderRelated(p);
+  // ---- Variant SKU summary (compact — finish/color combinations only)
+  const variantsSection = renderVariantsCompact(p);
 
   // ---- Admin footer
   const adminBits = [];
   if (p.bom_last_edited_at) adminBits.push(`BOM edited ${escapeHtml(p.bom_last_edited_at.split('T')[0])}`);
   if (DATA.generated_at) adminBits.push(`Library updated ${escapeHtml(DATA.generated_at.split('T')[0])}`);
-  adminBits.push(`<a href="${escapeHtml(p.url)}" target="_blank" rel="noopener">Live product page ↗</a>`);
   if (p.bom_page_url) adminBits.push(`<a href="${escapeHtml(p.bom_page_url)}" target="_blank" rel="noopener">BOM page ↗</a>`);
+  adminBits.push(`<a href="${escapeHtml(p.url)}" target="_blank" rel="noopener">Customer page ↗</a>`);
   const adminHtml = `<footer class="spec-admin">${adminBits.join(' · ')}</footer>`;
 
   // ---- Compose
@@ -481,31 +390,25 @@ function renderSpec(p) {
       <div class="spec-head">
         <div>
           ${heroHtml}
-          ${galleryHtml}
         </div>
         <div class="spec-summary">
           <div class="spec-num-row">
             <span class="spec-num">${escapeHtml(skuLabel)}</span>
             <span class="spec-status ${statusCls}">${escapeHtml(statusLabel)}</span>
-            ${certShort ? `<span class="spec-finish-pill">${escapeHtml(certShort)}</span>` : ''}
+            ${certPill}
             <span class="spec-finish-pill">${escapeHtml(p.type)}</span>
           </div>
           <h2 class="spec-title">${escapeHtml(p.title)}</h2>
-          ${p.tagline ? `<p class="spec-tagline">${escapeHtml(p.tagline)}</p>` : ''}
-          ${priceRow}
           ${ctaRow}
-          ${tagStrip}
           ${qualityHtml}
         </div>
       </div>
 
-      ${downloadsSection}
-      ${colorsSection}
-      ${variantsSection}
+      ${salesSection}
+      ${diagramsSection}
+      ${qcSection}
       ${bomSection}
-      ${proseSection}
-      ${relatedSection}
-      ${bodySection}
+      ${variantsSection}
       ${adminHtml}
     </article>
   `;
@@ -514,33 +417,15 @@ function renderSpec(p) {
   $('spec-slot').hidden = false;
   $('grid-slot').hidden = true;
 
-  // wire
   $('spec-slot').querySelector('.spec-back').onclick = () => {
     history.replaceState(null, '', '#' + activeBucket);
     routeFromHash();
   };
-  $('spec-slot').querySelectorAll('.spec-thumb').forEach(b => {
-    b.onclick = () => {
-      $('spec-slot').querySelectorAll('.spec-thumb').forEach(x => x.classList.remove('is-current'));
-      b.classList.add('is-current');
-      const img = document.getElementById('hero-img');
-      if (img) {
-        img.src = b.dataset.src;
-        img.alt = b.dataset.alt || '';
-      }
-    };
-  });
-  // Variants show-all toggle
-  const moreBtn = $('spec-slot').querySelector('.variants-show-more');
-  if (moreBtn) {
-    moreBtn.onclick = () => {
-      $('spec-slot').querySelectorAll('.variants-table tr.is-hidden').forEach(tr => tr.classList.remove('is-hidden'));
-      moreBtn.style.display = 'none';
-    };
-  }
 }
 
 function qualityCells(p) {
+  // QC-relevant facts only. Marketing fields (style, bulb temperature,
+  // hanging height for the customer) are NOT here — they're on the listing.
   const cells = [];
   cells.push({ label: 'Lead time',  val: p.lead_time, empty: !p.lead_time });
   cells.push({
@@ -548,27 +433,27 @@ function qualityCells(p) {
     val: shortCert(p.certification),
     empty: !p.certification,
     cls: /UL\s*listed/i.test(p.certification || '') ? 'cert-yes' : '',
-    sub: (p.certification && p.certification.length > 32) ? p.certification.slice(0, 80) + '…' : '',
   });
   if (p.bucket === 'lighting') {
-    cells.push({ label: 'Mounting',     val: prettySlug(p.mounting_type),     empty: !p.mounting_type });
-    cells.push({ label: 'Socket',       val: p.socket_type,                    empty: !p.socket_type });
-    cells.push({ label: 'Hanging height', val: p.hanging_height,               empty: !p.hanging_height });
-    cells.push({ label: 'Bulb',         val: bulbCombo(p),                     empty: !bulbCombo(p) });
+    cells.push({ label: 'Mounting', val: prettySlug(p.mounting_type), empty: !p.mounting_type });
+    cells.push({ label: 'Socket',   val: p.socket_type,                empty: !p.socket_type });
   } else {
-    cells.push({ label: 'Finish',       val: prettySlug(p.hardware_finish),    empty: !p.hardware_finish });
-    cells.push({ label: 'Material',     val: prettySlug(p.handle_material),    empty: !p.handle_material });
-    cells.push({ label: 'Design',       val: prettySlug(p.knob_handle_design), empty: !p.knob_handle_design });
-    cells.push({ label: 'Weight',       val: p.weight,                         empty: !p.weight });
+    cells.push({ label: 'Finish',   val: prettySlug(p.hardware_finish), empty: !p.hardware_finish });
+    cells.push({ label: 'Material', val: prettySlug(p.handle_material), empty: !p.handle_material });
   }
-  cells.push({ label: 'Variants',     val: String(p.variant_count),          empty: !p.variant_count });
-  cells.push({ label: 'BOM parts',    val: p.parts_total ? String(p.parts_total) : '', empty: !p.parts_total, sub: p.has_canopy_kit ? 'Incl. canopy kit' : '' });
+  cells.push({ label: 'Variants',  val: String(p.variant_count), empty: !p.variant_count });
+  cells.push({
+    label: 'BOM parts',
+    val: p.parts_total ? String(p.parts_total) : '',
+    empty: !p.parts_total,
+    sub: p.has_canopy_kit ? 'Incl. canopy kit' : '',
+  });
+  // Pre-test flag — fixtures with "Extension Rods Assembled Prior to Testing"
+  // need to be bench-tested before ship.
+  if (p.qc && p.qc.needs_pre_test) {
+    cells.push({ label: 'Pre-test', val: 'Required', cls: 'cert-yes', sub: 'Extension rods + electrical' });
+  }
   return cells.slice(0, 8);
-}
-
-function bulbCombo(p) {
-  const bits = [p.bulb_cap_type, p.bulb_shape, p.bulb_size].map(prettySlug).filter(Boolean);
-  return bits.join(' · ');
 }
 
 function shortCert(s) {
@@ -588,51 +473,191 @@ function prettySlug(s) {
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
-function renderVariants(p) {
+// ---------- Sales --------------------------------------------------------
+
+function renderSales(p) {
+  const u24 = p.sales_2024_units || 0;
+  const u25 = p.sales_2025_units || 0;
+  if (!u24 && !u25) return '';
+  let yoy = '';
+  if (u24 > 0) {
+    const pct = ((u25 - u24) / u24) * 100;
+    const cls = pct > 5 ? 'up' : (pct < -5 ? 'down' : 'flat');
+    const arrow = pct > 5 ? '↑' : (pct < -5 ? '↓' : '→');
+    yoy = `<span class="demand-yoy ${cls}">${arrow} ${pct >= 0 ? '+' : ''}${pct.toFixed(0)}%</span>`;
+  } else if (u25 > 0) {
+    yoy = `<span class="demand-yoy up">NEW</span>`;
+  }
+  const fmt = (n) => '$' + Math.round(n).toLocaleString();
+  return `
+    <section class="spec-section spec-demand">
+      <header class="spec-section-head">
+        <h3>Sales</h3>
+        <span class="spec-section-aside">Gross units shipped (all finishes &amp; colors)</span>
+      </header>
+      <div class="demand-line">
+        <span class="demand-pair">
+          <span class="demand-year">2024</span>
+          <span class="demand-num">${u24.toLocaleString()}</span>
+          <span class="quality-sub" style="margin-left:4px">${fmt(p.sales_2024_revenue || 0)}</span>
+        </span>
+        <span class="demand-arrow" aria-hidden="true">→</span>
+        <span class="demand-pair">
+          <span class="demand-year">2025</span>
+          <span class="demand-num is-current">${u25.toLocaleString()}</span>
+          <span class="quality-sub" style="margin-left:4px">${fmt(p.sales_2025_revenue || 0)}</span>
+        </span>
+        ${yoy}
+      </div>
+    </section>`;
+}
+
+// ---------- Diagrams / Downloads ----------------------------------------
+
+function renderDiagrams(p) {
+  // The Tearsheet typically IS the assembly diagram for our lighting (it's
+  // the exploded view + dimensions). Installation Guide is the customer-
+  // facing PDF. Revit/CAD is the architectural file. We surface the
+  // tearsheet first and largest so the QC person can open it inline.
+  const t = p.downloads.tearsheet;
+  const ig = p.downloads.installation_guide;
+  const rev = p.downloads.revit;
+  const w3d = p.downloads.warehouse_3d;
+
+  // If there's a tearsheet, show it embedded so QC can read it without
+  // leaving the page. PDFs render via the browser's native plugin.
+  const tearsheetEmbed = t
+    ? `<div class="diagram-frame">
+         <iframe src="${escapeHtml(t)}#view=FitH" loading="lazy" title="Tearsheet for ${escapeHtml(p.title)}"></iframe>
+         <div class="diagram-actions">
+           <a class="product-cta secondary" href="${escapeHtml(t)}" target="_blank" rel="noopener">Open tearsheet ↗</a>
+         </div>
+       </div>`
+    : `<div class="empty-panel">No tearsheet uploaded for this product.</div>`;
+
+  const extras = [];
+  if (ig)  extras.push({ title: 'Installation Guide', sub: 'Customer-facing PDF', url: ig });
+  if (rev) extras.push({ title: 'Revit / CAD',        sub: 'Architects file',     url: rev });
+  if (w3d) extras.push({ title: '3D Warehouse',       sub: 'SketchUp model',      url: w3d });
+  const extrasHtml = extras.length
+    ? `<div class="downloads-grid">${extras.map(d => `
+         <a class="download-btn" href="${escapeHtml(d.url)}" target="_blank" rel="noopener">
+           <div class="download-icon pdf">PDF</div>
+           <div class="download-meta">
+             <div class="download-title">${escapeHtml(d.title)}</div>
+             <div class="download-sub">${escapeHtml(d.sub)}</div>
+           </div>
+         </a>`).join('')}</div>`
+    : '';
+
+  return `
+    <section class="spec-section">
+      <header class="spec-section-head">
+        <h3>Assembly diagram</h3>
+        <span class="spec-section-aside">Exploded view + dimensions from the tearsheet</span>
+      </header>
+      ${tearsheetEmbed}
+      ${extrasHtml}
+    </section>`;
+}
+
+// ---------- QC callouts: wire lengths, extension rods, canopy configs ----
+
+function renderQcCallouts(p) {
+  const qc = p.qc || {};
+  const blocks = [];
+
+  // Wire / lead lengths
+  if ((qc.wire_lengths || []).length) {
+    const rows = qc.wire_lengths.map(w => `
+      <li class="qc-list-row">
+        <span class="qc-list-num">${w.length_in}<span class="qc-list-unit">"</span></span>
+        <span class="qc-list-detail">
+          <a class="bom-part-num" href="parts.html#${encodeURIComponent(w.part_number)}">${escapeHtml(w.part_number)}</a>
+          <span class="bom-desc">${escapeHtml(w.desc || '')}</span>
+        </span>
+        <span class="bom-qty">${escapeHtml(String(w.qty || ''))}</span>
+      </li>`).join('');
+    blocks.push(`
+      <section class="spec-section">
+        <header class="spec-section-head">
+          <h3>Wire &amp; lead lengths <span class="spec-section-count">${qc.wire_lengths.length}</span></h3>
+          <span class="spec-section-aside">Pre-wired leads ship at these lengths</span>
+        </header>
+        <ul class="qc-list">${rows}</ul>
+      </section>`);
+  }
+
+  // Extension rods
+  if ((qc.extension_rods || []).length) {
+    const total = qc.extension_rods.reduce((s, r) => s + (Number(r.qty) || 0), 0);
+    const rows = qc.extension_rods.map(r => `
+      <li class="qc-list-row">
+        <span class="bom-qty">${escapeHtml(String(r.qty || ''))}</span>
+        <span class="qc-list-detail">
+          <a class="bom-part-num" href="parts.html#${encodeURIComponent(r.part_number)}">${escapeHtml(r.part_number)}</a>
+          <span class="bom-desc">${escapeHtml(r.desc || '')}</span>
+        </span>
+      </li>`).join('');
+    blocks.push(`
+      <section class="spec-section">
+        <header class="spec-section-head">
+          <h3>Extension rods <span class="spec-section-count">${total}</span></h3>
+          <span class="spec-section-aside">${qc.needs_pre_test ? 'Assembled and tested before ship' : 'Customer-installed'}</span>
+        </header>
+        <ul class="qc-list">${rows}</ul>
+      </section>`);
+  }
+
+  // Canopy kit configurations
+  if ((qc.canopy_configs || []).length) {
+    const cfgs = qc.canopy_configs.map(c => `
+      <div class="canopy-cfg">
+        <div class="canopy-cfg-head">
+          <span class="canopy-cfg-name">${escapeHtml(c.name)}</span>
+          <span class="bom-section-count">${c.part_count} part${c.part_count === 1 ? '' : 's'}</span>
+        </div>
+        <ul class="qc-list">${c.parts.map(prt => `
+          <li class="qc-list-row">
+            <span class="bom-qty">${escapeHtml(String(prt.qty || ''))}</span>
+            <span class="qc-list-detail">
+              <a class="bom-part-num" href="parts.html#${encodeURIComponent(prt.part_number || '')}">${escapeHtml(prt.part_number || '—')}</a>
+              <span class="bom-desc">${escapeHtml(prt.desc || '')}</span>
+            </span>
+          </li>`).join('')}</ul>
+      </div>`).join('');
+    blocks.push(`
+      <section class="spec-section">
+        <header class="spec-section-head">
+          <h3>Canopy kit <span class="spec-section-count">${qc.canopy_configs.length}</span></h3>
+          <span class="spec-section-aside">${qc.canopy_configs.length === 1 ? 'Configuration' : 'Configurations — choose by mounting'}</span>
+        </header>
+        <div class="canopy-cfg-list">${cfgs}</div>
+      </section>`);
+  }
+
+  return blocks.join('');
+}
+
+// ---------- Compact variants (just SKU + finish + color, no inventory) ----
+
+function renderVariantsCompact(p) {
   const variants = p.variants || [];
   if (!variants.length) return '';
-  const hasOpt2 = variants.some(v => v.option2);
-  const hasOpt3 = variants.some(v => v.option3);
-  const PREVIEW_LIMIT = 10;
-  const overflow = variants.length > PREVIEW_LIMIT;
-
-  const rows = variants.map((v, i) => {
-    const cls = (i >= PREVIEW_LIMIT) ? 'is-hidden' : '';
-    const thumb = v.image
-      ? `<div class="v-thumb"><img src="${escapeHtml(v.image)}" alt="" loading="lazy"></div>`
-      : `<div class="v-thumb"></div>`;
-    const qty = Number(v.qty || 0);
-    const qtyCls = qty < 0 ? 'neg' : '';
-    return `<tr class="${cls}" style="${cls === 'is-hidden' ? 'display:none' : ''}">
-      <td>${thumb}</td>
-      <td class="v-sku">${escapeHtml(v.sku)}</td>
-      <td>${escapeHtml(v.option1 || '—')}</td>
-      ${hasOpt2 ? `<td>${escapeHtml(v.option2 || '')}</td>` : ''}
-      ${hasOpt3 ? `<td>${escapeHtml(v.option3 || '')}</td>` : ''}
-      <td class="v-price">${v.price ? '$' + escapeHtml(v.price) : '—'}</td>
-      <td class="v-qty ${qtyCls}">${qty}</td>
-    </tr>`;
-  }).join('');
-
-  return `<section class="spec-section">
-    <header class="spec-section-head">
-      <h3>Variants <span class="spec-section-count">${variants.length}</span></h3>
-      <span class="spec-section-aside">SKU · finish · color · price · on-hand</span>
-    </header>
-    <table class="variants-table">
-      <thead><tr>
-        <th></th>
-        <th>SKU</th>
-        <th>${escapeHtml(variants[0].option1_name || 'Option 1')}</th>
-        ${hasOpt2 ? `<th>${escapeHtml(variants[0].option2_name || 'Option 2')}</th>` : ''}
-        ${hasOpt3 ? `<th>${escapeHtml(variants[0].option3_name || 'Option 3')}</th>` : ''}
-        <th>Price</th>
-        <th style="text-align:right">Qty</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    ${overflow ? `<button type="button" class="variants-show-more">Show all ${variants.length} variants</button>` : ''}
-  </section>`;
+  const rows = variants.map(v => `
+    <li class="qc-list-row">
+      <span class="v-sku">${escapeHtml(v.sku)}</span>
+      <span class="qc-list-detail">
+        <span class="bom-desc">${escapeHtml([v.option1, v.option2, v.option3].filter(Boolean).join(' · '))}</span>
+      </span>
+    </li>`).join('');
+  return `
+    <details class="spec-section spec-usedin">
+      <summary class="spec-section-head">
+        <h3>Variant SKUs <span class="spec-section-count">${variants.length}</span></h3>
+      </summary>
+      <ul class="qc-list">${rows}</ul>
+    </details>`;
 }
 
 function renderBomTree(p) {
@@ -685,47 +710,6 @@ function renderBomTree(p) {
     </header>
     ${blocks}
   </section>`;
-}
-
-function renderProse(p) {
-  const blocks = [];
-  if (p.configuration) blocks.push({ title: 'Configuration', text: p.configuration });
-  if (p.certification && (p.certification.length > 40)) blocks.push({ title: 'Certification', text: p.certification });
-  if (p.product_specs) blocks.push({ title: 'Specs', text: p.product_specs });
-  if (p.materials)     blocks.push({ title: 'Materials', text: p.materials });
-  if (p.care_guide)    blocks.push({ title: 'Care guide', text: p.care_guide, id: 'care-guide' });
-  if (p.product_note)  blocks.push({ title: 'Product note', text: p.product_note });
-  if (!blocks.length) return '';
-  return blocks.map(b => `<section class="spec-section" ${b.id ? `id="${b.id}"` : ''}>
-    <header class="spec-section-head"><h3>${escapeHtml(b.title)}</h3></header>
-    <div class="prose-block">${escapeHtml(b.text)}</div>
-  </section>`).join('');
-}
-
-function renderRelated(p) {
-  const groups = [];
-  const variation = (p.variation_handles || []).filter(h => h !== p.handle);
-  const compl = p.complementary_handles || [];
-  const related = (p.related_handles || []).filter(h => !variation.includes(h) && !compl.includes(h));
-  if (variation.length) groups.push({ title: 'Variations', handles: variation });
-  if (compl.length)     groups.push({ title: 'Complementary', handles: compl });
-  if (related.length)   groups.push({ title: 'Related', handles: related });
-  if (!groups.length) return '';
-  const chip = (h) => {
-    const target = BY_HANDLE[h];
-    if (target) {
-      const img = target.image ? `<span class="related-chip-img"><img src="${escapeHtml(target.image)}" alt="" loading="lazy"></span>` : '';
-      return `<a class="related-chip" href="#${encodeURIComponent(h)}">${img}${escapeHtml(target.title)}</a>`;
-    }
-    // External handle (not in library) — link out to storefront
-    return `<a class="related-chip" href="https://www.duttonbrown.com/products/${escapeHtml(h)}" target="_blank" rel="noopener">${escapeHtml(h)} ↗</a>`;
-  };
-  return groups.map(g => `<section class="spec-section">
-    <header class="spec-section-head">
-      <h3>${escapeHtml(g.title)} <span class="spec-section-count">${g.handles.length}</span></h3>
-    </header>
-    <div class="related-row">${g.handles.map(chip).join('')}</div>
-  </section>`).join('');
 }
 
 bootstrap();
