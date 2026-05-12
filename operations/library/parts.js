@@ -260,8 +260,28 @@ function previewCardHtml(p) {
   const imgHtml = p.image
     ? `<div class="preview-image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.part_number)}" loading="lazy"></div>`
     : `<div class="preview-image no-img">No image</div>`;
-  return `<a class="preview-card" data-pn="${escapeHtml(p.part_number)}" href="#${encodeURIComponent(p.part_number)}">
+
+  // In-house process pill stripe — drawn on top of the thumb so it's
+  // instantly scannable (Powder Coat / Black Batch are workflow-critical).
+  const inHouse = (p.in_house_processes || fam?.in_house_processes || []).filter(Boolean);
+  const ihpStripe = inHouse.length
+    ? `<div class="preview-ihp">${inHouse.map(proc => `<span class="ihp-pill" data-proc="${escapeHtml(proc)}">${escapeHtml(proc)}</span>`).join('')}</div>`
+    : '';
+
+  // Status flag — only render when non-Active so the grid stays calm.
+  // Discontinuing / Inactive get loud red/gray ribbons; Introducing is blue.
+  const status = p.status;
+  let statusFlag = '';
+  if (status && status !== 'Active') {
+    const cls = statusClass(status);
+    statusFlag = `<div class="preview-status-flag ${cls}">${escapeHtml(status)}</div>`;
+  }
+  const cardCls = status && status !== 'Active' ? `preview-card is-${statusClass(status)}` : 'preview-card';
+
+  return `<a class="${cardCls}" data-pn="${escapeHtml(p.part_number)}" href="#${encodeURIComponent(p.part_number)}">
     ${imgHtml}
+    ${ihpStripe}
+    ${statusFlag}
     <div class="preview-body">
       <div class="preview-num">${escapeHtml(p.part_number)}</div>
       <div class="preview-desc">${escapeHtml(desc)}</div>
@@ -390,8 +410,33 @@ function fmtDate(iso) {
   } catch { return iso; }
 }
 
+// Relative time for the "last ordered 3d ago" line in the spec card. Returns
+// human-friendly short forms that match the patterns used elsewhere in the
+// operations UIs (today / yesterday / Nd / NMo / Ny).
+function relTime(iso) {
+  if (!iso) return '';
+  const t = new Date(iso).getTime();
+  if (Number.isNaN(t)) return '';
+  const days = Math.floor((Date.now() - t) / 86400000);
+  if (days < 0) return 'upcoming';
+  if (days === 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days < 30) return `${days}d ago`;
+  const months = Math.floor(days / 30);
+  if (months < 12) return `${months}mo ago`;
+  const years = Math.floor(days / 365);
+  return `${years}y ago`;
+}
+
+// Status class for the colored dot/badge next to part numbers. Was just
+// "active or nothing" before; now distinguishes each lifecycle stage so
+// Inactive and Discontinuing are visually loud, not just text.
 function statusClass(s) {
-  return s === 'Active' ? 'active' : '';
+  if (s === 'Active') return 'active';
+  if (s === 'Introducing') return 'introducing';
+  if (s === 'Discontinuing') return 'discontinuing';
+  if (s === 'Inactive') return 'inactive';
+  return '';
 }
 
 function renderSpec(p) {
@@ -399,33 +444,103 @@ function renderSpec(p) {
   const gloss = fam.glossary || {};
   const siblings = (DATA.siblings[p.family_id] || []).map(pn => PARTS_BY_NUM[pn]).filter(Boolean);
 
+  // ---------- Image
   const imgHtml = p.image
     ? `<div class="spec-image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.part_number)}"></div>`
     : `<div class="spec-image no-img">No image</div>`;
 
-  // Quick facts
-  const quick = [
-    { label: 'Material', val: (fam.materials || []).join(', ') },
-    { label: 'Lead time', val: p.lead_time },
-    { label: 'Last ordered', val: fmtDate(p.last_ordered) },
-    { label: 'Vendor', val: fam.vendor },
-    { label: 'MOQ', val: p.moq },
-    { label: 'Reorder qty', val: p.reorder_qty },
-  ];
-  const quickHtml = quick.map(q => {
-    const empty = q.val == null || q.val === '';
-    const val = empty ? '—' : escapeHtml(String(q.val));
-    return `<div>
-      <div class="quick-label">${escapeHtml(q.label)}</div>
-      <div class="quick-val ${empty ? 'empty' : ''}">${val}</div>
-    </div>`;
-  }).join('');
-
+  // ---------- Header chips
   const finishPill = p.finish
     ? `<span class="spec-finish-pill">${escapeHtml(p.finish)} finish</span>`
     : '';
+  const glossaryChip = gloss.name
+    ? `<span class="spec-glossary-chip" title="Glossary category">${escapeHtml(gloss.name)}${gloss.abbr ? ` <span class="abbr">(${gloss.abbr})</span>` : ''}</span>`
+    : '';
 
-  // Siblings
+  // ---------- In-house processes — the operational tell (Powder Coat, Black
+  // Batch, etc.). Pull from the part, falling back to the family. Most
+  // important fact on the page after the title; render as bold pills.
+  const inHouse = (p.in_house_processes || fam.in_house_processes || []).filter(Boolean);
+  let inHouseHtml = '';
+  if (inHouse.length) {
+    const pills = inHouse.map(proc => `<span class="ihp-pill" data-proc="${escapeHtml(proc)}">${escapeHtml(proc)}</span>`).join('');
+    inHouseHtml = `<div class="spec-ihp"><span class="spec-ihp-label">In-House</span><div class="spec-ihp-pills">${pills}</div></div>`;
+  } else {
+    // Explicit empty state — vendor-finished is a meaningful "no work needed"
+    // signal, not absence of data.
+    inHouseHtml = `<div class="spec-ihp spec-ihp-none"><span class="spec-ihp-label">In-House</span><span class="spec-ihp-empty">None — arrives ready from vendor</span></div>`;
+  }
+
+  // ---------- Key facts (4-up grid). Vendor + Lead Time + MOQ + Last Ordered
+  // are the action-driving values; the rest of the legacy "Material / Reorder Qty"
+  // group moves to the inline-tags strip below.
+  const moqDisplay = (p.moq ?? p.reorder_qty);
+  const moqLabel   = (p.moq != null) ? 'MOQ' : (p.reorder_qty != null ? 'Reorder qty' : 'MOQ');
+  const keyFacts = [
+    { label: 'Lead time',    val: p.lead_time },
+    { label: moqLabel,       val: moqDisplay },
+    { label: 'Vendor',       val: fam.vendor },
+    { label: 'Last ordered', val: fmtDate(p.last_ordered), sub: p.last_ordered ? relTime(p.last_ordered) : null },
+  ];
+  const keyFactsHtml = keyFacts.map(q => {
+    const empty = q.val == null || q.val === '';
+    const val = empty ? '—' : escapeHtml(String(q.val));
+    const sub = (!empty && q.sub) ? `<div class="keyfact-sub">${escapeHtml(q.sub)}</div>` : '';
+    return `<div class="keyfact">
+      <div class="keyfact-label">${escapeHtml(q.label)}</div>
+      <div class="keyfact-val ${empty ? 'empty' : ''}">${val}</div>
+      ${sub}
+    </div>`;
+  }).join('');
+
+  // ---------- Demand block — always open, prominent. 2024 / 2025 / YoY.
+  const u24 = p.use_2024 || 0;
+  const u25 = p.use_2025 || 0;
+  let deltaHtml = '';
+  if (u24 > 0) {
+    const pct = ((u25 - u24) / u24) * 100;
+    const cls = pct > 5 ? 'up' : (pct < -5 ? 'down' : 'flat');
+    const arrow = pct > 5 ? '↑' : (pct < -5 ? '↓' : '→');
+    deltaHtml = `<div class="demand-cell">
+      <div class="demand-label">Year over year</div>
+      <div class="demand-yoy ${cls}">${arrow} ${pct >= 0 ? '+' : ''}${pct.toFixed(0)}%</div>
+    </div>`;
+  } else if (u25 > 0) {
+    deltaHtml = `<div class="demand-cell">
+      <div class="demand-label">Year over year</div>
+      <div class="demand-yoy up">NEW</div>
+    </div>`;
+  }
+  const demandHasData = u24 > 0 || u25 > 0;
+  const demandHtml = `
+    <section class="spec-section spec-demand">
+      <header class="spec-section-head">
+        <h3>Demand</h3>
+        ${p.last_ordered ? `<span class="spec-section-aside">Last ordered ${escapeHtml(fmtDate(p.last_ordered))} · ${escapeHtml(relTime(p.last_ordered))}</span>` : ''}
+      </header>
+      <div class="demand-grid ${demandHasData ? '' : 'is-empty'}">
+        <div class="demand-cell">
+          <div class="demand-label">2024 usage</div>
+          <div class="demand-val ${u24 ? '' : 'empty'}">${u24 ? u24.toLocaleString() : '0'}</div>
+        </div>
+        <div class="demand-cell">
+          <div class="demand-label">2025 usage</div>
+          <div class="demand-val ${u25 ? '' : 'empty'}">${u25 ? u25.toLocaleString() : '0'}</div>
+        </div>
+        ${deltaHtml}
+      </div>
+    </section>
+  `;
+
+  // ---------- Material / Raw-or-Pre-finished as small inline tag strip
+  const tags = [];
+  for (const m of (fam.materials || [])) tags.push({ kind: 'material', val: m });
+  if (fam.raw_or_prefinished) tags.push({ kind: 'finish-state', val: fam.raw_or_prefinished });
+  const tagsHtml = tags.length
+    ? `<div class="spec-tags">${tags.map(t => `<span class="spec-tag" data-kind="${t.kind}">${escapeHtml(t.val)}</span>`).join('')}</div>`
+    : '';
+
+  // ---------- Siblings (same family)
   let siblingsHtml = '';
   if (siblings.length > 1) {
     const sibs = siblings.map(s => {
@@ -439,105 +554,70 @@ function renderSpec(p) {
         <div class="sibling-fin">${escapeHtml(s.finish || '—')}</div>
       </a>`;
     }).join('');
-    siblingsHtml = `<div class="siblings">
-      <div class="siblings-head">
-        <span class="siblings-label">Same family · ${siblings.length} variants</span>
-        <span class="siblings-base">Base: <b>${escapeHtml(fam.part_number || '')}</b>${fam.description ? ' · ' + escapeHtml(fam.description) : ''}</span>
-      </div>
+    siblingsHtml = `<section class="spec-section siblings">
+      <header class="spec-section-head">
+        <h3>Same family — ${siblings.length} variants</h3>
+        <span class="spec-section-aside">Base <b>${escapeHtml(fam.part_number || '')}</b>${fam.description ? ' · ' + escapeHtml(fam.description) : ''}</span>
+      </header>
       <div class="siblings-row">${sibs}</div>
-    </div>`;
+    </section>`;
   }
 
-  // Demand panel
-  const u24 = p.use_2024 || 0;
-  const u25 = p.use_2025 || 0;
-  let delta = '';
-  if (u24 > 0) {
-    const pct = ((u25 - u24) / u24) * 100;
-    const cls = pct > 5 ? 'up' : (pct < -5 ? 'down' : 'flat');
-    const arrow = pct > 5 ? '↑' : (pct < -5 ? '↓' : '→');
-    delta = `<div class="year-block">
-      <div class="year-label">YoY</div>
-      <div class="year-delta ${cls}">${arrow} ${pct >= 0 ? '+' : ''}${pct.toFixed(0)}%</div>
-    </div>`;
-  } else if (u25 > 0) {
-    delta = `<div class="year-block">
-      <div class="year-label">YoY</div>
-      <div class="year-delta up">↑ NEW</div>
-    </div>`;
-  }
-  const demandHtml = `
-    <div class="year-row">
-      <div class="year-block">
-        <div class="year-label">2024 usage</div>
-        <div class="year-val ${u24 ? '' : 'empty'}">${u24 ? u24.toLocaleString() : '0'}</div>
-      </div>
-      <div class="year-block">
-        <div class="year-label">2025 usage</div>
-        <div class="year-val ${u25 ? '' : 'empty'}">${u25 ? u25.toLocaleString() : '0'}</div>
-      </div>
-      ${delta}
-    </div>
-    <p class="demand-note">Usage from Notion Parts DB.${p.last_ordered ? ` Last ordered ${escapeHtml(fmtDate(p.last_ordered))}` : ''}${p.lead_time ? ` · ${escapeHtml(p.lead_time)} lead time` : ''}.</p>
-  `;
-
-  // Used In panel (from family.products)
+  // ---------- Used In (collapsed by default — often dozens of products)
   const products = fam.products || [];
   const usedInHtml = products.length
-    ? `<div class="product-grid">${products.map(prod => `
-        <a class="product-card-mini" href="${escapeHtml(prod.url || '#')}" target="_blank" rel="noopener" title="${escapeHtml(prod.title || '')}">
-          <span class="sku">${escapeHtml(prod.sku)}</span>
-          <span class="title">${escapeHtml(prod.title || '—')}</span>
-        </a>`).join('')}</div>`
-    : `<div class="empty-panel">Not used in any product BOM yet.</div>`;
+    ? `<details class="spec-section spec-usedin">
+        <summary class="spec-section-head">
+          <h3>Used in <span class="spec-section-count">${products.length}</span></h3>
+          <span class="spec-section-aside">Products that include this part family</span>
+        </summary>
+        <div class="product-grid">${products.map(prod => `
+          <a class="product-card-mini" href="${escapeHtml(prod.url || '#')}" target="_blank" rel="noopener" title="${escapeHtml(prod.title || '')}">
+            <span class="sku">${escapeHtml(prod.sku)}</span>
+            <span class="title">${escapeHtml(prod.title || '—')}</span>
+          </a>`).join('')}</div>
+      </details>`
+    : '';
 
-  // Notes panel
-  const notesItems = [
-    { label: 'Definition', val: gloss.definition || fam.definition || '' },
-    { label: 'In-house process', val: (p.in_house_processes || fam.in_house_processes || []).join(', ') },
-    { label: 'Raw or Pre-finished', val: fam.raw_or_prefinished || '' },
-    { label: 'Glossary type', val: gloss.name ? `${gloss.name}${gloss.abbr ? ` (${gloss.abbr})` : ''}` : '' },
-    { label: 'Last edited (Notion)', val: p.last_edited_at ? p.last_edited_at.split('T')[0] : '' },
-  ];
-  const notesHtml = `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px 24px;">
-    ${notesItems.map(n => `<div>
-      <div class="quick-label">${escapeHtml(n.label)}</div>
-      <div class="quick-val ${n.val ? '' : 'empty'}">${n.val ? escapeHtml(n.val) : '—'}</div>
-    </div>`).join('')}
-    <div style="grid-column: 1 / -1;">
-      <div class="quick-label">Notion link</div>
-      <div class="quick-val"><a href="${escapeHtml(p.page_url)}" target="_blank" rel="noopener">Open part in Notion ↗</a>${fam.page_url ? ` · <a href="${escapeHtml(fam.page_url)}" target="_blank" rel="noopener">Open family ↗</a>` : ''}</div>
-    </div>
-  </div>`;
+  // ---------- Admin footer (faded). Last edited + Notion deep links.
+  const adminBits = [];
+  if (p.last_edited_at) adminBits.push(`Last edited ${escapeHtml(p.last_edited_at.split('T')[0])}`);
+  if (p.page_url)   adminBits.push(`<a href="${escapeHtml(p.page_url)}" target="_blank" rel="noopener">Open part in Notion ↗</a>`);
+  if (fam.page_url) adminBits.push(`<a href="${escapeHtml(fam.page_url)}" target="_blank" rel="noopener">Open family ↗</a>`);
+  const adminHtml = adminBits.length
+    ? `<footer class="spec-admin">${adminBits.join(' · ')}</footer>`
+    : '';
 
+  // ---------- Title + definition. Note: definition shows ONCE here, not in
+  // a separate Notes panel. Glossary chip provides category context.
   const title = fam.description || 'Part';
   const definition = gloss.definition || fam.definition || '';
 
   const html = `
     <article class="spec-card">
-      <button class="spec-back" type="button">Back to all parts</button>
+      <button class="spec-back" type="button">← Back to all parts</button>
+
       <div class="spec-head">
         ${imgHtml}
         <div class="spec-summary">
           <div class="spec-num-row">
             <span class="spec-num">${escapeHtml(p.part_number)}</span>
-            ${finishPill}
             <span class="spec-status ${statusClass(p.status)}">${escapeHtml(p.status || 'Status unknown')}</span>
+            ${finishPill}
+            ${glossaryChip}
           </div>
           <h2 class="spec-title">${escapeHtml(title)}</h2>
-          <p class="spec-definition">${escapeHtml(definition)}</p>
-          <div class="spec-quick">${quickHtml}</div>
+          ${definition ? `<p class="spec-definition">${escapeHtml(definition)}</p>` : ''}
+          ${inHouseHtml}
+          <div class="spec-keyfacts">${keyFactsHtml}</div>
+          ${tagsHtml}
         </div>
       </div>
+
+      ${demandHtml}
       ${siblingsHtml}
-      <div class="spec-tabs">
-        <button class="spec-tab is-active" data-tab="demand">Demand</button>
-        <button class="spec-tab" data-tab="used">Used In <span class="tab-count">${products.length}</span></button>
-        <button class="spec-tab" data-tab="notes">Notes &amp; Refs</button>
-      </div>
-      <div class="spec-panel is-active" data-panel="demand">${demandHtml}</div>
-      <div class="spec-panel" data-panel="used">${usedInHtml}</div>
-      <div class="spec-panel" data-panel="notes">${notesHtml}</div>
+      ${usedInHtml}
+      ${adminHtml}
     </article>
   `;
 
@@ -545,16 +625,8 @@ function renderSpec(p) {
   $('spec-slot').hidden = false;
   $('grid-slot').hidden = true;
 
-  // wire
+  // wire — tabs are gone, just back button + siblings
   $('spec-slot').querySelector('.spec-back').onclick = backToBrowse;
-  $('spec-slot').querySelectorAll('.spec-tab').forEach(t => {
-    t.onclick = () => {
-      $('spec-slot').querySelectorAll('.spec-tab').forEach(x => x.classList.remove('is-active'));
-      $('spec-slot').querySelectorAll('.spec-panel').forEach(x => x.classList.remove('is-active'));
-      t.classList.add('is-active');
-      $('spec-slot').querySelector(`[data-panel="${t.dataset.tab}"]`).classList.add('is-active');
-    };
-  });
   $('spec-slot').querySelectorAll('.sibling').forEach(a => {
     // Sibling click stays in place — the spec card is already on screen and
     // we just swap its contents.
