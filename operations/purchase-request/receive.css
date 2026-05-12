@@ -3,6 +3,58 @@
 
 /* Search bar shared with Submit/Purchase/Status — see styles.css .search-bar. */
 
+/* Supplier filter bubbles — chip row above the PO list. Click a supplier
+   to narrow the queue; click again (or the All chip) to clear. Hidden when
+   there are fewer than 2 suppliers (no value in a 1-chip filter row). */
+.supplier-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.supplier-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s, color 0.12s;
+}
+.supplier-bubble:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+.supplier-bubble.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.supplier-bubble-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.supplier-bubble.is-active .supplier-bubble-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
 .po-group {
   margin-bottom: 12px;
   background: white;
