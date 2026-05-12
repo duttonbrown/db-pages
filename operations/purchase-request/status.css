@@ -148,6 +148,64 @@
 .refresh-btn:active svg { transform: rotate(180deg); }
 .refresh-btn svg { transition: transform 0.5s ease; display: block; }
 
+/* Part bubbles — quick digest of which parts are in the current view, with
+   a summed Qty Ordered (or ×N request count when no qty exists yet). Click
+   a bubble to scroll to the first card with that part. */
+.part-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: -8px 0 16px;
+  padding: 0;
+}
+.part-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 4px 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+}
+.part-bubble:hover {
+  background: var(--bg);
+  border-color: var(--muted);
+}
+.part-bubble-name {
+  letter-spacing: 0.01em;
+}
+.part-bubble-qty {
+  display: inline-block;
+  min-width: 22px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #FFF7EB;
+  color: var(--accent-dark);
+  font-variant-numeric: tabular-nums;
+}
+.part-bubble-qty.part-bubble-count {
+  background: var(--bg);
+  color: var(--muted);
+}
+
+/* Brief highlight when a card is jumped to from a part bubble. */
+.request-card.flash {
+  animation: card-flash 1.2s ease-out;
+}
+@keyframes card-flash {
+  0%   { box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.35); }
+  100% { box-shadow: 0 0 0 0   rgba(255, 153, 18, 0);    }
+}
+
 /* Loading + error + empty */
 .loading-state {
   text-align: center;
