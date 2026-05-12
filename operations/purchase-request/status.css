@@ -205,7 +205,7 @@
   margin: 0 0 18px;
   padding: 0;
   display: grid;
-  gap: 6px;
+  gap: 10px;
 }
 
 /* Request card — same visual world as the form's cart-item */
