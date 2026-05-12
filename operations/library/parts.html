@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parts Library — Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-base.css">
+<link rel="stylesheet" href="parts.css">
+</head>
+<body>
+<div class="app-shell">
+
+<aside class="side-nav" aria-label="Library navigation">
+  <div class="side-nav-inner">
+    <a class="side-nav-brand" href="../../index.html">
+      <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
+    </a>
+    <div class="side-nav-eyebrow">Library</div>
+    <ul class="side-nav-tabs" role="tablist">
+      <li><a class="side-nav-tab" href="parts.html" aria-current="page">Parts <span class="tab-count" id="parts-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="#" style="opacity:0.45; pointer-events:none">Lighting <span class="tab-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="#" style="opacity:0.45; pointer-events:none">Hardware <span class="tab-count">—</span></a></li>
+    </ul>
+  </div>
+</aside>
+
+<div class="app-main">
+<main class="card card-wide">
+
+  <header class="page-intro">
+    <h1 class="page-lead">Parts Library</h1>
+    <p class="page-sub">Look up any part — image, description, demand, where it's used, and finish variants.</p>
+  </header>
+
+  <div class="lib-toolbar">
+    <div class="lib-search">
+      <input id="search" type="text" placeholder="Search part #, description, or category…" autocomplete="off" spellcheck="false">
+      <ul id="results" class="lib-results" hidden></ul>
+    </div>
+    <div class="lib-count" id="lib-count">Loading…</div>
+  </div>
+
+  <div class="recents-row hidden" id="recents-row">
+    <span class="recents-label">Recent</span>
+    <div id="recents-chips"></div>
+  </div>
+
+  <div class="glossary-strip" id="glossary"></div>
+
+  <!-- Spec card slot (hidden until a part is picked) -->
+  <div id="spec-slot" hidden></div>
+
+  <!-- Browse-grid slot -->
+  <div id="grid-slot">
+    <div class="loading-state">Loading parts…</div>
+  </div>
+
+</main>
+</div>
+</div>
+
+<script src="parts.js"></script>
+</body>
+</html>
