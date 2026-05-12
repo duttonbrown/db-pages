@@ -40,6 +40,7 @@
     <select id="purchaser-name">
       <option value="">Select your name…</option>
     </select>
+    <button type="button" id="add-to-queue-btn" class="add-to-queue-btn">+ Add to queue</button>
     <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
   </div>
 
@@ -98,6 +99,107 @@
       <button type="button" id="bulk-clear" class="link-btn">Clear</button>
       <button type="button" id="bulk-ordered-btn" class="primary" disabled>Mark Ordered</button>
     </div>
+  </div>
+</div>
+
+<!-- Add-to-queue modal: purchaser self-adds a row at "Waiting to Order" without
+     going through the requester flow. Supports catalog picker, custom items
+     not yet in the DB, and one-time purchases (Type: Other, no catalog link). -->
+<div id="add-modal" class="modal" hidden>
+  <div class="modal-card add-modal-card">
+    <header class="modal-header">
+      <h2>Add to queue</h2>
+      <button type="button" class="modal-close" id="add-modal-close" aria-label="Close">✕</button>
+    </header>
+    <div class="modal-context">
+      <span id="add-modal-requestor-context"></span>
+      Lands in <strong>Waiting to Order</strong> — skips Submitted.
+    </div>
+    <div class="modal-body">
+      <!-- Mode toggle: catalog picker (default) vs one-time custom purchase -->
+      <div class="field add-mode-row">
+        <label class="add-mode-toggle">
+          <input type="checkbox" id="add-one-time">
+          <span>One-time purchase</span>
+          <small class="muted">(custom item, won't be added to Parts/Supplies DB)</small>
+        </label>
+      </div>
+
+      <!-- Catalog picker mode -->
+      <div id="add-picker">
+        <div class="field">
+          <label for="add-search">Search part number, name, or description</label>
+          <input type="text" id="add-search" placeholder="Loading catalog…" autocomplete="off" disabled>
+          <ul id="add-results" class="results" hidden></ul>
+        </div>
+
+        <div id="add-picked" class="picked" hidden>
+          <div class="picked-row">
+            <img id="add-picked-image" alt="" hidden>
+            <div class="picked-body">
+              <div class="chip-row">
+                <span id="add-picked-type" class="badge"></span>
+                <span id="add-picked-category" class="badge badge-category" hidden></span>
+              </div>
+              <strong id="add-picked-title"></strong>
+              <small id="add-picked-subtitle"></small>
+            </div>
+            <button type="button" id="add-picked-cancel" class="link-btn">Change</button>
+          </div>
+        </div>
+
+        <div class="field checkbox-field">
+          <label>
+            <input type="checkbox" id="add-not-in-db">
+            <span>Add item not in database</span>
+          </label>
+        </div>
+
+        <div id="add-custom-fields" hidden>
+          <div class="field">
+            <label for="add-custom-name">What is the item?</label>
+            <input type="text" id="add-custom-name" placeholder="Item name or description">
+          </div>
+          <div class="field">
+            <label>Type</label>
+            <div class="inline-radio">
+              <label><input type="radio" name="add-custom-type" value="Part" checked> Part</label>
+              <label><input type="radio" name="add-custom-type" value="Supply"> Supply</label>
+              <label><input type="radio" name="add-custom-type" value="Other"> Other</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- One-time purchase mode -->
+      <div id="add-one-time-fields" hidden>
+        <div class="field">
+          <label for="add-onetime-name">Item name<span class="req">*</span></label>
+          <input type="text" id="add-onetime-name" placeholder="e.g. Custom brass bracket, 2&quot; OD">
+        </div>
+        <div class="field">
+          <label for="add-onetime-vendor">Vendor</label>
+          <input type="text" id="add-onetime-vendor" placeholder="Where are you buying it?">
+        </div>
+      </div>
+
+      <!-- Shared fields (apply to all modes) -->
+      <div class="field">
+        <label for="add-notes">Note for the row <span class="muted">(optional — what / why / spec)</span></label>
+        <input type="text" id="add-notes" placeholder="e.g. for Lana 2026-Q3 build, finish: brushed brass">
+      </div>
+      <div class="field checkbox-field">
+        <label class="urgent-label">
+          <input type="checkbox" id="add-urgent">
+          <span>Urgent</span>
+        </label>
+      </div>
+    </div>
+    <div id="add-modal-error" class="error" hidden></div>
+    <footer class="modal-footer">
+      <button type="button" id="add-modal-cancel" class="secondary">Cancel</button>
+      <button type="button" id="add-modal-submit" class="primary" disabled>Add to queue</button>
+    </footer>
   </div>
 </div>
 

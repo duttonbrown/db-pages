@@ -1300,5 +1300,381 @@ document.addEventListener("wheel", (e) => {
   }
 }, { passive: true });
 
+// ----- + Add to queue (purchaser self-add) -----
+//
+// The Purchase page can't ONLY be a triage screen — sometimes the purchaser
+// already knows we need something and wants to log it directly, or has bought
+// a one-time custom part for a project. This modal handles both, landing the
+// new row at "Waiting to Order" so it skips the Submitted triage step.
+//
+// Two modes:
+//   - Catalog picker (default) — search Parts + Supplies, or add a custom item
+//     that isn't in the DB yet (same as the Submit page's "not in DB" flow).
+//   - One-time purchase — Type: Other, name + free-text vendor only. Won't be
+//     added to the Parts/Supplies DB.
+//
+// Requestor is hard-wired to the current purchaserSel.value. The button is
+// gated on that select being filled in, so rows never land with an empty
+// Requestor field.
+
+const addBtn          = $("add-to-queue-btn");
+const addModal        = $("add-modal");
+const addModalClose   = $("add-modal-close");
+const addModalCancel  = $("add-modal-cancel");
+const addModalSubmit  = $("add-modal-submit");
+const addModalErr     = $("add-modal-error");
+const addModalCtx     = $("add-modal-requestor-context");
+const addOneTime      = $("add-one-time");
+const addPickerSec    = $("add-picker");
+const addOneTimeSec   = $("add-one-time-fields");
+const addSearch       = $("add-search");
+const addResults      = $("add-results");
+const addPicked       = $("add-picked");
+const addPickedImage  = $("add-picked-image");
+const addPickedTitle  = $("add-picked-title");
+const addPickedSub    = $("add-picked-subtitle");
+const addPickedType   = $("add-picked-type");
+const addPickedCat    = $("add-picked-category");
+const addPickedCancel = $("add-picked-cancel");
+const addNotInDb      = $("add-not-in-db");
+const addCustomFields = $("add-custom-fields");
+const addCustomName   = $("add-custom-name");
+const addOnetimeName  = $("add-onetime-name");
+const addOnetimeVendor = $("add-onetime-vendor");
+const addNotes        = $("add-notes");
+const addUrgent       = $("add-urgent");
+
+let addCatalog = { parts: [], supplies: [] };
+let addCatalogReady = false;
+let addCatalogLoading = null;
+let addPickedItem = null;
+let addCurrentResults = [];
+let addActiveIndex = -1;
+
+async function loadAddCatalog() {
+  if (addCatalogReady) return;
+  if (addCatalogLoading) return addCatalogLoading;
+  addCatalogLoading = (async () => {
+    try {
+      const res = await fetch(`${WORKER_URL}/catalog`);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "catalog failed");
+      addCatalog.parts = data.parts || [];
+      addCatalog.supplies = data.supplies || [];
+      addCatalogReady = true;
+      addSearch.disabled = false;
+      addSearch.placeholder = `Search ${addCatalog.parts.length} parts + ${addCatalog.supplies.length} supplies…`;
+    } catch (e) {
+      addSearch.placeholder = "Search part number, name, or description";
+      addSearch.disabled = false;
+      addModalErr.textContent = "Couldn't load catalog. Search may be slow.";
+      addModalErr.hidden = false;
+    } finally {
+      addCatalogLoading = null;
+    }
+  })();
+  return addCatalogLoading;
+}
+
+function addLocalSearch(q) {
+  const needle = q.toLowerCase();
+  const score = (r) => {
+    const t = (r.title || "").toLowerCase();
+    const d = (r.description || "").toLowerCase();
+    const s = (r.subtitle || "").toLowerCase();
+    const f = (r.familyName || "").toLowerCase();
+    const c = (r.category || "").toLowerCase();
+    if (t.startsWith(needle)) return 4;
+    if (t.includes(needle))   return 3;
+    if (f.includes(needle) || c.includes(needle)) return 2;
+    if (d.includes(needle) || s.includes(needle)) return 1;
+    return 0;
+  };
+  const all = [...addCatalog.parts, ...addCatalog.supplies];
+  return all
+    .map(r => ({ r, s: score(r) }))
+    .filter(x => x.s > 0)
+    .sort((a, b) => b.s - a.s || ((b.r.use2025 ?? -1) - (a.r.use2025 ?? -1)))
+    .slice(0, 12)
+    .map(x => x.r);
+}
+
+function renderAddResults(items) {
+  addCurrentResults = items;
+  addActiveIndex = -1;
+  addResults.innerHTML = "";
+  if (items.length === 0) {
+    const empty = document.createElement("li");
+    empty.className = "empty";
+    empty.textContent = "No matches. Check the box below to add an item not in the database.";
+    addResults.appendChild(empty);
+  } else {
+    items.forEach((item, i) => {
+      const li = document.createElement("li");
+      li.dataset.index = i;
+      const icon = item.type === "Part" ? "🔩" : "📦";
+      const thumb = item.image
+        ? `<img class="thumb" src="${item.image}" alt="">`
+        : `<span class="icon">${icon}</span>`;
+      li.innerHTML = `
+        ${thumb}
+        <span class="meta">
+          <span class="title-row">
+            <strong class="title-text"></strong>
+            <span class="title-desc"></span>
+          </span>
+          <small class="vendor-line"></small>
+        </span>
+        <span class="source-tag">
+          <small class="source-db"></small>
+        </span>
+      `;
+      li.querySelector(".title-text").textContent = item.title || "(untitled)";
+      const desc = item.description || item.subtitle || "";
+      li.querySelector(".title-desc").textContent = desc ? `— ${desc}` : "";
+      const v = item.vendor ? `Vendor: ${item.vendor}` : "";
+      li.querySelector(".vendor-line").textContent = v;
+      li.querySelector(".vendor-line").hidden = !v;
+      li.querySelector(".source-db").textContent =
+        item.type === "Part" ? "Parts" : "Supplies";
+      li.addEventListener("click", () => pickAddItem(item));
+      addResults.appendChild(li);
+    });
+  }
+  addResults.hidden = false;
+}
+
+function runAddSearch(q) {
+  if (q.length < 2) { addResults.hidden = true; return; }
+  if (!addCatalogReady) {
+    addResults.innerHTML = '<li class="empty">Loading catalog…</li>';
+    addResults.hidden = false;
+    return;
+  }
+  renderAddResults(addLocalSearch(q));
+}
+
+function pickAddItem(item) {
+  addPickedItem = item;
+  addPickedImage.src = item.image || "";
+  addPickedImage.hidden = !item.image;
+  const desc = item.description || item.subtitle || "";
+  addPickedTitle.textContent = desc ? `${item.title} — ${desc}` : item.title;
+  addPickedSub.textContent = item.vendor ? `Vendor: ${item.vendor}` : "";
+  addPickedType.textContent = (item.type || "").toUpperCase();
+  if (item.category) {
+    addPickedCat.textContent = item.category.toUpperCase();
+    addPickedCat.hidden = false;
+  } else {
+    addPickedCat.hidden = true;
+  }
+  addPicked.hidden = false;
+  addSearch.hidden = true;
+  addResults.hidden = true;
+  updateAddSubmitState();
+}
+
+function cancelAddPicked() {
+  addPickedItem = null;
+  addPicked.hidden = true;
+  addSearch.hidden = false;
+  addSearch.value = "";
+  addSearch.focus();
+  updateAddSubmitState();
+}
+
+function toggleAddNotInDb() {
+  if (addNotInDb.checked) {
+    addCustomFields.hidden = false;
+    addSearch.hidden = true;
+    addResults.hidden = true;
+    cancelAddPicked();
+    addCustomName.focus();
+  } else {
+    addCustomFields.hidden = true;
+    addCustomName.value = "";
+    addSearch.hidden = false;
+    addSearch.focus();
+  }
+  updateAddSubmitState();
+}
+
+function toggleAddOneTime() {
+  if (addOneTime.checked) {
+    addPickerSec.hidden = true;
+    addOneTimeSec.hidden = false;
+    addOnetimeName.focus();
+  } else {
+    addPickerSec.hidden = false;
+    addOneTimeSec.hidden = true;
+    addOnetimeName.value = "";
+    addOnetimeVendor.value = "";
+    if (!addPickedItem && !addNotInDb.checked) addSearch.focus();
+  }
+  updateAddSubmitState();
+}
+
+function updateAddSubmitState() {
+  let ok = false;
+  if (addOneTime.checked) {
+    ok = addOnetimeName.value.trim().length > 0;
+  } else if (addNotInDb.checked) {
+    ok = addCustomName.value.trim().length > 0;
+  } else {
+    ok = !!addPickedItem;
+  }
+  addModalSubmit.disabled = !ok;
+}
+
+function openAddModal() {
+  if (!purchaserSel.value) {
+    showError("Pick your name in the top bar first — you'll be the requestor on the row.");
+    purchaserSel.focus();
+    return;
+  }
+  // Reset
+  addOneTime.checked = false;
+  addNotInDb.checked = false;
+  addPickedItem = null;
+  addSearch.value = "";
+  addCustomName.value = "";
+  addOnetimeName.value = "";
+  addOnetimeVendor.value = "";
+  addNotes.value = "";
+  addUrgent.checked = false;
+  addResults.hidden = true;
+  addResults.innerHTML = "";
+  addPicked.hidden = true;
+  addCustomFields.hidden = true;
+  addOneTimeSec.hidden = true;
+  addPickerSec.hidden = false;
+  addSearch.hidden = false;
+  document.querySelector('input[name="add-custom-type"][value="Part"]').checked = true;
+  addModalErr.hidden = true;
+  addModalErr.textContent = "";
+  addModalSubmit.disabled = true;
+  addModalSubmit.textContent = "Add to queue";
+  addModalCtx.innerHTML = `Requestor: <strong>${escapeHtml(purchaserSel.value)}</strong>. `;
+  addModal.hidden = false;
+  loadAddCatalog();
+  setTimeout(() => addSearch.focus(), 0);
+}
+
+function closeAddModal() {
+  addModal.hidden = true;
+}
+
+async function submitAddToQueue() {
+  if (!purchaserSel.value) {
+    addModalErr.textContent = "Pick your name first.";
+    addModalErr.hidden = false;
+    return;
+  }
+  const notes = addNotes.value.trim();
+  const outOfStock = addUrgent.checked;
+
+  let item;
+  if (addOneTime.checked) {
+    const name = addOnetimeName.value.trim();
+    if (!name) return;
+    const vendor = addOnetimeVendor.value.trim();
+    item = {
+      type: "Other",
+      notInDb: true,
+      customName: name,
+      vendor,
+      notes,
+      outOfStock,
+    };
+  } else if (addNotInDb.checked) {
+    const name = addCustomName.value.trim();
+    if (!name) return;
+    const t = document.querySelector('input[name="add-custom-type"]:checked').value;
+    item = {
+      type: t,
+      notInDb: true,
+      customName: name,
+      notes,
+      outOfStock,
+    };
+  } else {
+    if (!addPickedItem) return;
+    item = {
+      type: addPickedItem.type,
+      relationId: addPickedItem.id,
+      notInDb: false,
+      moq: addPickedItem.reorderQty,
+      vendor: addPickedItem.vendor,
+      notes,
+      outOfStock,
+    };
+  }
+
+  addModalErr.hidden = true;
+  addModalSubmit.disabled = true;
+  addModalSubmit.textContent = "Adding…";
+
+  const idempotencyKey = (crypto?.randomUUID?.() || ("k-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10)));
+  try {
+    const res = await fetch(`${WORKER_URL}/submit`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        requestor: purchaserSel.value,
+        initialStatus: "Waiting to Order",
+        idempotencyKey,
+        items: [item],
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok && res.status !== 207) {
+      const firstFail = (data.failed || [])[0]?.error;
+      throw new Error(firstFail || data.error || "Add failed");
+    }
+    if ((data.failed || []).length > 0) {
+      throw new Error(data.failed[0].error || "Add failed");
+    }
+    closeAddModal();
+    await loadPending();
+  } catch (e) {
+    addModalErr.textContent = e.message || "Add failed";
+    addModalErr.hidden = false;
+    addModalSubmit.disabled = false;
+    addModalSubmit.textContent = "Add to queue";
+  }
+}
+
+addBtn.addEventListener("click", openAddModal);
+addModalClose.addEventListener("click", closeAddModal);
+addModalCancel.addEventListener("click", closeAddModal);
+addModal.addEventListener("click", (e) => { if (e.target === addModal) closeAddModal(); });
+
+addSearch.addEventListener("input", () => runAddSearch(addSearch.value.trim()));
+addSearch.addEventListener("keydown", (e) => {
+  if (addResults.hidden) return;
+  const items = addResults.querySelectorAll("li[data-index]");
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    addActiveIndex = Math.min(addActiveIndex + 1, items.length - 1);
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    addActiveIndex = Math.max(addActiveIndex - 1, 0);
+  } else if (e.key === "Enter" && addActiveIndex >= 0) {
+    e.preventDefault();
+    pickAddItem(addCurrentResults[addActiveIndex]);
+    return;
+  } else if (e.key === "Escape") {
+    addResults.hidden = true;
+    return;
+  } else { return; }
+  items.forEach((el, i) => el.classList.toggle("active", i === addActiveIndex));
+});
+addPickedCancel.addEventListener("click", cancelAddPicked);
+addNotInDb.addEventListener("change", toggleAddNotInDb);
+addOneTime.addEventListener("change", toggleAddOneTime);
+addCustomName.addEventListener("input", updateAddSubmitState);
+addOnetimeName.addEventListener("input", updateAddSubmitState);
+addModalSubmit.addEventListener("click", submitAddToQueue);
+
 // Boot
 loadPeople().then(loadPending);

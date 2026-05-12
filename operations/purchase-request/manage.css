@@ -748,6 +748,101 @@ body.bulk-mode .pending-row {
   .purchaser-bar { flex-wrap: wrap; }
   .purchaser-bar select { max-width: none; flex: 1 1 100%; }
   .purchaser-bar .link-btn { margin-left: 0; }
+  .purchaser-bar .add-to-queue-btn { flex: 1 1 100%; }
   .triage, .vendor-digest { padding: 10px 12px; }
   .vendor-bubble, .triage-bubble { flex: 1 1 100%; }
 }
+
+/* ----- + Add to queue (purchaser self-add) ----- */
+
+.add-to-queue-btn {
+  margin-left: auto;
+  background: var(--accent);
+  color: white;
+  border: 1px solid var(--accent);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.add-to-queue-btn:hover { background: var(--accent-dark, #D97706); }
+.add-to-queue-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.purchaser-bar .add-to-queue-btn + .link-btn { margin-left: 0; }
+
+/* Wider modal for the add flow — needs room for the search results list */
+.add-modal-card { max-width: 560px; }
+
+.add-mode-row {
+  margin-bottom: 18px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+.add-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.add-mode-toggle small {
+  font-size: 11px;
+  font-weight: 300;
+  margin-left: auto;
+}
+@media (max-width: 480px) {
+  .add-mode-toggle { flex-wrap: wrap; }
+  .add-mode-toggle small { margin-left: 0; flex: 1 1 100%; }
+}
+
+#add-modal .results {
+  max-height: 240px;
+  overflow-y: auto;
+}
+#add-modal .picked {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+#add-modal .picked-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#add-modal #add-picked-image {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+#add-modal .picked-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+#add-modal .picked-body strong {
+  font-weight: 500;
+  font-size: 14px;
+}
+#add-modal .picked-body small {
+  font-size: 11px;
+  color: var(--muted);
+}
+#add-modal .chip-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+#add-modal-error { margin: 0 20px; }
