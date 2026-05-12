@@ -87,6 +87,11 @@ function partCountsByGlossary() {
   return counts;
 }
 
+// Glossary strip collapses to ~2 rows by default. The toggle expands it
+// when there are more chips than fit. Once the user expands, we keep it
+// open for the rest of the session — they explicitly asked for more.
+let glossaryExpanded = false;
+
 function renderGlossary() {
   const counts = partCountsByGlossary();
   const entries = DATA.glossary
@@ -96,8 +101,8 @@ function renderGlossary() {
       if (b.id === 'all') return 1;
       return b.count - a.count;
     });
-  $('glossary').innerHTML = entries.map(g => {
-    if (g.id !== 'all' && !g.count) return '';
+  const visible = entries.filter(g => g.id === 'all' || g.count);
+  $('glossary').innerHTML = visible.map(g => {
     return `<button class="glossary-chip${g.id === activeGlossary ? ' is-active' : ''}" data-gid="${escapeHtml(g.id)}">${escapeHtml(g.name || '(unnamed)')} <span class="gc-count">${g.count}</span></button>`;
   }).join('');
   $('glossary').querySelectorAll('.glossary-chip').forEach(b => {
@@ -112,7 +117,38 @@ function renderGlossary() {
       }
     };
   });
+
+  // Wire the Show all / Show fewer toggle. Show it whenever there are more
+  // chips than ~14 (the rough number that fits in 2 compact rows). After
+  // render we measure the strip vs its collapsed cap to decide; if the
+  // strip's natural height fits within the cap we keep the toggle hidden.
+  const strip = $('glossary');
+  const toggle = $('glossary-toggle');
+  if (!toggle) return;
+  // Apply the right collapsed state first, then measure.
+  strip.classList.toggle('is-collapsed', !glossaryExpanded);
+  // Defer measurement so layout has settled.
+  requestAnimationFrame(() => {
+    const collapsedCap = 64; // keep in sync with .glossary-strip.is-collapsed max-height
+    // Temporarily uncollapse to measure natural height
+    const wasCollapsed = strip.classList.contains('is-collapsed');
+    if (wasCollapsed) strip.classList.remove('is-collapsed');
+    const natural = strip.offsetHeight;
+    if (wasCollapsed) strip.classList.add('is-collapsed');
+    const overflows = natural > collapsedCap + 4;
+    toggle.hidden = !overflows;
+    toggle.textContent = glossaryExpanded ? "Show fewer" : `Show all ${visible.length - 1} categories`;
+  });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('glossary-toggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    glossaryExpanded = !glossaryExpanded;
+    renderGlossary();
+  });
+});
 
 // --- Browse grid ---
 function filteredParts() {
