@@ -125,6 +125,58 @@
   white-space: nowrap;
 }
 
+/* Active glossary filter pill — surfaces the current category filter at the
+   top so it's obvious what's narrowing the grid (and easy to clear). */
+.active-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.active-filter-row.hidden { display: none; }
+.active-filter-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.active-filter-pill {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 6px 4px 12px;
+  background: var(--ink);
+  color: white;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.4;
+  transition: background 0.12s;
+}
+.active-filter-pill:hover { background: #000; }
+.active-filter-pill .afp-count {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  font-variant-numeric: tabular-nums;
+}
+.active-filter-pill .afp-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  font-size: 14px;
+  line-height: 1;
+  color: white;
+}
+.active-filter-pill:hover .afp-clear { background: rgba(255,255,255,0.28); }
+
 /* Recents */
 .recents-row {
   display: flex;
@@ -689,6 +741,15 @@
 }
 .spec-glossary-chip .abbr { color: var(--muted); font-weight: 400; }
 
+/* Label prefix on Finish / Material chips — same muted treatment as the
+   keyfact labels so the value is what reads, not the field name. */
+.spec-finish-pill .chip-label,
+.spec-material-chip .chip-label {
+  color: var(--muted);
+  font-weight: 400;
+  margin-right: 2px;
+}
+
 /* --- In-house process pills (THE operational tell) --- */
 .spec-ihp {
   display: flex;
@@ -721,7 +782,13 @@
   color: white;
   letter-spacing: 0.01em;
   white-space: nowrap;
+  font-family: inherit;
+  border: 1px solid transparent;
 }
+button.ihp-pill,
+.ihp-pill[data-filter] { cursor: pointer; }
+.ihp-pill[data-filter]:hover { filter: brightness(1.15); }
+.ihp-pill.is-active { outline: 2px solid var(--accent); outline-offset: 1px; }
 /* Color-code the loudest processes so they're spottable at a glance */
 .ihp-pill[data-proc*="Powder" i] { background: #B85C00; }
 .ihp-pill[data-proc*="Black Batch" i],
@@ -742,6 +809,13 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--ink);
+}
+/* Multi-vendor stacks one per line so commas inside vendor names don't
+   collide with separators. */
+.spec-vendor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 /* In-House pills inside a key-fact cell render smaller — they need to fit
    the 120px-min grid cell without forcing a wide column. */
@@ -996,6 +1070,7 @@
   padding: 2px 6px;
   border-radius: 3px;
   letter-spacing: 0.02em;
+  pointer-events: auto;
 }
 .preview-status-flag {
   position: absolute;

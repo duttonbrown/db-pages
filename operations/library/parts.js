@@ -11,8 +11,31 @@ let PARTS_BY_NUM = {};        // part_number -> part
 let FAMILY_BY_PARTNUM = {};   // part_number -> family object
 let GLOSSARY_BY_ID = {};      // id -> glossary entry
 let activeGlossary = 'all';
+let activeProcesses = new Set(); // in-house process filters: 'Powder Coat', 'Black Batch', etc.
 let activeResultIdx = -1;
 let currentPart = null;
+
+function partProcesses(p) {
+  const fam = DATA.families[p.family_id];
+  return (p.in_house_processes || (fam && fam.in_house_processes) || []).filter(Boolean);
+}
+
+function clearFiltersIfShowingPart() {
+  if (currentPart) {
+    currentPart = null;
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  $('spec-slot').hidden = true;
+  $('grid-slot').hidden = false;
+}
+
+function toggleProcessFilter(proc) {
+  if (activeProcesses.has(proc)) activeProcesses.delete(proc);
+  else activeProcesses.add(proc);
+  clearFiltersIfShowingPart();
+  renderGlossary();
+  renderGrid();
+}
 
 // --- Load and bootstrap ---
 async function bootstrap() {
@@ -42,16 +65,6 @@ async function bootstrap() {
   const sideSuppliesCount = $('supplies-count');
   if (sideSuppliesCount) sideSuppliesCount.textContent = (DATA.counts.supplies || 0).toLocaleString();
   $('lib-count').innerHTML = `<b>${DATA.counts.parts}</b> parts · <b>${DATA.counts.glossary}</b> categories`;
-  // Pull lighting/hardware counts so the sidebar shows them on parts.html too
-  fetch('products-library.json', { cache: 'no-store' })
-    .then(r => r.ok ? r.json() : null)
-    .then(pl => {
-      if (!pl) return;
-      const navL = $('nav-lighting-count'); if (navL) navL.textContent = (pl.counts.lighting || 0).toLocaleString();
-      const navH = $('nav-hardware-count'); if (navH) navH.textContent = (pl.counts.hardware || 0).toLocaleString();
-    })
-    .catch(() => {});
-
   renderGlossary();
   renderRecents();
   wireSearch();
@@ -103,6 +116,70 @@ function partCountsByGlossary() {
 // open for the rest of the session — they explicitly asked for more.
 let glossaryExpanded = false;
 
+// Count parts matching a hypothetical filter set — used to show accurate
+// counts on each filter pill (the count reflects what'd remain if you
+// removed *only* that one pill, i.e. all other active filters still apply).
+function countWith(opts) {
+  const glossary = opts.glossary != null ? opts.glossary : activeGlossary;
+  const procs = opts.processes || activeProcesses;
+  return DATA.parts.filter(p => {
+    if (glossary !== 'all') {
+      const fam = DATA.families[p.family_id];
+      if (!fam || !fam.glossary || fam.glossary.id !== glossary) return false;
+    }
+    if (procs.size) {
+      const pp = partProcesses(p);
+      for (const wanted of procs) if (!pp.includes(wanted)) return false;
+    }
+    return true;
+  }).length;
+}
+
+function renderActiveFilter(entries) {
+  const row = $('active-filter-row');
+  if (!row) return;
+  const pills = [];
+
+  if (activeGlossary !== 'all') {
+    const entry = entries.find(g => g.id === activeGlossary);
+    if (entry) {
+      pills.push({
+        name: entry.name || '(unnamed)',
+        count: countWith({}),
+        kind: 'glossary',
+        key: entry.id,
+      });
+    }
+  }
+  for (const proc of activeProcesses) {
+    pills.push({
+      name: proc,
+      count: countWith({}),
+      kind: 'process',
+      key: proc,
+    });
+  }
+
+  if (!pills.length) { row.classList.add('hidden'); row.innerHTML = ''; return; }
+  row.classList.remove('hidden');
+  row.innerHTML = `<span class="active-filter-label">Filter</span>` + pills.map(p => `
+    <button type="button" class="active-filter-pill" data-kind="${escapeHtml(p.kind)}" data-key="${escapeHtml(p.key)}">
+      <span class="afp-name">${escapeHtml(p.name)}</span>
+      <span class="afp-count">${p.count}</span>
+      <span class="afp-clear" aria-label="Clear filter">×</span>
+    </button>
+  `).join('');
+  row.querySelectorAll('.active-filter-pill').forEach(btn => {
+    btn.onclick = () => {
+      if (btn.dataset.kind === 'glossary') activeGlossary = 'all';
+      else if (btn.dataset.kind === 'process') activeProcesses.delete(btn.dataset.key);
+      clearFiltersIfShowingPart();
+      renderGlossary();
+      renderGrid();
+    };
+  });
+}
+
 function renderGlossary() {
   const counts = partCountsByGlossary();
   const entries = DATA.glossary
@@ -113,6 +190,7 @@ function renderGlossary() {
       return b.count - a.count;
     });
   const visible = entries.filter(g => g.id === 'all' || g.count);
+  renderActiveFilter(entries);
   $('glossary').innerHTML = visible.map(g => {
     return `<button class="glossary-chip${g.id === activeGlossary ? ' is-active' : ''}" data-gid="${escapeHtml(g.id)}">${escapeHtml(g.name || '(unnamed)')} <span class="gc-count">${g.count}</span></button>`;
   }).join('');
@@ -175,6 +253,16 @@ function filteredParts() {
       return fam && fam.glossary && fam.glossary.id === activeGlossary;
     });
   }
+  if (activeProcesses.size) {
+    list = list.filter(p => {
+      const procs = partProcesses(p);
+      // All active process filters must match (intersect, not union)
+      for (const wanted of activeProcesses) {
+        if (!procs.includes(wanted)) return false;
+      }
+      return true;
+    });
+  }
   return list;
 }
 
@@ -188,6 +276,15 @@ function renderGrid() {
   $('grid-slot').innerHTML = `<div class="parts-grid">${html}</div>`;
   $('grid-slot').querySelectorAll('.preview-card').forEach(a => {
     a.onclick = (e) => {
+      // Clicks on an in-house process pill toggle the filter instead of
+      // opening the part — the pill is the affordance for filtering.
+      const pill = e.target.closest('.ihp-pill[data-filter]');
+      if (pill) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleProcessFilter(pill.dataset.proc);
+        return;
+      }
       e.preventDefault();
       showPart(a.dataset.pn);
     };
@@ -206,7 +303,7 @@ function previewCardHtml(p) {
   // instantly scannable (Powder Coat / Black Batch are workflow-critical).
   const inHouse = (p.in_house_processes || fam?.in_house_processes || []).filter(Boolean);
   const ihpStripe = inHouse.length
-    ? `<div class="preview-ihp">${inHouse.map(proc => `<span class="ihp-pill" data-proc="${escapeHtml(proc)}">${escapeHtml(proc)}</span>`).join('')}</div>`
+    ? `<div class="preview-ihp">${inHouse.map(proc => `<span class="ihp-pill${activeProcesses.has(proc) ? ' is-active' : ''}" data-proc="${escapeHtml(proc)}" data-filter="1">${escapeHtml(proc)}</span>`).join('')}</div>`
     : '';
 
   // Status flag — only render when non-Active so the grid stays calm.
@@ -390,25 +487,31 @@ function renderSpec(p) {
     ? `<div class="spec-image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.part_number)}"></div>`
     : `<div class="spec-image no-img">No image</div>`;
 
-  // ---------- Header chips. Lives in the spec-num-row alongside the part #
-  // so the reader gets finish, status, category and material on the same
-  // line as the name. Saves a whole row vs. a separate tags strip below.
-  const finishPill = p.finish
-    ? `<span class="spec-finish-pill">${escapeHtml(p.finish)} finish</span>`
-    : '';
+  // ---------- Header chips. Lives in the spec-num-row alongside the part #.
+  // Ordered: part type (glossary), Finish, Material — each labeled so the
+  // reader doesn't have to guess what the value means.
   const glossaryChip = gloss.name
     ? `<span class="spec-glossary-chip" title="Glossary category">${escapeHtml(gloss.name)}${gloss.abbr ? ` <span class="abbr">(${gloss.abbr})</span>` : ''}</span>`
     : '';
-  const materialChips = (fam.materials || []).filter(Boolean).map(m =>
-    `<span class="spec-material-chip" title="Material">${escapeHtml(m)}</span>`
-  ).join('');
+  const finishPill = p.finish
+    ? `<span class="spec-finish-pill"><span class="chip-label">Finish:</span> ${escapeHtml(p.finish)}</span>`
+    : '';
+  const materials = (fam.materials || []).filter(Boolean);
+  const materialChips = materials.length
+    ? `<span class="spec-material-chip" title="Material"><span class="chip-label">Material:</span> ${materials.map(escapeHtml).join(', ')}</span>`
+    : '';
 
   // ---------- Vendor takes the wide row above the keyfacts. (Was In-House.)
   // Vendor is the single-fact answer most people are after — render it big
-  // and label-left, value-right like the old In-House strip.
-  const vendorName = fam.vendor || '';
-  const vendorHtml = vendorName
-    ? `<div class="spec-ihp"><span class="spec-ihp-label">Vendor</span><div class="spec-ihp-pills"><span class="vendor-name">${escapeHtml(vendorName)}</span></div></div>`
+  // and label-left, value-right like the old In-House strip. Multiple
+  // vendors stack on separate lines (vendor names contain commas, so a
+  // single comma-joined string is unreadable).
+  const vendorRaw = fam.vendor;
+  const vendors = Array.isArray(vendorRaw)
+    ? vendorRaw.filter(Boolean)
+    : (vendorRaw ? [vendorRaw] : []);
+  const vendorHtml = vendors.length
+    ? `<div class="spec-ihp"><span class="spec-ihp-label">Vendor</span><div class="spec-vendor-list">${vendors.map(v => `<span class="vendor-name">${escapeHtml(v)}</span>`).join('')}</div></div>`
     : `<div class="spec-ihp spec-ihp-none"><span class="spec-ihp-label">Vendor</span><span class="spec-ihp-empty">— not set</span></div>`;
 
   // ---------- In-house processes — moved into the keyfacts grid as a cell.
@@ -417,18 +520,18 @@ function renderSpec(p) {
   // absence of data.
   const inHouse = (p.in_house_processes || fam.in_house_processes || []).filter(Boolean);
   const inHousePills = inHouse.length
-    ? inHouse.map(proc => `<span class="ihp-pill" data-proc="${escapeHtml(proc)}">${escapeHtml(proc)}</span>`).join('')
-    : `<span class="keyfact-val empty">Vendor-finished</span>`;
+    ? inHouse.map(proc => `<button type="button" class="ihp-pill${activeProcesses.has(proc) ? ' is-active' : ''}" data-proc="${escapeHtml(proc)}" data-filter="1">${escapeHtml(proc)}</button>`).join('')
+    : `<span class="keyfact-val empty">—</span>`;
 
   // ---------- Key facts. Lead Time / In-House / MOQ / Reorder Qty / Last Ordered.
   // The In-House cell renders pills via the `html` field; the other cells are
   // plain values via `val`.
   const keyFacts = [
     { label: 'Lead time',    val: p.lead_time },
-    { label: 'In-House',     html: `<div class="keyfact-pills">${inHousePills}</div>` },
+    { label: 'Last ordered', val: fmtDate(p.last_ordered), sub: p.last_ordered ? relTime(p.last_ordered) : null },
     { label: 'MOQ',          val: p.moq },
     { label: 'Reorder qty',  val: p.reorder_qty },
-    { label: 'Last ordered', val: fmtDate(p.last_ordered), sub: p.last_ordered ? relTime(p.last_ordered) : null },
+    { label: 'In-House',     html: `<div class="keyfact-pills">${inHousePills}</div>` },
   ];
   const keyFactsHtml = keyFacts.map(q => {
     if (q.html) {
@@ -554,9 +657,9 @@ function renderSpec(p) {
           <div class="spec-num-row">
             <span class="spec-num">${escapeHtml(p.part_number)}</span>
             <span class="spec-status ${statusClass(p.status)}">${escapeHtml(p.status || 'Status unknown')}</span>
+            ${glossaryChip}
             ${finishPill}
             ${materialChips}
-            ${glossaryChip}
           </div>
           <h2 class="spec-title">${escapeHtml(title)}</h2>
           ${definition ? `<p class="spec-definition">${escapeHtml(definition)}</p>` : ''}
@@ -576,8 +679,11 @@ function renderSpec(p) {
   $('spec-slot').hidden = false;
   $('grid-slot').hidden = true;
 
-  // wire — tabs are gone, just back button + siblings
+  // wire — tabs are gone, just back button + siblings + process-filter pills
   $('spec-slot').querySelector('.spec-back').onclick = backToBrowse;
+  $('spec-slot').querySelectorAll('.ihp-pill[data-filter]').forEach(btn => {
+    btn.onclick = () => toggleProcessFilter(btn.dataset.proc);
+  });
   $('spec-slot').querySelectorAll('.sibling').forEach(a => {
     // Sibling click stays in place — the spec card is already on screen and
     // we just swap its contents.
