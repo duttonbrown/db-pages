@@ -194,9 +194,9 @@ body.bulk-mode .app-main { padding-bottom: 80px; }
   color: var(--muted);
   font-weight: 400;
 }
-/* Bulk update / Refresh slotted onto the first status-group-header so they
-   sit on the SUBMITTED row instead of the purchaser bar. Falls back to the
-   standalone wrapper above the empty state when the queue has no rows. */
+/* Bulk update slotted onto the first status-group-header so it sits on the
+   SUBMITTED row. Falls back to the standalone wrapper above the empty state
+   when the queue has no rows. */
 .queue-actions {
   margin-left: auto;
   display: flex;
@@ -209,6 +209,39 @@ body.bulk-mode .app-main { padding-bottom: 80px; }
   margin-bottom: 14px;
 }
 .queue-actions-standalone:empty { display: none; }
+
+/* Prominent accent button — matches Receive's .po-actions .primary so the
+   primary call-to-action reads the same across the two consoles. Active
+   state flips to a "you're in bulk mode" treatment so the exit affordance
+   is obvious. */
+.bulk-toggle-btn {
+  appearance: none;
+  margin: 0;
+  width: auto;
+  height: 32px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.bulk-toggle-btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.bulk-toggle-btn.active {
+  background: white;
+  color: var(--accent-dark);
+  border-color: var(--accent);
+}
+.bulk-toggle-btn.active:hover { background: var(--bg); }
 
 /* Each pending row */
 .pending-list {

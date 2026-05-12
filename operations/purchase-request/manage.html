@@ -40,15 +40,15 @@
     <select id="purchaser-name">
       <option value="">Select your name…</option>
     </select>
+    <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
   </div>
 
-  <!-- Slotted into the first .status-group-header at render time when the
-       queue has rows; falls back to its standalone .queue-actions-standalone
-       wrapper above the empty state otherwise. -->
+  <!-- Bulk update slots onto the first .status-group-header at render time so
+       it lives on the SUBMITTED row. Falls back to the standalone wrapper
+       above the empty state when the queue has no rows. -->
   <div id="queue-actions-standalone" class="queue-actions-standalone">
     <div id="queue-actions" class="queue-actions">
-      <button type="button" id="bulk-toggle-btn" class="link-btn" aria-pressed="false">Bulk update</button>
-      <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
+      <button type="button" id="bulk-toggle-btn" class="bulk-toggle-btn" aria-pressed="false">Bulk update</button>
     </div>
   </div>
 
