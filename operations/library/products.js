@@ -105,10 +105,10 @@ function syncTabActive() {
 function updateLead() {
   const lead = $('page-lead'), sub = $('page-sub');
   if (activeBucket === 'hardware') {
-    lead.textContent = 'Hardware Library';
+    lead.textContent = 'Hardware';
     sub.textContent  = 'Pulls, knobs, hooks — finish options, materials, BOM, downloads, and certifications.';
   } else {
-    lead.textContent = 'Lighting Library';
+    lead.textContent = 'Lighting';
     sub.textContent  = 'Sconces, pendants, chandeliers, flush mounts — UL/cUL, sockets, BOM, canopy kits, and downloads.';
   }
   const c = DATA.counts;
@@ -207,7 +207,6 @@ function cardHtml(p) {
 
   const flags = [];
   if (p.has_canopy_kit)               flags.push(`<span class="preview-flag canopy" title="Canopy kit included">Canopy</span>`);
-  if (/UL\s*listed/i.test(p.certification || '')) flags.push(`<span class="preview-flag ul" title="${escapeHtml(p.certification)}">UL</span>`);
   if ((p.color_options || []).length) flags.push(`<span class="preview-flag colors" title="${p.color_options.length} color options">${p.color_options.length} colors</span>`);
   const flagsHtml = flags.length ? `<div class="preview-flags">${flags.join('')}</div>` : '';
 

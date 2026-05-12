@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles-base.css">
 <link rel="stylesheet" href="parts.css">
-<link rel="stylesheet" href="products.css">
 </head>
 <body>
 <div class="app-shell">
@@ -21,10 +20,10 @@
     </a>
     <div class="side-nav-eyebrow">Library</div>
     <ul class="side-nav-tabs" role="tablist">
-      <li><a class="side-nav-tab" href="products.html#lighting" data-tab="lighting">Lighting <span class="tab-count" id="lighting-count">—</span></a></li>
-      <li><a class="side-nav-tab" href="products.html#hardware" data-tab="hardware">Hardware <span class="tab-count" id="hardware-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="products.html#lighting">Lighting <span class="tab-count" id="nav-lighting-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="products.html#hardware">Hardware <span class="tab-count" id="nav-hardware-count">—</span></a></li>
       <li><a class="side-nav-tab" href="parts.html">Parts <span class="tab-count" id="parts-count">—</span></a></li>
-      <li><a class="side-nav-tab" href="supplies.html">Supplies <span class="tab-count" id="supplies-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="supplies.html" aria-current="page">Supplies <span class="tab-count" id="supplies-count">—</span></a></li>
     </ul>
   </div>
 </aside>
@@ -33,13 +32,13 @@
 <main class="card card-wide">
 
   <header class="page-intro">
-    <h1 class="page-lead" id="page-lead">Library</h1>
-    <p class="page-sub" id="page-sub">Every lighting fixture and hardware piece — image, BOM, certifications, downloads, and quality refs.</p>
+    <h1 class="page-lead">Library</h1>
+    <p class="page-sub">Consumables — powder coats, packaging, chemicals, shop materials.</p>
   </header>
 
   <div class="lib-toolbar">
     <div class="lib-search">
-      <input id="search" type="text" placeholder="Search SKU, handle, title, or type…" autocomplete="off" spellcheck="false">
+      <input id="search" type="text" placeholder="Search SKU, title, or type…" autocomplete="off" spellcheck="false">
       <ul id="results" class="lib-results" hidden></ul>
     </div>
     <div class="lib-count" id="lib-count">Loading…</div>
@@ -54,18 +53,18 @@
     <div class="glossary-strip" id="type-filters"></div>
   </div>
 
-  <!-- Spec card slot (hidden until a product is picked) -->
+  <!-- Spec card slot (hidden until a supply is picked) -->
   <div id="spec-slot" hidden></div>
 
   <!-- Browse grid slot -->
   <div id="grid-slot">
-    <div class="loading-state">Loading products…</div>
+    <div class="loading-state">Loading supplies…</div>
   </div>
 
 </main>
 </div>
 </div>
 
-<script src="products.js"></script>
+<script src="supplies.js"></script>
 </body>
 </html>
