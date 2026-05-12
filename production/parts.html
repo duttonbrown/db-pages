@@ -508,7 +508,7 @@ function renderResults(items) {
         <span class="rnum">${escapeHtml(p.part_number)}</span>
         <span class="rdesc"> — ${escapeHtml(p.description || '')}</span>
       </div>
-      <span class="rmeta">${p.part_used_as || ''} · ${p.products_count} prod</span>
+      <span class="rmeta">${p.part_used_as || ''} · ${(p.products || []).filter(x => x.sku).length} prod</span>
     </div>`).join('');
   box.classList.add('open');
   activeResultIdx = -1;
@@ -583,7 +583,7 @@ function renderCard(p) {
 
         <div class="tab-bar">
           <button class="tab active" data-tab="demand">Demand</button>
-          <button class="tab" data-tab="products">Used In <span class="tab-count">${p.products_count}</span></button>
+          <button class="tab" data-tab="products">Used In <span class="tab-count">${(p.products || []).filter(x => x.sku).length}</span></button>
           <button class="tab" data-tab="meta">Notes &amp; Refs</button>
         </div>
 
