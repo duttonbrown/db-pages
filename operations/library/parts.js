@@ -462,32 +462,40 @@ function renderSpec(p) {
     `<span class="spec-material-chip" title="Material">${escapeHtml(m)}</span>`
   ).join('');
 
-  // ---------- In-house processes — the operational tell (Powder Coat, Black
-  // Batch, etc.). Pull from the part, falling back to the family. Most
-  // important fact on the page after the title; render as bold pills.
-  const inHouse = (p.in_house_processes || fam.in_house_processes || []).filter(Boolean);
-  let inHouseHtml = '';
-  if (inHouse.length) {
-    const pills = inHouse.map(proc => `<span class="ihp-pill" data-proc="${escapeHtml(proc)}">${escapeHtml(proc)}</span>`).join('');
-    inHouseHtml = `<div class="spec-ihp"><span class="spec-ihp-label">In-House</span><div class="spec-ihp-pills">${pills}</div></div>`;
-  } else {
-    // Explicit empty state — vendor-finished is a meaningful "no work needed"
-    // signal, not absence of data.
-    inHouseHtml = `<div class="spec-ihp spec-ihp-none"><span class="spec-ihp-label">In-House</span><span class="spec-ihp-empty">None — arrives ready from vendor</span></div>`;
-  }
+  // ---------- Vendor takes the wide row above the keyfacts. (Was In-House.)
+  // Vendor is the single-fact answer most people are after — render it big
+  // and label-left, value-right like the old In-House strip.
+  const vendorName = fam.vendor || '';
+  const vendorHtml = vendorName
+    ? `<div class="spec-ihp"><span class="spec-ihp-label">Vendor</span><div class="spec-ihp-pills"><span class="vendor-name">${escapeHtml(vendorName)}</span></div></div>`
+    : `<div class="spec-ihp spec-ihp-none"><span class="spec-ihp-label">Vendor</span><span class="spec-ihp-empty">— not set</span></div>`;
 
-  // ---------- Key facts. Vendor + Lead Time + MOQ + Reorder Qty + Last Ordered.
-  // MOQ and Reorder Qty are different signals (vendor minimum vs. our typical
-  // restock size) and the new Reorder Basis property makes the distinction
-  // operationally meaningful — keep them as separate slots, both empty-friendly.
+  // ---------- In-house processes — moved into the keyfacts grid as a cell.
+  // Pull from the part, falling back to the family. Render as bold pills
+  // inside the cell. Empty state is "Vendor-finished" — meaningful info, not
+  // absence of data.
+  const inHouse = (p.in_house_processes || fam.in_house_processes || []).filter(Boolean);
+  const inHousePills = inHouse.length
+    ? inHouse.map(proc => `<span class="ihp-pill" data-proc="${escapeHtml(proc)}">${escapeHtml(proc)}</span>`).join('')
+    : `<span class="keyfact-val empty">Vendor-finished</span>`;
+
+  // ---------- Key facts. Lead Time / In-House / MOQ / Reorder Qty / Last Ordered.
+  // The In-House cell renders pills via the `html` field; the other cells are
+  // plain values via `val`.
   const keyFacts = [
     { label: 'Lead time',    val: p.lead_time },
-    { label: 'Vendor',       val: fam.vendor },
+    { label: 'In-House',     html: `<div class="keyfact-pills">${inHousePills}</div>` },
     { label: 'MOQ',          val: p.moq },
     { label: 'Reorder qty',  val: p.reorder_qty },
     { label: 'Last ordered', val: fmtDate(p.last_ordered), sub: p.last_ordered ? relTime(p.last_ordered) : null },
   ];
   const keyFactsHtml = keyFacts.map(q => {
+    if (q.html) {
+      return `<div class="keyfact">
+        <div class="keyfact-label">${escapeHtml(q.label)}</div>
+        ${q.html}
+      </div>`;
+    }
     const empty = q.val == null || q.val === '';
     const val = empty ? '—' : escapeHtml(String(q.val));
     const sub = (!empty && q.sub) ? `<div class="keyfact-sub">${escapeHtml(q.sub)}</div>` : '';
@@ -611,7 +619,7 @@ function renderSpec(p) {
           </div>
           <h2 class="spec-title">${escapeHtml(title)}</h2>
           ${definition ? `<p class="spec-definition">${escapeHtml(definition)}</p>` : ''}
-          ${inHouseHtml}
+          ${vendorHtml}
           <div class="spec-keyfacts">${keyFactsHtml}</div>
         </div>
       </div>
