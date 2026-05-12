@@ -1,30 +1,7 @@
 /* Receive Shipments — receiving console.
    Inherits styles.css + manage.css for the brand and bar treatments. */
 
-.receive-search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.receive-search input[type="search"] {
-  flex: 1;
-  max-width: 480px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font: inherit;
-  background: white;
-}
-.receive-search input[type="search"]:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.18);
-}
-.receive-search-count {
-  font-size: 12px;
-  color: var(--muted);
-}
+/* Search bar shared with Submit/Purchase/Status — see styles.css .search-bar. */
 
 .po-group {
   margin-bottom: 12px;
@@ -55,6 +32,15 @@
   font-weight: 600;
   color: var(--text);
   letter-spacing: 0.02em;
+}
+.po-num-secondary {
+  font-weight: 500;
+  color: var(--muted);
+}
+.po-num-missing {
+  font-weight: 500;
+  color: var(--muted);
+  font-style: italic;
 }
 .po-prefix {
   font-size: 10px;
@@ -307,10 +293,8 @@
   .po-actions .primary { flex: 1; }
 }
 
-/* iPhone — tighten the search bar and the issue-note width so they don't
-   force horizontal scroll. */
+/* iPhone — tighten the issue-note width so it doesn't force horizontal scroll. */
 @media (max-width: 480px) {
-  .receive-search input[type="search"] { max-width: none; }
   .item-issue-note { width: 100%; }
   .item-thumb,
   .item-thumb-fallback { width: 36px; height: 36px; font-size: 16px; }

@@ -435,6 +435,62 @@ textarea { resize: vertical; min-height: 70px; }
   cursor: pointer;
 }
 
+/* Shared page-level search bar — same look across Submit, Purchase, Receive,
+   and Status so the team builds one muscle memory. Pages can drop in:
+       <div class="search-bar">
+         <input type="search" class="search-input" placeholder="…">
+         <span class="search-count" hidden></span>
+       </div>
+   The input style matches the global form-field treatment (10px 12px,
+   accent focus glow). */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  position: relative;
+}
+.search-input {
+  flex: 1;
+  max-width: 480px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: white;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.search-input::placeholder { color: var(--muted); font-weight: 400; }
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.12);
+}
+.search-count {
+  font-size: 12px;
+  color: var(--muted);
+}
+.search-clear {
+  appearance: none;
+  background: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-clear:hover { background: var(--bg); color: var(--text); }
+@media (max-width: 480px) {
+  .search-input { max-width: none; }
+}
+
 /* Search results */
 .results {
   list-style: none;
