@@ -72,6 +72,16 @@ function showError(msg) {
 }
 function clearError() { errorEl.hidden = true; }
 
+// Friendly upstream-outage message — used when the worker tags an error as
+// errorCode=upstream_unavailable (Notion 5xx / 429). Shows a retry button
+// instead of raw error text so the page stops looking broken.
+function showUpstreamUnavailable(retryFn) {
+  errorEl.innerHTML = `<strong>Notion is having trouble responding right now.</strong> This usually clears up within a few minutes. <button type="button" class="link-btn" id="upstream-retry-btn">Try refresh</button>`;
+  errorEl.hidden = false;
+  const btn = document.getElementById("upstream-retry-btn");
+  if (btn) btn.addEventListener("click", () => { clearError(); retryFn(); });
+}
+
 function todayISO() { return new Date().toISOString().slice(0, 10); }
 
 // ----- Recent activity chip -----
@@ -197,6 +207,13 @@ async function loadPending() {
     const data = await res.json();
     loadingFill.style.width = "100%";
     setTimeout(() => { loadingBar.hidden = true; }, 300);
+    if (!res.ok) {
+      if (data.errorCode === "upstream_unavailable") {
+        showUpstreamUnavailable(loadPending);
+        return;
+      }
+      throw new Error(data.error || "Failed to load");
+    }
     allRows = data.rows || [];
     renderTriage(allRows);
     renderDigest(allRows);

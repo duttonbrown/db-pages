@@ -35,6 +35,12 @@ const LOADING_MESSAGES = [
 
 function showError(msg) { errorEl.textContent = msg; errorEl.hidden = false; }
 function clearError() { errorEl.hidden = true; }
+function showUpstreamUnavailable(retryFn) {
+  errorEl.innerHTML = `<strong>Notion is having trouble responding right now.</strong> This usually clears up within a few minutes. <button type="button" class="link-btn" id="upstream-retry-btn">Try refresh</button>`;
+  errorEl.hidden = false;
+  const btn = document.getElementById("upstream-retry-btn");
+  if (btn) btn.addEventListener("click", () => { clearError(); retryFn(); });
+}
 
 function todayISO() { return new Date().toISOString().slice(0, 10); }
 
@@ -111,6 +117,13 @@ async function loadShipments() {
     const data = await res.json();
     loadingFill.style.width = "100%";
     setTimeout(() => { loadingBar.hidden = true; }, 250);
+    if (!res.ok) {
+      if (data.errorCode === "upstream_unavailable") {
+        showUpstreamUnavailable(loadShipments);
+        return;
+      }
+      throw new Error(data.error || "Failed to load");
+    }
     // /pending returns Submitted + Waiting + Backordered + Ordered. Receiving
     // only cares about Ordered — the rest aren't physically en route.
     allOrdered = (data.rows || []).filter(r => r.status === "Ordered");
