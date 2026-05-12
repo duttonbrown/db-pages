@@ -18,11 +18,15 @@ const loadingFill  = loadingBar.querySelector(".loading-fill");
 const loadingMsgEl = loadingBar.querySelector(".loading-message");
 const searchInput  = $("receive-search");
 const searchCount  = $("receive-search-count");
+const supplierBubbles = $("supplier-bubbles");
 
 // Cache of the most recent Ordered rows so the search box can re-render
 // without round-tripping the worker.
 let allOrdered = [];
 let searchQuery = "";
+// Active supplier-bubble filter. Empty string = "All". Matches primaryVendor(r)
+// (the first comma-separated vendor on a row) case-insensitively.
+let vendorFilter = "";
 
 // Keep this list in sync with app.js LOADING_MESSAGES.
 const LOADING_MESSAGES = [
@@ -131,6 +135,12 @@ async function loadShipments() {
     // /pending returns Submitted + Waiting + Backordered + Ordered. Receiving
     // only cares about Ordered — the rest aren't physically en route.
     allOrdered = (data.rows || []).filter(r => r.status === "Ordered");
+    // If the active vendor filter no longer matches any cached row (vendor
+    // dropped out after a receive), reset it so the page doesn't render empty.
+    if (vendorFilter && !allOrdered.some(r => primaryVendor(r).toLowerCase() === vendorFilter.toLowerCase())) {
+      vendorFilter = "";
+    }
+    renderSupplierBubbles();
     renderShipments(filteredOrdered());
     updateSearchCount();
   } catch (e) {
@@ -155,13 +165,62 @@ function matchesSearch(r, q) {
 
 function filteredOrdered() {
   const q = searchQuery.trim().toLowerCase();
-  if (!q) return allOrdered;
-  return allOrdered.filter(r => matchesSearch(r, q));
+  const v = vendorFilter.trim().toLowerCase();
+  return allOrdered.filter(r => {
+    if (q && !matchesSearch(r, q)) return false;
+    if (v && primaryVendor(r).toLowerCase() !== v) return false;
+    return true;
+  });
+}
+
+// Build the supplier bubble row at the top of the page. One bubble per
+// distinct primary vendor in the current Ordered cache, plus an "All"
+// bubble. Counts reflect the unfiltered cache so receivers can see how
+// many items each supplier owes before clicking. Hidden when there are
+// fewer than 2 vendors (no value in a 1-bubble row).
+function renderSupplierBubbles() {
+  if (!supplierBubbles) return;
+  const counts = new Map();
+  for (const r of allOrdered) {
+    const v = primaryVendor(r);
+    if (!v) continue;
+    counts.set(v, (counts.get(v) || 0) + 1);
+  }
+  if (counts.size < 2) {
+    supplierBubbles.hidden = true;
+    supplierBubbles.innerHTML = "";
+    return;
+  }
+  const entries = [...counts.entries()].sort((a, b) => {
+    if (b[1] !== a[1]) return b[1] - a[1];
+    return a[0].localeCompare(b[0]);
+  });
+  const allActive = vendorFilter === "" ? "is-active" : "";
+  const allBubble = `<button type="button" class="supplier-bubble ${allActive}" data-vendor="" role="tab" aria-selected="${vendorFilter === ""}">All <span class="supplier-bubble-count">${allOrdered.length}</span></button>`;
+  const bubbles = entries.map(([v, n]) => {
+    const active = vendorFilter.toLowerCase() === v.toLowerCase() ? "is-active" : "";
+    return `<button type="button" class="supplier-bubble ${active}" data-vendor="${escapeHtml(v)}" role="tab" aria-selected="${vendorFilter.toLowerCase() === v.toLowerCase()}">${escapeHtml(v)} <span class="supplier-bubble-count">${n}</span></button>`;
+  }).join("");
+  supplierBubbles.innerHTML = allBubble + bubbles;
+  supplierBubbles.hidden = false;
+}
+
+if (supplierBubbles) {
+  supplierBubbles.addEventListener("click", (e) => {
+    const btn = e.target.closest(".supplier-bubble");
+    if (!btn) return;
+    const target = btn.dataset.vendor || "";
+    // Tapping the active bubble clears the filter (back to All).
+    vendorFilter = (target.toLowerCase() === vendorFilter.toLowerCase()) ? "" : target;
+    renderSupplierBubbles();
+    renderShipments(filteredOrdered());
+    updateSearchCount();
+  });
 }
 
 function updateSearchCount() {
   const total = allOrdered.length;
-  if (!searchQuery.trim()) {
+  if (!searchQuery.trim() && !vendorFilter) {
     searchCount.hidden = true;
     return;
   }
@@ -182,7 +241,16 @@ function renderShipments(rows) {
   poListEl.innerHTML = "";
 
   if (rows.length === 0) {
-    if (searchQuery.trim() && allOrdered.length > 0) {
+    if (vendorFilter && allOrdered.length > 0) {
+      emptyEl.innerHTML = `<p>No open shipments from <strong>${escapeHtml(vendorFilter)}</strong>${searchQuery.trim() ? ` matching "<strong>${escapeHtml(searchQuery)}</strong>"` : ""}. <button type="button" class="link-btn" id="clear-receive-vendor">Show all suppliers</button></p>`;
+      const clr = $("clear-receive-vendor");
+      if (clr) clr.addEventListener("click", () => {
+        vendorFilter = "";
+        renderSupplierBubbles();
+        renderShipments(filteredOrdered());
+        updateSearchCount();
+      });
+    } else if (searchQuery.trim() && allOrdered.length > 0) {
       emptyEl.innerHTML = `<p>No shipments match "<strong>${escapeHtml(searchQuery)}</strong>". <button type="button" class="link-btn" id="clear-receive-search">Clear search</button></p>`;
       const clr = $("clear-receive-search");
       if (clr) clr.addEventListener("click", () => {
@@ -207,12 +275,20 @@ function renderShipments(rows) {
   // packing slip. PO # is still shown in the header for context.
   // Rows missing an Order # group together by PO # so they still cluster
   // sensibly; rows missing both fall into "(no order #)".
+  //
+  // VENDOR is part of the key. Two suppliers can independently assign the
+  // same order number (or share a blank), and previously a Bolt Depot row
+  // landing in the same group as a Grand Brass row would adopt the first
+  // row's vendor in the header — making SCF screws show up under "Grand
+  // Brass Lamp Parts". Splitting by vendor up front guarantees each group
+  // matches exactly one packing slip.
   const groups = new Map();
   for (const r of rows) {
+    const vendorKey = (primaryVendor(r) || "__no-vendor__").toLowerCase();
     let key;
-    if (r.orderNumber) key = `ORD:${normalizeOrderNumber(r.orderNumber)}`;
-    else if (r.poNumber) key = `PO:${normalizePO(r.poNumber)}`;
-    else key = "__NONE__";
+    if (r.orderNumber) key = `ORD:${normalizeOrderNumber(r.orderNumber)}|${vendorKey}`;
+    else if (r.poNumber) key = `PO:${normalizePO(r.poNumber)}|${vendorKey}`;
+    else key = `__NONE__|${vendorKey}`;
 
     if (!groups.has(key)) {
       groups.set(key, {
@@ -458,6 +534,13 @@ async function submitGroup(section, g, selectedOnly = false) {
       emptyEl.innerHTML = `<p>📦 Nothing waiting to be received. The dock is clear.</p>`;
       emptyEl.hidden = false;
     }
+    // Re-run bubble render so counts reflect the new cache. If the active
+    // vendor filter just lost all its rows, drop back to All.
+    if (vendorFilter && !allOrdered.some(r => primaryVendor(r).toLowerCase() === vendorFilter.toLowerCase())) {
+      vendorFilter = "";
+      renderShipments(filteredOrdered());
+    }
+    renderSupplierBubbles();
     updateSearchCount();
   } catch (e) {
     showError(e.message || "Receive failed");
