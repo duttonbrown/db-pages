@@ -430,7 +430,6 @@ function renderCart() {
       <div class="cart-meta">
         <div class="chip-row">
           <span class="badge"></span>
-          <span class="badge badge-category" hidden></span>
         </div>
         <span class="title-row">
           <strong class="title-text"></strong>
@@ -452,11 +451,6 @@ function renderCart() {
       <button type="button" class="link-btn cart-remove" aria-label="Remove">✕</button>
     `;
     li.querySelector(".badge").textContent = it.type.toUpperCase();
-    const catChip = li.querySelector(".badge-category");
-    if (it.category) {
-      catChip.textContent = it.category.toUpperCase();
-      catChip.hidden = false;
-    }
     li.querySelector(".title-text").textContent = it.title;
     const desc = it.description || it.subtitle || "";
     li.querySelector(".title-desc").textContent = desc ? `— ${desc}` : "";
