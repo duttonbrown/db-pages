@@ -471,15 +471,15 @@ function renderSpec(p) {
     inHouseHtml = `<div class="spec-ihp spec-ihp-none"><span class="spec-ihp-label">In-House</span><span class="spec-ihp-empty">None — arrives ready from vendor</span></div>`;
   }
 
-  // ---------- Key facts (4-up grid). Vendor + Lead Time + MOQ + Last Ordered
-  // are the action-driving values; the rest of the legacy "Material / Reorder Qty"
-  // group moves to the inline-tags strip below.
-  const moqDisplay = (p.moq ?? p.reorder_qty);
-  const moqLabel   = (p.moq != null) ? 'MOQ' : (p.reorder_qty != null ? 'Reorder qty' : 'MOQ');
+  // ---------- Key facts. Vendor + Lead Time + MOQ + Reorder Qty + Last Ordered.
+  // MOQ and Reorder Qty are different signals (vendor minimum vs. our typical
+  // restock size) and the new Reorder Basis property makes the distinction
+  // operationally meaningful — keep them as separate slots, both empty-friendly.
   const keyFacts = [
     { label: 'Lead time',    val: p.lead_time },
-    { label: moqLabel,       val: moqDisplay },
     { label: 'Vendor',       val: fam.vendor },
+    { label: 'MOQ',          val: p.moq },
+    { label: 'Reorder qty',  val: p.reorder_qty },
     { label: 'Last ordered', val: fmtDate(p.last_ordered), sub: p.last_ordered ? relTime(p.last_ordered) : null },
   ];
   const keyFactsHtml = keyFacts.map(q => {
@@ -563,19 +563,20 @@ function renderSpec(p) {
     </section>`;
   }
 
-  // ---------- Used In (collapsed by default — often dozens of products)
+  // ---------- Used In. Compact two-line list (SKU on top, name beneath),
+  // arranged in a multi-column flow — no boxes, no big gaps. Stays inside
+  // a <details> so the section collapses if the user wants quiet.
   const products = fam.products || [];
   const usedInHtml = products.length
     ? `<details class="spec-section spec-usedin">
         <summary class="spec-section-head">
           <h3>Used in <span class="spec-section-count">${products.length}</span></h3>
-          <span class="spec-section-aside">Products that include this part family</span>
         </summary>
-        <div class="product-grid">${products.map(prod => `
-          <a class="product-card-mini" href="${escapeHtml(prod.url || '#')}" target="_blank" rel="noopener" title="${escapeHtml(prod.title || '')}">
-            <span class="sku">${escapeHtml(prod.sku)}</span>
-            <span class="title">${escapeHtml(prod.title || '—')}</span>
-          </a>`).join('')}</div>
+        <ul class="product-list">${products.map(prod => `
+          <li><a class="product-line" href="${escapeHtml(prod.url || '#')}" target="_blank" rel="noopener" title="${escapeHtml(prod.title || '')}">
+            <span class="product-sku">${escapeHtml(prod.sku)}</span>
+            <span class="product-title">${escapeHtml(prod.title || '—')}</span>
+          </a></li>`).join('')}</ul>
       </details>`
     : '';
 
@@ -595,7 +596,7 @@ function renderSpec(p) {
 
   const html = `
     <article class="spec-card">
-      <button class="spec-back" type="button">← Back to all parts</button>
+      <button class="spec-back" type="button">Back to all parts</button>
 
       <div class="spec-head">
         ${imgHtml}
