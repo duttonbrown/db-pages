@@ -806,40 +806,67 @@
   vertical-align: 2px;
 }
 
-/* --- Demand block --- */
+/* --- Demand block ---
+   One tight line: "2024 186  →  2025 238  +28%". The label hugs the
+   number, the arrow sits between the two pairs, the YoY pill is the
+   final element. No CSS Grid sprawl. */
 .spec-demand {
   background: linear-gradient(180deg, #FFF7EB 0%, #FFFFFF 60%);
 }
-.demand-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 18px 32px;
+.demand-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-variant-numeric: tabular-nums;
 }
-.demand-grid.is-empty .demand-val { color: var(--muted); }
-.demand-cell { display: flex; flex-direction: column; gap: 4px; }
-.demand-label {
+.demand-pair {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.demand-year {
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
 }
-.demand-val {
-  font-size: 22px;
+.demand-num {
+  font-size: 24px;
   font-weight: 600;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-  line-height: 1.1;
+  color: var(--text);
+  line-height: 1;
 }
-.demand-val.empty { color: var(--muted); font-weight: 300; }
+.demand-num.is-current { color: var(--ink); }
+.demand-arrow {
+  font-size: 16px;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1;
+  /* nudge to sit between the numbers, not between the labels */
+  transform: translateY(-1px);
+}
+.demand-empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+  font-style: italic;
+}
 .demand-yoy {
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  padding: 3px 9px;
+  border-radius: 999px;
+  line-height: 1;
+  /* keep the pill aligned with the big numbers' baseline */
+  align-self: center;
 }
-.demand-yoy.up   { color: #1A7F37; }
-.demand-yoy.down { color: var(--error, #C0392B); }
-.demand-yoy.flat { color: var(--muted); }
+.demand-yoy.up   { background: #DCFCE7; color: #166534; }
+.demand-yoy.down { background: #FEE2E2; color: #991B1B; }
+.demand-yoy.flat { background: var(--bg); color: var(--muted); }
 
 /* --- Used In (collapsible) --- */
 .spec-usedin summary {
@@ -962,5 +989,5 @@
   .spec-head { grid-template-columns: 1fr; gap: 16px; }
   .spec-summary { padding-left: 0; }
   .lib-toolbar { grid-template-columns: 1fr; }
-  .demand-val { font-size: 18px; }
+  .demand-num { font-size: 20px; }
 }
