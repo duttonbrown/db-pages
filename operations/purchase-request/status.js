@@ -256,6 +256,18 @@ function renderRows() {
     visibleActive = active.filter(r => r.status === activeFilter);
   }
 
+  // For the All view, group by status so Submitted floats to the top, then
+  // Waiting → Backordered → Ordered. Within each bucket the worker's order
+  // (newest first) is preserved by using a stable sort.
+  if (activeFilter === "all") {
+    const order = { "Submitted": 0, "Waiting to Order": 1, "Backordered": 2, "Ordered": 3 };
+    visibleActive = [...visibleActive].sort((a, b) => {
+      const ai = order[a.status] ?? 99;
+      const bi = order[b.status] ?? 99;
+      return ai - bi;
+    });
+  }
+
   // Search filter applies on top of the status filter
   if (searchQuery) {
     visibleActive  = visibleActive.filter(matchesSearch);
