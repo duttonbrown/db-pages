@@ -1,0 +1,959 @@
+:root {
+  /* Internal-tools palette. Brand-leaning charcoal grounds + warm orange
+     reserved for *moments of intent* (CTAs, active progress). Charcoal
+     handles structural roles (text, dark surfaces, active tab); orange
+     marks where to act. Two-color system: charcoal carries the UI,
+     orange punctuates it. */
+  --accent:      #FF9912;   /* warm orange — primary CTA, loading, active progress */
+  --accent-dark: #D97706;   /* hover/pressed CTA */
+  --text:        #4A4A4A;   /* brand charcoal — body text */
+  --ink:         #2A2A2A;   /* darker charcoal — headers, active tab text, emphasis */
+  --muted:       #888888;
+  --border:      #E0DDD9;   /* warm-neutral border, plays with charcoal */
+  --bg:          #FAFAFA;
+  --card:        #ffffff;
+  --success:     #2E7D32;
+  --error:       #c0392b;
+  --urgent:      #e67e22;   /* still here for decorative urgent flag */
+  --radius:      8px;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* App shell — sidebar + work card, BOTH centered together so the sidebar
+   hugs the work area (not the viewport edge). On wide screens this looks
+   like two panels in the middle of the page; on narrow screens the sidebar
+   collapses to a horizontal bar above. Mirrors the production print-queue. */
+.app-shell {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;       /* sidebar stretches to match card height */
+  gap: 0;
+  min-height: 100vh;
+  padding: 24px 24px 0;       /* no bottom padding — card extends to viewport edge */
+  width: 100%;
+}
+
+/* ─── Side nav ─── The OUTER element is the stretched visual column —
+   carries the background, border, and rounded radius that visually meets
+   the card. It always grows to match the card's full height so the bottom
+   edges line up. Inside it, .side-nav-inner is what's sticky — the brand +
+   tabs follow you as you scroll, but the visual rail stays edge-to-edge. */
+.side-nav {
+  width: 200px;
+  flex-shrink: 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+}
+.side-nav-inner {
+  position: sticky;
+  top: 24px;
+  padding: 22px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.side-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  text-decoration: none;
+  color: var(--text);
+}
+.side-nav-brand .brandmark {
+  width: 100%;
+  max-width: 156px;
+  height: auto;
+  display: block;
+}
+/* Section title — was a tiny all-caps eyebrow, now a real readable label.
+   Sentence case, larger, no aggressive letter-spacing. */
+.side-nav-eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  padding: 0 22px;
+  margin: 2px 0 6px;
+}
+.side-nav-tabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.side-nav-tabs li { margin: 0; }
+.side-nav-tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 22px 10px 19px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  position: relative;
+  transition: color 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  border-left: 3px solid transparent;
+  padding-left: 19px;
+}
+.side-nav-tab:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+.side-nav-tab.is-active,
+.side-nav-tab[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+  background: var(--bg);
+  border-left-color: var(--accent);
+}
+.side-nav-tab .tab-count {
+  display: inline-block;
+  min-width: 18px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--border);
+}
+.side-nav-tab.is-active .tab-count,
+.side-nav-tab[aria-current="page"] .tab-count {
+  background: white;
+  color: var(--accent-dark);
+  border-color: #FCD9A6;
+}
+
+/* Tablet/mobile: sidebar collapses to a horizontal bar above the card */
+@media (max-width: 900px) {
+  .app-shell {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 16px 32px;
+  }
+  .side-nav {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius) var(--radius) 0 0;
+    box-shadow: none;
+  }
+  .side-nav-inner {
+    position: relative;
+    top: auto;
+    padding: 12px 14px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .side-nav-brand { padding: 0; }
+  .side-nav-brand .brandmark { max-width: 120px; }
+  .side-nav-eyebrow { padding: 0; margin: 0; }
+  .side-nav-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .side-nav-tab {
+    padding: 6px 12px;
+    border-left: none;
+    width: auto;
+    border-radius: 999px;
+  }
+  .side-nav-tab.is-active,
+  .side-nav-tab[aria-current="page"] {
+    border-left: none;
+    background: var(--ink);
+    color: white;
+  }
+  .side-nav-tab.is-active .tab-count,
+  .side-nav-tab[aria-current="page"] .tab-count {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border-color: transparent;
+  }
+}
+
+.app-main {
+  display: flex;
+  align-items: stretch;       /* let the card grow to fill the column height */
+  flex: 1;
+  min-width: 0;
+  max-width: 1080px;
+}
+
+/* Bottom anchor — replaces the old footer nav. Just a quiet "View in Notion"
+   link at the very bottom of the card so the external escape hatch stays
+   reachable on long pages. */
+.card-bottom-link {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.card-bottom-link a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 400;
+}
+.card-bottom-link a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+/* Page eyebrow + lead — replaces the old big H1 + subtitle pair on each page.
+   Keeps content title-of-record on the tab; this shows what the page is for
+   in a single confident sentence. */
+.page-intro {
+  margin-bottom: 18px;
+  text-align: left;
+}
+/* Title-first hierarchy: bold h1 leads, quiet subtitle supports. */
+.page-lead {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.page-sub {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--muted);
+  max-width: 64ch;
+}
+.page-sub strong { font-weight: 500; color: var(--text); }
+@media (max-width: 640px) {
+  .page-lead { font-size: 22px; }
+  .page-sub { font-size: 13px; }
+}
+
+.card {
+  background: var(--card);
+  /* Square off the side that meets the sidebar so they read as one panel */
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 32px;
+  width: 100%;
+  max-width: 880px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+  border: 1px solid var(--border);
+  border-left: none;
+}
+.card-wide { max-width: 1080px; }
+
+@media (max-width: 900px) {
+  .card {
+    border-radius: 0 0 var(--radius) var(--radius);
+    border: 1px solid var(--border);
+    border-top: none;
+  }
+}
+
+header { margin-bottom: 24px; }
+
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+h2.cart-heading {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 24px 0 8px;
+  color: var(--text);
+}
+
+.subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  margin: 0;
+}
+
+.loading-bar {
+  margin: 16px 0 0;
+}
+.loading-message {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.loading-track {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+.loading-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  border-radius: 999px;
+  transition: width 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+.loading-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: loading-shimmer 1.4s linear infinite;
+}
+@keyframes loading-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.field { margin-bottom: 16px; position: relative; }
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.muted { color: var(--muted); font-weight: 400; }
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+  background: white;
+  transition: border-color 0.15s;
+}
+
+/* Kill the up/down spinner arrows on number inputs across all browsers.
+   They invite accidental ±1 clicks, and combined with the wheel-blur handler
+   (in manage.js / receive.js / app.js) this prevents the "5000 -> 5006" bug
+   from accidental scroll/click while the field has focus. */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input:disabled { background: #F5F5F5; cursor: wait; }
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.12);
+}
+
+textarea { resize: vertical; min-height: 70px; }
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Standalone checkbox row (e.g. "Add item not in database") — needs more
+   breathing room than a checkbox sitting *inside* a card or modal. */
+.checkbox-field {
+  margin-top: 18px;
+}
+.checkbox-field label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.checkbox-field input { width: auto; margin: 0; }
+
+.inline-radio {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+}
+.inline-radio label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Search results */
+.results {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  max-height: 360px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.results li {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: background 0.1s;
+}
+
+.results li:last-child { border-bottom: none; }
+.results li:hover,
+.results li.active { background: #FFF7EB; }
+
+.results .icon {
+  font-size: 28px;
+  line-height: 1.4;
+  flex-shrink: 0;
+  width: 64px;
+  text-align: center;
+}
+.thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  background: #F0F0F0;
+}
+.results .meta { flex: 1; min-width: 0; }
+.results .meta small { font-size: 12px; color: var(--muted); display: block; margin-top: 2px; }
+.results .vendor-line { font-size: 11px; color: var(--text); }
+.results .stats-line { font-size: 11px; color: var(--accent-dark); }
+
+.title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.title-text {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.title-desc {
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted);
+  min-width: 0;
+}
+
+.source-tag {
+  flex-shrink: 0;
+  text-align: right;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: flex-start;
+  padding-top: 2px;
+  white-space: nowrap;
+}
+.source-tag small { font-size: 10px; line-height: 1.3; }
+.source-tag .source-db { color: var(--text); font-weight: 500; }
+.source-tag .source-type { color: var(--muted); }
+
+.results .empty {
+  padding: 14px;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Picked item card */
+.picked {
+  padding: 14px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: #FFF7EB;
+  margin-top: 4px;
+}
+
+.picked-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.picked img {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.picked-body { flex: 1 1 240px; min-width: 0; }
+.picked-body strong { display: block; font-weight: 400; font-size: 14px; color: var(--text); }
+.picked-body small { font-size: 12px; color: var(--muted); display: block; }
+
+.picked-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.picked-actions .primary { width: auto; padding: 8px 18px; }
+
+.picked-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.picked-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text);
+  cursor: pointer;
+  margin: 0;
+}
+.picked-toggle input { width: auto; margin: 0; }
+.picked-toggle.urgent { color: var(--error); font-weight: 400; }
+
+.picked-note-input { margin-top: 8px; }
+
+.urgent-label { color: var(--error); font-weight: 400; }
+.urgent-label input { accent-color: var(--error); }
+
+.urgent-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--error);
+  color: white;
+  margin-left: 6px;
+}
+
+.cart-item-urgent {
+  background: #FFF5F5;
+  border-left: 3px solid var(--error);
+}
+
+.cart-row-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+.cart-urgent-toggle { color: var(--error); }
+.cart-urgent-toggle.urgent-active { color: var(--error); font-weight: 600; }
+
+/* Cart */
+.cart {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.cart-item:last-child { border-bottom: none; }
+
+.cart-item .icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1.4;
+  align-self: flex-start;
+  padding-top: 2px;
+  width: 64px;
+  text-align: center;
+}
+.cart-item .thumb { align-self: flex-start; }
+.cart-meta { flex: 1; min-width: 0; }
+.cart-meta small { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.cart-meta .vendor-line { color: var(--text); font-size: 11px; }
+.cart-meta .stats-line { color: var(--accent-dark); font-size: 11px; }
+
+.cart-note-toggle {
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--muted);
+}
+.cart-note-toggle:hover { color: var(--accent-dark); }
+.cart-note-input {
+  width: 100%;
+  font-size: 12px;
+  padding: 6px 8px;
+  margin-top: 4px;
+}
+
+.cart-remove {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: var(--muted);
+  padding: 4px 8px;
+  align-self: flex-start;
+}
+.cart-remove:hover { color: var(--error); text-decoration: none; }
+
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--accent);
+  color: white;
+}
+
+.badge-category {
+  background: #EAEAEA;
+  color: var(--text);
+}
+
+/* Urgent chip overrides .badge background when both classes are applied
+   (receive + status pages). Purchaser console uses .urgent-tag alone. */
+.badge.urgent-tag {
+  background: var(--error);
+  color: white;
+  margin-left: 0;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+/* Recent activity chip — surfaces "this item was just touched" warnings
+   across Submit, Purchase, and (eventually) Status pages. Two tones:
+   urgent (≤30d, red) and muted (31–180d, gray). The same DOM
+   convention (.recent-chip[data-tone]) is reused everywhere. */
+.recent-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.recent-chip[data-tone="urgent"] {
+  background: #FDECEA;
+  color: var(--error);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+}
+.recent-chip[data-tone="muted"] {
+  background: #F0F0F0;
+  color: var(--muted);
+}
+/* Results list — chip sits in the title-row beside the description */
+.results .recent-chip { margin-left: 4px; }
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--accent-dark);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: 12px;
+}
+.link-btn:hover { text-decoration: none; }
+
+.primary, .secondary {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.primary {
+  background: var(--accent);
+  color: white;
+}
+.primary:hover:not(:disabled) { background: var(--accent-dark); }
+.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.secondary {
+  background: white;
+  color: var(--text);
+  border: 1px solid var(--border);
+  margin-top: 12px;
+}
+.secondary:hover { background: var(--bg); }
+
+/* Success */
+.success { text-align: center; padding: 24px 0; }
+.success .check {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  background: var(--success);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 600;
+}
+.success h2 { font-weight: 600; margin: 0 0 16px; font-size: 20px; }
+.success-list {
+  list-style: none;
+  margin: 0 auto 16px;
+  padding: 0;
+  text-align: left;
+  max-width: 320px;
+}
+.success-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.success-list li:last-child { border-bottom: none; }
+.success-list strong { font-weight: 600; color: var(--text); }
+.success-list a { color: var(--accent-dark); font-size: 13px; }
+
+.error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: #FFEBEE;
+  color: var(--error);
+  font-size: 13px;
+}
+
+.card-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.card-footer a {
+  color: var(--accent-dark);
+  text-decoration: none;
+  font-weight: 400;
+}
+.card-footer a:hover { text-decoration: underline; }
+.card-footer a[aria-current="page"] {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: default;
+}
+
+/* db brandmark — official Dutton Brown icon. PNG sits beside the page title. */
+.brandmark {
+  display: block;
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Page header row — brandmark + title side by side */
+.brand-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.brand-header-row h1 { margin: 0; }
+
+/* "How to use this form" disclosure — sits just above the footer */
+.how-to {
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.how-to summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.how-to summary::-webkit-details-marker { display: none; }
+.how-to summary:hover { color: var(--text); }
+.how-to[open] summary { color: var(--text); }
+.how-to-chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.how-to[open] .how-to-chevron { transform: rotate(180deg); }
+.how-to-body {
+  padding: 8px 0 4px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+  font-weight: 400;
+}
+.how-to-steps {
+  list-style: decimal;
+  padding-left: 22px;
+  margin: 8px 0 18px;
+  display: grid;
+  gap: 10px;
+}
+.how-to-steps li { padding-left: 4px; }
+.how-to-steps li strong {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.how-to-steps em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text);
+}
+.how-to-callout {
+  display: block;
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: #FFF7EB;
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-dark);
+}
+.how-to-tips {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-top: 4px;
+}
+.how-to-tips strong {
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.how-to-tips ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 12.5px;
+}
+.how-to-tips li strong {
+  display: inline;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text);
+  margin-bottom: 0;
+  font-size: inherit;
+}
+.how-to-tips em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text);
+}

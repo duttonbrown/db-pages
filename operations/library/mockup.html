@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parts Library — Dutton Brown (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-base.css">
+<style>
+/* --- LIBRARY-specific overrides on top of the operations base styles --- */
+
+.lib-toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  margin-bottom: 18px;
+  align-items: center;
+}
+.lib-search {
+  position: relative;
+}
+.lib-search input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.lib-search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,153,18,0.12);
+}
+.lib-search::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--muted);
+  border-radius: 50%;
+}
+.lib-search::after {
+  content: '';
+  position: absolute;
+  left: 26px;
+  top: calc(50% + 6px);
+  width: 6px;
+  height: 1.5px;
+  background: var(--muted);
+  transform: rotate(45deg);
+  transform-origin: left;
+}
+
+.lib-count {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 400;
+  white-space: nowrap;
+}
+.lib-count b { color: var(--ink); font-weight: 600; }
+
+/* Glossary chip strip */
+.glossary-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.glossary-chip {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.12s;
+}
+.glossary-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+.glossary-chip.is-active {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+.glossary-chip .gc-count {
+  font-size: 10px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.glossary-chip.is-active .gc-count { color: rgba(255,255,255,0.7); }
+
+/* Grid of preview cards */
+.parts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px;
+}
+.preview-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+}
+.preview-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.preview-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.preview-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.preview-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.preview-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.preview-desc {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* When a part is selected: spec card replaces the grid view */
+.spec-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+.spec-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px 20px 6px;
+  font-family: inherit;
+}
+.spec-back:hover { color: var(--ink); }
+.spec-back::before {
+  content: '←';
+  font-size: 16px;
+  line-height: 1;
+}
+
+.spec-head {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 0;
+  padding: 0 20px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.spec-image {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.spec-image img { max-width: 90%; max-height: 90%; object-fit: contain; }
+.spec-summary {
+  padding: 0 0 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+.spec-num-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.spec-num {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+}
+.spec-finish-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.spec-status {
+  font-size: 12px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.spec-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  display: inline-block;
+}
+.spec-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 8px 0 4px;
+  line-height: 1.3;
+}
+.spec-definition {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.spec-quick {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+.quick-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+.quick-val {
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.quick-val.empty { color: var(--muted); font-weight: 300; font-style: italic; }
+
+/* Family siblings strip */
+.siblings {
+  padding: 16px 20px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.siblings-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.siblings-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.siblings-base {
+  font-size: 12px;
+  color: var(--muted);
+}
+.siblings-base b { font-weight: 500; color: var(--text); }
+.siblings-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.sibling {
+  flex: 0 0 92px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.12s;
+}
+.sibling:hover { border-color: var(--accent); }
+.sibling.is-current { border-color: var(--ink); background: var(--ink); color: white; }
+.sibling-img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.sibling.is-current .sibling-img { border-bottom-color: rgba(255,255,255,0.15); }
+.sibling-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
+.sibling-num {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 0 2px;
+}
+.sibling-fin {
+  font-size: 9px;
+  color: var(--muted);
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sibling.is-current .sibling-fin { color: rgba(255,255,255,0.65); }
+
+/* Tabs in spec view */
+.spec-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 6px 20px 0;
+  border-bottom: 1px solid var(--border);
+  background: white;
+}
+.spec-tab {
+  font-family: inherit;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 10px 14px 12px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.spec-tab:hover { color: var(--text); }
+.spec-tab.is-active {
+  color: var(--ink);
+  font-weight: 500;
+  border-bottom-color: var(--accent);
+}
+.spec-tab .tab-count {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  margin-left: 4px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.spec-tab.is-active .tab-count {
+  color: var(--accent-dark);
+  background: white;
+  border-color: #FCD9A6;
+}
+
+.spec-panel { padding: 22px 20px; display: none; }
+.spec-panel.is-active { display: block; }
+
+/* Demand panel */
+.year-row {
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.year-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.year-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.year-val {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.year-delta {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.year-delta.up   { background: #DCFCE7; color: #166534; }
+.year-delta.down { background: #FEE2E2; color: #991B1B; }
+.year-delta.flat { background: var(--bg); color: var(--muted); }
+
+/* Used In panel */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+.product-card-mini {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text);
+  align-items: baseline;
+  transition: border-color 0.12s;
+}
+.product-card-mini:hover { border-color: var(--accent); }
+.product-card-mini .sku {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.product-card-mini .title {
+  font-size: 12px;
+  color: var(--muted);
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<aside class="side-nav" aria-label="Library navigation">
+  <div class="side-nav-inner">
+    <a class="side-nav-brand" href="../index.html">
+      <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
+    </a>
+    <div class="side-nav-eyebrow">Library</div>
+    <ul class="side-nav-tabs" role="tablist">
+      <li><a class="side-nav-tab" href="parts.html" aria-current="page">Parts <span class="tab-count">684</span></a></li>
+      <li><a class="side-nav-tab" href="#" style="opacity:0.45; pointer-events:none">Lighting <span class="tab-count">—</span></a></li>
+      <li><a class="side-nav-tab" href="#" style="opacity:0.45; pointer-events:none">Hardware <span class="tab-count">—</span></a></li>
+    </ul>
+  </div>
+</aside>
+
+<div class="app-main">
+<main class="card card-wide">
+
+  <header class="page-intro">
+    <h1 class="page-lead">Parts Library</h1>
+    <p class="page-sub">Look up any part — image, description, demand, where it's used, and finish variants.</p>
+  </header>
+
+  <!-- Toolbar: search + count -->
+  <div class="lib-toolbar">
+    <div class="lib-search">
+      <input type="text" placeholder="Search part #, description, or category (e.g. BU1, disc, canopy)…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="lib-count"><b>684</b> parts · <b>82</b> categories</div>
+  </div>
+
+  <!-- Glossary chip strip -->
+  <div class="glossary-strip" id="glossary">
+    <button class="glossary-chip is-active">All <span class="gc-count">684</span></button>
+    <button class="glossary-chip">Pipe Aluminum <span class="gc-count">42</span></button>
+    <button class="glossary-chip">Disc <span class="gc-count">38</span></button>
+    <button class="glossary-chip">Canopy <span class="gc-count">31</span></button>
+    <button class="glossary-chip">Nipple <span class="gc-count">26</span></button>
+    <button class="glossary-chip">Body <span class="gc-count">24</span></button>
+    <button class="glossary-chip">Pipe Female <span class="gc-count">22</span></button>
+    <button class="glossary-chip">Socket <span class="gc-count">18</span></button>
+    <button class="glossary-chip">Globe Cap <span class="gc-count">16</span></button>
+    <button class="glossary-chip">Bulb <span class="gc-count">14</span></button>
+    <button class="glossary-chip">Bracket <span class="gc-count">13</span></button>
+    <button class="glossary-chip">Wire Nut <span class="gc-count">12</span></button>
+    <button class="glossary-chip">Check Ring <span class="gc-count">10</span></button>
+    <button class="glossary-chip">Hex Key <span class="gc-count">8</span></button>
+    <button class="glossary-chip">Rod <span class="gc-count">7</span></button>
+    <button class="glossary-chip">Sleeve <span class="gc-count">6</span></button>
+    <button class="glossary-chip">Set Screw <span class="gc-count">6</span></button>
+    <button class="glossary-chip">+ 65 more</button>
+  </div>
+
+  <!-- ====== STATE 1: spec card open (current "view a part" state) ====== -->
+  <article class="spec-card">
+    <button class="spec-back">Back to all parts</button>
+
+    <!-- Top: image + summary -->
+    <div class="spec-head">
+      <div class="spec-image">
+        <img src="../../production/parts-images/CRS5.jpg" alt="CRS5BR">
+      </div>
+      <div class="spec-summary">
+        <div class="spec-num-row">
+          <span class="spec-num">CRS5BR</span>
+          <span class="spec-finish-pill">Brass finish</span>
+          <span class="spec-status">Active</span>
+        </div>
+        <h2 class="spec-title">Check ring, 5", use with A-CA6 (Lepore)</h2>
+        <p class="spec-definition">A flat metal ring used to retain a globe or acrylic disc against a canopy. Threads onto the center stem; finished in customer-selected metal or color.</p>
+
+        <div class="spec-quick">
+          <div>
+            <div class="quick-label">Material</div>
+            <div class="quick-val">Steel</div>
+          </div>
+          <div>
+            <div class="quick-label">Lead time</div>
+            <div class="quick-val">1 week</div>
+          </div>
+          <div>
+            <div class="quick-label">Last ordered</div>
+            <div class="quick-val">Aug 12, 2025</div>
+          </div>
+          <div>
+            <div class="quick-label">Vendor</div>
+            <div class="quick-val">Lepore</div>
+          </div>
+          <div>
+            <div class="quick-label">MOQ</div>
+            <div class="quick-val empty">—</div>
+          </div>
+          <div>
+            <div class="quick-label">Reorder qty</div>
+            <div class="quick-val">200</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Family siblings strip -->
+    <div class="siblings">
+      <div class="siblings-head">
+        <span class="siblings-label">Same family · 6 finish variants</span>
+        <span class="siblings-base">Base: <b>CRS5</b> · Check ring, 5"</span>
+      </div>
+      <div class="siblings-row">
+        <a class="sibling">
+          <div class="sibling-img"><img src="../../production/parts-images/CRS5.jpg" alt=""></div>
+          <div class="sibling-num">CRS5</div>
+          <div class="sibling-fin">Raw</div>
+        </a>
+        <a class="sibling is-current">
+          <div class="sibling-img"><img src="../../production/parts-images/CRS5.jpg" alt=""></div>
+          <div class="sibling-num">CRS5BR</div>
+          <div class="sibling-fin">Brass</div>
+        </a>
+        <a class="sibling">
+          <div class="sibling-img"><img src="../../production/parts-images/CRS5.jpg" alt=""></div>
+          <div class="sibling-num">CRS5NI</div>
+          <div class="sibling-fin">Nickel</div>
+        </a>
+        <a class="sibling">
+          <div class="sibling-img"><img src="../../production/parts-images/CRS5.jpg" alt=""></div>
+          <div class="sibling-num">CRS5BK</div>
+          <div class="sibling-fin">Black</div>
+        </a>
+        <a class="sibling">
+          <div class="sibling-img"><img src="../../production/parts-images/CRS5.jpg" alt=""></div>
+          <div class="sibling-num">CRS5W</div>
+          <div class="sibling-fin">White</div>
+        </a>
+        <a class="sibling">
+          <div class="sibling-img"><img src="../../production/parts-images/CRS5-M1.gif" alt=""></div>
+          <div class="sibling-num">CRS5-M1</div>
+          <div class="sibling-fin">Machined</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="spec-tabs">
+      <button class="spec-tab is-active">Demand</button>
+      <button class="spec-tab">Used In <span class="tab-count">12</span></button>
+      <button class="spec-tab">Notes &amp; Refs</button>
+    </div>
+
+    <!-- Demand panel (active) -->
+    <div class="spec-panel is-active">
+      <div class="year-row">
+        <div class="year-block">
+          <div class="year-label">2024 usage</div>
+          <div class="year-val">186</div>
+        </div>
+        <div class="year-block">
+          <div class="year-label">2025 usage</div>
+          <div class="year-val">238</div>
+        </div>
+        <div class="year-block">
+          <div class="year-label">YoY</div>
+          <div class="year-delta up">↑ +28%</div>
+        </div>
+      </div>
+      <p style="font-size: 12px; color: var(--muted); margin: 0;">Usage figures pulled from the Notion Parts DB. Last ordered Aug 12, 2025 — 1-week lead time.</p>
+    </div>
+  </article>
+
+  <!-- ====== STATE 2 (preview): browse grid ======
+       NOTE: this would normally be hidden when the spec card is open.
+       Showing it below for layout review only.
+  -->
+  <div style="margin-top: 40px; padding-top: 20px; border-top: 2px dashed var(--border);">
+    <p style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">↓ Browse-grid state (shown when no part is selected)</p>
+
+    <div class="parts-grid">
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/CRS5.jpg" alt="CRS5"></div>
+        <div class="preview-body">
+          <div class="preview-num">CRS5</div>
+          <div class="preview-desc">Check ring, 5", use with A-CA6</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/A-DI2.jpeg" alt="A-DI2"></div>
+        <div class="preview-body">
+          <div class="preview-num">A-DI2</div>
+          <div class="preview-desc">Disc, 3", Acrylic</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/A-CA6.jpeg" alt="A-CA6"></div>
+        <div class="preview-body">
+          <div class="preview-num">A-CA6</div>
+          <div class="preview-desc">Canopy, 6", Acrylic, use with CRC5</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/BU1.jpg" alt="BU1"></div>
+        <div class="preview-body">
+          <div class="preview-num">BU1</div>
+          <div class="preview-desc">Body, urchin, 11 rows</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/BU1L.jpg" alt="BU1L"></div>
+        <div class="preview-body">
+          <div class="preview-num">BU1L</div>
+          <div class="preview-desc">Lid for body, urchin</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/BOS18.jpg" alt="BOS18"></div>
+        <div class="preview-body">
+          <div class="preview-num">BOS18</div>
+          <div class="preview-desc">Body, sputnik, 18"</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/CA5.jpg" alt="CA5"></div>
+        <div class="preview-body">
+          <div class="preview-num">CA5</div>
+          <div class="preview-desc">Canopy, 5", round</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/GC6.jpg" alt="GC6"></div>
+        <div class="preview-body">
+          <div class="preview-num">GC6</div>
+          <div class="preview-desc">Globe cap, 6"</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/AN6.jpg" alt="AN6"></div>
+        <div class="preview-body">
+          <div class="preview-num">AN6</div>
+          <div class="preview-desc">Anchor, 6", wall</div>
+        </div>
+      </article>
+      <article class="preview-card">
+        <div class="preview-image"><img src="../../production/parts-images/AR1.jpg" alt="AR1"></div>
+        <div class="preview-body">
+          <div class="preview-num">AR1</div>
+          <div class="preview-desc">Arm, swing, single</div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+</main>
+</div>
+</div>
+
+</body>
+</html>
