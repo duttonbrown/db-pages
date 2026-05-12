@@ -503,6 +503,7 @@ function renderQueue(rows) {
       emptyEl.innerHTML = `<p>🎉 No active requests. The queue is clear.</p>`;
     }
     emptyEl.hidden = false;
+    slotQueueActions(null);
     return;
   }
   emptyEl.hidden = true;
@@ -514,6 +515,7 @@ function renderQueue(rows) {
     if (grouped[r.status]) grouped[r.status].push(r);
   }
 
+  let firstHeader = null;
   for (const g of STATUS_GROUPS) {
     const items = grouped[g.name];
     if (items.length === 0) continue;
@@ -531,7 +533,20 @@ function renderQueue(rows) {
     const list = section.querySelector(".pending-list");
     for (const r of items) list.appendChild(renderRow(r));
     queueEl.appendChild(section);
+    if (!firstHeader) firstHeader = section.querySelector(".status-group-header");
   }
+
+  // Slot the Bulk update / Refresh buttons onto the right side of the first
+  // status group header so they sit at the same height as the SUBMITTED row
+  // instead of floating up in the (otherwise quiet) purchaser bar.
+  slotQueueActions(firstHeader);
+}
+
+function slotQueueActions(targetHeader) {
+  const actions = document.getElementById("queue-actions");
+  if (!actions) return;
+  const target = targetHeader || document.getElementById("queue-actions-standalone");
+  if (target && actions.parentElement !== target) target.appendChild(actions);
 }
 
 function renderRow(r) {

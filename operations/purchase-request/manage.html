@@ -40,8 +40,16 @@
     <select id="purchaser-name">
       <option value="">Select your name…</option>
     </select>
-    <button type="button" id="bulk-toggle-btn" class="link-btn" aria-pressed="false">Bulk update</button>
-    <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
+  </div>
+
+  <!-- Slotted into the first .status-group-header at render time when the
+       queue has rows; falls back to its standalone .queue-actions-standalone
+       wrapper above the empty state otherwise. -->
+  <div id="queue-actions-standalone" class="queue-actions-standalone">
+    <div id="queue-actions" class="queue-actions">
+      <button type="button" id="bulk-toggle-btn" class="link-btn" aria-pressed="false">Bulk update</button>
+      <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
+    </div>
   </div>
 
   <div id="loading-bar" class="loading-bar" hidden>
