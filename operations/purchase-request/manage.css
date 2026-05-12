@@ -194,6 +194,21 @@ body.bulk-mode .app-main { padding-bottom: 80px; }
   color: var(--muted);
   font-weight: 400;
 }
+/* Bulk update / Refresh slotted onto the first status-group-header so they
+   sit on the SUBMITTED row instead of the purchaser bar. Falls back to the
+   standalone wrapper above the empty state when the queue has no rows. */
+.queue-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.queue-actions-standalone {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+.queue-actions-standalone:empty { display: none; }
 
 /* Each pending row */
 .pending-list {
