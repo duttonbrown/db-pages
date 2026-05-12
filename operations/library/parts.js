@@ -493,42 +493,43 @@ function renderSpec(p) {
     </div>`;
   }).join('');
 
-  // ---------- Demand block — always open, prominent. 2024 / 2025 / YoY.
+  // ---------- Demand block — one tight horizontal line: 2024 → 2025 + YoY pill.
   const u24 = p.use_2024 || 0;
   const u25 = p.use_2025 || 0;
-  let deltaHtml = '';
+  const demandHasData = u24 > 0 || u25 > 0;
+
+  let yoyPill = '';
   if (u24 > 0) {
     const pct = ((u25 - u24) / u24) * 100;
     const cls = pct > 5 ? 'up' : (pct < -5 ? 'down' : 'flat');
     const arrow = pct > 5 ? '↑' : (pct < -5 ? '↓' : '→');
-    deltaHtml = `<div class="demand-cell">
-      <div class="demand-label">Year over year</div>
-      <div class="demand-yoy ${cls}">${arrow} ${pct >= 0 ? '+' : ''}${pct.toFixed(0)}%</div>
-    </div>`;
+    yoyPill = `<span class="demand-yoy ${cls}" title="Year over year">${arrow} ${pct >= 0 ? '+' : ''}${pct.toFixed(0)}%</span>`;
   } else if (u25 > 0) {
-    deltaHtml = `<div class="demand-cell">
-      <div class="demand-label">Year over year</div>
-      <div class="demand-yoy up">NEW</div>
-    </div>`;
+    yoyPill = `<span class="demand-yoy up" title="No 2024 baseline">NEW</span>`;
   }
-  const demandHasData = u24 > 0 || u25 > 0;
+
+  const demandBody = demandHasData
+    ? `<div class="demand-line">
+         <span class="demand-pair">
+           <span class="demand-year">2024</span>
+           <span class="demand-num">${u24.toLocaleString()}</span>
+         </span>
+         <span class="demand-arrow" aria-hidden="true">→</span>
+         <span class="demand-pair">
+           <span class="demand-year">2025</span>
+           <span class="demand-num is-current">${u25.toLocaleString()}</span>
+         </span>
+         ${yoyPill}
+       </div>`
+    : `<p class="demand-empty">No usage recorded for 2024 or 2025.</p>`;
+
   const demandHtml = `
     <section class="spec-section spec-demand">
       <header class="spec-section-head">
         <h3>Demand</h3>
         ${p.last_ordered ? `<span class="spec-section-aside">Last ordered ${escapeHtml(fmtDate(p.last_ordered))} · ${escapeHtml(relTime(p.last_ordered))}</span>` : ''}
       </header>
-      <div class="demand-grid ${demandHasData ? '' : 'is-empty'}">
-        <div class="demand-cell">
-          <div class="demand-label">2024 usage</div>
-          <div class="demand-val ${u24 ? '' : 'empty'}">${u24 ? u24.toLocaleString() : '0'}</div>
-        </div>
-        <div class="demand-cell">
-          <div class="demand-label">2025 usage</div>
-          <div class="demand-val ${u25 ? '' : 'empty'}">${u25 ? u25.toLocaleString() : '0'}</div>
-        </div>
-        ${deltaHtml}
-      </div>
+      ${demandBody}
     </section>
   `;
 
