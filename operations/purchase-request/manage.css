@@ -334,6 +334,11 @@ body.bulk-mode .pending-row {
   border-color: var(--error);
   color: var(--error);
 }
+.row-actions .action-btn.action-edit:hover {
+  background: #EFF6FF;
+  border-color: #1A56C7;
+  color: #1A56C7;
+}
 .row-actions .open-notion {
   font-size: 11px;
   color: var(--muted);

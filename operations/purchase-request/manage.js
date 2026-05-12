@@ -655,7 +655,11 @@ function escapeHtml(s) {
 }
 
 function actionsFor(status) {
-  // Allowed transitions per current status
+  // Allowed transitions per current status. The "edit" action doesn't change
+  // status — it lets the purchaser correct facts like Order # / PO # / Qty /
+  // ETA / Tracking that get entered wrong or change after the supplier
+  // responds. Only offered on rows that have already been ordered, since
+  // that's where the editable fields are populated.
   switch (status) {
     case "Submitted":
       return [
@@ -668,12 +672,14 @@ function actionsFor(status) {
     case "Waiting to Order":
       return [
         { action: "ordered",   label: "Mark Ordered" },
+        { action: "edit",      label: "Edit",   cls: "action-edit" },
         { action: "cancelled", label: "Cancel", cls: "action-cancel" },
       ];
     case "Ordered":
       return [
         { action: "received",    label: "Mark Received" },
         { action: "backordered", label: "Mark Backordered" },
+        { action: "edit",        label: "Edit",   cls: "action-edit" },
         { action: "cancelled",   label: "Cancel", cls: "action-cancel" },
       ];
     default:
@@ -689,6 +695,7 @@ const ACTION_TITLES = {
   waitingToOrder: "Mark as Waiting to Order",
   received: "Mark as Received",
   cancelled: "Cancel Request",
+  edit: "Edit order details",
 };
 
 let modalRow = null;
@@ -723,9 +730,10 @@ function openModal(action, row) {
     });
   }
 
-  // Mark Ordered: "No PO #" disables the PO input and satisfies the required
-  // PO check at submit time. Useful when a vendor doesn't issue PO numbers.
-  if (action === "ordered") {
+  // Mark Ordered + Edit share the same "No PO #" / "No Order #" toggles and
+  // the same ETA auto-slide behavior. Edit reuses them; the auto-slide is a
+  // no-op for Edit because the form has no Ordered Date input.
+  if (action === "ordered" || action === "edit") {
     const noPOBox = modalForm.querySelector("#f-noPO");
     const poInput = modalForm.querySelector("#f-poNumber");
     if (noPOBox && poInput) {
@@ -910,6 +918,55 @@ function fieldsFor(action, row) {
       <div class="field">
         <label for="f-purchaserNotes">Purchaser notes <span class="muted">(optional)</span></label>
         <input id="f-purchaserNotes" name="purchaserNotes" type="text">
+      </div>
+    `;
+  }
+  if (action === "edit") {
+    // Pre-fill every field with the row's current value. No "required"
+    // markers — edit is sparse: only fields the purchaser actually changes
+    // get PATCHed. The worker appends an audit line to Purchaser Notes.
+    const orderNumber = row.orderNumber || "";
+    const poNumber    = row.poNumber    || "";
+    const qty         = row.qtyOrdered ?? "";
+    const eta         = row.eta         || "";
+    const tracking    = row.tracking    || "";
+    // "No Order #" / "No PO" sentinel is the em-dash we wrote at Mark Ordered.
+    const orderIsNo = orderNumber === "—";
+    const poIsNo    = poNumber    === "—";
+    return `
+      <div class="field-row">
+        <div class="field">
+          <label for="f-orderNumber">Order #</label>
+          <input id="f-orderNumber" name="orderNumber" type="text" value="${escapeHtml(orderIsNo ? "" : orderNumber)}"${orderIsNo ? " disabled placeholder=\"Not provided\"" : ""}>
+          <label class="field-checkbox">
+            <input type="checkbox" id="f-noOrderNumber" name="noOrderNumber" value="1"${orderIsNo ? " checked" : ""}>
+            <span>No Order # available</span>
+          </label>
+        </div>
+        <div class="field">
+          <label for="f-poNumber">PO #</label>
+          <input id="f-poNumber" name="poNumber" type="text" value="${escapeHtml(poIsNo ? "" : poNumber)}"${poIsNo ? " disabled placeholder=\"Not provided\"" : ""}>
+          <label class="field-checkbox">
+            <input type="checkbox" id="f-noPO" name="noPO" value="1"${poIsNo ? " checked" : ""}>
+            <span>No PO # available</span>
+          </label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-qtyOrdered">Qty Ordered</label>
+        <input id="f-qtyOrdered" name="qtyOrdered" type="number" min="1" value="${qty}">
+      </div>
+      <div class="field">
+        <label for="f-eta">ETA</label>
+        <input id="f-eta" name="eta" type="date" value="${eta}">
+      </div>
+      <div class="field">
+        <label for="f-tracking">Tracking #</label>
+        <input id="f-tracking" name="tracking" type="text" value="${escapeHtml(tracking)}">
+      </div>
+      <div class="field">
+        <label for="f-purchaserNotes">Add note about this edit <span class="muted">(optional, prepends to notes)</span></label>
+        <input id="f-purchaserNotes" name="purchaserNotes" type="text" placeholder="e.g. Supplier said low stock — reduced qty">
       </div>
     `;
   }
