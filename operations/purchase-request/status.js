@@ -20,6 +20,7 @@ const activeListEl  = $("active-list");
 const archiveEl     = $("archive-section");
 const archiveListEl = $("archive-list");
 const lastRefEl     = $("last-refreshed");
+const partBubblesEl = $("part-bubbles");
 
 // Keep this list in sync with app.js LOADING_MESSAGES.
 const LOADING_MESSAGES = [
@@ -83,6 +84,17 @@ function fmtTimestamp(iso) {
     month: "short", day: "numeric", year: "numeric",
     hour: "numeric", minute: "2-digit",
   });
+}
+
+// A stable key for grouping cards by their underlying part/supply. Catalog
+// items use itemName (e.g. "NL1"); not-in-DB items fall back to customItemName.
+// Two requests for the same part share a key so they aggregate into one bubble.
+function partKey(r) {
+  const name = r.itemName || r.customItemName || "";
+  return name.trim().toLowerCase();
+}
+function partLabel(r) {
+  return r.itemName || r.customItemName || "(unnamed)";
 }
 
 function statusKindClass(status) {
@@ -274,6 +286,10 @@ function renderRows() {
     visibleArchive = visibleArchive.filter(matchesSearch);
   }
 
+  // Part-bubble row reflects whatever's about to be rendered, regardless of
+  // which section (active or archive) the rows landed in.
+  renderPartBubbles([...visibleActive, ...visibleArchive]);
+
   // Active list
   activeListEl.innerHTML = "";
   if (visibleActive.length > 0) {
@@ -317,9 +333,67 @@ function renderRows() {
   }
 }
 
+// Compact bubble row that mirrors what's currently rendered. One bubble per
+// distinct part; qty sums when known (Ordered/Received), otherwise we show
+// "×N" — the request count for that part. Click → scroll to first matching
+// card. Hidden when there's nothing to show.
+function renderPartBubbles(rows) {
+  if (!partBubblesEl) return;
+  if (!rows.length) {
+    partBubblesEl.hidden = true;
+    partBubblesEl.innerHTML = "";
+    return;
+  }
+
+  // Aggregate by part key. Keep first-seen order so the bubble row mirrors
+  // the visual order of the cards underneath.
+  const order = [];
+  const agg = new Map();
+  for (const r of rows) {
+    const key = partKey(r);
+    if (!key) continue;
+    if (!agg.has(key)) {
+      order.push(key);
+      agg.set(key, { key, label: partLabel(r), qty: 0, count: 0, hasQty: false });
+    }
+    const a = agg.get(key);
+    a.count += 1;
+    if (typeof r.qtyOrdered === "number" && r.qtyOrdered > 0) {
+      a.qty += r.qtyOrdered;
+      a.hasQty = true;
+    }
+  }
+
+  partBubblesEl.innerHTML = order.map(k => {
+    const a = agg.get(k);
+    const tail = a.hasQty
+      ? `<span class="part-bubble-qty">${a.qty.toLocaleString()}</span>`
+      : `<span class="part-bubble-qty part-bubble-count">×${a.count}</span>`;
+    return `<button type="button" class="part-bubble" data-part-key="${escapeHtml(a.key)}" title="Jump to first ${escapeHtml(a.label)}">
+      <span class="part-bubble-name">${escapeHtml(a.label)}</span>
+      ${tail}
+    </button>`;
+  }).join("");
+  partBubblesEl.hidden = false;
+}
+
+// Click on a bubble → scroll to the first card with that part key and
+// briefly highlight it so the eye can land on it.
+partBubblesEl?.addEventListener("click", (e) => {
+  const btn = e.target.closest(".part-bubble");
+  if (!btn) return;
+  const key = btn.dataset.partKey;
+  const target = document.querySelector(`.request-card[data-part-key="${CSS.escape(key)}"]`);
+  if (!target) return;
+  target.scrollIntoView({ behavior: "smooth", block: "center" });
+  target.classList.add("flash");
+  setTimeout(() => target.classList.remove("flash"), 1200);
+});
+
 function renderCard(r, idx) {
   const li = document.createElement("li");
   li.className = "request-card";
+  li.dataset.partKey = partKey(r);
   if (r.outOfStock) li.classList.add("urgent");
   li.style.animationDelay = `${Math.min(idx, 8) * 60}ms`;
 
@@ -414,6 +488,7 @@ function renderCard(r, idx) {
 function renderArchiveCard(r, idx) {
   const li = document.createElement("li");
   li.className = "request-card";
+  li.dataset.partKey = partKey(r);
   li.style.animationDelay = `${Math.min(idx, 8) * 40}ms`;
 
   const itemTitle = r.itemName || r.customItemName || "(unnamed item)";
