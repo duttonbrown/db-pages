@@ -47,6 +47,12 @@ let catalogReady = false;
 
 function showError(msg) { errorBox.textContent = msg; errorBox.hidden = false; }
 function clearError() { errorBox.hidden = true; }
+function showUpstreamUnavailable(retryFn) {
+  errorBox.innerHTML = `<strong>Notion is having trouble responding right now.</strong> This usually clears up within a few minutes. <button type="button" class="link-btn" id="upstream-retry-btn">Try refresh</button>`;
+  errorBox.hidden = false;
+  const btn = document.getElementById("upstream-retry-btn");
+  if (btn) btn.addEventListener("click", () => { clearError(); retryFn(); });
+}
 
 function fmtUse(n)   { return (n === null || n === undefined) ? "" : `${n}/yr`; }
 function fmtReorder(v) {
@@ -114,6 +120,15 @@ async function loadCatalog() {
   try {
     const res = await fetch(`${WORKER_URL}/catalog`);
     const data = await res.json();
+    if (!res.ok) {
+      if (data.errorCode === "upstream_unavailable") {
+        search.placeholder = "Search part number, name, or description";
+        loadingBar.hidden = true;
+        showUpstreamUnavailable(loadCatalog);
+        return;
+      }
+      throw new Error(data.error || "Failed to load");
+    }
     catalog.parts = data.parts || [];
     catalog.supplies = data.supplies || [];
     catalogReady = true;

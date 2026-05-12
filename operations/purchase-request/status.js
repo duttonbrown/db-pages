@@ -165,13 +165,25 @@ async function loadAndRender() {
   try {
     const res = await fetch(`${WORKER_URL}/requests`);
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Failed to load");
+    if (!res.ok) {
+      const err = new Error(data.error || "Failed to load");
+      err.errorCode = data.errorCode;
+      err.upstream  = data.upstream;
+      throw err;
+    }
     allRows = data.rows || [];
     lastRefEl.textContent = new Date().toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
     if (loadingFill) loadingFill.style.width = "100%";
     renderRows();
   } catch (e) {
-    errorEl.textContent = e.message || "Couldn't load the request log.";
+    // Friendly message when Notion's API is the upstream culprit, not our app
+    if (e.errorCode === "upstream_unavailable") {
+      errorEl.innerHTML = `<strong>Notion is having trouble responding right now.</strong> This usually clears up within a few minutes. <button type="button" class="link-btn" id="notion-down-retry">Try refresh</button>`;
+      const r = document.getElementById("notion-down-retry");
+      if (r) r.addEventListener("click", () => { errorEl.hidden = true; loadAll(); });
+    } else {
+      errorEl.textContent = e.message || "Couldn't load the request log.";
+    }
     errorEl.hidden = false;
   } finally {
     clearInterval(tick);
