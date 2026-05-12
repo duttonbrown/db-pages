@@ -74,6 +74,10 @@ function normalizePO(po) {
   return String(po || "").trim().toUpperCase();
 }
 
+function normalizeOrderNumber(n) {
+  return String(n || "").trim().toUpperCase();
+}
+
 async function loadReceivers() {
   // Mirrors the Submit form's requestor list — anyone who can submit a request
   // can also receive a shipment. (Was previously the narrower /people pool.)
@@ -196,14 +200,24 @@ function renderShipments(rows) {
   }
   emptyEl.hidden = true;
 
-  // Group by normalized PO. Rows missing a PO go in their own "No PO" group
-  // (rare — usually only when something was marked Ordered without filling it).
-  const groups = new Map(); // normalizedPO -> { display, vendor, oldestOrdered, oldestETA, items[] }
+  // Group by vendor's Order # (the number on the actual order confirmation),
+  // not PO #. Multiple vendors often share one internal PO (e.g. a "dummy" PO
+  // when the purchaser submitted one batch that fanned out to several vendors),
+  // and the Order # is what receivers can match against the physical box's
+  // packing slip. PO # is still shown in the header for context.
+  // Rows missing an Order # group together by PO # so they still cluster
+  // sensibly; rows missing both fall into "(no order #)".
+  const groups = new Map();
   for (const r of rows) {
-    const key = r.poNumber ? normalizePO(r.poNumber) : "__NO_PO__";
+    let key;
+    if (r.orderNumber) key = `ORD:${normalizeOrderNumber(r.orderNumber)}`;
+    else if (r.poNumber) key = `PO:${normalizePO(r.poNumber)}`;
+    else key = "__NONE__";
+
     if (!groups.has(key)) {
       groups.set(key, {
-        displayPO: r.poNumber || "(no PO)",
+        displayOrder: r.orderNumber || "",
+        displayPO: r.poNumber || "",
         vendor: primaryVendor(r),
         orderedDate: r.orderedDate || null,
         eta: r.eta || null,
@@ -213,7 +227,12 @@ function renderShipments(rows) {
     }
     const g = groups.get(key);
     g.items.push(r);
-    // Surface the earliest orderedDate / earliest ETA for the group header.
+    // Backfill metadata from any row in the group: receivers can have
+    // entered the order # on one row but left it blank on another in the
+    // same shipment.
+    if (!g.displayOrder && r.orderNumber) g.displayOrder = r.orderNumber;
+    if (!g.displayPO && r.poNumber) g.displayPO = r.poNumber;
+    if (!g.vendor && primaryVendor(r)) g.vendor = primaryVendor(r);
     if (r.orderedDate && (!g.orderedDate || r.orderedDate < g.orderedDate)) {
       g.orderedDate = r.orderedDate;
     }
@@ -221,36 +240,55 @@ function renderShipments(rows) {
     if (!g.tracking && r.tracking) g.tracking = r.tracking;
   }
 
-  // Sort by oldest orderedDate first — older POs are more likely to have arrived
+  // Within each group, sort urgent (out-of-stock) rows to the top so
+  // receivers see what they need to unbox first.
+  for (const g of groups.values()) {
+    g.items.sort((a, b) => {
+      if (!!a.outOfStock !== !!b.outOfStock) return a.outOfStock ? -1 : 1;
+      return 0;
+    });
+  }
+
+  // Sort groups: any group containing an urgent item floats up, then by
+  // oldest orderedDate first (older orders are more likely to have arrived).
+  const groupHasUrgent = (g) => g.items.some(r => r.outOfStock);
   const sorted = [...groups.entries()].sort((a, b) => {
+    const au = groupHasUrgent(a[1]);
+    const bu = groupHasUrgent(b[1]);
+    if (au !== bu) return au ? -1 : 1;
     const ax = a[1].orderedDate || "9999-99-99";
     const bx = b[1].orderedDate || "9999-99-99";
     return ax.localeCompare(bx);
   });
 
-  for (const [poKey, g] of sorted) {
-    poListEl.appendChild(renderPOGroup(poKey, g));
+  for (const [key, g] of sorted) {
+    poListEl.appendChild(renderPOGroup(key, g));
   }
 }
 
-function renderPOGroup(poKey, g) {
+function renderPOGroup(groupKey, g) {
   const section = document.createElement("section");
   section.className = "po-group";
-  section.dataset.poKey = poKey;
+  section.dataset.groupKey = groupKey;
 
   const age = ageDays(g.orderedDate);
   const ageLabel = age != null ? ` · ${age}d ago` : "";
   const eta = g.eta ? ` · ETA ${fmtDate(g.eta)}` : "";
 
-  // Render "(no PO)" without the "PO:" prefix — it'd read awkwardly.
-  const poDisplay = poKey === "__NO_PO__"
-    ? escapeHtml(g.displayPO)
-    : `<span class="po-prefix">PO:</span> ${escapeHtml(g.displayPO)}`;
+  // Header shows the vendor's Order # primary (matches what's on the packing
+  // slip), then the internal PO # alongside. Either can be blank.
+  const orderChip = g.displayOrder
+    ? `<span class="po-num"><span class="po-prefix">Order #</span> ${escapeHtml(g.displayOrder)}</span>`
+    : `<span class="po-num po-num-missing">(no order #)</span>`;
+  const poChip = g.displayPO
+    ? `<span class="po-num po-num-secondary"><span class="po-prefix">PO</span> ${escapeHtml(g.displayPO)}</span>`
+    : "";
 
   section.innerHTML = `
     <header class="po-header">
       <div class="po-meta">
-        <span class="po-num">${poDisplay}</span>
+        ${orderChip}
+        ${poChip}
         ${g.vendor ? `<span class="po-vendor">${escapeHtml(g.vendor)}</span>` : ""}
         <span class="po-when">Ordered ${escapeHtml(fmtDate(g.orderedDate))}${ageLabel}${eta}</span>
       </div>
@@ -327,7 +365,7 @@ function renderItemRow(r) {
         ${urgentChip}
       </div>
       <div class="item-meta">
-        <span><span class="meta-label">Order #</span> ${escapeHtml(r.orderNum || "—")}</span>
+        <span><span class="meta-label">Request #</span> ${escapeHtml(r.orderNum || "—")}</span>
         <span><span class="meta-label">Requestor</span> ${escapeHtml(r.requestor || "—")}</span>
         ${r.notes ? `<span class="item-note">"${escapeHtml(r.notes)}"</span>` : ""}
       </div>
