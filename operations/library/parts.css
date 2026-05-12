@@ -735,6 +735,27 @@
   font-weight: 300;
   font-style: italic;
 }
+/* Vendor name now lives in the wide spec-ihp row (label-left, value-right).
+   Render plain text, sized to match the bold key-facts so it reads as
+   "primary fact" not "another chip". */
+.vendor-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+/* In-House pills inside a key-fact cell render smaller — they need to fit
+   the 120px-min grid cell without forcing a wide column. */
+.keyfact-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 1px;
+}
+.keyfact-pills .ihp-pill {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
 
 /* --- Key facts: auto-flow grid
    Lead Time / Vendor / MOQ / Reorder qty / Last Ordered. minmax(120px) lets
