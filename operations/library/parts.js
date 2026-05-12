@@ -56,76 +56,8 @@ async function bootstrap() {
   renderRecents();
   wireSearch();
   routeFromHash();
-  renderSupplies(); // independent of parts navigation; always rendered at the bottom
 
   window.addEventListener('hashchange', routeFromHash);
-}
-
-// --- Supplies (flat list rendered below parts) ---
-// Independent from the parts grid: clicking a parts category chip does NOT
-// affect supplies, and supplies have their own type-filter chips. Clicking
-// a supply card opens the Notion page (no internal spec card yet — supplies
-// are simpler entities; can be expanded later if useful).
-let activeSupplyType = 'all';
-
-function renderSupplies() {
-  const section = $('section-supplies');
-  if (!section) return;
-  const supplies = DATA.supplies || [];
-  if (supplies.length === 0) {
-    section.hidden = true;
-    return;
-  }
-  section.hidden = false;
-  $('supplies-section-count').textContent = `${supplies.length} item${supplies.length === 1 ? '' : 's'}`;
-
-  // Type filter chips — only Active supplies; group by Type select
-  const counts = {};
-  supplies.filter(s => s.status === 'Active').forEach(s => {
-    const t = s.type || '(uncategorized)';
-    counts[t] = (counts[t] || 0) + 1;
-  });
-  const types = ['all', ...Object.keys(counts).sort((a, b) => counts[b] - counts[a])];
-  $('supply-type-filters').innerHTML = types.map(t => {
-    const label = t === 'all' ? 'All' : t;
-    const n = t === 'all' ? supplies.filter(s => s.status === 'Active').length : counts[t];
-    const cls = `glossary-chip${activeSupplyType === t ? ' is-active' : ''}`;
-    return `<button class="${cls}" data-supply-type="${escapeHtml(t)}">${escapeHtml(label)} <span class="gc-count">${n}</span></button>`;
-  }).join('');
-  $('supply-type-filters').querySelectorAll('[data-supply-type]').forEach(b => {
-    b.onclick = () => {
-      activeSupplyType = b.dataset.supplyType;
-      renderSupplies();
-    };
-  });
-
-  // Filter + render grid
-  let list = supplies.filter(s => s.status === 'Active');
-  if (activeSupplyType !== 'all') {
-    list = list.filter(s => (s.type || '(uncategorized)') === activeSupplyType);
-  }
-  if (list.length === 0) {
-    $('supplies-grid-slot').innerHTML = `<div class="empty-grid">No supplies match this filter.</div>`;
-    return;
-  }
-  $('supplies-grid-slot').innerHTML = `<div class="parts-grid">${list.map(supplyCardHtml).join('')}</div>`;
-}
-
-function supplyCardHtml(s) {
-  const imgHtml = s.image
-    ? `<div class="preview-image"><img src="${escapeHtml(s.image)}" alt="${escapeHtml(s.sku || s.title)}" loading="lazy"></div>`
-    : `<div class="preview-image no-img">No image</div>`;
-  const label = s.sku || s.title || '(unnamed)';
-  const desc  = s.title && s.title !== label ? s.title : (s.description || '');
-  const type  = s.type ? `<span class="preview-finish">${escapeHtml(s.type)}</span>` : '';
-  return `<a class="preview-card" href="${escapeHtml(s.page_url || '#')}" target="_blank" rel="noopener">
-    ${imgHtml}
-    <div class="preview-body">
-      <div class="preview-num">${escapeHtml(label)}</div>
-      <div class="preview-desc">${escapeHtml(desc)}</div>
-      ${type}
-    </div>
-  </a>`;
 }
 
 // --- Recent parts (localStorage) ---
