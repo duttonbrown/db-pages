@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<title>Wash List — Bone — 2026-05-12-01</title>
+<title>Wash List — Cobalt — 2026-05-12-01</title>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
         :root {
@@ -288,9 +288,16 @@
         }
     
 
-        .color-banner { padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; }
-        .color-banner h1 { margin: 0; font-size: 22px; font-weight: 600; }
-        .color-banner .date { margin: 4px 0 0; font-size: 13px; opacity: 0.85; }
+        /* Color banner — title is an inline pill hugging the text;
+           fill is the color itself; fg auto-picked for contrast. */
+        .color-banner { margin-bottom: 18px; }
+        .color-banner h1 { margin: 0; font-size: 22px; font-weight: 600;
+                            display: inline-block;
+                            padding: 6px 18px;
+                            border-radius: 999px;
+                            line-height: 1.2; }
+        .color-banner .date { margin: 6px 0 0; font-size: 13px;
+                               color: #555; }
         .color-banner .batch-id { font-variant-numeric: tabular-nums;
                                    letter-spacing: 0.3px; font-weight: 500;
                                    opacity: 1; }
@@ -306,13 +313,24 @@
         .parts-grid { display: grid; grid-template-columns: repeat(6, 1fr);
                       gap: 10px; margin-top: 8px; align-items: flex-start; }
         .parts-section { min-width: 0; }
-        .parts-section .section-header { margin-top: 0; font-size: 11px;
-                                          padding: 5px 8px; border-radius: 5px 3px 0 0; }
+        /* Soft pill — light gray fill, uppercase label, rounded.
+           Prints with minimal ink; reads like a label/tag. */
+        .parts-section .section-header { margin-top: 0; font-size: 10px;
+                                          padding: 5px 12px;
+                                          background: #f3f3f3; color: #4a4a4a;
+                                          border: none;
+                                          border-radius: 999px;
+                                          letter-spacing: 0.6px;
+                                          text-transform: uppercase;
+                                          font-weight: 600;
+                                          display: inline-block;
+                                          margin-bottom: 4px; }
         .parts-table { width: 100%; border-collapse: collapse; margin: 0;
                        border: 1px solid var(--border); border-top: none; }
         .parts-table td { padding: 2px 6px; border-bottom: 1px solid #f0f0f0;
                           font-size: 13px; line-height: 1.3; }
-        .parts-table td:first-child { font-weight: 500; white-space: nowrap; }
+        .parts-table td.chk-cell { width: 18px; padding: 2px 4px; }
+        .parts-table td:nth-child(2) { font-weight: 500; white-space: nowrap; }
         .parts-table td:last-child { text-align: right; font-weight: 600;
                                       font-size: 13px; padding-left: 10px;
                                       font-variant-numeric: tabular-nums; }
@@ -321,12 +339,42 @@
                      border-bottom: 1px dotted #b8b8b8; }
         .part-link:hover { color: var(--accent-dark);
                            border-bottom-color: var(--accent-dark); }
+        /* Empty printable checkbox — Catherine marks with an X on the floor */
+        .wash-chk { display: inline-block; width: 12px; height: 12px;
+                    border: 1.5px solid #888; border-radius: 2px;
+                    vertical-align: middle; background: #fff; }
+        /* Order strip — single line of order chips under the banner */
+        .order-strip { margin: 12px 0 16px; font-size: 12px;
+                        line-height: 1.6; color: #4a4a4a; }
+        .order-strip .ord-strip-label { font-weight: 600; color: #1a1a1a;
+                                          margin-right: 6px; }
+        .ord-chip { font-variant-numeric: tabular-nums;
+                    background: #f3f3f3; padding: 1px 7px; border-radius: 10px;
+                    display: inline-block; margin: 1px 1px;
+                    border: 1px solid #e0e0e0; }
         @media print {
             .part-link { color: inherit !important; border-bottom: none; }
         }
         .mask { background: #d4edda; }
-        .orders-table { width: 100%; border-collapse: collapse; }
-        .orders-table th { text-align: left; }
+        .orders-table { width: 100%; border-collapse: separate;
+                         border-spacing: 0; }
+        /* Soft header row — light gray fill, uppercase muted label,
+           rounded outer corners; matches the look Catherine wants. */
+        .orders-table thead th { text-align: left;
+                                 background: #f3f3f3; color: #6a6a6a;
+                                 font-size: 10px; font-weight: 600;
+                                 letter-spacing: 0.6px;
+                                 text-transform: uppercase;
+                                 padding: 6px 10px; border: none;
+                                 border-top: 1px solid #e0e0e0;
+                                 border-bottom: 1px solid #e0e0e0; }
+        .orders-table thead th:first-child {
+            border-left: 1px solid #e0e0e0;
+            border-radius: 999px 0 0 999px; padding-left: 14px; }
+        .orders-table thead th:last-child {
+            border-right: 1px solid #e0e0e0;
+            border-radius: 0 999px 999px 0; padding-right: 14px;
+            text-align: right; }
         .orders-table td { padding: 4px 10px; border-bottom: 1px solid #eee;
                            font-size: 13px; vertical-align: top; }
         .orders-table .col-order { white-space: nowrap; width: 80px; }
@@ -354,21 +402,48 @@
                               align-items: center; border-bottom: 1px solid #eee; }
         .sort-order-header .oname { font-weight: 600; font-size: 15px; }
         .sort-order-header .cust { color: var(--muted); font-size: 12px; }
-        .sort-order-header .total-parts { background: var(--accent-dark); color: #fff;
-                              font-size: 11px; font-weight: 600; padding: 2px 8px;
-                              border-radius: 10px; margin-left: 8px; }
+        /* Soft pill — light gray fill, low ink. */
+        .sort-order-header .total-parts { background: #f3f3f3; color: #4a4a4a;
+                              border: none;
+                              font-size: 10px; font-weight: 600;
+                              letter-spacing: 0.4px;
+                              text-transform: uppercase;
+                              padding: 2px 9px;
+                              border-radius: 999px; margin-left: 8px; }
         .sort-product { padding: 8px 14px; border-bottom: 1px solid #f5f5f5; }
         .sort-product:last-child { border-bottom: none; }
         .sort-prod-header { display: flex; justify-content: space-between;
                             align-items: baseline; margin-bottom: 4px; }
         .sort-prod-header .pname { font-size: 13px; font-weight: 500; }
-        .sort-prod-header .pqty { font-size: 13px; font-weight: 600; color: var(--accent-dark); }
+        .sort-prod-header .pqty { font-size: 13px; font-weight: 700; color: #1a1a1a; }
         .sort-parts-grid { display: flex; flex-wrap: wrap; gap: 0; }
         .sort-part { display: inline-flex; align-items: baseline; gap: 4px;
                      padding: 2px 10px 2px 0; font-size: 12px; color: #555; }
         .sort-part .sp-name { font-weight: 500; }
-        .sort-part .sp-qty { font-weight: 600; color: var(--accent-dark);
+        .sort-part .sp-qty { font-weight: 700; color: #1a1a1a;
                              font-variant-numeric: tabular-nums; }
+        /* Tray sort-back row — consolidated alphabetical part counts for the
+           whole order. Sorter scans left→right, drops each part into the
+           order's tray. The per-product breakdown stays underneath. */
+        .sort-tray-row { display: flex; flex-wrap: wrap;
+                          gap: 4px 12px; padding: 8px 14px;
+                          background: #fafafa;
+                          border-top: 1px solid var(--border);
+                          border-bottom: 1px solid var(--border); }
+        .sort-tray-row .tray-part { display: inline-flex; align-items: baseline;
+                                     gap: 4px; font-size: 12px; color: #1a1a1a; }
+        .sort-tray-row .tray-part .sp-name { font-weight: 600;
+                                              font-variant-numeric: tabular-nums; }
+        .sort-tray-row .tray-part .sp-qty { font-weight: 700;
+                                             color: #1a1a1a;
+                                             font-variant-numeric: tabular-nums;
+                                             min-width: 14px; }
+        @media print {
+            .sort-tray-row { background: #f5f5f5 !important;
+                              -webkit-print-color-adjust: exact;
+                              print-color-adjust: exact;
+                              font-size: 11px; }
+        }
         @media print {
             .tab-bar { display: none; }
             .view { display: block !important; page-break-before: always; }
@@ -385,17 +460,22 @@
     </style>
 </head><body>
 
-<div class="color-banner" style="background:#E5E4CF;color:#333;">
-    <h1>Parts Wash List — Bone</h1>
+<div class="color-banner">
+    <h1 style="background:#203955;color:#ffffff;">Parts Wash List — Cobalt</h1>
     <div class="date">May 12, 2026 &middot; <span class="batch-id">Batch 2026-05-12-01</span></div>
 </div>
 
+<div class="order-strip">
+    <span class="ord-strip-label">Orders (8):</span>
+    <span class="ord-chip">35352</span> &middot; <span class="ord-chip">35407</span> &middot; <span class="ord-chip">35446</span> &middot; <span class="ord-chip">35520</span> &middot; <span class="ord-chip">35538</span> &middot; <span class="ord-chip">35545</span> &middot; <span class="ord-chip">35565</span> &middot; <span class="ord-chip">35582</span>
+</div>
+
 <div class="kpi-row">
-    <div class="kpi"><div class="kpi-value">5</div><div class="kpi-label">Orders</div></div>
-    <div class="kpi"><div class="kpi-value">13</div><div class="kpi-label">Total Items</div></div>
-    <div class="kpi"><div class="kpi-value">13</div><div class="kpi-label">Lighting</div></div>
-    <div class="kpi"><div class="kpi-value">0</div><div class="kpi-label">Hardware</div></div>
-    <div class="kpi"><div class="kpi-value">48</div><div class="kpi-label">Total Parts</div></div>
+    <div class="kpi"><div class="kpi-value">8</div><div class="kpi-label">Orders</div></div>
+    <div class="kpi"><div class="kpi-value">16</div><div class="kpi-label">Total Items</div></div>
+    <div class="kpi"><div class="kpi-value">5</div><div class="kpi-label">Lighting</div></div>
+    <div class="kpi"><div class="kpi-value">11</div><div class="kpi-label">Hardware</div></div>
+    <div class="kpi"><div class="kpi-value">32</div><div class="kpi-label">Total Parts</div></div>
 </div>
 
 <div class="legend">
@@ -411,46 +491,32 @@
 <div class="tab-content">
     <div id="view-parts" class="view active">
         <div class="parts-grid">
-        <div class="parts-section" style="grid-column: 2; grid-row: 1;">
-<div class="section-header">Lamp Cups</div>
+        <div class="parts-section" style="grid-column: 1; grid-row: 1;">
+<div class="section-header">Pipes</div>
 <table class="parts-table"><tbody>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></td><td>8</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b814f8ddcf8b3d83410ca" target="_blank" rel="noopener" class="part-link">PFB2</a></td><td>5</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b8121ae19f1fff5cbb09f" target="_blank" rel="noopener" class="part-link">PM3</a></td><td>4</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81b39a6de45678040b38" target="_blank" rel="noopener" class="part-link">PF4</a></td><td>1</td></tr>
 </tbody></table>
 </div>
-<div class="parts-section" style="grid-column: 5; grid-row: 1;">
-<div class="section-header">PATs / FPS</div>
+<div class="parts-section" style="grid-column: 2; grid-row: 1;">
+<div class="section-header">Lamp Cups</div>
 <table class="parts-table"><tbody>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b814ebd4fc8cd0971b2d8" target="_blank" rel="noopener" class="part-link">PAT18</a></td><td>1</td></tr>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b81ff8d9dfbd3e86a3edb" target="_blank" rel="noopener" class="part-link">PAT18-M1</a></td><td>1</td></tr>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b81139a6ddaf9d45c6642" target="_blank" rel="noopener" class="part-link">FPS2</a></td><td>4</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></td><td>6</td></tr>
 </tbody></table>
 </div>
 <div class="parts-section" style="grid-column: 6; grid-row: 1;">
 <div class="section-header">Misc</div>
 <table class="parts-table"><tbody>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b81a79189df369794af28" target="_blank" rel="noopener" class="part-link">BOS18-M3</a></td><td>1</td></tr>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b81bab4a3e26047211c9f" target="_blank" rel="noopener" class="part-link">MO3</a></td><td>2</td></tr>
-</tbody></table>
-</div>
-<div class="parts-section" style="grid-column: 1; grid-row: 2;">
-<div class="section-header">Bodies / Shades</div>
-<table class="parts-table"><tbody>
-<tr class="mask"><td><a href="https://www.notion.so/2ceffa524c5b816b8afec99a0a021534" target="_blank" rel="noopener" class="part-link">BOS18-M2</a></td><td>1</td></tr>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b8109803bd79bc2434005" target="_blank" rel="noopener" class="part-link">BOS18L</a></td><td>2</td></tr>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b818ebce2c47cdf8db871" target="_blank" rel="noopener" class="part-link">QS3</a></td><td>1</td></tr>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b81bf8f4ef3eea16004c6" target="_blank" rel="noopener" class="part-link">QS6-M1</a></td><td>2</td></tr>
-</tbody></table>
-</div>
-<div class="parts-section" style="grid-column: 3; grid-row: 2;">
-<div class="section-header">Canopies</div>
-<table class="parts-table"><tbody>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></td><td>10</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/0dddf3b25f2e4dc1a645b8ff5e24286e" target="_blank" rel="noopener" class="part-link">FPK1</a></td><td>6</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b813594e5fb29f6170ce3" target="_blank" rel="noopener" class="part-link">FC1</a></td><td>6</td></tr>
 </tbody></table>
 </div>
 <div class="parts-section" style="grid-column: 4; grid-row: 2;">
 <div class="section-header">Caps / Canopies</div>
 <table class="parts-table"><tbody>
-<tr><td><a href="https://www.notion.so/2ceffa524c5b81cc9acbccd8e45f3d3c" target="_blank" rel="noopener" class="part-link">GC6</a></td><td>15</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81cc9acbccd8e45f3d3c" target="_blank" rel="noopener" class="part-link">GC6</a></td><td>3</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81e18585e2e946aff663" target="_blank" rel="noopener" class="part-link">GC8</a></td><td>1</td></tr>
 </tbody></table>
 </div>
 
@@ -459,12 +525,14 @@
         <h2 style="margin-top:30px;">Orders in This Batch</h2>
         <table class="orders-table">
         <thead><tr><th>Order</th><th>Date</th><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
-        <tbody><tr><td class="col-order">35548</td><td class="col-date">May 08</td><td class="col-sku">30321-2BO</td><td class="col-name">Color Icon 3 Sconce - Nickel / Bone</td><td class="col-qty">1</td></tr>
-<tr><td class="col-order">35560</td><td class="col-date">May 09</td><td class="col-sku">30405-1BO</td><td class="col-name">Color Status Chandelier 35" - Brass / Bone</td><td class="col-qty">1</td></tr>
-<tr><td class="col-order">35560</td><td class="col-date">May 09</td><td class="col-sku">30502-1BO</td><td class="col-name">Color Prisma Chandelier 35" - Brass / Bone</td><td class="col-qty">1</td></tr>
-<tr><td class="col-order">35561</td><td class="col-date">May 10</td><td class="col-sku">30320-1BO</td><td class="col-name">Color Legend 3 Sconce - Brass / Bone</td><td class="col-qty">1</td></tr>
-<tr><td class="col-order">35562</td><td class="col-date">May 10</td><td class="col-sku">ER1-4-BO</td><td class="col-name">Extension Rods - Bone / 4"</td><td class="col-qty">1</td></tr>
-<tr class="exp-row"><td class="col-order">35574<span class="exp-tag">EXP</span></td><td class="col-date">May 11</td><td class="col-sku">60125-3BO</td><td class="col-name">Color Twink Sconce - Black / Bone / Hardwired (no switch)</td><td class="col-qty">8</td></tr>
+        <tbody><tr><td class="col-order">35352</td><td class="col-date">Apr 26</td><td class="col-sku">H15-2E</td><td class="col-name">Color Tux Hook - Nickel / Cobalt</td><td class="col-qty">3</td></tr>
+<tr><td class="col-order">35407</td><td class="col-date">Apr 30</td><td class="col-sku">H20-2E</td><td class="col-name">Color Persona Knob - Nickel / Cobalt</td><td class="col-qty">3</td></tr>
+<tr><td class="col-order">35446</td><td class="col-date">May 01</td><td class="col-sku">60224-2E</td><td class="col-name">Color Ruler Sconce - Nickel / Cobalt</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">35520</td><td class="col-date">May 07</td><td class="col-sku">60224-2E</td><td class="col-name">Color Ruler Sconce - Nickel / Cobalt</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35538</td><td class="col-date">May 07</td><td class="col-sku">30332-1E</td><td class="col-name">Color Supreme Flush Mount - Brass / Cobalt</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35545</td><td class="col-date">May 08</td><td class="col-sku">H16-2E</td><td class="col-name">Color Snug Hook - Nickel / Cobalt</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35565</td><td class="col-date">May 11</td><td class="col-sku">H16-2E</td><td class="col-name">Color Snug Hook - Nickel / Cobalt</td><td class="col-qty">4</td></tr>
+<tr><td class="col-order">35582</td><td class="col-date">May 11</td><td class="col-sku">40121P-9-2E</td><td class="col-name">Color Boom Swing Arm Plug-in Sconce - 9" Arm - Nickel / Cobalt</td><td class="col-qty">1</td></tr>
 </tbody>
         </table>
     </div>
@@ -473,78 +541,121 @@
         <p class="subtitle">Sort coated parts back to their original orders.</p>
         <div class="sort-order" style="">
             <div class="sort-order-header">
-                <div><span class="oname">35548</span><span class="total-parts">8 parts</span></div>
-                <span class="cust">Jodi Berger</span>
+                <div><span class="oname">35352</span><span class="total-parts">6 parts</span></div>
+                <span class="cust">Gloria Barbarotto</span>
             </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/0dddf3b25f2e4dc1a645b8ff5e24286e" target="_blank" rel="noopener" class="part-link">FPK1</a></span> <span class="sp-qty">6</span></span></div>
             <div class="sort-product">
                 <div class="sort-prod-header">
-                    <span class="pname">Color Icon 3 Sconce - Nickel / Bone</span>
-                    <span class="pqty">x1</span>
+                    <span class="pname">Color Tux Hook - Nickel / Cobalt</span>
+                    <span class="pqty">x3</span>
                 </div>
-                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81139a6ddaf9d45c6642" target="_blank" rel="noopener" class="part-link">FPS2</a></span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81cc9acbccd8e45f3d3c" target="_blank" rel="noopener" class="part-link">GC6</a></span> <span class="sp-qty">3</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81bab4a3e26047211c9f" target="_blank" rel="noopener" class="part-link">MO3</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b814ebd4fc8cd0971b2d8" target="_blank" rel="noopener" class="part-link">PAT18</a></span> <span class="sp-qty">1</span></span></div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/0dddf3b25f2e4dc1a645b8ff5e24286e" target="_blank" rel="noopener" class="part-link">FPK1</a></span> <span class="sp-qty">6</span></span></div>
             </div>
 
         </div>
 <div class="sort-order" style="">
             <div class="sort-order-header">
-                <div><span class="oname">35560</span><span class="total-parts">16 parts</span></div>
-                <span class="cust">Heidi O'leary</span>
+                <div><span class="oname">35407</span><span class="total-parts">6 parts</span></div>
+                <span class="cust">Carly Gladstone</span>
             </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b813594e5fb29f6170ce3" target="_blank" rel="noopener" class="part-link">FC1</a></span> <span class="sp-qty">6</span></span></div>
             <div class="sort-product">
                 <div class="sort-prod-header">
-                    <span class="pname">Color Status Chandelier 35" - Brass / Bone</span>
-                    <span class="pqty">x1</span>
+                    <span class="pname">Color Persona Knob - Nickel / Cobalt</span>
+                    <span class="pqty">x3</span>
                 </div>
-                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b816b8afec99a0a021534" target="_blank" rel="noopener" class="part-link">BOS18-M2</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8109803bd79bc2434005" target="_blank" rel="noopener" class="part-link">BOS18L</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81cc9acbccd8e45f3d3c" target="_blank" rel="noopener" class="part-link">GC6</a></span> <span class="sp-qty">4</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81bf8f4ef3eea16004c6" target="_blank" rel="noopener" class="part-link">QS6-M1</a></span> <span class="sp-qty">1</span></span></div>
-            </div>
-<div class="sort-product">
-                <div class="sort-prod-header">
-                    <span class="pname">Color Prisma Chandelier 35" - Brass / Bone</span>
-                    <span class="pqty">x1</span>
-                </div>
-                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81a79189df369794af28" target="_blank" rel="noopener" class="part-link">BOS18-M3</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8109803bd79bc2434005" target="_blank" rel="noopener" class="part-link">BOS18L</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81cc9acbccd8e45f3d3c" target="_blank" rel="noopener" class="part-link">GC6</a></span> <span class="sp-qty">5</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b818ebce2c47cdf8db871" target="_blank" rel="noopener" class="part-link">QS3</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81bf8f4ef3eea16004c6" target="_blank" rel="noopener" class="part-link">QS6-M1</a></span> <span class="sp-qty">1</span></span></div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b813594e5fb29f6170ce3" target="_blank" rel="noopener" class="part-link">FC1</a></span> <span class="sp-qty">6</span></span></div>
             </div>
 
         </div>
 <div class="sort-order" style="">
             <div class="sort-order-header">
-                <div><span class="oname">35561</span><span class="total-parts">8 parts</span></div>
-                <span class="cust">Yael Gutreich Oron</span>
+                <div><span class="oname">35446</span><span class="total-parts">4 parts</span></div>
+                <span class="cust">Peter Greenberger</span>
             </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></span> <span class="sp-qty">4</span></span></div>
             <div class="sort-product">
                 <div class="sort-prod-header">
-                    <span class="pname">Color Legend 3 Sconce - Brass / Bone</span>
-                    <span class="pqty">x1</span>
+                    <span class="pname">Color Ruler Sconce - Nickel / Cobalt</span>
+                    <span class="pqty">x2</span>
                 </div>
-                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81139a6ddaf9d45c6642" target="_blank" rel="noopener" class="part-link">FPS2</a></span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81cc9acbccd8e45f3d3c" target="_blank" rel="noopener" class="part-link">GC6</a></span> <span class="sp-qty">3</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81bab4a3e26047211c9f" target="_blank" rel="noopener" class="part-link">MO3</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ff8d9dfbd3e86a3edb" target="_blank" rel="noopener" class="part-link">PAT18-M1</a></span> <span class="sp-qty">1</span></span></div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></span> <span class="sp-qty">4</span></span></div>
             </div>
 
         </div>
 <div class="sort-order" style="">
             <div class="sort-order-header">
-                <div><span class="oname">35562</span><span class="total-parts">0 parts</span></div>
-                <span class="cust">Jerry Mitchell</span>
+                <div><span class="oname">35520</span><span class="total-parts">2 parts</span></div>
+                <span class="cust">Alyssa Mosberg</span>
             </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></span> <span class="sp-qty">2</span></span></div>
             <div class="sort-product">
                 <div class="sort-prod-header">
-                    <span class="pname">Extension Rods - Bone / 4"</span>
+                    <span class="pname">Color Ruler Sconce - Nickel / Cobalt</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></span> <span class="sp-qty">2</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35538</span><span class="total-parts">9 parts</span></div>
+                <span class="cust">Monica Leyva</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81cc9acbccd8e45f3d3c" target="_blank" rel="noopener" class="part-link">GC6</a></span> <span class="sp-qty">3</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81e18585e2e946aff663" target="_blank" rel="noopener" class="part-link">GC8</a></span> <span class="sp-qty">1</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b39a6de45678040b38" target="_blank" rel="noopener" class="part-link">PF4</a></span> <span class="sp-qty">1</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8121ae19f1fff5cbb09f" target="_blank" rel="noopener" class="part-link">PM3</a></span> <span class="sp-qty">4</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Supreme Flush Mount - Brass / Cobalt</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81cc9acbccd8e45f3d3c" target="_blank" rel="noopener" class="part-link">GC6</a></span> <span class="sp-qty">3</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81e18585e2e946aff663" target="_blank" rel="noopener" class="part-link">GC8</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b39a6de45678040b38" target="_blank" rel="noopener" class="part-link">PF4</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8121ae19f1fff5cbb09f" target="_blank" rel="noopener" class="part-link">PM3</a></span> <span class="sp-qty">4</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35545</span><span class="total-parts">1 parts</span></div>
+                <span class="cust">Sarah Kraus</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b814f8ddcf8b3d83410ca" target="_blank" rel="noopener" class="part-link">PFB2</a></span> <span class="sp-qty">1</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Snug Hook - Nickel / Cobalt</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b814f8ddcf8b3d83410ca" target="_blank" rel="noopener" class="part-link">PFB2</a></span> <span class="sp-qty">1</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35565</span><span class="total-parts">4 parts</span></div>
+                <span class="cust">Denise Nico</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b814f8ddcf8b3d83410ca" target="_blank" rel="noopener" class="part-link">PFB2</a></span> <span class="sp-qty">4</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Snug Hook - Nickel / Cobalt</span>
+                    <span class="pqty">x4</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b814f8ddcf8b3d83410ca" target="_blank" rel="noopener" class="part-link">PFB2</a></span> <span class="sp-qty">4</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35582</span><span class="total-parts">0 parts</span></div>
+                <span class="cust">Maryna Sivaieva</span>
+            </div>
+            
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Boom Swing Arm Plug-in Sconce - 9" Arm - Nickel / Cobalt</span>
                     <span class="pqty">x1</span>
                 </div>
                 <div class="sort-parts-grid"></div>
-            </div>
-
-        </div>
-<div class="sort-order" style="border-left: 4px solid #e74c3c;">
-            <div class="sort-order-header">
-                <div><span class="oname">35574</span> <span class="exp-tag">EXP</span><span class="total-parts">16 parts</span></div>
-                <span class="cust">Graybar</span>
-            </div>
-            <div class="sort-product">
-                <div class="sort-prod-header">
-                    <span class="pname">Color Twink Sconce - Black / Bone / Hardwired (no switch)</span>
-                    <span class="pqty">x8</span>
-                </div>
-                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">8</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></span> <span class="sp-qty">8</span></span></div>
             </div>
 
         </div>

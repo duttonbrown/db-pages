@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Wash List — White — 2026-05-12-01</title>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        :root {
+            /* Internal-tools palette ported from inventory-request-form.
+               Charcoal carries the UI; warm orange marks intent (active
+               filter, active tab, primary CTA). */
+            --accent:      #FF9912;
+            --accent-dark: #D97706;
+            --text:        #4A4A4A;
+            --ink:         #2A2A2A;
+            --muted:       #888888;
+            --border:      #E0DDD9;
+            --bg:          #FAFAFA;
+            --card:        #ffffff;
+            --success:     #2E7D32;
+            --error:       #c0392b;
+            --radius:      8px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+               color: var(--text); background: var(--bg);
+               padding: 24px; max-width: 1200px; margin: 0 auto; }
+        h1 { font-size: 24px; font-weight: 600; color: var(--ink); margin-bottom: 4px;
+              letter-spacing: -0.01em; }
+        h2 { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 16px; }
+        .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+        .kpi-row { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+        .kpi { background: var(--card); border: 1px solid var(--border);
+               border-radius: var(--radius); padding: 18px 22px;
+               flex: 1; min-width: 140px; }
+        .kpi-value { font-size: 28px; font-weight: 700; color: var(--ink);
+                      letter-spacing: -0.01em; }
+        .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase;
+                      letter-spacing: 0.06em; font-weight: 600; }
+        .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 300; }
+        .kpi-aside-line { font-size: 10px; color: var(--muted); margin-top: 8px;
+                           padding-top: 8px; border-top: 1px dashed var(--border); }
+        .kpi-aside-num { font-weight: 600; color: var(--text); }
+        .kpi-aside-line em { color: #999; font-style: italic; }
+        .kpi-wide { flex: 3 1 0; min-width: 380px; }
+        /* Orders KPI:
+           - Top row: 148 ORDERS on the left, pill column on the right
+           - Then a full-width divider, age histogram, divider
+           - Bottom row: Last Update + Schedule info button
+        */
+        .kpi-narrow { flex: 1 1 0; min-width: 280px; display: flex;
+                       flex-direction: column; }
+        .kpi-narrow .kpi-top-row { display: flex; gap: 16px;
+                                     align-items: flex-start;
+                                     justify-content: space-between; }
+        .kpi-narrow .kpi-top-row .kpi-info { display: flex;
+                                                flex-direction: column;
+                                                justify-content: center; }
+        .kpi-narrow .kpi-value { font-size: 42px; line-height: 1; }
+        .kpi-narrow .kpi-value.kpi-date { font-size: 16px; line-height: 1.2; }
+        .kpi-narrow .kpi-top-row .kpi-flags { display: flex;
+                                                flex-direction: column;
+                                                gap: 3px; align-items: stretch;
+                                                min-width: 100px;
+                                                margin-top: 0; flex-shrink: 0; }
+        .kpi-narrow .kpi-pill { width: 100%; }
+        .kpi-narrow .kpi-pill-tag { flex: 1; }
+        .kpi-bottom-row { display: flex; flex-direction: column; gap: 2px; }
+        .kpi-date-row { display: flex; align-items: center; gap: 8px; }
+        /* Small (i) info marker that reveals a popover on hover/focus.
+           Replaces the old "Refresh info" button so the date can use the
+           full card width. */
+        .refresh-info-tip { position: relative; display: inline-flex;
+                             align-items: center; justify-content: center;
+                             width: 18px; height: 18px; border-radius: 50%;
+                             border: 1px solid #c5cdd6; background: #fff;
+                             color: #6c757d; font-family: serif;
+                             font-style: italic; font-size: 11px;
+                             cursor: help; line-height: 1; }
+        .refresh-info-tip:hover, .refresh-info-tip:focus { border-color: #2c3e50;
+                                                              color: #2c3e50;
+                                                              outline: none; }
+        .refresh-info-bubble { display: none; position: absolute; bottom: 26px;
+                                left: -6px; min-width: 280px; max-width: 360px;
+                                padding: 12px 14px; background: var(--bg);
+                                border: 1px solid var(--border);
+                                border-radius: 8px; font-size: 12px;
+                                font-family: inherit; font-style: normal;
+                                font-weight: 300;
+                                color: var(--text); line-height: 1.5;
+                                box-shadow: 0 4px 16px -4px rgba(0,0,0,0.12);
+                                z-index: 10; }
+        .refresh-info-tip:hover .refresh-info-bubble,
+        .refresh-info-tip:focus .refresh-info-bubble { display: block; }
+        .refresh-info-bubble strong { font-weight: 600; color: var(--ink); }
+        .refresh-info-bubble code { background: #fff;
+                                      border: 1px solid var(--border);
+                                      padding: 1px 5px; border-radius: 5px;
+                                      font-size: 11px; font-family: 'Poppins', monospace; }
+
+        /* Top-of-page (i) hover bubble — same idea as refresh-info-tip but
+           sized to sit beside the H1. */
+        .info-hover-tip { position: relative; display: inline-flex;
+                           align-items: center; justify-content: center;
+                           width: 22px; height: 22px; border-radius: 50%;
+                           border: 1px solid #c5cdd6; background: #fff;
+                           color: var(--muted); font-family: serif;
+                           font-style: italic; font-size: 13px;
+                           cursor: help; line-height: 1; vertical-align: middle; }
+        .info-hover-tip:hover, .info-hover-tip:focus { border-color: var(--accent-dark);
+                                                          color: var(--accent-dark);
+                                                          outline: none; }
+        .info-hover-bubble { display: none; position: absolute; top: 30px;
+                              left: 0; min-width: 320px; max-width: 480px;
+                              padding: 12px 14px; background: var(--bg);
+                              border: 1px solid var(--border);
+                              border-radius: 8px; font-size: 12px;
+                              font-family: inherit; font-style: normal;
+                              font-weight: 300;
+                              color: var(--text); line-height: 1.55;
+                              box-shadow: 0 4px 16px -4px rgba(0,0,0,0.12);
+                              z-index: 10; }
+        .info-hover-tip:hover .info-hover-bubble,
+        .info-hover-tip:focus .info-hover-bubble { display: block; }
+        .info-hover-bubble strong { font-weight: 600; color: var(--ink); }
+        .schedule-info-toggle { font-size: 11px; padding: 5px 10px;
+                                 border: 1px solid #c5cdd6; background: #fff;
+                                 border-radius: 8px; cursor: pointer;
+                                 color: var(--text); font-family: inherit;
+                                 white-space: nowrap; }
+        .schedule-info-toggle:hover, .schedule-info-toggle.active {
+                                  background: var(--accent-dark); color: #fff;
+                                  border-color: var(--accent-dark); }
+        .schedule-info { background: var(--bg); border: 1px solid var(--border);
+                          border-radius: 8px; padding: 10px 12px;
+                          margin-top: 8px; font-size: 11px; color: var(--text);
+                          line-height: 1.5; }
+        .schedule-info code { background: #fff; border: 1px solid var(--border);
+                                padding: 1px 4px; border-radius: 5px; font-size: 10px; }
+        .kpi-divider { height: 1px; background: var(--border); margin: 14px 0 10px; }
+        .age-hist { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
+        .age-row { display: grid; grid-template-columns: 50px 1fr 28px;
+                    align-items: center; gap: 8px; font-size: 11px; }
+        .age-label { color: #666; font-variant-numeric: tabular-nums; }
+        .age-bar { height: 6px; background: #f1f3f5; border-radius: 5px;
+                    overflow: hidden; }
+        .age-fill { height: 100%; border-radius: 5px; transition: width 0.2s; }
+        .age-count { text-align: right; font-weight: 600; color: var(--text);
+                      font-variant-numeric: tabular-nums; }
+        .kpi-date { font-size: 18px; line-height: 1.2; letter-spacing: -0.01em; }
+        .page-head { display: flex; align-items: center; gap: 10px;
+                      margin-bottom: 8px; }
+        .page-head h1 { margin: 0; }
+        .info-toggle { width: 22px; height: 22px; border-radius: 50%;
+                        border: 1px solid #c5cdd6; background: #fff;
+                        color: var(--muted); font-family: serif; font-style: italic;
+                        font-size: 13px; cursor: pointer; line-height: 1;
+                        padding: 0; }
+        .info-toggle:hover { border-color: var(--accent-dark); color: var(--accent-dark); }
+        .info-toggle.active { background: var(--accent-dark); color: #fff; border-color: var(--accent-dark); }
+        .info-panel { background: #fff; border: 1px solid var(--border);
+                       border-radius: 8px; padding: 12px 16px; margin: 8px 0 14px;
+                       font-size: 12px; color: #4a4a4a; }
+        .info-panel p { margin: 0 0 6px; }
+        .info-panel p:last-child { margin-bottom: 0; }
+        .items-matrix { width: 100%; border-collapse: collapse; margin-top: 8px;
+                         font-variant-numeric: tabular-nums; }
+        .items-matrix th { font-size: 10px; color: var(--muted); text-transform: uppercase;
+                            letter-spacing: 0.05em; font-weight: 600; padding: 4px 8px;
+                            text-align: center; border-bottom: 1px solid var(--border);
+                            vertical-align: bottom; }
+        .items-matrix th:nth-child(2) { text-align: right; }
+        .items-matrix .col-sub { display: block; font-size: 9px; color: #b0b0b0;
+                                  font-weight: 400; text-transform: none;
+                                  letter-spacing: 0; margin-top: 2px; }
+        .items-matrix .col-sub-triple { display: flex;
+                                          justify-content: space-between;
+                                          align-items: center; gap: 0;
+                                          padding: 0 4px; }
+        .items-matrix .col-sub-triple > span { flex: 1 1 0; text-align: center;
+                                                 font-variant-numeric: tabular-nums; }
+        .items-matrix th.row-label { text-align: left; color: var(--text);
+                                      text-transform: none; letter-spacing: 0;
+                                      font-weight: 500; font-size: 12px; }
+        .items-matrix th:first-child { text-align: left; }
+        .items-matrix td { font-size: 13px; padding: 5px 8px; text-align: right;
+                            border-bottom: 1px solid #f1f3f5; }
+        .items-matrix td.matrix-cell { min-width: 130px; padding: 5px 6px; }
+        .items-matrix tr:last-child td,
+        .items-matrix tr:last-child th { border-bottom: none; }
+        .items-matrix .cell-open { font-weight: 700; color: var(--ink); font-size: 14px; }
+        .items-matrix tr.sub-row th.row-label { padding-left: 18px;
+                                                  font-weight: 400;
+                                                  color: var(--muted); font-size: 11px; }
+        .items-matrix tr.sub-row td { color: var(--muted); font-size: 12px; }
+        .items-matrix tr.sub-row .cell-open { color: var(--muted); font-weight: 600;
+                                               font-size: 12px; }
+        .items-matrix tr.sub-row .cell-rec,
+        .items-matrix tr.sub-row .cell-ful { color: var(--muted); }
+        .items-matrix .cell-pair { display: flex; align-items: baseline;
+                                    justify-content: space-between;
+                                    padding: 0 4px; gap: 0; }
+        .items-matrix .cell-rec, .items-matrix .cell-ful, .items-matrix .cell-delta {
+            flex: 1 1 0; text-align: center;
+            font-variant-numeric: tabular-nums;
+        }
+        .items-matrix .cell-rec, .items-matrix .cell-ful { color: #4a4a4a; }
+        .items-matrix .cell-delta { font-size: 13px; color: var(--muted); }
+        .items-matrix .cell-delta-pos { color: var(--muted); }
+        .items-matrix .cell-delta-neg { color: var(--muted); }
+        .items-matrix .cell-zero { color: #c5c5c5; }
+        .matrix-view-toggle { display: flex; gap: 4px; align-items: center;
+                               margin-top: 10px; padding: 6px 10px;
+                               background: var(--bg); border: 1px solid var(--border);
+                               border-radius: 8px; flex-wrap: wrap; }
+        .matrix-view-btn { padding: 3px 12px; font-size: 11px;
+                            border: 1px solid #ddd; background: #fff;
+                            border-radius: 5px; cursor: pointer;
+                            font-family: inherit; color: #4A4A4A; }
+        .matrix-view-btn:hover { border-color: var(--accent-dark); }
+        .matrix-view-btn.active { background: var(--accent-dark); color: #fff;
+                                   border-color: var(--accent-dark); font-weight: 600; }
+        .matrix-note { font-size: 10px; color: var(--muted); margin-top: 8px;
+                        padding-top: 8px; border-top: 1px dashed var(--border);
+                        font-style: italic; }
+        .matrix-note > div { margin-bottom: 4px; }
+        .matrix-note > div:last-child { margin-bottom: 0; }
+        .matrix-info-toggle { width: 16px; height: 16px; padding: 0;
+                               border: 1px solid #c5cdd6; background: #fff;
+                               color: var(--muted); border-radius: 50%;
+                               font-family: serif; font-style: italic;
+                               font-size: 10px; line-height: 1; cursor: pointer;
+                               vertical-align: middle; margin-left: 4px; }
+        .matrix-info-toggle:hover, .matrix-info-toggle.active {
+                                background: var(--accent-dark); color: #fff;
+                                border-color: var(--accent-dark); }
+        .matrix-info { background: var(--bg); border: 1px solid var(--border);
+                        border-radius: 8px; padding: 10px 12px; margin-top: 8px;
+                        font-style: normal; color: var(--text); }
+        .matrix-info p { margin: 0 0 6px; }
+        .matrix-info p:last-child { margin-bottom: 0; }
+        .matrix-info code { background: #fff; border: 1px solid var(--border);
+                             padding: 1px 4px; border-radius: 5px; font-size: 10px; }
+        .kpi-flags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+        .kpi-pill { display: inline-flex; align-items: stretch; cursor: help;
+                     border-radius: 5px; overflow: hidden; line-height: 1; }
+        .kpi-pill-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+                         padding: 4px 7px; color: #fff;
+                         display: flex; align-items: center; }
+        .kpi-pill-num { font-weight: 700; font-size: 12px;
+                          font-variant-numeric: tabular-nums; color: var(--ink);
+                          padding: 4px 7px; background: #fff;
+                          border: 1px solid var(--border); border-left: none;
+                          display: flex; align-items: center;
+                          min-width: 14px; justify-content: center; }
+        .kpi-pill-exp   .kpi-pill-tag { background: #e74c3c; }
+        .kpi-pill-quick .kpi-pill-tag { background: #d4a017; }
+        .kpi-pill-large .kpi-pill-tag { background: #2c3e50; }
+        .kpi-pill-hold  .kpi-pill-tag { background: #6c757d; }
+        .kpi-pill-trade .kpi-pill-tag { background: #FF9912; }
+        .kpi-pill-vip   .kpi-pill-tag { background: #6f42c1; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+        th { background: #f1f3f5; padding: 8px 12px; text-align: left;
+             font-size: 12px; text-transform: uppercase; color: #666;
+             border-bottom: 2px solid var(--border); }
+        td { padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+        tr:hover { background: var(--bg); }
+        .section-header { background: var(--accent-dark); color: white; padding: 10px 14px;
+                          font-size: 14px; font-weight: 600; margin-top: 20px;
+                          border-radius: 4px 4px 0 0; }
+        .rack-info { color: var(--muted); font-size: 12px; }
+        .qty { font-weight: 600; font-size: 16px; }
+        .rack-count { color: #e67e22; font-weight: 500; }
+        .adjustment { color: #e74c3c; font-style: italic; }
+        .order-card { border: 1px solid var(--border); border-radius: 8px;
+                      padding: 16px; margin-bottom: 12px; }
+        .order-header { font-weight: 600; font-size: 16px; margin-bottom: 8px; }
+        .order-customer { color: #666; font-size: 13px; }
+        .order-products { margin-top: 8px; }
+        .chart-container { max-width: 800px; margin: 0 auto 30px; }
+        @media print {
+            body { padding: 0; font-size: 12px; }
+            .kpi-row { display: none; }
+            .chart-container { display: none; }
+            .no-print { display: none; }
+            table { font-size: 11px; }
+            .section-header { background: #333 !important; -webkit-print-color-adjust: exact; }
+            .order-card { page-break-inside: avoid; }
+            h1 { font-size: 18px; }
+        }
+    
+
+        /* Color banner — title is an inline pill hugging the text;
+           fill is the color itself; fg auto-picked for contrast. */
+        .color-banner { margin-bottom: 18px; }
+        .color-banner h1 { margin: 0; font-size: 22px; font-weight: 600;
+                            display: inline-block;
+                            padding: 6px 18px;
+                            border-radius: 999px;
+                            line-height: 1.2; }
+        .color-banner .date { margin: 6px 0 0; font-size: 13px;
+                               color: #555; }
+        .color-banner .batch-id { font-variant-numeric: tabular-nums;
+                                   letter-spacing: 0.3px; font-weight: 500;
+                                   opacity: 1; }
+        .tab-bar { display: flex; gap: 0; margin: 20px 0 0; }
+        .tab { padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer;
+               border: 1px solid var(--border); border-bottom: none; border-radius: 6px 6px 0 0;
+               background: #f1f3f5; color: #666; }
+        .tab.active { background: #fff; color: var(--accent-dark); border-bottom: 1px solid #fff;
+                      margin-bottom: -1px; position: relative; z-index: 1; }
+        .tab-content { border-top: 1px solid var(--border); padding-top: 12px; }
+        .view { display: none; }
+        .view.active { display: block; }
+        .parts-grid { display: grid; grid-template-columns: repeat(6, 1fr);
+                      gap: 10px; margin-top: 8px; align-items: flex-start; }
+        .parts-section { min-width: 0; }
+        /* Soft pill — light gray fill, uppercase label, rounded.
+           Prints with minimal ink; reads like a label/tag. */
+        .parts-section .section-header { margin-top: 0; font-size: 10px;
+                                          padding: 5px 12px;
+                                          background: #f3f3f3; color: #4a4a4a;
+                                          border: none;
+                                          border-radius: 999px;
+                                          letter-spacing: 0.6px;
+                                          text-transform: uppercase;
+                                          font-weight: 600;
+                                          display: inline-block;
+                                          margin-bottom: 4px; }
+        .parts-table { width: 100%; border-collapse: collapse; margin: 0;
+                       border: 1px solid var(--border); border-top: none; }
+        .parts-table td { padding: 2px 6px; border-bottom: 1px solid #f0f0f0;
+                          font-size: 13px; line-height: 1.3; }
+        .parts-table td.chk-cell { width: 18px; padding: 2px 4px; }
+        .parts-table td:nth-child(2) { font-weight: 500; white-space: nowrap; }
+        .parts-table td:last-child { text-align: right; font-weight: 600;
+                                      font-size: 13px; padding-left: 10px;
+                                      font-variant-numeric: tabular-nums; }
+        .parts-table tr:last-child td { border-bottom: none; }
+        .part-link { color: inherit; text-decoration: none;
+                     border-bottom: 1px dotted #b8b8b8; }
+        .part-link:hover { color: var(--accent-dark);
+                           border-bottom-color: var(--accent-dark); }
+        /* Empty printable checkbox — Catherine marks with an X on the floor */
+        .wash-chk { display: inline-block; width: 12px; height: 12px;
+                    border: 1.5px solid #888; border-radius: 2px;
+                    vertical-align: middle; background: #fff; }
+        /* Order strip — single line of order chips under the banner */
+        .order-strip { margin: 12px 0 16px; font-size: 12px;
+                        line-height: 1.6; color: #4a4a4a; }
+        .order-strip .ord-strip-label { font-weight: 600; color: #1a1a1a;
+                                          margin-right: 6px; }
+        .ord-chip { font-variant-numeric: tabular-nums;
+                    background: #f3f3f3; padding: 1px 7px; border-radius: 10px;
+                    display: inline-block; margin: 1px 1px;
+                    border: 1px solid #e0e0e0; }
+        @media print {
+            .part-link { color: inherit !important; border-bottom: none; }
+        }
+        .mask { background: #d4edda; }
+        .orders-table { width: 100%; border-collapse: separate;
+                         border-spacing: 0; }
+        /* Soft header row — light gray fill, uppercase muted label,
+           rounded outer corners; matches the look Catherine wants. */
+        .orders-table thead th { text-align: left;
+                                 background: #f3f3f3; color: #6a6a6a;
+                                 font-size: 10px; font-weight: 600;
+                                 letter-spacing: 0.6px;
+                                 text-transform: uppercase;
+                                 padding: 6px 10px; border: none;
+                                 border-top: 1px solid #e0e0e0;
+                                 border-bottom: 1px solid #e0e0e0; }
+        .orders-table thead th:first-child {
+            border-left: 1px solid #e0e0e0;
+            border-radius: 999px 0 0 999px; padding-left: 14px; }
+        .orders-table thead th:last-child {
+            border-right: 1px solid #e0e0e0;
+            border-radius: 0 999px 999px 0; padding-right: 14px;
+            text-align: right; }
+        .orders-table td { padding: 4px 10px; border-bottom: 1px solid #eee;
+                           font-size: 13px; vertical-align: top; }
+        .orders-table .col-order { white-space: nowrap; width: 80px; }
+        .orders-table .col-date { white-space: nowrap; width: 60px; color: #999;
+                                   font-size: 12px; }
+        .orders-table .col-sku { font-family: monospace; font-size: 12px;
+                                  font-weight: 600; white-space: nowrap; width: 120px; }
+        .orders-table .col-name { color: #555; }
+        .orders-table .col-qty { text-align: right; width: 36px; font-weight: 600;
+                                  font-variant-numeric: tabular-nums; }
+        .exp-tag { display: inline-block; background: #e74c3c; color: #fff;
+                   font-size: 9px; font-weight: 700; padding: 1px 4px;
+                   border-radius: 5px; margin-left: 5px; vertical-align: middle;
+                   letter-spacing: 0.5px; }
+        .exp-row { background: #fdf0ef; }
+        .legend { margin: 12px 0 4px; font-size: 12px; color: #666; }
+        .legend span { display: inline-block; padding: 2px 8px; border-radius: 5px;
+                       margin-right: 10px; }
+        .legend .lg-mask { background: #d4edda; }
+        .legend .lg-exp { background: #e74c3c; color: #fff; }
+        .sort-order { border: 1px solid var(--border); border-radius: 8px;
+                      margin-bottom: 14px; overflow: hidden; background: #fff; }
+        .sort-order-header { padding: 10px 14px;
+                              display: flex; justify-content: space-between;
+                              align-items: center; border-bottom: 1px solid #eee; }
+        .sort-order-header .oname { font-weight: 600; font-size: 15px; }
+        .sort-order-header .cust { color: var(--muted); font-size: 12px; }
+        /* Soft pill — light gray fill, low ink. */
+        .sort-order-header .total-parts { background: #f3f3f3; color: #4a4a4a;
+                              border: none;
+                              font-size: 10px; font-weight: 600;
+                              letter-spacing: 0.4px;
+                              text-transform: uppercase;
+                              padding: 2px 9px;
+                              border-radius: 999px; margin-left: 8px; }
+        .sort-product { padding: 8px 14px; border-bottom: 1px solid #f5f5f5; }
+        .sort-product:last-child { border-bottom: none; }
+        .sort-prod-header { display: flex; justify-content: space-between;
+                            align-items: baseline; margin-bottom: 4px; }
+        .sort-prod-header .pname { font-size: 13px; font-weight: 500; }
+        .sort-prod-header .pqty { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+        .sort-parts-grid { display: flex; flex-wrap: wrap; gap: 0; }
+        .sort-part { display: inline-flex; align-items: baseline; gap: 4px;
+                     padding: 2px 10px 2px 0; font-size: 12px; color: #555; }
+        .sort-part .sp-name { font-weight: 500; }
+        .sort-part .sp-qty { font-weight: 700; color: #1a1a1a;
+                             font-variant-numeric: tabular-nums; }
+        /* Tray sort-back row — consolidated alphabetical part counts for the
+           whole order. Sorter scans left→right, drops each part into the
+           order's tray. The per-product breakdown stays underneath. */
+        .sort-tray-row { display: flex; flex-wrap: wrap;
+                          gap: 4px 12px; padding: 8px 14px;
+                          background: #fafafa;
+                          border-top: 1px solid var(--border);
+                          border-bottom: 1px solid var(--border); }
+        .sort-tray-row .tray-part { display: inline-flex; align-items: baseline;
+                                     gap: 4px; font-size: 12px; color: #1a1a1a; }
+        .sort-tray-row .tray-part .sp-name { font-weight: 600;
+                                              font-variant-numeric: tabular-nums; }
+        .sort-tray-row .tray-part .sp-qty { font-weight: 700;
+                                             color: #1a1a1a;
+                                             font-variant-numeric: tabular-nums;
+                                             min-width: 14px; }
+        @media print {
+            .sort-tray-row { background: #f5f5f5 !important;
+                              -webkit-print-color-adjust: exact;
+                              print-color-adjust: exact;
+                              font-size: 11px; }
+        }
+        @media print {
+            .tab-bar { display: none; }
+            .view { display: block !important; page-break-before: always; }
+            .view:first-child { page-break-before: auto; }
+            .parts-grid { gap: 4px; }
+            .parts-section { page-break-inside: avoid; }
+            .parts-section .section-header { font-size: 10px; padding: 3px 5px;
+                        background: #333 !important; -webkit-print-color-adjust: exact; }
+            .parts-table td { padding: 1px 4px; font-size: 11px; }
+            .color-banner, .mask, .exp-tag, .exp-row {
+                -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .sort-order { page-break-inside: avoid; }
+        }
+    </style>
+</head><body>
+
+<div class="color-banner">
+    <h1 style="background:#FFFFFF;color:#1a1a1a;">Parts Wash List — White</h1>
+    <div class="date">May 12, 2026 &middot; <span class="batch-id">Batch 2026-05-12-01</span></div>
+</div>
+
+<div class="order-strip">
+    <span class="ord-strip-label">Orders (9):</span>
+    <span class="ord-chip">35091</span> &middot; <span class="ord-chip">35365</span> &middot; <span class="ord-chip">35392</span> &middot; <span class="ord-chip">35435</span> &middot; <span class="ord-chip">35436</span> &middot; <span class="ord-chip">35450</span> &middot; <span class="ord-chip">35497</span> &middot; <span class="ord-chip">35540</span> &middot; <span class="ord-chip">35555</span>
+</div>
+
+<div class="kpi-row">
+    <div class="kpi"><div class="kpi-value">9</div><div class="kpi-label">Orders</div></div>
+    <div class="kpi"><div class="kpi-value">26</div><div class="kpi-label">Total Items</div></div>
+    <div class="kpi"><div class="kpi-value">21</div><div class="kpi-label">Lighting</div></div>
+    <div class="kpi"><div class="kpi-value">5</div><div class="kpi-label">Hardware</div></div>
+    <div class="kpi"><div class="kpi-value">110</div><div class="kpi-label">Total Parts</div></div>
+</div>
+
+<div class="legend">
+    <span class="lg-mask">Green = mask before coating</span>
+    <span class="lg-exp">EXP = expedite</span>
+</div>
+
+<div class="tab-bar">
+    <div class="tab active" onclick="switchTab('parts')">Parts Wash List</div>
+    <div class="tab" onclick="switchTab('sort')">Sort Back</div>
+</div>
+
+<div class="tab-content">
+    <div id="view-parts" class="view active">
+        <div class="parts-grid">
+        <div class="parts-section" style="grid-column: 1; grid-row: 1;">
+<div class="section-header">Pipes</div>
+<table class="parts-table"><tbody>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b814f8ddcf8b3d83410ca" target="_blank" rel="noopener" class="part-link">PFB2</a></td><td>4</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b811c89e2f4b40c85d4b4" target="_blank" rel="noopener" class="part-link">PM5</a></td><td>4</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b8148acfef6c3cf0c4698" target="_blank" rel="noopener" class="part-link">PM7</a></td><td>12</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81aba9aef927187a3b5f" target="_blank" rel="noopener" class="part-link">PM10</a></td><td>6</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b812c901dd801ad7dce2a" target="_blank" rel="noopener" class="part-link">PF2</a></td><td>6</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section" style="grid-column: 2; grid-row: 1;">
+<div class="section-header">Lamp Cups</div>
+<table class="parts-table"><tbody>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></td><td>7</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></td><td>6</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b8167a071e3f05f30d203" target="_blank" rel="noopener" class="part-link">LC3</a></td><td>24</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section" style="grid-column: 3; grid-row: 1;">
+<div class="section-header">Pipes (2)</div>
+<table class="parts-table"><tbody>
+<tr class="mask"><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b817fa464cf2c59f5f4eb" target="_blank" rel="noopener" class="part-link">SPC1</a></td><td>1</td></tr>
+<tr class="mask"><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81628f02fdd1b35d01cc" target="_blank" rel="noopener" class="part-link">SPC2</a></td><td>1</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section" style="grid-column: 6; grid-row: 1;">
+<div class="section-header">Misc</div>
+<table class="parts-table"><tbody>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81b58233fdd5d9446260" target="_blank" rel="noopener" class="part-link">RO5/8x8</a></td><td>5</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81f38cbfccae133a67a2" target="_blank" rel="noopener" class="part-link">KN1</a></td><td>2</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section" style="grid-column: 1; grid-row: 2;">
+<div class="section-header">Bodies / Shades</div>
+<table class="parts-table"><tbody>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81638535daec87970686" target="_blank" rel="noopener" class="part-link">BS1-M0</a></td><td>2</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section" style="grid-column: 3; grid-row: 2;">
+<div class="section-header">Canopies</div>
+<table class="parts-table"><tbody>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></td><td>8</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81fd905de731497a8b20" target="_blank" rel="noopener" class="part-link">CA5-M0</a></td><td>2</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section" style="grid-column: 4; grid-row: 2;">
+<div class="section-header">Caps / Canopies</div>
+<table class="parts-table"><tbody>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b8118b65ef938fc8c91ae" target="_blank" rel="noopener" class="part-link">CRC5</a></td><td>1</td></tr>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b81e18585e2e946aff663" target="_blank" rel="noopener" class="part-link">GC8</a></td><td>17</td></tr>
+<tr class="mask"><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b816b8240dbd4e2c648f7" target="_blank" rel="noopener" class="part-link">DO6-M2</a></td><td>1</td></tr>
+</tbody></table>
+</div>
+<div class="parts-section" style="grid-column: 1; grid-row: 3;">
+<div class="section-header">Domes</div>
+<table class="parts-table"><tbody>
+<tr><td class="chk-cell"><span class="wash-chk"></span></td><td><a href="https://www.notion.so/2ceffa524c5b815198e4de89c365ca4b" target="_blank" rel="noopener" class="part-link">DO12-M1</a></td><td>1</td></tr>
+</tbody></table>
+</div>
+
+        </div>
+
+        <h2 style="margin-top:30px;">Orders in This Batch</h2>
+        <table class="orders-table">
+        <thead><tr><th>Order</th><th>Date</th><th>SKU</th><th>Product</th><th>Qty</th></tr></thead>
+        <tbody><tr><td class="col-order">35091</td><td class="col-date">Apr 09</td><td class="col-sku">21800-2A</td><td class="col-name">Color Elliptical Sputnik Chandelier - Nickel / White</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35091</td><td class="col-date">Apr 09</td><td class="col-sku">20630-2A</td><td class="col-name">Color Sputnik Flush Mount - Nickel / White</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35365</td><td class="col-date">Apr 28</td><td class="col-sku">40120-6-2A</td><td class="col-name">Color Boom Sconce - 6" Arm - Nickel / White</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">35392</td><td class="col-date">Apr 29</td><td class="col-sku">60121-2A</td><td class="col-name">Color Snug Sconce - Nickel / White / Hardwired (no switch)</td><td class="col-qty">4</td></tr>
+<tr><td class="col-order">35435</td><td class="col-date">May 01</td><td class="col-sku">60224-1A</td><td class="col-name">Color Ruler Sconce - Brass / White</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">35436</td><td class="col-date">May 01</td><td class="col-sku">60125-3A</td><td class="col-name">Color Twink Sconce - Black / White / Hardwired (no switch)</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">35436</td><td class="col-date">May 01</td><td class="col-sku">30112-12-3A</td><td class="col-name">Color Lure Pendant 12" - Black / White</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35436</td><td class="col-date">May 01</td><td class="col-sku">30221-3A</td><td class="col-name">Color Cap Double Sconce 8" - Black / White</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">35436</td><td class="col-date">May 01</td><td class="col-sku">31001-3A</td><td class="col-name">Color Crown Chandelier 46" - Black / White</td><td class="col-qty">1</td></tr>
+<tr><td class="col-order">35450</td><td class="col-date">May 02</td><td class="col-sku">70221-3A</td><td class="col-name">Color Phoenix Sconce - Black / White</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">35497</td><td class="col-date">May 06</td><td class="col-sku">H33-8-2A</td><td class="col-name">Color Swift Pull - Nickel - 8" (C-C 6") / White</td><td class="col-qty">5</td></tr>
+<tr><td class="col-order">35540</td><td class="col-date">May 07</td><td class="col-sku">60130-2A</td><td class="col-name">Color Reader Flush Mount - Nickel / White</td><td class="col-qty">2</td></tr>
+<tr><td class="col-order">35555</td><td class="col-date">May 09</td><td class="col-sku">70122-A</td><td class="col-name">Color Lepore Sconce - White</td><td class="col-qty">1</td></tr>
+</tbody>
+        </table>
+    </div>
+
+    <div id="view-sort" class="view">
+        <p class="subtitle">Sort coated parts back to their original orders.</p>
+        <div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35091</span><span class="total-parts">51 parts</span></div>
+                <span class="cust">Heather Osen</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b816b8240dbd4e2c648f7" target="_blank" rel="noopener" class="part-link">DO6-M2</a></span> <span class="sp-qty">1</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8167a071e3f05f30d203" target="_blank" rel="noopener" class="part-link">LC3</a></span> <span class="sp-qty">24</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b812c901dd801ad7dce2a" target="_blank" rel="noopener" class="part-link">PF2</a></span> <span class="sp-qty">6</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81aba9aef927187a3b5f" target="_blank" rel="noopener" class="part-link">PM10</a></span> <span class="sp-qty">6</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8148acfef6c3cf0c4698" target="_blank" rel="noopener" class="part-link">PM7</a></span> <span class="sp-qty">12</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b817fa464cf2c59f5f4eb" target="_blank" rel="noopener" class="part-link">SPC1</a></span> <span class="sp-qty">1</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81628f02fdd1b35d01cc" target="_blank" rel="noopener" class="part-link">SPC2</a></span> <span class="sp-qty">1</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Elliptical Sputnik Chandelier - Nickel / White</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8167a071e3f05f30d203" target="_blank" rel="noopener" class="part-link">LC3</a></span> <span class="sp-qty">18</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81aba9aef927187a3b5f" target="_blank" rel="noopener" class="part-link">PM10</a></span> <span class="sp-qty">6</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8148acfef6c3cf0c4698" target="_blank" rel="noopener" class="part-link">PM7</a></span> <span class="sp-qty">12</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b817fa464cf2c59f5f4eb" target="_blank" rel="noopener" class="part-link">SPC1</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81628f02fdd1b35d01cc" target="_blank" rel="noopener" class="part-link">SPC2</a></span> <span class="sp-qty">1</span></span></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Sputnik Flush Mount - Nickel / White</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b816b8240dbd4e2c648f7" target="_blank" rel="noopener" class="part-link">DO6-M2</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8167a071e3f05f30d203" target="_blank" rel="noopener" class="part-link">LC3</a></span> <span class="sp-qty">6</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b812c901dd801ad7dce2a" target="_blank" rel="noopener" class="part-link">PF2</a></span> <span class="sp-qty">6</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35365</span><span class="total-parts">6 parts</span></div>
+                <span class="cust">Sivan Schiller</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81638535daec87970686" target="_blank" rel="noopener" class="part-link">BS1-M0</a></span> <span class="sp-qty">2</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81fd905de731497a8b20" target="_blank" rel="noopener" class="part-link">CA5-M0</a></span> <span class="sp-qty">2</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81f38cbfccae133a67a2" target="_blank" rel="noopener" class="part-link">KN1</a></span> <span class="sp-qty">2</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Boom Sconce - 6" Arm - Nickel / White</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81638535daec87970686" target="_blank" rel="noopener" class="part-link">BS1-M0</a></span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81fd905de731497a8b20" target="_blank" rel="noopener" class="part-link">CA5-M0</a></span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81f38cbfccae133a67a2" target="_blank" rel="noopener" class="part-link">KN1</a></span> <span class="sp-qty">2</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35392</span><span class="total-parts">12 parts</span></div>
+                <span class="cust">Viking Electric</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">4</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></span> <span class="sp-qty">4</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b814f8ddcf8b3d83410ca" target="_blank" rel="noopener" class="part-link">PFB2</a></span> <span class="sp-qty">4</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Snug Sconce - Nickel / White / Hardwired (no switch)</span>
+                    <span class="pqty">x4</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">4</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></span> <span class="sp-qty">4</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b814f8ddcf8b3d83410ca" target="_blank" rel="noopener" class="part-link">PFB2</a></span> <span class="sp-qty">4</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35435</span><span class="total-parts">4 parts</span></div>
+                <span class="cust">Dana Hedrick</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></span> <span class="sp-qty">4</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Ruler Sconce - Brass / White</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></span> <span class="sp-qty">4</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35436</span><span class="total-parts">22 parts</span></div>
+                <span class="cust">Janette Kovsky</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">2</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b815198e4de89c365ca4b" target="_blank" rel="noopener" class="part-link">DO12-M1</a></span> <span class="sp-qty">1</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81e18585e2e946aff663" target="_blank" rel="noopener" class="part-link">GC8</a></span> <span class="sp-qty">17</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></span> <span class="sp-qty">2</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Twink Sconce - Black / White / Hardwired (no switch)</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></span> <span class="sp-qty">2</span></span></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Lure Pendant 12" - Black / White</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b815198e4de89c365ca4b" target="_blank" rel="noopener" class="part-link">DO12-M1</a></span> <span class="sp-qty">1</span></span></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Cap Double Sconce 8" - Black / White</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81e18585e2e946aff663" target="_blank" rel="noopener" class="part-link">GC8</a></span> <span class="sp-qty">4</span></span></div>
+            </div>
+<div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Crown Chandelier 46" - Black / White</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81e18585e2e946aff663" target="_blank" rel="noopener" class="part-link">GC8</a></span> <span class="sp-qty">13</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35450</span><span class="total-parts">4 parts</span></div>
+                <span class="cust">Joann Shapiro</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b811c89e2f4b40c85d4b4" target="_blank" rel="noopener" class="part-link">PM5</a></span> <span class="sp-qty">4</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Phoenix Sconce - Black / White</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b811c89e2f4b40c85d4b4" target="_blank" rel="noopener" class="part-link">PM5</a></span> <span class="sp-qty">4</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35497</span><span class="total-parts">5 parts</span></div>
+                <span class="cust">Jody Deluca Designs</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b58233fdd5d9446260" target="_blank" rel="noopener" class="part-link">RO5/8x8</a></span> <span class="sp-qty">5</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Swift Pull - Nickel - 8" (C-C 6") / White</span>
+                    <span class="pqty">x5</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b58233fdd5d9446260" target="_blank" rel="noopener" class="part-link">RO5/8x8</a></span> <span class="sp-qty">5</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35540</span><span class="total-parts">4 parts</span></div>
+                <span class="cust">Brianna Fano</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">2</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></span> <span class="sp-qty">2</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Reader Flush Mount - Nickel / White</span>
+                    <span class="pqty">x2</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81ab9ab5e4074c7392df" target="_blank" rel="noopener" class="part-link">CA5</a></span> <span class="sp-qty">2</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81d6a9c2debc23ce5bdf" target="_blank" rel="noopener" class="part-link">LC2</a></span> <span class="sp-qty">2</span></span></div>
+            </div>
+
+        </div>
+<div class="sort-order" style="">
+            <div class="sort-order-header">
+                <div><span class="oname">35555</span><span class="total-parts">2 parts</span></div>
+                <span class="cust">Laura Pellicone</span>
+            </div>
+            <div class="sort-tray-row" title="Alphabetical part counts for tray sort-back"><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8118b65ef938fc8c91ae" target="_blank" rel="noopener" class="part-link">CRC5</a></span> <span class="sp-qty">1</span></span><span class="tray-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></span> <span class="sp-qty">1</span></span></div>
+            <div class="sort-product">
+                <div class="sort-prod-header">
+                    <span class="pname">Color Lepore Sconce - White</span>
+                    <span class="pqty">x1</span>
+                </div>
+                <div class="sort-parts-grid"><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b8118b65ef938fc8c91ae" target="_blank" rel="noopener" class="part-link">CRC5</a></span> <span class="sp-qty">1</span></span><span class="sort-part"><span class="sp-name"><a href="https://www.notion.so/2ceffa524c5b81b5a3e6e7d36039ee92" target="_blank" rel="noopener" class="part-link">LC1</a></span> <span class="sp-qty">1</span></span></div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+function switchTab(view) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + view).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
+</body></html>
