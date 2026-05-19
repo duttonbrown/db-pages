@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-18T18:12:27.743483-05:00",
-  "order_count": 165,
+  "updated_at": "2026-05-18T20:32:29.491900-05:00",
+  "order_count": 166,
   "zero_order_count": 2,
   "lighting": {
-    "total": 1007,
-    "color": 998,
-    "non_color": 9
+    "total": 1010,
+    "color": 1000,
+    "non_color": 10
   },
   "hardware": {
     "total": 396,
@@ -13,7 +13,7 @@
     "non_color": 87
   },
   "expedites": 0,
-  "open_value": 429352.65,
+  "open_value": 430545.5,
   "oldest_order_days": 77,
   "avg_days_to_fulfill": 10.3
 }
