@@ -421,7 +421,10 @@ function renderItemRow(r) {
 
   const itemTitle = r.itemName || r.customItemName || "(unnamed)";
   const description = r.description || "";
-  const qtyDefault = r.qtyOrdered != null ? r.qtyOrdered : "";
+  // Received qty starts blank — receiver must explicitly enter what arrived,
+  // so we don't accidentally close out a row when only part of it is in the
+  // box. The Ordered count is shown next to it as a reference.
+  const qtyOrdered = r.qtyOrdered != null ? r.qtyOrdered : "";
   const thumbHtml = r.image
     ? `<img class="item-thumb" src="${escapeHtml(r.image)}" alt="">`
     : `<div class="item-thumb-fallback">${r.type === "Supply" ? "📦" : r.type === "Other" ? "🛠️" : "🔩"}</div>`;
@@ -449,11 +452,11 @@ function renderItemRow(r) {
     <div class="item-qty">
       <label>
         <span class="meta-label">Ordered</span>
-        <span class="qty-ordered">${escapeHtml(String(qtyDefault))}</span>
+        <span class="qty-ordered">${escapeHtml(String(qtyOrdered))}</span>
       </label>
       <label>
         <span class="meta-label">Received</span>
-        <input type="number" class="item-qty-received" min="0" value="${escapeHtml(String(qtyDefault))}">
+        <input type="number" class="item-qty-received" min="0" value="" placeholder="${escapeHtml(String(qtyOrdered))}" data-qty-ordered="${escapeHtml(String(qtyOrdered))}">
       </label>
     </div>
     <div class="item-issue-wrap">
@@ -471,6 +474,76 @@ function renderItemRow(r) {
   return li;
 }
 
+// Short-shipment modal — appears whenever an item's arrived qty is less than
+// what was ordered. Receiver decides per item:
+//   "More expected" (default) → close this row at the arrived qty, AND spawn
+//     a new sibling row for the remainder. Receiver continues to log future
+//     boxes against the sibling.
+//   "Nothing more coming"     → close this row at the arrived qty and drop
+//     the remainder. The shortfall is accepted as the final outcome.
+// Resolves to a map of pageId -> "split" | "close", or null if cancelled.
+function promptShortShipments(shortItems) {
+  return new Promise((resolve) => {
+    const overlay = document.createElement("div");
+    overlay.className = "receive-modal-overlay";
+    const rows = shortItems.map(it => {
+      const ordered = it.qtyOrdered ?? "?";
+      const got = it.qtyReceived ?? 0;
+      const remainder = (typeof it.qtyOrdered === "number" && typeof it.qtyReceived === "number")
+        ? Math.max(0, it.qtyOrdered - it.qtyReceived)
+        : "?";
+      return `
+        <li class="receive-modal-item" data-page-id="${escapeHtml(it.pageId)}">
+          <div class="receive-modal-item-head">
+            <strong>${escapeHtml(it.itemLabel)}</strong>
+            <span class="receive-modal-counts">${got} of ${ordered} arrived · ${remainder} short</span>
+          </div>
+          <div class="receive-modal-choices" role="radiogroup" aria-label="Status for this item">
+            <label><input type="radio" name="decide-${escapeHtml(it.pageId)}" value="split" checked> More expected — track the remaining ${remainder} on a new row</label>
+            <label><input type="radio" name="decide-${escapeHtml(it.pageId)}" value="close"> Nothing more coming — close and drop the remainder</label>
+          </div>
+        </li>`;
+    }).join("");
+    overlay.innerHTML = `
+      <div class="receive-modal" role="dialog" aria-modal="true" aria-labelledby="receive-modal-title">
+        <header>
+          <h2 id="receive-modal-title">Short shipment</h2>
+          <p class="receive-modal-sub">Less arrived than was ordered. For each item, tell us whether more is expected.</p>
+        </header>
+        <ul class="receive-modal-list">${rows}</ul>
+        <footer class="receive-modal-actions">
+          <button type="button" class="link-btn" data-action="cancel">Cancel</button>
+          <button type="button" class="primary" data-action="confirm">Log shipment</button>
+        </footer>
+      </div>`;
+    document.body.appendChild(overlay);
+
+    const close = (result) => {
+      overlay.remove();
+      document.removeEventListener("keydown", onKey);
+      resolve(result);
+    };
+    const onKey = (e) => { if (e.key === "Escape") close(null); };
+    document.addEventListener("keydown", onKey);
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) close(null);
+      const action = e.target.dataset?.action;
+      if (action === "cancel") close(null);
+      if (action === "confirm") {
+        const decisions = {};
+        for (const it of shortItems) {
+          const picked = overlay.querySelector(`input[name="decide-${CSS.escape(it.pageId)}"]:checked`);
+          // "split" → more expected (worker keeps row open via spawn).
+          // "close" → no more coming (worker closes and skips spawn).
+          decisions[it.pageId] = picked?.value === "close" ? "close" : "split";
+        }
+        close(decisions);
+      }
+    });
+  });
+}
+
 async function submitGroup(section, g, selectedOnly = false) {
   if (!receiverSel.value) {
     alert("Please select your name in the top bar before receiving.");
@@ -486,7 +559,52 @@ async function submitGroup(section, g, selectedOnly = false) {
   });
   if (selected.length === 0) return;
 
-  // Disable buttons while in-flight
+  // Build the per-item payload up front so we can detect short shipments
+  // and ask the receiver how to handle them BEFORE locking the buttons.
+  // Each item carries qtyReceived + a `complete` flag:
+  //   complete=true  -> Status flips to Received. Worker writes the actual
+  //                     qty that arrived to Qty Ordered (truth-up) and does
+  //                     NOT spawn a sibling for any short remainder.
+  //   complete=false -> Status flips to Received on THIS row at the arrived
+  //                     qty, AND the worker spawns a sibling row tracking
+  //                     the remainder (this is the split-shipment path).
+  const items = selected.map(li => {
+    const issue = li.querySelector(".item-issue").checked;
+    const issueText = issue ? li.querySelector(".item-issue-text").value.trim() : "";
+    const qtyInput = li.querySelector(".item-qty-received");
+    const qtyVal = qtyInput.value.trim();
+    const qtyReceived = qtyVal === "" ? null : Number(qtyVal);
+    const qtyOrdered = Number(qtyInput.dataset.qtyOrdered) || null;
+    const isShort = qtyOrdered != null && qtyReceived != null && qtyReceived < qtyOrdered;
+    return {
+      pageId: li.dataset.pageId,
+      qtyReceived,
+      qtyOrdered,
+      isShort,
+      issue,
+      issueNote: issueText,
+      itemLabel: li.querySelector(".item-title")?.textContent || "(item)",
+      // Full shipments are auto-complete. Short shipments default to
+      // splitting (more expected) — the prompt below lets the receiver
+      // flip individual items to "no more coming" which sets complete=true.
+      complete: !isShort,
+    };
+  });
+
+  // If any item is short, ask the receiver whether more is coming.
+  const shortItems = items.filter(it => it.isShort);
+  if (shortItems.length > 0) {
+    const decisions = await promptShortShipments(shortItems);
+    if (decisions === null) {
+      return; // Receiver cancelled — write nothing.
+    }
+    for (const it of items) {
+      if (it.isShort) it.complete = decisions[it.pageId] === "close";
+    }
+  }
+
+  // Disable buttons while in-flight (after the prompt so we don't strand the
+  // section disabled if the receiver cancels the modal).
   const allBtn = section.querySelector(".po-receive-all");
   const selBtn = section.querySelector(".po-receive-selected");
   allBtn.disabled = true;
@@ -494,17 +612,15 @@ async function submitGroup(section, g, selectedOnly = false) {
   const allLabel = allBtn.textContent;
   allBtn.textContent = "Receiving…";
 
-  const items = selected.map(li => {
-    const issue = li.querySelector(".item-issue").checked;
-    const issueText = issue ? li.querySelector(".item-issue-text").value.trim() : "";
-    const qtyVal = li.querySelector(".item-qty-received").value.trim();
-    return {
-      pageId: li.dataset.pageId,
-      qtyReceived: qtyVal === "" ? null : Number(qtyVal),
-      issue,
-      issueNote: issueText,
-    };
-  });
+  // Strip helper-only fields before sending to the worker — it only needs
+  // pageId, qtyReceived, complete, issue, issueNote.
+  const itemsPayload = items.map(it => ({
+    pageId: it.pageId,
+    qtyReceived: it.qtyReceived,
+    complete: it.complete,
+    issue: it.issue,
+    issueNote: it.issueNote,
+  }));
 
   try {
     const res = await fetch(`${WORKER_URL}/receive`, {
@@ -513,22 +629,34 @@ async function submitGroup(section, g, selectedOnly = false) {
       body: JSON.stringify({
         receiverName: receiverSel.value,
         receivedDate: todayISO(),
-        items,
+        items: itemsPayload,
       }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Receive failed");
-    // Drop received rows from the in-memory cache so search counts stay honest
+
+    // Every row in the batch closes on this transaction (Status → Received).
+    // Short shipments with "more expected" spawn a sibling row server-side;
+    // the sibling appears on the next /pending poll, not in this response —
+    // we kick a refresh so receivers see remainder rows right away.
     const receivedIds = new Set(selected.map(li => li.dataset.pageId));
     allOrdered = allOrdered.filter(r => !receivedIds.has(r.pageId));
-
-    // Remove the received items from the DOM. If the group is now empty,
-    // remove the whole section.
     for (const li of selected) li.remove();
+
     if (section.querySelectorAll(".item-row").length === 0) {
       section.remove();
     } else {
       updateSelectedCount(section);
+    }
+
+    // If the worker spawned any sibling rows, refresh to pull them in so
+    // they're immediately visible on this page. Otherwise skip the network
+    // round-trip — the DOM is already correct.
+    const spawnedSiblings = (data.results || []).some(r => r.sibling);
+    if (spawnedSiblings) {
+      // Brief debounce — let the user see the row disappear before the
+      // refresh repopulates with the sibling.
+      setTimeout(() => loadShipments(), 600);
     }
     if (poListEl.querySelectorAll(".po-group").length === 0) {
       emptyEl.innerHTML = `<p>📦 Nothing waiting to be received. The dock is clear.</p>`;

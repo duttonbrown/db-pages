@@ -660,6 +660,38 @@
   font-weight: 500;
 }
 
+/* Tracking deep-link in the archive Received view. Quiet by default, accent
+   on hover so the click affordance is obvious. */
+.archive-section .archive-tracking-link {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--border);
+}
+.archive-section .archive-tracking-link:hover {
+  color: var(--accent-dark);
+  border-bottom-color: var(--accent);
+}
+.archive-section .archive-tracking-carrier {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* "Split shipment" tag — appears on any archive row that's a remainder
+   sibling spawned from a partial receive. Lets receivers and requestors
+   identify chains at a glance. Same family as the tracking dotted link. */
+.archive-section .archive-split-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #F5F3EE;
+  color: #6B5D3E;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: help;
+}
+
 /* Footer meta on the page itself */
 .page-meta {
   margin-top: 16px;
