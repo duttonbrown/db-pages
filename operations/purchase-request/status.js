@@ -516,8 +516,11 @@ function renderArchiveCard(r, idx) {
         </div>
         <div class="archive-meta">
           <span>${closedLine}</span>
+          ${isReceived && r.receiver ? `<span>by <strong>${escapeHtml(r.receiver)}</strong></span>` : ""}
           ${r.qtyOrdered != null ? `<span>Qty: <strong>${r.qtyOrdered}</strong></span>` : ""}
           ${r.poNumber ? `<span>PO: <strong>${escapeHtml(r.poNumber)}</strong></span>` : ""}
+          ${isReceived && r.tracking ? `<span>Tracking: ${renderArchiveTracking(r.tracking)}</span>` : ""}
+          ${r.parentRequestId ? `<span class="archive-split-tag" title="Part of a split shipment chain">split shipment</span>` : ""}
           ${r.cancellationReason ? `<span>Reason: ${escapeHtml(r.cancellationReason)}</span>` : ""}
         </div>
       </div>
@@ -525,6 +528,18 @@ function renderArchiveCard(r, idx) {
     </div>
   `;
   return li;
+}
+
+// Tracking cell on archive cards — shorter than the active-view tracking row.
+// Renders a carrier-aware deep link when we can detect the carrier, otherwise
+// just shows the number. Matches the active card's behavior (see
+// renderTrackingRow + detectCarrier).
+function renderArchiveTracking(tracking) {
+  const carrier = detectCarrier(tracking);
+  if (carrier) {
+    return `<a href="${escapeHtml(carrier.url)}" target="_blank" rel="noopener" class="archive-tracking-link"><strong>${escapeHtml(carrier.clean)}</strong> <span class="archive-tracking-carrier">${escapeHtml(carrier.name)}</span> ↗</a>`;
+  }
+  return `<strong>${escapeHtml(tracking)}</strong>`;
 }
 
 // ----- Process rail rendering -----

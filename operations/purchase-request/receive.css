@@ -352,3 +352,96 @@
   .item-thumb-fallback { width: 36px; height: 36px; font-size: 16px; }
   .item-row { padding: 8px 10px; gap: 10px; }
 }
+
+/* Short-shipment modal — pops up when at least one item in the batch had
+   received qty < ordered. Receiver decides per item: split (more expected,
+   worker spawns a sibling row for the remainder) or close (nothing more
+   coming, accept the shortfall). */
+.receive-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: receive-modal-fade 0.12s ease-out;
+}
+@keyframes receive-modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.receive-modal {
+  background: white;
+  border-radius: 10px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+  padding: 20px 22px;
+  font-family: inherit;
+}
+.receive-modal h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.receive-modal-sub {
+  margin: 0 0 14px;
+  color: var(--ink-faint, #6b6b6b);
+  font-size: 13px;
+}
+.receive-modal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.receive-modal-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.receive-modal-item-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+.receive-modal-counts {
+  color: var(--ink-faint, #6b6b6b);
+  font-size: 12px;
+}
+.receive-modal-prior {
+  font-style: italic;
+  margin-left: 4px;
+}
+.receive-modal-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+.receive-modal-choices label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 2px 0;
+}
+.receive-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.receive-modal-actions .primary {
+  padding: 8px 16px;
+}
