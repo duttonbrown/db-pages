@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-12T18:12:00",
+  "generated_at": "2026-05-21T12:05:38",
   "counts": {
-    "parts": 429,
+    "parts": 434,
     "supplies": 133,
     "families": 279,
     "glossary": 82
@@ -22490,6 +22490,64 @@
       "last_edited_at": "2026-05-12T05:24:00.000Z"
     },
     {
+      "part_number": "BOS18-M2",
+      "page_id": "7d12babd-0bd5-4cf9-833c-684c212d23e8",
+      "page_url": "https://www.notion.so/BOS18-M2-7d12babd0bd54cf9833c684c212d23e8",
+      "image": "parts-images/BOS18-M2.png",
+      "finish": "Aluminum",
+      "status": "Active",
+      "use_2024": 156,
+      "use_2025": 177,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "family_id": "2ceffa52-4c5b-816b-8afe-c99a0a021534",
+      "last_edited_at": "2026-05-12T23:33:00.000Z"
+    },
+    {
+      "part_number": "BOS18-M3",
+      "page_id": "2680515b-db5e-420e-9f84-286aad4cae1e",
+      "page_url": "https://www.notion.so/BOS18-M3-2680515bdb5e420e9f84286aad4cae1e",
+      "image": "parts-images/BOS18-M3.png",
+      "finish": "Aluminum",
+      "status": "Active",
+      "use_2024": 63,
+      "use_2025": 49,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [
+        "Powder Coat",
+        "Machine"
+      ],
+      "family_id": "2ceffa52-4c5b-81a7-9189-df369794af28",
+      "last_edited_at": "2026-05-12T23:33:00.000Z"
+    },
+    {
+      "part_number": "BOS18-M5",
+      "page_id": "628af55a-01f3-4d9b-aac8-bdbdc20c2939",
+      "page_url": "https://www.notion.so/BOS18-M5-628af55a01f34d9baac8bdbdc20c2939",
+      "image": "parts-images/BOS18-M5.png",
+      "finish": "Aluminum",
+      "status": "Active",
+      "use_2024": 310,
+      "use_2025": 127,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "family_id": "2ceffa52-4c5b-81a0-ba49-e606b5e10f9b",
+      "last_edited_at": "2026-05-12T23:33:00.000Z"
+    },
+    {
       "part_number": "BOS18L",
       "page_id": "324ffa52-4c5b-8153-bad8-f9e262c665a5",
       "page_url": "https://www.notion.so/BOS18L-324ffa524c5b8153bad8f9e262c665a5",
@@ -22507,6 +22565,44 @@
       ],
       "family_id": "2ceffa52-4c5b-8109-803b-d79bc2434005",
       "last_edited_at": "2026-05-12T05:24:00.000Z"
+    },
+    {
+      "part_number": "BOS30-M6",
+      "page_id": "4d032b36-8df3-40b2-a7ea-912d692781cd",
+      "page_url": "https://www.notion.so/BOS30-M6-4d032b368df340b2a7ea912d692781cd",
+      "image": "parts-images/BOS30-M6.png",
+      "finish": "Aluminum",
+      "status": "Active",
+      "use_2024": 15,
+      "use_2025": 31,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "family_id": "2ceffa52-4c5b-817a-8842-c7593cda43f6",
+      "last_edited_at": "2026-05-12T23:33:00.000Z"
+    },
+    {
+      "part_number": "BOS30-M8",
+      "page_id": "b146c541-5a6e-461a-8ffc-d9dc4cb88391",
+      "page_url": "https://www.notion.so/BOS30-M8-b146c5415a6e461a8ffcd9dc4cb88391",
+      "image": "parts-images/BOS30-M8.png",
+      "finish": "Aluminum",
+      "status": "Active",
+      "use_2024": 24,
+      "use_2025": 56,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "family_id": "2ceffa52-4c5b-814e-aba0-c758501d6681",
+      "last_edited_at": "2026-05-12T23:33:00.000Z"
     },
     {
       "part_number": "BOS30L",
@@ -30006,16 +30102,16 @@
       "last_edited_at": "2026-04-20T22:03:00.000Z"
     },
     {
-      "sku": "FEIN 31345063010",
+      "sku": "FEIN 31345251010",
       "title": "Filter Bag, Powder Vacuum",
       "description": "",
       "page_id": "348ffa52-4c5b-8066-aa35-d062a21e7e18",
       "page_url": "https://www.notion.so/Filter-Bag-Powder-Vacuum-348ffa524c5b8066aa35d062a21e7e18",
-      "image": "supply-images/FEIN_31345063010.jpg",
+      "image": "supply-images/FEIN_31345251010.jpg",
       "status": "Active",
       "type": "Consumables",
       "reorder_qty": "5",
-      "last_edited_at": "2026-04-20T22:05:00.000Z"
+      "last_edited_at": "2026-05-21T16:15:00.000Z"
     },
     {
       "sku": "HT1",
@@ -31387,6 +31483,21 @@
     }
   ],
   "siblings": {
+    "2ceffa52-4c5b-817a-8842-c7593cda43f6": [
+      "BOS30-M6"
+    ],
+    "2ceffa52-4c5b-814e-aba0-c758501d6681": [
+      "BOS30-M8"
+    ],
+    "2ceffa52-4c5b-81a7-9189-df369794af28": [
+      "BOS18-M3"
+    ],
+    "2ceffa52-4c5b-81a0-ba49-e606b5e10f9b": [
+      "BOS18-M5"
+    ],
+    "2ceffa52-4c5b-816b-8afe-c99a0a021534": [
+      "BOS18-M2"
+    ],
     "2dfffa52-4c5b-80e3-881c-e059b696716f": [
       "CRS5RB",
       "CRS5NI",
