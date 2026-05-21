@@ -106,6 +106,17 @@ function statusKindClass(status) {
   return "kind-neutral";
 }
 
+// Display label for the top-right status badge. Notion's internal status
+// "Ordered" reads as "In Transit" from a requester's perspective — once
+// it's been purchased, the next thing they care about is "is it on its
+// way?" not the internal workflow stage. All other statuses use their
+// raw name. data-status on the element still carries the raw Notion
+// value so styling and filters remain unchanged.
+function statusLabel(status) {
+  if (status === "Ordered") return "In Transit";
+  return status || "—";
+}
+
 // ----- Boot -----
 refreshBtn.addEventListener("click", () => loadAndRender());
 
@@ -470,7 +481,7 @@ function renderCard(r, idx) {
           ${r.outOfStock ? `<span class="badge urgent-tag">URGENT</span>` : ""}
         </div>
       </div>
-      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(r.status || "—")}</span>
+      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(statusLabel(r.status))}</span>
     </div>
 
     <div class="process-rail ${r.status === "Cancelled" ? "is-cancelled" : ""}" style="--rail-progress: ${progressPct}%;">
@@ -525,7 +536,7 @@ function renderArchiveCard(r, idx) {
           ${r.cancellationReason ? `<span>Reason: ${escapeHtml(r.cancellationReason)}</span>` : ""}
         </div>
       </div>
-      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(r.status)}</span>
+      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(statusLabel(r.status))}</span>
     </div>
   `;
   return li;
