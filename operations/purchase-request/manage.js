@@ -125,18 +125,27 @@ function recentChip(activity) {
 // caller can decide whether to fall back to today. Range strings ("2-3 weeks")
 // use the upper bound so the ETA defaults conservative, not optimistic.
 function leadTimeToDays(s) {
+  const parsed = parseLeadTime(s);
+  return parsed ? parsed.days : null;
+}
+
+// Same parse, but returns { days, unit } so callers can decide whether the
+// number should be applied as business days (vendor said "10 days") or
+// calendar days (vendor said "2 weeks" — humans mean calendar weeks).
+//   unit = "month" | "week" | "day"
+// Bare numbers default to "day" so an ambiguous "10" gets business-day math
+// (closer to how a US supplier means "10 days").
+function parseLeadTime(s) {
   if (!s) return null;
   const str = String(s).toLowerCase().trim();
-  // Pull the last number in the string (covers "2-3 weeks" -> 3, "approx 2 weeks" -> 2)
   const nums = str.match(/\d+(?:\.\d+)?/g);
   if (!nums) return null;
   const n = parseFloat(nums[nums.length - 1]);
   if (!Number.isFinite(n) || n <= 0) return null;
-  if (/month/.test(str))   return Math.round(n * 30);
-  if (/week/.test(str))    return Math.round(n * 7);
-  if (/day/.test(str))     return Math.round(n);
-  // Bare number with no unit — assume days
-  return Math.round(n);
+  if (/month/.test(str)) return { days: Math.round(n * 30), unit: "month" };
+  if (/week/.test(str))  return { days: Math.round(n * 7),  unit: "week" };
+  if (/day/.test(str))   return { days: Math.round(n),       unit: "day" };
+  return { days: Math.round(n), unit: "day" };
 }
 
 // Add `days` to an ISO date (YYYY-MM-DD). Returns ISO. UTC math so we don't
@@ -146,6 +155,31 @@ function addDaysISO(iso, days) {
   const dt = new Date(Date.UTC(y, m - 1, d));
   dt.setUTCDate(dt.getUTCDate() + days);
   return dt.toISOString().slice(0, 10);
+}
+
+// Add business days (skip Sat + Sun) to an ISO date. Used when the lead
+// time was given in "days" — a supplier saying "10 days" means business
+// days in US B2B context. We don't subtract DB holidays here; close enough
+// for ETA estimation and not worth pulling in working-days.csv on the
+// client side.
+function addBusinessDaysISO(iso, days) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  let added = 0;
+  while (added < days) {
+    dt.setUTCDate(dt.getUTCDate() + 1);
+    const dow = dt.getUTCDay(); // 0=Sun, 6=Sat
+    if (dow !== 0 && dow !== 6) added++;
+  }
+  return dt.toISOString().slice(0, 10);
+}
+
+// Project a lead time onto an ISO date with the right calendar/business
+// semantics. Days → business days; weeks/months → calendar days.
+function projectETA(iso, parsedLead) {
+  if (!parsedLead || !iso) return iso;
+  if (parsedLead.unit === "day") return addBusinessDaysISO(iso, parsedLead.days);
+  return addDaysISO(iso, parsedLead.days);
 }
 
 function ageDays(dateISO) {
@@ -835,22 +869,38 @@ function openModal(action, row) {
 
     // Auto-slide ETA when Ordered Date changes — but only while the user
     // hasn't manually touched the ETA. As soon as they pick a date there,
-    // we respect it and stop overriding. This way a default "today + 1 week"
+    // we respect it and stop overriding. This way a default "today + lead"
     // stays useful if the order date is backdated, but doesn't fight a
     // purchaser who wants a specific ETA.
     const orderedInput = modalForm.querySelector("#f-orderedDate");
     const etaInput     = modalForm.querySelector("#f-eta");
+    const noEtaInput   = modalForm.querySelector("#f-noEta");
     if (orderedInput && etaInput) {
-      const leadDays = Number(etaInput.dataset.leadDays);
+      const parsedLead = parseLeadTime(etaInput.dataset.leadTime);
       let etaTouched = false;
       etaInput.addEventListener("input", () => { etaTouched = true; });
-      if (Number.isFinite(leadDays) && leadDays > 0) {
+      if (parsedLead) {
         orderedInput.addEventListener("input", () => {
           if (etaTouched) return;
           if (!orderedInput.value) return;
-          etaInput.value = addDaysISO(orderedInput.value, leadDays);
+          etaInput.value = projectETA(orderedInput.value, parsedLead);
         });
       }
+    }
+    // "ETA not available" checkbox: when checked, blank + disable the ETA
+    // field so the form submits without a date. Worker accepts null ETA
+    // when noEta=true (mirrors the noPO / noOrderNumber pattern).
+    if (etaInput && noEtaInput) {
+      noEtaInput.addEventListener("change", () => {
+        if (noEtaInput.checked) {
+          etaInput.dataset.savedValue = etaInput.value;
+          etaInput.value = "";
+          etaInput.disabled = true;
+        } else {
+          etaInput.disabled = false;
+          if (etaInput.dataset.savedValue) etaInput.value = etaInput.dataset.savedValue;
+        }
+      });
     }
   }
 
@@ -873,13 +923,18 @@ function fieldsFor(action, row) {
   const moq = row.moqQty ?? "";
   if (action === "ordered") {
     // Default ETA = orderedDate + lead time (parsed from row.leadTime).
+    // "days" lead times are treated as business days; "weeks"/"months"
+    // stay calendar days because that's how humans actually mean them.
     // Falls back to empty when leadTime is missing/unparseable so the
-    // purchaser has to pick one explicitly instead of trusting a bad guess.
-    const leadDays = leadTimeToDays(row.leadTime);
-    const defaultETA = leadDays != null ? addDaysISO(today, leadDays) : "";
-    const etaHint = leadDays != null
-      ? ` <span class="muted">(${escapeHtml(row.leadTime)} from order date)</span>`
-      : "";
+    // purchaser picks one explicitly instead of trusting a bad guess.
+    const parsedLead = parseLeadTime(row.leadTime);
+    const defaultETA = parsedLead ? projectETA(today, parsedLead) : "";
+    const etaHintBits = [];
+    if (parsedLead) {
+      const unitLabel = parsedLead.unit === "day" ? "business days" : "from order date";
+      etaHintBits.push(`<span class="muted">(${escapeHtml(row.leadTime)}${parsedLead.unit === "day" ? " — business" : ""} from order date)</span>`);
+    }
+    const etaHint = etaHintBits.length ? ` ${etaHintBits.join(" ")}` : "";
     return `
       <div class="field-row">
         <div class="field">
@@ -903,13 +958,19 @@ function fieldsFor(action, row) {
         <label for="f-qtyOrdered">Qty Ordered<span class="req">*</span></label>
         <input id="f-qtyOrdered" name="qtyOrdered" type="number" min="1" value="${moq}">
       </div>
-      <div class="field">
-        <label for="f-orderedDate">Ordered Date<span class="req">*</span></label>
-        <input id="f-orderedDate" name="orderedDate" type="date" value="${today}">
-      </div>
-      <div class="field">
-        <label for="f-eta">ETA<span class="req">*</span>${etaHint}</label>
-        <input id="f-eta" name="eta" type="date" value="${defaultETA}" data-lead-days="${leadDays ?? ""}">
+      <div class="field-row">
+        <div class="field">
+          <label for="f-orderedDate">Ordered Date<span class="req">*</span></label>
+          <input id="f-orderedDate" name="orderedDate" type="date" value="${today}" max="${today}">
+        </div>
+        <div class="field">
+          <label for="f-eta">ETA<span class="req">*</span>${etaHint}</label>
+          <input id="f-eta" name="eta" type="date" value="${defaultETA}" data-lead-time="${escapeHtml(row.leadTime || "")}">
+          <label class="field-checkbox">
+            <input type="checkbox" id="f-noEta" name="noEta" value="1">
+            <span>ETA not available yet</span>
+          </label>
+        </div>
       </div>
       <div class="field">
         <label for="f-tracking">Tracking # <span class="muted">(optional)</span></label>
@@ -1115,15 +1176,20 @@ function openBulkOrderedModal() {
        </div>`
     : "";
 
-  // Lead time hint for ETA default — use the longest among selected items so
-  // the auto-defaulted ETA is conservative. Falls back to no default if no
-  // item has a parseable lead time.
-  const leadDaysList = bulkModalRows.map(r => leadTimeToDays(r.leadTime)).filter(d => d != null && d > 0);
-  const maxLead = leadDaysList.length ? Math.max(...leadDaysList) : null;
+  // Lead time hint for ETA default — pick the lead time from the row with
+  // the longest lead so the default ETA is conservative. Falls back to no
+  // default if no item has a parseable lead time. "days" units get business
+  // day math; "weeks"/"months" stay calendar.
+  const parsedLeads = bulkModalRows
+    .map(r => ({ row: r, parsed: parseLeadTime(r.leadTime) }))
+    .filter(x => x.parsed && x.parsed.days > 0);
+  const longest = parsedLeads.length
+    ? parsedLeads.reduce((a, b) => (b.parsed.days > a.parsed.days ? b : a))
+    : null;
   const today = todayISO();
-  const defaultETA = maxLead != null ? addDaysISO(today, maxLead) : "";
-  const etaHint = maxLead != null
-    ? ` <span class="muted">(longest lead = ${maxLead}d from order date)</span>`
+  const defaultETA = longest ? projectETA(today, longest.parsed) : "";
+  const etaHint = longest
+    ? ` <span class="muted">(longest lead = ${escapeHtml(longest.row.leadTime)}${longest.parsed.unit === "day" ? " — business" : ""} from order date)</span>`
     : "";
 
   // Per-item qty table — one editable row per selected request. Default to
@@ -1180,13 +1246,19 @@ function openBulkOrderedModal() {
         </label>
       </div>
     </div>
-    <div class="field">
-      <label for="bf-orderedDate">Ordered Date<span class="req">*</span></label>
-      <input id="bf-orderedDate" name="orderedDate" type="date" value="${today}">
-    </div>
-    <div class="field">
-      <label for="bf-eta">ETA<span class="req">*</span>${etaHint}</label>
-      <input id="bf-eta" name="eta" type="date" value="${defaultETA}" data-lead-days="${maxLead ?? ""}">
+    <div class="field-row">
+      <div class="field">
+        <label for="bf-orderedDate">Ordered Date<span class="req">*</span></label>
+        <input id="bf-orderedDate" name="orderedDate" type="date" value="${today}" max="${today}">
+      </div>
+      <div class="field">
+        <label for="bf-eta">ETA<span class="req">*</span>${etaHint}</label>
+        <input id="bf-eta" name="eta" type="date" value="${defaultETA}" data-lead-time="${escapeHtml(longest?.row.leadTime || "")}">
+        <label class="field-checkbox">
+          <input type="checkbox" id="bf-noEta" name="noEta" value="1">
+          <span>ETA not available yet</span>
+        </label>
+      </div>
     </div>
     <div class="field">
       <label for="bf-tracking">Tracking # <span class="muted">(optional, same for all)</span></label>
@@ -1223,13 +1295,26 @@ function openBulkOrderedModal() {
   // ETA auto-slide on Ordered Date change (mirrors single-row modal)
   const orderedInput = modalForm.querySelector("#bf-orderedDate");
   const etaInput     = modalForm.querySelector("#bf-eta");
-  if (orderedInput && etaInput && maxLead != null) {
+  const noEtaInput   = modalForm.querySelector("#bf-noEta");
+  if (orderedInput && etaInput && longest) {
     let etaTouched = false;
     etaInput.addEventListener("input", () => { etaTouched = true; });
     orderedInput.addEventListener("input", () => {
       if (etaTouched) return;
       if (!orderedInput.value) return;
-      etaInput.value = addDaysISO(orderedInput.value, maxLead);
+      etaInput.value = projectETA(orderedInput.value, longest.parsed);
+    });
+  }
+  if (etaInput && noEtaInput) {
+    noEtaInput.addEventListener("change", () => {
+      if (noEtaInput.checked) {
+        etaInput.dataset.savedValue = etaInput.value;
+        etaInput.value = "";
+        etaInput.disabled = true;
+      } else {
+        etaInput.disabled = false;
+        if (etaInput.dataset.savedValue) etaInput.value = etaInput.dataset.savedValue;
+      }
     });
   }
 
@@ -1253,6 +1338,7 @@ async function submitBulkOrdered() {
     tracking:      f("bf-tracking")?.value.trim() || "",
     noPO:          truthyBox("bf-noPO"),
     noOrderNumber: truthyBox("bf-noOrderNumber"),
+    noEta:         truthyBox("bf-noEta"),
   };
   // Strip empty/false so the worker's validator doesn't get confused
   for (const k of Object.keys(sharedFields)) {
