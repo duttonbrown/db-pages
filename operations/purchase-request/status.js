@@ -35,6 +35,7 @@ const LOADING_MESSAGES = [
 let allRows = [];          // every request returned from /requests
 let activeFilter = "Ordered";  // default: Ordered (most-visited view — "where are my orders"). Pills: all | Submitted | Waiting to Order | Backordered | Ordered | archive
 let searchQuery = "";      // free-text filter — matches across item/order/requestor/vendor/PO/notes
+let sortMode = "lastUpdated";  // "lastUpdated" (default) | "requestNumber" (newest REQ-NN-#### first)
 
 // The rail is built per-row, not from a fixed pipeline. Slot 2 ("Middle")
 // reflects what actually happened — Ordered, Backordered, Waiting, or
@@ -150,6 +151,44 @@ if (searchInput) {
     searchInput.focus();
     renderRows();
   });
+}
+
+// Sort dropdown — re-renders on change. Default "lastUpdated" puts the most
+// recently touched rows on top; "requestNumber" sorts by REQ-NN-#### descending
+// (newest request first).
+const sortSelect = $("sort-select");
+if (sortSelect) {
+  sortSelect.addEventListener("change", () => {
+    sortMode = sortSelect.value || "lastUpdated";
+    renderRows();
+  });
+}
+
+// Parse the numeric tail of a Request # title (REQ-26-0042 → 20260042) so we
+// can compare across year prefixes. Falls back to a string compare if the
+// title doesn't match the expected shape.
+function requestNumberKey(r) {
+  const m = String(r.orderNum || "").match(/^REQ-(\d{2})-(\d+)/);
+  if (m) return parseInt(m[1], 10) * 1000000 + parseInt(m[2], 10);
+  return -1;
+}
+
+function timeKey(iso) {
+  if (!iso) return 0;
+  const t = new Date(iso).getTime();
+  return Number.isFinite(t) ? t : 0;
+}
+
+// Apply the current sortMode to a row list, newest first in both modes.
+// Returns a new array; never mutates input.
+function applySort(rows) {
+  if (sortMode === "requestNumber") {
+    return [...rows].sort((a, b) => requestNumberKey(b) - requestNumberKey(a));
+  }
+  return [...rows].sort((a, b) =>
+    timeKey(b.lastEditedTime || b.createdTime) -
+    timeKey(a.lastEditedTime || a.createdTime)
+  );
 }
 
 // Returns true if the row matches the current search query. An empty query
@@ -280,16 +319,21 @@ function renderRows() {
   }
 
   // For the All view, group by status so Submitted floats to the top, then
-  // Waiting → Backordered → Ordered. Within each bucket the worker's order
-  // (newest first) is preserved by using a stable sort.
+  // Waiting → Backordered → Ordered. Within each bucket apply the chosen sort
+  // (last-updated newest first, or request-number newest first) — JS sort is
+  // stable so applying the within-bucket sort first then the bucket sort
+  // yields the desired ordering.
   if (activeFilter === "all") {
     const order = { "Submitted": 0, "Waiting to Order": 1, "Backordered": 2, "Ordered": 3 };
-    visibleActive = [...visibleActive].sort((a, b) => {
+    visibleActive = applySort(visibleActive).sort((a, b) => {
       const ai = order[a.status] ?? 99;
       const bi = order[b.status] ?? 99;
       return ai - bi;
     });
+  } else {
+    visibleActive = applySort(visibleActive);
   }
+  visibleArchive = applySort(visibleArchive);
 
   // Search filter applies on top of the status filter
   if (searchQuery) {
