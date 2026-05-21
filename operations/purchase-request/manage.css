@@ -512,6 +512,64 @@ body.bulk-mode .pending-row {
 }
 .field-checkbox input { width: auto; margin: 0; cursor: pointer; }
 
+/* Status acknowledgement pills — sit above the filter strip. Show the
+   purchaser at-a-glance how many rows are in Submitted (still need to be
+   triaged) vs Waiting to Order (acknowledged, ready to buy). Clickable
+   to narrow the queue to that status; click the active pill to clear. */
+.status-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+.status-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s, box-shadow 0.12s;
+}
+.status-pill-btn:hover {
+  border-color: var(--text);
+  box-shadow: 0 1px 4px rgba(74, 74, 74, 0.12);
+}
+.status-pill-btn.active {
+  background: #F5F5F5;
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px rgba(74, 74, 74, 0.14);
+}
+.status-pill-btn[data-status="Waiting to Order"].active {
+  background: #E8F0FE;
+  border-color: #1A56C7;
+  box-shadow: 0 0 0 2px rgba(26, 86, 199, 0.18);
+}
+.status-pill-emoji { font-size: 14px; line-height: 1; }
+.status-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--text);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+}
+.status-pill-btn[data-status="Waiting to Order"] .status-pill-count {
+  background: #1A56C7;
+}
+.status-pill-label { font-weight: 500; }
+
 /* Triage digest — two attention bubbles (Urgent / New item) above the
    vendor digest. Same UX shape: click to filter, click again to clear.
    Triage filter and vendor filter are mutually exclusive. */

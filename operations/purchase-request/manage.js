@@ -46,6 +46,10 @@ let vendorFilter = null;
 // null | "urgent" | "newItem". Lives alongside vendor so the bubble UI
 // can show the active state without inventing another mode flag.
 let triageFilter = null;
+// Status acknowledgement pill filter. Independent of triage/vendor —
+// stacks ON TOP of them. Values: null | "Submitted" | "Waiting to Order".
+// Clicking the active pill clears the filter.
+let statusFilter = null;
 // Holds the most recent /pending payload so refresh-less filtering is cheap.
 let allRows = [];
 
@@ -259,6 +263,7 @@ async function loadPending() {
       throw new Error(data.error || "Failed to load");
     }
     allRows = data.rows || [];
+    renderStatusPills(allRows);
     renderTriage(allRows);
     renderDigest(allRows);
     renderQueue(filteredRows());
@@ -295,12 +300,53 @@ function isTriageEligible(r) {
   return r.status === "Submitted";
 }
 
+// Status acknowledgement pills — show how many rows are sitting in
+// Submitted (triage queue) and Waiting to Order (purchaser acknowledged
+// but not yet bought). Pills are clickable and stack on top of any
+// active triage/vendor filter, so e.g. "Waiting to Order × Grand Brass"
+// narrows to just Grand Brass rows that are ready to place.
+function renderStatusPills(rows) {
+  const el = document.getElementById("status-pills");
+  if (!el) return;
+  const counts = { Submitted: 0, "Waiting to Order": 0 };
+  for (const r of rows) {
+    if (r.status in counts) counts[r.status]++;
+  }
+  const totalShown = counts.Submitted + counts["Waiting to Order"];
+  // Hide the row entirely when there's nothing in either bucket — the
+  // queue empty-state handles "all clear" messaging.
+  el.hidden = totalShown === 0;
+  document.getElementById("status-pill-count-submitted").textContent = counts.Submitted;
+  document.getElementById("status-pill-count-waiting").textContent    = counts["Waiting to Order"];
+  // Toggle active class + aria-selected per pill
+  for (const btn of el.querySelectorAll(".status-pill-btn")) {
+    const isActive = btn.dataset.status === statusFilter;
+    btn.classList.toggle("active", isActive);
+    btn.setAttribute("aria-selected", isActive ? "true" : "false");
+    // Hide a pill if its count is zero — keeps the row compact when one
+    // bucket dries up.
+    const count = btn.dataset.status === "Submitted" ? counts.Submitted : counts["Waiting to Order"];
+    btn.hidden = count === 0;
+  }
+  // If the active status filter just emptied out, drop it so the queue
+  // doesn't render as a misleading "empty" state.
+  if (statusFilter && counts[statusFilter] === 0) {
+    statusFilter = null;
+    // Need to re-render counts/active state after clearing
+    for (const btn of el.querySelectorAll(".status-pill-btn")) {
+      btn.classList.remove("active");
+      btn.setAttribute("aria-selected", "false");
+    }
+  }
+}
+
 function filteredRows() {
   // Hide Ordered rows from the visible queue — once a row is ordered, the
   // purchaser is done with it. It lives in Receive + Status until it's
   // received. Kept in allRows (not filtered upstream) so vendor-digest can
   // still surface "last ordered" hints from this data.
   let rows = allRows.filter(r => r.status !== "Ordered");
+  if (statusFilter) rows = rows.filter(r => r.status === statusFilter);
   if (triageFilter === "urgent") rows = rows.filter(r => isTriageEligible(r) && r.outOfStock);
   else if (triageFilter === "newItem") rows = rows.filter(r => isTriageEligible(r) && r.notInDb && !r.oneTime);
   else if (triageFilter === "oneTime") rows = rows.filter(r => isTriageEligible(r) && r.oneTime);
@@ -390,6 +436,25 @@ function toggleTriageFilter(key) {
   renderTriage(allRows);
   renderDigest(allRows);
   renderQueue(filteredRows());
+}
+
+function toggleStatusFilter(status) {
+  statusFilter = (statusFilter === status) ? null : status;
+  // Status filter stacks with triage + vendor (intentional — "show me
+  // Waiting to Order Grand Brass urgent items" is a useful intersection).
+  renderStatusPills(allRows);
+  renderQueue(filteredRows());
+}
+
+// Wire status-pill clicks once. Section may start hidden, but the buttons
+// exist in the DOM so a single delegated listener handles all clicks.
+const statusPillsEl = document.getElementById("status-pills");
+if (statusPillsEl) {
+  statusPillsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".status-pill-btn");
+    if (!btn) return;
+    toggleStatusFilter(btn.dataset.status);
+  });
 }
 
 function renderDigest(rows) {
