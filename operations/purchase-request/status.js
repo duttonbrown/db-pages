@@ -517,7 +517,7 @@ function renderArchiveCard(r, idx) {
         <div class="archive-meta">
           <span>${closedLine}</span>
           ${isReceived && r.receiver ? `<span>by <strong>${escapeHtml(r.receiver)}</strong></span>` : ""}
-          ${r.qtyOrdered != null ? `<span>Qty: <strong>${r.qtyOrdered}</strong></span>` : ""}
+          ${renderArchiveQty(r, isReceived)}
           ${r.poNumber ? `<span>PO: <strong>${escapeHtml(r.poNumber)}</strong></span>` : ""}
           ${isReceived && r.tracking ? `<span>Tracking: ${renderArchiveTracking(r.tracking)}</span>` : ""}
           ${r.parentRequestId ? `<span class="archive-split-tag" title="Part of a split shipment chain">split shipment</span>` : ""}
@@ -528,6 +528,30 @@ function renderArchiveCard(r, idx) {
     </div>
   `;
   return li;
+}
+
+// Qty cell on archive cards. On Received rows we show Received vs Ordered
+// and flag the gap when the row came in short. On Cancelled rows we just
+// show the original Ordered qty since nothing arrived.
+function renderArchiveQty(r, isReceived) {
+  if (!isReceived) {
+    return r.qtyOrdered != null
+      ? `<span>Qty: <strong>${r.qtyOrdered}</strong></span>`
+      : "";
+  }
+  const haveReceived = r.qtyReceived != null;
+  const haveOrdered  = r.qtyOrdered != null;
+  if (haveReceived && haveOrdered) {
+    const short = r.qtyReceived < r.qtyOrdered;
+    const overReceipt = r.qtyReceived > r.qtyOrdered;
+    const tag = short ? ` <span class="archive-short-tag" title="Received less than ordered">short ${r.qtyOrdered - r.qtyReceived}</span>`
+              : overReceipt ? ` <span class="archive-over-tag" title="Received more than ordered">+${r.qtyReceived - r.qtyOrdered}</span>`
+              : "";
+    return `<span>Qty: <strong>${r.qtyReceived}</strong> of ${r.qtyOrdered}${tag}</span>`;
+  }
+  if (haveReceived) return `<span>Qty received: <strong>${r.qtyReceived}</strong></span>`;
+  if (haveOrdered)  return `<span>Qty ordered: <strong>${r.qtyOrdered}</strong></span>`;
+  return "";
 }
 
 // Tracking cell on archive cards — shorter than the active-view tracking row.
