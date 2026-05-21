@@ -90,6 +90,13 @@
       </label>
     </div>
 
+    <div class="field checkbox-field">
+      <label>
+        <input type="checkbox" id="one-time">
+        <span>One-time purchase <span class="muted">(won't be added to inventory — e.g. a replacement brush, project-specific item)</span></span>
+      </label>
+    </div>
+
     <div id="custom-fields" hidden>
       <div class="field">
         <label for="custom-name">What is the item?</label>
@@ -114,6 +121,42 @@
         </label>
       </div>
       <button type="button" id="add-custom-btn" class="primary" disabled>Add to request</button>
+    </div>
+
+    <div id="onetime-fields" hidden>
+      <div class="field">
+        <label for="onetime-name">What is the item?</label>
+        <input type="text" id="onetime-name" placeholder="e.g. Replacement brush for FEIN vacuum">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="onetime-vendor">Vendor <span class="muted">(optional)</span></label>
+          <input type="text" id="onetime-vendor" placeholder="Amazon, McMaster, etc.">
+        </div>
+        <div class="field">
+          <label for="onetime-qty">Qty <span class="muted">(default 1)</span></label>
+          <input type="number" id="onetime-qty" min="1" step="1" value="1">
+        </div>
+      </div>
+      <div class="field">
+        <label for="onetime-sku">SKU / model # <span class="muted">(optional)</span></label>
+        <input type="text" id="onetime-sku" placeholder="If you have the exact part number">
+      </div>
+      <div class="field">
+        <label for="onetime-link">Link to product <span class="muted">(optional)</span></label>
+        <input type="url" id="onetime-link" placeholder="https://www.amazon.com/…">
+      </div>
+      <div class="field">
+        <label for="onetime-notes">Anything else for the purchaser <span class="muted">(optional)</span></label>
+        <input type="text" id="onetime-notes" placeholder="Why we need it, urgency context, spec details…">
+      </div>
+      <div class="field checkbox-field">
+        <label class="urgent-label">
+          <input type="checkbox" id="onetime-urgent">
+          <span>Urgent</span>
+        </label>
+      </div>
+      <button type="button" id="add-onetime-btn" class="primary" disabled>Add to request</button>
     </div>
   </section>
 
@@ -166,6 +209,10 @@
         <li>
           <strong>Can't find it? Add it as a new item.</strong>
           Check <em>"Add item not in database"</em>, name the item, choose Part / Supply / Other, and add a note for the purchaser if helpful.
+        </li>
+        <li>
+          <strong>Buying something one time? Use one-time purchase.</strong>
+          Check <em>"One-time purchase"</em> for things that won't go into inventory — a replacement brush, a project-specific bracket, an Amazon order. You can include vendor, qty, SKU, and a product link so the purchaser knows exactly what to buy.
         </li>
         <li>
           <strong>Flag urgency if needed.</strong>

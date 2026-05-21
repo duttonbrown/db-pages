@@ -172,11 +172,25 @@
       <div id="add-one-time-fields" hidden>
         <div class="field">
           <label for="add-onetime-name">Item name<span class="req">*</span></label>
-          <input type="text" id="add-onetime-name" placeholder="e.g. Custom brass bracket, 2&quot; OD">
+          <input type="text" id="add-onetime-name" placeholder="e.g. Replacement brush for FEIN vacuum">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="add-onetime-vendor">Vendor</label>
+            <input type="text" id="add-onetime-vendor" placeholder="Amazon, McMaster, etc.">
+          </div>
+          <div class="field">
+            <label for="add-onetime-qty">Qty</label>
+            <input type="number" id="add-onetime-qty" min="1" step="1" value="1">
+          </div>
         </div>
         <div class="field">
-          <label for="add-onetime-vendor">Vendor</label>
-          <input type="text" id="add-onetime-vendor" placeholder="Where are you buying it?">
+          <label for="add-onetime-sku">SKU / model # <span class="muted">(optional)</span></label>
+          <input type="text" id="add-onetime-sku" placeholder="If you have the exact part number">
+        </div>
+        <div class="field">
+          <label for="add-onetime-link">Link to product <span class="muted">(optional)</span></label>
+          <input type="url" id="add-onetime-link" placeholder="https://www.amazon.com/…">
         </div>
       </div>
 

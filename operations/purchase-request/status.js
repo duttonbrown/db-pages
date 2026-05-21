@@ -466,7 +466,7 @@ function renderCard(r, idx) {
         </div>
         <div class="card-tags">
           ${r.type ? `<span class="badge">${escapeHtml(r.type.toUpperCase())}</span>` : ""}
-          ${r.notInDb ? `<span class="badge badge-category">NEW ITEM</span>` : ""}
+          ${r.oneTime ? `<span class="badge badge-onetime">ONE-TIME</span>` : (r.notInDb ? `<span class="badge badge-category">NEW ITEM</span>` : "")}
           ${r.outOfStock ? `<span class="badge urgent-tag">URGENT</span>` : ""}
         </div>
       </div>
@@ -520,6 +520,7 @@ function renderArchiveCard(r, idx) {
           ${renderArchiveQty(r, isReceived)}
           ${r.poNumber ? `<span>PO: <strong>${escapeHtml(r.poNumber)}</strong></span>` : ""}
           ${isReceived && r.tracking ? `<span>Tracking: ${renderArchiveTracking(r.tracking)}</span>` : ""}
+          ${r.oneTime ? `<span class="archive-onetime-tag" title="One-time purchase, not catalog inventory">one-time</span>` : ""}
           ${r.parentRequestId ? `<span class="archive-split-tag" title="Part of a split shipment chain">split shipment</span>` : ""}
           ${r.cancellationReason ? `<span>Reason: ${escapeHtml(r.cancellationReason)}</span>` : ""}
         </div>

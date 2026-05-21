@@ -431,6 +431,9 @@ function renderItemRow(r) {
   const urgentChip = r.outOfStock
     ? `<span class="badge urgent-tag">URGENT</span>`
     : "";
+  const onetimeChip = r.oneTime
+    ? `<span class="badge badge-onetime">ONE-TIME</span>`
+    : "";
 
   li.innerHTML = `
     <label class="item-include-wrap">
@@ -441,6 +444,7 @@ function renderItemRow(r) {
       <div class="item-title-row">
         <strong class="item-title">${escapeHtml(itemTitle)}</strong>
         ${description ? `<span class="item-desc">— ${escapeHtml(description)}</span>` : ""}
+        ${onetimeChip}
         ${urgentChip}
       </div>
       <div class="item-meta">
