@@ -60,6 +60,24 @@
 
   <div id="error" class="error" hidden></div>
 
+  <!-- Status-acknowledgement pills: shows at-a-glance counts of rows in
+       Submitted (triaged-in but not yet decided) and Waiting to Order
+       (acknowledged, not yet purchased). Click to narrow the queue to
+       that status; click again to clear. Hidden when both buckets are
+       empty. -->
+  <section id="status-pills" class="status-pills" hidden role="tablist" aria-label="Filter queue by status">
+    <button type="button" class="status-pill-btn" data-status="Submitted" role="tab" aria-selected="false">
+      <span class="status-pill-emoji" aria-hidden="true">📥</span>
+      <span class="status-pill-count" id="status-pill-count-submitted">0</span>
+      <span class="status-pill-label">Submitted</span>
+    </button>
+    <button type="button" class="status-pill-btn" data-status="Waiting to Order" role="tab" aria-selected="false">
+      <span class="status-pill-emoji" aria-hidden="true">⏳</span>
+      <span class="status-pill-count" id="status-pill-count-waiting">0</span>
+      <span class="status-pill-label">Waiting to Order</span>
+    </button>
+  </section>
+
   <!-- Combined filter strip: triage bubbles (urgent / new item) + vendor
        bubbles (vendors with 2+ open requests) inline. Replaces the two stacked
        card sections that ate ~280px of vertical chrome. -->
