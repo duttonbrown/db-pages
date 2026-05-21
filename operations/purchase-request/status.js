@@ -108,13 +108,16 @@ function statusKindClass(status) {
 }
 
 // Display label for the top-right status badge. Notion's internal status
-// "Ordered" reads as "In Transit" from a requester's perspective — once
-// it's been purchased, the next thing they care about is "is it on its
-// way?" not the internal workflow stage. All other statuses use their
-// raw name. data-status on the element still carries the raw Notion
-// value so styling and filters remain unchanged.
-function statusLabel(status) {
-  if (status === "Ordered") return "In Transit";
+// "Ordered" splits into two requester-facing reads:
+//   - Ordered + tracking present → "In Transit" (the package is actually moving)
+//   - Ordered + no tracking yet   → "Ordered" (purchase placed, waiting on carrier)
+// All other statuses use their raw name. data-status on the element still
+// carries the raw Notion value so CSS styling and pill filters are unchanged.
+function statusLabel(status, row) {
+  if (status === "Ordered") {
+    const tracking = row && typeof row.tracking === "string" ? row.tracking.trim() : "";
+    return tracking ? "In Transit" : "Ordered";
+  }
   return status || "—";
 }
 
@@ -525,7 +528,7 @@ function renderCard(r, idx) {
           ${r.outOfStock ? `<span class="badge urgent-tag">URGENT</span>` : ""}
         </div>
       </div>
-      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(statusLabel(r.status))}</span>
+      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(statusLabel(r.status, r))}</span>
     </div>
 
     <div class="process-rail ${r.status === "Cancelled" ? "is-cancelled" : ""}" style="--rail-progress: ${progressPct}%;">
@@ -580,7 +583,7 @@ function renderArchiveCard(r, idx) {
           ${r.cancellationReason ? `<span>Reason: ${escapeHtml(r.cancellationReason)}</span>` : ""}
         </div>
       </div>
-      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(statusLabel(r.status))}</span>
+      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(statusLabel(r.status, r))}</span>
     </div>
   `;
   return li;
