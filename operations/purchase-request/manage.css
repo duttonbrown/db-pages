@@ -602,6 +602,20 @@ body.bulk-mode .pending-row {
 }
 .triage-bubble-newitem .triage-bubble-count { background: var(--text); }
 
+/* One-time triage bubble — steel-blue to match the .badge-onetime tag so
+   purchasers visually associate "this filter chip" with "those tags on the
+   rows it surfaces." */
+.triage-bubble-onetime:hover {
+  border-color: #2C5282;
+  box-shadow: 0 1px 4px rgba(44, 82, 130, 0.2);
+}
+.triage-bubble-onetime.active {
+  border-color: #2C5282;
+  background: #E8EEF6;
+  box-shadow: 0 0 0 2px rgba(44, 82, 130, 0.2);
+}
+.triage-bubble-onetime .triage-bubble-count { background: #2C5282; }
+
 /* Vendor digest list — flows inline inside .filter-strip via display:contents.
    Bubble keeps its info (count, oldest age, last ordered) but collapses it
    into one row with the long detail (breakdown, last ordered) tucked into

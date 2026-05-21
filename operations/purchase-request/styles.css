@@ -747,6 +747,17 @@ textarea { resize: vertical; min-height: 70px; }
   color: var(--text);
 }
 
+/* One-time purchase badge — quieter than URGENT, more distinctive than
+   NEW ITEM. Uses a steel-blue to signal "different kind of thing" without
+   competing with the alert tones. Shows across Submit cart, Purchase
+   queue, Receive list, and Status cards. */
+.badge-onetime {
+  background: #E8EEF6;
+  color: #2C5282;
+  border: 1px solid #C7D3E3;
+}
+.badge.badge-onetime { background: #E8EEF6; color: #2C5282; }
+
 /* Urgent chip overrides .badge background when both classes are applied
    (receive + status pages). Purchaser console uses .urgent-tag alone. */
 .badge.urgent-tag {

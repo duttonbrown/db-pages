@@ -268,7 +268,8 @@ function filteredRows() {
   // still surface "last ordered" hints from this data.
   let rows = allRows.filter(r => r.status !== "Ordered");
   if (triageFilter === "urgent") rows = rows.filter(r => isTriageEligible(r) && r.outOfStock);
-  else if (triageFilter === "newItem") rows = rows.filter(r => isTriageEligible(r) && r.notInDb);
+  else if (triageFilter === "newItem") rows = rows.filter(r => isTriageEligible(r) && r.notInDb && !r.oneTime);
+  else if (triageFilter === "oneTime") rows = rows.filter(r => isTriageEligible(r) && r.oneTime);
   if (vendorFilter) rows = rows.filter(r => primaryVendor(r) === vendorFilter);
   return rows;
 }
@@ -280,14 +281,18 @@ function filteredRows() {
 function renderTriage(rows) {
   const eligible = rows.filter(isTriageEligible);
   const urgentCount = eligible.filter(r => r.outOfStock).length;
-  const newItemCount = eligible.filter(r => r.notInDb).length;
+  // "New item" = not in DB AND not a one-time purchase. One-times go in
+  // their own bucket so the purchaser can route them differently (Amazon
+  // / store-direct vs adding-to-catalog candidates).
+  const newItemCount = eligible.filter(r => r.notInDb && !r.oneTime).length;
+  const oneTimeCount = eligible.filter(r => r.oneTime).length;
 
-  if (urgentCount === 0 && newItemCount === 0) {
+  if (urgentCount === 0 && newItemCount === 0 && oneTimeCount === 0) {
     triageEl.hidden = true;
     triageListEl.innerHTML = "";
-    // Clear stale filter if its bucket dried up
     if (triageFilter === "urgent" && urgentCount === 0) triageFilter = null;
     if (triageFilter === "newItem" && newItemCount === 0) triageFilter = null;
+    if (triageFilter === "oneTime" && oneTimeCount === 0) triageFilter = null;
     refreshFilterStrip();
     return;
   }
@@ -311,10 +316,19 @@ function renderTriage(rows) {
       modifier: "triage-bubble-newitem",
     }));
   }
+  if (oneTimeCount > 0) {
+    triageListEl.appendChild(buildTriageBubble({
+      key: "oneTime",
+      label: "One-time",
+      count: oneTimeCount,
+      modifier: "triage-bubble-onetime",
+    }));
+  }
 
-  // If the active triage filter's bucket disappeared after a refresh, drop it
+  // Drop stale filter if its bucket dried up
   if (triageFilter === "urgent" && urgentCount === 0) triageFilter = null;
   if (triageFilter === "newItem" && newItemCount === 0) triageFilter = null;
+  if (triageFilter === "oneTime" && oneTimeCount === 0) triageFilter = null;
   refreshFilterStrip();
 }
 
@@ -612,6 +626,7 @@ function renderRow(r) {
   // so the badge would just repeat what the title already says.
   const tags = li.querySelector(".row-tags");
   tags.appendChild(makeBadge(r.type.toUpperCase(), "badge"));
+  if (r.oneTime) tags.appendChild(makeBadge("ONE-TIME", "badge-onetime"));
   if (r.outOfStock) tags.appendChild(makeBadge("URGENT", "urgent-tag"));
   // Recent activity chip — warns the purchaser if this same item was just
   // ordered/received recently so they don't re-order on top of an in-flight one.
@@ -1559,6 +1574,12 @@ function openAddModal() {
   addCustomName.value = "";
   addOnetimeName.value = "";
   addOnetimeVendor.value = "";
+  const qtyEl = document.getElementById("add-onetime-qty");
+  if (qtyEl) qtyEl.value = "1";
+  const skuEl = document.getElementById("add-onetime-sku");
+  if (skuEl) skuEl.value = "";
+  const linkEl = document.getElementById("add-onetime-link");
+  if (linkEl) linkEl.value = "";
   addNotes.value = "";
   addUrgent.checked = false;
   addResults.hidden = true;
@@ -1597,12 +1618,25 @@ async function submitAddToQueue() {
     const name = addOnetimeName.value.trim();
     if (!name) return;
     const vendor = addOnetimeVendor.value.trim();
+    const qtyRaw = parseInt(document.getElementById("add-onetime-qty")?.value, 10);
+    const qty = (!Number.isNaN(qtyRaw) && qtyRaw > 0) ? qtyRaw : 1;
+    const sku = document.getElementById("add-onetime-sku")?.value.trim() || "";
+    const link = document.getElementById("add-onetime-link")?.value.trim() || "";
+    // Compose Notes with structured prefixes so the purchaser can scan
+    // for SKU / link at a glance even though they share a single field.
+    const noteParts = [];
+    if (sku)   noteParts.push(`SKU: ${sku}`);
+    if (link)  noteParts.push(link);
+    if (notes) noteParts.push(notes);
+    const combinedNotes = noteParts.join(" — ");
     item = {
       type: "Other",
       notInDb: true,
       customName: name,
       vendor,
-      notes,
+      qtyOrdered: qty,
+      oneTime: true,
+      notes: combinedNotes,
       outOfStock,
     };
   } else if (addNotInDb.checked) {

@@ -24,6 +24,22 @@ const customName    = $("custom-name");
 const customNotes   = $("custom-notes");
 const customOutOfStock = $("custom-out-of-stock");
 const addCustomBtn  = $("add-custom-btn");
+// One-time purchase: a different beast from "add item not in database."
+// notInDb implies "this should be in the catalog eventually." One-time is
+// "buy it once and we're done" — a vacuum brush, a replacement clip, a
+// project-specific part. type=Other, notInDb=true, plus structured fields
+// for vendor / qty / SKU / link that get packed into Notes for the
+// purchaser. No new Notion property — uses what already exists.
+const oneTime        = $("one-time");
+const onetimeFields  = $("onetime-fields");
+const onetimeName    = $("onetime-name");
+const onetimeVendor  = $("onetime-vendor");
+const onetimeQty     = $("onetime-qty");
+const onetimeSku     = $("onetime-sku");
+const onetimeLink    = $("onetime-link");
+const onetimeNotes   = $("onetime-notes");
+const onetimeUrgent  = $("onetime-urgent");
+const addOnetimeBtn  = $("add-onetime-btn");
 const cartSection   = $("cart-section");
 const cartList      = $("cart");
 const cartCount     = $("cart-count");
@@ -401,6 +417,45 @@ function addCustomToCart() {
   renderCart();
 }
 
+// One-time purchase add — packs structured vendor / qty / SKU / link / notes
+// into the existing item shape. Notes get a formatted preamble so the
+// purchaser sees the structured bits clearly in Notion. Qty goes on the
+// item so the worker writes it to Qty Ordered (one-times know their qty,
+// unlike catalog items where qty is the purchaser's call). Vendor goes
+// to the existing Vendor Name field. No new Notion property.
+function addOnetimeToCart() {
+  const name = onetimeName.value.trim();
+  if (!name) return;
+  const vendor = onetimeVendor.value.trim();
+  const qtyRaw = parseInt(onetimeQty.value, 10);
+  const qty = (!Number.isNaN(qtyRaw) && qtyRaw > 0) ? qtyRaw : 1;
+  const sku = onetimeSku.value.trim();
+  const link = onetimeLink.value.trim();
+  const userNote = onetimeNotes.value.trim();
+  // Build the composite notes string. Order: SKU first (purchasers scan for
+  // model numbers), link second (the thing they'll click), free-text last.
+  const noteParts = [];
+  if (sku)      noteParts.push(`SKU: ${sku}`);
+  if (link)     noteParts.push(link);
+  if (userNote) noteParts.push(userNote);
+  const composedNotes = noteParts.join(" — ");
+  cart.push({
+    type: "Other",
+    notInDb: true,
+    customName: name,
+    qty,
+    notes: composedNotes,
+    outOfStock: onetimeUrgent.checked,
+    vendor,
+    title: name,
+    subtitle: vendor ? `One-time — ${vendor}` : "One-time purchase",
+    oneTime: true, // local flag so the cart row can show a tag
+  });
+  oneTime.checked = false;
+  toggleOneTime();
+  renderCart();
+}
+
 function removeFromCart(i) {
   cart.splice(i, 1);
   renderCart();
@@ -430,6 +485,7 @@ function renderCart() {
       <div class="cart-meta">
         <div class="chip-row">
           <span class="badge"></span>
+          <span class="badge badge-onetime" hidden>ONE-TIME</span>
         </div>
         <span class="title-row">
           <strong class="title-text"></strong>
@@ -451,6 +507,7 @@ function renderCart() {
       <button type="button" class="link-btn cart-remove" aria-label="Remove">✕</button>
     `;
     li.querySelector(".badge").textContent = it.type.toUpperCase();
+    li.querySelector(".badge-onetime").hidden = !it.oneTime;
     li.querySelector(".title-text").textContent = it.title;
     const desc = it.description || it.subtitle || "";
     li.querySelector(".title-desc").textContent = desc ? `— ${desc}` : "";
@@ -528,6 +585,8 @@ function updateSubmitState() {
 
 function toggleNotInDb() {
   if (notInDb.checked) {
+    // Mutually exclusive with the one-time path.
+    if (oneTime.checked) { oneTime.checked = false; toggleOneTime(); }
     customFields.hidden = false;
     search.hidden = true;
     resultsList.hidden = true;
@@ -541,8 +600,35 @@ function toggleNotInDb() {
   }
 }
 
+function toggleOneTime() {
+  if (oneTime.checked) {
+    // Mutually exclusive with the not-in-db path.
+    if (notInDb.checked) { notInDb.checked = false; toggleNotInDb(); }
+    onetimeFields.hidden = false;
+    search.hidden = true;
+    resultsList.hidden = true;
+    cancelPicked();
+    onetimeName.focus();
+  } else {
+    onetimeFields.hidden = true;
+    search.hidden = false;
+    onetimeName.value = "";
+    onetimeVendor.value = "";
+    onetimeQty.value = "1";
+    onetimeSku.value = "";
+    onetimeLink.value = "";
+    onetimeNotes.value = "";
+    onetimeUrgent.checked = false;
+    search.focus();
+  }
+}
+
 function updateAddCustomState() {
   addCustomBtn.disabled = customName.value.trim().length === 0;
+}
+
+function updateAddOnetimeState() {
+  addOnetimeBtn.disabled = onetimeName.value.trim().length === 0;
 }
 
 // Idempotency key for the current cart. Generated the first time the user
@@ -576,6 +662,12 @@ async function handleSubmit() {
       moq: it.reorderQty,
       notes: it.notes,
       outOfStock: !!it.outOfStock,
+      // One-time purchase additions. vendor + qtyOrdered land in dedicated
+      // Notion columns (Vendor Name + Qty Ordered) so they're queryable;
+      // SKU + link are already packed into notes by addOnetimeToCart.
+      vendor: it.vendor || undefined,
+      qtyOrdered: it.qty || undefined,
+      oneTime: !!it.oneTime,
     })),
   };
 
@@ -726,6 +818,9 @@ pickedLastBox.addEventListener("change", () => {
 notInDb.addEventListener("change", toggleNotInDb);
 customName.addEventListener("input", updateAddCustomState);
 addCustomBtn.addEventListener("click", addCustomToCart);
+oneTime.addEventListener("change", toggleOneTime);
+onetimeName.addEventListener("input", updateAddOnetimeState);
+addOnetimeBtn.addEventListener("click", addOnetimeToCart);
 requestor.addEventListener("change", updateSubmitState);
 submitBtn.addEventListener("click", handleSubmit);
 newReqBtn.addEventListener("click", resetForm);
