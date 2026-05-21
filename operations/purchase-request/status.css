@@ -692,6 +692,30 @@
   cursor: help;
 }
 
+/* Qty mismatch tags — flag short and over-receipt cases inline so the gap
+   is visible without doing the math. Short is amber; over-receipt is a
+   quieter blue so it doesn't read as a problem. */
+.archive-section .archive-short-tag,
+.archive-section .archive-over-tag {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: help;
+}
+.archive-section .archive-short-tag {
+  background: #FFF4E6;
+  color: #B45309;
+}
+.archive-section .archive-over-tag {
+  background: #EEF4FA;
+  color: #2C5282;
+}
+
 /* Footer meta on the page itself */
 .page-meta {
   margin-top: 16px;
