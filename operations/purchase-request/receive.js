@@ -67,6 +67,24 @@ function fmtDate(iso) {
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
+// Carrier-delivered timestamps are full ISO instants with a real time-of-day,
+// not date-only Notion strings — so they don't need the date-only workaround.
+function fmtDeliveredAt(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleString(undefined, {
+    month: "short", day: "numeric", year: "numeric",
+    hour: "numeric", minute: "2-digit",
+  });
+}
+function fmtDeliveredShort(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+}
+
 function escapeHtml(s) {
   return String(s ?? "").replace(/[&<>"']/g, c =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -304,6 +322,11 @@ function renderShipments(rows) {
         orderedDate: r.orderedDate || null,
         eta: r.eta || null,
         tracking: r.tracking || "",
+        // Carrier-delivered = ANY row in the group reports carrierStatus
+        // "Delivered". Receivers care at the group/box level — if one row is
+        // confirmed delivered, the whole order is at the dock.
+        carrierDelivered: false,
+        carrierDeliveredAt: null,
         items: [],
       });
     }
@@ -320,6 +343,12 @@ function renderShipments(rows) {
     }
     if (r.eta && (!g.eta || r.eta < g.eta)) g.eta = r.eta;
     if (!g.tracking && r.tracking) g.tracking = r.tracking;
+    if (r.carrierStatus === "Delivered") {
+      g.carrierDelivered = true;
+      if (r.deliveredAt && (!g.carrierDeliveredAt || r.deliveredAt > g.carrierDeliveredAt)) {
+        g.carrierDeliveredAt = r.deliveredAt;
+      }
+    }
   }
 
   // Within each group, sort urgent (out-of-stock) rows to the top so
@@ -331,10 +360,15 @@ function renderShipments(rows) {
     });
   }
 
-  // Sort groups: any group containing an urgent item floats up, then by
-  // oldest orderedDate first (older orders are more likely to have arrived).
+  // Sort groups, top-down priority:
+  //   1. Carrier reports Delivered (box is at the dock right now)
+  //   2. Any urgent (out-of-stock) item
+  //   3. Oldest Ordered Date (older orders are more likely to have arrived)
   const groupHasUrgent = (g) => g.items.some(r => r.outOfStock);
   const sorted = [...groups.entries()].sort((a, b) => {
+    if (a[1].carrierDelivered !== b[1].carrierDelivered) {
+      return a[1].carrierDelivered ? -1 : 1;
+    }
     const au = groupHasUrgent(a[1]);
     const bu = groupHasUrgent(b[1]);
     if (au !== bu) return au ? -1 : 1;
@@ -366,13 +400,22 @@ function renderPOGroup(groupKey, g) {
     ? `<span class="po-num po-num-secondary"><span class="po-prefix">PO</span> ${escapeHtml(g.displayPO)}</span>`
     : "";
 
+  // Delivered chip — appears when the carrier reports the package arrived
+  // at the dock but no one has marked the row Received yet. Helps the
+  // warehouse spot which boxes to open first (vs ones still in transit
+  // that just happen to be sitting in the same queue).
+  const deliveredChip = g.carrierDelivered
+    ? `<span class="po-delivered-chip" title="${g.carrierDeliveredAt ? escapeHtml(fmtDeliveredAt(g.carrierDeliveredAt)) : "Delivered by carrier"}">📦 Delivered${g.carrierDeliveredAt ? ` ${escapeHtml(fmtDeliveredShort(g.carrierDeliveredAt))}` : ""}</span>`
+    : "";
+
   section.innerHTML = `
-    <header class="po-header">
+    <header class="po-header${g.carrierDelivered ? " po-header-delivered" : ""}">
       <div class="po-meta">
         ${orderChip}
         ${poChip}
         ${g.vendor ? `<span class="po-vendor">${escapeHtml(g.vendor)}</span>` : ""}
         <span class="po-when">Ordered ${escapeHtml(fmtDate(g.orderedDate))}${ageLabel}${eta}</span>
+        ${deliveredChip}
       </div>
       <div class="po-actions">
         <button type="button" class="po-receive-selected secondary" disabled>Receive selected</button>

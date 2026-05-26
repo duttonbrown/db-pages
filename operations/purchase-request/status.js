@@ -591,7 +591,7 @@ function renderCard(r, idx) {
   // Tracking row — dedicated panel below the spotlight when a tracking
   // number is on file. Shows on Ordered and Received cards.
   const trackingRow = (r.status === "Ordered" || r.status === "Received")
-    ? renderTrackingRow(r.tracking)
+    ? renderTrackingRow(r)
     : "";
 
   // Notes
@@ -972,7 +972,45 @@ function renderSpotlight(r) {
 // is on file. Auto-detects carrier from the number's syntax; if detected,
 // surfaces the carrier name and a deep link to that carrier's tracking page.
 // Falls back to plain text when the pattern is ambiguous.
-function renderTrackingRow(tracking) {
+// Maps a Notion "Carrier Status" select value to a visual treatment and a
+// small emoji. The poller writes one of: In Transit / Out for Delivery /
+// Delivered / Exception / Returned. Anything else (or blank) returns null
+// and the carrier-status line is suppressed.
+const CARRIER_STATUS_VISUALS = {
+  "In Transit":       { kind: "neutral", icon: "📦" },
+  "Out for Delivery": { kind: "active",  icon: "🚚" },
+  "Delivered":        { kind: "success", icon: "✅" },
+  "Exception":        { kind: "warn",    icon: "⚠️" },
+  "Returned":         { kind: "warn",    icon: "↩️" },
+};
+
+// Carrier-status line — second line under the tracking row, populated by the
+// inbound-tracking poller. Hidden until the poller has touched the row, so
+// pre-feature rows render unchanged. Shows status + last-scan detail; on
+// Delivered, swaps in the delivery timestamp.
+function renderCarrierStatusLine(r) {
+  const visual = CARRIER_STATUS_VISUALS[r.carrierStatus];
+  if (!visual) return "";
+  const detailBits = [];
+  if (r.carrierStatus === "Delivered" && r.deliveredAt) {
+    detailBits.push(fmtTimestamp(r.deliveredAt));
+  } else if (r.lastScan) {
+    detailBits.push(r.lastScan);
+  }
+  const detail = detailBits.length
+    ? `<span class="carrier-status-detail"> · ${escapeHtml(detailBits.join(" · "))}</span>`
+    : "";
+  return `
+    <div class="carrier-status-line carrier-status-${visual.kind}">
+      <span class="carrier-status-icon" aria-hidden="true">${visual.icon}</span>
+      <span class="carrier-status-label">${escapeHtml(r.carrierStatus)}</span>
+      ${detail}
+    </div>
+  `;
+}
+
+function renderTrackingRow(r) {
+  const tracking = r && r.tracking;
   if (!tracking) return "";
   const carrier = detectCarrier(tracking);
   const numberHtml = carrier
@@ -983,7 +1021,10 @@ function renderTrackingRow(tracking) {
   return `
     <div class="tracking-row">
       <div class="tracking-label">Tracking</div>
-      <div class="tracking-value">${numberHtml}</div>
+      <div class="tracking-value">
+        ${numberHtml}
+        ${renderCarrierStatusLine(r)}
+      </div>
     </div>
   `;
 }

@@ -111,6 +111,27 @@
   font-size: 11px;
   color: var(--muted);
 }
+
+/* Delivered chip — appears on PO group headers when the carrier-tracking
+   poller has confirmed the box hit the dock. Pairs with .po-header-delivered
+   for a subtle green-tinted header so the eye lands on these first. */
+.po-delivered-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: #DCFCE7;
+  color: #15803D;
+  border-radius: 999px;
+  border: 1px solid #BBF7D0;
+}
+.po-header-delivered {
+  background: linear-gradient(180deg, #ECFDF5, #ffffff);
+  border-bottom-color: #BBF7D0;
+}
 .po-actions { display: flex; gap: 6px; align-items: stretch; }
 .po-actions .primary,
 .po-actions .secondary {

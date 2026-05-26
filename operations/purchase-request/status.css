@@ -566,6 +566,34 @@
   transition: color 0.15s;
 }
 
+/* Carrier-status line — second line beneath the tracking number, populated
+   by the inbound-tracking poller (UPS / FedEx / USPS). Quiet by default;
+   "active" (Out for Delivery) gets the brand accent, "success" (Delivered)
+   gets green, "warn" (Exception / Returned) gets a muted red. */
+.carrier-status-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.3;
+}
+.carrier-status-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+.carrier-status-label {
+  font-weight: 500;
+}
+.carrier-status-detail {
+  color: var(--muted);
+}
+.carrier-status-active .carrier-status-label  { color: var(--accent-dark); }
+.carrier-status-success .carrier-status-label { color: #15803D; }
+.carrier-status-warn .carrier-status-label    { color: #B91C1C; }
+
 @media (max-width: 480px) {
   .tracking-row {
     grid-template-columns: 1fr;
