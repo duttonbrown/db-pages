@@ -56,7 +56,13 @@ function ageDays(iso) {
 
 function fmtDate(iso) {
   if (!iso) return "";
-  const d = new Date(iso);
+  // "YYYY-MM-DD" without a time/zone is a local calendar day. Parsing it as
+  // UTC midnight drops one day in any timezone west of UTC (see status.js
+  // fmtDate for the long-form comment).
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  const d = dateOnly
+    ? new Date(parseInt(dateOnly[1], 10), parseInt(dateOnly[2], 10) - 1, parseInt(dateOnly[3], 10))
+    : new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }

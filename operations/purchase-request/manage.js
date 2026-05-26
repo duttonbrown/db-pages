@@ -550,11 +550,15 @@ function lastOrderedLabel(iso) {
   if (!iso) return "";
   const today = todayISO();
   if (iso === today) return "today";
-  const diffDays = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+  // "YYYY-MM-DD" must be parsed as a local calendar day, not UTC midnight, or
+  // the relative offset slips a day west of UTC (see status.js fmtDate).
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  const d = dateOnly
+    ? new Date(parseInt(dateOnly[1], 10), parseInt(dateOnly[2], 10) - 1, parseInt(dateOnly[3], 10))
+    : new Date(iso);
+  const diffDays = Math.floor((Date.now() - d.getTime()) / 86400000);
   if (diffDays === 1) return "yesterday";
   if (diffDays > 0 && diffDays < 7) return `${diffDays} days ago`;
-  // Use formatted date for older
-  const d = new Date(iso);
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 

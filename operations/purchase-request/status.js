@@ -61,15 +61,29 @@ function primaryVendor(row) {
 
 function fmtDate(iso) {
   if (!iso) return "";
-  const d = new Date(iso);
+  // Notion date-only properties come back as "YYYY-MM-DD" (no time, no zone).
+  // `new Date("YYYY-MM-DD")` parses as UTC midnight, which shifts back a day in
+  // any timezone west of UTC — Mountain Time turns "2026-06-01" into May 31.
+  // Build the date in local time when we recognize the date-only shape.
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  const d = dateOnly
+    ? new Date(parseInt(dateOnly[1], 10), parseInt(dateOnly[2], 10) - 1, parseInt(dateOnly[3], 10))
+    : new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
 function fmtRelative(iso) {
   if (!iso) return "";
-  const ms = Date.now() - new Date(iso).getTime();
-  if (Number.isNaN(ms)) return "";
+  // Same date-only handling as fmtDate — "YYYY-MM-DD" without a time/zone is a
+  // local calendar day, not a UTC instant. Parsing it as UTC drops one day in
+  // any timezone west of UTC, which then bumps "today" to "yesterday" etc.
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  const t = dateOnly
+    ? new Date(parseInt(dateOnly[1], 10), parseInt(dateOnly[2], 10) - 1, parseInt(dateOnly[3], 10)).getTime()
+    : new Date(iso).getTime();
+  if (Number.isNaN(t)) return "";
+  const ms = Date.now() - t;
   const days = Math.floor(ms / 86400000);
   if (days <= 0)  return "today";
   if (days === 1) return "yesterday";
