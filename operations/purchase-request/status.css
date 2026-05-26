@@ -85,6 +85,25 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Vendor pill strip — second filter layer below the status pills. Same pill
+   styling as .pill, just a quieter resting state so the status row stays the
+   primary control. Renders dynamically from the rows in the current status
+   view; intersects with the status filter. */
+.vendor-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: -12px 0 16px;
+  padding: 0;
+}
+.vendor-pills .pill {
+  font-size: 11px;
+  padding: 4px 10px;
+}
+.vendor-pills .pill:not(.active) {
+  color: var(--muted);
+}
+
 .sort-control {
   display: inline-flex;
   align-items: center;

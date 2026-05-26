@@ -21,6 +21,7 @@ const archiveEl     = $("archive-section");
 const archiveListEl = $("archive-list");
 const lastRefEl     = $("last-refreshed");
 const partBubblesEl = $("part-bubbles");
+const vendorPillsEl = $("vendor-pills");
 
 // Keep this list in sync with app.js LOADING_MESSAGES.
 const LOADING_MESSAGES = [
@@ -33,7 +34,8 @@ const LOADING_MESSAGES = [
 
 // ----- State -----
 let allRows = [];          // every request returned from /requests
-let activeFilter = "Ordered";  // default: Ordered (most-visited view — "where are my orders"). Pills: all | Submitted | Waiting to Order | Backordered | Ordered | archive
+let activeFilter = "Ordered";  // default: Ordered (most-visited view — "where are my orders"). Pills: all | Submitted | Waiting to Order | Backordered | Ordered | In Transit | Received | archive
+let activeVendor = "";     // "" = all vendors. Otherwise the primary vendor name (case-preserved) that the user pinned.
 let searchQuery = "";      // free-text filter — matches across item/order/requestor/vendor/PO/notes
 let sortMode = "lastUpdated";  // "lastUpdated" (default) | "requestNumber" (newest REQ-NN-#### first)
 
@@ -262,6 +264,15 @@ async function loadAndRender() {
 //   - "In motion" (all): everything that's not Received or Cancelled
 //   - Received:  its own filter (the "I got my stuff" view)
 //   - Archive:   Cancelled only — the dead end
+// "In Transit" is Ordered + a non-empty tracking string. Mirrors the badge
+// label split in statusLabel() so the pill counts match what the cards read.
+function hasTracking(r) {
+  return typeof r.tracking === "string" && r.tracking.trim() !== "";
+}
+function isInTransit(r) {
+  return r.status === "Ordered" && hasTracking(r);
+}
+
 function updateCounts(rows) {
   const counts = {
     all: 0,
@@ -269,6 +280,7 @@ function updateCounts(rows) {
     "Waiting to Order": 0,
     Backordered: 0,
     Ordered: 0,
+    "In Transit": 0,
     Received: 0,
     archive: 0,
   };
@@ -277,6 +289,11 @@ function updateCounts(rows) {
       counts.archive++;
     } else if (r.status === "Received") {
       counts.Received++;
+    } else if (r.status === "Ordered") {
+      // Split Ordered into "Ordered (no tracking yet)" and "In Transit".
+      if (hasTracking(r)) counts["In Transit"]++;
+      else                counts.Ordered++;
+      counts.all++;
     } else if (counts[r.status] !== undefined) {
       counts[r.status]++;
       counts.all++;
@@ -289,6 +306,7 @@ function updateCounts(rows) {
   $("count-Ordered").textContent = counts.Ordered;
   $("count-Backordered").textContent = counts.Backordered;
   $("count-Waiting-to-Order").textContent = counts["Waiting to Order"];
+  $("count-In-Transit").textContent = counts["In Transit"];
   $("count-Received").textContent = counts.Received;
   $("count-archive").textContent = counts.archive;
   return counts;
@@ -317,8 +335,33 @@ function renderRows() {
   } else if (activeFilter === "Received") {
     visibleActive = [];
     visibleArchive = received;
+  } else if (activeFilter === "In Transit") {
+    // In Transit = Ordered + tracking on file. Matches the badge label split.
+    visibleActive = active.filter(isInTransit);
+  } else if (activeFilter === "Ordered") {
+    // Ordered = purchase placed, no tracking yet. In Transit owns the rest.
+    visibleActive = active.filter(r => r.status === "Ordered" && !hasTracking(r));
   } else if (activeFilter !== "all") {
     visibleActive = active.filter(r => r.status === activeFilter);
+  }
+
+  // Search applies before the vendor pills are rendered so the per-vendor
+  // counts reflect what's actually on screen — not a phantom number that
+  // dwarfs the filtered card list.
+  if (searchQuery) {
+    visibleActive  = visibleActive.filter(matchesSearch);
+    visibleArchive = visibleArchive.filter(matchesSearch);
+  }
+
+  // Vendor filter applies on top of status + search. Compute the per-vendor
+  // counts now (before the vendor filter narrows the rows) so each pill reads
+  // "how many rows would I see if I clicked this vendor." renderVendorPills
+  // also auto-drops the pin if the previously-active vendor no longer appears.
+  renderVendorPills([...visibleActive, ...visibleArchive]);
+  if (activeVendor) {
+    const vendorMatch = r => primaryVendor(r) === activeVendor;
+    visibleActive  = visibleActive.filter(vendorMatch);
+    visibleArchive = visibleArchive.filter(vendorMatch);
   }
 
   // For the All view, group by status so Submitted floats to the top, then
@@ -337,12 +380,6 @@ function renderRows() {
     visibleActive = applySort(visibleActive);
   }
   visibleArchive = applySort(visibleArchive);
-
-  // Search filter applies on top of the status filter
-  if (searchQuery) {
-    visibleActive  = visibleActive.filter(matchesSearch);
-    visibleArchive = visibleArchive.filter(matchesSearch);
-  }
 
   // Part-bubble row reflects whatever's about to be rendered, regardless of
   // which section (active or archive) the rows landed in.
@@ -390,6 +427,76 @@ function renderRows() {
     emptyEl.hidden = true;
   }
 }
+
+// Vendor pill row — one pill per primary vendor present in the rows the
+// status filter just selected (i.e. counts reflect "under this status, how
+// many of each vendor"). Click a vendor to narrow further; click the pinned
+// vendor again or "All vendors" to clear. Hidden when no vendors are present.
+function renderVendorPills(rows) {
+  if (!vendorPillsEl) return;
+
+  // Tally rows by primary vendor. Rows with no vendor fall into "(no vendor)"
+  // so the user can isolate not-in-DB / unclassified rows when they need to.
+  const NO_VENDOR_KEY = "(no vendor)";
+  const counts = new Map();
+  for (const r of rows) {
+    const v = primaryVendor(r) || NO_VENDOR_KEY;
+    counts.set(v, (counts.get(v) || 0) + 1);
+  }
+
+  if (counts.size === 0) {
+    vendorPillsEl.hidden = true;
+    vendorPillsEl.innerHTML = "";
+    return;
+  }
+
+  // Sort: highest count first, then alphabetical. "(no vendor)" sinks to the
+  // end regardless of count — it's noise, not signal.
+  const sorted = [...counts.entries()].sort((a, b) => {
+    if (a[0] === NO_VENDOR_KEY) return 1;
+    if (b[0] === NO_VENDOR_KEY) return -1;
+    if (b[1] !== a[1]) return b[1] - a[1];
+    return a[0].localeCompare(b[0]);
+  });
+
+  // If the user had a vendor pinned but it's no longer in the current view
+  // (e.g. they switched status filters), drop the pin so they don't end up
+  // staring at an empty list. renderRows will re-run on the next interaction.
+  if (activeVendor && !counts.has(activeVendor)) {
+    activeVendor = "";
+  }
+
+  const total = rows.length;
+  const allActive = activeVendor === "" ? " active" : "";
+  const allSelected = activeVendor === "" ? "true" : "false";
+  const parts = [
+    `<button type="button" class="pill vendor-pill${allActive}" data-vendor="" role="tab" aria-selected="${allSelected}">
+      <span>All vendors</span>
+      <span class="pill-count">${total}</span>
+    </button>`,
+  ];
+  for (const [vendor, count] of sorted) {
+    const isActive = vendor === activeVendor;
+    const cls = isActive ? " active" : "";
+    const sel = isActive ? "true" : "false";
+    parts.push(`<button type="button" class="pill vendor-pill${cls}" data-vendor="${escapeHtml(vendor)}" role="tab" aria-selected="${sel}">
+      <span>${escapeHtml(vendor)}</span>
+      <span class="pill-count">${count}</span>
+    </button>`);
+  }
+  vendorPillsEl.innerHTML = parts.join("");
+  vendorPillsEl.hidden = false;
+}
+
+vendorPillsEl?.addEventListener("click", (e) => {
+  const btn = e.target.closest(".vendor-pill");
+  if (!btn) return;
+  const next = btn.dataset.vendor || "";
+  // Click the already-pinned vendor → unpin (act like "All vendors"). Saves
+  // a trip to the All vendors pill when there are many vendors in the row.
+  activeVendor = (next === activeVendor) ? "" : next;
+  renderRows();
+});
 
 // Compact bubble row that mirrors what's currently rendered. One bubble per
 // distinct part; qty sums when known (Ordered/Received), otherwise we show

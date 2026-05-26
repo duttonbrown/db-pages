@@ -63,6 +63,10 @@
         <span>Waiting</span>
         <span class="pill-count" id="count-Waiting-to-Order">—</span>
       </button>
+      <button type="button" class="pill" data-status="In Transit" role="tab" aria-selected="false">
+        <span>In Transit</span>
+        <span class="pill-count" id="count-In-Transit">—</span>
+      </button>
       <button type="button" class="pill" data-status="Received" role="tab" aria-selected="false">
         <span>Received</span>
         <span class="pill-count" id="count-Received">—</span>
@@ -89,6 +93,8 @@
       <span>Refresh</span>
     </button>
   </div>
+
+  <div id="vendor-pills" class="vendor-pills" hidden role="tablist" aria-label="Filter by vendor"></div>
 
   <div id="part-bubbles" class="part-bubbles" hidden aria-label="Parts in current view"></div>
 

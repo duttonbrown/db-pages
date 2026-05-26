@@ -894,44 +894,9 @@ function openModal(action, row) {
     });
   }
 
-  // Mark Ordered + Edit share the same "No PO #" / "No Order #" toggles and
-  // the same ETA auto-slide behavior. Edit reuses them; the auto-slide is a
-  // no-op for Edit because the form has no Ordered Date input.
+  // Mark Ordered + Edit share the same ETA auto-slide behavior. Auto-slide
+  // is a no-op for Edit because the form has no Ordered Date input.
   if (action === "ordered" || action === "edit") {
-    const noPOBox = modalForm.querySelector("#f-noPO");
-    const poInput = modalForm.querySelector("#f-poNumber");
-    if (noPOBox && poInput) {
-      noPOBox.addEventListener("change", () => {
-        if (noPOBox.checked) {
-          poInput.value = "";
-          poInput.disabled = true;
-          poInput.placeholder = "Not provided";
-        } else {
-          poInput.disabled = false;
-          poInput.placeholder = "e.g. PO-2026-0042";
-          poInput.focus();
-        }
-      });
-    }
-
-    // Same pattern for "No Order # available" — internal stock requests that
-    // aren't tied to a Shopify/customer order.
-    const noOrderBox = modalForm.querySelector("#f-noOrderNumber");
-    const orderInput = modalForm.querySelector("#f-orderNumber");
-    if (noOrderBox && orderInput) {
-      noOrderBox.addEventListener("change", () => {
-        if (noOrderBox.checked) {
-          orderInput.value = "";
-          orderInput.disabled = true;
-          orderInput.placeholder = "Not provided";
-        } else {
-          orderInput.disabled = false;
-          orderInput.placeholder = "e.g. #12345";
-          orderInput.focus();
-        }
-      });
-    }
-
     // Auto-slide ETA when Ordered Date changes — but only while the user
     // hasn't manually touched the ETA. As soon as they pick a date there,
     // we respect it and stop overriding. This way a default "today + lead"
@@ -954,7 +919,7 @@ function openModal(action, row) {
     }
     // "ETA not available" checkbox: when checked, blank + disable the ETA
     // field so the form submits without a date. Worker accepts null ETA
-    // when noEta=true (mirrors the noPO / noOrderNumber pattern).
+    // when noEta=true.
     if (etaInput && noEtaInput) {
       noEtaInput.addEventListener("change", () => {
         if (noEtaInput.checked) {
@@ -1003,20 +968,12 @@ function fieldsFor(action, row) {
     return `
       <div class="field-row">
         <div class="field">
-          <label for="f-orderNumber">Order #<span class="req">*</span></label>
+          <label for="f-orderNumber">Order #</label>
           <input id="f-orderNumber" name="orderNumber" type="text" placeholder="e.g. #12345">
-          <label class="field-checkbox">
-            <input type="checkbox" id="f-noOrderNumber" name="noOrderNumber" value="1">
-            <span>No Order # available</span>
-          </label>
         </div>
         <div class="field">
-          <label for="f-poNumber">PO #<span class="req">*</span></label>
+          <label for="f-poNumber">PO #</label>
           <input id="f-poNumber" name="poNumber" type="text" placeholder="e.g. PO-2026-0042">
-          <label class="field-checkbox">
-            <input type="checkbox" id="f-noPO" name="noPO" value="1">
-            <span>No PO # available</span>
-          </label>
         </div>
       </div>
       <div class="field">
@@ -1128,19 +1085,11 @@ function fieldsFor(action, row) {
       <div class="field-row">
         <div class="field">
           <label for="f-orderNumber">Order #</label>
-          <input id="f-orderNumber" name="orderNumber" type="text" value="${escapeHtml(orderIsNo ? "" : orderNumber)}"${orderIsNo ? " disabled placeholder=\"Not provided\"" : ""}>
-          <label class="field-checkbox">
-            <input type="checkbox" id="f-noOrderNumber" name="noOrderNumber" value="1"${orderIsNo ? " checked" : ""}>
-            <span>No Order # available</span>
-          </label>
+          <input id="f-orderNumber" name="orderNumber" type="text" value="${escapeHtml(orderIsNo ? "" : orderNumber)}">
         </div>
         <div class="field">
           <label for="f-poNumber">PO #</label>
-          <input id="f-poNumber" name="poNumber" type="text" value="${escapeHtml(poIsNo ? "" : poNumber)}"${poIsNo ? " disabled placeholder=\"Not provided\"" : ""}>
-          <label class="field-checkbox">
-            <input type="checkbox" id="f-noPO" name="noPO" value="1"${poIsNo ? " checked" : ""}>
-            <span>No PO # available</span>
-          </label>
+          <input id="f-poNumber" name="poNumber" type="text" value="${escapeHtml(poIsNo ? "" : poNumber)}">
         </div>
       </div>
       <div class="field">
@@ -1295,20 +1244,12 @@ function openBulkOrderedModal() {
     </div>
     <div class="field-row">
       <div class="field">
-        <label for="bf-orderNumber">Order #<span class="req">*</span></label>
+        <label for="bf-orderNumber">Order #</label>
         <input id="bf-orderNumber" name="orderNumber" type="text" placeholder="e.g. #12345">
-        <label class="field-checkbox">
-          <input type="checkbox" id="bf-noOrderNumber" name="noOrderNumber" value="1">
-          <span>No Order # available</span>
-        </label>
       </div>
       <div class="field">
-        <label for="bf-poNumber">PO #<span class="req">*</span></label>
+        <label for="bf-poNumber">PO #</label>
         <input id="bf-poNumber" name="poNumber" type="text" placeholder="e.g. PO-2026-0042">
-        <label class="field-checkbox">
-          <input type="checkbox" id="bf-noPO" name="noPO" value="1">
-          <span>No PO # available</span>
-        </label>
       </div>
     </div>
     <div class="field-row">
@@ -1336,26 +1277,6 @@ function openBulkOrderedModal() {
   `;
   modalErr.hidden = true;
   modal.hidden = false;
-
-  // Wire toggles
-  const wireNoToggle = (boxId, inputId, placeholderOn, placeholderOff) => {
-    const box = modalForm.querySelector(`#${boxId}`);
-    const input = modalForm.querySelector(`#${inputId}`);
-    if (!box || !input) return;
-    box.addEventListener("change", () => {
-      if (box.checked) {
-        input.value = "";
-        input.disabled = true;
-        input.placeholder = placeholderOn;
-      } else {
-        input.disabled = false;
-        input.placeholder = placeholderOff;
-        input.focus();
-      }
-    });
-  };
-  wireNoToggle("bf-noOrderNumber", "bf-orderNumber", "Not provided", "e.g. #12345");
-  wireNoToggle("bf-noPO",          "bf-poNumber",   "Not provided", "e.g. PO-2026-0042");
 
   // ETA auto-slide on Ordered Date change (mirrors single-row modal)
   const orderedInput = modalForm.querySelector("#bf-orderedDate");
@@ -1401,8 +1322,6 @@ async function submitBulkOrdered() {
     orderedDate:   f("bf-orderedDate")?.value || "",
     eta:           f("bf-eta")?.value || "",
     tracking:      f("bf-tracking")?.value.trim() || "",
-    noPO:          truthyBox("bf-noPO"),
-    noOrderNumber: truthyBox("bf-noOrderNumber"),
     noEta:         truthyBox("bf-noEta"),
   };
   // Strip empty/false so the worker's validator doesn't get confused
