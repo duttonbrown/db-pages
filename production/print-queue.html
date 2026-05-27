@@ -1446,7 +1446,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-26T22:57:36",
+  "built_at": "2026-05-26T23:25:42",
   "orders": [
     {
       "shopify_order_id": "6973383671890",
@@ -4894,12 +4894,26 @@ function renderRow(r){
   const orderLinkInner = o.shopify_url
     ? `<a href="${o.shopify_url}" target="_blank">${orderName}</a>`
     : orderName;
-  // The order # itself is already linked to the Shopify admin order page
-  // (orderLinkInner wraps it in an anchor to o.shopify_url). PDF Order Pro
-  // generates per-order signed tokens we don't have at queue-build time,
-  // so we can't deep-link straight to the PDF — the manager clicks the
-  // order # to reach admin, then hits PDF Order Pro's "View PDF" from there.
-  const adminLink = "";
+  // Direct PDF deep-link via Order Printer Pro's storefront proxy.
+  // Pattern (provided by Thomas from the app's "Set up PDF link" page):
+  //   /apps/download-pdf/orders/<SHOP_TOKEN>/<order.id * 5707>/<order.name>.pdf
+  // - SHOP_TOKEN is a per-shop constant the app issues; harmless to commit
+  //   (it only signs requests to OUR storefront's app proxy).
+  // - The 5707 multiplier obfuscates the raw order id, mirroring the Liquid
+  //   `{{ order.id | times: 5707 }}` in the app's snippet.
+  // - order.name is lowercased + dashed by Shopify's `handleize`; our order
+  //   names are pure digits so `String(name).toLowerCase()` is enough.
+  const PDF_SHOP_TOKEN = "9fbd8dac7bee8b5dca67";
+  const orderIdNum = o.shopify_order_id ? Number(o.shopify_order_id) : 0;
+  const orderHandle = String(o.shopify_order_name || o.shopify_order_number || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  // JS numbers stay exact up to 2^53 — Shopify order ids are ~13 digits,
+  // so id * 5707 fits well within that bound.
+  const pdfLink = (orderIdNum && orderHandle)
+    ? `<a href="https://www.duttonbrown.com/apps/download-pdf/orders/${PDF_SHOP_TOKEN}/${orderIdNum * 5707}/${orderHandle}.pdf"
+          target="_blank"
+          class="pdf-link"
+          title="Download the Work Order PDF for this order">PDF</a>`
+    : "";
   const rawLines = (p.lines && p.lines.length) ? p.lines : (p.line_item_titles||[]).map((t,i)=>(
     {title:t, variant_sku:(p.variant_skus||[])[i]||"", qty: i===0 ? p.total_qty : 0}
   ));
@@ -4960,7 +4974,7 @@ function renderRow(r){
   return `
     <div class="order-block" ${dragAttrs}>
       <div class="order-block-head">
-        <div class="col-order">${orderLinkInner}${adminLink}${companionBadge}</div>
+        <div class="col-order">${orderLinkInner}${pdfLink}${companionBadge}</div>
         <div class="col-date">${fmtDateLong(o.created_at)}</div>
         <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
         <div class="col-customer">${o.customer_name || ""}</div>
