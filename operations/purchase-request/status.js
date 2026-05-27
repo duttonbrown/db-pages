@@ -342,15 +342,31 @@ function updateCounts(rows) {
       counts.all++;
     }
   }
-  $("count-all").textContent = counts.all;
-  $("count-Submitted").textContent = counts.Submitted;
-  $("count-Ordered").textContent = counts.Ordered;
-  $("count-Backordered").textContent = counts.Backordered;
-  $("count-Waiting-to-Order").textContent = counts["Waiting to Order"];
-  $("count-In-Transit").textContent = counts["In Transit"];
-  $("count-Delivered").textContent = counts.Delivered;
-  $("count-Received").textContent = counts.Received;
-  $("count-archive").textContent = counts.archive;
+  // Set counts AND show/hide each pill based on whether there's anything in
+  // the bucket. Two pills are always visible: "All" (the reset) and whichever
+  // pill the user currently has active (so their selection never disappears
+  // from under them, even when filtering down to zero rows). Everything
+  // else hides when empty so the row doesn't gum up with dead options.
+  const pillStates = [
+    { id: "count-all",              key: "all",              count: counts.all },
+    { id: "count-Submitted",        key: "Submitted",        count: counts.Submitted },
+    { id: "count-Ordered",          key: "Ordered",          count: counts.Ordered },
+    { id: "count-Backordered",      key: "Backordered",      count: counts.Backordered },
+    { id: "count-Waiting-to-Order", key: "Waiting to Order", count: counts["Waiting to Order"] },
+    { id: "count-In-Transit",       key: "In Transit",       count: counts["In Transit"] },
+    { id: "count-Delivered",        key: "Delivered",        count: counts.Delivered },
+    { id: "count-Received",         key: "Received",         count: counts.Received },
+    { id: "count-archive",          key: "archive",          count: counts.archive },
+  ];
+  for (const p of pillStates) {
+    const el = $(p.id);
+    if (!el) continue;
+    el.textContent = p.count;
+    const pill = el.closest(".pill");
+    if (!pill) continue;
+    const alwaysShow = p.key === "all" || p.key === activeFilter;
+    pill.hidden = !alwaysShow && p.count === 0;
+  }
   return counts;
 }
 
@@ -443,7 +459,12 @@ function renderRows() {
   // also auto-drops the pin if the previously-active vendor no longer appears.
   renderVendorPills([...visibleActive, ...visibleArchive]);
   if (activeVendor) {
-    const vendorMatch = r => primaryVendor(r) === activeVendor;
+    // The "(no vendor)" pill's data-vendor is the literal sentinel string,
+    // but rows themselves have primaryVendor === "". Translate so the
+    // pill actually filters to the rows it counted.
+    const vendorMatch = activeVendor === NO_VENDOR_KEY
+      ? r => !primaryVendor(r)
+      : r => primaryVendor(r) === activeVendor;
     visibleActive  = visibleActive.filter(vendorMatch);
     visibleArchive = visibleArchive.filter(vendorMatch);
   }
@@ -535,6 +556,12 @@ function renderRows() {
   }
 }
 
+// Sentinel pill label for rows whose primaryVendor is empty. Lives at module
+// scope so the filter predicate (which is in renderRows) and the renderer
+// agree on the exact string — otherwise clicking the pill would filter for
+// the literal "(no vendor)" string instead of empty vendors.
+const NO_VENDOR_KEY = "(no vendor)";
+
 // Vendor pill row — one pill per primary vendor present in the rows the
 // status filter just selected (i.e. counts reflect "under this status, how
 // many of each vendor"). Click a vendor to narrow further; click the pinned
@@ -542,9 +569,8 @@ function renderRows() {
 function renderVendorPills(rows) {
   if (!vendorPillsEl) return;
 
-  // Tally rows by primary vendor. Rows with no vendor fall into "(no vendor)"
+  // Tally rows by primary vendor. Rows with no vendor fall into NO_VENDOR_KEY
   // so the user can isolate not-in-DB / unclassified rows when they need to.
-  const NO_VENDOR_KEY = "(no vendor)";
   const counts = new Map();
   for (const r of rows) {
     const v = primaryVendor(r) || NO_VENDOR_KEY;
