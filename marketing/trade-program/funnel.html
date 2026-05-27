@@ -1,0 +1,3833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dutton Brown — Trade Program Funnel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --db-primary: #4A4A4A;
+    --db-accent: #FF9912;
+    --db-accent-hover: #D97706;
+    --db-accent-soft: #FFF4E0;
+    --db-surface: #F7F5F2;
+    --db-surface-mid: #EDE9E3;
+    --db-text: #4A4A4A;
+    --db-text-muted: #6B6B6B;
+    --db-text-light: #8A8A8A;
+    --db-border: #E6E6E6;
+    --db-radius: 4px;
+    --db-radius-full: 9999px;
+    --db-pos: #4E782F;
+    --db-neg: #9F2C00;
+    --db-neu: #8A8A8A;
+    --db-warn: #B89111;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300;
+    color: var(--db-text);
+    background: var(--db-surface);
+    line-height: 1.55;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  table, .kpi-val, .kpi-cell-sub, .kpi-period-label,
+  .kpi-compare td, .kpi-compare th { font-variant-numeric: tabular-nums; }
+
+  .header {
+    background: var(--db-primary);
+    color: #fff;
+    padding: 56px 32px 32px;
+    text-align: left;
+    position: relative;
+  }
+  .header::before {
+    content: 'MARKETING REPORT';
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--db-accent);
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    max-width: 900px;
+  }
+  .header p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-top: 8px;
+  }
+  .header .updated {
+    display: inline-block;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 18px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 14px;
+  }
+  .report-nav {
+    display: flex;
+    gap: 24px;
+    justify-content: flex-start;
+    padding: 0 32px 24px;
+    background: var(--db-primary);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .report-nav a {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.78rem;
+    font-weight: 400;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .report-nav a:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+  .report-nav a.current {
+    color: var(--db-accent);
+    border-bottom: 1px solid var(--db-accent);
+    font-weight: 600;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px; }
+
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--db-border);
+    margin-bottom: 32px;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 14px 22px;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--db-text-light);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .tab-btn:hover { color: var(--db-text); }
+  .tab-btn.active {
+    color: var(--db-text);
+    font-weight: 600;
+    border-bottom-color: var(--db-primary);
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .tab-subtitle {
+    font-size: 0.82rem;
+    color: var(--db-text-muted);
+    margin: 0 0 18px;
+    letter-spacing: 0.01em;
+  }
+  .tab-subtitle strong { font-weight: 600; color: var(--db-text); }
+
+  /* KPI hero row */
+  .kpi-hero-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .kpi-hero {
+    background: #fff;
+    border: 1px solid var(--db-border);
+    border-radius: var(--db-radius);
+    padding: 22px 20px;
+  }
+  .kpi-hero .kpi-hero-label {
+    font-weight: 600;
+    font-size: 0.65rem;
+    color: var(--db-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .kpi-hero .kpi-hero-val {
+    font-weight: 600;
+    font-size: 2rem;
+    color: var(--db-text);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .kpi-hero .kpi-hero-deltas {
+    display: flex;
+    gap: 14px;
+    margin-top: 12px;
+    font-size: 0.72rem;
+  }
+  .kpi-hero .kpi-hero-delta { color: var(--db-text-light); font-weight: 400; }
+  .kpi-hero .kpi-hero-delta span { font-weight: 600; }
+  .kpi-hero .kpi-hero-delta .pos { color: var(--db-pos); }
+  .kpi-hero .kpi-hero-delta .neg { color: var(--db-neg); }
+  .kpi-hero .kpi-hero-delta .neu { color: var(--db-neu); }
+  .kpi-hero .kpi-hero-delta .warn { color: var(--db-warn); }
+
+  /* Sections */
+  .section { margin-bottom: 40px; }
+  .section h2 {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--db-border);
+    color: var(--db-text);
+    letter-spacing: 0.02em;
+  }
+  .section h2 .section-sub {
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: var(--db-text-light);
+    letter-spacing: 0;
+    text-transform: none;
+    margin-left: 12px;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card {
+    background: #fff;
+    border: 1px solid var(--db-border);
+    border-radius: var(--db-radius);
+    padding: 22px;
+  }
+  .chart-container { position: relative; margin: 8px 0; background: #fff; border: 1px solid var(--db-border); border-radius: var(--db-radius); padding: 20px; }
+
+  /* Filter pills */
+  .pill-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 20px;
+  }
+  .pill {
+    background: #fff;
+    border: 1px solid var(--db-border);
+    border-radius: var(--db-radius);
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--db-text-muted);
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: all 0.15s;
+  }
+  .pill:hover { border-color: var(--db-text); color: var(--db-text); }
+  .pill.active {
+    background: var(--db-primary);
+    color: #fff;
+    border-color: var(--db-primary);
+    font-weight: 600;
+  }
+  .pill-hint {
+    font-size: 0.7rem;
+    color: var(--db-text-light);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    margin-left: auto;
+  }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th {
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--db-border);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--db-text-light);
+  }
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--db-border);
+    color: var(--db-text);
+    font-size: 0.88rem;
+  }
+  tr:hover td { background: var(--db-surface); }
+  .r { text-align: right; }
+  .table-wrap {
+    background: #fff;
+    border: 1px solid var(--db-border);
+    border-radius: var(--db-radius);
+    overflow-x: auto;
+  }
+  .table-wrap table tr:last-child td { border-bottom: none; }
+  .table-wrap th:first-child, .table-wrap td:first-child { padding-left: 24px; }
+  .table-wrap th:last-child, .table-wrap td:last-child { padding-right: 24px; }
+
+  /* Delta pills inside tables */
+  .delta { font-weight: 400; }
+  .delta.pos { color: var(--db-pos); }
+  .delta.neg { color: var(--db-neg); }
+  .delta.neu { color: var(--db-neu); }
+  .delta.warn { color: var(--db-warn); }
+
+  /* Alert panel */
+  .alert {
+    background: var(--db-accent-soft);
+    border-left: 3px solid var(--db-accent);
+    border-radius: var(--db-radius);
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .alert-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .alert-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--db-text);
+  }
+  .alert-meta {
+    font-size: 0.72rem;
+    color: var(--db-text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .alert-body {
+    margin-top: 10px;
+    font-size: 0.88rem;
+    color: var(--db-text);
+    font-weight: 300;
+  }
+  .alert-body strong { font-weight: 600; }
+  .alert-action {
+    display: inline-block;
+    margin-top: 12px;
+    background: var(--db-primary);
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--db-radius);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .alert-action:hover { background: var(--db-text); }
+  .alert.collapsed .leak-table-wrap { display: none; }
+  .alert-toggle {
+    background: none;
+    border: none;
+    color: var(--db-accent-hover);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 0;
+    margin-top: 14px;
+  }
+  .alert-toggle:hover { color: var(--db-text); }
+  .leak-table-wrap { margin-top: 14px; }
+
+  /* Sparkline-style minimetric */
+  .micro-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .micro {
+    background: #fff;
+    border: 1px solid var(--db-border);
+    border-radius: var(--db-radius);
+    padding: 16px 18px;
+  }
+  .micro-label {
+    font-weight: 600;
+    font-size: 0.62rem;
+    color: var(--db-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .micro-row-inner {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .micro-val {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--db-text);
+  }
+  .micro-delta { font-size: 0.72rem; }
+
+  /* Number-history view */
+  .history-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .history-toggles { display: flex; flex-wrap: wrap; gap: 8px; }
+  .history-actions { display: flex; gap: 8px; }
+  .ghost-btn {
+    background: #fff;
+    border: 1px solid var(--db-border);
+    border-radius: var(--db-radius);
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--db-text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .ghost-btn:hover { background: var(--db-primary); color: #fff; border-color: var(--db-primary); }
+
+  .history-table-wrap {
+    background: #fff;
+    border: 1px solid var(--db-border);
+    border-radius: var(--db-radius);
+    overflow: auto;
+    max-height: 70vh;
+    position: relative;
+  }
+  table.history-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.82rem;
+  }
+  table.history-table thead th {
+    position: sticky;
+    top: 0;
+    background: var(--db-surface);
+    z-index: 3;
+    font-weight: 600;
+    font-size: 0.62rem;
+    color: var(--db-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--db-border);
+    text-align: right;
+    white-space: nowrap;
+  }
+  table.history-table thead .col-sub {
+    font-size: 0.55rem;
+    font-weight: 300;
+    color: #B0B0B0;
+    margin-top: 3px;
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+  }
+  table.history-table thead th:first-child {
+    text-align: left;
+    left: 0;
+    z-index: 4;
+    border-right: 1px solid var(--db-border);
+  }
+  table.history-table tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--db-border);
+    color: var(--db-text);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  table.history-table tbody td:first-child {
+    position: sticky;
+    left: 0;
+    background: #fff;
+    font-weight: 600;
+    color: var(--db-text);
+    text-align: left;
+    border-right: 1px solid var(--db-border);
+    z-index: 2;
+  }
+  table.history-table tbody tr:hover td { background: var(--db-surface); }
+  table.history-table tbody tr:hover td:first-child { background: var(--db-surface-mid); }
+  table.history-table tbody tr.year-divider td { border-top: 2px solid var(--db-border); }
+  table.history-table tbody td.blank { color: #C9C9C9; font-weight: 300; }
+  table.history-table tbody tr.latest td:first-child::after {
+    content: '●';
+    color: var(--db-accent);
+    margin-left: 8px;
+    font-size: 0.6rem;
+    vertical-align: middle;
+  }
+
+  .history-legend {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 0.72rem;
+    color: var(--db-text-muted);
+    font-weight: 300;
+  }
+  .history-legend .legend-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .legend-fresh { background: var(--db-accent); }
+  .legend-blank { background: #C9C9C9; }
+
+  /* Demoted "quarterly" section — less visual weight */
+  .section.quarterly {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 2px dashed var(--db-border);
+    opacity: 0.95;
+  }
+  .section.quarterly h2 {
+    font-size: 0.9rem;
+    color: var(--db-text-muted);
+  }
+  .section.quarterly h2 .section-sub { color: var(--db-text-light); }
+  .quarterly-note {
+    font-size: 0.74rem;
+    color: var(--db-text-light);
+    font-weight: 300;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* Coverage note (data-availability disclosure) */
+  .coverage-note {
+    background: var(--db-surface-mid);
+    border-radius: var(--db-radius);
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 0.78rem;
+    color: var(--db-text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .coverage-note strong { color: var(--db-text); font-weight: 600; }
+
+  /* Footnote */
+  .footnote {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--db-border);
+    font-size: 0.72rem;
+    color: var(--db-text-light);
+    line-height: 1.7;
+  }
+  .footnote strong { color: var(--db-text-muted); font-weight: 600; }
+  .footnote code {
+    background: var(--db-surface-mid);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.85em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  @media (max-width: 700px) {
+    .header { padding: 40px 20px 24px; }
+    .header h1 { font-size: 1.4rem; }
+    .report-nav { padding: 0 20px 20px; gap: 16px; }
+    .container { padding: 24px 20px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .kpi-hero-row { grid-template-columns: repeat(2, 1fr); }
+    .kpi-hero .kpi-hero-val { font-size: 1.6rem; }
+    .tab-btn { padding: 12px 14px; font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Dutton Brown — Trade Program Funnel</h1>
+  <p>Application funnel health, growth signals, and pending ops review</p>
+  <div class="updated" id="updated-stamp">Updated —</div>
+</div>
+
+<div class="report-nav">
+  <a href="#" class="current">Funnel</a>
+  <a href="../trade-program/" title="Existing landing page mocks">Landing Pages</a>
+  <a href="../monthly-marketing-meetings/" title="Marketing scoreboards">Marketing Scoreboards</a>
+</div>
+
+<div class="container">
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="btn-current" onclick="showTab('current')">Current Month</button>
+    <button class="tab-btn" id="btn-trends" onclick="showTab('trends')">Trends</button>
+    <button class="tab-btn" id="btn-history" onclick="showTab('history')">Number History</button>
+    <button class="tab-btn" id="btn-quality" onclick="showTab('quality')">Quality &amp; Engagement</button>
+    <button class="tab-btn" id="btn-ops" onclick="showTab('ops')">Ops Review</button>
+  </div>
+
+  <!-- ============ CURRENT MONTH ============ -->
+  <div class="tab-content active" id="current">
+    <div class="tab-subtitle" id="current-subtitle">—</div>
+
+    <div class="kpi-hero-row" id="kpi-hero-row"></div>
+
+    <div class="alert" id="leak-alert">
+      <div class="alert-header">
+        <div class="alert-title">Approved applicants without samples tag</div>
+        <div class="alert-meta" id="leak-count-meta">—</div>
+      </div>
+      <div class="alert-body" id="leak-body">—</div>
+      <button class="alert-toggle" onclick="toggleAlert()">Show breakdown ↓</button>
+      <div class="leak-table-wrap">
+        <div class="table-wrap" style="margin-top:6px">
+          <table id="leak-table">
+            <thead><tr><th>Approved</th><th>Email</th><th>Business</th><th>Tags on customer</th><th>Notes</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Funnel — last 13 months <span class="section-sub">Monthly applications received vs approved.</span></h2>
+      <div class="chart-container">
+        <canvas id="chart-funnel" height="320"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TRENDS ============ -->
+  <div class="tab-content" id="trends">
+    <div class="tab-subtitle">Long-view of trade program performance from January 2024 onward.</div>
+
+    <div class="coverage-note">
+      <strong>Data coverage:</strong>
+      Funnel counts (Received / Approved / Denied) backfilled to <strong>Jan 2024</strong> from Outlook emails.
+      Trade AOV &amp; Landing Page Traffic start <strong>Jan 2025</strong>.
+      Active Account Rate &amp; Repeat Rate start <strong>May 2025</strong>.
+      May 2026 values will appear when the monthly orchestrator runs (days 5–7 of June).
+    </div>
+
+    <div class="section">
+      <h2>Applications received vs approved <span class="section-sub">29 months of history.</span></h2>
+      <div class="chart-container">
+        <canvas id="chart-history" height="320"></canvas>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Trade AOV <span class="section-sub">Last 16 months — average order value on trade orders.</span></h2>
+      <div class="chart-container">
+        <canvas id="chart-aov" height="280"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ NUMBER HISTORY ============ -->
+  <div class="tab-content" id="history">
+    <div class="tab-subtitle">Every trade metric, every month. Built for Hannah — scan history at a glance, copy to clipboard, export to CSV.</div>
+
+    <div class="history-controls">
+      <div class="history-toggles">
+        <button class="pill active" data-range="all" onclick="setHistoryRange('all')">All months</button>
+        <button class="pill" data-range="2026" onclick="setHistoryRange('2026')">2026</button>
+        <button class="pill" data-range="2025" onclick="setHistoryRange('2025')">2025</button>
+        <button class="pill" data-range="2024" onclick="setHistoryRange('2024')">2024</button>
+        <button class="pill" data-range="trailing12" onclick="setHistoryRange('trailing12')">Trailing 12</button>
+      </div>
+      <div class="history-actions">
+        <button class="ghost-btn" onclick="copyHistoryCsv()">Copy as TSV</button>
+        <button class="ghost-btn" onclick="downloadHistoryCsv()">Download CSV</button>
+      </div>
+    </div>
+
+    <div class="history-table-wrap">
+      <table id="history-table" class="history-table"></table>
+    </div>
+
+    <div class="history-legend">
+      <span><span class="legend-dot legend-fresh"></span>Latest available</span>
+      <span><span class="legend-dot legend-blank"></span>Not tracked in this month</span>
+      <span style="font-weight:300;color:var(--db-text-light)">Numbers shown are values reported in the Notion Snapshots database (KPI <em>Trade — *</em>).</span>
+    </div>
+  </div>
+
+  <!-- ============ QUALITY & ENGAGEMENT ============ -->
+  <div class="tab-content" id="quality">
+    <div class="tab-subtitle">How much of the approved base is actually buying — and coming back.</div>
+
+    <div class="coverage-note">
+      <strong>About windows:</strong> Engagement metrics use rolling windows by design. The <strong>90-day Active Rate</strong> is the most responsive — use it for monthly health checks. The <strong>12-month Active Account Rate</strong> (in the Quarterly Strategic panel at the bottom) is heavily smoothed and best read year-over-year, not month-to-month.
+    </div>
+
+    <div class="micro-row" id="quality-micro" style="margin-bottom:32px"></div>
+
+    <div class="section">
+      <h2>90-Day Active Rate <span class="section-sub">% of lifetime trade-tagged accounts that placed an order in the trailing 90 days. Sensitive to monthly change — use this for ongoing program health.</span></h2>
+      <div class="chart-container">
+        <canvas id="chart-active-90" height="240"></canvas>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Repeat rate <span class="section-sub">% of trade customers with more than one order in the trailing 12 months. A 12-month rolling metric — moves slowly by design.</span></h2>
+      <div class="chart-container">
+        <canvas id="chart-repeat" height="240"></canvas>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Landing page traffic <span class="section-sub">GA4 unique visitors to <code>/pages/trade</code>. Bot-filtered. Monthly metric.</span></h2>
+      <div class="chart-container">
+        <canvas id="chart-traffic" height="240"></canvas>
+      </div>
+    </div>
+
+    <div class="section quarterly">
+      <h2>Quarterly strategic view: 12-month Active Account Rate <span class="section-sub">% of lifetime trade-tagged accounts active in trailing 12 months. Read this YoY, not MoM — a 1-pt change here represents real movement.</span></h2>
+      <div class="chart-container">
+        <canvas id="chart-active" height="220"></canvas>
+      </div>
+      <p class="quarterly-note">By design, this metric shares 11/12 of its data window with the prior month — it should not change much month-to-month. The 90-Day Active Rate above is the right tool for short-cycle review.</p>
+    </div>
+  </div>
+
+  <!-- ============ OPS REVIEW ============ -->
+  <div class="tab-content" id="ops">
+    <div class="tab-subtitle">Process-side view. Tagging discipline, application bursts, and items that need a human.</div>
+
+    <div class="section">
+      <h2>Tagging discipline by month <span class="section-sub">When approval emails go out but the customer record never gets the <code>samples</code> tag.</span></h2>
+      <div class="chart-container">
+        <canvas id="chart-leaks" height="260"></canvas>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Application volume — top spikes <span class="section-sub">Months with abnormal application volume vs trailing-12 average. Useful for tracing where applicants came from.</span></h2>
+      <div class="table-wrap">
+        <table id="spike-table">
+          <thead><tr><th>Month</th><th class="r">Applications</th><th class="r">vs prior month</th><th class="r">vs same month last year</th><th>Likely driver</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>What's coming next <span class="section-sub">Built on Shopify customer metafields. These slots fill as the n8n trade orchestrator goes live (~June 2026).</span></h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="kpi-hero-label">Customer Type Mix</div>
+          <p style="margin-top:10px;font-size:0.85rem;color:var(--db-text-muted);font-weight:300">Interior Designer / Architect / Contractor / Reseller / etc. Available once the form's Customer Type field flows to a Shopify metafield via n8n.</p>
+        </div>
+        <div class="card">
+          <div class="kpi-hero-label">State &amp; Region</div>
+          <p style="margin-top:10px;font-size:0.85rem;color:var(--db-text-muted);font-weight:300">Top states by applicant volume. Requires the form's State field to write to a metafield.</p>
+        </div>
+        <div class="card">
+          <div class="kpi-hero-label">Time-to-first-order</div>
+          <p style="margin-top:10px;font-size:0.85rem;color:var(--db-text-muted);font-weight:300">Median days from approval to first paid order. Already in Shopify — just needs the rollup script.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    <strong>Source:</strong> Monthly Metrics Snapshots DB (<code>341ffa524c5b81ae9bcbdd67ba3803fb</code>). Backfilled from Outlook trade-application emails Jan 2024 → present. Going forward, the n8n trade orchestrator writes <code>trade.application_received_date</code>, <code>trade.approval_date</code>, and <code>trade.denial_date</code> to Shopify customer metafields.<br>
+    <strong>Leak alert source:</strong> <code>tools/trade-backfill/output/for_chase_review_approved_but_not_tagged.csv</code>. Refreshed when the backfill pipeline re-runs.<br>
+    <strong>Brand:</strong> Poppins 300/400/600 only. Accent <code>#FF9912</code> reserved for large display text. Small-text accent <code>#D97706</code> for WCAG AA contrast.<br>
+    <strong>Owner:</strong> Hannah (Marketing) + Chase (Operations). Notion source: <a href="https://www.notion.so/352ffa524c5b816ebc46d84b1bd8c41a" target="_blank">Marketing Truth Audit</a> + <a href="https://www.notion.so/353ffa524c5b8132a42af6635f8635ff" target="_blank">Metrics &amp; Snapshots Changelog</a>.
+  </div>
+</div>
+
+<script>
+const DASHBOARD = {
+  "months": [
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05"
+  ],
+  "data": {
+    "2024-01": {
+      "Trade - Sample Order Share": {
+        "value": 15.7407,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 77,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 34,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 173,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 991.7537,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.179,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.4512,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 42.5244,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 794.7551,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 295,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9884,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 85,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 86,
+        "mom": null,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 132,
+        "mom": null,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 45,
+        "mom": null,
+        "yoy": null
+      }
+    },
+    "2024-02": {
+      "Trade - Sample Order Share": {
+        "value": 15.1042,
+        "mom": -0.0404,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 52,
+        "mom": -0.3247,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 29,
+        "mom": -0.1471,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 159,
+        "mom": -0.0809,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 1205.0786,
+        "mom": 0.2151,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.3756,
+        "mom": 0.038,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.1103,
+        "mom": -0.0195,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 42.4521,
+        "mom": -0.0017,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 987.7321,
+        "mom": 0.2428,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 269,
+        "mom": -0.0881,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 0.95,
+        "mom": -0.0389,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 57,
+        "mom": -0.3294,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 60,
+        "mom": -0.3023,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 122,
+        "mom": -0.0758,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 45,
+        "mom": 0,
+        "yoy": null
+      }
+    },
+    "2024-03": {
+      "Trade - Sample Order Share": {
+        "value": 16.0622,
+        "mom": 0.0634,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 69,
+        "mom": 0.3269,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 31,
+        "mom": 0.069,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 160,
+        "mom": 0.0063,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 885.9912,
+        "mom": -0.2648,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.9132,
+        "mom": 0.1,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 16.6514,
+        "mom": -0.0268,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 42.2047,
+        "mom": -0.0058,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 715.7079,
+        "mom": -0.2754,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 262,
+        "mom": -0.026,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9767,
+        "mom": 0.0282,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 84,
+        "mom": 0.4737,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 86,
+        "mom": 0.4333,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 82,
+        "mom": -0.3279,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 34,
+        "mom": -0.2444,
+        "yoy": null
+      }
+    },
+    "2024-04": {
+      "Trade - Sample Order Share": {
+        "value": 13.0435,
+        "mom": -0.1879,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 57,
+        "mom": -0.1739,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 27,
+        "mom": -0.129,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 177,
+        "mom": 0.1062,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 821.8825,
+        "mom": -0.0724,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.8083,
+        "mom": -0.0177,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 16.2449,
+        "mom": -0.0244,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 43.18,
+        "mom": 0.0231,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 672.4722,
+        "mom": -0.0604,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 267,
+        "mom": 0.0191,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1.0617,
+        "mom": 0.0871,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 86,
+        "mom": 0.0238,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 81,
+        "mom": -0.0581,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 113,
+        "mom": 0.378,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 39,
+        "mom": 0.1471,
+        "yoy": null
+      }
+    },
+    "2024-05": {
+      "Trade - Sample Order Share": {
+        "value": 8.8106,
+        "mom": -0.3245,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 40,
+        "mom": -0.2982,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 20,
+        "mom": -0.2593,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 199,
+        "mom": 0.1243,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 702.6637,
+        "mom": -0.1451,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.9525,
+        "mom": 0.0248,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 16.3891,
+        "mom": 0.0089,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 42.4,
+        "mom": -0.0181,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 616.106,
+        "mom": -0.0838,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 264,
+        "mom": -0.0112,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9649,
+        "mom": -0.0912,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 55,
+        "mom": -0.3605,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 57,
+        "mom": -0.2963,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 67,
+        "mom": -0.4071,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 24,
+        "mom": -0.3846,
+        "yoy": null
+      }
+    },
+    "2024-06": {
+      "Trade - Sample Order Share": {
+        "value": 16.6667,
+        "mom": 0.8917,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 71,
+        "mom": 0.775,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 36,
+        "mom": 0.8,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 172,
+        "mom": -0.1357,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 772.0751,
+        "mom": 0.0988,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.8739,
+        "mom": -0.0132,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 16.2843,
+        "mom": -0.0064,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 42.5121,
+        "mom": 0.0026,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 615.0783,
+        "mom": -0.0017,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 625,
+        "mom": 1.3674,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1.0172,
+        "mom": 0.0542,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 59,
+        "mom": 0.0727,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 58,
+        "mom": 0.0175,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 60,
+        "mom": -0.1045,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 22,
+        "mom": -0.0833,
+        "yoy": null
+      }
+    },
+    "2024-07": {
+      "Trade - Sample Order Share": {
+        "value": 16.3265,
+        "mom": -0.0204,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 70,
+        "mom": -0.0141,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 32,
+        "mom": -0.1111,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 158,
+        "mom": -0.0814,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 750.752,
+        "mom": -0.0276,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.7559,
+        "mom": -0.0201,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 16.0482,
+        "mom": -0.0145,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 42.0752,
+        "mom": -0.0103,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 605.1981,
+        "mom": -0.0161,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 2741,
+        "mom": 3.3856,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": -0.0169,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 66,
+        "mom": 0.1186,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 66,
+        "mom": 0.1379,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 71,
+        "mom": 0.1833,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 20,
+        "mom": -0.0909,
+        "yoy": null
+      }
+    },
+    "2024-08": {
+      "Trade - Sample Order Share": {
+        "value": 14.0704,
+        "mom": -0.1382,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 65,
+        "mom": -0.0714,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 28,
+        "mom": -0.125,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 162,
+        "mom": 0.0253,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 756.1936,
+        "mom": 0.0072,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.6116,
+        "mom": -0.0251,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 15.9302,
+        "mom": -0.0073,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 42.3868,
+        "mom": 0.0074,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 615.5948,
+        "mom": 0.0172,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 1346,
+        "mom": -0.5089,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9528,
+        "mom": -0.0472,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 101,
+        "mom": 0.5303,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 106,
+        "mom": 0.6061,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 75,
+        "mom": 0.0563,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 10,
+        "mom": -0.5,
+        "yoy": null
+      }
+    },
+    "2024-09": {
+      "Trade - Sample Order Share": {
+        "value": 12.8079,
+        "mom": -0.0897,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 65,
+        "mom": 0,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 26,
+        "mom": -0.0714,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 170,
+        "mom": 0.0494,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 832.0003,
+        "mom": 0.1002,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.5461,
+        "mom": -0.0117,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 16.2318,
+        "mom": 0.0189,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 43.2149,
+        "mom": 0.0195,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 696.7569,
+        "mom": 0.1318,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 1299,
+        "mom": -0.0349,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1.0252,
+        "mom": 0.076,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 122,
+        "mom": 0.2079,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 119,
+        "mom": 0.1226,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 87,
+        "mom": 0.16,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 15,
+        "mom": 0.5,
+        "yoy": null
+      }
+    },
+    "2024-10": {
+      "Trade - Sample Order Share": {
+        "value": 17.0213,
+        "mom": 0.329,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 66,
+        "mom": 0.0154,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 32,
+        "mom": 0.2308,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 149,
+        "mom": -0.1235,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 785.7568,
+        "mom": -0.0556,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.7034,
+        "mom": 0.0284,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 16.4809,
+        "mom": 0.0153,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 42.0843,
+        "mom": -0.0262,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 622.7541,
+        "mom": -0.1062,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 1487,
+        "mom": 0.1447,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": -0.0246,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 100,
+        "mom": -0.1803,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 100,
+        "mom": -0.1597,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 103,
+        "mom": 0.1839,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 19,
+        "mom": 0.2667,
+        "yoy": null
+      }
+    },
+    "2024-11": {
+      "Trade - Sample Order Share": {
+        "value": 14.5078,
+        "mom": -0.1477,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 75,
+        "mom": 0.1364,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 28,
+        "mom": -0.125,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 158,
+        "mom": 0.0604,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 1327.7094,
+        "mom": 0.6897,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.8476,
+        "mom": 0.0253,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 16.8612,
+        "mom": 0.0231,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 41.2131,
+        "mom": -0.0207,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 1086.9435,
+        "mom": 0.7454,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 779,
+        "mom": -0.4761,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9873,
+        "mom": -0.0127,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 78,
+        "mom": -0.22,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 79,
+        "mom": -0.21,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 90,
+        "mom": -0.1262,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 9,
+        "mom": -0.5263,
+        "yoy": null
+      }
+    },
+    "2024-12": {
+      "Trade - Sample Order Share": {
+        "value": 12.1053,
+        "mom": -0.1656,
+        "yoy": null
+      },
+      "Trade - Sample Units": {
+        "value": 40,
+        "mom": -0.4667,
+        "yoy": null
+      },
+      "Trade - Sample Orders": {
+        "value": 23,
+        "mom": -0.1786,
+        "yoy": null
+      },
+      "Trade - Orders (Paid)": {
+        "value": 162,
+        "mom": 0.0253,
+        "yoy": null
+      },
+      "Trade - AOV (Paid)": {
+        "value": 833.7192,
+        "mom": -0.3721,
+        "yoy": null
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.4805,
+        "mom": -0.0628,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.0316,
+        "mom": 0.0101,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 41.6474,
+        "mom": 0.0105,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 711.2237,
+        "mom": -0.3457,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 1104,
+        "mom": 0.4172,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": 0.0129,
+        "yoy": null
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 91,
+        "mom": 0.1667,
+        "yoy": null
+      },
+      "Trade - New Applicants": {
+        "value": 91,
+        "mom": 0.1519,
+        "yoy": null
+      },
+      "Retail - Sample Units": {
+        "value": 111,
+        "mom": 0.2333,
+        "yoy": null
+      },
+      "Retail - Sample Orders": {
+        "value": 18,
+        "mom": 1,
+        "yoy": null
+      }
+    },
+    "2025-01": {
+      "Trade - Sample Order Share": {
+        "value": 20.2899,
+        "mom": 0.6761,
+        "yoy": 0.289
+      },
+      "Trade - Sample Units": {
+        "value": 98,
+        "mom": 1.45,
+        "yoy": 0.2727
+      },
+      "Trade - Orders (Paid)": {
+        "value": 162,
+        "mom": 0,
+        "yoy": -0.0636
+      },
+      "Trade - Sample Orders": {
+        "value": 42,
+        "mom": 0.8261,
+        "yoy": 0.2353
+      },
+      "Trade - AOV (Paid)": {
+        "value": 787.189,
+        "mom": -0.0558,
+        "yoy": -0.2063
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.8083,
+        "mom": 0.0598,
+        "yoy": 0.1215
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.202,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 39.939,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1.0085,
+        "mom": 0.0085,
+        "yoy": 0.0204
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 118,
+        "mom": 0.2967,
+        "yoy": 0.3882
+      },
+      "Trade - New Applicants": {
+        "value": 117,
+        "mom": 0.2857,
+        "yoy": 0.3605
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 1897,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 616.3276,
+        "mom": -0.1334,
+        "yoy": -0.2245
+      },
+      "Retail - Sample Units": {
+        "value": 92,
+        "mom": -0.1712,
+        "yoy": -0.303
+      },
+      "Retail - Sample Orders": {
+        "value": 19,
+        "mom": 0.0556,
+        "yoy": -0.5778
+      }
+    },
+    "2025-02": {
+      "Trade - Sample Order Share": {
+        "value": 11.9171,
+        "mom": -0.4127,
+        "yoy": -0.211
+      },
+      "Trade - Sample Units": {
+        "value": 67,
+        "mom": -0.3163,
+        "yoy": 0.2885
+      },
+      "Trade - Sample Orders": {
+        "value": 23,
+        "mom": -0.4524,
+        "yoy": -0.2069
+      },
+      "Trade - Orders (Paid)": {
+        "value": 162,
+        "mom": 0,
+        "yoy": 0.0189
+      },
+      "Trade - AOV (Paid)": {
+        "value": 1086.3349,
+        "mom": 0.38,
+        "yoy": -0.0985
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.7428,
+        "mom": -0.0113,
+        "yoy": 0.0683
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.3069,
+        "mom": 0.0061,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 39.3182,
+        "mom": -0.0155,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": -0.0084,
+        "yoy": 0.0526
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 62,
+        "mom": -0.4746,
+        "yoy": 0.0877
+      },
+      "Trade - New Applicants": {
+        "value": 62,
+        "mom": -0.4701,
+        "yoy": 0.0333
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 1283,
+        "mom": -0.3237,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 911.8563,
+        "mom": 0.4795,
+        "yoy": -0.0768
+      },
+      "Retail - Sample Units": {
+        "value": 126,
+        "mom": 0.3696,
+        "yoy": 0.0328
+      },
+      "Retail - Sample Orders": {
+        "value": 18,
+        "mom": -0.0526,
+        "yoy": -0.6
+      }
+    },
+    "2025-03": {
+      "Trade - Sample Order Share": {
+        "value": 11.6667,
+        "mom": -0.021,
+        "yoy": -0.2737
+      },
+      "Trade - Sample Units": {
+        "value": 57,
+        "mom": -0.1493,
+        "yoy": -0.1739
+      },
+      "Trade - Sample Orders": {
+        "value": 21,
+        "mom": -0.087,
+        "yoy": -0.3226
+      },
+      "Trade - Orders (Paid)": {
+        "value": 156,
+        "mom": -0.037,
+        "yoy": -0.025
+      },
+      "Trade - AOV (Paid)": {
+        "value": 812.4862,
+        "mom": -0.2521,
+        "yoy": -0.083
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.7428,
+        "mom": 0,
+        "yoy": -0.0288
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.2807,
+        "mom": -0.0015,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 40.0607,
+        "mom": 0.0189,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": 0,
+        "yoy": 0.0239
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 123,
+        "mom": 0.9839,
+        "yoy": 0.4643
+      },
+      "Trade - New Applicants": {
+        "value": 123,
+        "mom": 0.9839,
+        "yoy": 0.4302
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 1341,
+        "mom": 0.0452,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 704.1902,
+        "mom": -0.2277,
+        "yoy": -0.0161
+      },
+      "Retail - Sample Units": {
+        "value": 96,
+        "mom": -0.2381,
+        "yoy": 0.1707
+      },
+      "Retail - Sample Orders": {
+        "value": 17,
+        "mom": -0.0556,
+        "yoy": -0.5
+      }
+    },
+    "2025-04": {
+      "Trade - Sample Order Share": {
+        "value": 5.3279,
+        "mom": -0.5433,
+        "yoy": -0.5915
+      },
+      "Trade - Sample Units": {
+        "value": 70,
+        "mom": 0.2281,
+        "yoy": 0.2281
+      },
+      "Trade - Sample Orders": {
+        "value": 13,
+        "mom": -0.381,
+        "yoy": -0.5185
+      },
+      "Trade - Orders (Paid)": {
+        "value": 226,
+        "mom": 0.4487,
+        "yoy": 0.2768
+      },
+      "Trade - AOV (Paid)": {
+        "value": 714.9829,
+        "mom": -0.12,
+        "yoy": -0.1301
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 6.3197,
+        "mom": 0.1004,
+        "yoy": 0.088
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.7527,
+        "mom": 0.0273,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 39.6603,
+        "mom": -0.01,
+        "yoy": null
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9889,
+        "mom": -0.0111,
+        "yoy": -0.0686
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 89,
+        "mom": -0.2764,
+        "yoy": 0.0349
+      },
+      "Trade - New Applicants": {
+        "value": 90,
+        "mom": -0.2683,
+        "yoy": 0.1111
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 944,
+        "mom": -0.296,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 662.2383,
+        "mom": -0.0596,
+        "yoy": -0.0152
+      },
+      "Retail - Sample Units": {
+        "value": 116,
+        "mom": 0.2083,
+        "yoy": 0.0265
+      },
+      "Retail - Sample Orders": {
+        "value": 17,
+        "mom": 0,
+        "yoy": -0.5641
+      }
+    },
+    "2025-05": {
+      "Trade - Sample Order Share": {
+        "value": 6.599,
+        "mom": 0.2386,
+        "yoy": -0.251
+      },
+      "Trade - Sample Units": {
+        "value": 62,
+        "mom": -0.1143,
+        "yoy": 0.55
+      },
+      "Trade - Sample Orders": {
+        "value": 13,
+        "mom": 0,
+        "yoy": -0.35
+      },
+      "Trade - Orders (Paid)": {
+        "value": 179,
+        "mom": -0.208,
+        "yoy": -0.1005
+      },
+      "Trade - AOV (Paid)": {
+        "value": 679.8998,
+        "mom": -0.0491,
+        "yoy": -0.0324
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 6.2541,
+        "mom": -0.0104,
+        "yoy": 0.0507
+      },
+      "Trade - Approval Rate": {
+        "value": 1.0109,
+        "mom": 0.0222,
+        "yoy": 0.0476
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 93,
+        "mom": 0.0449,
+        "yoy": 0.6909
+      },
+      "Trade - New Applicants": {
+        "value": 92,
+        "mom": 0.0222,
+        "yoy": 0.614
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.7506,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 39.3782,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 947,
+        "mom": 0.0032,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 618.0369,
+        "mom": -0.0667,
+        "yoy": 0.0031
+      },
+      "Retail - Sample Units": {
+        "value": 99,
+        "mom": -0.1466,
+        "yoy": 0.4776
+      },
+      "Retail - Sample Orders": {
+        "value": 20,
+        "mom": 0.1765,
+        "yoy": -0.1667
+      }
+    },
+    "2025-06": {
+      "Trade - Sample Order Share": {
+        "value": 8.9623,
+        "mom": 0.3581,
+        "yoy": -0.4623
+      },
+      "Trade - Sample Units": {
+        "value": 75,
+        "mom": 0.2097,
+        "yoy": 0.0563
+      },
+      "Trade - Sample Orders": {
+        "value": 19,
+        "mom": 0.4615,
+        "yoy": -0.4722
+      },
+      "Trade - Orders (Paid)": {
+        "value": 184,
+        "mom": 0.0279,
+        "yoy": 0.0698
+      },
+      "Trade - AOV (Paid)": {
+        "value": 1003.831,
+        "mom": 0.4764,
+        "yoy": 0.3002
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 6.4245,
+        "mom": 0.0273,
+        "yoy": 0.0937
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9775,
+        "mom": -0.033,
+        "yoy": -0.039
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 87,
+        "mom": -0.0645,
+        "yoy": 0.4746
+      },
+      "Trade - New Applicants": {
+        "value": 89,
+        "mom": -0.0326,
+        "yoy": 0.5345
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.9477,
+        "mom": 0.0111,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 38.7994,
+        "mom": -0.0147,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 671,
+        "mom": -0.2914,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 871.3627,
+        "mom": 0.4099,
+        "yoy": 0.4167
+      },
+      "Retail - Sample Units": {
+        "value": 65,
+        "mom": -0.3434,
+        "yoy": 0.0833
+      },
+      "Retail - Sample Orders": {
+        "value": 12,
+        "mom": -0.4,
+        "yoy": -0.4545
+      }
+    },
+    "2025-07": {
+      "Trade - Sample Order Share": {
+        "value": 12.7072,
+        "mom": 0.4178,
+        "yoy": -0.2217
+      },
+      "Trade - Sample Units": {
+        "value": 77,
+        "mom": 0.0267,
+        "yoy": 0.1
+      },
+      "Trade - Sample Orders": {
+        "value": 23,
+        "mom": 0.2105,
+        "yoy": -0.2812
+      },
+      "Trade - Orders (Paid)": {
+        "value": 155,
+        "mom": -0.1576,
+        "yoy": -0.019
+      },
+      "Trade - AOV (Paid)": {
+        "value": 727.8694,
+        "mom": -0.2749,
+        "yoy": -0.0305
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.6641,
+        "mom": -0.1184,
+        "yoy": -0.016
+      },
+      "Trade - Approval Rate": {
+        "value": 1.0225,
+        "mom": 0.046,
+        "yoy": 0.0225
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 91,
+        "mom": 0.046,
+        "yoy": 0.3788
+      },
+      "Trade - New Applicants": {
+        "value": 89,
+        "mom": 0,
+        "yoy": 0.3485
+      },
+      "Trade - Active Account Rate": {
+        "value": 18.263,
+        "mom": 0.0176,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 36.5468,
+        "mom": -0.0581,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 627,
+        "mom": -0.0656,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 623.4329,
+        "mom": -0.2845,
+        "yoy": 0.0301
+      },
+      "Retail - Sample Units": {
+        "value": 71,
+        "mom": 0.0923,
+        "yoy": 0
+      },
+      "Retail - Sample Orders": {
+        "value": 10,
+        "mom": -0.1667,
+        "yoy": -0.5
+      }
+    },
+    "2025-08": {
+      "Trade - Sample Order Share": {
+        "value": 8.2873,
+        "mom": -0.3478,
+        "yoy": -0.411
+      },
+      "Trade - Sample Units": {
+        "value": 57,
+        "mom": -0.2597,
+        "yoy": -0.1231
+      },
+      "Trade - Sample Orders": {
+        "value": 15,
+        "mom": -0.3478,
+        "yoy": -0.4643
+      },
+      "Trade - Orders (Paid)": {
+        "value": 160,
+        "mom": 0.0323,
+        "yoy": -0.0123
+      },
+      "Trade - AOV (Paid)": {
+        "value": 837.2856,
+        "mom": 0.1503,
+        "yoy": 0.1072
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.5068,
+        "mom": -0.0278,
+        "yoy": -0.0187
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9733,
+        "mom": -0.0481,
+        "yoy": 0.0216
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 73,
+        "mom": -0.1978,
+        "yoy": -0.2772
+      },
+      "Trade - New Applicants": {
+        "value": 75,
+        "mom": -0.1573,
+        "yoy": -0.2925
+      },
+      "Trade - Active Account Rate": {
+        "value": 18.0134,
+        "mom": -0.0137,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 36.8344,
+        "mom": 0.0079,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 886,
+        "mom": 0.4131,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 740.2967,
+        "mom": 0.1875,
+        "yoy": 0.2026
+      },
+      "Retail - Sample Units": {
+        "value": 82,
+        "mom": 0.1549,
+        "yoy": 0.0933
+      },
+      "Retail - Sample Orders": {
+        "value": 16,
+        "mom": 0.6,
+        "yoy": 0.6
+      }
+    },
+    "2025-09": {
+      "Trade - Sample Order Share": {
+        "value": 5.4545,
+        "mom": -0.3418,
+        "yoy": -0.5741
+      },
+      "Trade - Sample Units": {
+        "value": 109,
+        "mom": 0.9123,
+        "yoy": 0.6769
+      },
+      "Trade - Sample Orders": {
+        "value": 12,
+        "mom": -0.2,
+        "yoy": -0.5385
+      },
+      "Trade - Orders (Paid)": {
+        "value": 200,
+        "mom": 0.25,
+        "yoy": 0.1765
+      },
+      "Trade - AOV (Paid)": {
+        "value": 778.1772,
+        "mom": -0.0706,
+        "yoy": -0.0647
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.4805,
+        "mom": -0.0048,
+        "yoy": -0.0118
+      },
+      "Trade - Approval Rate": {
+        "value": 1.0328,
+        "mom": 0.0611,
+        "yoy": 0.0074
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 63,
+        "mom": -0.137,
+        "yoy": -0.4836
+      },
+      "Trade - New Applicants": {
+        "value": 61,
+        "mom": -0.1867,
+        "yoy": -0.4874
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.79,
+        "mom": -0.0124,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 38.4047,
+        "mom": 0.0426,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 428,
+        "mom": -0.5169,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 707.5701,
+        "mom": -0.0442,
+        "yoy": 0.0155
+      },
+      "Retail - Sample Units": {
+        "value": 98,
+        "mom": 0.1951,
+        "yoy": 0.1264
+      },
+      "Retail - Sample Orders": {
+        "value": 20,
+        "mom": 0.25,
+        "yoy": 0.3333
+      }
+    },
+    "2025-10": {
+      "Trade - Sample Order Share": {
+        "value": 8.867,
+        "mom": 0.6256,
+        "yoy": -0.4791
+      },
+      "Trade - Sample Units": {
+        "value": 76,
+        "mom": -0.3028,
+        "yoy": 0.1515
+      },
+      "Trade - Sample Orders": {
+        "value": 18,
+        "mom": 0.5,
+        "yoy": -0.4375
+      },
+      "Trade - Orders (Paid)": {
+        "value": 177,
+        "mom": -0.115,
+        "yoy": 0.1879
+      },
+      "Trade - AOV (Paid)": {
+        "value": 869.841,
+        "mom": 0.1178,
+        "yoy": 0.107
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.7559,
+        "mom": 0.0502,
+        "yoy": 0.0092
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9877,
+        "mom": -0.0437,
+        "yoy": -0.0123
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 80,
+        "mom": 0.2698,
+        "yoy": -0.2
+      },
+      "Trade - New Applicants": {
+        "value": 81,
+        "mom": 0.3279,
+        "yoy": -0.19
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.9083,
+        "mom": 0.0066,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 38.4446,
+        "mom": 0.001,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 314,
+        "mom": -0.2664,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 758.4328,
+        "mom": 0.0719,
+        "yoy": 0.2179
+      },
+      "Retail - Sample Units": {
+        "value": 73,
+        "mom": -0.2551,
+        "yoy": -0.2913
+      },
+      "Retail - Sample Orders": {
+        "value": 18,
+        "mom": -0.1,
+        "yoy": -0.0526
+      }
+    },
+    "2025-11": {
+      "Trade - Sample Order Share": {
+        "value": 6.4327,
+        "mom": -0.2745,
+        "yoy": -0.5566
+      },
+      "Trade - Sample Units": {
+        "value": 46,
+        "mom": -0.3947,
+        "yoy": -0.3867
+      },
+      "Trade - Sample Orders": {
+        "value": 11,
+        "mom": -0.3889,
+        "yoy": -0.6071
+      },
+      "Trade - Orders (Paid)": {
+        "value": 155,
+        "mom": -0.1243,
+        "yoy": -0.019
+      },
+      "Trade - AOV (Paid)": {
+        "value": 844.5025,
+        "mom": -0.0291,
+        "yoy": -0.3639
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.6379,
+        "mom": -0.0205,
+        "yoy": -0.0359
+      },
+      "Trade - Approval Rate": {
+        "value": 1.0161,
+        "mom": 0.0288,
+        "yoy": 0.0292
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 63,
+        "mom": -0.2125,
+        "yoy": -0.1923
+      },
+      "Trade - New Applicants": {
+        "value": 62,
+        "mom": -0.2346,
+        "yoy": -0.2152
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.6324,
+        "mom": -0.0154,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 38.4501,
+        "mom": 0.0001,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 299,
+        "mom": -0.0478,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 765.8356,
+        "mom": 0.0098,
+        "yoy": -0.2954
+      },
+      "Retail - Sample Units": {
+        "value": 133,
+        "mom": 0.8219,
+        "yoy": 0.4778
+      },
+      "Retail - Sample Orders": {
+        "value": 24,
+        "mom": 0.3333,
+        "yoy": 1.6667
+      }
+    },
+    "2025-12": {
+      "Trade - Sample Order Share": {
+        "value": 5.7325,
+        "mom": -0.1089,
+        "yoy": -0.5264
+      },
+      "Trade - Sample Units": {
+        "value": 40,
+        "mom": -0.1304,
+        "yoy": 0
+      },
+      "Trade - Sample Orders": {
+        "value": 9,
+        "mom": -0.1818,
+        "yoy": -0.6087
+      },
+      "Trade - Orders (Paid)": {
+        "value": 143,
+        "mom": -0.0774,
+        "yoy": -0.1173
+      },
+      "Trade - AOV (Paid)": {
+        "value": 753.7838,
+        "mom": -0.1074,
+        "yoy": -0.0959
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.2052,
+        "mom": -0.0767,
+        "yoy": -0.0502
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": -0.0158,
+        "yoy": 0
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 59,
+        "mom": -0.0635,
+        "yoy": -0.3516
+      },
+      "Trade - New Applicants": {
+        "value": 59,
+        "mom": -0.0484,
+        "yoy": -0.3516
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.4222,
+        "mom": -0.0119,
+        "yoy": null
+      },
+      "Trade - Repeat Rate": {
+        "value": 38.6878,
+        "mom": 0.0062,
+        "yoy": null
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 180,
+        "mom": -0.398,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 686.6056,
+        "mom": -0.1035,
+        "yoy": -0.0346
+      },
+      "Retail - Sample Units": {
+        "value": 90,
+        "mom": -0.3233,
+        "yoy": -0.1892
+      },
+      "Retail - Sample Orders": {
+        "value": 17,
+        "mom": -0.2917,
+        "yoy": -0.0556
+      }
+    },
+    "2026-01": {
+      "Trade - Sample Order Share": {
+        "value": 14.2105,
+        "mom": 1.4789,
+        "yoy": -0.2996
+      },
+      "Trade - Sample Units": {
+        "value": 81,
+        "mom": 1.025,
+        "yoy": -0.1735
+      },
+      "Trade - Sample Orders": {
+        "value": 27,
+        "mom": 2,
+        "yoy": -0.3571
+      },
+      "Trade - Orders (Paid)": {
+        "value": 162,
+        "mom": 0.1329,
+        "yoy": 0
+      },
+      "Trade - AOV (Paid)": {
+        "value": 1228.4832,
+        "mom": 0.6298,
+        "yoy": 0.5606
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.415,
+        "mom": 0.0403,
+        "yoy": -0.0677
+      },
+      "Trade - Approval Rate": {
+        "value": 0.9873,
+        "mom": -0.0127,
+        "yoy": -0.021
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 78,
+        "mom": 0.322,
+        "yoy": -0.339
+      },
+      "Trade - Repeat Rate": {
+        "value": 36.9679,
+        "mom": -0.0445,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.593,
+        "mom": 0.0098,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 1047.4436,
+        "mom": 0.5255,
+        "yoy": 0.6995
+      },
+      "Trade - New Applicants": {
+        "value": 79,
+        "mom": 0.339,
+        "yoy": -0.3248
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 272,
+        "mom": 0.5111,
+        "yoy": -0.8566
+      },
+      "Retail - Sample Units": {
+        "value": 160,
+        "mom": 0.7778,
+        "yoy": 0.7391
+      },
+      "Retail - Sample Orders": {
+        "value": 19,
+        "mom": 0.1176,
+        "yoy": 0
+      }
+    },
+    "2026-02": {
+      "Trade - Sample Order Share": {
+        "value": 13.8095,
+        "mom": -0.0282,
+        "yoy": 0.1588
+      },
+      "Trade - Sample Units": {
+        "value": 101,
+        "mom": 0.2469,
+        "yoy": 0.5075
+      },
+      "Trade - Sample Orders": {
+        "value": 29,
+        "mom": 0.0741,
+        "yoy": 0.2609
+      },
+      "Trade - Orders (Paid)": {
+        "value": 175,
+        "mom": 0.0802,
+        "yoy": 0.0802
+      },
+      "Trade - AOV (Paid)": {
+        "value": 815.6079,
+        "mom": -0.3361,
+        "yoy": -0.2492
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 5.6116,
+        "mom": 0.0363,
+        "yoy": -0.0228
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": 0.0129,
+        "yoy": 0
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 82,
+        "mom": 0.0513,
+        "yoy": 0.3226
+      },
+      "Trade - Repeat Rate": {
+        "value": 37.2768,
+        "mom": 0.0084,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.6587,
+        "mom": 0.0037,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 679.6923,
+        "mom": -0.3511,
+        "yoy": -0.2546
+      },
+      "Trade - New Applicants": {
+        "value": 82,
+        "mom": 0.038,
+        "yoy": 0.3226
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 292,
+        "mom": 0.0735,
+        "yoy": -0.7724
+      },
+      "Retail - Sample Units": {
+        "value": 157,
+        "mom": -0.0187,
+        "yoy": 0.246
+      },
+      "Retail - Sample Orders": {
+        "value": 19,
+        "mom": 0,
+        "yoy": 0.0556
+      }
+    },
+    "2026-03": {
+      "Trade - Sample Order Share": {
+        "value": 8.4746,
+        "mom": -0.3863,
+        "yoy": -0.2736
+      },
+      "Trade - Sample Units": {
+        "value": 94,
+        "mom": -0.0693,
+        "yoy": 0.6491
+      },
+      "Trade - Sample Orders": {
+        "value": 20,
+        "mom": -0.3103,
+        "yoy": -0.0476
+      },
+      "Trade - Orders (Paid)": {
+        "value": 210,
+        "mom": 0.2,
+        "yoy": 0.3462
+      },
+      "Trade - AOV (Paid)": {
+        "value": 1622.5226,
+        "mom": 0.9893,
+        "yoy": 0.997
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 6.2148,
+        "mom": 0.1075,
+        "yoy": 0.0822
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": 0,
+        "yoy": 0
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 99,
+        "mom": 0.2073,
+        "yoy": -0.1951
+      },
+      "Trade - Repeat Rate": {
+        "value": 38.259,
+        "mom": 0.0263,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 17.9608,
+        "mom": 0.0171,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 1443.7871,
+        "mom": 1.1242,
+        "yoy": 1.0503
+      },
+      "Trade - New Applicants": {
+        "value": 99,
+        "mom": 0.2073,
+        "yoy": -0.1951
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 270,
+        "mom": -0.0753,
+        "yoy": -0.7987
+      },
+      "Retail - Sample Units": {
+        "value": 97,
+        "mom": -0.3822,
+        "yoy": 0.0104
+      },
+      "Retail - Sample Orders": {
+        "value": 17,
+        "mom": -0.1053,
+        "yoy": 0
+      }
+    },
+    "2026-04": {
+      "Trade - Sample Units": {
+        "value": 102,
+        "mom": 0.0851,
+        "yoy": 0.4571
+      },
+      "Trade - Sample Order Share": {
+        "value": 16.5217,
+        "mom": 0.9496,
+        "yoy": 2.101
+      },
+      "Trade - Sample Orders": {
+        "value": 38,
+        "mom": 0.9,
+        "yoy": 1.9231
+      },
+      "Trade - Orders (Paid)": {
+        "value": 189,
+        "mom": -0.1,
+        "yoy": -0.1637
+      },
+      "Trade - AOV (Paid)": {
+        "value": 893.1427,
+        "mom": -0.4495,
+        "yoy": 0.2492
+      },
+      "Trade - 90-Day Active Rate": {
+        "value": 6.6343,
+        "mom": 0.0675,
+        "yoy": 0.0498
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": 0,
+        "yoy": 0.0112
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 85,
+        "mom": -0.1414,
+        "yoy": -0.0449
+      },
+      "Trade - Repeat Rate": {
+        "value": 37.4453,
+        "mom": -0.0213,
+        "yoy": null
+      },
+      "Trade - Active Account Rate": {
+        "value": 18.0003,
+        "mom": 0.0022,
+        "yoy": null
+      },
+      "Trade - AOV": {
+        "value": 734.0347,
+        "mom": -0.4916,
+        "yoy": 0.1084
+      },
+      "Trade - New Applicants": {
+        "value": 85,
+        "mom": -0.1414,
+        "yoy": -0.0556
+      },
+      "Trade - Landing Page Traffic": {
+        "value": 288,
+        "mom": 0.0667,
+        "yoy": -0.6949
+      },
+      "Retail - Sample Units": {
+        "value": 90,
+        "mom": -0.0722,
+        "yoy": -0.2241
+      },
+      "Retail - Sample Orders": {
+        "value": 15,
+        "mom": -0.1176,
+        "yoy": -0.1176
+      }
+    },
+    "2026-05": {
+      "Trade - Sample Orders": {
+        "value": 18,
+        "mom": -0.5263,
+        "yoy": 0.3846
+      },
+      "Trade - Orders (Paid)": {
+        "value": 150,
+        "mom": -0.2063,
+        "yoy": -0.162
+      },
+      "Trade - AOV (Paid)": {
+        "value": 1473.3677,
+        "mom": 0.6496,
+        "yoy": 1.167
+      },
+      "Trade - AOV": {
+        "value": 1292.4278,
+        "mom": 0.7607,
+        "yoy": 1.0912
+      },
+      "Trade - Approval Rate": {
+        "value": 1,
+        "mom": 0,
+        "yoy": -0.0108
+      },
+      "Trade - Applications Denied": {
+        "value": 0,
+        "mom": null,
+        "yoy": null
+      },
+      "Trade - Applications Approved": {
+        "value": 59,
+        "mom": -0.3059,
+        "yoy": -0.3656
+      },
+      "Trade - New Applicants": {
+        "value": 59,
+        "mom": null,
+        "yoy": -0.3587
+      },
+      "Retail - Sample Units": {
+        "value": 107,
+        "mom": 0.1889,
+        "yoy": 0.0808
+      },
+      "Retail - Sample Orders": {
+        "value": 11,
+        "mom": -0.2667,
+        "yoy": -0.45
+      }
+    }
+  },
+  "updated": "2026-05-22",
+  "leaked_approvals": {
+    "total": 58,
+    "by_month": {
+      "2026-04": 3,
+      "2025-11": 2,
+      "2025-09": 2,
+      "2025-08": 2,
+      "2025-07": 6,
+      "2025-06": 6,
+      "2025-05": 7,
+      "2025-04": 1,
+      "2025-03": 6,
+      "2025-02": 2,
+      "2025-01": 7,
+      "2024-12": 2,
+      "2024-11": 1,
+      "2024-10": 7,
+      "2024-09": 2,
+      "2024-07": 1,
+      "2024-01": 1
+    },
+    "recent": [
+      {
+        "applicant_email": "catherine@ogawafisher.com",
+        "business_name": "Ogawa Fisher Architects",
+        "approved_on": "2026-04-23",
+        "application_received": "2026-04-23",
+        "current_shopify_tags": "Login with Shop, Shop",
+        "shopify_customer_id": "9330353307730",
+        "notes": "Has tags but not samples"
+      },
+      {
+        "applicant_email": "cchawkdesign@gmail.com",
+        "business_name": "MCHAWK ENTERPRISES LLC",
+        "approved_on": "2026-04-22",
+        "application_received": "2026-04-22",
+        "current_shopify_tags": "trade",
+        "shopify_customer_id": "9325838270546",
+        "notes": "Has trade tag from form submit but never got samples (no discount)"
+      },
+      {
+        "applicant_email": "hello@herffinger.com",
+        "business_name": "Heffinger Interiors",
+        "approved_on": "2026-04-13",
+        "application_received": "2026-04-13",
+        "current_shopify_tags": "",
+        "shopify_customer_id": "9307583053906",
+        "notes": "No tags at all \u00e2\u20ac\u201d customer never tagged after approval"
+      },
+      {
+        "applicant_email": "allison@dfdesig.co",
+        "business_name": "Df Design",
+        "approved_on": "2025-11-25",
+        "application_received": "2025-11-25",
+        "current_shopify_tags": "",
+        "shopify_customer_id": "8978247745618",
+        "notes": "No tags at all \u00e2\u20ac\u201d customer never tagged after approval"
+      },
+      {
+        "applicant_email": "rachel.elliott@summit.com",
+        "business_name": "SUMMIT ELECTRIC SUPPLY",
+        "approved_on": "2025-11-19",
+        "application_received": "2025-11-19",
+        "current_shopify_tags": "CAD, Login with Shop, Shop, tax exempt, trade",
+        "shopify_customer_id": "8957403398226",
+        "notes": "Has trade tag from form submit but never got samples (no discount)"
+      },
+      {
+        "applicant_email": "lori@bijouarchitecture.com",
+        "business_name": "Bijou Architecture",
+        "approved_on": "2025-09-26",
+        "application_received": "2025-09-26",
+        "current_shopify_tags": "CAD, trade",
+        "shopify_customer_id": "8834176319570",
+        "notes": "Has trade tag from form submit but never got samples (no discount)"
+      },
+      {
+        "applicant_email": "intpat106@gmail.com",
+        "business_name": "PattraInt",
+        "approved_on": "2025-09-08",
+        "application_received": "2025-09-03",
+        "current_shopify_tags": "trade",
+        "shopify_customer_id": "8762632274002",
+        "notes": "Has trade tag from form submit but never got samples (no discount)"
+      },
+      {
+        "applicant_email": "waltonsk@outlook.com",
+        "business_name": "Walton construction llc",
+        "approved_on": "2025-08-28",
+        "application_received": "2025-08-28",
+        "current_shopify_tags": "trade",
+        "shopify_customer_id": "8749997490258",
+        "notes": "Has trade tag from form submit but never got samples (no discount)"
+      },
+      {
+        "applicant_email": "aegirl17802@yahoo.com",
+        "business_name": "Yuupp",
+        "approved_on": "2025-08-19",
+        "application_received": "2025-08-18",
+        "current_shopify_tags": "",
+        "shopify_customer_id": "8727800676434",
+        "notes": "No tags at all \u00e2\u20ac\u201d customer never tagged after approval"
+      },
+      {
+        "applicant_email": "adrienne@modascapes.com",
+        "business_name": "ModaScapes, LLC",
+        "approved_on": "2025-07-25",
+        "application_received": "2025-07-25",
+        "current_shopify_tags": "Login with Shop, Shop",
+        "shopify_customer_id": "8728688197714",
+        "notes": "Has tags but not samples"
+      }
+    ]
+  }
+};
+
+// ===== Helpers =====
+function fmtInt(n) { return n == null ? '—' : Math.round(n).toLocaleString(); }
+function fmtPct(n, digits = 1) { return n == null ? '—' : (n * 100).toFixed(digits) + '%'; }
+function fmtUSD(n) { return n == null ? '—' : '$' + Math.round(n).toLocaleString(); }
+function fmtMonthLabel(ym) {
+  const [y, m] = ym.split('-');
+  const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return names[parseInt(m,10)-1] + " '" + y.slice(2);
+}
+function deltaClass(pct, invert) {
+  if (pct == null) return 'neu';
+  if (invert) pct = -pct;
+  if (pct >= 0.02) return 'pos';
+  if (pct <= -0.05) return 'neg';
+  if (pct < 0) return 'warn';
+  return 'neu';
+}
+function fmtDelta(pct) {
+  if (pct == null || isNaN(pct)) return '—';
+  const sign = pct >= 0 ? '+' : '';
+  return sign + (pct * 100).toFixed(1) + '%';
+}
+
+const months = DASHBOARD.months;
+const data = DASHBOARD.data;
+const latest = months[months.length - 1];
+const prevMonth = months[months.length - 2];
+
+// Update stamp
+document.getElementById('updated-stamp').textContent =
+  'Updated ' + DASHBOARD.updated + ' — through ' + fmtMonthLabel(latest);
+document.getElementById('current-subtitle').innerHTML =
+  '<strong>' + fmtMonthLabel(latest) + '</strong> &nbsp;&middot;&nbsp; comparison against ' +
+  fmtMonthLabel(prevMonth) + ' (MoM) and ' +
+  fmtMonthLabel((parseInt(latest.split('-')[0])-1) + '-' + latest.split('-')[1]) + ' (YoY).';
+
+// ===== KPI hero row =====
+function renderKPIHero() {
+  const wrap = document.getElementById('kpi-hero-row');
+  const curr = data[latest] || {};
+  const tiles = [
+    {
+      key: 'Trade - New Applicants',
+      label: 'New Applicants',
+      fmt: fmtInt,
+    },
+    {
+      key: 'Trade - Applications Approved',
+      label: 'Approved',
+      fmt: fmtInt,
+    },
+    {
+      key: 'Trade - Applications Denied',
+      label: 'Denied',
+      fmt: fmtInt,
+    },
+    {
+      key: 'Trade - AOV',
+      label: 'Trade AOV',
+      fmt: fmtUSD,
+      fallbackKey: true,
+    },
+    {
+      key: 'Trade - 90-Day Active Rate',
+      label: '90-Day Active Rate',
+      fmt: (v) => v == null ? '—' : v.toFixed(1) + '%',
+      fallbackKey: true,
+    },
+  ];
+
+  // For tiles missing data in latest month, fall back to most recent month with data
+  function latestWithData(metricKey) {
+    for (let i = months.length - 1; i >= 0; i--) {
+      const m = data[months[i]] || {};
+      if (m[metricKey] && m[metricKey].value != null) return { month: months[i], rec: m[metricKey] };
+    }
+    return null;
+  }
+
+  wrap.innerHTML = tiles.map(t => {
+    const rec = (curr[t.key] && curr[t.key].value != null)
+      ? { month: latest, rec: curr[t.key] }
+      : latestWithData(t.key);
+    if (!rec) {
+      return '<div class="kpi-hero"><div class="kpi-hero-label">' + t.label + '</div><div class="kpi-hero-val">—</div></div>';
+    }
+    const mom = rec.rec.mom;
+    const yoy = rec.rec.yoy;
+    const monthNote = rec.month === latest
+      ? ''
+      : '<div class="kpi-hero-delta" style="margin-top:6px"><span class="warn">' + fmtMonthLabel(rec.month) + ' (latest available)</span></div>';
+    return `
+      <div class="kpi-hero">
+        <div class="kpi-hero-label">${t.label}</div>
+        <div class="kpi-hero-val">${t.fmt(rec.rec.value)}</div>
+        <div class="kpi-hero-deltas">
+          <span class="kpi-hero-delta">MoM <span class="${deltaClass(mom)}">${fmtDelta(mom)}</span></span>
+          <span class="kpi-hero-delta">YoY <span class="${deltaClass(yoy)}">${fmtDelta(yoy)}</span></span>
+        </div>
+        ${monthNote}
+      </div>`;
+  }).join('');
+}
+renderKPIHero();
+
+// ===== Leak alert =====
+function renderLeakAlert() {
+  const leak = DASHBOARD.leaked_approvals;
+  document.getElementById('leak-count-meta').textContent = leak.total + ' open';
+  const last30 = months.slice(-3); // last 3 months including current
+  const recent = last30.reduce((sum, m) => sum + (leak.by_month[m] || 0), 0);
+  document.getElementById('leak-body').innerHTML =
+    '<strong>' + leak.total + ' approved applicants</strong> were emailed an approval but do not currently have the <code style="background:rgba(0,0,0,0.05);padding:1px 5px;border-radius:3px">samples</code> tag — meaning they cannot redeem the trade discount. ' +
+    '<strong>' + recent + '</strong> of those are from the last 3 months (' + last30.map(fmtMonthLabel).join(' → ') + ') and are the priority for Chase to review.';
+
+  const tbody = document.querySelector('#leak-table tbody');
+  tbody.innerHTML = leak.recent.map(r => `
+    <tr>
+      <td>${r.approved_on || '—'}</td>
+      <td>${r.applicant_email}</td>
+      <td>${r.business_name || '—'}</td>
+      <td>${r.current_shopify_tags || '<em style="color:var(--db-text-light);font-weight:300">none</em>'}</td>
+      <td style="font-weight:300;color:var(--db-text-muted)">${r.notes || ''}</td>
+    </tr>`).join('');
+}
+renderLeakAlert();
+
+function toggleAlert() {
+  const a = document.getElementById('leak-alert');
+  a.classList.toggle('collapsed');
+  const btn = a.querySelector('.alert-toggle');
+  if (a.classList.contains('collapsed')) btn.textContent = 'Show breakdown ↓';
+  else btn.textContent = 'Hide breakdown ↑';
+}
+document.getElementById('leak-alert').classList.add('collapsed');
+
+// ===== Tabs =====
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  document.getElementById('btn-' + name).classList.add('active');
+  // Charts may need to size after becoming visible — force resize
+  setTimeout(() => Object.values(window.__charts || {}).forEach(c => c && c.resize()), 50);
+}
+
+// ===== Series helpers =====
+function seriesValue(metric, monthsList) {
+  return monthsList.map(m => {
+    const rec = (data[m] || {})[metric];
+    return rec && rec.value != null ? rec.value : null;
+  });
+}
+
+// ===== Color tokens =====
+const C = {
+  primary: '#4A4A4A',
+  accent: '#FF9912',
+  accentSoft: 'rgba(255,153,18,0.18)',
+  approve: '#7A9B76',
+  deny: '#D4726A',
+  rate: '#4A4A4A',
+  line: '#B89111',
+  surface: '#EDE9E3',
+};
+
+Chart.defaults.font.family = "'Poppins', sans-serif";
+Chart.defaults.font.weight = '300';
+Chart.defaults.color = '#6B6B6B';
+Chart.defaults.font.size = 11;
+
+window.__charts = {};
+
+// ===== Current Month funnel chart =====
+(function () {
+  const last13 = months.slice(-13);
+  const received = seriesValue('Trade - New Applicants', last13);
+  const approved = seriesValue('Trade - Applications Approved', last13);
+  const denied = seriesValue('Trade - Applications Denied', last13);
+
+  window.__charts.funnel = new Chart(document.getElementById('chart-funnel'), {
+    type: 'bar',
+    data: {
+      labels: last13.map(fmtMonthLabel),
+      datasets: [
+        { label: 'Received', data: received, backgroundColor: C.primary, borderRadius: 2 },
+        { label: 'Approved', data: approved, backgroundColor: C.approve, borderRadius: 2 },
+        { label: 'Denied', data: denied, backgroundColor: C.deny, borderRadius: 2 },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, boxHeight: 12, padding: 14 } } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' }, title: { display: true, text: 'Applications', color: '#8A8A8A', font: { size: 10 } } },
+        x: { grid: { display: false } },
+      }
+    }
+  });
+})();
+
+// ===== Trends: history bar =====
+(function () {
+  const received = seriesValue('Trade - New Applicants', months);
+  const approved = seriesValue('Trade - Applications Approved', months);
+  window.__charts.history = new Chart(document.getElementById('chart-history'), {
+    type: 'bar',
+    data: {
+      labels: months.map(fmtMonthLabel),
+      datasets: [
+        { label: 'Received', data: received, backgroundColor: C.primary, borderRadius: 2 },
+        { label: 'Approved', data: approved, backgroundColor: C.approve, borderRadius: 2 },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, boxHeight: 12, padding: 14 } } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
+        x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } },
+      }
+    }
+  });
+})();
+
+// ===== Trends: AOV =====
+(function () {
+  const aov = seriesValue('Trade - AOV', months);
+  window.__charts.aov = new Chart(document.getElementById('chart-aov'), {
+    type: 'line',
+    data: {
+      labels: months.map(fmtMonthLabel),
+      datasets: [{
+        label: 'Trade AOV ($)',
+        data: aov,
+        borderColor: C.primary,
+        backgroundColor: 'rgba(74,74,74,0.08)',
+        fill: true,
+        pointRadius: 3,
+        borderWidth: 2,
+        tension: 0.3,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { callback: v => '$' + v } },
+        x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } },
+      }
+    }
+  });
+})();
+
+// ===== Quality micros + charts =====
+(function () {
+  const qm = document.getElementById('quality-micro');
+  const aov = seriesValue('Trade - AOV', months);
+  const active = seriesValue('Trade - Active Account Rate', months);
+  const repeat = seriesValue('Trade - Repeat Rate', months);
+  function latestNonNull(arr) {
+    for (let i = arr.length - 1; i >= 0; i--) if (arr[i] != null) return { v: arr[i], i };
+    return null;
+  }
+  const aovL = latestNonNull(aov);
+  const activeL = latestNonNull(active);
+  const repeatL = latestNonNull(repeat);
+  function micro(label, latestObj, fmt) {
+    if (!latestObj) return `<div class="micro"><div class="micro-label">${label}</div><div class="micro-row-inner"><span class="micro-val">—</span></div></div>`;
+    const prev = latestObj.i > 0 ? aov[latestObj.i - 1] : null;
+    return `<div class="micro">
+      <div class="micro-label">${label} <span style="font-weight:300;color:var(--db-text-light);text-transform:none;letter-spacing:0">${fmtMonthLabel(months[latestObj.i])}</span></div>
+      <div class="micro-row-inner">
+        <span class="micro-val">${fmt(latestObj.v)}</span>
+      </div>
+    </div>`;
+  }
+  const active90 = seriesValue('Trade - 90-Day Active Rate', months);
+  const active90L = latestNonNull(active90);
+  qm.innerHTML = [
+    micro('Latest Trade AOV', aovL, fmtUSD),
+    micro('90-Day Active Rate', active90L, (v) => v.toFixed(1) + '%'),
+    micro('Repeat Rate', repeatL, (v) => v.toFixed(1) + '%'),
+  ].join('');
+
+  // 90-Day Active Rate chart (primary engagement metric)
+  window.__charts.active90 = new Chart(document.getElementById('chart-active-90'), {
+    type: 'line',
+    data: {
+      labels: months.map(fmtMonthLabel),
+      datasets: [{
+        label: '90-Day Active Rate (%)',
+        data: active90,
+        borderColor: C.accent,
+        backgroundColor: C.accentSoft,
+        fill: true,
+        spanGaps: true,
+        pointRadius: 3,
+        borderWidth: 2,
+        tension: 0.25,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { min: 0, suggestedMax: 20, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { callback: v => v + '%' } },
+        x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } },
+      }
+    }
+  });
+
+  // 12-month Active Account Rate chart (demoted to quarterly)
+  window.__charts.active = new Chart(document.getElementById('chart-active'), {
+    type: 'line',
+    data: {
+      labels: months.map(fmtMonthLabel),
+      datasets: [{
+        label: 'Active Account Rate (%)',
+        data: active,
+        borderColor: '#A8A8A8',
+        backgroundColor: 'rgba(168,168,168,0.10)',
+        fill: true,
+        spanGaps: true,
+        pointRadius: 2,
+        borderWidth: 1.5,
+        tension: 0.3,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { min: 14, max: 20, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { callback: v => v + '%' } },
+        x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } },
+      }
+    }
+  });
+
+  // Repeat rate chart
+  window.__charts.repeat = new Chart(document.getElementById('chart-repeat'), {
+    type: 'line',
+    data: {
+      labels: months.map(fmtMonthLabel),
+      datasets: [{
+        label: 'Repeat Rate (%)',
+        data: repeat,
+        borderColor: C.accent,
+        backgroundColor: C.accentSoft,
+        fill: true,
+        spanGaps: true,
+        pointRadius: 3,
+        borderWidth: 2,
+        tension: 0.3,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { min: 0, suggestedMax: 50, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { callback: v => v + '%' } },
+        x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } },
+      }
+    }
+  });
+
+  // Landing page traffic
+  const traffic = seriesValue('Trade - Landing Page Traffic', months);
+  window.__charts.traffic = new Chart(document.getElementById('chart-traffic'), {
+    type: 'bar',
+    data: {
+      labels: months.map(fmtMonthLabel),
+      datasets: [{
+        label: 'Unique visitors',
+        data: traffic,
+        backgroundColor: C.primary,
+        borderRadius: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
+        x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } },
+      }
+    }
+  });
+})();
+
+// ===== Ops: leak by month chart =====
+(function () {
+  const leak = DASHBOARD.leaked_approvals;
+  const last12 = months.slice(-12);
+  const data = last12.map(m => leak.by_month[m] || 0);
+  window.__charts.leaks = new Chart(document.getElementById('chart-leaks'), {
+    type: 'bar',
+    data: {
+      labels: last12.map(fmtMonthLabel),
+      datasets: [{
+        label: 'Approved but not tagged',
+        data,
+        backgroundColor: C.deny,
+        borderRadius: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
+        x: { grid: { display: false } },
+      }
+    }
+  });
+})();
+
+// ===== Ops: spike table =====
+(function () {
+  const received = seriesValue('Trade - New Applicants', months);
+  const tbody = document.querySelector('#spike-table tbody');
+  const rows = [];
+  for (let i = 12; i < months.length; i++) {
+    const cur = received[i];
+    if (cur == null) continue;
+    const prev = received[i - 1];
+    const yoyIdx = i - 12;
+    const yoy = received[yoyIdx];
+    const trailing = received.slice(Math.max(0, i - 12), i).filter(v => v != null);
+    const avg = trailing.length ? (trailing.reduce((a,b)=>a+b,0)/trailing.length) : null;
+    const lift = avg ? (cur / avg) - 1 : 0;
+    rows.push({ month: months[i], cur, prev, yoy, lift });
+  }
+  rows.sort((a,b) => Math.abs(b.lift) - Math.abs(a.lift));
+  const top = rows.slice(0, 8);
+  tbody.innerHTML = top.map(r => {
+    const momPct = r.prev ? (r.cur / r.prev) - 1 : null;
+    const yoyPct = r.yoy ? (r.cur / r.yoy) - 1 : null;
+    return `<tr>
+      <td>${fmtMonthLabel(r.month)}</td>
+      <td class="r">${fmtInt(r.cur)}</td>
+      <td class="r"><span class="delta ${deltaClass(momPct)}">${fmtDelta(momPct)}</span></td>
+      <td class="r"><span class="delta ${deltaClass(yoyPct)}">${fmtDelta(yoyPct)}</span></td>
+      <td style="font-weight:300;color:var(--db-text-muted)">${r.lift > 0.5 ? 'Investigate — possible campaign or PR mention' : (r.lift < -0.4 ? 'Slowdown — verify landing page health' : 'Within seasonal range')}</td>
+    </tr>`;
+  }).join('');
+})();
+
+// ===== Number History view =====
+const HISTORY_COLUMNS = [
+  // Funnel
+  { label: 'New Applicants',       sub: 'monthly',         key: 'Trade - New Applicants',        fmt: fmtInt,  raw: v => v },
+  { label: 'Approved',             sub: 'monthly',         key: 'Trade - Applications Approved', fmt: fmtInt,  raw: v => v },
+  { label: 'Denied',               sub: 'monthly',         key: 'Trade - Applications Denied',   fmt: fmtInt,  raw: v => v },
+  // Activity (orders + AOV)
+  { label: 'Trade Orders (Paid)',  sub: 'monthly',         key: 'Trade - Orders (Paid)',         fmt: fmtInt,  raw: v => v },
+  { label: 'Trade AOV (Paid)',     sub: 'monthly',         key: 'Trade - AOV (Paid)',            fmt: fmtUSD,  raw: v => v },
+  { label: 'Trade AOV (All)',      sub: 'monthly',         key: 'Trade - AOV',                   fmt: fmtUSD,  raw: v => v },
+  // Samples
+  { label: 'Trade Sample Orders',  sub: 'monthly',         key: 'Trade - Sample Orders',         fmt: fmtInt,  raw: v => v },
+  { label: 'Retail Sample Orders', sub: 'monthly',         key: 'Retail - Sample Orders',        fmt: fmtInt,  raw: v => v },
+  { label: 'Trade Sample Units',   sub: 'monthly',         key: 'Trade - Sample Units',          fmt: fmtInt,  raw: v => v },
+  { label: 'Retail Sample Units',  sub: 'monthly',         key: 'Retail - Sample Units',         fmt: fmtInt,  raw: v => v },
+  { label: 'Trade Sample Share',   sub: 'monthly',         key: 'Trade - Sample Order Share',    fmt: v => v == null ? '—' : v.toFixed(1) + '%', raw: v => v },
+  // Engagement
+  { label: 'Landing Page Traffic', sub: 'monthly',         key: 'Trade - Landing Page Traffic',  fmt: fmtInt,  raw: v => v },
+  { label: '90-Day Active Rate',   sub: '90-day rolling',  key: 'Trade - 90-Day Active Rate',    fmt: v => v == null ? '—' : v.toFixed(1) + '%', raw: v => v },
+  { label: 'Active Account Rate',  sub: '12-mo rolling',   key: 'Trade - Active Account Rate',   fmt: v => v == null ? '—' : v.toFixed(1) + '%', raw: v => v },
+  { label: 'Repeat Rate',          sub: '12-mo rolling',   key: 'Trade - Repeat Rate',           fmt: v => v == null ? '—' : v.toFixed(1) + '%', raw: v => v },
+];
+
+let __historyRange = 'all';
+function setHistoryRange(r) {
+  __historyRange = r;
+  document.querySelectorAll('.history-toggles .pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.range === r);
+  });
+  renderHistory();
+}
+
+function historyMonths() {
+  if (__historyRange === 'all') return months;
+  if (__historyRange === 'trailing12') return months.slice(-12);
+  return months.filter(m => m.startsWith(__historyRange));
+}
+
+function renderHistory() {
+  const table = document.getElementById('history-table');
+  const shown = historyMonths();
+  const head = ['<thead><tr><th>Month</th>',
+    ...HISTORY_COLUMNS.map(c => `<th>${c.label}<div class="col-sub">${c.sub}</div></th>`),
+    '</tr></thead>'].join('');
+
+  let prevYear = null;
+  const rows = shown.map((m, idx) => {
+    const year = m.split('-')[0];
+    const yearChange = prevYear && prevYear !== year;
+    prevYear = year;
+    const cells = HISTORY_COLUMNS.map(c => {
+      const rec = (data[m] || {})[c.key];
+      const v = rec ? rec.value : null;
+      if (v == null) return '<td class="blank">—</td>';
+      return `<td>${c.fmt(v)}</td>`;
+    }).join('');
+    const isLatest = idx === shown.length - 1 && __historyRange !== '2024' && __historyRange !== '2025';
+    const cls = [yearChange ? 'year-divider' : '', isLatest ? 'latest' : ''].filter(Boolean).join(' ');
+    return `<tr class="${cls}"><td>${fmtMonthLabel(m)}</td>${cells}</tr>`;
+  }).join('');
+
+  table.innerHTML = head + '<tbody>' + rows + '</tbody>';
+}
+
+function buildHistoryCsv(separator) {
+  const shown = historyMonths();
+  const lines = [['Month', ...HISTORY_COLUMNS.map(c => c.label)].join(separator)];
+  for (const m of shown) {
+    const row = [m];
+    for (const c of HISTORY_COLUMNS) {
+      const rec = (data[m] || {})[c.key];
+      const v = rec ? rec.value : null;
+      row.push(v == null ? '' : (typeof v === 'number' ? v : ''+v));
+    }
+    lines.push(row.join(separator));
+  }
+  return lines.join('\n');
+}
+
+function copyHistoryCsv() {
+  const tsv = buildHistoryCsv('\t');
+  navigator.clipboard.writeText(tsv).then(
+    () => alert('Copied to clipboard. Paste into Google Sheets, Excel, or Notion.'),
+    () => alert('Copy failed — try the download button instead.')
+  );
+}
+
+function downloadHistoryCsv() {
+  const csv = buildHistoryCsv(',');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'trade-program-history-' + DASHBOARD.updated + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+renderHistory();
+</script>
+
+</body>
+</html>
