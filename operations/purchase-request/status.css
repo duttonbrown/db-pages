@@ -404,10 +404,15 @@
 .card-status-badge[data-status="Waiting to Order"] { background: #E8F0FE; color: #1A56C7; }
 .card-status-badge[data-status="Backordered"]      { background: #FDECEA; color: var(--error); }
 .card-status-badge[data-status="Ordered"]          { background: #FFF7EB; color: var(--accent-dark); }
+.card-status-badge[data-status="Delivered"]        { background: #DCFCE7; color: #15803D; }
 .card-status-badge[data-status="Received"]         { background: #E8F5E9; color: var(--success); }
 .card-status-badge[data-status="Cancelled"]        { background: #F0F0F0; color: var(--muted); }
 
-/* Process rail — the page's signature visual */
+/* Process rail — the page's signature visual.
+   Vertical anatomy of one stage:
+     padding-top (3px) → pretext (16px reserved) → gap (4px) → marker (14px)
+   So marker center sits at ~3 + 16 + 4 + 7 = 30px from the rail top. The
+   connecting line below uses that as its `top` so it threads the markers. */
 .process-rail {
   position: relative;
   margin-top: 6px;
@@ -416,7 +421,7 @@
 .process-rail::before {
   content: "";
   position: absolute;
-  top: 15px;
+  top: 30px;
   left: 12px;
   right: 12px;
   height: 2px;
@@ -427,7 +432,7 @@
 .process-rail::after {
   content: "";
   position: absolute;
-  top: 15px;
+  top: 30px;
   left: 12px;
   height: 2px;
   width: var(--rail-progress, 0%);
@@ -566,33 +571,36 @@
   transition: color 0.15s;
 }
 
-/* Carrier-status line — second line beneath the tracking number, populated
-   by the inbound-tracking poller (UPS / FedEx / USPS). Quiet by default;
-   "active" (Out for Delivery) gets the brand accent, "success" (Delivered)
-   gets green, "warn" (Exception / Returned) gets a muted red. */
-.carrier-status-line {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 3px;
-  font-size: 11.5px;
-  font-weight: 400;
-  color: var(--muted);
-  line-height: 1.3;
-}
-.carrier-status-icon {
-  font-size: 12px;
-  line-height: 1;
-}
-.carrier-status-label {
+/* Stage pretext — a small label above the timeline stage marker, used by
+   the inbound-tracking poller to show "Lehi, UT · today 4:44 PM" above
+   the In Transit / Delivered check. The slot always reserves 12px + 4px
+   so the rail's connecting line stays at a constant `top` even when only
+   some stages have pretext text. */
+.stage-pretext {
+  font-size: 10px;
   font-weight: 500;
-}
-.carrier-status-detail {
   color: var(--muted);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  height: 12px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.carrier-status-active .carrier-status-label  { color: var(--accent-dark); }
-.carrier-status-success .carrier-status-label { color: #15803D; }
-.carrier-status-warn .carrier-status-label    { color: #B91C1C; }
+
+/* Delivered stage — green check + accent label. Visually distinct from the
+   default "done" so the eye lands on it as the package's current state. */
+.stage.kind-delivered .stage-marker { background: #15803D; border-color: #15803D; color: #fff; }
+.stage.kind-delivered .stage-label  { color: #15803D; font-weight: 600; }
+.stage.kind-delivered .stage-pretext { color: #15803D; }
+
+/* Out-for-delivery (carrier moving but not yet handed off) — accent orange
+   so the team can spot which boxes are imminent vs sitting at a hub. */
+.stage.kind-active-carrier .stage-marker { background: var(--accent); border-color: var(--accent); color: #fff; }
+.stage.kind-active-carrier .stage-label  { color: var(--accent-dark); font-weight: 600; }
+.stage.kind-active-carrier .stage-pretext { color: var(--accent-dark); }
 
 @media (max-width: 480px) {
   .tracking-row {

@@ -123,18 +123,34 @@ function statusKindClass(status) {
   return "kind-neutral";
 }
 
-// Display label for the top-right status badge. Notion's internal status
-// "Ordered" splits into two requester-facing reads:
-//   - Ordered + tracking present → "In Transit" (the package is actually moving)
-//   - Ordered + no tracking yet   → "Ordered" (purchase placed, waiting on carrier)
-// All other statuses use their raw name. data-status on the element still
-// carries the raw Notion value so CSS styling and pill filters are unchanged.
-function statusLabel(status, row) {
+// Display label + style key for the top-right status badge. Notion's internal
+// status "Ordered" splits into THREE requester-facing reads now that the
+// carrier-tracking poller is writing back:
+//   - Ordered + carrierStatus=Delivered → "Delivered" (carrier at the dock,
+//     human hasn't opened the box yet — Receive page shows it with a green
+//     chip, this page makes it look the same)
+//   - Ordered + tracking present        → "In Transit" (package is moving)
+//   - Ordered + no tracking yet         → "Ordered" (purchase placed, waiting)
+// Returns { label, key } — `key` becomes data-status on the badge so the CSS
+// rules below pick the color without inventing a new Notion enum value.
+function statusBadge(status, row) {
   if (status === "Ordered") {
+    if (row && row.carrierStatus === "Delivered") {
+      return { label: "Delivered", key: "Delivered" };
+    }
     const tracking = row && typeof row.tracking === "string" ? row.tracking.trim() : "";
-    return tracking ? "In Transit" : "Ordered";
+    return tracking
+      ? { label: "In Transit", key: "Ordered" }
+      : { label: "Ordered",    key: "Ordered" };
   }
-  return status || "—";
+  return { label: status || "—", key: status || "" };
+}
+
+// Back-compat shim — older call sites still want a plain label string. We
+// could fold these into statusBadge() callers but keeping the thin wrapper
+// avoids churn in surrounding code.
+function statusLabel(status, row) {
+  return statusBadge(status, row).label;
 }
 
 // ----- Boot -----
@@ -279,12 +295,19 @@ async function loadAndRender() {
 //   - Received:  its own filter (the "I got my stuff" view)
 //   - Archive:   Cancelled only — the dead end
 // "In Transit" is Ordered + a non-empty tracking string. Mirrors the badge
-// label split in statusLabel() so the pill counts match what the cards read.
+// label split in statusBadge() so the pill counts match what the cards read.
+// "Delivered" siphons rows where the carrier-tracking poller has confirmed
+// arrival but no one has marked the row Received yet — that's the bucket the
+// warehouse cares about: "open these boxes next."
 function hasTracking(r) {
   return typeof r.tracking === "string" && r.tracking.trim() !== "";
 }
+function isDelivered(r) {
+  return r.status === "Ordered" && r.carrierStatus === "Delivered";
+}
 function isInTransit(r) {
-  return r.status === "Ordered" && hasTracking(r);
+  // Carrier-confirmed Delivered rows promote out of In Transit into Delivered.
+  return r.status === "Ordered" && hasTracking(r) && !isDelivered(r);
 }
 
 function updateCounts(rows) {
@@ -295,6 +318,7 @@ function updateCounts(rows) {
     Backordered: 0,
     Ordered: 0,
     "In Transit": 0,
+    Delivered: 0,
     Received: 0,
     archive: 0,
   };
@@ -304,9 +328,12 @@ function updateCounts(rows) {
     } else if (r.status === "Received") {
       counts.Received++;
     } else if (r.status === "Ordered") {
-      // Split Ordered into "Ordered (no tracking yet)" and "In Transit".
-      if (hasTracking(r)) counts["In Transit"]++;
-      else                counts.Ordered++;
+      // Three-way split: Delivered (carrier confirmed, awaiting human
+      // Receive) → In Transit (tracking on file, not yet delivered) →
+      // Ordered (no tracking yet).
+      if (isDelivered(r))      counts.Delivered++;
+      else if (hasTracking(r)) counts["In Transit"]++;
+      else                     counts.Ordered++;
       counts.all++;
     } else if (counts[r.status] !== undefined) {
       counts[r.status]++;
@@ -321,6 +348,7 @@ function updateCounts(rows) {
   $("count-Backordered").textContent = counts.Backordered;
   $("count-Waiting-to-Order").textContent = counts["Waiting to Order"];
   $("count-In-Transit").textContent = counts["In Transit"];
+  $("count-Delivered").textContent = counts.Delivered;
   $("count-Received").textContent = counts.Received;
   $("count-archive").textContent = counts.archive;
   return counts;
@@ -349,11 +377,17 @@ function renderRows() {
   } else if (activeFilter === "Received") {
     visibleActive = [];
     visibleArchive = received;
+  } else if (activeFilter === "Delivered") {
+    // Delivered = carrier confirmed arrival, awaiting human Receive.
+    // Highest-priority bucket for the warehouse — these boxes are at the
+    // dock right now and have not been opened.
+    visibleActive = active.filter(isDelivered);
   } else if (activeFilter === "In Transit") {
-    // In Transit = Ordered + tracking on file. Matches the badge label split.
+    // In Transit = Ordered + tracking + NOT yet delivered. Once the carrier
+    // confirms delivery the row promotes to the Delivered pill.
     visibleActive = active.filter(isInTransit);
   } else if (activeFilter === "Ordered") {
-    // Ordered = purchase placed, no tracking yet. In Transit owns the rest.
+    // Ordered = purchase placed, no tracking yet.
     visibleActive = active.filter(r => r.status === "Ordered" && !hasTracking(r));
   } else if (activeFilter !== "all") {
     visibleActive = active.filter(r => r.status === activeFilter);
@@ -378,18 +412,23 @@ function renderRows() {
     visibleArchive = visibleArchive.filter(vendorMatch);
   }
 
-  // For the All view, group by status so Submitted floats to the top, then
-  // Waiting → Backordered → Ordered. Within each bucket apply the chosen sort
+  // For the All view, group by status so Delivered floats to the top (these
+  // boxes are at the dock right now), then Submitted, Waiting → Backordered
+  // → In Transit → Ordered. Within each bucket apply the chosen sort
   // (last-updated newest first, or request-number newest first) — JS sort is
   // stable so applying the within-bucket sort first then the bucket sort
   // yields the desired ordering.
   if (activeFilter === "all") {
-    const order = { "Submitted": 0, "Waiting to Order": 1, "Backordered": 2, "Ordered": 3 };
-    visibleActive = applySort(visibleActive).sort((a, b) => {
-      const ai = order[a.status] ?? 99;
-      const bi = order[b.status] ?? 99;
-      return ai - bi;
-    });
+    const bucket = (r) => {
+      if (isDelivered(r))            return 0;
+      if (r.status === "Submitted")  return 1;
+      if (r.status === "Waiting to Order") return 2;
+      if (r.status === "Backordered") return 3;
+      if (isInTransit(r))             return 4;
+      if (r.status === "Ordered")     return 5;
+      return 99;
+    };
+    visibleActive = applySort(visibleActive).sort((a, b) => bucket(a) - bucket(b));
   } else {
     visibleActive = applySort(visibleActive);
   }
@@ -649,7 +688,7 @@ function renderCard(r, idx) {
           ${r.outOfStock ? `<span class="badge urgent-tag">URGENT</span>` : ""}
         </div>
       </div>
-      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(statusLabel(r.status, r))}</span>
+      <span class="card-status-badge" data-status="${escapeHtml(statusBadge(r.status, r).key)}">${escapeHtml(statusBadge(r.status, r).label)}</span>
     </div>
 
     <div class="process-rail ${r.status === "Cancelled" ? "is-cancelled" : ""}" style="--rail-progress: ${progressPct}%;">
@@ -704,7 +743,7 @@ function renderArchiveCard(r, idx) {
           ${r.cancellationReason ? `<span>Reason: ${escapeHtml(r.cancellationReason)}</span>` : ""}
         </div>
       </div>
-      <span class="card-status-badge" data-status="${escapeHtml(r.status)}">${escapeHtml(statusLabel(r.status, r))}</span>
+      <span class="card-status-badge" data-status="${escapeHtml(statusBadge(r.status, r).key)}">${escapeHtml(statusBadge(r.status, r).label)}</span>
     </div>
   `;
   return li;
@@ -795,20 +834,48 @@ function buildStages(r) {
     detail: r.dateRequested ? fmtDate(r.dateRequested) : "",
   };
 
-  // Third slot — In Transit. Auto-checked when a carrier-detected tracking
-  // number is on file (presence of a real tracking number = "this is moving").
-  // Only meaningful once the order has actually been placed.
+  // Third slot — In Transit (or Delivered, once the carrier confirms).
+  // Auto-checked when a carrier-detected tracking number is on file. Only
+  // meaningful once the order has actually been placed.
+  //
+  // Carrier-tracking poller writes back r.carrierStatus + r.lastScan +
+  // r.deliveredAt. We use those three to:
+  //   - relabel the slot "Delivered" when the carrier confirms it
+  //   - put the latest scan location/time in pretext (above the marker)
+  //   - put the carrier name in detail (below the marker)
   const carrier = (isOrderedOrBeyond && r.tracking) ? detectCarrier(r.tracking) : null;
+  const carrierDelivered = r.carrierStatus === "Delivered";
   let inTransit;
   if (isReceived) {
-    inTransit = { state: "done", label: "In Transit", detail: carrier ? carrier.name : "" };
+    inTransit = { state: "done", label: "In Transit", detail: carrier ? carrier.name : "", pretext: "" };
+  } else if (status === "Ordered" && carrierDelivered) {
+    // Box at the dock per the carrier — relabel + green check. r.deliveredAt
+    // is a full ISO instant; lastScan is the city/time text. Prefer the
+    // delivery timestamp since it's the more authoritative source.
+    const when = r.deliveredAt
+      ? fmtTimestamp(r.deliveredAt)
+      : (r.lastScan || "");
+    inTransit = {
+      state: "done",
+      label: "Delivered",
+      detail: carrier ? carrier.name : "",
+      pretext: when,
+      kind: "delivered",
+    };
   } else if (status === "Ordered" && carrier) {
-    inTransit = { state: "done", label: "In Transit", detail: carrier.name };
+    // In transit — show the latest scan line above the check when we have it.
+    inTransit = {
+      state: "done",
+      label: r.carrierStatus || "In Transit",
+      detail: carrier.name,
+      pretext: r.lastScan || "",
+      kind: r.carrierStatus === "Out for Delivery" ? "active-carrier" : "",
+    };
   } else if (status === "Ordered") {
     // Ordered but no tracking yet — this is the active "what comes next" slot
-    inTransit = { state: "active", label: "In Transit", detail: "Awaiting tracking" };
+    inTransit = { state: "active", label: "In Transit", detail: "Awaiting tracking", pretext: "" };
   } else {
-    inTransit = { state: "upcoming", label: "In Transit", detail: "" };
+    inTransit = { state: "upcoming", label: "In Transit", detail: "", pretext: "" };
   }
 
   // Fourth slot — Received.
@@ -816,15 +883,19 @@ function buildStages(r) {
     state: isReceived ? "done" : "upcoming",
     label: "Received",
     detail: isReceived && r.receivedDate ? fmtDate(r.receivedDate) : "",
+    pretext: "",
   };
 
-  // Progress fill: 0%, 33%, 66%, 100% across the four slots.
+  // Progress fill: 0%, 33%, 66%, 87%, 100% across the four slots.
+  // "Delivered" sits between In Transit and Received — past the third
+  // checkpoint, just shy of the fourth.
   let progressPct;
-  if (status === "Submitted")        progressPct = 0;
-  else if (isReceived)               progressPct = 100;
-  else if (status === "Ordered" && carrier) progressPct = 75; // past the In-Transit check
-  else if (status === "Ordered")     progressPct = 50;        // through Ordered
-  else                                progressPct = 33;        // Waiting / Backordered
+  if (status === "Submitted")                 progressPct = 0;
+  else if (isReceived)                        progressPct = 100;
+  else if (status === "Ordered" && carrierDelivered) progressPct = 87;
+  else if (status === "Ordered" && carrier)   progressPct = 75; // past the In-Transit check
+  else if (status === "Ordered")              progressPct = 50; // through Ordered
+  else                                        progressPct = 33; // Waiting / Backordered
 
   return {
     stages: [submitted, middle, inTransit, received],
@@ -894,8 +965,14 @@ function renderStages(r) {
     else if (s.state === "upcoming")  cls += " upcoming";
 
     const icon = s.state === "cancelled" ? cancelSvg : checkSvg;
+    if (s.kind === "delivered")       cls += " kind-delivered";
+    else if (s.kind === "active-carrier") cls += " kind-active-carrier";
+    // Pretext slot always renders (even empty) so every stage reserves the
+    // same vertical space — that keeps the rail's connecting line aligned
+    // across stages whether or not a given stage has carrier-scan info.
     return `
       <div class="${cls}">
+        <div class="stage-pretext">${s.pretext ? escapeHtml(s.pretext) : ""}</div>
         <div class="stage-marker">
           ${icon}
           <span class="num">${i + 1}</span>
@@ -972,43 +1049,6 @@ function renderSpotlight(r) {
 // is on file. Auto-detects carrier from the number's syntax; if detected,
 // surfaces the carrier name and a deep link to that carrier's tracking page.
 // Falls back to plain text when the pattern is ambiguous.
-// Maps a Notion "Carrier Status" select value to a visual treatment and a
-// small emoji. The poller writes one of: In Transit / Out for Delivery /
-// Delivered / Exception / Returned. Anything else (or blank) returns null
-// and the carrier-status line is suppressed.
-const CARRIER_STATUS_VISUALS = {
-  "In Transit":       { kind: "neutral", icon: "📦" },
-  "Out for Delivery": { kind: "active",  icon: "🚚" },
-  "Delivered":        { kind: "success", icon: "✅" },
-  "Exception":        { kind: "warn",    icon: "⚠️" },
-  "Returned":         { kind: "warn",    icon: "↩️" },
-};
-
-// Carrier-status line — second line under the tracking row, populated by the
-// inbound-tracking poller. Hidden until the poller has touched the row, so
-// pre-feature rows render unchanged. Shows status + last-scan detail; on
-// Delivered, swaps in the delivery timestamp.
-function renderCarrierStatusLine(r) {
-  const visual = CARRIER_STATUS_VISUALS[r.carrierStatus];
-  if (!visual) return "";
-  const detailBits = [];
-  if (r.carrierStatus === "Delivered" && r.deliveredAt) {
-    detailBits.push(fmtTimestamp(r.deliveredAt));
-  } else if (r.lastScan) {
-    detailBits.push(r.lastScan);
-  }
-  const detail = detailBits.length
-    ? `<span class="carrier-status-detail"> · ${escapeHtml(detailBits.join(" · "))}</span>`
-    : "";
-  return `
-    <div class="carrier-status-line carrier-status-${visual.kind}">
-      <span class="carrier-status-icon" aria-hidden="true">${visual.icon}</span>
-      <span class="carrier-status-label">${escapeHtml(r.carrierStatus)}</span>
-      ${detail}
-    </div>
-  `;
-}
-
 function renderTrackingRow(r) {
   const tracking = r && r.tracking;
   if (!tracking) return "";
@@ -1018,13 +1058,12 @@ function renderTrackingRow(r) {
       + `${escapeHtml(carrier.clean)} <span class="tracking-carrier">${escapeHtml(carrier.name)}</span>`
       + ` <span class="tracking-cta">Track ↗</span></a>`
     : escapeHtml(tracking);
+  // Carrier scan info no longer renders here — it's anchored above the
+  // matching timeline stage now so the data sits next to what it describes.
   return `
     <div class="tracking-row">
       <div class="tracking-label">Tracking</div>
-      <div class="tracking-value">
-        ${numberHtml}
-        ${renderCarrierStatusLine(r)}
-      </div>
+      <div class="tracking-value">${numberHtml}</div>
     </div>
   `;
 }
