@@ -739,6 +739,26 @@
   font-size: 11px;
   color: var(--muted);
 }
+
+/* Footer row appended below the archive list when older Received/Cancelled
+   rows have rolled past the 30-day horizon. Quiet, links to Notion. */
+.archive-horizon-footer {
+  list-style: none;
+  text-align: center;
+  margin: 12px 0 4px;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  color: var(--muted);
+  border-top: 1px dashed var(--border);
+}
+.archive-horizon-footer a {
+  color: var(--accent-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+.archive-horizon-footer a:hover {
+  text-decoration: underline;
+}
 .archive-section .archive-meta strong {
   color: var(--text);
   font-weight: 500;

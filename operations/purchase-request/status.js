@@ -358,25 +358,61 @@ function updateCounts(rows) {
 // page lead. Left as a no-op so the call sites don't change.
 function updateHeroSub(/* counts */) {}
 
+// Rolling horizon for Received + Cancelled rows. Rows closed more than this
+// many days ago drop out of the default view to keep the page tight; pill
+// counts still show the full underlying total, and a footer link points
+// users at Notion when they need older state. Bump up if leadership starts
+// asking for "last quarter" patterns; older than 90 days is reference, not
+// active dashboard material.
+const CLOSED_HORIZON_DAYS = 30;
+
+function closedWithinHorizon(r) {
+  const isReceived  = r.status === "Received";
+  const isCancelled = r.status === "Cancelled";
+  if (!isReceived && !isCancelled) return true;
+
+  // Received: dedicated Received Date field. Cancelled: no dedicated date,
+  // so fall back to last-edited (the cancel action is the last edit).
+  const closedAt = isReceived ? r.receivedDate : (r.lastEditedTime || r.createdTime);
+  if (!closedAt) return true; // missing data → keep visible, don't accidentally hide
+
+  // Parse YYYY-MM-DD as local (see fmtDate) and full ISO normally.
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(closedAt);
+  const t = dateOnly
+    ? new Date(parseInt(dateOnly[1], 10), parseInt(dateOnly[2], 10) - 1, parseInt(dateOnly[3], 10)).getTime()
+    : new Date(closedAt).getTime();
+  if (Number.isNaN(t)) return true;
+  const days = Math.floor((Date.now() - t) / 86400000);
+  return days <= CLOSED_HORIZON_DAYS;
+}
+
 function renderRows() {
   const counts = updateCounts(allRows);
   updateHeroSub(counts);
 
   // Partition: active = in motion (excludes Received + Cancelled).
-  //            Received and Cancelled each get their own dedicated view.
-  const active   = allRows.filter(r => r.status !== "Received" && r.status !== "Cancelled");
-  const received = allRows.filter(r => r.status === "Received");
-  const archive  = allRows.filter(r => r.status === "Cancelled");
+  //            Received and Cancelled each get their own dedicated view,
+  //            both with a rolling 30-day horizon (see closedWithinHorizon).
+  const active        = allRows.filter(r => r.status !== "Received" && r.status !== "Cancelled");
+  const receivedAll   = allRows.filter(r => r.status === "Received");
+  const archiveAll    = allRows.filter(r => r.status === "Cancelled");
+  const received      = receivedAll.filter(closedWithinHorizon);
+  const archive       = archiveAll.filter(closedWithinHorizon);
+  const receivedHidden = receivedAll.length - received.length;
+  const archiveHidden  = archiveAll.length - archive.length;
 
   let visibleActive = active;
   let visibleArchive = [];
+  let hiddenOlder = 0;  // for the "+ N older in Notion" footer
 
   if (activeFilter === "archive") {
     visibleActive = [];
     visibleArchive = archive;
+    hiddenOlder = archiveHidden;
   } else if (activeFilter === "Received") {
     visibleActive = [];
     visibleArchive = received;
+    hiddenOlder = receivedHidden;
   } else if (activeFilter === "Delivered") {
     // Delivered = carrier confirmed arrival, awaiting human Receive.
     // Highest-priority bucket for the warehouse — these boxes are at the
@@ -468,13 +504,31 @@ function renderRows() {
     visibleArchive.forEach((r, i) => {
       archiveListEl.appendChild(renderArchiveCard(r, i));
     });
+    // Rolling horizon footer — shown only on Received / Cancelled views when
+    // there are older rows we deliberately suppressed. Links to Notion for
+    // anyone who needs the full history.
+    if (hiddenOlder > 0 && (activeFilter === "Received" || activeFilter === "archive")) {
+      const li = document.createElement("li");
+      li.className = "archive-horizon-footer";
+      const noun = activeFilter === "Received" ? "received" : "cancelled";
+      li.innerHTML = `+ ${hiddenOlder} older ${escapeHtml(noun)} hidden after ${CLOSED_HORIZON_DAYS} days · <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">view in Notion ↗</a>`;
+      archiveListEl.appendChild(li);
+    }
     archiveEl.hidden = false;
   } else {
     archiveEl.hidden = true;
   }
 
-  // Empty state — only when truly no rows match the filter
+  // Empty state — only when truly no rows match the filter. But "no recent
+  // closed rows" on Received / Cancelled shouldn't read as "nothing exists"
+  // — surface the horizon explanation if older rows are hiding.
   if (visibleActive.length === 0 && visibleArchive.length === 0) {
+    if (hiddenOlder > 0 && (activeFilter === "Received" || activeFilter === "archive")) {
+      const noun = activeFilter === "Received" ? "received" : "cancelled";
+      emptyEl.innerHTML = `<p>No items ${escapeHtml(noun)} in the last ${CLOSED_HORIZON_DAYS} days.</p><p>${hiddenOlder} older ${escapeHtml(noun)} item${hiddenOlder === 1 ? "" : "s"} in Notion · <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">view ↗</a></p>`;
+    } else {
+      emptyEl.innerHTML = '<h2>Nothing here.</h2><p>No requests match this filter.</p><a href="index.html">Submit a new request →</a>';
+    }
     emptyEl.hidden = false;
   } else {
     emptyEl.hidden = true;
@@ -736,6 +790,8 @@ function renderArchiveCard(r, idx) {
           <span>${closedLine}</span>
           ${isReceived && r.receiver ? `<span>by <strong>${escapeHtml(r.receiver)}</strong></span>` : ""}
           ${renderArchiveQty(r, isReceived)}
+          ${primaryVendor(r) ? `<span>Vendor: <strong>${escapeHtml(primaryVendor(r))}</strong></span>` : ""}
+          ${r.orderNumber ? `<span>Order #: <strong>${escapeHtml(r.orderNumber)}</strong></span>` : ""}
           ${r.poNumber ? `<span>PO: <strong>${escapeHtml(r.poNumber)}</strong></span>` : ""}
           ${isReceived && r.tracking ? `<span>Tracking: ${renderArchiveTracking(r.tracking)}</span>` : ""}
           ${r.oneTime ? `<span class="archive-onetime-tag" title="One-time purchase, not catalog inventory">one-time</span>` : ""}
