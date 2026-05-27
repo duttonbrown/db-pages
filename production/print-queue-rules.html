@@ -633,21 +633,26 @@
           <div class="flow-q-text">Title starts with "Color"?<span class="info-badge">i</span></div>
           <div class="tip">
             <strong>Color products go through powder coat.</strong> They
-            group <em>across SKUs by color</em> — same color on different
-            fixtures = one paint group, one printout. The title prefix is
-            the source of truth (not the SKU).
+            group by <em>color + category</em> — same color on the same
+            kind of build (e.g. all Ochre Pulls) = one paint group, one
+            printout. A different build in the same color (e.g. an Ochre
+            Fixture) gets its own sheet. The title prefix tells us it's a
+            Color product; the SKU + Shopify product type tells us the
+            category.
           </div>
         </div>
         <div class="flow-yes-line"><span class="label">YES</span></div>
         <div class="flow-outcome powder" tabindex="0">
           <div class="flow-outcome-loc">Powder Coating</div>
           <div class="flow-outcome-grid">
-            <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>1</strong> per unique color (across SKUs)</span></div>
+            <div class="flow-outcome-cell"><span class="lbl">Printouts</span><span class="val"><strong>1</strong> per (color, category)</span></div>
             <div class="flow-outcome-cell"><span class="lbl">Assembly rows</span><span class="val"><strong>1</strong> per (SKU, color, finish)</span></div>
           </div>
           <div class="tip">
-            Page key: <code>("color", color)</code>.
-            Same paint color across SKUs = one printout (paints together).
+            Page key: <code>("color", color, category)</code>.
+            Same color + same category = one printout (e.g. all Ochre Pulls
+            share a sheet). Different category = different sheet (Ochre
+            Fixture and Ochre Pulls each get their own).
             Brass-Barely and Black-Barely are different builds, so each gets
             its own Notion row even on the same paint page.
           </div>
@@ -713,7 +718,7 @@
             </div>
             <div class="tip">
               Accessory shares an order with a fixture. Defaults to
-              Assembly with a TODO note for Catherine to confirm
+              Assembly with a TODO note for the Production Manager to confirm
               (Shipping vs Assembly). After ~30 cases we'll codify the
               rule.
             </div>
@@ -749,6 +754,52 @@
     </div>
   </section>
 
+  <!-- ─────────── Categories ─────────── -->
+  <section class="block">
+    <h2 class="section-title">Categories — how color sheets split</h2>
+    <div class="callout-grid">
+      <div class="callout">
+        <div class="callout-eyebrow">Why</div>
+        <div class="callout-title">Color products split by category, not just color.</div>
+        <div class="callout-body">
+          A Color Fixture and a Color Pull in the same paint color travel
+          together through powder coat — but they're fundamentally different
+          builds after that. They go to different stations, get different
+          hardware, get packed differently. So they get their own traveler
+          sheets even though the paint side groups them.
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout-eyebrow">Categories</div>
+        <div class="callout-title">Fixture · Pull · Knob · Hook · Holder · Accessory</div>
+        <div class="callout-body">
+          Each is a distinct build path on the floor. Add a new category
+          only when the team treats it as a separate build path.
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout-eyebrow">Source</div>
+        <div class="callout-title">Shopify product type first, SKU prefix as backup.</div>
+        <div class="callout-body">
+          Resolution order: <code>product.product_type</code> from Shopify
+          (when set), then SKU prefix (<code>H33-*</code>=Pull, <code>H26-*</code>=Knob,
+          <code>5-digit</code>=Fixture), then title keywords. A line with no
+          clear category falls to <code>Accessory</code>.
+        </div>
+      </div>
+      <div class="callout accent">
+        <div class="callout-eyebrow">Example</div>
+        <div class="callout-title">Ochre Fixture × 1 + Ochre Pulls × 3 → 2 sheets.</div>
+        <div class="callout-body">
+          Same color, two categories. Sheet 1: Fixture. Sheet 2: Pulls.
+          Both route to Powder Coating; both land on the lead's queue under
+          the Ochre color group, but as separate cards with their own
+          <strong>+1</strong>.
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─────────── Cheat sheet ─────────── -->
   <section class="block">
     <h2 class="section-title">Cheat sheet</h2>
@@ -764,7 +815,7 @@
       <tbody>
         <tr>
           <td>Color product</td>
-          <td><code>("color", color)</code></td>
+          <td><code>("color", color, category)</code></td>
           <td><span class="loc-powder">Powder Coating</span></td>
           <td>One per <code>(SKU, color, finish)</code></td>
         </tr>
@@ -845,7 +896,7 @@
         <div class="callout-body">
           A model is overkill and lets one anomaly flip a rule overnight.
           A weekly promotion step is fast, debuggable, and matches how
-          Catherine already thinks.
+          the production team already thinks.
         </div>
       </div>
     </div>
