@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-21T12:05:38",
+  "generated_at": "2026-05-27T18:43:28",
   "counts": {
-    "parts": 434,
-    "supplies": 133,
-    "families": 279,
+    "parts": 442,
+    "supplies": 135,
+    "families": 282,
     "glossary": 82
   },
   "glossary": [
@@ -583,6 +583,70 @@
     }
   ],
   "families": {
+    "368ffa52-4c5b-804c-b6b7-e6a2d6aa29e5": {
+      "part_number": "BULB-G16",
+      "page_id": "368ffa52-4c5b-804c-b6b7-e6a2d6aa29e5",
+      "page_url": "https://www.notion.so/BULB-G16-368ffa524c5b804cb6b7e6a2d6aa29e5",
+      "description": "Bulb, medium base, G16",
+      "definition": "A light bulb used to illuminate a light fixture. Available in a variety of shapes and wattages. PAR16 bulbs are included in some of our products.",
+      "materials": [],
+      "raw_or_prefinished": null,
+      "in_house_processes": [],
+      "vendor": [
+        "Daisy - Hangzhou Sehon Technology"
+      ],
+      "glossary": {
+        "id": "319ffa52-4c5b-8074-abc3-f38040fe3436",
+        "name": "Bulb",
+        "abbr": "BULB",
+        "definition": "A light bulb used to illuminate a light fixture. Available in a variety of shapes and wattages. PAR16 bulbs are included in some of our products.",
+        "image": null
+      },
+      "products": []
+    },
+    "367ffa52-4c5b-8052-9780-cec25559b668": {
+      "part_number": "BULB-T45",
+      "page_id": "367ffa52-4c5b-8052-9780-cec25559b668",
+      "page_url": "https://www.notion.so/BULB-T45-367ffa524c5b80529780cec25559b668",
+      "description": "Bulb, medium base, T45",
+      "definition": "A light bulb used to illuminate a light fixture. Available in a variety of shapes and wattages. PAR16 bulbs are included in some of our products.",
+      "materials": [],
+      "raw_or_prefinished": null,
+      "in_house_processes": [],
+      "vendor": [
+        "Daisy - Hangzhou Sehon Technology"
+      ],
+      "glossary": {
+        "id": "319ffa52-4c5b-8074-abc3-f38040fe3436",
+        "name": "Bulb",
+        "abbr": "BULB",
+        "definition": "A light bulb used to illuminate a light fixture. Available in a variety of shapes and wattages. PAR16 bulbs are included in some of our products.",
+        "image": null
+      },
+      "products": []
+    },
+    "367ffa52-4c5b-80c9-aa13-d2ff98ad68ae": {
+      "part_number": "BULB-G25",
+      "page_id": "367ffa52-4c5b-80c9-aa13-d2ff98ad68ae",
+      "page_url": "https://www.notion.so/BULB-G25-367ffa524c5b80c9aa13d2ff98ad68ae",
+      "description": "Bulb, medium base, G25",
+      "definition": "A light bulb used to illuminate a light fixture. Available in a variety of shapes and wattages. PAR16 bulbs are included in some of our products.",
+      "materials": [],
+      "raw_or_prefinished": null,
+      "in_house_processes": [],
+      "vendor": [
+        "Daisy - Hangzhou Sehon Technology",
+        "Home Depot"
+      ],
+      "glossary": {
+        "id": "319ffa52-4c5b-8074-abc3-f38040fe3436",
+        "name": "Bulb",
+        "abbr": "BULB",
+        "definition": "A light bulb used to illuminate a light fixture. Available in a variety of shapes and wattages. PAR16 bulbs are included in some of our products.",
+        "image": null
+      },
+      "products": []
+    },
     "350ffa52-4c5b-809a-b8f5-f9b15d10c599": {
       "part_number": "A-DI2",
       "page_id": "350ffa52-4c5b-809a-b8f5-f9b15d10c599",
@@ -742,6 +806,7 @@
       "raw_or_prefinished": null,
       "in_house_processes": [],
       "vendor": [
+        "Daisy - Hangzhou Sehon Technology",
         "Doeren Sales & Associates"
       ],
       "glossary": {
@@ -1071,6 +1136,7 @@
       "raw_or_prefinished": null,
       "in_house_processes": [],
       "vendor": [
+        "Daisy - Hangzhou Sehon Technology",
         "Home Depot"
       ],
       "glossary": {
@@ -7015,10 +7081,10 @@
           "url": "https://www.notion.so/30222-C-2c8ffa524c5b8014ba90f7d26a6719b0"
         },
         {
-          "id": "2aeffa524c5b80e89294dde5bab39abb",
-          "sku": "30222",
-          "title": "Visage Sconce 6\"",
-          "url": "https://www.notion.so/30222-2aeffa524c5b80e89294dde5bab39abb"
+          "id": "2aeffa524c5b807a8211ff76c63cdae5",
+          "sku": "30321",
+          "title": "Color Icon 3 Sconce",
+          "url": "https://www.notion.so/30321-2aeffa524c5b807a8211ff76c63cdae5"
         }
       ]
     },
@@ -8460,10 +8526,10 @@
           "url": "https://www.notion.so/30404F-C-2c8ffa524c5b807aa643ccc3da609ecf"
         },
         {
-          "id": "2aeffa524c5b80c0b3bbfb0098861100",
-          "sku": "31001",
-          "title": "Crown Chandelier 46\"",
-          "url": "https://www.notion.so/31001-2aeffa524c5b80c0b3bbfb0098861100"
+          "id": "2aeffa524c5b803d93d5c72aff1546dd",
+          "sku": "30404F",
+          "title": "Tetra Flush Mount",
+          "url": "https://www.notion.so/30404F-2aeffa524c5b803d93d5c72aff1546dd"
         }
       ]
     },
@@ -11093,10 +11159,10 @@
           "url": "https://www.notion.so/30130-12-2aeffa524c5b804690a4e04cd787e846"
         },
         {
-          "id": "2c8ffa524c5b8060a379ce770c982bb5",
-          "sku": "30221 (C)",
-          "title": "Color Cap Double Sconce 8\"",
-          "url": "https://www.notion.so/30221-C-2c8ffa524c5b8060a379ce770c982bb5"
+          "id": "2aeffa524c5b8078a9c1fd99869c5e56",
+          "sku": "30130-8",
+          "title": "Cap Flush Mount 8\"",
+          "url": "https://www.notion.so/30130-8-2aeffa524c5b8078a9c1fd99869c5e56"
         }
       ]
     },
@@ -21624,10 +21690,10 @@
           "url": "https://www.notion.so/30222-C-2c8ffa524c5b8014ba90f7d26a6719b0"
         },
         {
-          "id": "2aeffa524c5b8095b799f64bddd4e6bf",
-          "sku": "30330",
-          "title": "Color Ballsy Flush Mount 6\"",
-          "url": "https://www.notion.so/30330-2aeffa524c5b8095b799f64bddd4e6bf"
+          "id": "2aeffa524c5b80e89294dde5bab39abb",
+          "sku": "30222",
+          "title": "Visage Sconce 6\"",
+          "url": "https://www.notion.so/30222-2aeffa524c5b80e89294dde5bab39abb"
         }
       ]
     },
@@ -22747,6 +22813,91 @@
       "in_house_processes": [],
       "family_id": "2ceffa52-4c5b-819d-83e8-f04656110ec6",
       "last_edited_at": "2026-05-12T05:25:00.000Z"
+    },
+    {
+      "part_number": "BULB-A15",
+      "page_id": "367ffa52-4c5b-8078-a292-c72362d711ea",
+      "page_url": "https://www.notion.so/BULB-A15-367ffa524c5b8078a292c72362d711ea",
+      "image": "parts-images/BULB-A15.jpg",
+      "finish": null,
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [],
+      "family_id": "319ffa52-4c5b-80fa-b13b-f87c46f07008",
+      "last_edited_at": "2026-05-21T22:27:00.000Z"
+    },
+    {
+      "part_number": "BULB-G16-W",
+      "page_id": "368ffa52-4c5b-80a7-8806-e6657ede7efe",
+      "page_url": "https://www.notion.so/BULB-G16-W-368ffa524c5b80a78806e6657ede7efe",
+      "image": "parts-images/BULB-G16-W.jpg",
+      "finish": null,
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [],
+      "family_id": "368ffa52-4c5b-804c-b6b7-e6a2d6aa29e5",
+      "last_edited_at": "2026-05-22T12:26:00.000Z"
+    },
+    {
+      "part_number": "BULB-G25-W",
+      "page_id": "367ffa52-4c5b-80ce-8bd6-c965ca914f84",
+      "page_url": "https://www.notion.so/BULB-G25-W-367ffa524c5b80ce8bd6c965ca914f84",
+      "image": "parts-images/BULB-G25-W.jpg",
+      "finish": null,
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [],
+      "family_id": "367ffa52-4c5b-80c9-aa13-d2ff98ad68ae",
+      "last_edited_at": "2026-05-21T22:25:00.000Z"
+    },
+    {
+      "part_number": "BULB-PAR16",
+      "page_id": "367ffa52-4c5b-8060-b9a8-c716c6bb13e1",
+      "page_url": "https://www.notion.so/BULB-PAR16-367ffa524c5b8060b9a8c716c6bb13e1",
+      "image": "parts-images/BULB-PAR16.jpg",
+      "finish": null,
+      "status": "Active",
+      "use_2024": 1197,
+      "use_2025": 1320,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [],
+      "family_id": "4d23c003-4edb-469a-b90c-6792f5ef035e",
+      "last_edited_at": "2026-05-22T16:05:00.000Z"
+    },
+    {
+      "part_number": "BULB-T45-W",
+      "page_id": "367ffa52-4c5b-801a-b68f-c442d3370cf8",
+      "page_url": "https://www.notion.so/BULB-T45-W-367ffa524c5b801ab68fc442d3370cf8",
+      "image": "parts-images/BULB-T45-W.jpg",
+      "finish": null,
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [],
+      "family_id": "367ffa52-4c5b-8052-9780-cec25559b668",
+      "last_edited_at": "2026-05-21T22:26:00.000Z"
     },
     {
       "part_number": "C14BL",
@@ -27504,6 +27655,59 @@
       "last_edited_at": "2026-05-12T05:19:00.000Z"
     },
     {
+      "part_number": "PM9BL",
+      "page_id": "368ffa52-4c5b-8015-bc7f-df8996e94889",
+      "page_url": "https://www.notion.so/PM9BL-368ffa524c5b8015bc7fdf8996e94889",
+      "image": "parts-images/PM9BL.jpg",
+      "finish": "Black",
+      "status": "Active",
+      "use_2024": 17,
+      "use_2025": 21,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "family_id": "2ceffa52-4c5b-818c-ba9c-e1eccbea31e5",
+      "last_edited_at": "2026-05-22T16:05:00.000Z"
+    },
+    {
+      "part_number": "PM9BR",
+      "page_id": "368ffa52-4c5b-8007-89e1-cf6976befac0",
+      "page_url": "https://www.notion.so/PM9BR-368ffa524c5b800789e1cf6976befac0",
+      "image": "parts-images/PM9BR.jpg",
+      "finish": "Brass",
+      "status": "Active",
+      "use_2024": 15,
+      "use_2025": 35,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [],
+      "family_id": "2ceffa52-4c5b-818c-ba9c-e1eccbea31e5",
+      "last_edited_at": "2026-05-22T16:05:00.000Z"
+    },
+    {
+      "part_number": "PM9NI",
+      "page_id": "368ffa52-4c5b-80b1-8a74-d847939b1bc1",
+      "page_url": "https://www.notion.so/PM9NI-368ffa524c5b80b18a74d847939b1bc1",
+      "image": "parts-images/PM9NI.jpg",
+      "finish": "Nickel",
+      "status": "Active",
+      "use_2024": 9,
+      "use_2025": 43,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "in_house_processes": [],
+      "family_id": "2ceffa52-4c5b-818c-ba9c-e1eccbea31e5",
+      "last_edited_at": "2026-05-22T16:05:00.000Z"
+    },
+    {
       "part_number": "PMB1.5BL",
       "page_id": "324ffa52-4c5b-8108-9776-e5dd1dfb2fd7",
       "page_url": "https://www.notion.so/PMB1-5BL-324ffa524c5b81089776e5dd1dfb2fd7",
@@ -27586,7 +27790,7 @@
       "reorder_qty": null,
       "in_house_processes": [],
       "family_id": "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47",
-      "last_edited_at": "2026-04-29T05:06:00.000Z"
+      "last_edited_at": "2026-05-27T18:44:00.000Z"
     },
     {
       "part_number": "PMB5BR",
@@ -27603,7 +27807,7 @@
       "reorder_qty": null,
       "in_house_processes": [],
       "family_id": "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47",
-      "last_edited_at": "2026-04-29T05:08:00.000Z"
+      "last_edited_at": "2026-05-27T18:44:00.000Z"
     },
     {
       "part_number": "PMB5NI",
@@ -27620,7 +27824,7 @@
       "reorder_qty": null,
       "in_house_processes": [],
       "family_id": "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47",
-      "last_edited_at": "2026-04-29T05:05:00.000Z"
+      "last_edited_at": "2026-05-27T18:44:00.000Z"
     },
     {
       "part_number": "PT1BL",
@@ -28032,15 +28236,15 @@
       "image": "parts-images/RE8_32.jpg",
       "finish": "Brass",
       "status": "Active",
-      "use_2024": 0,
-      "use_2025": 0,
+      "use_2024": 2,
+      "use_2025": 102,
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
       "reorder_qty": null,
       "in_house_processes": [],
       "family_id": "2e5ffa52-4c5b-8028-8f39-c682b02c46ab",
-      "last_edited_at": "2026-05-12T05:21:00.000Z"
+      "last_edited_at": "2026-05-22T16:06:00.000Z"
     },
     {
       "part_number": "RES84BL",
@@ -29354,11 +29558,11 @@
       "use_2025": 1400,
       "last_ordered": "2026-05-11",
       "lead_time": "1 week",
-      "moq": null,
+      "moq": 2000,
       "reorder_qty": null,
       "in_house_processes": [],
       "family_id": "2ceffa52-4c5b-81c0-bfc5-c6be37d737fb",
-      "last_edited_at": "2026-05-11T20:02:00.000Z"
+      "last_edited_at": "2026-05-27T04:34:00.000Z"
     },
     {
       "part_number": "WIB",
@@ -31351,6 +31555,18 @@
     },
     {
       "sku": "Various suppliers",
+      "title": "Printer paper",
+      "description": "",
+      "page_id": "36cffa52-4c5b-80ce-b95b-d2e975de3f72",
+      "page_url": "https://www.notion.so/Printer-paper-36cffa524c5b80ceb95bd2e975de3f72",
+      "image": "supply-images/Various_suppliers.jpg",
+      "status": "Active",
+      "type": "Consumables",
+      "reorder_qty": "10 reams / 5000 sheets",
+      "last_edited_at": "2026-05-26T14:48:00.000Z"
+    },
+    {
+      "sku": "Various suppliers",
       "title": "String, hang-tag, orange or black",
       "description": "",
       "page_id": "348ffa52-4c5b-8094-be38-c56eb8f94f33",
@@ -31363,15 +31579,15 @@
     },
     {
       "sku": "Various suppliers",
-      "title": "Twist ties, orange",
+      "title": "Twist ties, orange, 4\u201d",
       "description": "",
       "page_id": "348ffa52-4c5b-80c9-9186-c515a5a868cf",
-      "page_url": "https://www.notion.so/Twist-ties-orange-348ffa524c5b80c99186c515a5a868cf",
-      "image": null,
+      "page_url": "https://www.notion.so/Twist-ties-orange-4-348ffa524c5b80c99186c515a5a868cf",
+      "image": "supply-images/Various_suppliers.jpg",
       "status": "Active",
       "type": "Consumables",
-      "reorder_qty": "1000+",
-      "last_edited_at": "2026-04-20T22:01:00.000Z"
+      "reorder_qty": "5000",
+      "last_edited_at": "2026-05-27T04:39:00.000Z"
     },
     {
       "sku": "Various suppliers",
@@ -31480,9 +31696,41 @@
       "type": "Box/Cardboard",
       "reorder_qty": "25",
       "last_edited_at": "2026-04-20T18:46:00.000Z"
+    },
+    {
+      "sku": "Various suppliers",
+      "title": "Zip ties, clear, 4\u201d",
+      "description": "",
+      "page_id": "36dffa52-4c5b-803d-a79c-f2f1444290d9",
+      "page_url": "https://www.notion.so/Zip-ties-clear-4-36dffa524c5b803da79cf2f1444290d9",
+      "image": "supply-images/Various_suppliers.jpg",
+      "status": null,
+      "type": "Consumables",
+      "reorder_qty": "3000",
+      "last_edited_at": "2026-05-27T04:40:00.000Z"
     }
   ],
   "siblings": {
+    "2ceffa52-4c5b-818c-ba9c-e1eccbea31e5": [
+      "PM9BR",
+      "PM9NI",
+      "PM9BL"
+    ],
+    "368ffa52-4c5b-804c-b6b7-e6a2d6aa29e5": [
+      "BULB-G16-W"
+    ],
+    "4d23c003-4edb-469a-b90c-6792f5ef035e": [
+      "BULB-PAR16"
+    ],
+    "319ffa52-4c5b-80fa-b13b-f87c46f07008": [
+      "BULB-A15"
+    ],
+    "367ffa52-4c5b-80c9-aa13-d2ff98ad68ae": [
+      "BULB-G25-W"
+    ],
+    "367ffa52-4c5b-8052-9780-cec25559b668": [
+      "BULB-T45-W"
+    ],
     "2ceffa52-4c5b-817a-8842-c7593cda43f6": [
       "BOS30-M6"
     ],
