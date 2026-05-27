@@ -720,6 +720,28 @@
   .companion-badge.solo  { background: #ECEFF1; color: #607D8B; border: 1px solid #CFD8DC; }
   .companion-badge.multi { background: #FFF3E0; color: var(--accent-dark, #D97706); border: 1px solid #FFE0B2; }
 
+  /* Deep-link to the order's PDF inside Shopify admin's Order Printer Pro.
+     Sits right next to the order number so a manager can pull the full
+     packing/build PDF in one click without leaving the print queue. */
+  .pdf-link {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    line-height: 1.4;
+    vertical-align: middle;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    background: #E3F2FD;
+    color: #1565C0;
+    border: 1px solid #BBDEFB;
+    text-decoration: none;
+  }
+  .pdf-link:hover { background: #BBDEFB; color: #0D47A1; }
+
   /* Unmerge button — only present when a printout has absorbed others. Lives
      in the controls row alongside the page input, visually muted so it reads
      as "undo affordance" not "primary action". */
@@ -1424,7 +1446,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-26T22:43:51",
+  "built_at": "2026-05-26T22:46:44",
   "orders": [
     {
       "shopify_order_id": "6973383671890",
@@ -3284,7 +3306,7 @@ const QUEUE = {
         "Finish-Only",
         "Hardware-Only"
       ],
-      "predicted_page_count": 3,
+      "predicted_page_count": 1,
       "printouts": [
         {
           "shopify_order_id": "6972633514066",
@@ -3292,7 +3314,6 @@ const QUEUE = {
           "shopify_order_number": "35853",
           "key": [
             "finish",
-            "H16",
             "Brass"
           ],
           "page_count": 1,
@@ -3302,13 +3323,19 @@ const QUEUE = {
           "category": "hook",
           "category_label": "Hook",
           "parent_skus": [
-            "H16"
+            "H16",
+            "H43",
+            "H60-18"
           ],
           "variant_skus": [
-            "H16-1"
+            "H16-1",
+            "H43-1",
+            "H60-18-1"
           ],
           "line_item_titles": [
-            "Snug Hook"
+            "Snug Hook",
+            "Head Tissue Holder",
+            "Throne Towel Rack 18\""
           ],
           "lines": [
             {
@@ -3318,37 +3345,7 @@ const QUEUE = {
               "qty": 3,
               "category": "hook",
               "category_label": "Hook"
-            }
-          ],
-          "total_qty": 3,
-          "notes": null,
-          "source": "finish"
-        },
-        {
-          "shopify_order_id": "6972633514066",
-          "shopify_order_name": "35853",
-          "shopify_order_number": "35853",
-          "key": [
-            "finish",
-            "H43",
-            "Brass"
-          ],
-          "page_count": 1,
-          "location": "Assembly",
-          "color": null,
-          "finish": "Brass",
-          "category": "holder",
-          "category_label": "Holder",
-          "parent_skus": [
-            "H43"
-          ],
-          "variant_skus": [
-            "H43-1"
-          ],
-          "line_item_titles": [
-            "Head Tissue Holder"
-          ],
-          "lines": [
+            },
             {
               "title": "Head Tissue Holder",
               "variant_title": "Brass",
@@ -3356,37 +3353,7 @@ const QUEUE = {
               "qty": 3,
               "category": "holder",
               "category_label": "Holder"
-            }
-          ],
-          "total_qty": 3,
-          "notes": null,
-          "source": "finish"
-        },
-        {
-          "shopify_order_id": "6972633514066",
-          "shopify_order_name": "35853",
-          "shopify_order_number": "35853",
-          "key": [
-            "finish",
-            "H60-18",
-            "Brass"
-          ],
-          "page_count": 1,
-          "location": "Assembly",
-          "color": null,
-          "finish": "Brass",
-          "category": "accessory",
-          "category_label": "Accessory",
-          "parent_skus": [
-            "H60-18"
-          ],
-          "variant_skus": [
-            "H60-18-1"
-          ],
-          "line_item_titles": [
-            "Throne Towel Rack 18\""
-          ],
-          "lines": [
+            },
             {
               "title": "Throne Towel Rack 18\"",
               "variant_title": "Brass",
@@ -3396,7 +3363,7 @@ const QUEUE = {
               "category_label": "Accessory"
             }
           ],
-          "total_qty": 1,
+          "total_qty": 7,
           "notes": null,
           "source": "finish"
         }
@@ -4214,7 +4181,7 @@ const QUEUE = {
   ],
   "totals": {
     "orders": 20,
-    "printouts": 25,
+    "printouts": 23,
     "notion_rows": 36,
     "skipped_already_printed": 214
   },
@@ -4915,6 +4882,15 @@ function renderRow(r){
   const orderLinkInner = o.shopify_url
     ? `<a href="${o.shopify_url}" target="_blank">${orderName}</a>`
     : orderName;
+  // PDF Order Pro deep-link: opens the Order Printer Pro app inside Shopify
+  // admin for THIS order, so the manager can pull up the full PDF (with
+  // packaging notes, attachments, custom fields) without manually navigating.
+  const pdfLink = o.shopify_order_id
+    ? `<a href="https://admin.shopify.com/store/dutton-brown/apps/order-printer-pro/orders/${o.shopify_order_id}"
+          target="_blank"
+          class="pdf-link"
+          title="Open this order in PDF Order Pro">PDF</a>`
+    : "";
   const lines = (p.lines && p.lines.length) ? p.lines : (p.line_item_titles||[]).map((t,i)=>(
     {title:t, variant_sku:(p.variant_skus||[])[i]||"", qty: i===0 ? p.total_qty : 0}
   ));
@@ -4962,7 +4938,7 @@ function renderRow(r){
   return `
     <div class="order-block" ${dragAttrs}>
       <div class="order-block-head">
-        <div class="col-order">${orderLinkInner}${companionBadge}</div>
+        <div class="col-order">${orderLinkInner}${pdfLink}${companionBadge}</div>
         <div class="col-date">${fmtDateLong(o.created_at)}</div>
         <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
         <div class="col-customer">${o.customer_name || ""}</div>
