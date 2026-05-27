@@ -523,6 +523,13 @@
     vertical-align: middle;
     margin-right: 4px;
   }
+  /* All-Colors sample → conic rainbow so the dot communicates "every color"
+     rather than a single swatch the floor would have to interpret. */
+  .swatch-dot.swatch-rainbow {
+    background:
+      conic-gradient(#E74C3C, #F39C12, #F1C40F, #2ECC71, #1ABC9C,
+                     #3498DB, #9B59B6, #E91E63, #E74C3C);
+  }
   .group-name-row {
     display: flex;
     align-items: center;
@@ -672,11 +679,64 @@
   .order-block {
     padding: 10px 4px 12px;
     border-top: 1px solid #BAB6AF;
+    cursor: grab;                          /* drag-to-combine affordance */
+    transition: background 80ms ease, box-shadow 80ms ease;
+  }
+  .order-block:active { cursor: grabbing; }
+  .order-block.is-dragging { opacity: 0.55; }
+  .order-block.drop-ok {
+    background: #FFF5E5;                   /* light accent tint */
+    box-shadow: inset 0 0 0 2px var(--accent, #FF9912);
+    border-radius: 6px;
+  }
+  .order-block.drop-bad {
+    background: #FBECEC;
+    box-shadow: inset 0 0 0 2px #C0392B;
+    border-radius: 6px;
+    cursor: not-allowed;
   }
   .order-block:first-child {
     padding-top: 4px;
     border-top: none;
   }
+
+  /* "PART x/N" / "SOLO" badge next to the order number. Tells the floor at a
+     glance whether this work order is a slice of a larger order or stands
+     alone. Always present (SOLO is also a signal — its absence would be
+     ambiguous), but visually subdued so it doesn't fight the order number. */
+  .companion-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 6px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    line-height: 1.4;
+    vertical-align: middle;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+  }
+  .companion-badge.solo  { background: #ECEFF1; color: #607D8B; border: 1px solid #CFD8DC; }
+  .companion-badge.multi { background: #FFF3E0; color: var(--accent-dark, #D97706); border: 1px solid #FFE0B2; }
+
+  /* Unmerge button — only present when a printout has absorbed others. Lives
+     in the controls row alongside the page input, visually muted so it reads
+     as "undo affordance" not "primary action". */
+  .unmerge-btn {
+    appearance: none;
+    border: 1px dashed var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+  .unmerge-btn:hover { background: var(--bg); color: var(--ink); border-color: var(--ink); }
   .order-block-head {
     display: grid;
     grid-template-columns: var(--row-grid);
@@ -1364,7 +1424,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-26T22:30:05",
+  "built_at": "2026-05-26T22:43:51",
   "orders": [
     {
       "shopify_order_id": "6973383671890",
@@ -1382,45 +1442,8 @@ const QUEUE = {
         "Auto-Created",
         "Color"
       ],
-      "predicted_page_count": 2,
+      "predicted_page_count": 1,
       "printouts": [
-        {
-          "shopify_order_id": "6973383671890",
-          "shopify_order_name": "35869",
-          "shopify_order_number": "35869",
-          "key": [
-            "simple",
-            "HS2BR"
-          ],
-          "page_count": 1,
-          "location": "Assembly",
-          "color": null,
-          "finish": null,
-          "category": "accessory",
-          "category_label": "Accessory",
-          "parent_skus": [
-            "HS2BR"
-          ],
-          "variant_skus": [
-            "HS2BR"
-          ],
-          "line_item_titles": [
-            "Hang-Straight Attachment"
-          ],
-          "lines": [
-            {
-              "title": "Hang-Straight Attachment",
-              "variant_title": "Orbi / Brass",
-              "variant_sku": "HS2BR",
-              "qty": 1,
-              "category": "accessory",
-              "category_label": "Accessory"
-            }
-          ],
-          "total_qty": 1,
-          "notes": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager",
-          "source": "accessory"
-        },
         {
           "shopify_order_id": "6973383671890",
           "shopify_order_name": "35869",
@@ -1440,17 +1463,20 @@ const QUEUE = {
             "30403",
             "ER1-3-BO",
             "ER1-12-BO",
-            "ER1-24-BO"
+            "ER1-24-BO",
+            "HS2BR"
           ],
           "variant_skus": [
             "30403-1BO",
             "ER1-3-BO",
             "ER1-12-BO",
-            "ER1-24-BO"
+            "ER1-24-BO",
+            "HS2BR"
           ],
           "line_item_titles": [
             "Color Big Orbi Chandelier",
-            "Extension Rods"
+            "Extension Rods",
+            "Hang-Straight Attachment"
           ],
           "lines": [
             {
@@ -1484,9 +1510,17 @@ const QUEUE = {
               "qty": 1,
               "category": "accessory",
               "category_label": "Accessory"
+            },
+            {
+              "title": "Hang-Straight Attachment",
+              "variant_title": "Orbi / Brass",
+              "variant_sku": "HS2BR",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory"
             }
           ],
-          "total_qty": 4,
+          "total_qty": 5,
           "notes": null,
           "source": "color"
         }
@@ -1868,7 +1902,7 @@ const QUEUE = {
         "Auto-Created",
         "Color"
       ],
-      "predicted_page_count": 2,
+      "predicted_page_count": 1,
       "printouts": [
         {
           "shopify_order_id": "6973201416274",
@@ -1876,28 +1910,39 @@ const QUEUE = {
           "shopify_order_number": "35866",
           "key": [
             "color",
-            "Black",
-            "accessory"
+            "Ochre",
+            "lighting"
           ],
           "page_count": 1,
           "location": "Powder Coating",
-          "color": "Black",
+          "color": "Ochre",
           "finish": null,
-          "category": "accessory",
-          "category_label": "Accessory",
+          "category": "lighting",
+          "category_label": "Lighting",
           "parent_skus": [
+            "30405",
             "HS2BL",
             "ER1-24-3"
           ],
           "variant_skus": [
+            "30405-3H",
             "HS2BL",
             "ER1-24-3"
           ],
           "line_item_titles": [
+            "Color Status Chandelier 35\"",
             "Hang-Straight Attachment",
             "Extension Rods"
           ],
           "lines": [
+            {
+              "title": "Color Status Chandelier 35\"",
+              "variant_title": "Black / Ochre",
+              "variant_sku": "30405-3H",
+              "qty": 3,
+              "category": "fixture",
+              "category_label": "Fixture"
+            },
             {
               "title": "Hang-Straight Attachment",
               "variant_title": "Status / Black",
@@ -1915,45 +1960,7 @@ const QUEUE = {
               "category_label": "Accessory"
             }
           ],
-          "total_qty": 6,
-          "notes": null,
-          "source": "color"
-        },
-        {
-          "shopify_order_id": "6973201416274",
-          "shopify_order_name": "35866",
-          "shopify_order_number": "35866",
-          "key": [
-            "color",
-            "Ochre",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Ochre",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
-            "30405"
-          ],
-          "variant_skus": [
-            "30405-3H"
-          ],
-          "line_item_titles": [
-            "Color Status Chandelier 35\""
-          ],
-          "lines": [
-            {
-              "title": "Color Status Chandelier 35\"",
-              "variant_title": "Black / Ochre",
-              "variant_sku": "30405-3H",
-              "qty": 3,
-              "category": "fixture",
-              "category_label": "Fixture"
-            }
-          ],
-          "total_qty": 3,
+          "total_qty": 9,
           "notes": null,
           "source": "color"
         }
@@ -2091,7 +2098,7 @@ const QUEUE = {
             "accessory"
           ],
           "page_count": 1,
-          "location": "Powder Coating",
+          "location": "Shipping",
           "color": "Black",
           "finish": null,
           "category": "accessory",
@@ -2116,7 +2123,7 @@ const QUEUE = {
             }
           ],
           "total_qty": 4,
-          "notes": null,
+          "notes": "BLACK-ACCESSORY: routed to Shipping (batch black separately or fold into another Black work order)",
           "source": "color"
         },
         {
@@ -2591,8 +2598,8 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-A",
-            "SAC-PG",
-            "SAF-1"
+            "SAF-1",
+            "SAC-PG"
           ],
           "variant_skus": [
             "SAC-A",
@@ -4207,7 +4214,7 @@ const QUEUE = {
   ],
   "totals": {
     "orders": 20,
-    "printouts": 27,
+    "printouts": 25,
     "notion_rows": 36,
     "skipped_already_printed": 214
   },
@@ -4352,6 +4359,7 @@ function chipStyle(name){
 const EDIT_KEY = "db-print-queue-edits-v1";
 const LOC_OVERRIDE_KEY = "db-print-queue-loc-overrides-v1";
 const LOC_LOG_KEY = "db-print-queue-loc-log-v1";
+const MERGE_KEY = "db-print-queue-merges-v1";    // user-merged printouts (drag-to-combine)
 
 function loadLocOverrides(){
   try { return JSON.parse(localStorage.getItem(LOC_OVERRIDE_KEY) || "{}"); }
@@ -4522,6 +4530,198 @@ function clearStoredEdits(){
   location.reload();
 }
 
+// ── Drag-to-combine printouts within an order ────────────────────────────────
+// Manager can drag one printout onto another printout *of the same order* to
+// fold them into a single work order. Saved by stable printout key (not idx)
+// so the merge survives the hourly rebuild even if classify changes ordering.
+// The source's lines, qty, SKUs, and titles are absorbed into the target; the
+// source is dropped and stashed in the merge record so unmerge can restore it.
+function printoutKey(p){
+  // Same key the classifier emits — a tuple identifying the printout's
+  // bucket independent of array position. Sample-only orders only have one
+  // printout per order, so a flat sentinel is fine.
+  if(!p || !p.key) return p && p.source === "sample-only" ? "sample-only" : "";
+  return Array.isArray(p.key) ? p.key.join("::") : String(p.key);
+}
+function loadMerges(){
+  try { return JSON.parse(localStorage.getItem(MERGE_KEY) || "{}"); }
+  catch(e){ return {}; }
+}
+function saveMerges(merges){
+  localStorage.setItem(MERGE_KEY, JSON.stringify(merges));
+}
+function recordMerge(orderId, sourceKey, targetKey, sourceSnapshot){
+  const merges = loadMerges();
+  if(!merges[orderId]) merges[orderId] = [];
+  merges[orderId].push({
+    ts: new Date().toISOString(),
+    sourceKey, targetKey,
+    sourceSnapshot,           // full original source printout, for unmerge
+  });
+  saveMerges(merges);
+}
+function dropMergeRecord(orderId, sourceKey){
+  const merges = loadMerges();
+  if(!merges[orderId]) return null;
+  const idx = merges[orderId].findIndex(m => m.sourceKey === sourceKey);
+  if(idx < 0) return null;
+  const [removed] = merges[orderId].splice(idx, 1);
+  if(merges[orderId].length === 0) delete merges[orderId];
+  saveMerges(merges);
+  return removed;
+}
+// Core merge op: absorbs `source` into `target` in place. Returns the source
+// snapshot (for later unmerge) or null if nothing happened.
+function mergePrintoutsInPlace(target, source){
+  if(!target || !source || target === source) return null;
+  // Snapshot before we mutate, deep-copied so later mutations don't bleed in.
+  const snap = JSON.parse(JSON.stringify(source));
+  target.total_qty = (target.total_qty || 0) + (source.total_qty || 0);
+  target.page_count = (target.page_count || 0) + (source.page_count || 0);
+  target.lines = (target.lines || []).concat(source.lines || []);
+  const uniqPush = (arr, items) => {
+    arr = arr || [];
+    for(const it of (items || [])){
+      if(it && !arr.includes(it)) arr.push(it);
+    }
+    return arr;
+  };
+  target.parent_skus      = uniqPush(target.parent_skus, source.parent_skus);
+  target.variant_skus     = uniqPush(target.variant_skus, source.variant_skus);
+  target.line_item_titles = uniqPush(target.line_item_titles, source.line_item_titles);
+  // Track which printouts have been folded in so the UI can show the unmerge
+  // affordance and so applyMerges can rebuild after refresh.
+  target._merged_sources = (target._merged_sources || []).concat([snap]);
+  target.manager_adjusted = true;
+  return snap;
+}
+function applyMerges(){
+  if(!QUEUE || !QUEUE.orders) return 0;
+  const merges = loadMerges();
+  let applied = 0;
+  for(const orderId in merges){
+    const order = QUEUE.orders.find(o => o.shopify_order_id === orderId);
+    if(!order || !order.printouts) continue;
+    // Re-apply each merge in original order. Sources may no longer exist if
+    // the order changed upstream — silently drop those records.
+    const stillValid = [];
+    for(const m of merges[orderId]){
+      const target = order.printouts.find(p => printoutKey(p) === m.targetKey);
+      const sourceIdx = order.printouts.findIndex(p => printoutKey(p) === m.sourceKey);
+      if(!target || sourceIdx < 0) continue;
+      const source = order.printouts[sourceIdx];
+      mergePrintoutsInPlace(target, source);
+      order.printouts.splice(sourceIdx, 1);
+      stillValid.push(m);
+      applied++;
+    }
+    // Prune dead merges so storage doesn't grow forever.
+    if(stillValid.length !== merges[orderId].length){
+      if(stillValid.length === 0) delete merges[orderId];
+      else merges[orderId] = stillValid;
+      saveMerges(merges);
+    }
+    order.predicted_page_count = (order.printouts||[]).reduce((s,p)=>s+(p.page_count||0),0);
+  }
+  if(QUEUE.totals){
+    QUEUE.totals.printouts = QUEUE.orders.reduce((s,o)=>s+(o.predicted_page_count||0),0);
+  }
+  return applied;
+}
+function clearStoredMerges(){
+  localStorage.removeItem(MERGE_KEY);
+  location.reload();
+}
+
+// User actions ───────────────────────────────────────────────────────────────
+function manualMerge(orderId, sourceKey, targetKey){
+  if(sourceKey === targetKey) return;
+  const order = QUEUE.orders.find(o => o.shopify_order_id === orderId);
+  if(!order) return;
+  const target = order.printouts.find(p => printoutKey(p) === targetKey);
+  const sourceIdx = order.printouts.findIndex(p => printoutKey(p) === sourceKey);
+  if(!target || sourceIdx < 0) return;
+  const source = order.printouts[sourceIdx];
+  const snap = mergePrintoutsInPlace(target, source);
+  if(!snap) return;
+  order.printouts.splice(sourceIdx, 1);
+  recordMerge(orderId, sourceKey, targetKey, snap);
+  recalcOrderTotal(order);
+}
+function unmergeLast(orderId, targetKey){
+  const order = QUEUE.orders.find(o => o.shopify_order_id === orderId);
+  if(!order) return;
+  const target = order.printouts.find(p => printoutKey(p) === targetKey);
+  if(!target || !target._merged_sources || target._merged_sources.length === 0) return;
+  const restored = target._merged_sources.pop();
+  // Undo the merge on target.
+  target.total_qty  = Math.max(0, (target.total_qty  || 0) - (restored.total_qty  || 0));
+  target.page_count = Math.max(1, (target.page_count || 0) - (restored.page_count || 0));
+  const restoredLineIds = new Set((restored.lines||[]).map(l => l.variant_sku + "::" + l.title));
+  target.lines = (target.lines || []).filter((l, i, arr) => {
+    const id = l.variant_sku + "::" + l.title;
+    if(!restoredLineIds.has(id)) return true;
+    // Only drop the FIRST match for each id so duplicates on the target are preserved.
+    restoredLineIds.delete(id);
+    return false;
+  });
+  const subtractList = (arr, items) => (arr || []).filter(x => !(items||[]).includes(x)
+    || (target.lines.some(l => l.variant_sku === x) || (target.parent_skus||[]).filter(s=>s===x).length > 1));
+  // Simpler subtract: rebuild parent_skus/variant_skus/titles from remaining lines.
+  target.parent_skus      = Array.from(new Set(target.lines.map(l => (l.variant_sku||"").replace(/-[^-]*$/, "")).filter(Boolean)));
+  target.variant_skus     = Array.from(new Set(target.lines.map(l => l.variant_sku).filter(Boolean)));
+  target.line_item_titles = Array.from(new Set(target.lines.map(l => l.title).filter(Boolean)));
+  if(target._merged_sources.length === 0) delete target._merged_sources;
+  order.printouts.push(restored);
+  dropMergeRecord(orderId, printoutKey(restored));
+  recalcOrderTotal(order);
+}
+
+// HTML5 drag/drop wiring. Lives at document level so it works across any
+// rendered order-block (re-render rebinds via the data-* attrs in the markup).
+let DRAG_CTX = null;        // { orderId, sourceKey }
+function onDragStart(ev){
+  const el = ev.currentTarget;
+  DRAG_CTX = { orderId: el.dataset.order, sourceKey: el.dataset.printoutKey };
+  ev.dataTransfer.effectAllowed = "move";
+  // Required for Firefox to actually start a drag.
+  try { ev.dataTransfer.setData("text/plain", DRAG_CTX.sourceKey); } catch(e){}
+  el.classList.add("is-dragging");
+}
+function onDragEnd(ev){
+  ev.currentTarget.classList.remove("is-dragging");
+  document.querySelectorAll(".order-block.drop-ok, .order-block.drop-bad")
+    .forEach(el => el.classList.remove("drop-ok","drop-bad"));
+  DRAG_CTX = null;
+}
+function onDragOver(ev){
+  if(!DRAG_CTX) return;
+  const el = ev.currentTarget;
+  const sameOrder = el.dataset.order === DRAG_CTX.orderId;
+  const notSelf   = el.dataset.printoutKey !== DRAG_CTX.sourceKey;
+  if(sameOrder && notSelf){
+    ev.preventDefault();
+    ev.dataTransfer.dropEffect = "move";
+    el.classList.add("drop-ok");
+    el.classList.remove("drop-bad");
+  } else if(!sameOrder){
+    el.classList.add("drop-bad");
+    el.classList.remove("drop-ok");
+  }
+}
+function onDragLeave(ev){
+  ev.currentTarget.classList.remove("drop-ok","drop-bad");
+}
+function onDrop(ev){
+  if(!DRAG_CTX) return;
+  const el = ev.currentTarget;
+  if(el.dataset.order !== DRAG_CTX.orderId) return;   // only same-order merges
+  const targetKey = el.dataset.printoutKey;
+  if(targetKey === DRAG_CTX.sourceKey) return;
+  ev.preventDefault();
+  manualMerge(DRAG_CTX.orderId, DRAG_CTX.sourceKey, targetKey);
+}
+
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function fmtMonthDay(s){
   if(!s) return "";
@@ -4626,8 +4826,20 @@ function renderLine(line, ctxColor, ctxFinish){
   // (e.g. for sample lines or accessories where the SKU doesn't carry the
   // finish digit).
   const decoded = decodeVariantSku(sku);
-  const finishName = decoded.finish || ctxFinish || null;
-  const colorName  = decoded.color  || ctxColor  || null;
+  let finishName = decoded.finish || ctxFinish || null;
+  let colorName  = decoded.color  || ctxColor  || null;
+  // Sample lines (SAC-*, SAF-*) and other accessory-style lines don't carry
+  // a finish digit in the SKU, but Shopify's variant_title is the option name
+  // itself ("Python Green" / "Brass" / "All Colors"). Use it as a final
+  // fallback so samples get a swatch dot too.
+  const vtRaw = (line.variant_title || "").trim();
+  if(!colorName && !finishName && vtRaw && vtRaw.toLowerCase() !== "default title"){
+    const toks = vtRaw.split("/").map(s => s.trim()).filter(Boolean);
+    for(const tok of toks){
+      if(!colorName && COLOR_HEX[tok])   colorName  = tok;
+      if(!finishName && FINISH_HEX[tok]) finishName = tok;
+    }
+  }
   // Order on screen: [finish-dot][color-dot] SKU pill. Dots sit OUTSIDE the
   // pill (to its left) so the swatch reads as a swatch, not part of the SKU.
   // Finish before color because metal finish is "more upstream" than powder
@@ -4637,6 +4849,11 @@ function renderLine(line, ctxColor, ctxFinish){
     : "";
   const colorDot = colorName && COLOR_HEX[colorName]
     ? `<span class="swatch-dot" style="--swatch-color:${COLOR_HEX[colorName]}" title="Color: ${colorName}"></span>`
+    : "";
+  // "All Colors" sample → render a multi-stop rainbow dot so the floor knows
+  // this is the rainbow swatch card, not a single color.
+  const allColorsDot = (!colorDot && !finishDot && /all colors/i.test(vtRaw))
+    ? `<span class="swatch-dot swatch-rainbow" title="All Colors"></span>`
     : "";
   // Surface the chosen variant option (e.g. "6"" for an Extension Rod) so the
   // user doesn't have to infer size from the SKU. Strip finish/color tokens
@@ -4648,7 +4865,7 @@ function renderLine(line, ctxColor, ctxFinish){
     : "";
   return `
     <li class="line-item">
-      <span class="line-sku-cell">${finishDot}${colorDot}<span class="line-sku">${sku || "—"}</span></span>
+      <span class="line-sku-cell">${finishDot}${colorDot}${allColorsDot}<span class="line-sku">${sku || "—"}</span></span>
       <span class="line-title" title="${title}">${title}${variantTag}</span>
       <span class="line-qty"><span class="lbl">×</span>${qty}</span>
     </li>`;
@@ -4702,13 +4919,50 @@ function renderRow(r){
     {title:t, variant_sku:(p.variant_skus||[])[i]||"", qty: i===0 ? p.total_qty : 0}
   ));
   const autoLoc = p._auto_location || p.location;
+  const pKey = printoutKey(p);
+  const orderPrintoutCount = (o.printouts||[]).length;
+  // Multi-printout orders get a companion badge so the floor can see at a
+  // glance whether this work order is the whole order or a slice. Single-
+  // printout orders are also tagged "SOLO" so the absence of the slice
+  // indicator is itself information, not just a gap.
+  // Sibling preview: list each OTHER printout on this order so the floor can
+  // hover the badge and immediately see what else ships with this work order.
+  // Example: hovering the hang-straight tells you "ships with: Color Orbi
+  // Pendant 16" (Bone, ×1)" — no need to click into Shopify.
+  const siblingPreview = (orderPrintoutCount > 1)
+    ? (o.printouts||[]).map((sp, sIdx) => {
+        if(sIdx === idx) return null;
+        const colorish = sp.color || sp.finish || (sp.source === "sample-only" ? "Samples" : "");
+        const titles = (sp.line_item_titles||[]).slice(0,2).join(", ")
+                       || (sp.parent_skus||[]).slice(0,2).join(", ")
+                       || "(item)";
+        const qty = sp.total_qty || 0;
+        return `  • ${titles}${colorish ? " — " + colorish : ""} (×${qty})`;
+      }).filter(Boolean).join("\n")
+    : "";
+  const companionBadge = orderPrintoutCount > 1
+    ? `<span class="companion-badge multi" title="Part ${idx+1} of ${orderPrintoutCount} printouts on order #${o.shopify_order_name||o.shopify_order_number||"?"}.\n\nShips with:\n${siblingPreview}">PART ${idx+1}/${orderPrintoutCount}</span>`
+    : `<span class="companion-badge solo" title="This is the only printout for this order — it is the whole order.">SOLO</span>`;
+  const mergedCount = (p._merged_sources||[]).length;
+  const unmergeBtn = mergedCount > 0
+    ? `<button class="unmerge-btn" title="Undo last merge into this printout"
+               onclick="unmergeLast('${o.shopify_order_id}', '${pKey}')">↶ unmerge (${mergedCount})</button>`
+    : "";
+  const dragAttrs = `draggable="true"
+        data-order="${o.shopify_order_id}"
+        data-printout-key="${pKey}"
+        ondragstart="onDragStart(event)"
+        ondragend="onDragEnd(event)"
+        ondragover="onDragOver(event)"
+        ondragleave="onDragLeave(event)"
+        ondrop="onDrop(event)"`;
   // Column-based header: each piece of info gets its own track so order#,
   // date, time-ago, customer, amount, and tags cascade down the page in
   // straight vertical columns across every order block.
   return `
-    <div class="order-block">
+    <div class="order-block" ${dragAttrs}>
       <div class="order-block-head">
-        <div class="col-order">${orderLinkInner}</div>
+        <div class="col-order">${orderLinkInner}${companionBadge}</div>
         <div class="col-date">${fmtDateLong(o.created_at)}</div>
         <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
         <div class="col-customer">${o.customer_name || ""}</div>
@@ -4724,6 +4978,7 @@ function renderRow(r){
                  data-order="${o.shopify_order_id}" data-printout="${idx}" onchange="updatePages(this)" />
           <button class="split-btn" onclick="splitPage('${o.shopify_order_id}', ${idx})">+1</button>
         </div>
+        ${unmergeBtn}
       </div>
       <ul class="line-list">
         ${lines.map(l => renderLine(l, p.color, p.finish)).join("")}
@@ -5276,6 +5531,7 @@ function init(){
     const rh = document.getElementById("releaseHint");
     if(rh) rh.style.display = "none";
   }
+  const mergedCount = applyMerges();        // replay user merges first — they restructure printouts
   const restored = applyStoredEdits();
   const movedCount = applyLocOverrides();
   let suffix = QUEUE && QUEUE.built_at ? `Built ${fmtFull(QUEUE.built_at)}` : "—";
@@ -5284,6 +5540,9 @@ function init(){
   }
   if(movedCount > 0){
     suffix += ` · <span style="color:var(--accent-dark)">${movedCount} location override${movedCount===1?"":"s"}</span> · <a href="#" onclick="clearLocOverrides();return false;">reset</a> · <a href="#" onclick="downloadOverrideLog();return false;">export log</a>`;
+  }
+  if(mergedCount > 0){
+    suffix += ` · <span style="color:var(--accent-dark)">${mergedCount} manual merge${mergedCount===1?"":"s"}</span> · <a href="#" onclick="clearStoredMerges();return false;">reset</a>`;
   }
   document.getElementById("pageSub").innerHTML = suffix;
   render();
