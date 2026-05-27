@@ -742,6 +742,45 @@
   }
   .pdf-link:hover { background: #BBDEFB; color: #0D47A1; }
 
+  /* Customer history: order count + lifetime-spend club badge. Sits right
+     of the customer name, visually subdued so the name stays primary. */
+  .cust-suffix {
+    margin-left: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    vertical-align: middle;
+  }
+  .cust-count {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 3px;
+    line-height: 1.4;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    background: #ECEFF1;
+    color: #455A64;
+    border: 1px solid #CFD8DC;
+  }
+  .cust-club {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    line-height: 1.4;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+  }
+  /* Three tiers, escalating from soft mint → warm gold → deep accent.
+     Goal: a quick glance reads relative tier without needing the number. */
+  .cust-club.club-10k { background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; }
+  .cust-club.club-20k { background: #FFF3E0; color: var(--accent-dark, #D97706); border: 1px solid #FFE0B2; }
+  .cust-club.club-50k { background: #FFEBEE; color: #C2185B; border: 1px solid #F8BBD0; }
+
   /* Unmerge button — only present when a printout has absorbed others. Lives
      in the controls row alongside the page input, visually muted so it reads
      as "undo affordance" not "primary action". */
@@ -1446,7 +1485,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-26T23:27:13",
+  "built_at": "2026-05-26T23:33:41",
   "orders": [
     {
       "shopify_order_id": "6973383671890",
@@ -1454,6 +1493,8 @@ const QUEUE = {
       "shopify_order_number": "35869",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 880.37,
       "ship_by_date": null,
       "created_at": "2026-05-26T21:21:09-05:00",
       "tags": "discount",
@@ -1726,6 +1767,8 @@ const QUEUE = {
       "shopify_order_number": "35868",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 2240.21,
       "ship_by_date": null,
       "created_at": "2026-05-26T21:18:07-05:00",
       "tags": "redo, trade",
@@ -1820,6 +1863,8 @@ const QUEUE = {
       "shopify_order_number": "35867",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 484.6,
       "ship_by_date": null,
       "created_at": "2026-05-26T19:39:34-05:00",
       "tags": "discount, redo",
@@ -1914,6 +1959,8 @@ const QUEUE = {
       "shopify_order_number": "35866",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 3,
+      "customer_total_spent": 5659.65,
       "ship_by_date": null,
       "created_at": "2026-05-26T18:31:07-05:00",
       "tags": "redo, trade",
@@ -2098,6 +2145,8 @@ const QUEUE = {
       "shopify_order_number": "35865",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 3,
+      "customer_total_spent": 5659.65,
       "ship_by_date": null,
       "created_at": "2026-05-26T18:20:34-05:00",
       "tags": "redo, trade",
@@ -2264,6 +2313,8 @@ const QUEUE = {
       "shopify_order_number": "35864",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 3,
+      "customer_total_spent": 1800.88,
       "ship_by_date": null,
       "created_at": "2026-05-26T17:41:01-05:00",
       "tags": "discount, redo",
@@ -2497,6 +2548,8 @@ const QUEUE = {
       "shopify_order_number": "35863",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 26,
+      "customer_total_spent": 11724.37,
       "ship_by_date": null,
       "created_at": "2026-05-26T17:32:35-05:00",
       "tags": "$10K Club, redo, trade",
@@ -2591,6 +2644,8 @@ const QUEUE = {
       "shopify_order_number": "35862",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 18.25,
       "ship_by_date": null,
       "created_at": "2026-05-26T16:18:41-05:00",
       "tags": "redo",
@@ -2619,9 +2674,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
+            "SAC-A",
             "SAF-1",
-            "SAC-PG",
-            "SAC-A"
+            "SAC-PG"
           ],
           "variant_skus": [
             "SAC-A",
@@ -2672,6 +2727,8 @@ const QUEUE = {
       "shopify_order_number": "35861",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 437.1,
       "ship_by_date": null,
       "created_at": "2026-05-26T15:30:48-05:00",
       "tags": "redo, trade",
@@ -2766,6 +2823,8 @@ const QUEUE = {
       "shopify_order_number": "35860",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 2092.0,
       "ship_by_date": null,
       "created_at": "2026-05-26T14:45:00-05:00",
       "tags": "trade",
@@ -2860,6 +2919,8 @@ const QUEUE = {
       "shopify_order_number": "35859",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 780.43,
       "ship_by_date": null,
       "created_at": "2026-05-26T14:40:21-05:00",
       "tags": "discount, redo",
@@ -2954,6 +3015,8 @@ const QUEUE = {
       "shopify_order_number": "35858",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 843.23,
       "ship_by_date": null,
       "created_at": "2026-05-26T13:40:06-05:00",
       "tags": "redo, trade",
@@ -3048,6 +3111,8 @@ const QUEUE = {
       "shopify_order_number": "35856",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 15,
+      "customer_total_spent": 8273.74,
       "ship_by_date": null,
       "created_at": "2026-05-26T13:30:43-05:00",
       "tags": "trade",
@@ -3142,6 +3207,8 @@ const QUEUE = {
       "shopify_order_number": "35855",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 602.92,
       "ship_by_date": null,
       "created_at": "2026-05-26T12:46:58-05:00",
       "tags": "redo",
@@ -3236,6 +3303,8 @@ const QUEUE = {
       "shopify_order_number": "35854",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 5,
+      "customer_total_spent": 1069.16,
       "ship_by_date": null,
       "created_at": "2026-05-26T12:02:27-05:00",
       "tags": "redo",
@@ -3295,6 +3364,8 @@ const QUEUE = {
       "shopify_order_number": "35853",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 697.92,
       "ship_by_date": null,
       "created_at": "2026-05-26T11:32:51-05:00",
       "tags": "discount",
@@ -3482,6 +3553,8 @@ const QUEUE = {
       "shopify_order_number": "35852",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 336.0,
       "ship_by_date": null,
       "created_at": "2026-05-26T11:31:00-05:00",
       "tags": "trade",
@@ -3576,6 +3649,8 @@ const QUEUE = {
       "shopify_order_number": "35851",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 2939.36,
       "ship_by_date": null,
       "created_at": "2026-05-26T11:08:25-05:00",
       "tags": "discount, redo",
@@ -3760,6 +3835,8 @@ const QUEUE = {
       "shopify_order_number": "35850",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 6,
+      "customer_total_spent": 4039.44,
       "ship_by_date": null,
       "created_at": "2026-05-26T09:24:59-05:00",
       "tags": "redo, trade",
@@ -3946,6 +4023,8 @@ const QUEUE = {
       "shopify_order_number": "35849",
       "shopify_url": "",
       "customer_name": "",
+      "customer_orders_count": 3,
+      "customer_total_spent": 1760.97,
       "ship_by_date": null,
       "created_at": "2026-05-26T09:24:44-05:00",
       "tags": "discount, redo",
@@ -4698,6 +4777,33 @@ function fmtMonthDay(s){
 function isQuickBuild(o){ return (o.auto_tags||[]).some(t => /quick.build/i.test(t)); }
 function isSampleOnly(o){ return (o.printouts||[]).every(p => p.source === "sample-only"); }
 
+// Customer-history suffix: order count + lifetime-spend club badge.
+// Goal: the floor and the manager both see at a glance whether they're
+// looking at a brand-new customer or a returning high-spender, without
+// leaving the print queue.
+//
+//   • "×N" pill = lifetime order count (this order included), suppressed
+//     when count <= 1 because "1 order" tells you nothing.
+//   • Club badges = lifetime spend tiers, mirroring the loyalty bands we
+//     already segment in Shopify (10K / 20K / 50K). 50K added on top so
+//     the highest tier stands out — adjust if Thomas uses different bands.
+function customerSuffix(o){
+  const count = +(o.customer_orders_count || 0);
+  const spent = +(o.customer_total_spent || 0);
+  const parts = [];
+  if(count > 1){
+    parts.push(`<span class="cust-count" title="${count} lifetime orders">×${count}</span>`);
+  }
+  let club = "";
+  if(spent >= 50000)      club = { label: "50K", cls: "club-50k", title: `Lifetime spend $${Math.round(spent).toLocaleString()} — 50K club` };
+  else if(spent >= 20000) club = { label: "20K", cls: "club-20k", title: `Lifetime spend $${Math.round(spent).toLocaleString()} — 20K club` };
+  else if(spent >= 10000) club = { label: "10K", cls: "club-10k", title: `Lifetime spend $${Math.round(spent).toLocaleString()} — 10K club` };
+  if(club){
+    parts.push(`<span class="cust-club ${club.cls}" title="${club.title}">${club.label}</span>`);
+  }
+  return parts.length ? ` <span class="cust-suffix">${parts.join("")}</span>` : "";
+}
+
 function tagsFor(o){
   const t = (o.tags||"").toLowerCase();
   const out = [];
@@ -4977,7 +5083,7 @@ function renderRow(r){
         <div class="col-order">${orderLinkInner}${pdfLink}${companionBadge}</div>
         <div class="col-date">${fmtDateLong(o.created_at)}</div>
         <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
-        <div class="col-customer">${o.customer_name || ""}</div>
+        <div class="col-customer">${o.customer_name || ""}${customerSuffix(o)}</div>
         <div class="col-tags">${tagsFor(o)}</div>
         <div class="col-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
       </div>
@@ -5200,7 +5306,7 @@ function renderOrderQueue(){
           <div class="col-order">${orderLinkInner}</div>
           <div class="col-date">${fmtDateLong(o.created_at)}</div>
           <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
-          <div class="col-customer">${o.customer_name || ""}</div>
+          <div class="col-customer">${o.customer_name || ""}${customerSuffix(o)}</div>
           <div class="col-tags">${tagsFor(o)}</div>
           <div class="col-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
         </div>
