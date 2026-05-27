@@ -741,11 +741,21 @@
     min-width: 0;
   }
   .line-item + .line-item { border-top: 1px dotted var(--border); }
-  .line-item .line-sku   { grid-column: 1; }
+  .line-item .line-sku-cell { grid-column: 1; }
   /* Title spans columns 2-5 (date, time-ago, customer, tags slots) so it
      has room to breathe. Line qty stacks under the order's amount in col 6. */
   .line-item .line-title { grid-column: 2 / span 4; }
   .line-item .line-qty   { grid-column: 6; text-align: right; justify-self: end; }
+  /* Cell wrapper: holds [finish-dot][color-dot] swatches to the LEFT of the
+     SKU pill so the swatch reads as a swatch, not as part of the SKU code. */
+  .line-sku-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .line-sku-cell .swatch-dot { margin-right: 0; }
   .line-sku {
     font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
     font-size: 11px;
@@ -759,6 +769,21 @@
     align-items: center;
     white-space: nowrap;
     width: max-content;
+  }
+  /* Selected variant option (e.g. "6"" for Extension Rod) — small subdued tag
+     after the product title so the user doesn't have to infer size from SKU. */
+  .line-variant {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 0 5px;
+    border-radius: 3px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    vertical-align: middle;
   }
   .line-title {
     font-size: 12px;
@@ -1339,8 +1364,400 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-26T19:57:28",
+  "built_at": "2026-05-26T22:22:34",
   "orders": [
+    {
+      "shopify_order_id": "6973383671890",
+      "shopify_order_name": "35869",
+      "shopify_order_number": "35869",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-26T21:21:09-05:00",
+      "tags": "discount",
+      "total_price": 880.37,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 2,
+      "printouts": [
+        {
+          "shopify_order_id": "6973383671890",
+          "shopify_order_name": "35869",
+          "shopify_order_number": "35869",
+          "key": [
+            "simple",
+            "HS2BR"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "parent_skus": [
+            "HS2BR"
+          ],
+          "variant_skus": [
+            "HS2BR"
+          ],
+          "line_item_titles": [
+            "Hang-Straight Attachment"
+          ],
+          "lines": [
+            {
+              "title": "Hang-Straight Attachment",
+              "variant_title": "Orbi / Brass",
+              "variant_sku": "HS2BR",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory"
+            }
+          ],
+          "total_qty": 1,
+          "notes": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager",
+          "source": "accessory"
+        },
+        {
+          "shopify_order_id": "6973383671890",
+          "shopify_order_name": "35869",
+          "shopify_order_number": "35869",
+          "key": [
+            "color",
+            "Bone",
+            "fixture"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Bone",
+          "finish": null,
+          "category": "fixture",
+          "category_label": "Fixture",
+          "parent_skus": [
+            "30403",
+            "ER1-3-BO",
+            "ER1-12-BO",
+            "ER1-24-BO"
+          ],
+          "variant_skus": [
+            "30403-1BO",
+            "ER1-3-BO",
+            "ER1-12-BO",
+            "ER1-24-BO"
+          ],
+          "line_item_titles": [
+            "Color Big Orbi Chandelier",
+            "Extension Rods"
+          ],
+          "lines": [
+            {
+              "title": "Color Big Orbi Chandelier",
+              "variant_title": "Brass / Bone",
+              "variant_sku": "30403-1BO",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture"
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Bone / 3\"",
+              "variant_sku": "ER1-3-BO",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory"
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Bone / 12\"",
+              "variant_sku": "ER1-12-BO",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory"
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Bone / 24\"",
+              "variant_sku": "ER1-24-BO",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory"
+            }
+          ],
+          "total_qty": 4,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6973383671890",
+          "shopify_order_name": "35869",
+          "shopify_order_number": "35869",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-26T21:21:09-05:00",
+          "parent_sku": "ER1-3-BO",
+          "color": "Bone",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 1,
+          "line_item_ids": [
+            16853262205010
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-3-BO"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6973383671890",
+          "shopify_order_name": "35869",
+          "shopify_order_number": "35869",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-26T21:21:09-05:00",
+          "parent_sku": "ER1-12-BO",
+          "color": "Bone",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 1,
+          "line_item_ids": [
+            16853262237778
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-12-BO"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6973383671890",
+          "shopify_order_name": "35869",
+          "shopify_order_number": "35869",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-26T21:21:09-05:00",
+          "parent_sku": "ER1-24-BO",
+          "color": "Bone",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 1,
+          "line_item_ids": [
+            16853262270546
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-24-BO"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6973383671890",
+          "shopify_order_name": "35869",
+          "shopify_order_number": "35869",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-26T21:21:09-05:00",
+          "parent_sku": "HS2BR",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 1,
+          "line_item_ids": [
+            16853262303314
+          ],
+          "item_titles": [
+            "Hang-Straight Attachment"
+          ],
+          "variant_skus": [
+            "HS2BR"
+          ],
+          "tags": [
+            "Accessory",
+            "Auto-Created"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": true,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager"
+        },
+        {
+          "shopify_order_id": "6973383671890",
+          "shopify_order_name": "35869",
+          "shopify_order_number": "35869",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-26T21:21:09-05:00",
+          "parent_sku": "30403",
+          "color": "Bone",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16853262336082
+          ],
+          "item_titles": [
+            "Color Big Orbi Chandelier"
+          ],
+          "variant_skus": [
+            "30403-1BO"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
+    {
+      "shopify_order_id": "6973380296786",
+      "shopify_order_name": "35868",
+      "shopify_order_number": "35868",
+      "shopify_url": "",
+      "customer_name": "",
+      "ship_by_date": null,
+      "created_at": "2026-05-26T21:18:07-05:00",
+      "tags": "redo, trade",
+      "total_price": 779.23,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "6973380296786",
+          "shopify_order_name": "35868",
+          "shopify_order_number": "35868",
+          "key": [
+            "color",
+            "Bone",
+            "fixture"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Bone",
+          "finish": null,
+          "category": "fixture",
+          "category_label": "Fixture",
+          "parent_skus": [
+            "40120-0"
+          ],
+          "variant_skus": [
+            "40120-0-1BO"
+          ],
+          "line_item_titles": [
+            "Color Boom Sconce - No Arm"
+          ],
+          "lines": [
+            {
+              "title": "Color Boom Sconce - No Arm",
+              "variant_title": "Brass / Bone",
+              "variant_sku": "40120-0-1BO",
+              "qty": 3,
+              "category": "fixture",
+              "category_label": "Fixture"
+            }
+          ],
+          "total_qty": 3,
+          "notes": null,
+          "source": "color"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6973380296786",
+          "shopify_order_name": "35868",
+          "shopify_order_number": "35868",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-26T21:18:07-05:00",
+          "parent_sku": "40120-0",
+          "color": "Bone",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 3,
+          "line_item_ids": [
+            16853254438994
+          ],
+          "item_titles": [
+            "Color Boom Sconce - No Arm"
+          ],
+          "variant_skus": [
+            "40120-0-1BO"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ]
+    },
     {
       "shopify_order_id": "6973273047122",
       "shopify_order_name": "35867",
@@ -1386,6 +1803,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Scepter Sconce 10\"",
+              "variant_title": "Nickel / Spa",
               "variant_sku": "60220-2B",
               "qty": 2,
               "category": "fixture",
@@ -1482,6 +1900,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Hang-Straight Attachment",
+              "variant_title": "Status / Black",
               "variant_sku": "HS2BL",
               "qty": 3,
               "category": "accessory",
@@ -1489,6 +1908,7 @@ const QUEUE = {
             },
             {
               "title": "Extension Rods",
+              "variant_title": "Black / 24\"",
               "variant_sku": "ER1-24-3",
               "qty": 3,
               "category": "accessory",
@@ -1526,6 +1946,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Status Chandelier 35\"",
+              "variant_title": "Black / Ochre",
               "variant_sku": "30405-3H",
               "qty": 3,
               "category": "fixture",
@@ -1687,6 +2108,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Extension Rods",
+              "variant_title": "Black / 12\"",
               "variant_sku": "ER1-12-3",
               "qty": 4,
               "category": "accessory",
@@ -1724,6 +2146,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Status Chandelier 35\"",
+              "variant_title": "Black / Ochre",
               "variant_sku": "30405-3H",
               "qty": 4,
               "category": "fixture",
@@ -1854,6 +2277,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Stud Hook",
+              "variant_title": "Nickel / Bone",
               "variant_sku": "H10-2BO",
               "qty": 1,
               "category": "hook",
@@ -1861,6 +2285,7 @@ const QUEUE = {
             },
             {
               "title": "Color Snug Hook",
+              "variant_title": "Nickel / Bone",
               "variant_sku": "H16-2BO",
               "qty": 2,
               "category": "hook",
@@ -1898,6 +2323,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Swift Knob",
+              "variant_title": "Nickel / Bone",
               "variant_sku": "H28-2BO",
               "qty": 2,
               "category": "knob",
@@ -1935,6 +2361,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Head Tissue Holder",
+              "variant_title": "Nickel / Bone",
               "variant_sku": "H43-2BO",
               "qty": 1,
               "category": "holder",
@@ -2134,6 +2561,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Icon 3 Sconce",
+              "variant_title": "Black / Slate Blue",
               "variant_sku": "30321-3F",
               "qty": 1,
               "category": "fixture",
@@ -2216,9 +2644,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-PG",
+            "SAC-A",
             "SAF-1",
-            "SAC-A"
+            "SAC-PG"
           ],
           "variant_skus": [
             "SAC-A",
@@ -2233,6 +2661,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Samples",
+              "variant_title": "White",
               "variant_sku": "SAC-A",
               "qty": 1,
               "category": "accessory",
@@ -2240,6 +2669,7 @@ const QUEUE = {
             },
             {
               "title": "Finish Samples",
+              "variant_title": "Brass",
               "variant_sku": "SAF-1",
               "qty": 1,
               "category": "accessory",
@@ -2247,6 +2677,7 @@ const QUEUE = {
             },
             {
               "title": "Color Samples",
+              "variant_title": "Python Green",
               "variant_sku": "SAC-PG",
               "qty": 1,
               "category": "accessory",
@@ -2305,6 +2736,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Legend 2 Sconce",
+              "variant_title": "Nickel / Barely",
               "variant_sku": "30223-2K",
               "qty": 1,
               "category": "fixture",
@@ -2398,6 +2830,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Display Sconce",
+              "variant_title": "Brass / Ochre / Hardwired (no switch)",
               "variant_sku": "60127-1H",
               "qty": 6,
               "category": "fixture",
@@ -2491,6 +2924,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Cap Flush Mount 12\"",
+              "variant_title": "Nickel / Ochre",
               "variant_sku": "30130-12-2H",
               "qty": 1,
               "category": "fixture",
@@ -2584,6 +3018,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Commander Flush Mount 29\"",
+              "variant_title": "Slate Blue",
               "variant_sku": "60630-F",
               "qty": 1,
               "category": "fixture",
@@ -2677,6 +3112,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Reader Swing Arm Sconce - 9\" Arm",
+              "variant_title": "Brass / Chalk",
               "variant_sku": "60128-9-1L",
               "qty": 2,
               "category": "fixture",
@@ -2770,6 +3206,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Reader Flush Mount",
+              "variant_title": "Black / Black",
               "variant_sku": "60130-3",
               "qty": 2,
               "category": "fixture",
@@ -2863,6 +3300,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Samples",
+              "variant_title": "All Colors",
               "variant_sku": "SAC-ALL",
               "qty": 1,
               "category": "accessory",
@@ -2922,6 +3360,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Snug Hook",
+              "variant_title": "Brass",
               "variant_sku": "H16-1",
               "qty": 3,
               "category": "hook",
@@ -2959,6 +3398,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Head Tissue Holder",
+              "variant_title": "Brass",
               "variant_sku": "H43-1",
               "qty": 3,
               "category": "holder",
@@ -2996,6 +3436,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Throne Towel Rack 18\"",
+              "variant_title": "Brass",
               "variant_sku": "H60-18-1",
               "qty": 1,
               "category": "accessory",
@@ -3160,6 +3601,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Dapper Hook",
+              "variant_title": "Black / 5\"",
               "variant_sku": "H1C-5-3",
               "qty": 6,
               "category": "hook",
@@ -3259,6 +3701,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Alegria Flush Mount 30\"",
+              "variant_title": "Brass / Orange",
               "variant_sku": "51000F-1I",
               "qty": 1,
               "category": "fixture",
@@ -3266,6 +3709,7 @@ const QUEUE = {
             },
             {
               "title": "Color Supreme Flush Mount",
+              "variant_title": "Brass / Orange",
               "variant_sku": "30332-1I",
               "qty": 1,
               "category": "fixture",
@@ -3273,6 +3717,7 @@ const QUEUE = {
             },
             {
               "title": "Color Elliptical Sputnik Chandelier",
+              "variant_title": "Brass / Orange",
               "variant_sku": "21800-1I",
               "qty": 1,
               "category": "fixture",
@@ -3436,6 +3881,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Swift Pull - Nickel",
+              "variant_title": "10\" (C-C 8\") / Barely",
               "variant_sku": "H33-10-2K",
               "qty": 1,
               "category": "pull",
@@ -3443,6 +3889,7 @@ const QUEUE = {
             },
             {
               "title": "Color Swift Pull - Nickel",
+              "variant_title": "5\" (C-C 3\") / Barely",
               "variant_sku": "H33-5-2K",
               "qty": 4,
               "category": "pull",
@@ -3480,6 +3927,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Highness Knob",
+              "variant_title": "Stainless Steel / Barely",
               "variant_sku": "H26-4K",
               "qty": 4,
               "category": "knob",
@@ -3644,6 +4092,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Lure Pendant 12\"",
+              "variant_title": "Brass / Cobalt",
               "variant_sku": "30112-12-1E",
               "qty": 1,
               "category": "fixture",
@@ -3680,6 +4129,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Extension Rods",
+              "variant_title": "Brass / 6\"",
               "variant_sku": "ER1-6-1",
               "qty": 1,
               "category": "accessory",
@@ -3717,6 +4167,7 @@ const QUEUE = {
           "lines": [
             {
               "title": "Color Persona Knob",
+              "variant_title": "Brass / Cobalt",
               "variant_sku": "H20-1E",
               "qty": 19,
               "category": "knob",
@@ -3836,9 +4287,9 @@ const QUEUE = {
     }
   ],
   "totals": {
-    "orders": 18,
-    "printouts": 27,
-    "notion_rows": 30,
+    "orders": 20,
+    "printouts": 30,
+    "notion_rows": 36,
     "skipped_already_printed": 214
   },
   "public_redacted": true
@@ -3900,6 +4351,34 @@ function decodeVariantSku(sku){
   const colorSuffix = tail.slice(1);
   const color = colorSuffix ? (COLOR_SUFFIX_TO_NAME[colorSuffix] || null) : null;
   return {finish, color};
+}
+
+// Pull the "real" choice out of a Shopify variant_title for line display.
+// variant_title looks like "Brass / Bone / 24"" — finish, color, then any
+// other options. The first two are already shown as swatch dots / group
+// chips, so we strip them and return what's left (size, length, mount, etc.).
+// Returns "" when variant_title is empty, "Default Title", or fully redundant.
+function extractSizeOption(variantTitle, productTitle){
+  const vt = (variantTitle || "").trim();
+  if(!vt) return "";
+  if(vt.toLowerCase() === "default title") return "";
+  const finishNames = new Set(Object.values(FINISH_DIGIT_TO_NAME));   // Brass/Nickel/Black
+  const colorNames  = new Set(Object.values(COLOR_SUFFIX_TO_NAME));
+  // "Status" is a fixture line name that sometimes leaks into variant_title
+  // when the option list has "Status / Black". Treat any token matching a
+  // known color or finish as redundant; everything else is a real option.
+  const kept = vt.split("/").map(s => s.trim()).filter(tok => {
+    if(!tok) return false;
+    if(finishNames.has(tok)) return false;
+    if(colorNames.has(tok)) return false;
+    return true;
+  });
+  if(kept.length === 0) return "";
+  const out = kept.join(" / ");
+  // If the surviving option is already in the product title (e.g.
+  // 'Throne Towel Rack 18"' with variant '18"'), don't repeat it.
+  if(productTitle && productTitle.includes(out)) return "";
+  return out;
 }
 
 // Classify a line as Lighting / Hardware / Sample / Accessory using the same
@@ -4229,19 +4708,28 @@ function renderLine(line, ctxColor, ctxFinish){
   const decoded = decodeVariantSku(sku);
   const finishName = decoded.finish || ctxFinish || null;
   const colorName  = decoded.color  || ctxColor  || null;
-  // Order on screen: finish-dot · color-dot · SKU pill. Both shown if both
-  // apply; only one shown if only one applies. Finish first because metal
-  // finish is "more upstream" than powder coat color in our process.
+  // Order on screen: [finish-dot][color-dot] SKU pill. Dots sit OUTSIDE the
+  // pill (to its left) so the swatch reads as a swatch, not part of the SKU.
+  // Finish before color because metal finish is "more upstream" than powder
+  // coat color in our process.
   const finishDot = finishName && finishHex(finishName)
     ? `<span class="swatch-dot" style="--swatch-color:${finishHex(finishName)}" title="Finish: ${finishName}"></span>`
     : "";
   const colorDot = colorName && COLOR_HEX[colorName]
     ? `<span class="swatch-dot" style="--swatch-color:${COLOR_HEX[colorName]}" title="Color: ${colorName}"></span>`
     : "";
+  // Surface the chosen variant option (e.g. "6"" for an Extension Rod) so the
+  // user doesn't have to infer size from the SKU. Strip finish/color tokens
+  // from variant_title because the swatch dots + group chip already show
+  // those — what's left is the real choice (size, length, mount, etc.).
+  const sizeOpt = extractSizeOption(line.variant_title, title);
+  const variantTag = sizeOpt
+    ? ` <span class="line-variant" title="Option: ${sizeOpt}">${sizeOpt}</span>`
+    : "";
   return `
     <li class="line-item">
-      <span class="line-sku">${finishDot}${colorDot}${sku || "—"}</span>
-      <span class="line-title" title="${title}">${title}</span>
+      <span class="line-sku-cell">${finishDot}${colorDot}<span class="line-sku">${sku || "—"}</span></span>
+      <span class="line-title" title="${title}">${title}${variantTag}</span>
       <span class="line-qty"><span class="lbl">×</span>${qty}</span>
     </li>`;
 }
