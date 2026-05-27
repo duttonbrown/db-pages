@@ -22,6 +22,7 @@ const notInDb       = $("not-in-db");
 const customFields  = $("custom-fields");
 const customName    = $("custom-name");
 const customNotes   = $("custom-notes");
+const customVendor  = $("custom-vendor");
 const customOutOfStock = $("custom-out-of-stock");
 const addCustomBtn  = $("add-custom-btn");
 // One-time purchase: a different beast from "add item not in database."
@@ -397,6 +398,7 @@ function addCustomToCart() {
   if (!name) return;
   const t = document.querySelector('input[name="custom-type"]:checked').value;
   const note = customNotes.value.trim();
+  const vendor = customVendor.value.trim();
   cart.push({
     type: t,
     notInDb: true,
@@ -405,11 +407,12 @@ function addCustomToCart() {
     notes: note,
     outOfStock: customOutOfStock.checked,
     title: name,
-    subtitle: "(not in database)",
-    vendor: "",
+    subtitle: vendor ? `(not in database) — ${vendor}` : "(not in database)",
+    vendor,
   });
   customName.value = "";
   customNotes.value = "";
+  customVendor.value = "";
   customOutOfStock.checked = false;
   document.querySelector('input[name="custom-type"][value="Part"]').checked = true;
   notInDb.checked = false;
