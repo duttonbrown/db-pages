@@ -1446,7 +1446,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-05-26T22:46:44",
+  "built_at": "2026-05-26T22:57:36",
   "orders": [
     {
       "shopify_order_id": "6973383671890",
@@ -2620,8 +2620,8 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-A",
-            "SAF-1",
-            "SAC-PG"
+            "SAC-PG",
+            "SAF-1"
           ],
           "variant_skus": [
             "SAC-A",
@@ -4822,14 +4822,26 @@ function renderLine(line, ctxColor, ctxFinish){
   const allColorsDot = (!colorDot && !finishDot && /all colors/i.test(vtRaw))
     ? `<span class="swatch-dot swatch-rainbow" title="All Colors"></span>`
     : "";
-  // Surface the chosen variant option (e.g. "6"" for an Extension Rod) so the
-  // user doesn't have to infer size from the SKU. Strip finish/color tokens
-  // from variant_title because the swatch dots + group chip already show
-  // those — what's left is the real choice (size, length, mount, etc.).
+  // Surface the chosen variant option (size, length, mount, etc.) and the
+  // finish/color name on the options line so the floor reads the spec in
+  // plain text — swatch dots are visual reinforcement, but the words remove
+  // ambiguity ("Brass" beats "small brown dot" when you're moving fast).
+  // Finish chip is only added when the group context doesn't ALREADY show it
+  // (e.g. a Brass finish line on the Brass finish-only card doesn't repeat).
   const sizeOpt = extractSizeOption(line.variant_title, title);
-  const variantTag = sizeOpt
-    ? ` <span class="line-variant" title="Option: ${sizeOpt}">${sizeOpt}</span>`
-    : "";
+  const showFinishOnLine = finishName && finishName !== ctxFinish;
+  const showColorOnLine  = colorName  && colorName  !== ctxColor;
+  const tags = [];
+  if(showFinishOnLine){
+    tags.push(`<span class="line-variant" title="Finish: ${finishName}">${finishName}</span>`);
+  }
+  if(showColorOnLine){
+    tags.push(`<span class="line-variant" title="Color: ${colorName}">${colorName}</span>`);
+  }
+  if(sizeOpt){
+    tags.push(`<span class="line-variant" title="Option: ${sizeOpt}">${sizeOpt}</span>`);
+  }
+  const variantTag = tags.length ? " " + tags.join(" ") : "";
   return `
     <li class="line-item">
       <span class="line-sku-cell">${finishDot}${colorDot}${allColorsDot}<span class="line-sku">${sku || "—"}</span></span>
@@ -4882,18 +4894,28 @@ function renderRow(r){
   const orderLinkInner = o.shopify_url
     ? `<a href="${o.shopify_url}" target="_blank">${orderName}</a>`
     : orderName;
-  // PDF Order Pro deep-link: opens the Order Printer Pro app inside Shopify
-  // admin for THIS order, so the manager can pull up the full PDF (with
-  // packaging notes, attachments, custom fields) without manually navigating.
-  const pdfLink = o.shopify_order_id
-    ? `<a href="https://admin.shopify.com/store/dutton-brown/apps/order-printer-pro/orders/${o.shopify_order_id}"
-          target="_blank"
-          class="pdf-link"
-          title="Open this order in PDF Order Pro">PDF</a>`
-    : "";
-  const lines = (p.lines && p.lines.length) ? p.lines : (p.line_item_titles||[]).map((t,i)=>(
+  // The order # itself is already linked to the Shopify admin order page
+  // (orderLinkInner wraps it in an anchor to o.shopify_url). PDF Order Pro
+  // generates per-order signed tokens we don't have at queue-build time,
+  // so we can't deep-link straight to the PDF — the manager clicks the
+  // order # to reach admin, then hits PDF Order Pro's "View PDF" from there.
+  const adminLink = "";
+  const rawLines = (p.lines && p.lines.length) ? p.lines : (p.line_item_titles||[]).map((t,i)=>(
     {title:t, variant_sku:(p.variant_skus||[])[i]||"", qty: i===0 ? p.total_qty : 0}
   ));
+  // Sort so the fixture/lighting always sits at the top of the printout,
+  // then hardware, then accessories. The floor reads "fixture first, then
+  // what goes with it" — never "rod first, fixture later." When categories
+  // tie, fall back to the original order so SKU-level grouping is preserved.
+  const CAT_RANK = { fixture: 0, lighting: 0, pull: 1, knob: 1, hook: 1, holder: 1, hardware: 1, accessory: 2, sample: 3 };
+  const lines = rawLines.map((l, i) => ({ l, i }))
+    .sort((a, b) => {
+      const ra = CAT_RANK[a.l.category] ?? 4;
+      const rb = CAT_RANK[b.l.category] ?? 4;
+      if(ra !== rb) return ra - rb;
+      return a.i - b.i;
+    })
+    .map(x => x.l);
   const autoLoc = p._auto_location || p.location;
   const pKey = printoutKey(p);
   const orderPrintoutCount = (o.printouts||[]).length;
@@ -4938,7 +4960,7 @@ function renderRow(r){
   return `
     <div class="order-block" ${dragAttrs}>
       <div class="order-block-head">
-        <div class="col-order">${orderLinkInner}${pdfLink}${companionBadge}</div>
+        <div class="col-order">${orderLinkInner}${adminLink}${companionBadge}</div>
         <div class="col-date">${fmtDateLong(o.created_at)}</div>
         <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
         <div class="col-customer">${o.customer_name || ""}</div>
