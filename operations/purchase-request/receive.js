@@ -1,5 +1,5 @@
 // Receive Shipments console
-// Audience: receivers (Catherine, Chase, Thomas, Zach) confirming what arrived.
+// Audience: receivers (Chase, Thomas, Zach) confirming what arrived.
 // Surface: rows currently in Ordered status, grouped by PO so a whole box can
 // be confirmed in one click. Issues are flagged via a per-row checkbox + note;
 // they still mark the row Received but are visible separately for follow-up.
