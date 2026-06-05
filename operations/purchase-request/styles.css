@@ -758,6 +758,27 @@ textarea { resize: vertical; min-height: 70px; }
 }
 .badge.badge-onetime { background: #E8EEF6; color: #2C5282; }
 
+/* Parser "needs review" pill — the order parser filled Order #/Tracking from a
+   supplier email but couldn't flip Status, so a human must move the row to
+   Ordered. Brand accent (not error red — this is an action prompt, not a
+   problem) with a soft pulse so it reads as "do something" in the queue. */
+.badge.badge-needs-review {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent-dark);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: help;
+  animation: needsReviewPulse 2.4s ease-in-out infinite;
+}
+@keyframes needsReviewPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 153, 18, 0.0); }
+  50%      { box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge.badge-needs-review { animation: none; }
+}
+
 /* Urgent chip overrides .badge background when both classes are applied
    (receive + status pages). Purchaser console uses .urgent-tag alone. */
 .badge.urgent-tag {

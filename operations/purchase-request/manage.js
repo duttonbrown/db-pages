@@ -731,6 +731,21 @@ function renderRow(r) {
   tags.appendChild(makeBadge(r.type.toUpperCase(), "badge"));
   if (r.oneTime) tags.appendChild(makeBadge("ONE-TIME", "badge-onetime"));
   if (r.outOfStock) tags.appendChild(makeBadge("URGENT", "urgent-tag"));
+  // Parser marker: the order parser filled this row from a supplier email but
+  // could not flip its Status — a human must move it Submitted → Ordered.
+  // Shown only while the row is still Submitted (once it's Ordered the action
+  // is done, so the nag disappears). The pill carries a tooltip with what the
+  // parser found so the purchaser can confirm before flipping.
+  if (r.parserStatus === "Needs review — info filled" && r.status === "Submitted") {
+    const pill = makeBadge("REVIEW → ORDER", "badge-needs-review");
+    const found = [
+      r.orderNumber ? `Order #${r.orderNumber}` : "",
+      r.tracking ? `Tracking ${r.tracking}` : "",
+    ].filter(Boolean).join(" · ");
+    pill.title = `Parser filled ${found || "details"} from a supplier email but left this Submitted. `
+      + `Confirm and flip to Ordered.${r.lastParsed ? ` (parsed ${r.lastParsed})` : ""}`;
+    tags.appendChild(pill);
+  }
   // Recent activity chip — warns the purchaser if this same item was just
   // ordered/received recently so they don't re-order on top of an in-flight one.
   const chip = recentChip(r.priorActivity);
