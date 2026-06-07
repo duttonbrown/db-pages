@@ -513,6 +513,14 @@
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+  /* Plain chip: the swatch carries the color, so the pill itself stays neutral
+     (white bg, light grey outline) instead of a tinted background — saves ink
+     and avoids double-encoding the hue. */
+  .color-chip-plain {
+    background: #fff;
+    color: var(--ink);
+    border-color: var(--border);
+  }
   /* Inline finish/color dot used next to a SKU pill in the line list */
   .swatch-dot {
     display: inline-block;
@@ -1502,6 +1510,10 @@
     border-top: 2px solid #D40000; border-bottom: 2px solid #D40000;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
+  /* When the EXPEDITE banner sits at the very top of the head (above the
+     "Traveler" eyebrow) it gets no top margin and a little breathing room below
+     so it reads as the first thing on the sheet. */
+  .trv-head .trv-expedite { margin: 0 0 12px; }
 
   /* Bill to / Ship to */
   .trv-addresses { display: flex; gap: 40px; margin: 18px 0 8px; }
@@ -1514,7 +1526,7 @@
   .trv-table { width: 100%; border-collapse: collapse; margin-top: 14px; }
   .trv-table thead th {
     text-align: left; font-size: 12px; font-weight: 600; color: #000;
-    padding: 7px 4px; border-top: 2px solid var(--theme, #4a4a4a); border-bottom: 2px solid var(--theme, #4a4a4a);
+    padding: 7px 4px; border-top: 1px solid #d8d8d8; border-bottom: 1px solid #d8d8d8;
   }
   .trv-table th.trv-qty-col, .trv-table td.trv-qty { text-align: center; width: 56px; white-space: nowrap; }
   .trv-table th.trv-img-col { width: 60px; }
@@ -1524,18 +1536,20 @@
   .trv-thumb-missing { width: 54px; height: 54px; border: 1px dashed var(--border); border-radius: 4px; display:flex; align-items:center; justify-content:center; color: var(--muted); font-size: 9px; text-align:center; }
   .trv-li-title { font-size: 13.5px; font-weight: 600; color: #000; margin: 0; line-height: 1.3; }
   /* Variant (color/finish) inline next to the item name — the build spec. Less
-     heavy than the title so the name still leads, but clearly present. */
-  .trv-li-variant { font-weight: 400; color: #333; }
-  .trv-li-variant::before { content: "· "; color: var(--muted); }
+     heavy than the title so the name still leads, but clearly present. The same
+     airy spacing as the "Also on this order" rows below: a wider gap before the
+     variant and between each swatch chip, so nothing reads crammed. */
+  .trv-li-variant { font-weight: 400; color: #333; margin-left: 14px; }
+  .trv-li-variant::before { content: ""; }
   /* Variant chips: each finish/color swatch dot paired with its own name, so the
      swatch reads as a label for the word beside it. Used on build + ref rows. */
   .trv-vchips { display: inline; }
   .trv-vchip {
     display: inline-flex; align-items: center; white-space: nowrap;
-    vertical-align: middle; margin-right: 10px;
+    vertical-align: middle; margin-right: 14px;
   }
   .trv-vchip:last-child { margin-right: 0; }
-  .trv-vchip .swatch-dot { margin-right: 4px; }
+  .trv-vchip .swatch-dot { margin-right: 6px; }
   /* Traveler number badge next to the item name (e.g. 1/2) — which sheet of
      the order this line is assigned to. */
   .trv-li-badge {
@@ -1587,7 +1601,7 @@
   .trv-sig:last-child { margin-bottom: 0; }
   .trv-sig-label { font-size: 13px; font-weight: 600; color: #000; white-space: nowrap; margin-right: 10px; }
   .trv-sig-value { font-size: 13px; color: #000; }
-  .trv-sig-fill { display: inline-block; width: 220px; border-bottom: 1px solid #000; height: 1px; }
+  .trv-sig-fill { display: inline-block; width: 220px; border-bottom: 1px solid #d8d8d8; height: 1px; }
 
   /* ── Drag-drop affordances (screen only) ── */
   .trv-build-row { cursor: grab; }
@@ -1802,7 +1816,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T18:12:38",
+  "built_at": "2026-06-07T18:27:47",
   "orders": [
     {
       "shopify_order_id": "6994415222866",
@@ -4755,7 +4769,7 @@ const QUEUE = {
           ],
           "page_count": 1,
           "location": "Powder Coating",
-          "color": "White",
+          "color": "Black",
           "finish": null,
           "category": "lighting",
           "category_label": "Lighting",
@@ -6025,6 +6039,14 @@ function chipStyle(name){
   return `--swatch-color:${hex};--chip-bg:${tintBg};--chip-text:${text};--chip-border:${border};`;
 }
 
+// Like chipStyle but sets ONLY the swatch color — no background/border tint.
+// Used where the swatch dot already carries the hue (the traveler bubbles), so
+// the pill stays neutral instead of double-encoding the color with a tint.
+function chipSwatchStyle(name){
+  const hex = swatchHexFor(name);
+  return hex ? `--swatch-color:${hex};` : "";
+}
+
 // ── Edit persistence (so hourly auto-refresh doesn't clobber edits) ─────────
 const EDIT_KEY = "db-print-queue-edits-v1";
 const LOC_OVERRIDE_KEY = "db-print-queue-loc-overrides-v1";
@@ -6851,11 +6873,15 @@ function escapeHtml(s){
 }
 
 function trvChip(p){
+  // The swatch itself carries the color; the pill stays neutral (no tinted
+  // background) since the swatch already communicates the hue — tinting the
+  // whole pill on top of that just wastes ink. chipSwatchStyle sets only the
+  // --swatch-color, not the background/border tint.
   if(p.color && COLOR_HEX[p.color]){
-    return `<span class="color-chip" style="${chipStyle(p.color)}"><span class="color-chip-swatch"></span>${escapeHtml(p.color)}</span>`;
+    return `<span class="color-chip color-chip-plain" style="${chipSwatchStyle(p.color)}"><span class="color-chip-swatch"></span>${escapeHtml(p.color)}</span>`;
   }
   if(p.finish && FINISH_HEX[p.finish]){
-    return `<span class="color-chip" style="${chipStyle(p.finish)}"><span class="color-chip-swatch"></span>${escapeHtml(p.finish)}</span>`;
+    return `<span class="color-chip color-chip-plain" style="${chipSwatchStyle(p.finish)}"><span class="color-chip-swatch"></span>${escapeHtml(p.finish)}</span>`;
   }
   return "";
 }
@@ -7094,6 +7120,7 @@ function renderTraveler(o, p, idx, total, calloutHtml){
           <span class="trv-loc-pill loc-${(p.location||'').toLowerCase().replace(/\s+/g,'-')}">${escapeHtml(p.location||"")}</span>
           ${trvChip(p)}
         </div>
+        ${expedite}
         <p class="trv-eyebrow">Traveler${multi ? ` <span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}</p>
         <h2 class="trv-ordernum">Order ${orderName}</h2>
         <ul class="trv-meta">
@@ -7105,7 +7132,6 @@ function renderTraveler(o, p, idx, total, calloutHtml){
       </div>
       <div class="trv-logo"><img src="${DB_LOGO}" alt="Dutton Brown"></div>
     </div>
-    ${expedite}
     ${addrBlock}
     <table class="trv-table">
       <thead>
