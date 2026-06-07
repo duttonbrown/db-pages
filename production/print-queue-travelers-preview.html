@@ -1512,9 +1512,15 @@
      heavy than the title so the name still leads, but clearly present. */
   .trv-li-variant { font-weight: 400; color: #333; }
   .trv-li-variant::before { content: "· "; color: var(--muted); }
-  /* Swatch dots inline next to the variant / reference title. */
-  .trv-swatches { display: inline-flex; align-items: center; vertical-align: middle; margin-right: 2px; }
-  .trv-swatches .swatch-dot { margin-right: 3px; }
+  /* Variant chips: each finish/color swatch dot paired with its own name, so the
+     swatch reads as a label for the word beside it. Used on build + ref rows. */
+  .trv-vchips { display: inline; }
+  .trv-vchip {
+    display: inline-flex; align-items: center; white-space: nowrap;
+    vertical-align: middle; margin-right: 10px;
+  }
+  .trv-vchip:last-child { margin-right: 0; }
+  .trv-vchip .swatch-dot { margin-right: 4px; }
   /* Traveler number badge next to the item name (e.g. 1/2) — which sheet of
      the order this line is assigned to. */
   .trv-li-badge {
@@ -1780,7 +1786,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T17:25:38",
+  "built_at": "2026-06-07T17:45:05",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2405,8 +2411,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-E",
-            "SAC-F"
+            "SAC-F",
+            "SAC-E"
           ],
           "variant_skus": [
             "SAC-E",
@@ -2700,9 +2706,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
+            "SAC-B",
             "SAC-BO",
-            "SAF-ALL",
-            "SAC-B"
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -6826,30 +6832,60 @@ function trvAddress(addr, title){
     </div>`;
 }
 
-// Finish + color swatch dots for a traveler line — same visual as the Print
-// Queue page so the assembler gets a color/finish reminder per item and can't
-// grab the wrong paint or metal. Decodes the line's SKU first, falls back to
-// the Shopify variant_title ("Brass / Bone", "All Colors"). Order: finish, then
-// color (finish is upstream of powder coat in our process).
-function trvSwatches(line){
+// Build the inline variant display for a traveler line: a swatch dot PAIRED
+// WITH ITS OWN NAME (so each swatch hugs the word it represents) for finish and
+// color, plus any leftover option text (size, "Hardwired", etc.).
+//
+// We decode finish/color from the SKU (reliable) and fall back to the Shopify
+// variant_title. The raw variant_title word ORDER is inconsistent
+// ("Brass / Black" vs '12" / White / Nickel' vs "Black"), so we never trust its
+// order — we render decoded chips and strip the matched finish/color tokens
+// from the leftover string. Returns "" when there's nothing to show.
+function trvVariantChips(line){
   const decoded = decodeVariantSku(line.variant_sku || line.sku || "");
   let finishName = decoded.finish || null;
   let colorName  = decoded.color  || null;
   const vtRaw = (line.variant_title || "").trim();
-  if((!colorName || !finishName) && vtRaw && vtRaw.toLowerCase() !== "default title"){
-    vtRaw.split("/").map(s => s.trim()).filter(Boolean).forEach(tok => {
-      if(!colorName && COLOR_HEX[tok])   colorName  = tok;
-      if(!finishName && FINISH_HEX[tok]) finishName = tok;
-    });
+  const tokens = (vtRaw && vtRaw.toLowerCase() !== "default title")
+    ? vtRaw.split("/").map(s => s.trim()).filter(Boolean) : [];
+  // Fill finish/color from variant tokens if the SKU didn't decode them.
+  tokens.forEach(tok => {
+    if(!colorName && COLOR_HEX[tok])   colorName  = tok;
+    if(!finishName && FINISH_HEX[tok]) finishName = tok;
+  });
+  // Leftover option tokens = everything that isn't the finish or color name
+  // (e.g. size "12\" (C-C 10\")", "Hardwired (no switch)").
+  const leftovers = tokens.filter(tok =>
+    tok !== finishName && tok !== colorName &&
+    !COLOR_HEX[tok] && !FINISH_HEX[tok]);
+
+  const chips = [];
+  if(finishName && finishHex(finishName)){
+    chips.push(`<span class="trv-vchip" title="Finish: ${escapeHtml(finishName)}">`
+      + `<span class="swatch-dot" style="--swatch-color:${finishHex(finishName)}"></span>`
+      + `${escapeHtml(finishName)}</span>`);
+  } else if(finishName){
+    chips.push(`<span class="trv-vchip">${escapeHtml(finishName)}</span>`);
   }
-  const finishDot = finishName && finishHex(finishName)
-    ? `<span class="swatch-dot" style="--swatch-color:${finishHex(finishName)}" title="Finish: ${escapeHtml(finishName)}"></span>` : "";
-  const colorDot = colorName && COLOR_HEX[colorName]
-    ? `<span class="swatch-dot" style="--swatch-color:${COLOR_HEX[colorName]}" title="Color: ${escapeHtml(colorName)}"></span>` : "";
-  const rainbow = (!finishDot && !colorDot && /all colors/i.test(vtRaw))
-    ? `<span class="swatch-dot swatch-rainbow" title="All Colors"></span>` : "";
-  const dots = finishDot + colorDot + rainbow;
-  return dots ? `<span class="trv-swatches">${dots}</span>` : "";
+  if(colorName && COLOR_HEX[colorName]){
+    chips.push(`<span class="trv-vchip" title="Color: ${escapeHtml(colorName)}">`
+      + `<span class="swatch-dot" style="--swatch-color:${COLOR_HEX[colorName]}"></span>`
+      + `${escapeHtml(colorName)}</span>`);
+  } else if(colorName){
+    chips.push(`<span class="trv-vchip">${escapeHtml(colorName)}</span>`);
+  }
+  // "All Colors" sample → rainbow dot + label.
+  if(!finishName && !colorName && /all colors/i.test(vtRaw)){
+    chips.push(`<span class="trv-vchip" title="All Colors">`
+      + `<span class="swatch-dot swatch-rainbow"></span>All Colors</span>`);
+  }
+  leftovers.forEach(tok => chips.push(`<span class="trv-vchip">${escapeHtml(tok)}</span>`));
+  // If nothing decoded and there were no tokens, but variant_title exists
+  // (e.g. "All Finishes"), show it plain so nothing is lost.
+  if(!chips.length && vtRaw && vtRaw.toLowerCase() !== "default title"){
+    chips.push(`<span class="trv-vchip">${escapeHtml(vtRaw)}</span>`);
+  }
+  return chips.length ? `<span class="trv-vchips">${chips.join("")}</span>` : "";
 }
 
 function trvLineProps(props){
@@ -6874,11 +6910,10 @@ function trvBuildRow(ln){
   // the item name — the assembler must always see what to build, but it
   // shouldn't add a whole extra line. Custom line properties (cord color,
   // engraving, etc.) follow below via trvLineProps so nothing is lost.
-  const swatches = trvSwatches(ln);
-  // Swatches sit just before the variant text: "<title> [dots]· Bone".
-  const variant = ln.variant_title
-    ? ` ${swatches}<span class="trv-li-variant">${escapeHtml(ln.variant_title)}</span>`
-    : (swatches ? ` ${swatches}` : "");
+  // Variant chips: each finish/color swatch paired with its own name, plus any
+  // leftover option (size, mount). Sits inline to the right of the item name.
+  const vchips = trvVariantChips(ln);
+  const variant = vchips ? ` <span class="trv-li-variant">${vchips}</span>` : "";
   // Drag handle (screen-only) lets the manager move this exact line to another
   // traveler in the same order. data-line-id is the stable identity assigned in
   // ensureLineIds(); ondragstart/end live on the row.
@@ -6898,14 +6933,14 @@ function trvBuildRow(ln){
 
 function trvRefRow(ln, where, travelerLabel){
   const sku = ln.variant_sku ? `<span class="trv-ref-sku">${escapeHtml(ln.variant_sku)}</span>` : "";
-  const swatches = trvSwatches(ln);
+  const vchips = trvVariantChips(ln);
   // The traveler number lives at the FAR RIGHT (after the location tag), in the
   // same orange format as the top traveler counter — so the floor can see which
   // sheet this referenced item is built on.
   const badge = travelerLabel ? `<span class="trv-count-of trv-ref-num">${escapeHtml(travelerLabel)}</span>` : "";
   return `<div class="trv-ref-row">
       <span class="trv-ref-qty">× ${ln.qty}</span>
-      <span class="trv-ref-title">${swatches}${escapeHtml(ln.title)} ${sku}</span>
+      <span class="trv-ref-title">${escapeHtml(ln.title)} ${sku} ${vchips}</span>
       <span class="trv-ref-where">${escapeHtml(where)}</span>
       ${badge}
     </div>`;
