@@ -1717,7 +1717,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T16:21:57",
+  "built_at": "2026-06-07T16:27:46",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2343,8 +2343,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-E",
-            "SAC-F"
+            "SAC-F",
+            "SAC-E"
           ],
           "variant_skus": [
             "SAC-E",
@@ -2639,8 +2639,8 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-B",
-            "SAC-BO",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-BO"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -5780,8 +5780,11 @@ const LOCATIONS = [
   { name: "Shipping",       cls: "section-shipping", key: "shipping" }
 ];
 
-// Canonical color order from db-brand/brand-identity.md (white at bottom of
-// strip → black at top; we render bottom-up so this list is in display order).
+// Canonical color order — matches the storefront swatch picker exactly (the
+// Shopify product "Color" option value order, verified identical across all
+// color products 2026-06-07). Used to group Powder Coating travelers by color
+// for printing, so the floor pulls each color's stack already collated.
+// If the swatch order ever changes on the site, update this list to match.
 const COLOR_ORDER = [
   "White","Chalk","Bone","Spa","Python Green","Lagoon","Cobalt","Slate Blue",
   "Ochre","Orange","Riding Hood Red","Pinkaboo","Barely","Black"
@@ -7130,17 +7133,35 @@ function renderTravelers(){
     const total = (o.printouts||[]).length;
     (o.printouts||[]).forEach((p, idx) => pairs.push({o, p, idx, total, orderIdx}));
   });
-  // Priority bucket: 0 = Sample, 1 = Assembly, 2 = everything else (Powder
-  // Coating / Shipping non-sample). Within a bucket keep the original
-  // chronological order (orderIdx, then idx) so the queue stays stable.
-  function trvBucket(pair){
-    const p = pair.p;
-    if(p.source === "sample-only" || p.category === "sample") return 0;
-    if((p.location||"") === "Assembly") return 1;
-    return 2;
+  // Print order matches the Print Queue page's section model:
+  //   bucket 0 = Shipping  (incl. samples) — keep received order
+  //   bucket 1 = Assembly                   — keep received order
+  //   bucket 2 = Powder Coating             — GROUP BY COLOR across orders
+  // Grouping powder-coat travelers by color means all "Riding Hood Red" sheets
+  // print contiguously (then Python Green, etc.), so the floor pulls a color's
+  // stack already collated instead of hand-sorting a printed pile. Color order
+  // follows the canonical COLOR_ORDER (white → black), same as the queue page.
+  function trvBucket(p){
+    const loc = p.location || "";
+    if(loc === "Powder Coating") return 2;
+    if(loc === "Assembly") return 1;
+    return 0; // Shipping + samples
   }
-  pairs.sort((a,b) => trvBucket(a) - trvBucket(b)
-    || a.orderIdx - b.orderIdx || a.idx - b.idx);
+  function colorRank(p){
+    const i = COLOR_ORDER.indexOf(p.color);
+    return i === -1 ? COLOR_ORDER.length : i; // unknown colors sort last
+  }
+  pairs.sort((a,b) => {
+    const ba = trvBucket(a.p), bb = trvBucket(b.p);
+    if(ba !== bb) return ba - bb;
+    // Within Powder Coating: color group first, then received order.
+    if(ba === 2){
+      const ca = colorRank(a.p), cb = colorRank(b.p);
+      if(ca !== cb) return ca - cb;
+    }
+    // Shipping / Assembly (and ties within a color): received order.
+    return a.orderIdx - b.orderIdx || a.idx - b.idx;
+  });
   const sheets = pairs.map(x => renderTraveler(x.o, x.p, x.idx, x.total));
   mount.innerHTML = `<div class="trv-list">${sheets.join("")}</div>`;
   const n = sheets.length;
