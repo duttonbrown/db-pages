@@ -1436,22 +1436,31 @@
     font-size: 19px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em;
     line-height: 1.1; margin: 0 0 12px;
   }
-  .trv-logo { width: 150px; flex-shrink: 0; }
+  .trv-logo { width: 75px; flex-shrink: 0; }
   .trv-logo img { width: 100%; height: auto; display: block; }
 
   .trv-meta { list-style: none; margin: 0; padding: 0; }
   .trv-meta li { font-size: 13px; color: #333; margin-bottom: 2px; }
   .trv-meta b { color: #000; font-weight: 600; }
 
-  /* Two plain bubbles under the meta block: the build location and the
-     color/finish. No label, no fill, no category — just the two things the
-     floor needs to know what this sheet is. */
-  .trv-tags { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-  .trv-loc-pill {
-    font-size: 12px; font-weight: 600; color: #444;
-    padding: 3px 11px; border: 1px solid var(--border); border-radius: 999px; background: white;
+  /* Two bubbles pinned at the very TOP-LEFT of the sheet — location + color/
+     finish — so the floor can identify any traveler at a glance from the
+     corner. Sits above the eyebrow, pushed up into the header margin. */
+  .trv-tags {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin: -8px 0 10px;          /* pull up toward the top margin */
   }
-  .trv-tags .color-chip { font-size: 12px; }
+  .trv-loc-pill {
+    font-size: 13px; font-weight: 600; color: #333;
+    padding: 4px 13px; border: 1.5px solid var(--ink); border-radius: 999px; background: white;
+    letter-spacing: 0.01em;
+  }
+  /* Subtle per-location tint so Powder Coating / Assembly / Shipping are
+     distinguishable at a glance without relying on reading the word. */
+  .trv-loc-pill.loc-powder-coating { border-color: var(--accent); color: var(--accent-dark); }
+  .trv-loc-pill.loc-assembly       { border-color: #2C6E8F; color: #225873; }
+  .trv-loc-pill.loc-shipping       { border-color: var(--success); color: var(--success); }
+  .trv-tags .color-chip { font-size: 13px; }
 
   /* Expedite banner — OPP styling, faithful red */
   .trv-expedite {
@@ -1717,7 +1726,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T16:28:05",
+  "built_at": "2026-06-07T16:38:18",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2066,16 +2075,15 @@ const QUEUE = {
           "shopify_order_name": "36025",
           "shopify_order_number": "36025",
           "key": [
-            "color",
-            "Black",
-            "accessory"
+            "finish",
+            "Black"
           ],
           "page_count": 1,
-          "location": "Shipping",
-          "color": "Black",
-          "finish": null,
-          "category": "accessory",
-          "category_label": "Accessory",
+          "location": "Assembly",
+          "color": null,
+          "finish": "Black",
+          "category": "holder",
+          "category_label": "Holder",
           "parent_skus": [
             "H60-36"
           ],
@@ -2092,8 +2100,8 @@ const QUEUE = {
               "variant_sku": "H60-36-3",
               "parent_sku": "H60-36",
               "qty": 1,
-              "category": "accessory",
-              "category_label": "Accessory",
+              "category": "holder",
+              "category_label": "Holder",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/office-towel-rack-40-black-1.jpg?v=1775636818&width=120",
               "properties": [
                 {
@@ -2105,9 +2113,9 @@ const QUEUE = {
             }
           ],
           "total_qty": 1,
-          "notes": "BLACK-ACCESSORY: routed to Shipping (batch black separately or fold into another Black work order)",
-          "source": "color",
-          "traveler_key": "color|Black|accessory"
+          "notes": null,
+          "source": "finish",
+          "traveler_key": "finish|Black"
         }
       ],
       "notion_rows": [
@@ -2155,10 +2163,10 @@ const QUEUE = {
           "ship_by_date": null,
           "created_at": "2026-06-07T14:50:36-05:00",
           "parent_sku": "H60-36",
-          "color": "Black",
+          "color": null,
           "finish": "Black",
-          "category": "accessory",
-          "category_label": "Accessory",
+          "category": "holder",
+          "category_label": "Holder",
           "qty": 1,
           "line_item_ids": [
             16904022884434
@@ -2171,14 +2179,14 @@ const QUEUE = {
           ],
           "tags": [
             "Auto-Created",
-            "Color",
+            "Finish-Only",
             "Hardware-Only"
           ],
           "priority": "Redo",
           "is_large_order": false,
           "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
+          "is_color": false,
+          "location": "Assembly",
           "review_note": null
         }
       ]
@@ -2639,8 +2647,8 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-B",
-            "SAF-ALL",
-            "SAC-BO"
+            "SAC-BO",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -3432,8 +3440,8 @@ const QUEUE = {
           "location": "Assembly",
           "color": null,
           "finish": "Nickel",
-          "category": "accessory",
-          "category_label": "Accessory",
+          "category": "holder",
+          "category_label": "Holder",
           "parent_skus": [
             "H60-24"
           ],
@@ -3450,8 +3458,8 @@ const QUEUE = {
               "variant_sku": "H60-24-2",
               "parent_sku": "H60-24",
               "qty": 1,
-              "category": "accessory",
-              "category_label": "Accessory",
+              "category": "holder",
+              "category_label": "Holder",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/office-towel-rack-28-nickel-1.jpg?v=1775636816&width=120",
               "properties": [
                 {
@@ -3480,8 +3488,8 @@ const QUEUE = {
           "parent_sku": "H60-24",
           "color": null,
           "finish": "Nickel",
-          "category": "accessory",
-          "category_label": "Accessory",
+          "category": "holder",
+          "category_label": "Holder",
           "qty": 1,
           "line_item_ids": [
             16897920172114
@@ -6863,6 +6871,10 @@ function renderTraveler(o, p, idx, total){
     </div>
     <div class="trv-head">
       <div>
+        <div class="trv-tags">
+          <span class="trv-loc-pill loc-${(p.location||'').toLowerCase().replace(/\s+/g,'-')}">${escapeHtml(p.location||"")}</span>
+          ${trvChip(p)}
+        </div>
         <p class="trv-eyebrow">Traveler <span class="trv-count-of">${(idx||0)+1}/${total||1}</span></p>
         <h2 class="trv-ordernum">Order ${orderName}</h2>
         <ul class="trv-meta">
@@ -6871,10 +6883,6 @@ function renderTraveler(o, p, idx, total){
           ${shipMethod}
           ${email}
         </ul>
-        <div class="trv-tags">
-          <span class="trv-loc-pill">${escapeHtml(p.location||"")}</span>
-          ${trvChip(p)}
-        </div>
       </div>
       <div class="trv-logo"><img src="${DB_LOGO}" alt="Dutton Brown"></div>
     </div>
@@ -7147,6 +7155,13 @@ function renderTravelers(){
     if(loc === "Assembly") return 1;
     return 0; // Shipping + samples
   }
+  // Within the Shipping bucket: samples first, then lone accessories (extension
+  // rods, bulbs, hardware ordered on their own) — so the quick "grab and ship"
+  // items lead the whole queue. 0 = sample, 1 = everything else in Shipping.
+  function shippingRank(p){
+    if(p.source === "sample-only" || p.category === "sample") return 0;
+    return 1;
+  }
   function colorRank(p){
     const i = COLOR_ORDER.indexOf(p.color);
     return i === -1 ? COLOR_ORDER.length : i; // unknown colors sort last
@@ -7154,12 +7169,17 @@ function renderTravelers(){
   pairs.sort((a,b) => {
     const ba = trvBucket(a.p), bb = trvBucket(b.p);
     if(ba !== bb) return ba - bb;
+    // Within Shipping: samples first, then accessories.
+    if(ba === 0){
+      const sa = shippingRank(a.p), sb = shippingRank(b.p);
+      if(sa !== sb) return sa - sb;
+    }
     // Within Powder Coating: color group first, then received order.
     if(ba === 2){
       const ca = colorRank(a.p), cb = colorRank(b.p);
       if(ca !== cb) return ca - cb;
     }
-    // Shipping / Assembly (and ties within a color): received order.
+    // Within each (bucket, sub-group): keep received order.
     return a.orderIdx - b.orderIdx || a.idx - b.idx;
   });
   const sheets = pairs.map(x => renderTraveler(x.o, x.p, x.idx, x.total));
