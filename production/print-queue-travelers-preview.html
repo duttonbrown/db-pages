@@ -1399,8 +1399,8 @@
   /* Batch expedite callout — printed at the very top of the travelers batch so
      the printer knows rushed work is coming. */
   .trv-expedite-callout {
-    display: flex; align-items: center; gap: 14px;
-    margin: 0 auto 24px; padding: 12px 18px;
+    display: flex; align-items: center; gap: 14px; flex: 0 0 auto;
+    margin: 0 0 16px; padding: 10px 16px;
     border: 2px solid #D40000; border-radius: 10px; background: #FFF5F5;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
@@ -1459,6 +1459,15 @@
   .trv-meta { list-style: none; margin: 0; padding: 0; }
   .trv-meta li { font-size: 13px; color: #333; margin-bottom: 2px; }
   .trv-meta b { color: #000; font-weight: 600; }
+  /* Customer trade + club badges on the traveler's Customer line. */
+  .trv-cust-badges { display: inline-flex; align-items: center; gap: 5px; vertical-align: middle; margin-left: 4px; }
+  .trv-cust-badges .tag-trade {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.04em; padding: 1px 6px;
+    border-radius: 4px; background: #FCE7F3; color: #BE185D;
+  }
+  .trv-cust-badges .cust-club {
+    font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 4px;
+  }
 
   /* Two bubbles at the TOP-LEFT of the sheet — location + color/finish (+ the
      orange traveler number when 2+) — so the floor IDs any traveler at a glance
@@ -1786,7 +1795,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T17:45:05",
+  "built_at": "2026-06-07T17:57:02",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2706,9 +2715,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-B",
+            "SAF-ALL",
             "SAC-BO",
-            "SAF-ALL"
+            "SAC-B"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -6888,6 +6897,18 @@ function trvVariantChips(line){
   return chips.length ? `<span class="trv-vchips">${chips.join("")}</span>` : "";
 }
 
+// Lifetime-spend club badge for a traveler's customer (10K/20K/50K), matching
+// the Print Queue page's bands so high-value orders are flagged on the sheet.
+function trvClubBadge(o){
+  const spent = +(o.customer_total_spent || 0);
+  let c = null;
+  if(spent >= 50000)      c = {label:"50K", cls:"club-50k"};
+  else if(spent >= 20000) c = {label:"20K", cls:"club-20k"};
+  else if(spent >= 10000) c = {label:"10K", cls:"club-10k"};
+  if(!c) return "";
+  return `<span class="cust-club ${c.cls}" title="Lifetime spend $${Math.round(spent).toLocaleString()} — ${c.label} club">${c.label}</span>`;
+}
+
 function trvLineProps(props){
   if(!props || !props.length) return "";
   return props.map(pr => {
@@ -6985,7 +7006,7 @@ function trvNotes(o){
 
 const DB_LOGO = "https://www.orderprintertemplates.com/api/v1/logos/bd06efacfb0688e9dec1?v=1750774793";
 
-function renderTraveler(o, p, idx, total){
+function renderTraveler(o, p, idx, total, calloutHtml){
   const multi = (total || 1) >= 2;   // only number travelers when there's >1
   const buildRows = (p.lines||[]).map(trvBuildRow).join("");
   const expedite = o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : "";
@@ -6996,6 +7017,17 @@ function renderTraveler(o, p, idx, total){
     ? `<li><b>Shipping:</b> ${escapeHtml(o.shipping_method)}</li>` : "";
   const email = o.customer_email
     ? `<li><b>Email:</b> ${escapeHtml(o.customer_email)}</li>` : "";
+  // Customer line: name + TRADE tag (trade-account orders) + lifetime-spend club
+  // badge (10K/20K/50K) so the floor instantly flags trade + high-value orders.
+  const custName = o.customer_name && o.customer_name !== "Guest"
+    ? escapeHtml(o.customer_name) : "";
+  const tradeTag = (o.tags||"").toLowerCase().includes("trade")
+    ? `<span class="tag tag-trade">TRADE</span>` : "";
+  const clubBadge = trvClubBadge(o);
+  const custBadges = (tradeTag || clubBadge)
+    ? ` <span class="trv-cust-badges">${tradeTag}${clubBadge}</span>` : "";
+  const customerLine = (custName || custBadges)
+    ? `<li><b>Customer:</b> ${custName}${custBadges}</li>` : "";
   const addresses = (trvAddress(o.billing_address,"Bill to") + trvAddress(o.shipping_address,"Ship to"));
   const addrBlock = addresses ? `<div class="trv-addresses">${addresses}</div>` : "";
   const orderName = escapeHtml(o.shopify_order_name || ("#"+(o.shopify_order_number||"")));
@@ -7008,6 +7040,7 @@ function renderTraveler(o, p, idx, total){
     <div class="trv-sheet-actions no-print">
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
     </div>
+    ${calloutHtml || ""}
     <div class="trv-head">
       <div>
         <div class="trv-tags">
@@ -7017,6 +7050,7 @@ function renderTraveler(o, p, idx, total){
         <p class="trv-eyebrow">Traveler${multi ? ` <span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}</p>
         <h2 class="trv-ordernum">Order ${orderName}</h2>
         <ul class="trv-meta">
+          ${customerLine}
           <li><b>Order Date:</b> ${escapeHtml(fmtDateLong(o.created_at))}</li>
           <li><b>Latest Ship By:</b> ${shipBy}</li>
           ${shipMethod}
@@ -7129,12 +7163,25 @@ function trvDrop(ev){
   if(!targetSheet) return;
   const toOrder = targetSheet.dataset.order;
   const toKey   = targetSheet.dataset.traveler;
-  moveLine(lid, toOrder, toKey, /*record*/true);
+  // Work out WHERE to insert: find the row under the cursor and whether the
+  // drop is in its top or bottom half → insert before or after it. This is
+  // what lets you reorder lines within a sheet (drop one above another), as
+  // well as drop at a precise spot in another sheet.
+  const rows = Array.from(tbody.querySelectorAll(".trv-build-row"));
+  let insertBeforeLid = null;
+  for(const row of rows){
+    if(row.dataset.lineId === lid) continue;       // skip the dragged row itself
+    const r = row.getBoundingClientRect();
+    if(ev.clientY < r.top + r.height / 2){ insertBeforeLid = row.dataset.lineId; break; }
+  }
+  moveLine(lid, toOrder, toKey, /*record*/true, insertBeforeLid);
 }
 
 // Core move. Returns true on success. Records to undo stack + persists when
-// `record` is true (false during undo/redo replay).
-function moveLine(lid, toOrder, toKey, record){
+// `record` is true (false during undo/redo replay). `insertBeforeLid` is the
+// line id to insert in front of (null = append to the end). Handles BOTH
+// reordering within a sheet and moving to another sheet on the same order.
+function moveLine(lid, toOrder, toKey, record, insertBeforeLid){
   // Locate the line and its current printout.
   let from = null, lineObj = null, fromIdx = -1;
   for(const o of (QUEUE.orders||[])){
@@ -7154,19 +7201,34 @@ function moveLine(lid, toOrder, toKey, record){
     showTrvToast("Items can only move between travelers on the same order.", null);
     return false;
   }
-  // No-op if dropped back on its own sheet.
-  if(from.printout === dest.printout){ return false; }
 
-  // Apply.
+  const sameSheet = (from.printout === dest.printout);
+  // Remember the line that FOLLOWED the dragged one in its source, so undo can
+  // drop it back in exactly the same slot.
+  const fromBeforeLid = (from.printout.lines[fromIdx + 1] || {})._lid || null;
+
+  // Remove from source first.
   from.printout.lines.splice(fromIdx, 1);
-  dest.printout.lines.push(lineObj);
+  // Compute insertion index in the destination (after removal, for same-sheet).
+  let insertIdx = dest.printout.lines.length;
+  if(insertBeforeLid){
+    const at = dest.printout.lines.findIndex(l => l._lid === insertBeforeLid);
+    if(at >= 0) insertIdx = at;
+  }
+  // No-op guard: dropped exactly where it already was (same sheet, same slot).
+  if(sameSheet && insertIdx === fromIdx){
+    dest.printout.lines.splice(insertIdx, 0, lineObj);  // put it back
+    return false;
+  }
+  dest.printout.lines.splice(insertIdx, 0, lineObj);
   recomputePrintout(from.printout);
-  recomputePrintout(dest.printout);
+  if(!sameSheet) recomputePrintout(dest.printout);
 
   const move = {
     lid,
     fromOrder: from.order.shopify_order_id, fromKey: from.printout.traveler_key||"",
-    toOrder, toKey, fromIdx,
+    toOrder, toKey, fromIdx, insertBeforeLid: insertBeforeLid || null,
+    fromBeforeLid, sameSheet,
     title: lineObj.title, sku: lineObj.variant_sku||"",
     toLabel: (dest.printout.color || dest.printout.finish || dest.printout.category_label || "traveler"),
   };
@@ -7174,7 +7236,10 @@ function moveLine(lid, toOrder, toKey, record){
     TRV_UNDO.push(move);
     TRV_REDO = [];
     persistMoves();
-    showTrvToast(`Moved “${move.title}” → ${move.toLabel}`, () => undoLastMove());
+    const msg = sameSheet
+      ? `Reordered “${move.title}”`
+      : `Moved “${move.title}” → ${move.toLabel}`;
+    showTrvToast(msg, () => undoLastMove());
   }
   renderTravelers();
   return true;
@@ -7183,8 +7248,9 @@ function moveLine(lid, toOrder, toKey, record){
 function undoLastMove(){
   const m = TRV_UNDO.pop();
   if(!m) return;
-  // Reverse: move the line back from (toOrder,toKey) to (fromOrder,fromKey).
-  const ok = moveLine(m.lid, m.fromOrder, m.fromKey, /*record*/false);
+  // Reverse: move the line back to its source sheet AND its original slot
+  // (insert before whatever followed it at move time).
+  const ok = moveLine(m.lid, m.fromOrder, m.fromKey, /*record*/false, m.fromBeforeLid);
   if(ok){
     TRV_REDO.push(m);
     persistMoves();
@@ -7194,7 +7260,7 @@ function undoLastMove(){
 function redoLastMove(){
   const m = TRV_REDO.pop();
   if(!m) return;
-  const ok = moveLine(m.lid, m.toOrder, m.toKey, /*record*/false);
+  const ok = moveLine(m.lid, m.toOrder, m.toKey, /*record*/false, m.insertBeforeLid);
   if(ok){ TRV_UNDO.push(m); persistMoves(); showTrvToast(`Redid move of “${m.title}”`, () => undoLastMove()); }
 }
 
@@ -7209,13 +7275,13 @@ function applyStoredMoves(){
   if(!Array.isArray(stored) || !stored.length) return 0;
   let applied = 0;
   stored.forEach(m => {
-    if(moveLine(m.lid, m.toOrder, m.toKey, /*record*/false)){ TRV_UNDO.push(m); applied++; }
+    if(moveLine(m.lid, m.toOrder, m.toKey, /*record*/false, m.insertBeforeLid)){ TRV_UNDO.push(m); applied++; }
   });
   return applied;
 }
 function clearTrvMoves(){
   // Undo everything in effect, in reverse order.
-  while(TRV_UNDO.length){ const m = TRV_UNDO.pop(); moveLine(m.lid, m.fromOrder, m.fromKey, false); }
+  while(TRV_UNDO.length){ const m = TRV_UNDO.pop(); moveLine(m.lid, m.fromOrder, m.fromKey, false, m.fromBeforeLid); }
   TRV_REDO = [];
   try { localStorage.removeItem(TRV_MOVES_KEY); } catch(e){}
   showTrvToast("Reset all line moves.", null);
@@ -7357,8 +7423,13 @@ function renderTravelers(){
     // Within each (bucket, sub-group): keep received order.
     return a.orderIdx - b.orderIdx || a.idx - b.idx;
   });
-  const sheets = pairs.map(x => renderTraveler(x.o, x.p, x.idx, x.total));
-  mount.innerHTML = trvExpediteCallout() + `<div class="trv-list">${sheets.join("")}</div>`;
+  // The expedite callout rides at the very top INSIDE the first traveler so it
+  // prints on page 1 — NOT as a sibling above the full-page-tall list, which
+  // would consume its own blank page and push the first traveler to page 2.
+  const callout = trvExpediteCallout();
+  const sheets = pairs.map((x, i) =>
+    renderTraveler(x.o, x.p, x.idx, x.total, i === 0 ? callout : ""));
+  mount.innerHTML = `<div class="trv-list">${sheets.join("")}</div>`;
   const n = sheets.length;
   document.getElementById("trvCount").textContent = n;
   document.getElementById("trvCountPlural").textContent = n === 1 ? "" : "s";
@@ -7832,7 +7903,7 @@ function render(){
   }
   const t = QUEUE.totals || {};
   document.getElementById("kpiRow").innerHTML = `
-    <div class="kpi"><div class="kpi-value">${t.orders||0}</div><div class="kpi-label">Open orders</div></div>
+    <div class="kpi" title="Open, unfulfilled Shopify orders that are NOT yet tagged 'printed'."><div class="kpi-value">${t.orders||0}</div><div class="kpi-label">Unprinted orders</div></div>
     <div class="kpi"><div class="kpi-value accent">${t.printouts||0}</div><div class="kpi-label">Pages predicted</div></div>
     <div class="kpi"><div class="kpi-value">${t.notion_rows||0}</div><div class="kpi-label">Assembly rows</div></div>
     <div class="kpi"><div class="kpi-value muted">${t.skipped_already_printed||0}</div><div class="kpi-label">Already printed</div></div>
