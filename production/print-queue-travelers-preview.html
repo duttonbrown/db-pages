@@ -1399,22 +1399,24 @@
   /* The list of travelers on screen */
   .trv-list { display: flex; flex-direction: column; gap: 28px; }
 
-  /* One traveler = one sheet. On screen: a letter-proportioned white card.
-     On print: a real page. */
+  /* One traveler = one sheet. On screen every traveler fills the SAME full
+     content width (no centered narrow card, no varying widths, no side
+     whitespace) so the stack reads as a consistent justified column. Letter
+     proportion is approximated via min-height. */
   .traveler {
     background: white;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06);
     color: #333;
-    padding: 30px 34px 26px;
-    max-width: 760px;
-    margin: 0 auto;
+    padding: 36px 44px 30px;
+    width: 100%;
+    margin: 0;
     display: flex; flex-direction: column;
     position: relative;
-    /* Approximate a Letter page on screen so the footer sits where it will
-       print (bottom-left). 760px wide ≈ 8.5in; 980px tall ≈ 11in proportion. */
-    min-height: 980px;
+    /* ~11/8.5 of the rendered width keeps a letter-ish proportion so the footer
+       sits near the bottom like it will in print. */
+    min-height: 900px;
   }
   .traveler * { line-height: 1.45; }
 
@@ -1486,13 +1488,23 @@
   }
   .trv-table th.trv-qty-col, .trv-table td.trv-qty { text-align: center; width: 56px; white-space: nowrap; }
   .trv-table th.trv-img-col { width: 60px; }
-  .trv-table tbody td { padding: 10px 4px; border-bottom: 1px solid #efefef; vertical-align: middle; }
+  .trv-table tbody td { padding: 6px 4px; border-bottom: 1px solid #efefef; vertical-align: middle; }
   .trv-thumb-wrap { width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; }
   .trv-thumb { max-width: 54px; max-height: 54px; height: auto; width: auto; display: block; }
   .trv-thumb-missing { width: 54px; height: 54px; border: 1px dashed var(--border); border-radius: 4px; display:flex; align-items:center; justify-content:center; color: var(--muted); font-size: 9px; text-align:center; }
-  .trv-li-title { font-size: 13.5px; font-weight: 600; color: #000; margin: 0; }
-  .trv-li-sku { font-size: 12px; color: #555; margin: 1px 0 0; }
-  .trv-li-prop { font-size: 11.5px; color: #555; margin: 2px 0 0; }
+  .trv-li-title { font-size: 13.5px; font-weight: 600; color: #000; margin: 0; line-height: 1.3; }
+  /* Traveler number badge next to the item name (e.g. 1/2) — which sheet of
+     the order this line is assigned to. */
+  .trv-li-badge {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    color: var(--accent-dark); background: #FFF4E5;
+    border: 1px solid #FCD9A6; border-radius: 999px;
+    padding: 0 7px; margin-left: 5px; vertical-align: middle;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .trv-li-badge.ref { color: #666; background: var(--bg); border-color: var(--border); }
+  .trv-li-sku { font-size: 12px; color: #555; margin: 0; line-height: 1.35; }
+  .trv-li-prop { font-size: 11.5px; color: #555; margin: 0; line-height: 1.35; }
   .trv-li-prop b { color: #333; font-weight: 600; }
   .trv-li-propimg { margin-top: 4px; max-width: 60px; height: auto; border: 1px solid var(--border); border-radius: 3px; }
   .trv-qty { font-size: 14px; font-weight: 600; color: #000; }
@@ -1579,19 +1591,33 @@
     body.printing-travelers .kpi-row,
     body.printing-travelers .trv-toolbar,
     body.printing-travelers .public-banner { display: none !important; }
+    /* Collapse the whole centered app-shell chain to a plain full-width block
+       in print, otherwise the flex centering leaves empty margins on the right
+       and bottom (the on-screen layout leaking into print). */
     body.printing-travelers .app-shell,
     body.printing-travelers .app-main,
-    body.printing-travelers .card { padding: 0; margin: 0; border: none; box-shadow: none; max-width: none; }
+    body.printing-travelers .card,
+    body.printing-travelers #content-travelers,
+    body.printing-travelers .trv-list {
+      display: block !important;
+      width: 100% !important; max-width: none !important;
+      padding: 0 !important; margin: 0 !important;
+      border: none !important; box-shadow: none !important;
+    }
     body.printing-travelers .tab-content:not(#content-travelers) { display: none !important; }
 
     .traveler {
       box-shadow: none; border: none; border-radius: 0;
       max-width: none; width: 100%; padding: 0;
       page-break-after: always; break-after: page;
-      /* Fill the printable page so the signature footer pins to the very
-         bottom-left of each sheet, in the same spot every time. 100vh minus the
-         12mm top+bottom @page margins. */
-      min-height: calc(100vh - 24mm);
+      page-break-inside: avoid;
+      /* Exactly one printable page tall (page height minus the 12mm top+bottom
+         @page margins), with overflow hidden so a tall traveler can NEVER bleed
+         a sliver onto the next page. The footer flex-pins to the bottom. Using
+         a fixed height (not min-height) + clipping is the only print-reliable
+         way — vh units overshoot and bled the next sheet's top tag. */
+      height: calc(100vh - 24mm);
+      overflow: hidden;
       display: flex; flex-direction: column;
     }
     .traveler:last-child { page-break-after: auto; break-after: auto; }
@@ -1726,7 +1752,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T16:38:18",
+  "built_at": "2026-06-07T16:55:24",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2646,8 +2672,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-B",
             "SAC-BO",
+            "SAC-B",
             "SAF-ALL"
           ],
           "variant_skus": [
@@ -6788,7 +6814,11 @@ function trvBuildRow(ln){
     ? `<div class="trv-thumb-wrap"><img class="trv-thumb" src="${escapeHtml(ln.image_url)}" alt="${escapeHtml(ln.variant_sku||ln.title)}" loading="lazy"></div>`
     : `<div class="trv-thumb-wrap"><div class="trv-thumb-missing">no image</div></div>`;
   const sku = ln.variant_sku ? `<p class="trv-li-sku">${escapeHtml(ln.variant_sku)}</p>` : "";
-  const variant = ln.variant_title ? `<p class="trv-li-prop">${escapeHtml(ln.variant_title)}</p>` : "";
+  // No traveler badge on build items — it's obvious these belong to this sheet.
+  // Keep the line tight — like the OPP work order: title / SKU / spec lines
+  // (Lead Time etc.). The variant title (color/finish) is intentionally NOT
+  // repeated as its own line: it's already on the color chip and inside the
+  // SKU, and an extra line just adds height.
   // Drag handle (screen-only) lets the manager move this exact line to another
   // traveler in the same order. data-line-id is the stable identity assigned in
   // ensureLineIds(); ondragstart/end live on the row.
@@ -6800,33 +6830,38 @@ function trvBuildRow(ln){
       </td>
       <td>
         <p class="trv-li-title">${escapeHtml(ln.title)}</p>
-        ${sku}${variant}${trvLineProps(ln.properties)}
+        ${sku}${trvLineProps(ln.properties)}
       </td>
       <td class="trv-qty">× ${ln.qty}</td>
     </tr>`;
 }
 
-function trvRefRow(ln, where){
+function trvRefRow(ln, where, travelerLabel){
   const sku = ln.variant_sku ? `<span class="trv-ref-sku">${escapeHtml(ln.variant_sku)}</span>` : "";
+  const badge = travelerLabel ? `<span class="trv-li-badge ref">${escapeHtml(travelerLabel)}</span>` : "";
   return `<div class="trv-ref-row">
       <span class="trv-ref-qty">× ${ln.qty}</span>
-      <span class="trv-ref-title">${escapeHtml(ln.title)} ${sku}</span>
+      <span class="trv-ref-title">${escapeHtml(ln.title)} ${badge} ${sku}</span>
       <span class="trv-ref-where">${escapeHtml(where)}</span>
     </div>`;
 }
 
 // Build the "Also on this order" reference list for printout `p` within order `o`.
+// Each sibling line carries its own traveler badge (its index within the order)
+// so the floor can see which sheet that item is actually built on.
 function trvReferences(o, p){
   const refs = [];
-  (o.printouts||[]).forEach(other => {
+  const total = (o.printouts||[]).length;
+  (o.printouts||[]).forEach((other, otherIdx) => {
     if(other === p) return;
     const where = (other.color || other.finish || other.category_label || "Other")
       + (other.location ? ` · ${other.location}` : "");
-    (other.lines||[]).forEach(ln => refs.push(trvRefRow(ln, where)));
+    const label = `${otherIdx+1}/${total}`;
+    (other.lines||[]).forEach(ln => refs.push(trvRefRow(ln, where, label)));
   });
   if(!refs.length) return "";
   return `<div class="trv-refs">
-      <div class="trv-refs-head">Also on this order — built on other travelers (reference only)</div>
+      <div class="trv-refs-head">Also on this order</div>
       ${refs.join("")}
     </div>`;
 }
@@ -6848,6 +6883,7 @@ function trvNotes(o){
 const DB_LOGO = "https://www.orderprintertemplates.com/api/v1/logos/bd06efacfb0688e9dec1?v=1750774793";
 
 function renderTraveler(o, p, idx, total){
+  const multi = (total || 1) >= 2;   // only number travelers when there's >1
   const buildRows = (p.lines||[]).map(trvBuildRow).join("");
   const expedite = o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : "";
   const shipBy = o.latest_ship_by && o.latest_ship_by !== "—"
@@ -6875,7 +6911,7 @@ function renderTraveler(o, p, idx, total){
           <span class="trv-loc-pill loc-${(p.location||'').toLowerCase().replace(/\s+/g,'-')}">${escapeHtml(p.location||"")}</span>
           ${trvChip(p)}
         </div>
-        <p class="trv-eyebrow">Traveler <span class="trv-count-of">${(idx||0)+1}/${total||1}</span></p>
+        <p class="trv-eyebrow">Traveler${multi ? ` <span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}</p>
         <h2 class="trv-ordernum">Order ${orderName}</h2>
         <ul class="trv-meta">
           <li><b>Order Date:</b> ${escapeHtml(fmtDateLong(o.created_at))}</li>
