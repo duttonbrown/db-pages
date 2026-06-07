@@ -1512,6 +1512,9 @@
      heavy than the title so the name still leads, but clearly present. */
   .trv-li-variant { font-weight: 400; color: #333; }
   .trv-li-variant::before { content: "· "; color: var(--muted); }
+  /* Swatch dots inline next to the variant / reference title. */
+  .trv-swatches { display: inline-flex; align-items: center; vertical-align: middle; margin-right: 2px; }
+  .trv-swatches .swatch-dot { margin-right: 3px; }
   /* Traveler number badge next to the item name (e.g. 1/2) — which sheet of
      the order this line is assigned to. */
   .trv-li-badge {
@@ -1777,7 +1780,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T17:20:51",
+  "built_at": "2026-06-07T17:25:38",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2402,8 +2405,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-F",
-            "SAC-E"
+            "SAC-E",
+            "SAC-F"
           ],
           "variant_skus": [
             "SAC-E",
@@ -2697,8 +2700,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAF-ALL",
             "SAC-BO",
+            "SAF-ALL",
             "SAC-B"
           ],
           "variant_skus": [
@@ -6823,6 +6826,32 @@ function trvAddress(addr, title){
     </div>`;
 }
 
+// Finish + color swatch dots for a traveler line — same visual as the Print
+// Queue page so the assembler gets a color/finish reminder per item and can't
+// grab the wrong paint or metal. Decodes the line's SKU first, falls back to
+// the Shopify variant_title ("Brass / Bone", "All Colors"). Order: finish, then
+// color (finish is upstream of powder coat in our process).
+function trvSwatches(line){
+  const decoded = decodeVariantSku(line.variant_sku || line.sku || "");
+  let finishName = decoded.finish || null;
+  let colorName  = decoded.color  || null;
+  const vtRaw = (line.variant_title || "").trim();
+  if((!colorName || !finishName) && vtRaw && vtRaw.toLowerCase() !== "default title"){
+    vtRaw.split("/").map(s => s.trim()).filter(Boolean).forEach(tok => {
+      if(!colorName && COLOR_HEX[tok])   colorName  = tok;
+      if(!finishName && FINISH_HEX[tok]) finishName = tok;
+    });
+  }
+  const finishDot = finishName && finishHex(finishName)
+    ? `<span class="swatch-dot" style="--swatch-color:${finishHex(finishName)}" title="Finish: ${escapeHtml(finishName)}"></span>` : "";
+  const colorDot = colorName && COLOR_HEX[colorName]
+    ? `<span class="swatch-dot" style="--swatch-color:${COLOR_HEX[colorName]}" title="Color: ${escapeHtml(colorName)}"></span>` : "";
+  const rainbow = (!finishDot && !colorDot && /all colors/i.test(vtRaw))
+    ? `<span class="swatch-dot swatch-rainbow" title="All Colors"></span>` : "";
+  const dots = finishDot + colorDot + rainbow;
+  return dots ? `<span class="trv-swatches">${dots}</span>` : "";
+}
+
 function trvLineProps(props){
   if(!props || !props.length) return "";
   return props.map(pr => {
@@ -6845,8 +6874,11 @@ function trvBuildRow(ln){
   // the item name — the assembler must always see what to build, but it
   // shouldn't add a whole extra line. Custom line properties (cord color,
   // engraving, etc.) follow below via trvLineProps so nothing is lost.
+  const swatches = trvSwatches(ln);
+  // Swatches sit just before the variant text: "<title> [dots]· Bone".
   const variant = ln.variant_title
-    ? ` <span class="trv-li-variant">${escapeHtml(ln.variant_title)}</span>` : "";
+    ? ` ${swatches}<span class="trv-li-variant">${escapeHtml(ln.variant_title)}</span>`
+    : (swatches ? ` ${swatches}` : "");
   // Drag handle (screen-only) lets the manager move this exact line to another
   // traveler in the same order. data-line-id is the stable identity assigned in
   // ensureLineIds(); ondragstart/end live on the row.
@@ -6866,13 +6898,14 @@ function trvBuildRow(ln){
 
 function trvRefRow(ln, where, travelerLabel){
   const sku = ln.variant_sku ? `<span class="trv-ref-sku">${escapeHtml(ln.variant_sku)}</span>` : "";
+  const swatches = trvSwatches(ln);
   // The traveler number lives at the FAR RIGHT (after the location tag), in the
   // same orange format as the top traveler counter — so the floor can see which
   // sheet this referenced item is built on.
   const badge = travelerLabel ? `<span class="trv-count-of trv-ref-num">${escapeHtml(travelerLabel)}</span>` : "";
   return `<div class="trv-ref-row">
       <span class="trv-ref-qty">× ${ln.qty}</span>
-      <span class="trv-ref-title">${escapeHtml(ln.title)} ${sku}</span>
+      <span class="trv-ref-title">${swatches}${escapeHtml(ln.title)} ${sku}</span>
       <span class="trv-ref-where">${escapeHtml(where)}</span>
       ${badge}
     </div>`;
