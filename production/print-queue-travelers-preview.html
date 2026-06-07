@@ -510,6 +510,8 @@
     background: var(--swatch-color, #ccc);
     border: 1px solid rgba(0,0,0,0.18);
     flex-shrink: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
   /* Inline finish/color dot used next to a SKU pill in the line list */
   .swatch-dot {
@@ -522,6 +524,10 @@
     flex-shrink: 0;
     vertical-align: middle;
     margin-right: 4px;
+    /* Force the fill to print — browsers drop background colors otherwise,
+       which left the swatch dots hollow/white on the printed traveler. */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
   /* All-Colors sample → conic rainbow so the dot communicates "every color"
      rather than a single swatch the floor would have to interpret. */
@@ -1553,13 +1559,14 @@
     color: var(--muted); padding-bottom: 6px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
   }
   .trv-ref-row {
-    display: flex; align-items: center; gap: 10px; padding: 5px 0;
+    display: flex; align-items: center; gap: 14px; padding: 6px 0;
     font-size: 12px; color: #666; border-bottom: 1px dotted #eee;
   }
   .trv-ref-row:last-child { border-bottom: none; }
-  .trv-ref-qty { font-weight: 600; color: #555; min-width: 30px; }
-  .trv-ref-title { flex: 1; color: #555; }
-  .trv-ref-sku { color: #999; font-size: 11px; }
+  .trv-ref-qty { font-weight: 600; color: #555; min-width: 30px; flex-shrink: 0; }
+  .trv-ref-name { color: #444; font-weight: 500; flex-shrink: 0; }
+  .trv-ref-sku { color: #999; font-size: 11px; flex-shrink: 0; }
+  .trv-ref-spacer { flex: 1 1 auto; }   /* pushes location + number to the right */
   .trv-ref-where {
     font-size: 10px; font-weight: 600; color: #777; padding: 2px 8px;
     background: var(--bg); border: 1px solid var(--border); border-radius: 999px; white-space: nowrap;
@@ -1795,8 +1802,39 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T17:57:02",
+  "built_at": "2026-06-07T18:12:38",
   "orders": [
+    {
+      "shopify_order_id": "6994415222866",
+      "shopify_order_name": "36029",
+      "shopify_order_number": "36029",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 139.2,
+      "ship_by_date": null,
+      "latest_ship_by": "June 9, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-06-07T18:10:45-05:00",
+      "tags": "redo",
+      "total_price": 139.2,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "FedEx Home Delivery\u00ae",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 0,
+      "printouts": [],
+      "notion_rows": []
+    },
     {
       "shopify_order_id": "6994260525138",
       "shopify_order_name": "36028",
@@ -2420,8 +2458,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-F",
-            "SAC-E"
+            "SAC-E",
+            "SAC-F"
           ],
           "variant_skus": [
             "SAC-E",
@@ -2715,9 +2753,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
+            "SAC-B",
             "SAF-ALL",
-            "SAC-BO",
-            "SAC-B"
+            "SAC-BO"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -5842,7 +5880,7 @@ const QUEUE = {
     }
   ],
   "totals": {
-    "orders": 31,
+    "orders": 32,
     "printouts": 35,
     "notion_rows": 36,
     "skipped_already_printed": 184
@@ -6822,10 +6860,12 @@ function trvChip(p){
   return "";
 }
 
-function trvAddress(addr, title){
+function trvAddress(addr, title, nameBadges){
   if(!addr) return "";
   const L = [];
-  if(addr.name) L.push(escapeHtml(addr.name));
+  // Name line carries the optional TRADE / club badges (passed only for Bill to).
+  if(addr.name) L.push(escapeHtml(addr.name) + (nameBadges || ""));
+  else if(nameBadges) L.push(nameBadges);
   if(addr.company) L.push(escapeHtml(addr.company));
   if(addr.address1) L.push(escapeHtml(addr.address1));
   if(addr.address2) L.push(escapeHtml(addr.address2));
@@ -6857,10 +6897,14 @@ function trvVariantChips(line){
   const vtRaw = (line.variant_title || "").trim();
   const tokens = (vtRaw && vtRaw.toLowerCase() !== "default title")
     ? vtRaw.split("/").map(s => s.trim()).filter(Boolean) : [];
-  // Fill finish/color from variant tokens if the SKU didn't decode them.
+  // Fill finish/color from variant tokens if the SKU didn't decode them. Don't
+  // let a token that just echoes the already-decoded finish become the color:
+  // "Black" is both a finish and a color, so a finish-only Black item (towel
+  // rack H60-36-3, variant_title "Black") was wrongly getting Black AS A COLOR
+  // too → "Black · Black". A token only fills color if it isn't the finish.
   tokens.forEach(tok => {
-    if(!colorName && COLOR_HEX[tok])   colorName  = tok;
     if(!finishName && FINISH_HEX[tok]) finishName = tok;
+    if(!colorName && COLOR_HEX[tok] && tok !== finishName) colorName = tok;
   });
   // Leftover option tokens = everything that isn't the finish or color name
   // (e.g. size "12\" (C-C 10\")", "Hardwired (no switch)").
@@ -6959,9 +7003,15 @@ function trvRefRow(ln, where, travelerLabel){
   // same orange format as the top traveler counter — so the floor can see which
   // sheet this referenced item is built on.
   const badge = travelerLabel ? `<span class="trv-count-of trv-ref-num">${escapeHtml(travelerLabel)}</span>` : "";
+  // Title / SKU / swatch chips are SEPARATE flex children so the row's gap
+  // spaces them out instead of cramming everything together. A flex spacer
+  // pushes the location tag + traveler number to the right.
   return `<div class="trv-ref-row">
       <span class="trv-ref-qty">× ${ln.qty}</span>
-      <span class="trv-ref-title">${escapeHtml(ln.title)} ${sku} ${vchips}</span>
+      <span class="trv-ref-name">${escapeHtml(ln.title)}</span>
+      ${sku}
+      ${vchips}
+      <span class="trv-ref-spacer"></span>
       <span class="trv-ref-where">${escapeHtml(where)}</span>
       ${badge}
     </div>`;
@@ -7017,18 +7067,15 @@ function renderTraveler(o, p, idx, total, calloutHtml){
     ? `<li><b>Shipping:</b> ${escapeHtml(o.shipping_method)}</li>` : "";
   const email = o.customer_email
     ? `<li><b>Email:</b> ${escapeHtml(o.customer_email)}</li>` : "";
-  // Customer line: name + TRADE tag (trade-account orders) + lifetime-spend club
-  // badge (10K/20K/50K) so the floor instantly flags trade + high-value orders.
-  const custName = o.customer_name && o.customer_name !== "Guest"
-    ? escapeHtml(o.customer_name) : "";
+  // TRADE tag (trade-account orders) + lifetime-spend club badge (10K/20K/50K)
+  // ride alongside the existing customer info (the Bill-to name) so the floor
+  // flags trade + high-value orders without a separate line.
   const tradeTag = (o.tags||"").toLowerCase().includes("trade")
     ? `<span class="tag tag-trade">TRADE</span>` : "";
   const clubBadge = trvClubBadge(o);
   const custBadges = (tradeTag || clubBadge)
     ? ` <span class="trv-cust-badges">${tradeTag}${clubBadge}</span>` : "";
-  const customerLine = (custName || custBadges)
-    ? `<li><b>Customer:</b> ${custName}${custBadges}</li>` : "";
-  const addresses = (trvAddress(o.billing_address,"Bill to") + trvAddress(o.shipping_address,"Ship to"));
+  const addresses = (trvAddress(o.billing_address,"Bill to", custBadges) + trvAddress(o.shipping_address,"Ship to"));
   const addrBlock = addresses ? `<div class="trv-addresses">${addresses}</div>` : "";
   const orderName = escapeHtml(o.shopify_order_name || ("#"+(o.shopify_order_number||"")));
 
@@ -7050,7 +7097,6 @@ function renderTraveler(o, p, idx, total, calloutHtml){
         <p class="trv-eyebrow">Traveler${multi ? ` <span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}</p>
         <h2 class="trv-ordernum">Order ${orderName}</h2>
         <ul class="trv-meta">
-          ${customerLine}
           <li><b>Order Date:</b> ${escapeHtml(fmtDateLong(o.created_at))}</li>
           <li><b>Latest Ship By:</b> ${shipBy}</li>
           ${shipMethod}
@@ -7336,7 +7382,7 @@ function trvExpediteCallout(){
   if(!exp.length) return "";
   const sheetCount = exp.reduce((s,o)=>s+(o.printouts||[]).length, 0);
   const orderNames = exp.map(o => o.shopify_order_name || ("#"+o.shopify_order_number)).join(", ");
-  return `<div class="trv-expedite-callout">
+  return `<div class="trv-expedite-callout no-print">
       <span class="trv-expedite-callout-tag">EXPEDITE</span>
       <span class="trv-expedite-callout-text">
         <strong>${exp.length}</strong> expedite order${exp.length===1?"":"s"} in this batch
