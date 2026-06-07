@@ -1777,7 +1777,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T17:17:47",
+  "built_at": "2026-06-07T17:20:51",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2697,9 +2697,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
+            "SAF-ALL",
             "SAC-BO",
-            "SAC-B",
-            "SAF-ALL"
+            "SAC-B"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -6883,12 +6883,15 @@ function trvRefRow(ln, where, travelerLabel){
 // so the floor can see which sheet that item is actually built on.
 function trvReferences(o, p){
   const refs = [];
-  const total = (o.printouts||[]).length;
-  (o.printouts||[]).forEach((other, otherIdx) => {
-    if(other === p) return;
+  // Reference siblings in the SAME color-sorted order used for numbering, so
+  // the "Also on this order" rows read 2/5, 3/5, 4/5 … in sequence and the
+  // badge matches each sibling traveler's eyebrow number.
+  const siblings = (o.printouts||[]).filter(x => x !== p)
+    .sort((a,b) => (a._travelerNum||0) - (b._travelerNum||0));
+  siblings.forEach(other => {
     const where = (other.color || other.finish || other.category_label || "Other")
       + (other.location ? ` · ${other.location}` : "");
-    const label = `${otherIdx+1}/${total}`;
+    const label = `${other._travelerNum||"?"}/${other._travelerTotal||(o.printouts||[]).length}`;
     (other.lines||[]).forEach(ln => refs.push(trvRefRow(ln, where, label)));
   });
   if(!refs.length) return "";
@@ -7221,10 +7224,29 @@ function renderTravelers(){
   // computed from the printout's index WITHIN its order before we reorder the
   // print sequence. Then sort the print order so Samples + Assembly travelers
   // come first (they're quick wins / don't wait on powder coat), then the rest.
+  // Number each order's travelers by COLOR FIRST (then finish, then by the
+  // backend split order). Without this the numbering follows the category split
+  // (hardware groups, then lighting groups), which splits a color across two
+  // non-consecutive numbers — e.g. Bone hardware = 2/5 and Bone lighting = 4/5
+  // with Orange (3/5) wedged between. Sorting by color keeps a color's
+  // travelers together and in order (Bone 2/5, 3/5).
+  function orderColorRank(p){
+    if(p.color){ const i = COLOR_ORDER.indexOf(p.color); return i === -1 ? 900 : i; }
+    if(p.finish) return 1000;        // finish-only after colors
+    return 2000;                     // samples / accessories last
+  }
   const pairs = [];
   (QUEUE.orders||[]).forEach((o, orderIdx) => {
-    const total = (o.printouts||[]).length;
-    (o.printouts||[]).forEach((p, idx) => pairs.push({o, p, idx, total, orderIdx}));
+    const ordered = (o.printouts||[]).map((p, origIdx) => ({p, origIdx}))
+      .sort((a,b) => orderColorRank(a.p) - orderColorRank(b.p) || a.origIdx - b.origIdx);
+    const total = ordered.length;
+    // Stamp the color-sorted traveler number onto each printout so BOTH the
+    // eyebrow and the "Also on this order" reference badges read the same value.
+    ordered.forEach(({p}, idx) => {
+      p._travelerNum = idx + 1;
+      p._travelerTotal = total;
+      pairs.push({o, p, idx, total, orderIdx});
+    });
   });
   // Print order matches the Print Queue page's section model:
   //   bucket 0 = Shipping  (incl. samples) — keep received order
