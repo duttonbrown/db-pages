@@ -1428,6 +1428,10 @@
     font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--muted); margin: 0 0 2px;
   }
+  .trv-count-of {
+    letter-spacing: 0.04em; color: var(--accent-dark); margin-left: 4px;
+    font-variant-numeric: tabular-nums;
+  }
   .trv-ordernum {
     font-size: 19px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em;
     line-height: 1.1; margin: 0 0 12px;
@@ -1713,7 +1717,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T16:17:14",
+  "built_at": "2026-06-07T16:21:57",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2339,8 +2343,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-F",
-            "SAC-E"
+            "SAC-E",
+            "SAC-F"
           ],
           "variant_skus": [
             "SAC-E",
@@ -2634,8 +2638,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-BO",
             "SAC-B",
+            "SAC-BO",
             "SAF-ALL"
           ],
           "variant_skus": [
@@ -6832,7 +6836,7 @@ function trvNotes(o){
 
 const DB_LOGO = "https://www.orderprintertemplates.com/api/v1/logos/bd06efacfb0688e9dec1?v=1750774793";
 
-function renderTraveler(o, p){
+function renderTraveler(o, p, idx, total){
   const buildRows = (p.lines||[]).map(trvBuildRow).join("");
   const expedite = o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : "";
   const shipBy = o.latest_ship_by && o.latest_ship_by !== "—"
@@ -6856,7 +6860,7 @@ function renderTraveler(o, p){
     </div>
     <div class="trv-head">
       <div>
-        <p class="trv-eyebrow">Traveler</p>
+        <p class="trv-eyebrow">Traveler <span class="trv-count-of">${(idx||0)+1}/${total||1}</span></p>
         <h2 class="trv-ordernum">Order ${orderName}</h2>
         <ul class="trv-meta">
           <li><b>Order Date:</b> ${escapeHtml(fmtDateLong(o.created_at))}</li>
@@ -7117,10 +7121,27 @@ function renderTravelers(){
   ensureLineIds();
   // Flatten to (order, printout) pairs, in the same chronological order the
   // print queue uses. Each printout becomes one traveler sheet.
-  const sheets = [];
-  (QUEUE.orders||[]).forEach(o => {
-    (o.printouts||[]).forEach(p => sheets.push(renderTraveler(o, p)));
+  // Flatten to (order, printout) pairs. The 1/N counter is per-order, so it's
+  // computed from the printout's index WITHIN its order before we reorder the
+  // print sequence. Then sort the print order so Samples + Assembly travelers
+  // come first (they're quick wins / don't wait on powder coat), then the rest.
+  const pairs = [];
+  (QUEUE.orders||[]).forEach((o, orderIdx) => {
+    const total = (o.printouts||[]).length;
+    (o.printouts||[]).forEach((p, idx) => pairs.push({o, p, idx, total, orderIdx}));
   });
+  // Priority bucket: 0 = Sample, 1 = Assembly, 2 = everything else (Powder
+  // Coating / Shipping non-sample). Within a bucket keep the original
+  // chronological order (orderIdx, then idx) so the queue stays stable.
+  function trvBucket(pair){
+    const p = pair.p;
+    if(p.source === "sample-only" || p.category === "sample") return 0;
+    if((p.location||"") === "Assembly") return 1;
+    return 2;
+  }
+  pairs.sort((a,b) => trvBucket(a) - trvBucket(b)
+    || a.orderIdx - b.orderIdx || a.idx - b.idx);
+  const sheets = pairs.map(x => renderTraveler(x.o, x.p, x.idx, x.total));
   mount.innerHTML = `<div class="trv-list">${sheets.join("")}</div>`;
   const n = sheets.length;
   document.getElementById("trvCount").textContent = n;
