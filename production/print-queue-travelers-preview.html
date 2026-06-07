@@ -1445,12 +1445,12 @@
   .trv-meta li { font-size: 13px; color: #333; margin-bottom: 2px; }
   .trv-meta b { color: #000; font-weight: 600; }
 
-  /* Two bubbles pinned at the very TOP-LEFT of the sheet — location + color/
-     finish — so the floor can identify any traveler at a glance from the
-     corner. Sits above the eyebrow, pushed up into the header margin. */
+  /* Two bubbles at the TOP-LEFT of the sheet — location + color/finish (+ the
+     orange traveler number when 2+) — so the floor IDs any traveler at a glance
+     from the corner. A little top room so the pill borders aren't clipped. */
   .trv-tags {
     display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    margin: -8px 0 10px;          /* pull up toward the top margin */
+    margin: 2px 0 12px;
   }
   .trv-loc-pill {
     font-size: 13px; font-weight: 600; color: #333;
@@ -1608,15 +1608,18 @@
 
     .traveler {
       box-shadow: none; border: none; border-radius: 0;
-      max-width: none; width: 100%; padding: 0;
+      max-width: none; width: 100%;
+      /* Small top pad so the top-left pill borders clear the page edge (the
+         sheet clips with overflow:hidden). */
+      padding: 3mm 0 0;
       page-break-after: always; break-after: page;
       page-break-inside: avoid;
       /* Exactly one printable page tall (page height minus the 12mm top+bottom
-         @page margins), with overflow hidden so a tall traveler can NEVER bleed
-         a sliver onto the next page. The footer flex-pins to the bottom. Using
-         a fixed height (not min-height) + clipping is the only print-reliable
-         way — vh units overshoot and bled the next sheet's top tag. */
-      height: calc(100vh - 24mm);
+         @page margins AND our 3mm top pad), with overflow hidden so a tall
+         traveler can NEVER bleed a sliver onto the next page. The footer
+         flex-pins to the bottom. Fixed height (not min-height) + clipping is the
+         only print-reliable way — vh units overshoot and bled the next sheet. */
+      height: calc(100vh - 24mm - 3mm);
       overflow: hidden;
       display: flex; flex-direction: column;
     }
@@ -1752,7 +1755,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T16:55:24",
+  "built_at": "2026-06-07T17:06:13",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2377,8 +2380,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-F",
-            "SAC-E"
+            "SAC-E",
+            "SAC-F"
           ],
           "variant_skus": [
             "SAC-E",
@@ -2672,9 +2675,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-BO",
             "SAC-B",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-BO"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -6910,6 +6913,7 @@ function renderTraveler(o, p, idx, total){
         <div class="trv-tags">
           <span class="trv-loc-pill loc-${(p.location||'').toLowerCase().replace(/\s+/g,'-')}">${escapeHtml(p.location||"")}</span>
           ${trvChip(p)}
+          ${multi ? `<span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}
         </div>
         <p class="trv-eyebrow">Traveler${multi ? ` <span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}</p>
         <h2 class="trv-ordernum">Order ${orderName}</h2>
