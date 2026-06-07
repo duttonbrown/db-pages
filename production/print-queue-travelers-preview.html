@@ -1429,8 +1429,8 @@
     color: var(--muted); margin: 0 0 2px;
   }
   .trv-ordernum {
-    font-size: 38px; font-weight: 600; color: var(--ink); letter-spacing: -0.02em;
-    line-height: 1.05; margin: 0 0 12px;
+    font-size: 19px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em;
+    line-height: 1.1; margin: 0 0 12px;
   }
   .trv-logo { width: 150px; flex-shrink: 0; }
   .trv-logo img { width: 100%; height: auto; display: block; }
@@ -1439,20 +1439,15 @@
   .trv-meta li { font-size: 13px; color: #333; margin-bottom: 2px; }
   .trv-meta b { color: #000; font-weight: 600; }
 
-  /* The "what is this sheet for" focus band — replaces OPP's red box.
-     Conspicuous, accent-bordered, says color/finish + category + item count. */
-  .trv-focus {
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-    margin: 16px 0 4px;
-    padding: 9px 14px;
-    border: 2px solid var(--accent);
-    border-radius: 8px;
-    background: #FFF8EF;
+  /* Two plain bubbles under the meta block: the build location and the
+     color/finish. No label, no fill, no category — just the two things the
+     floor needs to know what this sheet is. */
+  .trv-tags { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .trv-loc-pill {
+    font-size: 12px; font-weight: 600; color: #444;
+    padding: 3px 11px; border: 1px solid var(--border); border-radius: 999px; background: white;
   }
-  .trv-focus-label { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-dark); }
-  .trv-focus-main { font-size: 15px; font-weight: 600; color: var(--ink); }
-  .trv-focus .color-chip { font-size: 12px; }
-  .trv-focus-loc { font-size: 11px; font-weight: 600; color: #555; margin-left: auto; padding: 3px 10px; background: white; border: 1px solid var(--border); border-radius: 999px; }
+  .trv-tags .color-chip { font-size: 12px; }
 
   /* Expedite banner — OPP styling, faithful red */
   .trv-expedite {
@@ -1591,7 +1586,6 @@
     .trv-sheet-actions { display: none !important; }
     /* Keep build table rows from splitting across pages */
     .trv-table tbody tr { page-break-inside: avoid; }
-    .trv-focus { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
@@ -1617,7 +1611,7 @@
     </li>
     <li>
       <button type="button" class="side-nav-tab" id="tab-travelers" role="tab" onclick="setTab('travelers')">
-        Work Orders <span class="tab-count" id="cnt-travelers">—</span>
+        Travelers <span class="tab-count" id="cnt-travelers">—</span>
       </button>
     </li>
     <li>
@@ -1703,9 +1697,9 @@
   <!-- ── Travelers (one work-order sheet per printout — screen == print) ── -->
   <div class="tab-content" id="content-travelers">
     <div class="trv-toolbar no-print">
-      <span class="trv-toolbar-label"><strong id="trvCount">0</strong> work order<span id="trvCountPlural">s</span></span>
+      <span class="trv-toolbar-label"><strong id="trvCount">0</strong> traveler<span id="trvCountPlural">s</span></span>
       <div class="trv-toolbar-actions">
-        <button type="button" class="trv-btn trv-btn-primary" onclick="printAllTravelers()">Print all work orders</button>
+        <button type="button" class="trv-btn trv-btn-primary" onclick="printAllTravelers()">Print all travelers</button>
       </div>
       <span class="trv-move-indicator" id="trvMoveIndicator" style="display:none"></span>
       <span class="trv-toolbar-hint">Drag a line (⋮⋮) to move it to another traveler on the same order. <strong>Ctrl+Z</strong> undoes. Print = exactly what you see.</span>
@@ -1719,7 +1713,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-07T16:05:45",
+  "built_at": "2026-06-07T16:17:14",
   "orders": [
     {
       "shopify_order_id": "6994260525138",
@@ -2640,9 +2634,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
+            "SAC-BO",
             "SAC-B",
-            "SAF-ALL",
-            "SAC-BO"
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -6734,13 +6728,6 @@ function escapeHtml(s){
     {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 }
 
-function trvFocusMain(p){
-  // "Riding Hood Red · Hardware" or "Brass · Assembly build" etc.
-  const tone = p.color || p.finish || (p.category_label || "Build");
-  const cat  = p.category_label ? ` · ${p.category_label}` : "";
-  return `${escapeHtml(tone)}${escapeHtml(cat)}`;
-}
-
 function trvChip(p){
   if(p.color && COLOR_HEX[p.color]){
     return `<span class="color-chip" style="${chipStyle(p.color)}"><span class="color-chip-swatch"></span>${escapeHtml(p.color)}</span>`;
@@ -6869,7 +6856,7 @@ function renderTraveler(o, p){
     </div>
     <div class="trv-head">
       <div>
-        <p class="trv-eyebrow">Work Order</p>
+        <p class="trv-eyebrow">Traveler</p>
         <h2 class="trv-ordernum">Order ${orderName}</h2>
         <ul class="trv-meta">
           <li><b>Order Date:</b> ${escapeHtml(fmtDateLong(o.created_at))}</li>
@@ -6877,16 +6864,14 @@ function renderTraveler(o, p){
           ${shipMethod}
           ${email}
         </ul>
+        <div class="trv-tags">
+          <span class="trv-loc-pill">${escapeHtml(p.location||"")}</span>
+          ${trvChip(p)}
+        </div>
       </div>
       <div class="trv-logo"><img src="${DB_LOGO}" alt="Dutton Brown"></div>
     </div>
     ${expedite}
-    <div class="trv-focus">
-      <span class="trv-focus-label">Building</span>
-      ${trvChip(p)}
-      <span class="trv-focus-main">${trvFocusMain(p)}</span>
-      <span class="trv-focus-loc">${escapeHtml(p.location||"")}</span>
-    </div>
     ${addrBlock}
     <table class="trv-table">
       <thead>
