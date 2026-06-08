@@ -3663,6 +3663,9 @@ const DB_LOGO = "https://www.orderprintertemplates.com/api/v1/logos/bd06efacfb06
 
 function renderTraveler(o, p, idx, total, calloutHtml){
   const multi = (total || 1) >= 2;   // only number travelers when there's >1
+  // A Shipping traveler is already past QC + the ship-by milestone (it's just
+  // going out the door), so its footer skips the Ship By / QC sign-off lines.
+  const isShippingTraveler = String(p.location || "").toLowerCase() === "shipping";
   const buildRows = (p.lines||[]).map(trvBuildRow).join("");
   const expedite = o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : "";
   const shipBy = o.latest_ship_by && o.latest_ship_by !== "—"
@@ -3727,8 +3730,8 @@ function renderTraveler(o, p, idx, total, calloutHtml){
     <div class="trv-spacer"></div>
     <div class="trv-foot">
       <div class="trv-sig"><span class="trv-sig-label">Order Date:</span><span class="trv-sig-value">${escapeHtml(fmtDateLong(o.created_at))}</span></div>
-      <div class="trv-sig"><span class="trv-sig-label">Ship By</span><span class="trv-sig-fill"></span></div>
-      <div class="trv-sig"><span class="trv-sig-label">QC</span><span class="trv-sig-fill"></span></div>
+      ${isShippingTraveler ? "" : `<div class="trv-sig"><span class="trv-sig-label">Ship By</span><span class="trv-sig-fill"></span></div>
+      <div class="trv-sig"><span class="trv-sig-label">QC</span><span class="trv-sig-fill"></span></div>`}
       ${o.is_expedited ? `<div class="trv-expedite" style="margin:14px 0 0">EXPEDITE</div>` : ""}
     </div>
   </div>`;
