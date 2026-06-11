@@ -1017,6 +1017,10 @@
   .tag-trade   { background: #FCE7F3; color: #BE185D; }
   .tag-redo    { background: #EDE9FE; color: #6D28D9; }
   .tag-printed { background: #E8F5E9; color: var(--success); }
+  /* Resync alerts — loud, solid fills so a stale/voided traveler can't be
+     missed on a dense board. VOID = discard the paperwork; CHANGED = reprint. */
+  .tag-void    { background: var(--error); color: #fff; }
+  .tag-changed { background: var(--accent-dark); color: #fff; }
 
   .review-note {
     grid-column: 1 / -1;
@@ -1526,6 +1530,18 @@
      so it reads as the first thing on the sheet. */
   .trv-head .trv-expedite { margin: 0 0 12px; }
 
+  /* Stale-traveler banner (resync). Solid fill, prints, sits at the very top of
+     the sheet so a stale printout is unmistakable. NOT no-print — the whole
+     point is that it shows on paper. */
+  .trv-stale {
+    text-align: center; font-weight: 600; color: #fff;
+    font-size: 16px; line-height: 22px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 8px 10px; margin: 0 0 12px; border-radius: 4px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .trv-stale-void    { background: #D40000; }
+  .trv-stale-changed { background: var(--accent-dark); }
+
   /* Bill to / Ship to */
   .trv-addresses { display: flex; gap: 40px; margin: 18px 0 8px; }
   .trv-addr { flex: 1; }
@@ -1821,7 +1837,7 @@
       <div class="trv-toolbar-actions">
         <button type="button" class="trv-btn trv-btn-primary" onclick="printAllTravelers()">Print all travelers</button>
         <button type="button" class="trv-btn" id="releaseBatchBtn" onclick="releaseBatch()"
-                title="Tag these orders printed, attach each traveler PDF to its Shopify order, and archive the batch to SharePoint. Downloads a release file — then click the &quot;DB Finalize Release&quot; shortcut.">Release batch</button>
+                title="Tag these orders printed, attach each traveler PDF to its Shopify order, and archive the batch to SharePoint. Runs automatically on the release PC — a Teams card confirms. If the PC is offline, a release file downloads for the &quot;DB Finalize Release&quot; shortcut instead.">Release batch</button>
       </div>
       <span class="trv-move-indicator" id="trvMoveIndicator" style="display:none"></span>
       <span class="trv-toolbar-hint">Drag a line (⋮⋮) to move it to another traveler on the same order. <strong>Ctrl+Z</strong> undoes. Print = exactly what you see.</span>
@@ -1835,140 +1851,24 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-10T18:19:52",
+  "built_at": "2026-06-11T17:19:11",
   "orders": [
     {
-      "shopify_order_id": "6999613243474",
-      "shopify_order_name": "36075",
-      "shopify_order_number": "36075",
+      "shopify_order_id": "7001251938386",
+      "shopify_order_name": "36084",
+      "shopify_order_number": "36084",
       "shopify_url": "",
       "customer_name": "",
       "customer_email": "",
-      "customer_orders_count": 7,
-      "customer_total_spent": 8991.21,
+      "customer_orders_count": 6,
+      "customer_total_spent": 7985.92,
       "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
+      "latest_ship_by": "July 2, 2026",
       "lead_time_label": "2 - 3 weeks",
       "is_expedited": false,
-      "created_at": "2026-06-10T17:04:21-05:00",
+      "created_at": "2026-06-11T14:24:26-05:00",
       "tags": "redo, trade",
-      "total_price": 1026.78,
-      "priority": "Redo",
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
-        {
-          "shopify_order_id": "6999613243474",
-          "shopify_order_name": "36075",
-          "shopify_order_number": "36075",
-          "key": [
-            "color",
-            "Spa",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Spa",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
-            "30407F"
-          ],
-          "variant_skus": [
-            "30407F-1B"
-          ],
-          "line_item_titles": [
-            "Color Big Status Flush Mount 42\""
-          ],
-          "lines": [
-            {
-              "title": "Color Big Status Flush Mount 42\"",
-              "variant_title": "Brass / Spa / White Glass",
-              "variant_sku": "30407F-1B",
-              "parent_sku": "30407F",
-              "qty": 1,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-big-status-flush-mount-brass-spa-1.jpg?v=1754622280&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "2 - 3 weeks",
-                  "is_image": false
-                }
-              ]
-            }
-          ],
-          "total_qty": 1,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|Spa|lighting"
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "6999613243474",
-          "shopify_order_name": "36075",
-          "shopify_order_number": "36075",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T17:04:21-05:00",
-          "parent_sku": "30407F",
-          "color": "Spa",
-          "finish": "Brass",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 1,
-          "line_item_ids": [
-            16915784925266
-          ],
-          "item_titles": [
-            "Color Big Status Flush Mount 42\""
-          ],
-          "variant_skus": [
-            "30407F-1B"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": ""
-    },
-    {
-      "shopify_order_id": "6999586930770",
-      "shopify_order_name": "36074",
-      "shopify_order_number": "36074",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 4,
-      "customer_total_spent": 3497.2,
-      "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
-      "lead_time_label": "2 - 3 weeks",
-      "is_expedited": false,
-      "created_at": "2026-06-10T16:43:37-05:00",
-      "tags": "redo",
-      "total_price": 1127.02,
+      "total_price": 1457.48,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -1983,87 +1883,39 @@ const QUEUE = {
       "predicted_page_count": 2,
       "printouts": [
         {
-          "shopify_order_id": "6999586930770",
-          "shopify_order_name": "36074",
-          "shopify_order_number": "36074",
+          "shopify_order_id": "7001251938386",
+          "shopify_order_name": "36084",
+          "shopify_order_number": "36084",
           "key": [
             "color",
-            "Slate Blue",
+            "Bone",
             "lighting"
           ],
           "page_count": 1,
           "location": "Powder Coating",
-          "color": "Slate Blue",
+          "color": "Bone",
           "finish": null,
           "category": "lighting",
           "category_label": "Lighting",
           "parent_skus": [
-            "60226-11"
+            "60330"
           ],
           "variant_skus": [
-            "60226-11-2F"
+            "60330-2BO"
           ],
           "line_item_titles": [
-            "Color Pilot Sconce 11\""
+            "Color Pose Flush Mount"
           ],
           "lines": [
             {
-              "title": "Color Pilot Sconce 11\"",
-              "variant_title": "Nickel / Slate Blue / Hardwired (no switch)",
-              "variant_sku": "60226-11-2F",
-              "parent_sku": "60226-11",
-              "qty": 2,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-pilot-sconce-11-nickel-slateblue.jpg?v=1757596779&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "2 - 3 weeks",
-                  "is_image": false
-                }
-              ]
-            }
-          ],
-          "total_qty": 2,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|Slate Blue|lighting"
-        },
-        {
-          "shopify_order_id": "6999586930770",
-          "shopify_order_name": "36074",
-          "shopify_order_number": "36074",
-          "key": [
-            "color",
-            "Lagoon",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Lagoon",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
-            "60420"
-          ],
-          "variant_skus": [
-            "60420-2D"
-          ],
-          "line_item_titles": [
-            "Color Vogue 4 Sconce"
-          ],
-          "lines": [
-            {
-              "title": "Color Vogue 4 Sconce",
-              "variant_title": "Nickel / Lagoon",
-              "variant_sku": "60420-2D",
-              "parent_sku": "60420",
+              "title": "Color Pose Flush Mount",
+              "variant_title": "Nickel / Bone",
+              "variant_sku": "60330-2BO",
+              "parent_sku": "60330",
               "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-vogue-4-sconce-lagoon-1.jpg?v=1758680664&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-pose-flush-mount-nickel-bone.jpg?v=1756402441&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2076,32 +1928,80 @@ const QUEUE = {
           "total_qty": 1,
           "notes": null,
           "source": "color",
+          "traveler_key": "color|Bone|lighting"
+        },
+        {
+          "shopify_order_id": "7001251938386",
+          "shopify_order_name": "36084",
+          "shopify_order_number": "36084",
+          "key": [
+            "color",
+            "Lagoon",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60330"
+          ],
+          "variant_skus": [
+            "60330-1D"
+          ],
+          "line_item_titles": [
+            "Color Pose Flush Mount"
+          ],
+          "lines": [
+            {
+              "title": "Color Pose Flush Mount",
+              "variant_title": "Brass / Lagoon",
+              "variant_sku": "60330-1D",
+              "parent_sku": "60330",
+              "qty": 3,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-pose-flush-mount-brass-lagoon.jpg?v=1756402441&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 3,
+          "notes": null,
+          "source": "color",
           "traveler_key": "color|Lagoon|lighting"
         }
       ],
       "notion_rows": [
         {
-          "shopify_order_id": "6999586930770",
-          "shopify_order_name": "36074",
-          "shopify_order_number": "36074",
+          "shopify_order_id": "7001251938386",
+          "shopify_order_name": "36084",
+          "shopify_order_number": "36084",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-10T16:43:37-05:00",
-          "parent_sku": "60226-11",
-          "color": "Slate Blue",
+          "created_at": "2026-06-11T14:24:26-05:00",
+          "parent_sku": "60330",
+          "color": "Bone",
           "finish": "Nickel",
           "category": "fixture",
           "category_label": "Fixture",
-          "qty": 2,
+          "qty": 1,
           "line_item_ids": [
-            16915725877330
+            16919058022482
           ],
           "item_titles": [
-            "Color Pilot Sconce 11\""
+            "Color Pose Flush Mount"
           ],
           "variant_skus": [
-            "60226-11-2F"
+            "60330-2BO"
           ],
           "tags": [
             "Auto-Created",
@@ -2115,27 +2015,27 @@ const QUEUE = {
           "review_note": null
         },
         {
-          "shopify_order_id": "6999586930770",
-          "shopify_order_name": "36074",
-          "shopify_order_number": "36074",
+          "shopify_order_id": "7001251938386",
+          "shopify_order_name": "36084",
+          "shopify_order_number": "36084",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-10T16:43:37-05:00",
-          "parent_sku": "60420",
+          "created_at": "2026-06-11T14:24:26-05:00",
+          "parent_sku": "60330",
           "color": "Lagoon",
-          "finish": "Nickel",
+          "finish": "Brass",
           "category": "fixture",
           "category_label": "Fixture",
-          "qty": 1,
+          "qty": 3,
           "line_item_ids": [
-            16915725910098
+            16919058055250
           ],
           "item_titles": [
-            "Color Vogue 4 Sconce"
+            "Color Pose Flush Mount"
           ],
           "variant_skus": [
-            "60420-2D"
+            "60330-1D"
           ],
           "tags": [
             "Auto-Created",
@@ -2152,21 +2052,417 @@ const QUEUE = {
       "traveler_pdf_url": ""
     },
     {
-      "shopify_order_id": "6999454318674",
-      "shopify_order_name": "36073",
-      "shopify_order_number": "36073",
+      "shopify_order_id": "7001143246930",
+      "shopify_order_name": "36083",
+      "shopify_order_number": "36083",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 6,
+      "customer_total_spent": 3564.95,
+      "ship_by_date": null,
+      "latest_ship_by": "July 2, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-11T13:53:34-05:00",
+      "tags": "trade",
+      "total_price": 424.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7001143246930",
+          "shopify_order_name": "36083",
+          "shopify_order_number": "36083",
+          "key": [
+            "color",
+            "White",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30224"
+          ],
+          "variant_skus": [
+            "30224-2A"
+          ],
+          "line_item_titles": [
+            "Color Icon 2 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Icon 2 Sconce",
+              "variant_title": "Nickel / White",
+              "variant_sku": "30224-2A",
+              "parent_sku": "30224",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-icon-sconce-2-white_67841a6f-0356-40c1-9deb-8aa5ddb4b847.jpg?v=1747968137&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7001143246930",
+          "shopify_order_name": "36083",
+          "shopify_order_number": "36083",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T13:53:34-05:00",
+          "parent_sku": "30224",
+          "color": "White",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16918888611922
+          ],
+          "item_titles": [
+            "Color Icon 2 Sconce"
+          ],
+          "variant_skus": [
+            "30224-2A"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": ""
+    },
+    {
+      "shopify_order_id": "7000903188562",
+      "shopify_order_name": "36082",
+      "shopify_order_number": "36082",
       "shopify_url": "",
       "customer_name": "",
       "customer_email": "",
       "customer_orders_count": 2,
-      "customer_total_spent": 547.96,
+      "customer_total_spent": 2205.07,
       "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
+      "latest_ship_by": "July 2, 2026",
       "lead_time_label": "2 - 3 weeks",
       "is_expedited": false,
-      "created_at": "2026-06-10T15:02:29-05:00",
+      "created_at": "2026-06-11T12:29:06-05:00",
+      "tags": "trade",
+      "total_price": 2200.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7000903188562",
+          "shopify_order_name": "36082",
+          "shopify_order_number": "36082",
+          "key": [
+            "color",
+            "Orange",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Orange",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "31001",
+            "50131-12"
+          ],
+          "variant_skus": [
+            "31001-3I",
+            "50131-12-2I"
+          ],
+          "line_item_titles": [
+            "Color Crown Chandelier 46\"",
+            "Color Hemi Flush Mount 12\""
+          ],
+          "lines": [
+            {
+              "title": "Color Crown Chandelier 46\"",
+              "variant_title": "Black / Orange",
+              "variant_sku": "31001-3I",
+              "parent_sku": "31001",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-crown-chandelier-46-black-orange.jpg?v=1747968301&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Hemi Flush Mount 12\"",
+              "variant_title": "Nickel / Orange",
+              "variant_sku": "50131-12-2I",
+              "parent_sku": "50131-12",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-hemi-flush-mount-12-nickel-orange.jpg?v=1758372344&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Orange|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7000903188562",
+          "shopify_order_name": "36082",
+          "shopify_order_number": "36082",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T12:29:06-05:00",
+          "parent_sku": "31001",
+          "color": "Orange",
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16918477307986
+          ],
+          "item_titles": [
+            "Color Crown Chandelier 46\""
+          ],
+          "variant_skus": [
+            "31001-3I"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000903188562",
+          "shopify_order_name": "36082",
+          "shopify_order_number": "36082",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T12:29:06-05:00",
+          "parent_sku": "50131-12",
+          "color": "Orange",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16918477340754
+          ],
+          "item_titles": [
+            "Color Hemi Flush Mount 12\""
+          ],
+          "variant_skus": [
+            "50131-12-2I"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": ""
+    },
+    {
+      "shopify_order_id": "7000840503378",
+      "shopify_order_name": "36081",
+      "shopify_order_number": "36081",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 667.13,
+      "ship_by_date": null,
+      "latest_ship_by": "\u2014",
+      "lead_time_label": "",
+      "is_expedited": false,
+      "created_at": "2026-06-11T12:07:14-05:00",
+      "tags": "trade",
+      "total_price": 480.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7000840503378",
+          "shopify_order_name": "36081",
+          "shopify_order_number": "36081",
+          "key": [
+            "color",
+            "Spa",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Spa",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30321"
+          ],
+          "variant_skus": [
+            "30321-3B"
+          ],
+          "line_item_titles": [
+            "Color Icon 3 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Icon 3 Sconce",
+              "variant_title": "Black / Spa",
+              "variant_sku": "30321-3B",
+              "parent_sku": "30321",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-icon-sconce-3-spa_d322ab70-bb47-4de3-b9fd-a87ff54c0de9.jpg?v=1747968132&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Spa|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7000840503378",
+          "shopify_order_name": "36081",
+          "shopify_order_number": "36081",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T12:07:14-05:00",
+          "parent_sku": "30321",
+          "color": "Spa",
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16918368747602
+          ],
+          "item_titles": [
+            "Color Icon 3 Sconce"
+          ],
+          "variant_skus": [
+            "30321-3B"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": ""
+    },
+    {
+      "shopify_order_id": "7000829362258",
+      "shopify_order_name": "36080",
+      "shopify_order_number": "36080",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 19,
+      "customer_total_spent": 10249.22,
+      "ship_by_date": null,
+      "latest_ship_by": "\u2014",
+      "lead_time_label": "",
+      "is_expedited": false,
+      "created_at": "2026-06-11T12:03:27-05:00",
       "tags": "redo, trade",
-      "total_price": 261.98,
+      "total_price": 838.98,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -2181,9 +2477,317 @@ const QUEUE = {
       "predicted_page_count": 1,
       "printouts": [
         {
-          "shopify_order_id": "6999454318674",
-          "shopify_order_name": "36073",
-          "shopify_order_number": "36073",
+          "shopify_order_id": "7000829362258",
+          "shopify_order_name": "36080",
+          "shopify_order_number": "36080",
+          "key": [
+            "color",
+            "Cobalt",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Cobalt",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30405"
+          ],
+          "variant_skus": [
+            "30405-2E"
+          ],
+          "line_item_titles": [
+            "Color Status Chandelier 35\""
+          ],
+          "lines": [
+            {
+              "title": "Color Status Chandelier 35\"",
+              "variant_title": "Nickel / Cobalt",
+              "variant_sku": "30405-2E",
+              "parent_sku": "30405",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-status-chandelier-nickel-cobalt-1.jpg?v=1754109232&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Cobalt|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7000829362258",
+          "shopify_order_name": "36080",
+          "shopify_order_number": "36080",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T12:03:27-05:00",
+          "parent_sku": "30405",
+          "color": "Cobalt",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16918351478866
+          ],
+          "item_titles": [
+            "Color Status Chandelier 35\""
+          ],
+          "variant_skus": [
+            "30405-2E"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": ""
+    },
+    {
+      "shopify_order_id": "7000709136466",
+      "shopify_order_name": "36079",
+      "shopify_order_number": "36079",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 5.72,
+      "ship_by_date": null,
+      "latest_ship_by": "June 15, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-06-11T11:07:28-05:00",
+      "tags": "trade",
+      "total_price": 5.72,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Sample"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7000709136466",
+          "shopify_order_name": "36079",
+          "shopify_order_number": "36079",
+          "key": [
+            "sample-only",
+            "7000709136466"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "sample",
+          "category_label": "Sample",
+          "parent_skus": [
+            "SAC-ALL"
+          ],
+          "variant_skus": [
+            "SAC-ALL"
+          ],
+          "line_item_titles": [
+            "Color Samples"
+          ],
+          "lines": [
+            {
+              "title": "Color Samples",
+              "variant_title": "All Colors",
+              "variant_sku": "SAC-ALL",
+              "parent_sku": "SAC-ALL",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/All-Colors_98189f34-7443-4ffd-bcfa-5cdbf76adba6.png?v=1763242187&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "sample-only",
+          "traveler_key": "sample-only|7000709136466"
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": ""
+    },
+    {
+      "shopify_order_id": "7000564957266",
+      "shopify_order_name": "36078",
+      "shopify_order_number": "36078",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 407.48,
+      "ship_by_date": null,
+      "latest_ship_by": "July 2, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-11T10:09:10-05:00",
+      "tags": "redo",
+      "total_price": 407.48,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7000564957266",
+          "shopify_order_name": "36078",
+          "shopify_order_number": "36078",
+          "key": [
+            "color",
+            "Bone",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Bone",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60125"
+          ],
+          "variant_skus": [
+            "60125-1BO"
+          ],
+          "line_item_titles": [
+            "Color Twink Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Twink Sconce",
+              "variant_title": "Brass / Bone / Hardwired (no switch)",
+              "variant_sku": "60125-1BO",
+              "parent_sku": "60125",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-twink-sconce-brass-bone.jpg?v=1757498107&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Bone|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7000564957266",
+          "shopify_order_name": "36078",
+          "shopify_order_number": "36078",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:09:10-05:00",
+          "parent_sku": "60125",
+          "color": "Bone",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16917879357522
+          ],
+          "item_titles": [
+            "Color Twink Sconce"
+          ],
+          "variant_skus": [
+            "60125-1BO"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": ""
+    },
+    {
+      "shopify_order_id": "7000556666962",
+      "shopify_order_name": "36077",
+      "shopify_order_number": "36077",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 10486.47,
+      "ship_by_date": null,
+      "latest_ship_by": "July 2, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-11T10:05:33-05:00",
+      "tags": "$10K Club, trade",
+      "total_price": 10478.4,
+      "priority": null,
+      "is_large_order": true,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Large Order"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Freight",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 11,
+      "printouts": [
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
           "key": [
             "color",
             "Python Green",
@@ -2196,253 +2800,30 @@ const QUEUE = {
           "category": "lighting",
           "category_label": "Lighting",
           "parent_skus": [
-            "60222"
-          ],
-          "variant_skus": [
-            "60222-1PG"
-          ],
-          "line_item_titles": [
-            "Color Monarch Sconce"
-          ],
-          "lines": [
-            {
-              "title": "Color Monarch Sconce",
-              "variant_title": "Brass / Python Green",
-              "variant_sku": "60222-1PG",
-              "parent_sku": "60222",
-              "qty": 1,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-monarch-sconce-brass-pythongreen.jpg?v=1747968446&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "2 - 3 weeks",
-                  "is_image": false
-                }
-              ]
-            }
-          ],
-          "total_qty": 1,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|Python Green|lighting"
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "6999454318674",
-          "shopify_order_name": "36073",
-          "shopify_order_number": "36073",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T15:02:29-05:00",
-          "parent_sku": "60222",
-          "color": "Python Green",
-          "finish": "Brass",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 1,
-          "line_item_ids": [
-            16915404128338
-          ],
-          "item_titles": [
-            "Color Monarch Sconce"
-          ],
-          "variant_skus": [
-            "60222-1PG"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": ""
-    },
-    {
-      "shopify_order_id": "6999426728018",
-      "shopify_order_name": "36072",
-      "shopify_order_number": "36072",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 1,
-      "customer_total_spent": 276.73,
-      "ship_by_date": null,
-      "latest_ship_by": "\u2014",
-      "lead_time_label": "",
-      "is_expedited": false,
-      "created_at": "2026-06-10T14:41:57-05:00",
-      "tags": "redo, trade",
-      "total_price": 276.73,
-      "priority": "Redo",
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
-        {
-          "shopify_order_id": "6999426728018",
-          "shopify_order_name": "36072",
-          "shopify_order_number": "36072",
-          "key": [
-            "color",
-            "Lagoon",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Lagoon",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
-            "50130-10"
-          ],
-          "variant_skus": [
-            "50130-10-3D"
-          ],
-          "line_item_titles": [
-            "Color Cadbury Flush Mount 10\""
-          ],
-          "lines": [
-            {
-              "title": "Color Cadbury Flush Mount 10\"",
-              "variant_title": "Black / Lagoon",
-              "variant_sku": "50130-10-3D",
-              "parent_sku": "50130-10",
-              "qty": 1,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-cadburry-flush-mount-10-black-lagoon_e38470d4-4722-4312-87a9-1d67182fdf01.jpg?v=1776738267&width=120",
-              "properties": []
-            }
-          ],
-          "total_qty": 1,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|Lagoon|lighting"
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "6999426728018",
-          "shopify_order_name": "36072",
-          "shopify_order_number": "36072",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T14:41:57-05:00",
-          "parent_sku": "50130-10",
-          "color": "Lagoon",
-          "finish": "Black",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 1,
-          "line_item_ids": [
-            16915339214930
-          ],
-          "item_titles": [
-            "Color Cadbury Flush Mount 10\""
-          ],
-          "variant_skus": [
-            "50130-10-3D"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": ""
-    },
-    {
-      "shopify_order_id": "6999366500434",
-      "shopify_order_name": "36071",
-      "shopify_order_number": "36071",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 2,
-      "customer_total_spent": 1732.48,
-      "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
-      "lead_time_label": "2 - 3 weeks",
-      "is_expedited": false,
-      "created_at": "2026-06-10T14:01:04-05:00",
-      "tags": "redo",
-      "total_price": 1680.48,
-      "priority": "Redo",
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
-        {
-          "shopify_order_id": "6999366500434",
-          "shopify_order_name": "36071",
-          "shopify_order_number": "36071",
-          "key": [
-            "color",
-            "Barely",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Barely",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
             "60224",
-            "50111-10"
+            "70222",
+            "30407"
           ],
           "variant_skus": [
-            "60224-1K",
-            "50111-10-1K"
+            "60224-2PG",
+            "70222-2PG",
+            "30407-2PG"
           ],
           "line_item_titles": [
             "Color Ruler Sconce",
-            "Color Echo Pendant 10\""
+            "Color Bianca Sconce 20\"",
+            "Color Big Status Chandelier 42\""
           ],
           "lines": [
             {
               "title": "Color Ruler Sconce",
-              "variant_title": "Brass / Barely",
-              "variant_sku": "60224-1K",
+              "variant_title": "Nickel / Python Green",
+              "variant_sku": "60224-2PG",
               "parent_sku": "60224",
-              "qty": 2,
+              "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-reader-sconce-brass-barely.jpg?v=1757447397&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-reader-sconce-nickel-pythongreen.jpg?v=1757447397&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2452,14 +2833,14 @@ const QUEUE = {
               ]
             },
             {
-              "title": "Color Echo Pendant 10\"",
-              "variant_title": "Brass / Barely",
-              "variant_sku": "50111-10-1K",
-              "parent_sku": "50111-10",
-              "qty": 3,
+              "title": "Color Bianca Sconce 20\"",
+              "variant_title": "Nickel / Python Green",
+              "variant_sku": "70222-2PG",
+              "parent_sku": "70222",
+              "qty": 2,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-echo-pendant-10-brass-barely.jpg?v=1747968429&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-bianca-sconce-20-nickel-pythongreen.jpg?v=1775636617&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2467,181 +2848,16 @@ const QUEUE = {
                   "is_image": false
                 }
               ]
-            }
-          ],
-          "total_qty": 5,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|Barely|lighting"
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "6999366500434",
-          "shopify_order_name": "36071",
-          "shopify_order_number": "36071",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T14:01:04-05:00",
-          "parent_sku": "60224",
-          "color": "Barely",
-          "finish": "Brass",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 2,
-          "line_item_ids": [
-            16915195363410
-          ],
-          "item_titles": [
-            "Color Ruler Sconce"
-          ],
-          "variant_skus": [
-            "60224-1K"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        },
-        {
-          "shopify_order_id": "6999366500434",
-          "shopify_order_name": "36071",
-          "shopify_order_number": "36071",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T14:01:04-05:00",
-          "parent_sku": "50111-10",
-          "color": "Barely",
-          "finish": "Brass",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 3,
-          "line_item_ids": [
-            16915195396178
-          ],
-          "item_titles": [
-            "Color Echo Pendant 10\""
-          ],
-          "variant_skus": [
-            "50111-10-1K"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": ""
-    },
-    {
-      "shopify_order_id": "6999314563154",
-      "shopify_order_name": "36070",
-      "shopify_order_number": "36070",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 7,
-      "customer_total_spent": 1852.28,
-      "ship_by_date": null,
-      "latest_ship_by": "June 12, 2026",
-      "lead_time_label": "1 - 2 days",
-      "is_expedited": false,
-      "created_at": "2026-06-10T13:27:46-05:00",
-      "tags": "redo, trade",
-      "total_price": 58.9,
-      "priority": "Redo",
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Ground Advantage",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 0,
-      "printouts": [],
-      "notion_rows": [],
-      "traveler_pdf_url": ""
-    },
-    {
-      "shopify_order_id": "6999312695378",
-      "shopify_order_name": "36069",
-      "shopify_order_number": "36069",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 1,
-      "customer_total_spent": 1088.0,
-      "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
-      "lead_time_label": "2 - 3 weeks",
-      "is_expedited": false,
-      "created_at": "2026-06-10T13:26:41-05:00",
-      "tags": "trade",
-      "total_price": 1088.0,
-      "priority": null,
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
-        {
-          "shopify_order_id": "6999312695378",
-          "shopify_order_name": "36069",
-          "shopify_order_number": "36069",
-          "key": [
-            "color",
-            "Cobalt",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Cobalt",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
-            "60226-23"
-          ],
-          "variant_skus": [
-            "60226-23-1E"
-          ],
-          "line_item_titles": [
-            "Color Pilot Sconce 23\""
-          ],
-          "lines": [
+            },
             {
-              "title": "Color Pilot Sconce 23\"",
-              "variant_title": "Brass / Cobalt / Hardwired (no switch)",
-              "variant_sku": "60226-23-1E",
-              "parent_sku": "60226-23",
-              "qty": 4,
+              "title": "Color Big Status Chandelier 42\"",
+              "variant_title": "Nickel / Python Green / White Glass",
+              "variant_sku": "30407-2PG",
+              "parent_sku": "30407",
+              "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-pilot-sconce-23-brass-cobalt.jpg?v=1757597453&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-big-status-chandelier-nickel-Pythongreen-1.jpg?v=1747968217&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2654,80 +2870,12 @@ const QUEUE = {
           "total_qty": 4,
           "notes": null,
           "source": "color",
-          "traveler_key": "color|Cobalt|lighting"
-        }
-      ],
-      "notion_rows": [
+          "traveler_key": "color|Python Green|lighting"
+        },
         {
-          "shopify_order_id": "6999312695378",
-          "shopify_order_name": "36069",
-          "shopify_order_number": "36069",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T13:26:41-05:00",
-          "parent_sku": "60226-23",
-          "color": "Cobalt",
-          "finish": "Brass",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 4,
-          "line_item_ids": [
-            16915069272146
-          ],
-          "item_titles": [
-            "Color Pilot Sconce 23\""
-          ],
-          "variant_skus": [
-            "60226-23-1E"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": null,
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": ""
-    },
-    {
-      "shopify_order_id": "6999216947282",
-      "shopify_order_name": "36068",
-      "shopify_order_number": "36068",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 1,
-      "customer_total_spent": 806.79,
-      "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
-      "lead_time_label": "2 - 3 weeks",
-      "is_expedited": false,
-      "created_at": "2026-06-10T12:29:15-05:00",
-      "tags": "",
-      "total_price": 806.79,
-      "priority": null,
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
-        {
-          "shopify_order_id": "6999216947282",
-          "shopify_order_name": "36068",
-          "shopify_order_number": "36068",
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
           "key": [
             "color",
             "Slate Blue",
@@ -2740,24 +2888,44 @@ const QUEUE = {
           "category": "lighting",
           "category_label": "Lighting",
           "parent_skus": [
-            "70221"
+            "60224",
+            "30407"
           ],
           "variant_skus": [
-            "70221-1F"
+            "60224-2F",
+            "30407-2F"
           ],
           "line_item_titles": [
-            "Color Phoenix Sconce"
+            "Color Ruler Sconce",
+            "Color Big Status Chandelier 42\""
           ],
           "lines": [
             {
-              "title": "Color Phoenix Sconce",
-              "variant_title": "Brass / Slate Blue",
-              "variant_sku": "70221-1F",
-              "parent_sku": "70221",
-              "qty": 2,
+              "title": "Color Ruler Sconce",
+              "variant_title": "Nickel / Slate Blue",
+              "variant_sku": "60224-2F",
+              "parent_sku": "60224",
+              "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-phoenix-sconce-brass-slateblue.jpg?v=1757601430&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-reader-sconce-nickel-slateblue_73dea34c-d632-4ed3-88b9-f798e256acad.jpg?v=1757447397&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Big Status Chandelier 42\"",
+              "variant_title": "Nickel / Slate Blue / White Glass",
+              "variant_sku": "30407-2F",
+              "parent_sku": "30407",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-big-status-chandelier-nickel-slateblue-1.jpg?v=1747968217&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2771,221 +2939,53 @@ const QUEUE = {
           "notes": null,
           "source": "color",
           "traveler_key": "color|Slate Blue|lighting"
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "6999216947282",
-          "shopify_order_name": "36068",
-          "shopify_order_number": "36068",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T12:29:15-05:00",
-          "parent_sku": "70221",
-          "color": "Slate Blue",
-          "finish": "Brass",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 2,
-          "line_item_ids": [
-            16914849661010
-          ],
-          "item_titles": [
-            "Color Phoenix Sconce"
-          ],
-          "variant_skus": [
-            "70221-1F"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": null,
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": ""
-    },
-    {
-      "shopify_order_id": "6999111303250",
-      "shopify_order_name": "36067",
-      "shopify_order_number": "36067",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 3,
-      "customer_total_spent": 1075.69,
-      "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
-      "lead_time_label": "2 - 3 weeks",
-      "is_expedited": false,
-      "created_at": "2026-06-10T11:17:03-05:00",
-      "tags": "redo",
-      "total_price": 1043.73,
-      "priority": "Redo",
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 2,
-      "printouts": [
-        {
-          "shopify_order_id": "6999111303250",
-          "shopify_order_name": "36067",
-          "shopify_order_number": "36067",
-          "key": [
-            "color",
-            "Spa",
-            "hardware"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Spa",
-          "finish": null,
-          "category": "hardware",
-          "category_label": "Hardware",
-          "parent_skus": [
-            "H43",
-            "H20",
-            "H72",
-            "H16"
-          ],
-          "variant_skus": [
-            "H43-2B",
-            "H20-2B",
-            "H72-2B",
-            "H16-2"
-          ],
-          "line_item_titles": [
-            "Color Head Tissue Holder",
-            "Color Persona Knob",
-            "Color Head Hand Towel Bar",
-            "Snug Hook"
-          ],
-          "lines": [
-            {
-              "title": "Color Head Tissue Holder",
-              "variant_title": "Nickel / Spa",
-              "variant_sku": "H43-2B",
-              "parent_sku": "H43",
-              "qty": 1,
-              "category": "holder",
-              "category_label": "Holder",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/2-head-holder-hardware-nickel-spa-1.jpg?v=1776738295&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "Within 1 week",
-                  "is_image": false
-                }
-              ]
-            },
-            {
-              "title": "Color Persona Knob",
-              "variant_title": "Nickel / Spa",
-              "variant_sku": "H20-2B",
-              "parent_sku": "H20",
-              "qty": 2,
-              "category": "knob",
-              "category_label": "Knob",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/persona-knob-hardware-nickel-spa-1_deed2890-6a8a-40b2-be65-5c94fa5f8cec.jpg?v=1775636726&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "2 - 3 weeks",
-                  "is_image": false
-                }
-              ]
-            },
-            {
-              "title": "Color Head Hand Towel Bar",
-              "variant_title": "Nickel / Spa",
-              "variant_sku": "H72-2B",
-              "parent_sku": "H72",
-              "qty": 1,
-              "category": "hardware",
-              "category_label": "Hardware",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/2-head-hand-towel-bar-hardware-nickel-spa-1.jpg?v=1776738295&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "Within 1 week",
-                  "is_image": false
-                }
-              ]
-            },
-            {
-              "title": "Snug Hook",
-              "variant_title": "Nickel",
-              "variant_sku": "H16-2",
-              "parent_sku": "H16",
-              "qty": 2,
-              "category": "hook",
-              "category_label": "Hook",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/H16-snug-hook-nickel-1.jpg?v=1747968002&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "Within 1 week",
-                  "is_image": false
-                }
-              ],
-              "fold_noncolor": true
-            }
-          ],
-          "total_qty": 6,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|Spa|hardware"
         },
         {
-          "shopify_order_id": "6999111303250",
-          "shopify_order_name": "36067",
-          "shopify_order_number": "36067",
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
           "key": [
             "color",
-            "Spa",
+            "Ochre",
             "lighting"
           ],
           "page_count": 1,
           "location": "Powder Coating",
-          "color": "Spa",
+          "color": "Ochre",
           "finish": null,
           "category": "lighting",
           "category_label": "Lighting",
           "parent_skus": [
-            "60121",
-            "30223"
+            "60224",
+            "30223",
+            "30407",
+            "50111-10",
+            "30130-12"
           ],
           "variant_skus": [
-            "60121-2B",
-            "30223-2B"
+            "60224-2H",
+            "30223-2H",
+            "30407-2H",
+            "50111-10-2H",
+            "30130-12-2H"
           ],
           "line_item_titles": [
-            "Color Snug Sconce",
-            "Color Legend 2 Sconce"
+            "Color Ruler Sconce",
+            "Color Legend 2 Sconce",
+            "Color Big Status Chandelier 42\"",
+            "Color Echo Pendant 10\"",
+            "Color Cap Flush Mount 12\""
           ],
           "lines": [
             {
-              "title": "Color Snug Sconce",
-              "variant_title": "Nickel / Spa / Hardwired (no switch)",
-              "variant_sku": "60121-2B",
-              "parent_sku": "60121",
+              "title": "Color Ruler Sconce",
+              "variant_title": "Nickel / Ochre",
+              "variant_sku": "60224-2H",
+              "parent_sku": "60224",
               "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-snug-sconce-nickel-spa.jpg?v=1747968541&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-reader-sconce-nickel-ochre_95e41726-d65b-4526-95e5-fb2604d7e456.jpg?v=1757447397&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2996,13 +2996,100 @@ const QUEUE = {
             },
             {
               "title": "Color Legend 2 Sconce",
-              "variant_title": "Nickel / Spa",
-              "variant_sku": "30223-2B",
+              "variant_title": "Nickel / Ochre",
+              "variant_sku": "30223-2H",
               "parent_sku": "30223",
               "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-legend-sconce-2-nickel-spa.jpg?v=1747968151&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-legend-sconce-2-nickel-ochre.jpg?v=1747968151&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Big Status Chandelier 42\"",
+              "variant_title": "Nickel / Ochre / White Glass",
+              "variant_sku": "30407-2H",
+              "parent_sku": "30407",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-big-status-chandelier-nickel-ochre-1.jpg?v=1747968217&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Echo Pendant 10\"",
+              "variant_title": "Nickel / Ochre",
+              "variant_sku": "50111-10-2H",
+              "parent_sku": "50111-10",
+              "qty": 5,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-echo-pendant-10-nickel-ochre.jpg?v=1747968430&width=120",
+              "properties": []
+            },
+            {
+              "title": "Color Cap Flush Mount 12\"",
+              "variant_title": "Nickel / Ochre",
+              "variant_sku": "30130-12-2H",
+              "parent_sku": "30130-12",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-cap-flush-mount-12-nickel-ochre.jpg?v=1759252262&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 9,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Ochre|lighting"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "key": [
+            "color",
+            "Orange",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Orange",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60224"
+          ],
+          "variant_skus": [
+            "60224-2I"
+          ],
+          "line_item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Ruler Sconce",
+              "variant_title": "Nickel / Orange",
+              "variant_sku": "60224-2I",
+              "parent_sku": "60224",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-reader-sconce-nickel-orange.jpg?v=1757447397&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -3012,257 +3099,63 @@ const QUEUE = {
               ]
             }
           ],
-          "total_qty": 2,
+          "total_qty": 1,
           "notes": null,
           "source": "color",
-          "traveler_key": "color|Spa|lighting"
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "6999111303250",
-          "shopify_order_name": "36067",
-          "shopify_order_number": "36067",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T11:17:03-05:00",
-          "parent_sku": "H16",
-          "color": null,
-          "finish": "Nickel",
-          "category": "hook",
-          "category_label": "Hook",
-          "qty": 2,
-          "line_item_ids": [
-            16914605441106
-          ],
-          "item_titles": [
-            "Snug Hook"
-          ],
-          "variant_skus": [
-            "H16-2"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Finish-Only",
-            "Hardware-Only"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": false,
-          "location": "Assembly",
-          "review_note": null
+          "traveler_key": "color|Orange|lighting"
         },
         {
-          "shopify_order_id": "6999111303250",
-          "shopify_order_name": "36067",
-          "shopify_order_number": "36067",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T11:17:03-05:00",
-          "parent_sku": "H43",
-          "color": "Spa",
-          "finish": "Nickel",
-          "category": "holder",
-          "category_label": "Holder",
-          "qty": 1,
-          "line_item_ids": [
-            16914605473874
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "key": [
+            "color",
+            "Bone",
+            "lighting"
           ],
-          "item_titles": [
-            "Color Head Tissue Holder"
-          ],
-          "variant_skus": [
-            "H43-2B"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color",
-            "Hardware-Only"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
+          "page_count": 1,
           "location": "Powder Coating",
-          "review_note": null
-        },
-        {
-          "shopify_order_id": "6999111303250",
-          "shopify_order_name": "36067",
-          "shopify_order_number": "36067",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T11:17:03-05:00",
-          "parent_sku": "H20",
-          "color": "Spa",
-          "finish": "Nickel",
-          "category": "knob",
-          "category_label": "Knob",
-          "qty": 2,
-          "line_item_ids": [
-            16914605506642
-          ],
-          "item_titles": [
-            "Color Persona Knob"
+          "color": "Bone",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30223"
           ],
           "variant_skus": [
-            "H20-2B"
+            "30223-2BO"
           ],
-          "tags": [
-            "Auto-Created",
-            "Color",
-            "Hardware-Only"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        },
-        {
-          "shopify_order_id": "6999111303250",
-          "shopify_order_name": "36067",
-          "shopify_order_number": "36067",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T11:17:03-05:00",
-          "parent_sku": "H72",
-          "color": "Spa",
-          "finish": "Nickel",
-          "category": "hardware",
-          "category_label": "Hardware",
-          "qty": 1,
-          "line_item_ids": [
-            16914605539410
-          ],
-          "item_titles": [
-            "Color Head Hand Towel Bar"
-          ],
-          "variant_skus": [
-            "H72-2B"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color",
-            "Hardware-Only"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        },
-        {
-          "shopify_order_id": "6999111303250",
-          "shopify_order_name": "36067",
-          "shopify_order_number": "36067",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T11:17:03-05:00",
-          "parent_sku": "60121",
-          "color": "Spa",
-          "finish": "Nickel",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 1,
-          "line_item_ids": [
-            16914605572178
-          ],
-          "item_titles": [
-            "Color Snug Sconce"
-          ],
-          "variant_skus": [
-            "60121-2B"
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        },
-        {
-          "shopify_order_id": "6999111303250",
-          "shopify_order_name": "36067",
-          "shopify_order_number": "36067",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-10T11:17:03-05:00",
-          "parent_sku": "30223",
-          "color": "Spa",
-          "finish": "Nickel",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 1,
-          "line_item_ids": [
-            16914605604946
-          ],
-          "item_titles": [
+          "line_item_titles": [
             "Color Legend 2 Sconce"
           ],
-          "variant_skus": [
-            "30223-2B"
+          "lines": [
+            {
+              "title": "Color Legend 2 Sconce",
+              "variant_title": "Nickel / Bone",
+              "variant_sku": "30223-2BO",
+              "parent_sku": "30223",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-legend-sconce-2-nickel-bone.jpg?v=1747968151&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            }
           ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": ""
-    },
-    {
-      "shopify_order_id": "6998953394258",
-      "shopify_order_name": "36066",
-      "shopify_order_number": "36066",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 1,
-      "customer_total_spent": 960.5,
-      "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
-      "lead_time_label": "2 - 3 weeks",
-      "is_expedited": false,
-      "created_at": "2026-06-10T09:22:57-05:00",
-      "tags": "discount",
-      "total_price": 960.5,
-      "priority": null,
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Bone|lighting"
+        },
         {
-          "shopify_order_id": "6998953394258",
-          "shopify_order_name": "36066",
-          "shopify_order_number": "36066",
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
           "key": [
             "color",
             "Cobalt",
@@ -3275,44 +3168,24 @@ const QUEUE = {
           "category": "lighting",
           "category_label": "Lighting",
           "parent_skus": [
-            "30223",
-            "30320"
+            "30223"
           ],
           "variant_skus": [
-            "30223-1E",
-            "30320-1E"
+            "30223-2E"
           ],
           "line_item_titles": [
-            "Color Legend 2 Sconce",
-            "Color Legend 3 Sconce"
+            "Color Legend 2 Sconce"
           ],
           "lines": [
             {
               "title": "Color Legend 2 Sconce",
-              "variant_title": "Brass / Cobalt",
-              "variant_sku": "30223-1E",
+              "variant_title": "Nickel / Cobalt",
+              "variant_sku": "30223-2E",
               "parent_sku": "30223",
               "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-legend-sconce-2-brass-cobalt.jpg?v=1747968150&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "2 - 3 weeks",
-                  "is_image": false
-                }
-              ]
-            },
-            {
-              "title": "Color Legend 3 Sconce",
-              "variant_title": "Brass / Cobalt",
-              "variant_sku": "30320-1E",
-              "parent_sku": "30320",
-              "qty": 1,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-legend-sconce-3-brass-cobalt.jpg?v=1747968143&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-legend-sconce-2-nickel-cobalt.jpg?v=1747968151&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -3322,76 +3195,869 @@ const QUEUE = {
               ]
             }
           ],
-          "total_qty": 2,
+          "total_qty": 1,
           "notes": null,
           "source": "color",
           "traveler_key": "color|Cobalt|lighting"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "key": [
+            "color",
+            "Riding Hood Red",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Riding Hood Red",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30223"
+          ],
+          "variant_skus": [
+            "30223-2RH"
+          ],
+          "line_item_titles": [
+            "Color Legend 2 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Legend 2 Sconce",
+              "variant_title": "Nickel / Riding Hood Red",
+              "variant_sku": "30223-2RH",
+              "parent_sku": "30223",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-legend-sconce-2-nickel-ridinghoodred.jpg?v=1747968152&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Riding Hood Red|lighting"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "key": [
+            "simple",
+            "ER1-6-2"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "parent_skus": [
+            "ER1-6-2"
+          ],
+          "variant_skus": [
+            "ER1-6-2"
+          ],
+          "line_item_titles": [
+            "Extension Rods"
+          ],
+          "lines": [
+            {
+              "title": "Extension Rods",
+              "variant_title": "Nickel / 6\"",
+              "variant_sku": "ER1-6-2",
+              "parent_sku": "ER1-6-2",
+              "qty": 11,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/extension-rod-nickel_cd6fee47-4889-47c1-bb0e-9927b86c6734.jpg?v=1747968904&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Same as fixture",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 11,
+          "notes": "ROD ASSIGNMENT (see order note): the order note references rod placement \u2014 assign these rods to the right fixture(s) per the note, then drag them onto that traveler.",
+          "source": "accessory",
+          "traveler_key": "simple|ER1-6-2"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "key": [
+            "simple",
+            "ER1-12-2"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "parent_skus": [
+            "ER1-12-2"
+          ],
+          "variant_skus": [
+            "ER1-12-2"
+          ],
+          "line_item_titles": [
+            "Extension Rods"
+          ],
+          "lines": [
+            {
+              "title": "Extension Rods",
+              "variant_title": "Nickel / 12\"",
+              "variant_sku": "ER1-12-2",
+              "parent_sku": "ER1-12-2",
+              "qty": 3,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/extension-rod-nickel_cd6fee47-4889-47c1-bb0e-9927b86c6734.jpg?v=1747968904&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Same as fixture",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 3,
+          "notes": "ROD ASSIGNMENT (see order note): the order note references rod placement \u2014 assign these rods to the right fixture(s) per the note, then drag them onto that traveler.",
+          "source": "accessory",
+          "traveler_key": "simple|ER1-12-2"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "key": [
+            "simple",
+            "ER1-24-2"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "parent_skus": [
+            "ER1-24-2"
+          ],
+          "variant_skus": [
+            "ER1-24-2"
+          ],
+          "line_item_titles": [
+            "Extension Rods"
+          ],
+          "lines": [
+            {
+              "title": "Extension Rods",
+              "variant_title": "Nickel / 24\"",
+              "variant_sku": "ER1-24-2",
+              "parent_sku": "ER1-24-2",
+              "qty": 25,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/extension-rod-nickel_cd6fee47-4889-47c1-bb0e-9927b86c6734.jpg?v=1747968904&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Same as fixture",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 25,
+          "notes": "ROD ASSIGNMENT (see order note): the order note references rod placement \u2014 assign these rods to the right fixture(s) per the note, then drag them onto that traveler.",
+          "source": "accessory",
+          "traveler_key": "simple|ER1-24-2"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "key": [
+            "color",
+            "Lagoon",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "50111-10"
+          ],
+          "variant_skus": [
+            "50111-10-2D"
+          ],
+          "line_item_titles": [
+            "Color Echo Pendant 10\""
+          ],
+          "lines": [
+            {
+              "title": "Color Echo Pendant 10\"",
+              "variant_title": "Nickel / Lagoon",
+              "variant_sku": "50111-10-2D",
+              "parent_sku": "50111-10",
+              "qty": 6,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-echo-pendant-10-nickel-lagoon.jpg?v=1747968430&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 6,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Lagoon|lighting"
         }
       ],
       "notion_rows": [
         {
-          "shopify_order_id": "6998953394258",
-          "shopify_order_name": "36066",
-          "shopify_order_number": "36066",
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-10T09:22:57-05:00",
-          "parent_sku": "30223",
-          "color": "Cobalt",
-          "finish": "Brass",
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "60224",
+          "color": "Python Green",
+          "finish": "Nickel",
           "category": "fixture",
           "category_label": "Fixture",
           "qty": 1,
           "line_item_ids": [
-            16914234736722
+            16917862711378
           ],
           "item_titles": [
-            "Color Legend 2 Sconce"
+            "Color Ruler Sconce"
           ],
           "variant_skus": [
-            "30223-1E"
+            "60224-2PG"
           ],
           "tags": [
             "Auto-Created",
-            "Color"
+            "Color",
+            "Large Order"
           ],
           "priority": null,
-          "is_large_order": false,
+          "is_large_order": true,
           "is_accessory": false,
           "is_color": true,
           "location": "Powder Coating",
           "review_note": null
         },
         {
-          "shopify_order_id": "6998953394258",
-          "shopify_order_name": "36066",
-          "shopify_order_number": "36066",
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-10T09:22:57-05:00",
-          "parent_sku": "30320",
-          "color": "Cobalt",
-          "finish": "Brass",
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "60224",
+          "color": "Slate Blue",
+          "finish": "Nickel",
           "category": "fixture",
           "category_label": "Fixture",
           "qty": 1,
           "line_item_ids": [
-            16914234769490
+            16917862744146
           ],
           "item_titles": [
-            "Color Legend 3 Sconce"
+            "Color Ruler Sconce"
           ],
           "variant_skus": [
-            "30320-1E"
+            "60224-2F"
           ],
           "tags": [
             "Auto-Created",
-            "Color"
+            "Color",
+            "Large Order"
           ],
           "priority": null,
-          "is_large_order": false,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "60224",
+          "color": "Ochre",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917862776914
+          ],
+          "item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "variant_skus": [
+            "60224-2H"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "60224",
+          "color": "Orange",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917862809682
+          ],
+          "item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "variant_skus": [
+            "60224-2I"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "30223",
+          "color": "Bone",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917862842450
+          ],
+          "item_titles": [
+            "Color Legend 2 Sconce"
+          ],
+          "variant_skus": [
+            "30223-2BO"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "30223",
+          "color": "Cobalt",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917862875218
+          ],
+          "item_titles": [
+            "Color Legend 2 Sconce"
+          ],
+          "variant_skus": [
+            "30223-2E"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "30223",
+          "color": "Ochre",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917862907986
+          ],
+          "item_titles": [
+            "Color Legend 2 Sconce"
+          ],
+          "variant_skus": [
+            "30223-2H"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "30223",
+          "color": "Riding Hood Red",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917862940754
+          ],
+          "item_titles": [
+            "Color Legend 2 Sconce"
+          ],
+          "variant_skus": [
+            "30223-2RH"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "70222",
+          "color": "Python Green",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16917862973522
+          ],
+          "item_titles": [
+            "Color Bianca Sconce 20\""
+          ],
+          "variant_skus": [
+            "70222-2PG"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "30407",
+          "color": "Python Green",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917863006290
+          ],
+          "item_titles": [
+            "Color Big Status Chandelier 42\""
+          ],
+          "variant_skus": [
+            "30407-2PG"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "30407",
+          "color": "Slate Blue",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917863039058
+          ],
+          "item_titles": [
+            "Color Big Status Chandelier 42\""
+          ],
+          "variant_skus": [
+            "30407-2F"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "30407",
+          "color": "Ochre",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917863071826
+          ],
+          "item_titles": [
+            "Color Big Status Chandelier 42\""
+          ],
+          "variant_skus": [
+            "30407-2H"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "ER1-6-2",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 11,
+          "line_item_ids": [
+            16917863104594
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-6-2"
+          ],
+          "tags": [
+            "Accessory",
+            "Auto-Created",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": true,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "ER1-12-2",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 3,
+          "line_item_ids": [
+            16917863137362
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-12-2"
+          ],
+          "tags": [
+            "Accessory",
+            "Auto-Created",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": true,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "ER1-24-2",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 25,
+          "line_item_ids": [
+            16917863170130
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-24-2"
+          ],
+          "tags": [
+            "Accessory",
+            "Auto-Created",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": true,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager"
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "50111-10",
+          "color": "Lagoon",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 6,
+          "line_item_ids": [
+            16917863202898
+          ],
+          "item_titles": [
+            "Color Echo Pendant 10\""
+          ],
+          "variant_skus": [
+            "50111-10-2D"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "50111-10",
+          "color": "Ochre",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 5,
+          "line_item_ids": [
+            16917863235666
+          ],
+          "item_titles": [
+            "Color Echo Pendant 10\""
+          ],
+          "variant_skus": [
+            "50111-10-2H"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000556666962",
+          "shopify_order_name": "36077",
+          "shopify_order_number": "36077",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T10:05:33-05:00",
+          "parent_sku": "30130-12",
+          "color": "Ochre",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917863268434
+          ],
+          "item_titles": [
+            "Color Cap Flush Mount 12\""
+          ],
+          "variant_skus": [
+            "30130-12-2H"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
           "is_accessory": false,
           "is_color": true,
           "location": "Powder Coating",
@@ -3401,26 +4067,25 @@ const QUEUE = {
       "traveler_pdf_url": ""
     },
     {
-      "shopify_order_id": "6998923411538",
-      "shopify_order_name": "36065",
-      "shopify_order_number": "36065",
+      "shopify_order_id": "7000458985554",
+      "shopify_order_name": "36076",
+      "shopify_order_number": "36076",
       "shopify_url": "",
       "customer_name": "",
       "customer_email": "",
-      "customer_orders_count": 4,
-      "customer_total_spent": 1255.27,
+      "customer_orders_count": 1,
+      "customer_total_spent": 639.23,
       "ship_by_date": null,
-      "latest_ship_by": "July 1, 2026",
-      "lead_time_label": "2 - 3 weeks",
+      "latest_ship_by": "June 18, 2026",
+      "lead_time_label": "Within 1 week",
       "is_expedited": false,
-      "created_at": "2026-06-10T08:58:45-05:00",
-      "tags": "redo, trade",
-      "total_price": 959.31,
+      "created_at": "2026-06-11T09:04:23-05:00",
+      "tags": "discount, redo",
+      "total_price": 639.23,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
-        "Auto-Created",
-        "Color"
+        "Auto-Created"
       ],
       "billing_address": null,
       "shipping_address": null,
@@ -3430,43 +4095,62 @@ const QUEUE = {
       "predicted_page_count": 1,
       "printouts": [
         {
-          "shopify_order_id": "6998923411538",
-          "shopify_order_name": "36065",
-          "shopify_order_number": "36065",
+          "shopify_order_id": "7000458985554",
+          "shopify_order_name": "36076",
+          "shopify_order_number": "36076",
           "key": [
-            "color",
-            "Spa",
-            "lighting"
+            "finish",
+            "Brass"
           ],
           "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Spa",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
+          "location": "Assembly",
+          "color": null,
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
           "parent_skus": [
-            "30223"
+            "30130-12",
+            "30110-8"
           ],
           "variant_skus": [
-            "30223-1B"
+            "30130-12-1",
+            "30110-8-1"
           ],
           "line_item_titles": [
-            "Color Legend 2 Sconce"
+            "Cap Flush Mount 12\"",
+            "Cap Pendant 8\""
           ],
           "lines": [
             {
-              "title": "Color Legend 2 Sconce",
-              "variant_title": "Brass / Spa",
-              "variant_sku": "30223-1B",
-              "parent_sku": "30223",
-              "qty": 2,
+              "title": "Cap Flush Mount 12\"",
+              "variant_title": "Brass",
+              "variant_sku": "30130-12-1",
+              "parent_sku": "30130-12",
+              "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-legend-sconce-2-brass-spa.jpg?v=1747968149&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/cap-flush-mount-12-brass-brass_0e9636f9-65a4-457a-876c-309a2fde2846.jpg?v=1757864632&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
-                  "value": "2 - 3 weeks",
+                  "value": "Within 1 week",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Cap Pendant 8\"",
+              "variant_title": "Brass / White Glass",
+              "variant_sku": "30110-8-1",
+              "parent_sku": "30110-8",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/cap-globe-pendant-8-brass-brass_fff13ac7-d9b5-4fe7-9360-9f161b8c1d2b.jpg?v=1775636593&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Within 1 week",
                   "is_image": false
                 }
               ]
@@ -3474,43 +4158,77 @@ const QUEUE = {
           ],
           "total_qty": 2,
           "notes": null,
-          "source": "color",
-          "traveler_key": "color|Spa|lighting"
+          "source": "finish",
+          "traveler_key": "finish|Brass"
         }
       ],
       "notion_rows": [
         {
-          "shopify_order_id": "6998923411538",
-          "shopify_order_name": "36065",
-          "shopify_order_number": "36065",
+          "shopify_order_id": "7000458985554",
+          "shopify_order_name": "36076",
+          "shopify_order_number": "36076",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-10T08:58:45-05:00",
-          "parent_sku": "30223",
-          "color": "Spa",
+          "created_at": "2026-06-11T09:04:23-05:00",
+          "parent_sku": "30130-12",
+          "color": null,
           "finish": "Brass",
           "category": "fixture",
           "category_label": "Fixture",
-          "qty": 2,
+          "qty": 1,
           "line_item_ids": [
-            16914165039186
+            16917677899858
           ],
           "item_titles": [
-            "Color Legend 2 Sconce"
+            "Cap Flush Mount 12\""
           ],
           "variant_skus": [
-            "30223-1B"
+            "30130-12-1"
           ],
           "tags": [
             "Auto-Created",
-            "Color"
+            "Finish-Only"
           ],
           "priority": "Redo",
           "is_large_order": false,
           "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7000458985554",
+          "shopify_order_name": "36076",
+          "shopify_order_number": "36076",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-11T09:04:23-05:00",
+          "parent_sku": "30110-8",
+          "color": null,
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16917677932626
+          ],
+          "item_titles": [
+            "Cap Pendant 8\""
+          ],
+          "variant_skus": [
+            "30110-8-1"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Finish-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
           "review_note": null
         }
       ],
@@ -4176,10 +4894,10 @@ const QUEUE = {
     }
   ],
   "totals": {
-    "orders": 16,
-    "printouts": 18,
-    "notion_rows": 24,
-    "skipped_already_printed": 174
+    "orders": 14,
+    "printouts": 26,
+    "notion_rows": 34,
+    "skipped_already_printed": 173
   },
   "public_redacted": true
 };
@@ -4733,9 +5451,18 @@ function customerSuffix(o){
 }
 
 function tagsFor(o){
-  const t = (o.tags||"").toLowerCase();
+  // tags may arrive as a comma-joined string (print-queue.json) or an array.
+  const t = (Array.isArray(o.tags) ? o.tags.join(",") : (o.tags||"")).toLowerCase();
   const out = [];
-  if(o.priority === "Expedites") out.push(`<span class="tag tag-exp">EXP</span>`);
+  // Resync change/void signals first — most urgent, must catch the eye. These
+  // are set by lib/resync.py when a released order's traveler data changes or
+  // it gets cancelled, so the floor knows the printed paperwork is now stale.
+  if(t.includes("traveler-void"))    out.push(`<span class="tag tag-void">VOID — DISCARD</span>`);
+  else if(t.includes("traveler-changed")) out.push(`<span class="tag tag-changed">CHANGED — REPRINT</span>`);
+  // Expedite: surface the tag, not just the priority bucket, so an expedite
+  // applied AFTER triage release still shows on the row.
+  if(o.priority === "Expedites" || t.includes("expedite"))
+                                 out.push(`<span class="tag tag-exp">EXP</span>`);
   if(isQuickBuild(o))            out.push(`<span class="tag tag-quick">QUICK</span>`);
   if(o.is_large_order)           out.push(`<span class="tag tag-large">LARGE</span>`);
   if(t.includes("trade"))        out.push(`<span class="tag tag-trade">TRADE</span>`);
@@ -5436,10 +6163,21 @@ function renderTraveler(o, p, idx, total, calloutHtml){
     ? `<tr class="trv-empty-row"><td colspan="3">No build items — drop a line here</td></tr>`
     : "";
 
+  // Stale-traveler banner: if resync has flagged this order (traveler-void /
+  // traveler-changed tag), print a loud banner so a re-rendered or re-printed
+  // sheet self-identifies as out of date. VOID outranks CHANGED.
+  const _tg = (Array.isArray(o.tags) ? o.tags.join(",") : (o.tags||"")).toLowerCase();
+  const staleBanner = _tg.includes("traveler-void")
+    ? `<div class="trv-stale trv-stale-void">VOID — ORDER CANCELLED · DISCARD THIS PAPERWORK</div>`
+    : _tg.includes("traveler-changed")
+    ? `<div class="trv-stale trv-stale-changed">MODIFIED SINCE PRINT · REPRINT BEFORE BUILDING</div>`
+    : "";
+
   return `<div class="traveler" data-order="${escapeHtml(o.shopify_order_id)}" data-traveler="${escapeHtml(p.traveler_key||"")}">
     <div class="trv-sheet-actions no-print">
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
     </div>
+    ${staleBanner}
     ${calloutHtml || ""}
     <div class="trv-head">
       <div>
@@ -5879,31 +6617,60 @@ async function printAllTravelers(){
   window.addEventListener("afterprint", cleanup);
   window.print();
 }
-// Release the whole board: download a release.json (the current post-drag
-// arrangement) that the "DB Finalize Release" .bat feeds to release_queue.py,
-// which tags the orders `printed`, attaches each traveler PDF to its Shopify
-// order, and archives the combined batch PDF to SharePoint. The page is static
-// (no backend), so this is the download half; the .bat is the run half.
-function releaseBatch(){
+// Release the whole board. Primary path: POST the release JSON (current
+// post-drag arrangement) to the n8n webhook, which forwards it through the
+// Cloudflare Tunnel to release_listener.py on the release PC — release_queue.py
+// runs there (tags printed, attaches PDFs, archives to SharePoint) and a Teams
+// card confirms. Fallback (PC offline / webhook unreachable): download the
+// release.json for the "DB Finalize Release" .bat, exactly as before.
+// Append ?dryrun=1 to the board URL to send a dry-run (renders, writes nothing).
+const RELEASE_WEBHOOK = "https://thomometer.app.n8n.cloud/webhook/db-release";
+async function releaseBatch(){
   if(!QUEUE || !(QUEUE.orders||[]).length){
     showTrvToast("Nothing on the board to release.", null);
     return;
   }
   const orders = QUEUE.orders.filter(o => o.shopify_order_number && o.shopify_order_id);
   const count = orders.length;
+  const dryRun = new URLSearchParams(location.search).has("dryrun");
   const ok = window.confirm(
-    `Release ${count} order${count===1?"":"s"}?\n\n` +
-    `This will tag them PRINTED in Shopify, attach each traveler PDF to its order, ` +
-    `and archive the batch to SharePoint.\n\n` +
-    `A release file downloads now — then click the "DB Finalize Release" shortcut to run it.`);
+    (dryRun ? `DRY RUN — release ${count} order${count===1?"":"s"}?\n\nNothing will be written; PDFs render only.\n\n`
+            : `Release ${count} order${count===1?"":"s"}?\n\n` +
+              `This will tag them PRINTED in Shopify, attach each traveler PDF to its order, ` +
+              `and archive the batch to SharePoint.\n\n`) +
+    `It runs automatically on the release PC — a Teams card confirms when done.`);
   if(!ok) return;
 
-  const stamp = new Date().toISOString().slice(0,16).replace(/[:T]/g,"-"); // YYYY-MM-DD-HH-MM
   const payload = {
     released_at: new Date().toISOString(),
     source: "print-queue-board",
+    dry_run: dryRun,
     orders: orders,            // full post-drag arrangement; release_queue.py reads number/id/printouts
   };
+  const btn = document.getElementById("releaseBatchBtn");
+
+  // ── Primary: webhook → tunnel → listener on the release PC ────────────────
+  try {
+    const resp = await fetch(RELEASE_WEBHOOK, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+    });
+    if(resp.ok){
+      const out = await resp.json().catch(() => ({}));
+      if(out && out.queued){
+        setLastReleaseNow();
+        if(btn){ btn.textContent = dryRun ? "Dry run queued ✓" : "Released ✓"; btn.disabled = true; }
+        showTrvToast(
+          `${dryRun ? "Dry-run release" : "Release"} queued for ${count} order${count===1?"":"s"} — ` +
+          `running on the release PC. Confirmation posts to Teams (Automations › Production).`, null);
+        return;
+      }
+    }
+  } catch(e){ /* network/CORS failure — fall through to the download path */ }
+
+  // ── Fallback: download the release file for the DB Finalize Release .bat ──
+  const stamp = new Date().toISOString().slice(0,16).replace(/[:T]/g,"-"); // YYYY-MM-DD-HH-MM
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -5911,11 +6678,10 @@ function releaseBatch(){
   URL.revokeObjectURL(url);
 
   setLastReleaseNow();
-  const btn = document.getElementById("releaseBatchBtn");
   if(btn){ btn.textContent = "Released ✓ — run Finalize"; btn.disabled = true; }
   showTrvToast(
-    `Downloaded release for ${count} order${count===1?"":"s"}. ` +
-    `Now click the "DB Finalize Release" shortcut to tag + attach + archive.`, null);
+    `Release PC unreachable — downloaded the release file for ${count} order${count===1?"":"s"} instead. ` +
+    `Click the "DB Finalize Release" shortcut on the release station to finish.`, null);
 }
 
 // Print a single traveler — isolate it, print, restore.
