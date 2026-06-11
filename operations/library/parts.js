@@ -11,6 +11,7 @@ let PARTS_BY_NUM = {};        // part_number -> part
 let FAMILY_BY_PARTNUM = {};   // part_number -> family object
 let GLOSSARY_BY_ID = {};      // id -> glossary entry
 let activeGlossary = 'all';
+let activeFamily = null;         // family_id filter (deep-linked via #family/<id>)
 let activeProcesses = new Set(); // in-house process filters: 'Powder Coat', 'Black Batch', etc.
 let activeResultIdx = -1;
 let currentPart = null;
@@ -140,6 +141,15 @@ function renderActiveFilter(entries) {
   if (!row) return;
   const pills = [];
 
+  if (activeFamily) {
+    const fam = DATA.families[activeFamily];
+    pills.push({
+      name: (fam && (fam.part_number || fam.description)) || 'Part family',
+      count: filteredParts().length,
+      kind: 'family',
+      key: activeFamily,
+    });
+  }
   if (activeGlossary !== 'all') {
     const entry = entries.find(g => g.id === activeGlossary);
     if (entry) {
@@ -173,6 +183,10 @@ function renderActiveFilter(entries) {
     btn.onclick = () => {
       if (btn.dataset.kind === 'glossary') activeGlossary = 'all';
       else if (btn.dataset.kind === 'process') activeProcesses.delete(btn.dataset.key);
+      else if (btn.dataset.kind === 'family') {
+        activeFamily = null;
+        history.replaceState(null, '', location.pathname + location.search);
+      }
       clearFiltersIfShowingPart();
       renderGlossary();
       renderGrid();
@@ -247,6 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Browse grid ---
 function filteredParts() {
   let list = DATA.parts.slice();
+  if (activeFamily) {
+    list = list.filter(p => p.family_id === activeFamily);
+  }
   if (activeGlossary !== 'all') {
     list = list.filter(p => {
       const fam = DATA.families[p.family_id];
@@ -693,15 +710,32 @@ function renderSpec(p) {
 
 function routeFromHash() {
   if (location.hash) {
-    const pn = decodeURIComponent(location.hash.slice(1));
-    if (PARTS_BY_NUM[pn]) {
-      showPart(pn); return;
+    const raw = decodeURIComponent(location.hash.slice(1));
+    // #family/<family_id> — show the grid filtered to one part family (all
+    // finish variants). Deep-linked from the production wash list so a part
+    // code opens its whole family.
+    if (raw.startsWith('family/')) {
+      const fid = raw.slice('family/'.length);
+      if (DATA && DATA.families && DATA.families[fid]) {
+        activeFamily = fid;
+        currentPart = null;
+        $('spec-slot').hidden = true;
+        $('grid-slot').hidden = false;
+        renderActiveFilter(DATA.glossary);
+        renderGrid();
+        return;
+      }
+    }
+    if (PARTS_BY_NUM[raw]) {
+      activeFamily = null;
+      showPart(raw); return;
     }
   }
   // No hash: show browse grid
+  activeFamily = null;
   $('spec-slot').hidden = true;
   $('grid-slot').hidden = false;
-  if (DATA) renderGrid();
+  if (DATA) { renderActiveFilter(DATA.glossary); renderGrid(); }
 }
 
 bootstrap();
