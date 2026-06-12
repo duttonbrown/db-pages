@@ -1748,6 +1748,15 @@
   .trv-dist-quick button:hover { color: var(--ink); border-color: var(--ink); }
   .trv-dist-flag { background: #FFF4E0; border: 1px solid #F0C064; border-radius: 7px;
     padding: 6px 10px; font-size: 11.5px; color: #8A5A00; margin-bottom: 10px; }
+  /* Rod Finish chips in the assign dialog (from Notion Products › Rod Finish):
+     green = fixture's own rod matches the rod being assigned, gray = info
+     only, red = wrong rod type or the fixture ships with no rod. */
+  .trv-rod-chip { font-size: 10px; font-weight: 500; padding: 1px 6px;
+    border-radius: 4px; border: 1px solid; margin-left: 7px;
+    vertical-align: 1px; white-space: nowrap; }
+  .trv-rod-match { background: #EDF7EE; border-color: #B7DDB9; color: #2E7D32; }
+  .trv-rod-info  { background: #F6F6F6; border-color: #E0E0E0; color: #777; }
+  .trv-rod-warn  { background: #FDF0EE; border-color: #F2C4BD; color: #B3402E; }
   .trv-dist-note { background: #FAFAFA; border: 1px solid #eee; border-radius: 7px;
     padding: 7px 10px; font-size: 11px; color: #666; margin-bottom: 10px;
     max-height: 110px; overflow: auto; }
@@ -1971,7 +1980,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-12T16:23:56",
+  "built_at": "2026-06-12T16:39:51",
   "orders": [
     {
       "shopify_order_id": "7002909376594",
@@ -2046,7 +2055,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "Finish"
             },
             {
               "title": "Color Lure Flush Mount 8\"",
@@ -2063,7 +2073,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "Finish"
             }
           ],
           "total_qty": 4,
@@ -2248,7 +2259,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "Finish"
             }
           ],
           "total_qty": 1,
@@ -2364,7 +2376,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "No Rod"
             }
           ],
           "total_qty": 2,
@@ -2474,7 +2487,8 @@ const QUEUE = {
               "category": "fixture",
               "category_label": "Fixture",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-prisma-chandelier-brass-pinkaboo-1.jpg?v=1776738260&width=120",
-              "properties": []
+              "properties": [],
+              "rod_finish": "Finish"
             }
           ],
           "total_qty": 1,
@@ -2590,7 +2604,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "No Rod"
             }
           ],
           "total_qty": 4,
@@ -2995,7 +3010,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "Finish"
             }
           ],
           "total_qty": 2,
@@ -3111,7 +3127,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "Finish"
             }
           ],
           "total_qty": 1,
@@ -3227,7 +3244,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "No Rod"
             }
           ],
           "total_qty": 1,
@@ -3390,7 +3408,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "Finish"
             }
           ],
           "total_qty": 3,
@@ -3831,7 +3850,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "Finish"
             }
           ],
           "total_qty": 2,
@@ -3995,7 +4015,8 @@ const QUEUE = {
                   "value": "2 - 3 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "No Rod"
             }
           ],
           "total_qty": 2,
@@ -4140,7 +4161,8 @@ const QUEUE = {
               "category": "fixture",
               "category_label": "Fixture",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/bianca-sconce-20-nickel-1.jpg?v=1757601763&width=120",
-              "properties": []
+              "properties": [],
+              "rod_finish": "Finish"
             }
           ],
           "total_qty": 2,
@@ -4188,7 +4210,8 @@ const QUEUE = {
               "category": "fixture",
               "category_label": "Fixture",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-pose-flush-mount-nickel-white.jpg?v=1756402441&width=120",
-              "properties": []
+              "properties": [],
+              "rod_finish": "No Rod"
             },
             {
               "title": "Color Elliptical Sputnik Chandelier",
@@ -4199,7 +4222,8 @@ const QUEUE = {
               "category": "fixture",
               "category_label": "Fixture",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-white-nickel-1.jpg?v=1757840446&width=120",
-              "properties": []
+              "properties": [],
+              "rod_finish": "Finish"
             },
             {
               "title": "Hang-Straight Attachment",
@@ -4268,7 +4292,8 @@ const QUEUE = {
               "category": "fixture",
               "category_label": "Fixture",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-bianca-sconce-12-nickel-barely.jpg?v=1775636614&width=120",
-              "properties": []
+              "properties": [],
+              "rod_finish": "Finish"
             },
             {
               "title": "Color Bling Pendant",
@@ -4279,7 +4304,8 @@ const QUEUE = {
               "category": "fixture",
               "category_label": "Fixture",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-bling-pendant-nickel-barely.jpg?v=1758455190&width=120",
-              "properties": []
+              "properties": [],
+              "rod_finish": "Finish"
             },
             {
               "title": "Extension Rods",
@@ -4431,7 +4457,8 @@ const QUEUE = {
               "category": "fixture",
               "category_label": "Fixture",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-beaded-urchin-chandelier-27-brass-pinkaboo.jpg?v=1780599831&width=120",
-              "properties": []
+              "properties": [],
+              "rod_finish": "Finish"
             },
             {
               "title": "Hang-Straight Attachment",
@@ -6904,6 +6931,54 @@ function rodSizeOf(ln){
 }
 const ROD_TARGET_RE = /pendant|chandelier/i;
 
+// The rod line's OWN variant: a powder color name in its text makes it a
+// COLOR rod; otherwise a metal finish name makes it a FINISH rod. "Black"
+// reads as the finish (rods in Black are ER*-3 finish rods, not powder).
+function rodVariantOf(ln){
+  const hay = ((ln.variant_title||"") + " " + (ln.title||"")).toLowerCase();
+  for(const c of COLOR_ORDER){
+    if(c !== "Black" && hay.includes(c.toLowerCase())) return {type:"Color", name:c};
+  }
+  for(const f in FINISH_HEX){
+    if(hay.includes(f.toLowerCase())) return {type:"Finish", name:f};
+  }
+  return null;
+}
+
+// Rank a fixture as a target for the rod being assigned, using the Notion
+// Products DB "Rod Finish" property (stamped onto lines as ln.rod_finish:
+// "Finish" | "Color" | "No Rod"). Exact color/finish match > type match >
+// no data > type mismatch > fixture ships with no rod.
+function rodMatchScore(rodVar, r){
+  const rf = r.ln.rod_finish;
+  if(!rf) return 0;
+  if(rf === "No Rod") return -2;
+  if(!rodVar) return 0;
+  if(rf !== rodVar.type) return -1;
+  const dec = decodeVariantSku(r.ln.variant_sku||"");
+  const own = rodVar.type === "Color" ? (dec.color || r.p.color)
+                                      : (dec.finish || r.p.finish);
+  return own && own === rodVar.name ? 3 : 1;
+}
+
+// Small chip describing the fixture's OWN rod (per Notion Rod Finish):
+// green = matches the rod being assigned, gray = informational, red = the
+// fixture ships with no rod (or the wrong rod type).
+function rodFinishChip(rodVar, r){
+  const rf = r.ln.rod_finish;
+  if(!rf) return "";
+  const score = rodMatchScore(rodVar, r);
+  const cls = score >= 1 ? "match" : score === 0 ? "info" : "warn";
+  let text;
+  if(rf === "No Rod"){ text = "ships with no rod"; }
+  else {
+    const dec = decodeVariantSku(r.ln.variant_sku||"");
+    const own = rf === "Color" ? (dec.color || r.p.color) : (dec.finish || r.p.finish);
+    text = `rod: ${rf.toLowerCase()}${own ? " · " + own : ""}`;
+  }
+  return `<span class="trv-rod-chip trv-rod-${cls}" title="From Notion Products › Rod Finish">${escapeHtml(text)}</span>`;
+}
+
 // Note segments like `Color Echo Pendant (11) 6", (22) 24"` → entries of
 // {name, count, size}. Lines/segments without a (count) size" pair are skipped.
 function parseRodNote(note){
@@ -6983,6 +7058,15 @@ function openDistribute(lid){
   let rowsHtml, metaExtra = "";
   if(rodMode && fixtureRows.length){
     const size = rodSizeOf(src.line);
+    // Rank fixtures by Rod Finish fit (Notion Products DB): fixtures whose own
+    // rod matches the rod being assigned float to the top; "No Rod" /
+    // wrong-type fixtures sink. Stable, so equal scores keep board order.
+    // Sort BEFORE the note-based prefill — its fill indexes follow this array.
+    const rodVar = rodVariantOf(src.line);
+    fixtureRows = fixtureRows
+      .map((r, i) => ({ r, i, s: rodMatchScore(rodVar, r) }))
+      .sort((a, b) => b.s - a.s || a.i - b.i)
+      .map(x => x.r);
     const suggested = suggestRodFill(src.order.note, fixtureRows, size, src.line.qty);
     rowsHtml = fixtureRows.map((r, i) => {
       const lbl = travelerOptionLabel(r.p);
@@ -6991,7 +7075,7 @@ function openDistribute(lid){
       const per2 = Math.min(src.line.qty, 2 * (r.ln.qty || 1));
       return `<div class="trv-dist-row">
           <div class="trv-dist-info">
-            <div class="trv-dist-main">${r.ln.qty} × ${escapeHtml(r.ln.title)}</div>
+            <div class="trv-dist-main">${r.ln.qty} × ${escapeHtml(r.ln.title)}${rodFinishChip(rodVar, r)}</div>
             <div class="trv-dist-sub">${escapeHtml(lbl.main)}</div>
           </div>
           <span class="trv-dist-quick">
@@ -7005,6 +7089,9 @@ function openDistribute(lid){
     }).join("");
     if(suggested){
       metaExtra += `<div class="trv-dist-flag">Pre-filled from the order note — verify against the note, then Apply.</div>`;
+    }
+    if(fixtureRows.some(r => r.ln.rod_finish)){
+      metaExtra += `<div class="trv-dist-flag">Fixtures are ranked by rod match${rodVar ? ` for this ${escapeHtml(rodVar.name)} rod` : ""} — green chip = the fixture's own rod matches.</div>`;
     }
     if(src.order.note){
       metaExtra += `<div class="trv-dist-note"><b>Order note:</b><br>${escapeHtml(String(src.order.note).slice(0, 600)).replace(/\n/g, "<br>")}</div>`;
