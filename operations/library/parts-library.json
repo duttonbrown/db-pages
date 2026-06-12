@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-11T12:00:44",
+  "generated_at": "2026-06-12T07:05:39",
   "counts": {
     "parts": 452,
-    "supplies": 135,
+    "supplies": 137,
     "families": 282,
     "glossary": 82
   },
@@ -30305,23 +30305,23 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-801a-a68c-ea9adfa9dd16",
       "page_url": "https://app.notion.com/p/BX01-2c3ffa524c5b801aa68cea9adfa9dd16",
-      "image": null,
+      "image": "supply-images/BX01.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "3000",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:24:00.000Z"
     },
     {
       "sku": "BX02",
-      "title": "BX02",
+      "title": "BX02-14",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80db-b60e-fae2c4618926",
-      "page_url": "https://app.notion.com/p/BX02-2c3ffa524c5b80dbb60efae2c4618926",
-      "image": null,
+      "page_url": "https://app.notion.com/p/BX02-14-2c3ffa524c5b80dbb60efae2c4618926",
+      "image": "supply-images/BX02.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "2000",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:24:00.000Z"
     },
     {
       "sku": "BX02-26",
@@ -30329,11 +30329,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-80a3-9f8a-ce97eddaf3d5",
       "page_url": "https://app.notion.com/p/BX02-26-2c3ffa524c5b80a39f8ace97eddaf3d5",
-      "image": null,
+      "image": "supply-images/BX02-26.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "500",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX02-38",
@@ -30341,11 +30341,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-804c-b359-e1a71c90113a",
       "page_url": "https://app.notion.com/p/BX02-38-2c3ffa524c5b804cb359e1a71c90113a",
-      "image": null,
+      "image": "supply-images/BX02-38.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "300",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX03",
@@ -30353,11 +30353,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-80cf-99fe-ce2ef83aa3d5",
       "page_url": "https://app.notion.com/p/BX03-2c3ffa524c5b80cf99fece2ef83aa3d5",
-      "image": null,
+      "image": "supply-images/BX03.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "1000",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX04",
@@ -30365,11 +30365,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-801f-ba88-ecf9bd9d1d57",
       "page_url": "https://app.notion.com/p/BX04-2c3ffa524c5b801fba88ecf9bd9d1d57",
-      "image": null,
+      "image": "supply-images/BX04.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "1000",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX06",
@@ -30377,11 +30377,11 @@
       "description": "",
       "page_id": "2e0ffa52-4c5b-8079-9af8-fa690f9a7e18",
       "page_url": "https://app.notion.com/p/BX05-2e0ffa524c5b80799af8fa690f9a7e18",
-      "image": null,
+      "image": "supply-images/BX06.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "300",
-      "last_edited_at": "2026-01-06T00:45:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX06",
@@ -30389,11 +30389,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-805e-b23b-f49bf9051d11",
       "page_url": "https://app.notion.com/p/BX06-2c3ffa524c5b805eb23bf49bf9051d11",
-      "image": null,
+      "image": "supply-images/BX06.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "300",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX07",
@@ -30401,11 +30401,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-809b-916f-ce7ddf075575",
       "page_url": "https://app.notion.com/p/BX07-2c3ffa524c5b809b916fce7ddf075575",
-      "image": null,
+      "image": "supply-images/BX07.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "500",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX08",
@@ -30413,11 +30413,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-808a-854d-c677baa0086e",
       "page_url": "https://app.notion.com/p/BX08-2c3ffa524c5b808a854dc677baa0086e",
-      "image": null,
+      "image": "supply-images/BX08.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "2000",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX09",
@@ -30425,11 +30425,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-80fd-abfa-fbb4985ebae0",
       "page_url": "https://app.notion.com/p/BX09-2c3ffa524c5b80fdabfafbb4985ebae0",
-      "image": null,
+      "image": "supply-images/BX09.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "1000",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX10",
@@ -30437,11 +30437,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-8079-ad65-edd5f537ce84",
       "page_url": "https://app.notion.com/p/BX10-2c3ffa524c5b8079ad65edd5f537ce84",
-      "image": null,
+      "image": "supply-images/BX10.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "500",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX11",
@@ -30449,11 +30449,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-8042-b53a-f1b7dfc9b74c",
       "page_url": "https://app.notion.com/p/BX11-2c3ffa524c5b8042b53af1b7dfc9b74c",
-      "image": null,
+      "image": "supply-images/BX11.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "500",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:25:00.000Z"
     },
     {
       "sku": "BX12",
@@ -30461,11 +30461,11 @@
       "description": "",
       "page_id": "2c3ffa52-4c5b-809a-b57a-ff8aec170652",
       "page_url": "https://app.notion.com/p/BX12-2c3ffa524c5b809ab57aff8aec170652",
-      "image": null,
+      "image": "supply-images/BX12.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "500",
-      "last_edited_at": "2026-01-06T00:41:00.000Z"
+      "last_edited_at": "2026-06-11T23:26:00.000Z"
     },
     {
       "sku": "EQP-BTH-CCBF8020",
@@ -31820,8 +31820,8 @@
       "image": null,
       "status": null,
       "type": "Box/Thick Paper",
-      "reorder_qty": "",
-      "last_edited_at": "2026-01-06T00:56:00.000Z"
+      "reorder_qty": "500",
+      "last_edited_at": "2026-06-11T23:28:00.000Z"
     },
     {
       "sku": "",
@@ -31870,6 +31870,30 @@
       "type": "Box/Cardboard",
       "reorder_qty": "25",
       "last_edited_at": "2026-04-20T18:46:00.000Z"
+    },
+    {
+      "sku": "S-7711",
+      "title": "Paper towels, kitchen",
+      "description": "",
+      "page_id": "37cffa52-4c5b-803e-8834-cba0fbe55076",
+      "page_url": "https://app.notion.com/p/Paper-towels-kitchen-37cffa524c5b803e8834cba0fbe55076",
+      "image": "supply-images/S-7711.jpg",
+      "status": null,
+      "type": "Consumables",
+      "reorder_qty": "30 rolls / case",
+      "last_edited_at": "2026-06-11T17:51:00.000Z"
+    },
+    {
+      "sku": "SM-89460",
+      "title": "Paper towels, bathroom",
+      "description": "",
+      "page_id": "37cffa52-4c5b-8002-a9bf-c40d00d6be3b",
+      "page_url": "https://app.notion.com/p/Paper-towels-bathroom-37cffa524c5b8002a9bfc40d00d6be3b",
+      "image": "supply-images/SM-89460.jpg",
+      "status": null,
+      "type": "Consumables",
+      "reorder_qty": "6 rolls / case",
+      "last_edited_at": "2026-06-11T17:48:00.000Z"
     },
     {
       "sku": "Various suppliers",
