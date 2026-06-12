@@ -322,6 +322,21 @@
     font-size: 11px;
   }
 
+  /* ?order= focused view — loud enough that nobody mistakes a one-order
+     board for the whole queue. */
+  .order-filter-banner {
+    background: #FFF7EB;
+    border: 1px solid #FCD9A6;
+    color: var(--accent-dark);
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 6px;
+    margin: 0 0 12px;
+  }
+  .order-filter-banner b { font-weight: 600; }
+  .order-filter-banner a { color: var(--accent-dark); font-weight: 600; margin-left: 10px; }
+
   /* KPI strip */
   .kpi-row {
     display: grid;
@@ -1762,7 +1777,7 @@
     body { background: white; }
     .app-main { padding: 0; }
     .card { box-shadow: none; padding: 16px; max-width: none; }
-    .filter-bar, .public-banner { display: none; }
+    .filter-bar, .public-banner, .order-filter-banner { display: none; }
     .group-card { page-break-inside: avoid; }
     .no-print { display: none !important; }
 
@@ -1875,6 +1890,8 @@
     <code>db-operations/projects/work-order-sync/print-queue.html</code>.
   </div>
 
+  <div class="order-filter-banner" id="orderFilterBanner" hidden></div>
+
   <section class="kpi-row" id="kpiRow"></section>
 
   <!-- ── Order queue ── -->
@@ -1954,7 +1971,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-12T16:00:51",
+  "built_at": "2026-06-12T16:08:26",
   "orders": [
     {
       "shopify_order_id": "7002909376594",
@@ -2402,14 +2419,14 @@ const QUEUE = {
       "customer_name": "",
       "customer_email": "",
       "customer_orders_count": 27,
-      "customer_total_spent": 15858.58,
+      "customer_total_spent": 15898.58,
       "ship_by_date": null,
       "latest_ship_by": "\u2014",
       "lead_time_label": "",
       "is_expedited": false,
       "created_at": "2026-06-12T12:36:20-05:00",
       "tags": "$10K Club, redo, trade",
-      "total_price": 853.73,
+      "total_price": 893.73,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
@@ -4059,16 +4076,943 @@ const QUEUE = {
         }
       ],
       "traveler_pdf_url": ""
+    },
+    {
+      "shopify_order_id": "6989401489490",
+      "shopify_order_name": "35989",
+      "shopify_order_number": "35989",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 14831.44,
+      "ship_by_date": null,
+      "latest_ship_by": "\u2014",
+      "lead_time_label": "",
+      "is_expedited": false,
+      "created_at": "2026-06-04T14:01:38-05:00",
+      "tags": "$10K Club, trade",
+      "total_price": 14831.44,
+      "priority": null,
+      "is_large_order": true,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Large Order"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Shipping",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 5,
+      "printouts": [
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "key": [
+            "finish",
+            "Nickel"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "parent_skus": [
+            "70222"
+          ],
+          "variant_skus": [
+            "70222-2"
+          ],
+          "line_item_titles": [
+            "Bianca Sconce 20\""
+          ],
+          "lines": [
+            {
+              "title": "Bianca Sconce 20\"",
+              "variant_title": "Nickel",
+              "variant_sku": "70222-2",
+              "parent_sku": "70222",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/bianca-sconce-20-nickel-1.jpg?v=1757601763&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "finish",
+          "traveler_key": "finish|Nickel"
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "key": [
+            "color",
+            "White",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60330",
+            "21800",
+            "HS2NI"
+          ],
+          "variant_skus": [
+            "60330-2A",
+            "21800-2A",
+            "HS2NI"
+          ],
+          "line_item_titles": [
+            "Color Pose Flush Mount",
+            "Color Elliptical Sputnik Chandelier",
+            "Hang-Straight Attachment"
+          ],
+          "lines": [
+            {
+              "title": "Color Pose Flush Mount",
+              "variant_title": "Nickel / White",
+              "variant_sku": "60330-2A",
+              "parent_sku": "60330",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-pose-flush-mount-nickel-white.jpg?v=1756402441&width=120",
+              "properties": []
+            },
+            {
+              "title": "Color Elliptical Sputnik Chandelier",
+              "variant_title": "Nickel / White",
+              "variant_sku": "21800-2A",
+              "parent_sku": "21800",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-white-nickel-1.jpg?v=1757840446&width=120",
+              "properties": []
+            },
+            {
+              "title": "Hang-Straight Attachment",
+              "variant_title": "Sputnik / Nickel",
+              "variant_sku": "HS2NI",
+              "parent_sku": "HS2NI",
+              "qty": 2,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/HS2NI-hang-straights-nickel.webp?v=1747968862&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 5,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|lighting"
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "key": [
+            "color",
+            "Barely",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Barely",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "70110",
+            "70220",
+            "ER1-2-K",
+            "ER1-3-K",
+            "ER1-4-K",
+            "ER1-6-K",
+            "ER1-12-K",
+            "ER1-24-K"
+          ],
+          "variant_skus": [
+            "70110-2K",
+            "70220-2K",
+            "ER1-2-K",
+            "ER1-3-K",
+            "ER1-4-K",
+            "ER1-6-K",
+            "ER1-12-K",
+            "ER1-24-K"
+          ],
+          "line_item_titles": [
+            "Color Bling Pendant",
+            "Color Bianca Sconce 12\"",
+            "Extension Rods"
+          ],
+          "lines": [
+            {
+              "title": "Color Bianca Sconce 12\"",
+              "variant_title": "Nickel / Barely",
+              "variant_sku": "70220-2K",
+              "parent_sku": "70220",
+              "qty": 12,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-bianca-sconce-12-nickel-barely.jpg?v=1775636614&width=120",
+              "properties": []
+            },
+            {
+              "title": "Color Bling Pendant",
+              "variant_title": "Nickel / Barely",
+              "variant_sku": "70110-2K",
+              "parent_sku": "70110",
+              "qty": 22,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-bling-pendant-nickel-barely.jpg?v=1758455190&width=120",
+              "properties": []
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Barely / 2\"",
+              "variant_sku": "ER1-2-K",
+              "parent_sku": "ER1-2-K",
+              "qty": 7,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-extension-rod-barely.jpg?v=1747968905&width=120",
+              "properties": []
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Barely / 3\"",
+              "variant_sku": "ER1-3-K",
+              "parent_sku": "ER1-3-K",
+              "qty": 11,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-extension-rod-barely.jpg?v=1747968905&width=120",
+              "properties": []
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Barely / 4\"",
+              "variant_sku": "ER1-4-K",
+              "parent_sku": "ER1-4-K",
+              "qty": 12,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-extension-rod-barely.jpg?v=1747968905&width=120",
+              "properties": []
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Barely / 6\"",
+              "variant_sku": "ER1-6-K",
+              "parent_sku": "ER1-6-K",
+              "qty": 6,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-extension-rod-barely.jpg?v=1747968905&width=120",
+              "properties": []
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Barely / 12\"",
+              "variant_sku": "ER1-12-K",
+              "parent_sku": "ER1-12-K",
+              "qty": 6,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-extension-rod-barely.jpg?v=1747968905&width=120",
+              "properties": []
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Barely / 24\"",
+              "variant_sku": "ER1-24-K",
+              "parent_sku": "ER1-24-K",
+              "qty": 17,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-extension-rod-barely.jpg?v=1747968905&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 93,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Barely|lighting"
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "key": [
+            "simple",
+            "SJ2NI"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "parent_skus": [
+            "SJ2NI"
+          ],
+          "variant_skus": [
+            "SJ2NI"
+          ],
+          "line_item_titles": [
+            "Hang-Straight Attachment"
+          ],
+          "lines": [
+            {
+              "title": "Hang-Straight Attachment",
+              "variant_title": "Bling / Nickel",
+              "variant_sku": "SJ2NI",
+              "parent_sku": "SJ2NI",
+              "qty": 22,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/part-SJ2NI-cropped.jpg?v=1747968863&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 22,
+          "notes": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager",
+          "source": "accessory",
+          "traveler_key": "simple|SJ2NI"
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "key": [
+            "color",
+            "Q",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Q",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "10403-27",
+            "HS2BR"
+          ],
+          "variant_skus": [
+            "10403-27-1Q",
+            "HS2BR"
+          ],
+          "line_item_titles": [
+            "Color Beaded Urchin Chandelier 27\"",
+            "Hang-Straight Attachment"
+          ],
+          "lines": [
+            {
+              "title": "Color Beaded Urchin Chandelier 27\"",
+              "variant_title": "Brass / Pinkaboo",
+              "variant_sku": "10403-27-1Q",
+              "parent_sku": "10403-27",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-beaded-urchin-chandelier-27-brass-pinkaboo.jpg?v=1780599831&width=120",
+              "properties": []
+            },
+            {
+              "title": "Hang-Straight Attachment",
+              "variant_title": "Urchin / Brass",
+              "variant_sku": "HS2BR",
+              "parent_sku": "HS2BR",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/HS2BR-hang-straights-brass.webp?v=1747968862&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Q|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "70222",
+          "color": null,
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16893292413010
+          ],
+          "item_titles": [
+            "Bianca Sconce 20\""
+          ],
+          "variant_skus": [
+            "70222-2"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Finish-Only",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "60330",
+          "color": "White",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16893292445778
+          ],
+          "item_titles": [
+            "Color Pose Flush Mount"
+          ],
+          "variant_skus": [
+            "60330-2A"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "21800",
+          "color": "White",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16893292478546
+          ],
+          "item_titles": [
+            "Color Elliptical Sputnik Chandelier"
+          ],
+          "variant_skus": [
+            "21800-2A"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "HS2NI",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 2,
+          "line_item_ids": [
+            16893292511314
+          ],
+          "item_titles": [
+            "Hang-Straight Attachment"
+          ],
+          "variant_skus": [
+            "HS2NI"
+          ],
+          "tags": [
+            "Accessory",
+            "Auto-Created",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": true,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager"
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "70110",
+          "color": "Barely",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 22,
+          "line_item_ids": [
+            16893292544082
+          ],
+          "item_titles": [
+            "Color Bling Pendant"
+          ],
+          "variant_skus": [
+            "70110-2K"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "ER1-2-K",
+          "color": "Barely",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 7,
+          "line_item_ids": [
+            16893292576850
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-2-K"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "ER1-3-K",
+          "color": "Barely",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 11,
+          "line_item_ids": [
+            16893292609618
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-3-K"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "ER1-4-K",
+          "color": "Barely",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 12,
+          "line_item_ids": [
+            16893292642386
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-4-K"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "ER1-6-K",
+          "color": "Barely",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 6,
+          "line_item_ids": [
+            16893292675154
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-6-K"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "ER1-12-K",
+          "color": "Barely",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 6,
+          "line_item_ids": [
+            16893292707922
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-12-K"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "ER1-24-K",
+          "color": "Barely",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 17,
+          "line_item_ids": [
+            16893292740690
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-24-K"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "SJ2NI",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 22,
+          "line_item_ids": [
+            16893292773458
+          ],
+          "item_titles": [
+            "Hang-Straight Attachment"
+          ],
+          "variant_skus": [
+            "SJ2NI"
+          ],
+          "tags": [
+            "Accessory",
+            "Auto-Created",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": true,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager"
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "70220",
+          "color": "Barely",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 12,
+          "line_item_ids": [
+            16893292806226
+          ],
+          "item_titles": [
+            "Color Bianca Sconce 12\""
+          ],
+          "variant_skus": [
+            "70220-2K"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "10403-27",
+          "color": "Q",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16893292838994
+          ],
+          "item_titles": [
+            "Color Beaded Urchin Chandelier 27\""
+          ],
+          "variant_skus": [
+            "10403-27-1Q"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6989401489490",
+          "shopify_order_name": "35989",
+          "shopify_order_number": "35989",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-04T14:01:38-05:00",
+          "parent_sku": "HS2BR",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 1,
+          "line_item_ids": [
+            16893292871762
+          ],
+          "item_titles": [
+            "Hang-Straight Attachment"
+          ],
+          "variant_skus": [
+            "HS2BR"
+          ],
+          "tags": [
+            "Accessory",
+            "Auto-Created",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": true,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": "MIXED-ACCESSORY: confirm Shipping vs Assembly with Production Manager"
+        }
+      ],
+      "traveler_pdf_url": ""
     }
   ],
   "totals": {
-    "orders": 16,
-    "printouts": 17,
-    "notion_rows": 20,
-    "skipped_already_printed": 167
+    "orders": 17,
+    "printouts": 22,
+    "notion_rows": 35,
+    "skipped_already_printed": 166
   },
   "public_redacted": true
 };
+
+// ?order=35989 (comma-separable, # optional) — focus the whole board on
+// specific orders. Filters the queue AT THE SOURCE so every tab, count,
+// printout and the Release batch payload see only the requested orders —
+// e.g. release one big order on its own. No param = the full board.
+const ORDER_FILTER = (new URLSearchParams(location.search).get("order") || "")
+  .split(",").map(s => s.trim().replace(/^#/, "")).filter(Boolean);
+if (ORDER_FILTER.length && QUEUE && Array.isArray(QUEUE.orders)) {
+  const want = new Set(ORDER_FILTER);
+  QUEUE.orders = QUEUE.orders.filter(o => want.has(String(o.shopify_order_number)));
+  const banner = document.getElementById("orderFilterBanner");
+  if (banner) {
+    const asked = ORDER_FILTER.map(n => "#" + n).join(", ");
+    banner.innerHTML = QUEUE.orders.length
+      ? `Focused view — showing only <b>${asked}</b>. Printing and Release batch apply to just ` +
+        `${QUEUE.orders.length === 1 ? "this order" : "these orders"}.` +
+        `<a href="${location.pathname}">Show full board</a>`
+      : `No open unprinted order matches <b>${asked}</b> — it may still be tagged ` +
+        `<b>printed</b>, be fulfilled, or the board hasn't rebuilt since it changed (hourly).` +
+        `<a href="${location.pathname}">Show full board</a>`;
+    banner.hidden = false;
+  }
+}
+
 let SORT = "chrono";
 
 const LOCATIONS = [
