@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-12T12:00:41",
+  "generated_at": "2026-06-15T07:05:34",
   "counts": {
     "parts": 452,
     "supplies": 137,
@@ -3741,7 +3741,7 @@
       "raw_or_prefinished": null,
       "in_house_processes": [],
       "vendor": [
-        "BP Lamp Supply"
+        "B&P Lamp Supply"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-8153-8196-e27a9b7ffb8d",
@@ -7701,7 +7701,7 @@
       "raw_or_prefinished": "Pre-Finished",
       "in_house_processes": [],
       "vendor": [
-        "BP Lamp Supply"
+        "B&P Lamp Supply"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-81b2-b6fc-d45f3e168b22",
@@ -12471,7 +12471,7 @@
       "raw_or_prefinished": null,
       "in_house_processes": [],
       "vendor": [
-        "BP Lamp Supply"
+        "B&P Lamp Supply"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-81ff-bcc4-dfb435b0228e",
@@ -13697,7 +13697,7 @@
       "raw_or_prefinished": "Pre-Finished",
       "in_house_processes": [],
       "vendor": [
-        "BP Lamp Supply"
+        "B&P Lamp Supply"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-814d-85aa-e62f5c632279",
@@ -18161,7 +18161,7 @@
         "Black Batch"
       ],
       "vendor": [
-        "BP Lamp Supply"
+        "B&P Lamp Supply"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-8102-bf5f-dc2f37c8d2fb",
@@ -20240,7 +20240,7 @@
         "Black Batch"
       ],
       "vendor": [
-        "BP Lamp Supply"
+        "B&P Lamp Supply"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-8118-a1c4-c73a60e641bf",
@@ -29446,23 +29446,6 @@
       "last_edited_at": "2026-04-29T05:08:00.000Z"
     },
     {
-      "part_number": "SW2B",
-      "page_id": "324ffa52-4c5b-817e-9076-fcd3d7f554c6",
-      "page_url": "https://app.notion.com/p/SW2B-324ffa524c5b817e9076fcd3d7f554c6",
-      "image": "parts-images/SW2B.jpg",
-      "finish": "Black",
-      "status": "Active",
-      "use_2024": 0,
-      "use_2025": 0,
-      "last_ordered": null,
-      "lead_time": "1 week",
-      "moq": null,
-      "reorder_qty": null,
-      "in_house_processes": [],
-      "family_id": "2ceffa52-4c5b-812f-8a56-dacf7d92e27f",
-      "last_edited_at": "2026-04-29T05:07:00.000Z"
-    },
-    {
       "part_number": "SW2W",
       "page_id": "324ffa52-4c5b-817e-a0c3-c947b3bfb7af",
       "page_url": "https://app.notion.com/p/SW2W-324ffa524c5b817ea0c3c947b3bfb7af",
@@ -29473,11 +29456,11 @@
       "use_2025": 0,
       "last_ordered": null,
       "lead_time": "1 week",
-      "moq": null,
+      "moq": 100,
       "reorder_qty": null,
       "in_house_processes": [],
       "family_id": "2ceffa52-4c5b-812f-8a56-dacf7d92e27f",
-      "last_edited_at": "2026-04-29T05:07:00.000Z"
+      "last_edited_at": "2026-06-12T18:24:00.000Z"
     },
     {
       "part_number": "SW4",
@@ -29507,13 +29490,13 @@
       "use_2025": 422,
       "last_ordered": null,
       "lead_time": "10 weeks",
-      "moq": null,
+      "moq": 500,
       "reorder_qty": null,
       "in_house_processes": [
         "Powder Coat"
       ],
       "family_id": "2ceffa52-4c5b-81e2-b31f-ca607b12bd71",
-      "last_edited_at": "2026-05-12T05:19:00.000Z"
+      "last_edited_at": "2026-06-12T18:25:00.000Z"
     },
     {
       "part_number": "SWR1M",
@@ -29526,13 +29509,13 @@
       "use_2025": 422,
       "last_ordered": null,
       "lead_time": "10 weeks",
-      "moq": null,
+      "moq": 500,
       "reorder_qty": null,
       "in_house_processes": [
         "Powder Coat"
       ],
       "family_id": "2ceffa52-4c5b-8123-b12e-de37dd586ede",
-      "last_edited_at": "2026-05-12T05:19:00.000Z"
+      "last_edited_at": "2026-06-12T18:25:00.000Z"
     },
     {
       "part_number": "WA0-3_4",
@@ -30260,6 +30243,23 @@
       "in_house_processes": [],
       "family_id": "2ceffa52-4c5b-8153-ad55-f205e906b7c2",
       "last_edited_at": "2026-05-06T20:21:00.000Z"
+    },
+    {
+      "part_number": "SW2B",
+      "page_id": "324ffa52-4c5b-817e-9076-fcd3d7f554c6",
+      "page_url": "https://app.notion.com/p/SW2B-324ffa524c5b817e9076fcd3d7f554c6",
+      "image": "parts-images/SW2B.jpg",
+      "finish": "Black",
+      "status": "Inactive",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "1 week",
+      "moq": 100,
+      "reorder_qty": null,
+      "in_house_processes": [],
+      "family_id": "2ceffa52-4c5b-812f-8a56-dacf7d92e27f",
+      "last_edited_at": "2026-06-12T18:25:00.000Z"
     }
   ],
   "supplies": [
