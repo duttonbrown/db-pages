@@ -905,6 +905,105 @@
     </div>
   </section>
 
+  <!-- ─────────── Change log ─────────── -->
+  <section class="block">
+    <h2 class="section-title">Change log</h2>
+    <p class="page-sub" style="margin:0 0 16px;">
+      Notable rule and behavior changes to the print queue, newest first. We log
+      a change here when it alters how orders are classified, routed, tagged, or
+      surfaced — small fixes and copy tweaks are left to git history.
+    </p>
+    <style>
+      .changelog { list-style: none; margin: 0; padding: 0; }
+      .changelog > li {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 16px;
+        padding: 12px 0;
+        border-top: 1px solid var(--border);
+      }
+      .changelog > li:first-child { border-top: none; }
+      .changelog .cl-date {
+        font-size: 12px; font-weight: 600; color: var(--accent-dark);
+        letter-spacing: 0.02em; white-space: nowrap; padding-top: 1px;
+      }
+      .changelog .cl-title {
+        font-size: 14px; font-weight: 600; color: var(--ink);
+        margin: 0 0 3px; line-height: 1.35;
+      }
+      .changelog .cl-body {
+        font-size: 13px; color: var(--text); margin: 0; line-height: 1.5;
+      }
+      .changelog .cl-body code {
+        background: var(--bg); border: 1px solid var(--border);
+        border-radius: 4px; padding: 0 4px; font-size: 12px;
+      }
+      @media (max-width: 560px) {
+        .changelog > li { grid-template-columns: 1fr; gap: 4px; }
+      }
+    </style>
+    <ul class="changelog">
+      <li>
+        <div class="cl-date">2026-06-16</div>
+        <div>
+          <p class="cl-title">Bulbs &amp; glass globes now show on the traveler so shipping packs them.</p>
+          <p class="cl-body">
+            Bulbs and glass globes never get a build sheet (nothing to build),
+            so they were invisible on the fixture traveler — the shipping station
+            had no cue to put them in the box. They now appear under
+            <strong>“Also on this order”</strong>, badged amber
+            <strong>“ships with order · pack”</strong>. Non-physical lines
+            (package protection, fees, signature, return labels) are still left
+            off — nothing to pack.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="cl-date">2026-06-16</div>
+        <div>
+          <p class="cl-title">Traveler sheet polish — logo, EXPEDITE, tighter layout.</p>
+          <p class="cl-body">
+            Fixed the missing top-right logo (now the local brandmark, not a
+            flaky external image that failed to load into the PDF). Moved the
+            <strong>EXPEDITE</strong> callout <em>above</em> the Order Date in
+            the footer. Dropped the redundant color chip next to the “Powder
+            Coating” pill — the color already shows on every build line. Tightened
+            the “Also on this order” rows so they take less room.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="cl-date">2026-06-16</div>
+        <div>
+          <p class="cl-title">Every open order is now accounted for — no silent drops.</p>
+          <p class="cl-body">
+            An order whose lines are <em>all</em> bulbs, glass globes, or
+            excluded upsells (package protection, fees, return labels) produces
+            no traveler by design — those ship straight from inventory. Such
+            orders used to vanish from the board with no record (orders #36103
+            and #36130 slipped through this way). The build now lists them in a
+            <strong>“Needs attention”</strong> panel and a <strong>Needs
+            attention</strong> count tile, so the lead can confirm each is a
+            real quick-ship rather than a missed order.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="cl-date">2026-06-16</div>
+        <div>
+          <p class="cl-title">Release marker tag renamed <code>traveler-tracked</code> → <code>traveler</code>.</p>
+          <p class="cl-body">
+            The tag the release flow adds to mark an order as one of our
+            released travelers (the resync watch set) is now simply
+            <code>traveler</code>. Readers accept both names during the
+            transition, and a one-time migration re-tags in-flight orders, so
+            nothing breaks mid-round. <code>printed</code> is unchanged.
+          </p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
 </main>
 </div>
 

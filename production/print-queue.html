@@ -337,10 +337,43 @@
   .order-filter-banner b { font-weight: 600; }
   .order-filter-banner a { color: var(--accent-dark); font-weight: 600; margin-left: 10px; }
 
+  /* "Needs attention" panel — open orders that produced ZERO travelers
+     (bulbs / glass globes / excluded upsells only). They ship from inventory
+     and never build, but the lead must confirm each is a legit quick-ship, not
+     an order the round missed (the 36103 / 36130 case). Louder than the amber
+     info banners: a red left rule so it can't be skimmed past. */
+  .needs-attention {
+    background: #FFF5F4;
+    border: 1px solid #F2C7C2;
+    border-left: 4px solid var(--error);
+    color: var(--text);
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 6px;
+    margin: 0 0 12px;
+  }
+  .needs-attention-head {
+    font-weight: 600; color: var(--error);
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 6px;
+  }
+  .needs-attention-sub { font-weight: 400; color: var(--muted); font-size: 11px; }
+  .needs-attention ul { list-style: none; margin: 0; padding: 0; }
+  .needs-attention li {
+    display: flex; align-items: baseline; gap: 8px;
+    padding: 3px 0; flex-wrap: wrap;
+  }
+  .needs-attention li + li { border-top: 1px solid #F6DDD9; }
+  .needs-attention .na-order { font-weight: 600; color: var(--ink); }
+  .needs-attention .na-order a { color: var(--ink); text-decoration: none; }
+  .needs-attention .na-order a:hover { text-decoration: underline; }
+  .needs-attention .na-reason { color: var(--text); }
+  .needs-attention .na-meta { color: var(--muted); font-size: 11px; margin-left: auto; }
+
   /* KPI strip */
   .kpi-row {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     gap: 8px;
     margin-bottom: 12px;
   }
@@ -1623,28 +1656,38 @@
   .trv-li-propimg { margin-top: 4px; max-width: 60px; height: auto; border: 1px solid var(--border); border-radius: 3px; }
   .trv-qty { font-size: 14px; font-weight: 600; color: #000; }
 
-  /* "Also on this order" reference rows — minimized, subordinate */
-  .trv-refs { margin-top: 20px; }
+  /* "Also on this order" reference rows — minimized, subordinate. Kept compact
+     (smaller than the build table) so it stays clearly secondary and doesn't eat
+     vertical room on the sheet. */
+  .trv-refs { margin-top: 16px; }
   .trv-refs-head {
-    font-size: 10px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase;
-    color: var(--muted); padding-bottom: 6px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
+    font-size: 9.5px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--muted); padding-bottom: 5px; border-bottom: 1px solid var(--border); margin-bottom: 6px;
   }
   .trv-ref-row {
-    display: flex; align-items: center; gap: 10px; padding: 3px 0;
-    font-size: 11.5px; color: #666; border-bottom: 1px dotted #eee;
+    display: flex; align-items: center; gap: 9px; padding: 2px 0;
+    font-size: 10.5px; color: #666; border-bottom: 1px dotted #eee;
   }
   .trv-ref-row:last-child { border-bottom: none; }
   /* Assigned accessories nest tight under their fixture in the refs list too. */
   .trv-ref-row:has(+ .trv-ref-attached) { border-bottom: none; padding-bottom: 0; }
-  .trv-ref-attached { padding: 0 0 2px 26px; font-size: 10.5px; color: #8a8a8a; }
+  .trv-ref-attached { padding: 0 0 2px 24px; font-size: 9.5px; color: #8a8a8a; }
   .trv-ref-attached .trv-ref-name { font-weight: 400; }
-  .trv-ref-qty { font-weight: 600; color: #555; min-width: 30px; flex-shrink: 0; }
+  .trv-ref-qty { font-weight: 600; color: #555; min-width: 28px; flex-shrink: 0; }
   .trv-ref-name { color: #444; font-weight: 500; flex-shrink: 0; }
-  .trv-ref-sku { color: #999; font-size: 11px; flex-shrink: 0; }
+  .trv-ref-sku { color: #999; font-size: 10px; flex-shrink: 0; }
   .trv-ref-spacer { flex: 1 1 auto; }   /* pushes location + number to the right */
   .trv-ref-where {
-    font-size: 10px; font-weight: 600; color: #777; padding: 2px 8px;
+    font-size: 9.5px; font-weight: 600; color: #777; padding: 2px 7px;
     background: var(--bg); border: 1px solid var(--border); border-radius: 999px; white-space: nowrap;
+  }
+  /* Ship-along items (bulbs / globes) — "ships with order · pack". Amber so the
+     shipping station can't skim past a physical item that needs to go in the box. */
+  .trv-ref-ship .trv-ref-where {
+    color: var(--accent-dark); background: #FFF7EB; border-color: #FCD9A6;
+  }
+  .trv-ref-ship .trv-ref-num {
+    color: var(--accent-dark); font-weight: 600;
   }
   /* Traveler number at the far right of a reference row — orange, matching the
      top counter. min-width keeps the column aligned across rows. */
@@ -1667,7 +1710,9 @@
     display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
     column-gap: 18px; align-items: baseline;
   }
-  .trv-sig { display: flex; align-items: baseline; min-width: 0; grid-row: 1; }
+  /* Sign-off cells share row 2; the EXPEDITE banner (when present) sits on row 1
+     ABOVE the Order Date / Ship By / QC strip. */
+  .trv-sig { display: flex; align-items: baseline; min-width: 0; grid-row: 2; }
   .trv-sig-date      { grid-column: 1; }
   .trv-sig-shipby    { grid-column: 2; }
   .trv-sig-partsqc   { grid-column: 3; }
@@ -1675,7 +1720,7 @@
   .trv-sig-label { font-size: 13px; font-weight: 500; color: #000; white-space: nowrap; margin-right: 8px; }
   .trv-sig-value { font-size: 13px; color: #000; white-space: nowrap; }
   .trv-sig-fill { flex: 1 1 auto; border-bottom: 1px solid #d8d8d8; height: 1px; }
-  .trv-foot .trv-expedite { grid-column: 1 / -1; grid-row: 2; justify-self: start; margin: 12px 0 0; }
+  .trv-foot .trv-expedite { grid-column: 1 / -1; grid-row: 1; justify-self: start; margin: 0 0 12px; }
 
   /* ── Drag-drop affordances (screen only) ── */
   .trv-build-row { cursor: grab; }
@@ -1903,6 +1948,10 @@
 
   <section class="kpi-row" id="kpiRow"></section>
 
+  <!-- Open orders that produced ZERO travelers (bulb/globe/excluded-only).
+       Populated by renderNeedsAttention(); hidden when the list is empty. -->
+  <div class="needs-attention" id="needsAttention" hidden></div>
+
   <!-- ── Order queue ── -->
   <div class="tab-content" id="content-order">
     <div class="oq-cutoff-info" id="oqCutoff"></div>
@@ -1980,8 +2029,119 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-16T10:00:03",
+  "built_at": "2026-06-16T11:00:03",
   "orders": [
+    {
+      "shopify_order_id": "7009220034642",
+      "shopify_order_name": "36144",
+      "shopify_order_number": "36144",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 266.08,
+      "ship_by_date": null,
+      "latest_ship_by": "\u2014",
+      "lead_time_label": "",
+      "is_expedited": false,
+      "created_at": "2026-06-16T10:32:28-05:00",
+      "tags": "redo, trade",
+      "total_price": 266.08,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7009220034642",
+          "shopify_order_name": "36144",
+          "shopify_order_number": "36144",
+          "key": [
+            "finish",
+            "Black"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "parent_skus": [
+            "60221"
+          ],
+          "variant_skus": [
+            "60221-3"
+          ],
+          "line_item_titles": [
+            "Scepter Sconce 18\""
+          ],
+          "lines": [
+            {
+              "title": "Scepter Sconce 18\"",
+              "variant_title": "Black",
+              "variant_sku": "60221-3",
+              "parent_sku": "60221",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-scepter-sconce-18-black-black_a453d8ae-3693-457b-91da-42338e6fe710.jpg?v=1757506948&width=120",
+              "properties": [],
+              "rod_finish": "Finish"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "finish",
+          "traveler_key": "finish|Black"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7009220034642",
+          "shopify_order_name": "36144",
+          "shopify_order_number": "36144",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-16T10:32:28-05:00",
+          "parent_sku": "60221",
+          "color": null,
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16937671917650
+          ],
+          "item_titles": [
+            "Scepter Sconce 18\""
+          ],
+          "variant_skus": [
+            "60221-3"
+          ],
+          "tags": [
+            "Auto-Created",
+            "Finish-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7009048952914",
       "shopify_order_name": "36143",
@@ -2152,7 +2312,9 @@ const QUEUE = {
           "review_note": null
         }
       ],
-      "traveler_pdf_url": ""
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
     },
     {
       "shopify_order_id": "7009008779346",
@@ -2269,14 +2431,18 @@ const QUEUE = {
           "review_note": null
         }
       ],
-      "traveler_pdf_url": ""
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
     }
   ],
+  "needs_attention": [],
   "totals": {
-    "orders": 2,
-    "printouts": 2,
-    "notion_rows": 3,
-    "skipped_already_printed": 182
+    "orders": 3,
+    "printouts": 3,
+    "notion_rows": 4,
+    "skipped_already_printed": 175,
+    "needs_attention": 0
   },
   "public_redacted": true
 };
@@ -3519,9 +3685,10 @@ function trvBuildRow(ln){
     </tr>`;
 }
 
-function trvRefRow(ln, where, travelerLabel){
+function trvRefRow(ln, where, travelerLabel, isShipWith){
   const sku = ln.variant_sku ? `<span class="trv-ref-sku">${escapeHtml(ln.variant_sku)}</span>` : "";
   const att = ln._att ? " trv-ref-attached" : "";
+  const ship = isShipWith ? " trv-ref-ship" : "";
   const vchips = trvVariantChips(ln);
   // The traveler number lives at the FAR RIGHT (after the location tag), in the
   // same orange format as the top traveler counter — so the floor can see which
@@ -3530,7 +3697,7 @@ function trvRefRow(ln, where, travelerLabel){
   // Title / SKU / swatch chips are SEPARATE flex children so the row's gap
   // spaces them out instead of cramming everything together. A flex spacer
   // pushes the location tag + traveler number to the right.
-  return `<div class="trv-ref-row${att}">
+  return `<div class="trv-ref-row${att}${ship}">
       <span class="trv-ref-qty">× ${ln.qty}</span>
       <span class="trv-ref-name">${escapeHtml(ln.title)}</span>
       ${sku}
@@ -3563,6 +3730,11 @@ function trvReferences(o, p){
       : `${other._travelerNum||"?"}/${other._travelerTotal||(o.printouts||[]).length}`;
     (other.lines||[]).forEach(ln => refs.push(trvRefRow(ln, where, label)));
   });
+  // Physical ship-along items with no traveler (bulbs / glass globes). They go
+  // in the box but never get built, so they'd otherwise be invisible to the
+  // shipping station — list them here, flagged "ships with order", so they get
+  // packed. Shown on every sheet (like siblings) so they can't be missed.
+  (o.ships_with||[]).forEach(ln => refs.push(trvRefRow(ln, "ships with order", "pack", true)));
   if(!refs.length) return "";
   return `<div class="trv-refs">
       <div class="trv-refs-head">Also on this order</div>
@@ -3584,7 +3756,12 @@ function trvNotes(o){
     </div>`;
 }
 
-const DB_LOGO = "https://www.orderprintertemplates.com/api/v1/logos/bd06efacfb0688e9dec1?v=1750774793";
+// Traveler brandmark. Use the LOCAL svg (same file the sidebar uses), not the
+// old Order Printer Pro remote URL — a 250KB external fetch that silently failed
+// to load during headless PDF render, leaving the top-right logo blank. The file
+// is copied next to every rendered HTML (published boards AND the data/ render
+// dir the PDFs are driven from) by _copy_logo / _render_release_html.
+const DB_LOGO = "logo-dutton-brown.svg";
 
 // ── Master traveler (Large orders >$5K with 4+ travelers) ───────────────────
 // An UNNUMBERED cover sheet listing every item on the order in full build-row
@@ -3632,6 +3809,9 @@ function renderMasterTraveler(o, calloutHtml){
   // Unassigned rods belong to no traveler yet — list them flagged.
   (o.printouts||[]).filter(p => p._pendingRod)
     .forEach(p => (p.lines||[]).forEach(ln => rows.push(trvMasterRow(ln, "assign!"))));
+  // Physical ship-along items (bulbs / glass globes) — no traveler, but they
+  // ship in the box, so list them on the cover sheet flagged "pack".
+  (o.ships_with||[]).forEach(ln => rows.push(trvMasterRow(ln, "pack")));
 
   const expedite = o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : "";
   const shipBy = o.latest_ship_by && o.latest_ship_by !== "—"
@@ -3765,7 +3945,6 @@ function renderTraveler(o, p, idx, total, calloutHtml){
       <div>
         <div class="trv-tags">
           <span class="trv-loc-pill loc-${(p.location||'').toLowerCase().replace(/\s+/g,'-')}">${escapeHtml(p.location||"")}</span>
-          ${trvChip(p)}
         </div>
         ${expedite}
         <div class="trv-ordernum-row">
@@ -3798,11 +3977,11 @@ function renderTraveler(o, p, idx, total, calloutHtml){
     ${trvNotes(o)}
     <div class="trv-spacer"></div>
     <div class="trv-foot">
+      ${o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : ""}
       <div class="trv-sig trv-sig-date"><span class="trv-sig-label">Order Date:</span><span class="trv-sig-value">${escapeHtml(fmtDateShort(o.created_at))}</span></div>
       ${isShippingTraveler ? "" : `<div class="trv-sig trv-sig-shipby"><span class="trv-sig-label">Ship By</span><span class="trv-sig-fill"></span></div>
       ${isPowderCoating ? `<div class="trv-sig trv-sig-partsqc"><span class="trv-sig-label">Parts QC</span><span class="trv-sig-fill"></span></div>` : ""}
       <div class="trv-sig trv-sig-productqc"><span class="trv-sig-label">Product QC</span><span class="trv-sig-fill"></span></div>`}
-      ${o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : ""}
     </div>
   </div>`;
 }
@@ -5274,6 +5453,41 @@ function renderAssemblyQueue(){
   }).join("");
 }
 
+// Open orders that produced ZERO travelers (bulb/globe/excluded-only). They
+// ship from inventory and never build — but the lead must confirm each is a
+// legit quick-ship, not a round the queue silently missed (orders 36103/36130).
+// Hidden when the list is empty.
+function renderNeedsAttention(){
+  const el = document.getElementById("needsAttention");
+  if(!el) return;
+  const items = QUEUE.needs_attention || [];
+  if(!items.length){ el.hidden = true; el.innerHTML = ""; return; }
+  const redacted = QUEUE && QUEUE.public_redacted;
+  const rows = items.map(o => {
+    const num = escapeHtml(String(o.shopify_order_number || o.shopify_order_name || ""));
+    // Admin link + customer name are stripped on the public board (redacted).
+    const orderCell = (!redacted && o.shopify_url)
+      ? `<a href="${escapeHtml(o.shopify_url)}" target="_blank" rel="noopener">#${num}</a>`
+      : `#${num}`;
+    const cust = (!redacted && o.customer_name) ? escapeHtml(o.customer_name) : "";
+    const when = o.created_at ? fmtDateLong(o.created_at) : "";
+    const meta = [cust, when].filter(Boolean).join(" · ");
+    return `<li>
+      <span class="na-order">${orderCell}</span>
+      <span class="na-reason">${escapeHtml(o.reason_label || o.reason || "")}</span>
+      ${meta ? `<span class="na-meta">${meta}</span>` : ""}
+    </li>`;
+  }).join("");
+  const n = items.length;
+  el.innerHTML = `
+    <div class="needs-attention-head">
+      ⚠ ${n} open order${n===1?"":"s"} produced no traveler
+      <span class="needs-attention-sub">— confirm each is a quick-ship (bulbs / globes / accessories), not a missed order</span>
+    </div>
+    <ul>${rows}</ul>`;
+  el.hidden = false;
+}
+
 function render(){
   const sectionsEl = document.getElementById("sections");
   if(!QUEUE){
@@ -5281,12 +5495,18 @@ function render(){
     return;
   }
   const t = QUEUE.totals || {};
+  const naCount = (QUEUE.needs_attention || []).length;
+  const naTile = naCount
+    ? `<div class="kpi" title="Open orders that produced no traveler — confirm each is a quick-ship (bulbs/globes), not a missed order."><div class="kpi-value" style="color:var(--error)">${naCount}</div><div class="kpi-label">Needs attention</div></div>`
+    : "";
   document.getElementById("kpiRow").innerHTML = `
     <div class="kpi" title="Open, unfulfilled Shopify orders that are NOT yet tagged 'printed'."><div class="kpi-value">${t.orders||0}</div><div class="kpi-label">Unprinted orders</div></div>
     <div class="kpi"><div class="kpi-value accent">${t.printouts||0}</div><div class="kpi-label">Pages predicted</div></div>
     <div class="kpi"><div class="kpi-value">${t.notion_rows||0}</div><div class="kpi-label">Assembly rows</div></div>
     <div class="kpi"><div class="kpi-value muted">${t.skipped_already_printed||0}</div><div class="kpi-label">Already printed</div></div>
+    ${naTile}
   `;
+  renderNeedsAttention();
   // "Samples + Quick first" reorders the whole SECTION stack so the quick-ship
   // work (Shipping = samples, then Assembly) prints before Powder Coating — not
   // just within each section. Otherwise sections keep their default order.
