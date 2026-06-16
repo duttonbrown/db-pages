@@ -1980,7 +1980,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-16T09:00:03",
+  "built_at": "2026-06-16T09:32:59",
   "orders": [
     {
       "shopify_order_id": "7008585547858",
@@ -2018,7 +2018,7 @@ const QUEUE = {
     "orders": 1,
     "printouts": 0,
     "notion_rows": 0,
-    "skipped_already_printed": 190
+    "skipped_already_printed": 186
   },
   "public_redacted": true
 };
@@ -4469,7 +4469,60 @@ async function printAllTravelers(){
 // release.json for the "DB Finalize Release" .bat, exactly as before.
 // Append ?dryrun=1 to the board URL to send a dry-run (renders, writes nothing).
 const RELEASE_WEBHOOK = "https://thomometer.app.n8n.cloud/webhook/db-release";
+
+// ── Release allowlist ────────────────────────────────────────────────────────
+// Only these signed-in @duttonbrown.com accounts may release a batch, so nobody
+// tags orders PRINTED + attaches PDFs by an accidental click. The page is behind
+// Cloudflare Access, so we read the authenticated email from the Access identity
+// endpoint and disable the Release button for everyone else. (Casual-click
+// guard — not a hard security boundary; the email is also logged downstream.)
+const RELEASE_ALLOWLIST = [
+  "shipping@duttonbrown.com",
+  "thomas@duttonbrown.com",
+  "chase@duttonbrown.com",
+  "alex@duttonbrown.com",
+];
+let RELEASE_USER_EMAIL = null;   // resolved once from CF Access
+let RELEASE_ALLOWED = null;      // null = unknown yet; true/false once resolved
+
+async function resolveReleaseUser(){
+  // Cloudflare Access serves the signed-in identity here on any Access-gated
+  // host. Local dev (no Access) → 400/empty → treat as allowed so the tool still
+  // works at the machine. A real hub user gets their @duttonbrown.com email.
+  try{
+    const r = await fetch("/cdn-cgi/access/get-identity", {credentials:"include"});
+    if(!r.ok) return null;             // not behind Access (local dev) → null
+    const id = await r.json().catch(() => ({}));
+    return (id && id.email) ? String(id.email).trim().toLowerCase() : null;
+  }catch(e){ return null; }
+}
+
+async function enforceReleaseGate(){
+  const btn = document.getElementById("releaseBatchBtn");
+  if(!btn) return;
+  const email = await resolveReleaseUser();
+  RELEASE_USER_EMAIL = email;
+  // No identity (local dev / Access not in front) → leave the button enabled.
+  if(email === null){ RELEASE_ALLOWED = true; return; }
+  RELEASE_ALLOWED = RELEASE_ALLOWLIST.includes(email);
+  if(!RELEASE_ALLOWED){
+    btn.disabled = true;
+    btn.title = "Releasing is limited to Shipping and management (shipping@, " +
+                "Chase, Alex, Thomas). You're signed in as " + email + ".";
+    btn.style.opacity = "0.5";
+    btn.style.cursor = "not-allowed";
+  }
+}
+
 async function releaseBatch(){
+  // Hard guard (defense in depth): refuse if the resolved user isn't allowed,
+  // even if the button was somehow re-enabled. RELEASE_ALLOWED===true also
+  // covers local dev (null identity).
+  if(RELEASE_ALLOWED === false){
+    showTrvToast("Releasing is limited to Shipping and management (shipping@, " +
+                 "Chase, Alex, Thomas).", null);
+    return;
+  }
   if(!QUEUE || !(QUEUE.orders||[]).length){
     showTrvToast("Nothing on the board to release.", null);
     return;
@@ -5038,6 +5091,9 @@ function init(){
   if(TAB_NAMES.includes(hash)){
     setTab(hash, false);
   }
+
+  // Gate the Release button to Shipping + management (async; disables on resolve).
+  enforceReleaseGate();
 }
 init();
 </script>
