@@ -2029,7 +2029,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-16T15:00:02",
+  "built_at": "2026-06-16T16:00:02",
   "orders": [
     {
       "shopify_order_id": "7009587265618",
@@ -2104,7 +2104,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
-              "rod_finish": "Finish"
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
             },
             {
               "title": "Color Lepore Flush Mount",
@@ -2249,11 +2250,11 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-K",
+            "SAC-H",
             "SAF-ALL",
             "SAC-B",
-            "SAC-H",
-            "SAC-D"
+            "SAC-D",
+            "SAC-K"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2547,7 +2548,8 @@ const QUEUE = {
               "category_label": "Fixture",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-scepter-sconce-18-black-black_a453d8ae-3693-457b-91da-42338e6fe710.jpg?v=1757506948&width=120",
               "properties": [],
-              "rod_finish": "Finish"
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
             }
           ],
           "total_qty": 1,
@@ -2669,7 +2671,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
-              "rod_finish": "Finish"
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
             },
             {
               "title": "Color Supreme Flush Mount",
@@ -2687,7 +2690,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
-              "rod_finish": "Finish"
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
             }
           ],
           "total_qty": 2,
@@ -4807,6 +4811,8 @@ function isRodLine(ln){
 // screen); the rod heuristic covers fallback lines without a category.
 function isAssignableLine(ln){
   if(lineProductType(ln.variant_sku, ln.title) === "Sample") return false;
+  // Bulbs distribute onto fixtures just like rods (see bulb helpers below).
+  if(isBulbLine(ln)) return true;
   return ln.category === "accessory" || (!ln.category && isRodLine(ln));
 }
 // A rod sheet is "pending assignment" when the order ALSO has pendant/
@@ -4876,6 +4882,111 @@ function rodFinishChip(rodVar, r){
   return `<span class="trv-rod-chip trv-rod-${cls}" title="From Notion Products › Rod Finish">${escapeHtml(text)}</span>`;
 }
 
+// ── Bulb-aware assignment (mirror of the rod helpers above) ──────────────────
+// Bulbs distribute onto FIXTURES, not whole travelers. A fixture's SKU encodes
+// how many bulbs it takes (2nd+3rd digits: 31000 → 10, 60221 → 2), and its
+// Notion "Lampholder Label" (stamped as ln.lampholder) says which bulbs fit:
+// L-A15 = only G16/A15, L-PAR16 = only PAR16, L-A / L-G = any. Backend folds
+// single-fixture orders automatically (fold_bulb rows) and flags multi-fixture
+// orders as a bulb sheet (is_bulb_sheet) the board surfaces as a task.
+const BULB_TYPES = ["PAR16","G16","G25","A15","A19","T30","T45"];
+function isBulbLine(ln){
+  if(ln && ln.is_bulb) return true;
+  const s = (ln && ln.variant_sku) || "";
+  const t = ((ln && ln.title) || "").toLowerCase();
+  return /^BULB/i.test(s) || t.includes("bulb");
+}
+// Bulb base size from title (reliable) then SKU (often opaque). Matches lib/bulbs.
+function bulbTypeOf(ln){
+  if(ln && ln.bulb_type) return ln.bulb_type;
+  const hay = `${(ln&&ln.title)||""} ${(ln&&ln.variant_title)||""} ${(ln&&ln.variant_sku)||""}`;
+  for(const t of BULB_TYPES){
+    if(new RegExp(`(?<![A-Z0-9])${t}(?![0-9])`, "i").test(hay)) return t;
+  }
+  return null;
+}
+// Bulbs per fixture from the 5-digit lighting SKU's 2nd+3rd digits.
+function bulbsPerFixture(sku){
+  const s = (sku||"").trim();
+  if(!/^[1-9]\d{4}/.test(s)) return 0;
+  const n = parseInt(s.slice(1,3), 10);
+  return Number.isFinite(n) ? n : 0;
+}
+function fixtureTakesBulbs(ln){
+  return bulbsPerFixture((ln&&ln.parent_sku) || (ln&&ln.variant_sku) || "") > 0;
+}
+// A fixture line is a valid bulb target if it takes bulbs and isn't itself a bulb.
+function isBulbTargetLine(ln){
+  return !isBulbLine(ln) && fixtureTakesBulbs(ln);
+}
+// Lampholder fit: true fits, false doesn't, null unknown. Mirrors lib/bulbs.fits.
+const BULB_FIT_RESTRICTED = { "L-A15": ["G16","A15"], "L-PAR16": ["PAR16"] };
+function bulbFits(bulbType, label){
+  if(!label || !bulbType) return null;
+  const allowed = BULB_FIT_RESTRICTED[(label||"").trim().toUpperCase()];
+  if(!allowed) return true;                 // L-A / L-G / unrestricted = roomy
+  return allowed.includes(bulbType);
+}
+function bulbFitScore(bulbType, label){
+  const f = bulbFits(bulbType, label);
+  return f === true ? 2 : f === false ? -2 : 0;
+}
+// A bulb sheet is "pending assignment" when the order has fixtures to assign
+// onto. (The backend only emits is_bulb_sheet in that case, but guard anyway.)
+function isPendingBulbSheet(o, p){
+  if(!p || !p.is_bulb_sheet) return false;
+  return (o.printouts||[]).some(q => q !== p &&
+    (q.lines||[]).some(isBulbTargetLine));
+}
+// Fit chip for a fixture row in the bulb dialog (and for nested fold_bulb rows):
+// green "fits", gray "lampholder: L-A", red "G25 — may not fit L-A15".
+function bulbFitChip(bulbType, label){
+  if(!label && !bulbType) return "";
+  const f = bulbFits(bulbType, label);
+  const cls = f === true ? "match" : f === false ? "warn" : "info";
+  let text;
+  if(f === false)      text = `${bulbType} — may not fit ${label}`;
+  else if(f === true)  text = label ? `fits · ${label}` : "fits";
+  else                 text = label ? `lampholder: ${label}` : "lampholder: unknown";
+  return `<span class="trv-rod-chip trv-rod-${cls}" title="From Notion Products › Lampholder Label">${escapeHtml(text)}</span>`;
+}
+// Fit chip for a folded bulb sub-row (Case A): reads the bulb's type and the
+// lampholder of its sibling fixture line(s) on the SAME sheet. Only warns/info —
+// a clean fit shows nothing (the row already sits under its fixture).
+function foldBulbFitChip(p, bulbLn){
+  const bt = bulbTypeOf(bulbLn);
+  const labels = (p.lines||[])
+    .filter(ln => !ln.is_bulb && ln.lampholder)
+    .map(ln => ln.lampholder);
+  if(!labels.length || !bt) return "";
+  // If any sibling fixture can't take this bulb, warn; else stay quiet.
+  const bad = labels.find(lab => bulbFits(bt, lab) === false);
+  if(bad) return bulbFitChip(bt, bad);
+  return "";
+}
+
+// Suggested per-fixture UNIT fill for bulbs: meet each fixture's bulb need
+// (bulbsPerFixture × qty) in fit-rank order, converting bulbs → line units via
+// pack size; extras (customer over-ordered) pile onto the best-fit fixture.
+// `rows` are {p, ln} already sorted best-fit first. `avail` = bulb line qty
+// (units). `pack` = bulbs per unit. Returns a units array aligned to rows.
+function suggestBulbFill(rows, avail, pack){
+  pack = Math.max(1, pack||1);
+  const fill = new Array(rows.length).fill(0);
+  let unitsLeft = avail;
+  // Bulbs each fixture still needs.
+  const need = rows.map(r => bulbsPerFixture((r.ln.parent_sku||r.ln.variant_sku)) * (r.ln.qty||1));
+  for(let i=0; i<rows.length && unitsLeft>0; i++){
+    if(need[i] <= 0) continue;
+    const wantUnits = Math.ceil(need[i] / pack);
+    const give = Math.min(wantUnits, unitsLeft);
+    fill[i] += give; unitsLeft -= give;
+  }
+  // Leftover units (over-order) → the single best-fit fixture (index 0 post-sort).
+  if(unitsLeft > 0 && rows.length){ fill[0] += unitsLeft; unitsLeft = 0; }
+  return fill.some(x=>x>0) ? fill : null;
+}
+
 // Note segments like `Color Echo Pendant (11) 6", (22) 24"` → entries of
 // {name, count, size}. Lines/segments without a (count) size" pair are skipped.
 function parseRodNote(note){
@@ -4935,14 +5046,17 @@ function distQuick(btn, n){
 function openDistribute(lid){
   const src = findLineByLid(lid);
   if(!src) return;
-  const rodMode = isRodLine(src.line);
-  // Rod mode: rows = the order's pendant/chandelier LINES (other sheets only).
+  const bulbMode = isBulbLine(src.line);
+  const rodMode = !bulbMode && isRodLine(src.line);
+  // Rod/bulb mode: rows = the order's fixture LINES (other sheets only). Rods
+  // target pendants/chandeliers; bulbs target any fixture that takes bulbs.
   let fixtureRows = [];
-  if(rodMode){
+  if(rodMode || bulbMode){
     (src.order.printouts||[]).forEach(p => {
       if(p === src.printout) return;
       (p.lines||[]).forEach(ln => {
-        if(ROD_TARGET_RE.test(ln.title||"")) fixtureRows.push({ p, ln });
+        if(bulbMode ? isBulbTargetLine(ln) : ROD_TARGET_RE.test(ln.title||""))
+          fixtureRows.push({ p, ln });
       });
     });
   }
@@ -4953,7 +5067,47 @@ function openDistribute(lid){
   DIST_LID = lid;
 
   let rowsHtml, metaExtra = "";
-  if(rodMode && fixtureRows.length){
+  if(bulbMode && fixtureRows.length){
+    const bulbType = bulbTypeOf(src.line);
+    const pack = (src.line.bulb_count && src.line.qty)
+      ? Math.max(1, Math.round(src.line.bulb_count / src.line.qty)) : 1;
+    // Rank fixtures by lampholder fit (fits > unknown > doesn't fit); stable so
+    // equal scores keep board order. Sort BEFORE the prefill (its indexes follow).
+    fixtureRows = fixtureRows
+      .map((r, i) => ({ r, i, s: bulbFitScore(bulbType, r.ln.lampholder) }))
+      .sort((a, b) => b.s - a.s || a.i - b.i)
+      .map(x => x.r);
+    const suggested = suggestBulbFill(fixtureRows, src.line.qty, pack);
+    rowsHtml = fixtureRows.map((r, i) => {
+      const lbl = travelerOptionLabel(r.p);
+      const val = suggested ? (suggested[i] || 0) : 0;
+      const need = bulbsPerFixture(r.ln.parent_sku||r.ln.variant_sku) * (r.ln.qty||1);
+      const per1 = Math.min(src.line.qty, 1 * (r.ln.qty || 1));
+      const needUnits = Math.min(src.line.qty, Math.ceil(need / pack));
+      return `<div class="trv-dist-row">
+          <div class="trv-dist-info">
+            <div class="trv-dist-main">${r.ln.qty} × ${escapeHtml(r.ln.title)}${bulbFitChip(bulbType, r.ln.lampholder)}</div>
+            <div class="trv-dist-sub">${escapeHtml(lbl.main)} · takes ${need} bulb${need===1?"":"s"}${pack>1?` · ${pack}/unit`:""}</div>
+          </div>
+          <span class="trv-dist-quick">
+            <button type="button" onclick="distQuick(this, ${needUnits})" title="Fill this fixture's need (${need} bulbs)">need</button>
+            <button type="button" onclick="distQuick(this, ${per1})" title="1 unit per fixture">1/u</button>
+          </span>
+          <input type="number" class="trv-dist-qty" data-tkey="${escapeHtml(r.p.traveler_key||"")}"
+                 data-attach="${escapeHtml(r.ln._lid)}" data-attach-title="${escapeHtml(r.ln.title||"")}"
+                 min="0" max="${src.line.qty}" value="${val}" oninput="distRecount()">
+        </div>`;
+    }).join("");
+    if(suggested){
+      metaExtra += `<div class="trv-dist-flag">Pre-filled best guess — each fixture filled to its bulb need, extras on the best fit. Alex decides; adjust and Apply.</div>`;
+    }
+    if(fixtureRows.some(r => r.ln.lampholder)){
+      metaExtra += `<div class="trv-dist-flag">Fixtures ranked by lampholder fit${bulbType ? ` for ${escapeHtml(bulbType)} bulbs` : ""} — <span class="trv-rod-chip trv-rod-warn">red</span> = may not fit.</div>`;
+    }
+    if(pack > 1){
+      metaExtra += `<div class="trv-dist-flag">This line is ${pack}-packs: each unit you assign = ${pack} bulbs. Boxes can't be split.</div>`;
+    }
+  } else if(rodMode && fixtureRows.length){
     const size = rodSizeOf(src.line);
     // Rank fixtures by Rod Finish fit (Notion Products DB): fixtures whose own
     // rod matches the rod being assigned float to the top; "No Rod" /
@@ -5014,7 +5168,7 @@ function openDistribute(lid){
       <div class="trv-dist-title">Assign “${escapeHtml(src.line.title)}”
         <span class="trv-dist-order">${escapeHtml(src.order.shopify_order_name || ("#" + (src.order.shopify_order_number || "")))}</span></div>
       <div class="trv-dist-meta">${src.line.qty} × ${escapeHtml(src.line.variant_sku||"")} on this sheet —
-        type how many go to each ${rodMode && fixtureRows.length ? "fixture" : "traveler"}. Whatever's left stays here. Ctrl+Z steps back.</div>
+        type how many go to each ${(rodMode||bulbMode) && fixtureRows.length ? "fixture" : "traveler"}. Whatever's left stays here. Ctrl+Z steps back.</div>
       ${metaExtra}
       <div class="trv-dist-rows">${rowsHtml}</div>
       <div class="trv-dist-foot">
@@ -5206,8 +5360,11 @@ function renderTravelers(){
   // ASSIGNMENT TASK at the top of this tab. Emptied sheets (fully assigned
   // away) drop out of the print run and the numbering entirely.
   const rodTasks = [];
+  // Bulbs on multi-fixture orders are an ASSIGNMENT TASK too (mirror of rods):
+  // their sheet never prints — the lead distributes the bulbs onto fixtures.
+  const bulbTasks = [];
   (QUEUE.orders||[]).forEach((o, orderIdx) => {
-    (o.printouts||[]).forEach(p => { p._pendingRod = false; });
+    (o.printouts||[]).forEach(p => { p._pendingRod = false; p._pendingBulb = false; });
     const ordered = (o.printouts||[]).map((p, origIdx) => ({p, origIdx}))
       .filter(({p}) => (p.lines||[]).length > 0)
       .filter(({p}) => {
@@ -5215,6 +5372,12 @@ function renderTravelers(){
           p._pendingRod = true;
           p._travelerNum = null; p._travelerTotal = null;
           (p.lines||[]).forEach(ln => rodTasks.push({ o, ln }));
+          return false;
+        }
+        if(isPendingBulbSheet(o, p)){
+          p._pendingBulb = true;
+          p._travelerNum = null; p._travelerTotal = null;
+          (p.lines||[]).forEach(ln => bulbTasks.push({ o, ln }));
           return false;
         }
         return true;
