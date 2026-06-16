@@ -946,6 +946,25 @@
       <li>
         <div class="cl-date">2026-06-16</div>
         <div>
+          <p class="cl-title">Every open order now gets a traveler — catch-all sheet for the odd ones.</p>
+          <p class="cl-body">
+            If the build rules don’t recognize an order, it still gets a pickable
+            <strong>Shipping</strong> traveler instead of disappearing. This
+            covers <strong>bulb / glass-globe-only</strong> orders (#36103,
+            #36130), <strong>custom $0 draft orders</strong>, and
+            <strong>one-time / lost-part</strong> orders with a free-text line and
+            no real SKU. The sheet lists every physical line and notes “no
+            standard build — pull, pack, ship; confirm with the manager if
+            anything needs building.” Only fee/label-only or empty orders get no
+            sheet — those still show in <strong>“Needs attention”</strong> for the
+            lead to dismiss. CUSTOM-* color-match lines on a build order now also
+            surface under “Also on this order” so they can’t be missed.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="cl-date">2026-06-16</div>
+        <div>
           <p class="cl-title">Bulbs &amp; glass globes now show on the traveler so shipping packs them.</p>
           <p class="cl-body">
             Bulbs and glass globes never get a build sheet (nothing to build),
@@ -975,16 +994,14 @@
       <li>
         <div class="cl-date">2026-06-16</div>
         <div>
-          <p class="cl-title">Every open order is now accounted for — no silent drops.</p>
+          <p class="cl-title">“Needs attention” panel — no order leaves the board unseen.</p>
           <p class="cl-body">
-            An order whose lines are <em>all</em> bulbs, glass globes, or
-            excluded upsells (package protection, fees, return labels) produces
-            no traveler by design — those ship straight from inventory. Such
-            orders used to vanish from the board with no record (orders #36103
-            and #36130 slipped through this way). The build now lists them in a
-            <strong>“Needs attention”</strong> panel and a <strong>Needs
-            attention</strong> count tile, so the lead can confirm each is a
-            real quick-ship rather than a missed order.
+            Any open order that ends up with <em>no</em> traveler now lists in a
+            <strong>“Needs attention”</strong> panel with a count tile. After the
+            catch-all change above, that’s only fee/label-only or empty orders
+            (nothing to ship) — the lead glances and dismisses. This is the
+            backstop that ensures an order can never silently vanish from a round
+            the way #36103 and #36130 did.
           </p>
         </div>
       </li>
