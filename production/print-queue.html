@@ -2029,7 +2029,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-16T16:00:02",
+  "built_at": "2026-06-16T17:00:02",
   "orders": [
     {
       "shopify_order_id": "7009587265618",
@@ -2250,11 +2250,11 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-H",
             "SAF-ALL",
-            "SAC-B",
             "SAC-D",
-            "SAC-K"
+            "SAC-K",
+            "SAC-H",
+            "SAC-B"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -4098,7 +4098,7 @@ function trvLineProps(props){
   }).join("");
 }
 
-function trvBuildRow(ln){
+function trvBuildRow(ln, p){
   // Thumbnails load EAGERLY (not lazy): they're small and must always be
   // present on print — lazy off-screen images were rendering blank.
   const img = ln.image_url
@@ -4119,7 +4119,12 @@ function trvBuildRow(ln){
   // Lines assigned to a specific fixture (rod assignment) render nested under
   // it — indented and vertically tight, so the position itself says "belongs
   // to the item above". No text tag (wastes space; position is the signal).
-  const rowCls = ln._att ? " trv-row-attached" : "";
+  // Bulb rows nested under a fixture — either auto-folded (fold_bulb, Case A) or
+  // hand-assigned via the dialog (_att, Case B) — nest like rod sub-rows and
+  // carry a fit chip when the bulb may not fit the fixture's lampholder.
+  const isFoldBulb = !!ln.fold_bulb;
+  const rowCls = (ln._att || isFoldBulb) ? " trv-row-attached" : "";
+  const bulbChip = (isFoldBulb || (ln._att && isBulbLine(ln))) && p ? foldBulbFitChip(p, ln) : "";
   // ⇄ assign is an accessories-only affordance: lighting and hardware are the
   // builds themselves — they're never distributed onto other items' travelers.
   const assignBtn = isAssignableLine(ln)
@@ -4134,7 +4139,7 @@ function trvBuildRow(ln){
         ${img}
       </td>
       <td>
-        <p class="trv-li-title">${escapeHtml(ln.title)}${variant}</p>
+        <p class="trv-li-title">${escapeHtml(ln.title)}${variant}${bulbChip}</p>
         ${sku}${trvLineProps(ln.properties)}
       </td>
       <td class="trv-qty">× ${ln.qty}
@@ -4178,7 +4183,7 @@ function trvReferences(o, p){
     .sort((a,b) => (a._travelerNum||0) - (b._travelerNum||0));
   siblings.forEach(other => {
     if(!(other.lines||[]).length) return;             // emptied sheets aren't anywhere
-    const pending = !!other._pendingRod;
+    const pending = !!(other._pendingRod || other._pendingBulb);
     const where = pending
       ? "Needs assignment"
       : (other.color || other.finish || other.category_label || "Other")
@@ -4264,8 +4269,8 @@ function renderMasterTraveler(o, calloutHtml){
     const badge = `${p._travelerNum}/${p._travelerTotal}`;
     (p.lines||[]).forEach(ln => rows.push(trvMasterRow(ln, badge)));
   });
-  // Unassigned rods belong to no traveler yet — list them flagged.
-  (o.printouts||[]).filter(p => p._pendingRod)
+  // Unassigned rods/bulbs belong to no traveler yet — list them flagged.
+  (o.printouts||[]).filter(p => p._pendingRod || p._pendingBulb)
     .forEach(p => (p.lines||[]).forEach(ln => rows.push(trvMasterRow(ln, "assign!"))));
   // Physical ship-along items (bulbs / glass globes) — no traveler, but they
   // ship in the box, so list them on the cover sheet flagged "pack".
@@ -4356,9 +4361,9 @@ function renderTraveler(o, p, idx, total, calloutHtml){
   const foldDivider = foldedLines.length
     ? `<tr class="trv-fold-divider"><td colspan="3">Building alongside · no powder coating</td></tr>`
     : "";
-  const buildRows = coatedLines.map(trvBuildRow).join("")
+  const buildRows = coatedLines.map(ln => trvBuildRow(ln, p)).join("")
                   + foldDivider
-                  + foldedLines.map(trvBuildRow).join("");
+                  + foldedLines.map(ln => trvBuildRow(ln, p)).join("");
   const expedite = o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : "";
   const shipBy = o.latest_ship_by && o.latest_ship_by !== "—"
     ? `${escapeHtml(o.latest_ship_by)}${o.lead_time_label ? ` (${escapeHtml(o.lead_time_label)})` : ""}`
@@ -4453,6 +4458,7 @@ const TRV_MOVES_KEY = "db-traveler-line-moves-v1";
 let TRV_UNDO = [];          // stack of applied moves (for Ctrl+Z)
 let TRV_REDO = [];          // stack of undone moves (for redo)
 let TRV_ROD_TASKS = 0;      // unassigned rod lines (the Travelers task bar)
+let TRV_BULB_TASKS = 0;     // unassigned bulb lines (multi-fixture orders)
 
 // Assign a stable per-line id once, so DnD can find the exact line object even
 // after re-renders. id = order|traveler_key|lineItemId|sku|ordinal.
@@ -5398,6 +5404,7 @@ function renderTravelers(){
     });
   });
   TRV_ROD_TASKS = rodTasks.length;
+  TRV_BULB_TASKS = bulbTasks.length;
   // Print order matches the Print Queue page's section model:
   //   bucket 0 = Shipping  (incl. samples) — keep received order
   //   bucket 1 = Assembly                   — keep received order
@@ -5453,9 +5460,13 @@ function renderTravelers(){
   const sheets = pairs.map((x, i) =>
     x.master ? renderMasterTraveler(x.o, i === 0 ? callout : "")
              : renderTraveler(x.o, x.p, x.idx, x.total, i === 0 ? callout : ""));
-  const taskBar = rodTasks.length ? `<div class="trv-tasks no-print">
-      <div class="trv-tasks-head">⚠ Rod assignment needed — these print on their fixtures' travelers, not their own. Assign BEFORE printing.</div>
-      ${rodTasks.map(t => `<div class="trv-task">
+  // Rod + bulb assignment task bars share identical markup (one builder). Both
+  // list lines that must be assigned onto fixtures before printing.
+  function renderTaskBar(tasks, head){
+    if(!tasks.length) return "";
+    return `<div class="trv-tasks no-print">
+      <div class="trv-tasks-head">${head}</div>
+      ${tasks.map(t => `<div class="trv-task">
           <span class="trv-task-qty">${t.ln.qty} ×</span>
           <span class="trv-task-title">${escapeHtml(t.ln.title)}</span>
           <span class="trv-task-sku">${escapeHtml(t.ln.variant_sku||"")}</span>
@@ -5463,7 +5474,11 @@ function renderTravelers(){
           <span class="trv-task-spacer"></span>
           <button type="button" class="trv-btn trv-btn-primary" onclick="openDistribute('${escapeHtml(t.ln._lid)}')">⇄ Assign</button>
         </div>`).join("")}
-    </div>` : "";
+    </div>`;
+  }
+  const taskBar =
+    renderTaskBar(rodTasks, "⚠ Rod assignment needed — these print on their fixtures' travelers, not their own. Assign BEFORE printing.")
+    + renderTaskBar(bulbTasks, "⚠ Bulb assignment needed — multiple fixtures take bulbs. Distribute onto each fixture's traveler (ranked by lampholder fit) BEFORE printing.");
   mount.innerHTML = `${taskBar}<div class="trv-list">${sheets.join("")}</div>`;
   const n = sheets.length;
   document.getElementById("trvCount").textContent = n;
@@ -5504,11 +5519,21 @@ function ensureThumbsLoaded(root){
   ]);
 }
 
+// Shared pre-print/release gate: warn about any rod OR bulb lines still pending
+// assignment (they won't print on any traveler). Returns true to proceed.
+function confirmUnassignedTasks(verb){
+  const bits = [];
+  if(TRV_ROD_TASKS > 0) bits.push(`${TRV_ROD_TASKS} rod line${TRV_ROD_TASKS===1?"":"s"}`);
+  if(TRV_BULB_TASKS > 0) bits.push(`${TRV_BULB_TASKS} bulb line${TRV_BULB_TASKS===1?"":"s"}`);
+  if(!bits.length) return true;
+  return window.confirm(
+    `${bits.join(" and ")} still need assignment (top of the Travelers tab) and ` +
+    `will NOT appear on any traveler.\n\n${verb} anyway?`);
+}
+
 // Print all travelers — flag the body so the print CSS hides chrome.
 async function printAllTravelers(){
-  if(TRV_ROD_TASKS > 0 && !window.confirm(
-      `${TRV_ROD_TASKS} rod line${TRV_ROD_TASKS===1?"":"s"} still need assignment ` +
-      `(top of this tab) and will NOT print anywhere.\n\nPrint anyway?`)) return;
+  if(!confirmUnassignedTasks("Print")) return;
   document.body.classList.add("printing-travelers");
   await ensureThumbsLoaded(document.getElementById("travelers"));
   const cleanup = () => { document.body.classList.remove("printing-travelers"); window.removeEventListener("afterprint", cleanup); };
@@ -5581,9 +5606,7 @@ async function releaseBatch(){
     showTrvToast("Nothing on the board to release.", null);
     return;
   }
-  if(TRV_ROD_TASKS > 0 && !window.confirm(
-      `${TRV_ROD_TASKS} rod line${TRV_ROD_TASKS===1?"":"s"} still need assignment ` +
-      `(top of the Travelers tab) and won't appear on any traveler PDF.\n\nRelease anyway?`)) return;
+  if(!confirmUnassignedTasks("Release")) return;
   const orders = QUEUE.orders.filter(o => o.shopify_order_number && o.shopify_order_id);
   const count = orders.length;
   const dryRun = new URLSearchParams(location.search).has("dryrun");
