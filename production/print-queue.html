@@ -370,6 +370,32 @@
   .needs-attention .na-reason { color: var(--text); }
   .needs-attention .na-meta { color: var(--muted); font-size: 11px; margin-left: auto; }
 
+  /* Printed-review panel: a question, not a miss. Amber (info) rather than the
+     red of a dropped order — "did this really get printed?" not "you lost one." */
+  .needs-attention.printed-review {
+    background: #FFFAF0;
+    border: 1px solid #F2DFC2;
+  }
+  .needs-attention.printed-review .needs-attention-head { color: #B45309; }
+  .needs-attention.printed-review li + li { border-top: 1px solid #F4E7D2; }
+  .pr-draft-badge {
+    font-size: 10px; font-weight: 600; color: #B45309;
+    background: #FCEBCF; border: 1px solid #F2DFC2; border-radius: 4px;
+    padding: 1px 6px; white-space: nowrap;
+  }
+  /* Per-row dismiss (localStorage). Quiet until hovered so it doesn't compete
+     with the order link; sits at the far right after the meta. */
+  .needs-attention.printed-review li { position: relative; }
+  .pr-dismiss {
+    margin-left: 8px; flex: none;
+    border: 1px solid transparent; background: transparent;
+    color: #C08A3E; font-size: 12px; line-height: 1; cursor: pointer;
+    border-radius: 4px; padding: 2px 6px;
+  }
+  .pr-dismiss:hover { background: #FCEBCF; border-color: #F2DFC2; color: #8a5a14; }
+  .pr-restore, .pr-allclear a { color: #B45309; text-decoration: underline; cursor: pointer; }
+  .pr-allclear { padding: 4px 0; color: var(--muted); font-size: 12px; }
+
   /* KPI strip */
   .kpi-row {
     display: grid;
@@ -1573,6 +1599,12 @@
   .trv-loc-pill.loc-assembly       { border-color: #2C6E8F; color: #225873; }
   .trv-loc-pill.loc-shipping       { border-color: var(--success); color: var(--success); }
   .trv-tags .color-chip { font-size: 13px; }
+  /* Fallback chip for a color/finish with no swatch hex — plain neutral pill. */
+  .color-chip-plain {
+    display: inline-flex; align-items: center;
+    font-size: 13px; font-weight: 500; color: #333;
+    padding: 3px 11px; border: 1.5px solid #C9C9C9; border-radius: 999px; background: #fff;
+  }
 
   /* Expedite banner — OPP styling, faithful red */
   .trv-expedite {
@@ -1738,6 +1770,12 @@
     padding: 1px 7px; border: 1px solid #ddd; border-radius: 9px; background: #fff;
     color: #888; cursor: pointer; font-family: inherit; }
   .trv-dist-btn:hover { color: var(--ink); border-color: var(--ink); }
+  /* Split / ÷N controls in the qty cell — same compact pill as the assign btn. */
+  .trv-split-group { display: flex; gap: 4px; justify-content: flex-end; margin-top: 3px; }
+  .trv-split-btn { font-size: 9px; line-height: 1.5; padding: 1px 7px;
+    border: 1px solid #ddd; border-radius: 9px; background: #fff; color: #888;
+    cursor: pointer; font-family: inherit; }
+  .trv-split-btn:hover { color: var(--ink); border-color: var(--ink); }
   .trv-dist-overlay { position: fixed; inset: 0; background: rgba(40,40,40,.45);
     z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .trv-dist-modal { background: #fff; border-radius: 10px; padding: 18px 20px;
@@ -1952,6 +1990,10 @@
        Populated by renderNeedsAttention(); hidden when the list is empty. -->
   <div class="needs-attention" id="needsAttention" hidden></div>
 
+  <!-- Recent orders tagged `printed` but with no traveler on file — the
+       copied-tag accident. Populated by renderPrintedReview(); hidden when empty. -->
+  <div class="needs-attention printed-review" id="printedReview" hidden></div>
+
   <!-- ── Order queue ── -->
   <div class="tab-content" id="content-order">
     <div class="oq-cutoff-info" id="oqCutoff"></div>
@@ -2029,8 +2071,243 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-16T17:00:02",
+  "built_at": "2026-06-17T07:00:02",
   "orders": [
+    {
+      "shopify_order_id": "7010063220818",
+      "shopify_order_name": "36149",
+      "shopify_order_number": "36149",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 5.72,
+      "ship_by_date": null,
+      "latest_ship_by": "June 18, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-06-16T20:44:33-05:00",
+      "tags": "trade",
+      "total_price": 5.72,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Sample"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7010063220818",
+          "shopify_order_name": "36149",
+          "shopify_order_number": "36149",
+          "key": [
+            "sample-only",
+            "7010063220818"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "sample",
+          "category_label": "Sample",
+          "parent_skus": [
+            "SAC-ALL",
+            "SAF-ALL"
+          ],
+          "variant_skus": [
+            "SAF-ALL",
+            "SAC-ALL"
+          ],
+          "line_item_titles": [
+            "Finish Samples",
+            "Color Samples"
+          ],
+          "lines": [
+            {
+              "title": "Finish Samples",
+              "variant_title": "All Finishes",
+              "variant_sku": "SAF-ALL",
+              "parent_sku": "SAF-ALL",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/finish-sample-ring-dutton-brown-1_815f8606-ec32-4056-85f0-88949151d0e0.jpg?v=1747968599&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Samples",
+              "variant_title": "All Colors",
+              "variant_sku": "SAC-ALL",
+              "parent_sku": "SAC-ALL",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/All-Colors_98189f34-7443-4ffd-bcfa-5cdbf76adba6.png?v=1763242187&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "sample-only",
+          "traveler_key": "sample-only|7010063220818"
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
+    {
+      "shopify_order_id": "7009837482066",
+      "shopify_order_name": "36148",
+      "shopify_order_number": "36148",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 16027.8,
+      "ship_by_date": null,
+      "latest_ship_by": "June 23, 2026",
+      "lead_time_label": "Expedited \u2014 within 1 week",
+      "is_expedited": true,
+      "created_at": "2026-06-16T17:26:02-05:00",
+      "tags": "expedite",
+      "total_price": 3234.0,
+      "priority": "Expedites",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color",
+        "Plug-In"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7009837482066",
+          "shopify_order_name": "36148",
+          "shopify_order_number": "36148",
+          "key": [
+            "color",
+            "Lagoon",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30222"
+          ],
+          "variant_skus": [
+            "30222-1D"
+          ],
+          "line_item_titles": [
+            "Color Visage Sconce 6\""
+          ],
+          "lines": [
+            {
+              "title": "Color Visage Sconce 6\"",
+              "variant_title": "Brass / Lagoon",
+              "variant_sku": "30222-1D",
+              "parent_sku": "30222",
+              "qty": 7,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-visage-sconce-brass-lagoon.jpg?v=1747968592&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 7,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Lagoon|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7009837482066",
+          "shopify_order_name": "36148",
+          "shopify_order_number": "36148",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-16T17:26:02-05:00",
+          "parent_sku": "30222",
+          "color": "Lagoon",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 7,
+          "line_item_ids": [
+            16939139072082
+          ],
+          "item_titles": [
+            "Color Visage Sconce 6\""
+          ],
+          "variant_skus": [
+            "30222-1D"
+          ],
+          "lines": [
+            {
+              "sku": "30222-1D",
+              "title": "Color Visage Sconce 6\"",
+              "qty": 7,
+              "finish": "Brass",
+              "color": "Lagoon",
+              "category": "fixture",
+              "variant_title": "Brass / Lagoon"
+            }
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Expedites",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7009587265618",
       "shopify_order_name": "36147",
@@ -2155,6 +2432,17 @@ const QUEUE = {
           "variant_skus": [
             "60121-3I"
           ],
+          "lines": [
+            {
+              "sku": "60121-3I",
+              "title": "Color Snug Sconce",
+              "qty": 2,
+              "finish": "Black",
+              "color": "Orange",
+              "category": "fixture",
+              "variant_title": "Black / Orange / Hardwired (no switch)"
+            }
+          ],
           "tags": [
             "Auto-Created",
             "Color"
@@ -2188,6 +2476,17 @@ const QUEUE = {
           ],
           "variant_skus": [
             "70130-I"
+          ],
+          "lines": [
+            {
+              "sku": "70130-I",
+              "title": "Color Lepore Flush Mount",
+              "qty": 1,
+              "finish": null,
+              "color": "Orange",
+              "category": "fixture",
+              "variant_title": "Orange"
+            }
           ],
           "tags": [
             "Auto-Created",
@@ -2250,11 +2549,11 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAF-ALL",
             "SAC-D",
+            "SAF-ALL",
             "SAC-K",
-            "SAC-H",
-            "SAC-B"
+            "SAC-B",
+            "SAC-H"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -2470,6 +2769,26 @@ const QUEUE = {
             "SS3/16BR"
           ],
           "variant_skus": [],
+          "lines": [
+            {
+              "sku": "",
+              "title": "HK5/64",
+              "qty": 1,
+              "finish": null,
+              "color": null,
+              "category": "accessory",
+              "variant_title": ""
+            },
+            {
+              "sku": "",
+              "title": "SS3/16BR",
+              "qty": 4,
+              "finish": null,
+              "color": null,
+              "category": "accessory",
+              "variant_title": ""
+            }
+          ],
           "tags": [
             "Accessory",
             "Auto-Created"
@@ -2581,6 +2900,17 @@ const QUEUE = {
           ],
           "variant_skus": [
             "60221-3"
+          ],
+          "lines": [
+            {
+              "sku": "60221-3",
+              "title": "Scepter Sconce 18\"",
+              "qty": 1,
+              "finish": "Black",
+              "color": null,
+              "category": "fixture",
+              "variant_title": "Black"
+            }
           ],
           "tags": [
             "Auto-Created",
@@ -2724,6 +3054,17 @@ const QUEUE = {
           "variant_skus": [
             "30224-3F"
           ],
+          "lines": [
+            {
+              "sku": "30224-3F",
+              "title": "Color Icon 2 Sconce",
+              "qty": 1,
+              "finish": "Black",
+              "color": "Slate Blue",
+              "category": "fixture",
+              "variant_title": "Black / Slate Blue"
+            }
+          ],
           "tags": [
             "Auto-Created",
             "Color"
@@ -2757,6 +3098,17 @@ const QUEUE = {
           ],
           "variant_skus": [
             "30332-3F"
+          ],
+          "lines": [
+            {
+              "sku": "30332-3F",
+              "title": "Color Supreme Flush Mount",
+              "qty": 1,
+              "finish": "Black",
+              "color": "Slate Blue",
+              "category": "fixture",
+              "variant_title": "Black / Slate Blue"
+            }
           ],
           "tags": [
             "Auto-Created",
@@ -2876,6 +3228,17 @@ const QUEUE = {
           "variant_skus": [
             "H33-5-2BO"
           ],
+          "lines": [
+            {
+              "sku": "H33-5-2BO",
+              "title": "Color Swift Pull - Nickel",
+              "qty": 2,
+              "finish": "Nickel",
+              "color": "Bone",
+              "category": "pull",
+              "variant_title": "5\" (C-C 3\") / Bone / Nickel"
+            }
+          ],
           "tags": [
             "Auto-Created",
             "Color",
@@ -2895,12 +3258,14 @@ const QUEUE = {
     }
   ],
   "needs_attention": [],
+  "printed_review": [],
   "totals": {
-    "orders": 6,
-    "printouts": 6,
-    "notion_rows": 7,
+    "orders": 8,
+    "printouts": 8,
+    "notion_rows": 8,
     "skipped_already_printed": 175,
-    "needs_attention": 0
+    "needs_attention": 0,
+    "printed_review": 0
   },
   "public_redacted": true
 };
@@ -4132,6 +4497,19 @@ function trvBuildRow(ln, p){
                 onclick="openDistribute('${escapeHtml(ln._lid)}')"
                 title="Assign quantities of this line to other travelers on this order — no dragging needed">⇄ assign</button>`
     : "";
+  // Split controls (screen-only) — carve a multi-qty line into separate lines on
+  // this same traveler so each group can take a different rod/qty. Only shown when
+  // there's more than one unit to split. Uses the same conserving engine as drag.
+  const splitBtns = (ln.qty || 0) > 1
+    ? `<span class="trv-split-group no-print">
+         <button type="button" class="trv-split-btn" draggable="false"
+                 onclick="trvSplitRow('${escapeHtml(ln._lid)}')"
+                 title="Split off some of these units onto a separate line on this traveler">Split</button>
+         <button type="button" class="trv-split-btn" draggable="false"
+                 onclick="trvSplitIntoN('${escapeHtml(ln._lid)}')"
+                 title="Split this line into N even lines on this traveler">÷N</button>
+       </span>`
+    : "";
   return `<tr class="trv-build-row${rowCls}" draggable="true" data-line-id="${escapeHtml(ln._lid)}"
               ondragstart="trvDragStart(event)" ondragend="trvDragEnd(event)">
       <td class="trv-img-col">
@@ -4143,7 +4521,7 @@ function trvBuildRow(ln, p){
         ${sku}${trvLineProps(ln.properties)}
       </td>
       <td class="trv-qty">× ${ln.qty}
-        ${assignBtn}
+        ${assignBtn}${splitBtns}
       </td>
     </tr>`;
 }
@@ -4345,6 +4723,22 @@ function renderMasterTraveler(o, calloutHtml){
   </div>`;
 }
 
+// Color / finish chip shown next to the location pill at the top of a traveler,
+// so the floor can sort the powder-coat stack by color (and assembly by finish)
+// at a glance without reading the SKUs. Uses the same swatch chip as the Print
+// Queue groups. Powder Coating travelers carry p.color; metal-finish work carries
+// p.finish; shipping/sample sheets carry neither and get no chip.
+function trvColorFinishChip(p){
+  const name = p.color || p.finish || "";
+  if(!name) return "";
+  const style = chipStyle(name);
+  if(style){
+    return `<span class="color-chip" style="${style}"><span class="color-chip-swatch"></span>${escapeHtml(name)}</span>`;
+  }
+  // Known color/finish without a swatch hex — still show the name as a plain chip.
+  return `<span class="color-chip color-chip-plain">${escapeHtml(name)}</span>`;
+}
+
 function renderTraveler(o, p, idx, total, calloutHtml){
   const multi = (total || 1) >= 2;   // only number travelers when there's >1
   // A Shipping traveler is already past QC + the ship-by milestone (it's just
@@ -4408,6 +4802,7 @@ function renderTraveler(o, p, idx, total, calloutHtml){
       <div>
         <div class="trv-tags">
           <span class="trv-loc-pill loc-${(p.location||'').toLowerCase().replace(/\s+/g,'-')}">${escapeHtml(p.location||"")}</span>
+          ${trvColorFinishChip(p)}
         </div>
         ${expedite}
         <div class="trv-ordernum-row">
@@ -4729,6 +5124,72 @@ function undoSplit(m){
   recomputePrintout(cloneAt.printout);
   renderTravelers();
   return true;
+}
+
+// ── In-place traveler line split ────────────────────────────────────────────
+// Split a multi-qty line into separate lines ON THE SAME traveler, so the floor
+// can assign different rods/quantities to each group (e.g. 35989's 22 pendants:
+// 6 with 6" rods, 16 with 24"). Mirrors the assembly tab's Split / ÷N exactly,
+// but routes through splitLine() — the same clone-and-conserve engine the drag
+// split uses — so each piece keeps its own qty, the total is conserved, and the
+// split survives undo/redo AND release→PDF (unlike the localStorage-only asm
+// split). The clone is inserted right AFTER the source line on the same sheet.
+
+// Find the _lid of the line that follows `lid` on its own printout (so a same-
+// sheet split inserts the new piece directly under the original). Null = append.
+function _trvNextLid(lid){
+  const src = findLineByLid(lid);
+  if(!src) return null;
+  const lines = src.printout.lines || [];
+  const i = lines.findIndex(l => l._lid === lid);
+  return (i >= 0 && i + 1 < lines.length) ? lines[i+1]._lid : null;
+}
+
+// Carve `qty` units off `lid` into a new line on the SAME traveler, right below
+// the source. Thin wrapper over splitLine with the source's own sheet as target.
+function trvSplitInPlace(lid, qty){
+  const src = findLineByLid(lid);
+  if(!src) return false;
+  return splitLine(lid, src.order.shopify_order_id, src.printout.traveler_key||"",
+                   qty, /*record*/true, /*insertBeforeLid*/_trvNextLid(lid));
+}
+
+// "Split" button: carve a chosen number of units off into a sibling line.
+function trvSplitRow(lid){
+  const src = findLineByLid(lid);
+  if(!src){ showTrvToast("Couldn't find that item.", null); return; }
+  const total = src.line.qty || 0;
+  if(total <= 1){ showTrvToast("Can't split a line of 1.", null); return; }
+  const def = Math.floor(total / 2);
+  const ans = window.prompt(
+    `Split “${src.line.title}” (×${total}) — how many units move to a new line on this traveler?\n` +
+    `1–${total-1} (the rest stay on the original line).`, String(def));
+  if(ans == null) return;
+  const n = Math.max(0, parseInt(ans, 10) || 0);
+  if(n < 1 || n >= total){ showTrvToast(`Enter 1–${total-1}.`, null); return; }
+  trvSplitInPlace(lid, n);
+}
+
+// "÷N" button: split a line into N even sibling lines on the same traveler.
+function trvSplitIntoN(lid){
+  const src = findLineByLid(lid);
+  if(!src){ showTrvToast("Couldn't find that item.", null); return; }
+  const total = src.line.qty || 0;
+  if(total <= 1){ showTrvToast("Can't split a line of 1.", null); return; }
+  const ans = window.prompt(
+    `Split “${src.line.title}” (×${total}) into how many even lines on this traveler?\n` +
+    `e.g. ${total} ÷ 3 → ${_distribute(total,3).join(", ")}.`, "2");
+  if(ans == null) return;
+  const n = Math.max(1, parseInt(ans, 10) || 0);
+  if(n <= 1) return;
+  if(n > total){ showTrvToast(`Can't split ${total} units into ${n} lines.`, null); return; }
+  // _distribute gives the target sizes; peel off all but the last (the last is
+  // whatever remains on the source). Each peel is one splitLine call, so the
+  // whole ÷N is a sequence of conserving splits — fully undoable piece by piece.
+  const parts = _distribute(total, n);
+  for(let i = 0; i < parts.length - 1; i++){
+    trvSplitInPlace(lid, parts[i]);
+  }
 }
 
 function undoLastMove(){
@@ -6128,6 +6589,83 @@ function renderNeedsAttention(){
   el.hidden = false;
 }
 
+// "Printed but maybe never printed" review list. Mirrors renderNeedsAttention:
+// these orders are tagged `printed` (so the queue skips them) yet show no traveler
+// on file — the tell-tale of a `printed` tag copied off another order. The lead
+// confirms each was really printed, or removes the tag in Shopify to re-queue it.
+//
+// Dismiss is per-browser (localStorage): once you've eyeballed a row and decided
+// it's fine, ✕ hides it for YOU and it stays hidden across rebuilds. Deliberately
+// not shared/tagged — these are rare, so a local "I've seen this" is enough, and
+// it keeps the dismiss out of Shopify. A "Show N dismissed" link restores them.
+const PR_DISMISS_KEY = "db-printed-review-dismissed-v1";
+function prLoadDismissed(){
+  try { return new Set(JSON.parse(localStorage.getItem(PR_DISMISS_KEY) || "[]")); }
+  catch(e){ return new Set(); }
+}
+function prSaveDismissed(set){
+  localStorage.setItem(PR_DISMISS_KEY, JSON.stringify([...set]));
+}
+function prDismiss(num){
+  const s = prLoadDismissed(); s.add(String(num)); prSaveDismissed(s); renderPrintedReview();
+}
+function prRestoreAll(){
+  prSaveDismissed(new Set()); renderPrintedReview();
+}
+function renderPrintedReview(){
+  const el = document.getElementById("printedReview");
+  if(!el) return;
+  const raw = (QUEUE && QUEUE.printed_review) || [];
+  const dismissed = prLoadDismissed();
+  // Only count dismissals against orders actually present this build, so the
+  // "Show N dismissed" count never drifts to stale order numbers.
+  const presentNums = new Set(raw.map(o => String(o.shopify_order_number || o.shopify_order_name || "")));
+  const dismissedHere = [...dismissed].filter(n => presentNums.has(n)).length;
+  const visible = raw.filter(o => !dismissed.has(String(o.shopify_order_number || o.shopify_order_name || "")));
+  if(!visible.length){
+    // Nothing to show — but if everything was dismissed, offer a way back.
+    if(dismissedHere){
+      el.innerHTML = `<div class="pr-allclear">All printed-review orders dismissed ·
+        <a href="#" onclick="prRestoreAll();return false;">show ${dismissedHere} dismissed</a></div>`;
+      el.hidden = false;
+    } else { el.hidden = true; el.innerHTML = ""; }
+    return;
+  }
+  // Draft-sourced first (strongest copied-tag signal), then newest.
+  const items = visible.slice().sort((a,b) =>
+    (a.from_draft===b.from_draft ? String(b.created_at||"").localeCompare(String(a.created_at||"")) : (a.from_draft?-1:1)));
+  const redacted = QUEUE && QUEUE.public_redacted;
+  const rows = items.map(o => {
+    const numRaw = String(o.shopify_order_number || o.shopify_order_name || "");
+    const num = escapeHtml(numRaw);
+    const orderCell = (!redacted && o.shopify_url)
+      ? `<a href="${escapeHtml(o.shopify_url)}" target="_blank" rel="noopener">#${num}</a>`
+      : `#${num}`;
+    const cust = (!redacted && o.customer_name) ? escapeHtml(o.customer_name) : "";
+    const when = o.created_at ? fmtDateLong(o.created_at) : "";
+    const meta = [cust, when].filter(Boolean).join(" · ");
+    const draftBadge = o.from_draft ? `<span class="pr-draft-badge" title="Created from a draft order — drafts copy their tags, so this “printed” was likely inherited, not earned">from draft</span>` : "";
+    return `<li>
+      <span class="na-order">${orderCell}</span>
+      <span class="na-reason">${escapeHtml(o.reason_label || o.reason || "")}</span>
+      ${draftBadge}
+      ${meta ? `<span class="na-meta">${meta}</span>` : ""}
+      <button class="pr-dismiss" title="Dismiss — I've confirmed this; hide it on this device" onclick="prDismiss('${escapeHtml(numRaw)}')">✕</button>
+    </li>`;
+  }).join("");
+  const n = items.length;
+  const restoreLink = dismissedHere
+    ? ` <a class="pr-restore" href="#" onclick="prRestoreAll();return false;">show ${dismissedHere} dismissed</a>`
+    : "";
+  el.innerHTML = `
+    <div class="needs-attention-head">
+      🔍 ${n} order${n===1?"":"s"} tagged “printed” but no traveler on file
+      <span class="needs-attention-sub">— confirm each was really printed; if the tag was copied from another order, remove “printed” in Shopify to re-queue it${restoreLink}</span>
+    </div>
+    <ul>${rows}</ul>`;
+  el.hidden = false;
+}
+
 function render(){
   const sectionsEl = document.getElementById("sections");
   if(!QUEUE){
@@ -6147,6 +6685,7 @@ function render(){
     ${naTile}
   `;
   renderNeedsAttention();
+  renderPrintedReview();
   // "Samples + Quick first" reorders the whole SECTION stack so the quick-ship
   // work (Shipping = samples, then Assembly) prints before Powder Coating — not
   // just within each section. Otherwise sections keep their default order.
