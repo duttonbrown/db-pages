@@ -127,6 +127,77 @@
 
 /* Active glossary filter pill — surfaces the current category filter at the
    top so it's obvious what's narrowing the grid (and easy to clear). */
+/* Quick filters — prominent, color-coded top pills for the two workflow
+   processes + the data-quality lens. Outlined when idle, filled when active,
+   so an enabled filter reads loudly. Mirrors the process pill color language
+   used on grid cards and the spec card. */
+.quick-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.quick-filter-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 2px;
+}
+.quick-filter {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 7px 5px 12px;
+  background: white;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.3;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.quick-filter .qf-count {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  background: var(--bg);
+  border-radius: 999px;
+  padding: 1px 7px;
+  min-width: 20px;
+  text-align: center;
+  transition: background 0.12s, color 0.12s;
+}
+/* Idle hover hints the pill's own color. Scoped to :not(.is-active) so an
+   active (filled) pill's white label never gets overridden by the hover color
+   — otherwise hovering an active pill paints its text the same as its fill. */
+.quick-filter.qf-powder:not(.is-active):hover  { border-color: #B85C00; color: #B85C00; }
+.quick-filter.qf-black:not(.is-active):hover   { border-color: #2B2B2B; color: #2B2B2B; }
+.quick-filter.qf-attention:not(.is-active):hover { border-color: var(--accent-dark); color: var(--accent-dark); }
+/* Active = filled in the pill's color. */
+.quick-filter.is-active { color: white; border-color: transparent; }
+.quick-filter.is-active .qf-count { background: rgba(255,255,255,0.22); color: white; }
+.quick-filter.qf-powder.is-active    { background: #B85C00; }
+.quick-filter.qf-black.is-active     { background: #2B2B2B; }
+.quick-filter.qf-attention.is-active { background: var(--accent-dark); }
+/* Attention lens "all clear" state — calm green, non-interactive, reads as
+   "nothing to do" rather than an actionable nag at zero. */
+.quick-filter.qf-clear {
+  border-color: color-mix(in srgb, var(--success) 35%, white);
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 7%, white);
+  cursor: default;
+}
+.quick-filter.qf-clear .qf-check {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--success);
+}
+
 .active-filter-row {
   display: flex;
   align-items: center;
@@ -368,6 +439,27 @@
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+/* Finish (left) + location chip (right) share one tight row so the card height
+   stays constant whether or not a location is assigned. */
+.preview-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 1px;
+  min-height: 14px;
+}
+.preview-loc {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: white;
+  background: var(--loc-color, var(--muted));
+  padding: 1px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 .empty-grid {
@@ -816,6 +908,51 @@ button.ihp-pill,
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+
+/* --- Location pills (zone-colored). Code is the loud bit; zone rides quietly
+   behind it as a tinted chip. Each location's --loc-color is set inline from
+   the zone color map so a pill reads its group at a glance. Links to the floor
+   plan when one is known. */
+.spec-loc-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.loc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 4px 3px 4px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--loc-color, var(--muted)) 9%, white);
+  border: 1px solid color-mix(in srgb, var(--loc-color, var(--muted)) 28%, white);
+  text-decoration: none;
+  font-family: inherit;
+  line-height: 1.1;
+  transition: background 0.12s, border-color 0.12s;
+}
+a.loc-pill:hover {
+  background: color-mix(in srgb, var(--loc-color, var(--muted)) 16%, white);
+  border-color: color-mix(in srgb, var(--loc-color, var(--muted)) 45%, white);
+}
+.loc-pill .loc-code {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: white;
+  background: var(--loc-color, var(--muted));
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+.loc-pill .loc-zone {
+  font-size: 11px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--loc-color, var(--muted)) 55%, var(--ink));
+  padding-right: 5px;
+  white-space: nowrap;
 }
 /* In-House pills inside a key-fact cell render smaller — they need to fit
    the 120px-min grid cell without forcing a wide column. */

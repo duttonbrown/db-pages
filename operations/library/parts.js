@@ -1,4 +1,18 @@
 // Parts Library — single-page app over parts-library.json.
+//
+// Optional config (set on window BEFORE this script runs) lets a gated copy of
+// this page — e.g. the SSO-walled hub version in db-private — reuse this exact
+// JS/CSS while loading data + images from the public db-pages origin and
+// overlaying sensitive prices from a private file:
+//   window.LIBRARY_CONFIG = {
+//     base: 'https://duttonbrown.github.io/db-pages/operations/library/',
+//     priceOverlay: 'parts-prices.json'   // same-origin (private) overlay
+//   }
+// When unset (the public page), everything resolves relative as before.
+const LIBRARY_CONFIG = (typeof window !== 'undefined' && window.LIBRARY_CONFIG) || {};
+const LIBRARY_BASE = LIBRARY_CONFIG.base || '';
+// Prefix a relative library asset path (image or JSON) with the configured base.
+const libUrl = (rel) => (rel && LIBRARY_BASE && !/^https?:|^data:/.test(rel)) ? LIBRARY_BASE + rel : rel;
 
 const $ = (id) => document.getElementById(id);
 const escapeHtml = (s) =>
@@ -13,12 +27,58 @@ let GLOSSARY_BY_ID = {};      // id -> glossary entry
 let activeGlossary = 'all';
 let activeFamily = null;         // family_id filter (deep-linked via #family/<id>)
 let activeProcesses = new Set(); // in-house process filters: 'Powder Coat', 'Black Batch', etc.
+let attentionFilter = false;     // needs-attention lens (missing location/price, etc.)
 let activeResultIdx = -1;
 let currentPart = null;
 
 function partProcesses(p) {
   const fam = DATA.families[p.family_id];
   return (p.in_house_processes || (fam && fam.in_house_processes) || []).filter(Boolean);
+}
+
+// --- Location + Price helpers -------------------------------------------------
+
+// A part can carry 0..N resolved location objects: {code, group, description,
+// color, floor_plan}. Render each as a zone-colored pill — code is the loud
+// bit, zone is the quiet context, full description sits in the tooltip. When a
+// floor_plan PDF is known, the pill links to it so anyone can see where the
+// code physically is. (Data is blank on every part today; this lights up the
+// moment a Location is assigned in Notion.)
+function locationPills(locations) {
+  const locs = (locations || []).filter(l => l && l.code);
+  if (!locs.length) return '';
+  return locs.map(l => {
+    const color = l.color || 'var(--muted)';
+    const tip = [l.group, l.description].filter(Boolean).join(' — ');
+    const inner = `<span class="loc-code">${escapeHtml(l.code)}</span>${l.group ? `<span class="loc-zone">${escapeHtml(l.group)}</span>` : ''}`;
+    const style = `style="--loc-color:${escapeHtml(color)}"`;
+    return l.floor_plan
+      ? `<a class="loc-pill" ${style} href="${escapeHtml(l.floor_plan)}" target="_blank" rel="noopener" title="${escapeHtml(tip)} · open floor plan ↗">${inner}</a>`
+      : `<span class="loc-pill" ${style} title="${escapeHtml(tip)}">${inner}</span>`;
+  }).join('');
+}
+
+// Money formatter for Price. Whole dollars when even, two decimals otherwise.
+function fmtPrice(n) {
+  if (n == null || n === '') return null;
+  const num = Number(n);
+  if (Number.isNaN(num)) return null;
+  return num % 1 === 0
+    ? `$${num.toLocaleString()}`
+    : `$${num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+// A part "needs attention" when it's an active/introducing SKU that's missing
+// the operational data this library exists to surface — no storage location, or
+// no price — or it's being discontinued while still showing real recent demand
+// (someone should know before it disappears). Drives the data-quality lens.
+function partNeedsAttention(p) {
+  const status = p.status;
+  if (status === 'Inactive') return false; // dead SKUs aren't worth nagging about
+  const missingLocation = !(p.locations && p.locations.length);
+  const missingPrice = p.price == null;
+  const discontinuingButUsed = status === 'Discontinuing' && (p.use_2025 || 0) > 0;
+  return missingLocation || missingPrice || discontinuingButUsed;
 }
 
 function clearFiltersIfShowingPart() {
@@ -34,16 +94,110 @@ function toggleProcessFilter(proc) {
   if (activeProcesses.has(proc)) activeProcesses.delete(proc);
   else activeProcesses.add(proc);
   clearFiltersIfShowingPart();
+  renderQuickFilters();
   renderGlossary();
   renderGrid();
+}
+
+function toggleAttention() {
+  attentionFilter = !attentionFilter;
+  clearFiltersIfShowingPart();
+  renderQuickFilters();
+  renderGlossary();
+  renderGrid();
+}
+
+// --- Quick filters (prominent top pills) -------------------------------------
+// Surfaces the two workflow-critical process filters (Powder Coat, Black Batch)
+// plus the data-quality lens, all in one strip above the category chips. These
+// reuse the same filter state as everything else, so toggling one here, on a
+// grid card, or clearing it from the active-filter row all stay in sync.
+function renderQuickFilters() {
+  const row = $('quick-filter-row');
+  if (!row || !DATA) return;
+
+  // Count for a process pill = parts that would match if THIS process were the
+  // only process filter added on top of the current glossary + attention state.
+  const procCount = (proc) =>
+    countWith({ processes: new Set([proc]) });
+
+  const pills = [
+    {
+      key: 'Powder Coat', kind: 'process', label: 'Powder Coat',
+      active: activeProcesses.has('Powder Coat'),
+      count: procCount('Powder Coat'),
+      cls: 'qf-powder',
+    },
+    {
+      key: 'Black Batch', kind: 'process', label: 'Black Batch',
+      active: activeProcesses.has('Black Batch'),
+      count: procCount('Black Batch'),
+      cls: 'qf-black',
+    },
+    {
+      key: 'attention', kind: 'attention', label: 'Needs attention',
+      active: attentionFilter,
+      count: countWith({ attention: true }),
+      cls: 'qf-attention',
+    },
+  ];
+
+  row.innerHTML =
+    `<span class="quick-filter-label">Quick filters</span>` +
+    pills.map(p => {
+      // The attention lens is a worklist: when nothing needs attention, show a
+      // calm "All clear" instead of an orange button nagging at zero.
+      const allClear = p.kind === 'attention' && p.count === 0 && !p.active;
+      const cls = allClear ? `${p.cls} qf-clear` : p.cls;
+      const label = allClear ? 'All clear' : p.label;
+      const countHtml = allClear ? '<span class="qf-check">✓</span>' : `<span class="qf-count">${p.count}</span>`;
+      return `
+      <button type="button" class="quick-filter ${cls}${p.active ? ' is-active' : ''}"${allClear ? ' disabled' : ''}
+              data-kind="${p.kind}" data-key="${escapeHtml(p.key)}"
+              ${p.kind === 'attention' ? 'title="Active/Introducing parts missing a location or price, or discontinuing parts still in use"' : ''}>
+        <span class="qf-label">${escapeHtml(label)}</span>
+        ${countHtml}
+      </button>`;
+    }).join('');
+
+  row.querySelectorAll('.quick-filter').forEach(btn => {
+    btn.onclick = () => {
+      if (btn.dataset.kind === 'attention') toggleAttention();
+      else toggleProcessFilter(btn.dataset.key);
+    };
+  });
+}
+
+// Merge the private price overlay onto DATA.parts/supplies when configured.
+// The public JSON may carry prices already (acceptable short-term); the overlay
+// lets the gated copy show prices even if the public JSON is later stripped of
+// them. Same-origin fetch from the private repo; failures are non-fatal.
+async function applyPriceOverlay() {
+  if (!LIBRARY_CONFIG.priceOverlay || !DATA) return;
+  try {
+    const resp = await fetch(LIBRARY_CONFIG.priceOverlay, { cache: 'no-store' });
+    if (!resp.ok) return;
+    const overlay = await resp.json();
+    const pp = overlay.parts || {};
+    const sp = overlay.supplies || {};
+    (DATA.parts || []).forEach(p => {
+      if (pp[p.part_number] != null) p.price = pp[p.part_number];
+    });
+    (DATA.supplies || []).forEach(s => {
+      if (s.sku && sp[s.sku] != null) s.price = sp[s.sku];
+    });
+  } catch (e) {
+    /* overlay is best-effort; the page works without prices */
+  }
 }
 
 // --- Load and bootstrap ---
 async function bootstrap() {
   try {
-    const resp = await fetch('parts-library.json', { cache: 'no-store' });
+    const resp = await fetch(libUrl('parts-library.json'), { cache: 'no-store' });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     DATA = await resp.json();
+    await applyPriceOverlay();
   } catch (e) {
     $('grid-slot').innerHTML = `<div class="empty-grid">Failed to load library data: ${escapeHtml(e.message)}</div>`;
     return;
@@ -66,6 +220,7 @@ async function bootstrap() {
   const sideSuppliesCount = $('supplies-count');
   if (sideSuppliesCount) sideSuppliesCount.textContent = (DATA.counts.supplies || 0).toLocaleString();
   $('lib-count').innerHTML = `<b>${DATA.counts.parts}</b> parts · <b>${DATA.counts.glossary}</b> categories`;
+  renderQuickFilters();
   renderGlossary();
   renderRecents();
   wireSearch();
@@ -123,6 +278,7 @@ let glossaryExpanded = false;
 function countWith(opts) {
   const glossary = opts.glossary != null ? opts.glossary : activeGlossary;
   const procs = opts.processes || activeProcesses;
+  const attention = opts.attention != null ? opts.attention : attentionFilter;
   return DATA.parts.filter(p => {
     if (glossary !== 'all') {
       const fam = DATA.families[p.family_id];
@@ -132,6 +288,7 @@ function countWith(opts) {
       const pp = partProcesses(p);
       for (const wanted of procs) if (!pp.includes(wanted)) return false;
     }
+    if (attention && !partNeedsAttention(p)) return false;
     return true;
   }).length;
 }
@@ -169,6 +326,14 @@ function renderActiveFilter(entries) {
       key: proc,
     });
   }
+  if (attentionFilter) {
+    pills.push({
+      name: 'Needs attention',
+      count: countWith({}),
+      kind: 'attention',
+      key: 'attention',
+    });
+  }
 
   if (!pills.length) { row.classList.add('hidden'); row.innerHTML = ''; return; }
   row.classList.remove('hidden');
@@ -183,11 +348,13 @@ function renderActiveFilter(entries) {
     btn.onclick = () => {
       if (btn.dataset.kind === 'glossary') activeGlossary = 'all';
       else if (btn.dataset.kind === 'process') activeProcesses.delete(btn.dataset.key);
+      else if (btn.dataset.kind === 'attention') attentionFilter = false;
       else if (btn.dataset.kind === 'family') {
         activeFamily = null;
         history.replaceState(null, '', location.pathname + location.search);
       }
       clearFiltersIfShowingPart();
+      renderQuickFilters();
       renderGlossary();
       renderGrid();
     };
@@ -222,6 +389,7 @@ function renderGlossary() {
       }
       $('spec-slot').hidden = true;
       $('grid-slot').hidden = false;
+      renderQuickFilters();
       renderGrid();
     };
   });
@@ -280,6 +448,9 @@ function filteredParts() {
       return true;
     });
   }
+  if (attentionFilter) {
+    list = list.filter(partNeedsAttention);
+  }
   return list;
 }
 
@@ -313,7 +484,7 @@ function previewCardHtml(p) {
   const desc = (fam && fam.description) || '';
   const finish = p.finish ? `<span class="preview-finish">${escapeHtml(p.finish)}</span>` : '';
   const imgHtml = p.image
-    ? `<div class="preview-image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.part_number)}" loading="lazy"></div>`
+    ? `<div class="preview-image"><img src="${escapeHtml(libUrl(p.image))}" alt="${escapeHtml(p.part_number)}" loading="lazy"></div>`
     : `<div class="preview-image no-img">No image</div>`;
 
   // In-house process pill stripe — drawn on top of the thumb so it's
@@ -340,7 +511,10 @@ function previewCardHtml(p) {
     <div class="preview-body">
       <div class="preview-num">${escapeHtml(p.part_number)}</div>
       <div class="preview-desc">${escapeHtml(desc)}</div>
-      ${finish}
+      <div class="preview-meta">
+        ${finish}
+        ${(p.locations && p.locations.length) ? `<span class="preview-loc" style="--loc-color:${escapeHtml(p.locations[0].color || 'var(--muted)')}" title="${escapeHtml([p.locations[0].group, p.locations[0].description].filter(Boolean).join(' — '))}">${escapeHtml(p.locations[0].code)}${p.locations.length > 1 ? ` +${p.locations.length - 1}` : ''}</span>` : ''}
+      </div>
     </div>
   </a>`;
 }
@@ -372,7 +546,7 @@ function renderSearchResults(items) {
     const fam = DATA.families[p.family_id] || {};
     const desc = (fam.description || '');
     const img = p.image
-      ? `<div class="lib-result-img"><img src="${escapeHtml(p.image)}" alt="" loading="lazy"></div>`
+      ? `<div class="lib-result-img"><img src="${escapeHtml(libUrl(p.image))}" alt="" loading="lazy"></div>`
       : `<div class="lib-result-img no-img">—</div>`;
     return `<li class="lib-result" data-pn="${escapeHtml(p.part_number)}" data-idx="${i}">
       ${img}
@@ -501,7 +675,7 @@ function renderSpec(p) {
 
   // ---------- Image
   const imgHtml = p.image
-    ? `<div class="spec-image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.part_number)}"></div>`
+    ? `<div class="spec-image"><img src="${escapeHtml(libUrl(p.image))}" alt="${escapeHtml(p.part_number)}"></div>`
     : `<div class="spec-image no-img">No image</div>`;
 
   // ---------- Header chips. Lives in the spec-num-row alongside the part #.
@@ -531,6 +705,15 @@ function renderSpec(p) {
     ? `<div class="spec-ihp"><span class="spec-ihp-label">Vendor</span><div class="spec-vendor-list">${vendors.map(v => `<span class="vendor-name">${escapeHtml(v)}</span>`).join('')}</div></div>`
     : `<div class="spec-ihp spec-ihp-none"><span class="spec-ihp-label">Vendor</span><span class="spec-ihp-empty">— not set</span></div>`;
 
+  // ---------- Location — "where to find it" on the floor. Zone-colored pills,
+  // one per assigned location; empty state says "not set" honestly so the blank
+  // data reads as a to-do, not a bug. Sits directly under Vendor (same wide
+  // label-left row treatment) since "who makes it / where is it" pair up.
+  const locPills = locationPills(p.locations);
+  const locationHtml = locPills
+    ? `<div class="spec-ihp"><span class="spec-ihp-label">Location</span><div class="spec-loc-list">${locPills}</div></div>`
+    : `<div class="spec-ihp spec-ihp-none"><span class="spec-ihp-label">Location</span><span class="spec-ihp-empty">— not set</span></div>`;
+
   // ---------- In-house processes — moved into the keyfacts grid as a cell.
   // Pull from the part, falling back to the family. Render as bold pills
   // inside the cell. Empty state is "Vendor-finished" — meaningful info, not
@@ -544,6 +727,7 @@ function renderSpec(p) {
   // The In-House cell renders pills via the `html` field; the other cells are
   // plain values via `val`.
   const keyFacts = [
+    { label: 'Price',        val: fmtPrice(p.price) },
     { label: 'Lead time',    val: p.lead_time },
     { label: 'Last ordered', val: fmtDate(p.last_ordered), sub: p.last_ordered ? relTime(p.last_ordered) : null },
     { label: 'MOQ',          val: p.moq },
@@ -681,6 +865,7 @@ function renderSpec(p) {
           <h2 class="spec-title">${escapeHtml(title)}</h2>
           ${definition ? `<p class="spec-definition">${escapeHtml(definition)}</p>` : ''}
           ${vendorHtml}
+          ${locationHtml}
           <div class="spec-keyfacts">${keyFactsHtml}</div>
         </div>
       </div>
