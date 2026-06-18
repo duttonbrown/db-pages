@@ -1242,6 +1242,39 @@
     gap: 6px;
     white-space: nowrap;
   }
+  /* ── Nested sub-items (the physical lines that roll into a work-order row) ──
+     A row that aggregates more than one line gets a chevron toggle; expanding
+     it reveals one muted, indented child row per line so the lead can SEE every
+     SKU that will travel to the Assembly Log before pushing. */
+  .asm-child-toggle {
+    border: none; background: none; cursor: pointer;
+    color: var(--muted); font-size: 11px; line-height: 1;
+    padding: 0 5px 0 0; margin: 0; font-family: inherit;
+    transition: transform .12s ease, color .12s ease;
+    display: inline-block; width: 14px;
+  }
+  .asm-child-toggle:hover { color: var(--accent-dark); }
+  .asm-child-toggle.is-open { transform: rotate(90deg); color: var(--ink); }
+  .asm-child-count {
+    margin-left: 6px; font-size: 10px; color: var(--muted);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 999px; padding: 0 6px; font-weight: 400;
+    vertical-align: middle;
+  }
+  tr.asm-child-row > td { border-top: none; padding-top: 3px; padding-bottom: 3px; }
+  tr.asm-child-row { background: color-mix(in srgb, var(--bg) 55%, white); }
+  .asm-child-lead {
+    padding-left: 22px; color: var(--muted); font-size: 11px;
+    position: relative;
+  }
+  .asm-child-lead::before {
+    content: "└"; position: absolute; left: 8px; color: var(--border);
+  }
+  .asm-child-sku {
+    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
+    font-size: 10px; color: var(--text); margin-right: 6px;
+  }
+  .asm-child-qty { color: var(--muted); font-variant-numeric: tabular-nums; }
   .asm-qty-input {
     width: 44px;
     text-align: center;
@@ -2054,10 +2087,11 @@
       <span><strong id="asmRowCount">0</strong> row(s) preview the push to the
         <a href="https://www.notion.so/duttonbrown/Assembly-Log-31affa524c5b804dac05d9a261025303" target="_blank" style="color:var(--accent-dark)">Notion Assembly Log</a>.
         <strong>Split</strong> halves a row · <strong>÷N</strong> divides into N even parts ·
-        <strong>merge</strong> reverts.</span>
+        <strong>merge</strong> reverts · click a row's <span style="color:var(--muted)">&#9654;</span>
+        to see the sub-items that build it (they carry to Notion with the row).</span>
       <button type="button" class="asm-push-btn" disabled
-              title="Release flow not yet wired — run python release_queue.py from the local copy.">
-        Push to Notion (release script pending)
+              title="The push to the Assembly Log runs from the release PC: python sync_orders.py creates/updates each row with Sync Status = Pending Review, and serializes every sub-item line into the row's Line Items field. A one-click hub button is the next step.">
+        Push to Notion &mdash; via sync_orders.py
       </button>
     </div>
     <div class="asm-split-banner" id="asmSplitBanner" style="display:none"></div>
@@ -2104,8 +2138,158 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-18T17:35:57",
+  "built_at": "2026-06-18T18:10:06",
   "orders": [
+    {
+      "shopify_order_id": "7013121785938",
+      "shopify_order_name": "36175",
+      "shopify_order_number": "36175",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 432.49,
+      "ship_by_date": null,
+      "latest_ship_by": "July 16, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-18T17:54:05-05:00",
+      "tags": "redo",
+      "total_price": 432.49,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7013121785938",
+          "shopify_order_name": "36175",
+          "shopify_order_number": "36175",
+          "key": [
+            "color",
+            "Ochre",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Ochre",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30112F-10"
+          ],
+          "variant_skus": [
+            "30112F-10-1H",
+            "BULB-9993"
+          ],
+          "line_item_titles": [
+            "Color Lure Flush Mount 10\"",
+            "LED G25 Bulb - 3-Pack"
+          ],
+          "lines": [
+            {
+              "title": "Color Lure Flush Mount 10\"",
+              "variant_title": "Brass / Ochre / Flat ceiling",
+              "variant_sku": "30112F-10-1H",
+              "parent_sku": "30112F-10",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-lure-flush-mount-10-brass-ochre.jpg?v=1747968661&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "LED G25 Bulb - 3-Pack",
+              "variant_title": "White / 500 lumens",
+              "variant_sku": "BULB-9993",
+              "parent_sku": "BULB-9993",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Bulb",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/G25-bulb-500lm-3000K-enclosed-dimmable-3-pack.jpg?v=1775636800&width=120",
+              "properties": [],
+              "line_item_id": 16946979471442,
+              "is_bulb": true,
+              "bulb_type": "G25",
+              "bulb_count": 3,
+              "fold_bulb": true
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Ochre|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7013121785938",
+          "shopify_order_name": "36175",
+          "shopify_order_number": "36175",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-18T17:54:05-05:00",
+          "parent_sku": "30112F-10",
+          "color": "Ochre",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16946979504210
+          ],
+          "item_titles": [
+            "Color Lure Flush Mount 10\""
+          ],
+          "variant_skus": [
+            "30112F-10-1H"
+          ],
+          "lines": [
+            {
+              "sku": "30112F-10-1H",
+              "title": "Color Lure Flush Mount 10\"",
+              "qty": 1,
+              "finish": "Brass",
+              "color": "Ochre",
+              "category": "fixture",
+              "variant_title": "Brass / Ochre / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-lure-flush-mount-10-brass-ochre.jpg?v=1747968661&width=120"
+            }
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7013068931154",
       "shopify_order_name": "36174",
@@ -3305,9 +3489,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 7,
-    "printouts": 10,
-    "notion_rows": 9,
+    "orders": 8,
+    "printouts": 11,
+    "notion_rows": 10,
     "skipped_already_printed": 173,
     "needs_attention": 0,
     "printed_review": 0
@@ -3580,6 +3764,25 @@ function saveAssignment(rowKey, assembler){
 // original qty.
 const ASM_SPLIT_KEY = "db-print-queue-asm-split-v1";
 const ASM_SPLIT_TOTAL_KEY = "db-print-queue-asm-split-total-v1";
+
+// Which multi-line Assembly rows are EXPANDED to show their nested sub-items.
+// Default is collapsed (children hidden); a row's baseKey appears here once the
+// manager opens it. Browser-local, same as splits/assignments.
+const ASM_EXPAND_KEY = "db-print-queue-asm-expand-v1";
+function loadAsmExpand(){
+  try { return JSON.parse(localStorage.getItem(ASM_EXPAND_KEY) || "{}"); }
+  catch(e){ return {}; }
+}
+function saveAsmExpand(map){
+  localStorage.setItem(ASM_EXPAND_KEY, JSON.stringify(map));
+}
+function asmToggleChildren(baseKey){
+  const map = loadAsmExpand();
+  if(map[baseKey]) delete map[baseKey]; else map[baseKey] = 1;
+  saveAsmExpand(map);
+  renderAssemblyQueue();
+}
+
 function loadSplits(){
   try { return JSON.parse(localStorage.getItem(ASM_SPLIT_KEY) || "{}"); }
   catch(e){ return {}; }
@@ -6779,6 +6982,7 @@ function renderAssemblyQueue(){
     return;
   }
 
+  const expandMap = loadAsmExpand();
   body.innerHTML = rows.map(rec => {
     const o = rec.order, r = rec.row;
     // Bare order number, no #, no customer.
@@ -6786,6 +6990,24 @@ function renderAssemblyQueue(){
     const orderLink = o.shopify_url
       ? `<a class="asm-order" href="${o.shopify_url}" target="_blank">${orderName}</a>`
       : `<span class="asm-order">${orderName}</span>`;
+
+    // ── Nested sub-items ───────────────────────────────────────────────────
+    // The physical lines that rolled into this (parent_sku, color, finish) row.
+    // Only worth nesting when there's more than one line (a single line just
+    // restates the parent). Children are shown ONCE — on the parent/first part
+    // of a split — never duplicated across split parts (qty is split, the line
+    // detail is not, so showing children on every part would over-count).
+    const childLines = Array.isArray(r.lines) ? r.lines : [];
+    const hasChildren = childLines.length > 1 && rec.partIdx === 0;
+    const isOpen = hasChildren && !!expandMap[rec.baseKey];
+    const childToggle = hasChildren
+      ? `<button class="asm-child-toggle${isOpen ? " is-open" : ""}"
+                 title="${isOpen ? "Hide" : "Show"} the ${childLines.length} sub-items that build this row"
+                 onclick="asmToggleChildren('${rec.baseKey}')">&#9654;</button>`
+      : "";
+    const childCount = hasChildren
+      ? `<span class="asm-child-count" title="${childLines.length} sub-items carry to the Assembly Log with this row">${childLines.length} items</span>`
+      : "";
     const title = (r.item_titles && r.item_titles[0]) || "";
     const variantSku = (r.variant_skus && r.variant_skus[0]) || r.parent_sku;
     const colorDot = r.color && swatchHexFor(r.color)
@@ -6831,9 +7053,9 @@ function renderAssemblyQueue(){
     const opts = ASSEMBLERS.map(a =>
       `<option value="${a}" ${rec.assembler===a?"selected":""}>${a||"— assign —"}</option>`).join("");
 
-    return `
+    const parentTr = `
       <tr class="${trCls}">
-        <td>${orderLink}${partSuffix}</td>
+        <td>${childToggle}${orderLink}${partSuffix}${childCount}</td>
         <td>
           <span class="asm-sku">${variantSku}</span>
           <div class="asm-cust" style="margin-top:2px">${title}</div>
@@ -6856,6 +7078,29 @@ function renderAssemblyQueue(){
           </select>
         </td>
       </tr>`;
+
+    // Child rows — one per physical line, only when expanded.
+    const childTrs = isOpen ? childLines.map(L => {
+      const cSku = L.sku || r.parent_sku || "";
+      const cTitle = L.title || "";
+      const cQty = L.qty != null ? L.qty : "";
+      const cFinish = L.finish
+        ? `<span class="color-chip color-chip-plain" style="${chipSwatchStyle(L.finish)}"><span class="swatch-dot sm"></span>${L.finish}</span>` : "";
+      const cColor = L.color
+        ? `<span class="color-chip color-chip-plain" style="${chipSwatchStyle(L.color)}"><span class="swatch-dot sm"></span>${L.color}</span>` : "";
+      return `
+      <tr class="asm-child-row">
+        <td class="asm-child-lead"></td>
+        <td><span class="asm-child-sku">${cSku}</span><span style="font-size:11px;color:var(--muted)">${cTitle}</span></td>
+        <td>${cFinish}</td>
+        <td>${cColor}</td>
+        <td class="right asm-child-qty">${cQty}</td>
+        <td class="center" style="color:var(--border)">&middot;</td>
+        <td></td>
+      </tr>`;
+    }).join("") : "";
+
+    return parentTr + childTrs;
   }).join("");
 }
 
