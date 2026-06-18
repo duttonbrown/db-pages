@@ -2058,6 +2058,8 @@
       <span class="trv-toolbar-label"><strong id="trvCount">0</strong> traveler<span id="trvCountPlural">s</span></span>
       <div class="trv-toolbar-actions">
         <button type="button" class="trv-btn trv-btn-primary" onclick="printAllTravelers()">Print all travelers</button>
+        <button type="button" class="trv-btn" id="refreshBoardBtn" onclick="refreshBoard()"
+                title="Rebuild the board from live Shopify right now instead of waiting for the next hourly update — pulls in just-placed orders on demand. Takes ~45s.">↻ Refresh</button>
         <button type="button" class="trv-btn" id="releaseBatchBtn" onclick="releaseBatch()"
                 title="Tag these orders printed, attach each traveler PDF to its Shopify order, and archive the batch to SharePoint. Runs automatically on the release PC — a Teams card confirms. If the PC is offline, a release file downloads for the &quot;DB Finalize Release&quot; shortcut instead.">Release batch</button>
         <a class="trv-release-help" href="release.html" target="_blank" rel="noopener"
@@ -2075,7 +2077,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-18T11:30:02",
+  "built_at": "2026-06-18T11:35:02",
   "orders": [
     {
       "shopify_order_id": "7012434477138",
@@ -4011,6 +4013,8 @@ function renderMasterTraveler(o, calloutHtml){
   return `<div class="traveler trv-master" data-order="${escapeHtml(o.shopify_order_id)}" data-traveler="__master">
     <div class="trv-sheet-actions no-print">
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
+      <button type="button" class="trv-btn trv-btn-ghost trv-release-one" onclick="releaseOneOrder(this)"
+              title="Release just this order now — tags it printed, attaches its traveler PDF(s) to the Shopify order, and archives to SharePoint. Lets you push one order out ahead of the rest of the batch.">Release this order</button>
     </div>
     ${staleBanner}
     ${calloutHtml || ""}
@@ -4126,6 +4130,8 @@ function renderTraveler(o, p, idx, total, calloutHtml){
   return `<div class="traveler" data-order="${escapeHtml(o.shopify_order_id)}" data-traveler="${escapeHtml(p.traveler_key||"")}">
     <div class="trv-sheet-actions no-print">
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
+      <button type="button" class="trv-btn trv-btn-ghost trv-release-one" onclick="releaseOneOrder(this)"
+              title="Release just this order now — tags it printed, attaches its traveler PDF(s) to the Shopify order, and archives to SharePoint. Lets you push one order out ahead of the rest of the batch.">Release this order</button>
     </div>
     ${staleBanner}
     ${calloutHtml || ""}
@@ -5451,6 +5457,102 @@ async function releaseBatch(){
   showTrvToast(
     `Release PC unreachable — downloaded the release file for ${count} order${count===1?"":"s"} instead. ` +
     `Click the "DB Finalize Release" shortcut on the release station to finish.`, null);
+}
+
+// ── On-demand board refresh ──────────────────────────────────────────────────
+// Rebuild the board from live Shopify right now (instead of waiting for the
+// hourly task) so just-placed orders show up. POSTs to the refresh webhook,
+// which forwards through the tunnel to release_listener.py's /refresh-board
+// (runs the same publish chain the hourly task runs). Reloads on success so the
+// freshly published board is what's on screen.
+const REFRESH_WEBHOOK = "https://thomometer.app.n8n.cloud/webhook/refresh-board";
+
+async function refreshBoard(){
+  const btn = document.getElementById("refreshBoardBtn");
+  const orig = btn ? btn.textContent : "";
+  if(btn){ btn.disabled = true; btn.textContent = "Refreshing…"; }
+  showTrvToast("Rebuilding the board from live Shopify — about 45 seconds…", null);
+  try{
+    const resp = await fetch(REFRESH_WEBHOOK, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: "{}",
+    });
+    const out = await resp.json().catch(() => ({}));
+    if(resp.ok && out && out.ok){
+      if(btn){ btn.textContent = "Refreshed ✓"; }
+      showTrvToast("Board refreshed — reloading with the latest orders…", null);
+      setTimeout(() => location.reload(), 900);
+      return;
+    }
+    throw new Error((out && out.message) || ("HTTP " + resp.status));
+  }catch(e){
+    if(btn){ btn.disabled = false; btn.textContent = orig; }
+    showTrvToast("Refresh failed (" + (e.message || e) + "). The hourly update will " +
+                 "catch up, or try again in a moment.", null);
+  }
+}
+
+// ── Release a single order early ─────────────────────────────────────────────
+// Push ONE order out ahead of the rest of the batch. Same pipeline as
+// releaseBatch() (webhook → tunnel → release_queue.py: tag printed, attach the
+// order's traveler PDF(s), archive to SharePoint) — just scoped to the one order
+// the clicked sheet belongs to. Reuses the release allowlist guard. No download
+// fallback here: a single early release is a convenience; if the PC is offline
+// the team falls back to the normal batch Release.
+async function releaseOneOrder(btn){
+  if(RELEASE_ALLOWED === false){
+    showTrvToast("Releasing is limited to Shipping and management (shipping@, " +
+                 "Chase, Alex, Thomas).", null);
+    return;
+  }
+  const sheet = btn.closest(".traveler");
+  const oid = sheet ? sheet.getAttribute("data-order") : null;
+  if(!oid){ showTrvToast("Couldn't identify this order.", null); return; }
+  const order = (QUEUE.orders||[]).find(o => String(o.shopify_order_id) === String(oid));
+  if(!order || !order.shopify_order_number){
+    showTrvToast("This order isn't on the board.", null);
+    return;
+  }
+  const num = order.shopify_order_number;
+  const dryRun = new URLSearchParams(location.search).has("dryrun");
+  const ok = window.confirm(
+    (dryRun ? `DRY RUN — release order #${num}?\n\nNothing will be written; PDFs render only.\n\n`
+            : `Release order #${num} now, ahead of the rest of the batch?\n\n` +
+              `This tags it PRINTED in Shopify, attaches its traveler PDF(s) to the order, ` +
+              `and archives it to SharePoint.\n\n`) +
+    `It runs automatically on the release PC — a Teams card confirms when done.`);
+  if(!ok) return;
+
+  const payload = {
+    released_at: new Date().toISOString(),
+    source: "print-queue-board-single",
+    dry_run: dryRun,
+    orders: [order],           // one-order payload; release_queue.py handles any count
+  };
+  const orig = btn.textContent;
+  btn.disabled = true; btn.textContent = "Releasing…";
+  try{
+    const resp = await fetch(RELEASE_WEBHOOK, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+    });
+    const out = await resp.json().catch(() => ({}));
+    if(resp.ok && out && out.queued){
+      setLastReleaseNow();
+      btn.textContent = dryRun ? "Dry run queued ✓" : "Released ✓";
+      showTrvToast(
+        `${dryRun ? "Dry-run release" : "Release"} queued for #${num} — running on the release PC. ` +
+        `Confirmation posts to Teams (Automations › Production).`, null);
+      return;
+    }
+    throw new Error((out && out.error) || ("HTTP " + resp.status));
+  }catch(e){
+    btn.disabled = false; btn.textContent = orig;
+    showTrvToast("Couldn't release #" + num + " (" + (e.message || e) + "). " +
+                 "If the release PC is offline, use the batch Release instead.", null);
+  }
 }
 
 // Print a single traveler — isolate it, print, restore. The isolated sheet is
