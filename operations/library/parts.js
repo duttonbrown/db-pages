@@ -214,9 +214,18 @@ async function bootstrap() {
   // Add 'all' faux glossary
   DATA.glossary.unshift({ id: 'all', name: 'All', abbr: '', definition: '' });
 
+  // Sidebar counts — Parts/Supplies from this file, Lighting/Hardware from products
   $('parts-count').textContent = DATA.counts.parts.toLocaleString();
   const sideSuppliesCount = $('supplies-count');
   if (sideSuppliesCount) sideSuppliesCount.textContent = (DATA.counts.supplies || 0).toLocaleString();
+  fetch(libUrl('products-library.json'), { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : null)
+    .then(pl => {
+      if (!pl) return;
+      const lc = $('nav-lighting-count'); if (lc) lc.textContent = (pl.counts.lighting || 0).toLocaleString();
+      const hc = $('nav-hardware-count'); if (hc) hc.textContent = (pl.counts.hardware || 0).toLocaleString();
+    })
+    .catch(() => {});
   $('lib-count').innerHTML = `<b>${DATA.counts.parts}</b> parts · <b>${DATA.counts.glossary}</b> categories`;
   renderQuickFilters();
   renderGlossary();
