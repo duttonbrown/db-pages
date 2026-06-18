@@ -2085,6 +2085,8 @@
         <button type="button" class="trv-btn trv-btn-primary" onclick="printAllTravelers()">Print all travelers</button>
         <button type="button" class="trv-btn" id="releaseBatchBtn" onclick="releaseBatch()"
                 title="Tag these orders printed, attach each traveler PDF to its Shopify order, and archive the batch to SharePoint. Runs automatically on the release PC — a Teams card confirms. If the PC is offline, a release file downloads for the &quot;DB Finalize Release&quot; shortcut instead.">Release batch</button>
+        <button type="button" class="trv-btn" id="printSelectedBtn" onclick="printSelected()" disabled
+                title="Print only the orders you've checked (use the Select boxes on each order) — every traveler on each selected order. For printing a few orders together without printing the whole board.">Print selected (0)</button>
         <button type="button" class="trv-btn" id="releaseSelectedBtn" onclick="releaseSelected()" disabled
                 title="Release only the orders you've checked (use the Select boxes on each order). Same as Release batch, but scoped to your selection — for pushing a few orders out together without releasing everything.">Release selected (0)</button>
         <a class="trv-release-help" href="release.html" target="_blank" rel="noopener"
@@ -2102,7 +2104,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-18T12:46:03",
+  "built_at": "2026-06-18T13:00:02",
   "orders": [
     {
       "shopify_order_id": "7012649336914",
@@ -4410,8 +4412,6 @@ function renderMasterTraveler(o, calloutHtml, showSelect){
     <div class="trv-sheet-actions no-print">
       ${showSelect ? trvSelectBox(o) : ""}
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
-      <button type="button" class="trv-btn trv-btn-ghost trv-release-one" onclick="releaseOneOrder(this)"
-              title="Release just this order now — tags it printed, attaches its traveler PDF(s) to the Shopify order, and archives to SharePoint. Lets you push one order out ahead of the rest of the batch.">Release this order</button>
     </div>
     ${staleBanner}
     ${calloutHtml || ""}
@@ -4528,8 +4528,6 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
     <div class="trv-sheet-actions no-print">
       ${showSelect ? trvSelectBox(o) : ""}
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
-      <button type="button" class="trv-btn trv-btn-ghost trv-release-one" onclick="releaseOneOrder(this)"
-              title="Release just this order now — tags it printed, attaches its traveler PDF(s) to the Shopify order, and archives to SharePoint. Lets you push one order out ahead of the rest of the batch.">Release this order</button>
     </div>
     ${staleBanner}
     ${calloutHtml || ""}
@@ -5911,87 +5909,55 @@ async function refreshBoard(){
   }
 }
 
-// ── Release a single order early ─────────────────────────────────────────────
-// Push ONE order out ahead of the rest of the batch. Same pipeline as
-// releaseBatch() (webhook → tunnel → release_queue.py: tag printed, attach the
-// order's traveler PDF(s), archive to SharePoint) — just scoped to the one order
-// the clicked sheet belongs to. Reuses the release allowlist guard. No download
-// fallback here: a single early release is a convenience; if the PC is offline
-// the team falls back to the normal batch Release.
-async function releaseOneOrder(btn){
-  if(RELEASE_ALLOWED === false){
-    showTrvToast("Releasing is limited to Shipping and management (shipping@, " +
-                 "Chase, Alex, Thomas).", null);
-    return;
-  }
-  const sheet = btn.closest(".traveler");
-  const oid = sheet ? sheet.getAttribute("data-order") : null;
-  if(!oid){ showTrvToast("Couldn't identify this order.", null); return; }
-  const order = (QUEUE.orders||[]).find(o => String(o.shopify_order_id) === String(oid));
-  if(!order || !order.shopify_order_number){
-    showTrvToast("This order isn't on the board.", null);
-    return;
-  }
-  const num = order.shopify_order_number;
-  const dryRun = new URLSearchParams(location.search).has("dryrun");
-  const ok = window.confirm(
-    (dryRun ? `DRY RUN — release order #${num}?\n\nNothing will be written; PDFs render only.\n\n`
-            : `Release order #${num} now, ahead of the rest of the batch?\n\n` +
-              `This tags it PRINTED in Shopify, attaches its traveler PDF(s) to the order, ` +
-              `and archives it to SharePoint.\n\n`) +
-    `It runs automatically on the release PC — a Teams card confirms when done.`);
-  if(!ok) return;
-
-  const payload = {
-    released_at: new Date().toISOString(),
-    source: "print-queue-board-single",
-    dry_run: dryRun,
-    orders: [order],           // one-order payload; release_queue.py handles any count
-  };
-  const orig = btn.textContent;
-  btn.disabled = true; btn.textContent = "Releasing…";
-  try{
-    const resp = await fetch(RELEASE_WEBHOOK, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(payload),
-    });
-    const out = await resp.json().catch(() => ({}));
-    if(resp.ok && out && out.queued){
-      setLastReleaseNow();
-      btn.textContent = dryRun ? "Dry run queued ✓" : "Released ✓";
-      showTrvToast(
-        `${dryRun ? "Dry-run release" : "Release"} queued for #${num} — running on the release PC. ` +
-        `Confirmation posts to Teams (Automations › Production).`, null);
-      return;
-    }
-    throw new Error((out && out.error) || ("HTTP " + resp.status));
-  }catch(e){
-    btn.disabled = false; btn.textContent = orig;
-    showTrvToast("Couldn't release #" + num + " (" + (e.message || e) + "). " +
-                 "If the release PC is offline, use the batch Release instead.", null);
-  }
-}
-
-// ── Batch release of a hand-picked selection ─────────────────────────────────
-// The middle ground between "Release this order" (one) and "Release batch"
-// (all): tick the Select box on any number of orders, then release exactly
-// those together. Same pipeline + allowlist as releaseBatch, scoped to the
-// checked order ids.
+// ── Print / release a hand-picked selection ──────────────────────────────────
+// The middle ground between one order and the whole board: tick the Select box
+// on any number of orders, then Print selected (paper only) or Release selected
+// (full pipeline + allowlist, same as releaseBatch) scoped to the checked order
+// ids. One checkbox per order selects all of that order's traveler sheets.
 function selectedOrderIds(){
   return Array.from(document.querySelectorAll(".trv-select-box:checked"))
     .map(cb => String(cb.getAttribute("data-order-id")));
 }
 
+// Print exactly the checked orders — EVERY traveler sheet belonging to each
+// selected order (one checkbox per order selects the whole order). Mirrors
+// printOneTraveler's isolate→print→restore, but for a set of sheets. No release,
+// no Shopify writes — just paper.
+async function printSelected(){
+  const ids = new Set(selectedOrderIds());
+  if(!ids.size){ showTrvToast("No orders selected — tick a Select box first.", null); return; }
+  if(!confirmUnassignedTasks("Print")) return;
+  const list = document.getElementById("travelers");
+  const sheets = Array.from(list.querySelectorAll(".traveler"));
+  const chosen = sheets.filter(s => ids.has(String(s.getAttribute("data-order"))));
+  if(!chosen.length){ showTrvToast("Selected orders aren't on the board.", null); return; }
+  const chosenSet = new Set(chosen);
+  sheets.forEach(s => { if(!chosenSet.has(s)) s.style.display = "none"; });
+  document.body.classList.add("printing-travelers");
+  await ensureThumbsLoaded(list);
+  const cleanup = () => {
+    document.body.classList.remove("printing-travelers");
+    sheets.forEach(s => { s.style.display = ""; });
+    window.removeEventListener("afterprint", cleanup);
+  };
+  window.addEventListener("afterprint", cleanup);
+  window.print();
+}
+
 function onTrvSelectChange(cb){
-  // Keep the pill's checked style and the toolbar count in sync.
+  // Keep the pill's checked style and the toolbar counts in sync.
   const pill = cb.closest(".trv-select");
   if(pill) pill.classList.toggle("is-checked", cb.checked);
   const n = selectedOrderIds().length;
-  const btn = document.getElementById("releaseSelectedBtn");
-  if(btn){
-    btn.textContent = `Release selected (${n})`;
-    btn.disabled = (n === 0) || (RELEASE_ALLOWED === false);
+  const printBtn = document.getElementById("printSelectedBtn");
+  if(printBtn){
+    printBtn.textContent = `Print selected (${n})`;
+    printBtn.disabled = (n === 0);   // printing isn't gated by the release allowlist
+  }
+  const relBtn = document.getElementById("releaseSelectedBtn");
+  if(relBtn){
+    relBtn.textContent = `Release selected (${n})`;
+    relBtn.disabled = (n === 0) || (RELEASE_ALLOWED === false);
   }
 }
 
