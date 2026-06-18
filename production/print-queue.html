@@ -2077,7 +2077,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-18T12:00:02",
+  "built_at": "2026-06-18T12:02:27",
   "orders": [
     {
       "shopify_order_id": "7012434477138",
@@ -4724,16 +4724,26 @@ function isBulbTargetLine(ln){
   return !isBulbLine(ln) && fixtureTakesBulbs(ln);
 }
 // Lampholder fit: true fits, false doesn't, null unknown. Mirrors lib/bulbs.fits.
-const BULB_FIT_RESTRICTED = { "L-A15": ["G16","A15"], "L-PAR16": ["PAR16"] };
+//   L-A15  — A15 / G16 only (G25 is too big)
+//   L-PAR16 — PAR16 only
+//   L-G    — Sputnik candelabra-globe holder; we stock NO bulb for it → [] = nothing fits
+//   L-A / unlisted — roomy, accepts any bulb
+const BULB_FIT_RESTRICTED = { "L-A15": ["G16","A15"], "L-PAR16": ["PAR16"], "L-G": [] };
+// Native (best-fit) bulb per holder — a bulb on its native holder ranks above the
+// same bulb substituting into a roomier L-A. Mirrors lib/bulbs._NATIVE_BULB.
+const BULB_NATIVE = { "L-A15": "A15", "L-PAR16": "PAR16" };
 function bulbFits(bulbType, label){
   if(!label || !bulbType) return null;
   const allowed = BULB_FIT_RESTRICTED[(label||"").trim().toUpperCase()];
-  if(!allowed) return true;                 // L-A / L-G / unrestricted = roomy
-  return allowed.includes(bulbType);
+  if(!allowed) return true;                 // L-A / unrestricted = roomy
+  return allowed.includes(bulbType);        // [] (L-G) => nothing fits
 }
+// +3 native exact match, +1 roomy substitute, 0 unknown, -2 doesn't fit.
 function bulbFitScore(bulbType, label){
   const f = bulbFits(bulbType, label);
-  return f === true ? 2 : f === false ? -2 : 0;
+  if(f === false) return -2;
+  if(f === null)  return 0;
+  return BULB_NATIVE[(label||"").trim().toUpperCase()] === bulbType ? 3 : 1;
 }
 // A bulb sheet is "pending assignment" when the order has fixtures to assign
 // onto. (The backend only emits is_bulb_sheet in that case, but guard anyway.)
