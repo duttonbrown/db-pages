@@ -145,32 +145,30 @@
   letter-spacing: 0.05em;
   margin-right: 2px;
 }
+/* Matches the company-hub filter pills (.fpill): soft 6px rounded-rect, white
+   idle / dark-fill active, count as a faded inline number (not a badge). */
 .quick-filter {
   font-family: inherit;
   font-size: 12px;
-  font-weight: 500;
-  padding: 5px 7px 5px 12px;
+  font-weight: 400;
+  padding: 3px 12px;
   background: white;
-  color: var(--ink);
+  color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 6px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  line-height: 1.3;
+  gap: 3px;
+  line-height: 1.4;
   transition: background 0.12s, border-color 0.12s, color 0.12s;
 }
 .quick-filter .qf-count {
-  font-size: 11px;
+  font-size: 10px;
   font-variant-numeric: tabular-nums;
-  color: var(--muted);
-  background: var(--bg);
-  border-radius: 999px;
-  padding: 1px 7px;
-  min-width: 20px;
-  text-align: center;
-  transition: background 0.12s, color 0.12s;
+  opacity: 0.65;
+  margin-left: 3px;
+  transition: opacity 0.12s;
 }
 /* Idle hover hints the pill's own color. Scoped to :not(.is-active) so an
    active (filled) pill's white label never gets overridden by the hover color
@@ -178,9 +176,9 @@
 .quick-filter.qf-powder:not(.is-active):hover  { border-color: #B85C00; color: #B85C00; }
 .quick-filter.qf-black:not(.is-active):hover   { border-color: #2B2B2B; color: #2B2B2B; }
 .quick-filter.qf-attention:not(.is-active):hover { border-color: var(--accent-dark); color: var(--accent-dark); }
-/* Active = filled in the pill's color. */
-.quick-filter.is-active { color: white; border-color: transparent; }
-.quick-filter.is-active .qf-count { background: rgba(255,255,255,0.22); color: white; }
+/* Active = filled in the pill's color (matches hub's .fpill.on weight bump). */
+.quick-filter.is-active { color: white; border-color: transparent; font-weight: 500; }
+.quick-filter.is-active .qf-count { opacity: 0.8; }
 .quick-filter.qf-powder.is-active    { background: #B85C00; }
 .quick-filter.qf-black.is-active     { background: #2B2B2B; }
 .quick-filter.qf-attention.is-active { background: var(--accent-dark); }
@@ -220,7 +218,7 @@
   background: var(--ink);
   color: white;
   border: 1px solid var(--ink);
-  border-radius: 999px;
+  border-radius: 6px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -270,7 +268,7 @@
   padding: 3px 10px;
   background: white;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 6px;
   cursor: pointer;
   color: var(--text);
   transition: all 0.12s;
@@ -317,7 +315,7 @@
   padding: 3px 10px;
   background: white;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 6px;
   cursor: pointer;
   color: var(--text);
   display: inline-flex;
@@ -535,7 +533,7 @@
   font-size: 11px;
   font-weight: 500;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 6px;
   background: var(--bg);
   color: var(--text);
   border: 1px solid var(--border);
@@ -547,7 +545,7 @@
   font-size: 11px;
   font-weight: 400;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 6px;
   background: #F4F1ED;
   color: var(--text);
   border: 1px dashed var(--border);
@@ -705,7 +703,7 @@
   font-weight: 600;
   padding: 1px 6px;
   margin-left: 4px;
-  border-radius: 999px;
+  border-radius: 6px;
   background: var(--bg);
   color: var(--muted);
   border: 1px solid var(--border);
@@ -739,7 +737,7 @@
 .year-val.empty { color: var(--muted); font-weight: 300; }
 .year-delta {
   font-size: 13px; font-weight: 500;
-  padding: 4px 10px; border-radius: 999px;
+  padding: 4px 10px; border-radius: 6px;
 }
 .year-delta.up   { background: #DCFCE7; color: #166534; }
 .year-delta.down { background: #FEE2E2; color: #991B1B; }
@@ -826,7 +824,7 @@
   font-size: 11px;
   font-weight: 500;
   padding: 3px 8px;
-  border-radius: 999px;
+  border-radius: 6px;
   background: #EEF2F7;
   color: var(--ink);
   letter-spacing: 0.01em;
@@ -924,7 +922,7 @@ button.ihp-pill,
   align-items: center;
   gap: 7px;
   padding: 3px 4px 3px 4px;
-  border-radius: 5px;
+  border-radius: 6px;
   background: color-mix(in srgb, var(--loc-color, var(--muted)) 9%, white);
   border: 1px solid color-mix(in srgb, var(--loc-color, var(--muted)) 28%, white);
   text-decoration: none;
@@ -1061,7 +1059,7 @@ a.loc-pill:hover {
   color: white;
   font-size: 10px;
   font-weight: 600;
-  border-radius: 999px;
+  border-radius: 6px;
   letter-spacing: 0;
   text-transform: none;
   margin-left: 6px;
@@ -1121,7 +1119,7 @@ a.loc-pill:hover {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   padding: 3px 9px;
-  border-radius: 999px;
+  border-radius: 6px;
   line-height: 1;
   /* keep the pill aligned with the big numbers' baseline */
   align-self: center;
@@ -1171,7 +1169,7 @@ a.loc-pill:hover {
   font-size: 11px;
   font-weight: 500;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: 6px;
   background: #F0F0F0;
   color: var(--muted);
 }
