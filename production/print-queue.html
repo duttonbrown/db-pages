@@ -1528,6 +1528,10 @@
     border-radius: var(--radius);
     box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06);
     color: #333;
+    /* Pin the font here, not just on body: if Poppins fails to load the
+       fallback must be sans-serif, never the browser's serif default (the
+       intermittent serif-traveler bug). */
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     padding: 36px 44px 30px;
     width: 100%;
     margin: 0;
@@ -2071,8 +2075,88 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-18T10:00:02",
+  "built_at": "2026-06-18T11:00:02",
   "orders": [
+    {
+      "shopify_order_id": "7012434477138",
+      "shopify_order_name": "36170",
+      "shopify_order_number": "36170",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 9,
+      "customer_total_spent": 12525.81,
+      "ship_by_date": null,
+      "latest_ship_by": "June 22, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-06-18T10:29:36-05:00",
+      "tags": "",
+      "total_price": 80.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Bulb-Only"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "UPS Overnight",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7012434477138",
+          "shopify_order_name": "36170",
+          "shopify_order_number": "36170",
+          "key": [
+            "catch-all",
+            "7012434477138"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Ship / Review",
+          "parent_skus": [
+            "G6W"
+          ],
+          "variant_skus": [
+            "G6W"
+          ],
+          "line_item_titles": [
+            "Replacement Neckless Glass Globe"
+          ],
+          "lines": [
+            {
+              "title": "Replacement Neckless Glass Globe",
+              "variant_title": "6\" / White Glass",
+              "variant_sku": "G6W",
+              "parent_sku": "G6W",
+              "qty": 2,
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/globe-listing-white-1_00d441c9-5341-45c5-bec8-e0dd32d3b3f7.jpg?v=1747968726&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": "No standard build \u2014 bulbs/globes, custom, or one-time items. Pull, pack, and ship; confirm with the manager if anything needs building.",
+          "source": "catch-all",
+          "traveler_key": "catch-all|7012434477138"
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7012298227794",
       "shopify_order_name": "36169",
@@ -2503,10 +2587,10 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 2,
-    "printouts": 4,
+    "orders": 3,
+    "printouts": 5,
     "notion_rows": 3,
-    "skipped_already_printed": 175,
+    "skipped_already_printed": 173,
     "needs_attention": 0,
     "printed_review": 0
   },
@@ -3830,6 +3914,10 @@ function trvNotes(o){
   const bits = [];
   if(o.note) bits.push(escapeHtml(o.note).replace(/\n/g,"<br>"));
   (o.note_attributes||[]).forEach(a => {
+    // "Ship By" already shows formatted in the header (Latest Ship By); don't
+    // echo the raw ISO value again down here.
+    const nm = String(a.name||"").trim().toLowerCase();
+    if(nm === "ship by" || nm === "ship_by") return;
     const label = String(a.name||"").replace(/[-_]/g," ");
     bits.push(`<b>${escapeHtml(label.charAt(0).toUpperCase()+label.slice(1))}:</b> ${escapeHtml(a.value)}`);
   });
