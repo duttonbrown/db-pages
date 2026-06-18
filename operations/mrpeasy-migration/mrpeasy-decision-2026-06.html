@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRPeasy — The Decision · June 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #4A4A4A; --bg: #FAFAF9; --panel: #FFFFFF; --line: #E0DDD9;
+    --muted: #8A8078; --gold: #C9A94E; --accent: #FF9912; --accent-text: #D97706;
+    --good: #2F8F5B; --warn: #C77B1E; --bad: #C0492F; --soft: #F7F5F2;
+  }
+  body { font-family: 'Poppins', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  header { background: var(--soft); padding: 3rem 2rem 2.5rem; text-align: center; border-bottom: 1px solid var(--line); }
+  header .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  header h1 { font-weight: 600; font-size: 1.7rem; letter-spacing: 0.01em; margin-top: 0.6rem; }
+  header p.sub { font-weight: 300; font-size: 0.95rem; margin-top: 0.5rem; color: var(--muted); max-width: 660px; margin-left: auto; margin-right: auto; }
+  header a.back { display: inline-block; margin-top: 1.25rem; color: var(--muted); font-size: 0.8rem; text-decoration: none; font-weight: 300; }
+  header a.back:hover { color: var(--ink); }
+  main { max-width: 920px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  h2.sec { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin: 3rem 0 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+  h2.sec:first-of-type { margin-top: 0; }
+  p.lead { font-weight: 300; font-size: 1.05rem; margin-bottom: 1rem; }
+  p { font-weight: 300; margin-bottom: 0.9rem; }
+  strong { font-weight: 600; }
+  em { font-style: normal; color: var(--accent-text); font-weight: 400; }
+  ul { margin: 0 0 1rem 1.2rem; }
+  ul li { font-weight: 300; margin-bottom: 0.4rem; }
+
+  .verdict { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem 1.75rem 1.4rem; margin-bottom: 1.5rem; }
+  .verdict h3 { font-weight: 600; font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .verdict .answer { font-size: 1.35rem; font-weight: 600; color: var(--accent-text); margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.1rem; text-align: center; }
+  .stat .n { font-size: 1.55rem; font-weight: 600; color: var(--accent-text); line-height: 1.1; }
+  .stat .l { font-size: 0.72rem; font-weight: 300; color: var(--muted); margin-top: 0.35rem; }
+
+  table.cmp { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.85rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  table.cmp th { text-align: left; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line); background: var(--soft); }
+  table.cmp td { padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line); font-weight: 300; vertical-align: top; }
+  table.cmp tr:last-child td { border-bottom: none; }
+  table.cmp td.feat { font-weight: 400; color: var(--ink); }
+  .pill { display: inline-block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.03em; padding: 0.2rem 0.6rem; border-radius: 999px; white-space: nowrap; }
+  .pill.built { background: #E7F3EC; color: var(--good); }
+  .pill.partial { background: #FBF1E0; color: var(--warn); }
+  .pill.gap { background: #FAE9E5; color: var(--bad); }
+  .pill.na { background: #EFEDEA; color: var(--muted); }
+
+  .callout { border-radius: 8px; padding: 1.4rem 1.6rem; margin: 1.25rem 0; font-size: 0.9rem; font-weight: 300; }
+  .callout strong { font-weight: 600; }
+  .callout.gold { background: #FBF6E9; border: 1px solid #E8D9A8; border-left: 4px solid var(--gold); }
+  .callout.bad { background: #FAE9E5; border: 1px solid #E8C5BC; border-left: 4px solid var(--bad); color: #6a2a1c; }
+  .callout.good { background: #E7F3EC; border: 1px solid #BcdCC8; border-left: 4px solid var(--good); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.25rem 0; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.4rem 1.5rem; }
+  .card h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.75rem; }
+  .card.keep h4 { color: var(--good); }
+  .card.buy h4 { color: var(--bad); }
+  .card ul { margin-left: 1.1rem; }
+  .card ul li { font-size: 0.85rem; }
+  @media (max-width: 640px) { .cols { grid-template-columns: 1fr; } }
+
+  ol.roadmap { list-style: none; counter-reset: r; margin-top: 1rem; }
+  ol.roadmap > li { counter-increment: r; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.4rem 1.5rem 1.1rem 4.2rem; margin-bottom: 1.1rem; position: relative; }
+  ol.roadmap > li::before { content: counter(r); position: absolute; left: 1.25rem; top: 1.3rem; width: 2rem; height: 2rem; background: var(--soft); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.95rem; color: var(--accent-text); }
+  ol.roadmap > li.top::before { background: var(--accent); color: #fff; border-color: var(--accent); }
+  ol.roadmap h4 { font-weight: 600; font-size: 1.02rem; margin-bottom: 0.4rem; }
+  ol.roadmap .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.65rem; }
+  ol.roadmap .tag { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.18rem 0.55rem; border-radius: 4px; background: var(--soft); color: var(--muted); border: 1px solid var(--line); }
+  ol.roadmap .tag.effort { color: var(--accent-text); }
+  ol.roadmap p { font-size: 0.88rem; margin-bottom: 0.5rem; }
+  ol.roadmap .why { font-size: 0.82rem; color: var(--muted); }
+
+  .talk { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem 1.6rem; margin: 1.25rem 0; }
+  .talk p { font-size: 0.9rem; margin-bottom: 0.7rem; }
+  .talk p:last-child { margin-bottom: 0; }
+  .talk .q { font-weight: 600; color: var(--ink); }
+
+  footer { text-align: center; font-size: 0.75rem; font-weight: 300; color: var(--muted); padding: 2rem; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Operations · Make-or-Buy Decision</div>
+    <h1>MRPeasy: Should We Buy It?</h1>
+    <p class="sub">A re-evaluation after building our own production stack — written June 2026, three months after the original MRPeasy brief. The ground has shifted.</p>
+    <a class="back" href="../index.html">&larr; Operations</a>
+  </header>
+  <main>
+
+    <div class="verdict">
+      <h3>The short answer</h3>
+      <div class="answer">No — don't buy MRPeasy. Build the one missing piece instead.</div>
+      <p>When we wrote the MRPeasy brief in March, we had spreadsheets and institutional knowledge — so an off-the-shelf MRP looked like the obvious fix. Since then we built the hard 75% of an MRP ourselves: a live BOM engine that resolves every product&times;color into exact parts, a powder-coat pick list that aggregates parts by color across all open orders, and finish-split usage history per part. Those are <em>exactly</em> the three features MRPeasy is sold on — and ours are more tailored to how we actually work (Black Batch, (C) color variants, kit rods, glass-vs-color).</p>
+      <p>The one thing MRPeasy would genuinely add is a <strong>live on-hand inventory ledger with reorder alerts</strong>. That's a real gap — and it's the cheapest piece to build, not the most expensive. We can have low-stock monitoring in Notion for <strong>$0/month</strong> instead of <strong>~$5,700/year</strong>.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="n">~75%</div><div class="l">of MRPeasy's headline value already built in custom code</div></div>
+      <div class="stat"><div class="n">9,238</div><div class="l">BOM part-rows live across 402 SKUs (our "Matrix BOM," already running)</div></div>
+      <div class="stat"><div class="n">$5,700/yr</div><div class="l">MRPeasy all-in (3 seats + Make.com) — to mostly re-buy what we have</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">primitive actually missing: on-hand quantity per part</div></div>
+    </div>
+
+    <h2 class="sec">What changed since the March brief</h2>
+    <p class="lead">The MRPeasy pages were written to escape Fishbowl and replace spreadsheets. Both problems are now solved — by us, not by a vendor.</p>
+    <p>Read the original three pages and you'll notice every headline reason to buy MRPeasy describes a problem we've since solved in our own tooling:</p>
+    <ul>
+      <li><strong>"We have no system of record for BOMs"</strong> &rarr; We now have <code>extract_bom.py</code> generating <strong>bom-master</strong> nightly: 402 SKUs, 241 unique parts, 9,238 rows, with per-product color resolution.</li>
+      <li><strong>"Matrix BOM is the feature that decided it"</strong> &rarr; We built the same thing. Each part carries a role (Standard / Finish Only / Color Only / Finish+Color) and resolves per-product against the (C) variant's Color Parts list. The same physical part lands in the powder-coat bucket on one product and the brass-finish bucket on another — automatically.</li>
+      <li><strong>"Powder coat pick list is our #1 requirement and MRPeasy has no native view"</strong> &rarr; We built the native view MRPeasy <em>doesn't have</em>. The wash list explodes every open order of a color into one aggregated, floor-laid-out pick list, then freezes it as a dated batch.</li>
+      <li><strong>"We need usage history for reorder points"</strong> &rarr; <code>parts-usage</code> writes finish-split annual consumption (Brass / Nickel / Black / Color) back to every part in Notion.</li>
+    </ul>
+    <div class="callout gold">
+      <strong>The uncomfortable truth:</strong> the March brief is now an argument <em>against</em> our own work. It recommends paying a vendor to rebuild the exact capabilities we've since shipped — and to rebuild them in a more generic form that doesn't know about Black Batch, (C) variants, or kit rods. Buying MRPeasy now would be a strategic step backward dressed up as modernization.
+    </div>
+
+    <h2 class="sec">Feature-by-feature: what's built vs. what MRPeasy adds</h2>
+    <table class="cmp">
+      <thead>
+        <tr><th>MRPeasy headline feature</th><th>Status here</th><th>Where it lives / what's missing</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feat">Matrix BOM — variant/finish/color &rarr; exact parts</td>
+          <td><span class="pill built">Built</span></td>
+          <td><code>extract_bom.py</code> — and more domain-aware than MRPeasy's generic version</td>
+        </tr>
+        <tr>
+          <td class="feat">Powder-coat pick list by color</td>
+          <td><span class="pill built">Built</span></td>
+          <td><code>parts-wash-list</code> — the exact view MRPeasy admits it has no native version of</td>
+        </tr>
+        <tr>
+          <td class="feat">Usage history per part</td>
+          <td><span class="pill built">Built</span></td>
+          <td><code>parts-usage</code> — finish-split, written to Notion annually</td>
+        </tr>
+        <tr>
+          <td class="feat">Parts demand from open orders</td>
+          <td><span class="pill partial">Partial</span></td>
+          <td>Color/powder-coat slice only (via wash list). No all-parts shortage view across the full open-order book yet.</td>
+        </tr>
+        <tr>
+          <td class="feat">Live on-hand inventory ledger</td>
+          <td><span class="pill gap">Missing</span></td>
+          <td>No "Qty on Hand" exists anywhere in Notion today. This is the real gap.</td>
+        </tr>
+        <tr>
+          <td class="feat">Automatic reorder-point / low-stock alerts</td>
+          <td><span class="pill gap">Missing</span></td>
+          <td>Can't exist without on-hand qty. Buildable once that number exists.</td>
+        </tr>
+        <tr>
+          <td class="feat">Shopify &rarr; production sync</td>
+          <td><span class="pill built">Built</span></td>
+          <td><code>work-order-sync</code> — already live, hourly</td>
+        </tr>
+        <tr>
+          <td class="feat">Shop-floor labor / kiosk clock-in</td>
+          <td><span class="pill na">Not built</span></td>
+          <td>MRPeasy includes this free. We don't have it — but it's not why we're considering MRP, and it's a separable problem.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec">The real question isn't MRP — it's inventory alerts</h2>
+    <p class="lead">You said it directly: you need a way to monitor inventory alert levels. That's the actual job to be done. MRPeasy is one way to get it; it's the expensive way.</p>
+    <p>Here's the precise situation in Notion today. The Parts database already holds almost everything a reorder system needs:</p>
+    <ul>
+      <li><strong>Usage rate</strong> — <code>2024 Use</code> / <code>2025 Use</code> (populated on ~74% of parts)</li>
+      <li><strong>Lead time</strong> — populated on 100% of sampled parts (free text: "10 weeks", "1 week")</li>
+      <li><strong>Vendor + backup vendor</strong> — via rollup</li>
+      <li><strong>Reorder sizing</strong> — <code>Reorder Qty.</code>, <code>MOQ</code>, <code>Reorder Basis</code></li>
+    </ul>
+    <p>What's missing is a single number: <strong>Qty on Hand</strong> per part. Without it, nothing can fire an alert, because you can't compare a current level against a threshold that doesn't exist. There's even an <code>Inventory Transactions</code> relation on Part Families that was stubbed in and never built out — the intent was always there.</p>
+    <div class="callout bad">
+      <strong>This is the honest catch:</strong> an on-hand number is only as good as the discipline maintaining it. MRP's whole pitch is that it deducts stock automatically as orders consume parts, so nobody has to keep the number current by hand. That's the one thing we'd be giving up by staying custom — and the thing we have to design around. The plan below does exactly that: it deducts automatically off the BOM engine we already run, so the number stays live without manual counting.
+    </div>
+
+    <h2 class="sec">Keep custom, or buy — the straight tradeoff</h2>
+    <div class="cols">
+      <div class="card keep">
+        <h4>Build the ledger ourselves (recommended)</h4>
+        <ul>
+          <li><strong>$0/month</strong> — uses Notion + n8n we already pay for</li>
+          <li>Reuses the BOM engine + usage math already built</li>
+          <li>Tailored to Black Batch, (C) variants, kit rods, color batching</li>
+          <li>Team already lives in Notion — no new logins, no kiosk migration</li>
+          <li>Alerts route to Teams (where the team already is)</li>
+          <li>Risk: we maintain it; on-hand accuracy depends on our automation discipline</li>
+        </ul>
+      </div>
+      <div class="card buy">
+        <h4>Buy MRPeasy</h4>
+        <ul>
+          <li><strong>~$5,700/year</strong> ongoing, forever</li>
+          <li>Re-buys ~75% of what we already built, in a more generic form</li>
+          <li>6&ndash;8 week migration of 402 SKUs + 500 parts into a second system of record</li>
+          <li>Splits the source of truth: Notion + MRPeasy must now agree</li>
+          <li>Auto-deducts on-hand stock (the genuine win) + free labor kiosk</li>
+          <li>No native color-batch pick list — we'd rebuild ours on their API anyway</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout good">
+      <strong>Buy MRPeasy only if</strong> one of these becomes true: (1) part-level on-hand tracking proves impossible to keep accurate with our own automation after we try, (2) we want shop-floor labor/kiosk time tracking badly enough to pay for it, or (3) the team grows past the point where one custom-maintained system is safe. None of those are true today. Revisit in 6 months — don't commit now.
+    </div>
+
+    <h2 class="sec">The roadmap if we don't buy — inventory alerts for $0</h2>
+    <p class="lead">Four moves, in order. The first two get you low-stock alerts. The last two make them self-maintaining.</p>
+    <ol class="roadmap">
+      <li class="top">
+        <h4>Add the missing primitive: <code>Qty on Hand</code> + <code>Reorder Point</code> to the Parts DB</h4>
+        <div class="meta"><span class="tag effort">~1 day</span><span class="tag">Notion</span></div>
+        <p>Two number properties on the Parts database. Seed <code>Reorder Point</code> from a simple rule we already have the inputs for: <em>(annual use &divide; 52) &times; lead-time-weeks &times; safety factor</em>. Seed <code>Qty on Hand</code> from a one-time physical count of the parts that actually matter (the ~80 high-velocity / long-lead parts, not all 455).</p>
+        <p class="why">Everything else is blocked on this one number existing. It's the smallest possible change and unblocks the whole feature.</p>
+      </li>
+      <li class="top">
+        <h4>Build the low-stock alert: nightly n8n check &rarr; Teams card</h4>
+        <div class="meta"><span class="tag effort">~1 day</span><span class="tag">n8n</span><span class="tag">Teams</span></div>
+        <p>One scheduled n8n workflow: read every Part where <code>Qty on Hand &le; Reorder Point</code>, post an Adaptive Card to the Operations channel with part, on-hand, reorder point, vendor, and lead time — plus an "Add to purchase queue" button that lands a row in the Purchase Request Log we already have.</p>
+        <p class="why">This is the literal thing you asked for — monitor inventory alert levels — delivered end to end. After this step you have working low-stock alerts at $0.</p>
+      </li>
+      <li>
+        <h4>Make on-hand self-deduct: receipts add, fulfillments subtract</h4>
+        <div class="meta"><span class="tag effort">~3&ndash;4 days</span><span class="tag">n8n</span><span class="tag">BOM engine</span></div>
+        <p>Two automations close the loop so nobody maintains the number by hand. <strong>In:</strong> when a Purchase Request Log row flips to Received, add <code>Qty Received</code> to that part's on-hand. <strong>Out:</strong> when a Shopify order ships, BOM-explode it (the engine already does this) and subtract the consumed parts. This is exactly the auto-deduction MRP charges for — running on the BOM engine we already built.</p>
+        <p class="why">Removes the one real advantage MRPeasy has over us. After this, the on-hand number stays live on its own.</p>
+      </li>
+      <li>
+        <h4>Extend demand to all parts: open-order shortage view</h4>
+        <div class="meta"><span class="tag effort">~2&ndash;3 days</span><span class="tag">Python</span></div>
+        <p>Generalize the wash-list explosion from "color parts only" to "all parts across the whole open-order book," then compare projected demand against on-hand to surface shortages <em>before</em> they block a build — not just the powder-coat slice. Publish it as a hub view next to the wash list.</p>
+        <p class="why">This is the last thing MRP does that we don't. With it, we've matched the full feature set — on our own terms, at no monthly cost.</p>
+      </li>
+    </ol>
+    <div class="callout good">
+      <strong>Net:</strong> Steps 1&ndash;2 (about two days of work) give you the inventory alerts you asked for. Steps 3&ndash;4 (about a week more) make them self-maintaining and complete the MRP feature set. Total recurring cost: $0. Total one-time cost: roughly a week and a half of build, most of it reusing engines that already run.
+    </div>
+
+    <h2 class="sec">How to tell the team</h2>
+    <div class="talk">
+      <p class="q">"Are we still doing the MRPeasy migration?"</p>
+      <p>No — and here's the good news: we don't need to spend the money, because we already built the hard part. In March we needed MRPeasy because we were running production on spreadsheets. Since then we built our own BOM engine, our own color-batch pick list, and our own usage tracking — which is most of what MRPeasy does, tuned to exactly how <em>we</em> work.</p>
+      <p class="q">"So what about tracking inventory and low-stock alerts?"</p>
+      <p>That's the one real thing MRPeasy had that we don't — yet. We're adding it to Notion directly: a quantity-on-hand number and a reorder point per part, plus a nightly check that pings the Operations channel when something runs low. It'll deduct stock automatically off the same order data we already process, so nobody has to count by hand. Working alerts in about two days, the full picture in about a week and a half — for nothing per month instead of ~$5,700 a year.</p>
+      <p class="q">"Why not just buy the proven thing?"</p>
+      <p>Because buying it now means paying every year to re-acquire capabilities we already own, migrating 400+ products into a second system of record, and splitting our source of truth in two. We keep MRPeasy on the table as a fallback — if we ever can't keep our own inventory numbers accurate, or we want shop-floor labor tracking, we revisit it. We're not closing the door; we're not paying to walk through it before we have to.</p>
+    </div>
+
+    <h2 class="sec">What to do with the old MRPeasy pages</h2>
+    <p>The three March pages (Recommendation, Meeting Brief, Kickoff Agenda) are now historical context, not a plan. Recommend we keep them for the record but mark them superseded by this page, so nobody walks into a vendor call next quarter working from the old conclusion. The "ERP Migration" section on the Operations landing page should point here first.</p>
+
+  </main>
+  <footer>
+    Dutton Brown &middot; Operations &middot; Make-or-Buy re-evaluation &middot; June 2026 &middot; supersedes the March 2026 MRPeasy brief
+  </footer>
+</body>
+</html>
