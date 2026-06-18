@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production Automation — Strategic Review · June 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #4A4A4A; --bg: #FAFAF9; --panel: #FFFFFF; --line: #E0DDD9;
+    --muted: #8A8078; --gold: #C9A94E; --accent: #FF9912; --accent-text: #D97706;
+    --good: #2F8F5B; --warn: #C77B1E; --bad: #C0492F; --soft: #F7F5F2;
+  }
+  body { font-family: 'Poppins', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  header { background: var(--soft); padding: 3rem 2rem 2.5rem; text-align: center; border-bottom: 1px solid var(--line); }
+  header .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  header h1 { font-weight: 600; font-size: 1.7rem; letter-spacing: 0.01em; margin-top: 0.6rem; }
+  header p.sub { font-weight: 300; font-size: 0.95rem; margin-top: 0.5rem; color: var(--muted); max-width: 640px; margin-left: auto; margin-right: auto; }
+  header a.back { display: inline-block; margin-top: 1.25rem; color: var(--muted); font-size: 0.8rem; text-decoration: none; font-weight: 300; }
+  header a.back:hover { color: var(--ink); }
+  main { max-width: 920px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  h2.sec { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin: 3rem 0 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+  h2.sec:first-of-type { margin-top: 0; }
+  p.lead { font-weight: 300; font-size: 1.05rem; margin-bottom: 1rem; }
+  p { font-weight: 300; margin-bottom: 0.9rem; }
+  strong { font-weight: 600; }
+  em { font-style: normal; color: var(--accent-text); font-weight: 400; }
+
+  .verdict { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem 1.75rem 1.25rem; margin-bottom: 1.5rem; }
+  .verdict h3 { font-weight: 600; font-size: 1.15rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.1rem; text-align: center; }
+  .stat .n { font-size: 1.6rem; font-weight: 600; color: var(--accent-text); line-height: 1.1; }
+  .stat .l { font-size: 0.72rem; font-weight: 300; color: var(--muted); margin-top: 0.35rem; }
+
+  table.health { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.85rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  table.health th { text-align: left; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line); background: var(--soft); }
+  table.health td { padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line); font-weight: 300; vertical-align: top; }
+  table.health tr:last-child td { border-bottom: none; }
+  .pill { display: inline-block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.03em; padding: 0.2rem 0.6rem; border-radius: 999px; white-space: nowrap; }
+  .pill.live { background: #E7F3EC; color: var(--good); }
+  .pill.partial { background: #FBF1E0; color: var(--warn); }
+  .pill.stuck { background: #FAE9E5; color: var(--bad); }
+  .pill.manual { background: #EFEDEA; color: var(--muted); }
+
+  ol.tasks { list-style: none; counter-reset: t; margin-top: 1rem; }
+  ol.tasks > li { counter-increment: t; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.5rem 1.5rem 1.25rem 4.2rem; margin-bottom: 1.1rem; position: relative; }
+  ol.tasks > li::before { content: counter(t); position: absolute; left: 1.25rem; top: 1.4rem; width: 2rem; height: 2rem; background: var(--soft); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.95rem; color: var(--accent-text); }
+  ol.tasks > li.top::before { background: var(--accent); color: #fff; border-color: var(--accent); }
+  ol.tasks h4 { font-weight: 600; font-size: 1.05rem; margin-bottom: 0.4rem; }
+  ol.tasks .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.7rem; }
+  ol.tasks .tag { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.18rem 0.55rem; border-radius: 4px; background: var(--soft); color: var(--muted); border: 1px solid var(--line); }
+  ol.tasks .tag.new { color: var(--accent-text); }
+  ol.tasks .tag.finish { color: var(--good); }
+  ol.tasks .tag.struct { color: #5C6BC0; }
+  ol.tasks p { font-size: 0.88rem; margin-bottom: 0.5rem; }
+  ol.tasks .why { font-size: 0.82rem; color: var(--muted); }
+  ol.tasks .why b { color: var(--ink); font-weight: 600; }
+
+  ul.clean { list-style: none; margin: 0.5rem 0 1rem; }
+  ul.clean li { padding-left: 1.4rem; position: relative; font-weight: 300; font-size: 0.9rem; margin-bottom: 0.5rem; }
+  ul.clean li::before { content: "→"; position: absolute; left: 0; color: var(--gold); }
+
+  .callout { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.25rem 0; font-size: 0.9rem; }
+  .callout h4 { font-weight: 600; margin-bottom: 0.4rem; font-size: 0.95rem; }
+  .footer-note { text-align: center; color: var(--muted); font-size: 0.78rem; font-weight: 300; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  code { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.82em; background: var(--soft); padding: 0.1rem 0.35rem; border-radius: 3px; color: var(--accent-text); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Operations · Strategic Review</div>
+    <h1>Is your production-automation work pointed at the right goal?</h1>
+    <p class="sub">A full audit of <code>db-operations</code> against one question: <em>how close are you to "production runs itself"</em> — and the 10 highest-value moves to get there.</p>
+    <a class="back" href="index.html">&larr; Operations</a>
+  </header>
+  <main>
+
+    <h2 class="sec">The one-line answer</h2>
+    <div class="verdict">
+      <h3>Yes — your direction is right. You're building the right thing. But you've over-invested in <em>features</em> and under-invested in <em>closing loops</em> and <em>adoption.</em></h3>
+      <p style="margin-bottom:0.4rem;">The custom production stack (Shopify&nbsp;→ Notion spine&nbsp;→ travelers&nbsp;→ wash list&nbsp;→ consoles) is the <strong>correct architecture</strong> for a made-to-order, color-batch-across-orders shop. Six independent deep-dive agents agreed on this, and on the same root problem: <strong>the machine is mostly built, but it doesn't run by itself and the floor isn't using it yet.</strong></p>
+      <p style="margin-bottom:0;">Two facts tell the whole story, pulled live from Notion today:</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="n">418<span style="font-size:0.9rem;color:var(--muted)">/419</span></div><div class="l">Production Log rows stuck at "Pending Review" — triage essentially never happens</div></div>
+      <div class="stat"><div class="n">0<span style="font-size:0.9rem;color:var(--muted)">/419</span></div><div class="l">rows with a "Shipped At" date — the loop never closes</div></div>
+      <div class="stat"><div class="n">377</div><div class="l">rows frozen at "Powder Coat" — no automated advance when a batch returns</div></div>
+      <div class="stat"><div class="n">~0</div><div class="l">real floor cuts through any console — all traffic is you + test orders</div></div>
+    </div>
+
+    <p>You have built a system that <strong>creates</strong> production data beautifully and <strong>advances</strong> it almost not at all. Every stage transition — Powder&nbsp;Coat&nbsp;→&nbsp;Assembly&nbsp;→&nbsp;QC&nbsp;→&nbsp;Shipping&nbsp;→&nbsp;Complete — is a human hand-editing a Notion field, and right now those humans aren't doing it. That's not a code problem. That's a <strong>close-the-loop + adoption</strong> problem, and it's where the next 10 moves should concentrate.</p>
+
+    <h2 class="sec">What's actually live vs. what just looks live</h2>
+    <p>Agents verified every "automation" claim against Windows Task Scheduler, GitHub Actions, and live Notion — not against READMEs. The READMEs <em>undersell</em> some things and <em>oversell</em> others. Reality:</p>
+
+    <table class="health">
+      <thead><tr><th>System</th><th>Status</th><th>The truth</th></tr></thead>
+      <tbody>
+        <tr><td>Order → traveler → release</td><td><span class="pill live">LIVE</span></td><td>Ship-by stamping, hourly board, release button, traveler PDFs, SharePoint archive — all working, idempotent, audit-trailed. 5 real releases in the last week. This is your best-built subsystem.</td></tr>
+        <tr><td>Spine row creation (Shopify→Notion)</td><td><span class="pill live">LIVE</span></td><td>One row per (order&nbsp;# · color · SKU), hourly + on release. README says "pending validation" — it's been live for weeks.</td></tr>
+        <tr><td>Lead Time console</td><td><span class="pill partial">1 STEP FROM LIVE</span></td><td>Built &amp; verified. Blocked only on wiring the tunnel route + publishing. Removes <strong>you</strong> from a recurring loop the day it ships. Cleanest win on the board.</td></tr>
+        <tr><td>Powder-coat wash list console</td><td><span class="pill partial">BUILT, UNUSED</span></td><td>E2E-verified but zero real cuts — the floor still logs by hand. Custom-color batches can't advance the spine (a real hole).</td></tr>
+        <tr><td>Production Log console (timers/QC)</td><td><span class="pill partial">BUILT, UNUSED</span></td><td>Timer engine is genuinely complete and self-testing. But triage can't model how the floor actually splits an order, so they don't triage. Re-split is design-only.</td></tr>
+        <tr><td>Item library (training/reference)</td><td><span class="pill live">LIVE &amp; DONE</span></td><td>The most finished thing you have. 360 images, weekday cron. Read-only, nothing to adopt.</td></tr>
+        <tr><td>Stage advance: PC→Assembly→QC→Ship→Complete</td><td><span class="pill stuck">100% MANUAL</span></td><td><strong>The missing spine.</strong> Exactly one automated writer of <code>Location</code> (row creation). Everything after is a human Notion edit that isn't happening.</td></tr>
+        <tr><td>BOM source of truth (the production brain)</td><td><span class="pill stuck">MANUAL REBUILD</span></td><td>Feeds wash list, batching, black-batch quick-ship, every library. The <strong>only</strong> link with no scheduled rebuild and no staleness guard. A wash list today can silently use yesterday's BOM.</td></tr>
+        <tr><td>Monthly KPI orchestrator</td><td><span class="pill stuck">FAILING SILENTLY</span></td><td>Last run exit-code 4 (failure), no logs, no alert. Also duplicated across a Windows task <em>and</em> a GitHub Action writing the same Notion DB.</td></tr>
+        <tr><td>Carrier tracking + order-email parser</td><td><span class="pill live">LIVE</span></td><td>Both running on schedule and writing to Notion — memory notes <em>undersell</em> these. Parser runs hourly, succeeding.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec">The build-vs-buy question, settled</h2>
+    <div class="callout">
+      <h4>Stay custom. The MRPeasy migration is effectively already dead — and that's the right call.</h4>
+      <p style="margin-bottom:0.5rem;">The research's own make-or-break test concluded MRPeasy <strong>cannot do the wash list natively</strong> (aggregate powder-coat parts by color across orders) — it's an architectural mismatch, not a config gap. Every honest version of the buy plan ends in "…and then write the Python scripts anyway," while paying $300–900/mo and <em>adding</em> manual MO labor on the floor. Your color-batch-across-orders reality is something every packaged MRP fights and your custom stack fits.</p>
+      <p style="margin-bottom:0;"><strong>Keep one door open:</strong> the single place custom is genuinely weak is <strong>part-level inventory with a real transaction ledger</strong> (raw → coated → finished, decremented on batch-complete) plus purchasing/receiving and QuickBooks COGS. Don't buy for it yet — prove you can build it (Task&nbsp;9). Only if that drifts against a physical count does a narrow back-office tool (likely Odoo, not MRPeasy) earn its keep.</p>
+    </div>
+
+    <h2 class="sec">The 10 highest-value moves, ranked</h2>
+    <p class="lead">Ordered by leverage toward "production runs itself." The first three close the loop and prove the system; the rest harden, de-risk, and clean up. <strong>#1–3 are the ones that change the trajectory.</strong></p>
+
+    <ol class="tasks">
+
+      <li class="top">
+        <h4>Auto-complete on shipment — close the loop with a fulfillment webhook</h4>
+        <div class="meta"><span class="tag new">New · small</span><span class="tag finish">Closes the loop</span></div>
+        <p>Register a Shopify <code>orders/fulfilled</code> (or ShipStation) webhook → n8n → match order&nbsp;# → set Production Log <code>Location = Complete</code> + stamp <code>Shipped At</code>. <strong>Zero floor action required</strong> — it fires from the shipping desk event using data Shopify already has and you currently throw away.</p>
+        <p class="why"><b>Why #1:</b> It's the only break in an otherwise-closed loop, it needs no human, and every piece already exists (webhook harness, listener bridge, Notion patch, order-# dedupe key). It's a few-hours build that turns the spine from a write-once log into a self-maintaining status board — the prerequisite for trusting it to drive anything. Today 0/419 rows ever get marked shipped.</p>
+      </li>
+
+      <li class="top">
+        <h4>Auto-advance Powder Coat → Assembly on batch complete</h4>
+        <div class="meta"><span class="tag new">New · small</span><span class="tag finish">Closes the loop</span></div>
+        <p>When the wash-list server completes a batch, write back to every included Production Log row: advance <code>Location</code> Powder&nbsp;Coat&nbsp;→&nbsp;Assembly and stamp <code>+ Wash List</code> / <code>Powder Coat ETA</code>. Also fix the hole where <strong>custom-color batches can't advance the spine at all</strong> (<code>spine_advance.py</code>).</p>
+        <p class="why"><b>Why #2:</b> 377 of 419 rows are frozen at Powder Coat — this is the single highest-volume manual edit in the whole system, every order passes through it, and the wash server already knows exactly which rows belong to which batch. Closing it advances ~85% of the open queue automatically.</p>
+      </li>
+
+      <li class="top">
+        <h4>Ship the Lead Time console — it's one wire from removing you</h4>
+        <div class="meta"><span class="tag finish">Finish · 3 steps</span><span class="tag">Removes a person</span></div>
+        <p>Wire the <code>leadtime/*</code> tunnel route + Task, publish the page to <code>/production/lead-times/</code>, and delete the Hextom step from the runbook. Add a <code>try/finally</code> so a partial apply always logs a revertable record.</p>
+        <p class="why"><b>Why #3:</b> It's the only console blocked by <em>mechanics, not people</em>, and the only one that removes a human (you) from a recurring loop the moment it ships. Highest certainty-to-value ratio on the list — finish what's done.</p>
+      </li>
+
+      <li>
+        <h4>Make a Notion write-failure impossible to miss</h4>
+        <div class="meta"><span class="tag finish">Finish · small</span><span class="tag">Trust / adoption</span></div>
+        <p>Every console deliberately lets Notion writes fail silently (right call for floor continuity — the floor falls back to hand-editing). But there's <strong>no reconciliation and no alert</strong>, so a failed write looks identical to "working." Add a Teams Adaptive Card on any <code>notion=FAILED</code> (the routing pattern already exists).</p>
+        <p class="why"><b>Why:</b> Silent desync is the fastest way to lose floor trust on day one. Small change, directly protects adoption of everything above.</p>
+      </li>
+
+      <li>
+        <h4>Schedule + guard the BOM rebuild (the production brain)</h4>
+        <div class="meta"><span class="tag new">New · small</span><span class="tag">De-risk core</span></div>
+        <p>Add a scheduled rebuild of <code>extract_bom.py</code> <strong>plus a staleness guard</strong> so the wash list warns or refuses when running on an out-of-date BOM, and a dropped-row log so unresolvable parts stop vanishing silently. Fix <code>DB-RefreshPartsLibrary</code> in the same pass (it's currently failing, exit 1).</p>
+        <p class="why"><b>Why:</b> The BOM is the spine of the entire production stack yet it's the only link with no auto-refresh and no freshness check. Every "automated" downstream decision silently inherits its staleness.</p>
+      </li>
+
+      <li>
+        <h4>Solve triage + re-split so the spine matches how the floor really works</h4>
+        <div class="meta"><span class="tag new">New · medium</span><span class="tag">Adoption keystone</span></div>
+        <p>Build post-triage re-split (spine self-relation + a <code>Manual Split</code> flag the hourly sync respects). Resolve the latent bug where the console <em>patches</em> rows the sync <em>re-derives</em> — today they can fight and clobber floor work.</p>
+        <p class="why"><b>Why:</b> The floor won't triage because triage can't model rod/bulb assignment + splitting. This is the load-bearing unbuilt piece — until the spine is trustworthy, every downstream console reads partly-stale data. Higher effort, which is why it sits below the quick loop-closers, but it's the keystone for real adoption.</p>
+      </li>
+
+      <li>
+        <h4>Run the first real floor cut — drive adoption, don't add features</h4>
+        <div class="meta"><span class="tag">Adoption · you-led</span><span class="tag">Highest ROI on built work</span></div>
+        <p>Sit with Scottie/Willy and get the <strong>first real wash-list cut</strong> and first real triage pass through the console — not a test order. Watch where it fights them; that list is your real backlog. Then one assembler on real timers.</p>
+        <p class="why"><b>Why:</b> Every agent independently flagged the same thing — ~zero organic floor use across all consoles. More features compound the gap. The build is largely done; the missing ingredient is one supervised real run that converts "built" into "used." This is yours to drive, not Claude's to build.</p>
+      </li>
+
+      <li>
+        <h4>Consolidate &amp; un-break the monthly KPI pipeline</h4>
+        <div class="meta"><span class="tag finish">Finish · medium</span><span class="tag">Visibility</span></div>
+        <p>It's <strong>failing silently</strong> (exit 4, no logs) <em>and</em> duplicated — a Windows orchestrator and a GitHub Action both write the same Notion Snapshots DB on overlapping schedules. Collapse to <strong>one</strong> path (prefer GitHub Actions — a sleeping PC can't miss it), add run logging + a Teams failure alert, and replace the hardcoded QuickBooks income table (frozen at 2026-04) with a live Intuit pull.</p>
+        <p class="why"><b>Why:</b> Production KPIs are how you'll <em>know</em> automation is working. Right now the scoreboard quietly lies as the calendar advances.</p>
+      </li>
+
+      <li>
+        <h4>Prove part-level inventory before you ever consider buying an MRP</h4>
+        <div class="meta"><span class="tag new">New · spike</span><span class="tag">Strategic de-risk</span></div>
+        <p>30-day spike: take the top ~50 highest-usage parts, stand up a part-stock ledger fed by the BOM extractor + batch-complete events (raw → coated → finished, decremented automatically), and test it against a physical count. Wire in the Parts Request → Inventory Request handoff (31/34 floor requests are stuck at "Submitted," oldest from March).</p>
+        <p class="why"><b>Why:</b> This is the one capability the research says only a packaged MRP gives you. If your ledger holds against a real count, the entire buy case collapses and you've saved $300–900/mo forever. If it drifts, you've scoped the exact narrow slice worth buying.</p>
+      </li>
+
+      <li>
+        <h4>Pay down the structural &amp; security debt that taxes every change</h4>
+        <div class="meta"><span class="tag struct">Structure · medium</span><span class="tag">Maintainability</span></div>
+        <ul class="clean">
+          <li><b>Rotate the leaked Notion key</b> — a live key is committed in <code>fetch_all_parts.sh</code> + ~12 other tracked files. Rotate, purge, replace with the <code>.env</code> read. Do this first.</li>
+          <li><b>One shared client lib</b> — there are 15 copies of the Notion client and 3 of the Shopify client. A 429-retry fix today means editing a dozen files. Add <code>common/</code> and collapse them.</li>
+          <li><b>Promote the consoles out of <code>projects/</code></b> and document them — your core automation is buried 4 levels deep and CLAUDE.md doesn't mention it, the hub, or db-private at all.</li>
+          <li><b>Archive the dead weight</b> — ~13 parked folders, resolve the <code>data/production</code> vs <code>projects/data/production</code> shadow.</li>
+        </ul>
+        <p class="why"><b>Why last:</b> None of it blocks today, but it raises the cost of every move above. The key rotation is the one genuine risk — do that part immediately even though the section ranks #10.</p>
+      </li>
+
+    </ol>
+
+    <h2 class="sec">How to read this list</h2>
+    <p><strong>#1, #2, #3 are the trajectory-changers.</strong> Do them first and in order — they're small, they need no floor behavior change, and together they make the spine self-maintaining for every transition that doesn't require human judgment (powder-coat return, shipment). That's the proof-of-life that makes the harder, people-dependent stages (#6, #7) worth pushing.</p>
+    <p><strong>#7 is the one only you can do.</strong> Everything else Claude can build. Adoption is a CEO-led act: one real cut, watched, with the floor. The single biggest risk to this entire investment isn't a missing feature — it's that a fully-built system sits unused because nobody walked the floor through their first real run.</p>
+    <p style="margin-bottom:0;"><strong>The strategy is sound.</strong> You are not reinventing an MRP poorly — you're building the one production system that actually fits a color-batch, made-to-order shop, and packaged tools can't. The job now is to <em>finish the loops and earn the adoption</em>, not to build more surface.</p>
+
+    <p class="footer-note">
+      Strategic review · 17 June 2026 · synthesized from 6 parallel deep-dive audits of <code>db-operations</code>, the Notion production data model, and the MRP research.<br>
+      For: Thomas, Dutton Brown.
+    </p>
+
+  </main>
+</body>
+</html>
