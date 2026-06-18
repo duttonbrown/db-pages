@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRP — What to Build Instead · Roadmap · June 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #4A4A4A; --bg: #FAFAF9; --panel: #FFFFFF; --line: #E0DDD9;
+    --muted: #8A8078; --gold: #C9A94E; --accent: #FF9912; --accent-text: #D97706;
+    --good: #2F8F5B; --warn: #C77B1E; --bad: #C0492F; --soft: #F7F5F2;
+  }
+  body { font-family: 'Poppins', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  header { background: var(--soft); padding: 3rem 2rem 2.5rem; text-align: center; border-bottom: 1px solid var(--line); }
+  header .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  header h1 { font-weight: 600; font-size: 1.7rem; letter-spacing: 0.01em; margin-top: 0.6rem; }
+  header p.sub { font-weight: 300; font-size: 0.95rem; margin-top: 0.5rem; color: var(--muted); max-width: 680px; margin-left: auto; margin-right: auto; }
+  header a.back { display: inline-block; margin-top: 1.25rem; color: var(--muted); font-size: 0.8rem; text-decoration: none; font-weight: 300; }
+  header a.back:hover { color: var(--ink); }
+  main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  h2.sec { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin: 3.25rem 0 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+  h2.sec:first-of-type { margin-top: 0; }
+  p.lead { font-weight: 300; font-size: 1.05rem; margin-bottom: 1rem; }
+  p { font-weight: 300; margin-bottom: 0.9rem; }
+  strong { font-weight: 600; }
+  em { font-style: normal; color: var(--accent-text); font-weight: 400; }
+  code { background: var(--soft); border: 1px solid var(--line); border-radius: 4px; padding: 0.05rem 0.35rem; font-size: 0.85em; font-family: 'Consolas', monospace; }
+  ul { margin: 0 0 1rem 1.2rem; } ul li { font-weight: 300; margin-bottom: 0.4rem; }
+
+  .verdict { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem 1.75rem 1.4rem; margin-bottom: 1.5rem; }
+  .verdict h3 { font-weight: 600; font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .verdict .answer { font-size: 1.25rem; font-weight: 600; color: var(--accent-text); margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.1rem; text-align: center; }
+  .stat .n { font-size: 1.5rem; font-weight: 600; color: var(--accent-text); line-height: 1.1; }
+  .stat .l { font-size: 0.72rem; font-weight: 300; color: var(--muted); margin-top: 0.35rem; }
+
+  table.cmp { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.84rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  table.cmp th { text-align: left; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); padding: 0.7rem 0.85rem; border-bottom: 1px solid var(--line); background: var(--soft); }
+  table.cmp td { padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--line); font-weight: 300; vertical-align: top; }
+  table.cmp tr:last-child td { border-bottom: none; }
+  table.cmp td.feat { font-weight: 400; color: var(--ink); }
+  .pill { display: inline-block; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.03em; padding: 0.18rem 0.55rem; border-radius: 999px; white-space: nowrap; }
+  .pill.built { background: #E7F3EC; color: var(--good); }
+  .pill.partial { background: #FBF1E0; color: var(--warn); }
+  .pill.gap { background: #FAE9E5; color: var(--bad); }
+  .pill.na { background: #EFEDEA; color: var(--muted); }
+
+  .callout { border-radius: 8px; padding: 1.4rem 1.6rem; margin: 1.25rem 0; font-size: 0.9rem; font-weight: 300; }
+  .callout strong { font-weight: 600; }
+  .callout.gold { background: #FBF6E9; border: 1px solid #E8D9A8; border-left: 4px solid var(--gold); }
+  .callout.bad { background: #FAE9E5; border: 1px solid #E8C5BC; border-left: 4px solid var(--bad); color: #6a2a1c; }
+  .callout.good { background: #E7F3EC; border: 1px solid #BcdCC8; border-left: 4px solid var(--good); }
+
+  /* phase cards */
+  .phase { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.6rem 1.7rem 1.3rem; margin-bottom: 1.25rem; position: relative; }
+  .phase.now { border-left: 4px solid var(--accent); }
+  .phase.next { border-left: 4px solid var(--gold); }
+  .phase.later { border-left: 4px solid var(--line); }
+  .phase .ph-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.3rem; }
+  .phase h3 { font-weight: 600; font-size: 1.15rem; }
+  .phase .horizon { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 999px; }
+  .phase.now .horizon { background: #FBE6CC; color: var(--accent-text); }
+  .phase.next .horizon { background: #FBF6E9; color: #9A7B1E; }
+  .phase.later .horizon { background: var(--soft); color: var(--muted); }
+  .phase .effort { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.9rem; }
+  .phase .goal { font-size: 0.92rem; margin-bottom: 0.9rem; }
+  .phase ol { margin: 0 0 0.5rem 1.2rem; }
+  .phase ol li { font-weight: 300; font-size: 0.88rem; margin-bottom: 0.45rem; }
+  .phase .delivers { font-size: 0.83rem; color: var(--good); font-weight: 400; margin-top: 0.6rem; padding-top: 0.7rem; border-top: 1px solid var(--line); }
+
+  footer { text-align: center; font-size: 0.75rem; font-weight: 300; color: var(--muted); padding: 2rem; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Operations · Build Roadmap</div>
+    <h1>The MRP We Should Build (Not Buy)</h1>
+    <p class="sub">A capability-by-capability study of MRPeasy and Katana, mapped against what we already have — and a phased plan for the pieces worth building ourselves. June 2026.</p>
+    <a class="back" href="mrpeasy-decision-2026-06.html">&larr; The MRPeasy Decision</a>
+  </header>
+  <main>
+
+    <div class="verdict">
+      <h3>The framing</h3>
+      <div class="answer">We don't need an MRP. We need four capabilities an MRP happens to bundle.</div>
+      <p>I studied both MRPeasy and Katana module by module. An MRP is really a dozen modules wired into one recalculation engine: BOM, inventory, procurement, production planning, scheduling, MRP run, costing, CRM/sales, shop floor, reporting. We've already built the production-specific half (BOM, wash list, travelers, consoles). Looking at everything the two vendors do, only <strong>four capabilities</strong> are both genuinely missing and genuinely worth having: <em>inventory on-hand, low-stock alerts, a real PO system, and an all-parts demand view</em>. The rest is either already built, irrelevant to a made-to-order shop, or not worth the complexity.</p>
+      <p>Your instinct on a PO system was right — and it's the keystone. It's the natural home for inventory tracking, it's the one thing we currently pay <strong>Katana ~$299+/mo</strong> for and barely use, and building it lets us cancel Katana.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="n">4</div><div class="l">capabilities worth building (of ~12 MRP modules)</div></div>
+      <div class="stat"><div class="n">~30%</div><div class="l">of a real PO system already exists in the Purchase Request Log</div></div>
+      <div class="stat"><div class="n">$299+/mo</div><div class="l">Katana — paid for, only POs used; this roadmap replaces it</div></div>
+      <div class="stat"><div class="n">$0/mo</div><div class="l">recurring cost of the build (Notion + n8n we already run)</div></div>
+    </div>
+
+    <h2 class="sec">Every MRP module, scored against what we have</h2>
+    <p class="lead">This is the honest map. Green = built. Amber = partial. Red = real gap worth closing. Grey = an MRP feature we genuinely don't need.</p>
+    <table class="cmp">
+      <thead>
+        <tr><th style="width:23%">Module</th><th style="width:11%">Status</th><th>Where it stands / verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="feat">BOM / Matrix BOM</td><td><span class="pill built">Built</span></td><td><code>extract_bom.py</code> — resolves product×color→parts, 9,238 rows. More tailored than either vendor (Black Batch, (C) variants, kit rods).</td></tr>
+        <tr><td class="feat">Powder-coat batch pick list</td><td><span class="pill built">Built</span></td><td><code>parts-wash-list</code> — the exact color-grouped view <em>MRPeasy admits it has no native version of</em>.</td></tr>
+        <tr><td class="feat">Usage / consumption history</td><td><span class="pill built">Built</span></td><td><code>parts-usage</code> — finish-split annual consumption per part, written to Notion.</td></tr>
+        <tr><td class="feat">Shopify → production sync</td><td><span class="pill built">Built</span></td><td><code>work-order-sync</code>, hourly. Both vendors charge for this integration.</td></tr>
+        <tr><td class="feat">Production tracking / travelers</td><td><span class="pill built">Built</span></td><td>Production Log spine + travelers + consoles. Equals their MO tracking + shop-floor status, in our vocabulary.</td></tr>
+        <tr><td class="feat">Lead-time management</td><td><span class="pill built">Built</span></td><td>Lead Time Control Panel + per-part lead time in Notion (100% populated).</td></tr>
+        <tr><td class="feat"><strong>Inventory on-hand</strong></td><td><span class="pill gap">Gap</span></td><td><strong>No <code>Qty on Hand</code> exists anywhere.</strong> The single missing primitive. Both vendors' core. → Phase 1</td></tr>
+        <tr><td class="feat"><strong>Low-stock / reorder alerts</strong></td><td><span class="pill gap">Gap</span></td><td>Can't exist without on-hand. MRPeasy "Critical on-hand report"; Katana "Replenishment". → Phase 1</td></tr>
+        <tr><td class="feat"><strong>Purchase Order system</strong></td><td><span class="pill partial">~30%</span></td><td>Purchase Request Log is a per-line request log, not a vendor-grouped PO. No PO header, vendor is a string not a relation, no cost/total, no PDF. → Phase 2 <em>(replaces Katana)</em></td></tr>
+        <tr><td class="feat"><strong>All-parts demand / shortage view</strong></td><td><span class="pill partial">Partial</span></td><td>We explode demand for color parts only (wash list). No "all parts across all open orders" shortage view. → Phase 3</td></tr>
+        <tr><td class="feat">Reorder suggestions (what to order, when)</td><td><span class="pill gap">Gap</span></td><td>Katana's best feature: stockout-date + suggested-qty + order-by-date. Buildable once on-hand + demand exist. → Phase 3</td></tr>
+        <tr><td class="feat">Vendor master (terms, MOQ, price)</td><td><span class="pill partial">Thin</span></td><td>Companies DB exists but has no payment terms, MOQ, account #, or contact email. → Phase 2</td></tr>
+        <tr><td class="feat">Costing — BOM cost rollup, landed cost</td><td><span class="pill na">Skip</span></td><td>Nice-to-have. We have QuickBooks for financials; landed cost is marginal at our volume. Defer.</td></tr>
+        <tr><td class="feat">Production scheduling (Gantt / capacity)</td><td><span class="pill na">Skip</span></td><td>Finite-capacity scheduling is overkill for a 10-person batch shop. Our batch + traveler flow already sequences work. Don't build.</td></tr>
+        <tr><td class="feat">Shop-floor labor / kiosk time tracking</td><td><span class="pill na">Maybe</span></td><td>Both include it. We don't have it. Separable problem — only build if we decide we need labor cost per job. Not now.</td></tr>
+        <tr><td class="feat">CRM / quotes / B2B portal</td><td><span class="pill na">Skip</span></td><td>Shopify + draft orders already do this. Not an MRP need for us.</td></tr>
+        <tr><td class="feat">MRP recalculation engine</td><td><span class="pill na">Skip</span></td><td>The thing that makes MRP hard to build — and we don't need the monolith. Phases 1+3 give us the two outputs (reorder + shortage) without the engine.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout gold">
+      <strong>Read the grey rows carefully — they're the point.</strong> Half of what an MRP does, we either already have or genuinely don't need. That's <em>why</em> buying one is wasteful: you pay monthly for twelve modules to use four. The four red/amber rows are the entire real backlog. Everything below is a plan to build exactly those, and nothing more.
+    </div>
+
+    <h2 class="sec">The build — three phases, in priority order</h2>
+    <p class="lead">Phase 1 delivers the alerts you asked for. Phase 2 builds the PO system and lets us cancel Katana. Phase 3 makes it all self-maintaining and adds the predictive layer. Each phase ships value on its own — you can stop after any one.</p>
+
+    <div class="phase now">
+      <div class="ph-head"><h3>Phase 1 — Inventory levels &amp; low-stock alerts</h3><span class="horizon">Do now · ~2–3 days</span></div>
+      <div class="effort">Reuses: Parts DB, n8n, Teams, Purchase Request Log. New cost: $0.</div>
+      <div class="goal"><strong>Goal:</strong> Know what's on hand, get pinged before anything runs out. This is the literal ask — "monitor inventory alert levels."</div>
+      <ol>
+        <li>Add two number properties to the Parts DB: <code>Qty on Hand</code> and <code>Reorder Point</code>. (There's already a stubbed-but-empty <code>Inventory Transactions</code> relation — the intent was always there.)</li>
+        <li>Seed <code>Reorder Point</code> from a rule using inputs we already have: <em>(annual use ÷ 52) × lead-time-weeks × safety factor</em>. The <code>2025 Use</code> and <code>Lead Time</code> fields are populated enough to do this for the parts that matter.</li>
+        <li>Seed <code>Qty on Hand</code> from a one-time physical count of the ~80 high-velocity / long-lead parts — <strong>not</strong> all 455. Long tail can stay blank and be added as it's touched.</li>
+        <li>Build one scheduled n8n workflow: nightly, read every part where <code>Qty on Hand ≤ Reorder Point</code> → post one Adaptive Card to the Operations Teams channel (part, on-hand, reorder point, vendor, lead time) with an <strong>"Add to purchase queue"</strong> button that drops a row into the Purchase Request Log.</li>
+      </ol>
+      <div class="delivers">✓ Delivers working low-stock alerts, end to end. After Phase 1 you have the thing you asked for.</div>
+    </div>
+
+    <div class="phase next">
+      <div class="ph-head"><h3>Phase 2 — Real Purchase Order system (cancels Katana)</h3><span class="horizon">Do next · ~1–1.5 weeks</span></div>
+      <div class="effort">Reuses: Purchase Request Log (~30% there), Companies DB, the purchase console + worker already on the hub. New cost: $0 — and <strong>saves ~$299+/mo by killing Katana.</strong></div>
+      <div class="goal"><strong>Goal:</strong> Turn the per-line request log into a real vendor-grouped PO system — the one Katana function we actually use — so we can cancel Katana.</div>
+      <ol>
+        <li>New <code>Purchase Orders</code> DB as a <strong>PO header</strong>: auto <code>PO #</code>, real relation to a vendor (Companies), status (Draft → Sent → Partially Received → Closed), order date, expected date, total.</li>
+        <li>Add a real <code>Vendor</code> <em>relation</em> (to Companies) on every Purchase Request Log row — today vendor is a free-text string, which blocks all vendor-level grouping. Link each PRL line to its parent PO.</li>
+        <li>Enrich the Companies/vendor master with the purchasing metadata it's missing: <code>Payment Terms</code>, <code>Min Order Value</code>, <code>Account #</code>, <code>Contact Email</code>, numeric <code>Lead Time (days)</code>.</li>
+        <li>Build a <strong>"What to reorder, grouped by vendor"</strong> view: every part at/under reorder point, bucketed by vendor, one-click → consolidated PO (Katana's exact "add other missing items from the same supplier" move).</li>
+        <li>Generate a <strong>PO PDF</strong> to email the vendor (we already render traveler PDFs with Playwright — same pattern). Capture line cost = qty × price for a real PO total.</li>
+        <li>Actually populate receiving: fill <code>Qty Received</code> on receipt (the field exists but is blank on every row today), driving partial-receive status on the PO header.</li>
+      </ol>
+      <div class="delivers">✓ Replaces Katana's PO function with something tailored to us — multi-vendor per part (which Katana can't do), our REQ numbering, our Teams alerts. Cancel Katana → net savings fund the build many times over.</div>
+    </div>
+
+    <div class="phase later">
+      <div class="ph-head"><h3>Phase 3 — Self-maintaining inventory + predictive demand</h3><span class="horizon">Do later · ~1 week</span></div>
+      <div class="effort">Reuses: the BOM engine (already explodes orders), work-order-sync, the new PO system. New cost: $0.</div>
+      <div class="goal"><strong>Goal:</strong> Stop maintaining on-hand by hand, and see shortages <em>before</em> they block a build — the predictive layer that's the real reason MRPs exist.</div>
+      <ol>
+        <li><strong>Auto-deduct on-hand.</strong> Two automations close the loop: PO/request marked <em>Received</em> → add qty to on-hand; Shopify order <em>ships</em> → BOM-explode it (engine already does this) → subtract consumed parts. This is the exact auto-deduction MRPs charge for — on the engine we already run.</li>
+        <li><strong>All-parts demand view.</strong> Generalize the wash-list explosion from "color parts only" to "every part across the whole open-order book." Publish as a hub view next to the wash list.</li>
+        <li><strong>Reorder suggestions.</strong> Combine on-hand + open demand + lead time into Katana's best feature: per part, a <em>stockout date</em>, <em>suggested order qty</em>, and <em>order-by date</em>. This is the "what to order and when" engine — without buying the engine.</li>
+        <li><strong>Self-tuning reorder points.</strong> Recompute reorder points monthly from rolling actual usage instead of a static seed — beating Katana, where safety stock is manual-entry-only.</li>
+      </ol>
+      <div class="delivers">✓ Completes full MRP feature parity for our use case — and on points 1 and 4 it's <em>better</em> than either vendor. On-hand stays live with no manual counting.</div>
+    </div>
+
+    <h2 class="sec">What we deliberately are NOT building</h2>
+    <p>Saying no is half the value of this study. These are real MRP modules we're choosing to skip, with the reason — so nobody re-opens them later by accident:</p>
+    <ul>
+      <li><strong>Finite-capacity / Gantt scheduling</strong> — overkill for a 10-person batch shop. Batches + travelers already sequence the floor. (Even Katana doesn't really do true Gantt — it's priority-list auto-allocation.)</li>
+      <li><strong>The MRP recalculation engine</strong> — the monolith that makes MRP hard to build and hard to trust. Phases 1 + 3 give us its two useful <em>outputs</em> (reorder + shortage) as simple, debuggable scripts. We don't need the black box.</li>
+      <li><strong>BOM cost rollup / landed cost / WIP valuation</strong> — financial precision we get from QuickBooks at our volume. Defer indefinitely.</li>
+      <li><strong>CRM / quotes / B2B portal</strong> — Shopify and draft orders already do this.</li>
+      <li><strong>Shop-floor labor time tracking (kiosk)</strong> — the one "maybe." Only worth building if we decide we need labor cost per job. Park it; revisit if a margin question forces it.</li>
+      <li><strong>Lot / serial traceability</strong> — both vendors gate it behind their priciest add-ons; we have no regulatory driver for it. Skip.</li>
+    </ul>
+
+    <h2 class="sec">Bottom line</h2>
+    <div class="callout good">
+      <strong>The plan:</strong> Phase 1 (~2–3 days) gives you inventory alerts — the thing you asked for. Phase 2 (~1–1.5 weeks) builds the PO system you suspected you wanted and lets us <strong>cancel Katana, saving ~$299+/mo</strong>. Phase 3 (~1 week) makes it self-maintaining and adds the predictive reorder layer that's the actual reason MRPs exist. Total recurring cost: <strong>$0</strong>. Total build: about <strong>three weeks</strong>, most of it reusing engines that already run. The result is a system that does the four things we need from an MRP — and does two of them <em>better</em> than MRPeasy or Katana, because it knows what Black Batch, (C) variants, and color batching are, and they never will.
+    </div>
+    <p style="font-size:0.85rem; color:var(--muted);">Sources: MRPeasy module + pricing pages (mrpeasy.com), Katana feature + support KB (katanamrp.com, support.katanamrp.com), and a live audit of the Dutton Brown Notion Parts, Companies, and Purchase Request Log databases — June 2026.</p>
+
+  </main>
+  <footer>
+    Dutton Brown · Operations · Build-vs-Buy MRP Roadmap · June 2026 · companion to the MRPeasy Decision
+  </footer>
+</body>
+</html>
