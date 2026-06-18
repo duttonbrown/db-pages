@@ -2086,7 +2086,7 @@
         <button type="button" class="trv-btn" id="releaseBatchBtn" onclick="releaseBatch()"
                 title="Tag these orders printed, attach each traveler PDF to its Shopify order, and archive the batch to SharePoint. Runs automatically on the release PC — a Teams card confirms. If the PC is offline, a release file downloads for the &quot;DB Finalize Release&quot; shortcut instead.">Release batch</button>
         <button type="button" class="trv-btn" id="printSelectedBtn" onclick="printSelected()" disabled
-                title="Print only the orders you've checked (use the Select boxes on each order) — every traveler on each selected order. For printing a few orders together without printing the whole board.">Print selected (0)</button>
+                title="Print only the orders you've checked (use the Select boxes on each order) — every traveler on each selected order. After the paper's out, it asks whether to mark them released too (tag PRINTED + archive PDFs), so printed orders don't stay invisible to Shopify. Cancel that prompt to print for reference only.">Print selected (0)</button>
         <button type="button" class="trv-btn" id="releaseSelectedBtn" onclick="releaseSelected()" disabled
                 title="Release only the orders you've checked (use the Select boxes on each order). Same as Release batch, but scoped to your selection — for pushing a few orders out together without releasing everything.">Release selected (0)</button>
         <a class="trv-release-help" href="release.html" target="_blank" rel="noopener"
@@ -2104,8 +2104,208 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-18T13:00:02",
+  "built_at": "2026-06-18T14:00:02",
   "orders": [
+    {
+      "shopify_order_id": "7012746821714",
+      "shopify_order_name": "36173",
+      "shopify_order_number": "36173",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 1168.0,
+      "ship_by_date": null,
+      "latest_ship_by": "July 16, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-18T13:38:11-05:00",
+      "tags": "trade",
+      "total_price": 1168.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7012746821714",
+          "shopify_order_name": "36173",
+          "shopify_order_number": "36173",
+          "key": [
+            "color",
+            "Riding Hood Red",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Riding Hood Red",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30130-12",
+            "30224"
+          ],
+          "variant_skus": [
+            "30130-12-2RH",
+            "30224-1RH"
+          ],
+          "line_item_titles": [
+            "Color Cap Flush Mount 12\"",
+            "Color Icon 2 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Cap Flush Mount 12\"",
+              "variant_title": "Nickel / Riding Hood Red / Flat ceiling",
+              "variant_sku": "30130-12-2RH",
+              "parent_sku": "30130-12",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-cap-flush-mount-12-nickel-ridinghoodred.jpg?v=1759252262&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "Color Icon 2 Sconce",
+              "variant_title": "Brass / Riding Hood Red",
+              "variant_sku": "30224-1RH",
+              "parent_sku": "30224",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-icon-sconce-2-ridinghoodred.jpg?v=1747968137&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 3,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Riding Hood Red|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7012746821714",
+          "shopify_order_name": "36173",
+          "shopify_order_number": "36173",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-18T13:38:11-05:00",
+          "parent_sku": "30130-12",
+          "color": "Riding Hood Red",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16946097750098
+          ],
+          "item_titles": [
+            "Color Cap Flush Mount 12\""
+          ],
+          "variant_skus": [
+            "30130-12-2RH"
+          ],
+          "lines": [
+            {
+              "sku": "30130-12-2RH",
+              "title": "Color Cap Flush Mount 12\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Riding Hood Red",
+              "category": "fixture",
+              "variant_title": "Nickel / Riding Hood Red / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-cap-flush-mount-12-nickel-ridinghoodred.jpg?v=1759252262&width=120"
+            }
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7012746821714",
+          "shopify_order_name": "36173",
+          "shopify_order_number": "36173",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-18T13:38:11-05:00",
+          "parent_sku": "30224",
+          "color": "Riding Hood Red",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16946097782866
+          ],
+          "item_titles": [
+            "Color Icon 2 Sconce"
+          ],
+          "variant_skus": [
+            "30224-1RH"
+          ],
+          "lines": [
+            {
+              "sku": "30224-1RH",
+              "title": "Color Icon 2 Sconce",
+              "qty": 2,
+              "finish": "Brass",
+              "color": "Riding Hood Red",
+              "category": "fixture",
+              "variant_title": "Brass / Riding Hood Red",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-icon-sconce-2-ridinghoodred.jpg?v=1747968137&width=120"
+            }
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7012649336914",
       "shopify_order_name": "36172",
@@ -2811,8 +3011,8 @@ const QUEUE = {
           "category": "accessory",
           "category_label": "Bulb",
           "parent_skus": [
-            "BULB-9993",
-            "BULB-9992"
+            "BULB-9992",
+            "BULB-9993"
           ],
           "variant_skus": [
             "BULB-9993",
@@ -2975,9 +3175,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 5,
-    "printouts": 8,
-    "notion_rows": 6,
+    "orders": 6,
+    "printouts": 9,
+    "notion_rows": 8,
     "skipped_already_printed": 173,
     "needs_attention": 0,
     "printed_review": 0
@@ -5911,9 +6111,14 @@ async function refreshBoard(){
 
 // ── Print / release a hand-picked selection ──────────────────────────────────
 // The middle ground between one order and the whole board: tick the Select box
-// on any number of orders, then Print selected (paper only) or Release selected
-// (full pipeline + allowlist, same as releaseBatch) scoped to the checked order
-// ids. One checkbox per order selects all of that order's traveler sheets.
+// on any number of orders, then Print selected or Release selected scoped to the
+// checked order ids. One checkbox per order selects all of that order's sheets.
+//   • Print selected — prints the paper, then (once the dialog closes) asks
+//     whether to release the same orders, so a printed traveler doesn't stay
+//     invisible to Shopify/SharePoint. The release half is allowlist-gated; the
+//     printing half is open to the floor. Cancel the follow-up = print only.
+//   • Release selected — straight to the full pipeline + allowlist, same as
+//     releaseBatch, scoped to the checked orders. No printing.
 function selectedOrderIds(){
   return Array.from(document.querySelectorAll(".trv-select-box:checked"))
     .map(cb => String(cb.getAttribute("data-order-id")));
@@ -5924,7 +6129,8 @@ function selectedOrderIds(){
 // printOneTraveler's isolate→print→restore, but for a set of sheets. No release,
 // no Shopify writes — just paper.
 async function printSelected(){
-  const ids = new Set(selectedOrderIds());
+  const selectedIds = selectedOrderIds();          // capture before printing
+  const ids = new Set(selectedIds);
   if(!ids.size){ showTrvToast("No orders selected — tick a Select box first.", null); return; }
   if(!confirmUnassignedTasks("Print")) return;
   const list = document.getElementById("travelers");
@@ -5939,9 +6145,58 @@ async function printSelected(){
     document.body.classList.remove("printing-travelers");
     sheets.forEach(s => { s.style.display = ""; });
     window.removeEventListener("afterprint", cleanup);
+    // Once the paper's out, offer to close the loop. afterprint fires whether
+    // they printed or cancelled, so we ASK (never auto-release): only the
+    // operator knows it really printed. Defer past the print teardown so the
+    // confirm() doesn't race the dialog dismissing.
+    setTimeout(() => promptReleaseAfterPrint(selectedIds), 0);
   };
   window.addEventListener("afterprint", cleanup);
   window.print();
+}
+
+// Follow-up after "Print selected": close the print→release gap so paper on the
+// floor isn't invisible to Shopify/SharePoint. Allowlisted users get the release
+// confirm; everyone else is told who can release. We re-derive the order numbers
+// from the live QUEUE so the prompt names the orders, not raw ids.
+function promptReleaseAfterPrint(orderIds){
+  const idSet = new Set((orderIds||[]).map(String));
+  const orders = (QUEUE.orders||[]).filter(o =>
+    idSet.has(String(o.shopify_order_id)) && o.shopify_order_number && o.shopify_order_id);
+  if(!orders.length) return;                        // nothing releasable — stay quiet
+  const count = orders.length;
+  const nums = orders.map(o => "#" + o.shopify_order_number).join(", ");
+
+  // Not on the release allowlist → can't release; just tell them who can.
+  if(RELEASE_ALLOWED === false){
+    showTrvToast(
+      `Printed ${count} order${count===1?"":"s"} (${nums}). To mark them released — ` +
+      `tag PRINTED in Shopify + archive the PDFs — ask Shipping or management ` +
+      `(shipping@, Chase, Alex, Thomas) to hit "Release selected".`, null);
+    return;
+  }
+  // Allowlisted (or local dev) → offer to release the same orders now. This is
+  // the single confirm (releaseOrderIds gets skipConfirm), so it carries the
+  // dry-run wording itself.
+  const dryRun = new URLSearchParams(location.search).has("dryrun");
+  const go = window.confirm(
+    `Printed ${count} order${count===1?"":"s"}:\n\n${nums}\n\n` +
+    (dryRun
+      ? `DRY RUN — mark them released now? Nothing will be written; PDFs render only.\n\n`
+      : `Mark them released now? This tags them PRINTED in Shopify, attaches each ` +
+        `traveler PDF to its order, and archives them to SharePoint.\n\n`) +
+    `Click Cancel if you printed these for reference and don't want to release them yet.`);
+  if(!go){
+    showTrvToast(
+      `Printed ${count} order${count===1?"":"s"} — not released. ` +
+      `Use "Release selected" when you're ready to mark them PRINTED.`, null);
+    return;
+  }
+  releaseOrderIds(orderIds, {
+    btn: document.getElementById("releaseSelectedBtn"),
+    source: "print-queue-board-print-then-release",
+    skipConfirm: true,
+  });
 }
 
 function onTrvSelectChange(cb){
@@ -5961,36 +6216,46 @@ function onTrvSelectChange(cb){
   }
 }
 
-async function releaseSelected(){
+// Release a specific set of order ids through the full pipeline (tag PRINTED,
+// attach PDFs, archive to SharePoint). Shared by the "Release selected" button
+// and the after-print release prompt so both confirm + POST identically. Returns
+// true if the release was queued. `opts.btn` is an optional button to show
+// progress on; `opts.source` tags the payload for the listener's logs.
+async function releaseOrderIds(ids, opts){
+  opts = opts || {};
   if(RELEASE_ALLOWED === false){
     showTrvToast("Releasing is limited to Shipping and management (shipping@, " +
                  "Chase, Alex, Thomas).", null);
-    return;
+    return false;
   }
-  const ids = new Set(selectedOrderIds());
-  if(!ids.size){ showTrvToast("No orders selected — tick a Select box first.", null); return; }
-  if(!confirmUnassignedTasks("Release")) return;
+  const idSet = new Set(Array.from(ids).map(String));
+  if(!idSet.size){ showTrvToast("No orders selected — tick a Select box first.", null); return false; }
   const orders = (QUEUE.orders||[]).filter(o =>
-    ids.has(String(o.shopify_order_id)) && o.shopify_order_number && o.shopify_order_id);
+    idSet.has(String(o.shopify_order_id)) && o.shopify_order_number && o.shopify_order_id);
   const count = orders.length;
-  if(!count){ showTrvToast("Selected orders aren't on the board.", null); return; }
+  if(!count){ showTrvToast("Selected orders aren't on the board.", null); return false; }
   const dryRun = new URLSearchParams(location.search).has("dryrun");
   const nums = orders.map(o => "#" + o.shopify_order_number).join(", ");
-  const ok = window.confirm(
-    (dryRun ? `DRY RUN — release ${count} selected order${count===1?"":"s"}?\n\n${nums}\n\nNothing will be written; PDFs render only.\n\n`
-            : `Release ${count} selected order${count===1?"":"s"}?\n\n${nums}\n\n` +
-              `This tags them PRINTED in Shopify, attaches each traveler PDF to its order, ` +
-              `and archives them to SharePoint.\n\n`) +
-    `It runs automatically on the release PC — a Teams card confirms when done.`);
-  if(!ok) return;
+  // The print-then-release prompt already confirmed (and named the dry run), so
+  // skip the second confirm there; the standalone "Release selected" button does
+  // its own confirm here.
+  if(!opts.skipConfirm){
+    const ok = window.confirm(
+      (dryRun ? `DRY RUN — release ${count} selected order${count===1?"":"s"}?\n\n${nums}\n\nNothing will be written; PDFs render only.\n\n`
+              : `Release ${count} selected order${count===1?"":"s"}?\n\n${nums}\n\n` +
+                `This tags them PRINTED in Shopify, attaches each traveler PDF to its order, ` +
+                `and archives them to SharePoint.\n\n`) +
+      `It runs automatically on the release PC — a Teams card confirms when done.`);
+    if(!ok) return false;
+  }
 
   const payload = {
     released_at: new Date().toISOString(),
-    source: "print-queue-board-selected",
+    source: opts.source || "print-queue-board-selected",
     dry_run: dryRun,
     orders: orders,
   };
-  const btn = document.getElementById("releaseSelectedBtn");
+  const btn = opts.btn || null;
   const orig = btn ? btn.textContent : "";
   if(btn){ btn.disabled = true; btn.textContent = "Releasing…"; }
   try{
@@ -6006,14 +6271,30 @@ async function releaseSelected(){
       showTrvToast(
         `${dryRun ? "Dry-run release" : "Release"} queued for ${count} order${count===1?"":"s"} ` +
         `(${nums}) — running on the release PC. Confirmation posts to Teams (Automations › Production).`, null);
-      return;
+      return true;
     }
     throw new Error((out && out.error) || ("HTTP " + resp.status));
   }catch(e){
     if(btn){ btn.disabled = false; btn.textContent = orig; }
     showTrvToast("Couldn't release the selection (" + (e.message || e) + "). " +
                  "If the release PC is offline, use the batch Release instead.", null);
+    return false;
   }
+}
+
+async function releaseSelected(){
+  if(RELEASE_ALLOWED === false){
+    showTrvToast("Releasing is limited to Shipping and management (shipping@, " +
+                 "Chase, Alex, Thomas).", null);
+    return;
+  }
+  const ids = selectedOrderIds();
+  if(!ids.length){ showTrvToast("No orders selected — tick a Select box first.", null); return; }
+  if(!confirmUnassignedTasks("Release")) return;
+  await releaseOrderIds(ids, {
+    btn: document.getElementById("releaseSelectedBtn"),
+    source: "print-queue-board-selected",
+  });
 }
 
 // Print a single traveler — isolate it, print, restore. The isolated sheet is
