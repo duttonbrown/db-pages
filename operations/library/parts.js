@@ -53,7 +53,7 @@ function locationPills(locations) {
     const inner = `<span class="loc-code">${escapeHtml(l.code)}</span>${l.group ? `<span class="loc-zone">${escapeHtml(l.group)}</span>` : ''}`;
     const style = `style="--loc-color:${escapeHtml(color)}"`;
     return l.floor_plan
-      ? `<a class="loc-pill" ${style} href="${escapeHtml(l.floor_plan)}" target="_blank" rel="noopener" title="${escapeHtml(tip)} · open floor plan ↗">${inner}</a>`
+      ? `<a class="loc-pill" ${style} href="${escapeHtml(libUrl(l.floor_plan))}" target="_blank" rel="noopener" title="${escapeHtml(tip)} · open floor plan ↗">${inner}</a>`
       : `<span class="loc-pill" ${style} title="${escapeHtml(tip)}">${inner}</span>`;
   }).join('');
 }
@@ -800,7 +800,7 @@ function renderSpec(p) {
     const sibs = siblings.map(s => {
       const isCurrent = s.part_number === p.part_number;
       const img = s.image
-        ? `<img src="${escapeHtml(s.image)}" alt="" loading="lazy">`
+        ? `<img src="${escapeHtml(libUrl(s.image))}" alt="" loading="lazy">`
         : '<span style="font-size:9px;color:var(--muted)">—</span>';
       return `<a class="sibling${isCurrent ? ' is-current' : ''}" data-pn="${escapeHtml(s.part_number)}" href="#${encodeURIComponent(s.part_number)}">
         <div class="sibling-img">${img}</div>
