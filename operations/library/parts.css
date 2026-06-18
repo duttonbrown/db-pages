@@ -149,7 +149,7 @@
    idle / dark-fill active, count as a faded inline number (not a badge). */
 .quick-filter {
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 400;
   padding: 3px 12px;
   background: white;
@@ -263,17 +263,17 @@
 }
 .recents-chip {
   font-family: inherit;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 400;
-  padding: 3px 10px;
+  padding: 3px 12px;
   background: white;
   border: 1px solid var(--border);
   border-radius: 6px;
   cursor: pointer;
   color: var(--text);
-  transition: all 0.12s;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
 }
-.recents-chip:hover { border-color: var(--accent); color: var(--accent-dark); }
+.recents-chip:hover { background: var(--bg); border-color: var(--muted); }
 
 /* Glossary chip strip — wrapped in .glossary-strip-wrap so we can layer
    a "Show all" toggle below the chip flow. Collapsed state caps at ~2 rows
@@ -308,11 +308,12 @@
   text-decoration: underline;
 }
 .glossary-toggle:hover { color: var(--text); }
+/* Matches the company-hub .fpill exactly (production console filter chips). */
 .glossary-chip {
   font-family: inherit;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 400;
-  padding: 3px 10px;
+  padding: 3px 12px;
   background: white;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -320,25 +321,27 @@
   color: var(--text);
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  line-height: 1.6;
-  transition: all 0.12s;
+  gap: 3px;
+  line-height: 1.4;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
 }
 .glossary-chip:hover {
-  border-color: var(--accent);
-  color: var(--accent-dark);
+  background: var(--bg);
+  border-color: var(--muted);
 }
 .glossary-chip.is-active {
   background: var(--ink);
   color: white;
   border-color: var(--ink);
+  font-weight: 500;
 }
 .glossary-chip .gc-count {
   font-size: 10px;
-  color: var(--muted);
+  opacity: 0.65;
+  margin-left: 3px;
   font-variant-numeric: tabular-nums;
 }
-.glossary-chip.is-active .gc-count { color: rgba(255,255,255,0.7); }
+.glossary-chip.is-active .gc-count { opacity: 0.8; }
 
 /* Browse grid */
 .parts-grid {
