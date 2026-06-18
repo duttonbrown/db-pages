@@ -226,7 +226,15 @@
   .page-intro {
     margin-bottom: 14px;
     text-align: left;
+    /* Title block on the left, global actions (Refresh) pinned top-right. */
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
   }
+  .page-intro-text { min-width: 0; }
+  .page-intro-actions { flex: 0 0 auto; }
   .page-eyebrow {
     display: inline-block;
     font-size: 10px;
@@ -1545,7 +1553,18 @@
 
   .trv-sheet-actions {
     position: absolute; top: 12px; right: 14px; display: flex; gap: 6px;
+    align-items: center;
   }
+  /* Per-order select checkbox (only on an order's first sheet) for batch release. */
+  .trv-select {
+    display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
+    font-size: 12px; font-weight: 500; color: var(--muted);
+    padding: 5px 9px; border: 1px solid var(--border); border-radius: 6px;
+    background: white; user-select: none;
+  }
+  .trv-select:hover { border-color: var(--accent); color: var(--ink); }
+  .trv-select input { cursor: pointer; margin: 0; accent-color: var(--accent); }
+  .trv-select.is-checked { border-color: var(--accent); color: var(--ink); }
 
   /* Header: title + db logo */
   .trv-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
@@ -1976,9 +1995,15 @@
 <div class="app-main">
 <main class="card card-wide">
   <header class="page-intro">
-    <p class="page-eyebrow">Production · Print queue</p>
-    <h1 class="page-lead" id="pageLead">Today's printout plan</h1>
-    <p class="page-sub" id="pageSub">Loading…</p>
+    <div class="page-intro-text">
+      <p class="page-eyebrow">Production · Print queue</p>
+      <h1 class="page-lead" id="pageLead">Today's printout plan</h1>
+      <p class="page-sub" id="pageSub">Loading…</p>
+    </div>
+    <div class="page-intro-actions no-print">
+      <button type="button" class="trv-btn" id="refreshBoardBtn" onclick="refreshBoard()"
+              title="Rebuild the board from live Shopify right now instead of waiting for the next hourly update — pulls in just-placed orders on demand. Takes ~45s.">↻ Refresh</button>
+    </div>
   </header>
 
   <div class="public-banner" id="publicBanner" hidden>
@@ -2058,10 +2083,10 @@
       <span class="trv-toolbar-label"><strong id="trvCount">0</strong> traveler<span id="trvCountPlural">s</span></span>
       <div class="trv-toolbar-actions">
         <button type="button" class="trv-btn trv-btn-primary" onclick="printAllTravelers()">Print all travelers</button>
-        <button type="button" class="trv-btn" id="refreshBoardBtn" onclick="refreshBoard()"
-                title="Rebuild the board from live Shopify right now instead of waiting for the next hourly update — pulls in just-placed orders on demand. Takes ~45s.">↻ Refresh</button>
         <button type="button" class="trv-btn" id="releaseBatchBtn" onclick="releaseBatch()"
                 title="Tag these orders printed, attach each traveler PDF to its Shopify order, and archive the batch to SharePoint. Runs automatically on the release PC — a Teams card confirms. If the PC is offline, a release file downloads for the &quot;DB Finalize Release&quot; shortcut instead.">Release batch</button>
+        <button type="button" class="trv-btn" id="releaseSelectedBtn" onclick="releaseSelected()" disabled
+                title="Release only the orders you've checked (use the Select boxes on each order). Same as Release batch, but scoped to your selection — for pushing a few orders out together without releasing everything.">Release selected (0)</button>
         <a class="trv-release-help" href="release.html" target="_blank" rel="noopener"
            title="The Traveler Release guide — everyday flow, offline fallback, troubleshooting">how release works</a>
       </div>
@@ -2077,8 +2102,140 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-18T12:02:27",
+  "built_at": "2026-06-18T12:20:16",
   "orders": [
+    {
+      "shopify_order_id": "7012593533010",
+      "shopify_order_name": "36171",
+      "shopify_order_number": "36171",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 457.98,
+      "ship_by_date": null,
+      "latest_ship_by": "July 16, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-18T12:04:29-05:00",
+      "tags": "discount, redo",
+      "total_price": 457.98,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Auto-Created",
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7012593533010",
+          "shopify_order_name": "36171",
+          "shopify_order_number": "36171",
+          "key": [
+            "color",
+            "Spa",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Spa",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30224"
+          ],
+          "variant_skus": [
+            "30224-1B"
+          ],
+          "line_item_titles": [
+            "Color Icon 2 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Icon 2 Sconce",
+              "variant_title": "Brass / Spa",
+              "variant_sku": "30224-1B",
+              "parent_sku": "30224",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-icon-sconce-2-spa.jpg?v=1747968136&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Spa|lighting"
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7012593533010",
+          "shopify_order_name": "36171",
+          "shopify_order_number": "36171",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-18T12:04:29-05:00",
+          "parent_sku": "30224",
+          "color": "Spa",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16945735762002
+          ],
+          "item_titles": [
+            "Color Icon 2 Sconce"
+          ],
+          "variant_skus": [
+            "30224-1B"
+          ],
+          "lines": [
+            {
+              "sku": "30224-1B",
+              "title": "Color Icon 2 Sconce",
+              "qty": 1,
+              "finish": "Brass",
+              "color": "Spa",
+              "category": "fixture",
+              "variant_title": "Brass / Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-icon-sconce-2-spa.jpg?v=1747968136&width=120"
+            }
+          ],
+          "tags": [
+            "Auto-Created",
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7012434477138",
       "shopify_order_name": "36170",
@@ -2589,9 +2746,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 3,
-    "printouts": 5,
-    "notion_rows": 3,
+    "orders": 4,
+    "printouts": 6,
+    "notion_rows": 4,
     "skipped_already_printed": 173,
     "needs_attention": 0,
     "printed_review": 0
@@ -3971,7 +4128,19 @@ function trvMasterRefNote(total){
     </div>`;
 }
 
-function renderMasterTraveler(o, calloutHtml){
+// Per-order select checkbox for batch release. Carries the order id + number so
+// releaseSelected() can gather the checked orders. onchange keeps the toolbar's
+// "Release selected (N)" count + the pill's checked style in sync.
+function trvSelectBox(o){
+  const id = escapeHtml(String(o.shopify_order_id || ""));
+  const num = escapeHtml(String(o.shopify_order_number || ""));
+  return `<label class="trv-select no-print" title="Select this order for a batch release">
+      <input type="checkbox" class="trv-select-box" data-order-id="${id}" data-order-num="${num}"
+             onchange="onTrvSelectChange(this)"> Select
+    </label>`;
+}
+
+function renderMasterTraveler(o, calloutHtml, showSelect){
   const numbered = (o.printouts||[]).filter(p => p._travelerNum)
     .sort((a,b) => a._travelerNum - b._travelerNum);
   const total = numbered.length ? (numbered[0]._travelerTotal || numbered.length) : 0;
@@ -4012,6 +4181,7 @@ function renderMasterTraveler(o, calloutHtml){
 
   return `<div class="traveler trv-master" data-order="${escapeHtml(o.shopify_order_id)}" data-traveler="__master">
     <div class="trv-sheet-actions no-print">
+      ${showSelect ? trvSelectBox(o) : ""}
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
       <button type="button" class="trv-btn trv-btn-ghost trv-release-one" onclick="releaseOneOrder(this)"
               title="Release just this order now — tags it printed, attaches its traveler PDF(s) to the Shopify order, and archives to SharePoint. Lets you push one order out ahead of the rest of the batch.">Release this order</button>
@@ -4074,7 +4244,7 @@ function trvColorFinishChip(p){
   return `<span class="color-chip color-chip-plain">${escapeHtml(name)}</span>`;
 }
 
-function renderTraveler(o, p, idx, total, calloutHtml){
+function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
   const multi = (total || 1) >= 2;   // only number travelers when there's >1
   // A Shipping traveler is already past QC + the ship-by milestone (it's just
   // going out the door), so its footer skips the Ship By / QC sign-off lines.
@@ -4129,6 +4299,7 @@ function renderTraveler(o, p, idx, total, calloutHtml){
 
   return `<div class="traveler" data-order="${escapeHtml(o.shopify_order_id)}" data-traveler="${escapeHtml(p.traveler_key||"")}">
     <div class="trv-sheet-actions no-print">
+      ${showSelect ? trvSelectBox(o) : ""}
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
       <button type="button" class="trv-btn trv-btn-ghost trv-release-one" onclick="releaseOneOrder(this)"
               title="Release just this order now — tags it printed, attaches its traveler PDF(s) to the Shopify order, and archives to SharePoint. Lets you push one order out ahead of the rest of the batch.">Release this order</button>
@@ -5265,9 +5436,19 @@ function renderTravelers(){
     if(at >= 0) pairs.splice(at, 0, { o, master: true });
   }
   const callout = trvExpediteCallout();
+  // One select checkbox per ORDER, placed on whichever of its sheets prints
+  // first (master if present, else its first traveler). Releasing a selected
+  // order releases the whole order, so a single checkbox per order is right.
+  const seenOrderCheck = new Set();
+  const firstOfOrder = (o) => {
+    const id = String(o.shopify_order_id);
+    if(seenOrderCheck.has(id)) return false;
+    seenOrderCheck.add(id);
+    return true;
+  };
   const sheets = pairs.map((x, i) =>
-    x.master ? renderMasterTraveler(x.o, i === 0 ? callout : "")
-             : renderTraveler(x.o, x.p, x.idx, x.total, i === 0 ? callout : ""));
+    x.master ? renderMasterTraveler(x.o, i === 0 ? callout : "", firstOfOrder(x.o))
+             : renderTraveler(x.o, x.p, x.idx, x.total, i === 0 ? callout : "", firstOfOrder(x.o)));
   // Rod + bulb assignment task bars share identical markup (one builder). Both
   // list lines that must be assigned onto fixtures before printing.
   function renderTaskBar(tasks, head){
@@ -5561,6 +5742,83 @@ async function releaseOneOrder(btn){
   }catch(e){
     btn.disabled = false; btn.textContent = orig;
     showTrvToast("Couldn't release #" + num + " (" + (e.message || e) + "). " +
+                 "If the release PC is offline, use the batch Release instead.", null);
+  }
+}
+
+// ── Batch release of a hand-picked selection ─────────────────────────────────
+// The middle ground between "Release this order" (one) and "Release batch"
+// (all): tick the Select box on any number of orders, then release exactly
+// those together. Same pipeline + allowlist as releaseBatch, scoped to the
+// checked order ids.
+function selectedOrderIds(){
+  return Array.from(document.querySelectorAll(".trv-select-box:checked"))
+    .map(cb => String(cb.getAttribute("data-order-id")));
+}
+
+function onTrvSelectChange(cb){
+  // Keep the pill's checked style and the toolbar count in sync.
+  const pill = cb.closest(".trv-select");
+  if(pill) pill.classList.toggle("is-checked", cb.checked);
+  const n = selectedOrderIds().length;
+  const btn = document.getElementById("releaseSelectedBtn");
+  if(btn){
+    btn.textContent = `Release selected (${n})`;
+    btn.disabled = (n === 0) || (RELEASE_ALLOWED === false);
+  }
+}
+
+async function releaseSelected(){
+  if(RELEASE_ALLOWED === false){
+    showTrvToast("Releasing is limited to Shipping and management (shipping@, " +
+                 "Chase, Alex, Thomas).", null);
+    return;
+  }
+  const ids = new Set(selectedOrderIds());
+  if(!ids.size){ showTrvToast("No orders selected — tick a Select box first.", null); return; }
+  if(!confirmUnassignedTasks("Release")) return;
+  const orders = (QUEUE.orders||[]).filter(o =>
+    ids.has(String(o.shopify_order_id)) && o.shopify_order_number && o.shopify_order_id);
+  const count = orders.length;
+  if(!count){ showTrvToast("Selected orders aren't on the board.", null); return; }
+  const dryRun = new URLSearchParams(location.search).has("dryrun");
+  const nums = orders.map(o => "#" + o.shopify_order_number).join(", ");
+  const ok = window.confirm(
+    (dryRun ? `DRY RUN — release ${count} selected order${count===1?"":"s"}?\n\n${nums}\n\nNothing will be written; PDFs render only.\n\n`
+            : `Release ${count} selected order${count===1?"":"s"}?\n\n${nums}\n\n` +
+              `This tags them PRINTED in Shopify, attaches each traveler PDF to its order, ` +
+              `and archives them to SharePoint.\n\n`) +
+    `It runs automatically on the release PC — a Teams card confirms when done.`);
+  if(!ok) return;
+
+  const payload = {
+    released_at: new Date().toISOString(),
+    source: "print-queue-board-selected",
+    dry_run: dryRun,
+    orders: orders,
+  };
+  const btn = document.getElementById("releaseSelectedBtn");
+  const orig = btn ? btn.textContent : "";
+  if(btn){ btn.disabled = true; btn.textContent = "Releasing…"; }
+  try{
+    const resp = await fetch(RELEASE_WEBHOOK, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+    });
+    const out = await resp.json().catch(() => ({}));
+    if(resp.ok && out && out.queued){
+      setLastReleaseNow();
+      if(btn){ btn.textContent = dryRun ? "Dry run queued ✓" : "Released ✓"; }
+      showTrvToast(
+        `${dryRun ? "Dry-run release" : "Release"} queued for ${count} order${count===1?"":"s"} ` +
+        `(${nums}) — running on the release PC. Confirmation posts to Teams (Automations › Production).`, null);
+      return;
+    }
+    throw new Error((out && out.error) || ("HTTP " + resp.status));
+  }catch(e){
+    if(btn){ btn.disabled = false; btn.textContent = orig; }
+    showTrvToast("Couldn't release the selection (" + (e.message || e) + "). " +
                  "If the release PC is offline, use the batch Release instead.", null);
   }
 }
