@@ -8,6 +8,16 @@ const escapeHtml = (s) =>
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
+// Cross-origin base, mirrors parts.js. The gated hub copy of this page sets
+//   window.LIBRARY_CONFIG = { base: 'https://duttonbrown.github.io/db-pages/operations/library/' }
+// so the same-origin (public) page is untouched (base '' → libUrl is a no-op),
+// while the gated page resolves the data JSON against the public origin. Product
+// images are already absolute Shopify CDN URLs, so libUrl only rewrites the
+// relative data fetches; it leaves http(s)/data URLs alone.
+const LIBRARY_CONFIG = (typeof window !== 'undefined' && window.LIBRARY_CONFIG) || {};
+const LIBRARY_BASE = LIBRARY_CONFIG.base || '';
+const libUrl = (rel) => (rel && LIBRARY_BASE && !/^https?:|^data:/.test(rel)) ? LIBRARY_BASE + rel : rel;
+
 let DATA = null;
 let BY_HANDLE = {};
 let CURRENT = null;
@@ -19,7 +29,7 @@ let activeResultIdx = -1;
 
 async function bootstrap() {
   try {
-    const resp = await fetch('products-library.json', { cache: 'no-store' });
+    const resp = await fetch(libUrl('products-library.json'), { cache: 'no-store' });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     DATA = await resp.json();
   } catch (e) {
@@ -32,7 +42,7 @@ async function bootstrap() {
   // Sidebar counts — also fetch the parts library so all 4 tabs show counts
   $('lighting-count').textContent = (DATA.counts.lighting || 0).toLocaleString();
   $('hardware-count').textContent = (DATA.counts.hardware || 0).toLocaleString();
-  fetch('parts-library.json', { cache: 'no-store' })
+  fetch(libUrl('parts-library.json'), { cache: 'no-store' })
     .then(r => r.ok ? r.json() : null)
     .then(pl => {
       if (!pl) return;

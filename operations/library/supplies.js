@@ -8,6 +8,15 @@ const escapeHtml = (s) =>
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
+// Cross-origin base, mirrors parts.js. The gated hub copy sets
+//   window.LIBRARY_CONFIG = { base: 'https://duttonbrown.github.io/db-pages/operations/library/' }
+// so the public same-origin page is untouched (base '' → no-op), while the gated
+// page resolves both the data JSON and the relative supply-images/* paths against
+// the public origin. http(s)/data URLs are left alone.
+const LIBRARY_CONFIG = (typeof window !== 'undefined' && window.LIBRARY_CONFIG) || {};
+const LIBRARY_BASE = LIBRARY_CONFIG.base || '';
+const libUrl = (rel) => (rel && LIBRARY_BASE && !/^https?:|^data:/.test(rel)) ? LIBRARY_BASE + rel : rel;
+
 let DATA = null;          // raw parts-library.json (we only use .supplies)
 let SUPPLIES = [];
 let BY_KEY = {};
@@ -21,7 +30,7 @@ function keyOf(s) { return s.sku || s.page_id; }
 
 async function bootstrap() {
   try {
-    const resp = await fetch('parts-library.json', { cache: 'no-store' });
+    const resp = await fetch(libUrl('parts-library.json'), { cache: 'no-store' });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     DATA = await resp.json();
   } catch (e) {
@@ -34,7 +43,7 @@ async function bootstrap() {
   // Sidebar counts — Parts/Supplies from this file, Lighting/Hardware from products
   $('parts-count').textContent = (DATA.counts.parts || 0).toLocaleString();
   $('supplies-count').textContent = SUPPLIES.length.toLocaleString();
-  fetch('products-library.json', { cache: 'no-store' })
+  fetch(libUrl('products-library.json'), { cache: 'no-store' })
     .then(r => r.ok ? r.json() : null)
     .then(pl => {
       if (!pl) return;
@@ -146,7 +155,7 @@ function renderGrid() {
 
 function cardHtml(s) {
   const imgHtml = s.image
-    ? `<div class="preview-image"><img src="${escapeHtml(s.image)}" alt="${escapeHtml(s.sku || s.title)}" loading="lazy"></div>`
+    ? `<div class="preview-image"><img src="${escapeHtml(libUrl(s.image))}" alt="${escapeHtml(s.sku || s.title)}" loading="lazy"></div>`
     : `<div class="preview-image no-img">No image</div>`;
   const label = s.sku || s.title || '(unnamed)';
   const desc  = s.title && s.title !== label ? s.title : (s.description || '');
@@ -186,7 +195,7 @@ function renderSearchResults(items) {
   if (!items.length) { box.hidden = true; box.classList.remove('open'); return; }
   box.innerHTML = items.map((s, i) => {
     const img = s.image
-      ? `<div class="lib-result-img"><img src="${escapeHtml(s.image)}" alt="" loading="lazy"></div>`
+      ? `<div class="lib-result-img"><img src="${escapeHtml(libUrl(s.image))}" alt="" loading="lazy"></div>`
       : `<div class="lib-result-img no-img">—</div>`;
     const label = s.sku || s.title || '—';
     const sub = (s.title && s.title !== label) ? s.title : (s.description || '');
@@ -283,7 +292,7 @@ function backToBrowse() {
 
 function renderSpec(s) {
   const imgHtml = s.image
-    ? `<div class="spec-image"><img src="${escapeHtml(s.image)}" alt="${escapeHtml(s.sku || s.title)}"></div>`
+    ? `<div class="spec-image"><img src="${escapeHtml(libUrl(s.image))}" alt="${escapeHtml(s.sku || s.title)}"></div>`
     : `<div class="spec-image no-img">No image</div>`;
 
   const skuLabel = s.sku || s.title || '—';
