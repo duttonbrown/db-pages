@@ -134,12 +134,10 @@ function renderQuickFilters() {
       count: procCount('Black Batch'),
       cls: 'qf-black',
     },
-    {
-      key: 'attention', kind: 'attention', label: 'Needs attention',
-      active: attentionFilter,
-      count: countWith({ attention: true }),
-      cls: 'qf-attention',
-    },
+    // "Needs attention" lens removed 2026-06-17 (too noisy until location/price
+    // data is populated). The plumbing — partNeedsAttention(), toggleAttention(),
+    // attentionFilter, and the filteredParts/countWith/active-filter branches —
+    // is left intact so it can be re-added here later by restoring this entry.
   ];
 
   row.innerHTML =
