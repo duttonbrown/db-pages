@@ -3,132 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Receive Shipments — Dutton Brown</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="manage.css">
-<link rel="stylesheet" href="receive.css">
+<meta name="robots" content="noindex, nofollow">
+<!-- Moved to the gated hub. Redirect so old bookmarks land on the signed-in
+     version. See feedback_db_pages_vs_hub_placement. -->
+<meta http-equiv="refresh" content="0; url=https://hub.duttonbrown.com/operations/purchase-requests/receive.html">
+<title>Moved — Receive Shipments</title>
+<link rel="canonical" href="https://hub.duttonbrown.com/operations/purchase-requests/receive.html">
+<style>
+  body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300; color: #4A4A4A; background: #FAFAFA; margin: 0; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+  .box { max-width: 420px; }
+  h1 { font-size: 20px; font-weight: 600; color: #2A2A2A; margin: 0 0 10px; }
+  p { font-size: 14px; margin: 0 0 18px; }
+  a.btn { display: inline-block; font-size: 13px; font-weight: 600; text-decoration: none;
+    background: #D97706; color: white; padding: 9px 18px; border-radius: 6px; }
+</style>
 </head>
 <body>
-<div class="app-shell">
-
-<aside class="side-nav" aria-label="Inventory navigation">
-  <div class="side-nav-inner">
-    <a class="side-nav-brand" href="index.html">
-      <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
-    </a>
-    <div class="side-nav-eyebrow">Inventory</div>
-    <ul class="side-nav-tabs" role="tablist">
-      <li><a class="side-nav-tab" href="index.html">Submit</a></li>
-      <li><a class="side-nav-tab" href="manage.html">Purchase</a></li>
-      <li><a class="side-nav-tab" href="receive.html" aria-current="page">Receive</a></li>
-      <li><a class="side-nav-tab" href="status.html">Status</a></li>
-    </ul>
+  <div class="box">
+    <h1>Receive Shipments has moved</h1>
+    <p>This tool now lives on the Dutton Brown hub (sign-in required). You’ll be redirected automatically.</p>
+    <a class="btn" href="https://hub.duttonbrown.com/operations/purchase-requests/receive.html">Go to the hub</a>
   </div>
-</aside>
-
-<div class="app-main">
-<main class="card card-wide">
-  <header class="page-intro">
-    <h1 class="page-lead">Receive shipments</h1>
-    <p class="page-sub">Confirm what arrived. Grouped by PO so a whole box can be received in one click.</p>
-  </header>
-
-  <div class="purchaser-bar">
-    <label for="receiver-name">You are:</label>
-    <select id="receiver-name">
-      <option value="">Select your name…</option>
-    </select>
-    <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
-  </div>
-
-  <div class="search-bar">
-    <input
-      type="search"
-      id="receive-search"
-      class="search-input"
-      placeholder="Search by order #, item, vendor, requestor, PO…"
-      aria-label="Search shipments"
-      autocomplete="off">
-    <span class="search-count" id="receive-search-count" hidden></span>
-  </div>
-
-  <section id="supplier-bubbles" class="supplier-bubbles" hidden role="tablist" aria-label="Filter shipments by supplier"></section>
-
-  <div id="loading-bar" class="loading-bar" hidden>
-    <div class="loading-message">Loading shipments…</div>
-    <div class="loading-track"><div class="loading-fill"></div></div>
-  </div>
-
-  <div id="error" class="error" hidden></div>
-
-  <div id="empty" class="empty-state" hidden>
-    <p>📦 Nothing waiting to be received. The dock is clear.</p>
-  </div>
-
-  <section id="po-list"></section>
-
-  <details class="how-to">
-    <summary>
-      <span class="how-to-label">How to use this page</span>
-      <svg class="how-to-chevron" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 6l4 4 4-4"/>
-      </svg>
-    </summary>
-    <div class="how-to-body">
-      <ol class="how-to-steps">
-        <li>
-          <strong>Pick your name.</strong>
-          Select yourself in <em>You are</em> at the top so we know who signed for the shipment. Your name sticks across page loads.
-        </li>
-        <li>
-          <strong>Find the order.</strong>
-          Shipments are grouped by the supplier's Order # (the number on the packing slip). Use the search box for an item, vendor, PO, or order number; tap a supplier bubble to narrow to one vendor.
-        </li>
-        <li>
-          <strong>Enter what actually arrived.</strong>
-          The <em>Received</em> field is blank — type the qty that's in the box. The ordered qty shows as a faded hint next to it for reference.
-          <span class="how-to-callout">Don't guess. If the box is short, enter what's actually there — the next step handles the missing units.</span>
-        </li>
-        <li>
-          <strong>Flag any issues.</strong>
-          Check the <em>Issue</em> box if anything's wrong (damaged, wrong part, missing parts inside the package) and add a quick note. The row still marks Received, but the purchaser sees the issue for follow-up.
-        </li>
-        <li>
-          <strong>Confirm the shipment.</strong>
-          Click <em>Receive all</em> to log every item in the group, or check the boxes you got and click <em>Receive selected</em>.
-        </li>
-        <li>
-          <strong>Short shipment? Tell us if more is coming.</strong>
-          If any qty you entered is less than what was ordered, a popup asks per item:
-          <ul>
-            <li><strong>More expected</strong> (default) — this row closes at what arrived, and a new row appears for the remainder so the next box can be logged against it.</li>
-            <li><strong>Nothing more coming</strong> — this row closes at what arrived, and the rest is written off. No new row.</li>
-          </ul>
-        </li>
-      </ol>
-      <div class="how-to-tips">
-        <strong>Tips</strong>
-        <ul>
-          <li><strong>One row = one box.</strong> Split shipments create sibling rows so each physical delivery has its own receiver, tracking, and date.</li>
-          <li><strong>Order # matches the packing slip.</strong> If you can't find the row, search the order number printed on the slip — it's the most reliable match.</li>
-          <li><strong>Tracking is on the row already.</strong> The purchaser fills it in at order time. You'll see it on the Status tab once shipments close.</li>
-          <li><strong>Wrong qty? Fix it on the Status tab.</strong> Open the row in Notion from there if you typed the wrong number.</li>
-        </ul>
-      </div>
-    </div>
-  </details>
-
-  <div class="card-bottom-link">
-    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion ↗</a>
-  </div>
-</main>
-</div>
-
-</div>
-
-<script src="receive.js"></script>
 </body>
 </html>

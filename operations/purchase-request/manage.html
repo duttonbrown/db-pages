@@ -3,252 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Purchaser Console — Dutton Brown</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="manage.css">
+<meta name="robots" content="noindex, nofollow">
+<!-- Moved to the gated hub. Redirect so old bookmarks land on the signed-in
+     version. See feedback_db_pages_vs_hub_placement. -->
+<meta http-equiv="refresh" content="0; url=https://hub.duttonbrown.com/operations/purchase-requests/manage.html">
+<title>Moved — Purchaser Console</title>
+<link rel="canonical" href="https://hub.duttonbrown.com/operations/purchase-requests/manage.html">
+<style>
+  body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300; color: #4A4A4A; background: #FAFAFA; margin: 0; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+  .box { max-width: 420px; }
+  h1 { font-size: 20px; font-weight: 600; color: #2A2A2A; margin: 0 0 10px; }
+  p { font-size: 14px; margin: 0 0 18px; }
+  a.btn { display: inline-block; font-size: 13px; font-weight: 600; text-decoration: none;
+    background: #D97706; color: white; padding: 9px 18px; border-radius: 6px; }
+</style>
 </head>
 <body>
-<div class="app-shell">
-
-<aside class="side-nav" aria-label="Inventory navigation">
-  <div class="side-nav-inner">
-    <a class="side-nav-brand" href="index.html">
-      <img src="logo-dutton-brown.svg" class="brandmark" alt="Dutton Brown">
-    </a>
-    <div class="side-nav-eyebrow">Inventory</div>
-    <ul class="side-nav-tabs" role="tablist">
-      <li><a class="side-nav-tab" href="index.html">Submit</a></li>
-      <li><a class="side-nav-tab" href="manage.html" aria-current="page">Purchase</a></li>
-      <li><a class="side-nav-tab" href="receive.html">Receive</a></li>
-      <li><a class="side-nav-tab" href="status.html">Status</a></li>
-    </ul>
+  <div class="box">
+    <h1>The Purchaser Console has moved</h1>
+    <p>This tool now lives on the Dutton Brown hub (sign-in required). You’ll be redirected automatically.</p>
+    <a class="btn" href="https://hub.duttonbrown.com/operations/purchase-requests/manage.html">Go to the hub</a>
   </div>
-</aside>
-
-<div class="app-main">
-<main class="card card-wide">
-  <header class="page-intro">
-    <h1 class="page-lead">Purchaser console</h1>
-    <p class="page-sub">Triage active requests. Each action enforces the required fields so the data stays clean.</p>
-  </header>
-
-  <div class="purchaser-bar">
-    <label for="purchaser-name">You are:</label>
-    <select id="purchaser-name">
-      <option value="">Select your name…</option>
-    </select>
-    <button type="button" id="refresh-btn" class="link-btn">Refresh</button>
-  </div>
-
-  <!-- Bulk update slots onto the first .status-group-header at render time so
-       it lives on the SUBMITTED row. Falls back to the standalone wrapper
-       above the empty state when the queue has no rows. -->
-  <div id="queue-actions-standalone" class="queue-actions-standalone">
-    <div id="queue-actions" class="queue-actions">
-      <button type="button" id="add-to-queue-btn" class="bulk-toggle-btn add-to-queue-btn">+ Add to queue</button>
-      <button type="button" id="bulk-toggle-btn" class="bulk-toggle-btn" aria-pressed="false">Bulk update</button>
-    </div>
-  </div>
-
-  <div id="loading-bar" class="loading-bar" hidden>
-    <div class="loading-message">Loading active requests…</div>
-    <div class="loading-track"><div class="loading-fill"></div></div>
-  </div>
-
-  <div id="error" class="error" hidden></div>
-
-  <!-- Status-acknowledgement pills: shows at-a-glance counts of rows in
-       Submitted (triaged-in but not yet decided) and Waiting to Order
-       (acknowledged, not yet purchased). Click to narrow the queue to
-       that status; click again to clear. Hidden when both buckets are
-       empty. -->
-  <section id="status-pills" class="status-pills" hidden role="tablist" aria-label="Filter queue by status">
-    <button type="button" class="status-pill-btn" data-status="Submitted" role="tab" aria-selected="false">
-      <span class="status-pill-emoji" aria-hidden="true">📥</span>
-      <span class="status-pill-count" id="status-pill-count-submitted">0</span>
-      <span class="status-pill-label">Submitted</span>
-    </button>
-    <button type="button" class="status-pill-btn" data-status="Waiting to Order" role="tab" aria-selected="false">
-      <span class="status-pill-emoji" aria-hidden="true">⏳</span>
-      <span class="status-pill-count" id="status-pill-count-waiting">0</span>
-      <span class="status-pill-label">Waiting to Order</span>
-    </button>
-  </section>
-
-  <!-- Combined filter strip: triage bubbles (urgent / new item) + vendor
-       bubbles (vendors with 2+ open requests) inline. Replaces the two stacked
-       card sections that ate ~280px of vertical chrome. -->
-  <section id="filter-strip" class="filter-strip" hidden>
-    <span class="filter-strip-label">Filters</span>
-    <div id="triage-list" class="filter-group triage-list" role="tablist" aria-label="Filter queue by triage"></div>
-    <div id="vendor-digest-list" class="filter-group vendor-digest-list" role="tablist" aria-label="Filter queue by vendor"></div>
-  </section>
-  <!-- Kept as hidden anchors so existing JS that reads/sets these elements'
-       .hidden property keeps working without conditional churn. -->
-  <span id="triage" hidden></span>
-  <span id="vendor-digest" hidden></span>
-
-  <div id="empty" class="empty-state" hidden>
-    <p>🎉 No active requests. The queue is clear.</p>
-  </div>
-
-  <section id="queue"></section>
-
-  <div class="card-bottom-link">
-    <a href="https://www.notion.so/34affa524c5b8183998cd29c785e4aa6?v=34affa524c5b814c9807000c5b591c5f&source=copy_link" target="_blank" rel="noopener">View in Notion ↗</a>
-  </div>
-</main>
-</div>
-
-</div>
-
-<!-- Sticky bulk action bar — appears at bottom of viewport when bulkMode is on and ≥1 row is selected. -->
-<div id="bulk-action-bar" class="bulk-action-bar" hidden>
-  <div class="bulk-action-bar-inner">
-    <span class="bulk-count" id="bulk-count">0 selected</span>
-    <div class="bulk-actions">
-      <button type="button" id="bulk-select-all" class="link-btn">Select all visible</button>
-      <button type="button" id="bulk-clear" class="link-btn">Clear</button>
-      <button type="button" id="bulk-ordered-btn" class="primary" disabled>Mark Ordered</button>
-    </div>
-  </div>
-</div>
-
-<!-- Add-to-queue modal: purchaser self-adds a row at "Waiting to Order" without
-     going through the requester flow. Supports catalog picker, custom items
-     not yet in the DB, and one-time purchases (Type: Other, no catalog link). -->
-<div id="add-modal" class="modal" hidden>
-  <div class="modal-card add-modal-card">
-    <header class="modal-header">
-      <h2>Add to queue</h2>
-      <button type="button" class="modal-close" id="add-modal-close" aria-label="Close">✕</button>
-    </header>
-    <div class="modal-context">
-      <span id="add-modal-requestor-context"></span>
-      Lands in <strong>Waiting to Order</strong> — skips Submitted.
-    </div>
-    <div class="modal-body">
-      <!-- Mode toggle: catalog picker (default) vs one-time custom purchase -->
-      <div class="field add-mode-row">
-        <label class="add-mode-toggle">
-          <input type="checkbox" id="add-one-time">
-          <span>One-time purchase</span>
-          <small class="muted">(custom item, won't be added to Parts/Supplies DB)</small>
-        </label>
-      </div>
-
-      <!-- Catalog picker mode -->
-      <div id="add-picker">
-        <div class="field">
-          <label for="add-search">Search part number, name, or description</label>
-          <input type="text" id="add-search" placeholder="Loading catalog…" autocomplete="off" disabled>
-          <ul id="add-results" class="results" hidden></ul>
-        </div>
-
-        <div id="add-picked" class="picked" hidden>
-          <div class="picked-row">
-            <img id="add-picked-image" alt="" hidden>
-            <div class="picked-body">
-              <div class="chip-row">
-                <span id="add-picked-type" class="badge"></span>
-                <span id="add-picked-category" class="badge badge-category" hidden></span>
-              </div>
-              <strong id="add-picked-title"></strong>
-              <small id="add-picked-subtitle"></small>
-            </div>
-            <button type="button" id="add-picked-cancel" class="link-btn">Change</button>
-          </div>
-        </div>
-
-        <div class="field checkbox-field">
-          <label>
-            <input type="checkbox" id="add-not-in-db">
-            <span>Add item not in database</span>
-          </label>
-        </div>
-
-        <div id="add-custom-fields" hidden>
-          <div class="field">
-            <label for="add-custom-name">What is the item?</label>
-            <input type="text" id="add-custom-name" placeholder="Item name or description">
-          </div>
-          <div class="field">
-            <label>Type</label>
-            <div class="inline-radio">
-              <label><input type="radio" name="add-custom-type" value="Part" checked> Part</label>
-              <label><input type="radio" name="add-custom-type" value="Supply"> Supply</label>
-              <label><input type="radio" name="add-custom-type" value="Other"> Other</label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- One-time purchase mode -->
-      <div id="add-one-time-fields" hidden>
-        <div class="field">
-          <label for="add-onetime-name">Item name<span class="req">*</span></label>
-          <input type="text" id="add-onetime-name" placeholder="e.g. Replacement brush for FEIN vacuum">
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="add-onetime-vendor">Vendor</label>
-            <input type="text" id="add-onetime-vendor" placeholder="Amazon, McMaster, etc.">
-          </div>
-          <div class="field">
-            <label for="add-onetime-qty">Qty</label>
-            <input type="number" id="add-onetime-qty" min="1" step="1" value="1">
-          </div>
-        </div>
-        <div class="field">
-          <label for="add-onetime-sku">SKU / model # <span class="muted">(optional)</span></label>
-          <input type="text" id="add-onetime-sku" placeholder="If you have the exact part number">
-        </div>
-        <div class="field">
-          <label for="add-onetime-link">Link to product <span class="muted">(optional)</span></label>
-          <input type="text" id="add-onetime-link" placeholder="Paste any product URL">
-        </div>
-      </div>
-
-      <!-- Shared fields (apply to all modes) -->
-      <div class="field">
-        <label for="add-notes">Note for the row <span class="muted">(optional — what / why / spec)</span></label>
-        <input type="text" id="add-notes" placeholder="e.g. for Lana 2026-Q3 build, finish: brushed brass">
-      </div>
-      <div class="field checkbox-field">
-        <label class="urgent-label">
-          <input type="checkbox" id="add-urgent">
-          <span>Urgent</span>
-        </label>
-      </div>
-    </div>
-    <div id="add-modal-error" class="error" hidden></div>
-    <footer class="modal-footer">
-      <button type="button" id="add-modal-cancel" class="secondary">Cancel</button>
-      <button type="button" id="add-modal-submit" class="primary" disabled>Add to queue</button>
-    </footer>
-  </div>
-</div>
-
-<!-- Action modal: fields swap in based on which action button was clicked -->
-<div id="modal" class="modal" hidden>
-  <div class="modal-card">
-    <header class="modal-header">
-      <h2 id="modal-title">Action</h2>
-      <button type="button" class="modal-close" id="modal-close" aria-label="Close">✕</button>
-    </header>
-    <div class="modal-context" id="modal-context"></div>
-    <form id="modal-form" class="modal-body"></form>
-    <div id="modal-error" class="error" hidden></div>
-    <footer class="modal-footer">
-      <button type="button" id="modal-cancel" class="secondary">Cancel</button>
-      <button type="button" id="modal-submit" class="primary">Confirm</button>
-    </footer>
-  </div>
-</div>
-
-<script src="manage.js"></script>
 </body>
 </html>
