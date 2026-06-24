@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Purchasing System — Build Progress · June 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #4A4A4A; --bg: #FAFAF9; --panel: #FFFFFF; --line: #E0DDD9;
+    --muted: #8A8078; --gold: #C9A94E; --accent: #FF9912; --accent-text: #D97706;
+    --good: #2F8F5B; --warn: #C77B1E; --bad: #C0492F; --soft: #F7F5F2;
+  }
+  body { font-family: 'Poppins', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  header { background: var(--soft); padding: 3rem 2rem 2.5rem; text-align: center; border-bottom: 1px solid var(--line); }
+  header .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  header h1 { font-weight: 600; font-size: 1.8rem; letter-spacing: 0.01em; margin-top: 0.6rem; }
+  header p.sub { font-weight: 300; font-size: 0.95rem; margin-top: 0.5rem; color: var(--muted); max-width: 700px; margin-left: auto; margin-right: auto; }
+  header a.back { display: inline-block; margin-top: 1.25rem; color: var(--muted); font-size: 0.8rem; text-decoration: none; font-weight: 300; }
+  header a.back:hover { color: var(--ink); }
+  main { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  h2.sec { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); margin: 3.25rem 0 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+  h2.sec:first-of-type { margin-top: 0; }
+  p.lead { font-weight: 300; font-size: 1.05rem; margin-bottom: 1rem; }
+  p { font-weight: 300; margin-bottom: 0.9rem; }
+  strong { font-weight: 600; }
+  em { font-style: normal; color: var(--accent-text); font-weight: 400; }
+  code { background: var(--soft); border: 1px solid var(--line); border-radius: 4px; padding: 0.05rem 0.35rem; font-size: 0.85em; font-family: 'Consolas', monospace; }
+  ul { margin: 0 0 1rem 1.2rem; } ul li { font-weight: 300; margin-bottom: 0.4rem; }
+
+  .verdict { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem 1.75rem 1.4rem; margin-bottom: 1.5rem; }
+  .verdict h3 { font-weight: 600; font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .verdict .answer { font-size: 1.2rem; font-weight: 600; color: var(--accent-text); margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.1rem; text-align: center; }
+  .stat .n { font-size: 1.5rem; font-weight: 600; color: var(--accent-text); line-height: 1.1; }
+  .stat .l { font-size: 0.72rem; font-weight: 300; color: var(--muted); margin-top: 0.35rem; }
+
+  /* phase cards */
+  .phase { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.6rem 1.7rem 1.3rem; margin-bottom: 1.25rem; position: relative; }
+  .phase.done { border-left: 4px solid var(--good); }
+  .phase.now { border-left: 4px solid var(--accent); }
+  .phase.next { border-left: 4px solid var(--gold); }
+  .phase .ph-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.3rem; }
+  .phase h3 { font-weight: 600; font-size: 1.15rem; }
+  .phase .horizon { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 999px; }
+  .phase.done .horizon { background: #E7F3EC; color: var(--good); }
+  .phase.now .horizon { background: #FBE6CC; color: var(--accent-text); }
+  .phase.next .horizon { background: #FBF6E9; color: #9A7B1E; }
+  .phase .goal { font-size: 0.92rem; margin-bottom: 0.9rem; }
+  .phase ol { margin: 0 0 0.5rem 1.2rem; }
+  .phase ol li { font-weight: 300; font-size: 0.88rem; margin-bottom: 0.45rem; }
+  .phase .delivers { font-size: 0.83rem; color: var(--good); font-weight: 400; margin-top: 0.6rem; padding-top: 0.7rem; border-top: 1px solid var(--line); }
+
+  table.cmp { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.84rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  table.cmp th { text-align: left; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); padding: 0.7rem 0.85rem; border-bottom: 1px solid var(--line); background: var(--soft); }
+  table.cmp td { padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--line); font-weight: 300; vertical-align: top; }
+  table.cmp tr:last-child td { border-bottom: none; }
+  table.cmp td.feat { font-weight: 400; color: var(--ink); }
+  .pill { display: inline-block; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.03em; padding: 0.18rem 0.55rem; border-radius: 999px; white-space: nowrap; }
+  .pill.built { background: #E7F3EC; color: var(--good); }
+  .pill.partial { background: #FBF1E0; color: var(--warn); }
+  .pill.gap { background: #FAE9E5; color: var(--bad); }
+
+  .callout { border-radius: 8px; padding: 1.4rem 1.6rem; margin: 1.25rem 0; font-size: 0.9rem; font-weight: 300; }
+  .callout strong { font-weight: 600; }
+  .callout.gold { background: #FBF6E9; border: 1px solid #E8D9A8; border-left: 4px solid var(--gold); }
+  .callout.good { background: #E7F3EC; border: 1px solid #BcdCC8; border-left: 4px solid var(--good); }
+
+  .schema { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.25rem 0; }
+  @media (max-width: 720px) { .schema { grid-template-columns: 1fr; } }
+  .schema .box { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.3rem 1.4rem; }
+  .schema .box h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.5rem; }
+  .schema .box h4 .ic { font-size: 1.1rem; }
+  .schema .box .field { font-size: 0.8rem; font-weight: 300; padding: 0.28rem 0; border-bottom: 1px solid #F1EFEC; display: flex; justify-content: space-between; gap: 0.6rem; }
+  .schema .box .field:last-child { border-bottom: none; }
+  .schema .box .field .t { color: var(--muted); font-size: 0.7rem; font-family: 'Consolas', monospace; white-space: nowrap; }
+
+  footer { text-align: center; font-size: 0.75rem; font-weight: 300; color: var(--muted); padding: 2rem; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Operations · Purchasing System · Build Progress</div>
+    <h1>The Purchasing System We're Building</h1>
+    <p class="sub">Low-stock alerts, real purchase orders, and a vendor master — built on the tools we already run, for $0/month, instead of paying for an MRP. Where we are as of June 2026.</p>
+    <a class="back" href="build-vs-buy-roadmap-2026-06.html">&larr; The build-vs-buy roadmap</a>
+  </header>
+  <main>
+
+    <div class="verdict">
+      <h3>What this is</h3>
+      <div class="answer">A purchasing system that knows what's running low, turns a request into a vendor purchase order, and tracks it through receiving — without buying MRPeasy or Katana.</div>
+      <p>We decided to <strong>build, not buy</strong> (see the decision + roadmap pages). This page is the running record of that build: what's live, what's next, and what one thing is waiting on a click. Phase&nbsp;1 — inventory alerts — is <em>done and live in Notion</em>. Phase&nbsp;2 — the real PO system — is <em>most of the way there</em>: the vendor master is built and the PO database is designed, validated, and ready to create.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="n">481</div><div class="l">parts &amp; supplies now carry a reorder point (auto-computed)</div></div>
+      <div class="stat"><div class="n">38</div><div class="l">vendors in the new vendor master, with terms &amp; lead times</div></div>
+      <div class="stat"><div class="n">$0</div><div class="l">monthly cost — runs on Notion + n8n we already pay for</div></div>
+      <div class="stat"><div class="n">~$5.7k/yr</div><div class="l">avoided by not buying an MRP to do the same job</div></div>
+    </div>
+
+    <h2 class="sec">Phase 1 — Inventory levels &amp; low-stock alerts · <span style="color:var(--good)">LIVE</span></h2>
+    <p class="lead">The keystone gap was simple: nothing in our system knew <em>how much of a part we have</em>. Without that number, no alert can fire. So Phase 1 created it.</p>
+
+    <div class="phase done">
+      <div class="ph-head"><h3>What shipped</h3><span class="horizon">Done · live in Notion</span></div>
+      <ol>
+        <li><strong>Two new fields on every part &amp; supply:</strong> <code>Qty on Hand</code> and <code>Reorder Point</code>. The primitives everything else needs.</li>
+        <li><strong>Reorder points computed automatically</strong> from data we already had — annual usage and lead time — for <strong>481 items</strong> (366 parts + 115 supplies). The formula: cover demand over the reorder lead time, plus a 50% safety buffer. Every number shows its own math, so it's checkable, not a black box.</li>
+        <li><strong>Low-stock detection</strong> that lists everything at or below its reorder point and formats the exact alert card — ready to wire to a nightly check.</li>
+      </ol>
+      <div class="delivers">✓ The moment someone enters on-hand counts, low-stock alerts light up. Next: a nightly check that posts to the Operations channel in Teams with an "Add to purchase queue" button.</div>
+    </div>
+
+    <h2 class="sec">Phase 2 — Real purchase orders + vendor master · <span style="color:var(--accent-text)">IN PROGRESS</span></h2>
+    <p class="lead">Turn the per-line request log into a real, vendor-grouped purchase order system — the one thing we'd otherwise still pay an MRP to do.</p>
+
+    <div class="phase done">
+      <div class="ph-head"><h3>Vendor master — built &amp; live</h3><span class="horizon">Done</span></div>
+      <div class="goal">A purchase order should default a vendor's terms, lead time, and contact — not make us re-type them every order. So the vendor directory grew up into a real vendor master.</div>
+      <ul>
+        <li>Seven purchasing fields added to every vendor: <em>Payment Terms, Lead Time (days), Min Order $, Account #, Contact Email, Default Incoterms, Currency.</em></li>
+        <li>Lead times converted from text to numbers across <strong>37 vendors</strong> — so the system can compute order-by dates.</li>
+        <li>A <strong>Vendors interface in the Operations hub</strong>: search, filter by Import / Domestic, see every vendor's terms and what they supply, and start a PO straight from a vendor.</li>
+      </ul>
+      <div class="delivers">✓ The vendor master is the foundation every PO sits on. It's live now.</div>
+    </div>
+
+    <div class="phase now">
+      <div class="ph-head"><h3>Purchase Orders database — designed &amp; ready</h3><span class="horizon">One click away</span></div>
+      <div class="goal">A real PO is a header (who, when, totals, terms) plus its line items (what, how many, received). We modeled both against how MRPeasy and Katana structure a PO, then trimmed to exactly what a 10-person made-to-order shop needs — nothing more.</div>
+
+      <div class="schema">
+        <div class="box">
+          <h4><span class="ic">🧾</span> Purchase Order (header)</h4>
+          <div class="field"><span>PO #</span><span class="t">PO-2026-0001</span></div>
+          <div class="field"><span>Vendor</span><span class="t">→ vendor master</span></div>
+          <div class="field"><span>Status</span><span class="t">Draft→…→Closed</span></div>
+          <div class="field"><span>Order / Expected dates</span><span class="t">date</span></div>
+          <div class="field"><span>Payment Terms · Incoterms</span><span class="t">from vendor</span></div>
+          <div class="field"><span>Subtotal · Freight · Tax · Fees</span><span class="t">$</span></div>
+          <div class="field"><span>Total</span><span class="t">auto</span></div>
+          <div class="field"><span>Tracking · Carrier · Notes</span><span class="t">text</span></div>
+          <div class="field"><span>Purchaser · Attachments</span><span class="t">who / files</span></div>
+        </div>
+        <div class="box">
+          <h4><span class="ic">📦</span> PO Line Item</h4>
+          <div class="field"><span>Part / Supply</span><span class="t">→ catalog</span></div>
+          <div class="field"><span>Vendor SKU</span><span class="t">their code</span></div>
+          <div class="field"><span>Qty Ordered</span><span class="t">number</span></div>
+          <div class="field"><span>Qty Received</span><span class="t">number</span></div>
+          <div class="field"><span>Qty Outstanding</span><span class="t">auto</span></div>
+          <div class="field"><span>Unit Price</span><span class="t">$</span></div>
+          <div class="field"><span>Line Total</span><span class="t">auto</span></div>
+          <div class="field"><span>Expected / Received date</span><span class="t">per line</span></div>
+          <div class="field"><span>Line Status</span><span class="t">Open→Received</span></div>
+        </div>
+      </div>
+
+      <p style="font-size:0.85rem;"><strong>Lifecycle:</strong> Draft → Sent → Partially Received → Received → Closed → Cancelled. <strong>Receiving:</strong> a simple "quantity received" per line that handles partial shipments and rolls the PO status forward automatically — the overseas-split-shipment reality, without complexity.</p>
+      <div class="callout gold" style="margin-top:1rem;">
+        <strong>The one thing it's waiting on:</strong> creating a database in Notion needs the page shared with our integration — a 30-second click. The schema is validated and the create-script is ready; the moment it's shared, the Purchase Orders and PO Line Items databases come to life and link to vendors, parts, and the request log.
+      </div>
+    </div>
+
+    <h2 class="sec">How a purchase order will flow</h2>
+    <table class="cmp">
+      <thead><tr><th style="width:18%">Step</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td class="feat">1 · Need</td><td>A part runs low (alert) or someone requests it. It lands in the purchase queue.</td></tr>
+        <tr><td class="feat">2 · Group</td><td>Open needs group <strong>by vendor</strong> into that vendor's open <strong>Draft PO</strong> — one accumulating draft per vendor.</td></tr>
+        <tr><td class="feat">3 · Review</td><td>A person reviews the draft — quantities, prices, MOQ — and hits <strong>Send</strong>. Nothing reaches a vendor automatically.</td></tr>
+        <tr><td class="feat">4 · Issue</td><td>A PO PDF is generated and emailed; the file is archived in SharePoint under <code>80_records / Purchase Orders</code> with a clean <code>PO-2026-0001</code> name.</td></tr>
+        <tr><td class="feat">5 · Receive</td><td>As boxes arrive, quantity received is logged per line; partials are handled; the PO rolls Draft → Sent → Partially Received → Received.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec">Phase 3 — Self-maintaining &amp; predictive · later</h2>
+    <p>Once Phase 2 is live, the last layer makes it run itself: on-hand counts that <em>auto-deduct</em> as orders ship (off the BOM engine we already run) and <em>auto-add</em> as POs are received; an all-parts shortage view; and reorder suggestions that tell us the stockout date, the quantity to order, and the date to order by. That's full MRP capability — two pieces of it better than the tools we'd have bought — at no monthly cost.</p>
+
+    <div class="callout good">
+      <strong>Where we are:</strong> Phase 1 (inventory alerts) is live. The vendor master and Vendors interface are live. The Purchase Orders database is designed, validated, and one click from existing. We've replaced most of what an MRP does — tuned to how Dutton Brown actually works — and we haven't spent a dollar a month to do it.
+    </div>
+    <p style="font-size:0.8rem; color:var(--muted); margin-top:1.5rem;">Sources: live audit of the Dutton Brown Notion Parts, Supplies, Companies, and Purchase Request Log databases; MRPeasy + Katana PO data models (mrpeasy.com, developer.katanamrp.com). June 2026.</p>
+
+  </main>
+  <footer>
+    Dutton Brown · Operations · Purchasing System Build Progress · June 2026 · companion to the Build-vs-Buy Roadmap
+  </footer>
+</body>
+</html>
