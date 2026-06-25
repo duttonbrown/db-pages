@@ -1531,6 +1531,25 @@
     font-size: 13px; font-weight: 500; color: #333;
     padding: 3px 11px; border: 1.5px solid #C9C9C9; border-radius: 6px; background: #fff;
   }
+  /* Discreet "order changed / cancelled" pill — rides in the top .trv-tags row
+     to the right of the location + color bubbles, NOT a full-width banner. Small
+     and outline-only so it reads as a status flag, not an alarm bar. CHANGED =
+     amber outline; VOID = red, the louder of the two (a cancelled order's sheet
+     must be discarded). Prints. */
+  .trv-change-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+    padding: 3px 10px; border-radius: 6px; background: #fff;
+    /* Explicit brand hex, NOT var(--accent): the CSS custom props come from the
+       hub shell / portal.css, which is NOT inlined when the traveler renders
+       standalone for PDF — so var(--accent) is empty there and a bordered pill
+       would lose its border. Hex keeps the bubble visible on paper. */
+    border: 1.5px solid #D97706; color: #B45309;
+    text-transform: uppercase; white-space: nowrap;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .trv-change-pill .trv-change-when { font-weight: 500; text-transform: none; letter-spacing: 0; color: #555; }
+  .trv-change-pill.is-void { border-color: #D40000; color: #D40000; }
 
   /* Expedite banner — OPP styling, faithful red */
   .trv-expedite {
@@ -1544,18 +1563,6 @@
      "Traveler" eyebrow) it gets no top margin and a little breathing room below
      so it reads as the first thing on the sheet. */
   .trv-head .trv-expedite { margin: 0 0 12px; }
-
-  /* Stale-traveler banner (resync). Solid fill, prints, sits at the very top of
-     the sheet so a stale printout is unmistakable. NOT no-print — the whole
-     point is that it shows on paper. */
-  .trv-stale {
-    text-align: center; font-weight: 600; color: #fff;
-    font-size: 16px; line-height: 22px; letter-spacing: 2px; text-transform: uppercase;
-    padding: 8px 10px; margin: 0 0 12px; border-radius: 4px;
-    -webkit-print-color-adjust: exact; print-color-adjust: exact;
-  }
-  .trv-stale-void    { background: #D40000; }
-  .trv-stale-changed { background: var(--accent-dark); }
 
   /* Bill to / Ship to */
   .trv-addresses { display: flex; gap: 40px; margin: 10px 0 6px; }
@@ -1988,8 +1995,139 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T13:20:36",
+  "built_at": "2026-06-25T14:00:02",
   "orders": [
+    {
+      "shopify_order_id": "7023775318098",
+      "shopify_order_name": "36277",
+      "shopify_order_number": "36277",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 560.0,
+      "ship_by_date": null,
+      "latest_ship_by": "July 23, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-25T13:47:43-05:00",
+      "tags": "trade",
+      "total_price": 560.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7023775318098",
+          "shopify_order_name": "36277",
+          "shopify_order_number": "36277",
+          "key": [
+            "color",
+            "Riding Hood Red",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Riding Hood Red",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60224"
+          ],
+          "variant_skus": [
+            "60224-2RH"
+          ],
+          "line_item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Ruler Sconce",
+              "variant_title": "Nickel / Riding Hood Red",
+              "variant_sku": "60224-2RH",
+              "parent_sku": "60224",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-reader-sconce-nickel-ridinghoodred.jpg?v=1757447397&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-PAR16"
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Riding Hood Red|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7023775318098",
+          "shopify_order_name": "36277",
+          "shopify_order_number": "36277",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T13:47:43-05:00",
+          "parent_sku": "60224",
+          "color": "Riding Hood Red",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16972406063186
+          ],
+          "item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "variant_skus": [
+            "60224-2RH"
+          ],
+          "lines": [
+            {
+              "sku": "60224-2RH",
+              "title": "Color Ruler Sconce",
+              "qty": 2,
+              "finish": "Nickel",
+              "color": "Riding Hood Red",
+              "category": "fixture",
+              "variant_title": "Nickel / Riding Hood Red",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-reader-sconce-nickel-ridinghoodred.jpg?v=1757447397&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7023662268498",
       "shopify_order_name": "36276",
@@ -2480,37 +2618,15 @@ const QUEUE = {
           "category": "lighting",
           "category_label": "Lighting",
           "parent_skus": [
-            "60420",
             "60720"
           ],
           "variant_skus": [
-            "60420-1B",
             "60720-2B"
           ],
           "line_item_titles": [
-            "Color Vogue 4 Sconce",
             "Color Vogue 7 Sconce"
           ],
           "lines": [
-            {
-              "title": "Color Vogue 4 Sconce",
-              "variant_title": "Brass / Spa",
-              "variant_sku": "60420-1B",
-              "parent_sku": "60420",
-              "qty": 1,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-vogue-4-sconce-spa-1.jpg?v=1758680664&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "3 - 4 weeks",
-                  "is_image": false
-                }
-              ],
-              "rod_finish": "No Rod",
-              "lampholder": "L-A"
-            },
             {
               "title": "Color Vogue 7 Sconce",
               "variant_title": "Nickel / Spa",
@@ -2525,16 +2641,11 @@ const QUEUE = {
               "lampholder": "L-A"
             }
           ],
-          "total_qty": 2,
+          "total_qty": 1,
           "notes": null,
           "source": "color",
           "traveler_key": "color|Spa|lighting",
           "jobs": [
-            {
-              "job": "J-36265-2",
-              "parent_sku": "60420",
-              "location": "Powder Coat"
-            },
             {
               "job": "J-36265-3",
               "parent_sku": "60720",
@@ -2597,51 +2708,6 @@ const QUEUE = {
           "customer_name": "",
           "ship_by_date": null,
           "created_at": "2026-06-24T17:21:55-05:00",
-          "parent_sku": "60420",
-          "color": "Spa",
-          "finish": "Brass",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 1,
-          "line_item_ids": [
-            16969292152914
-          ],
-          "item_titles": [
-            "Color Vogue 4 Sconce"
-          ],
-          "variant_skus": [
-            "60420-1B"
-          ],
-          "lines": [
-            {
-              "sku": "60420-1B",
-              "title": "Color Vogue 4 Sconce",
-              "qty": 1,
-              "finish": "Brass",
-              "color": "Spa",
-              "category": "fixture",
-              "variant_title": "Brass / Spa",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-vogue-4-sconce-spa-1.jpg?v=1758680664&width=120"
-            }
-          ],
-          "tags": [
-            "Color"
-          ],
-          "priority": "Redo",
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        },
-        {
-          "shopify_order_id": "7022417936466",
-          "shopify_order_name": "36265",
-          "shopify_order_number": "36265",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-24T17:21:55-05:00",
           "parent_sku": "60720",
           "color": "Spa",
           "finish": "Nickel",
@@ -2683,231 +2749,15 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": []
-    },
-    {
-      "shopify_order_id": "6942787960914",
-      "shopify_order_name": "35549",
-      "shopify_order_number": "35549",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 2,
-      "customer_total_spent": 89178.96,
-      "ship_by_date": null,
-      "latest_ship_by": "\u2014",
-      "lead_time_label": "",
-      "is_expedited": false,
-      "created_at": "2026-05-08T14:14:34-05:00",
-      "tags": "$20K Club, large order, trade",
-      "total_price": 88673.92,
-      "priority": null,
-      "is_large_order": true,
-      "auto_tags": [
-        "Color",
-        "Large Order"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Freight",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 2,
-      "printouts": [
-        {
-          "shopify_order_id": "6942787960914",
-          "shopify_order_name": "35549",
-          "shopify_order_number": "35549",
-          "key": [
-            "color",
-            "Python Green",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Python Green",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
-            "60129S-9"
-          ],
-          "variant_skus": [
-            "60129S-9-1PG"
-          ],
-          "line_item_titles": [
-            "Color Major Sconce 9\""
-          ],
-          "lines": [
-            {
-              "title": "Color Major Sconce 9\"",
-              "variant_title": "Brass / Python Green / Hardwired with dimmer switch",
-              "variant_sku": "60129S-9-1PG",
-              "parent_sku": "60129S-9",
-              "qty": 304,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-major-sconce-9-brass-pythongreen.jpg?v=1757504002&width=120",
-              "properties": [],
-              "rod_finish": "Finish",
-              "lampholder": "L-A"
-            }
-          ],
-          "total_qty": 304,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|Python Green|lighting",
-          "jobs": []
-        },
-        {
-          "shopify_order_id": "6942787960914",
-          "shopify_order_name": "35549",
-          "shopify_order_number": "35549",
-          "key": [
-            "color",
-            "White",
-            "accessory"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "White",
-          "finish": null,
-          "category": "accessory",
-          "category_label": "Accessory",
-          "parent_skus": [
-            "PLS-8-WH"
-          ],
-          "variant_skus": [
-            "PLS-8-WH"
-          ],
-          "line_item_titles": [
-            "Plug-in Cords and Switches"
-          ],
-          "lines": [
-            {
-              "title": "Plug-in Cords and Switches",
-              "variant_title": "Cord with switch / White / 8 ft",
-              "variant_sku": "PLS-8-WH",
-              "parent_sku": "PLS-8-WH",
-              "qty": 304,
-              "category": "accessory",
-              "category_label": "Accessory",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/20221018_195557587_iOS.jpg?v=1747968798&width=120",
-              "properties": []
-            }
-          ],
-          "total_qty": 304,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|White|accessory",
-          "jobs": []
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "6942787960914",
-          "shopify_order_name": "35549",
-          "shopify_order_number": "35549",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-05-08T14:14:34-05:00",
-          "parent_sku": "60129S-9",
-          "color": "Python Green",
-          "finish": "Brass",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 304,
-          "line_item_ids": [
-            16784268886098
-          ],
-          "item_titles": [
-            "Color Major Sconce 9\""
-          ],
-          "variant_skus": [
-            "60129S-9-1PG"
-          ],
-          "lines": [
-            {
-              "sku": "60129S-9-1PG",
-              "title": "Color Major Sconce 9\"",
-              "qty": 304,
-              "finish": "Brass",
-              "color": "Python Green",
-              "category": "fixture",
-              "variant_title": "Brass / Python Green / Hardwired with dimmer switch",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-major-sconce-9-brass-pythongreen.jpg?v=1757504002&width=120"
-            }
-          ],
-          "tags": [
-            "Color",
-            "Large Order"
-          ],
-          "priority": null,
-          "is_large_order": true,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        },
-        {
-          "shopify_order_id": "6942787960914",
-          "shopify_order_name": "35549",
-          "shopify_order_number": "35549",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-05-08T14:14:34-05:00",
-          "parent_sku": "PLS-8-WH",
-          "color": "White",
-          "finish": null,
-          "category": "accessory",
-          "category_label": "Accessory",
-          "qty": 304,
-          "line_item_ids": [
-            16784268918866
-          ],
-          "item_titles": [
-            "Plug-in Cords and Switches"
-          ],
-          "variant_skus": [
-            "PLS-8-WH"
-          ],
-          "lines": [
-            {
-              "sku": "PLS-8-WH",
-              "title": "Plug-in Cords and Switches",
-              "qty": 304,
-              "finish": null,
-              "color": "White",
-              "category": "accessory",
-              "variant_title": "Cord with switch / White / 8 ft",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/20221018_195557587_iOS.jpg?v=1747968798&width=120"
-            }
-          ],
-          "tags": [
-            "Color",
-            "Large Order"
-          ],
-          "priority": null,
-          "is_large_order": true,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": "",
-      "no_traveler_reason": null,
-      "ships_with": []
     }
   ],
   "needs_attention": [],
   "printed_review": [],
   "totals": {
     "orders": 5,
-    "printouts": 7,
-    "notion_rows": 8,
-    "skipped_already_printed": 155,
+    "printouts": 6,
+    "notion_rows": 6,
+    "skipped_already_printed": 154,
     "printed_today": 25,
     "needs_attention": 0,
     "printed_review": 0
@@ -4402,19 +4252,18 @@ function renderMasterTraveler(o, calloutHtml, showSelect){
   const addresses = (trvAddress(o.billing_address,"Bill to", custBadges) + trvAddress(o.shipping_address,"Ship to"));
   const addrBlock = addresses ? `<div class="trv-addresses">${addresses}</div>` : "";
   const orderName = escapeHtml(o.shopify_order_name || ("#"+(o.shopify_order_number||"")));
-  const staleBanner = trvStaleBanner(o);
 
   return `<div class="traveler trv-master" data-order="${escapeHtml(o.shopify_order_id)}" data-traveler="__master">
     <div class="trv-sheet-actions no-print">
       ${showSelect ? trvSelectBox(o) : ""}
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
     </div>
-    ${staleBanner}
     ${calloutHtml || ""}
     <div class="trv-head">
       <div>
         <div class="trv-tags">
           <span class="trv-loc-pill loc-master">Master Traveler</span>
+          ${trvChangePill(o)}
         </div>
         ${expedite}
         <div class="trv-ordernum-row">
@@ -4510,24 +4359,18 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
     ? `<tr class="trv-empty-row"><td colspan="3">No build items — drop a line here</td></tr>`
     : "";
 
-  // Stale-traveler banner: if resync has flagged this order (traveler-void /
-  // traveler-changed), print a loud banner so a re-rendered or re-printed sheet
-  // self-identifies as out of date — dated + with what changed when the reissue
-  // data is present. VOID outranks CHANGED. See trvStaleBanner().
-  const staleBanner = trvStaleBanner(o);
-
   return `<div class="traveler" data-order="${escapeHtml(o.shopify_order_id)}" data-traveler="${escapeHtml(p.traveler_key||"")}">
     <div class="trv-sheet-actions no-print">
       ${showSelect ? trvSelectBox(o) : ""}
       <button type="button" class="trv-btn trv-btn-ghost" onclick="printOneTraveler(this)">Print</button>
     </div>
-    ${staleBanner}
     ${calloutHtml || ""}
     <div class="trv-head">
       <div>
         <div class="trv-tags">
           <span class="trv-loc-pill loc-${(p.location||'').toLowerCase().replace(/\s+/g,'-')}">${escapeHtml(p.location||"")}</span>
           ${trvColorFinishChip(p)}
+          ${trvChangePill(o)}
         </div>
         ${expedite}
         <div class="trv-ordernum-row">
@@ -6223,24 +6066,23 @@ function fmtDateTimeShort(iso){
 // block (stamped into print-queue.json by lib/resync.py) for the date/time +
 // what-changed line; falls back to the tag-only banner for orders flagged
 // before the reissue data existed. VOID outranks CHANGED.
-function trvStaleBanner(o){
+// Discreet status pill for a reissued / cancelled traveler. Rides in the top
+// .trv-tags row beside the location + color bubbles (NOT a full-width banner —
+// Thomas wants it subtle). Reads the resync `reissue` block stamped into
+// print-queue.json for the date/time; falls back to the tag alone for orders
+// flagged before the reissue data existed. VOID outranks CHANGED and never says
+// reprint (a cancelled order's sheet is discarded, not rebuilt).
+function trvChangePill(o){
   const tg = (Array.isArray(o.tags) ? o.tags.join(",") : (o.tags||"")).toLowerCase();
   const r = o.reissue || null;
   const isVoid    = tg.includes("traveler-void")    || (r && r.kind === "void");
   const isChanged = tg.includes("traveler-changed") || (r && r.kind === "changed");
+  const when = r && r.at ? `<span class="trv-change-when">${fmtDateTimeShort(r.at)}</span>` : "";
   if(isVoid){
-    const when = r && r.at ? ` · ${fmtDateTimeShort(r.at)}` : "";
-    return `<div class="trv-stale trv-stale-void">VOID — ORDER CANCELLED${when} · DISCARD THIS PAPERWORK</div>`;
+    return `<span class="trv-change-pill is-void">Order cancelled${when ? " · " : ""}${when}</span>`;
   }
   if(isChanged){
-    if(r && r.at){
-      const reissued = fmtDateTimeShort(r.at);
-      const wasPrinted = r.printed_at ? ` · was printed ${fmtDateTimeShort(r.printed_at)}` : "";
-      const what = r.summary ? ` · ${escapeHtml(r.summary)}` : "";
-      const rev = r.rev ? ` (rev${r.rev})` : "";
-      return `<div class="trv-stale trv-stale-changed">REISSUED ${reissued}${rev}${wasPrinted}${what} — REPRINT BEFORE BUILDING</div>`;
-    }
-    return `<div class="trv-stale trv-stale-changed">MODIFIED SINCE PRINT · REPRINT BEFORE BUILDING</div>`;
+    return `<span class="trv-change-pill">Order changed${when ? " · " : ""}${when}</span>`;
   }
   return "";
 }
