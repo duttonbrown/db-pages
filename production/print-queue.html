@@ -1861,7 +1861,7 @@
   }
 </style>
 </head>
-<body>
+<body data-dept="production" data-page="board">
 
 <div class="app-shell">
 
@@ -1870,51 +1870,11 @@
      four in-page tabs (Order queue / Print queue / Travelers / Job Preview) wired
      to setTab() — they switch the panel in place; Guide/Rules and every other rail
      item navigate. The active in-page tab is marked is-subcurrent by setTab(). -->
-<nav class="side-nav" aria-label="Production sections">
-  <a class="side-nav-dept" href="log/">Production</a>
-  <ul class="side-nav-tabs">
-    <li class="has-sub"><button class="side-nav-tab" data-sub="manage" aria-expanded="true">Manage <span class="sub-caret">&#9656;</span></button>
-      <ul class="side-nav-sub" aria-label="Manage tools">
-        <li class="has-sub"><button class="side-nav-tab" data-sub="printq" aria-expanded="true">Print <span class="sub-caret">&#9656;</span></button>
-          <ul class="side-nav-sub" aria-label="Print queue tools">
-            <li><a id="tab-order"     href="#order"     onclick="setTab('order');return false;">Order queue <span class="tab-count" id="cnt-order">—</span></a></li>
-            <li><a id="tab-print"     href="#print"     onclick="setTab('print');return false;">Print Queue <span class="tab-count" id="cnt-print">—</span></a></li>
-            <li><a id="tab-travelers" href="#travelers" onclick="setTab('travelers');return false;">Travelers <span class="tab-count" id="cnt-travelers">—</span></a></li>
-            <li><a id="tab-assembly"  href="#assembly"  onclick="setTab('assembly');return false;">Job Preview <span class="tab-count" id="cnt-assembly">—</span></a></li>
-            <li><a href="order-release.html">Guide <span class="ext">&#8599;</span></a></li>
-            <li><a href="print-queue-rules.html">Rules <span class="ext">&#8599;</span></a></li>
-          </ul>
-        </li>
-        <li><a href="log/#triage">Assign</a></li>
-      </ul>
-    </li>
-    <li class="has-sub"><button class="side-nav-tab" data-sub="powder" aria-expanded="true">Powder Coating <span class="sub-caret">&#9656;</span></button>
-      <ul class="side-nav-sub" aria-label="Powder Coating tools">
-        <li><a href="powder-coating/#log">Powder coating log <span class="ext">&#8599;</span></a></li>
-        <li><a href="powder-coating/#queue">Batch Queue <span class="ext">&#8599;</span></a></li>
-        <li><a href="powder-coating/#batch">Issue Batch <span class="ext">&#8599;</span></a></li>
-        <li><a href="powder-coating/#rework">Recoat <span class="ext">&#8599;</span></a></li>
-        <li><a href="powder-coating/#stock">Stock Batch <span class="ext">&#8599;</span></a></li>
-      </ul>
-    </li>
-    <li><a class="side-nav-tab side-nav-link" href="log/#assembly">Assembly</a></li>
-    <li class="has-sub"><button class="side-nav-tab" data-sub="qc" aria-expanded="true">QC &amp; Testing <span class="sub-caret">&#9656;</span></button>
-      <ul class="side-nav-sub" aria-label="QC &amp; quality tools">
-        <li><a href="log/#qc">QC log <span class="ext">&#8599;</span></a></li>
-        <li><a href="log/#parts-requests">Parts Request <span class="ext">&#8599;</span></a></li>
-        <li><a href="log/#rework">Rework <span class="ext">&#8599;</span></a></li>
-      </ul>
-    </li>
-    <li><a class="side-nav-tab side-nav-link" href="log/#shipping">Shipping</a></li>
-  </ul>
-  <div class="side-nav-foot">
-    <ul class="side-nav-tabs">
-      <li><a class="side-nav-tab side-nav-link" href="log/#thisweek">This Week</a></li>
-      <li><a class="side-nav-tab side-nav-link" href="overview/">Overview <span class="ext">&#8599;</span></a></li>
-    </ul>
-    <a href="tools.html">&larr; All production tools</a>
-  </div>
-</nav>
+<!-- Rail rendered by /_shared/nav.js from the single RAILS config (data-dept).
+     data-page="board" => the Print sub-links (Order/Print/Travelers/Job
+     Preview) are this page's in-page tabs; everything else is a cross-page
+     link. Do not hand-code rail markup. -->
+<nav class="side-nav" data-rail aria-label="Production sections"></nav>
 
 <div class="app-main">
 <main class="card card-wide">
@@ -2029,7 +1989,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T09:00:02",
+  "built_at": "2026-06-25T09:51:00",
   "orders": [
     {
       "shopify_order_id": "7023247917138",
@@ -3107,7 +3067,7 @@ const QUEUE = {
     "orders": 5,
     "printouts": 8,
     "notion_rows": 10,
-    "skipped_already_printed": 163,
+    "skipped_already_printed": 160,
     "printed_today": 18,
     "needs_attention": 0,
     "printed_review": 0
@@ -4202,6 +4162,23 @@ function setTab(name, updateHash = true){
 window.addEventListener("hashchange", () => {
   const hash = (location.hash || "").replace("#","");
   if(TAB_NAMES.includes(hash)) setTab(hash, false);
+});
+
+// The Print sub-links (Order Queue / Print Queue / Travelers / Job Preview) are
+// in-page tabs rendered by /_shared/nav.js as <a data-tab="…">. Switch the panel
+// in place via a delegated handler (replaces the old inline onclick that lived on
+// the hand-coded rail). data-sub disclosure toggles stay owned by nav.js.
+document.addEventListener("click", e => {
+  const a = e.target.closest('.side-nav a[data-tab]');
+  if(!a) return;
+  const name = a.getAttribute("data-tab");
+  if(TAB_NAMES.includes(name)){ e.preventDefault(); setTab(name); }
+});
+// nav.js injects the rail after this script runs; re-assert the active tab on its
+// freshly-rendered controls so the current tab shows is-subcurrent.
+document.addEventListener("hub:railready", () => {
+  const hash = (location.hash || "").replace("#","");
+  setTab(TAB_NAMES.includes(hash) ? hash : "order", false);
 });
 
 // NOTE: collapsible rail groups (Manage / Print) are toggled by the SHARED

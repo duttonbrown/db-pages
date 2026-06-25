@@ -427,55 +427,14 @@
   }
 </style>
 </head>
-<body data-dept="production">
+<body data-dept="production" data-nav-active="rules">
 
 <div class="app-shell">
 
-<nav class="side-nav" aria-label="Production navigation">
-  <a class="side-nav-dept" href="/production/">Production</a>
-  <ul class="side-nav-tabs">
-    <li class="has-sub"><button class="side-nav-tab" data-sub="manage" aria-expanded="true">Manage <span class="sub-caret">&#9656;</span></button>
-      <ul class="side-nav-sub" aria-label="Manage tools">
-        <li class="has-sub"><button class="side-nav-tab" data-sub="printq" aria-expanded="true">Print <span class="sub-caret">&#9656;</span></button>
-          <ul class="side-nav-sub" aria-label="Print queue tools">
-            <li><a href="print-queue.html#order">Order queue <span class="ext">&#8599;</span></a></li>
-            <li><a href="print-queue.html#print">Print Queue <span class="ext">&#8599;</span></a></li>
-            <li><a href="print-queue.html#travelers">Travelers <span class="ext">&#8599;</span></a></li>
-            <li><a href="print-queue.html#assembly">Job Preview <span class="ext">&#8599;</span></a></li>
-            <li><a href="order-release.html">Guide <span class="ext">&#8599;</span></a></li>
-            <li><a class="is-active" href="print-queue-rules.html" aria-current="page">Rules</a></li>
-          </ul>
-        </li>
-        <li><a href="log/#triage">Assign</a></li>
-      </ul>
-    </li>
-    <li class="has-sub"><button class="side-nav-tab" data-sub="powder" aria-expanded="true">Powder Coating <span class="sub-caret">&#9656;</span></button>
-      <ul class="side-nav-sub" aria-label="Powder Coating tools">
-        <li><a href="powder-coating/#log">Powder coating log <span class="ext">&#8599;</span></a></li>
-        <li><a href="powder-coating/#queue">Batch Queue <span class="ext">&#8599;</span></a></li>
-        <li><a href="powder-coating/#batch">Issue Batch <span class="ext">&#8599;</span></a></li>
-        <li><a href="powder-coating/#rework">Recoat <span class="ext">&#8599;</span></a></li>
-        <li><a href="powder-coating/#stock">Stock Batch <span class="ext">&#8599;</span></a></li>
-      </ul>
-    </li>
-    <li><a class="side-nav-tab side-nav-link" href="log/#assembly">Assembly</a></li>
-    <li class="has-sub"><button class="side-nav-tab" data-sub="qc" aria-expanded="true">QC &amp; Testing <span class="sub-caret">&#9656;</span></button>
-      <ul class="side-nav-sub" aria-label="QC &amp; quality tools">
-        <li><a href="log/#qc">QC log <span class="ext">&#8599;</span></a></li>
-        <li><a href="log/#parts-requests">Parts Request <span class="ext">&#8599;</span></a></li>
-        <li><a href="log/#rework">Rework <span class="ext">&#8599;</span></a></li>
-      </ul>
-    </li>
-    <li><a class="side-nav-tab side-nav-link" href="log/#shipping">Shipping</a></li>
-  </ul>
-  <div class="side-nav-foot">
-    <ul class="side-nav-tabs">
-      <li><a class="side-nav-tab side-nav-link" href="log/#thisweek">This Week</a></li>
-      <li><a class="side-nav-tab side-nav-link" href="overview/">Overview <span class="ext">&#8599;</span></a></li>
-    </ul>
-    <a href="tools.html">&larr; All production tools</a>
-  </div>
-</nav>
+<!-- Rail rendered by /_shared/nav.js from the single RAILS config (data-dept).
+     Links-only page (no in-page tabs); data-nav-active="rules" lights up the
+     Rules entry. Do not hand-code rail markup. -->
+<nav class="side-nav" data-rail aria-label="Production navigation"></nav>
 
 <div class="app-main">
 <main class="card">
