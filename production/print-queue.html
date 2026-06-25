@@ -2063,7 +2063,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T18:33:33",
+  "built_at": "2026-06-25T18:46:50",
   "orders": [
     {
       "shopify_order_id": "7024146120786",
@@ -2469,8 +2469,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-L",
             "SAC-B",
+            "SAC-L",
             "SAF-1"
           ],
           "variant_skus": [
@@ -5784,7 +5784,7 @@ function renderRow(r){
       <div class="order-block-head">
         <div class="col-order">${orderLinkInner}${pdfLink}${companionBadge}</div>
         <div class="col-date">${fmtDateLong(o.created_at)}</div>
-        <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
+        <div class="col-time-ago">${fmtTimeCST(o.created_at)}</div>
         <div class="col-customer">${o.customer_name || ""}${customerSuffix(o)}</div>
         <div class="col-tags">${tagsFor(o)}</div>
         <div class="col-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
@@ -8483,6 +8483,18 @@ function fmtRelative(iso){
   if(hrs < 24)   return `${hrs.toFixed(1)}h ago`;
   return `${Math.round(hrs/24)}d ago`;
 }
+// Order time-of-day in US Central (CST/CDT) — e.g. "3:42 PM". The order queue
+// shows this instead of a relative "Xh ago" (Thomas: CST clock, not elapsed).
+// Shopify created_at is UTC; America/Chicago handles the DST offset.
+function fmtTimeCST(iso){
+  if(!iso) return "";
+  try {
+    const d = new Date(iso);
+    if(isNaN(d)) return "";
+    return d.toLocaleTimeString("en-US", {
+      timeZone: "America/Chicago", hour: "numeric", minute: "2-digit", hour12: true });
+  } catch(e){ return ""; }
+}
 // "May 7, 2026 at 4:30 PM" — used for every visible date/time on the page.
 // 12-hour clock, no leading zero on the hour, AM/PM suffix.
 function fmtFull(iso){
@@ -8646,7 +8658,7 @@ function renderOrderQueue(){
         <div class="order-block-head">
           <div class="col-order">${orderLinkInner}</div>
           <div class="col-date">${fmtDateLong(o.created_at)}</div>
-          <div class="col-time-ago">${fmtRelative(o.created_at)}</div>
+          <div class="col-time-ago">${fmtTimeCST(o.created_at)}</div>
           <div class="col-customer">${o.customer_name || ""}${customerSuffix(o)}</div>
           <div class="col-tags">${tagsFor(o)}</div>
           <div class="col-amount">${o.total_price != null ? fmtMoney(o.total_price) : ""}</div>
