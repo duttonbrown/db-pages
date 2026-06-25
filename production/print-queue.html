@@ -1833,15 +1833,19 @@
       /* One page tall for normal sheets (footer flex-pins to the bottom), but
          a tall traveler may FLOW onto a second page instead of being clipped —
          "print only pages that have content" (Thomas 2026-06-11). Absolute mm,
-         NOT 100vh: in Chromium's print-to-PDF the page area (inside the 12mm
-         @page margins) is the vh basis, so the old `100vh - 24mm - …` calc
-         double-subtracted the margins and floated the sign-off strip ~25mm up
-         the page. Letter paper 279.4mm − 24mm margins = 255.4mm printable;
-         stop 3mm short so the strip ends as close to the bottom margin as the
-         header sits to the top (3mm pad, mirrored) and rounding can never
-         overshoot into a spilled sliver/blank page. */
+         NOT 100vh.
+         min-height EMPIRICALLY tuned (2026-06-25): the theoretical printable
+         area is 279.4 − 24mm @page margins = 255.4mm, but Chromium's print-to-PDF
+         (margin:0 on page.pdf, @page margin:12mm in CSS) reserves slightly more
+         than the nominal margin, so a sheet ≥250mm spills a near-blank second
+         page that strands the footer alone (the 252.4mm value here did exactly
+         that — see order 36273). 248mm is the largest height that reliably stays
+         on ONE page across the floor's normal sheets while still pushing the
+         flex-pinned sign-off strip to the page bottom; smaller would float the
+         strip up. A genuinely tall traveler (many lines) exceeds 248mm and is
+         ALLOWED to flow to a real second page — that's content, not a stray. */
       height: auto;
-      min-height: calc(279.4mm - 24mm - 3mm);
+      min-height: 248mm;
       overflow: visible;
       display: flex; flex-direction: column;
     }
@@ -1984,7 +1988,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T13:09:22",
+  "built_at": "2026-06-25T13:20:36",
   "orders": [
     {
       "shopify_order_id": "7023662268498",
@@ -2679,15 +2683,231 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": []
+    },
+    {
+      "shopify_order_id": "6942787960914",
+      "shopify_order_name": "35549",
+      "shopify_order_number": "35549",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 89178.96,
+      "ship_by_date": null,
+      "latest_ship_by": "\u2014",
+      "lead_time_label": "",
+      "is_expedited": false,
+      "created_at": "2026-05-08T14:14:34-05:00",
+      "tags": "$20K Club, large order, trade",
+      "total_price": 88673.92,
+      "priority": null,
+      "is_large_order": true,
+      "auto_tags": [
+        "Color",
+        "Large Order"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Freight",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 2,
+      "printouts": [
+        {
+          "shopify_order_id": "6942787960914",
+          "shopify_order_name": "35549",
+          "shopify_order_number": "35549",
+          "key": [
+            "color",
+            "Python Green",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Python Green",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60129S-9"
+          ],
+          "variant_skus": [
+            "60129S-9-1PG"
+          ],
+          "line_item_titles": [
+            "Color Major Sconce 9\""
+          ],
+          "lines": [
+            {
+              "title": "Color Major Sconce 9\"",
+              "variant_title": "Brass / Python Green / Hardwired with dimmer switch",
+              "variant_sku": "60129S-9-1PG",
+              "parent_sku": "60129S-9",
+              "qty": 304,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-major-sconce-9-brass-pythongreen.jpg?v=1757504002&width=120",
+              "properties": [],
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 304,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Python Green|lighting",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "6942787960914",
+          "shopify_order_name": "35549",
+          "shopify_order_number": "35549",
+          "key": [
+            "color",
+            "White",
+            "accessory"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "parent_skus": [
+            "PLS-8-WH"
+          ],
+          "variant_skus": [
+            "PLS-8-WH"
+          ],
+          "line_item_titles": [
+            "Plug-in Cords and Switches"
+          ],
+          "lines": [
+            {
+              "title": "Plug-in Cords and Switches",
+              "variant_title": "Cord with switch / White / 8 ft",
+              "variant_sku": "PLS-8-WH",
+              "parent_sku": "PLS-8-WH",
+              "qty": 304,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/20221018_195557587_iOS.jpg?v=1747968798&width=120",
+              "properties": []
+            }
+          ],
+          "total_qty": 304,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|accessory",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "6942787960914",
+          "shopify_order_name": "35549",
+          "shopify_order_number": "35549",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-08T14:14:34-05:00",
+          "parent_sku": "60129S-9",
+          "color": "Python Green",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 304,
+          "line_item_ids": [
+            16784268886098
+          ],
+          "item_titles": [
+            "Color Major Sconce 9\""
+          ],
+          "variant_skus": [
+            "60129S-9-1PG"
+          ],
+          "lines": [
+            {
+              "sku": "60129S-9-1PG",
+              "title": "Color Major Sconce 9\"",
+              "qty": 304,
+              "finish": "Brass",
+              "color": "Python Green",
+              "category": "fixture",
+              "variant_title": "Brass / Python Green / Hardwired with dimmer switch",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-major-sconce-9-brass-pythongreen.jpg?v=1757504002&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "6942787960914",
+          "shopify_order_name": "35549",
+          "shopify_order_number": "35549",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-05-08T14:14:34-05:00",
+          "parent_sku": "PLS-8-WH",
+          "color": "White",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 304,
+          "line_item_ids": [
+            16784268918866
+          ],
+          "item_titles": [
+            "Plug-in Cords and Switches"
+          ],
+          "variant_skus": [
+            "PLS-8-WH"
+          ],
+          "lines": [
+            {
+              "sku": "PLS-8-WH",
+              "title": "Plug-in Cords and Switches",
+              "qty": 304,
+              "finish": null,
+              "color": "White",
+              "category": "accessory",
+              "variant_title": "Cord with switch / White / 8 ft",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/20221018_195557587_iOS.jpg?v=1747968798&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
     }
   ],
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 4,
-    "printouts": 5,
-    "notion_rows": 6,
-    "skipped_already_printed": 156,
+    "orders": 5,
+    "printouts": 7,
+    "notion_rows": 8,
+    "skipped_already_printed": 155,
     "printed_today": 25,
     "needs_attention": 0,
     "printed_review": 0
