@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18T17:03:55",
+  "generated_at": "2026-06-25T15:09:01",
   "products": {
     "30110H-10 (C)": {
       "parent_sku": "30110H-10 (C)",
@@ -5443,7 +5443,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "382ffa524c5b810cb4f0e2cf699468ca",
       "source_page_url": "https://app.notion.com/p/30112FH-10-382ffa524c5b810cb4f0e2cf699468ca",
-      "last_edited_at": "2026-06-17T03:10:00.000Z",
+      "last_edited_at": "2026-06-24T04:55:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -5752,6 +5752,34 @@
           "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
+        },
+        {
+          "section": "Canopy Configuration 1",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Canopy Configuration 1",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
         }
       ],
       "is_parent": false
@@ -5764,7 +5792,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "382ffa524c5b81a883cdf6360b9e9da5",
       "source_page_url": "https://app.notion.com/p/30112FH-8-382ffa524c5b81a883cdf6360b9e9da5",
-      "last_edited_at": "2026-06-17T03:10:00.000Z",
+      "last_edited_at": "2026-06-24T04:55:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -6073,6 +6101,34 @@
           "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
+        },
+        {
+          "section": "Canopy Configuration 1",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Canopy Configuration 1",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
         }
       ],
       "is_parent": false
@@ -6085,7 +6141,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "382ffa524c5b81dfb831e66f29f9332f",
       "source_page_url": "https://app.notion.com/p/30112H-10-382ffa524c5b81dfb831e66f29f9332f",
-      "last_edited_at": "2026-06-17T03:10:00.000Z",
+      "last_edited_at": "2026-06-24T04:53:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -6327,6 +6383,34 @@
         },
         {
           "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
           "part_number": "G10",
           "part_id_notion": "2ceffa524c5b8126b3cdd63f1fd43161",
           "descriptive_name": "Globe, 10\"",
@@ -6490,7 +6574,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "382ffa524c5b811cb981fa17132d55ec",
       "source_page_url": "https://app.notion.com/p/30112H-8-382ffa524c5b811cb981fa17132d55ec",
-      "last_edited_at": "2026-06-17T03:10:00.000Z",
+      "last_edited_at": "2026-06-24T04:53:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -6725,6 +6809,34 @@
           "qty_raw": "2",
           "part_role": "Standard",
           "effective_role": "Standard",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
           "category": "Uncategorized",
           "rack_size": 1,
           "black_batch_stocked": false,
@@ -14453,7 +14565,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "382ffa524c5b81129381feefc2bf97bd",
       "source_page_url": "https://app.notion.com/p/30112H-6-382ffa524c5b81129381feefc2bf97bd",
-      "last_edited_at": "2026-06-17T01:17:00.000Z",
+      "last_edited_at": "2026-06-24T04:52:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -14695,6 +14807,34 @@
         },
         {
           "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
           "part_number": "G6",
           "part_id_notion": "2ceffa524c5b81849cdff9432f329a78",
           "descriptive_name": "Globe, 6\"",
@@ -14858,7 +14998,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "382ffa524c5b8196a95bd7f088626092",
       "source_page_url": "https://app.notion.com/p/30112H-12-382ffa524c5b8196a95bd7f088626092",
-      "last_edited_at": "2026-06-17T01:17:00.000Z",
+      "last_edited_at": "2026-06-24T04:53:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -15100,6 +15240,34 @@
         },
         {
           "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
           "part_number": "G12",
           "part_id_notion": "2ceffa524c5b81419955de3128d802b3",
           "descriptive_name": "Globe, 12\"",
@@ -15263,7 +15431,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "382ffa524c5b81978bf9d7ac893c7b18",
       "source_page_url": "https://app.notion.com/p/30112FH-6-382ffa524c5b81978bf9d7ac893c7b18",
-      "last_edited_at": "2026-06-17T01:17:00.000Z",
+      "last_edited_at": "2026-06-24T04:55:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -15572,6 +15740,34 @@
           "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
+        },
+        {
+          "section": "Canopy Configuration 1",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Canopy Configuration 1",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
         }
       ],
       "is_parent": false
@@ -15584,7 +15780,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "382ffa524c5b817cbaf2cd64c198184d",
       "source_page_url": "https://app.notion.com/p/30112FH-12-382ffa524c5b817cbaf2cd64c198184d",
-      "last_edited_at": "2026-06-17T01:17:00.000Z",
+      "last_edited_at": "2026-06-24T04:55:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -15931,6 +16127,34 @@
           "qty_raw": "1",
           "part_role": "Standard",
           "effective_role": "Standard",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Canopy Configuration 1",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Canopy Configuration 1",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
           "category": "Uncategorized",
           "rack_size": 1,
           "black_batch_stocked": false,
@@ -22247,7 +22471,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "381ffa524c5b81bfb6f8d6b1ccfe0de9",
       "source_page_url": "https://app.notion.com/p/60110H-381ffa524c5b81bfb6f8d6b1ccfe0de9",
-      "last_edited_at": "2026-06-16T23:52:00.000Z",
+      "last_edited_at": "2026-06-24T04:39:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -22405,11 +22629,11 @@
         },
         {
           "section": "Installation Parts",
-          "part_number": "NI1-1/2",
-          "part_id_notion": "2ceffa524c5b81a1b223f1bab650fbf2",
-          "descriptive_name": "Nipple, 1-1/2\u201d, bushings",
-          "qty": 1,
-          "qty_raw": "1",
+          "part_number": "NI0-7/8",
+          "part_id_notion": "2ceffa524c5b81ddbe4ef3f92dd24bfb",
+          "descriptive_name": "Nipple, 7/8\", bushings",
+          "qty": 2,
+          "qty_raw": "2",
           "part_role": "Standard",
           "effective_role": "Standard",
           "category": "Uncategorized",
@@ -22422,8 +22646,8 @@
           "part_number": "BU8",
           "part_id_notion": "2ceffa524c5b81eca508c4a9f88f3d69",
           "descriptive_name": "Bushings, 1/8IPS",
-          "qty": 2,
-          "qty_raw": "2",
+          "qty": 4,
+          "qty_raw": "4",
           "part_role": "Standard",
           "effective_role": "Standard",
           "category": "Uncategorized",
@@ -22440,6 +22664,48 @@
           "qty_raw": "1",
           "part_role": "Finish Only",
           "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "HK5/64",
+          "part_id_notion": "2ceffa524c5b81599fa8db692db01d9d",
+          "descriptive_name": "Hex Key, 5/64\"",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Standard",
+          "effective_role": "Standard",
           "category": "Uncategorized",
           "rack_size": 1,
           "black_batch_stocked": false,
@@ -22596,7 +22862,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "381ffa524c5b819e9e8dfd5daa0d19e4",
       "source_page_url": "https://app.notion.com/p/60111H-381ffa524c5b819e9e8dfd5daa0d19e4",
-      "last_edited_at": "2026-06-16T23:52:00.000Z",
+      "last_edited_at": "2026-06-24T04:39:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -22768,11 +23034,11 @@
         },
         {
           "section": "Installation Parts",
-          "part_number": "NI1-1/2",
-          "part_id_notion": "2ceffa524c5b81a1b223f1bab650fbf2",
-          "descriptive_name": "Nipple, 1-1/2\u201d, bushings",
-          "qty": 1,
-          "qty_raw": "1",
+          "part_number": "NI0-7/8",
+          "part_id_notion": "2ceffa524c5b81ddbe4ef3f92dd24bfb",
+          "descriptive_name": "Nipple, 7/8\", bushings",
+          "qty": 2,
+          "qty_raw": "2",
           "part_role": "Standard",
           "effective_role": "Standard",
           "category": "Uncategorized",
@@ -22785,8 +23051,8 @@
           "part_number": "BU8",
           "part_id_notion": "2ceffa524c5b81eca508c4a9f88f3d69",
           "descriptive_name": "Bushings, 1/8IPS",
-          "qty": 2,
-          "qty_raw": "2",
+          "qty": 4,
+          "qty_raw": "4",
           "part_role": "Standard",
           "effective_role": "Standard",
           "category": "Uncategorized",
@@ -22803,6 +23069,48 @@
           "qty_raw": "1",
           "part_role": "Finish Only",
           "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "HK5/64",
+          "part_id_notion": "2ceffa524c5b81599fa8db692db01d9d",
+          "descriptive_name": "Hex Key, 5/64\"",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Standard",
+          "effective_role": "Standard",
           "category": "Uncategorized",
           "rack_size": 1,
           "black_batch_stocked": false,
@@ -22945,7 +23253,7 @@
       "has_color_variant_sibling": true,
       "source_page_id": "381ffa524c5b811ba9bcf2748336604c",
       "source_page_url": "https://app.notion.com/p/60112H-381ffa524c5b811ba9bcf2748336604c",
-      "last_edited_at": "2026-06-16T23:52:00.000Z",
+      "last_edited_at": "2026-06-24T04:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -23190,6 +23498,48 @@
           "part_number": "LU8P",
           "part_id_notion": "2ceffa524c5b81e1b939c83304b20512",
           "descriptive_name": "Ground wire lug, pre-wired",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Standard",
+          "effective_role": "Standard",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Configuration 1",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Configuration 1",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Configuration 1",
+          "part_number": "HK5/64",
+          "part_id_notion": "2ceffa524c5b81599fa8db692db01d9d",
+          "descriptive_name": "Hex Key, 5/64\"",
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Standard",
@@ -23893,7 +24243,7 @@
       "has_color_variant_sibling": true,
       "source_page_id": "381ffa524c5b81068c0ac06ca6d69d63",
       "source_page_url": "https://app.notion.com/p/70110H-381ffa524c5b81068c0ac06ca6d69d63",
-      "last_edited_at": "2026-06-16T23:51:00.000Z",
+      "last_edited_at": "2026-06-24T04:39:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -24120,6 +24470,48 @@
           "location": ""
         },
         {
+          "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "HK5/64",
+          "part_id_notion": "2ceffa524c5b81599fa8db692db01d9d",
+          "descriptive_name": "Hex Key, 5/64\"",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Standard",
+          "effective_role": "Standard",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
           "section": "Canopy Configuration 1",
           "part_number": "CA5",
           "part_id_notion": "2ceffa524c5b81ab9ab5e4074c7392df",
@@ -24242,7 +24634,7 @@
       "has_color_variant_sibling": true,
       "source_page_id": "381ffa524c5b81fe8194ee9a3b9c3663",
       "source_page_url": "https://app.notion.com/p/70110FH-381ffa524c5b81fe8194ee9a3b9c3663",
-      "last_edited_at": "2026-06-16T23:51:00.000Z",
+      "last_edited_at": "2026-06-24T04:58:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -24523,6 +24915,48 @@
           "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "HK5/64",
+          "part_id_notion": "2ceffa524c5b81599fa8db692db01d9d",
+          "descriptive_name": "Hex Key, 5/64\"",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Standard",
+          "effective_role": "Standard",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
         }
       ],
       "is_parent": false
@@ -24535,7 +24969,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "381ffa524c5b810aadaac62c06dd81ff",
       "source_page_url": "https://app.notion.com/p/60112H-C-381ffa524c5b810aadaac62c06dd81ff",
-      "last_edited_at": "2026-06-16T23:54:00.000Z",
+      "last_edited_at": "2026-06-24T04:52:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -24788,6 +25222,48 @@
           "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
+        },
+        {
+          "section": "Configuration 1",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Configuration 1",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Configuration 1",
+          "part_number": "HK5/64",
+          "part_id_notion": "2ceffa524c5b81599fa8db692db01d9d",
+          "descriptive_name": "Hex Key, 5/64\"",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Standard",
+          "effective_role": "Standard",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
         }
       ],
       "is_parent": false
@@ -25009,7 +25485,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "381ffa524c5b8112a110f384f5872150",
       "source_page_url": "https://app.notion.com/p/70110H-C-381ffa524c5b8112a110f384f5872150",
-      "last_edited_at": "2026-06-16T23:54:00.000Z",
+      "last_edited_at": "2026-06-24T04:52:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -25236,6 +25712,48 @@
           "location": ""
         },
         {
+          "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "HK5/64",
+          "part_id_notion": "2ceffa524c5b81599fa8db692db01d9d",
+          "descriptive_name": "Hex Key, 5/64\"",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Standard",
+          "effective_role": "Standard",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
           "section": "Canopy Configuration 1",
           "part_number": "CA5",
           "part_id_notion": "2ceffa524c5b81ab9ab5e4074c7392df",
@@ -25358,7 +25876,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "381ffa524c5b81d5af90f48b9ac15c01",
       "source_page_url": "https://app.notion.com/p/70110FH-C-381ffa524c5b81d5af90f48b9ac15c01",
-      "last_edited_at": "2026-06-16T23:54:00.000Z",
+      "last_edited_at": "2026-06-24T04:58:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -25633,6 +26151,48 @@
           "descriptive_name": "Wire nuts, yellow",
           "qty": 3,
           "qty_raw": "3",
+          "part_role": "Standard",
+          "effective_role": "Standard",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SJ2",
+          "part_id_notion": "2ceffa524c5b81019ef4faeb35ecc960",
+          "descriptive_name": "Swivel joint, 1/8IPS, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish Only",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "SS1/8",
+          "part_id_notion": "2ceffa524c5b8115b2c1e52745eef7c1",
+          "descriptive_name": "Set screw, 8-32",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Finish+Color",
+          "effective_role": "Finish",
+          "category": "Uncategorized",
+          "rack_size": 1,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "HK5/64",
+          "part_id_notion": "2ceffa524c5b81599fa8db692db01d9d",
+          "descriptive_name": "Hex Key, 5/64\"",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Standard",
           "effective_role": "Standard",
           "category": "Uncategorized",
@@ -34626,7 +35186,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "324ffa524c5b817aae82d7312ebed61b",
       "source_page_url": "https://app.notion.com/p/ER1-324ffa524c5b817aae82d7312ebed61b",
-      "last_edited_at": "2026-03-15T23:13:00.000Z",
+      "last_edited_at": "2026-06-19T14:31:00.000Z",
       "parts": [],
       "is_parent": false
     },
@@ -34638,7 +35198,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "324ffa524c5b811d983bc1701c6097c4",
       "source_page_url": "https://app.notion.com/p/ER1-3-324ffa524c5b811d983bc1701c6097c4",
-      "last_edited_at": "2026-06-17T22:12:00.000Z",
+      "last_edited_at": "2026-06-19T14:31:00.000Z",
       "parts": [
         {
           "section": "\ud83d\udd29 Parts List",
@@ -34693,7 +35253,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "324ffa524c5b812aaa0ecaef3e38c50c",
       "source_page_url": "https://app.notion.com/p/ER1-12-324ffa524c5b812aaa0ecaef3e38c50c",
-      "last_edited_at": "2026-06-17T22:12:00.000Z",
+      "last_edited_at": "2026-06-19T14:31:00.000Z",
       "parts": [
         {
           "section": "\ud83d\udd29 Parts List",
@@ -34748,7 +35308,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "324ffa524c5b8147b393d10bdc467756",
       "source_page_url": "https://app.notion.com/p/ER1-6-324ffa524c5b8147b393d10bdc467756",
-      "last_edited_at": "2026-06-17T22:12:00.000Z",
+      "last_edited_at": "2026-06-19T14:31:00.000Z",
       "parts": [
         {
           "section": "\ud83d\udd29 Parts List",
@@ -34803,7 +35363,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "324ffa524c5b817fa9d1f89377fcdcc1",
       "source_page_url": "https://app.notion.com/p/ER1-4-324ffa524c5b817fa9d1f89377fcdcc1",
-      "last_edited_at": "2026-06-17T22:12:00.000Z",
+      "last_edited_at": "2026-06-19T14:31:00.000Z",
       "parts": [
         {
           "section": "\ud83d\udd29 Parts List",
@@ -34858,7 +35418,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "324ffa524c5b81c99fc3fab4d9b06477",
       "source_page_url": "https://app.notion.com/p/ER1-2-324ffa524c5b81c99fc3fab4d9b06477",
-      "last_edited_at": "2026-06-17T22:12:00.000Z",
+      "last_edited_at": "2026-06-19T14:31:00.000Z",
       "parts": [
         {
           "section": "\ud83d\udd29 Parts List",
@@ -34913,7 +35473,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "324ffa524c5b81f0af39e10d3600e247",
       "source_page_url": "https://app.notion.com/p/ER1-24-324ffa524c5b81f0af39e10d3600e247",
-      "last_edited_at": "2026-06-17T22:12:00.000Z",
+      "last_edited_at": "2026-06-19T14:31:00.000Z",
       "parts": [
         {
           "section": "\ud83d\udd29 Parts List",
@@ -35564,7 +36124,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "314ffa524c5b80dcacbbe10c4a5b0866",
       "source_page_url": "https://app.notion.com/p/G10W-314ffa524c5b80dcacbbe10c4a5b0866",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-24T21:09:00.000Z",
       "parts": [],
       "is_parent": false
     },
@@ -35576,7 +36136,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "314ffa524c5b80099ef6df85b604e72b",
       "source_page_url": "https://app.notion.com/p/G8W-314ffa524c5b80099ef6df85b604e72b",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-24T21:06:00.000Z",
       "parts": [],
       "is_parent": false
     },
@@ -35588,7 +36148,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "314ffa524c5b801cbabedef031785384",
       "source_page_url": "https://app.notion.com/p/G6W-314ffa524c5b801cbabedef031785384",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-24T21:06:00.000Z",
       "parts": [],
       "is_parent": false
     },
@@ -36962,7 +37522,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2ecffa524c5b806a8682c873f68b88ac",
       "source_page_url": "https://app.notion.com/p/60601-24-2ecffa524c5b806a8682c873f68b88ac",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -37434,7 +37994,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -37465,7 +38025,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2ecffa524c5b809ea60ad9a7a744f316",
       "source_page_url": "https://app.notion.com/p/60600-24-2ecffa524c5b809ea60ad9a7a744f316",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -37937,7 +38497,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -37968,7 +38528,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2ecffa524c5b8097b271c1882d45bd00",
       "source_page_url": "https://app.notion.com/p/60401-18-2ecffa524c5b8097b271c1882d45bd00",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:46:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -38426,7 +38986,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -38457,7 +39017,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2ecffa524c5b8090ac27dc7ccbdbad01",
       "source_page_url": "https://app.notion.com/p/60400-18-2ecffa524c5b8090ac27dc7ccbdbad01",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -38915,7 +39475,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -40552,7 +41112,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "0eeecc3bc9ac446ca4389d6c479f9f58",
       "source_page_url": "https://app.notion.com/p/60401-72-0eeecc3bc9ac446ca4389d6c479f9f58",
-      "last_edited_at": "2026-03-26T03:05:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -40646,7 +41206,7 @@
           "qty": 4,
           "qty_raw": "4",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Lamp Cups",
           "rack_size": 6,
           "black_batch_stocked": true,
@@ -41024,7 +41584,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -41055,7 +41615,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2c545d82b7de495181e1cf7230c0ed00",
       "source_page_url": "https://app.notion.com/p/60401-48-2c545d82b7de495181e1cf7230c0ed00",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -41513,7 +42073,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -41544,7 +42104,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "37520b5713654a4aaaf131c05c83392e",
       "source_page_url": "https://app.notion.com/p/60401-24-37520b5713654a4aaaf131c05c83392e",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:46:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -42002,7 +42562,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -42033,7 +42593,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "c17eff1906d74d619314bceba73f8ce3",
       "source_page_url": "https://app.notion.com/p/60401-84-c17eff1906d74d619314bceba73f8ce3",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -42127,7 +42687,7 @@
           "qty": 4,
           "qty_raw": "4",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Lamp Cups",
           "rack_size": 6,
           "black_batch_stocked": true,
@@ -42491,7 +43051,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -42522,7 +43082,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "c97e9c9a1bd445a980da337d8822a558",
       "source_page_url": "https://app.notion.com/p/60401-60-c97e9c9a1bd445a980da337d8822a558",
-      "last_edited_at": "2026-03-26T03:10:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -42994,7 +43554,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -43025,7 +43585,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "d1a7017b196a4033b5537cd8e5de7921",
       "source_page_url": "https://app.notion.com/p/60401-36-d1a7017b196a4033b5537cd8e5de7921",
-      "last_edited_at": "2026-03-26T03:10:00.000Z",
+      "last_edited_at": "2026-06-25T16:46:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -43483,7 +44043,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -43514,7 +44074,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2081a96ff94d4dac8e89cc80b7603845",
       "source_page_url": "https://app.notion.com/p/60400-72-2081a96ff94d4dac8e89cc80b7603845",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:46:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -43986,7 +44546,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -44017,7 +44577,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "3f79504ae31040fbbc3598b07856729b",
       "source_page_url": "https://app.notion.com/p/60400-36-3f79504ae31040fbbc3598b07856729b",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -44475,7 +45035,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -44506,7 +45066,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "7b3d3a5de7784a86bcf0fd0da6e166b0",
       "source_page_url": "https://app.notion.com/p/60400-24-7b3d3a5de7784a86bcf0fd0da6e166b0",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -44964,7 +45524,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -44995,7 +45555,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "8300a51a1ceb492c8390e1751a68e40b",
       "source_page_url": "https://app.notion.com/p/60400-48-8300a51a1ceb492c8390e1751a68e40b",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:46:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -45453,7 +46013,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -45484,7 +46044,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "a74766d4147d452bbf46f3d207d47d32",
       "source_page_url": "https://app.notion.com/p/60400-84-a74766d4147d452bbf46f3d207d47d32",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:46:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -45942,7 +46502,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -45973,7 +46533,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "ad29c9641da845b0abe8c45078f0f288",
       "source_page_url": "https://app.notion.com/p/60400-60-ad29c9641da845b0abe8c45078f0f288",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -46445,7 +47005,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -46488,7 +47048,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "162fdd09a0904210bbb74aee583fb8fa",
       "source_page_url": "https://app.notion.com/p/60601-72-162fdd09a0904210bbb74aee583fb8fa",
-      "last_edited_at": "2026-03-26T03:05:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -46974,7 +47534,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -47005,7 +47565,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "18d0c95773724e7cbd7c7b261c7c9eac",
       "source_page_url": "https://app.notion.com/p/60601-60-18d0c95773724e7cbd7c7b261c7c9eac",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -47491,7 +48051,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -47522,7 +48082,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2e717566f4974f1699326f72e7cfe64e",
       "source_page_url": "https://app.notion.com/p/60601-48-2e717566f4974f1699326f72e7cfe64e",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -47994,7 +48554,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -48025,7 +48585,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "6bfc27f716ab4c639a3228d3753be1d2",
       "source_page_url": "https://app.notion.com/p/60601-36-6bfc27f716ab4c639a3228d3753be1d2",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -48497,7 +49057,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -48528,7 +49088,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "b1445271f56c4cbbbe9c33794289ed7e",
       "source_page_url": "https://app.notion.com/p/60601-84-b1445271f56c4cbbbe9c33794289ed7e",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -49000,7 +49560,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -49031,7 +49591,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "028658545cf547008b9c999f8b714a8b",
       "source_page_url": "https://app.notion.com/p/60600-60-028658545cf547008b9c999f8b714a8b",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -49517,7 +50077,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -49548,7 +50108,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "316a3c5710114956aac84b41215fcd9d",
       "source_page_url": "https://app.notion.com/p/60600-36-316a3c5710114956aac84b41215fcd9d",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -50020,7 +50580,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -50051,7 +50611,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "605ad37a3be145b28e1bf9d6683499ab",
       "source_page_url": "https://app.notion.com/p/60600-48-605ad37a3be145b28e1bf9d6683499ab",
-      "last_edited_at": "2026-03-26T03:09:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -50523,7 +51083,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -50554,7 +51114,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "9d3272d5634f450ca6569bbde269bf6c",
       "source_page_url": "https://app.notion.com/p/60600-72-9d3272d5634f450ca6569bbde269bf6c",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -51040,7 +51600,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -51083,7 +51643,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "bdd3697ac67a4ddda2ac79f80fc4ad00",
       "source_page_url": "https://app.notion.com/p/60600-84-bdd3697ac67a4ddda2ac79f80fc4ad00",
-      "last_edited_at": "2026-03-16T22:08:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -51555,7 +52115,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -52277,7 +52837,21 @@
           "part_id_notion": "2ceffa524c5b81df99ebd6a910620fb4",
           "descriptive_name": "Pipe aluminum, extension (60211-58)",
           "qty": 1,
-          "qty_raw": "1, 1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "PA18-M1",
+          "part_id_notion": "2ceffa524c5b81cab026e1bf40968103",
+          "descriptive_name": "Pipe aluminum, extension (60211-58)",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -52654,7 +53228,21 @@
           "part_id_notion": "2ceffa524c5b81df99ebd6a910620fb4",
           "descriptive_name": "Pipe aluminum, extension (60211-52)",
           "qty": 1,
-          "qty_raw": "1, 1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "PA12-M1",
+          "part_id_notion": "2ceffa524c5b8105bc36c11515f2a516",
+          "descriptive_name": "Pipe aluminum, extension (60211-52)",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -53031,7 +53619,21 @@
           "part_id_notion": "2ceffa524c5b81df99ebd6a910620fb4",
           "descriptive_name": "Pipe aluminum, extension (60211-46)",
           "qty": 1,
-          "qty_raw": "1, 1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "PA6-M1",
+          "part_id_notion": "2ceffa524c5b810b8503f4f5bf9ee8d5",
+          "descriptive_name": "Pipe aluminum, extension (60211-46)",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -54525,7 +55127,21 @@
           "part_id_notion": "2ceffa524c5b81df99ebd6a910620fb4",
           "descriptive_name": "Pipe aluminum, extension (60210-58)",
           "qty": 1,
-          "qty_raw": "1, 1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "PA18-M1",
+          "part_id_notion": "2ceffa524c5b81cab026e1bf40968103",
+          "descriptive_name": "Pipe aluminum, extension (60210-58)",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -54902,7 +55518,21 @@
           "part_id_notion": "2ceffa524c5b81df99ebd6a910620fb4",
           "descriptive_name": "Pipe aluminum, extension (60210-52)",
           "qty": 1,
-          "qty_raw": "1, 1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "PA12-M1",
+          "part_id_notion": "2ceffa524c5b8105bc36c11515f2a516",
+          "descriptive_name": "Pipe aluminum, extension (60210-52)",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -55279,7 +55909,21 @@
           "part_id_notion": "2ceffa524c5b81df99ebd6a910620fb4",
           "descriptive_name": "Pipe aluminum, extension (60210-46)",
           "qty": 1,
-          "qty_raw": "1, 1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Installation Parts",
+          "part_number": "PA6-M1",
+          "part_id_notion": "2ceffa524c5b810b8503f4f5bf9ee8d5",
+          "descriptive_name": "Pipe aluminum, extension (60210-46)",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -61542,7 +62186,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2c8ffa524c5b80049549c86c0cfb33e1",
       "source_page_url": "https://app.notion.com/p/70222-C-2c8ffa524c5b80049549c86c0cfb33e1",
-      "last_edited_at": "2026-06-12T03:21:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -62156,7 +62800,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2c8ffa524c5b806dab3bd2b521639466",
       "source_page_url": "https://app.notion.com/p/70220-C-2c8ffa524c5b806dab3bd2b521639466",
-      "last_edited_at": "2026-06-12T03:20:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -62477,7 +63121,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2c8ffa524c5b80049b89fb8cda8c6150",
       "source_page_url": "https://app.notion.com/p/70130-C-2c8ffa524c5b80049b89fb8cda8c6150",
-      "last_edited_at": "2026-06-12T03:15:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -62714,7 +63358,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2c8ffa524c5b809689b0de4d05fa0505",
       "source_page_url": "https://app.notion.com/p/70122-C-2c8ffa524c5b809689b0de4d05fa0505",
-      "last_edited_at": "2026-06-12T03:23:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -70281,7 +70925,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2c8ffa524c5b8014ba90f7d26a6719b0",
       "source_page_url": "https://app.notion.com/p/30222-C-2c8ffa524c5b8014ba90f7d26a6719b0",
-      "last_edited_at": "2026-06-12T03:19:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -78919,12 +79563,12 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2aeffa524c5b8095a722edfebfdb3a1f",
       "source_page_url": "https://app.notion.com/p/H1C-8-2aeffa524c5b8095a722edfebfdb3a1f",
-      "last_edited_at": "2026-03-26T03:07:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
-          "part_number": "PF3",
-          "part_id_notion": "2ceffa524c5b81f19a3cf2f03345427f",
+          "part_number": "PF6",
+          "part_id_notion": "2ceffa524c5b81bc88c0d71136fd01df",
           "descriptive_name": "Pipe female, 3\u201d or 6\u201d",
           "qty": 1,
           "qty_raw": "1",
@@ -79197,7 +79841,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2aeffa524c5b8081a55eccc7c07f3a27",
       "source_page_url": "https://app.notion.com/p/H1C-5-2aeffa524c5b8081a55eccc7c07f3a27",
-      "last_edited_at": "2026-03-26T03:07:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -81314,7 +81958,7 @@
       "has_color_variant_sibling": true,
       "source_page_id": "2aeffa524c5b807fb14dc23814473a87",
       "source_page_url": "https://app.notion.com/p/70222-2aeffa524c5b807fb14dc23814473a87",
-      "last_edited_at": "2026-06-12T03:18:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -81514,15 +82158,15 @@
         },
         {
           "section": "Installation Parts",
-          "part_number": "CRC5",
-          "part_id_notion": "2ceffa524c5b8118b65ef938fc8c91ae",
+          "part_number": "CRS5-M1",
+          "part_id_notion": "2ceffa524c5b81bda5fdc157a8f91c1d",
           "descriptive_name": "Check ring, 5\", 1/8IPS slip hole\n(for finish only version, use CRS5-M1)",
           "qty": 1,
           "qty_raw": "1",
-          "part_role": "Finish+Color",
+          "part_role": "Finish",
           "effective_role": "Finish",
-          "category": "Caps/Canopies/Domes",
-          "rack_size": 9,
+          "category": "Uncategorized",
+          "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
         },
@@ -81928,7 +82572,7 @@
       "has_color_variant_sibling": true,
       "source_page_id": "2aeffa524c5b8013b54fcd0fd405497a",
       "source_page_url": "https://app.notion.com/p/70220-2aeffa524c5b8013b54fcd0fd405497a",
-      "last_edited_at": "2026-06-12T03:18:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -82128,15 +82772,15 @@
         },
         {
           "section": "Installation Parts",
-          "part_number": "CRC5",
-          "part_id_notion": "2ceffa524c5b8118b65ef938fc8c91ae",
+          "part_number": "CRS5-M1",
+          "part_id_notion": "2ceffa524c5b81bda5fdc157a8f91c1d",
           "descriptive_name": "Check ring, 5\", 1/8IPS slip hole\n(for finish only version, use CRS5-M1)",
           "qty": 1,
           "qty_raw": "1",
-          "part_role": "Finish+Color",
+          "part_role": "Finish",
           "effective_role": "Finish",
-          "category": "Caps/Canopies/Domes",
-          "rack_size": 9,
+          "category": "Uncategorized",
+          "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
         },
@@ -82249,7 +82893,7 @@
       "has_color_variant_sibling": true,
       "source_page_id": "2aeffa524c5b8038bbcde55a10643104",
       "source_page_url": "https://app.notion.com/p/70130-2aeffa524c5b8038bbcde55a10643104",
-      "last_edited_at": "2026-06-12T03:15:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -82379,15 +83023,15 @@
         },
         {
           "section": "Assembly Parts",
-          "part_number": "CRC5",
-          "part_id_notion": "2ceffa524c5b8118b65ef938fc8c91ae",
+          "part_number": "CRS5",
+          "part_id_notion": "2dfffa524c5b80e3881ce059b696716f",
           "descriptive_name": "Check ring, 5\", 1/8IPS slip hole\n(for finish only version, use CRS5)",
           "qty": 1,
           "qty_raw": "1",
-          "part_role": "Finish+Color",
+          "part_role": "Finish",
           "effective_role": "Finish",
-          "category": "Caps/Canopies/Domes",
-          "rack_size": 9,
+          "category": "Uncategorized",
+          "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
         },
@@ -82779,7 +83423,7 @@
       "has_color_variant_sibling": true,
       "source_page_id": "2aeffa524c5b8096bd41ef71811285a8",
       "source_page_url": "https://app.notion.com/p/70122-2aeffa524c5b8096bd41ef71811285a8",
-      "last_edited_at": "2026-06-12T03:23:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -82909,15 +83553,15 @@
         },
         {
           "section": "Assembly Parts",
-          "part_number": "CRC5",
-          "part_id_notion": "2ceffa524c5b8118b65ef938fc8c91ae",
+          "part_number": "CRS5",
+          "part_id_notion": "2dfffa524c5b80e3881ce059b696716f",
           "descriptive_name": "Check ring, 5\u201d, 1/8IPS slip hole\n(for finish only version, use CRS5)",
           "qty": 1,
           "qty_raw": "1",
-          "part_role": "Finish+Color",
+          "part_role": "Finish",
           "effective_role": "Finish",
-          "category": "Caps/Canopies/Domes",
-          "rack_size": 9,
+          "category": "Uncategorized",
+          "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
         },
@@ -84063,7 +84707,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2aeffa524c5b8021a28ac1b02ddbd8ed",
       "source_page_url": "https://app.notion.com/p/60631-2aeffa524c5b8021a28ac1b02ddbd8ed",
-      "last_edited_at": "2026-06-12T03:15:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Tier Assembly",
@@ -84253,7 +84897,35 @@
           "part_id_notion": "2ceffa524c5b812ebf1ec7c0a5386f04",
           "descriptive_name": "Pipe aluminum, extension, 3 lengths, 8-32 set screws",
           "qty": 1,
-          "qty_raw": "1\n1\n1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Extension Rod Assembly",
+          "part_number": "PA6-M1",
+          "part_id_notion": "2ceffa524c5b810b8503f4f5bf9ee8d5",
+          "descriptive_name": "Pipe aluminum, extension, 3 lengths, 8-32 set screws",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Extension Rod Assembly",
+          "part_number": "PA10-M1",
+          "part_id_notion": "2ceffa524c5b81fd9d47d8d0544e638b",
+          "descriptive_name": "Pipe aluminum, extension, 3 lengths, 8-32 set screws",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -84521,7 +85193,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -84552,7 +85224,7 @@
       "has_color_variant_sibling": false,
       "source_page_id": "2aeffa524c5b8038be4fd6add732b468",
       "source_page_url": "https://app.notion.com/p/60630-2aeffa524c5b8038be4fd6add732b468",
-      "last_edited_at": "2026-06-12T03:15:00.000Z",
+      "last_edited_at": "2026-06-25T16:45:00.000Z",
       "parts": [
         {
           "section": "Tier Assembly",
@@ -84742,7 +85414,35 @@
           "part_id_notion": "2ceffa524c5b812ebf1ec7c0a5386f04",
           "descriptive_name": "Pipe aluminum, extension, 3 lengths, 8-32 set screws",
           "qty": 1,
-          "qty_raw": "1\n1\n1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Extension Rod Assembly",
+          "part_number": "PA6-M1",
+          "part_id_notion": "2ceffa524c5b810b8503f4f5bf9ee8d5",
+          "descriptive_name": "Pipe aluminum, extension, 3 lengths, 8-32 set screws",
+          "qty": 1,
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Extension Rod Assembly",
+          "part_number": "PA10-M1",
+          "part_id_notion": "2ceffa524c5b81fd9d47d8d0544e638b",
+          "descriptive_name": "Pipe aluminum, extension, 3 lengths, 8-32 set screws",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -85010,7 +85710,7 @@
           "qty": 1,
           "qty_raw": "1",
           "part_role": "Finish+Color",
-          "effective_role": "Finish",
+          "effective_role": "Color",
           "category": "Caps/Canopies/Domes",
           "rack_size": 9,
           "black_batch_stocked": false,
@@ -85552,7 +86252,21 @@
           "part_id_notion": "2ceffa524c5b812ebf1ec7c0a5386f04",
           "descriptive_name": "Pipe aluminum, extension, 2 lengths, 8-32 set screws",
           "qty": 1,
-          "qty_raw": "1\n1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Extension Rod Assembly",
+          "part_number": "PA6-M1",
+          "part_id_notion": "2ceffa524c5b810b8503f4f5bf9ee8d5",
+          "descriptive_name": "Pipe aluminum, extension, 2 lengths, 8-32 set screws",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -86041,7 +86755,21 @@
           "part_id_notion": "2ceffa524c5b812ebf1ec7c0a5386f04",
           "descriptive_name": "Pipe aluminum, extension, 2 lengths, 8-32 set screws",
           "qty": 1,
-          "qty_raw": "1\n1",
+          "qty_raw": "1",
+          "part_role": "Color Only",
+          "effective_role": "Color",
+          "category": "Pipes Secondary",
+          "rack_size": 7,
+          "black_batch_stocked": false,
+          "location": ""
+        },
+        {
+          "section": "Extension Rod Assembly",
+          "part_number": "PA6-M1",
+          "part_id_notion": "2ceffa524c5b810b8503f4f5bf9ee8d5",
+          "descriptive_name": "Pipe aluminum, extension, 2 lengths, 8-32 set screws",
+          "qty": 1,
+          "qty_raw": "1",
           "part_role": "Color Only",
           "effective_role": "Color",
           "category": "Pipes Secondary",
@@ -120494,7 +121222,7 @@
       "has_color_variant_sibling": true,
       "source_page_id": "2aeffa524c5b80e89294dde5bab39abb",
       "source_page_url": "https://app.notion.com/p/30222-2aeffa524c5b80e89294dde5bab39abb",
-      "last_edited_at": "2026-06-12T03:19:00.000Z",
+      "last_edited_at": "2026-06-25T19:57:00.000Z",
       "parts": [
         {
           "section": "Assembly Parts",
@@ -120708,15 +121436,15 @@
         },
         {
           "section": "Installation Parts",
-          "part_number": "CRC5",
-          "part_id_notion": "2ceffa524c5b8118b65ef938fc8c91ae",
+          "part_number": "CRS5-M1",
+          "part_id_notion": "2ceffa524c5b81bda5fdc157a8f91c1d",
           "descriptive_name": "Check ring, 5\u201d, 1/8IPS slip hole\n(for finish only version, use CRS5-M1)",
           "qty": 1,
           "qty_raw": "1",
-          "part_role": "Finish+Color",
+          "part_role": "Finish",
           "effective_role": "Finish",
-          "category": "Caps/Canopies/Domes",
-          "rack_size": 9,
+          "category": "Uncategorized",
+          "rack_size": 1,
           "black_batch_stocked": false,
           "location": ""
         },
