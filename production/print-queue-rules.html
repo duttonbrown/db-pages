@@ -433,13 +433,48 @@
 
 <nav class="side-nav" aria-label="Production navigation">
   <a class="side-nav-dept" href="/production/">Production</a>
-  <ul class="side-nav-tabs" role="tablist">
-    <li><a class="side-nav-tab" href="print-queue.html#order">Order queue</a></li>
-    <li><a class="side-nav-tab" href="print-queue.html#print">Print queue</a></li>
-    <li><a class="side-nav-tab" href="print-queue.html#assembly">Order triage</a></li>
-    <li><a class="side-nav-tab is-active" href="print-queue-rules.html" aria-current="page">Rules</a></li>
+  <ul class="side-nav-tabs">
+    <li class="has-sub"><button class="side-nav-tab" data-sub="manage" aria-expanded="true">Manage <span class="sub-caret">&#9656;</span></button>
+      <ul class="side-nav-sub" aria-label="Manage tools">
+        <li class="has-sub"><button class="side-nav-tab" data-sub="printq" aria-expanded="true">Print <span class="sub-caret">&#9656;</span></button>
+          <ul class="side-nav-sub" aria-label="Print queue tools">
+            <li><a href="print-queue.html#order">Order queue <span class="ext">&#8599;</span></a></li>
+            <li><a href="print-queue.html#print">Print Queue <span class="ext">&#8599;</span></a></li>
+            <li><a href="print-queue.html#travelers">Travelers <span class="ext">&#8599;</span></a></li>
+            <li><a href="print-queue.html#assembly">Job Preview <span class="ext">&#8599;</span></a></li>
+            <li><a href="order-release.html">Guide <span class="ext">&#8599;</span></a></li>
+            <li><a class="is-active" href="print-queue-rules.html" aria-current="page">Rules</a></li>
+          </ul>
+        </li>
+        <li><a href="log/#triage">Assign</a></li>
+      </ul>
+    </li>
+    <li class="has-sub"><button class="side-nav-tab" data-sub="powder" aria-expanded="true">Powder Coating <span class="sub-caret">&#9656;</span></button>
+      <ul class="side-nav-sub" aria-label="Powder Coating tools">
+        <li><a href="powder-coating/#log">Powder coating log <span class="ext">&#8599;</span></a></li>
+        <li><a href="powder-coating/#queue">Batch Queue <span class="ext">&#8599;</span></a></li>
+        <li><a href="powder-coating/#batch">Issue Batch <span class="ext">&#8599;</span></a></li>
+        <li><a href="powder-coating/#rework">Recoat <span class="ext">&#8599;</span></a></li>
+        <li><a href="powder-coating/#stock">Stock Batch <span class="ext">&#8599;</span></a></li>
+      </ul>
+    </li>
+    <li><a class="side-nav-tab side-nav-link" href="log/#assembly">Assembly</a></li>
+    <li class="has-sub"><button class="side-nav-tab" data-sub="qc" aria-expanded="true">QC &amp; Testing <span class="sub-caret">&#9656;</span></button>
+      <ul class="side-nav-sub" aria-label="QC &amp; quality tools">
+        <li><a href="log/#qc">QC log <span class="ext">&#8599;</span></a></li>
+        <li><a href="log/#parts-requests">Parts Request <span class="ext">&#8599;</span></a></li>
+        <li><a href="log/#rework">Rework <span class="ext">&#8599;</span></a></li>
+      </ul>
+    </li>
+    <li><a class="side-nav-tab side-nav-link" href="log/#shipping">Shipping</a></li>
   </ul>
-  <div class="side-nav-foot"><a href="/">&larr; Hub home</a></div>
+  <div class="side-nav-foot">
+    <ul class="side-nav-tabs">
+      <li><a class="side-nav-tab side-nav-link" href="log/#thisweek">This Week</a></li>
+      <li><a class="side-nav-tab side-nav-link" href="overview/">Overview <span class="ext">&#8599;</span></a></li>
+    </ul>
+    <a href="tools.html">&larr; All production tools</a>
+  </div>
 </nav>
 
 <div class="app-main">
@@ -803,122 +838,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ─────────── Change log ─────────── -->
-  <section class="block">
-    <h2 class="section-title">Change log</h2>
-    <p class="page-sub" style="margin:0 0 16px;">
-      Notable rule and behavior changes to the print queue, newest first. We log
-      a change here when it alters how orders are classified, routed, tagged, or
-      surfaced — small fixes and copy tweaks are left to git history.
-    </p>
-    <style>
-      .changelog { list-style: none; margin: 0; padding: 0; }
-      .changelog > li {
-        display: grid;
-        grid-template-columns: 92px 1fr;
-        gap: 16px;
-        padding: 12px 0;
-        border-top: 1px solid var(--border);
-      }
-      .changelog > li:first-child { border-top: none; }
-      .changelog .cl-date {
-        font-size: 12px; font-weight: 600; color: var(--accent-dark);
-        letter-spacing: 0.02em; white-space: nowrap; padding-top: 1px;
-      }
-      .changelog .cl-title {
-        font-size: 14px; font-weight: 600; color: var(--ink);
-        margin: 0 0 3px; line-height: 1.35;
-      }
-      .changelog .cl-body {
-        font-size: 13px; color: var(--text); margin: 0; line-height: 1.5;
-      }
-      .changelog .cl-body code {
-        background: var(--bg); border: 1px solid var(--border);
-        border-radius: 4px; padding: 0 4px; font-size: 12px;
-      }
-      @media (max-width: 560px) {
-        .changelog > li { grid-template-columns: 1fr; gap: 4px; }
-      }
-    </style>
-    <ul class="changelog">
-      <li>
-        <div class="cl-date">2026-06-16</div>
-        <div>
-          <p class="cl-title">Every open order now gets a traveler — catch-all sheet for the odd ones.</p>
-          <p class="cl-body">
-            If the build rules don’t recognize an order, it still gets a pickable
-            <strong>Shipping</strong> traveler instead of disappearing. This
-            covers <strong>bulb / glass-globe-only</strong> orders (#36103,
-            #36130), <strong>custom $0 draft orders</strong>, and
-            <strong>one-time / lost-part</strong> orders with a free-text line and
-            no real SKU. The sheet lists every physical line and notes “no
-            standard build — pull, pack, ship; confirm with the manager if
-            anything needs building.” Only fee/label-only or empty orders get no
-            sheet — those still show in <strong>“Needs attention”</strong> for the
-            lead to dismiss. CUSTOM-* color-match lines on a build order now also
-            surface under “Also on this order” so they can’t be missed.
-          </p>
-        </div>
-      </li>
-      <li>
-        <div class="cl-date">2026-06-16</div>
-        <div>
-          <p class="cl-title">Bulbs &amp; glass globes now show on the traveler so shipping packs them.</p>
-          <p class="cl-body">
-            Bulbs and glass globes never get a build sheet (nothing to build),
-            so they were invisible on the fixture traveler — the shipping station
-            had no cue to put them in the box. They now appear under
-            <strong>“Also on this order”</strong>, badged amber
-            <strong>“ships with order · pack”</strong>. Non-physical lines
-            (package protection, fees, signature, return labels) are still left
-            off — nothing to pack.
-          </p>
-        </div>
-      </li>
-      <li>
-        <div class="cl-date">2026-06-16</div>
-        <div>
-          <p class="cl-title">Traveler sheet polish — logo, EXPEDITE, tighter layout.</p>
-          <p class="cl-body">
-            Fixed the missing top-right logo (now the local brandmark, not a
-            flaky external image that failed to load into the PDF). Moved the
-            <strong>EXPEDITE</strong> callout <em>above</em> the Order Date in
-            the footer. Dropped the redundant color chip next to the “Powder
-            Coating” pill — the color already shows on every build line. Tightened
-            the “Also on this order” rows so they take less room.
-          </p>
-        </div>
-      </li>
-      <li>
-        <div class="cl-date">2026-06-16</div>
-        <div>
-          <p class="cl-title">“Needs attention” panel — no order leaves the board unseen.</p>
-          <p class="cl-body">
-            Any open order that ends up with <em>no</em> traveler now lists in a
-            <strong>“Needs attention”</strong> panel with a count tile. After the
-            catch-all change above, that’s only fee/label-only or empty orders
-            (nothing to ship) — the lead glances and dismisses. This is the
-            backstop that ensures an order can never silently vanish from a round
-            the way #36103 and #36130 did.
-          </p>
-        </div>
-      </li>
-      <li>
-        <div class="cl-date">2026-06-16</div>
-        <div>
-          <p class="cl-title">Release marker tag renamed <code>traveler-tracked</code> → <code>traveler</code>.</p>
-          <p class="cl-body">
-            The tag the release flow adds to mark an order as one of our
-            released travelers (the resync watch set) is now simply
-            <code>traveler</code>. Readers accept both names during the
-            transition, and a one-time migration re-tags in-flight orders, so
-            nothing breaks mid-round. <code>printed</code> is unchanged.
-          </p>
-        </div>
-      </li>
-    </ul>
   </section>
 
 </main>

@@ -41,127 +41,16 @@
     width: 100%;
   }
 
-  .side-nav {
-    position: sticky;
-    top: 24px;
-    align-self: flex-start;
-    width: 200px;
-    flex-shrink: 0;
-    background: white;
-    border: 1px solid var(--border);
-    border-right: none;
-    border-radius: var(--radius) 0 0 var(--radius);
-    padding: 22px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
-    /* Soft right edge so the sidebar visually merges with the card */
-  }
-  /* The rail header (.side-nav-dept) + logo (top hub-bar) come from
-     /_shared/portal.css — no local brand/eyebrow rules needed. */
-  .side-nav-tabs {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .side-nav-tabs li { margin: 0; }
-  .side-nav-tab {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 10px 22px 10px 19px;       /* extra room on the right of the dot */
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.01em;
-    position: relative;
-    transition: color 0.15s ease, background 0.15s ease;
-    white-space: nowrap;
-    background: transparent;
-    border: none;
-    font-family: inherit;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-    border-left: 3px solid transparent;
-    padding-left: 19px;
-  }
-  .side-nav-tab:hover {
-    color: var(--text);
-    background: var(--bg);
-  }
-  .side-nav-tab.is-active,
-  .side-nav-tab[aria-current="page"] {
-    color: var(--ink);
-    font-weight: 600;
-    background: var(--bg);
-    border-left-color: var(--accent);
-  }
-  .side-nav-tab .tab-count {
-    display: inline-block;
-    min-width: 18px;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 1px 6px;
-    border-radius: 6px;
-    background: var(--bg);
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    border: 1px solid var(--border);
-  }
-  .side-nav-tab.is-active .tab-count,
-  .side-nav-tab[aria-current="page"] .tab-count {
-    background: white;
-    color: var(--accent-dark);
-    border-color: #FCD9A6;
-  }
+  /* The rail (.side-nav, .side-nav-dept, .side-nav-tab(s), .side-nav-sub, carets,
+     .side-nav-foot, .side-nav-section) now uses the CANONICAL hub rail from
+     /_shared/portal.css — same as /production/log/ — so this page keeps the exact
+     navigation structure (Manage → Print → tabs) instead of a solo bespoke rail.
+     Do NOT re-add .side-nav* rules here or they'll override portal.css and the
+     rail will drift / the nested submenu will break. */
 
-  /* Tablet/mobile: stack sidebar above the card as a horizontal bar */
+  /* Tablet/mobile: stack the rail above the card (portal.css styles the rail). */
   @media (max-width: 900px) {
-    .app-shell {
-      flex-direction: column;
-      padding: 16px 16px 32px;
-    }
-    .side-nav {
-      position: relative;
-      top: auto;
-      width: 100%;
-      flex-direction: column;
-      gap: 8px;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius) var(--radius) 0 0;
-      box-shadow: none;
-    }
-    .side-nav-tabs {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 2px;
-    }
-    .side-nav-tab {
-      padding: 6px 12px;
-      border-left: none;
-      width: auto;
-      border-radius: 6px;
-    }
-    .side-nav-tab.is-active,
-    .side-nav-tab[aria-current="page"] {
-      border-left: none;
-      background: var(--ink);
-      color: white;
-    }
-    .side-nav-tab.is-active .tab-count,
-    .side-nav-tab[aria-current="page"] .tab-count {
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border-color: transparent;
-    }
+    .app-shell { flex-direction: column; padding: 16px 16px 32px; }
     .card {
       border-radius: 0 0 var(--radius) var(--radius);
       border-top: none;
@@ -174,7 +63,7 @@
     align-items: flex-start;
     flex: 1;
     min-width: 0;
-    max-width: 1080px;
+    max-width: 1180px;                 /* match the canonical hub width (portal.css) */
   }
   .card {
     background: var(--card);
@@ -185,7 +74,7 @@
     border: 1px solid var(--border);
     border-left: none;
   }
-  .card-wide { max-width: 1080px; }
+  .card-wide { max-width: 1180px; }
 
   /* Page intro — eyebrow + lead, mirrors purchase-request */
   .page-intro {
@@ -1584,6 +1473,21 @@
     letter-spacing: 0.04em; color: var(--accent-dark); margin-left: 4px;
     font-variant-numeric: tabular-nums;
   }
+  /* Job number(s) for the card — a small monospace pill row under the order #. */
+  .trv-jobs { margin: 2px 0 6px; font-size: 11px; color: var(--muted);
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .trv-job-pill { display: inline-flex; align-items: center; gap: 6px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px;
+    font-weight: 600; letter-spacing: -0.02em; color: var(--ink);
+    background: var(--bg, #f4f4f4); border: 1px solid var(--border, #e2e2e2);
+    border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
+  .trv-job-split { font-family: inherit; font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent-dark, #d97706);
+    background: none; border: none; padding: 0 0 0 2px; cursor: pointer; }
+  .trv-job-split:hover { text-decoration: underline; }
+  /* Job roster line in the focused (?order=) banner. */
+  .order-job-roster { margin-top: 8px; display: flex; align-items: center;
+    gap: 6px; flex-wrap: wrap; font-size: 11px; font-weight: 600; }
   .trv-ordernum {
     font-size: 19px; font-weight: 400; color: var(--ink); letter-spacing: -0.01em;
     line-height: 1.1; margin: 0 0 12px;
@@ -1961,37 +1865,56 @@
 
 <div class="app-shell">
 
-<aside class="side-nav" aria-label="Production navigation">
-  <a class="side-nav-dept" href="./">Production</a>
-  <ul class="side-nav-tabs" role="tablist">
-    <li>
-      <button type="button" class="side-nav-tab" id="tab-order" role="tab" onclick="setTab('order')">
-        Order queue <span class="tab-count" id="cnt-order">—</span>
-      </button>
+<!-- Production rail — identical structure to /production/log/ so this page stays
+     part of the same navigation (no "solo page" jump). Print is expanded with its
+     four in-page tabs (Order queue / Print queue / Travelers / Job Preview) wired
+     to setTab() — they switch the panel in place; Guide/Rules and every other rail
+     item navigate. The active in-page tab is marked is-subcurrent by setTab(). -->
+<nav class="side-nav" aria-label="Production sections">
+  <a class="side-nav-dept" href="log/">Production</a>
+  <ul class="side-nav-tabs">
+    <li class="has-sub"><button class="side-nav-tab" data-sub="manage" aria-expanded="true">Manage <span class="sub-caret">&#9656;</span></button>
+      <ul class="side-nav-sub" aria-label="Manage tools">
+        <li class="has-sub"><button class="side-nav-tab" data-sub="printq" aria-expanded="true">Print <span class="sub-caret">&#9656;</span></button>
+          <ul class="side-nav-sub" aria-label="Print queue tools">
+            <li><a id="tab-order"     href="#order"     onclick="setTab('order');return false;">Order queue <span class="tab-count" id="cnt-order">—</span></a></li>
+            <li><a id="tab-print"     href="#print"     onclick="setTab('print');return false;">Print Queue <span class="tab-count" id="cnt-print">—</span></a></li>
+            <li><a id="tab-travelers" href="#travelers" onclick="setTab('travelers');return false;">Travelers <span class="tab-count" id="cnt-travelers">—</span></a></li>
+            <li><a id="tab-assembly"  href="#assembly"  onclick="setTab('assembly');return false;">Job Preview <span class="tab-count" id="cnt-assembly">—</span></a></li>
+            <li><a href="order-release.html">Guide <span class="ext">&#8599;</span></a></li>
+            <li><a href="print-queue-rules.html">Rules <span class="ext">&#8599;</span></a></li>
+          </ul>
+        </li>
+        <li><a href="log/#triage">Assign</a></li>
+      </ul>
     </li>
-    <li>
-      <button type="button" class="side-nav-tab is-active" id="tab-print" role="tab" onclick="setTab('print')">
-        Print queue <span class="tab-count" id="cnt-print">—</span>
-      </button>
+    <li class="has-sub"><button class="side-nav-tab" data-sub="powder" aria-expanded="true">Powder Coating <span class="sub-caret">&#9656;</span></button>
+      <ul class="side-nav-sub" aria-label="Powder Coating tools">
+        <li><a href="powder-coating/#log">Powder coating log <span class="ext">&#8599;</span></a></li>
+        <li><a href="powder-coating/#queue">Batch Queue <span class="ext">&#8599;</span></a></li>
+        <li><a href="powder-coating/#batch">Issue Batch <span class="ext">&#8599;</span></a></li>
+        <li><a href="powder-coating/#rework">Recoat <span class="ext">&#8599;</span></a></li>
+        <li><a href="powder-coating/#stock">Stock Batch <span class="ext">&#8599;</span></a></li>
+      </ul>
     </li>
-    <li>
-      <button type="button" class="side-nav-tab" id="tab-travelers" role="tab" onclick="setTab('travelers')">
-        Travelers <span class="tab-count" id="cnt-travelers">—</span>
-      </button>
+    <li><a class="side-nav-tab side-nav-link" href="log/#assembly">Assembly</a></li>
+    <li class="has-sub"><button class="side-nav-tab" data-sub="qc" aria-expanded="true">QC &amp; Testing <span class="sub-caret">&#9656;</span></button>
+      <ul class="side-nav-sub" aria-label="QC &amp; quality tools">
+        <li><a href="log/#qc">QC log <span class="ext">&#8599;</span></a></li>
+        <li><a href="log/#parts-requests">Parts Request <span class="ext">&#8599;</span></a></li>
+        <li><a href="log/#rework">Rework <span class="ext">&#8599;</span></a></li>
+      </ul>
     </li>
-    <li>
-      <button type="button" class="side-nav-tab" id="tab-assembly" role="tab" onclick="setTab('assembly')">
-        Job Preview <span class="tab-count" id="cnt-assembly">—</span>
-      </button>
-    </li>
-    <li>
-      <a class="side-nav-tab" href="order-release.html">Guide</a>
-    </li>
-    <li>
-      <a class="side-nav-tab" href="print-queue-rules.html">Rules</a>
-    </li>
+    <li><a class="side-nav-tab side-nav-link" href="log/#shipping">Shipping</a></li>
   </ul>
-</aside>
+  <div class="side-nav-foot">
+    <ul class="side-nav-tabs">
+      <li><a class="side-nav-tab side-nav-link" href="log/#thisweek">This Week</a></li>
+      <li><a class="side-nav-tab side-nav-link" href="overview/">Overview <span class="ext">&#8599;</span></a></li>
+    </ul>
+    <a href="tools.html">&larr; All production tools</a>
+  </div>
+</nav>
 
 <div class="app-main">
 <main class="card card-wide">
@@ -2106,160 +2029,27 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-22T11:42:38",
+  "built_at": "2026-06-25T08:52:30",
   "orders": [
     {
-      "shopify_order_id": "7018884628562",
-      "shopify_order_name": "36212",
-      "shopify_order_number": "36212",
+      "shopify_order_id": "7023171600466",
+      "shopify_order_name": "36270",
+      "shopify_order_number": "36270",
       "shopify_url": "",
       "customer_name": "",
       "customer_email": "",
-      "customer_orders_count": 41,
-      "customer_total_spent": 21693.02,
+      "customer_orders_count": 5,
+      "customer_total_spent": 2363.0,
       "ship_by_date": null,
-      "latest_ship_by": "July 20, 2026",
+      "latest_ship_by": "July 23, 2026",
       "lead_time_label": "3 - 4 weeks",
       "is_expedited": false,
-      "created_at": "2026-06-22T11:40:16-05:00",
-      "tags": "$20K Club, trade",
-      "total_price": 232.0,
-      "priority": null,
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
-        {
-          "shopify_order_id": "7018884628562",
-          "shopify_order_name": "36212",
-          "shopify_order_number": "36212",
-          "key": [
-            "color",
-            "White",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "White",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
-            "30120"
-          ],
-          "variant_skus": [
-            "30120-2A"
-          ],
-          "line_item_titles": [
-            "Color Cap Sconce 6\""
-          ],
-          "lines": [
-            {
-              "title": "Color Cap Sconce 6\"",
-              "variant_title": "Nickel / White",
-              "variant_sku": "30120-2A",
-              "parent_sku": "30120",
-              "qty": 1,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-cap-sconce-6-nickel-white.jpg?v=1753156274&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "3 - 4 weeks",
-                  "is_image": false
-                }
-              ],
-              "rod_finish": "Finish",
-              "lampholder": "L-A15"
-            }
-          ],
-          "total_qty": 1,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|White|lighting"
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "7018884628562",
-          "shopify_order_name": "36212",
-          "shopify_order_number": "36212",
-          "shopify_url": "",
-          "customer_name": "",
-          "ship_by_date": null,
-          "created_at": "2026-06-22T11:40:16-05:00",
-          "parent_sku": "30120",
-          "color": "White",
-          "finish": "Nickel",
-          "category": "fixture",
-          "category_label": "Fixture",
-          "qty": 1,
-          "line_item_ids": [
-            16960812417106
-          ],
-          "item_titles": [
-            "Color Cap Sconce 6\""
-          ],
-          "variant_skus": [
-            "30120-2A"
-          ],
-          "lines": [
-            {
-              "sku": "30120-2A",
-              "title": "Color Cap Sconce 6\"",
-              "qty": 1,
-              "finish": "Nickel",
-              "color": "White",
-              "category": "fixture",
-              "variant_title": "Nickel / White",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-cap-sconce-6-nickel-white.jpg?v=1753156274&width=120"
-            }
-          ],
-          "tags": [
-            "Auto-Created",
-            "Color"
-          ],
-          "priority": null,
-          "is_large_order": false,
-          "is_accessory": false,
-          "is_color": true,
-          "location": "Powder Coating",
-          "review_note": null
-        }
-      ],
-      "traveler_pdf_url": "",
-      "no_traveler_reason": null,
-      "ships_with": []
-    },
-    {
-      "shopify_order_id": "7018775969874",
-      "shopify_order_name": "36210",
-      "shopify_order_number": "36210",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 3,
-      "customer_total_spent": 14745.88,
-      "ship_by_date": null,
-      "latest_ship_by": "July 20, 2026",
-      "lead_time_label": "3 - 4 weeks",
-      "is_expedited": false,
-      "created_at": "2026-06-22T11:02:49-05:00",
+      "created_at": "2026-06-25T07:38:53-05:00",
       "tags": "redo, trade",
-      "total_price": 4754.23,
+      "total_price": 715.74,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
-        "Auto-Created",
         "Color"
       ],
       "billing_address": null,
@@ -2270,39 +2060,39 @@ const QUEUE = {
       "predicted_page_count": 1,
       "printouts": [
         {
-          "shopify_order_id": "7018775969874",
-          "shopify_order_name": "36210",
-          "shopify_order_number": "36210",
+          "shopify_order_id": "7023171600466",
+          "shopify_order_name": "36270",
+          "shopify_order_number": "36270",
           "key": [
             "color",
-            "Orange",
+            "Bone",
             "lighting"
           ],
           "page_count": 1,
           "location": "Powder Coating",
-          "color": "Orange",
+          "color": "Bone",
           "finish": null,
           "category": "lighting",
           "category_label": "Lighting",
           "parent_skus": [
-            "30110-12"
+            "60130"
           ],
           "variant_skus": [
-            "30110-12-1I"
+            "60130-1BO"
           ],
           "line_item_titles": [
-            "Color Cap Pendant 12\""
+            "Color Reader Flush Mount"
           ],
           "lines": [
             {
-              "title": "Color Cap Pendant 12\"",
-              "variant_title": "Brass / Orange / Flat ceiling",
-              "variant_sku": "30110-12-1I",
-              "parent_sku": "30110-12",
-              "qty": 14,
+              "title": "Color Reader Flush Mount",
+              "variant_title": "Brass / Bone / Flat ceiling",
+              "variant_sku": "60130-1BO",
+              "parent_sku": "60130",
+              "qty": 3,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-cap-globe-pendant-12-brass-orange_e006409e-7908-4b6b-b1e8-7616e004190d.jpg?v=1775636652&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-reader-flush-mount-brass-bone.jpg?v=1758378250&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2310,54 +2100,54 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
-              "rod_finish": "Finish",
-              "lampholder": "L-A"
+              "rod_finish": "No Rod",
+              "lampholder": "L-PAR16"
             }
           ],
-          "total_qty": 14,
+          "total_qty": 3,
           "notes": null,
           "source": "color",
-          "traveler_key": "color|Orange|lighting"
+          "traveler_key": "color|Bone|lighting",
+          "jobs": []
         }
       ],
       "notion_rows": [
         {
-          "shopify_order_id": "7018775969874",
-          "shopify_order_name": "36210",
-          "shopify_order_number": "36210",
+          "shopify_order_id": "7023171600466",
+          "shopify_order_name": "36270",
+          "shopify_order_number": "36270",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-22T11:02:49-05:00",
-          "parent_sku": "30110-12",
-          "color": "Orange",
+          "created_at": "2026-06-25T07:38:53-05:00",
+          "parent_sku": "60130",
+          "color": "Bone",
           "finish": "Brass",
           "category": "fixture",
           "category_label": "Fixture",
-          "qty": 14,
+          "qty": 3,
           "line_item_ids": [
-            16960515473490
+            16971054088274
           ],
           "item_titles": [
-            "Color Cap Pendant 12\""
+            "Color Reader Flush Mount"
           ],
           "variant_skus": [
-            "30110-12-1I"
+            "60130-1BO"
           ],
           "lines": [
             {
-              "sku": "30110-12-1I",
-              "title": "Color Cap Pendant 12\"",
-              "qty": 14,
+              "sku": "60130-1BO",
+              "title": "Color Reader Flush Mount",
+              "qty": 3,
               "finish": "Brass",
-              "color": "Orange",
+              "color": "Bone",
               "category": "fixture",
-              "variant_title": "Brass / Orange / Flat ceiling",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-cap-globe-pendant-12-brass-orange_e006409e-7908-4b6b-b1e8-7616e004190d.jpg?v=1775636652&width=120"
+              "variant_title": "Brass / Bone / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-reader-flush-mount-brass-bone.jpg?v=1758378250&width=120"
             }
           ],
           "tags": [
-            "Auto-Created",
             "Color"
           ],
           "priority": "Redo",
@@ -2373,27 +2163,217 @@ const QUEUE = {
       "ships_with": []
     },
     {
-      "shopify_order_id": "7018773905490",
-      "shopify_order_name": "36209",
-      "shopify_order_number": "36209",
+      "shopify_order_id": "7022902411346",
+      "shopify_order_name": "36269",
+      "shopify_order_number": "36269",
       "shopify_url": "",
       "customer_name": "",
       "customer_email": "",
-      "customer_orders_count": 12,
-      "customer_total_spent": 6568.32,
+      "customer_orders_count": 2,
+      "customer_total_spent": 415.94,
       "ship_by_date": null,
-      "latest_ship_by": "June 29, 2026",
-      "lead_time_label": "Within 1 week",
+      "latest_ship_by": "\u2014",
+      "lead_time_label": "",
       "is_expedited": false,
-      "created_at": "2026-06-22T11:01:56-05:00",
-      "tags": "trade",
-      "total_price": 480.0,
-      "priority": null,
+      "created_at": "2026-06-25T01:26:12-05:00",
+      "tags": "redo",
+      "total_price": 35.94,
+      "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
-        "Auto-Created",
-        "Finish-Only"
+        "Color"
       ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7022902411346",
+          "shopify_order_name": "36269",
+          "shopify_order_number": "36269",
+          "key": [
+            "color",
+            "Black",
+            "accessory"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": "Black",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "parent_skus": [
+            "ER1-6-3",
+            "ER1-4-3"
+          ],
+          "variant_skus": [
+            "ER1-6-3",
+            "ER1-4-3"
+          ],
+          "line_item_titles": [
+            "Extension Rods"
+          ],
+          "lines": [
+            {
+              "title": "Extension Rods",
+              "variant_title": "Black / 6\"",
+              "variant_sku": "ER1-6-3",
+              "parent_sku": "ER1-6-3",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-extension-rod-black_d946c10c-6eca-4eb9-9427-8aff2a8b0a01.jpg?v=1747968904&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Same as fixture",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Extension Rods",
+              "variant_title": "Black / 4\"",
+              "variant_sku": "ER1-4-3",
+              "parent_sku": "ER1-4-3",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-extension-rod-black_d946c10c-6eca-4eb9-9427-8aff2a8b0a01.jpg?v=1747968904&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Same as fixture",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": "BLACK-ACCESSORY: routed to Shipping (batch black separately or fold into another Black work order)",
+          "source": "color",
+          "traveler_key": "color|Black|accessory",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7022902411346",
+          "shopify_order_name": "36269",
+          "shopify_order_number": "36269",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T01:26:12-05:00",
+          "parent_sku": "ER1-6-3",
+          "color": "Black",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 1,
+          "line_item_ids": [
+            16970365075538
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-6-3"
+          ],
+          "lines": [
+            {
+              "sku": "ER1-6-3",
+              "title": "Extension Rods",
+              "qty": 1,
+              "finish": null,
+              "color": "Black",
+              "category": "accessory",
+              "variant_title": "Black / 6\"",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-extension-rod-black_d946c10c-6eca-4eb9-9427-8aff2a8b0a01.jpg?v=1747968904&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7022902411346",
+          "shopify_order_name": "36269",
+          "shopify_order_number": "36269",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T01:26:12-05:00",
+          "parent_sku": "ER1-4-3",
+          "color": "Black",
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 1,
+          "line_item_ids": [
+            16970365108306
+          ],
+          "item_titles": [
+            "Extension Rods"
+          ],
+          "variant_skus": [
+            "ER1-4-3"
+          ],
+          "lines": [
+            {
+              "sku": "ER1-4-3",
+              "title": "Extension Rods",
+              "qty": 1,
+              "finish": null,
+              "color": "Black",
+              "category": "accessory",
+              "variant_title": "Black / 4\"",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-extension-rod-black_d946c10c-6eca-4eb9-9427-8aff2a8b0a01.jpg?v=1747968904&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
+    {
+      "shopify_order_id": "7022825144402",
+      "shopify_order_name": "36268",
+      "shopify_order_number": "36268",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 294.98,
+      "ship_by_date": null,
+      "latest_ship_by": "July 1, 2026",
+      "lead_time_label": "Within 1 week",
+      "is_expedited": false,
+      "created_at": "2026-06-24T23:55:03-05:00",
+      "tags": "discount, redo",
+      "total_price": 294.98,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [],
       "billing_address": null,
       "shipping_address": null,
       "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
@@ -2402,9 +2382,9 @@ const QUEUE = {
       "predicted_page_count": 1,
       "printouts": [
         {
-          "shopify_order_id": "7018773905490",
-          "shopify_order_name": "36209",
-          "shopify_order_number": "36209",
+          "shopify_order_id": "7022825144402",
+          "shopify_order_name": "36268",
+          "shopify_order_number": "36268",
           "key": [
             "finish",
             "Nickel"
@@ -2416,24 +2396,24 @@ const QUEUE = {
           "category": "fixture",
           "category_label": "Fixture",
           "parent_skus": [
-            "60221"
+            "30110-8"
           ],
           "variant_skus": [
-            "60221-2"
+            "30110-8-2"
           ],
           "line_item_titles": [
-            "Scepter Sconce 18\""
+            "Cap Pendant 8\""
           ],
           "lines": [
             {
-              "title": "Scepter Sconce 18\"",
-              "variant_title": "Nickel",
-              "variant_sku": "60221-2",
-              "parent_sku": "60221",
-              "qty": 2,
+              "title": "Cap Pendant 8\"",
+              "variant_title": "Nickel / Flat ceiling",
+              "variant_sku": "30110-8-2",
+              "parent_sku": "30110-8",
+              "qty": 1,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/scepter-sconce-18-nickel-nickel.jpg?v=1757506948&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/cap-globe-pendant-8-nickel-nickel_feb94895-8315-4102-b59b-d66d065987c1.jpg?v=1775636593&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2445,53 +2425,53 @@ const QUEUE = {
               "lampholder": "L-A"
             }
           ],
-          "total_qty": 2,
+          "total_qty": 1,
           "notes": null,
           "source": "finish",
-          "traveler_key": "finish|Nickel"
+          "traveler_key": "finish|Nickel",
+          "jobs": []
         }
       ],
       "notion_rows": [
         {
-          "shopify_order_id": "7018773905490",
-          "shopify_order_name": "36209",
-          "shopify_order_number": "36209",
+          "shopify_order_id": "7022825144402",
+          "shopify_order_name": "36268",
+          "shopify_order_number": "36268",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-22T11:01:56-05:00",
-          "parent_sku": "60221",
+          "created_at": "2026-06-24T23:55:03-05:00",
+          "parent_sku": "30110-8",
           "color": null,
           "finish": "Nickel",
           "category": "fixture",
           "category_label": "Fixture",
-          "qty": 2,
+          "qty": 1,
           "line_item_ids": [
-            16960509673554
+            16970201825362
           ],
           "item_titles": [
-            "Scepter Sconce 18\""
+            "Cap Pendant 8\""
           ],
           "variant_skus": [
-            "60221-2"
+            "30110-8-2"
           ],
           "lines": [
             {
-              "sku": "60221-2",
-              "title": "Scepter Sconce 18\"",
-              "qty": 2,
+              "sku": "30110-8-2",
+              "title": "Cap Pendant 8\"",
+              "qty": 1,
               "finish": "Nickel",
               "color": null,
               "category": "fixture",
-              "variant_title": "Nickel",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/scepter-sconce-18-nickel-nickel.jpg?v=1757506948&width=120"
+              "variant_title": "Nickel / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/cap-globe-pendant-8-nickel-nickel_feb94895-8315-4102-b59b-d66d065987c1.jpg?v=1775636593&width=120"
             }
           ],
           "tags": [
-            "Auto-Created",
             "Finish-Only"
           ],
-          "priority": null,
+          "priority": "Redo",
           "is_large_order": false,
           "is_accessory": false,
           "is_color": false,
@@ -2504,106 +2484,24 @@ const QUEUE = {
       "ships_with": []
     },
     {
-      "shopify_order_id": "7018767548498",
-      "shopify_order_name": "36208",
-      "shopify_order_number": "36208",
+      "shopify_order_id": "7022815314002",
+      "shopify_order_name": "36267",
+      "shopify_order_number": "36267",
       "shopify_url": "",
       "customer_name": "",
       "customer_email": "",
       "customer_orders_count": 2,
-      "customer_total_spent": 265.77,
+      "customer_total_spent": 4419.45,
       "ship_by_date": null,
-      "latest_ship_by": "June 24, 2026",
-      "lead_time_label": "1 - 2 days",
-      "is_expedited": false,
-      "created_at": "2026-06-22T10:59:17-05:00",
-      "tags": "trade",
-      "total_price": 0.0,
-      "priority": null,
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Bulb-Only",
-        "Color"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Shipping",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
-        {
-          "shopify_order_id": "7018767548498",
-          "shopify_order_name": "36208",
-          "shopify_order_number": "36208",
-          "key": [
-            "catch-all",
-            "7018767548498"
-          ],
-          "page_count": 1,
-          "location": "Shipping",
-          "color": null,
-          "finish": null,
-          "category": "accessory",
-          "category_label": "Ship / Review",
-          "parent_skus": [
-            "BULB-9993"
-          ],
-          "variant_skus": [
-            "BULB-9993"
-          ],
-          "line_item_titles": [
-            "LED G25 Bulb - 3-Pack"
-          ],
-          "lines": [
-            {
-              "title": "LED G25 Bulb - 3-Pack",
-              "variant_title": "White / 500 lumens",
-              "variant_sku": "BULB-9993",
-              "parent_sku": "BULB-9993",
-              "qty": 1,
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/G25-bulb-500lm-3000K-enclosed-dimmable-3-pack.jpg?v=1775636800&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "1 - 2 days",
-                  "is_image": false
-                }
-              ]
-            }
-          ],
-          "total_qty": 1,
-          "notes": "No standard build \u2014 bulbs/globes, custom, or one-time items. Pull, pack, and ship; confirm with the manager if anything needs building.",
-          "source": "catch-all",
-          "traveler_key": "catch-all|7018767548498"
-        }
-      ],
-      "notion_rows": [],
-      "traveler_pdf_url": "",
-      "no_traveler_reason": null,
-      "ships_with": []
-    },
-    {
-      "shopify_order_id": "7018746839122",
-      "shopify_order_name": "36207",
-      "shopify_order_number": "36207",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 2,
-      "customer_total_spent": 784.95,
-      "ship_by_date": null,
-      "latest_ship_by": "July 20, 2026",
+      "latest_ship_by": "July 22, 2026",
       "lead_time_label": "3 - 4 weeks",
       "is_expedited": false,
-      "created_at": "2026-06-22T10:48:12-05:00",
-      "tags": "redo, trade",
-      "total_price": 779.23,
+      "created_at": "2026-06-24T23:39:22-05:00",
+      "tags": "redo",
+      "total_price": 4376.73,
       "priority": "Redo",
       "is_large_order": false,
       "auto_tags": [
-        "Auto-Created",
         "Color"
       ],
       "billing_address": null,
@@ -2611,90 +2509,115 @@ const QUEUE = {
       "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
       "note": "",
       "note_attributes": [],
-      "predicted_page_count": 2,
+      "predicted_page_count": 4,
       "printouts": [
         {
-          "shopify_order_id": "7018746839122",
-          "shopify_order_name": "36207",
-          "shopify_order_number": "36207",
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
           "key": [
             "color",
-            "Bone",
-            "hardware"
+            "Black",
+            "lighting"
           ],
           "page_count": 1,
           "location": "Powder Coating",
-          "color": "Bone",
+          "color": "Black",
           "finish": null,
-          "category": "hardware",
-          "category_label": "Hardware",
+          "category": "lighting",
+          "category_label": "Lighting",
           "parent_skus": [
-            "H13"
+            "30112-10",
+            "30407"
           ],
           "variant_skus": [
-            "H13-2BO"
+            "30112-10-3",
+            "30407-3"
           ],
           "line_item_titles": [
-            "Color Persona Hook"
+            "Color Lure Pendant 10\"",
+            "Color Big Status Chandelier 42\""
           ],
           "lines": [
             {
-              "title": "Color Persona Hook",
-              "variant_title": "Nickel / Bone",
-              "variant_sku": "H13-2BO",
-              "parent_sku": "H13",
-              "qty": 4,
-              "category": "hook",
-              "category_label": "Hook",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/2-persona-hook-hardware-nickel-bone.jpg?v=1776738292&width=120",
+              "title": "Color Lure Pendant 10\"",
+              "variant_title": "Black / Black / Flat ceiling",
+              "variant_sku": "30112-10-3",
+              "parent_sku": "30112-10",
+              "qty": 3,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-lure-pendant-10-black-black.jpg?v=1776738269&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
                   "value": "3 - 4 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "Color Big Status Chandelier 42\"",
+              "variant_title": "Black / Black / Flat ceiling",
+              "variant_sku": "30407-3",
+              "parent_sku": "30407",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-big-status-chandelier-black-black-1_30e0fdea-5f0e-403e-9851-24a452e38557.jpg?v=1776738287&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
             }
           ],
           "total_qty": 4,
           "notes": null,
           "source": "color",
-          "traveler_key": "color|Bone|hardware"
+          "traveler_key": "color|Black|lighting",
+          "jobs": []
         },
         {
-          "shopify_order_id": "7018746839122",
-          "shopify_order_name": "36207",
-          "shopify_order_number": "36207",
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
           "key": [
             "color",
-            "Bone",
+            "Spa",
             "lighting"
           ],
           "page_count": 1,
           "location": "Powder Coating",
-          "color": "Bone",
+          "color": "Spa",
           "finish": null,
           "category": "lighting",
           "category_label": "Lighting",
           "parent_skus": [
-            "30220"
+            "30223"
           ],
           "variant_skus": [
-            "30220-2BO"
+            "30223-3B"
           ],
           "line_item_titles": [
-            "Color Cap Double Sconce 6\""
+            "Color Legend 2 Sconce"
           ],
           "lines": [
             {
-              "title": "Color Cap Double Sconce 6\"",
-              "variant_title": "Nickel / Bone",
-              "variant_sku": "30220-2BO",
-              "parent_sku": "30220",
+              "title": "Color Legend 2 Sconce",
+              "variant_title": "Black / Spa",
+              "variant_sku": "30223-3B",
+              "parent_sku": "30223",
               "qty": 2,
               "category": "fixture",
               "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-cap-double-sconce-6-nickel-bone.jpg?v=1776530524&width=120",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-legend-sconce-2-black-spa.jpg?v=1747968152&width=120",
               "properties": [
                 {
                   "name": "Lead Time",
@@ -2709,49 +2632,150 @@ const QUEUE = {
           "total_qty": 2,
           "notes": null,
           "source": "color",
-          "traveler_key": "color|Bone|lighting"
+          "traveler_key": "color|Spa|lighting",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
+          "key": [
+            "color",
+            "Slate Blue",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Slate Blue",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30224"
+          ],
+          "variant_skus": [
+            "30224-3F"
+          ],
+          "line_item_titles": [
+            "Color Icon 2 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Icon 2 Sconce",
+              "variant_title": "Black / Slate Blue",
+              "variant_sku": "30224-3F",
+              "parent_sku": "30224",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-icon-sconce-2-slateblue_3761548e-69e3-4d3c-b70a-ced0bdf7da8f.jpg?v=1747968139&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Slate Blue|lighting",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
+          "key": [
+            "color",
+            "Lagoon",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60420"
+          ],
+          "variant_skus": [
+            "60420-3D"
+          ],
+          "line_item_titles": [
+            "Color Vogue 4 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Vogue 4 Sconce",
+              "variant_title": "Black / Lagoon",
+              "variant_sku": "60420-3D",
+              "parent_sku": "60420",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-vogue-4-sconce-lagoon-1.jpg?v=1758680664&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "No Rod",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Lagoon|lighting",
+          "jobs": []
         }
       ],
       "notion_rows": [
         {
-          "shopify_order_id": "7018746839122",
-          "shopify_order_name": "36207",
-          "shopify_order_number": "36207",
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-22T10:48:12-05:00",
-          "parent_sku": "H13",
-          "color": "Bone",
-          "finish": "Nickel",
-          "category": "hook",
-          "category_label": "Hook",
-          "qty": 4,
+          "created_at": "2026-06-24T23:39:22-05:00",
+          "parent_sku": "30112-10",
+          "color": "Black",
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 3,
           "line_item_ids": [
-            16960454623314
+            16970180755538
           ],
           "item_titles": [
-            "Color Persona Hook"
+            "Color Lure Pendant 10\""
           ],
           "variant_skus": [
-            "H13-2BO"
+            "30112-10-3"
           ],
           "lines": [
             {
-              "sku": "H13-2BO",
-              "title": "Color Persona Hook",
-              "qty": 4,
-              "finish": "Nickel",
-              "color": "Bone",
-              "category": "hook",
-              "variant_title": "Nickel / Bone",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/2-persona-hook-hardware-nickel-bone.jpg?v=1776738292&width=120"
+              "sku": "30112-10-3",
+              "title": "Color Lure Pendant 10\"",
+              "qty": 3,
+              "finish": "Black",
+              "color": "Black",
+              "category": "fixture",
+              "variant_title": "Black / Black / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-lure-pendant-10-black-black.jpg?v=1776738269&width=120"
             }
           ],
           "tags": [
-            "Auto-Created",
-            "Color",
-            "Hardware-Only"
+            "Color"
           ],
           "priority": "Redo",
           "is_large_order": false,
@@ -2761,42 +2785,41 @@ const QUEUE = {
           "review_note": null
         },
         {
-          "shopify_order_id": "7018746839122",
-          "shopify_order_name": "36207",
-          "shopify_order_number": "36207",
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-22T10:48:12-05:00",
-          "parent_sku": "30220",
-          "color": "Bone",
-          "finish": "Nickel",
+          "created_at": "2026-06-24T23:39:22-05:00",
+          "parent_sku": "30223",
+          "color": "Spa",
+          "finish": "Black",
           "category": "fixture",
           "category_label": "Fixture",
           "qty": 2,
           "line_item_ids": [
-            16960454656082
+            16970180788306
           ],
           "item_titles": [
-            "Color Cap Double Sconce 6\""
+            "Color Legend 2 Sconce"
           ],
           "variant_skus": [
-            "30220-2BO"
+            "30223-3B"
           ],
           "lines": [
             {
-              "sku": "30220-2BO",
-              "title": "Color Cap Double Sconce 6\"",
+              "sku": "30223-3B",
+              "title": "Color Legend 2 Sconce",
               "qty": 2,
-              "finish": "Nickel",
-              "color": "Bone",
+              "finish": "Black",
+              "color": "Spa",
               "category": "fixture",
-              "variant_title": "Nickel / Bone",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-cap-double-sconce-6-nickel-bone.jpg?v=1776530524&width=120"
+              "variant_title": "Black / Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-legend-sconce-2-black-spa.jpg?v=1747968152&width=120"
             }
           ],
           "tags": [
-            "Auto-Created",
             "Color"
           ],
           "priority": "Redo",
@@ -2805,132 +2828,134 @@ const QUEUE = {
           "is_color": true,
           "location": "Powder Coating",
           "review_note": null
-        }
-      ],
-      "traveler_pdf_url": "",
-      "no_traveler_reason": null,
-      "ships_with": []
-    },
-    {
-      "shopify_order_id": "7018700308562",
-      "shopify_order_name": "36206",
-      "shopify_order_number": "36206",
-      "shopify_url": "",
-      "customer_name": "",
-      "customer_email": "",
-      "customer_orders_count": 1,
-      "customer_total_spent": 440.98,
-      "ship_by_date": null,
-      "latest_ship_by": "July 20, 2026",
-      "lead_time_label": "3 - 4 weeks",
-      "is_expedited": false,
-      "created_at": "2026-06-22T10:14:06-05:00",
-      "tags": "discount, redo",
-      "total_price": 440.98,
-      "priority": "Redo",
-      "is_large_order": false,
-      "auto_tags": [
-        "Auto-Created",
-        "Color",
-        "Plug-In"
-      ],
-      "billing_address": null,
-      "shipping_address": null,
-      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
-      "note": "",
-      "note_attributes": [],
-      "predicted_page_count": 1,
-      "printouts": [
+        },
         {
-          "shopify_order_id": "7018700308562",
-          "shopify_order_name": "36206",
-          "shopify_order_number": "36206",
-          "key": [
-            "color",
-            "Orange",
-            "lighting"
-          ],
-          "page_count": 1,
-          "location": "Powder Coating",
-          "color": "Orange",
-          "finish": null,
-          "category": "lighting",
-          "category_label": "Lighting",
-          "parent_skus": [
-            "40121P-17"
-          ],
-          "variant_skus": [
-            "40121P-17-1I"
-          ],
-          "line_item_titles": [
-            "Color Boom Swing Arm Plug-in Sconce - 17\" Arm"
-          ],
-          "lines": [
-            {
-              "title": "Color Boom Swing Arm Plug-in Sconce - 17\" Arm",
-              "variant_title": "Brass / Orange",
-              "variant_sku": "40121P-17-1I",
-              "parent_sku": "40121P-17",
-              "qty": 1,
-              "category": "fixture",
-              "category_label": "Fixture",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-boom-swing-arm-sconce-plug-in-17-brass-orange.jpg?v=1757356934&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "3 - 4 weeks",
-                  "is_image": false
-                }
-              ],
-              "lampholder": "L-A"
-            }
-          ],
-          "total_qty": 1,
-          "notes": null,
-          "source": "color",
-          "traveler_key": "color|Orange|lighting"
-        }
-      ],
-      "notion_rows": [
-        {
-          "shopify_order_id": "7018700308562",
-          "shopify_order_name": "36206",
-          "shopify_order_number": "36206",
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
           "shopify_url": "",
           "customer_name": "",
           "ship_by_date": null,
-          "created_at": "2026-06-22T10:14:06-05:00",
-          "parent_sku": "40121P-17",
-          "color": "Orange",
-          "finish": "Brass",
+          "created_at": "2026-06-24T23:39:22-05:00",
+          "parent_sku": "30224",
+          "color": "Slate Blue",
+          "finish": "Black",
           "category": "fixture",
           "category_label": "Fixture",
           "qty": 1,
           "line_item_ids": [
-            16960338526290
+            16970180821074
           ],
           "item_titles": [
-            "Color Boom Swing Arm Plug-in Sconce - 17\" Arm"
+            "Color Icon 2 Sconce"
           ],
           "variant_skus": [
-            "40121P-17-1I"
+            "30224-3F"
           ],
           "lines": [
             {
-              "sku": "40121P-17-1I",
-              "title": "Color Boom Swing Arm Plug-in Sconce - 17\" Arm",
+              "sku": "30224-3F",
+              "title": "Color Icon 2 Sconce",
               "qty": 1,
-              "finish": "Brass",
-              "color": "Orange",
+              "finish": "Black",
+              "color": "Slate Blue",
               "category": "fixture",
-              "variant_title": "Brass / Orange",
-              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-boom-swing-arm-sconce-plug-in-17-brass-orange.jpg?v=1757356934&width=120"
+              "variant_title": "Black / Slate Blue",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-icon-sconce-2-slateblue_3761548e-69e3-4d3c-b70a-ced0bdf7da8f.jpg?v=1747968139&width=120"
             }
           ],
           "tags": [
-            "Auto-Created",
-            "Color",
-            "Plug-In"
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-24T23:39:22-05:00",
+          "parent_sku": "60420",
+          "color": "Lagoon",
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16970180853842
+          ],
+          "item_titles": [
+            "Color Vogue 4 Sconce"
+          ],
+          "variant_skus": [
+            "60420-3D"
+          ],
+          "lines": [
+            {
+              "sku": "60420-3D",
+              "title": "Color Vogue 4 Sconce",
+              "qty": 1,
+              "finish": "Black",
+              "color": "Lagoon",
+              "category": "fixture",
+              "variant_title": "Black / Lagoon",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/5-vogue-4-sconce-lagoon-1.jpg?v=1758680664&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7022815314002",
+          "shopify_order_name": "36267",
+          "shopify_order_number": "36267",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-24T23:39:22-05:00",
+          "parent_sku": "30407",
+          "color": "Black",
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16970180886610
+          ],
+          "item_titles": [
+            "Color Big Status Chandelier 42\""
+          ],
+          "variant_skus": [
+            "30407-3"
+          ],
+          "lines": [
+            {
+              "sku": "30407-3",
+              "title": "Color Big Status Chandelier 42\"",
+              "qty": 1,
+              "finish": "Black",
+              "color": "Black",
+              "category": "fixture",
+              "variant_title": "Black / Black / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-big-status-chandelier-black-black-1_30e0fdea-5f0e-403e-9851-24a452e38557.jpg?v=1776738287&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
           ],
           "priority": "Redo",
           "is_large_order": false,
@@ -2948,11 +2973,11 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 6,
+    "orders": 4,
     "printouts": 7,
-    "notion_rows": 6,
-    "skipped_already_printed": 175,
-    "printed_today": 29,
+    "notion_rows": 9,
+    "skipped_already_printed": 163,
+    "printed_today": 18,
     "needs_attention": 0,
     "printed_review": 0
   },
@@ -2971,10 +2996,19 @@ if (ORDER_FILTER.length && QUEUE && Array.isArray(QUEUE.orders)) {
   const banner = document.getElementById("orderFilterBanner");
   if (banner) {
     const asked = ORDER_FILTER.map(n => "#" + n).join(", ");
+    // Job roster: every job across the focused order(s)' printouts, in one line.
+    const allJobs = [];
+    QUEUE.orders.forEach(o => (o.printouts || []).forEach(p =>
+      (p.jobs || []).forEach(j => allJobs.push(j.job))));
+    const uniqJobs = [...new Set(allJobs)].sort();
+    const roster = uniqJobs.length
+      ? `<div class="order-job-roster">Jobs: ${uniqJobs.map(j =>
+          `<span class="trv-job-pill">${j.replace(/[<>&]/g, "")}</span>`).join(" ")}</div>`
+      : "";
     banner.innerHTML = QUEUE.orders.length
       ? `Focused view — showing only <b>${asked}</b>. Printing and Release batch apply to just ` +
         `${QUEUE.orders.length === 1 ? "this order" : "these orders"}.` +
-        `<a href="${location.pathname}">Show full board</a>`
+        `<a href="${location.pathname}">Show full board</a>` + roster
       : `No open unprinted order matches <b>${asked}</b> — it may still be tagged ` +
         `<b>printed</b>, be fulfilled, or the board hasn't rebuilt since it changed (hourly).` +
         `<a href="${location.pathname}">Show full board</a>`;
@@ -4016,7 +4050,9 @@ function setTab(name, updateHash = true){
     const tab = document.getElementById(`tab-${n}`);
     const content = document.getElementById(`content-${n}`);
     if(!tab || !content) return;
-    tab.classList.toggle("is-active", n === name);
+    // The rail tabs are now Print sub-links; mark the active one with the
+    // sub-link current style (is-subcurrent), matching the hub rail elsewhere.
+    tab.classList.toggle("is-subcurrent", n === name);
     content.classList.toggle("active", n === name);
   });
   // Reflect the active tab in the URL so a tab is bookmarkable / shareable
@@ -4036,6 +4072,11 @@ window.addEventListener("hashchange", () => {
   const hash = (location.hash || "").replace("#","");
   if(TAB_NAMES.includes(hash)) setTab(hash, false);
 });
+
+// NOTE: collapsible rail groups (Manage / Print) are toggled by the SHARED
+// _shared/nav.js wireSideNav() — do NOT add a second data-sub click handler here.
+// A duplicate toggle cancels nav.js's (two flips = net zero), so the submenu
+// never opens. nav.js owns rail disclosure hub-wide.
 
 // ── Travelers renderer ───────────────────────────────────────────────────────
 // One traveler sheet per printout. The "build set" is this printout's own
@@ -4309,6 +4350,24 @@ function trvNotes(o){
     </div>`;
 }
 
+// Job number(s) for this traveler card, read off the spine at board build
+// (jobstamp.stamp_queue -> p.jobs). A color/finish card can span several spine
+// rows, so this renders a SET of pills. In the focused ?order= view a manager
+// also gets a "Split" button per job (writes J-..-1 -> J-..-1a back to the
+// spine via the console server). Pills print; the split control is screen-only.
+function trvJobs(o, p){
+  const jobs = (p && p.jobs) || [];
+  if(!jobs.length) return "";
+  const focused = ORDER_FILTER.length > 0;  // only offer splits in the focused view
+  const pills = jobs.map(j => {
+    const split = focused
+      ? `<button type="button" class="trv-job-split no-print" title="Split this job (e.g. ${escapeHtml(j.job)} -> ${escapeHtml(j.job)}a)" onclick="splitJob(this)" data-job="${escapeHtml(j.job)}" data-sku="${escapeHtml(j.parent_sku||"")}" data-order="${escapeHtml(String(o.shopify_order_number||""))}">Split</button>`
+      : "";
+    return `<span class="trv-job-pill" data-job="${escapeHtml(j.job)}">${escapeHtml(j.job)}${split}</span>`;
+  }).join("");
+  return `<p class="trv-jobs">${jobs.length > 1 ? "Jobs" : "Job"}: ${pills}</p>`;
+}
+
 // Traveler brandmark. Use the LOCAL svg (still copied beside every board for the
 // printed sheet's logo; the screen rail's logo now comes from the hub top bar),
 // not the old Order Printer Pro remote URL — a 250KB external fetch that silently failed
@@ -4536,6 +4595,7 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
           <h2 class="trv-ordernum">Order ${orderName}</h2>
           <p class="trv-eyebrow">Traveler${multi ? ` <span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}</p>
         </div>
+        ${trvJobs(o, p)}
       </div>
       <div class="trv-logo"><img src="${DB_LOGO}" alt="Dutton Brown"></div>
     </div>
@@ -5737,6 +5797,54 @@ function confirmUnassignedTasks(verb){
   return window.confirm(
     `${bits.join(" and ")} still need assignment (top of the Travelers tab) and ` +
     `will NOT appear on any traveler.\n\n${verb} anyway?`);
+}
+
+// ── Job split ────────────────────────────────────────────────────────────────
+// The console server (spine writer) is reached through the same hooks bridge the
+// production-log console uses: hooks.duttonbrown.com/prod -> 127.0.0.1:8766.
+// Locally (file:// / localhost preview) there's no bridge, so split is a no-op.
+const PROD_API_BASE = location.hostname.endsWith("duttonbrown.com")
+  ? "https://hooks.duttonbrown.com/prod"
+  : "";
+
+// Split one job (J-..-1 -> J-..-1a). The server reads the job's existing split
+// children to pick the next letter and guards an already-split job, so the
+// client just sends the page via the order+job; here we resolve the spine page
+// by asking /api/order-jobs for the order, matching the job string, then POST
+// /api/job/split with its page_id. Best-effort + clear toasts.
+async function splitJob(btn){
+  const job = btn.dataset.job, order = btn.dataset.order;
+  if(!PROD_API_BASE){
+    alert("Job splitting needs the live hub (hooks bridge). Open this board on hub.duttonbrown.com.");
+    return;
+  }
+  if(!window.confirm(`Split job ${job}? This creates ${job}a as a child job for the part that's being torn apart.`)) return;
+  btn.disabled = true; const label = btn.textContent; btn.textContent = "…";
+  try{
+    // Resolve the spine page id for this exact job via the order's roster.
+    const rosterResp = await fetch(`${PROD_API_BASE}/api/order-jobs?order=${encodeURIComponent(order)}`, {credentials:"include"});
+    const roster = await rosterResp.json();
+    if(!roster || roster.ok !== true) throw new Error((roster && roster.message) || "Couldn't read the order's jobs.");
+    const row = (roster.jobs || []).find(j => j.job === job);
+    if(!row) throw new Error(`Job ${job} not found on order ${order} (board may be stale).`);
+    const resp = await fetch(`${PROD_API_BASE}/api/job/split`, {
+      method:"POST", credentials:"include",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({page_id: row.page_id}),
+    });
+    const data = await resp.json();
+    if(!data || data.ok !== true) throw new Error((data && data.message) || `Error ${resp.status}`);
+    // Reflect it on the pill immediately (the board JSON refreshes hourly). The
+    // job is now split, so drop the Split button — a child can't be split again.
+    const pill = btn.closest(".trv-job-pill");
+    if(pill){ pill.dataset.job = data.job; pill.textContent = data.job; }
+    alert(`Split: ${data.base_job} -> ${data.job}`);
+  }catch(e){
+    btn.textContent = label;
+    alert("Split failed: " + e.message);
+  }finally{
+    btn.disabled = false;
+  }
 }
 
 // Print all travelers — flag the body so the print CSS hides chrome.
