@@ -1380,6 +1380,38 @@
   }
   .trv-toolbar-label { font-size: 13px; color: var(--text); }
   .trv-toolbar-actions { display: flex; gap: 8px; align-items: center; }
+
+  /* Search box — live filter over the rendered traveler sheets. */
+  .trv-search-wrap { position: relative; display: inline-flex; align-items: center; }
+  .trv-search {
+    font-family: inherit; font-size: 12.5px; color: var(--ink);
+    padding: 7px 28px 7px 12px; border: 1px solid var(--border); border-radius: 6px;
+    background: #fff; width: 270px; max-width: 42vw; transition: border-color .15s ease;
+  }
+  .trv-search:focus { outline: none; border-color: var(--accent); }
+  .trv-search::placeholder { color: var(--muted); }
+  .trv-search-clear {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    border: none; background: none; cursor: pointer; color: var(--muted);
+    font-size: 16px; line-height: 1; padding: 2px 4px;
+  }
+  .trv-search-clear:hover { color: var(--ink); }
+
+  /* To-print vs Unfulfilled segmented toggle. */
+  .trv-viewtoggle { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .trv-vt-btn {
+    font-family: inherit; font-size: 12px; font-weight: 500; cursor: pointer;
+    padding: 7px 13px; border: none; background: #fff; color: var(--muted);
+    transition: all .15s ease; white-space: nowrap;
+  }
+  .trv-vt-btn + .trv-vt-btn { border-left: 1px solid var(--border); }
+  .trv-vt-btn:hover { color: var(--ink); }
+  .trv-vt-btn.is-active { background: var(--ink); color: #fff; }
+
+  /* Hidden-by-filter sheet (search miss). Display:none drops it from print too. */
+  .traveler.trv-filtered-out { display: none !important; }
+  /* "Loading unfulfilled…" + empty-search states inside the list. */
+  .trv-view-status { padding: 28px 16px; text-align: center; color: var(--muted); font-size: 13px; }
   .trv-release-help { font-size: 11px; color: var(--muted); text-decoration: underline; white-space: nowrap; }
   .trv-release-help:hover { color: var(--accent-dark); }
   .trv-toolbar-hint { font-size: 11px; color: var(--muted); flex: 1 1 240px; min-width: 200px; }
@@ -1460,6 +1492,8 @@
     font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--muted); margin: 0;
   }
+  /* Provenance stamp (created · edited) — very small, muted, screen-only. */
+  .trv-stamp { font-size: 10px; color: var(--muted); margin: 1px 0 4px; letter-spacing: 0.01em; }
   /* "Order #" and the "TRAVELER n/n" eyebrow share one baseline-aligned row so
      the eyebrow sits to the RIGHT of the order number (saves vertical space). */
   .trv-ordernum-row { display: flex; align-items: baseline; gap: 12px; margin: 0 0 6px; flex-wrap: wrap; }
@@ -1697,6 +1731,19 @@
   }
   .trv-row-dragging { opacity: 0.4; }
   .trv-drop-over { outline: 2px dashed var(--accent); outline-offset: -2px; background: #FFF8EF; }
+
+  /* READ-ONLY (Unfulfilled view, Phase 1): hide every edit/assign/select
+     affordance so a released traveler can only be reopened + reprinted, never
+     re-arranged. The write engine targets the to-print QUEUE, so editing here
+     would silently corrupt the daily queue — kill the controls at the source.
+     Drag is also neutralized (pointer-events:none on the handle) so a row can't
+     start a drag. Per-sheet "Print" stays (it's not inside these selectors). */
+  body.trv-readonly .trv-drag-handle,
+  body.trv-readonly .trv-split-btn,
+  body.trv-readonly .trv-dist-btn,
+  body.trv-readonly .trv-select,
+  body.trv-readonly .trv-tasks { display: none !important; }
+  body.trv-readonly .trv-build-row { cursor: default; }
 
   /* ── Distribute dialog (assign line quantities across travelers, no drag) ── */
   .trv-dist-btn { display: block; margin: 3px 0 0 auto; font-size: 9px; line-height: 1.5;
@@ -1972,8 +2019,19 @@
   <div class="tab-content" id="content-travelers">
     <div class="trv-toolbar no-print">
       <span class="trv-toolbar-label"><strong id="trvCount">0</strong> traveler<span id="trvCountPlural">s</span></span>
+      <div class="trv-search-wrap">
+        <input type="search" id="trvSearch" class="trv-search" placeholder="Search order #, customer, SKU, color, job…"
+               oninput="applyTrvFilter()" autocomplete="off" spellcheck="false">
+        <button type="button" class="trv-search-clear" id="trvSearchClear" onclick="clearTrvSearch()" title="Clear search" style="display:none">×</button>
+      </div>
+      <div class="trv-viewtoggle" role="group" aria-label="Which travelers to show">
+        <button type="button" class="trv-vt-btn is-active" id="trvViewQueue" onclick="setTrvView('queue')"
+                title="Travelers waiting to be printed (the daily release queue)">To print</button>
+        <button type="button" class="trv-vt-btn" id="trvViewUnfulfilled" onclick="setTrvView('unfulfilled')"
+                title="Every unfulfilled order that already has a released traveler — reopen its latest version to reprint or edit">Unfulfilled</button>
+      </div>
       <div class="trv-toolbar-actions">
-        <button type="button" class="trv-btn trv-btn-primary" onclick="printAllTravelers()">Print all travelers</button>
+        <button type="button" class="trv-btn trv-btn-primary" id="printAllBtn" onclick="printAllTravelers()">Print all travelers</button>
         <button type="button" class="trv-btn" id="releaseBatchBtn" onclick="releaseBatch()"
                 title="Tag these orders printed, attach each traveler PDF to its Shopify order, and archive the batch to SharePoint. Runs automatically on the release PC — a Teams card confirms. If the PC is offline, a release file downloads for the &quot;DB Finalize Release&quot; shortcut instead.">Release batch</button>
         <button type="button" class="trv-btn" id="printSelectedBtn" onclick="printSelected()" disabled
@@ -1995,8 +2053,718 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T15:06:38",
+  "built_at": "2026-06-25T16:00:02",
   "orders": [
+    {
+      "shopify_order_id": "7023975792722",
+      "shopify_order_name": "36285",
+      "shopify_order_number": "36285",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 3,
+      "customer_total_spent": 2248.69,
+      "ship_by_date": null,
+      "latest_ship_by": "June 29, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-06-25T15:44:52-05:00",
+      "tags": "redo, trade",
+      "total_price": 8.48,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color",
+        "Sample"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7023975792722",
+          "shopify_order_name": "36285",
+          "shopify_order_number": "36285",
+          "key": [
+            "sample-only",
+            "7023975792722"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "sample",
+          "category_label": "Sample",
+          "parent_skus": [
+            "SAC-ALL",
+            "SAF-ALL"
+          ],
+          "variant_skus": [
+            "SAF-ALL",
+            "SAC-ALL"
+          ],
+          "line_item_titles": [
+            "Finish Samples",
+            "Color Samples"
+          ],
+          "lines": [
+            {
+              "title": "Finish Samples",
+              "variant_title": "All Finishes",
+              "variant_sku": "SAF-ALL",
+              "parent_sku": "SAF-ALL",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/finish-sample-ring-dutton-brown-1_815f8606-ec32-4056-85f0-88949151d0e0.jpg?v=1747968599&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Samples",
+              "variant_title": "All Colors",
+              "variant_sku": "SAC-ALL",
+              "parent_sku": "SAC-ALL",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/All-Colors_98189f34-7443-4ffd-bcfa-5cdbf76adba6.png?v=1763242187&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "sample-only",
+          "traveler_key": "sample-only|7023975792722",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
+    {
+      "shopify_order_id": "7023965601874",
+      "shopify_order_name": "36284",
+      "shopify_order_number": "36284",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 45.0,
+      "ship_by_date": null,
+      "latest_ship_by": "June 29, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-06-25T15:38:42-05:00",
+      "tags": "trade",
+      "total_price": 45.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Color",
+        "Sample"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "FedEx Standard Overnight",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7023965601874",
+          "shopify_order_name": "36284",
+          "shopify_order_number": "36284",
+          "key": [
+            "sample-only",
+            "7023965601874"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "sample",
+          "category_label": "Sample",
+          "parent_skus": [
+            "SAC-ALL",
+            "SAF-ALL"
+          ],
+          "variant_skus": [
+            "SAF-ALL",
+            "SAC-ALL"
+          ],
+          "line_item_titles": [
+            "Finish Samples",
+            "Color Samples"
+          ],
+          "lines": [
+            {
+              "title": "Finish Samples",
+              "variant_title": "All Finishes",
+              "variant_sku": "SAF-ALL",
+              "parent_sku": "SAF-ALL",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/finish-sample-ring-dutton-brown-1_815f8606-ec32-4056-85f0-88949151d0e0.jpg?v=1747968599&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Samples",
+              "variant_title": "All Colors",
+              "variant_sku": "SAC-ALL",
+              "parent_sku": "SAC-ALL",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/All-Colors_98189f34-7443-4ffd-bcfa-5cdbf76adba6.png?v=1763242187&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "sample-only",
+          "traveler_key": "sample-only|7023965601874",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
+    {
+      "shopify_order_id": "7023950397522",
+      "shopify_order_name": "36283",
+      "shopify_order_number": "36283",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 3,
+      "customer_total_spent": 7826.86,
+      "ship_by_date": null,
+      "latest_ship_by": "\u2014",
+      "lead_time_label": "",
+      "is_expedited": false,
+      "created_at": "2026-06-25T15:28:40-05:00",
+      "tags": "trade",
+      "total_price": 5009.52,
+      "priority": null,
+      "is_large_order": true,
+      "auto_tags": [
+        "Color",
+        "Large Order"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 3,
+      "printouts": [
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "key": [
+            "color",
+            "Riding Hood Red",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Riding Hood Red",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30405",
+            "50120-10",
+            "40111-8-23"
+          ],
+          "variant_skus": [
+            "30405-1RH",
+            "50120-10-1RH",
+            "40111-8-23-1RH"
+          ],
+          "line_item_titles": [
+            "Color Status Chandelier 35\"",
+            "Color Cadbury Sconce 10\"",
+            "Color Maxo Pendant 8\""
+          ],
+          "lines": [
+            {
+              "title": "Color Cadbury Sconce 10\"",
+              "variant_title": "Brass / Riding Hood Red",
+              "variant_sku": "50120-10-1RH",
+              "parent_sku": "50120-10",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-cadburry-sconce-10-brass-ridinghoodred.jpg?v=1747968560&width=120",
+              "properties": [],
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "Color Status Chandelier 35\"",
+              "variant_title": "Brass / Riding Hood Red / Flat ceiling",
+              "variant_sku": "30405-1RH",
+              "parent_sku": "30405",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-status-chandelier-brass-ridinghoodred-1.jpg?v=1754109232&width=120",
+              "properties": [],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            },
+            {
+              "title": "Color Maxo Pendant 8\"",
+              "variant_title": "Brass / Riding Hood Red / 23\"",
+              "variant_sku": "40111-8-23-1RH",
+              "parent_sku": "40111-8-23",
+              "qty": 3,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-maxo-pendant-8-brass-ridinghoodred.jpg?v=1747967608&width=120",
+              "properties": [],
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 6,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Riding Hood Red|lighting",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "key": [
+            "color",
+            "Spa",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Spa",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30223",
+            "60222"
+          ],
+          "variant_skus": [
+            "30223-1B",
+            "60222-1B"
+          ],
+          "line_item_titles": [
+            "Color Legend 2 Sconce",
+            "Color Monarch Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Legend 2 Sconce",
+              "variant_title": "Brass / Spa",
+              "variant_sku": "30223-1B",
+              "parent_sku": "30223",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-legend-sconce-2-brass-spa.jpg?v=1747968149&width=120",
+              "properties": [],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            },
+            {
+              "title": "Color Monarch Sconce",
+              "variant_title": "Brass / Spa",
+              "variant_sku": "60222-1B",
+              "parent_sku": "60222",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-monarch-sconce-brass-spa.jpg?v=1747968446&width=120",
+              "properties": [],
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 3,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Spa|lighting",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "key": [
+            "color",
+            "Barely",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Barely",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60128-17"
+          ],
+          "variant_skus": [
+            "60128-17-1K"
+          ],
+          "line_item_titles": [
+            "Color Reader Swing Arm Sconce - 17\" arm"
+          ],
+          "lines": [
+            {
+              "title": "Color Reader Swing Arm Sconce - 17\" arm",
+              "variant_title": "Brass / Barely",
+              "variant_sku": "60128-17-1K",
+              "parent_sku": "60128-17",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-reader-swing-arm-17-brass-barely.jpg?v=1747967893&width=120",
+              "properties": [],
+              "rod_finish": "Finish",
+              "lampholder": "L-PAR16"
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Barely|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T15:28:40-05:00",
+          "parent_sku": "30405",
+          "color": "Riding Hood Red",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16972803735634
+          ],
+          "item_titles": [
+            "Color Status Chandelier 35\""
+          ],
+          "variant_skus": [
+            "30405-1RH"
+          ],
+          "lines": [
+            {
+              "sku": "30405-1RH",
+              "title": "Color Status Chandelier 35\"",
+              "qty": 1,
+              "finish": "Brass",
+              "color": "Riding Hood Red",
+              "category": "fixture",
+              "variant_title": "Brass / Riding Hood Red / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-status-chandelier-brass-ridinghoodred-1.jpg?v=1754109232&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T15:28:40-05:00",
+          "parent_sku": "50120-10",
+          "color": "Riding Hood Red",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16972803768402
+          ],
+          "item_titles": [
+            "Color Cadbury Sconce 10\""
+          ],
+          "variant_skus": [
+            "50120-10-1RH"
+          ],
+          "lines": [
+            {
+              "sku": "50120-10-1RH",
+              "title": "Color Cadbury Sconce 10\"",
+              "qty": 2,
+              "finish": "Brass",
+              "color": "Riding Hood Red",
+              "category": "fixture",
+              "variant_title": "Brass / Riding Hood Red",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-cadburry-sconce-10-brass-ridinghoodred.jpg?v=1747968560&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T15:28:40-05:00",
+          "parent_sku": "30223",
+          "color": "Spa",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            16972803833938
+          ],
+          "item_titles": [
+            "Color Legend 2 Sconce"
+          ],
+          "variant_skus": [
+            "30223-1B"
+          ],
+          "lines": [
+            {
+              "sku": "30223-1B",
+              "title": "Color Legend 2 Sconce",
+              "qty": 1,
+              "finish": "Brass",
+              "color": "Spa",
+              "category": "fixture",
+              "variant_title": "Brass / Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-legend-sconce-2-brass-spa.jpg?v=1747968149&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T15:28:40-05:00",
+          "parent_sku": "60222",
+          "color": "Spa",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16972803866706
+          ],
+          "item_titles": [
+            "Color Monarch Sconce"
+          ],
+          "variant_skus": [
+            "60222-1B"
+          ],
+          "lines": [
+            {
+              "sku": "60222-1B",
+              "title": "Color Monarch Sconce",
+              "qty": 2,
+              "finish": "Brass",
+              "color": "Spa",
+              "category": "fixture",
+              "variant_title": "Brass / Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-monarch-sconce-brass-spa.jpg?v=1747968446&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T15:28:40-05:00",
+          "parent_sku": "40111-8-23",
+          "color": "Riding Hood Red",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 3,
+          "line_item_ids": [
+            16972803899474
+          ],
+          "item_titles": [
+            "Color Maxo Pendant 8\""
+          ],
+          "variant_skus": [
+            "40111-8-23-1RH"
+          ],
+          "lines": [
+            {
+              "sku": "40111-8-23-1RH",
+              "title": "Color Maxo Pendant 8\"",
+              "qty": 3,
+              "finish": "Brass",
+              "color": "Riding Hood Red",
+              "category": "fixture",
+              "variant_title": "Brass / Riding Hood Red / 23\"",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-maxo-pendant-8-brass-ridinghoodred.jpg?v=1747967608&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7023950397522",
+          "shopify_order_name": "36283",
+          "shopify_order_number": "36283",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T15:28:40-05:00",
+          "parent_sku": "60128-17",
+          "color": "Barely",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            16972803932242
+          ],
+          "item_titles": [
+            "Color Reader Swing Arm Sconce - 17\" arm"
+          ],
+          "variant_skus": [
+            "60128-17-1K"
+          ],
+          "lines": [
+            {
+              "sku": "60128-17-1K",
+              "title": "Color Reader Swing Arm Sconce - 17\" arm",
+              "qty": 2,
+              "finish": "Brass",
+              "color": "Barely",
+              "category": "fixture",
+              "variant_title": "Brass / Barely",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-reader-swing-arm-17-brass-barely.jpg?v=1747967893&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Large Order"
+          ],
+          "priority": null,
+          "is_large_order": true,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [
+        {
+          "title": "Custom Color",
+          "variant_title": "",
+          "variant_sku": "CUSTOM-COLOR",
+          "parent_sku": "CUSTOM-COLOR",
+          "qty": 1,
+          "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/banner-text-custom-color-dutton-brown.jpg?v=1748485143&width=120",
+          "properties": []
+        }
+      ]
+    },
     {
       "shopify_order_id": "7023889023058",
       "shopify_order_name": "36282",
@@ -3574,9 +4342,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 10,
-    "printouts": 13,
-    "notion_rows": 12,
+    "orders": 13,
+    "printouts": 18,
+    "notion_rows": 18,
     "skipped_already_printed": 152,
     "printed_today": 25,
     "needs_attention": 0,
@@ -5090,6 +5858,7 @@ function renderMasterTraveler(o, calloutHtml, showSelect){
           <h2 class="trv-ordernum">Order ${orderName}</h2>
           <p class="trv-eyebrow">Master <span class="trv-count-of">${total} travelers</span></p>
         </div>
+        ${trvCreatedEditedStamp(o)}
       </div>
       <div class="trv-logo"><img src="${DB_LOGO}" alt="Dutton Brown"></div>
     </div>
@@ -5197,6 +5966,7 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
           <h2 class="trv-ordernum">Order ${orderName}</h2>
           <p class="trv-eyebrow">Traveler${multi ? ` <span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}</p>
         </div>
+        ${trvCreatedEditedStamp(o)}
         ${trvJobs(o, p)}
       </div>
       <div class="trv-logo"><img src="${DB_LOGO}" alt="Dutton Brown"></div>
@@ -5244,10 +6014,22 @@ let TRV_REDO = [];          // stack of undone moves (for redo)
 let TRV_ROD_TASKS = 0;      // unassigned rod lines (the Travelers task bar)
 let TRV_BULB_TASKS = 0;     // unassigned bulb lines (multi-fixture orders)
 
+// Travelers view: "queue" = the daily to-print set (the injected QUEUE), or
+// "unfulfilled" = every unfulfilled order WITH a traveler incl. already-printed,
+// fetched on demand from unfulfilled-travelers.json. The renderer reads
+// trvData() so both views share one render path.
+let TRV_VIEW = "queue";
+let TRV_UNFULFILLED = null;     // cached fetched dataset (null until first load)
+let TRV_UNFULFILLED_LOADING = false;
+let TRV_UNFULFILLED_ERROR = false;  // last fetch failed (distinct from "empty")
+function trvData(){
+  return (TRV_VIEW === "unfulfilled" && TRV_UNFULFILLED) ? TRV_UNFULFILLED : QUEUE;
+}
+
 // Assign a stable per-line id once, so DnD can find the exact line object even
 // after re-renders. id = order|traveler_key|lineItemId|sku|ordinal.
-function ensureLineIds(){
-  (QUEUE.orders||[]).forEach(o => {
+function ensureLineIds(data){
+  ((data || trvData()).orders||[]).forEach(o => {
     (o.printouts||[]).forEach(p => {
       (p.lines||[]).forEach((ln, i) => {
         if(!ln._lid){
@@ -5260,7 +6042,7 @@ function ensureLineIds(){
 }
 
 function findPrintout(orderId, travelerKey){
-  const o = (QUEUE.orders||[]).find(x => String(x.shopify_order_id) === String(orderId));
+  const o = (trvData().orders||[]).find(x => String(x.shopify_order_id) === String(orderId));
   if(!o) return null;
   const p = (o.printouts||[]).find(x => String(x.traveler_key||"") === String(travelerKey));
   return p ? { order: o, printout: p } : null;
@@ -5282,7 +6064,14 @@ function recomputePrintout(p){
 
 let TRV_DRAG_LID = null;
 
+// Editing is disabled in the read-only (Unfulfilled) view — the move/split
+// engine targets the to-print QUEUE, so a drag/split here would corrupt it.
+// CSS hides the controls; this is the belt-and-suspenders JS guard for the
+// row-body drag that CSS can't fully prevent.
+function trvIsReadOnly(){ return document.body.classList.contains("trv-readonly"); }
+
 function trvDragStart(ev){
+  if(trvIsReadOnly()){ ev.preventDefault(); return; }
   const row = ev.target.closest(".trv-build-row");
   if(!row) return;
   TRV_DRAG_LID = row.dataset.lineId;
@@ -5545,6 +6334,7 @@ function trvSplitInPlace(lid, qty){
 
 // "Split" button: carve a chosen number of units off into a sibling line.
 function trvSplitRow(lid){
+  if(trvIsReadOnly()) return;
   const src = findLineByLid(lid);
   if(!src){ showTrvToast("Couldn't find that item.", null); return; }
   const total = src.line.qty || 0;
@@ -5561,6 +6351,7 @@ function trvSplitRow(lid){
 
 // "÷N" button: split a line into N even sibling lines on the same traveler.
 function trvSplitIntoN(lid){
+  if(trvIsReadOnly()) return;
   const src = findLineByLid(lid);
   if(!src){ showTrvToast("Couldn't find that item.", null); return; }
   const total = src.line.qty || 0;
@@ -5910,6 +6701,7 @@ function distQuick(btn, n){
 }
 
 function openDistribute(lid){
+  if(trvIsReadOnly()) return;
   const src = findLineByLid(lid);
   if(!src) return;
   const bulbMode = isBulbLine(src.line);
@@ -6197,13 +6989,44 @@ function trvExpediteCallout(){
     </div>`;
 }
 
+// Reset the toolbar count (the search filter normally owns it, but the early
+// returns below bypass the filter, so they must zero it themselves or it lies).
+function trvSetCount(n){
+  const c = document.getElementById("trvCount");
+  const p = document.getElementById("trvCountPlural");
+  if(c) c.textContent = n;
+  if(p) p.textContent = (n === 1) ? "" : "s";
+}
+
 function renderTravelers(){
   const mount = document.getElementById("travelers");
-  if(!QUEUE || !(QUEUE.orders||[]).length){
-    mount.innerHTML = `<div class="empty-state"><h2>No travelers</h2><p>No orders pending print.</p></div>`;
+  if(TRV_VIEW === "unfulfilled" && TRV_UNFULFILLED_LOADING){
+    mount.innerHTML = `<div class="trv-view-status">Loading unfulfilled travelers…</div>`;
+    trvSetCount(0);
     return;
   }
-  ensureLineIds();
+  // Fetch failed (404 / network / not published to this site) — say so, and do
+  // NOT silently fall back to the to-print QUEUE (which trvData() would do).
+  if(TRV_VIEW === "unfulfilled" && TRV_UNFULFILLED_ERROR){
+    mount.innerHTML = `<div class="empty-state"><h2>Couldn't load unfulfilled travelers</h2>`
+      + `<p>The dataset failed to load — it may not be published to this site yet. `
+      + `Try again shortly, or use the To-print view.</p></div>`;
+    trvSetCount(0);
+    return;
+  }
+  // DATA is the active view's dataset (to-print queue or unfulfilled). Read it
+  // through trvData() so the same renderer serves both; everything below that
+  // referenced QUEUE now reads DATA.
+  const DATA = trvData();
+  if(!DATA || !(DATA.orders||[]).length){
+    const msg = TRV_VIEW === "unfulfilled"
+      ? `<div class="empty-state"><h2>No unfulfilled travelers</h2><p>No unfulfilled orders have a released traveler yet.</p></div>`
+      : `<div class="empty-state"><h2>No travelers</h2><p>No orders pending print.</p></div>`;
+    mount.innerHTML = msg;
+    trvSetCount(0);
+    return;
+  }
+  ensureLineIds(DATA);
   // Flatten to (order, printout) pairs, in the same chronological order the
   // print queue uses. Each printout becomes one traveler sheet.
   // Flatten to (order, printout) pairs. The 1/N counter is per-order, so it's
@@ -6229,7 +7052,7 @@ function renderTravelers(){
   // Bulbs on multi-fixture orders are an ASSIGNMENT TASK too (mirror of rods):
   // their sheet never prints — the lead distributes the bulbs onto fixtures.
   const bulbTasks = [];
-  (QUEUE.orders||[]).forEach((o, orderIdx) => {
+  (DATA.orders||[]).forEach((o, orderIdx) => {
     (o.printouts||[]).forEach(p => { p._pendingRod = false; p._pendingBulb = false; });
     const ordered = (o.printouts||[]).map((p, origIdx) => ({p, origIdx}))
       .filter(({p}) => (p.lines||[]).length > 0)
@@ -6311,7 +7134,7 @@ function renderTravelers(){
   // would consume its own blank page and push the first traveler to page 2.
   // Master travelers ride immediately BEFORE their order's first sheet in the
   // print sequence — the unnumbered cover page used to pull the order together.
-  for(const o of (QUEUE.orders||[])){
+  for(const o of (DATA.orders||[])){
     if(!o._master) continue;
     const at = pairs.findIndex(x => x.o === o);
     if(at >= 0) pairs.splice(at, 0, { o, master: true });
@@ -6366,6 +7189,109 @@ function renderTravelers(){
     } else {
       ind.style.display = "none";
     }
+  }
+  // Re-apply any active search so the filter survives a re-render (a move/split
+  // rebuilds the list and would otherwise show everything again).
+  applyTrvFilter();
+}
+
+// ── Travelers: live search filter ──────────────────────────────────────────
+// Filters the rendered sheets by a free-text query matched against each sheet's
+// own text (order #, customer, SKUs, color/finish, job #, location are all on
+// the sheet). Hiding via a class keeps the DOM intact so a cleared search
+// instantly restores everything and so print respects the filter. The visible
+// count in the toolbar reflects the filtered set.
+function applyTrvFilter(){
+  const input = document.getElementById("trvSearch");
+  const q = (input ? input.value : "").trim().toLowerCase();
+  const clearBtn = document.getElementById("trvSearchClear");
+  if(clearBtn) clearBtn.style.display = q ? "" : "none";
+  const sheets = Array.from(document.querySelectorAll("#travelers .traveler"));
+  let shown = 0;
+  // Tokenize on whitespace — every token must match somewhere (AND), so
+  // "36265 red" narrows to that order's red sheets.
+  const tokens = q ? q.split(/\s+/) : [];
+  sheets.forEach(sheet => {
+    if(!tokens.length){ sheet.classList.remove("trv-filtered-out"); shown++; return; }
+    // textContent already carries the visible order #, customer, SKUs, color,
+    // and job — everything a user searches. We deliberately do NOT add the
+    // data-order attribute (the long internal Shopify id), which only produced
+    // surprising false-positive matches on numeric substrings.
+    const hay = (sheet.textContent || "").toLowerCase();
+    const hit = tokens.every(t => hay.includes(t));
+    sheet.classList.toggle("trv-filtered-out", !hit);
+    if(hit) shown++;
+  });
+  const cEl = document.getElementById("trvCount");
+  const pEl = document.getElementById("trvCountPlural");
+  if(cEl) cEl.textContent = shown;
+  if(pEl) pEl.textContent = shown === 1 ? "" : "s";
+}
+
+function clearTrvSearch(){
+  const input = document.getElementById("trvSearch");
+  if(input){ input.value = ""; input.focus(); }
+  applyTrvFilter();
+}
+
+// ── Travelers: To-print vs Unfulfilled view ────────────────────────────────
+// "Unfulfilled" shows every unfulfilled order that already has a released
+// traveler (incl. printed ones the daily queue drops), so the floor can reopen
+// the latest version to reprint or edit. The dataset is fetched on demand from
+// unfulfilled-travelers.json (published next to this page); the to-print queue
+// is the injected QUEUE and needs no fetch.
+function setTrvView(view){
+  TRV_VIEW = view;
+  const qBtn = document.getElementById("trvViewQueue");
+  const uBtn = document.getElementById("trvViewUnfulfilled");
+  if(qBtn) qBtn.classList.toggle("is-active", view === "queue");
+  if(uBtn) uBtn.classList.toggle("is-active", view === "unfulfilled");
+
+  // The Unfulfilled view is READ-ONLY in Phase 1: reopen + per-sheet reprint
+  // only. Editing, batch select/release, and print-all all target the to-print
+  // QUEUE under the hood (the write engine reads QUEUE, not the active dataset),
+  // so allowing them here would silently corrupt the daily queue or release the
+  // wrong set. A body class hides every edit/batch affordance via CSS; the
+  // per-sheet "Print" button stays (reprint is the whole point). Editing the
+  // unfulfilled set with server-side persistence is Phase 2.
+  document.body.classList.toggle("trv-readonly", view === "unfulfilled");
+  const batchBtns = ["releaseBatchBtn", "printSelectedBtn", "releaseSelectedBtn"];
+  batchBtns.forEach(id => { const b = document.getElementById(id); if(b) b.disabled = (view === "unfulfilled"); });
+  const printAll = document.getElementById("printAllBtn");
+  if(printAll) printAll.style.display = (view === "unfulfilled") ? "none" : "";
+
+  // Clear any carried-over search so the new view starts unfiltered (the search
+  // box lives in the persistent toolbar, so it would otherwise filter the new
+  // dataset with the old query).
+  const sEl = document.getElementById("trvSearch");
+  if(sEl) sEl.value = "";
+
+  if(view === "unfulfilled" && !TRV_UNFULFILLED){
+    loadUnfulfilled();
+    return;   // loadUnfulfilled re-renders when done
+  }
+  renderTravelers();
+}
+
+async function loadUnfulfilled(){
+  if(TRV_UNFULFILLED_LOADING) return;
+  TRV_UNFULFILLED_LOADING = true;
+  TRV_UNFULFILLED_ERROR = false;
+  renderTravelers();   // shows the "Loading…" status
+  try {
+    // Cache-bust so a freshly published dataset is picked up without a hard
+    // reload. Same-origin static file next to this page.
+    const res = await fetch("unfulfilled-travelers.json?ts=" + Date.now(), {cache: "no-store"});
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    TRV_UNFULFILLED = await res.json();
+    TRV_UNFULFILLED_ERROR = false;
+  } catch(e){
+    TRV_UNFULFILLED = null;
+    TRV_UNFULFILLED_ERROR = true;   // distinct from "loaded but empty"
+    console.warn("unfulfilled dataset load failed:", e);
+  } finally {
+    TRV_UNFULFILLED_LOADING = false;
+    renderTravelers();
   }
 }
 
@@ -6892,6 +7818,24 @@ function fmtDateTimeShort(iso){
 // print-queue.json for the date/time; falls back to the tag alone for orders
 // flagged before the reissue data existed. VOID outranks CHANGED and never says
 // reprint (a cancelled order's sheet is discarded, not rebuilt).
+// Tiny "created · edited" provenance stamp under the eyebrow — when the traveler
+// was first released and last reissued. Screen-only (it's tooling metadata, not
+// work-order content). Only renders when the dataset carries the timestamps
+// (the Unfulfilled view enriches each order from traveler_state).
+function trvCreatedEditedStamp(o){
+  const created = o.created_at_traveler;
+  const edited = o.edited_at_traveler;
+  if(!created && !edited) return "";
+  const bits = [];
+  if(created) bits.push(`created ${fmtDateTimeShort(created)}`);
+  if(edited && edited !== created){
+    const rev = o.traveler_rev ? ` (rev${o.traveler_rev})` : "";
+    bits.push(`edited ${fmtDateTimeShort(edited)}${rev}`);
+  }
+  if(!bits.length) return "";
+  return `<div class="trv-stamp no-print">${bits.join(" · ")}</div>`;
+}
+
 function trvChangePill(o){
   const tg = (Array.isArray(o.tags) ? o.tags.join(",") : (o.tags||"")).toLowerCase();
   const r = o.reissue || null;
