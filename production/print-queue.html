@@ -2028,7 +2028,6 @@
   <!-- ── Travelers (one work-order sheet per printout — screen == print) ── -->
   <div class="tab-content" id="content-travelers">
     <div class="trv-toolbar no-print">
-      <span class="trv-toolbar-label"><strong id="trvCount">0</strong> traveler<span id="trvCountPlural">s</span></span>
       <div class="trv-search-wrap">
         <input type="search" id="trvSearch" class="trv-search" placeholder="Search order #, customer, SKU, color, job…"
                oninput="applyTrvFilter()" autocomplete="off" spellcheck="false">
@@ -2040,6 +2039,7 @@
         <button type="button" class="trv-vt-btn" id="trvViewUnfulfilled" onclick="setTrvView('unfulfilled')"
                 title="Every unfulfilled order that already has a released traveler — reopen its latest version to reprint or edit">Unfulfilled</button>
       </div>
+      <span class="trv-toolbar-label"><strong id="trvCount">0</strong> traveler<span id="trvCountPlural">s</span></span>
       <div class="trv-toolbar-actions">
         <button type="button" class="trv-btn trv-btn-primary" id="printAllBtn" onclick="printAllTravelers()">Print all travelers</button>
         <button type="button" class="trv-btn" id="releaseBatchBtn" onclick="releaseBatch()"
@@ -2063,8 +2063,139 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T17:00:02",
+  "built_at": "2026-06-25T18:33:33",
   "orders": [
+    {
+      "shopify_order_id": "7024146120786",
+      "shopify_order_name": "36289",
+      "shopify_order_number": "36289",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 8120.0,
+      "ship_by_date": null,
+      "latest_ship_by": "July 23, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-25T17:46:34-05:00",
+      "tags": "trade",
+      "total_price": 4664.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7024146120786",
+          "shopify_order_name": "36289",
+          "shopify_order_number": "36289",
+          "key": [
+            "color",
+            "Black",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Black",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30224"
+          ],
+          "variant_skus": [
+            "30224-3"
+          ],
+          "line_item_titles": [
+            "Color Icon 2 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Icon 2 Sconce",
+              "variant_title": "Black / Black",
+              "variant_sku": "30224-3",
+              "parent_sku": "30224",
+              "qty": 11,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-icon-sconce-2-black_fe34d03c-3ce5-416c-85d3-b539b9c80c00.jpg?v=1776738289&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 11,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Black|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7024146120786",
+          "shopify_order_name": "36289",
+          "shopify_order_number": "36289",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T17:46:34-05:00",
+          "parent_sku": "30224",
+          "color": "Black",
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 11,
+          "line_item_ids": [
+            16973283262546
+          ],
+          "item_titles": [
+            "Color Icon 2 Sconce"
+          ],
+          "variant_skus": [
+            "30224-3"
+          ],
+          "lines": [
+            {
+              "sku": "30224-3",
+              "title": "Color Icon 2 Sconce",
+              "qty": 11,
+              "finish": "Black",
+              "color": "Black",
+              "category": "fixture",
+              "variant_title": "Black / Black",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-icon-sconce-2-black_fe34d03c-3ce5-416c-85d3-b539b9c80c00.jpg?v=1776738289&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7024052797522",
       "shopify_order_name": "36288",
@@ -2338,9 +2469,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAF-1",
+            "SAC-L",
             "SAC-B",
-            "SAC-L"
+            "SAF-1"
           ],
           "variant_skus": [
             "SAF-1",
@@ -4704,9 +4835,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 16,
-    "printouts": 21,
-    "notion_rows": 19,
+    "orders": 17,
+    "printouts": 22,
+    "notion_rows": 20,
     "skipped_already_printed": 152,
     "printed_today": 25,
     "needs_attention": 0,
