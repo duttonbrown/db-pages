@@ -2063,7 +2063,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T19:22:00",
+  "built_at": "2026-06-25T19:31:06",
   "orders": [
     {
       "shopify_order_id": "7024146120786",
@@ -2470,8 +2470,8 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-L",
-            "SAC-B",
-            "SAF-1"
+            "SAF-1",
+            "SAC-B"
           ],
           "variant_skus": [
             "SAF-1",
@@ -8226,30 +8226,82 @@ async function releaseBatch(){
 // freshly published board is what's on screen.
 const REFRESH_WEBHOOK = "https://thomometer.app.n8n.cloud/webhook/refresh-board";
 
+// The rebuild now takes ~2+ min (the unfulfilled dataset grew), longer than the
+// browser/n8n fetch window — so we DON'T wait on the webhook response. We kick
+// off the rebuild (the listener runs it on a background thread and answers 202
+// at once) and then POLL the published board for a newer build, reloading when
+// it lands. A POST timeout no longer means "failed" — the rebuild is underway.
+//
+// Poll target: unfulfilled-travelers.json's Last-Modified (it's published to the
+// hub alongside the board and re-stamped every rebuild). A HEAD request fetches
+// only headers, so polling never pulls the ~1 MB body.
+const REFRESH_POLL_TARGET = "unfulfilled-travelers.json";
+const REFRESH_POLL_MS = 5000;          // check every 5s
+const REFRESH_POLL_TIMEOUT_MS = 240000; // give up watching after 4 min (rebuild is ~2-2.5)
+
+async function _boardLastModified(){
+  // Returns the Last-Modified header (ms epoch) of the published board file, or
+  // null if we can't read it (CORS / not published yet / local dev).
+  try{
+    const r = await fetch(REFRESH_POLL_TARGET + "?ts=" + Date.now(),
+                          {method: "HEAD", cache: "no-store"});
+    if(!r.ok) return null;
+    const lm = r.headers.get("Last-Modified");
+    return lm ? Date.parse(lm) : null;
+  }catch(e){ return null; }
+}
+
 async function refreshBoard(){
   const btn = document.getElementById("refreshBoardBtn");
   const orig = btn ? btn.textContent : "";
   if(btn){ btn.disabled = true; btn.textContent = "Refreshing…"; }
-  showTrvToast("Rebuilding the board from live Shopify — about 45 seconds…", null);
+  // Snapshot the current published build BEFORE kicking off the rebuild, so we
+  // can detect when a newer one lands.
+  const before = await _boardLastModified();
+
+  // Fire the rebuild. We treat ANY non-network-error response (incl. 202) as
+  // "started". A network/timeout error ALSO means it likely started server-side
+  // (the listener runs async) — so we still fall through to polling rather than
+  // declaring failure. Only a hard, immediate rejection stops us.
+  let kicked = false;
   try{
     const resp = await fetch(REFRESH_WEBHOOK, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: "{}",
+      method: "POST", headers: {"Content-Type": "application/json"}, body: "{}",
     });
-    const out = await resp.json().catch(() => ({}));
-    if(resp.ok && out && out.ok){
-      if(btn){ btn.textContent = "Refreshed ✓"; }
-      showTrvToast("Board refreshed — reloading with the latest orders…", null);
-      setTimeout(() => location.reload(), 900);
+    kicked = true;  // got a response of some kind → request reached the bridge
+    void resp;      // body unused; the rebuild runs server-side
+  }catch(e){
+    // "Failed to fetch" here usually means the synchronous webhook timed out
+    // while the rebuild kept going. Don't cry failure — poll for the result.
+    kicked = true;
+  }
+
+  showTrvToast("Rebuilding the board from live Shopify — this takes about 2 minutes. "
+             + "It'll reload automatically when ready.", null);
+
+  // Poll for a newer published build, then reload.
+  const deadline = Date.now() + REFRESH_POLL_TIMEOUT_MS;
+  const poll = async () => {
+    if(Date.now() > deadline){
+      if(btn){ btn.disabled = false; btn.textContent = orig; }
+      showTrvToast("Still rebuilding in the background. The hourly update will catch "
+                 + "up — or press Refresh again in a minute.", null);
       return;
     }
-    throw new Error((out && out.message) || ("HTTP " + resp.status));
-  }catch(e){
-    if(btn){ btn.disabled = false; btn.textContent = orig; }
-    showTrvToast("Refresh failed (" + (e.message || e) + "). The hourly update will " +
-                 "catch up, or try again in a moment.", null);
-  }
+    const now = await _boardLastModified();
+    // `before` may be null (couldn't read it). In that case, treat a readable
+    // `now` as "new enough" only if it's clearly after we started.
+    const advanced = (before != null && now != null && now > before)
+                  || (before == null && now != null && now > (Date.now() - REFRESH_POLL_TIMEOUT_MS));
+    if(advanced){
+      if(btn){ btn.textContent = "Reloading…"; }
+      showTrvToast("Board refreshed — reloading with the latest orders…", null);
+      setTimeout(() => location.reload(), 600);
+      return;
+    }
+    setTimeout(poll, REFRESH_POLL_MS);
+  };
+  setTimeout(poll, REFRESH_POLL_MS);
 }
 
 // ── Print / release a hand-picked selection ──────────────────────────────────
