@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T07:05:51",
+  "generated_at": "2026-06-26T12:00:47",
   "counts": {
     "parts": 456,
     "supplies": 139,
@@ -1149,10 +1149,40 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -2746,6 +2776,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -2756,6 +2792,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -2782,6 +2824,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -2794,10 +2860,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -2830,6 +2908,24 @@
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
         },
         {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
           "sku": "60130",
           "title": "Color Reader Flush Mount",
@@ -2852,18 +2948,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -3008,6 +3092,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -4583,6 +4691,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -4593,6 +4707,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -4619,6 +4739,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -4631,10 +4775,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -4665,6 +4821,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -4701,18 +4875,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -4857,6 +5019,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -8073,6 +8259,54 @@
           "url": "https://app.notion.com/p/40121-9-2aeffa524c5b80a186aece88ce6e53ac"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
+        },
+        {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
           "sku": "60128-17",
           "title": "Color Reader Swing Arm Sconce, 17\" Arm",
@@ -8083,6 +8317,48 @@
           "sku": "60128-9",
           "title": "Color Reader Swing Arm Sconce, 9\" Arm",
           "url": "https://app.notion.com/p/60128-9-2aeffa524c5b80789054c2e2175d877c"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80568fdbfac1c45ff4f9",
@@ -8216,6 +8492,54 @@
           "url": "https://app.notion.com/p/40121-9-2aeffa524c5b80a186aece88ce6e53ac"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
+        },
+        {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
           "sku": "60128-17",
           "title": "Color Reader Swing Arm Sconce, 17\" Arm",
@@ -8226,6 +8550,48 @@
           "sku": "60128-9",
           "title": "Color Reader Swing Arm Sconce, 9\" Arm",
           "url": "https://app.notion.com/p/60128-9-2aeffa524c5b80789054c2e2175d877c"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         }
       ]
     },
@@ -8686,6 +9052,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -8696,6 +9068,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -8722,6 +9100,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -8734,10 +9136,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b8070b14fe4704acb3618",
@@ -8756,6 +9170,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -8792,18 +9224,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -8948,6 +9368,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -9138,6 +9582,54 @@
           "url": "https://app.notion.com/p/40121-9-2aeffa524c5b80a186aece88ce6e53ac"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
+        },
+        {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
           "sku": "60128-17",
           "title": "Color Reader Swing Arm Sconce, 17\" Arm",
@@ -9148,6 +9640,48 @@
           "sku": "60128-9",
           "title": "Color Reader Swing Arm Sconce, 9\" Arm",
           "url": "https://app.notion.com/p/60128-9-2aeffa524c5b80789054c2e2175d877c"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         }
       ]
     },
@@ -9957,6 +10491,54 @@
           "url": "https://app.notion.com/p/40121-9-2aeffa524c5b80a186aece88ce6e53ac"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
+        },
+        {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
           "sku": "60128-17",
           "title": "Color Reader Swing Arm Sconce, 17\" Arm",
@@ -9967,6 +10549,48 @@
           "sku": "60128-9",
           "title": "Color Reader Swing Arm Sconce, 9\" Arm",
           "url": "https://app.notion.com/p/60128-9-2aeffa524c5b80789054c2e2175d877c"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         }
       ]
     },
@@ -10616,6 +11240,42 @@
           "url": "https://app.notion.com/p/50110H-8-381ffa524c5b813ab8c1dfcfa07881a5"
         },
         {
+          "id": "2aeffa524c5b80b0b23ddd4ee741557e",
+          "sku": "50111-10",
+          "title": "Color Echo Pendant 10\"",
+          "url": "https://app.notion.com/p/50111-10-2aeffa524c5b80b0b23ddd4ee741557e"
+        },
+        {
+          "id": "2aeffa524c5b806b9d19f3e82a3353ec",
+          "sku": "50111-12",
+          "title": "Color Echo Pendant 12\"",
+          "url": "https://app.notion.com/p/50111-12-2aeffa524c5b806b9d19f3e82a3353ec"
+        },
+        {
+          "id": "2aeffa524c5b80df9aede0c0642710d5",
+          "sku": "50111-8",
+          "title": "Color Echo Pendant 8\"",
+          "url": "https://app.notion.com/p/50111-8-2aeffa524c5b80df9aede0c0642710d5"
+        },
+        {
+          "id": "381ffa524c5b813c9bdaf1ccc97f05f8",
+          "sku": "50111H-10",
+          "title": "Color Echo Pendant 10\", Hang-straight",
+          "url": "https://app.notion.com/p/50111H-10-381ffa524c5b813c9bdaf1ccc97f05f8"
+        },
+        {
+          "id": "381ffa524c5b817d9b19da95499726b4",
+          "sku": "50111H-12",
+          "title": "Color Echo Pendant 12\", Hang-straight",
+          "url": "https://app.notion.com/p/50111H-12-381ffa524c5b817d9b19da95499726b4"
+        },
+        {
+          "id": "381ffa524c5b81739881f12408ac6ad1",
+          "sku": "50111H-8",
+          "title": "Color Echo Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/50111H-8-381ffa524c5b81739881f12408ac6ad1"
+        },
+        {
           "id": "2aeffa524c5b8066b686df178c33d703",
           "sku": "50130-10",
           "title": "Color Cadbury Flush Mount 10\"",
@@ -11191,6 +11851,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
           "sku": "60128-17",
           "title": "Color Reader Swing Arm Sconce, 17\" Arm",
@@ -11219,6 +11903,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -11339,6 +12041,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -12031,6 +12757,12 @@
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         }
       ]
     },
@@ -12536,6 +13268,12 @@
           "url": "https://app.notion.com/p/60124-0-2aeffa524c5b8012b048c818ab5ad3a7"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -12548,6 +13286,12 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b80c6bc67c8bb05702c7e",
           "sku": "60132",
           "title": "Twink Flush Mount",
@@ -12558,18 +13302,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2aeffa524c5b80ea94b5fca32d176bfd",
@@ -13074,6 +13806,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -13084,6 +13822,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b803faaaad639a17f4bf3",
@@ -13104,6 +13848,24 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b8070b14fe4704acb3618",
           "sku": "60129-15",
           "title": "Color Major Sconce 15\"",
@@ -13120,6 +13882,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -13192,6 +13972,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80568fdbfac1c45ff4f9",
@@ -15272,6 +16076,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -15282,6 +16092,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -15308,6 +16124,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -15320,10 +16160,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -15354,6 +16206,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -15390,18 +16260,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -15546,6 +16404,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -17260,6 +18142,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -17270,6 +18158,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -17296,6 +18190,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -17308,10 +18226,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -17342,6 +18272,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -17378,18 +18326,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -17534,6 +18470,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -18349,6 +19309,24 @@
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
         },
         {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
           "sku": "60210",
           "title": "Color Pilot Pendant 29\"",
@@ -18467,6 +19445,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -18723,6 +19725,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2ecffa524c5b8090ac27dc7ccbdbad01",
@@ -19605,6 +20625,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
           "sku": "60128-17",
           "title": "Color Reader Swing Arm Sconce, 17\" Arm",
@@ -20224,6 +21268,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -20234,6 +21284,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -20994,6 +22050,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b802881a7c1da8299f370",
           "sku": "60220",
           "title": "Scepter Sconce 10\"",
@@ -21522,6 +22602,24 @@
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
         },
         {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
           "id": "2aeffa524c5b80f29a93ef5fab59f72b",
           "sku": "60226-11",
           "title": "Color Pilot Sconce 11\"",
@@ -21544,6 +22642,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         }
       ]
     },
@@ -22100,6 +23222,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
           "sku": "60128-17",
           "title": "Color Reader Swing Arm Sconce, 17\" Arm",
@@ -22420,10 +23566,22 @@
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
         },
         {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -23846,6 +25004,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -23856,6 +25020,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b80ea94b5fca32d176bfd",
@@ -24318,6 +25488,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -24330,10 +25524,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -24366,6 +25572,24 @@
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
         },
         {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
           "id": "2aeffa524c5b80c6bc67c8bb05702c7e",
           "sku": "60132",
           "title": "Twink Flush Mount",
@@ -24376,18 +25600,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -24532,6 +25744,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -25569,6 +26805,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -25579,6 +26821,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -26780,6 +28028,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -26790,6 +28044,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -26816,6 +28076,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -26828,10 +28112,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -26862,6 +28158,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -26898,18 +28212,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -27054,6 +28356,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -30117,6 +31443,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -30127,6 +31459,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -30153,6 +31491,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -30165,10 +31527,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -30199,6 +31573,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -30235,18 +31627,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -30391,6 +31771,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -31129,6 +32533,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -31139,6 +32549,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -31165,6 +32581,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -31177,10 +32617,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b8070b14fe4704acb3618",
@@ -31199,6 +32651,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -31235,18 +32705,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -31391,6 +32849,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -31613,6 +33095,30 @@
           "sku": "60730",
           "title": "Color Vogue 7 Flush Mount",
           "url": "https://app.notion.com/p/60730-2aeffa524c5b802598d9f57a50fc19ca"
+        },
+        {
+          "id": "2aeffa524c5b802181c6ed9aaaf98c8d",
+          "sku": "70110",
+          "title": "Bling Pendant",
+          "url": "https://app.notion.com/p/70110-2aeffa524c5b802181c6ed9aaaf98c8d"
+        },
+        {
+          "id": "2c8ffa524c5b80b98a3bced51e5c7264",
+          "sku": "70110 (C)",
+          "title": "Color Bling Pendant",
+          "url": "https://app.notion.com/p/70110-C-2c8ffa524c5b80b98a3bced51e5c7264"
+        },
+        {
+          "id": "381ffa524c5b81068c0ac06ca6d69d63",
+          "sku": "70110H",
+          "title": "Bling Pendant, Hang-straight",
+          "url": "https://app.notion.com/p/70110H-381ffa524c5b81068c0ac06ca6d69d63"
+        },
+        {
+          "id": "381ffa524c5b8112a110f384f5872150",
+          "sku": "70110H (C)",
+          "title": "Color Bling Pendant, Hang-straight",
+          "url": "https://app.notion.com/p/70110H-C-381ffa524c5b8112a110f384f5872150"
         },
         {
           "id": "2aeffa524c5b8050a666df3710ad81b8",
@@ -31915,10 +33421,40 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -33229,6 +34765,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -33241,6 +34783,12 @@
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
         },
         {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -33251,6 +34799,12 @@
           "sku": "60125 (C)",
           "title": "Color Twink Sconce",
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
         },
         {
           "id": "2aeffa524c5b8070b14fe4704acb3618",
@@ -33269,6 +34823,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b8030b1a1ed287ce48112",
@@ -33293,18 +34865,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -33443,6 +35003,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -36046,6 +37630,12 @@
           "sku": "31001 (C)",
           "title": "Color Crown Chandelier 46\"",
           "url": "https://app.notion.com/p/31001-C-2c8ffa524c5b80478126e77aa841df24"
+        },
+        {
+          "id": "2aeffa524c5b8016bdb6d77ee4b8a91e",
+          "sku": "31001F",
+          "title": "Crown Flush Mount 46\"",
+          "url": "https://app.notion.com/p/31001F-2aeffa524c5b8016bdb6d77ee4b8a91e"
         },
         {
           "id": "2c8ffa524c5b80d68605e9bd5ab37454",
@@ -39242,6 +40832,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -39252,6 +40848,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b8012b048c818ab5ad3a7",
@@ -39278,6 +40880,30 @@
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
         },
         {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -39290,10 +40916,22 @@
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
         },
         {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
           "id": "2aeffa524c5b802aaf33f8882c13e42a",
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -39324,6 +40962,24 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         },
         {
           "id": "2aeffa524c5b80b9a095c951117d47a2",
@@ -39360,18 +41016,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -39516,6 +41160,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -41320,6 +42988,30 @@
           "sku": "60124-6",
           "title": "Color Reader Sconce, 6\" Arm",
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -43423,6 +45115,12 @@
           "url": "https://app.notion.com/p/60124-10-2aeffa524c5b803faaaad639a17f4bf3"
         },
         {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
           "sku": "H72",
           "title": "Head Hand Towel Bar",
@@ -43609,6 +45307,12 @@
           "sku": "60124-6",
           "title": "Color Reader Sconce, 6\" Arm",
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
         },
         {
           "id": "2aeffa524c5b80658130f1c1ba3e699a",
@@ -44025,6 +45729,12 @@
           "sku": "60124-3",
           "title": "Color Reader Sconce, 3\" Arm",
           "url": "https://app.notion.com/p/60124-3-2aeffa524c5b8078b4c9d3f093b57ffd"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
         },
         {
           "id": "2aeffa524c5b8013b54fcd0fd405497a",
@@ -44792,6 +46502,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -44802,6 +46518,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -46069,6 +47791,12 @@
           "sku": "60123 (C)",
           "title": "Color Tall Snug Sconce",
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
         },
         {
           "id": "2aeffa524c5b807fb14dc23814473a87",
@@ -47750,6 +49478,12 @@
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
         },
         {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
+        },
+        {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
           "sku": "60230",
           "title": "Color Pilot Flush Mount 29\"",
@@ -47970,6 +49704,12 @@
           "sku": "60129-21",
           "title": "Color Major Sconce 21\"",
           "url": "https://app.notion.com/p/60129-21-2aeffa524c5b80728d93ca141cfb75c0"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
         }
       ]
     },
@@ -48000,6 +49740,12 @@
           "sku": "60226-23",
           "title": "Color Pilot Sconce 23\"",
           "url": "https://app.notion.com/p/60226-23-2aeffa524c5b80a0b4e0ca8ada0fc144"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
         }
       ]
     },
@@ -48150,6 +49896,12 @@
           "sku": "60129-15",
           "title": "Color Major Sconce 15\"",
           "url": "https://app.notion.com/p/60129-15-2aeffa524c5b8070b14fe4704acb3618"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
         }
       ]
     },
@@ -48180,6 +49932,12 @@
           "sku": "60226-17",
           "title": "Color Pilot Sconce 17\"",
           "url": "https://app.notion.com/p/60226-17-2aeffa524c5b8047955ad781d00a643d"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
         }
       ]
     },
@@ -48378,6 +50136,12 @@
           "sku": "60129-9",
           "title": "Color Major Sconce 9\"",
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
         }
       ]
     },
@@ -48408,6 +50172,12 @@
           "sku": "60226-11",
           "title": "Color Pilot Sconce 11\"",
           "url": "https://app.notion.com/p/60226-11-2aeffa524c5b80f29a93ef5fab59f72b"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
         }
       ]
     },
@@ -48752,6 +50522,24 @@
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
         },
         {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
           "sku": "60210",
           "title": "Color Pilot Pendant 29\"",
@@ -48870,6 +50658,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -49175,6 +50987,12 @@
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         }
       ]
     },
@@ -49380,6 +51198,12 @@
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         }
       ]
     },
@@ -49453,6 +51277,30 @@
           "sku": "60124-6",
           "title": "Color Reader Sconce, 6\" Arm",
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -49907,6 +51755,12 @@
           "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
           "id": "2aeffa524c5b804194acfabf14233149",
           "sku": "60123",
           "title": "Tall Snug Sconce",
@@ -49919,6 +51773,12 @@
           "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
         },
         {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
           "id": "2aeffa524c5b80f58bb0c4a82866014f",
           "sku": "60125",
           "title": "Twink Sconce",
@@ -49929,6 +51789,12 @@
           "sku": "60125 (C)",
           "title": "Color Twink Sconce",
           "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
         },
         {
           "id": "2aeffa524c5b8070b14fe4704acb3618",
@@ -49949,6 +51815,24 @@
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
         },
         {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
           "id": "2aeffa524c5b80c6bc67c8bb05702c7e",
           "sku": "60132",
           "title": "Twink Flush Mount",
@@ -49959,18 +51843,6 @@
           "sku": "60132 (C)",
           "title": "Color Twink Flush Mount",
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
         },
         {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
@@ -50103,6 +51975,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
@@ -50489,6 +52385,54 @@
           "url": "https://app.notion.com/p/40121-9-2aeffa524c5b80a186aece88ce6e53ac"
         },
         {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
+        },
+        {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
           "sku": "60128-17",
           "title": "Color Reader Swing Arm Sconce, 17\" Arm",
@@ -50499,6 +52443,48 @@
           "sku": "60128-9",
           "title": "Color Reader Swing Arm Sconce, 9\" Arm",
           "url": "https://app.notion.com/p/60128-9-2aeffa524c5b80789054c2e2175d877c"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         }
       ]
     },
@@ -52385,6 +54371,24 @@
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
         },
         {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
           "id": "2aeffa524c5b8081a55eccc7c07f3a27",
           "sku": "H1C-5",
           "title": "Dapper Hook 5\"",
@@ -52725,6 +54729,12 @@
           "sku": "60127",
           "title": "Color Display Sconce",
           "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
         },
         {
           "id": "2aeffa524c5b809dae9bcff72726ee16",
@@ -54815,6 +56825,96 @@
           "sku": "40120-6",
           "title": "Color Boom Sconce, 6\" arm",
           "url": "https://app.notion.com/p/40120-6-2aeffa524c5b80a2b18bdd3eaff08908"
+        },
+        {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         }
       ]
     },
@@ -55208,18 +57308,6 @@
           "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
         },
         {
-          "id": "381ffa524c5b817091c7dcf3d8ea1f66",
-          "sku": "60132H",
-          "title": "Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-381ffa524c5b817091c7dcf3d8ea1f66"
-        },
-        {
-          "id": "381ffa524c5b8108ac57c865bfe4a275",
-          "sku": "60132H (C)",
-          "title": "Color Twink Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60132H-C-381ffa524c5b8108ac57c865bfe4a275"
-        },
-        {
           "id": "2ecffa524c5b80399142dcac16e4c0b5",
           "sku": "60210",
           "title": "Color Pilot Pendant 29\"",
@@ -55587,6 +57675,24 @@
           "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
         },
         {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
           "id": "2aeffa524c5b80f29a93ef5fab59f72b",
           "sku": "60226-11",
           "title": "Color Pilot Sconce 11\"",
@@ -55609,6 +57715,30 @@
           "sku": "60226-29",
           "title": "Color Pilot Sconce 29\"",
           "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
         },
         {
           "id": "2aeffa524c5b8022a05ec0bafc511f16",
@@ -55901,6 +58031,24 @@
           "sku": "60124-6",
           "title": "Color Reader Sconce, 6\" Arm",
           "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
         },
         {
           "id": "2aeffa524c5b802881a7c1da8299f370",
