@@ -2063,7 +2063,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T19:31:06",
+  "built_at": "2026-06-25T19:37:02",
   "orders": [
     {
       "shopify_order_id": "7024146120786",
@@ -2469,9 +2469,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-L",
             "SAF-1",
-            "SAC-B"
+            "SAC-B",
+            "SAC-L"
           ],
           "variant_skus": [
             "SAF-1",
@@ -5803,7 +5803,7 @@ function renderRow(r){
       <ul class="line-list">
         ${lines.map(l => renderLine(l, p.color, p.finish)).join("")}
       </ul>
-      ${p.notes ? `<div class="review-note">⚠ ${p.notes}</div>` : ""}
+      ${p.notes ? `<div class="review-note">${p.notes}</div>` : ""}
     </div>`;
 }
 
@@ -7709,8 +7709,8 @@ function renderTravelers(){
     </div>`;
   }
   const taskBar =
-    renderTaskBar(rodTasks, "⚠ Rod assignment needed — these print on their fixtures' travelers, not their own. Assign BEFORE printing.")
-    + renderTaskBar(bulbTasks, "⚠ Bulb assignment needed — multiple fixtures take bulbs. Distribute onto each fixture's traveler (ranked by lampholder fit) BEFORE printing.");
+    renderTaskBar(rodTasks, "Rod assignment needed — these print on their fixtures' travelers, not their own. Assign BEFORE printing.")
+    + renderTaskBar(bulbTasks, "Bulb assignment needed — multiple fixtures take bulbs. Distribute onto each fixture's traveler (ranked by lampholder fit) BEFORE printing.");
   mount.innerHTML = `${taskBar}<div class="trv-list">${sheets.join("")}</div>`;
   const n = sheets.length;
   document.getElementById("trvCount").textContent = n;
