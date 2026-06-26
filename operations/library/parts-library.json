@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25T12:00:52",
+  "generated_at": "2026-06-26T07:05:51",
   "counts": {
     "parts": 456,
     "supplies": 139,
@@ -1654,7 +1654,20 @@
         "definition": "A circular component used to secure parts together or cover an opening, ensuring items remain in place while also serving to form a clean, finished look.",
         "image": "glossary-images/glossary-Check_Ring.jpg"
       },
-      "products": []
+      "products": [
+        {
+          "id": "2aeffa524c5b8096bd41ef71811285a8",
+          "sku": "70122",
+          "title": "Lepore Sconce",
+          "url": "https://app.notion.com/p/70122-2aeffa524c5b8096bd41ef71811285a8"
+        },
+        {
+          "id": "2aeffa524c5b8038bbcde55a10643104",
+          "sku": "70130",
+          "title": "Lepore Flush Mount",
+          "url": "https://app.notion.com/p/70130-2aeffa524c5b8038bbcde55a10643104"
+        }
+      ]
     },
     "2dcffa52-4c5b-8043-a6d6-fe328688605d": {
       "part_number": "SCS",
@@ -36035,12 +36048,6 @@
           "url": "https://app.notion.com/p/31001-C-2c8ffa524c5b80478126e77aa841df24"
         },
         {
-          "id": "2aeffa524c5b8016bdb6d77ee4b8a91e",
-          "sku": "31001F",
-          "title": "Crown Flush Mount 46\"",
-          "url": "https://app.notion.com/p/31001F-2aeffa524c5b8016bdb6d77ee4b8a91e"
-        },
-        {
           "id": "2c8ffa524c5b80d68605e9bd5ab37454",
           "sku": "31001F (C)",
           "title": "Color Crown Flush Mount 46\"",
@@ -46082,6 +46089,12 @@
           "url": "https://app.notion.com/p/ER1-6-324ffa524c5b8147b393d10bdc467756"
         },
         {
+          "id": "2aeffa524c5b8095a722edfebfdb3a1f",
+          "sku": "H1C-8",
+          "title": "Dapper Hook 8\"",
+          "url": "https://app.notion.com/p/H1C-8-2aeffa524c5b8095a722edfebfdb3a1f"
+        },
+        {
           "id": "2aeffa524c5b80fcae63f76223819e01",
           "sku": "H30-7",
           "title": "Persona 7\" Pull",
@@ -46502,12 +46515,6 @@
           "sku": "H1C-5",
           "title": "Dapper Hook 5\"",
           "url": "https://app.notion.com/p/H1C-5-2aeffa524c5b8081a55eccc7c07f3a27"
-        },
-        {
-          "id": "2aeffa524c5b8095a722edfebfdb3a1f",
-          "sku": "H1C-8",
-          "title": "Dapper Hook 8\"",
-          "url": "https://app.notion.com/p/H1C-8-2aeffa524c5b8095a722edfebfdb3a1f"
         },
         {
           "id": "2aeffa524c5b80bd932de6b06c65df15",
@@ -48031,6 +48038,18 @@
           "url": "https://app.notion.com/p/40111-8-29-2c8ffa524c5b80c99b27c15e37f679ed"
         },
         {
+          "id": "2ddffa524c5b807495fddf9278f63432",
+          "sku": "60210-58",
+          "title": "Color Pilot Pendant 29\" - 58\u201d Height",
+          "url": "https://app.notion.com/p/60210-58-2ddffa524c5b807495fddf9278f63432"
+        },
+        {
+          "id": "2ddffa524c5b8016ae8ec8917bb70ce8",
+          "sku": "60211-58",
+          "title": "Color Pilot Pendant 47\" - 58\u201d Height",
+          "url": "https://app.notion.com/p/60211-58-2ddffa524c5b8016ae8ec8917bb70ce8"
+        },
+        {
           "id": "7b3d3a5de7784a86bcf0fd0da6e166b0",
           "sku": "60400-24",
           "title": "Color Captain Chandelier 29\" - 24\u201d Height",
@@ -48211,6 +48230,12 @@
           "url": "https://app.notion.com/p/60210-16-2aeffa524c5b80669cf6c9f801ce68c8"
         },
         {
+          "id": "2ddffa524c5b809ea031ed71cb65dad4",
+          "sku": "60210-52",
+          "title": "Color Pilot Pendant 29\" - 52\u201d Height",
+          "url": "https://app.notion.com/p/60210-52-2ddffa524c5b809ea031ed71cb65dad4"
+        },
+        {
           "id": "2aeffa524c5b805ba0e7ff443f9d0893",
           "sku": "60211",
           "title": "Color Pilot Pendant 47\"",
@@ -48221,6 +48246,12 @@
           "sku": "60211-16",
           "title": "Color Pilot Pendant 47\" - 16\u201d Height",
           "url": "https://app.notion.com/p/60211-16-2ecffa524c5b805db7f3dcc896e280fe"
+        },
+        {
+          "id": "2ddffa524c5b807ea006da7226dc9675",
+          "sku": "60211-52",
+          "title": "Color Pilot Pendant 47\" - 52\u201d Height",
+          "url": "https://app.notion.com/p/60211-52-2ddffa524c5b807ea006da7226dc9675"
         },
         {
           "id": "2ecffa524c5b8090ac27dc7ccbdbad01",
@@ -48305,7 +48336,20 @@
         "definition": "An aluminum pipe with female threaded ends often with set screw holes on the side ends and larger threaded holes to attach other pipes via neck breaks.",
         "image": "glossary-images/glossary-Pipe_Aluminum.jpg"
       },
-      "products": []
+      "products": [
+        {
+          "id": "2aeffa524c5b8038be4fd6add732b468",
+          "sku": "60630",
+          "title": "Color Commander Flush Mount 29\"",
+          "url": "https://app.notion.com/p/60630-2aeffa524c5b8038be4fd6add732b468"
+        },
+        {
+          "id": "2aeffa524c5b8021a28ac1b02ddbd8ed",
+          "sku": "60631",
+          "title": "Color Commander Flush Mount 47\"",
+          "url": "https://app.notion.com/p/60631-2aeffa524c5b8021a28ac1b02ddbd8ed"
+        }
+      ]
     },
     "2ceffa52-4c5b-819a-a949-f8047c5edbfd": {
       "part_number": "PA6-M3",
@@ -48390,6 +48434,18 @@
       },
       "products": [
         {
+          "id": "2ddffa524c5b806dbe21fe225d541bae",
+          "sku": "60210-46",
+          "title": "Color Pilot Pendant 29\" - 46\u201d Height",
+          "url": "https://app.notion.com/p/60210-46-2ddffa524c5b806dbe21fe225d541bae"
+        },
+        {
+          "id": "2ddffa524c5b807e9a16cf1f7a9813df",
+          "sku": "60211-46",
+          "title": "Color Pilot Pendant 47\" - 46\u201d Height",
+          "url": "https://app.notion.com/p/60211-46-2ddffa524c5b807e9a16cf1f7a9813df"
+        },
+        {
           "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
           "sku": "60230",
           "title": "Color Pilot Flush Mount 29\"",
@@ -48438,6 +48494,18 @@
           "url": "https://app.notion.com/p/60401-84-c17eff1906d74d619314bceba73f8ce3"
         },
         {
+          "id": "2aeffa524c5b80e3a27fcfd2c0211b5f",
+          "sku": "60430",
+          "title": "Color Captain Flush Mount 29\"",
+          "url": "https://app.notion.com/p/60430-2aeffa524c5b80e3a27fcfd2c0211b5f"
+        },
+        {
+          "id": "2aeffa524c5b80acb9fdd20620ecfa5f",
+          "sku": "60431",
+          "title": "Color Captain Flush Mount 47\"",
+          "url": "https://app.notion.com/p/60431-2aeffa524c5b80acb9fdd20620ecfa5f"
+        },
+        {
           "id": "2ecffa524c5b809ea60ad9a7a744f316",
           "sku": "60600-24",
           "title": "Color Commander Chandelier 29\" - 24\u201d Height",
@@ -48484,6 +48552,18 @@
           "sku": "60601-84",
           "title": "Color Commander Chandelier 47\" - 84\u201d Height",
           "url": "https://app.notion.com/p/60601-84-b1445271f56c4cbbbe9c33794289ed7e"
+        },
+        {
+          "id": "2aeffa524c5b8038be4fd6add732b468",
+          "sku": "60630",
+          "title": "Color Commander Flush Mount 29\"",
+          "url": "https://app.notion.com/p/60630-2aeffa524c5b8038be4fd6add732b468"
+        },
+        {
+          "id": "2aeffa524c5b8021a28ac1b02ddbd8ed",
+          "sku": "60631",
+          "title": "Color Commander Flush Mount 47\"",
+          "url": "https://app.notion.com/p/60631-2aeffa524c5b8021a28ac1b02ddbd8ed"
         }
       ]
     },
@@ -53876,7 +53956,26 @@
         "definition": "A circular component used to secure parts together or cover an opening, ensuring items remain in place while also serving to form a clean, finished look.",
         "image": "glossary-images/glossary-Check_Ring.jpg"
       },
-      "products": []
+      "products": [
+        {
+          "id": "2aeffa524c5b80e89294dde5bab39abb",
+          "sku": "30222",
+          "title": "Visage Sconce 6\"",
+          "url": "https://app.notion.com/p/30222-2aeffa524c5b80e89294dde5bab39abb"
+        },
+        {
+          "id": "2aeffa524c5b8013b54fcd0fd405497a",
+          "sku": "70220",
+          "title": "Bianca Sconce 12\"",
+          "url": "https://app.notion.com/p/70220-2aeffa524c5b8013b54fcd0fd405497a"
+        },
+        {
+          "id": "2aeffa524c5b807fb14dc23814473a87",
+          "sku": "70222",
+          "title": "Bianca Sconce 20\"",
+          "url": "https://app.notion.com/p/70222-2aeffa524c5b807fb14dc23814473a87"
+        }
+      ]
     },
     "2ceffa52-4c5b-8118-b65e-f938fc8c91ae": {
       "part_number": "CRC5",
@@ -53901,22 +54000,10 @@
       },
       "products": [
         {
-          "id": "2aeffa524c5b80e89294dde5bab39abb",
-          "sku": "30222",
-          "title": "Visage Sconce 6\"",
-          "url": "https://app.notion.com/p/30222-2aeffa524c5b80e89294dde5bab39abb"
-        },
-        {
           "id": "2c8ffa524c5b8014ba90f7d26a6719b0",
           "sku": "30222 (C)",
           "title": "Color Visage Sconce 6\"",
           "url": "https://app.notion.com/p/30222-C-2c8ffa524c5b8014ba90f7d26a6719b0"
-        },
-        {
-          "id": "2aeffa524c5b8096bd41ef71811285a8",
-          "sku": "70122",
-          "title": "Lepore Sconce",
-          "url": "https://app.notion.com/p/70122-2aeffa524c5b8096bd41ef71811285a8"
         },
         {
           "id": "2c8ffa524c5b809689b0de4d05fa0505",
@@ -53925,34 +54012,16 @@
           "url": "https://app.notion.com/p/70122-C-2c8ffa524c5b809689b0de4d05fa0505"
         },
         {
-          "id": "2aeffa524c5b8038bbcde55a10643104",
-          "sku": "70130",
-          "title": "Lepore Flush Mount",
-          "url": "https://app.notion.com/p/70130-2aeffa524c5b8038bbcde55a10643104"
-        },
-        {
           "id": "2c8ffa524c5b80049b89fb8cda8c6150",
           "sku": "70130 (C)",
           "title": "Color Lepore Flush Mount",
           "url": "https://app.notion.com/p/70130-C-2c8ffa524c5b80049b89fb8cda8c6150"
         },
         {
-          "id": "2aeffa524c5b8013b54fcd0fd405497a",
-          "sku": "70220",
-          "title": "Bianca Sconce 12\"",
-          "url": "https://app.notion.com/p/70220-2aeffa524c5b8013b54fcd0fd405497a"
-        },
-        {
           "id": "2c8ffa524c5b806dab3bd2b521639466",
           "sku": "70220 (C)",
           "title": "Color Bianca Sconce 12\"",
           "url": "https://app.notion.com/p/70220-C-2c8ffa524c5b806dab3bd2b521639466"
-        },
-        {
-          "id": "2aeffa524c5b807fb14dc23814473a87",
-          "sku": "70222",
-          "title": "Bianca Sconce 20\"",
-          "url": "https://app.notion.com/p/70222-2aeffa524c5b807fb14dc23814473a87"
         },
         {
           "id": "2c8ffa524c5b80049549c86c0cfb33e1",
