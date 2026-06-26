@@ -2063,7 +2063,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T19:18:04",
+  "built_at": "2026-06-25T19:22:00",
   "orders": [
     {
       "shopify_order_id": "7024146120786",
@@ -2470,8 +2470,8 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-L",
-            "SAF-1",
-            "SAC-B"
+            "SAC-B",
+            "SAF-1"
           ],
           "variant_skus": [
             "SAF-1",
@@ -7864,11 +7864,10 @@ async function loadUnfulfilled(){
 function startTrvEdit(orderId){
   if(TRV_VIEW !== "unfulfilled") return;          // edit only in the unfulfilled view
   if(TRV_EDIT_ORDER !== null) return;             // one session at a time
-  // Treat UNRESOLVED (null) as not-allowed for this irreversible-write path —
-  // the CF-Access identity resolves async, and `=== false` would leave a window
-  // where a non-allowlisted user could Edit→Save before the gate lands. Local
-  // dev sets RELEASE_ALLOWED=true, so the dev escape hatch is preserved.
-  if(RELEASE_ALLOWED !== true){
+  // Block ONLY a resolved-and-not-allowlisted user (=== false). An unresolved
+  // identity (null — CF Access not in front, or still resolving) fails OPEN so
+  // editing is never silently dead; saveTrvEdit re-checks before the actual write.
+  if(RELEASE_ALLOWED === false){
     showTrvToast("Editing is limited to Shipping and management (shipping@, Chase, Alex, Thomas).", null);
     return;
   }
@@ -7922,7 +7921,7 @@ function _stripForSave(order){
 }
 
 async function saveTrvEdit(btn, orderId){
-  if(RELEASE_ALLOWED !== true){   // unresolved counts as not-allowed (see startTrvEdit)
+  if(RELEASE_ALLOWED === false){   // only a resolved-not-allowlisted user is refused
     showTrvToast("Saving is limited to Shipping and management (shipping@, Chase, Alex, Thomas).", null);
     return;
   }
@@ -8582,12 +8581,25 @@ function trvEditControl(o){
     return `<button type="button" class="trv-btn trv-btn-primary" onclick="saveTrvEdit(this,'${oid}')">Save</button>`
          + `<button type="button" class="trv-btn trv-btn-ghost" onclick="cancelTrvEdit('${oid}')">Cancel</button>`;
   }
-  const blocked = (RELEASE_ALLOWED !== true) || (TRV_EDIT_ORDER !== null);
-  const tip = (RELEASE_ALLOWED !== true)
+  // Block only when the identity is RESOLVED and NOT on the allowlist (=== false).
+  // An unresolved identity (null — e.g. CF Access not in front, or still resolving)
+  // fails OPEN: the button stays enabled so editing is never silently dead. The
+  // hard guards in startTrvEdit/saveTrvEdit still refuse an explicit-false user.
+  const blocked = (RELEASE_ALLOWED === false) || (TRV_EDIT_ORDER !== null);
+  const tip = (RELEASE_ALLOWED === false)
     ? "Editing is limited to Shipping and management"
     : (TRV_EDIT_ORDER !== null ? "Finish or cancel the other edit first" : "Re-sort / split this traveler, then save a new version");
-  return `<button type="button" class="trv-btn trv-btn-ghost" onclick="startTrvEdit('${oid}')"`
-       + `${blocked ? " disabled" : ""} title="${escapeHtml(tip)}">Edit</button>`;
+  // When blocked by an explicit-not-allowed identity, keep the button CLICKABLE
+  // so the click can explain why (a disabled button fires no onclick — that was
+  // the "Edit does nothing, no message" symptom). Only the one-session-at-a-time
+  // block stays hard-disabled.
+  const hardDisabled = (TRV_EDIT_ORDER !== null);
+  const onclick = (RELEASE_ALLOWED === false)
+    ? `showTrvToast('Editing is limited to Shipping and management (shipping@, Chase, Alex, Thomas).', null)`
+    : `startTrvEdit('${oid}')`;
+  return `<button type="button" class="trv-btn trv-btn-ghost" onclick="${onclick}"`
+       + `${hardDisabled ? " disabled" : ""}${blocked && !hardDisabled ? ' style="opacity:.5"' : ""}`
+       + ` title="${escapeHtml(tip)}">Edit</button>`;
 }
 
 function trvChangePill(o){
