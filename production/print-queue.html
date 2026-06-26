@@ -1428,8 +1428,9 @@
   .trv-pdf-link { text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
   .trv-pdf-link:hover { border-color: var(--accent); color: var(--ink); }
 
-  /* Batch expedite callout — printed at the very top of the travelers batch so
-     the printer knows rushed work is coming. */
+  /* Batch expedite callout — SCREEN-ONLY heads-up banner that sits above the
+     first traveler (below the toolbar) so the floor sees rushed work is coming.
+     Never prints (no-print); each expedited sheet carries its own red banner. */
   .trv-expedite-callout {
     display: flex; align-items: center; gap: 14px; flex: 0 0 auto;
     margin: 0 0 16px; padding: 10px 16px;
@@ -1886,6 +1887,14 @@
       border: none !important; box-shadow: none !important;
     }
     body.printing-travelers .tab-content:not(#content-travelers) { display: none !important; }
+    /* Belt-and-suspenders: hide EVERY direct child of the card wrapper except the
+       travelers content. The wrapper chrome (page-intro, banners, kpi-row,
+       needs-attention / printed-review, the other tabs) is screen-only — and one
+       of those hidden-but-still-laid-out nodes was painting a stray .notdef glyph
+       (a NUL char in Poppins) at the page's top-left corner of every printed PDF.
+       Scoping print to ONLY #content-travelers kills it at the source, whatever
+       the exact emitter, and guarantees the paper is the work orders alone. */
+    body.printing-travelers .card-wide > *:not(#content-travelers) { display: none !important; }
 
     .traveler {
       box-shadow: none; border: none; border-radius: 0;
@@ -1934,10 +1943,10 @@
      to setTab() — they switch the panel in place; Guide/Rules and every other rail
      item navigate. The active in-page tab is marked is-subcurrent by setTab(). -->
 <!-- Rail rendered by /_shared/nav.js from the single RAILS config (data-dept).
-     data-page="board" => the Print sub-links (Order/Print/Travelers/Job
-     Preview) are this page's in-page tabs; everything else is a cross-page
-     link. Do not hand-code rail markup. -->
-<nav class="side-nav" data-rail aria-label="Production sections"></nav>
+     data-page="board" => the Print sub-links (Order/Print/Travelers/Job
+     Preview) are this page's in-page tabs; everything else is a cross-page
+     link. Do not hand-code rail markup. -->
+<nav class="side-nav" data-rail aria-label="Production sections"></nav>
 
 <div class="app-main">
 <main class="card card-wide">
@@ -2063,8 +2072,138 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-06-25T19:37:02",
+  "built_at": "2026-06-25T20:03:50",
   "orders": [
+    {
+      "shopify_order_id": "7024291610706",
+      "shopify_order_name": "36290",
+      "shopify_order_number": "36290",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 134.32,
+      "ship_by_date": null,
+      "latest_ship_by": "July 23, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-06-25T19:39:39-05:00",
+      "tags": "discount, redo",
+      "total_price": 134.32,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7024291610706",
+          "shopify_order_name": "36290",
+          "shopify_order_number": "36290",
+          "key": [
+            "color",
+            "Cobalt",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Cobalt",
+          "finish": null,
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H32-6"
+          ],
+          "variant_skus": [
+            "H32-6-2E"
+          ],
+          "line_item_titles": [
+            "Color Caliber Pull - Nickel"
+          ],
+          "lines": [
+            {
+              "title": "Color Caliber Pull - Nickel",
+              "variant_title": "6\" (C-C 4\") / Cobalt / Nickel",
+              "variant_sku": "H32-6-2E",
+              "parent_sku": "H32-6",
+              "qty": 3,
+              "category": "pull",
+              "category_label": "Pull",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-caliber-pull-hardware-nickel-cobalt.jpg?v=1777589457&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 3,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Cobalt|hardware",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7024291610706",
+          "shopify_order_name": "36290",
+          "shopify_order_number": "36290",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-06-25T19:39:39-05:00",
+          "parent_sku": "H32-6",
+          "color": "Cobalt",
+          "finish": "Nickel",
+          "category": "pull",
+          "category_label": "Pull",
+          "qty": 3,
+          "line_item_ids": [
+            16973630046290
+          ],
+          "item_titles": [
+            "Color Caliber Pull - Nickel"
+          ],
+          "variant_skus": [
+            "H32-6-2E"
+          ],
+          "lines": [
+            {
+              "sku": "H32-6-2E",
+              "title": "Color Caliber Pull - Nickel",
+              "qty": 3,
+              "finish": "Nickel",
+              "color": "Cobalt",
+              "category": "pull",
+              "variant_title": "6\" (C-C 4\") / Cobalt / Nickel",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-caliber-pull-hardware-nickel-cobalt.jpg?v=1777589457&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7024146120786",
       "shopify_order_name": "36289",
@@ -2470,8 +2609,8 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAF-1",
-            "SAC-B",
-            "SAC-L"
+            "SAC-L",
+            "SAC-B"
           ],
           "variant_skus": [
             "SAF-1",
@@ -4835,9 +4974,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 17,
-    "printouts": 22,
-    "notion_rows": 20,
+    "orders": 18,
+    "printouts": 23,
+    "notion_rows": 21,
     "skipped_already_printed": 152,
     "printed_today": 25,
     "needs_attention": 0,
@@ -7668,9 +7807,11 @@ function renderTravelers(){
     // Within each (bucket, sub-group): keep received order.
     return a.orderIdx - b.orderIdx || a.idx - b.idx;
   });
-  // The expedite callout rides at the very top INSIDE the first traveler so it
-  // prints on page 1 — NOT as a sibling above the full-page-tall list, which
-  // would consume its own blank page and push the first traveler to page 2.
+  // The batch expedite callout is SCREEN-ONLY (no-print) — it never lands on
+  // paper, so it has no page-consumption cost. Render it as its own banner
+  // ABOVE the traveler list (below the toolbar), not nested inside the first
+  // sheet, so it reads as a batch-level heads-up. The red per-sheet .trv-expedite
+  // banner is what actually prints on each expedited traveler.
   // Master travelers ride immediately BEFORE their order's first sheet in the
   // print sequence — the unnumbered cover page used to pull the order together.
   for(const o of (DATA.orders||[])){
@@ -7689,9 +7830,10 @@ function renderTravelers(){
     seenOrderCheck.add(id);
     return true;
   };
+  // callout no longer rides inside the first sheet — it's a sibling banner below.
   const sheets = pairs.map((x, i) =>
-    x.master ? renderMasterTraveler(x.o, i === 0 ? callout : "", firstOfOrder(x.o))
-             : renderTraveler(x.o, x.p, x.idx, x.total, i === 0 ? callout : "", firstOfOrder(x.o)));
+    x.master ? renderMasterTraveler(x.o, "", firstOfOrder(x.o))
+             : renderTraveler(x.o, x.p, x.idx, x.total, "", firstOfOrder(x.o)));
   // Rod + bulb assignment task bars share identical markup (one builder). Both
   // list lines that must be assigned onto fixtures before printing.
   function renderTaskBar(tasks, head){
@@ -7711,7 +7853,7 @@ function renderTravelers(){
   const taskBar =
     renderTaskBar(rodTasks, "Rod assignment needed — these print on their fixtures' travelers, not their own. Assign BEFORE printing.")
     + renderTaskBar(bulbTasks, "Bulb assignment needed — multiple fixtures take bulbs. Distribute onto each fixture's traveler (ranked by lampholder fit) BEFORE printing.");
-  mount.innerHTML = `${taskBar}<div class="trv-list">${sheets.join("")}</div>`;
+  mount.innerHTML = `${callout}${taskBar}<div class="trv-list">${sheets.join("")}</div>`;
   const n = sheets.length;
   document.getElementById("trvCount").textContent = n;
   document.getElementById("trvCountPlural").textContent = n === 1 ? "" : "s";
@@ -8085,11 +8227,37 @@ async function splitJob(btn){
 }
 
 // Print all travelers — flag the body so the print CSS hides chrome.
+// Tag the LAST sheet that will actually print with `trv-print-solo` so its
+// forced `page-break-after: always` is dropped — otherwise it emits a trailing
+// blank page. The CSS `.traveler:last-child` can't do this on its own once any
+// sheet is hidden (display:none from Print selected, or .trv-filtered-out from
+// search): :last-child still matches a hidden DOM sibling, so the last VISIBLE
+// sheet keeps its break. Returns a cleanup fn that removes the class.
+function _suppressTrailingBreak(){
+  const list = document.getElementById("travelers");
+  if(!list) return () => {};
+  const visible = Array.from(list.querySelectorAll(".traveler")).filter(s => {
+    if(s.classList.contains("trv-filtered-out")) return false;
+    // offsetParent is null for display:none elements (covers the Print-selected
+    // hide and any display:none ancestor).
+    return s.offsetParent !== null || s.style.display !== "none";
+  });
+  const last = visible[visible.length - 1];
+  if(!last) return () => {};
+  last.classList.add("trv-print-solo");
+  return () => last.classList.remove("trv-print-solo");
+}
+
 async function printAllTravelers(){
   if(!confirmUnassignedTasks("Print")) return;
   document.body.classList.add("printing-travelers");
   await ensureThumbsLoaded(document.getElementById("travelers"));
-  const cleanup = () => { document.body.classList.remove("printing-travelers"); window.removeEventListener("afterprint", cleanup); };
+  const restoreBreak = _suppressTrailingBreak();
+  const cleanup = () => {
+    document.body.classList.remove("printing-travelers");
+    restoreBreak();
+    window.removeEventListener("afterprint", cleanup);
+  };
   window.addEventListener("afterprint", cleanup);
   window.print();
 }
@@ -8194,7 +8362,7 @@ async function releaseBatch(){
       const out = await resp.json().catch(() => ({}));
       if(out && out.queued){
         setLastReleaseNow();
-        if(btn){ btn.textContent = dryRun ? "Dry run queued ✓" : "Released ✓"; btn.disabled = true; }
+        if(btn){ btn.textContent = dryRun ? "Dry run queued" : "Released"; btn.disabled = true; }
         showTrvToast(
           `${dryRun ? "Dry-run release" : "Release"} queued for ${count} order${count===1?"":"s"} — ` +
           `running on the release PC. Confirmation posts to Teams (Automations › Production).`, null);
@@ -8212,7 +8380,7 @@ async function releaseBatch(){
   URL.revokeObjectURL(url);
 
   setLastReleaseNow();
-  if(btn){ btn.textContent = "Released ✓ — run Finalize"; btn.disabled = true; }
+  if(btn){ btn.textContent = "Released — run Finalize"; btn.disabled = true; }
   showTrvToast(
     `Release PC unreachable — downloaded the release file for ${count} order${count===1?"":"s"} instead. ` +
     `Click the "DB Finalize Release" shortcut on the release station to finish.`, null);
@@ -8336,9 +8504,13 @@ async function printSelected(){
   sheets.forEach(s => { if(!chosenSet.has(s)) s.style.display = "none"; });
   document.body.classList.add("printing-travelers");
   await ensureThumbsLoaded(list);
+  // Drop the forced page-break on the last VISIBLE sheet so a middle-of-board
+  // selection doesn't strand a blank trailing page (see _suppressTrailingBreak).
+  const restoreBreak = _suppressTrailingBreak();
   const cleanup = () => {
     document.body.classList.remove("printing-travelers");
     sheets.forEach(s => { s.style.display = ""; });
+    restoreBreak();
     window.removeEventListener("afterprint", cleanup);
     // Once the paper's out, offer to close the loop. afterprint fires whether
     // they printed or cancelled, so we ASK (never auto-release): only the
@@ -8471,7 +8643,7 @@ async function releaseOrderIds(ids, opts){
     const out = await resp.json().catch(() => ({}));
     if(resp.ok && out && out.queued){
       setLastReleaseNow();
-      if(btn){ btn.textContent = dryRun ? "Dry run queued ✓" : "Released ✓"; }
+      if(btn){ btn.textContent = dryRun ? "Dry run queued" : "Released"; }
       showTrvToast(
         `${dryRun ? "Dry-run release" : "Release"} queued for ${count} order${count===1?"":"s"} ` +
         `(${nums}) — running on the release PC. Confirmation posts to Teams (Automations › Production).`, null);
@@ -9101,7 +9273,7 @@ function renderNeedsAttention(){
   const n = items.length;
   el.innerHTML = `
     <div class="needs-attention-head">
-      ⚠ ${n} open order${n===1?"":"s"} produced no traveler
+      ${n} open order${n===1?"":"s"} produced no traveler
       <span class="needs-attention-sub">— confirm each is a quick-ship (bulbs / globes / accessories), not a missed order</span>
     </div>
     <ul>${rows}</ul>`;
@@ -9114,7 +9286,7 @@ function renderNeedsAttention(){
 // confirms each was really printed, or removes the tag in Shopify to re-queue it.
 //
 // Dismiss is per-browser (localStorage): once you've eyeballed a row and decided
-// it's fine, ✕ hides it for YOU and it stays hidden across rebuilds. Deliberately
+// it's fine, dismissing hides it for YOU and it stays hidden across rebuilds. Deliberately
 // not shared/tagged — these are rare, so a local "I've seen this" is enough, and
 // it keeps the dismiss out of Shopify. A "Show N dismissed" link restores them.
 const PR_DISMISS_KEY = "db-printed-review-dismissed-v1";
@@ -9169,7 +9341,7 @@ function renderPrintedReview(){
       <span class="na-reason">${escapeHtml(o.reason_label || o.reason || "")}</span>
       ${draftBadge}
       ${meta ? `<span class="na-meta">${meta}</span>` : ""}
-      <button class="pr-dismiss" title="Dismiss — I've confirmed this; hide it on this device" onclick="prDismiss('${escapeHtml(numRaw)}')">✕</button>
+      <button class="pr-dismiss" title="Dismiss — I've confirmed this; hide it on this device" onclick="prDismiss('${escapeHtml(numRaw)}')">Dismiss</button>
     </li>`;
   }).join("");
   const n = items.length;
@@ -9178,7 +9350,7 @@ function renderPrintedReview(){
     : "";
   el.innerHTML = `
     <div class="needs-attention-head">
-      🔍 ${n} order${n===1?"":"s"} tagged “printed” but no traveler on file
+      ${n} order${n===1?"":"s"} tagged “printed” but no traveler on file
       <span class="needs-attention-sub">— confirm each was really printed; if the tag was copied from another order, remove “printed” in Shopify to re-queue it${restoreLink}</span>
     </div>
     <ul>${rows}</ul>`;
