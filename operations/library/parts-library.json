@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-01T12:00:59",
+  "generated_at": "2026-07-02T07:05:51",
   "counts": {
-    "parts": 456,
+    "parts": 463,
     "supplies": 139,
     "families": 282,
     "glossary": 82,
@@ -61218,6 +61218,170 @@
       "last_edited_at": "2026-06-24T00:44:00.000Z"
     },
     {
+      "part_number": "CA5-M0",
+      "page_id": "390ffa52-4c5b-8184-a67e-debb3f5b590d",
+      "page_url": "https://app.notion.com/p/CA5-M0-390ffa524c5b8184a67edebb3f5b590d",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "price": null,
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CA5RB",
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-81fd-905d-e731497a8b20",
+      "last_edited_at": "2026-07-01T19:33:00.000Z"
+    },
+    {
+      "part_number": "CA5-M1",
+      "page_id": "390ffa52-4c5b-818d-8611-f683c344b08b",
+      "page_url": "https://app.notion.com/p/CA5-M1-390ffa524c5b818d8611f683c344b08b",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "price": null,
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CA5RB",
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-8141-b608-ef48cfb3bb18",
+      "last_edited_at": "2026-07-01T19:33:00.000Z"
+    },
+    {
+      "part_number": "CA5-M2",
+      "page_id": "390ffa52-4c5b-8123-b9f2-d957f95661ec",
+      "page_url": "https://app.notion.com/p/CA5-M2-390ffa524c5b8123b9f2d957f95661ec",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "price": null,
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CA5RB",
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-81ef-a652-e5b81d8e9f3b",
+      "last_edited_at": "2026-07-01T19:33:00.000Z"
+    },
+    {
+      "part_number": "CA5-M3",
+      "page_id": "390ffa52-4c5b-8159-90c3-cbefebc1c67a",
+      "page_url": "https://app.notion.com/p/CA5-M3-390ffa524c5b815990c3cbefebc1c67a",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "price": null,
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CA5RB",
+      "in_house_processes": [
+        "Powder Coat",
+        "Machine"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-817c-884a-e5c58f7b9a4c",
+      "last_edited_at": "2026-07-01T19:33:00.000Z"
+    },
+    {
+      "part_number": "CA5-M6",
+      "page_id": "390ffa52-4c5b-8176-8760-f612d82c0b5f",
+      "page_url": "https://app.notion.com/p/CA5-M6-390ffa524c5b81768760f612d82c0b5f",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "price": null,
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CA5RB",
+      "in_house_processes": [
+        "Powder Coat",
+        "Machine"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-81aa-811d-e1385c33977e",
+      "last_edited_at": "2026-07-01T19:33:00.000Z"
+    },
+    {
+      "part_number": "CA5-M7",
+      "page_id": "390ffa52-4c5b-81e9-991e-d380e37dbc0c",
+      "page_url": "https://app.notion.com/p/CA5-M7-390ffa524c5b81e9991ed380e37dbc0c",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "price": null,
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CA5RB",
+      "in_house_processes": [
+        "Powder Coat",
+        "Machine"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-81d0-a8ae-e5d47a5da1b0",
+      "last_edited_at": "2026-07-01T19:34:00.000Z"
+    },
+    {
+      "part_number": "CA5-M8",
+      "page_id": "390ffa52-4c5b-811a-a1cc-ca34f722a284",
+      "page_url": "https://app.notion.com/p/CA5-M8-390ffa524c5b811aa1ccca34f722a284",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "price": null,
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CA5RB",
+      "in_house_processes": [
+        "Powder Coat"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-816d-945f-cdbd5c875ac6",
+      "last_edited_at": "2026-07-01T19:34:00.000Z"
+    },
+    {
       "part_number": "CA5BL",
       "page_id": "324ffa52-4c5b-817d-bdef-d8a6559f18ea",
       "page_url": "https://app.notion.com/p/CA5BL-324ffa524c5b817dbdefd8a6559f18ea",
@@ -70098,7 +70262,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-06-24T00:44:00.000Z"
+      "last_edited_at": "2026-07-01T21:37:00.000Z"
     },
     {
       "sku": "BX02-15",
@@ -70129,7 +70293,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-06-24T00:44:00.000Z"
+      "last_edited_at": "2026-07-01T21:37:00.000Z"
     },
     {
       "sku": "BX02-26",
@@ -73457,6 +73621,27 @@
     }
   },
   "siblings": {
+    "2ceffa52-4c5b-816d-945f-cdbd5c875ac6": [
+      "CA5-M8"
+    ],
+    "2ceffa52-4c5b-81d0-a8ae-e5d47a5da1b0": [
+      "CA5-M7"
+    ],
+    "2ceffa52-4c5b-81aa-811d-e1385c33977e": [
+      "CA5-M6"
+    ],
+    "2ceffa52-4c5b-817c-884a-e5c58f7b9a4c": [
+      "CA5-M3"
+    ],
+    "2ceffa52-4c5b-81ef-a652-e5b81d8e9f3b": [
+      "CA5-M2"
+    ],
+    "2ceffa52-4c5b-8141-b608-ef48cfb3bb18": [
+      "CA5-M1"
+    ],
+    "2ceffa52-4c5b-81fd-905d-e731497a8b20": [
+      "CA5-M0"
+    ],
     "2ceffa52-4c5b-817e-a31c-de201840e64f": [
       "GC10BR",
       "GC10NI",
