@@ -382,80 +382,85 @@
   font-size: 11px;
   color: var(--muted);
 }
-.bom-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  columns: 280px auto;
-  column-gap: 24px;
+/* Aligned parts table — mirrors the BOM Master page: role pill · part # ·
+   description · qty, in real columns with zebra striping, so a quantity reads
+   cleanly across to its part instead of the old 3-column masonry flow. */
+.bom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2px;
 }
-.bom-row {
-  break-inside: avoid;
-  display: grid;
-  grid-template-columns: 32px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 6px 4px 0;
-  border-bottom: 1px dotted transparent;
-}
-.bom-row + .bom-row { margin-top: 0; }
-.bom-row:hover { border-bottom-color: var(--accent); }
-.bom-qty {
-  font-size: 11px;
-  font-weight: 600;
+.bom-table th {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--muted);
-  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  text-align: left;
+  padding: 2px 6px;
+}
+.bom-table td {
+  padding: 4px 6px;
+  font-size: 12px;
+  border-bottom: 1px solid #F0EFEC;
+  vertical-align: top;
+}
+.bom-table tr:last-child td { border-bottom: none; }
+/* Zebra stripe so each row's qty tracks to its part across the width. */
+.bom-table tbody tr:nth-child(even) td { background: var(--bg); }
+.bom-table tbody tr:hover td { background: #FFF4E4; }
+.bt-role { width: 22px; }
+.bt-part { white-space: nowrap; }
+/* Description is the elastic column so qty stays tucked to the right. */
+.bt-desc { width: 100%; }
+.bt-qty {
   text-align: right;
   white-space: nowrap;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  min-width: 36px;
 }
-.bom-qty::after {
-  content: '×';
-  margin-left: 2px;
-  color: var(--border);
+.bt-qty::after { content: '×'; margin-left: 2px; color: var(--border); }
+
+/* Single-letter role pill in the lead column (C / F / FC / S). */
+.bom-pill {
+  display: inline-block;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+  background: #EFEEEB;
+  color: var(--muted);
 }
-.bom-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
+.bom-pill.color { background: #FF9912; color: #fff; }
+.bom-pill.finish { background: #6B7280; color: #fff; }
+.bom-pill.finishcolor { background: #A855F7; color: #fff; }
+.bom-pill.standard { background: #E5E3DF; color: #8A8A8A; }
+
 .bom-part-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 12px;
   font-weight: 600;
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .bom-part-num:hover {
   border-bottom-color: var(--accent);
   color: var(--accent-dark);
 }
 .bom-desc {
-  font-size: 11px;
-  color: var(--muted);
+  font-size: 12px;
+  color: var(--text);
   font-weight: 300;
   line-height: 1.3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
-.bom-role {
-  font-size: 9px;
-  font-weight: 600;
-  padding: 1px 5px;
-  border-radius: 2px;
-  background: #F0F0F0;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-.bom-role.color { background: #FFF4E4; color: #B85C00; }
-.bom-role.finish { background: #EEF2F7; color: #1A56C7; }
-.bom-role.finishcolor { background: #F4E8FF; color: #6B3FA3; }
 
 /* Body description (full marketing copy) */
 .product-body {
@@ -674,9 +679,6 @@
   color: #B85C00;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-}
-.canopy-cfg .qc-list {
-  columns: 240px auto;
 }
 
 @media (max-width: 720px) {

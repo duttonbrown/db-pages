@@ -627,14 +627,7 @@ function renderQcCallouts(p) {
           <span class="canopy-cfg-name">${escapeHtml(c.name)}</span>
           <span class="bom-section-count">${c.part_count} part${c.part_count === 1 ? '' : 's'}</span>
         </div>
-        <ul class="qc-list">${c.parts.map(prt => `
-          <li class="qc-list-row">
-            <span class="bom-qty">${escapeHtml(String(prt.qty || ''))}</span>
-            <span class="qc-list-detail">
-              <a class="bom-part-num" href="parts.html#${encodeURIComponent(prt.part_number || '')}">${escapeHtml(prt.part_number || '—')}</a>
-              <span class="bom-desc">${escapeHtml(prt.desc || '')}</span>
-            </span>
-          </li>`).join('')}</ul>
+        ${bomTable(c.parts)}
       </div>`).join('');
     blocks.push(`
       <section class="spec-section">
@@ -687,32 +680,7 @@ function renderBomTree(p) {
       : n.toLowerCase().startsWith('canopy') ? 1 : 2;
     return order(a) - order(b) || a.localeCompare(b);
   });
-  const blocks = sections.map(([name, parts]) => {
-    const isCanopy = name.toLowerCase().startsWith('canopy');
-    const headCls = isCanopy ? 'bom-section-head canopy' : 'bom-section-head';
-    const rows = parts.map(prt => {
-      const roleCls = (prt.role === 'Color') ? 'color'
-        : (prt.role === 'Finish') ? 'finish'
-        : (prt.role === 'Finish+Color') ? 'finishcolor' : '';
-      const roleTag = prt.role && prt.role !== 'Standard'
-        ? `<span class="bom-role ${roleCls}">${escapeHtml(prt.role)}</span>` : '';
-      return `<li class="bom-row">
-        <span class="bom-qty">${escapeHtml(String(prt.qty || ''))}</span>
-        <span class="bom-detail">
-          <a class="bom-part-num" href="parts.html#${encodeURIComponent(prt.part_number || '')}">${escapeHtml(prt.part_number || '—')}</a>
-          <span class="bom-desc" title="${escapeHtml(prt.desc || '')}">${escapeHtml(prt.desc || '')}</span>
-        </span>
-        ${roleTag}
-      </li>`;
-    }).join('');
-    return `<div class="bom-section">
-      <div class="${headCls}">
-        <span class="bom-section-name">${escapeHtml(name)}${isCanopy ? ' 🪤' : ''}</span>
-        <span class="bom-section-count">${parts.length} part${parts.length === 1 ? '' : 's'}</span>
-      </div>
-      <ul class="bom-list">${rows}</ul>
-    </div>`;
-  }).join('');
+  const blocks = sections.map(([name, parts]) => bomSectionTable(name, parts)).join('');
   return `<section class="spec-section">
     <header class="spec-section-head">
       <h3>Bill of Materials <span class="spec-section-count">${p.parts_total}</span></h3>
@@ -720,6 +688,46 @@ function renderBomTree(p) {
     </header>
     ${blocks}
   </section>`;
+}
+
+// Shared table renderer so the BOM and the canopy configs read identically —
+// aligned columns (role · part # · description · qty), zebra striped, matching
+// the BOM Master page. `parts` items carry {part_number|qty|desc, role?}.
+function bomTable(parts) {
+  const rows = parts.map(prt => {
+    const role = prt.role || 'Standard';
+    const roleCls = (role === 'Color') ? 'color'
+      : (role === 'Finish') ? 'finish'
+      : (role === 'Finish+Color') ? 'finishcolor' : 'standard';
+    // A single-letter pill in the lead column, exactly like BOM Master.
+    const pillChar = role === 'Finish+Color' ? 'FC' : role.charAt(0).toUpperCase();
+    const pn = prt.part_number || '';
+    const partCell = pn
+      ? `<a class="bom-part-num" href="parts.html#${encodeURIComponent(pn)}">${escapeHtml(pn)}</a>`
+      : '—';
+    return `<tr>
+      <td class="bt-role"><span class="bom-pill ${roleCls}" title="${escapeHtml(role)}">${escapeHtml(pillChar)}</span></td>
+      <td class="bt-part">${partCell}</td>
+      <td class="bt-desc">${escapeHtml(prt.desc || '')}</td>
+      <td class="bt-qty">${escapeHtml(String(prt.qty || ''))}</td>
+    </tr>`;
+  }).join('');
+  return `<table class="bom-table">
+    <thead><tr><th></th><th>Part #</th><th>Description</th><th>Qty</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+function bomSectionTable(name, parts) {
+  const isCanopy = name.toLowerCase().startsWith('canopy');
+  const headCls = isCanopy ? 'bom-section-head canopy' : 'bom-section-head';
+  return `<div class="bom-section">
+    <div class="${headCls}">
+      <span class="bom-section-name">${escapeHtml(name)}</span>
+      <span class="bom-section-count">${parts.length} part${parts.length === 1 ? '' : 's'}</span>
+    </div>
+    ${bomTable(parts)}
+  </div>`;
 }
 
 bootstrap();
