@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-03T12:01:00",
+  "generated_at": "2026-07-06T07:05:53",
   "counts": {
-    "parts": 474,
+    "parts": 475,
     "supplies": 139,
-    "families": 283,
+    "families": 284,
     "glossary": 83,
     "locations": 39,
     "parts_with_location": 10,
@@ -593,6 +593,2020 @@
     }
   ],
   "families": {
+    "392ffa52-4c5b-80f7-8288-fecf64c7e7df": {
+      "part_number": "SC1",
+      "page_id": "392ffa52-4c5b-80f7-8288-fecf64c7e7df",
+      "page_url": "https://app.notion.com/p/SC1-392ffa524c5b80f78288fecf64c7e7df",
+      "description": "Screw, flat-head, 8-32, 1\u201d",
+      "definition": "A threaded fastener used to join or secure parts of a fixture. Can be flathead, Phillips, hexagonal, among others. Included often in kits.",
+      "materials": [],
+      "raw_or_prefinished": null,
+      "in_house_processes": [],
+      "vendor": [
+        "Bolt Depot"
+      ],
+      "glossary": {
+        "id": "2ccffa52-4c5b-812e-8c2a-d0e24a124bf0",
+        "name": "Screw",
+        "abbr": "SC",
+        "definition": "A threaded fastener used to join or secure parts of a fixture. Can be flathead, Phillips, hexagonal, among others. Included often in kits.",
+        "image": "glossary-images/glossary-Screw.jpg"
+      },
+      "products": [
+        {
+          "id": "2aeffa524c5b807ca23ac2aee6d49ba6",
+          "sku": "10401-20",
+          "title": "Urchin Chandelier 20\"",
+          "url": "https://app.notion.com/p/10401-20-2aeffa524c5b807ca23ac2aee6d49ba6"
+        },
+        {
+          "id": "2aeffa524c5b804c89e0d086517302dc",
+          "sku": "10401-27",
+          "title": "Urchin Chandelier 27\"",
+          "url": "https://app.notion.com/p/10401-27-2aeffa524c5b804c89e0d086517302dc"
+        },
+        {
+          "id": "2aeffa524c5b8001a6dde799d8726521",
+          "sku": "10401F-20",
+          "title": "Urchin Flush Mount 20\"",
+          "url": "https://app.notion.com/p/10401F-20-2aeffa524c5b8001a6dde799d8726521"
+        },
+        {
+          "id": "2aeffa524c5b809aaf12f40a1fea55b0",
+          "sku": "10401F-27",
+          "title": "Urchin Flush Mount 27\"",
+          "url": "https://app.notion.com/p/10401F-27-2aeffa524c5b809aaf12f40a1fea55b0"
+        },
+        {
+          "id": "381ffa524c5b816ea01ade200f84b05c",
+          "sku": "10401FH-20",
+          "title": "Urchin Flush Mount 20\", Hang-straight",
+          "url": "https://app.notion.com/p/10401FH-20-381ffa524c5b816ea01ade200f84b05c"
+        },
+        {
+          "id": "381ffa524c5b817090f4c2b087510b20",
+          "sku": "10401FH-27",
+          "title": "Urchin Flush Mount 27\", Hang-straight",
+          "url": "https://app.notion.com/p/10401FH-27-381ffa524c5b817090f4c2b087510b20"
+        },
+        {
+          "id": "381ffa524c5b8115a40cfd6e2e455209",
+          "sku": "10401H-20",
+          "title": "Urchin Chandelier 20\", Hang-straight",
+          "url": "https://app.notion.com/p/10401H-20-381ffa524c5b8115a40cfd6e2e455209"
+        },
+        {
+          "id": "381ffa524c5b81129bb8e772ccb6d14a",
+          "sku": "10401H-27",
+          "title": "Urchin Chandelier 27\", Hang-straight",
+          "url": "https://app.notion.com/p/10401H-27-381ffa524c5b81129bb8e772ccb6d14a"
+        },
+        {
+          "id": "2aeffa524c5b8004bd2cee770b78e941",
+          "sku": "10403-20",
+          "title": "Color Beaded Urchin Chandelier 20\"",
+          "url": "https://app.notion.com/p/10403-20-2aeffa524c5b8004bd2cee770b78e941"
+        },
+        {
+          "id": "2aeffa524c5b800eac80c8e751ab56c2",
+          "sku": "10403-27",
+          "title": "Color Beaded Urchin Chandelier 27\"",
+          "url": "https://app.notion.com/p/10403-27-2aeffa524c5b800eac80c8e751ab56c2"
+        },
+        {
+          "id": "2aeffa524c5b8078bc82f2e937af3292",
+          "sku": "10403F-20",
+          "title": "Color Beaded Urchin Flush Mount 20\"",
+          "url": "https://app.notion.com/p/10403F-20-2aeffa524c5b8078bc82f2e937af3292"
+        },
+        {
+          "id": "2aeffa524c5b807ba5ebe5543c3732ae",
+          "sku": "10403F-27",
+          "title": "Color Beaded Urchin Flush Mount 27\"",
+          "url": "https://app.notion.com/p/10403F-27-2aeffa524c5b807ba5ebe5543c3732ae"
+        },
+        {
+          "id": "381ffa524c5b812a8110c5bf8326a26f",
+          "sku": "10403FH-20",
+          "title": "Color Beaded Urchin Flush Mount 20\", Hang-straight",
+          "url": "https://app.notion.com/p/10403FH-20-381ffa524c5b812a8110c5bf8326a26f"
+        },
+        {
+          "id": "381ffa524c5b81968f22f84b6ad6481b",
+          "sku": "10403FH-27",
+          "title": "Color Beaded Urchin Flush Mount 27\", Hang-straight",
+          "url": "https://app.notion.com/p/10403FH-27-381ffa524c5b81968f22f84b6ad6481b"
+        },
+        {
+          "id": "381ffa524c5b81d49ce3ceeabc0171fb",
+          "sku": "10403H-20",
+          "title": "Color Beaded Urchin Chandelier 20\", Hang-straight",
+          "url": "https://app.notion.com/p/10403H-20-381ffa524c5b81d49ce3ceeabc0171fb"
+        },
+        {
+          "id": "381ffa524c5b81759ea4d685022bce03",
+          "sku": "10403H-27",
+          "title": "Color Beaded Urchin Chandelier 27\", Hang-straight",
+          "url": "https://app.notion.com/p/10403H-27-381ffa524c5b81759ea4d685022bce03"
+        },
+        {
+          "id": "2aeffa524c5b803daee4fb76a4dfb965",
+          "sku": "20620",
+          "title": "Color Sputnik Sconce",
+          "url": "https://app.notion.com/p/20620-2aeffa524c5b803daee4fb76a4dfb965"
+        },
+        {
+          "id": "2aeffa524c5b80a6a643ff7a27225bd2",
+          "sku": "20630",
+          "title": "Color Sputnik Flush Mount",
+          "url": "https://app.notion.com/p/20630-2aeffa524c5b80a6a643ff7a27225bd2"
+        },
+        {
+          "id": "382ffa524c5b8159af30fd4ad513f7f1",
+          "sku": "20630H",
+          "title": "Color Sputnik Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/20630H-382ffa524c5b8159af30fd4ad513f7f1"
+        },
+        {
+          "id": "2aeffa524c5b80d5a784ea1ddda979d7",
+          "sku": "21800",
+          "title": "Color Elliptical Sputnik Chandelier",
+          "url": "https://app.notion.com/p/21800-2aeffa524c5b80d5a784ea1ddda979d7"
+        },
+        {
+          "id": "2aeffa524c5b80bb92f1d0d513bb6559",
+          "sku": "21800F",
+          "title": "Color Elliptical Sputnik Flush Mount",
+          "url": "https://app.notion.com/p/21800F-2aeffa524c5b80bb92f1d0d513bb6559"
+        },
+        {
+          "id": "381ffa524c5b815a8f1dece0f9f19892",
+          "sku": "21800FH",
+          "title": "Color Elliptical Sputnik Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/21800FH-381ffa524c5b815a8f1dece0f9f19892"
+        },
+        {
+          "id": "381ffa524c5b8123854df4ec664d1821",
+          "sku": "21800H",
+          "title": "Color Elliptical Sputnik Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/21800H-381ffa524c5b8123854df4ec664d1821"
+        },
+        {
+          "id": "2aeffa524c5b804ab024e28a6f0f1116",
+          "sku": "30110-10",
+          "title": "Cap Pendant 10\"",
+          "url": "https://app.notion.com/p/30110-10-2aeffa524c5b804ab024e28a6f0f1116"
+        },
+        {
+          "id": "2c8ffa524c5b807ebe82cc740e08dca3",
+          "sku": "30110-10 (C)",
+          "title": "Color Cap Pendant 10\"",
+          "url": "https://app.notion.com/p/30110-10-C-2c8ffa524c5b807ebe82cc740e08dca3"
+        },
+        {
+          "id": "2aeffa524c5b80d8885dc891d182045c",
+          "sku": "30110-12",
+          "title": "Cap Pendant 12\"",
+          "url": "https://app.notion.com/p/30110-12-2aeffa524c5b80d8885dc891d182045c"
+        },
+        {
+          "id": "320ffa524c5b80cda6fcdb7abf117896",
+          "sku": "30110-12 (C)",
+          "title": "Color Cap Pendant 12\"",
+          "url": "https://app.notion.com/p/30110-12-C-320ffa524c5b80cda6fcdb7abf117896"
+        },
+        {
+          "id": "2aeffa524c5b80d78a93e5495a03dd62",
+          "sku": "30110-6",
+          "title": "Cap Pendant 6\"",
+          "url": "https://app.notion.com/p/30110-6-2aeffa524c5b80d78a93e5495a03dd62"
+        },
+        {
+          "id": "2c8ffa524c5b800aba05d962f76a024e",
+          "sku": "30110-6 (C)",
+          "title": "Color Cap Pendant 6\"",
+          "url": "https://app.notion.com/p/30110-6-C-2c8ffa524c5b800aba05d962f76a024e"
+        },
+        {
+          "id": "2aeffa524c5b8005b1c7ef1476d62de8",
+          "sku": "30110-8",
+          "title": "Cap Pendant 8\"",
+          "url": "https://app.notion.com/p/30110-8-2aeffa524c5b8005b1c7ef1476d62de8"
+        },
+        {
+          "id": "2c8ffa524c5b80b68ed2da293eb141e2",
+          "sku": "30110-8 (C)",
+          "title": "Color Cap Pendant 8\"",
+          "url": "https://app.notion.com/p/30110-8-C-2c8ffa524c5b80b68ed2da293eb141e2"
+        },
+        {
+          "id": "382ffa524c5b819c9c38f93548689590",
+          "sku": "30110H-10",
+          "title": "Cap Pendant 10\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-10-382ffa524c5b819c9c38f93548689590"
+        },
+        {
+          "id": "382ffa524c5b81b892fccad2bceca290",
+          "sku": "30110H-10 (C)",
+          "title": "Color Cap Pendant 10\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-10-C-382ffa524c5b81b892fccad2bceca290"
+        },
+        {
+          "id": "382ffa524c5b812b8ab6cc62a02b0659",
+          "sku": "30110H-12",
+          "title": "Cap Pendant 12\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-12-382ffa524c5b812b8ab6cc62a02b0659"
+        },
+        {
+          "id": "382ffa524c5b81b7a087f92a3520c3f8",
+          "sku": "30110H-12 (C)",
+          "title": "Color Cap Pendant 12\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-12-C-382ffa524c5b81b7a087f92a3520c3f8"
+        },
+        {
+          "id": "382ffa524c5b8179a900efa57178ae71",
+          "sku": "30110H-6",
+          "title": "Cap Pendant 6\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-6-382ffa524c5b8179a900efa57178ae71"
+        },
+        {
+          "id": "382ffa524c5b81fa9c05c878fcebe2a7",
+          "sku": "30110H-6 (C)",
+          "title": "Color Cap Pendant 6\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-6-C-382ffa524c5b81fa9c05c878fcebe2a7"
+        },
+        {
+          "id": "382ffa524c5b81e48d08d668828ed995",
+          "sku": "30110H-8",
+          "title": "Cap Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-8-382ffa524c5b81e48d08d668828ed995"
+        },
+        {
+          "id": "382ffa524c5b8108acf9cde4ac51adfc",
+          "sku": "30110H-8 (C)",
+          "title": "Color Cap Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-8-C-382ffa524c5b8108acf9cde4ac51adfc"
+        },
+        {
+          "id": "2aeffa524c5b807a87fdfe1c7ce23fa5",
+          "sku": "30112-10",
+          "title": "Color Lure Pendant 10\"",
+          "url": "https://app.notion.com/p/30112-10-2aeffa524c5b807a87fdfe1c7ce23fa5"
+        },
+        {
+          "id": "2aeffa524c5b80cd90f1e1edc781541e",
+          "sku": "30112-12",
+          "title": "Color Lure Pendant 12\"",
+          "url": "https://app.notion.com/p/30112-12-2aeffa524c5b80cd90f1e1edc781541e"
+        },
+        {
+          "id": "2aeffa524c5b8046ad59ce7b09c0cab8",
+          "sku": "30112-6",
+          "title": "Color Lure Pendant 6\"",
+          "url": "https://app.notion.com/p/30112-6-2aeffa524c5b8046ad59ce7b09c0cab8"
+        },
+        {
+          "id": "2aeffa524c5b8037acfce14356148488",
+          "sku": "30112-8",
+          "title": "Color Lure Pendant 8\"",
+          "url": "https://app.notion.com/p/30112-8-2aeffa524c5b8037acfce14356148488"
+        },
+        {
+          "id": "2aeffa524c5b803cacfcf822b8d7437b",
+          "sku": "30112F-10",
+          "title": "Color Lure Flush Mount 10\"",
+          "url": "https://app.notion.com/p/30112F-10-2aeffa524c5b803cacfcf822b8d7437b"
+        },
+        {
+          "id": "2aeffa524c5b8095af44ce8d24b74f80",
+          "sku": "30112F-12",
+          "title": "Color Lure Flush Mount 12\"",
+          "url": "https://app.notion.com/p/30112F-12-2aeffa524c5b8095af44ce8d24b74f80"
+        },
+        {
+          "id": "2aeffa524c5b80a697b5d4c87f8645cd",
+          "sku": "30112F-6",
+          "title": "Color Lure Flush Mount 6\"",
+          "url": "https://app.notion.com/p/30112F-6-2aeffa524c5b80a697b5d4c87f8645cd"
+        },
+        {
+          "id": "2aeffa524c5b80669875d98224a57b7a",
+          "sku": "30112F-8",
+          "title": "Color Lure Flush Mount 8\"",
+          "url": "https://app.notion.com/p/30112F-8-2aeffa524c5b80669875d98224a57b7a"
+        },
+        {
+          "id": "382ffa524c5b810cb4f0e2cf699468ca",
+          "sku": "30112FH-10",
+          "title": "Color Lure Flush Mount 10\", Hang-straight",
+          "url": "https://app.notion.com/p/30112FH-10-382ffa524c5b810cb4f0e2cf699468ca"
+        },
+        {
+          "id": "382ffa524c5b817cbaf2cd64c198184d",
+          "sku": "30112FH-12",
+          "title": "Color Lure Flush Mount 12\", Hang-straight",
+          "url": "https://app.notion.com/p/30112FH-12-382ffa524c5b817cbaf2cd64c198184d"
+        },
+        {
+          "id": "382ffa524c5b81978bf9d7ac893c7b18",
+          "sku": "30112FH-6",
+          "title": "Color Lure Flush Mount 6\", Hang-straight",
+          "url": "https://app.notion.com/p/30112FH-6-382ffa524c5b81978bf9d7ac893c7b18"
+        },
+        {
+          "id": "382ffa524c5b81a883cdf6360b9e9da5",
+          "sku": "30112FH-8",
+          "title": "Color Lure Flush Mount 8\", Hang-straight",
+          "url": "https://app.notion.com/p/30112FH-8-382ffa524c5b81a883cdf6360b9e9da5"
+        },
+        {
+          "id": "382ffa524c5b81dfb831e66f29f9332f",
+          "sku": "30112H-10",
+          "title": "Color Lure Pendant 10\", Hang-straight",
+          "url": "https://app.notion.com/p/30112H-10-382ffa524c5b81dfb831e66f29f9332f"
+        },
+        {
+          "id": "382ffa524c5b8196a95bd7f088626092",
+          "sku": "30112H-12",
+          "title": "Color Lure Pendant 12\", Hang-straight",
+          "url": "https://app.notion.com/p/30112H-12-382ffa524c5b8196a95bd7f088626092"
+        },
+        {
+          "id": "382ffa524c5b81129381feefc2bf97bd",
+          "sku": "30112H-6",
+          "title": "Color Lure Pendant 6\", Hang-straight",
+          "url": "https://app.notion.com/p/30112H-6-382ffa524c5b81129381feefc2bf97bd"
+        },
+        {
+          "id": "382ffa524c5b811cb981fa17132d55ec",
+          "sku": "30112H-8",
+          "title": "Color Lure Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/30112H-8-382ffa524c5b811cb981fa17132d55ec"
+        },
+        {
+          "id": "2aeffa524c5b8097b61cd4389a10e60e",
+          "sku": "30120",
+          "title": "Cap Sconce 6\"",
+          "url": "https://app.notion.com/p/30120-2aeffa524c5b8097b61cd4389a10e60e"
+        },
+        {
+          "id": "2c8ffa524c5b80658172d319f1368200",
+          "sku": "30120 (C)",
+          "title": "Color Cap Sconce 6\"",
+          "url": "https://app.notion.com/p/30120-C-2c8ffa524c5b80658172d319f1368200"
+        },
+        {
+          "id": "2aeffa524c5b80e8be56d2337a34e23b",
+          "sku": "30121",
+          "title": "Cap Sconce 8\"",
+          "url": "https://app.notion.com/p/30121-2aeffa524c5b80e8be56d2337a34e23b"
+        },
+        {
+          "id": "2c8ffa524c5b8049beabf89c800e7d00",
+          "sku": "30121 (C)",
+          "title": "Color Cap Sconce 8\"",
+          "url": "https://app.notion.com/p/30121-C-2c8ffa524c5b8049beabf89c800e7d00"
+        },
+        {
+          "id": "2aeffa524c5b80b69c0df88009c44f07",
+          "sku": "30130-10",
+          "title": "Cap Flush Mount 10\"",
+          "url": "https://app.notion.com/p/30130-10-2aeffa524c5b80b69c0df88009c44f07"
+        },
+        {
+          "id": "2c8ffa524c5b803980d1d6e7c6175ae3",
+          "sku": "30130-10 (C)",
+          "title": "Color Cap Flush Mount 10\"",
+          "url": "https://app.notion.com/p/30130-10-C-2c8ffa524c5b803980d1d6e7c6175ae3"
+        },
+        {
+          "id": "2aeffa524c5b804690a4e04cd787e846",
+          "sku": "30130-12",
+          "title": "Cap Flush Mount 12\"",
+          "url": "https://app.notion.com/p/30130-12-2aeffa524c5b804690a4e04cd787e846"
+        },
+        {
+          "id": "2c8ffa524c5b80ea812df4d9ad07a958",
+          "sku": "30130-12 (C)",
+          "title": "Color Cap Flush Mount 12\"",
+          "url": "https://app.notion.com/p/30130-12-C-2c8ffa524c5b80ea812df4d9ad07a958"
+        },
+        {
+          "id": "2aeffa524c5b80a08a09fec5934a4ad6",
+          "sku": "30130-6",
+          "title": "Cap Flush Mount 6\"",
+          "url": "https://app.notion.com/p/30130-6-2aeffa524c5b80a08a09fec5934a4ad6"
+        },
+        {
+          "id": "2c8ffa524c5b80e8905dc805add881ad",
+          "sku": "30130-6 (C)",
+          "title": "Color Cap Flush Mount 6\"",
+          "url": "https://app.notion.com/p/30130-6-C-2c8ffa524c5b80e8905dc805add881ad"
+        },
+        {
+          "id": "2aeffa524c5b8078a9c1fd99869c5e56",
+          "sku": "30130-8",
+          "title": "Cap Flush Mount 8\"",
+          "url": "https://app.notion.com/p/30130-8-2aeffa524c5b8078a9c1fd99869c5e56"
+        },
+        {
+          "id": "2c8ffa524c5b801da5f4e9324e582f66",
+          "sku": "30130-8 (C)",
+          "title": "Color Cap Flush Mount 8\"",
+          "url": "https://app.notion.com/p/30130-8-C-2c8ffa524c5b801da5f4e9324e582f66"
+        },
+        {
+          "id": "382ffa524c5b8129b782faf4b8d9f27d",
+          "sku": "30130H-10",
+          "title": "Cap Flush Mount 10\", Hang-straight",
+          "url": "https://app.notion.com/p/30130H-10-382ffa524c5b8129b782faf4b8d9f27d"
+        },
+        {
+          "id": "382ffa524c5b818e89b9e8eb76d14f9c",
+          "sku": "30130H-12",
+          "title": "Cap Flush Mount 12\", Hang-straight",
+          "url": "https://app.notion.com/p/30130H-12-382ffa524c5b818e89b9e8eb76d14f9c"
+        },
+        {
+          "id": "382ffa524c5b81daa9ffd83322c4eb76",
+          "sku": "30130H-12 (C)",
+          "title": "Color Cap Flush Mount 12\", Hang-straight",
+          "url": "https://app.notion.com/p/30130H-12-C-382ffa524c5b81daa9ffd83322c4eb76"
+        },
+        {
+          "id": "382ffa524c5b810c846bd01a39d56dcd",
+          "sku": "30130H-6",
+          "title": "Cap Flush Mount 6\", Hang-straight",
+          "url": "https://app.notion.com/p/30130H-6-382ffa524c5b810c846bd01a39d56dcd"
+        },
+        {
+          "id": "382ffa524c5b81908426d1340eaefc4a",
+          "sku": "30130H-6 (C)",
+          "title": "Color Cap Flush Mount 6\", Hang-straight",
+          "url": "https://app.notion.com/p/30130H-6-C-382ffa524c5b81908426d1340eaefc4a"
+        },
+        {
+          "id": "382ffa524c5b819a81a6e4cacdfaf471",
+          "sku": "30130H-8",
+          "title": "Cap Flush Mount 8\", Hang-straight",
+          "url": "https://app.notion.com/p/30130H-8-382ffa524c5b819a81a6e4cacdfaf471"
+        },
+        {
+          "id": "2aeffa524c5b80e39f25c0d879fc2516",
+          "sku": "30220",
+          "title": "Cap Double Sconce 6\"",
+          "url": "https://app.notion.com/p/30220-2aeffa524c5b80e39f25c0d879fc2516"
+        },
+        {
+          "id": "2c8ffa524c5b805a954efedd3131c699",
+          "sku": "30220 (C)",
+          "title": "Color Cap Double Sconce 6\"",
+          "url": "https://app.notion.com/p/30220-C-2c8ffa524c5b805a954efedd3131c699"
+        },
+        {
+          "id": "2aeffa524c5b80199868d75e4596526a",
+          "sku": "30221",
+          "title": "Cap Double Sconce 8\"",
+          "url": "https://app.notion.com/p/30221-2aeffa524c5b80199868d75e4596526a"
+        },
+        {
+          "id": "2c8ffa524c5b8060a379ce770c982bb5",
+          "sku": "30221 (C)",
+          "title": "Color Cap Double Sconce 8\"",
+          "url": "https://app.notion.com/p/30221-C-2c8ffa524c5b8060a379ce770c982bb5"
+        },
+        {
+          "id": "2aeffa524c5b80e89294dde5bab39abb",
+          "sku": "30222",
+          "title": "Visage Sconce 6\"",
+          "url": "https://app.notion.com/p/30222-2aeffa524c5b80e89294dde5bab39abb"
+        },
+        {
+          "id": "2c8ffa524c5b8014ba90f7d26a6719b0",
+          "sku": "30222 (C)",
+          "title": "Color Visage Sconce 6\"",
+          "url": "https://app.notion.com/p/30222-C-2c8ffa524c5b8014ba90f7d26a6719b0"
+        },
+        {
+          "id": "2aeffa524c5b8004a27fe4711ff14fd7",
+          "sku": "30223",
+          "title": "Color Legend 2 Sconce",
+          "url": "https://app.notion.com/p/30223-2aeffa524c5b8004a27fe4711ff14fd7"
+        },
+        {
+          "id": "2aeffa524c5b801c98facef98a9c1ea2",
+          "sku": "30224",
+          "title": "Color Icon 2 Sconce",
+          "url": "https://app.notion.com/p/30224-2aeffa524c5b801c98facef98a9c1ea2"
+        },
+        {
+          "id": "2aeffa524c5b8092b130f67b9b2a0170",
+          "sku": "30230",
+          "title": "Color Icon 2 Flush Mount",
+          "url": "https://app.notion.com/p/30230-2aeffa524c5b8092b130f67b9b2a0170"
+        },
+        {
+          "id": "2aeffa524c5b8000b0f0e893619e948e",
+          "sku": "30320",
+          "title": "Color Legend 3 Sconce",
+          "url": "https://app.notion.com/p/30320-2aeffa524c5b8000b0f0e893619e948e"
+        },
+        {
+          "id": "2aeffa524c5b807a8211ff76c63cdae5",
+          "sku": "30321",
+          "title": "Color Icon 3 Sconce",
+          "url": "https://app.notion.com/p/30321-2aeffa524c5b807a8211ff76c63cdae5"
+        },
+        {
+          "id": "2aeffa524c5b8095b799f64bddd4e6bf",
+          "sku": "30330",
+          "title": "Color Ballsy Flush Mount 6\"",
+          "url": "https://app.notion.com/p/30330-2aeffa524c5b8095b799f64bddd4e6bf"
+        },
+        {
+          "id": "2aeffa524c5b802fa346e934ee98b5a4",
+          "sku": "30332",
+          "title": "Supreme Flush Mount 6\"",
+          "url": "https://app.notion.com/p/30332-2aeffa524c5b802fa346e934ee98b5a4"
+        },
+        {
+          "id": "2c8ffa524c5b802cb96cee39b6d7bd4c",
+          "sku": "30332 (C)",
+          "title": "Color Supreme Flush Mount 6\"",
+          "url": "https://app.notion.com/p/30332-C-2c8ffa524c5b802cb96cee39b6d7bd4c"
+        },
+        {
+          "id": "382ffa524c5b818b8880fa36ef66f27b",
+          "sku": "30332H",
+          "title": "Supreme Flush Mount 6\", Hang-straight",
+          "url": "https://app.notion.com/p/30332H-382ffa524c5b818b8880fa36ef66f27b"
+        },
+        {
+          "id": "382ffa524c5b8182a0f2dae17737788a",
+          "sku": "30332H (C)",
+          "title": "Color Supreme Flush Mount 6\", Hang-straight",
+          "url": "https://app.notion.com/p/30332H-C-382ffa524c5b8182a0f2dae17737788a"
+        },
+        {
+          "id": "2aeffa524c5b80078319ee88b9ad8a4c",
+          "sku": "30333",
+          "title": "Color Icon 3 Flush Mount",
+          "url": "https://app.notion.com/p/30333-2aeffa524c5b80078319ee88b9ad8a4c"
+        },
+        {
+          "id": "2aeffa524c5b8026b645f93a1e6e3350",
+          "sku": "30402",
+          "title": "Orbi Chandelier",
+          "url": "https://app.notion.com/p/30402-2aeffa524c5b8026b645f93a1e6e3350"
+        },
+        {
+          "id": "2c8ffa524c5b80fa9d24f23d9a4ea35d",
+          "sku": "30402 (C)",
+          "title": "Color Orbi Chandelier",
+          "url": "https://app.notion.com/p/30402-C-2c8ffa524c5b80fa9d24f23d9a4ea35d"
+        },
+        {
+          "id": "2aeffa524c5b8048bf4ff2158ec215ae",
+          "sku": "30402F",
+          "title": "Orbi Flush Mount",
+          "url": "https://app.notion.com/p/30402F-2aeffa524c5b8048bf4ff2158ec215ae"
+        },
+        {
+          "id": "2c8ffa524c5b80e1b220c8f82c3cf3c3",
+          "sku": "30402F (C)",
+          "title": "Color Orbi Flush Mount",
+          "url": "https://app.notion.com/p/30402F-C-2c8ffa524c5b80e1b220c8f82c3cf3c3"
+        },
+        {
+          "id": "382ffa524c5b817cb263fd2aad8b739a",
+          "sku": "30402FH",
+          "title": "Orbi Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30402FH-382ffa524c5b817cb263fd2aad8b739a"
+        },
+        {
+          "id": "382ffa524c5b811c9defe33963cd0a89",
+          "sku": "30402FH (C)",
+          "title": "Color Orbi Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30402FH-C-382ffa524c5b811c9defe33963cd0a89"
+        },
+        {
+          "id": "382ffa524c5b81f585f7fcc18384d29f",
+          "sku": "30402H",
+          "title": "Orbi Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30402H-382ffa524c5b81f585f7fcc18384d29f"
+        },
+        {
+          "id": "382ffa524c5b81309ba8fb7eda37e278",
+          "sku": "30402H (C)",
+          "title": "Color Orbi Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30402H-C-382ffa524c5b81309ba8fb7eda37e278"
+        },
+        {
+          "id": "2aeffa524c5b80c397eadbb294bea603",
+          "sku": "30403",
+          "title": "Big Orbi Chandelier",
+          "url": "https://app.notion.com/p/30403-2aeffa524c5b80c397eadbb294bea603"
+        },
+        {
+          "id": "2c8ffa524c5b800ab758cdf91da3ea8e",
+          "sku": "30403 (C)",
+          "title": "Color Big Orbi Chandelier",
+          "url": "https://app.notion.com/p/30403-C-2c8ffa524c5b800ab758cdf91da3ea8e"
+        },
+        {
+          "id": "2aeffa524c5b809eb80ff0d26351069c",
+          "sku": "30403F",
+          "title": "Big Orbi Flush Mount",
+          "url": "https://app.notion.com/p/30403F-2aeffa524c5b809eb80ff0d26351069c"
+        },
+        {
+          "id": "2c8ffa524c5b80d7b025e9860f2ff3b7",
+          "sku": "30403F (C)",
+          "title": "Color Big Orbi Flush Mount",
+          "url": "https://app.notion.com/p/30403F-C-2c8ffa524c5b80d7b025e9860f2ff3b7"
+        },
+        {
+          "id": "382ffa524c5b81fd94bcdc34e31cf148",
+          "sku": "30403FH",
+          "title": "Big Orbi Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30403FH-382ffa524c5b81fd94bcdc34e31cf148"
+        },
+        {
+          "id": "382ffa524c5b81b39675c8d701e7e4f8",
+          "sku": "30403FH (C)",
+          "title": "Color Big Orbi Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30403FH-C-382ffa524c5b81b39675c8d701e7e4f8"
+        },
+        {
+          "id": "382ffa524c5b81dea56fe8e8856ac312",
+          "sku": "30403H",
+          "title": "Big Orbi Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30403H-382ffa524c5b81dea56fe8e8856ac312"
+        },
+        {
+          "id": "382ffa524c5b8197beb8dd2eb2d5bf72",
+          "sku": "30403H (C)",
+          "title": "Color Big Orbi Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30403H-C-382ffa524c5b8197beb8dd2eb2d5bf72"
+        },
+        {
+          "id": "2aeffa524c5b8064ae2bf14c39b387eb",
+          "sku": "30404",
+          "title": "Tetra Chandelier",
+          "url": "https://app.notion.com/p/30404-2aeffa524c5b8064ae2bf14c39b387eb"
+        },
+        {
+          "id": "2c8ffa524c5b806ca7ebc4fbbad62402",
+          "sku": "30404 (C)",
+          "title": "Color Tetra Chandelier",
+          "url": "https://app.notion.com/p/30404-C-2c8ffa524c5b806ca7ebc4fbbad62402"
+        },
+        {
+          "id": "2aeffa524c5b803d93d5c72aff1546dd",
+          "sku": "30404F",
+          "title": "Tetra Flush Mount",
+          "url": "https://app.notion.com/p/30404F-2aeffa524c5b803d93d5c72aff1546dd"
+        },
+        {
+          "id": "2c8ffa524c5b807aa643ccc3da609ecf",
+          "sku": "30404F (C)",
+          "title": "Color Tetra Flush Mount",
+          "url": "https://app.notion.com/p/30404F-C-2c8ffa524c5b807aa643ccc3da609ecf"
+        },
+        {
+          "id": "382ffa524c5b81f6a62fcc4eebfcce74",
+          "sku": "30404FH",
+          "title": "Tetra Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30404FH-382ffa524c5b81f6a62fcc4eebfcce74"
+        },
+        {
+          "id": "382ffa524c5b81148915f50c53220d88",
+          "sku": "30404H",
+          "title": "Tetra Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30404H-382ffa524c5b81148915f50c53220d88"
+        },
+        {
+          "id": "2aeffa524c5b8041bb4bf99991aa1fed",
+          "sku": "30405",
+          "title": "Color Status Chandelier",
+          "url": "https://app.notion.com/p/30405-2aeffa524c5b8041bb4bf99991aa1fed"
+        },
+        {
+          "id": "2aeffa524c5b80e799bdc08b1b874d7c",
+          "sku": "30405F",
+          "title": "Color Status Flush Mount",
+          "url": "https://app.notion.com/p/30405F-2aeffa524c5b80e799bdc08b1b874d7c"
+        },
+        {
+          "id": "382ffa524c5b81eeae1bc5ede2224c07",
+          "sku": "30405FH",
+          "title": "Color Status Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30405FH-382ffa524c5b81eeae1bc5ede2224c07"
+        },
+        {
+          "id": "382ffa524c5b81c2bf70cd341f24bc28",
+          "sku": "30405H",
+          "title": "Color Status Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30405H-382ffa524c5b81c2bf70cd341f24bc28"
+        },
+        {
+          "id": "2aeffa524c5b807c92c9e5f9e57555bf",
+          "sku": "30407",
+          "title": "Color Big Status Chandelier",
+          "url": "https://app.notion.com/p/30407-2aeffa524c5b807c92c9e5f9e57555bf"
+        },
+        {
+          "id": "2aeffa524c5b8075b696edfc9a36eadf",
+          "sku": "30407F",
+          "title": "Color Big Status Flush Mount",
+          "url": "https://app.notion.com/p/30407F-2aeffa524c5b8075b696edfc9a36eadf"
+        },
+        {
+          "id": "382ffa524c5b8171b285c4b899febe20",
+          "sku": "30407FH",
+          "title": "Color Big Status Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30407FH-382ffa524c5b8171b285c4b899febe20"
+        },
+        {
+          "id": "382ffa524c5b81c797d5fac2cd9add3d",
+          "sku": "30407H",
+          "title": "Color Big Status Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30407H-382ffa524c5b81c797d5fac2cd9add3d"
+        },
+        {
+          "id": "2aeffa524c5b8019acf4e22ffb80b79d",
+          "sku": "30502",
+          "title": "Color Prisma Chandelier",
+          "url": "https://app.notion.com/p/30502-2aeffa524c5b8019acf4e22ffb80b79d"
+        },
+        {
+          "id": "382ffa524c5b815998acc82b169b09a4",
+          "sku": "30502H",
+          "title": "Color Prisma Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30502H-382ffa524c5b815998acc82b169b09a4"
+        },
+        {
+          "id": "2aeffa524c5b80208289f340f606adc7",
+          "sku": "30503",
+          "title": "Color Big Prisma Chandelier",
+          "url": "https://app.notion.com/p/30503-2aeffa524c5b80208289f340f606adc7"
+        },
+        {
+          "id": "382ffa524c5b81afa8dcfb715b1ec27d",
+          "sku": "30503H",
+          "title": "Color Big Prisma Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30503H-382ffa524c5b81afa8dcfb715b1ec27d"
+        },
+        {
+          "id": "2aeffa524c5b8054a978c41b4e58cd63",
+          "sku": "30605",
+          "title": "Color Axia Chandelier",
+          "url": "https://app.notion.com/p/30605-2aeffa524c5b8054a978c41b4e58cd63"
+        },
+        {
+          "id": "2aeffa524c5b808d9c25c66229981037",
+          "sku": "30606",
+          "title": "Color Big Axia Chandelier",
+          "url": "https://app.notion.com/p/30606-2aeffa524c5b808d9c25c66229981037"
+        },
+        {
+          "id": "2aeffa524c5b80b490fdd35ebbb07da8",
+          "sku": "31000",
+          "title": "Crown Chandelier 32\"",
+          "url": "https://app.notion.com/p/31000-2aeffa524c5b80b490fdd35ebbb07da8"
+        },
+        {
+          "id": "2c8ffa524c5b80acbf38dcf1612cb318",
+          "sku": "31000 (C)",
+          "title": "Color Crown Chandelier 32\"",
+          "url": "https://app.notion.com/p/31000-C-2c8ffa524c5b80acbf38dcf1612cb318"
+        },
+        {
+          "id": "2aeffa524c5b8058819fe454b40342c1",
+          "sku": "31000F",
+          "title": "Crown Flush Mount 32\"",
+          "url": "https://app.notion.com/p/31000F-2aeffa524c5b8058819fe454b40342c1"
+        },
+        {
+          "id": "2c8ffa524c5b80c7ba62c6fd55b6793e",
+          "sku": "31000F (C)",
+          "title": "Color Crown Flush Mount 32\"",
+          "url": "https://app.notion.com/p/31000F-C-2c8ffa524c5b80c7ba62c6fd55b6793e"
+        },
+        {
+          "id": "382ffa524c5b8131875ce44e88749815",
+          "sku": "31000FH",
+          "title": "Crown Flush Mount 32\", Hang-straight",
+          "url": "https://app.notion.com/p/31000FH-382ffa524c5b8131875ce44e88749815"
+        },
+        {
+          "id": "382ffa524c5b81409aadf8fd93533e07",
+          "sku": "31000FH (C)",
+          "title": "Color Crown Flush Mount 32\", Hang-straight",
+          "url": "https://app.notion.com/p/31000FH-C-382ffa524c5b81409aadf8fd93533e07"
+        },
+        {
+          "id": "382ffa524c5b817f8439f3ad6b56aeb2",
+          "sku": "31000H",
+          "title": "Crown Chandelier 32\", Hang-straight",
+          "url": "https://app.notion.com/p/31000H-382ffa524c5b817f8439f3ad6b56aeb2"
+        },
+        {
+          "id": "382ffa524c5b81cf9e46e60729cd5d67",
+          "sku": "31000H (C)",
+          "title": "Color Crown Chandelier 32\", Hang-straight",
+          "url": "https://app.notion.com/p/31000H-C-382ffa524c5b81cf9e46e60729cd5d67"
+        },
+        {
+          "id": "2aeffa524c5b80c0b3bbfb0098861100",
+          "sku": "31001",
+          "title": "Crown Chandelier 46\"",
+          "url": "https://app.notion.com/p/31001-2aeffa524c5b80c0b3bbfb0098861100"
+        },
+        {
+          "id": "2c8ffa524c5b80478126e77aa841df24",
+          "sku": "31001 (C)",
+          "title": "Color Crown Chandelier 46\"",
+          "url": "https://app.notion.com/p/31001-C-2c8ffa524c5b80478126e77aa841df24"
+        },
+        {
+          "id": "2aeffa524c5b8016bdb6d77ee4b8a91e",
+          "sku": "31001F",
+          "title": "Crown Flush Mount 46\"",
+          "url": "https://app.notion.com/p/31001F-2aeffa524c5b8016bdb6d77ee4b8a91e"
+        },
+        {
+          "id": "2c8ffa524c5b80d68605e9bd5ab37454",
+          "sku": "31001F (C)",
+          "title": "Color Crown Flush Mount 46\"",
+          "url": "https://app.notion.com/p/31001F-C-2c8ffa524c5b80d68605e9bd5ab37454"
+        },
+        {
+          "id": "382ffa524c5b812a96fded828274ccf5",
+          "sku": "31001FH",
+          "title": "Crown Flush Mount 46\", Hang-straight",
+          "url": "https://app.notion.com/p/31001FH-382ffa524c5b812a96fded828274ccf5"
+        },
+        {
+          "id": "382ffa524c5b81368661cc816d4db0e8",
+          "sku": "31001FH (C)",
+          "title": "Color Crown Flush Mount 46\", Hang-straight",
+          "url": "https://app.notion.com/p/31001FH-C-382ffa524c5b81368661cc816d4db0e8"
+        },
+        {
+          "id": "382ffa524c5b81c884dfc9c0673e2a2f",
+          "sku": "31001H",
+          "title": "Crown Chandelier 46\", Hang-straight",
+          "url": "https://app.notion.com/p/31001H-382ffa524c5b81c884dfc9c0673e2a2f"
+        },
+        {
+          "id": "382ffa524c5b816bbcd1fa843188b7f2",
+          "sku": "31001H (C)",
+          "title": "Color Crown Chandelier 46\", Hang-straight",
+          "url": "https://app.notion.com/p/31001H-C-382ffa524c5b816bbcd1fa843188b7f2"
+        },
+        {
+          "id": "2ecffa524c5b80eeb9eac34ce9aeddce",
+          "sku": "40111-13",
+          "title": "Color Maxo Pendant 13\"",
+          "url": "https://app.notion.com/p/40111-13-2ecffa524c5b80eeb9eac34ce9aeddce"
+        },
+        {
+          "id": "2aeffa524c5b8015b31afbb87e03f0bb",
+          "sku": "40111-13-23",
+          "title": "Color Maxo Pendant 13\" - 23\u201d Height",
+          "url": "https://app.notion.com/p/40111-13-23-2aeffa524c5b8015b31afbb87e03f0bb"
+        },
+        {
+          "id": "2c8ffa524c5b80fda5bef7cf4bcdfd67",
+          "sku": "40111-13-29",
+          "title": "Color Maxo Pendant 13\" - 29\u201d Height",
+          "url": "https://app.notion.com/p/40111-13-29-2c8ffa524c5b80fda5bef7cf4bcdfd67"
+        },
+        {
+          "id": "2c4ffa524c5b80959679f851986e1092",
+          "sku": "40111-13-35",
+          "title": "Color Maxo Pendant 13\" - 35\u201d Height",
+          "url": "https://app.notion.com/p/40111-13-35-2c4ffa524c5b80959679f851986e1092"
+        },
+        {
+          "id": "2c8ffa524c5b80af8f93f0f72c09deaa",
+          "sku": "40111-13-47",
+          "title": "Color Maxo Pendant 13\" - 47\u201d Height",
+          "url": "https://app.notion.com/p/40111-13-47-2c8ffa524c5b80af8f93f0f72c09deaa"
+        },
+        {
+          "id": "2ecffa524c5b80918397e8678f340e89",
+          "sku": "40111-8",
+          "title": "Color Maxo Pendant 8\u201d",
+          "url": "https://app.notion.com/p/40111-8-2ecffa524c5b80918397e8678f340e89"
+        },
+        {
+          "id": "2aeffa524c5b80b593b6c35d584b7bf1",
+          "sku": "40111-8-23",
+          "title": "Color Maxo Pendant 8\" - 23\u201d Height",
+          "url": "https://app.notion.com/p/40111-8-23-2aeffa524c5b80b593b6c35d584b7bf1"
+        },
+        {
+          "id": "2c8ffa524c5b80c99b27c15e37f679ed",
+          "sku": "40111-8-29",
+          "title": "Color Maxo Pendant 8\" - 29\u201d Height",
+          "url": "https://app.notion.com/p/40111-8-29-2c8ffa524c5b80c99b27c15e37f679ed"
+        },
+        {
+          "id": "2c4ffa524c5b8021b41fc25c7d75e3a7",
+          "sku": "40111-8-35",
+          "title": "Color Maxo Pendant 8\" - 35\u201d Height",
+          "url": "https://app.notion.com/p/40111-8-35-2c4ffa524c5b8021b41fc25c7d75e3a7"
+        },
+        {
+          "id": "2c8ffa524c5b80f98bebf292b77e3e39",
+          "sku": "40111-8-47",
+          "title": "Color Maxo Pendant 8\" - 47\u201d Height",
+          "url": "https://app.notion.com/p/40111-8-47-2c8ffa524c5b80f98bebf292b77e3e39"
+        },
+        {
+          "id": "2aeffa524c5b80ae981aedd5ba1b4efb",
+          "sku": "40120-0",
+          "title": "Color Boom Sconce, no arm",
+          "url": "https://app.notion.com/p/40120-0-2aeffa524c5b80ae981aedd5ba1b4efb"
+        },
+        {
+          "id": "2aeffa524c5b80d7baf2dba5d39f99ac",
+          "sku": "40120-10",
+          "title": "Color Boom Sconce, 10\" arm",
+          "url": "https://app.notion.com/p/40120-10-2aeffa524c5b80d7baf2dba5d39f99ac"
+        },
+        {
+          "id": "2aeffa524c5b8093a537d915fdb31c62",
+          "sku": "40120-3",
+          "title": "Color Boom Sconce, 3\" arm",
+          "url": "https://app.notion.com/p/40120-3-2aeffa524c5b8093a537d915fdb31c62"
+        },
+        {
+          "id": "2aeffa524c5b80a2b18bdd3eaff08908",
+          "sku": "40120-6",
+          "title": "Color Boom Sconce, 6\" arm",
+          "url": "https://app.notion.com/p/40120-6-2aeffa524c5b80a2b18bdd3eaff08908"
+        },
+        {
+          "id": "2aeffa524c5b80fa95d0f25bfbeb6023",
+          "sku": "40120P-0",
+          "title": "Color Boom Plug-in Sconce, no arm",
+          "url": "https://app.notion.com/p/40120P-0-2aeffa524c5b80fa95d0f25bfbeb6023"
+        },
+        {
+          "id": "2aeffa524c5b80689051c9697348d5e3",
+          "sku": "40120P-10",
+          "title": "Color Boom Plug-in Sconce, 10\" arm",
+          "url": "https://app.notion.com/p/40120P-10-2aeffa524c5b80689051c9697348d5e3"
+        },
+        {
+          "id": "2aeffa524c5b8078abdee8d9838a5b22",
+          "sku": "40120P-3",
+          "title": "Color Boom Plug-in Sconce, 3\" arm",
+          "url": "https://app.notion.com/p/40120P-3-2aeffa524c5b8078abdee8d9838a5b22"
+        },
+        {
+          "id": "2aeffa524c5b80c0a0d6f536a76e229b",
+          "sku": "40120P-6",
+          "title": "Color Boom Plug-in Sconce, 6\" arm",
+          "url": "https://app.notion.com/p/40120P-6-2aeffa524c5b80c0a0d6f536a76e229b"
+        },
+        {
+          "id": "2aeffa524c5b80ee8ebdcfb8edfab90d",
+          "sku": "40121-17",
+          "title": "Color Boom Swing Arm Sconce, 17\" Arm",
+          "url": "https://app.notion.com/p/40121-17-2aeffa524c5b80ee8ebdcfb8edfab90d"
+        },
+        {
+          "id": "2aeffa524c5b80a186aece88ce6e53ac",
+          "sku": "40121-9",
+          "title": "Color Boom Swing Arm Sconce, 9\" Arm",
+          "url": "https://app.notion.com/p/40121-9-2aeffa524c5b80a186aece88ce6e53ac"
+        },
+        {
+          "id": "2aeffa524c5b80ed82b8c5969c25cbed",
+          "sku": "40121P-17",
+          "title": "Color Boom Swing Arm Plug-in Sconce, 17\" Arm",
+          "url": "https://app.notion.com/p/40121P-17-2aeffa524c5b80ed82b8c5969c25cbed"
+        },
+        {
+          "id": "2aeffa524c5b80618733e975d51e1354",
+          "sku": "40121P-9",
+          "title": "Color Boom Swing Arm Plug-in Sconce, 9\" Arm",
+          "url": "https://app.notion.com/p/40121P-9-2aeffa524c5b80618733e975d51e1354"
+        },
+        {
+          "id": "2aeffa524c5b80de8038e7b02dc51b10",
+          "sku": "40131-13",
+          "title": "Color Maxo Flush Mount 13\"",
+          "url": "https://app.notion.com/p/40131-13-2aeffa524c5b80de8038e7b02dc51b10"
+        },
+        {
+          "id": "2aeffa524c5b8057be8dfa192caf1509",
+          "sku": "40131-8",
+          "title": "Color Maxo Flush Mount 8\"",
+          "url": "https://app.notion.com/p/40131-8-2aeffa524c5b8057be8dfa192caf1509"
+        },
+        {
+          "id": "2aeffa524c5b8016a0a6d959ad3e4951",
+          "sku": "50110-10",
+          "title": "Color Cadbury Pendant 10\"",
+          "url": "https://app.notion.com/p/50110-10-2aeffa524c5b8016a0a6d959ad3e4951"
+        },
+        {
+          "id": "2aeffa524c5b8064855bc2de8a220673",
+          "sku": "50110-12",
+          "title": "Color Cadbury Pendant 12\"",
+          "url": "https://app.notion.com/p/50110-12-2aeffa524c5b8064855bc2de8a220673"
+        },
+        {
+          "id": "2aeffa524c5b809a99caec0401428b50",
+          "sku": "50110-8",
+          "title": "Color Cadbury Pendant 8\"",
+          "url": "https://app.notion.com/p/50110-8-2aeffa524c5b809a99caec0401428b50"
+        },
+        {
+          "id": "381ffa524c5b81b6aaf6db6180efbbe8",
+          "sku": "50110H-10",
+          "title": "Color Cadbury Pendant 10\", Hang-straight",
+          "url": "https://app.notion.com/p/50110H-10-381ffa524c5b81b6aaf6db6180efbbe8"
+        },
+        {
+          "id": "381ffa524c5b8184b128d322bb328c3f",
+          "sku": "50110H-12",
+          "title": "Color Cadbury Pendant 12\", Hang-straight",
+          "url": "https://app.notion.com/p/50110H-12-381ffa524c5b8184b128d322bb328c3f"
+        },
+        {
+          "id": "381ffa524c5b813ab8c1dfcfa07881a5",
+          "sku": "50110H-8",
+          "title": "Color Cadbury Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/50110H-8-381ffa524c5b813ab8c1dfcfa07881a5"
+        },
+        {
+          "id": "2aeffa524c5b80b0b23ddd4ee741557e",
+          "sku": "50111-10",
+          "title": "Color Echo Pendant 10\"",
+          "url": "https://app.notion.com/p/50111-10-2aeffa524c5b80b0b23ddd4ee741557e"
+        },
+        {
+          "id": "2aeffa524c5b806b9d19f3e82a3353ec",
+          "sku": "50111-12",
+          "title": "Color Echo Pendant 12\"",
+          "url": "https://app.notion.com/p/50111-12-2aeffa524c5b806b9d19f3e82a3353ec"
+        },
+        {
+          "id": "2aeffa524c5b80df9aede0c0642710d5",
+          "sku": "50111-8",
+          "title": "Color Echo Pendant 8\"",
+          "url": "https://app.notion.com/p/50111-8-2aeffa524c5b80df9aede0c0642710d5"
+        },
+        {
+          "id": "381ffa524c5b813c9bdaf1ccc97f05f8",
+          "sku": "50111H-10",
+          "title": "Color Echo Pendant 10\", Hang-straight",
+          "url": "https://app.notion.com/p/50111H-10-381ffa524c5b813c9bdaf1ccc97f05f8"
+        },
+        {
+          "id": "381ffa524c5b817d9b19da95499726b4",
+          "sku": "50111H-12",
+          "title": "Color Echo Pendant 12\", Hang-straight",
+          "url": "https://app.notion.com/p/50111H-12-381ffa524c5b817d9b19da95499726b4"
+        },
+        {
+          "id": "381ffa524c5b81739881f12408ac6ad1",
+          "sku": "50111H-8",
+          "title": "Color Echo Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/50111H-8-381ffa524c5b81739881f12408ac6ad1"
+        },
+        {
+          "id": "2aeffa524c5b80af832aede14060b887",
+          "sku": "50120-10",
+          "title": "Color Cadbury Sconce 10\"",
+          "url": "https://app.notion.com/p/50120-10-2aeffa524c5b80af832aede14060b887"
+        },
+        {
+          "id": "2aeffa524c5b803b8fc7e057d2a114ed",
+          "sku": "50120-8",
+          "title": "Color Cadbury Sconce 8\"",
+          "url": "https://app.notion.com/p/50120-8-2aeffa524c5b803b8fc7e057d2a114ed"
+        },
+        {
+          "id": "2aeffa524c5b8051b248c254b67efeb2",
+          "sku": "50121-10",
+          "title": "Color Hemi Sconce 10\"",
+          "url": "https://app.notion.com/p/50121-10-2aeffa524c5b8051b248c254b67efeb2"
+        },
+        {
+          "id": "2aeffa524c5b806cb46ef00cccb5fff5",
+          "sku": "50121-8",
+          "title": "Color Hemi Sconce 8\"",
+          "url": "https://app.notion.com/p/50121-8-2aeffa524c5b806cb46ef00cccb5fff5"
+        },
+        {
+          "id": "2aeffa524c5b8066b686df178c33d703",
+          "sku": "50130-10",
+          "title": "Color Cadbury Flush Mount 10\"",
+          "url": "https://app.notion.com/p/50130-10-2aeffa524c5b8066b686df178c33d703"
+        },
+        {
+          "id": "2aeffa524c5b80ec9d5dce7fbe9f9b73",
+          "sku": "50130-12",
+          "title": "Color Cadbury Flush Mount 12\"",
+          "url": "https://app.notion.com/p/50130-12-2aeffa524c5b80ec9d5dce7fbe9f9b73"
+        },
+        {
+          "id": "2aeffa524c5b807d8855c5d01f8038b5",
+          "sku": "50130-8",
+          "title": "Color Cadbury Flush Mount 8\"",
+          "url": "https://app.notion.com/p/50130-8-2aeffa524c5b807d8855c5d01f8038b5"
+        },
+        {
+          "id": "381ffa524c5b81639548e04bdeffc1a6",
+          "sku": "50130H-10",
+          "title": "Color Cadbury Flush Mount 10\", Hang-straight",
+          "url": "https://app.notion.com/p/50130H-10-381ffa524c5b81639548e04bdeffc1a6"
+        },
+        {
+          "id": "381ffa524c5b81309bccdf90fcf8bbd1",
+          "sku": "50130H-12",
+          "title": "Color Cadbury Flush Mount 12\", Hang-straight",
+          "url": "https://app.notion.com/p/50130H-12-381ffa524c5b81309bccdf90fcf8bbd1"
+        },
+        {
+          "id": "381ffa524c5b8143bcc5c10f88bd2742",
+          "sku": "50130H-8",
+          "title": "Color Cadbury Flush Mount 8\", Hang-straight",
+          "url": "https://app.notion.com/p/50130H-8-381ffa524c5b8143bcc5c10f88bd2742"
+        },
+        {
+          "id": "2aeffa524c5b8075bc73ed1bc00acb54",
+          "sku": "50131-10",
+          "title": "Color Hemi Flush Mount 10\"",
+          "url": "https://app.notion.com/p/50131-10-2aeffa524c5b8075bc73ed1bc00acb54"
+        },
+        {
+          "id": "2aeffa524c5b80cf9fc5cad8ffd486ae",
+          "sku": "50131-12",
+          "title": "Color Hemi Flush Mount 12\"",
+          "url": "https://app.notion.com/p/50131-12-2aeffa524c5b80cf9fc5cad8ffd486ae"
+        },
+        {
+          "id": "2aeffa524c5b80248e64c0a637c39b13",
+          "sku": "50131-8",
+          "title": "Color Hemi Flush Mount 8\"",
+          "url": "https://app.notion.com/p/50131-8-2aeffa524c5b80248e64c0a637c39b13"
+        },
+        {
+          "id": "2aeffa524c5b80ffac63c7237b26a839",
+          "sku": "50220",
+          "title": "Color Amigo Sconce",
+          "url": "https://app.notion.com/p/50220-2aeffa524c5b80ffac63c7237b26a839"
+        },
+        {
+          "id": "2aeffa524c5b80a88360c635b514b796",
+          "sku": "50221",
+          "title": "Color Beso Sconce",
+          "url": "https://app.notion.com/p/50221-2aeffa524c5b80a88360c635b514b796"
+        },
+        {
+          "id": "2aeffa524c5b80ffa54cef30daab0f1a",
+          "sku": "51000",
+          "title": "Color Alegria Chandelier",
+          "url": "https://app.notion.com/p/51000-2aeffa524c5b80ffa54cef30daab0f1a"
+        },
+        {
+          "id": "2aeffa524c5b804aa751e22b23bc0277",
+          "sku": "51000F",
+          "title": "Color Alegria Flush Mount",
+          "url": "https://app.notion.com/p/51000F-2aeffa524c5b804aa751e22b23bc0277"
+        },
+        {
+          "id": "381ffa524c5b815e999cec3b00ff8bfc",
+          "sku": "51000FH",
+          "title": "Color Alegria Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/51000FH-381ffa524c5b815e999cec3b00ff8bfc"
+        },
+        {
+          "id": "381ffa524c5b812785becb0e7599c34c",
+          "sku": "51000H",
+          "title": "Color Alegria Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/51000H-381ffa524c5b812785becb0e7599c34c"
+        },
+        {
+          "id": "2aeffa524c5b80feadf3cfa5d61a741a",
+          "sku": "60110",
+          "title": "Color Reader Pendant",
+          "url": "https://app.notion.com/p/60110-2aeffa524c5b80feadf3cfa5d61a741a"
+        },
+        {
+          "id": "381ffa524c5b81bfb6f8d6b1ccfe0de9",
+          "sku": "60110H",
+          "title": "Color Reader Pendant, Hang-straight",
+          "url": "https://app.notion.com/p/60110H-381ffa524c5b81bfb6f8d6b1ccfe0de9"
+        },
+        {
+          "id": "2aeffa524c5b80ea9cf7f95260e46ad9",
+          "sku": "60111",
+          "title": "Color Eureka Pendant",
+          "url": "https://app.notion.com/p/60111-2aeffa524c5b80ea9cf7f95260e46ad9"
+        },
+        {
+          "id": "381ffa524c5b819e9e8dfd5daa0d19e4",
+          "sku": "60111H",
+          "title": "Color Eureka Pendant, Hang-straight",
+          "url": "https://app.notion.com/p/60111H-381ffa524c5b819e9e8dfd5daa0d19e4"
+        },
+        {
+          "id": "2aeffa524c5b803e9debcd21d2ca6e6a",
+          "sku": "60112",
+          "title": "Twink Pendant",
+          "url": "https://app.notion.com/p/60112-2aeffa524c5b803e9debcd21d2ca6e6a"
+        },
+        {
+          "id": "2c8ffa524c5b80278e52d9cdcbe6415d",
+          "sku": "60112 (C)",
+          "title": "Color Twink Pendant",
+          "url": "https://app.notion.com/p/60112-C-2c8ffa524c5b80278e52d9cdcbe6415d"
+        },
+        {
+          "id": "381ffa524c5b811ba9bcf2748336604c",
+          "sku": "60112H",
+          "title": "Twink Pendant, Hang-straight",
+          "url": "https://app.notion.com/p/60112H-381ffa524c5b811ba9bcf2748336604c"
+        },
+        {
+          "id": "381ffa524c5b810aadaac62c06dd81ff",
+          "sku": "60112H (C)",
+          "title": "Color Twink Pendant, Hang-straight",
+          "url": "https://app.notion.com/p/60112H-C-381ffa524c5b810aadaac62c06dd81ff"
+        },
+        {
+          "id": "2aeffa524c5b80a8a411c2dfb5115279",
+          "sku": "60121",
+          "title": "Snug Sconce",
+          "url": "https://app.notion.com/p/60121-2aeffa524c5b80a8a411c2dfb5115279"
+        },
+        {
+          "id": "2c8ffa524c5b80e4a653d20735dca87d",
+          "sku": "60121 (C)",
+          "title": "Color Snug Sconce",
+          "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
+        },
+        {
+          "id": "343ffa524c5b8144994ce1329baf6edb",
+          "sku": "60121S (C)",
+          "title": "Color Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
+        },
+        {
+          "id": "2aeffa524c5b804194acfabf14233149",
+          "sku": "60123",
+          "title": "Tall Snug Sconce",
+          "url": "https://app.notion.com/p/60123-2aeffa524c5b804194acfabf14233149"
+        },
+        {
+          "id": "2c8ffa524c5b80098f3cf5298a564823",
+          "sku": "60123 (C)",
+          "title": "Color Tall Snug Sconce",
+          "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
+        },
+        {
+          "id": "343ffa524c5b8139ac93e8493fca79c9",
+          "sku": "60123S (C)",
+          "title": "Color Tall Snug Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
+        },
+        {
+          "id": "2aeffa524c5b8012b048c818ab5ad3a7",
+          "sku": "60124-0",
+          "title": "Color Reader Sconce, No Arm",
+          "url": "https://app.notion.com/p/60124-0-2aeffa524c5b8012b048c818ab5ad3a7"
+        },
+        {
+          "id": "2aeffa524c5b803faaaad639a17f4bf3",
+          "sku": "60124-10",
+          "title": "Color Reader Sconce, 10\" Arm",
+          "url": "https://app.notion.com/p/60124-10-2aeffa524c5b803faaaad639a17f4bf3"
+        },
+        {
+          "id": "2aeffa524c5b8078b4c9d3f093b57ffd",
+          "sku": "60124-3",
+          "title": "Color Reader Sconce, 3\" Arm",
+          "url": "https://app.notion.com/p/60124-3-2aeffa524c5b8078b4c9d3f093b57ffd"
+        },
+        {
+          "id": "2aeffa524c5b80c2abdafe390ee7006d",
+          "sku": "60124-6",
+          "title": "Color Reader Sconce, 6\" Arm",
+          "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
+        },
+        {
+          "id": "2aeffa524c5b80308784e4eaf7a1c746",
+          "sku": "60124P-0",
+          "title": "Color Reader Plug-in Sconce, No Arm",
+          "url": "https://app.notion.com/p/60124P-0-2aeffa524c5b80308784e4eaf7a1c746"
+        },
+        {
+          "id": "2aeffa524c5b808c8edced45950d700c",
+          "sku": "60124P-10",
+          "title": "Color Reader Plug-in Sconce, 10\" Arm",
+          "url": "https://app.notion.com/p/60124P-10-2aeffa524c5b808c8edced45950d700c"
+        },
+        {
+          "id": "2aeffa524c5b80f9a08bd6ce8d7380ae",
+          "sku": "60124P-3",
+          "title": "Color Reader Plug-in Sconce, 3\" Arm",
+          "url": "https://app.notion.com/p/60124P-3-2aeffa524c5b80f9a08bd6ce8d7380ae"
+        },
+        {
+          "id": "2aeffa524c5b803fb3e3d66f7b89bf17",
+          "sku": "60124P-6",
+          "title": "Color Reader Plug-in Sconce, 6\" Arm",
+          "url": "https://app.notion.com/p/60124P-6-2aeffa524c5b803fb3e3d66f7b89bf17"
+        },
+        {
+          "id": "343ffa524c5b810ba2d4fd52837dddeb",
+          "sku": "60124S-0",
+          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
+        },
+        {
+          "id": "343ffa524c5b8139bca9f43245a4f95c",
+          "sku": "60124S-10",
+          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
+        },
+        {
+          "id": "343ffa524c5b81659ef8cf3b277517a8",
+          "sku": "60124S-3",
+          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
+        },
+        {
+          "id": "343ffa524c5b81df964de7593cfc6600",
+          "sku": "60124S-6",
+          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
+          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
+        },
+        {
+          "id": "2aeffa524c5b80f58bb0c4a82866014f",
+          "sku": "60125",
+          "title": "Twink Sconce",
+          "url": "https://app.notion.com/p/60125-2aeffa524c5b80f58bb0c4a82866014f"
+        },
+        {
+          "id": "2c8ffa524c5b80b9b01df09fac45815b",
+          "sku": "60125 (C)",
+          "title": "Color Twink Sconce",
+          "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
+        },
+        {
+          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
+          "sku": "60125S (C)",
+          "title": "Color Twink Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
+        },
+        {
+          "id": "2aeffa524c5b802aaf33f8882c13e42a",
+          "sku": "60127",
+          "title": "Color Display Sconce",
+          "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
+        },
+        {
+          "id": "343ffa524c5b81be86abcaa965e2e79f",
+          "sku": "60127S",
+          "title": "Color Display Sconce, Hardwired Switch",
+          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
+        },
+        {
+          "id": "2aeffa524c5b809dae9bcff72726ee16",
+          "sku": "60128-17",
+          "title": "Color Reader Swing Arm Sconce, 17\" Arm",
+          "url": "https://app.notion.com/p/60128-17-2aeffa524c5b809dae9bcff72726ee16"
+        },
+        {
+          "id": "2aeffa524c5b80789054c2e2175d877c",
+          "sku": "60128-9",
+          "title": "Color Reader Swing Arm Sconce, 9\" Arm",
+          "url": "https://app.notion.com/p/60128-9-2aeffa524c5b80789054c2e2175d877c"
+        },
+        {
+          "id": "2aeffa524c5b80099810eafdcc8b4706",
+          "sku": "60128P-17",
+          "title": "Color Reader Swing Arm Plug-in Sconce, 17\" Arm",
+          "url": "https://app.notion.com/p/60128P-17-2aeffa524c5b80099810eafdcc8b4706"
+        },
+        {
+          "id": "2aeffa524c5b80c890e0ece58c06a6fd",
+          "sku": "60128P-9",
+          "title": "Color Reader Swing Arm Plug-in Sconce, 9\" Arm",
+          "url": "https://app.notion.com/p/60128P-9-2aeffa524c5b80c890e0ece58c06a6fd"
+        },
+        {
+          "id": "2aeffa524c5b8070b14fe4704acb3618",
+          "sku": "60129-15",
+          "title": "Color Major Sconce 15\"",
+          "url": "https://app.notion.com/p/60129-15-2aeffa524c5b8070b14fe4704acb3618"
+        },
+        {
+          "id": "2aeffa524c5b80728d93ca141cfb75c0",
+          "sku": "60129-21",
+          "title": "Color Major Sconce 21\"",
+          "url": "https://app.notion.com/p/60129-21-2aeffa524c5b80728d93ca141cfb75c0"
+        },
+        {
+          "id": "2aeffa524c5b80e299a7e0f3f1a26861",
+          "sku": "60129-9",
+          "title": "Color Major Sconce 9\"",
+          "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
+        },
+        {
+          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
+          "sku": "60129S-15",
+          "title": "Color Major Sconce 15\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
+        },
+        {
+          "id": "343ffa524c5b8118abb7cdd721b034be",
+          "sku": "60129S-21",
+          "title": "Color Major Sconce 21\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
+        },
+        {
+          "id": "343ffa524c5b810c85d3c60579e7b196",
+          "sku": "60129S-9",
+          "title": "Color Major Sconce 9\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
+        },
+        {
+          "id": "2aeffa524c5b80b9a095c951117d47a2",
+          "sku": "60130",
+          "title": "Color Reader Flush Mount",
+          "url": "https://app.notion.com/p/60130-2aeffa524c5b80b9a095c951117d47a2"
+        },
+        {
+          "id": "381ffa524c5b81b68748da5487a658b2",
+          "sku": "60130H",
+          "title": "Color Reader Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/60130H-381ffa524c5b81b68748da5487a658b2"
+        },
+        {
+          "id": "2aeffa524c5b8030b1a1ed287ce48112",
+          "sku": "60131",
+          "title": "Color Eureka Flush Mount",
+          "url": "https://app.notion.com/p/60131-2aeffa524c5b8030b1a1ed287ce48112"
+        },
+        {
+          "id": "381ffa524c5b815ab4a4c6c344f9b7c0",
+          "sku": "60131H",
+          "title": "Color Eureka Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/60131H-381ffa524c5b815ab4a4c6c344f9b7c0"
+        },
+        {
+          "id": "2aeffa524c5b80c6bc67c8bb05702c7e",
+          "sku": "60132",
+          "title": "Twink Flush Mount",
+          "url": "https://app.notion.com/p/60132-2aeffa524c5b80c6bc67c8bb05702c7e"
+        },
+        {
+          "id": "2c8ffa524c5b8050afa0e66dd84499c5",
+          "sku": "60132 (C)",
+          "title": "Color Twink Flush Mount",
+          "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
+        },
+        {
+          "id": "2ecffa524c5b80399142dcac16e4c0b5",
+          "sku": "60210",
+          "title": "Color Pilot Pendant 29\"",
+          "url": "https://app.notion.com/p/60210-2ecffa524c5b80399142dcac16e4c0b5"
+        },
+        {
+          "id": "2aeffa524c5b80669cf6c9f801ce68c8",
+          "sku": "60210-16",
+          "title": "Color Pilot Pendant 29\" - 16\u201d Height",
+          "url": "https://app.notion.com/p/60210-16-2aeffa524c5b80669cf6c9f801ce68c8"
+        },
+        {
+          "id": "2ddffa524c5b80318a2dd5d63e525c9e",
+          "sku": "60210-28",
+          "title": "Color Pilot Pendant 29\" - 28\u201d Height",
+          "url": "https://app.notion.com/p/60210-28-2ddffa524c5b80318a2dd5d63e525c9e"
+        },
+        {
+          "id": "2ddffa524c5b8051a050ffb43158de2e",
+          "sku": "60210-34",
+          "title": "Color Pilot Pendant 29\" - 34\u201d Height",
+          "url": "https://app.notion.com/p/60210-34-2ddffa524c5b8051a050ffb43158de2e"
+        },
+        {
+          "id": "2ddffa524c5b808ea022d408f5ced1a8",
+          "sku": "60210-40",
+          "title": "Color Pilot Pendant 29\" - 40\u201d Height",
+          "url": "https://app.notion.com/p/60210-40-2ddffa524c5b808ea022d408f5ced1a8"
+        },
+        {
+          "id": "2ddffa524c5b806dbe21fe225d541bae",
+          "sku": "60210-46",
+          "title": "Color Pilot Pendant 29\" - 46\u201d Height",
+          "url": "https://app.notion.com/p/60210-46-2ddffa524c5b806dbe21fe225d541bae"
+        },
+        {
+          "id": "2ddffa524c5b809ea031ed71cb65dad4",
+          "sku": "60210-52",
+          "title": "Color Pilot Pendant 29\" - 52\u201d Height",
+          "url": "https://app.notion.com/p/60210-52-2ddffa524c5b809ea031ed71cb65dad4"
+        },
+        {
+          "id": "2ddffa524c5b807495fddf9278f63432",
+          "sku": "60210-58",
+          "title": "Color Pilot Pendant 29\" - 58\u201d Height",
+          "url": "https://app.notion.com/p/60210-58-2ddffa524c5b807495fddf9278f63432"
+        },
+        {
+          "id": "2aeffa524c5b805ba0e7ff443f9d0893",
+          "sku": "60211",
+          "title": "Color Pilot Pendant 47\"",
+          "url": "https://app.notion.com/p/60211-2aeffa524c5b805ba0e7ff443f9d0893"
+        },
+        {
+          "id": "2ecffa524c5b805db7f3dcc896e280fe",
+          "sku": "60211-16",
+          "title": "Color Pilot Pendant 47\" - 16\u201d Height",
+          "url": "https://app.notion.com/p/60211-16-2ecffa524c5b805db7f3dcc896e280fe"
+        },
+        {
+          "id": "2ddffa524c5b80cca032d6c5bccd1398",
+          "sku": "60211-28",
+          "title": "Color Pilot Pendant 47\" - 28\u201d Height",
+          "url": "https://app.notion.com/p/60211-28-2ddffa524c5b80cca032d6c5bccd1398"
+        },
+        {
+          "id": "2ddffa524c5b8085a2a2eca64fe0b479",
+          "sku": "60211-34",
+          "title": "Color Pilot Pendant 47\" - 34\u201d Height",
+          "url": "https://app.notion.com/p/60211-34-2ddffa524c5b8085a2a2eca64fe0b479"
+        },
+        {
+          "id": "2ddffa524c5b8064bfc0f468fd56d18a",
+          "sku": "60211-40",
+          "title": "Color Pilot Pendant 47\" - 40\u201d Height",
+          "url": "https://app.notion.com/p/60211-40-2ddffa524c5b8064bfc0f468fd56d18a"
+        },
+        {
+          "id": "2ddffa524c5b807e9a16cf1f7a9813df",
+          "sku": "60211-46",
+          "title": "Color Pilot Pendant 47\" - 46\u201d Height",
+          "url": "https://app.notion.com/p/60211-46-2ddffa524c5b807e9a16cf1f7a9813df"
+        },
+        {
+          "id": "2ddffa524c5b807ea006da7226dc9675",
+          "sku": "60211-52",
+          "title": "Color Pilot Pendant 47\" - 52\u201d Height",
+          "url": "https://app.notion.com/p/60211-52-2ddffa524c5b807ea006da7226dc9675"
+        },
+        {
+          "id": "2ddffa524c5b8016ae8ec8917bb70ce8",
+          "sku": "60211-58",
+          "title": "Color Pilot Pendant 47\" - 58\u201d Height",
+          "url": "https://app.notion.com/p/60211-58-2ddffa524c5b8016ae8ec8917bb70ce8"
+        },
+        {
+          "id": "2aeffa524c5b802881a7c1da8299f370",
+          "sku": "60220",
+          "title": "Scepter Sconce 10\"",
+          "url": "https://app.notion.com/p/60220-2aeffa524c5b802881a7c1da8299f370"
+        },
+        {
+          "id": "2c8ffa524c5b8091b372fc87b6b6711e",
+          "sku": "60220 (C)",
+          "title": "Color Scepter Sconce 10\"",
+          "url": "https://app.notion.com/p/60220-C-2c8ffa524c5b8091b372fc87b6b6711e"
+        },
+        {
+          "id": "2aeffa524c5b8092a926fe1c3f23d7a3",
+          "sku": "60221",
+          "title": "Scepter Sconce 18\"",
+          "url": "https://app.notion.com/p/60221-2aeffa524c5b8092a926fe1c3f23d7a3"
+        },
+        {
+          "id": "2c8ffa524c5b80efaac4c945cef0de5b",
+          "sku": "60221 (C)",
+          "title": "Color Scepter Sconce 18\"",
+          "url": "https://app.notion.com/p/60221-C-2c8ffa524c5b80efaac4c945cef0de5b"
+        },
+        {
+          "id": "2aeffa524c5b80c9ac33c8d34eab856b",
+          "sku": "60222",
+          "title": "Color Monarch Sconce",
+          "url": "https://app.notion.com/p/60222-2aeffa524c5b80c9ac33c8d34eab856b"
+        },
+        {
+          "id": "2aeffa524c5b80ccb187c710e1a44f11",
+          "sku": "60224",
+          "title": "Color Ruler Sconce",
+          "url": "https://app.notion.com/p/60224-2aeffa524c5b80ccb187c710e1a44f11"
+        },
+        {
+          "id": "2aeffa524c5b80f29a93ef5fab59f72b",
+          "sku": "60226-11",
+          "title": "Color Pilot Sconce 11\"",
+          "url": "https://app.notion.com/p/60226-11-2aeffa524c5b80f29a93ef5fab59f72b"
+        },
+        {
+          "id": "2aeffa524c5b8047955ad781d00a643d",
+          "sku": "60226-17",
+          "title": "Color Pilot Sconce 17\"",
+          "url": "https://app.notion.com/p/60226-17-2aeffa524c5b8047955ad781d00a643d"
+        },
+        {
+          "id": "2aeffa524c5b80a0b4e0ca8ada0fc144",
+          "sku": "60226-23",
+          "title": "Color Pilot Sconce 23\"",
+          "url": "https://app.notion.com/p/60226-23-2aeffa524c5b80a0b4e0ca8ada0fc144"
+        },
+        {
+          "id": "2aeffa524c5b8039990dce05de5948cd",
+          "sku": "60226-29",
+          "title": "Color Pilot Sconce 29\"",
+          "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
+        },
+        {
+          "id": "343ffa524c5b813c8d38ca43376e3a03",
+          "sku": "60226S-11",
+          "title": "Color Pilot Sconce 11\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
+        },
+        {
+          "id": "343ffa524c5b81f2a369c58ccd74963e",
+          "sku": "60226S-17",
+          "title": "Color Pilot Sconce 17\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
+        },
+        {
+          "id": "343ffa524c5b817db7f7e1137838d72f",
+          "sku": "60226S-23",
+          "title": "Color Pilot Sconce 23\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
+        },
+        {
+          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
+          "sku": "60226S-29",
+          "title": "Color Pilot Sconce 29\", Hardwired Switch",
+          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
+        },
+        {
+          "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
+          "sku": "60230",
+          "title": "Color Pilot Flush Mount 29\"",
+          "url": "https://app.notion.com/p/60230-2aeffa524c5b80d2a6fcefd1ebbd4f08"
+        },
+        {
+          "id": "2aeffa524c5b8078a4dec154789410d9",
+          "sku": "60231",
+          "title": "Color Pilot Flush Mount 47\"",
+          "url": "https://app.notion.com/p/60231-2aeffa524c5b8078a4dec154789410d9"
+        },
+        {
+          "id": "2aeffa524c5b80568fdbfac1c45ff4f9",
+          "sku": "60330",
+          "title": "Color Pose Flush Mount",
+          "url": "https://app.notion.com/p/60330-2aeffa524c5b80568fdbfac1c45ff4f9"
+        },
+        {
+          "id": "2ecffa524c5b8090ac27dc7ccbdbad01",
+          "sku": "60400-18",
+          "title": "Color Captain Chandelier 29\" - 18\u201d Height",
+          "url": "https://app.notion.com/p/60400-18-2ecffa524c5b8090ac27dc7ccbdbad01"
+        },
+        {
+          "id": "7b3d3a5de7784a86bcf0fd0da6e166b0",
+          "sku": "60400-24",
+          "title": "Color Captain Chandelier 29\" - 24\u201d Height",
+          "url": "https://app.notion.com/p/60400-24-7b3d3a5de7784a86bcf0fd0da6e166b0"
+        },
+        {
+          "id": "3f79504ae31040fbbc3598b07856729b",
+          "sku": "60400-36",
+          "title": "Color Captain Chandelier 29\" - 36\u201d Height",
+          "url": "https://app.notion.com/p/60400-36-3f79504ae31040fbbc3598b07856729b"
+        },
+        {
+          "id": "8300a51a1ceb492c8390e1751a68e40b",
+          "sku": "60400-48",
+          "title": "Color Captain Chandelier 29\" - 48\u201d Height",
+          "url": "https://app.notion.com/p/60400-48-8300a51a1ceb492c8390e1751a68e40b"
+        },
+        {
+          "id": "ad29c9641da845b0abe8c45078f0f288",
+          "sku": "60400-60",
+          "title": "Color Captain Chandelier 29\" - 60\u201d Height",
+          "url": "https://app.notion.com/p/60400-60-ad29c9641da845b0abe8c45078f0f288"
+        },
+        {
+          "id": "2081a96ff94d4dac8e89cc80b7603845",
+          "sku": "60400-72",
+          "title": "Color Captain Chandelier 29\" - 72\u201d Height",
+          "url": "https://app.notion.com/p/60400-72-2081a96ff94d4dac8e89cc80b7603845"
+        },
+        {
+          "id": "a74766d4147d452bbf46f3d207d47d32",
+          "sku": "60400-84",
+          "title": "Color Captain Chandelier 29\" - 84\u201d Height",
+          "url": "https://app.notion.com/p/60400-84-a74766d4147d452bbf46f3d207d47d32"
+        },
+        {
+          "id": "2ecffa524c5b8097b271c1882d45bd00",
+          "sku": "60401-18",
+          "title": "Color Captain Chandelier 47\" - 18\u201d Height",
+          "url": "https://app.notion.com/p/60401-18-2ecffa524c5b8097b271c1882d45bd00"
+        },
+        {
+          "id": "37520b5713654a4aaaf131c05c83392e",
+          "sku": "60401-24",
+          "title": "Color Captain Chandelier 47\" - 24\u201d Height",
+          "url": "https://app.notion.com/p/60401-24-37520b5713654a4aaaf131c05c83392e"
+        },
+        {
+          "id": "d1a7017b196a4033b5537cd8e5de7921",
+          "sku": "60401-36",
+          "title": "Color Captain Chandelier 47\" - 36\u201d Height",
+          "url": "https://app.notion.com/p/60401-36-d1a7017b196a4033b5537cd8e5de7921"
+        },
+        {
+          "id": "2c545d82b7de495181e1cf7230c0ed00",
+          "sku": "60401-48",
+          "title": "Color Captain Chandelier 47\" - 48\u201d Height",
+          "url": "https://app.notion.com/p/60401-48-2c545d82b7de495181e1cf7230c0ed00"
+        },
+        {
+          "id": "c97e9c9a1bd445a980da337d8822a558",
+          "sku": "60401-60",
+          "title": "Color Captain Chandelier 47\" - 60\u201d Height",
+          "url": "https://app.notion.com/p/60401-60-c97e9c9a1bd445a980da337d8822a558"
+        },
+        {
+          "id": "0eeecc3bc9ac446ca4389d6c479f9f58",
+          "sku": "60401-72",
+          "title": "Color Captain Chandelier 47\" - 72\u201d Height",
+          "url": "https://app.notion.com/p/60401-72-0eeecc3bc9ac446ca4389d6c479f9f58"
+        },
+        {
+          "id": "c17eff1906d74d619314bceba73f8ce3",
+          "sku": "60401-84",
+          "title": "Color Captain Chandelier 47\" - 84\u201d Height",
+          "url": "https://app.notion.com/p/60401-84-c17eff1906d74d619314bceba73f8ce3"
+        },
+        {
+          "id": "2aeffa524c5b80ea94b5fca32d176bfd",
+          "sku": "60420",
+          "title": "Color Vogue 4 Sconce",
+          "url": "https://app.notion.com/p/60420-2aeffa524c5b80ea94b5fca32d176bfd"
+        },
+        {
+          "id": "2aeffa524c5b80e3a27fcfd2c0211b5f",
+          "sku": "60430",
+          "title": "Color Captain Flush Mount 29\"",
+          "url": "https://app.notion.com/p/60430-2aeffa524c5b80e3a27fcfd2c0211b5f"
+        },
+        {
+          "id": "2aeffa524c5b80acb9fdd20620ecfa5f",
+          "sku": "60431",
+          "title": "Color Captain Flush Mount 47\"",
+          "url": "https://app.notion.com/p/60431-2aeffa524c5b80acb9fdd20620ecfa5f"
+        },
+        {
+          "id": "2aeffa524c5b8004b2c4e855319e2617",
+          "sku": "60432",
+          "title": "Color Vogue 4 Flush Mount",
+          "url": "https://app.notion.com/p/60432-2aeffa524c5b8004b2c4e855319e2617"
+        },
+        {
+          "id": "2ecffa524c5b809ea60ad9a7a744f316",
+          "sku": "60600-24",
+          "title": "Color Commander Chandelier 29\" - 24\u201d Height",
+          "url": "https://app.notion.com/p/60600-24-2ecffa524c5b809ea60ad9a7a744f316"
+        },
+        {
+          "id": "316a3c5710114956aac84b41215fcd9d",
+          "sku": "60600-36",
+          "title": "Color Commander Chandelier 29\" - 36\u201d Height",
+          "url": "https://app.notion.com/p/60600-36-316a3c5710114956aac84b41215fcd9d"
+        },
+        {
+          "id": "605ad37a3be145b28e1bf9d6683499ab",
+          "sku": "60600-48",
+          "title": "Color Commander Chandelier 29\" - 48\u201d Height",
+          "url": "https://app.notion.com/p/60600-48-605ad37a3be145b28e1bf9d6683499ab"
+        },
+        {
+          "id": "028658545cf547008b9c999f8b714a8b",
+          "sku": "60600-60",
+          "title": "Color Commander Chandelier 29\" - 60\u201d Height",
+          "url": "https://app.notion.com/p/60600-60-028658545cf547008b9c999f8b714a8b"
+        },
+        {
+          "id": "9d3272d5634f450ca6569bbde269bf6c",
+          "sku": "60600-72",
+          "title": "Color Commander Chandelier 29\" - 72\u201d Height",
+          "url": "https://app.notion.com/p/60600-72-9d3272d5634f450ca6569bbde269bf6c"
+        },
+        {
+          "id": "bdd3697ac67a4ddda2ac79f80fc4ad00",
+          "sku": "60600-84",
+          "title": "Color Commander Chandelier 29\" - 84\u201d Height",
+          "url": "https://app.notion.com/p/60600-84-bdd3697ac67a4ddda2ac79f80fc4ad00"
+        },
+        {
+          "id": "2ecffa524c5b806a8682c873f68b88ac",
+          "sku": "60601-24",
+          "title": "Color Commander Chandelier 47\" - 24\u201d Height",
+          "url": "https://app.notion.com/p/60601-24-2ecffa524c5b806a8682c873f68b88ac"
+        },
+        {
+          "id": "6bfc27f716ab4c639a3228d3753be1d2",
+          "sku": "60601-36",
+          "title": "Color Commander Chandelier 47\" - 36\u201d Height",
+          "url": "https://app.notion.com/p/60601-36-6bfc27f716ab4c639a3228d3753be1d2"
+        },
+        {
+          "id": "2e717566f4974f1699326f72e7cfe64e",
+          "sku": "60601-48",
+          "title": "Color Commander Chandelier 47\" - 48\u201d Height",
+          "url": "https://app.notion.com/p/60601-48-2e717566f4974f1699326f72e7cfe64e"
+        },
+        {
+          "id": "18d0c95773724e7cbd7c7b261c7c9eac",
+          "sku": "60601-60",
+          "title": "Color Commander Chandelier 47\" - 60\u201d Height",
+          "url": "https://app.notion.com/p/60601-60-18d0c95773724e7cbd7c7b261c7c9eac"
+        },
+        {
+          "id": "162fdd09a0904210bbb74aee583fb8fa",
+          "sku": "60601-72",
+          "title": "Color Commander Chandelier 47\" - 72\u201d Height",
+          "url": "https://app.notion.com/p/60601-72-162fdd09a0904210bbb74aee583fb8fa"
+        },
+        {
+          "id": "b1445271f56c4cbbbe9c33794289ed7e",
+          "sku": "60601-84",
+          "title": "Color Commander Chandelier 47\" - 84\u201d Height",
+          "url": "https://app.notion.com/p/60601-84-b1445271f56c4cbbbe9c33794289ed7e"
+        },
+        {
+          "id": "2aeffa524c5b8038be4fd6add732b468",
+          "sku": "60630",
+          "title": "Color Commander Flush Mount 29\"",
+          "url": "https://app.notion.com/p/60630-2aeffa524c5b8038be4fd6add732b468"
+        },
+        {
+          "id": "2aeffa524c5b8021a28ac1b02ddbd8ed",
+          "sku": "60631",
+          "title": "Color Commander Flush Mount 47\"",
+          "url": "https://app.notion.com/p/60631-2aeffa524c5b8021a28ac1b02ddbd8ed"
+        },
+        {
+          "id": "2aeffa524c5b80cc9a3cd21d68ff8d9b",
+          "sku": "60720",
+          "title": "Color Vogue 7 Sconce",
+          "url": "https://app.notion.com/p/60720-2aeffa524c5b80cc9a3cd21d68ff8d9b"
+        },
+        {
+          "id": "2aeffa524c5b802598d9f57a50fc19ca",
+          "sku": "60730",
+          "title": "Color Vogue 7 Flush Mount",
+          "url": "https://app.notion.com/p/60730-2aeffa524c5b802598d9f57a50fc19ca"
+        },
+        {
+          "id": "2aeffa524c5b802181c6ed9aaaf98c8d",
+          "sku": "70110",
+          "title": "Bling Pendant",
+          "url": "https://app.notion.com/p/70110-2aeffa524c5b802181c6ed9aaaf98c8d"
+        },
+        {
+          "id": "2c8ffa524c5b80b98a3bced51e5c7264",
+          "sku": "70110 (C)",
+          "title": "Color Bling Pendant",
+          "url": "https://app.notion.com/p/70110-C-2c8ffa524c5b80b98a3bced51e5c7264"
+        },
+        {
+          "id": "2aeffa524c5b803f8b78f0092813ce4d",
+          "sku": "70110F",
+          "title": "Bling Flush Mount",
+          "url": "https://app.notion.com/p/70110F-2aeffa524c5b803f8b78f0092813ce4d"
+        },
+        {
+          "id": "2c8ffa524c5b80b6a392e463d16d2e88",
+          "sku": "70110F (C)",
+          "title": "Color Bling Flush Mount",
+          "url": "https://app.notion.com/p/70110F-C-2c8ffa524c5b80b6a392e463d16d2e88"
+        },
+        {
+          "id": "381ffa524c5b81fe8194ee9a3b9c3663",
+          "sku": "70110FH",
+          "title": "Bling Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/70110FH-381ffa524c5b81fe8194ee9a3b9c3663"
+        },
+        {
+          "id": "381ffa524c5b81d5af90f48b9ac15c01",
+          "sku": "70110FH (C)",
+          "title": "Color Bling Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/70110FH-C-381ffa524c5b81d5af90f48b9ac15c01"
+        },
+        {
+          "id": "381ffa524c5b81068c0ac06ca6d69d63",
+          "sku": "70110H",
+          "title": "Bling Pendant, Hang-straight",
+          "url": "https://app.notion.com/p/70110H-381ffa524c5b81068c0ac06ca6d69d63"
+        },
+        {
+          "id": "381ffa524c5b8112a110f384f5872150",
+          "sku": "70110H (C)",
+          "title": "Color Bling Pendant, Hang-straight",
+          "url": "https://app.notion.com/p/70110H-C-381ffa524c5b8112a110f384f5872150"
+        },
+        {
+          "id": "2aeffa524c5b8096bd41ef71811285a8",
+          "sku": "70122",
+          "title": "Lepore Sconce",
+          "url": "https://app.notion.com/p/70122-2aeffa524c5b8096bd41ef71811285a8"
+        },
+        {
+          "id": "2c8ffa524c5b809689b0de4d05fa0505",
+          "sku": "70122 (C)",
+          "title": "Color Lepore Sconce",
+          "url": "https://app.notion.com/p/70122-C-2c8ffa524c5b809689b0de4d05fa0505"
+        },
+        {
+          "id": "2aeffa524c5b8038bbcde55a10643104",
+          "sku": "70130",
+          "title": "Lepore Flush Mount",
+          "url": "https://app.notion.com/p/70130-2aeffa524c5b8038bbcde55a10643104"
+        },
+        {
+          "id": "2c8ffa524c5b80049b89fb8cda8c6150",
+          "sku": "70130 (C)",
+          "title": "Color Lepore Flush Mount",
+          "url": "https://app.notion.com/p/70130-C-2c8ffa524c5b80049b89fb8cda8c6150"
+        },
+        {
+          "id": "2aeffa524c5b8013b54fcd0fd405497a",
+          "sku": "70220",
+          "title": "Bianca Sconce 12\"",
+          "url": "https://app.notion.com/p/70220-2aeffa524c5b8013b54fcd0fd405497a"
+        },
+        {
+          "id": "2c8ffa524c5b806dab3bd2b521639466",
+          "sku": "70220 (C)",
+          "title": "Color Bianca Sconce 12\"",
+          "url": "https://app.notion.com/p/70220-C-2c8ffa524c5b806dab3bd2b521639466"
+        },
+        {
+          "id": "2aeffa524c5b8050a666df3710ad81b8",
+          "sku": "70221",
+          "title": "Phoenix Sconce",
+          "url": "https://app.notion.com/p/70221-2aeffa524c5b8050a666df3710ad81b8"
+        },
+        {
+          "id": "2c8ffa524c5b809f8a4dc071db019be2",
+          "sku": "70221 (C)",
+          "title": "Color Phoenix Sconce",
+          "url": "https://app.notion.com/p/70221-C-2c8ffa524c5b809f8a4dc071db019be2"
+        },
+        {
+          "id": "2aeffa524c5b807fb14dc23814473a87",
+          "sku": "70222",
+          "title": "Bianca Sconce 20\"",
+          "url": "https://app.notion.com/p/70222-2aeffa524c5b807fb14dc23814473a87"
+        },
+        {
+          "id": "2c8ffa524c5b80049549c86c0cfb33e1",
+          "sku": "70222 (C)",
+          "title": "Color Bianca Sconce 20\"",
+          "url": "https://app.notion.com/p/70222-C-2c8ffa524c5b80049549c86c0cfb33e1"
+        },
+        {
+          "id": "2aeffa524c5b80d9a9fbeedf4db08a0b",
+          "sku": "90220",
+          "title": "Pearl Sconce Left (Room & Board)",
+          "url": "https://app.notion.com/p/90220-2aeffa524c5b80d9a9fbeedf4db08a0b"
+        },
+        {
+          "id": "2aeffa524c5b8074833ee96515ef7c30",
+          "sku": "90221",
+          "title": "Pearl Sconce Right (Room & Board)",
+          "url": "https://app.notion.com/p/90221-2aeffa524c5b8074833ee96515ef7c30"
+        },
+        {
+          "id": "2aeffa524c5b807b8af0d041928876c9",
+          "sku": "91000",
+          "title": "Cosma Chandelier 32\" (Room & Board)",
+          "url": "https://app.notion.com/p/91000-2aeffa524c5b807b8af0d041928876c9"
+        }
+      ]
+    },
     "391ffa52-4c5b-80a5-8039-cbb83ea0edee": {
       "part_number": "DT1",
       "page_id": "391ffa52-4c5b-80a5-8039-cbb83ea0edee",
@@ -15846,7 +17860,7 @@
       "part_number": "SCT1",
       "page_id": "2ceffa52-4c5b-817c-8fe6-f33fe784de86",
       "page_url": "https://app.notion.com/p/SCT1-2ceffa524c5b817c8fe6f33fe784de86",
-      "description": "Screw, truss, 1\u201d",
+      "description": "Screw, combo-head, 8-32, truss, 1\u201d",
       "definition": "A threaded fastener used to join or secure parts of a fixture. Can be flathead, Phillips, hexagonal, among others. Included often in kits.",
       "materials": [],
       "raw_or_prefinished": null,
@@ -15862,1998 +17876,6 @@
         "image": "glossary-images/glossary-Screw.jpg"
       },
       "products": [
-        {
-          "id": "2aeffa524c5b807ca23ac2aee6d49ba6",
-          "sku": "10401-20",
-          "title": "Urchin Chandelier 20\"",
-          "url": "https://app.notion.com/p/10401-20-2aeffa524c5b807ca23ac2aee6d49ba6"
-        },
-        {
-          "id": "2aeffa524c5b804c89e0d086517302dc",
-          "sku": "10401-27",
-          "title": "Urchin Chandelier 27\"",
-          "url": "https://app.notion.com/p/10401-27-2aeffa524c5b804c89e0d086517302dc"
-        },
-        {
-          "id": "2aeffa524c5b8001a6dde799d8726521",
-          "sku": "10401F-20",
-          "title": "Urchin Flush Mount 20\"",
-          "url": "https://app.notion.com/p/10401F-20-2aeffa524c5b8001a6dde799d8726521"
-        },
-        {
-          "id": "2aeffa524c5b809aaf12f40a1fea55b0",
-          "sku": "10401F-27",
-          "title": "Urchin Flush Mount 27\"",
-          "url": "https://app.notion.com/p/10401F-27-2aeffa524c5b809aaf12f40a1fea55b0"
-        },
-        {
-          "id": "381ffa524c5b816ea01ade200f84b05c",
-          "sku": "10401FH-20",
-          "title": "Urchin Flush Mount 20\", Hang-straight",
-          "url": "https://app.notion.com/p/10401FH-20-381ffa524c5b816ea01ade200f84b05c"
-        },
-        {
-          "id": "381ffa524c5b817090f4c2b087510b20",
-          "sku": "10401FH-27",
-          "title": "Urchin Flush Mount 27\", Hang-straight",
-          "url": "https://app.notion.com/p/10401FH-27-381ffa524c5b817090f4c2b087510b20"
-        },
-        {
-          "id": "381ffa524c5b8115a40cfd6e2e455209",
-          "sku": "10401H-20",
-          "title": "Urchin Chandelier 20\", Hang-straight",
-          "url": "https://app.notion.com/p/10401H-20-381ffa524c5b8115a40cfd6e2e455209"
-        },
-        {
-          "id": "381ffa524c5b81129bb8e772ccb6d14a",
-          "sku": "10401H-27",
-          "title": "Urchin Chandelier 27\", Hang-straight",
-          "url": "https://app.notion.com/p/10401H-27-381ffa524c5b81129bb8e772ccb6d14a"
-        },
-        {
-          "id": "2aeffa524c5b8004bd2cee770b78e941",
-          "sku": "10403-20",
-          "title": "Color Beaded Urchin Chandelier 20\"",
-          "url": "https://app.notion.com/p/10403-20-2aeffa524c5b8004bd2cee770b78e941"
-        },
-        {
-          "id": "2aeffa524c5b800eac80c8e751ab56c2",
-          "sku": "10403-27",
-          "title": "Color Beaded Urchin Chandelier 27\"",
-          "url": "https://app.notion.com/p/10403-27-2aeffa524c5b800eac80c8e751ab56c2"
-        },
-        {
-          "id": "2aeffa524c5b8078bc82f2e937af3292",
-          "sku": "10403F-20",
-          "title": "Color Beaded Urchin Flush Mount 20\"",
-          "url": "https://app.notion.com/p/10403F-20-2aeffa524c5b8078bc82f2e937af3292"
-        },
-        {
-          "id": "2aeffa524c5b807ba5ebe5543c3732ae",
-          "sku": "10403F-27",
-          "title": "Color Beaded Urchin Flush Mount 27\"",
-          "url": "https://app.notion.com/p/10403F-27-2aeffa524c5b807ba5ebe5543c3732ae"
-        },
-        {
-          "id": "381ffa524c5b812a8110c5bf8326a26f",
-          "sku": "10403FH-20",
-          "title": "Color Beaded Urchin Flush Mount 20\", Hang-straight",
-          "url": "https://app.notion.com/p/10403FH-20-381ffa524c5b812a8110c5bf8326a26f"
-        },
-        {
-          "id": "381ffa524c5b81968f22f84b6ad6481b",
-          "sku": "10403FH-27",
-          "title": "Color Beaded Urchin Flush Mount 27\", Hang-straight",
-          "url": "https://app.notion.com/p/10403FH-27-381ffa524c5b81968f22f84b6ad6481b"
-        },
-        {
-          "id": "381ffa524c5b81d49ce3ceeabc0171fb",
-          "sku": "10403H-20",
-          "title": "Color Beaded Urchin Chandelier 20\", Hang-straight",
-          "url": "https://app.notion.com/p/10403H-20-381ffa524c5b81d49ce3ceeabc0171fb"
-        },
-        {
-          "id": "381ffa524c5b81759ea4d685022bce03",
-          "sku": "10403H-27",
-          "title": "Color Beaded Urchin Chandelier 27\", Hang-straight",
-          "url": "https://app.notion.com/p/10403H-27-381ffa524c5b81759ea4d685022bce03"
-        },
-        {
-          "id": "2aeffa524c5b803daee4fb76a4dfb965",
-          "sku": "20620",
-          "title": "Color Sputnik Sconce",
-          "url": "https://app.notion.com/p/20620-2aeffa524c5b803daee4fb76a4dfb965"
-        },
-        {
-          "id": "2aeffa524c5b80a6a643ff7a27225bd2",
-          "sku": "20630",
-          "title": "Color Sputnik Flush Mount",
-          "url": "https://app.notion.com/p/20630-2aeffa524c5b80a6a643ff7a27225bd2"
-        },
-        {
-          "id": "382ffa524c5b8159af30fd4ad513f7f1",
-          "sku": "20630H",
-          "title": "Color Sputnik Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/20630H-382ffa524c5b8159af30fd4ad513f7f1"
-        },
-        {
-          "id": "2aeffa524c5b80d5a784ea1ddda979d7",
-          "sku": "21800",
-          "title": "Color Elliptical Sputnik Chandelier",
-          "url": "https://app.notion.com/p/21800-2aeffa524c5b80d5a784ea1ddda979d7"
-        },
-        {
-          "id": "2aeffa524c5b80bb92f1d0d513bb6559",
-          "sku": "21800F",
-          "title": "Color Elliptical Sputnik Flush Mount",
-          "url": "https://app.notion.com/p/21800F-2aeffa524c5b80bb92f1d0d513bb6559"
-        },
-        {
-          "id": "381ffa524c5b815a8f1dece0f9f19892",
-          "sku": "21800FH",
-          "title": "Color Elliptical Sputnik Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/21800FH-381ffa524c5b815a8f1dece0f9f19892"
-        },
-        {
-          "id": "381ffa524c5b8123854df4ec664d1821",
-          "sku": "21800H",
-          "title": "Color Elliptical Sputnik Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/21800H-381ffa524c5b8123854df4ec664d1821"
-        },
-        {
-          "id": "2aeffa524c5b804ab024e28a6f0f1116",
-          "sku": "30110-10",
-          "title": "Cap Pendant 10\"",
-          "url": "https://app.notion.com/p/30110-10-2aeffa524c5b804ab024e28a6f0f1116"
-        },
-        {
-          "id": "2c8ffa524c5b807ebe82cc740e08dca3",
-          "sku": "30110-10 (C)",
-          "title": "Color Cap Pendant 10\"",
-          "url": "https://app.notion.com/p/30110-10-C-2c8ffa524c5b807ebe82cc740e08dca3"
-        },
-        {
-          "id": "2aeffa524c5b80d8885dc891d182045c",
-          "sku": "30110-12",
-          "title": "Cap Pendant 12\"",
-          "url": "https://app.notion.com/p/30110-12-2aeffa524c5b80d8885dc891d182045c"
-        },
-        {
-          "id": "320ffa524c5b80cda6fcdb7abf117896",
-          "sku": "30110-12 (C)",
-          "title": "Color Cap Pendant 12\"",
-          "url": "https://app.notion.com/p/30110-12-C-320ffa524c5b80cda6fcdb7abf117896"
-        },
-        {
-          "id": "2aeffa524c5b80d78a93e5495a03dd62",
-          "sku": "30110-6",
-          "title": "Cap Pendant 6\"",
-          "url": "https://app.notion.com/p/30110-6-2aeffa524c5b80d78a93e5495a03dd62"
-        },
-        {
-          "id": "2c8ffa524c5b800aba05d962f76a024e",
-          "sku": "30110-6 (C)",
-          "title": "Color Cap Pendant 6\"",
-          "url": "https://app.notion.com/p/30110-6-C-2c8ffa524c5b800aba05d962f76a024e"
-        },
-        {
-          "id": "2aeffa524c5b8005b1c7ef1476d62de8",
-          "sku": "30110-8",
-          "title": "Cap Pendant 8\"",
-          "url": "https://app.notion.com/p/30110-8-2aeffa524c5b8005b1c7ef1476d62de8"
-        },
-        {
-          "id": "2c8ffa524c5b80b68ed2da293eb141e2",
-          "sku": "30110-8 (C)",
-          "title": "Color Cap Pendant 8\"",
-          "url": "https://app.notion.com/p/30110-8-C-2c8ffa524c5b80b68ed2da293eb141e2"
-        },
-        {
-          "id": "382ffa524c5b819c9c38f93548689590",
-          "sku": "30110H-10",
-          "title": "Cap Pendant 10\", Hang-straight",
-          "url": "https://app.notion.com/p/30110H-10-382ffa524c5b819c9c38f93548689590"
-        },
-        {
-          "id": "382ffa524c5b81b892fccad2bceca290",
-          "sku": "30110H-10 (C)",
-          "title": "Color Cap Pendant 10\", Hang-straight",
-          "url": "https://app.notion.com/p/30110H-10-C-382ffa524c5b81b892fccad2bceca290"
-        },
-        {
-          "id": "382ffa524c5b812b8ab6cc62a02b0659",
-          "sku": "30110H-12",
-          "title": "Cap Pendant 12\", Hang-straight",
-          "url": "https://app.notion.com/p/30110H-12-382ffa524c5b812b8ab6cc62a02b0659"
-        },
-        {
-          "id": "382ffa524c5b81b7a087f92a3520c3f8",
-          "sku": "30110H-12 (C)",
-          "title": "Color Cap Pendant 12\", Hang-straight",
-          "url": "https://app.notion.com/p/30110H-12-C-382ffa524c5b81b7a087f92a3520c3f8"
-        },
-        {
-          "id": "382ffa524c5b8179a900efa57178ae71",
-          "sku": "30110H-6",
-          "title": "Cap Pendant 6\", Hang-straight",
-          "url": "https://app.notion.com/p/30110H-6-382ffa524c5b8179a900efa57178ae71"
-        },
-        {
-          "id": "382ffa524c5b81fa9c05c878fcebe2a7",
-          "sku": "30110H-6 (C)",
-          "title": "Color Cap Pendant 6\", Hang-straight",
-          "url": "https://app.notion.com/p/30110H-6-C-382ffa524c5b81fa9c05c878fcebe2a7"
-        },
-        {
-          "id": "382ffa524c5b81e48d08d668828ed995",
-          "sku": "30110H-8",
-          "title": "Cap Pendant 8\", Hang-straight",
-          "url": "https://app.notion.com/p/30110H-8-382ffa524c5b81e48d08d668828ed995"
-        },
-        {
-          "id": "382ffa524c5b8108acf9cde4ac51adfc",
-          "sku": "30110H-8 (C)",
-          "title": "Color Cap Pendant 8\", Hang-straight",
-          "url": "https://app.notion.com/p/30110H-8-C-382ffa524c5b8108acf9cde4ac51adfc"
-        },
-        {
-          "id": "2aeffa524c5b807a87fdfe1c7ce23fa5",
-          "sku": "30112-10",
-          "title": "Color Lure Pendant 10\"",
-          "url": "https://app.notion.com/p/30112-10-2aeffa524c5b807a87fdfe1c7ce23fa5"
-        },
-        {
-          "id": "2aeffa524c5b80cd90f1e1edc781541e",
-          "sku": "30112-12",
-          "title": "Color Lure Pendant 12\"",
-          "url": "https://app.notion.com/p/30112-12-2aeffa524c5b80cd90f1e1edc781541e"
-        },
-        {
-          "id": "2aeffa524c5b8046ad59ce7b09c0cab8",
-          "sku": "30112-6",
-          "title": "Color Lure Pendant 6\"",
-          "url": "https://app.notion.com/p/30112-6-2aeffa524c5b8046ad59ce7b09c0cab8"
-        },
-        {
-          "id": "2aeffa524c5b8037acfce14356148488",
-          "sku": "30112-8",
-          "title": "Color Lure Pendant 8\"",
-          "url": "https://app.notion.com/p/30112-8-2aeffa524c5b8037acfce14356148488"
-        },
-        {
-          "id": "2aeffa524c5b803cacfcf822b8d7437b",
-          "sku": "30112F-10",
-          "title": "Color Lure Flush Mount 10\"",
-          "url": "https://app.notion.com/p/30112F-10-2aeffa524c5b803cacfcf822b8d7437b"
-        },
-        {
-          "id": "2aeffa524c5b8095af44ce8d24b74f80",
-          "sku": "30112F-12",
-          "title": "Color Lure Flush Mount 12\"",
-          "url": "https://app.notion.com/p/30112F-12-2aeffa524c5b8095af44ce8d24b74f80"
-        },
-        {
-          "id": "2aeffa524c5b80a697b5d4c87f8645cd",
-          "sku": "30112F-6",
-          "title": "Color Lure Flush Mount 6\"",
-          "url": "https://app.notion.com/p/30112F-6-2aeffa524c5b80a697b5d4c87f8645cd"
-        },
-        {
-          "id": "2aeffa524c5b80669875d98224a57b7a",
-          "sku": "30112F-8",
-          "title": "Color Lure Flush Mount 8\"",
-          "url": "https://app.notion.com/p/30112F-8-2aeffa524c5b80669875d98224a57b7a"
-        },
-        {
-          "id": "382ffa524c5b810cb4f0e2cf699468ca",
-          "sku": "30112FH-10",
-          "title": "Color Lure Flush Mount 10\", Hang-straight",
-          "url": "https://app.notion.com/p/30112FH-10-382ffa524c5b810cb4f0e2cf699468ca"
-        },
-        {
-          "id": "382ffa524c5b817cbaf2cd64c198184d",
-          "sku": "30112FH-12",
-          "title": "Color Lure Flush Mount 12\", Hang-straight",
-          "url": "https://app.notion.com/p/30112FH-12-382ffa524c5b817cbaf2cd64c198184d"
-        },
-        {
-          "id": "382ffa524c5b81978bf9d7ac893c7b18",
-          "sku": "30112FH-6",
-          "title": "Color Lure Flush Mount 6\", Hang-straight",
-          "url": "https://app.notion.com/p/30112FH-6-382ffa524c5b81978bf9d7ac893c7b18"
-        },
-        {
-          "id": "382ffa524c5b81a883cdf6360b9e9da5",
-          "sku": "30112FH-8",
-          "title": "Color Lure Flush Mount 8\", Hang-straight",
-          "url": "https://app.notion.com/p/30112FH-8-382ffa524c5b81a883cdf6360b9e9da5"
-        },
-        {
-          "id": "382ffa524c5b81dfb831e66f29f9332f",
-          "sku": "30112H-10",
-          "title": "Color Lure Pendant 10\", Hang-straight",
-          "url": "https://app.notion.com/p/30112H-10-382ffa524c5b81dfb831e66f29f9332f"
-        },
-        {
-          "id": "382ffa524c5b8196a95bd7f088626092",
-          "sku": "30112H-12",
-          "title": "Color Lure Pendant 12\", Hang-straight",
-          "url": "https://app.notion.com/p/30112H-12-382ffa524c5b8196a95bd7f088626092"
-        },
-        {
-          "id": "382ffa524c5b81129381feefc2bf97bd",
-          "sku": "30112H-6",
-          "title": "Color Lure Pendant 6\", Hang-straight",
-          "url": "https://app.notion.com/p/30112H-6-382ffa524c5b81129381feefc2bf97bd"
-        },
-        {
-          "id": "382ffa524c5b811cb981fa17132d55ec",
-          "sku": "30112H-8",
-          "title": "Color Lure Pendant 8\", Hang-straight",
-          "url": "https://app.notion.com/p/30112H-8-382ffa524c5b811cb981fa17132d55ec"
-        },
-        {
-          "id": "2aeffa524c5b8097b61cd4389a10e60e",
-          "sku": "30120",
-          "title": "Cap Sconce 6\"",
-          "url": "https://app.notion.com/p/30120-2aeffa524c5b8097b61cd4389a10e60e"
-        },
-        {
-          "id": "2c8ffa524c5b80658172d319f1368200",
-          "sku": "30120 (C)",
-          "title": "Color Cap Sconce 6\"",
-          "url": "https://app.notion.com/p/30120-C-2c8ffa524c5b80658172d319f1368200"
-        },
-        {
-          "id": "2aeffa524c5b80e8be56d2337a34e23b",
-          "sku": "30121",
-          "title": "Cap Sconce 8\"",
-          "url": "https://app.notion.com/p/30121-2aeffa524c5b80e8be56d2337a34e23b"
-        },
-        {
-          "id": "2c8ffa524c5b8049beabf89c800e7d00",
-          "sku": "30121 (C)",
-          "title": "Color Cap Sconce 8\"",
-          "url": "https://app.notion.com/p/30121-C-2c8ffa524c5b8049beabf89c800e7d00"
-        },
-        {
-          "id": "2aeffa524c5b80b69c0df88009c44f07",
-          "sku": "30130-10",
-          "title": "Cap Flush Mount 10\"",
-          "url": "https://app.notion.com/p/30130-10-2aeffa524c5b80b69c0df88009c44f07"
-        },
-        {
-          "id": "2c8ffa524c5b803980d1d6e7c6175ae3",
-          "sku": "30130-10 (C)",
-          "title": "Color Cap Flush Mount 10\"",
-          "url": "https://app.notion.com/p/30130-10-C-2c8ffa524c5b803980d1d6e7c6175ae3"
-        },
-        {
-          "id": "2aeffa524c5b804690a4e04cd787e846",
-          "sku": "30130-12",
-          "title": "Cap Flush Mount 12\"",
-          "url": "https://app.notion.com/p/30130-12-2aeffa524c5b804690a4e04cd787e846"
-        },
-        {
-          "id": "2c8ffa524c5b80ea812df4d9ad07a958",
-          "sku": "30130-12 (C)",
-          "title": "Color Cap Flush Mount 12\"",
-          "url": "https://app.notion.com/p/30130-12-C-2c8ffa524c5b80ea812df4d9ad07a958"
-        },
-        {
-          "id": "2aeffa524c5b80a08a09fec5934a4ad6",
-          "sku": "30130-6",
-          "title": "Cap Flush Mount 6\"",
-          "url": "https://app.notion.com/p/30130-6-2aeffa524c5b80a08a09fec5934a4ad6"
-        },
-        {
-          "id": "2c8ffa524c5b80e8905dc805add881ad",
-          "sku": "30130-6 (C)",
-          "title": "Color Cap Flush Mount 6\"",
-          "url": "https://app.notion.com/p/30130-6-C-2c8ffa524c5b80e8905dc805add881ad"
-        },
-        {
-          "id": "2aeffa524c5b8078a9c1fd99869c5e56",
-          "sku": "30130-8",
-          "title": "Cap Flush Mount 8\"",
-          "url": "https://app.notion.com/p/30130-8-2aeffa524c5b8078a9c1fd99869c5e56"
-        },
-        {
-          "id": "2c8ffa524c5b801da5f4e9324e582f66",
-          "sku": "30130-8 (C)",
-          "title": "Color Cap Flush Mount 8\"",
-          "url": "https://app.notion.com/p/30130-8-C-2c8ffa524c5b801da5f4e9324e582f66"
-        },
-        {
-          "id": "382ffa524c5b8129b782faf4b8d9f27d",
-          "sku": "30130H-10",
-          "title": "Cap Flush Mount 10\", Hang-straight",
-          "url": "https://app.notion.com/p/30130H-10-382ffa524c5b8129b782faf4b8d9f27d"
-        },
-        {
-          "id": "382ffa524c5b818e89b9e8eb76d14f9c",
-          "sku": "30130H-12",
-          "title": "Cap Flush Mount 12\", Hang-straight",
-          "url": "https://app.notion.com/p/30130H-12-382ffa524c5b818e89b9e8eb76d14f9c"
-        },
-        {
-          "id": "382ffa524c5b81daa9ffd83322c4eb76",
-          "sku": "30130H-12 (C)",
-          "title": "Color Cap Flush Mount 12\", Hang-straight",
-          "url": "https://app.notion.com/p/30130H-12-C-382ffa524c5b81daa9ffd83322c4eb76"
-        },
-        {
-          "id": "382ffa524c5b810c846bd01a39d56dcd",
-          "sku": "30130H-6",
-          "title": "Cap Flush Mount 6\", Hang-straight",
-          "url": "https://app.notion.com/p/30130H-6-382ffa524c5b810c846bd01a39d56dcd"
-        },
-        {
-          "id": "382ffa524c5b81908426d1340eaefc4a",
-          "sku": "30130H-6 (C)",
-          "title": "Color Cap Flush Mount 6\", Hang-straight",
-          "url": "https://app.notion.com/p/30130H-6-C-382ffa524c5b81908426d1340eaefc4a"
-        },
-        {
-          "id": "382ffa524c5b819a81a6e4cacdfaf471",
-          "sku": "30130H-8",
-          "title": "Cap Flush Mount 8\", Hang-straight",
-          "url": "https://app.notion.com/p/30130H-8-382ffa524c5b819a81a6e4cacdfaf471"
-        },
-        {
-          "id": "2aeffa524c5b80e39f25c0d879fc2516",
-          "sku": "30220",
-          "title": "Cap Double Sconce 6\"",
-          "url": "https://app.notion.com/p/30220-2aeffa524c5b80e39f25c0d879fc2516"
-        },
-        {
-          "id": "2c8ffa524c5b805a954efedd3131c699",
-          "sku": "30220 (C)",
-          "title": "Color Cap Double Sconce 6\"",
-          "url": "https://app.notion.com/p/30220-C-2c8ffa524c5b805a954efedd3131c699"
-        },
-        {
-          "id": "2aeffa524c5b80199868d75e4596526a",
-          "sku": "30221",
-          "title": "Cap Double Sconce 8\"",
-          "url": "https://app.notion.com/p/30221-2aeffa524c5b80199868d75e4596526a"
-        },
-        {
-          "id": "2c8ffa524c5b8060a379ce770c982bb5",
-          "sku": "30221 (C)",
-          "title": "Color Cap Double Sconce 8\"",
-          "url": "https://app.notion.com/p/30221-C-2c8ffa524c5b8060a379ce770c982bb5"
-        },
-        {
-          "id": "2aeffa524c5b80e89294dde5bab39abb",
-          "sku": "30222",
-          "title": "Visage Sconce 6\"",
-          "url": "https://app.notion.com/p/30222-2aeffa524c5b80e89294dde5bab39abb"
-        },
-        {
-          "id": "2c8ffa524c5b8014ba90f7d26a6719b0",
-          "sku": "30222 (C)",
-          "title": "Color Visage Sconce 6\"",
-          "url": "https://app.notion.com/p/30222-C-2c8ffa524c5b8014ba90f7d26a6719b0"
-        },
-        {
-          "id": "2aeffa524c5b8004a27fe4711ff14fd7",
-          "sku": "30223",
-          "title": "Color Legend 2 Sconce",
-          "url": "https://app.notion.com/p/30223-2aeffa524c5b8004a27fe4711ff14fd7"
-        },
-        {
-          "id": "2aeffa524c5b801c98facef98a9c1ea2",
-          "sku": "30224",
-          "title": "Color Icon 2 Sconce",
-          "url": "https://app.notion.com/p/30224-2aeffa524c5b801c98facef98a9c1ea2"
-        },
-        {
-          "id": "2aeffa524c5b8092b130f67b9b2a0170",
-          "sku": "30230",
-          "title": "Color Icon 2 Flush Mount",
-          "url": "https://app.notion.com/p/30230-2aeffa524c5b8092b130f67b9b2a0170"
-        },
-        {
-          "id": "2aeffa524c5b8000b0f0e893619e948e",
-          "sku": "30320",
-          "title": "Color Legend 3 Sconce",
-          "url": "https://app.notion.com/p/30320-2aeffa524c5b8000b0f0e893619e948e"
-        },
-        {
-          "id": "2aeffa524c5b807a8211ff76c63cdae5",
-          "sku": "30321",
-          "title": "Color Icon 3 Sconce",
-          "url": "https://app.notion.com/p/30321-2aeffa524c5b807a8211ff76c63cdae5"
-        },
-        {
-          "id": "2aeffa524c5b8095b799f64bddd4e6bf",
-          "sku": "30330",
-          "title": "Color Ballsy Flush Mount 6\"",
-          "url": "https://app.notion.com/p/30330-2aeffa524c5b8095b799f64bddd4e6bf"
-        },
-        {
-          "id": "2aeffa524c5b802fa346e934ee98b5a4",
-          "sku": "30332",
-          "title": "Supreme Flush Mount 6\"",
-          "url": "https://app.notion.com/p/30332-2aeffa524c5b802fa346e934ee98b5a4"
-        },
-        {
-          "id": "2c8ffa524c5b802cb96cee39b6d7bd4c",
-          "sku": "30332 (C)",
-          "title": "Color Supreme Flush Mount 6\"",
-          "url": "https://app.notion.com/p/30332-C-2c8ffa524c5b802cb96cee39b6d7bd4c"
-        },
-        {
-          "id": "382ffa524c5b818b8880fa36ef66f27b",
-          "sku": "30332H",
-          "title": "Supreme Flush Mount 6\", Hang-straight",
-          "url": "https://app.notion.com/p/30332H-382ffa524c5b818b8880fa36ef66f27b"
-        },
-        {
-          "id": "382ffa524c5b8182a0f2dae17737788a",
-          "sku": "30332H (C)",
-          "title": "Color Supreme Flush Mount 6\", Hang-straight",
-          "url": "https://app.notion.com/p/30332H-C-382ffa524c5b8182a0f2dae17737788a"
-        },
-        {
-          "id": "2aeffa524c5b80078319ee88b9ad8a4c",
-          "sku": "30333",
-          "title": "Color Icon 3 Flush Mount",
-          "url": "https://app.notion.com/p/30333-2aeffa524c5b80078319ee88b9ad8a4c"
-        },
-        {
-          "id": "2aeffa524c5b8026b645f93a1e6e3350",
-          "sku": "30402",
-          "title": "Orbi Chandelier",
-          "url": "https://app.notion.com/p/30402-2aeffa524c5b8026b645f93a1e6e3350"
-        },
-        {
-          "id": "2c8ffa524c5b80fa9d24f23d9a4ea35d",
-          "sku": "30402 (C)",
-          "title": "Color Orbi Chandelier",
-          "url": "https://app.notion.com/p/30402-C-2c8ffa524c5b80fa9d24f23d9a4ea35d"
-        },
-        {
-          "id": "2aeffa524c5b8048bf4ff2158ec215ae",
-          "sku": "30402F",
-          "title": "Orbi Flush Mount",
-          "url": "https://app.notion.com/p/30402F-2aeffa524c5b8048bf4ff2158ec215ae"
-        },
-        {
-          "id": "2c8ffa524c5b80e1b220c8f82c3cf3c3",
-          "sku": "30402F (C)",
-          "title": "Color Orbi Flush Mount",
-          "url": "https://app.notion.com/p/30402F-C-2c8ffa524c5b80e1b220c8f82c3cf3c3"
-        },
-        {
-          "id": "382ffa524c5b817cb263fd2aad8b739a",
-          "sku": "30402FH",
-          "title": "Orbi Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/30402FH-382ffa524c5b817cb263fd2aad8b739a"
-        },
-        {
-          "id": "382ffa524c5b811c9defe33963cd0a89",
-          "sku": "30402FH (C)",
-          "title": "Color Orbi Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/30402FH-C-382ffa524c5b811c9defe33963cd0a89"
-        },
-        {
-          "id": "382ffa524c5b81f585f7fcc18384d29f",
-          "sku": "30402H",
-          "title": "Orbi Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30402H-382ffa524c5b81f585f7fcc18384d29f"
-        },
-        {
-          "id": "382ffa524c5b81309ba8fb7eda37e278",
-          "sku": "30402H (C)",
-          "title": "Color Orbi Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30402H-C-382ffa524c5b81309ba8fb7eda37e278"
-        },
-        {
-          "id": "2aeffa524c5b80c397eadbb294bea603",
-          "sku": "30403",
-          "title": "Big Orbi Chandelier",
-          "url": "https://app.notion.com/p/30403-2aeffa524c5b80c397eadbb294bea603"
-        },
-        {
-          "id": "2c8ffa524c5b800ab758cdf91da3ea8e",
-          "sku": "30403 (C)",
-          "title": "Color Big Orbi Chandelier",
-          "url": "https://app.notion.com/p/30403-C-2c8ffa524c5b800ab758cdf91da3ea8e"
-        },
-        {
-          "id": "2aeffa524c5b809eb80ff0d26351069c",
-          "sku": "30403F",
-          "title": "Big Orbi Flush Mount",
-          "url": "https://app.notion.com/p/30403F-2aeffa524c5b809eb80ff0d26351069c"
-        },
-        {
-          "id": "2c8ffa524c5b80d7b025e9860f2ff3b7",
-          "sku": "30403F (C)",
-          "title": "Color Big Orbi Flush Mount",
-          "url": "https://app.notion.com/p/30403F-C-2c8ffa524c5b80d7b025e9860f2ff3b7"
-        },
-        {
-          "id": "382ffa524c5b81fd94bcdc34e31cf148",
-          "sku": "30403FH",
-          "title": "Big Orbi Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/30403FH-382ffa524c5b81fd94bcdc34e31cf148"
-        },
-        {
-          "id": "382ffa524c5b81b39675c8d701e7e4f8",
-          "sku": "30403FH (C)",
-          "title": "Color Big Orbi Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/30403FH-C-382ffa524c5b81b39675c8d701e7e4f8"
-        },
-        {
-          "id": "382ffa524c5b81dea56fe8e8856ac312",
-          "sku": "30403H",
-          "title": "Big Orbi Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30403H-382ffa524c5b81dea56fe8e8856ac312"
-        },
-        {
-          "id": "382ffa524c5b8197beb8dd2eb2d5bf72",
-          "sku": "30403H (C)",
-          "title": "Color Big Orbi Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30403H-C-382ffa524c5b8197beb8dd2eb2d5bf72"
-        },
-        {
-          "id": "2aeffa524c5b8064ae2bf14c39b387eb",
-          "sku": "30404",
-          "title": "Tetra Chandelier",
-          "url": "https://app.notion.com/p/30404-2aeffa524c5b8064ae2bf14c39b387eb"
-        },
-        {
-          "id": "2c8ffa524c5b806ca7ebc4fbbad62402",
-          "sku": "30404 (C)",
-          "title": "Color Tetra Chandelier",
-          "url": "https://app.notion.com/p/30404-C-2c8ffa524c5b806ca7ebc4fbbad62402"
-        },
-        {
-          "id": "2aeffa524c5b803d93d5c72aff1546dd",
-          "sku": "30404F",
-          "title": "Tetra Flush Mount",
-          "url": "https://app.notion.com/p/30404F-2aeffa524c5b803d93d5c72aff1546dd"
-        },
-        {
-          "id": "2c8ffa524c5b807aa643ccc3da609ecf",
-          "sku": "30404F (C)",
-          "title": "Color Tetra Flush Mount",
-          "url": "https://app.notion.com/p/30404F-C-2c8ffa524c5b807aa643ccc3da609ecf"
-        },
-        {
-          "id": "382ffa524c5b81f6a62fcc4eebfcce74",
-          "sku": "30404FH",
-          "title": "Tetra Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/30404FH-382ffa524c5b81f6a62fcc4eebfcce74"
-        },
-        {
-          "id": "382ffa524c5b81148915f50c53220d88",
-          "sku": "30404H",
-          "title": "Tetra Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30404H-382ffa524c5b81148915f50c53220d88"
-        },
-        {
-          "id": "2aeffa524c5b8041bb4bf99991aa1fed",
-          "sku": "30405",
-          "title": "Color Status Chandelier",
-          "url": "https://app.notion.com/p/30405-2aeffa524c5b8041bb4bf99991aa1fed"
-        },
-        {
-          "id": "2aeffa524c5b80e799bdc08b1b874d7c",
-          "sku": "30405F",
-          "title": "Color Status Flush Mount",
-          "url": "https://app.notion.com/p/30405F-2aeffa524c5b80e799bdc08b1b874d7c"
-        },
-        {
-          "id": "382ffa524c5b81eeae1bc5ede2224c07",
-          "sku": "30405FH",
-          "title": "Color Status Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/30405FH-382ffa524c5b81eeae1bc5ede2224c07"
-        },
-        {
-          "id": "382ffa524c5b81c2bf70cd341f24bc28",
-          "sku": "30405H",
-          "title": "Color Status Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30405H-382ffa524c5b81c2bf70cd341f24bc28"
-        },
-        {
-          "id": "2aeffa524c5b807c92c9e5f9e57555bf",
-          "sku": "30407",
-          "title": "Color Big Status Chandelier",
-          "url": "https://app.notion.com/p/30407-2aeffa524c5b807c92c9e5f9e57555bf"
-        },
-        {
-          "id": "2aeffa524c5b8075b696edfc9a36eadf",
-          "sku": "30407F",
-          "title": "Color Big Status Flush Mount",
-          "url": "https://app.notion.com/p/30407F-2aeffa524c5b8075b696edfc9a36eadf"
-        },
-        {
-          "id": "382ffa524c5b8171b285c4b899febe20",
-          "sku": "30407FH",
-          "title": "Color Big Status Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/30407FH-382ffa524c5b8171b285c4b899febe20"
-        },
-        {
-          "id": "382ffa524c5b81c797d5fac2cd9add3d",
-          "sku": "30407H",
-          "title": "Color Big Status Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30407H-382ffa524c5b81c797d5fac2cd9add3d"
-        },
-        {
-          "id": "2aeffa524c5b8019acf4e22ffb80b79d",
-          "sku": "30502",
-          "title": "Color Prisma Chandelier",
-          "url": "https://app.notion.com/p/30502-2aeffa524c5b8019acf4e22ffb80b79d"
-        },
-        {
-          "id": "382ffa524c5b815998acc82b169b09a4",
-          "sku": "30502H",
-          "title": "Color Prisma Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30502H-382ffa524c5b815998acc82b169b09a4"
-        },
-        {
-          "id": "2aeffa524c5b80208289f340f606adc7",
-          "sku": "30503",
-          "title": "Color Big Prisma Chandelier",
-          "url": "https://app.notion.com/p/30503-2aeffa524c5b80208289f340f606adc7"
-        },
-        {
-          "id": "382ffa524c5b81afa8dcfb715b1ec27d",
-          "sku": "30503H",
-          "title": "Color Big Prisma Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/30503H-382ffa524c5b81afa8dcfb715b1ec27d"
-        },
-        {
-          "id": "2aeffa524c5b8054a978c41b4e58cd63",
-          "sku": "30605",
-          "title": "Color Axia Chandelier",
-          "url": "https://app.notion.com/p/30605-2aeffa524c5b8054a978c41b4e58cd63"
-        },
-        {
-          "id": "2aeffa524c5b808d9c25c66229981037",
-          "sku": "30606",
-          "title": "Color Big Axia Chandelier",
-          "url": "https://app.notion.com/p/30606-2aeffa524c5b808d9c25c66229981037"
-        },
-        {
-          "id": "2aeffa524c5b80b490fdd35ebbb07da8",
-          "sku": "31000",
-          "title": "Crown Chandelier 32\"",
-          "url": "https://app.notion.com/p/31000-2aeffa524c5b80b490fdd35ebbb07da8"
-        },
-        {
-          "id": "2c8ffa524c5b80acbf38dcf1612cb318",
-          "sku": "31000 (C)",
-          "title": "Color Crown Chandelier 32\"",
-          "url": "https://app.notion.com/p/31000-C-2c8ffa524c5b80acbf38dcf1612cb318"
-        },
-        {
-          "id": "2aeffa524c5b8058819fe454b40342c1",
-          "sku": "31000F",
-          "title": "Crown Flush Mount 32\"",
-          "url": "https://app.notion.com/p/31000F-2aeffa524c5b8058819fe454b40342c1"
-        },
-        {
-          "id": "2c8ffa524c5b80c7ba62c6fd55b6793e",
-          "sku": "31000F (C)",
-          "title": "Color Crown Flush Mount 32\"",
-          "url": "https://app.notion.com/p/31000F-C-2c8ffa524c5b80c7ba62c6fd55b6793e"
-        },
-        {
-          "id": "382ffa524c5b8131875ce44e88749815",
-          "sku": "31000FH",
-          "title": "Crown Flush Mount 32\", Hang-straight",
-          "url": "https://app.notion.com/p/31000FH-382ffa524c5b8131875ce44e88749815"
-        },
-        {
-          "id": "382ffa524c5b81409aadf8fd93533e07",
-          "sku": "31000FH (C)",
-          "title": "Color Crown Flush Mount 32\", Hang-straight",
-          "url": "https://app.notion.com/p/31000FH-C-382ffa524c5b81409aadf8fd93533e07"
-        },
-        {
-          "id": "382ffa524c5b817f8439f3ad6b56aeb2",
-          "sku": "31000H",
-          "title": "Crown Chandelier 32\", Hang-straight",
-          "url": "https://app.notion.com/p/31000H-382ffa524c5b817f8439f3ad6b56aeb2"
-        },
-        {
-          "id": "382ffa524c5b81cf9e46e60729cd5d67",
-          "sku": "31000H (C)",
-          "title": "Color Crown Chandelier 32\", Hang-straight",
-          "url": "https://app.notion.com/p/31000H-C-382ffa524c5b81cf9e46e60729cd5d67"
-        },
-        {
-          "id": "2aeffa524c5b80c0b3bbfb0098861100",
-          "sku": "31001",
-          "title": "Crown Chandelier 46\"",
-          "url": "https://app.notion.com/p/31001-2aeffa524c5b80c0b3bbfb0098861100"
-        },
-        {
-          "id": "2c8ffa524c5b80478126e77aa841df24",
-          "sku": "31001 (C)",
-          "title": "Color Crown Chandelier 46\"",
-          "url": "https://app.notion.com/p/31001-C-2c8ffa524c5b80478126e77aa841df24"
-        },
-        {
-          "id": "2aeffa524c5b8016bdb6d77ee4b8a91e",
-          "sku": "31001F",
-          "title": "Crown Flush Mount 46\"",
-          "url": "https://app.notion.com/p/31001F-2aeffa524c5b8016bdb6d77ee4b8a91e"
-        },
-        {
-          "id": "2c8ffa524c5b80d68605e9bd5ab37454",
-          "sku": "31001F (C)",
-          "title": "Color Crown Flush Mount 46\"",
-          "url": "https://app.notion.com/p/31001F-C-2c8ffa524c5b80d68605e9bd5ab37454"
-        },
-        {
-          "id": "382ffa524c5b812a96fded828274ccf5",
-          "sku": "31001FH",
-          "title": "Crown Flush Mount 46\", Hang-straight",
-          "url": "https://app.notion.com/p/31001FH-382ffa524c5b812a96fded828274ccf5"
-        },
-        {
-          "id": "382ffa524c5b81368661cc816d4db0e8",
-          "sku": "31001FH (C)",
-          "title": "Color Crown Flush Mount 46\", Hang-straight",
-          "url": "https://app.notion.com/p/31001FH-C-382ffa524c5b81368661cc816d4db0e8"
-        },
-        {
-          "id": "382ffa524c5b81c884dfc9c0673e2a2f",
-          "sku": "31001H",
-          "title": "Crown Chandelier 46\", Hang-straight",
-          "url": "https://app.notion.com/p/31001H-382ffa524c5b81c884dfc9c0673e2a2f"
-        },
-        {
-          "id": "382ffa524c5b816bbcd1fa843188b7f2",
-          "sku": "31001H (C)",
-          "title": "Color Crown Chandelier 46\", Hang-straight",
-          "url": "https://app.notion.com/p/31001H-C-382ffa524c5b816bbcd1fa843188b7f2"
-        },
-        {
-          "id": "2ecffa524c5b80eeb9eac34ce9aeddce",
-          "sku": "40111-13",
-          "title": "Color Maxo Pendant 13\"",
-          "url": "https://app.notion.com/p/40111-13-2ecffa524c5b80eeb9eac34ce9aeddce"
-        },
-        {
-          "id": "2aeffa524c5b8015b31afbb87e03f0bb",
-          "sku": "40111-13-23",
-          "title": "Color Maxo Pendant 13\" - 23\u201d Height",
-          "url": "https://app.notion.com/p/40111-13-23-2aeffa524c5b8015b31afbb87e03f0bb"
-        },
-        {
-          "id": "2c8ffa524c5b80fda5bef7cf4bcdfd67",
-          "sku": "40111-13-29",
-          "title": "Color Maxo Pendant 13\" - 29\u201d Height",
-          "url": "https://app.notion.com/p/40111-13-29-2c8ffa524c5b80fda5bef7cf4bcdfd67"
-        },
-        {
-          "id": "2c4ffa524c5b80959679f851986e1092",
-          "sku": "40111-13-35",
-          "title": "Color Maxo Pendant 13\" - 35\u201d Height",
-          "url": "https://app.notion.com/p/40111-13-35-2c4ffa524c5b80959679f851986e1092"
-        },
-        {
-          "id": "2c8ffa524c5b80af8f93f0f72c09deaa",
-          "sku": "40111-13-47",
-          "title": "Color Maxo Pendant 13\" - 47\u201d Height",
-          "url": "https://app.notion.com/p/40111-13-47-2c8ffa524c5b80af8f93f0f72c09deaa"
-        },
-        {
-          "id": "2ecffa524c5b80918397e8678f340e89",
-          "sku": "40111-8",
-          "title": "Color Maxo Pendant 8\u201d",
-          "url": "https://app.notion.com/p/40111-8-2ecffa524c5b80918397e8678f340e89"
-        },
-        {
-          "id": "2aeffa524c5b80b593b6c35d584b7bf1",
-          "sku": "40111-8-23",
-          "title": "Color Maxo Pendant 8\" - 23\u201d Height",
-          "url": "https://app.notion.com/p/40111-8-23-2aeffa524c5b80b593b6c35d584b7bf1"
-        },
-        {
-          "id": "2c8ffa524c5b80c99b27c15e37f679ed",
-          "sku": "40111-8-29",
-          "title": "Color Maxo Pendant 8\" - 29\u201d Height",
-          "url": "https://app.notion.com/p/40111-8-29-2c8ffa524c5b80c99b27c15e37f679ed"
-        },
-        {
-          "id": "2c4ffa524c5b8021b41fc25c7d75e3a7",
-          "sku": "40111-8-35",
-          "title": "Color Maxo Pendant 8\" - 35\u201d Height",
-          "url": "https://app.notion.com/p/40111-8-35-2c4ffa524c5b8021b41fc25c7d75e3a7"
-        },
-        {
-          "id": "2c8ffa524c5b80f98bebf292b77e3e39",
-          "sku": "40111-8-47",
-          "title": "Color Maxo Pendant 8\" - 47\u201d Height",
-          "url": "https://app.notion.com/p/40111-8-47-2c8ffa524c5b80f98bebf292b77e3e39"
-        },
-        {
-          "id": "2aeffa524c5b80ae981aedd5ba1b4efb",
-          "sku": "40120-0",
-          "title": "Color Boom Sconce, no arm",
-          "url": "https://app.notion.com/p/40120-0-2aeffa524c5b80ae981aedd5ba1b4efb"
-        },
-        {
-          "id": "2aeffa524c5b80d7baf2dba5d39f99ac",
-          "sku": "40120-10",
-          "title": "Color Boom Sconce, 10\" arm",
-          "url": "https://app.notion.com/p/40120-10-2aeffa524c5b80d7baf2dba5d39f99ac"
-        },
-        {
-          "id": "2aeffa524c5b8093a537d915fdb31c62",
-          "sku": "40120-3",
-          "title": "Color Boom Sconce, 3\" arm",
-          "url": "https://app.notion.com/p/40120-3-2aeffa524c5b8093a537d915fdb31c62"
-        },
-        {
-          "id": "2aeffa524c5b80a2b18bdd3eaff08908",
-          "sku": "40120-6",
-          "title": "Color Boom Sconce, 6\" arm",
-          "url": "https://app.notion.com/p/40120-6-2aeffa524c5b80a2b18bdd3eaff08908"
-        },
-        {
-          "id": "2aeffa524c5b80fa95d0f25bfbeb6023",
-          "sku": "40120P-0",
-          "title": "Color Boom Plug-in Sconce, no arm",
-          "url": "https://app.notion.com/p/40120P-0-2aeffa524c5b80fa95d0f25bfbeb6023"
-        },
-        {
-          "id": "2aeffa524c5b80689051c9697348d5e3",
-          "sku": "40120P-10",
-          "title": "Color Boom Plug-in Sconce, 10\" arm",
-          "url": "https://app.notion.com/p/40120P-10-2aeffa524c5b80689051c9697348d5e3"
-        },
-        {
-          "id": "2aeffa524c5b8078abdee8d9838a5b22",
-          "sku": "40120P-3",
-          "title": "Color Boom Plug-in Sconce, 3\" arm",
-          "url": "https://app.notion.com/p/40120P-3-2aeffa524c5b8078abdee8d9838a5b22"
-        },
-        {
-          "id": "2aeffa524c5b80c0a0d6f536a76e229b",
-          "sku": "40120P-6",
-          "title": "Color Boom Plug-in Sconce, 6\" arm",
-          "url": "https://app.notion.com/p/40120P-6-2aeffa524c5b80c0a0d6f536a76e229b"
-        },
-        {
-          "id": "2aeffa524c5b80ee8ebdcfb8edfab90d",
-          "sku": "40121-17",
-          "title": "Color Boom Swing Arm Sconce, 17\" Arm",
-          "url": "https://app.notion.com/p/40121-17-2aeffa524c5b80ee8ebdcfb8edfab90d"
-        },
-        {
-          "id": "2aeffa524c5b80a186aece88ce6e53ac",
-          "sku": "40121-9",
-          "title": "Color Boom Swing Arm Sconce, 9\" Arm",
-          "url": "https://app.notion.com/p/40121-9-2aeffa524c5b80a186aece88ce6e53ac"
-        },
-        {
-          "id": "2aeffa524c5b80ed82b8c5969c25cbed",
-          "sku": "40121P-17",
-          "title": "Color Boom Swing Arm Plug-in Sconce, 17\" Arm",
-          "url": "https://app.notion.com/p/40121P-17-2aeffa524c5b80ed82b8c5969c25cbed"
-        },
-        {
-          "id": "2aeffa524c5b80618733e975d51e1354",
-          "sku": "40121P-9",
-          "title": "Color Boom Swing Arm Plug-in Sconce, 9\" Arm",
-          "url": "https://app.notion.com/p/40121P-9-2aeffa524c5b80618733e975d51e1354"
-        },
-        {
-          "id": "2aeffa524c5b80de8038e7b02dc51b10",
-          "sku": "40131-13",
-          "title": "Color Maxo Flush Mount 13\"",
-          "url": "https://app.notion.com/p/40131-13-2aeffa524c5b80de8038e7b02dc51b10"
-        },
-        {
-          "id": "2aeffa524c5b8057be8dfa192caf1509",
-          "sku": "40131-8",
-          "title": "Color Maxo Flush Mount 8\"",
-          "url": "https://app.notion.com/p/40131-8-2aeffa524c5b8057be8dfa192caf1509"
-        },
-        {
-          "id": "2aeffa524c5b8016a0a6d959ad3e4951",
-          "sku": "50110-10",
-          "title": "Color Cadbury Pendant 10\"",
-          "url": "https://app.notion.com/p/50110-10-2aeffa524c5b8016a0a6d959ad3e4951"
-        },
-        {
-          "id": "2aeffa524c5b8064855bc2de8a220673",
-          "sku": "50110-12",
-          "title": "Color Cadbury Pendant 12\"",
-          "url": "https://app.notion.com/p/50110-12-2aeffa524c5b8064855bc2de8a220673"
-        },
-        {
-          "id": "2aeffa524c5b809a99caec0401428b50",
-          "sku": "50110-8",
-          "title": "Color Cadbury Pendant 8\"",
-          "url": "https://app.notion.com/p/50110-8-2aeffa524c5b809a99caec0401428b50"
-        },
-        {
-          "id": "381ffa524c5b81b6aaf6db6180efbbe8",
-          "sku": "50110H-10",
-          "title": "Color Cadbury Pendant 10\", Hang-straight",
-          "url": "https://app.notion.com/p/50110H-10-381ffa524c5b81b6aaf6db6180efbbe8"
-        },
-        {
-          "id": "381ffa524c5b8184b128d322bb328c3f",
-          "sku": "50110H-12",
-          "title": "Color Cadbury Pendant 12\", Hang-straight",
-          "url": "https://app.notion.com/p/50110H-12-381ffa524c5b8184b128d322bb328c3f"
-        },
-        {
-          "id": "381ffa524c5b813ab8c1dfcfa07881a5",
-          "sku": "50110H-8",
-          "title": "Color Cadbury Pendant 8\", Hang-straight",
-          "url": "https://app.notion.com/p/50110H-8-381ffa524c5b813ab8c1dfcfa07881a5"
-        },
-        {
-          "id": "2aeffa524c5b80b0b23ddd4ee741557e",
-          "sku": "50111-10",
-          "title": "Color Echo Pendant 10\"",
-          "url": "https://app.notion.com/p/50111-10-2aeffa524c5b80b0b23ddd4ee741557e"
-        },
-        {
-          "id": "2aeffa524c5b806b9d19f3e82a3353ec",
-          "sku": "50111-12",
-          "title": "Color Echo Pendant 12\"",
-          "url": "https://app.notion.com/p/50111-12-2aeffa524c5b806b9d19f3e82a3353ec"
-        },
-        {
-          "id": "2aeffa524c5b80df9aede0c0642710d5",
-          "sku": "50111-8",
-          "title": "Color Echo Pendant 8\"",
-          "url": "https://app.notion.com/p/50111-8-2aeffa524c5b80df9aede0c0642710d5"
-        },
-        {
-          "id": "381ffa524c5b813c9bdaf1ccc97f05f8",
-          "sku": "50111H-10",
-          "title": "Color Echo Pendant 10\", Hang-straight",
-          "url": "https://app.notion.com/p/50111H-10-381ffa524c5b813c9bdaf1ccc97f05f8"
-        },
-        {
-          "id": "381ffa524c5b817d9b19da95499726b4",
-          "sku": "50111H-12",
-          "title": "Color Echo Pendant 12\", Hang-straight",
-          "url": "https://app.notion.com/p/50111H-12-381ffa524c5b817d9b19da95499726b4"
-        },
-        {
-          "id": "381ffa524c5b81739881f12408ac6ad1",
-          "sku": "50111H-8",
-          "title": "Color Echo Pendant 8\", Hang-straight",
-          "url": "https://app.notion.com/p/50111H-8-381ffa524c5b81739881f12408ac6ad1"
-        },
-        {
-          "id": "2aeffa524c5b80af832aede14060b887",
-          "sku": "50120-10",
-          "title": "Color Cadbury Sconce 10\"",
-          "url": "https://app.notion.com/p/50120-10-2aeffa524c5b80af832aede14060b887"
-        },
-        {
-          "id": "2aeffa524c5b803b8fc7e057d2a114ed",
-          "sku": "50120-8",
-          "title": "Color Cadbury Sconce 8\"",
-          "url": "https://app.notion.com/p/50120-8-2aeffa524c5b803b8fc7e057d2a114ed"
-        },
-        {
-          "id": "2aeffa524c5b8051b248c254b67efeb2",
-          "sku": "50121-10",
-          "title": "Color Hemi Sconce 10\"",
-          "url": "https://app.notion.com/p/50121-10-2aeffa524c5b8051b248c254b67efeb2"
-        },
-        {
-          "id": "2aeffa524c5b806cb46ef00cccb5fff5",
-          "sku": "50121-8",
-          "title": "Color Hemi Sconce 8\"",
-          "url": "https://app.notion.com/p/50121-8-2aeffa524c5b806cb46ef00cccb5fff5"
-        },
-        {
-          "id": "2aeffa524c5b8066b686df178c33d703",
-          "sku": "50130-10",
-          "title": "Color Cadbury Flush Mount 10\"",
-          "url": "https://app.notion.com/p/50130-10-2aeffa524c5b8066b686df178c33d703"
-        },
-        {
-          "id": "2aeffa524c5b80ec9d5dce7fbe9f9b73",
-          "sku": "50130-12",
-          "title": "Color Cadbury Flush Mount 12\"",
-          "url": "https://app.notion.com/p/50130-12-2aeffa524c5b80ec9d5dce7fbe9f9b73"
-        },
-        {
-          "id": "2aeffa524c5b807d8855c5d01f8038b5",
-          "sku": "50130-8",
-          "title": "Color Cadbury Flush Mount 8\"",
-          "url": "https://app.notion.com/p/50130-8-2aeffa524c5b807d8855c5d01f8038b5"
-        },
-        {
-          "id": "381ffa524c5b81639548e04bdeffc1a6",
-          "sku": "50130H-10",
-          "title": "Color Cadbury Flush Mount 10\", Hang-straight",
-          "url": "https://app.notion.com/p/50130H-10-381ffa524c5b81639548e04bdeffc1a6"
-        },
-        {
-          "id": "381ffa524c5b81309bccdf90fcf8bbd1",
-          "sku": "50130H-12",
-          "title": "Color Cadbury Flush Mount 12\", Hang-straight",
-          "url": "https://app.notion.com/p/50130H-12-381ffa524c5b81309bccdf90fcf8bbd1"
-        },
-        {
-          "id": "381ffa524c5b8143bcc5c10f88bd2742",
-          "sku": "50130H-8",
-          "title": "Color Cadbury Flush Mount 8\", Hang-straight",
-          "url": "https://app.notion.com/p/50130H-8-381ffa524c5b8143bcc5c10f88bd2742"
-        },
-        {
-          "id": "2aeffa524c5b8075bc73ed1bc00acb54",
-          "sku": "50131-10",
-          "title": "Color Hemi Flush Mount 10\"",
-          "url": "https://app.notion.com/p/50131-10-2aeffa524c5b8075bc73ed1bc00acb54"
-        },
-        {
-          "id": "2aeffa524c5b80cf9fc5cad8ffd486ae",
-          "sku": "50131-12",
-          "title": "Color Hemi Flush Mount 12\"",
-          "url": "https://app.notion.com/p/50131-12-2aeffa524c5b80cf9fc5cad8ffd486ae"
-        },
-        {
-          "id": "2aeffa524c5b80248e64c0a637c39b13",
-          "sku": "50131-8",
-          "title": "Color Hemi Flush Mount 8\"",
-          "url": "https://app.notion.com/p/50131-8-2aeffa524c5b80248e64c0a637c39b13"
-        },
-        {
-          "id": "2aeffa524c5b80ffac63c7237b26a839",
-          "sku": "50220",
-          "title": "Color Amigo Sconce",
-          "url": "https://app.notion.com/p/50220-2aeffa524c5b80ffac63c7237b26a839"
-        },
-        {
-          "id": "2aeffa524c5b80a88360c635b514b796",
-          "sku": "50221",
-          "title": "Color Beso Sconce",
-          "url": "https://app.notion.com/p/50221-2aeffa524c5b80a88360c635b514b796"
-        },
-        {
-          "id": "2aeffa524c5b80ffa54cef30daab0f1a",
-          "sku": "51000",
-          "title": "Color Alegria Chandelier",
-          "url": "https://app.notion.com/p/51000-2aeffa524c5b80ffa54cef30daab0f1a"
-        },
-        {
-          "id": "2aeffa524c5b804aa751e22b23bc0277",
-          "sku": "51000F",
-          "title": "Color Alegria Flush Mount",
-          "url": "https://app.notion.com/p/51000F-2aeffa524c5b804aa751e22b23bc0277"
-        },
-        {
-          "id": "381ffa524c5b815e999cec3b00ff8bfc",
-          "sku": "51000FH",
-          "title": "Color Alegria Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/51000FH-381ffa524c5b815e999cec3b00ff8bfc"
-        },
-        {
-          "id": "381ffa524c5b812785becb0e7599c34c",
-          "sku": "51000H",
-          "title": "Color Alegria Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/51000H-381ffa524c5b812785becb0e7599c34c"
-        },
-        {
-          "id": "2aeffa524c5b80feadf3cfa5d61a741a",
-          "sku": "60110",
-          "title": "Color Reader Pendant",
-          "url": "https://app.notion.com/p/60110-2aeffa524c5b80feadf3cfa5d61a741a"
-        },
-        {
-          "id": "381ffa524c5b81bfb6f8d6b1ccfe0de9",
-          "sku": "60110H",
-          "title": "Color Reader Pendant, Hang-straight",
-          "url": "https://app.notion.com/p/60110H-381ffa524c5b81bfb6f8d6b1ccfe0de9"
-        },
-        {
-          "id": "2aeffa524c5b80ea9cf7f95260e46ad9",
-          "sku": "60111",
-          "title": "Color Eureka Pendant",
-          "url": "https://app.notion.com/p/60111-2aeffa524c5b80ea9cf7f95260e46ad9"
-        },
-        {
-          "id": "381ffa524c5b819e9e8dfd5daa0d19e4",
-          "sku": "60111H",
-          "title": "Color Eureka Pendant, Hang-straight",
-          "url": "https://app.notion.com/p/60111H-381ffa524c5b819e9e8dfd5daa0d19e4"
-        },
-        {
-          "id": "2aeffa524c5b803e9debcd21d2ca6e6a",
-          "sku": "60112",
-          "title": "Twink Pendant",
-          "url": "https://app.notion.com/p/60112-2aeffa524c5b803e9debcd21d2ca6e6a"
-        },
-        {
-          "id": "2c8ffa524c5b80278e52d9cdcbe6415d",
-          "sku": "60112 (C)",
-          "title": "Color Twink Pendant",
-          "url": "https://app.notion.com/p/60112-C-2c8ffa524c5b80278e52d9cdcbe6415d"
-        },
-        {
-          "id": "381ffa524c5b811ba9bcf2748336604c",
-          "sku": "60112H",
-          "title": "Twink Pendant, Hang-straight",
-          "url": "https://app.notion.com/p/60112H-381ffa524c5b811ba9bcf2748336604c"
-        },
-        {
-          "id": "381ffa524c5b810aadaac62c06dd81ff",
-          "sku": "60112H (C)",
-          "title": "Color Twink Pendant, Hang-straight",
-          "url": "https://app.notion.com/p/60112H-C-381ffa524c5b810aadaac62c06dd81ff"
-        },
-        {
-          "id": "2aeffa524c5b80a8a411c2dfb5115279",
-          "sku": "60121",
-          "title": "Snug Sconce",
-          "url": "https://app.notion.com/p/60121-2aeffa524c5b80a8a411c2dfb5115279"
-        },
-        {
-          "id": "2c8ffa524c5b80e4a653d20735dca87d",
-          "sku": "60121 (C)",
-          "title": "Color Snug Sconce",
-          "url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d"
-        },
-        {
-          "id": "343ffa524c5b8144994ce1329baf6edb",
-          "sku": "60121S (C)",
-          "title": "Color Snug Sconce, Hardwired Switch",
-          "url": "https://app.notion.com/p/60121S-C-343ffa524c5b8144994ce1329baf6edb"
-        },
-        {
-          "id": "2aeffa524c5b804194acfabf14233149",
-          "sku": "60123",
-          "title": "Tall Snug Sconce",
-          "url": "https://app.notion.com/p/60123-2aeffa524c5b804194acfabf14233149"
-        },
-        {
-          "id": "2c8ffa524c5b80098f3cf5298a564823",
-          "sku": "60123 (C)",
-          "title": "Color Tall Snug Sconce",
-          "url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823"
-        },
-        {
-          "id": "343ffa524c5b8139ac93e8493fca79c9",
-          "sku": "60123S (C)",
-          "title": "Color Tall Snug Sconce, Hardwired Switch",
-          "url": "https://app.notion.com/p/60123S-C-343ffa524c5b8139ac93e8493fca79c9"
-        },
-        {
-          "id": "2aeffa524c5b8012b048c818ab5ad3a7",
-          "sku": "60124-0",
-          "title": "Color Reader Sconce, No Arm",
-          "url": "https://app.notion.com/p/60124-0-2aeffa524c5b8012b048c818ab5ad3a7"
-        },
-        {
-          "id": "2aeffa524c5b803faaaad639a17f4bf3",
-          "sku": "60124-10",
-          "title": "Color Reader Sconce, 10\" Arm",
-          "url": "https://app.notion.com/p/60124-10-2aeffa524c5b803faaaad639a17f4bf3"
-        },
-        {
-          "id": "2aeffa524c5b8078b4c9d3f093b57ffd",
-          "sku": "60124-3",
-          "title": "Color Reader Sconce, 3\" Arm",
-          "url": "https://app.notion.com/p/60124-3-2aeffa524c5b8078b4c9d3f093b57ffd"
-        },
-        {
-          "id": "2aeffa524c5b80c2abdafe390ee7006d",
-          "sku": "60124-6",
-          "title": "Color Reader Sconce, 6\" Arm",
-          "url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d"
-        },
-        {
-          "id": "2aeffa524c5b80308784e4eaf7a1c746",
-          "sku": "60124P-0",
-          "title": "Color Reader Plug-in Sconce, No Arm",
-          "url": "https://app.notion.com/p/60124P-0-2aeffa524c5b80308784e4eaf7a1c746"
-        },
-        {
-          "id": "2aeffa524c5b808c8edced45950d700c",
-          "sku": "60124P-10",
-          "title": "Color Reader Plug-in Sconce, 10\" Arm",
-          "url": "https://app.notion.com/p/60124P-10-2aeffa524c5b808c8edced45950d700c"
-        },
-        {
-          "id": "2aeffa524c5b80f9a08bd6ce8d7380ae",
-          "sku": "60124P-3",
-          "title": "Color Reader Plug-in Sconce, 3\" Arm",
-          "url": "https://app.notion.com/p/60124P-3-2aeffa524c5b80f9a08bd6ce8d7380ae"
-        },
-        {
-          "id": "2aeffa524c5b803fb3e3d66f7b89bf17",
-          "sku": "60124P-6",
-          "title": "Color Reader Plug-in Sconce, 6\" Arm",
-          "url": "https://app.notion.com/p/60124P-6-2aeffa524c5b803fb3e3d66f7b89bf17"
-        },
-        {
-          "id": "343ffa524c5b810ba2d4fd52837dddeb",
-          "sku": "60124S-0",
-          "title": "Color Reader Sconce, No Arm, Hardwired Switch",
-          "url": "https://app.notion.com/p/60124S-0-343ffa524c5b810ba2d4fd52837dddeb"
-        },
-        {
-          "id": "343ffa524c5b8139bca9f43245a4f95c",
-          "sku": "60124S-10",
-          "title": "Color Reader Sconce, 10\" Arm, Hardwired Switch",
-          "url": "https://app.notion.com/p/60124S-10-343ffa524c5b8139bca9f43245a4f95c"
-        },
-        {
-          "id": "343ffa524c5b81659ef8cf3b277517a8",
-          "sku": "60124S-3",
-          "title": "Color Reader Sconce, 3\" Arm, Hardwired Switch",
-          "url": "https://app.notion.com/p/60124S-3-343ffa524c5b81659ef8cf3b277517a8"
-        },
-        {
-          "id": "343ffa524c5b81df964de7593cfc6600",
-          "sku": "60124S-6",
-          "title": "Color Reader Sconce, 6\" Arm, Hardwired Switch",
-          "url": "https://app.notion.com/p/60124S-6-343ffa524c5b81df964de7593cfc6600"
-        },
-        {
-          "id": "2aeffa524c5b80f58bb0c4a82866014f",
-          "sku": "60125",
-          "title": "Twink Sconce",
-          "url": "https://app.notion.com/p/60125-2aeffa524c5b80f58bb0c4a82866014f"
-        },
-        {
-          "id": "2c8ffa524c5b80b9b01df09fac45815b",
-          "sku": "60125 (C)",
-          "title": "Color Twink Sconce",
-          "url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b"
-        },
-        {
-          "id": "343ffa524c5b81ff8c3ef45fb0e30929",
-          "sku": "60125S (C)",
-          "title": "Color Twink Sconce, Hardwired Switch",
-          "url": "https://app.notion.com/p/60125S-C-343ffa524c5b81ff8c3ef45fb0e30929"
-        },
-        {
-          "id": "2aeffa524c5b802aaf33f8882c13e42a",
-          "sku": "60127",
-          "title": "Color Display Sconce",
-          "url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a"
-        },
-        {
-          "id": "343ffa524c5b81be86abcaa965e2e79f",
-          "sku": "60127S",
-          "title": "Color Display Sconce, Hardwired Switch",
-          "url": "https://app.notion.com/p/60127S-343ffa524c5b81be86abcaa965e2e79f"
-        },
-        {
-          "id": "2aeffa524c5b809dae9bcff72726ee16",
-          "sku": "60128-17",
-          "title": "Color Reader Swing Arm Sconce, 17\" Arm",
-          "url": "https://app.notion.com/p/60128-17-2aeffa524c5b809dae9bcff72726ee16"
-        },
-        {
-          "id": "2aeffa524c5b80789054c2e2175d877c",
-          "sku": "60128-9",
-          "title": "Color Reader Swing Arm Sconce, 9\" Arm",
-          "url": "https://app.notion.com/p/60128-9-2aeffa524c5b80789054c2e2175d877c"
-        },
-        {
-          "id": "2aeffa524c5b80099810eafdcc8b4706",
-          "sku": "60128P-17",
-          "title": "Color Reader Swing Arm Plug-in Sconce, 17\" Arm",
-          "url": "https://app.notion.com/p/60128P-17-2aeffa524c5b80099810eafdcc8b4706"
-        },
-        {
-          "id": "2aeffa524c5b80c890e0ece58c06a6fd",
-          "sku": "60128P-9",
-          "title": "Color Reader Swing Arm Plug-in Sconce, 9\" Arm",
-          "url": "https://app.notion.com/p/60128P-9-2aeffa524c5b80c890e0ece58c06a6fd"
-        },
-        {
-          "id": "2aeffa524c5b8070b14fe4704acb3618",
-          "sku": "60129-15",
-          "title": "Color Major Sconce 15\"",
-          "url": "https://app.notion.com/p/60129-15-2aeffa524c5b8070b14fe4704acb3618"
-        },
-        {
-          "id": "2aeffa524c5b80728d93ca141cfb75c0",
-          "sku": "60129-21",
-          "title": "Color Major Sconce 21\"",
-          "url": "https://app.notion.com/p/60129-21-2aeffa524c5b80728d93ca141cfb75c0"
-        },
-        {
-          "id": "2aeffa524c5b80e299a7e0f3f1a26861",
-          "sku": "60129-9",
-          "title": "Color Major Sconce 9\"",
-          "url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861"
-        },
-        {
-          "id": "343ffa524c5b81f2b6ccf72fad2b8ca1",
-          "sku": "60129S-15",
-          "title": "Color Major Sconce 15\", Hardwired Switch",
-          "url": "https://app.notion.com/p/60129S-15-343ffa524c5b81f2b6ccf72fad2b8ca1"
-        },
-        {
-          "id": "343ffa524c5b8118abb7cdd721b034be",
-          "sku": "60129S-21",
-          "title": "Color Major Sconce 21\", Hardwired Switch",
-          "url": "https://app.notion.com/p/60129S-21-343ffa524c5b8118abb7cdd721b034be"
-        },
-        {
-          "id": "343ffa524c5b810c85d3c60579e7b196",
-          "sku": "60129S-9",
-          "title": "Color Major Sconce 9\", Hardwired Switch",
-          "url": "https://app.notion.com/p/60129S-9-343ffa524c5b810c85d3c60579e7b196"
-        },
-        {
-          "id": "2aeffa524c5b80b9a095c951117d47a2",
-          "sku": "60130",
-          "title": "Color Reader Flush Mount",
-          "url": "https://app.notion.com/p/60130-2aeffa524c5b80b9a095c951117d47a2"
-        },
-        {
-          "id": "381ffa524c5b81b68748da5487a658b2",
-          "sku": "60130H",
-          "title": "Color Reader Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60130H-381ffa524c5b81b68748da5487a658b2"
-        },
-        {
-          "id": "2aeffa524c5b8030b1a1ed287ce48112",
-          "sku": "60131",
-          "title": "Color Eureka Flush Mount",
-          "url": "https://app.notion.com/p/60131-2aeffa524c5b8030b1a1ed287ce48112"
-        },
-        {
-          "id": "381ffa524c5b815ab4a4c6c344f9b7c0",
-          "sku": "60131H",
-          "title": "Color Eureka Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/60131H-381ffa524c5b815ab4a4c6c344f9b7c0"
-        },
-        {
-          "id": "2aeffa524c5b80c6bc67c8bb05702c7e",
-          "sku": "60132",
-          "title": "Twink Flush Mount",
-          "url": "https://app.notion.com/p/60132-2aeffa524c5b80c6bc67c8bb05702c7e"
-        },
-        {
-          "id": "2c8ffa524c5b8050afa0e66dd84499c5",
-          "sku": "60132 (C)",
-          "title": "Color Twink Flush Mount",
-          "url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5"
-        },
-        {
-          "id": "2ecffa524c5b80399142dcac16e4c0b5",
-          "sku": "60210",
-          "title": "Color Pilot Pendant 29\"",
-          "url": "https://app.notion.com/p/60210-2ecffa524c5b80399142dcac16e4c0b5"
-        },
-        {
-          "id": "2aeffa524c5b80669cf6c9f801ce68c8",
-          "sku": "60210-16",
-          "title": "Color Pilot Pendant 29\" - 16\u201d Height",
-          "url": "https://app.notion.com/p/60210-16-2aeffa524c5b80669cf6c9f801ce68c8"
-        },
-        {
-          "id": "2ddffa524c5b80318a2dd5d63e525c9e",
-          "sku": "60210-28",
-          "title": "Color Pilot Pendant 29\" - 28\u201d Height",
-          "url": "https://app.notion.com/p/60210-28-2ddffa524c5b80318a2dd5d63e525c9e"
-        },
-        {
-          "id": "2ddffa524c5b8051a050ffb43158de2e",
-          "sku": "60210-34",
-          "title": "Color Pilot Pendant 29\" - 34\u201d Height",
-          "url": "https://app.notion.com/p/60210-34-2ddffa524c5b8051a050ffb43158de2e"
-        },
-        {
-          "id": "2ddffa524c5b808ea022d408f5ced1a8",
-          "sku": "60210-40",
-          "title": "Color Pilot Pendant 29\" - 40\u201d Height",
-          "url": "https://app.notion.com/p/60210-40-2ddffa524c5b808ea022d408f5ced1a8"
-        },
-        {
-          "id": "2ddffa524c5b806dbe21fe225d541bae",
-          "sku": "60210-46",
-          "title": "Color Pilot Pendant 29\" - 46\u201d Height",
-          "url": "https://app.notion.com/p/60210-46-2ddffa524c5b806dbe21fe225d541bae"
-        },
-        {
-          "id": "2ddffa524c5b809ea031ed71cb65dad4",
-          "sku": "60210-52",
-          "title": "Color Pilot Pendant 29\" - 52\u201d Height",
-          "url": "https://app.notion.com/p/60210-52-2ddffa524c5b809ea031ed71cb65dad4"
-        },
-        {
-          "id": "2ddffa524c5b807495fddf9278f63432",
-          "sku": "60210-58",
-          "title": "Color Pilot Pendant 29\" - 58\u201d Height",
-          "url": "https://app.notion.com/p/60210-58-2ddffa524c5b807495fddf9278f63432"
-        },
-        {
-          "id": "2aeffa524c5b805ba0e7ff443f9d0893",
-          "sku": "60211",
-          "title": "Color Pilot Pendant 47\"",
-          "url": "https://app.notion.com/p/60211-2aeffa524c5b805ba0e7ff443f9d0893"
-        },
-        {
-          "id": "2ecffa524c5b805db7f3dcc896e280fe",
-          "sku": "60211-16",
-          "title": "Color Pilot Pendant 47\" - 16\u201d Height",
-          "url": "https://app.notion.com/p/60211-16-2ecffa524c5b805db7f3dcc896e280fe"
-        },
-        {
-          "id": "2ddffa524c5b80cca032d6c5bccd1398",
-          "sku": "60211-28",
-          "title": "Color Pilot Pendant 47\" - 28\u201d Height",
-          "url": "https://app.notion.com/p/60211-28-2ddffa524c5b80cca032d6c5bccd1398"
-        },
-        {
-          "id": "2ddffa524c5b8085a2a2eca64fe0b479",
-          "sku": "60211-34",
-          "title": "Color Pilot Pendant 47\" - 34\u201d Height",
-          "url": "https://app.notion.com/p/60211-34-2ddffa524c5b8085a2a2eca64fe0b479"
-        },
-        {
-          "id": "2ddffa524c5b8064bfc0f468fd56d18a",
-          "sku": "60211-40",
-          "title": "Color Pilot Pendant 47\" - 40\u201d Height",
-          "url": "https://app.notion.com/p/60211-40-2ddffa524c5b8064bfc0f468fd56d18a"
-        },
-        {
-          "id": "2ddffa524c5b807e9a16cf1f7a9813df",
-          "sku": "60211-46",
-          "title": "Color Pilot Pendant 47\" - 46\u201d Height",
-          "url": "https://app.notion.com/p/60211-46-2ddffa524c5b807e9a16cf1f7a9813df"
-        },
-        {
-          "id": "2ddffa524c5b807ea006da7226dc9675",
-          "sku": "60211-52",
-          "title": "Color Pilot Pendant 47\" - 52\u201d Height",
-          "url": "https://app.notion.com/p/60211-52-2ddffa524c5b807ea006da7226dc9675"
-        },
-        {
-          "id": "2ddffa524c5b8016ae8ec8917bb70ce8",
-          "sku": "60211-58",
-          "title": "Color Pilot Pendant 47\" - 58\u201d Height",
-          "url": "https://app.notion.com/p/60211-58-2ddffa524c5b8016ae8ec8917bb70ce8"
-        },
-        {
-          "id": "2aeffa524c5b802881a7c1da8299f370",
-          "sku": "60220",
-          "title": "Scepter Sconce 10\"",
-          "url": "https://app.notion.com/p/60220-2aeffa524c5b802881a7c1da8299f370"
-        },
-        {
-          "id": "2c8ffa524c5b8091b372fc87b6b6711e",
-          "sku": "60220 (C)",
-          "title": "Color Scepter Sconce 10\"",
-          "url": "https://app.notion.com/p/60220-C-2c8ffa524c5b8091b372fc87b6b6711e"
-        },
-        {
-          "id": "2aeffa524c5b8092a926fe1c3f23d7a3",
-          "sku": "60221",
-          "title": "Scepter Sconce 18\"",
-          "url": "https://app.notion.com/p/60221-2aeffa524c5b8092a926fe1c3f23d7a3"
-        },
-        {
-          "id": "2c8ffa524c5b80efaac4c945cef0de5b",
-          "sku": "60221 (C)",
-          "title": "Color Scepter Sconce 18\"",
-          "url": "https://app.notion.com/p/60221-C-2c8ffa524c5b80efaac4c945cef0de5b"
-        },
-        {
-          "id": "2aeffa524c5b80c9ac33c8d34eab856b",
-          "sku": "60222",
-          "title": "Color Monarch Sconce",
-          "url": "https://app.notion.com/p/60222-2aeffa524c5b80c9ac33c8d34eab856b"
-        },
-        {
-          "id": "2aeffa524c5b80ccb187c710e1a44f11",
-          "sku": "60224",
-          "title": "Color Ruler Sconce",
-          "url": "https://app.notion.com/p/60224-2aeffa524c5b80ccb187c710e1a44f11"
-        },
-        {
-          "id": "2aeffa524c5b80f29a93ef5fab59f72b",
-          "sku": "60226-11",
-          "title": "Color Pilot Sconce 11\"",
-          "url": "https://app.notion.com/p/60226-11-2aeffa524c5b80f29a93ef5fab59f72b"
-        },
-        {
-          "id": "2aeffa524c5b8047955ad781d00a643d",
-          "sku": "60226-17",
-          "title": "Color Pilot Sconce 17\"",
-          "url": "https://app.notion.com/p/60226-17-2aeffa524c5b8047955ad781d00a643d"
-        },
-        {
-          "id": "2aeffa524c5b80a0b4e0ca8ada0fc144",
-          "sku": "60226-23",
-          "title": "Color Pilot Sconce 23\"",
-          "url": "https://app.notion.com/p/60226-23-2aeffa524c5b80a0b4e0ca8ada0fc144"
-        },
-        {
-          "id": "2aeffa524c5b8039990dce05de5948cd",
-          "sku": "60226-29",
-          "title": "Color Pilot Sconce 29\"",
-          "url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd"
-        },
-        {
-          "id": "343ffa524c5b813c8d38ca43376e3a03",
-          "sku": "60226S-11",
-          "title": "Color Pilot Sconce 11\", Hardwired Switch",
-          "url": "https://app.notion.com/p/60226S-11-343ffa524c5b813c8d38ca43376e3a03"
-        },
-        {
-          "id": "343ffa524c5b81f2a369c58ccd74963e",
-          "sku": "60226S-17",
-          "title": "Color Pilot Sconce 17\", Hardwired Switch",
-          "url": "https://app.notion.com/p/60226S-17-343ffa524c5b81f2a369c58ccd74963e"
-        },
-        {
-          "id": "343ffa524c5b817db7f7e1137838d72f",
-          "sku": "60226S-23",
-          "title": "Color Pilot Sconce 23\", Hardwired Switch",
-          "url": "https://app.notion.com/p/60226S-23-343ffa524c5b817db7f7e1137838d72f"
-        },
-        {
-          "id": "343ffa524c5b8158bbd4fbf183ee09b9",
-          "sku": "60226S-29",
-          "title": "Color Pilot Sconce 29\", Hardwired Switch",
-          "url": "https://app.notion.com/p/60226S-29-343ffa524c5b8158bbd4fbf183ee09b9"
-        },
-        {
-          "id": "2aeffa524c5b80d2a6fcefd1ebbd4f08",
-          "sku": "60230",
-          "title": "Color Pilot Flush Mount 29\"",
-          "url": "https://app.notion.com/p/60230-2aeffa524c5b80d2a6fcefd1ebbd4f08"
-        },
-        {
-          "id": "2aeffa524c5b8078a4dec154789410d9",
-          "sku": "60231",
-          "title": "Color Pilot Flush Mount 47\"",
-          "url": "https://app.notion.com/p/60231-2aeffa524c5b8078a4dec154789410d9"
-        },
-        {
-          "id": "2aeffa524c5b80568fdbfac1c45ff4f9",
-          "sku": "60330",
-          "title": "Color Pose Flush Mount",
-          "url": "https://app.notion.com/p/60330-2aeffa524c5b80568fdbfac1c45ff4f9"
-        },
-        {
-          "id": "2ecffa524c5b8090ac27dc7ccbdbad01",
-          "sku": "60400-18",
-          "title": "Color Captain Chandelier 29\" - 18\u201d Height",
-          "url": "https://app.notion.com/p/60400-18-2ecffa524c5b8090ac27dc7ccbdbad01"
-        },
-        {
-          "id": "7b3d3a5de7784a86bcf0fd0da6e166b0",
-          "sku": "60400-24",
-          "title": "Color Captain Chandelier 29\" - 24\u201d Height",
-          "url": "https://app.notion.com/p/60400-24-7b3d3a5de7784a86bcf0fd0da6e166b0"
-        },
-        {
-          "id": "3f79504ae31040fbbc3598b07856729b",
-          "sku": "60400-36",
-          "title": "Color Captain Chandelier 29\" - 36\u201d Height",
-          "url": "https://app.notion.com/p/60400-36-3f79504ae31040fbbc3598b07856729b"
-        },
-        {
-          "id": "8300a51a1ceb492c8390e1751a68e40b",
-          "sku": "60400-48",
-          "title": "Color Captain Chandelier 29\" - 48\u201d Height",
-          "url": "https://app.notion.com/p/60400-48-8300a51a1ceb492c8390e1751a68e40b"
-        },
-        {
-          "id": "ad29c9641da845b0abe8c45078f0f288",
-          "sku": "60400-60",
-          "title": "Color Captain Chandelier 29\" - 60\u201d Height",
-          "url": "https://app.notion.com/p/60400-60-ad29c9641da845b0abe8c45078f0f288"
-        },
-        {
-          "id": "2081a96ff94d4dac8e89cc80b7603845",
-          "sku": "60400-72",
-          "title": "Color Captain Chandelier 29\" - 72\u201d Height",
-          "url": "https://app.notion.com/p/60400-72-2081a96ff94d4dac8e89cc80b7603845"
-        },
-        {
-          "id": "a74766d4147d452bbf46f3d207d47d32",
-          "sku": "60400-84",
-          "title": "Color Captain Chandelier 29\" - 84\u201d Height",
-          "url": "https://app.notion.com/p/60400-84-a74766d4147d452bbf46f3d207d47d32"
-        },
-        {
-          "id": "2ecffa524c5b8097b271c1882d45bd00",
-          "sku": "60401-18",
-          "title": "Color Captain Chandelier 47\" - 18\u201d Height",
-          "url": "https://app.notion.com/p/60401-18-2ecffa524c5b8097b271c1882d45bd00"
-        },
-        {
-          "id": "37520b5713654a4aaaf131c05c83392e",
-          "sku": "60401-24",
-          "title": "Color Captain Chandelier 47\" - 24\u201d Height",
-          "url": "https://app.notion.com/p/60401-24-37520b5713654a4aaaf131c05c83392e"
-        },
-        {
-          "id": "d1a7017b196a4033b5537cd8e5de7921",
-          "sku": "60401-36",
-          "title": "Color Captain Chandelier 47\" - 36\u201d Height",
-          "url": "https://app.notion.com/p/60401-36-d1a7017b196a4033b5537cd8e5de7921"
-        },
-        {
-          "id": "2c545d82b7de495181e1cf7230c0ed00",
-          "sku": "60401-48",
-          "title": "Color Captain Chandelier 47\" - 48\u201d Height",
-          "url": "https://app.notion.com/p/60401-48-2c545d82b7de495181e1cf7230c0ed00"
-        },
-        {
-          "id": "c97e9c9a1bd445a980da337d8822a558",
-          "sku": "60401-60",
-          "title": "Color Captain Chandelier 47\" - 60\u201d Height",
-          "url": "https://app.notion.com/p/60401-60-c97e9c9a1bd445a980da337d8822a558"
-        },
-        {
-          "id": "0eeecc3bc9ac446ca4389d6c479f9f58",
-          "sku": "60401-72",
-          "title": "Color Captain Chandelier 47\" - 72\u201d Height",
-          "url": "https://app.notion.com/p/60401-72-0eeecc3bc9ac446ca4389d6c479f9f58"
-        },
-        {
-          "id": "c17eff1906d74d619314bceba73f8ce3",
-          "sku": "60401-84",
-          "title": "Color Captain Chandelier 47\" - 84\u201d Height",
-          "url": "https://app.notion.com/p/60401-84-c17eff1906d74d619314bceba73f8ce3"
-        },
-        {
-          "id": "2aeffa524c5b80ea94b5fca32d176bfd",
-          "sku": "60420",
-          "title": "Color Vogue 4 Sconce",
-          "url": "https://app.notion.com/p/60420-2aeffa524c5b80ea94b5fca32d176bfd"
-        },
-        {
-          "id": "2aeffa524c5b80e3a27fcfd2c0211b5f",
-          "sku": "60430",
-          "title": "Color Captain Flush Mount 29\"",
-          "url": "https://app.notion.com/p/60430-2aeffa524c5b80e3a27fcfd2c0211b5f"
-        },
-        {
-          "id": "2aeffa524c5b80acb9fdd20620ecfa5f",
-          "sku": "60431",
-          "title": "Color Captain Flush Mount 47\"",
-          "url": "https://app.notion.com/p/60431-2aeffa524c5b80acb9fdd20620ecfa5f"
-        },
-        {
-          "id": "2aeffa524c5b8004b2c4e855319e2617",
-          "sku": "60432",
-          "title": "Color Vogue 4 Flush Mount",
-          "url": "https://app.notion.com/p/60432-2aeffa524c5b8004b2c4e855319e2617"
-        },
-        {
-          "id": "2ecffa524c5b809ea60ad9a7a744f316",
-          "sku": "60600-24",
-          "title": "Color Commander Chandelier 29\" - 24\u201d Height",
-          "url": "https://app.notion.com/p/60600-24-2ecffa524c5b809ea60ad9a7a744f316"
-        },
-        {
-          "id": "316a3c5710114956aac84b41215fcd9d",
-          "sku": "60600-36",
-          "title": "Color Commander Chandelier 29\" - 36\u201d Height",
-          "url": "https://app.notion.com/p/60600-36-316a3c5710114956aac84b41215fcd9d"
-        },
-        {
-          "id": "605ad37a3be145b28e1bf9d6683499ab",
-          "sku": "60600-48",
-          "title": "Color Commander Chandelier 29\" - 48\u201d Height",
-          "url": "https://app.notion.com/p/60600-48-605ad37a3be145b28e1bf9d6683499ab"
-        },
-        {
-          "id": "028658545cf547008b9c999f8b714a8b",
-          "sku": "60600-60",
-          "title": "Color Commander Chandelier 29\" - 60\u201d Height",
-          "url": "https://app.notion.com/p/60600-60-028658545cf547008b9c999f8b714a8b"
-        },
-        {
-          "id": "9d3272d5634f450ca6569bbde269bf6c",
-          "sku": "60600-72",
-          "title": "Color Commander Chandelier 29\" - 72\u201d Height",
-          "url": "https://app.notion.com/p/60600-72-9d3272d5634f450ca6569bbde269bf6c"
-        },
-        {
-          "id": "bdd3697ac67a4ddda2ac79f80fc4ad00",
-          "sku": "60600-84",
-          "title": "Color Commander Chandelier 29\" - 84\u201d Height",
-          "url": "https://app.notion.com/p/60600-84-bdd3697ac67a4ddda2ac79f80fc4ad00"
-        },
-        {
-          "id": "2ecffa524c5b806a8682c873f68b88ac",
-          "sku": "60601-24",
-          "title": "Color Commander Chandelier 47\" - 24\u201d Height",
-          "url": "https://app.notion.com/p/60601-24-2ecffa524c5b806a8682c873f68b88ac"
-        },
-        {
-          "id": "6bfc27f716ab4c639a3228d3753be1d2",
-          "sku": "60601-36",
-          "title": "Color Commander Chandelier 47\" - 36\u201d Height",
-          "url": "https://app.notion.com/p/60601-36-6bfc27f716ab4c639a3228d3753be1d2"
-        },
-        {
-          "id": "2e717566f4974f1699326f72e7cfe64e",
-          "sku": "60601-48",
-          "title": "Color Commander Chandelier 47\" - 48\u201d Height",
-          "url": "https://app.notion.com/p/60601-48-2e717566f4974f1699326f72e7cfe64e"
-        },
-        {
-          "id": "18d0c95773724e7cbd7c7b261c7c9eac",
-          "sku": "60601-60",
-          "title": "Color Commander Chandelier 47\" - 60\u201d Height",
-          "url": "https://app.notion.com/p/60601-60-18d0c95773724e7cbd7c7b261c7c9eac"
-        },
-        {
-          "id": "162fdd09a0904210bbb74aee583fb8fa",
-          "sku": "60601-72",
-          "title": "Color Commander Chandelier 47\" - 72\u201d Height",
-          "url": "https://app.notion.com/p/60601-72-162fdd09a0904210bbb74aee583fb8fa"
-        },
-        {
-          "id": "b1445271f56c4cbbbe9c33794289ed7e",
-          "sku": "60601-84",
-          "title": "Color Commander Chandelier 47\" - 84\u201d Height",
-          "url": "https://app.notion.com/p/60601-84-b1445271f56c4cbbbe9c33794289ed7e"
-        },
-        {
-          "id": "2aeffa524c5b8038be4fd6add732b468",
-          "sku": "60630",
-          "title": "Color Commander Flush Mount 29\"",
-          "url": "https://app.notion.com/p/60630-2aeffa524c5b8038be4fd6add732b468"
-        },
-        {
-          "id": "2aeffa524c5b8021a28ac1b02ddbd8ed",
-          "sku": "60631",
-          "title": "Color Commander Flush Mount 47\"",
-          "url": "https://app.notion.com/p/60631-2aeffa524c5b8021a28ac1b02ddbd8ed"
-        },
-        {
-          "id": "2aeffa524c5b80cc9a3cd21d68ff8d9b",
-          "sku": "60720",
-          "title": "Color Vogue 7 Sconce",
-          "url": "https://app.notion.com/p/60720-2aeffa524c5b80cc9a3cd21d68ff8d9b"
-        },
-        {
-          "id": "2aeffa524c5b802598d9f57a50fc19ca",
-          "sku": "60730",
-          "title": "Color Vogue 7 Flush Mount",
-          "url": "https://app.notion.com/p/60730-2aeffa524c5b802598d9f57a50fc19ca"
-        },
-        {
-          "id": "2aeffa524c5b802181c6ed9aaaf98c8d",
-          "sku": "70110",
-          "title": "Bling Pendant",
-          "url": "https://app.notion.com/p/70110-2aeffa524c5b802181c6ed9aaaf98c8d"
-        },
-        {
-          "id": "2c8ffa524c5b80b98a3bced51e5c7264",
-          "sku": "70110 (C)",
-          "title": "Color Bling Pendant",
-          "url": "https://app.notion.com/p/70110-C-2c8ffa524c5b80b98a3bced51e5c7264"
-        },
-        {
-          "id": "2aeffa524c5b803f8b78f0092813ce4d",
-          "sku": "70110F",
-          "title": "Bling Flush Mount",
-          "url": "https://app.notion.com/p/70110F-2aeffa524c5b803f8b78f0092813ce4d"
-        },
-        {
-          "id": "2c8ffa524c5b80b6a392e463d16d2e88",
-          "sku": "70110F (C)",
-          "title": "Color Bling Flush Mount",
-          "url": "https://app.notion.com/p/70110F-C-2c8ffa524c5b80b6a392e463d16d2e88"
-        },
-        {
-          "id": "381ffa524c5b81fe8194ee9a3b9c3663",
-          "sku": "70110FH",
-          "title": "Bling Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/70110FH-381ffa524c5b81fe8194ee9a3b9c3663"
-        },
-        {
-          "id": "381ffa524c5b81d5af90f48b9ac15c01",
-          "sku": "70110FH (C)",
-          "title": "Color Bling Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/70110FH-C-381ffa524c5b81d5af90f48b9ac15c01"
-        },
-        {
-          "id": "381ffa524c5b81068c0ac06ca6d69d63",
-          "sku": "70110H",
-          "title": "Bling Pendant, Hang-straight",
-          "url": "https://app.notion.com/p/70110H-381ffa524c5b81068c0ac06ca6d69d63"
-        },
-        {
-          "id": "381ffa524c5b8112a110f384f5872150",
-          "sku": "70110H (C)",
-          "title": "Color Bling Pendant, Hang-straight",
-          "url": "https://app.notion.com/p/70110H-C-381ffa524c5b8112a110f384f5872150"
-        },
-        {
-          "id": "2aeffa524c5b8096bd41ef71811285a8",
-          "sku": "70122",
-          "title": "Lepore Sconce",
-          "url": "https://app.notion.com/p/70122-2aeffa524c5b8096bd41ef71811285a8"
-        },
-        {
-          "id": "2c8ffa524c5b809689b0de4d05fa0505",
-          "sku": "70122 (C)",
-          "title": "Color Lepore Sconce",
-          "url": "https://app.notion.com/p/70122-C-2c8ffa524c5b809689b0de4d05fa0505"
-        },
-        {
-          "id": "2aeffa524c5b8038bbcde55a10643104",
-          "sku": "70130",
-          "title": "Lepore Flush Mount",
-          "url": "https://app.notion.com/p/70130-2aeffa524c5b8038bbcde55a10643104"
-        },
-        {
-          "id": "2c8ffa524c5b80049b89fb8cda8c6150",
-          "sku": "70130 (C)",
-          "title": "Color Lepore Flush Mount",
-          "url": "https://app.notion.com/p/70130-C-2c8ffa524c5b80049b89fb8cda8c6150"
-        },
-        {
-          "id": "2aeffa524c5b8013b54fcd0fd405497a",
-          "sku": "70220",
-          "title": "Bianca Sconce 12\"",
-          "url": "https://app.notion.com/p/70220-2aeffa524c5b8013b54fcd0fd405497a"
-        },
-        {
-          "id": "2c8ffa524c5b806dab3bd2b521639466",
-          "sku": "70220 (C)",
-          "title": "Color Bianca Sconce 12\"",
-          "url": "https://app.notion.com/p/70220-C-2c8ffa524c5b806dab3bd2b521639466"
-        },
-        {
-          "id": "2aeffa524c5b8050a666df3710ad81b8",
-          "sku": "70221",
-          "title": "Phoenix Sconce",
-          "url": "https://app.notion.com/p/70221-2aeffa524c5b8050a666df3710ad81b8"
-        },
-        {
-          "id": "2c8ffa524c5b809f8a4dc071db019be2",
-          "sku": "70221 (C)",
-          "title": "Color Phoenix Sconce",
-          "url": "https://app.notion.com/p/70221-C-2c8ffa524c5b809f8a4dc071db019be2"
-        },
-        {
-          "id": "2aeffa524c5b807fb14dc23814473a87",
-          "sku": "70222",
-          "title": "Bianca Sconce 20\"",
-          "url": "https://app.notion.com/p/70222-2aeffa524c5b807fb14dc23814473a87"
-        },
-        {
-          "id": "2c8ffa524c5b80049549c86c0cfb33e1",
-          "sku": "70222 (C)",
-          "title": "Color Bianca Sconce 20\"",
-          "url": "https://app.notion.com/p/70222-C-2c8ffa524c5b80049549c86c0cfb33e1"
-        },
-        {
-          "id": "2aeffa524c5b80d9a9fbeedf4db08a0b",
-          "sku": "90220",
-          "title": "Pearl Sconce Left (Room & Board)",
-          "url": "https://app.notion.com/p/90220-2aeffa524c5b80d9a9fbeedf4db08a0b"
-        },
-        {
-          "id": "2aeffa524c5b8074833ee96515ef7c30",
-          "sku": "90221",
-          "title": "Pearl Sconce Right (Room & Board)",
-          "url": "https://app.notion.com/p/90221-2aeffa524c5b8074833ee96515ef7c30"
-        },
-        {
-          "id": "2aeffa524c5b807b8af0d041928876c9",
-          "sku": "91000",
-          "title": "Cosma Chandelier 32\" (Room & Board)",
-          "url": "https://app.notion.com/p/91000-2aeffa524c5b807b8af0d041928876c9"
-        },
         {
           "id": "2aeffa524c5b80f69bd9d2654fe3ba76",
           "sku": "H20",
@@ -70528,6 +70550,27 @@
       "last_edited_at": "2026-06-24T00:41:00.000Z"
     },
     {
+      "part_number": "SC1",
+      "page_id": "392ffa52-4c5b-8082-be62-cbfd8e80b939",
+      "page_url": "https://app.notion.com/p/SC1-392ffa524c5b8082be62cbfd8e80b939",
+      "image": "parts-images/SC1.jpg",
+      "finish": "Steel",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "1 week",
+      "price": null,
+      "moq": null,
+      "reorder_qty": 5000,
+      "reorder_point": 500,
+      "raw_input": null,
+      "in_house_processes": [],
+      "locations": [],
+      "family_id": "392ffa52-4c5b-80f7-8288-fecf64c7e7df",
+      "last_edited_at": "2026-07-03T19:59:00.000Z"
+    },
+    {
       "part_number": "SCA6",
       "page_id": "324ffa52-4c5b-819d-8789-c833067491f8",
       "page_url": "https://app.notion.com/p/SCA6-324ffa524c5b819d8789c833067491f8",
@@ -76293,6 +76336,9 @@
     }
   },
   "siblings": {
+    "392ffa52-4c5b-80f7-8288-fecf64c7e7df": [
+      "SC1"
+    ],
     "2ceffa52-4c5b-81ff-8d9d-fbd3e86a3edb": [
       "PAT18-M1"
     ],
