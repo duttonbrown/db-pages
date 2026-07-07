@@ -1,5 +1,11 @@
 # Dutton Brown — Pages (GitHub Pages)
 
+> **`db-pages` — one domain in Thomas's `~/repos` workspace.**
+> **Owns:** Dutton Brown static published pages (public GitHub Pages). No PII — customer data lives in `db-private`, never here.
+> Master cross-repo rules & area map: `~/repos/CLAUDE.md` (source: `systems/repos-CLAUDE.md`). Keep out-of-scope work in its home repo.
+> **Sync:** `syncpull` at session start · `syncpush` after edits (`dbpush`/`ilypush` brand-scoped, `dbs` status) — see `~/repos/SYNC-GUIDE.md`.
+> **Cowork:** Claude edits files (they sync to disk) but does **NOT** run git — the mount corrupts `.git/index`. Thomas runs the sync commands; read-only git inspection is fine.
+
 Public static HTML hosted via GitHub Pages. Dutton Brown content organized by team under `dutton-brown/`. Other brands (iloveyouth, etc.) get their own top-level folders.
 
 - URL: https://duttonbrown.github.io/db-pages/
@@ -31,10 +37,3 @@ index.html         — landing page with team-grouped catalog
 This repo is **public**. Content is accessible to anyone who finds the URL. Do NOT commit anything that's truly sensitive (customer PII, unreleased financials, private strategic plans that competitors could weaponize).
 
 Most operational content (KPI maps, BOMs, color queues, open orders) is low-sensitivity — the realistic threat of a random stranger finding these URLs is low. For convenience and iframe-friendly embedding in Notion, public hosting is the right tradeoff.
-
-## Cross-Machine Sync
-
-- `dbpush` — commit & push all repos
-- `dbpull` — pull latest on all repos
-- `dbs` — show status across all repos
-- Script: `~/repos/db-sync.sh` | Aliases in `~/.bashrc`
