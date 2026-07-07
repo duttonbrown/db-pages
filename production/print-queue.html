@@ -1682,7 +1682,7 @@
   /* Ship-along items (bulbs / globes) — "ships with order · pack". Amber so the
      shipping station can't skim past a physical item that needs to go in the box. */
   .trv-ref-ship .trv-ref-where {
-    color: var(--accent-dark); background: #FFF7EB; border-color: #FCD9A6;
+    color: var(--accent-dark, #D97706); background: #FFF7EB; border-color: #FCD9A6;
   }
 
   /* ADD-ON callout — bulbs, extension rods, and accessory lines riding on a
@@ -1691,14 +1691,16 @@
      in front of the SKU. (Header count pill tried + removed 2026-07-07.) */
   .trv-addon-chip {
     display: inline-block; font-size: 9.5px; font-weight: 600; letter-spacing: .06em;
-    color: var(--accent-dark); background: #FFF7EB; border: 1px solid #FCD9A6;
+    color: var(--accent-dark, #D97706); background: #FFF7EB; border: 1px solid #FCD9A6;
     border-radius: 6px; padding: 1px 7px; margin-right: 8px; vertical-align: middle;
     white-space: nowrap;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   /* Edge bar prints too — it's a border, not a background, so no color-adjust
-     needed. Sits on the row's first cell (the image column). */
-  .trv-addon-row td:first-child { border-left: 3px solid var(--accent); padding-left: 6px; }
+     needed. Sits on the row's first cell (the image column). Literal fallbacks:
+     lib/pdf.py renders via file:// where /_shared/portal.css (the token source)
+     doesn't resolve. */
+  .trv-addon-row td:first-child { border-left: 3px solid var(--accent, #FF9912); padding-left: 6px; }
 
   /* Notes */
   .trv-notes { margin-top: 18px; }
@@ -1912,20 +1914,25 @@
       page-break-after: always; break-after: page;
       /* One page tall for normal sheets (footer flex-pins to the bottom), but
          a tall traveler may FLOW onto a second page instead of being clipped —
-         "print only pages that have content" (Thomas 2026-06-11). Absolute mm,
-         NOT 100vh.
-         min-height EMPIRICALLY tuned (2026-06-25): the theoretical printable
-         area is 279.4 − 24mm @page margins = 255.4mm, but Chromium's print-to-PDF
-         (margin:0 on page.pdf, @page margin:12mm in CSS) reserves slightly more
-         than the nominal margin, so a sheet ≥250mm spills a near-blank second
-         page that strands the footer alone (the 252.4mm value here did exactly
-         that — see order 36273). 248mm is the largest height that reliably stays
-         on ONE page across the floor's normal sheets while still pushing the
-         flex-pinned sign-off strip to the page bottom; smaller would float the
-         strip up. A genuinely tall traveler (many lines) exceeds 248mm and is
-         ALLOWED to flow to a real second page — that's content, not a stray. */
+         "print only pages that have content" (Thomas 2026-06-11).
+         SIZED IN vh ON PURPOSE (2026-07-07): 100vh in print = the page area
+         inside the @page margins (~255.4mm on Letter at 100%), and it TRACKS
+         the print-dialog Scale setting — at 70% the layout page grows, so the
+         flex-pinned sign-off strip stays at the physical page bottom instead
+         of floating up (the absolute 248mm this replaced pinned correctly only
+         at 100%). The 8mm guard reproduces that empirically-tuned 248mm at
+         100% scale: Chromium's print-to-PDF (margin:0 on page.pdf, @page
+         margin:12mm in CSS) reserves slightly more than the nominal margin, so
+         a sheet ≥250mm spilled a near-blank second page stranding the footer
+         (see order 36273); 100vh − 8mm ≈ 247.4mm keeps one-page fit. Verified
+         2026-07-07 vs the 248mm baseline: identical page counts + footer
+         position at 100%, footer pinned at 70% (lib/pdf.py renders at 100%, so
+         archived PDFs are unchanged). DON'T subtract the @page margins from
+         100vh — it already excludes them (the old double-subtract bug).
+         A genuinely tall traveler (many lines) exceeds one page and is ALLOWED
+         to flow to a real second page — that's content, not a stray. */
       height: auto;
-      min-height: 248mm;
+      min-height: calc(100vh - 8mm);
       overflow: visible;
       display: flex; flex-direction: column;
     }
