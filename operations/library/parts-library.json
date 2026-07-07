@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T12:00:57",
+  "generated_at": "2026-07-07T12:01:16",
   "counts": {
     "parts": 475,
     "supplies": 139,
@@ -597,7 +597,7 @@
       "part_number": "SC1",
       "page_id": "392ffa52-4c5b-80f7-8288-fecf64c7e7df",
       "page_url": "https://app.notion.com/p/SC1-392ffa524c5b80f78288fecf64c7e7df",
-      "description": "Screw, flat-head, 8-32, 1\u201d",
+      "description": "Screw, 8-32, 1\u201d",
       "definition": "A threaded fastener used to join or secure parts of a fixture. Can be flathead, Phillips, hexagonal, among others. Included often in kits.",
       "materials": [],
       "raw_or_prefinished": null,
@@ -72983,7 +72983,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-07-01T21:37:00.000Z"
+      "last_edited_at": "2026-07-06T18:42:00.000Z"
     },
     {
       "sku": "BX02-15",
@@ -73014,7 +73014,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-07-01T21:37:00.000Z"
+      "last_edited_at": "2026-07-06T18:42:00.000Z"
     },
     {
       "sku": "BX02-26",
