@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T12:01:16",
+  "generated_at": "2026-07-08T07:05:52",
   "counts": {
     "parts": 475,
     "supplies": 139,
@@ -7930,6 +7930,12 @@
       },
       "products": [
         {
+          "id": "2aeffa524c5b80d5a784ea1ddda979d7",
+          "sku": "21800",
+          "title": "Color Elliptical Sputnik Chandelier",
+          "url": "https://app.notion.com/p/21800-2aeffa524c5b80d5a784ea1ddda979d7"
+        },
+        {
           "id": "2aeffa524c5b80bb92f1d0d513bb6559",
           "sku": "21800F",
           "title": "Color Elliptical Sputnik Flush Mount",
@@ -7940,6 +7946,12 @@
           "sku": "21800FH",
           "title": "Color Elliptical Sputnik Flush Mount, Hang-straight",
           "url": "https://app.notion.com/p/21800FH-381ffa524c5b815a8f1dece0f9f19892"
+        },
+        {
+          "id": "381ffa524c5b8123854df4ec664d1821",
+          "sku": "21800H",
+          "title": "Color Elliptical Sputnik Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/21800H-381ffa524c5b8123854df4ec664d1821"
         }
       ]
     },
@@ -7963,18 +7975,6 @@
         "image": "glossary-images/glossary-Wire__Ground.jpg"
       },
       "products": [
-        {
-          "id": "2aeffa524c5b80bb92f1d0d513bb6559",
-          "sku": "21800F",
-          "title": "Color Elliptical Sputnik Flush Mount",
-          "url": "https://app.notion.com/p/21800F-2aeffa524c5b80bb92f1d0d513bb6559"
-        },
-        {
-          "id": "381ffa524c5b815a8f1dece0f9f19892",
-          "sku": "21800FH",
-          "title": "Color Elliptical Sputnik Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/21800FH-381ffa524c5b815a8f1dece0f9f19892"
-        },
         {
           "id": "2aeffa524c5b80ee8ebdcfb8edfab90d",
           "sku": "40121-17",
@@ -10980,18 +10980,6 @@
         "image": "glossary-images/glossary-Wire_Connector.jpg"
       },
       "products": [
-        {
-          "id": "2aeffa524c5b80d5a784ea1ddda979d7",
-          "sku": "21800",
-          "title": "Color Elliptical Sputnik Chandelier",
-          "url": "https://app.notion.com/p/21800-2aeffa524c5b80d5a784ea1ddda979d7"
-        },
-        {
-          "id": "381ffa524c5b8123854df4ec664d1821",
-          "sku": "21800H",
-          "title": "Color Elliptical Sputnik Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/21800H-381ffa524c5b8123854df4ec664d1821"
-        },
         {
           "id": "2aeffa524c5b80ae981aedd5ba1b4efb",
           "sku": "40120-0",
@@ -23650,30 +23638,6 @@
       },
       "products": [
         {
-          "id": "2aeffa524c5b80d5a784ea1ddda979d7",
-          "sku": "21800",
-          "title": "Color Elliptical Sputnik Chandelier",
-          "url": "https://app.notion.com/p/21800-2aeffa524c5b80d5a784ea1ddda979d7"
-        },
-        {
-          "id": "2aeffa524c5b80bb92f1d0d513bb6559",
-          "sku": "21800F",
-          "title": "Color Elliptical Sputnik Flush Mount",
-          "url": "https://app.notion.com/p/21800F-2aeffa524c5b80bb92f1d0d513bb6559"
-        },
-        {
-          "id": "381ffa524c5b815a8f1dece0f9f19892",
-          "sku": "21800FH",
-          "title": "Color Elliptical Sputnik Flush Mount, Hang-straight",
-          "url": "https://app.notion.com/p/21800FH-381ffa524c5b815a8f1dece0f9f19892"
-        },
-        {
-          "id": "381ffa524c5b8123854df4ec664d1821",
-          "sku": "21800H",
-          "title": "Color Elliptical Sputnik Chandelier, Hang-straight",
-          "url": "https://app.notion.com/p/21800H-381ffa524c5b8123854df4ec664d1821"
-        },
-        {
           "id": "2aeffa524c5b8095b799f64bddd4e6bf",
           "sku": "30330",
           "title": "Color Ballsy Flush Mount 6\"",
@@ -34087,6 +34051,18 @@
           "sku": "21800",
           "title": "Color Elliptical Sputnik Chandelier",
           "url": "https://app.notion.com/p/21800-2aeffa524c5b80d5a784ea1ddda979d7"
+        },
+        {
+          "id": "2aeffa524c5b80bb92f1d0d513bb6559",
+          "sku": "21800F",
+          "title": "Color Elliptical Sputnik Flush Mount",
+          "url": "https://app.notion.com/p/21800F-2aeffa524c5b80bb92f1d0d513bb6559"
+        },
+        {
+          "id": "381ffa524c5b815a8f1dece0f9f19892",
+          "sku": "21800FH",
+          "title": "Color Elliptical Sputnik Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/21800FH-381ffa524c5b815a8f1dece0f9f19892"
         },
         {
           "id": "381ffa524c5b8123854df4ec664d1821",
@@ -55910,6 +55886,18 @@
           "url": "https://app.notion.com/p/30110-8-C-2c8ffa524c5b80b68ed2da293eb141e2"
         },
         {
+          "id": "382ffa524c5b81e48d08d668828ed995",
+          "sku": "30110H-8",
+          "title": "Cap Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-8-382ffa524c5b81e48d08d668828ed995"
+        },
+        {
+          "id": "382ffa524c5b8108acf9cde4ac51adfc",
+          "sku": "30110H-8 (C)",
+          "title": "Color Cap Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/30110H-8-C-382ffa524c5b8108acf9cde4ac51adfc"
+        },
+        {
           "id": "2aeffa524c5b8097b61cd4389a10e60e",
           "sku": "30120",
           "title": "Cap Sconce 6\"",
@@ -55980,6 +55968,12 @@
           "sku": "30130-8 (C)",
           "title": "Color Cap Flush Mount 8\"",
           "url": "https://app.notion.com/p/30130-8-C-2c8ffa524c5b801da5f4e9324e582f66"
+        },
+        {
+          "id": "382ffa524c5b819a81a6e4cacdfaf471",
+          "sku": "30130H-8",
+          "title": "Cap Flush Mount 8\", Hang-straight",
+          "url": "https://app.notion.com/p/30130H-8-382ffa524c5b819a81a6e4cacdfaf471"
         },
         {
           "id": "2aeffa524c5b80199868d75e4596526a",
@@ -56054,6 +56048,30 @@
           "url": "https://app.notion.com/p/30403F-C-2c8ffa524c5b80d7b025e9860f2ff3b7"
         },
         {
+          "id": "382ffa524c5b81fd94bcdc34e31cf148",
+          "sku": "30403FH",
+          "title": "Big Orbi Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30403FH-382ffa524c5b81fd94bcdc34e31cf148"
+        },
+        {
+          "id": "382ffa524c5b81b39675c8d701e7e4f8",
+          "sku": "30403FH (C)",
+          "title": "Color Big Orbi Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30403FH-C-382ffa524c5b81b39675c8d701e7e4f8"
+        },
+        {
+          "id": "382ffa524c5b81dea56fe8e8856ac312",
+          "sku": "30403H",
+          "title": "Big Orbi Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30403H-382ffa524c5b81dea56fe8e8856ac312"
+        },
+        {
+          "id": "382ffa524c5b8197beb8dd2eb2d5bf72",
+          "sku": "30403H (C)",
+          "title": "Color Big Orbi Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30403H-C-382ffa524c5b8197beb8dd2eb2d5bf72"
+        },
+        {
           "id": "2aeffa524c5b8064ae2bf14c39b387eb",
           "sku": "30404",
           "title": "Tetra Chandelier",
@@ -56076,6 +56094,18 @@
           "sku": "30404F (C)",
           "title": "Color Tetra Flush Mount",
           "url": "https://app.notion.com/p/30404F-C-2c8ffa524c5b807aa643ccc3da609ecf"
+        },
+        {
+          "id": "382ffa524c5b81f6a62fcc4eebfcce74",
+          "sku": "30404FH",
+          "title": "Tetra Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30404FH-382ffa524c5b81f6a62fcc4eebfcce74"
+        },
+        {
+          "id": "382ffa524c5b81148915f50c53220d88",
+          "sku": "30404H",
+          "title": "Tetra Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30404H-382ffa524c5b81148915f50c53220d88"
         },
         {
           "id": "2aeffa524c5b8041bb4bf99991aa1fed",
@@ -56102,6 +56132,18 @@
           "url": "https://app.notion.com/p/30407F-2aeffa524c5b8075b696edfc9a36eadf"
         },
         {
+          "id": "382ffa524c5b8171b285c4b899febe20",
+          "sku": "30407FH",
+          "title": "Color Big Status Flush Mount, Hang-straight",
+          "url": "https://app.notion.com/p/30407FH-382ffa524c5b8171b285c4b899febe20"
+        },
+        {
+          "id": "382ffa524c5b81c797d5fac2cd9add3d",
+          "sku": "30407H",
+          "title": "Color Big Status Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30407H-382ffa524c5b81c797d5fac2cd9add3d"
+        },
+        {
           "id": "2aeffa524c5b8019acf4e22ffb80b79d",
           "sku": "30502",
           "title": "Color Prisma Chandelier",
@@ -56112,6 +56154,12 @@
           "sku": "30503",
           "title": "Color Big Prisma Chandelier",
           "url": "https://app.notion.com/p/30503-2aeffa524c5b80208289f340f606adc7"
+        },
+        {
+          "id": "382ffa524c5b81afa8dcfb715b1ec27d",
+          "sku": "30503H",
+          "title": "Color Big Prisma Chandelier, Hang-straight",
+          "url": "https://app.notion.com/p/30503H-382ffa524c5b81afa8dcfb715b1ec27d"
         },
         {
           "id": "2aeffa524c5b808d9c25c66229981037",
@@ -56168,6 +56216,30 @@
           "url": "https://app.notion.com/p/31001F-C-2c8ffa524c5b80d68605e9bd5ab37454"
         },
         {
+          "id": "382ffa524c5b812a96fded828274ccf5",
+          "sku": "31001FH",
+          "title": "Crown Flush Mount 46\", Hang-straight",
+          "url": "https://app.notion.com/p/31001FH-382ffa524c5b812a96fded828274ccf5"
+        },
+        {
+          "id": "382ffa524c5b81368661cc816d4db0e8",
+          "sku": "31001FH (C)",
+          "title": "Color Crown Flush Mount 46\", Hang-straight",
+          "url": "https://app.notion.com/p/31001FH-C-382ffa524c5b81368661cc816d4db0e8"
+        },
+        {
+          "id": "382ffa524c5b81c884dfc9c0673e2a2f",
+          "sku": "31001H",
+          "title": "Crown Chandelier 46\", Hang-straight",
+          "url": "https://app.notion.com/p/31001H-382ffa524c5b81c884dfc9c0673e2a2f"
+        },
+        {
+          "id": "382ffa524c5b816bbcd1fa843188b7f2",
+          "sku": "31001H (C)",
+          "title": "Color Crown Chandelier 46\", Hang-straight",
+          "url": "https://app.notion.com/p/31001H-C-382ffa524c5b816bbcd1fa843188b7f2"
+        },
+        {
           "id": "2aeffa524c5b8016a0a6d959ad3e4951",
           "sku": "50110-10",
           "title": "Color Cadbury Pendant 10\"",
@@ -56186,6 +56258,12 @@
           "url": "https://app.notion.com/p/50110-8-2aeffa524c5b809a99caec0401428b50"
         },
         {
+          "id": "381ffa524c5b813ab8c1dfcfa07881a5",
+          "sku": "50110H-8",
+          "title": "Color Cadbury Pendant 8\", Hang-straight",
+          "url": "https://app.notion.com/p/50110H-8-381ffa524c5b813ab8c1dfcfa07881a5"
+        },
+        {
           "id": "2aeffa524c5b80b0b23ddd4ee741557e",
           "sku": "50111-10",
           "title": "Color Echo Pendant 10\"",
@@ -56202,6 +56280,12 @@
           "sku": "50111-8",
           "title": "Color Echo Pendant 8\"",
           "url": "https://app.notion.com/p/50111-8-2aeffa524c5b80df9aede0c0642710d5"
+        },
+        {
+          "id": "381ffa524c5b813c9bdaf1ccc97f05f8",
+          "sku": "50111H-10",
+          "title": "Color Echo Pendant 10\", Hang-straight",
+          "url": "https://app.notion.com/p/50111H-10-381ffa524c5b813c9bdaf1ccc97f05f8"
         },
         {
           "id": "2aeffa524c5b80af832aede14060b887",
@@ -56232,6 +56316,12 @@
           "sku": "50130-8",
           "title": "Color Cadbury Flush Mount 8\"",
           "url": "https://app.notion.com/p/50130-8-2aeffa524c5b807d8855c5d01f8038b5"
+        },
+        {
+          "id": "381ffa524c5b8143bcc5c10f88bd2742",
+          "sku": "50130H-8",
+          "title": "Color Cadbury Flush Mount 8\", Hang-straight",
+          "url": "https://app.notion.com/p/50130H-8-381ffa524c5b8143bcc5c10f88bd2742"
         },
         {
           "id": "2aeffa524c5b80ffa54cef30daab0f1a",
