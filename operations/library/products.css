@@ -423,7 +423,7 @@
 }
 .bt-qty::after { content: '×'; margin-left: 2px; color: var(--border); }
 
-/* Single-letter role pill in the lead column (C / F / FC / S). */
+/* Single-letter role pill in the lead column (C / F / S). */
 .bom-pill {
   display: inline-block;
   min-width: 16px;
@@ -437,10 +437,11 @@
   background: #EFEEEB;
   color: var(--muted);
 }
+/* C/F/S badge palette — matches BOM Master (orange C, gray F, light-gray S).
+   Finish+Color collapses into .finish; no separate purple FC pill. */
 .bom-pill.color { background: #FF9912; color: #fff; }
 .bom-pill.finish { background: #6B7280; color: #fff; }
-.bom-pill.finishcolor { background: #A855F7; color: #fff; }
-.bom-pill.standard { background: #E5E3DF; color: #8A8A8A; }
+.bom-pill.standard { background: #D1D5DB; color: #6B7280; }
 
 .bom-part-num {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;

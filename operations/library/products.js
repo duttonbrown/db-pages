@@ -758,12 +758,16 @@ function renderBomTree(p) {
 // the BOM Master page. `parts` items carry {part_number|qty|desc, role?}.
 function bomTable(parts) {
   const rows = parts.map(prt => {
-    const role = prt.role || 'Standard';
+    // Use effective_role — the collapsed 3-value vocabulary (Standard / Finish
+    // / Color) that BOM Master renders. part_role carries the raw 5-value form
+    // (Finish Only, Color Only, Finish+Color, ...) which is why this page used
+    // to show a divergent purple "FC" pill. Keying off effective_role makes the
+    // C/F/S badges identical to BOM Master. Fall back to part_role then Standard.
+    const role = prt.effective_role || prt.role || 'Standard';
     const roleCls = (role === 'Color') ? 'color'
       : (role === 'Finish') ? 'finish'
-      : (role === 'Finish+Color') ? 'finishcolor' : 'standard';
-    // A single-letter pill in the lead column, exactly like BOM Master.
-    const pillChar = role === 'Finish+Color' ? 'FC' : role.charAt(0).toUpperCase();
+      : 'standard';
+    const pillChar = role.charAt(0).toUpperCase();
     const pn = prt.part_number || '';
     const partCell = pn
       ? `<a class="bom-part-num" href="parts.html#${encodeURIComponent(pn)}">${escapeHtml(pn)}</a>`
