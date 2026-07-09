@@ -629,6 +629,7 @@
     border-top: 1px solid #BAB6AF;
     cursor: grab;                          /* drag-to-combine affordance */
     transition: background 80ms ease, box-shadow 80ms ease;
+    position: relative;                    /* anchor for .review-note-pop */
   }
   .order-block:active { cursor: grabbing; }
   .order-block.is-dragging { opacity: 0.55; }
@@ -956,12 +957,54 @@
   .tag-void    { background: var(--error); color: #fff; }
   .tag-changed { background: var(--accent-dark); color: #fff; }
 
-  .review-note {
+  /* Compact NOTE chip + floating popover. The chip sits inline (no row-height
+     cost); the popover is position:absolute inside the .order-block so opening
+     it never pushes the block taller. Tap-to-toggle for touch screens. */
+  .review-note-chip {
     grid-column: 1 / -1;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 4px;
+    padding: 2px 8px 2px 6px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     color: var(--accent-dark);
-    font-size: 11px;
-    font-style: italic;
-    margin-top: 2px;
+    background: #FFF7EB;
+    border: 1px solid #F3D9AE;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .review-note-chip:hover { background: #FDECCF; border-color: var(--accent); }
+  .review-note-chip.is-open { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .review-note-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent-dark); flex-shrink: 0;
+  }
+  .review-note-chip.is-open .review-note-dot { background: #fff; }
+  .review-note-pop {
+    position: absolute;
+    left: 4px;
+    z-index: 40;
+    margin-top: 4px;
+    max-width: min(340px, calc(100% - 8px));
+    background: #fff;
+    border: 1px solid #F3D9AE;
+    border-left: 3px solid var(--accent, #FF9912);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(40, 40, 40, 0.16);
+    padding: 9px 11px;
+  }
+  .review-note-pop-body {
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: var(--text, #333);
+    max-height: 220px;
+    overflow-y: auto;
   }
 
   /* ─────────── Order queue tab ─────────── */
@@ -2099,8 +2142,139 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-09T14:32:28",
+  "built_at": "2026-07-09T15:00:02",
   "orders": [
+    {
+      "shopify_order_id": "7048046968914",
+      "shopify_order_name": "36497",
+      "shopify_order_number": "36497",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 1054.98,
+      "ship_by_date": null,
+      "latest_ship_by": "August 6, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-07-09T14:33:53-05:00",
+      "tags": "redo",
+      "total_price": 1054.98,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7048046968914",
+          "shopify_order_name": "36497",
+          "shopify_order_number": "36497",
+          "key": [
+            "color",
+            "Python Green",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Python Green",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30405H"
+          ],
+          "variant_skus": [
+            "30405H-2PG"
+          ],
+          "line_item_titles": [
+            "Color Status Chandelier 35\""
+          ],
+          "lines": [
+            {
+              "title": "Color Status Chandelier 35\"",
+              "variant_title": "Nickel / Python Green / Sloped ceiling (add hang-straight)",
+              "variant_sku": "30405H-2PG",
+              "parent_sku": "30405H",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-status-chandelier-nickel-Pythongreen-1.jpg?v=1754109232&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Python Green|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7048046968914",
+          "shopify_order_name": "36497",
+          "shopify_order_number": "36497",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-09T14:33:53-05:00",
+          "parent_sku": "30405H",
+          "color": "Python Green",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17033296838738
+          ],
+          "item_titles": [
+            "Color Status Chandelier 35\""
+          ],
+          "variant_skus": [
+            "30405H-2PG"
+          ],
+          "lines": [
+            {
+              "sku": "30405H-2PG",
+              "title": "Color Status Chandelier 35\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Python Green",
+              "category": "fixture",
+              "variant_title": "Nickel / Python Green / Sloped ceiling (add hang-straight)",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-status-chandelier-nickel-Pythongreen-1.jpg?v=1754109232&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": []
+    },
     {
       "shopify_order_id": "7047920091218",
       "shopify_order_name": "36494",
@@ -2643,8 +2817,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -4376,9 +4550,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 11,
-    "printouts": 18,
-    "notion_rows": 19,
+    "orders": 12,
+    "printouts": 19,
+    "notion_rows": 20,
     "skipped_already_printed": 226,
     "printed_today": 11,
     "needs_attention": 0,
@@ -5347,9 +5521,39 @@ function renderRow(r){
       <ul class="line-list">
         ${lines.map(l => renderLine(l, p.color, p.finish)).join("")}
       </ul>
-      ${p.notes ? `<div class="review-note">${p.notes}</div>` : ""}
+      ${p.notes ? `<button type="button" class="review-note-chip" data-note="${escapeHtml(p.notes)}" onclick="toggleReviewNote(this)" aria-label="Show routing note" title="Show routing note"><span class="review-note-dot"></span>NOTE</button>` : ""}
     </div>`;
 }
+
+// The review note (bulb/black-accessory routing guidance, etc.) can run several
+// sentences long. Rendering it inline inflated the order block. Instead the
+// row shows a compact NOTE chip; clicking it opens a floating popover pinned
+// to the chip — position:absolute inside the block, so the row never grows.
+// Tap-to-toggle (not hover) so it works on the shop-floor touch screens.
+function toggleReviewNote(btn){
+  const existing = btn.parentElement.querySelector(".review-note-pop");
+  // Close any other open popover first (only one at a time).
+  closeReviewNotes(existing);
+  if(existing){ existing.remove(); btn.classList.remove("is-open"); return; }
+  const pop = document.createElement("div");
+  pop.className = "review-note-pop";
+  pop.innerHTML = `<div class="review-note-pop-body">${escapeHtml(btn.dataset.note || "").replace(/\n/g,"<br>")}</div>`;
+  btn.parentElement.appendChild(pop);
+  btn.classList.add("is-open");
+}
+function closeReviewNotes(except){
+  document.querySelectorAll(".review-note-pop").forEach(p => {
+    if(p !== except){ p.remove(); }
+  });
+  document.querySelectorAll(".review-note-chip.is-open").forEach(b => {
+    if(!except || b.parentElement !== except.parentElement){ b.classList.remove("is-open"); }
+  });
+}
+// Click anywhere outside an open popover/chip dismisses it.
+document.addEventListener("click", e => {
+  if(e.target.closest(".review-note-chip") || e.target.closest(".review-note-pop")) return;
+  closeReviewNotes(null);
+});
 
 function renderGroup(g){
   const rows = sortRows(g.rows).map(renderRow).join("");
