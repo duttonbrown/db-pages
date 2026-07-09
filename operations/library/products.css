@@ -687,3 +687,52 @@
   .product-spec .spec-title { font-size: 20px; }
   .diagram-frame iframe { height: 380px; }
 }
+
+/* ---- Configuration facet ------------------------------------------------ */
+
+/* Secondary filter strip (variant Configuration axis) below the type chips.
+   Reuses .glossary-chip; this only spaces the row + labels it. Hidden by JS
+   when the current view has no configurable products. */
+.config-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 2px;
+}
+.config-filters::before {
+  content: "Configuration";
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-right: 2px;
+}
+.config-filters[hidden] { display: none; }
+
+/* Spec-card Configuration pill row (read-only, shows a product's options). */
+.spec-config-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 2px;
+}
+.spec-config-label {
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.spec-config-pills { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.spec-config-pill {
+  font-size: 12px;
+  padding: 3px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--ink);
+  line-height: 1.4;
+}

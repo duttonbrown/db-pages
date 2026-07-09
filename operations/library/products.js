@@ -23,6 +23,7 @@ let BY_HANDLE = {};
 let CURRENT = null;
 let activeBucket = 'lighting';    // 'lighting' | 'hardware'
 let activeType = 'all';
+let activeConfig = null;          // a configuration_options value, or null = any
 let activeResultIdx = -1;
 
 // ---------------------------------------------------------------- bootstrap
@@ -85,9 +86,11 @@ function routeFromHash() {
     activeBucket = 'lighting';
   }
   activeType = 'all';
+  activeConfig = null;
   CURRENT = null;
   syncTabActive();
   renderTypeFilters();
+  renderConfigFilters();
   $('spec-slot').hidden = true;
   $('grid-slot').hidden = false;
   updateLead();
@@ -169,6 +172,53 @@ function renderTypeFilters() {
       $('spec-slot').hidden = true;
       $('grid-slot').hidden = false;
       renderTypeFilters();
+      renderConfigFilters();
+      renderGrid();
+    };
+  });
+}
+
+// ------------------------------------------------------------ config filters
+//
+// A secondary, data-driven facet over the variant "Configuration" axis:
+//   sconces -> Hardwired (no switch) / Hardwired with dimmer switch
+//   hanging -> Flat ceiling / Sloped ceiling (add hang-straight)
+// Chips are built from whatever configuration_options exist in the active
+// bucket + type view — no hardcoded labels. The row hides itself when the
+// current view has no configurable products (e.g. Hardware).
+function renderConfigFilters() {
+  const host = $('config-filters');
+  if (!host) return;
+  // Options present in the current bucket (+ type, if one is picked), so the
+  // chips always reflect a non-empty result.
+  const counts = {};
+  DATA.products.forEach(p => {
+    if (p.bucket !== activeBucket) return;
+    if (activeType !== 'all' && p.type !== activeType) return;
+    (p.configuration_options || []).forEach(v => { counts[v] = (counts[v] || 0) + 1; });
+  });
+  const values = Object.keys(counts);
+  // If the active chip is no longer valid in this view, drop it.
+  if (activeConfig && !counts[activeConfig]) activeConfig = null;
+  if (!values.length) { host.innerHTML = ''; host.hidden = true; return; }
+  host.hidden = false;
+  // Stable, readable order: hardwired/ceiling groupings sort naturally.
+  values.sort((a, b) => a.localeCompare(b));
+  const chips = [{ id: null, name: 'Any config', count: 0 }]
+    .concat(values.map(v => ({ id: v, name: v, count: counts[v] })));
+  host.innerHTML = chips.map(c => {
+    const on = (c.id === activeConfig) || (c.id === null && !activeConfig);
+    const cls = `glossary-chip config-chip${on ? ' is-active' : ''}`;
+    const cnt = c.id === null ? '' : ` <span class="gc-count">${c.count}</span>`;
+    return `<button class="${cls}" data-config="${escapeHtml(c.id == null ? '' : c.id)}">${escapeHtml(c.name)}${cnt}</button>`;
+  }).join('');
+  host.querySelectorAll('[data-config]').forEach(b => {
+    b.onclick = () => {
+      activeConfig = b.dataset.config || null;
+      if (CURRENT) { CURRENT = null; history.replaceState(null, '', '#' + activeBucket); }
+      $('spec-slot').hidden = true;
+      $('grid-slot').hidden = false;
+      renderConfigFilters();
       renderGrid();
     };
   });
@@ -179,6 +229,7 @@ function renderTypeFilters() {
 function filtered() {
   let list = DATA.products.filter(p => p.bucket === activeBucket);
   if (activeType !== 'all') list = list.filter(p => p.type === activeType);
+  if (activeConfig) list = list.filter(p => (p.configuration_options || []).includes(activeConfig));
   return list;
 }
 
@@ -351,6 +402,17 @@ function renderSpec(p) {
     ? `<span class="spec-finish-pill cert-yes" title="${escapeHtml(p.certification)}">${escapeHtml(certShort)}</span>`
     : '';
 
+  // ---- Configuration options (variant axis): hardwired-switch choice on
+  // sconces, ceiling choice on hanging fixtures. Rendered as its own labelled
+  // pill row so the longer ceiling strings read cleanly.
+  const cfg = p.configuration_options || [];
+  const configHtml = cfg.length ? `
+    <div class="spec-config-row">
+      <span class="spec-config-label">Configuration</span>
+      <span class="spec-config-pills">${cfg.map(v =>
+        `<span class="spec-config-pill">${escapeHtml(v)}</span>`).join('')}</span>
+    </div>` : '';
+
   // ---- QC quality strip — the things a builder needs at a glance
   const quality = qualityCells(p);
   const qualityHtml = `<div class="product-quality">${quality.map(q => `
@@ -410,6 +472,7 @@ function renderSpec(p) {
           </div>
           <h2 class="spec-title">${escapeHtml(p.title)}</h2>
           ${ctaRow}
+          ${configHtml}
           ${qualityHtml}
         </div>
       </div>
