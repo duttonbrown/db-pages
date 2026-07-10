@@ -1081,319 +1081,18 @@
     border-radius: 3px;
   }
 
-  /* ─────────── Assembly queue tab ─────────── */
-  .asm-table {
-    width: 100%;
-    border-collapse: collapse;
+  /* Quiet header links to the reference docs (Guide / Rules) — training lives
+     where it's needed, out of the rail. */
+  .intro-help-link {
     font-size: 12px;
-  }
-  .asm-table th {
-    font-size: 10px;
-    font-weight: 600;
     color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    text-align: left;
-    padding: 8px 8px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-  }
-  .asm-table th.right { text-align: right; }
-  .asm-table th.center { text-align: center; }
-  .asm-table td {
-    padding: 6px 8px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-  }
-  .asm-table td.center { text-align: center; }
-  .asm-table td.right { text-align: right; }
-  .asm-table tr:hover td { background: rgba(255, 153, 18, 0.04); }
-  .asm-order {
-    font-weight: 600;
-    color: var(--ink);
     text-decoration: none;
-    font-variant-numeric: tabular-nums;
+    border-bottom: 1px dotted var(--border);
+    padding-bottom: 1px;
+    margin-right: 10px;
+    align-self: center;
   }
-  .asm-order:hover { color: var(--accent-dark); }
-  .asm-cust { color: var(--muted); font-size: 11px; margin-left: 4px; font-weight: 400; }
-  /* Product title sits on TOP of the row; the mono SKU pill goes below it. */
-  .asm-title { color: var(--ink); font-weight: 500; font-size: 13px; line-height: 1.3; }
-  /* Tinted color/finish chips in the Job Preview table — smaller than the big
-     COLOR-dropdown chips so they sit neatly in dense rows. */
-  .asm-table .color-chip { font-size: 12px; padding: 2px 9px 2px 3px; }
-  .asm-table .swatch-dot { width: 11px; height: 11px; margin-right: 2px; }
-  .asm-sku {
-    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
-    font-size: 11px;
-    color: var(--text);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1px 6px;
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-  }
-  .asm-color-cell, .asm-finish-cell {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-  }
-  /* ── Nested sub-items (the physical lines that roll into a work-order row) ──
-     A row that aggregates more than one line gets a chevron toggle; expanding
-     it reveals one muted, indented child row per line so the lead can SEE every
-     SKU that will travel to the Assembly Log before pushing. */
-  .asm-child-toggle {
-    border: none; background: none; cursor: pointer;
-    color: var(--muted); font-size: 11px; line-height: 1;
-    padding: 0 5px 0 0; margin: 0; font-family: inherit;
-    transition: transform .12s ease, color .12s ease;
-    display: inline-block; width: 14px;
-  }
-  .asm-child-toggle:hover { color: var(--accent-dark); }
-  .asm-child-toggle.is-open { transform: rotate(90deg); color: var(--ink); }
-  .asm-child-count {
-    margin-left: 6px; font-size: 10px; color: var(--muted);
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 999px; padding: 0 6px; font-weight: 400;
-    vertical-align: middle;
-  }
-  tr.asm-child-row > td { border-top: none; padding-top: 3px; padding-bottom: 3px; }
-  tr.asm-child-row { background: color-mix(in srgb, var(--bg) 55%, white); }
-  .asm-child-lead {
-    padding-left: 22px; color: var(--muted); font-size: 11px;
-    position: relative;
-  }
-  .asm-child-lead::before {
-    content: "└"; position: absolute; left: 8px; color: var(--border);
-  }
-  .asm-child-sku {
-    font-family: 'JetBrains Mono', 'Consolas', 'SF Mono', monospace;
-    font-size: 10px; color: var(--text); margin-right: 6px;
-  }
-  .asm-child-qty { color: var(--muted); font-variant-numeric: tabular-nums; }
-  .asm-qty-input {
-    width: 44px;
-    text-align: center;
-    padding: 3px 4px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    background: white;
-  }
-  .asm-qty-input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(255, 153, 18, 0.12);
-  }
-  /* Qty cell layout: input + split controls in a tight row */
-  .asm-qty-cell {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    justify-content: flex-end;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-  }
-  .asm-split-group {
-    display: inline-flex;
-    align-items: stretch;
-    gap: 0;
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    box-shadow: 0 1px 2px rgba(217, 119, 6, 0.18);
-  }
-  .asm-split-btn {
-    appearance: none;
-    border: none;
-    background: var(--accent);
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 12px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-family: inherit;
-    line-height: 1;
-    transition: background 0.1s;
-  }
-  .asm-split-btn:hover { background: var(--accent-dark); }
-  .asm-split-btn:disabled {
-    background: var(--bg);
-    color: var(--muted);
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-  .asm-split-into-btn {
-    appearance: none;
-    border: none;
-    border-left: 1px solid rgba(255,255,255,0.35);
-    background: var(--accent);
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 10px;
-    cursor: pointer;
-    line-height: 1;
-    font-family: inherit;
-    transition: background 0.1s;
-  }
-  .asm-split-into-btn:hover { background: var(--accent-dark); }
-  .asm-split-into-btn:disabled {
-    background: var(--bg);
-    color: var(--muted);
-    border-left-color: var(--border);
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-  .asm-merge-btn {
-    appearance: none;
-    border: 1px solid var(--border);
-    background: white;
-    color: var(--muted);
-    font-size: 10px;
-    font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 6px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-family: inherit;
-  }
-  .asm-merge-btn:hover { border-color: var(--ink); color: var(--ink); }
-  /* Delete-part button — only visible on split-part rows. Conservative
-     visual treatment because it reduces row count. */
-  .asm-delete-btn {
-    appearance: none;
-    border: 1px solid var(--border);
-    background: white;
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 600;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    font-family: inherit;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 4px;
-  }
-  .asm-delete-btn:hover {
-    border-color: var(--error);
-    color: var(--error);
-    background: #FDECEA;
-  }
-  /* Total-locked reassurance chip — confirms split parts still sum to the
-     original Shopify quantity. */
-  .asm-total-hint {
-    display: inline-block;
-    font-size: 10px;
-    color: var(--muted);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    padding: 1px 6px;
-    border-radius: 4px;
-    margin-left: 6px;
-    font-variant-numeric: tabular-nums;
-    cursor: help;
-  }
-  .asm-assembler {
-    font-family: inherit;
-    font-size: 11px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 3px 6px;
-    background: white;
-    color: var(--text);
-    cursor: pointer;
-  }
-  .asm-assembler:focus { outline: none; border-color: var(--accent); }
-  .asm-row-tag { display: inline-flex; gap: 3px; }
-  .asm-summary-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 11px;
-    color: var(--muted);
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .asm-summary-bar strong { color: var(--text); }
-  .asm-push-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 14px;
-    border-radius: 6px;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: white;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-  .asm-loc-pill {
-    display: inline-block;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 1px 7px;
-    border-radius: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-  }
-  .asm-loc-powder   { background: #FFF7EB; color: var(--accent-dark); border: 1px solid #FCD9A6; }
-  .asm-loc-assembly { background: #E8E8E8; color: var(--ink);         border: 1px solid #D0D0D0; }
-  .asm-loc-shipping { background: #E8F5E9; color: #1F5F22;            border: 1px solid #BFE5C5; }
-
-  /* Split-row visual treatment: every part of a split row gets a coloured
-     left edge so it's unmistakable they share one parent. A "Part 1/3" pill
-     sits next to the order number. */
-  .asm-table tr.is-split-part td {
-    background: rgba(255, 153, 18, 0.04);
-  }
-  .asm-table tr.is-split-part td:first-child {
-    border-left: 3px solid var(--accent);
-    padding-left: 10px;
-  }
-  .asm-part-pill {
-    display: inline-block;
-    background: var(--accent);
-    color: white;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-left: 8px;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
-  .asm-split-banner {
-    background: #FFF7EB;
-    color: var(--accent-dark);
-    border: 1px solid #FCD9A6;
-    border-radius: var(--radius);
-    padding: 8px 12px;
-    font-size: 11px;
-    line-height: 1.45;
-    margin-bottom: 10px;
-  }
-  .asm-split-banner strong { color: var(--ink); font-weight: 600; }
+  .intro-help-link:hover { color: var(--accent-dark); border-bottom-color: var(--accent-dark); }
 
   .empty-state {
     text-align: center;
@@ -1999,13 +1698,13 @@
 
 <!-- Production rail — identical structure to /production/log/ so this page stays
      part of the same navigation (no "solo page" jump). Print is expanded with its
-     four in-page tabs (Order queue / Print queue / Travelers / Job Preview) wired
-     to setTab() — they switch the panel in place; Guide/Rules and every other rail
-     item navigate. The active in-page tab is marked is-subcurrent by setTab(). -->
+     three in-page tabs (Order queue / Print queue / Travelers) wired to setTab()
+     — they switch the panel in place; every other rail item navigates. The
+     active in-page tab is marked is-subcurrent by setTab(). -->
 <!-- Rail rendered by /_shared/nav.js from the single RAILS config (data-dept).
-     data-page="board" => the Print sub-links (Order/Print/Travelers/Job
-     Preview) are this page's in-page tabs; everything else is a cross-page
-     link. Do not hand-code rail markup. -->
+     data-page="board" => the Print sub-links (Order/Print/Travelers) are this
+     page's in-page tabs; everything else is a cross-page link. Do not hand-code
+     rail markup. -->
 <nav class="side-nav" data-rail aria-label="Production sections"></nav>
 
 <div class="app-main">
@@ -2017,6 +1716,8 @@
       <p class="page-sub" id="pageSub">Loading…</p>
     </div>
     <div class="page-intro-actions no-print">
+      <a class="intro-help-link" href="/production/order-release.html">Guide</a>
+      <a class="intro-help-link" href="/production/print-queue-rules.html">Rules</a>
       <button type="button" class="trv-btn" id="refreshBoardBtn" onclick="refreshBoard()"
               title="Rebuild the board from live Shopify right now instead of waiting for the next hourly update — pulls in just-placed orders on demand. Takes ~45s.">↻ Refresh</button>
     </div>
@@ -2072,36 +1773,6 @@
     <div id="sections"></div>
   </div>
 
-  <!-- ── Job Preview (preview rows that will go to Notion Assembly Log) ── -->
-  <div class="tab-content" id="content-assembly">
-    <div class="asm-summary-bar">
-      <span><strong id="asmRowCount">0</strong> row(s) preview the push to the
-        <a href="https://www.notion.so/duttonbrown/Assembly-Log-31affa524c5b804dac05d9a261025303" target="_blank" style="color:var(--accent-dark)">Notion Assembly Log</a>.
-        <strong>Split</strong> halves a row · <strong>÷N</strong> divides into N even parts ·
-        <strong>merge</strong> reverts · click a row's <span style="color:var(--muted)">&#9654;</span>
-        to see the sub-items that build it (they carry to Notion with the row).</span>
-      <button type="button" class="asm-push-btn" disabled
-              title="The push to the Assembly Log runs from the release PC: python sync_orders.py creates/updates each row with Sync Status = Pending Review, and serializes every sub-item line into the row's Line Items field. A one-click hub button is the next step.">
-        Push to Notion &mdash; via sync_orders.py
-      </button>
-    </div>
-    <div class="asm-split-banner" id="asmSplitBanner" style="display:none"></div>
-    <table class="asm-table" id="asmTable">
-      <thead>
-        <tr>
-          <th>Order</th>
-          <th>SKU / Title</th>
-          <th>Finish</th>
-          <th>Color</th>
-          <th class="right">Qty</th>
-          <th class="center">Location</th>
-          <th>Assembler</th>
-        </tr>
-      </thead>
-      <tbody id="asmBody"></tbody>
-    </table>
-  </div>
-
   <!-- ── Travelers (one work-order sheet per printout — screen == print) ── -->
   <div class="tab-content" id="content-travelers">
     <div class="trv-toolbar no-print">
@@ -2143,7 +1814,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-09T21:15:47",
+  "built_at": "2026-07-10T01:00:37",
   "orders": [
     {
       "shopify_order_id": "7048468234322",
@@ -5250,7 +4921,7 @@ const QUEUE = {
     "printouts": 25,
     "notion_rows": 24,
     "skipped_already_printed": 226,
-    "printed_today": 11,
+    "printed_today": 0,
     "needs_attention": 0,
     "printed_review": 0
   },
@@ -5506,86 +5177,6 @@ function setLastReleaseNow(){
   const now = new Date().toISOString();
   localStorage.setItem(LAST_RELEASE_KEY, now);
   return now;
-}
-
-// Assembler picks per row (so manager can assign before pushing).
-// Schema: { "<orderId>::<rowKey>": "Sarah" | "Alex" | ... }
-const ASM_ASSIGN_KEY = "db-print-queue-asm-assign-v1";
-function loadAssignments(){
-  try { return JSON.parse(localStorage.getItem(ASM_ASSIGN_KEY) || "{}"); }
-  catch(e){ return {}; }
-}
-function saveAssignment(rowKey, assembler){
-  const a = loadAssignments();
-  if(assembler) a[rowKey] = assembler; else delete a[rowKey];
-  localStorage.setItem(ASM_ASSIGN_KEY, JSON.stringify(a));
-}
-
-// Split-state — manager can split a single Notion row into multiple rows
-// before pushing. Stored as overrides keyed by the original row's identity.
-//
-// Two parallel maps so we can enforce qty conservation:
-//   splits[baseKey]    = [qty1, qty2, ...]  current parts
-//   splitTotals[baseKey] = N                the LOCKED original total qty
-//
-// Editing a part's qty rebalances the others so they always sum to N.
-// Splitting / merging / deleting a part also keep the sum at N.
-// If splitTotals isn't set yet, we lock it on first split using the row's
-// original qty.
-const ASM_SPLIT_KEY = "db-print-queue-asm-split-v1";
-const ASM_SPLIT_TOTAL_KEY = "db-print-queue-asm-split-total-v1";
-
-// Which multi-line Assembly rows are EXPANDED to show their nested sub-items.
-// Default is collapsed (children hidden); a row's baseKey appears here once the
-// manager opens it. Browser-local, same as splits/assignments.
-const ASM_EXPAND_KEY = "db-print-queue-asm-expand-v1";
-function loadAsmExpand(){
-  try { return JSON.parse(localStorage.getItem(ASM_EXPAND_KEY) || "{}"); }
-  catch(e){ return {}; }
-}
-function saveAsmExpand(map){
-  localStorage.setItem(ASM_EXPAND_KEY, JSON.stringify(map));
-}
-function asmToggleChildren(baseKey){
-  const map = loadAsmExpand();
-  if(map[baseKey]) delete map[baseKey]; else map[baseKey] = 1;
-  saveAsmExpand(map);
-  renderAssemblyQueue();
-}
-
-function loadSplits(){
-  try { return JSON.parse(localStorage.getItem(ASM_SPLIT_KEY) || "{}"); }
-  catch(e){ return {}; }
-}
-function saveSplits(map){
-  localStorage.setItem(ASM_SPLIT_KEY, JSON.stringify(map));
-}
-function loadSplitTotals(){
-  try { return JSON.parse(localStorage.getItem(ASM_SPLIT_TOTAL_KEY) || "{}"); }
-  catch(e){ return {}; }
-}
-function saveSplitTotals(map){
-  localStorage.setItem(ASM_SPLIT_TOTAL_KEY, JSON.stringify(map));
-}
-function lockSplitTotal(rowKey, qty){
-  const totals = loadSplitTotals();
-  if(!(rowKey in totals)){
-    totals[rowKey] = qty;
-    saveSplitTotals(totals);
-  }
-  return totals[rowKey];
-}
-function getSplitTotal(rowKey, fallback){
-  const totals = loadSplitTotals();
-  return rowKey in totals ? totals[rowKey] : fallback;
-}
-function clearSplitState(rowKey){
-  const splits = loadSplits();
-  const totals = loadSplitTotals();
-  delete splits[rowKey];
-  delete totals[rowKey];
-  saveSplits(splits);
-  saveSplitTotals(totals);
 }
 
 function downloadOverrideLog(){
@@ -6348,7 +5939,7 @@ function splitPage(orderId, idx){
   recalcOrderTotal(order);
 }
 // ── Tab switching ────────────────────────────────────────────────────────────
-const TAB_NAMES = ["order","print","travelers","assembly"];
+const TAB_NAMES = ["order","print","travelers"];
 
 function setTab(name, updateHash = true){
   if(!TAB_NAMES.includes(name)) name = "print";
@@ -6369,7 +5960,6 @@ function setTab(name, updateHash = true){
     history.replaceState(null, "", `#${name}`);
   }
   if(name === "order")     renderOrderQueue();
-  if(name === "assembly")  renderAssemblyQueue();
   if(name === "travelers") renderTravelers();
 }
 
@@ -6379,7 +5969,7 @@ window.addEventListener("hashchange", () => {
   if(TAB_NAMES.includes(hash)) setTab(hash, false);
 });
 
-// The Print sub-links (Order Queue / Print Queue / Travelers / Job Preview) are
+// The Print sub-links (Order Queue / Print Queue / Travelers) are
 // in-page tabs rendered by /_shared/nav.js as <a data-tab="…">. Switch the panel
 // in place via a delegated handler (replaces the old inline onclick that lived on
 // the hand-coded rail). data-sub disclosure toggles stay owned by nav.js.
@@ -9265,9 +8855,7 @@ function renderOrderQueue(){
   }).join("");
 }
 
-// ── Assembly queue renderer ─────────────────────────────────────────────────
-const ASSEMBLERS = ["", "Sarah", "Alex", "Eric", "Emma"];
-
+// ── Qty distribution helper (used by the Travelers split) ───────────────────
 // Distribute `qty` across `n` parts as evenly as possible.
 // 100/3 → [34,33,33]   (remainder lands in the early parts)
 // 100/4 → [25,25,25,25]
@@ -9283,325 +8871,6 @@ function _distribute(qty, n){
   const parts = new Array(n).fill(base);
   for(let i = 0; i < rem; i++) parts[i] += 1;
   return parts;
-}
-
-// Helper: rebalance an array of part-qtys around a fixed total.
-// Holds the part at `pinIdx` at `pinValue` (capped 1..total-(others count)),
-// then distributes (total - pinValue) across the other parts proportional
-// to their current values, with a floor of 1 each.
-function _rebalance(arr, pinIdx, pinValue, total){
-  const n = arr.length;
-  if(n === 0) return arr;
-  const minOthers = n - 1;                // each other part must be >= 1
-  const maxPin = Math.max(1, total - minOthers);
-  const pinned = Math.min(maxPin, Math.max(1, pinValue));
-  arr[pinIdx] = pinned;
-  if(n === 1) return arr;
-  const remaining = total - pinned;
-  // Distribute remaining across other parts proportionally to their current values.
-  // If their sum is 0 (shouldn't happen with floor 1), even-distribute.
-  const others = [];
-  let sumOthers = 0;
-  for(let i = 0; i < n; i++){
-    if(i === pinIdx) continue;
-    others.push({i, prev: arr[i]});
-    sumOthers += arr[i];
-  }
-  if(sumOthers <= 0){
-    const even = _distribute(remaining, others.length);
-    others.forEach((o, k) => { arr[o.i] = even[k]; });
-    return arr;
-  }
-  // Proportional split, then floor at 1 + redistribute leftover
-  let allocated = 0;
-  others.forEach((o, k) => {
-    if(k === others.length - 1){
-      arr[o.i] = remaining - allocated;          // last gets the rounding remainder
-    } else {
-      const share = Math.max(1, Math.round(remaining * o.prev / sumOthers));
-      arr[o.i] = share;
-      allocated += share;
-    }
-  });
-  // Final pass: ensure no part is below 1 (push deficit to the largest)
-  for(let i = 0; i < n; i++){
-    if(arr[i] < 1){
-      const deficit = 1 - arr[i];
-      arr[i] = 1;
-      // pull deficit from the largest other part
-      let donorIdx = -1, donorQty = -1;
-      for(let j = 0; j < n; j++){
-        if(j === i) continue;
-        if(arr[j] - deficit >= 1 && arr[j] > donorQty){ donorIdx = j; donorQty = arr[j]; }
-      }
-      if(donorIdx >= 0) arr[donorIdx] -= deficit;
-    }
-  }
-  return arr;
-}
-
-function asmSplitRow(rowKey, partIdx, originalRowQty){
-  // Halve the targeted part. Locks the row's total on first split.
-  const splits = loadSplits();
-  const arr = splits[rowKey] || [originalRowQty];
-  const total = lockSplitTotal(rowKey, arr.reduce((s,q)=>s+q, 0));
-  const qty = arr[partIdx];
-  if(qty <= 1) return;
-  const halves = _distribute(qty, 2);
-  arr.splice(partIdx, 1, ...halves);
-  splits[rowKey] = arr;
-  saveSplits(splits);
-  // Sanity check: total should still equal locked total (split conserves)
-  renderAssemblyQueue();
-}
-function asmSplitIntoN(rowKey, originalRowQty){
-  const splits = loadSplits();
-  const arr = splits[rowKey] || [originalRowQty];
-  const total = lockSplitTotal(rowKey, arr.reduce((s,q)=>s+q, 0));
-  const ans = window.prompt(
-    `Split a row of ${total} units into how many jobs?\n` +
-    `Even distribution (e.g. 100 ÷ 3 → 34, 33, 33).`,
-    String(Math.max(2, arr.length || 2))
-  );
-  if(ans == null) return;
-  const n = Math.max(1, parseInt(ans, 10) || 0);
-  if(n === 0) return;
-  if(n === 1){
-    splits[rowKey] = [total];
-  } else if(n > total){
-    alert(`Can't split ${total} units into ${n} parts — minimum 1 per part.`);
-    return;
-  } else {
-    splits[rowKey] = _distribute(total, n);
-  }
-  saveSplits(splits);
-  renderAssemblyQueue();
-}
-function asmMergeRow(rowKey){
-  // Reverts every part back to one row at the locked original total.
-  clearSplitState(rowKey);
-  renderAssemblyQueue();
-}
-function asmDeletePart(rowKey, partIdx){
-  // "Oopsies undo" — delete a single part. Its qty pours into the
-  // part ABOVE it (partIdx - 1). If we're deleting the first part,
-  // qty pours into the part BELOW it (partIdx + 1) instead.
-  // Total stays conserved. If only one part left, clear split state
-  // entirely.
-  const splits = loadSplits();
-  const arr = splits[rowKey];
-  if(!arr || arr.length <= 1){
-    clearSplitState(rowKey);
-    renderAssemblyQueue();
-    return;
-  }
-  const removed = arr[partIdx];
-  arr.splice(partIdx, 1);
-  if(arr.length === 1){
-    // Just one part left → unlock split state, total returns to one row
-    arr[0] = arr[0] + removed;
-    clearSplitState(rowKey);
-    renderAssemblyQueue();
-    return;
-  }
-  // Pour removed qty into neighbor: above if exists, else below
-  const targetIdx = partIdx === 0 ? 0 : partIdx - 1;
-  arr[targetIdx] += removed;
-  splits[rowKey] = arr;
-  saveSplits(splits);
-  renderAssemblyQueue();
-}
-function asmUpdateQty(rowKey, partIdx, newQty){
-  // Editing a part rebalances the others so the locked total stays put.
-  const splits = loadSplits();
-  const arr = splits[rowKey];
-  if(!arr) return;
-  const total = getSplitTotal(rowKey, arr.reduce((s,q)=>s+q, 0));
-  const requested = Math.max(1, parseInt(newQty, 10) || 1);
-  splits[rowKey] = _rebalance(arr.slice(), partIdx, requested, total);
-  saveSplits(splits);
-  renderAssemblyQueue();
-}
-function asmAssign(rowKey, assembler){
-  saveAssignment(rowKey, assembler);
-}
-
-function renderAssemblyQueue(){
-  const body = document.getElementById("asmBody");
-  if(!QUEUE || !QUEUE.orders){ body.innerHTML = ""; return; }
-
-  // Flatten every Notion-row from every order into a single list.
-  // Apply splits + assignments from localStorage so manager edits persist.
-  const splits = loadSplits();
-  const assigns = loadAssignments();
-  const rows = [];
-  for(const o of QUEUE.orders){
-    for(const r of (o.notion_rows || [])){
-      const baseKey = `${o.shopify_order_id}::${r.parent_sku}::${r.color||""}::${r.finish||""}`;
-      const parts = splits[baseKey] || [r.qty || 1];
-      parts.forEach((qty, partIdx) => {
-        const partKey = parts.length === 1 ? baseKey : `${baseKey}::p${partIdx}`;
-        rows.push({
-          order: o,
-          row: r,
-          baseKey,
-          partKey,
-          partIdx,
-          partsTotal: parts.length,
-          qty,
-          canSplit: qty > 1,
-          assembler: assigns[partKey] || "",
-        });
-      });
-    }
-  }
-
-  document.getElementById("cnt-assembly").textContent = rows.length;
-  document.getElementById("asmRowCount").textContent = rows.length;
-
-  // Show an explanatory banner when any row has been split.
-  const splitCount = rows.filter(r => r.partsTotal > 1).length;
-  const banner = document.getElementById("asmSplitBanner");
-  if(banner){
-    if(splitCount > 0){
-      banner.style.display = "block";
-      banner.innerHTML =
-        `<strong>${splitCount} row${splitCount===1?" has":"s have"} been split.</strong> ` +
-        `Each part will be pushed as a separate Notion Assembly Log row, with ` +
-        `<code style="background:white;border:1px solid var(--border);padding:1px 5px;border-radius:3px;font-family:'JetBrains Mono',Consolas,monospace;font-size:10px">Part i/N</code> ` +
-        `recorded so the split is traceable. The Order # stays the bare Shopify number.`;
-    } else {
-      banner.style.display = "none";
-    }
-  }
-
-  if(rows.length === 0){
-    body.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted)">
-      No production jobs pending. Once orders are in the print queue, their rows show up here.
-    </td></tr>`;
-    return;
-  }
-
-  const expandMap = loadAsmExpand();
-  body.innerHTML = rows.map(rec => {
-    const o = rec.order, r = rec.row;
-    // Bare order number, no #, no customer.
-    const orderName = String(o.shopify_order_number || o.shopify_order_name || "?").replace(/^#/, "");
-    const orderLink = o.shopify_url
-      ? `<a class="asm-order" href="${o.shopify_url}" target="_blank">${orderName}</a>`
-      : `<span class="asm-order">${orderName}</span>`;
-
-    // ── Nested sub-items ───────────────────────────────────────────────────
-    // The physical lines that rolled into this (parent_sku, color, finish) row.
-    // Only worth nesting when there's more than one line (a single line just
-    // restates the parent). Children are shown ONCE — on the parent/first part
-    // of a split — never duplicated across split parts (qty is split, the line
-    // detail is not, so showing children on every part would over-count).
-    const childLines = Array.isArray(r.lines) ? r.lines : [];
-    const hasChildren = childLines.length > 1 && rec.partIdx === 0;
-    const isOpen = hasChildren && !!expandMap[rec.baseKey];
-    const childToggle = hasChildren
-      ? `<button class="asm-child-toggle${isOpen ? " is-open" : ""}"
-                 title="${isOpen ? "Hide" : "Show"} the ${childLines.length} sub-items that build this row"
-                 onclick="asmToggleChildren('${rec.baseKey}')">&#9654;</button>`
-      : "";
-    const childCount = hasChildren
-      ? `<span class="asm-child-count" title="${childLines.length} sub-items carry to the Assembly Log with this row">${childLines.length} items</span>`
-      : "";
-    const title = (r.item_titles && r.item_titles[0]) || "";
-    const variantSku = (r.variant_skus && r.variant_skus[0]) || r.parent_sku;
-    const colorDot = r.color && swatchHexFor(r.color)
-      ? `<span class="swatch-dot" style="--swatch-color:${swatchHexFor(r.color)}" title="${r.color}"></span>` : "";
-    const finishDot = r.finish && finishHex(r.finish)
-      ? `<span class="swatch-dot" style="--swatch-color:${finishHex(r.finish)}" title="${r.finish}"></span>` : "";
-
-    const locKey = r.location === "Powder Coating" ? "powder"
-                 : r.location === "Shipping" ? "shipping" : "assembly";
-    const locPill = `<span class="asm-loc-pill asm-loc-${locKey}">${r.location || "Assembly"}</span>`;
-
-    // Part-of-N pill — always shown when split, including basic 2-way
-    const isPart = rec.partsTotal > 1;
-    const partSuffix = isPart
-      ? ` <span class="asm-part-pill">${rec.partIdx+1}/${rec.partsTotal}</span>`
-      : "";
-    const trCls = isPart ? "is-split-part" : "";
-
-    // Split controls — sit right of the qty input
-    const totalQty = (loadSplits()[rec.baseKey] || [r.qty || 1]).reduce((s,q)=>s+q, 0);
-    const splitDisabled = !rec.canSplit ? "disabled" : "";
-    const splitGroup = `
-      <span class="asm-split-group">
-        <button class="asm-split-btn" ${splitDisabled}
-                title="${rec.canSplit ? 'Split this row into two halves' : 'Cannot split a row of qty 1'}"
-                onclick="asmSplitRow('${rec.baseKey}', ${rec.partIdx}, ${r.qty || 1})">Split</button>
-        <button class="asm-split-into-btn" ${totalQty <= 1 ? 'disabled' : ''}
-                title="Split this order's row into N parts of even quantity"
-                onclick="asmSplitIntoN('${rec.baseKey}', ${r.qty || 1})">÷N</button>
-      </span>`;
-    // On split-parts: show a Delete (×) button that returns this part's qty
-    // to the neighbor above. On the parent row (or unsplit row): show the
-    // merge button as a quick "undo all splits" affordance.
-    const partControls = isPart
-      ? `<button class="asm-delete-btn" title="Delete this part — its qty will return to the part above (or below if this is the first part). Total quantity is conserved."
-                  onclick="asmDeletePart('${rec.baseKey}', ${rec.partIdx})">×</button>` +
-        (rec.partIdx === rec.partsTotal - 1
-          ? ` <button class="asm-merge-btn" title="Merge all parts back to one row"
-                       onclick="asmMergeRow('${rec.baseKey}')">merge all</button>`
-          : "")
-      : "";
-
-    const opts = ASSEMBLERS.map(a =>
-      `<option value="${a}" ${rec.assembler===a?"selected":""}>${a||"— assign —"}</option>`).join("");
-
-    const parentTr = `
-      <tr class="${trCls}">
-        <td>${childToggle}${orderLink}${partSuffix}${childCount}</td>
-        <td>
-          <div class="asm-title">${title}</div>
-          <span class="asm-sku" style="margin-top:3px">${variantSku}</span>
-        </td>
-        <td>${r.finish ? `<span class="color-chip" style="${chipStyle(r.finish)}"><span class="swatch-dot sm"></span>${r.finish}</span>` : ""}</td>
-        <td>${r.color ? `<span class="color-chip" style="${chipStyle(r.color)}"><span class="swatch-dot sm"></span>${r.color}</span>` : ""}</td>
-        <td class="right">
-          <span class="asm-qty-cell">
-            <input class="asm-qty-input" type="number" min="1" max="200" value="${rec.qty}"
-                   onchange="asmUpdateQty('${rec.baseKey}', ${rec.partIdx}, this.value)" />
-            ${splitGroup}
-            ${partControls}
-            ${isPart ? `<span class="asm-total-hint" title="${totalQty} units split across ${rec.partsTotal} parts (locked at original total)">${totalQty} total</span>` : ""}
-          </span>
-        </td>
-        <td class="center">${locPill}</td>
-        <td>
-          <select class="asm-assembler" onchange="asmAssign('${rec.partKey}', this.value)">
-            ${opts}
-          </select>
-        </td>
-      </tr>`;
-
-    // Child rows — one per physical line, only when expanded.
-    const childTrs = isOpen ? childLines.map(L => {
-      const cSku = L.sku || r.parent_sku || "";
-      const cTitle = L.title || "";
-      const cQty = L.qty != null ? L.qty : "";
-      const cFinish = L.finish
-        ? `<span class="color-chip" style="${chipStyle(L.finish)}"><span class="swatch-dot sm"></span>${L.finish}</span>` : "";
-      const cColor = L.color
-        ? `<span class="color-chip" style="${chipStyle(L.color)}"><span class="swatch-dot sm"></span>${L.color}</span>` : "";
-      return `
-      <tr class="asm-child-row">
-        <td class="asm-child-lead"></td>
-        <td><div style="font-size:11px;color:var(--ink);line-height:1.25">${cTitle}</div><span class="asm-child-sku" style="margin-top:1px">${cSku}</span></td>
-        <td>${cFinish}</td>
-        <td>${cColor}</td>
-        <td class="right asm-child-qty">${cQty}</td>
-        <td class="center" style="color:var(--border)">&middot;</td>
-        <td></td>
-      </tr>`;
-    }).join("") : "";
-
-    return parentTr + childTrs;
-  }).join("");
 }
 
 // Open orders that produced ZERO travelers (bulb/globe/excluded-only). They
@@ -9748,13 +9017,11 @@ function render(){
   const html = orderedLocations.map(renderSection).join("");
   sectionsEl.innerHTML = html || `<div class="empty-state"><h2>All clear</h2><p>No orders pending print.</p></div>`;
 
-  // Update tab counts (Order / Print / Travelers / Assembly).
+  // Update tab counts (Order / Print / Travelers).
   document.getElementById("cnt-print").textContent = t.printouts || 0;
   const trvN = (QUEUE.orders||[]).reduce((s,o)=>s+(o.printouts||[]).length, 0);
   const cntTrv = document.getElementById("cnt-travelers");
   if(cntTrv) cntTrv.textContent = trvN;
-  // Assembly + Order counts are computed when their renderers run; pre-populate.
-  document.getElementById("cnt-assembly").textContent = t.notion_rows || 0;
   // Order count: simple — orders since last release / 6 AM
   let cutoff = getLastReleaseAt();
   if(!cutoff){ const d = new Date(); d.setHours(6,0,0,0); cutoff = d.toISOString(); }
