@@ -1716,27 +1716,6 @@
   .trv-refs .trv-table td.trv-img-col { width: 60px; }
   .trv-refs .trv-build-row { cursor: default; }
 
-  /* Samples section — always the very last block of the item area. Samples for
-     finishes AND colors are kept separate from the build and packed together at
-     the end, so they get their own callout with an orange left edge running the
-     full height of the section (a border, so it prints). Finish samples band
-     above color samples (pre-sorted upstream). (Thomas 2026-07-09.) */
-  .trv-samples {
-    margin-top: 16px; border-left: 3px solid var(--accent, #FF9912);
-    padding-left: 11px; background: #FFFBF4;
-    -webkit-print-color-adjust: exact; print-color-adjust: exact;
-  }
-  .trv-samples-head { border-bottom-color: #FCD9A6; color: var(--accent-dark, #D97706); }
-  .trv-samples-count {
-    font-size: 9px; font-weight: 600; letter-spacing: .04em; margin-left: 8px;
-    color: var(--accent-dark, #D97706); background: #FFF7EB; border: 1px solid #FCD9A6;
-    border-radius: 6px; padding: 1px 7px; vertical-align: middle;
-    -webkit-print-color-adjust: exact; print-color-adjust: exact;
-  }
-  /* The section's own rows read "pack at end" in the same amber ship-along pill. */
-  .trv-samples .trv-ref-where {
-    color: var(--accent-dark, #D97706); background: #FFF7EB; border-color: #FCD9A6;
-  }
   /* Where the referenced line lives — its sheet's color/finish + location,
      pilled inline after the item name. */
   .trv-ref-where {
@@ -2164,7 +2143,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-09T20:26:51",
+  "built_at": "2026-07-09T21:15:47",
   "orders": [
     {
       "shopify_order_id": "7048468234322",
@@ -3526,8 +3505,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -6691,21 +6670,19 @@ function trvReferences(o, p){
     </div>`;
 }
 
-// Dedicated "Samples" section — always at the very bottom of the order, below
-// "Also on this order". Samples (SAC color / SAF finish) are NOT bunched with the
-// build they match: they're kept separate and packed together at the end. The
-// whole section carries an orange left edge so a sample on an order can't be
-// skimmed past. Finish samples band above color samples (o.samples arrives
-// pre-sorted from classify.sample_lines). Rendered on every sheet of the order so
-// it can't be missed, exactly like the refs list.
-function trvSamples(o){
+// "Include samples" — a plain section at the very bottom of the order, below
+// "Also on this order". Same formatting as the refs list (uppercase header +
+// hairline rule + rows), but hyper-simple: no orange edge, no "pack" pill, no
+// traveler badge. Samples are NOT built and need no traveler of their own — this
+// is just the reminder to drop them in the box before it ships. o.samples is
+// order-level (finish above color, pre-sorted upstream), so it renders on every
+// sheet of the order like the refs list so it can't be missed.
+function trvSampleSection(o){
   const samples = o.samples || [];
   if(!samples.length) return "";
-  const n = samples.reduce((s, ln) => s + (Number(ln.qty) || 0), 0);
-  const count = `${n} sample${n === 1 ? "" : "s"}`;
-  const rows = samples.map(ln => trvRefRow(ln, "pack at end", "", false)).join("");
-  return `<div class="trv-refs trv-samples">
-      <div class="trv-refs-head trv-samples-head">Samples <span class="trv-samples-count">${count}</span></div>
+  const rows = samples.map(ln => trvRefRow(ln, "", "", false)).join("");
+  return `<div class="trv-refs">
+      <div class="trv-refs-head">Include samples</div>
       <table class="trv-table"><tbody>${rows}</tbody></table>
     </div>`;
 }
@@ -6874,7 +6851,7 @@ function renderMasterTraveler(o, calloutHtml, showSelect){
       </thead>
       <tbody>${rows.join("")}</tbody>
     </table>
-    ${trvSamples(o)}
+    ${trvSampleSection(o)}
     ${trvNotes(o)}
     <div class="trv-spacer"></div>
     <div class="trv-foot">
@@ -6987,7 +6964,7 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
       <tbody class="trv-drop" ondragover="trvDragOver(event)" ondragleave="trvDragLeave(event)" ondrop="trvDrop(event)">${buildRows}${emptyHint}</tbody>
     </table>
     ${o._master ? trvMasterRefNote(total) : trvReferences(o, p)}
-    ${trvSamples(o)}
+    ${o._master ? "" : trvSampleSection(o)}
     ${trvNotes(o)}
     <div class="trv-spacer"></div>
     <div class="trv-foot">
