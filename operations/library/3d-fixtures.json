@@ -1,0 +1,1282 @@
+[
+ {
+  "sku": "H1A",
+  "product": "Head Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "All Black",
+  "img": "head-hook-blk.png"
+ },
+ {
+  "sku": "H1A",
+  "product": "Head Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "Brass + Black",
+  "img": "head-hook-bb.png"
+ },
+ {
+  "sku": "H10",
+  "product": "Stud Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "All Black",
+  "img": "stud-hook-blk.png"
+ },
+ {
+  "sku": "H10",
+  "product": "Stud Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "Brass + Black",
+  "img": "stud-hook-bb.png"
+ },
+ {
+  "sku": "H13",
+  "product": "Persona Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "All Black",
+  "img": "persona-hook-blk.png"
+ },
+ {
+  "sku": "H13",
+  "product": "Persona Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "Brass + Black",
+  "img": "persona-hook-bb.png"
+ },
+ {
+  "sku": "H16",
+  "product": "Snug Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "All Black",
+  "img": "snug-hook-blk.png"
+ },
+ {
+  "sku": "H16",
+  "product": "Snug Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "Brass + Black",
+  "img": "snug-hook-bb.png"
+ },
+ {
+  "sku": "H19",
+  "product": "Caliber Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "All Black",
+  "img": "caliber-hook-blk.png"
+ },
+ {
+  "sku": "H19",
+  "product": "Caliber Hook",
+  "group": "Hardware",
+  "subtype": "Hooks",
+  "finish": "Brass + Black",
+  "img": "caliber-hook-bb.png"
+ },
+ {
+  "sku": "H20",
+  "product": "Persona Knob",
+  "group": "Hardware",
+  "subtype": "Knobs",
+  "finish": "All Black",
+  "img": "persona-knob-blk.png"
+ },
+ {
+  "sku": "H20",
+  "product": "Persona Knob",
+  "group": "Hardware",
+  "subtype": "Knobs",
+  "finish": "Brass + Black",
+  "img": "persona-knob-bb.png"
+ },
+ {
+  "sku": "H26",
+  "product": "Highness Knob",
+  "group": "Hardware",
+  "subtype": "Knobs",
+  "finish": "All Black",
+  "img": "highness-knob-blk.png"
+ },
+ {
+  "sku": "H26",
+  "product": "Highness Knob",
+  "group": "Hardware",
+  "subtype": "Knobs",
+  "finish": "Brass + Black",
+  "img": "highness-knob-bb.png"
+ },
+ {
+  "sku": "H27",
+  "product": "Head Knob",
+  "group": "Hardware",
+  "subtype": "Knobs",
+  "finish": "All Black",
+  "img": "head-knob-blk.png"
+ },
+ {
+  "sku": "H27",
+  "product": "Head Knob",
+  "group": "Hardware",
+  "subtype": "Knobs",
+  "finish": "Brass + Black",
+  "img": "head-knob-bb.png"
+ },
+ {
+  "sku": "H28",
+  "product": "Swift Knob",
+  "group": "Hardware",
+  "subtype": "Knobs",
+  "finish": "Brass + Black",
+  "img": "swift-knob-bb.png"
+ },
+ {
+  "sku": "H43",
+  "product": "Head Tissue Holder",
+  "group": "Hardware",
+  "subtype": "Tissue Holders",
+  "finish": "All Black",
+  "img": "head-tissue-holder-blk.png"
+ },
+ {
+  "sku": "H43",
+  "product": "Head Tissue Holder",
+  "group": "Hardware",
+  "subtype": "Tissue Holders",
+  "finish": "Brass + Black",
+  "img": "head-tissue-holder-bb.png"
+ },
+ {
+  "sku": "H52",
+  "product": "Head Towel Bar 24",
+  "group": "Hardware",
+  "subtype": "Towel Bars",
+  "finish": "All Black",
+  "img": "head-towel-bar-24-blk.png"
+ },
+ {
+  "sku": "H52",
+  "product": "Head Towel Bar 24",
+  "group": "Hardware",
+  "subtype": "Towel Bars",
+  "finish": "Brass + Black",
+  "img": "head-towel-bar-24-bb.png"
+ },
+ {
+  "sku": "H62-18",
+  "product": "Head Towel Rack 18",
+  "group": "Hardware",
+  "subtype": "Towel Racks",
+  "finish": "All Black",
+  "img": "head-towel-rack-18-blk.png"
+ },
+ {
+  "sku": "H62-18",
+  "product": "Head Towel Rack 18",
+  "group": "Hardware",
+  "subtype": "Towel Racks",
+  "finish": "Brass + Black",
+  "img": "head-towel-rack-18-bb.png"
+ },
+ {
+  "sku": "H62-24",
+  "product": "Head Towel Rack 24",
+  "group": "Hardware",
+  "subtype": "Towel Racks",
+  "finish": "All Black",
+  "img": "head-towel-rack-24-blk.png"
+ },
+ {
+  "sku": "H62-24",
+  "product": "Head Towel Rack 24",
+  "group": "Hardware",
+  "subtype": "Towel Racks",
+  "finish": "Brass + Black",
+  "img": "head-towel-rack-24-bb.png"
+ },
+ {
+  "sku": "H72",
+  "product": "Head Hand Towel Bar",
+  "group": "Hardware",
+  "subtype": "Towel Bars",
+  "finish": "All Black",
+  "img": "head-hand-towel-bar-blk.png"
+ },
+ {
+  "sku": "H72",
+  "product": "Head Hand Towel Bar",
+  "group": "Hardware",
+  "subtype": "Towel Bars",
+  "finish": "Brass + Black",
+  "img": "head-hand-towel-bar-bb.png"
+ },
+ {
+  "sku": "10401-20",
+  "product": "Urchin Chandelier 20",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "All Brass",
+  "img": "urchin-chandelier-20-br.png"
+ },
+ {
+  "sku": "10401-27",
+  "product": "Urchin Chandelier 27",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "All Brass",
+  "img": "urchin-chandelier-27-br.png"
+ },
+ {
+  "sku": "10403-27",
+  "product": "Beaded Urchin Chandelier 27",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "beaded-urchin-chandelier-27-bb.png"
+ },
+ {
+  "sku": "30110-6",
+  "product": "Cap Pendant 6",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "All Black",
+  "img": "cap-pendant-6-blk.png"
+ },
+ {
+  "sku": "30110-6",
+  "product": "Cap Pendant 6",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "cap-pendant-6-bb.png"
+ },
+ {
+  "sku": "30110-8",
+  "product": "Cap Pendant 8",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "All Black",
+  "img": "cap-pendant-8-blk.png"
+ },
+ {
+  "sku": "30110-8",
+  "product": "Cap Pendant 8",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "cap-pendant-8-bb.png"
+ },
+ {
+  "sku": "30110-10",
+  "product": "Cap Pendant 10",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "All Black",
+  "img": "cap-pendant-10-blk.png"
+ },
+ {
+  "sku": "30110-10",
+  "product": "Cap Pendant 10",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "cap-pendant-10-bb.png"
+ },
+ {
+  "sku": "30110-12",
+  "product": "Cap Pendant 12",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "All Black",
+  "img": "cap-pendant-12-blk.png"
+ },
+ {
+  "sku": "30110-12",
+  "product": "Cap Pendant 12",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "cap-pendant-12-bb.png"
+ },
+ {
+  "sku": "30112F-6",
+  "product": "Lure Flush Mount 6",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "lure-flush-mount-6-bb.png"
+ },
+ {
+  "sku": "30112F-8",
+  "product": "Lure Flush Mount 8",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "lure-flush-mount-8-bb.png"
+ },
+ {
+  "sku": "30112F-10",
+  "product": "Lure Flush Mount 10",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "lure-flush-mount-10-bb.png"
+ },
+ {
+  "sku": "30112F-12",
+  "product": "Lure Flush Mount 12",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "lure-flush-mount-12-bb.png"
+ },
+ {
+  "sku": "30112-6",
+  "product": "Lure Pendant 6",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "lure-pendant-6-bb.png"
+ },
+ {
+  "sku": "30112-8",
+  "product": "Lure Pendant 8",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "lure-pendant-8-bb.png"
+ },
+ {
+  "sku": "30112-10",
+  "product": "Lure Pendant 10",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "lure-pendant-10-bb.png"
+ },
+ {
+  "sku": "30112-12",
+  "product": "Lure Pendant 12",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "lure-pendant-12-bb.png"
+ },
+ {
+  "sku": "30130-6",
+  "product": "Cap Flush Mount 6",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "cap-flush-mount-6-blk.png"
+ },
+ {
+  "sku": "30130-6",
+  "product": "Cap Flush Mount 6",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "cap-flush-mount-6-bb.png"
+ },
+ {
+  "sku": "30130-8",
+  "product": "Cap Flush Mount 8",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "cap-flush-mount-8-blk.png"
+ },
+ {
+  "sku": "30130-8",
+  "product": "Cap Flush Mount 8",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "cap-flush-mount-8-bb.png"
+ },
+ {
+  "sku": "30130-10",
+  "product": "Cap Flush Mount 10",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "cap-flush-mount-10-blk.png"
+ },
+ {
+  "sku": "30130-10",
+  "product": "Cap Flush Mount 10",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "cap-flush-mount-10-bb.png"
+ },
+ {
+  "sku": "30130-12",
+  "product": "Cap Flush Mount 12",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "cap-flush-mount-12-blk.png"
+ },
+ {
+  "sku": "30130-12",
+  "product": "Cap Flush Mount 12",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "cap-flush-mount-12-bb.png"
+ },
+ {
+  "sku": "30220",
+  "product": "Cap Double Sconce 6",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "cap-double-sconce-6-bb.png"
+ },
+ {
+  "sku": "30221",
+  "product": "Cap Double Sconce 8",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "cap-double-sconce-8-bb.png"
+ },
+ {
+  "sku": "30222",
+  "product": "Visage Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "visage-sconce-bb.png"
+ },
+ {
+  "sku": "30330",
+  "product": "Ballsy Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "ballsy-flush-mount-bb.png"
+ },
+ {
+  "sku": "30332",
+  "product": "Supreme Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "supreme-flush-mount-blk.png"
+ },
+ {
+  "sku": "30332",
+  "product": "Supreme Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "supreme-flush-mount-bb.png"
+ },
+ {
+  "sku": "30402",
+  "product": "Orbi Chandelier",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "All Black",
+  "img": "orbi-chandelier-blk.png"
+ },
+ {
+  "sku": "30402",
+  "product": "Orbi Chandelier",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "orbi-chandelier-bb.png"
+ },
+ {
+  "sku": "30402F",
+  "product": "Orbi Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "orbi-flush-mount-blk.png"
+ },
+ {
+  "sku": "30402F",
+  "product": "Orbi Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "orbi-flush-mount-bb.png"
+ },
+ {
+  "sku": "30403",
+  "product": "Big Orbi Chandelier",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "All Black",
+  "img": "big-orbi-chandelier-blk.png"
+ },
+ {
+  "sku": "30403",
+  "product": "Big Orbi Chandelier",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "big-orbi-chandelier-bb.png"
+ },
+ {
+  "sku": "30403F",
+  "product": "Big Orbi Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "big-orbi-flush-mount-blk.png"
+ },
+ {
+  "sku": "30403F",
+  "product": "Big Orbi Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "big-orbi-flush-mount-bb.png"
+ },
+ {
+  "sku": "30405",
+  "product": "Status Chandelier 35",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "status-chandelier-35-bb.png"
+ },
+ {
+  "sku": "30407",
+  "product": "Big Status Chandelier 42",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "big-status-chandelier-42-bb.png"
+ },
+ {
+  "sku": "30502",
+  "product": "Prisma Chandelier 35",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "prisma-chandelier-35-bb.png"
+ },
+ {
+  "sku": "30503",
+  "product": "Big Prisma Chandelier 42",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "big-prisma-chandelier-42-bb.png"
+ },
+ {
+  "sku": "30605",
+  "product": "Axia Chandelier",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "axia-chandelier-bb.png"
+ },
+ {
+  "sku": "30606",
+  "product": "Big Axia Chandelier",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "big-axia-chandelier-bb.png"
+ },
+ {
+  "sku": "31000",
+  "product": "Crown Chandelier 32",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "All Black",
+  "img": "crown-chandelier-32-blk.png"
+ },
+ {
+  "sku": "31000",
+  "product": "Crown Chandelier 32",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "crown-chandelier-32-bb.png"
+ },
+ {
+  "sku": "31000F",
+  "product": "Crown Flush Mount 32",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "crown-flush-mount-32-blk.png"
+ },
+ {
+  "sku": "31000F",
+  "product": "Crown Flush Mount 32",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "crown-flush-mount-32-bb.png"
+ },
+ {
+  "sku": "31001",
+  "product": "Crown Chandelier 46",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "All Black",
+  "img": "crown-chandelier-46-blk.png"
+ },
+ {
+  "sku": "31001",
+  "product": "Crown Chandelier 46",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "crown-chandelier-46-bb.png"
+ },
+ {
+  "sku": "31001F",
+  "product": "Crown Flush Mount 46",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "crown-flush-mount-46-blk.png"
+ },
+ {
+  "sku": "31001F",
+  "product": "Crown Flush Mount 46",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "crown-flush-mount-46-bb.png"
+ },
+ {
+  "sku": "40111",
+  "product": "Maxo Pendant 13",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "maxo-pendant-13-bb.png"
+ },
+ {
+  "sku": "40111-8",
+  "product": "Maxo Pendant 8",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "maxo-pendant-8-bb.png"
+ },
+ {
+  "sku": "40120-0",
+  "product": "Boom Sconce No Arm",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "boom-sconce-no-arm-bb.png"
+ },
+ {
+  "sku": "40120-3",
+  "product": "Boom Sconce 3",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "boom-sconce-3-bb.png"
+ },
+ {
+  "sku": "40120-6",
+  "product": "Boom Sconce 6",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "boom-sconce-6-bb.png"
+ },
+ {
+  "sku": "40120-10",
+  "product": "Boom Sconce 10",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "boom-sconce-10-bb.png"
+ },
+ {
+  "sku": "40121-9",
+  "product": "Boom Swing Arm Sconce 9",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "boom-swing-arm-sconce-9-bb.png"
+ },
+ {
+  "sku": "40121-17",
+  "product": "Boom Swing Arm Sconce 17",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "boom-swing-arm-sconce-17-bb.png"
+ },
+ {
+  "sku": "40131",
+  "product": "Maxo Flush Mount 13",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "maxo-flush-mount-13-bb.png"
+ },
+ {
+  "sku": "40131-8",
+  "product": "Maxo Flush Mount 8",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "maxo-flush-mount-8-bb.png"
+ },
+ {
+  "sku": "50110-8",
+  "product": "Cadbury Pendant 8",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "cadbury-pendant-8-bb.png"
+ },
+ {
+  "sku": "50110-10",
+  "product": "Cadbury Pendant 10",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "cadbury-pendant-10-bb.png"
+ },
+ {
+  "sku": "50110-12",
+  "product": "Cadbury Pendant 12",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "cadbury-pendant-12-bb.png"
+ },
+ {
+  "sku": "50111-8",
+  "product": "Echo Pendant 8",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "echo-pendant-8-bb.png"
+ },
+ {
+  "sku": "50111-10",
+  "product": "Echo Pendant 10",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "echo-pendant-10-bb.png"
+ },
+ {
+  "sku": "50111-12",
+  "product": "Echo Pendant 12",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "echo-pendant-12-bb.png"
+ },
+ {
+  "sku": "50120-8",
+  "product": "Cadbury Sconce 8",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "cadbury-sconce-8-bb.png"
+ },
+ {
+  "sku": "50120-10",
+  "product": "Cadbury Sconce 10",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "cadbury-sconce-10-bb.png"
+ },
+ {
+  "sku": "50121-8",
+  "product": "Hemi Sconce 8",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "hemi-sconce-8-bb.png"
+ },
+ {
+  "sku": "50121-10",
+  "product": "Hemi Sconce 10",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "hemi-sconce-10-bb.png"
+ },
+ {
+  "sku": "50130-8",
+  "product": "Cadbury Flush Mount 8",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "cadbury-flush-mount-8-bb.png"
+ },
+ {
+  "sku": "50130-10",
+  "product": "Cadbury Flush Mount 10",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "cadbury-flush-mount-10-bb.png"
+ },
+ {
+  "sku": "50130-12",
+  "product": "Cadbury Flush Mount 12",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "cadbury-flush-mount-12-bb.png"
+ },
+ {
+  "sku": "50131-8",
+  "product": "Hemi Flush Mount 8",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "hemi-flush-mount-8-bb.png"
+ },
+ {
+  "sku": "50131-10",
+  "product": "Hemi Flush Mount 10",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "hemi-flush-mount-10-bb.png"
+ },
+ {
+  "sku": "50131-12",
+  "product": "Hemi Flush Mount 12",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "hemi-flush-mount-12-bb.png"
+ },
+ {
+  "sku": "50220",
+  "product": "Amigo Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "amigo-sconce-bb.png"
+ },
+ {
+  "sku": "50221",
+  "product": "Beso Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "beso-sconce-bb.png"
+ },
+ {
+  "sku": "51000",
+  "product": "Alegria Chandelier 30",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "alegria-chandelier-30-bb.png"
+ },
+ {
+  "sku": "60111",
+  "product": "Eureka Pendant",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "eureka-pendant-bb.png"
+ },
+ {
+  "sku": "60112",
+  "product": "Twink Pendant",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "All Black",
+  "img": "twink-pendant-blk.png"
+ },
+ {
+  "sku": "60112",
+  "product": "Twink Pendant",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "twink-pendant-bb.png"
+ },
+ {
+  "sku": "60121",
+  "product": "Snug Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "snug-sconce-bb.png"
+ },
+ {
+  "sku": "60123",
+  "product": "Tall Snug Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "tall-snug-sconce-bb.png"
+ },
+ {
+  "sku": "60124-0",
+  "product": "Reader Sconce No Arm",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "reader-sconce-no-arm-bb.png"
+ },
+ {
+  "sku": "60124-3",
+  "product": "Reader Sconce 3",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "reader-sconce-3-bb.png"
+ },
+ {
+  "sku": "60124-6",
+  "product": "Reader Sconce 6",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "reader-sconce-6-bb.png"
+ },
+ {
+  "sku": "60124-10",
+  "product": "Reader Sconce 10",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "reader-sconce-10-bb.png"
+ },
+ {
+  "sku": "60125",
+  "product": "Twink Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "twink-sconce-bb.png"
+ },
+ {
+  "sku": "60127",
+  "product": "Display Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "display-sconce-bb.png"
+ },
+ {
+  "sku": "60128-9",
+  "product": "Reader Swing Arm Sconce 9",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "reader-swing-arm-sconce-9-bb.png"
+ },
+ {
+  "sku": "60128-17",
+  "product": "Reader Swing Arm Sconce 17",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "reader-swing-arm-sconce-17-bb.png"
+ },
+ {
+  "sku": "60129-9",
+  "product": "Major Sconce 9",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "major-sconce-9-bb.png"
+ },
+ {
+  "sku": "60129-15",
+  "product": "Major Sconce 15",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "major-sconce-15-bb.png"
+ },
+ {
+  "sku": "60129-21",
+  "product": "Major Sconce 21",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "major-sconce-21-bb.png"
+ },
+ {
+  "sku": "60130",
+  "product": "Reader Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "reader-flush-mount-bb.png"
+ },
+ {
+  "sku": "60131",
+  "product": "Eureka Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "eureka-flush-mount-bb.png"
+ },
+ {
+  "sku": "60132",
+  "product": "Twink Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "twink-flush-mount-blk.png"
+ },
+ {
+  "sku": "60132",
+  "product": "Twink Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "twink-flush-mount-bb.png"
+ },
+ {
+  "sku": "60220",
+  "product": "Scepter Sconce 10",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "scepter-sconce-10-bb.png"
+ },
+ {
+  "sku": "60221",
+  "product": "Scepter Sconce 18",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "scepter-sconce-18-bb.png"
+ },
+ {
+  "sku": "60222",
+  "product": "Monarch Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "monarch-sconce-bb.png"
+ },
+ {
+  "sku": "60224",
+  "product": "Ruler Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "ruler-sconce-bb.png"
+ },
+ {
+  "sku": "60230",
+  "product": "Pilot Flush Mount 29",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "pilot-flush-mount-29-bb.png"
+ },
+ {
+  "sku": "60230-34",
+  "product": "Pilot Pendant 29",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "pilot-pendant-29-bb.png"
+ },
+ {
+  "sku": "60231",
+  "product": "Pilot Flush Mount 47",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "pilot-flush-mount-47-bb.png"
+ },
+ {
+  "sku": "60231-34",
+  "product": "Pilot Pendant 47",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "pilot-pendant-47-bb.png"
+ },
+ {
+  "sku": "60320",
+  "product": "Elite Sconce Left",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "elite-sconce-left-bb.png"
+ },
+ {
+  "sku": "60321",
+  "product": "Elite Sconce Right",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "elite-sconce-right-bb.png"
+ },
+ {
+  "sku": "60330",
+  "product": "Pose Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "pose-flush-mount-bb.png"
+ },
+ {
+  "sku": "60400",
+  "product": "Captain Chandelier 29",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "captain-chandelier-29-bb.png"
+ },
+ {
+  "sku": "60401",
+  "product": "Captain Chandelier 47",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "captain-chandelier-47-bb.png"
+ },
+ {
+  "sku": "60430",
+  "product": "Captain Flush Mount 29",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "captain-flush-mount-29-bb.png"
+ },
+ {
+  "sku": "60431",
+  "product": "Captain Flush Mount 47",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "captain-flush-mount-47-bb.png"
+ },
+ {
+  "sku": "60600",
+  "product": "Commander Chandelier 29",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "commander-chandelier-29-bb.png"
+ },
+ {
+  "sku": "60601",
+  "product": "Commander Chandelier 47",
+  "group": "Lighting",
+  "subtype": "Chandeliers",
+  "finish": "Brass + Black",
+  "img": "commander-chandelier-47-bb.png"
+ },
+ {
+  "sku": "60630",
+  "product": "Commander Flush Mount 29",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "commander-flush-mount-29-bb.png"
+ },
+ {
+  "sku": "60631",
+  "product": "Commander Flush Mount 47",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "commander-flush-mount-47-bb.png"
+ },
+ {
+  "sku": "60730",
+  "product": "Vogue 7 Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "vogue-7-flush-mount-bb.png"
+ },
+ {
+  "sku": "70110",
+  "product": "Bling Pendant",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "All Black",
+  "img": "bling-pendant-blk.png"
+ },
+ {
+  "sku": "70110",
+  "product": "Bling Pendant",
+  "group": "Lighting",
+  "subtype": "Pendants",
+  "finish": "Brass + Black",
+  "img": "bling-pendant-bb.png"
+ },
+ {
+  "sku": "70110F",
+  "product": "Bling Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "bling-flush-mount-blk.png"
+ },
+ {
+  "sku": "70110F",
+  "product": "Bling Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "bling-flush-mount-bb.png"
+ },
+ {
+  "sku": "70130",
+  "product": "Lepore Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "All Black",
+  "img": "lepore-flush-mount-blk.png"
+ },
+ {
+  "sku": "70130",
+  "product": "Lepore Flush Mount",
+  "group": "Lighting",
+  "subtype": "Flush Mounts",
+  "finish": "Brass + Black",
+  "img": "lepore-flush-mount-bb.png"
+ },
+ {
+  "sku": "70220",
+  "product": "Bianca Sconce 12",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "bianca-sconce-12-bb.png"
+ },
+ {
+  "sku": "70221",
+  "product": "Phoenix Sconce",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "phoenix-sconce-bb.png"
+ },
+ {
+  "sku": "70222",
+  "product": "Bianca Sconce 20",
+  "group": "Lighting",
+  "subtype": "Sconces",
+  "finish": "Brass + Black",
+  "img": "bianca-sconce-20-bb.png"
+ }
+]
