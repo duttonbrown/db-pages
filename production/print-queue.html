@@ -1814,7 +1814,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-10T01:00:37",
+  "built_at": "2026-07-10T01:06:53",
   "orders": [
     {
       "shopify_order_id": "7048468234322",
@@ -3176,8 +3176,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAF-ALL",
-            "SAC-ALL"
+            "SAC-ALL",
+            "SAF-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -5980,10 +5980,12 @@ document.addEventListener("click", e => {
   if(TAB_NAMES.includes(name)){ e.preventDefault(); setTab(name); }
 });
 // nav.js injects the rail after this script runs; re-assert the active tab on its
-// freshly-rendered controls so the current tab shows is-subcurrent.
+// freshly-rendered controls so the current tab shows is-subcurrent, and fill the
+// rail's count badges (they didn't exist when render() first ran).
 document.addEventListener("hub:railready", () => {
   const hash = (location.hash || "").replace("#","");
   setTab(TAB_NAMES.includes(hash) ? hash : "order", false);
+  if (typeof updateTabCounts === "function") updateTabCounts();
 });
 
 // NOTE: collapsible rail groups (Manage / Print) are toggled by the SHARED
@@ -9017,17 +9019,22 @@ function render(){
   const html = orderedLocations.map(renderSection).join("");
   sectionsEl.innerHTML = html || `<div class="empty-state"><h2>All clear</h2><p>No orders pending print.</p></div>`;
 
-  // Update tab counts (Order / Print / Travelers).
-  document.getElementById("cnt-print").textContent = t.printouts || 0;
-  const trvN = (QUEUE.orders||[]).reduce((s,o)=>s+(o.printouts||[]).length, 0);
-  const cntTrv = document.getElementById("cnt-travelers");
-  if(cntTrv) cntTrv.textContent = trvN;
+  updateTabCounts(t);
+}
+
+// Rail tab counts (Order / Print / Travelers). The rail is injected by nav.js
+// AFTER this script runs, so every id lookup must be null-safe: render() at
+// init time finds no rail (counts re-applied on hub:railready below).
+function updateTabCounts(t){
+  t = t || (QUEUE && QUEUE.totals) || {};
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+  set("cnt-print", t.printouts || 0);
+  set("cnt-travelers", (QUEUE.orders||[]).reduce((s,o)=>s+(o.printouts||[]).length, 0));
   // Order count: simple — orders since last release / 6 AM
   let cutoff = getLastReleaseAt();
   if(!cutoff){ const d = new Date(); d.setHours(6,0,0,0); cutoff = d.toISOString(); }
   const cMs = new Date(cutoff).getTime();
-  const newCount = (QUEUE.orders||[]).filter(o => new Date(o.created_at).getTime() >= cMs).length;
-  document.getElementById("cnt-order").textContent = newCount;
+  set("cnt-order", (QUEUE.orders||[]).filter(o => new Date(o.created_at).getTime() >= cMs).length);
 }
 
 function init(){
