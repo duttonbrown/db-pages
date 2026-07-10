@@ -1715,6 +1715,28 @@
   .trv-refs .trv-table { margin-top: 0; }
   .trv-refs .trv-table td.trv-img-col { width: 60px; }
   .trv-refs .trv-build-row { cursor: default; }
+
+  /* Samples section — always the very last block of the item area. Samples for
+     finishes AND colors are kept separate from the build and packed together at
+     the end, so they get their own callout with an orange left edge running the
+     full height of the section (a border, so it prints). Finish samples band
+     above color samples (pre-sorted upstream). (Thomas 2026-07-09.) */
+  .trv-samples {
+    margin-top: 16px; border-left: 3px solid var(--accent, #FF9912);
+    padding-left: 11px; background: #FFFBF4;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .trv-samples-head { border-bottom-color: #FCD9A6; color: var(--accent-dark, #D97706); }
+  .trv-samples-count {
+    font-size: 9px; font-weight: 600; letter-spacing: .04em; margin-left: 8px;
+    color: var(--accent-dark, #D97706); background: #FFF7EB; border: 1px solid #FCD9A6;
+    border-radius: 6px; padding: 1px 7px; vertical-align: middle;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  /* The section's own rows read "pack at end" in the same amber ship-along pill. */
+  .trv-samples .trv-ref-where {
+    color: var(--accent-dark, #D97706); background: #FFF7EB; border-color: #FCD9A6;
+  }
   /* Where the referenced line lives — its sheet's color/finish + location,
      pilled inline after the item name. */
   .trv-ref-where {
@@ -2142,8 +2164,353 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-09T17:00:03",
+  "built_at": "2026-07-09T20:26:51",
   "orders": [
+    {
+      "shopify_order_id": "7048468234322",
+      "shopify_order_name": "36503",
+      "shopify_order_number": "36503",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 358.73,
+      "ship_by_date": null,
+      "latest_ship_by": "August 6, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-07-09T20:01:06-05:00",
+      "tags": "redo",
+      "total_price": 358.73,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7048468234322",
+          "shopify_order_name": "36503",
+          "shopify_order_number": "36503",
+          "key": [
+            "color",
+            "Lagoon",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "50131-12"
+          ],
+          "variant_skus": [
+            "50131-12-1D"
+          ],
+          "line_item_titles": [
+            "Color Hemi Flush Mount 12\""
+          ],
+          "lines": [
+            {
+              "title": "Color Hemi Flush Mount 12\"",
+              "variant_title": "Brass / Lagoon",
+              "variant_sku": "50131-12-1D",
+              "parent_sku": "50131-12",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-hemi-flush-mount-12-brass-lagoon.jpg?v=1758372344&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "No Rod",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Lagoon|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7048468234322",
+          "shopify_order_name": "36503",
+          "shopify_order_number": "36503",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-09T20:01:06-05:00",
+          "parent_sku": "50131-12",
+          "color": "Lagoon",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17034305175634
+          ],
+          "item_titles": [
+            "Color Hemi Flush Mount 12\""
+          ],
+          "variant_skus": [
+            "50131-12-1D"
+          ],
+          "lines": [
+            {
+              "sku": "50131-12-1D",
+              "title": "Color Hemi Flush Mount 12\"",
+              "qty": 1,
+              "finish": "Brass",
+              "color": "Lagoon",
+              "category": "fixture",
+              "variant_title": "Brass / Lagoon",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-hemi-flush-mount-12-brass-lagoon.jpg?v=1758372344&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
+    {
+      "shopify_order_id": "7048423702610",
+      "shopify_order_name": "36502",
+      "shopify_order_number": "36502",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 64.6,
+      "ship_by_date": null,
+      "latest_ship_by": "July 13, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-07-09T19:20:22-05:00",
+      "tags": "redo",
+      "total_price": 64.6,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7048423702610",
+          "shopify_order_name": "36502",
+          "shopify_order_number": "36502",
+          "key": [
+            "catch-all",
+            "7048423702610"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Ship / Review",
+          "parent_skus": [
+            "BULB-9992"
+          ],
+          "variant_skus": [
+            "BULB-9992"
+          ],
+          "line_item_titles": [
+            "LED A15 Bulb - 3-Pack"
+          ],
+          "lines": [
+            {
+              "title": "LED A15 Bulb - 3-Pack",
+              "variant_title": "White / 720 lumens",
+              "variant_sku": "BULB-9992",
+              "parent_sku": "BULB-9992",
+              "qty": 2,
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/6.5-watt-E26-A15-led-set-of-3.jpg?v=1747968373&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": "No standard build \u2014 bulbs/globes, custom, or one-time items. Pull, pack, and ship; confirm with the manager if anything needs building.",
+          "source": "catch-all",
+          "traveler_key": "catch-all|7048423702610",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
+    {
+      "shopify_order_id": "7048409350226",
+      "shopify_order_name": "36501",
+      "shopify_order_number": "36501",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 624.23,
+      "ship_by_date": null,
+      "latest_ship_by": "August 6, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-07-09T19:08:11-05:00",
+      "tags": "redo",
+      "total_price": 609.23,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7048409350226",
+          "shopify_order_name": "36501",
+          "shopify_order_number": "36501",
+          "key": [
+            "color",
+            "Cobalt",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Cobalt",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30332"
+          ],
+          "variant_skus": [
+            "30332-2E"
+          ],
+          "line_item_titles": [
+            "Color Supreme Flush Mount"
+          ],
+          "lines": [
+            {
+              "title": "Color Supreme Flush Mount",
+              "variant_title": "Nickel / Cobalt / Flat ceiling",
+              "variant_sku": "30332-2E",
+              "parent_sku": "30332",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-supreme-flush-mount-nickel-cobalt.jpg?v=1747968315&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Cobalt|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7048409350226",
+          "shopify_order_name": "36501",
+          "shopify_order_number": "36501",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-09T19:08:11-05:00",
+          "parent_sku": "30332",
+          "color": "Cobalt",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17034159390802
+          ],
+          "item_titles": [
+            "Color Supreme Flush Mount"
+          ],
+          "variant_skus": [
+            "30332-2E"
+          ],
+          "lines": [
+            {
+              "sku": "30332-2E",
+              "title": "Color Supreme Flush Mount",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Cobalt",
+              "category": "fixture",
+              "variant_title": "Nickel / Cobalt / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-supreme-flush-mount-nickel-cobalt.jpg?v=1747968315&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
     {
       "shopify_order_id": "7048223064146",
       "shopify_order_name": "36500",
@@ -2222,7 +2589,8 @@ const QUEUE = {
       "notion_rows": [],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7048188067922",
@@ -2352,7 +2720,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7048183152722",
@@ -2483,7 +2852,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7048046968914",
@@ -2608,7 +2978,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047920091218",
@@ -2892,7 +3263,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047886569554",
@@ -2975,7 +3347,8 @@ const QUEUE = {
       "notion_rows": [],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047871856722",
@@ -3106,7 +3479,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047803273298",
@@ -3209,7 +3583,8 @@ const QUEUE = {
       "notion_rows": [],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047789740114",
@@ -3628,7 +4003,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047780302930",
@@ -3759,7 +4135,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047712211026",
@@ -3990,7 +4367,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047672365138",
@@ -4313,7 +4691,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047639531602",
@@ -4670,7 +5049,8 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047610237010",
@@ -4753,7 +5133,8 @@ const QUEUE = {
       "notion_rows": [],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     },
     {
       "shopify_order_id": "7047589134418",
@@ -4879,15 +5260,16 @@ const QUEUE = {
       ],
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
-      "ships_with": []
+      "ships_with": [],
+      "samples": []
     }
   ],
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 15,
-    "printouts": 22,
-    "notion_rows": 22,
+    "orders": 18,
+    "printouts": 25,
+    "notion_rows": 24,
     "skipped_already_printed": 226,
     "printed_today": 11,
     "needs_attention": 0,
@@ -6201,16 +6583,8 @@ function trvBuildRow(ln, p){
   // hand-assigned via the dialog (_att, Case B) — nest like rod sub-rows and
   // carry a fit chip when the bulb may not fit the fixture's lampholder.
   const isFoldBulb = !!ln.fold_bulb;
-  // A sample bunched onto this sheet (SAC-*/SAF-*) nests just like a folded bulb:
-  // it ships with this color/finish but isn't built here. Indented "also ships"
-  // sub-row so the floor packs it with the item it was bought alongside.
-  const isFoldSample = !!ln.fold_sample;
-  const rowCls = ((ln._att || isFoldBulb || isFoldSample) ? " trv-row-attached" : "") + addOnRowCls(ln);
+  const rowCls = ((ln._att || isFoldBulb) ? " trv-row-attached" : "") + addOnRowCls(ln);
   const bulbChip = (isFoldBulb || (ln._att && isBulbLine(ln))) && p ? foldBulbFitChip(p, ln) : "";
-  // A bunched sample carries an explicit "ships with order" tag so the packer
-  // never mistakes it for a build line — it's stock that goes in the same box.
-  const sampleTag = isFoldSample
-    ? ` <span class="trv-ref-where">sample — ships with order</span>` : "";
   // ⇄ assign is an accessories-only affordance: lighting and hardware are the
   // builds themselves — they're never distributed onto other items' travelers.
   const assignBtn = isAssignableLine(ln)
@@ -6238,7 +6612,7 @@ function trvBuildRow(ln, p){
         ${img}
       </td>
       <td>
-        <p class="trv-li-title">${escapeHtml(ln.title)}${variant}${bulbChip}${sampleTag}</p>
+        <p class="trv-li-title">${escapeHtml(ln.title)}${variant}${bulbChip}</p>
         ${sku}${trvLineProps(ln.properties)}
       </td>
       <td class="trv-qty">× ${ln.qty}
@@ -6253,13 +6627,7 @@ function trvBuildRow(ln, p){
 // glass globes) physically ships, so it stays "ships with order".
 function shipWithLabel(ln){
   const sku = String(ln.variant_sku || ln.parent_sku || "").toUpperCase();
-  if(sku.startsWith("CUSTOM-")) return "assigned as replacement";
-  // Call out samples explicitly — they ship from stock alongside a build and are
-  // the item most easily forgotten in the box (Thomas, 2026-07-09).
-  if(ln.is_sample || sku.startsWith("SAC") || sku.startsWith("SAF")
-     || lineProductType(ln.variant_sku, ln.title) === "Sample")
-    return "sample — ships with order";
-  return "ships with order";
+  return sku.startsWith("CUSTOM-") ? "assigned as replacement" : "ships with order";
 }
 
 function trvRefRow(ln, where, travelerLabel, isShipWith){
@@ -6320,6 +6688,25 @@ function trvReferences(o, p){
   return `<div class="trv-refs">
       <div class="trv-refs-head">Also on this order</div>
       <table class="trv-table"><tbody>${refs.join("")}</tbody></table>
+    </div>`;
+}
+
+// Dedicated "Samples" section — always at the very bottom of the order, below
+// "Also on this order". Samples (SAC color / SAF finish) are NOT bunched with the
+// build they match: they're kept separate and packed together at the end. The
+// whole section carries an orange left edge so a sample on an order can't be
+// skimmed past. Finish samples band above color samples (o.samples arrives
+// pre-sorted from classify.sample_lines). Rendered on every sheet of the order so
+// it can't be missed, exactly like the refs list.
+function trvSamples(o){
+  const samples = o.samples || [];
+  if(!samples.length) return "";
+  const n = samples.reduce((s, ln) => s + (Number(ln.qty) || 0), 0);
+  const count = `${n} sample${n === 1 ? "" : "s"}`;
+  const rows = samples.map(ln => trvRefRow(ln, "pack at end", "", false)).join("");
+  return `<div class="trv-refs trv-samples">
+      <div class="trv-refs-head trv-samples-head">Samples <span class="trv-samples-count">${count}</span></div>
+      <table class="trv-table"><tbody>${rows}</tbody></table>
     </div>`;
 }
 
@@ -6487,6 +6874,7 @@ function renderMasterTraveler(o, calloutHtml, showSelect){
       </thead>
       <tbody>${rows.join("")}</tbody>
     </table>
+    ${trvSamples(o)}
     ${trvNotes(o)}
     <div class="trv-spacer"></div>
     <div class="trv-foot">
@@ -6599,6 +6987,7 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
       <tbody class="trv-drop" ondragover="trvDragOver(event)" ondragleave="trvDragLeave(event)" ondrop="trvDrop(event)">${buildRows}${emptyHint}</tbody>
     </table>
     ${o._master ? trvMasterRefNote(total) : trvReferences(o, p)}
+    ${trvSamples(o)}
     ${trvNotes(o)}
     <div class="trv-spacer"></div>
     <div class="trv-foot">
