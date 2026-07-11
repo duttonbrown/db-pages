@@ -18,7 +18,7 @@ Public static HTML hosted via GitHub Pages. Dutton Brown content organized by te
 dutton-brown/
   company-wide/    — roadmap, annual report, team pillars
   admin-hr/        — (empty for now)
-  operations/      — QB rollout, MrPeasy migration, parts usage, open orders
+  operations/      — QB rollout, inventory/PO build, parts usage, open orders
   production/      — KPI map, BOMs, color queue, wash lists, fulfillment
   design-dev/      — (empty for now)
   marketing/       — KPI map, trade program, dashboards
