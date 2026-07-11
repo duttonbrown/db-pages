@@ -956,6 +956,11 @@
      missed on a dense board. VOID = discard the paperwork; CHANGED = reprint. */
   .tag-void    { background: var(--error); color: #fff; }
   .tag-changed { background: var(--accent-dark); color: #fff; }
+  /* Finished-goods stock chips — the line's exact SKU is on the shelf.
+     Dashed amber = undecided (check stock), green = pull decided, gray = build. */
+  .tag-stock       { background: #FFF7EB; color: var(--accent-dark); border: 1px dashed var(--accent); }
+  .tag-stock-pull  { background: #E8F5E9; color: var(--success); }
+  .tag-stock-build { background: #F0F0F0; color: var(--muted); }
 
   /* Compact NOTE chip + floating popover. The chip sits inline (no row-height
      cost); the popover is position:absolute inside the .order-block so opening
@@ -1340,6 +1345,31 @@
      "Traveler" eyebrow) it gets no top margin and a little breathing room below
      so it reads as the first thing on the sheet. */
   .trv-head .trv-expedite { margin: 0 0 12px; }
+
+  /* Finished-goods STOCK box — prints on the traveler when a build line's SKU
+     is on the shelf. Advisory (undecided) or instructional (after a PULL /
+     BUILD NEW decision at release). Solid dark border so it prints crisp. */
+  .trv-stock {
+    border: 2px solid #1a1a1a;
+    border-radius: 6px;
+    padding: 7px 12px 8px;
+    margin: 4px 0 10px;
+    font-size: 12.5px;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .trv-stock-tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; color: #1a1a1a;
+    margin-bottom: 2px;
+  }
+  .trv-stock-line { margin: 2px 0; }
+  .trv-stock-note { color: #444; font-size: 11.5px; margin-top: 1px; }
+  .trv-stock-actions { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+  .trv-stock-qty {
+    width: 52px; font-family: inherit; font-size: 12px; padding: 3px 6px;
+    border: 1px solid var(--border); border-radius: 6px;
+  }
 
   /* Bill to / Ship to */
   .trv-addresses { display: flex; gap: 40px; margin: 10px 0 6px; }
@@ -1814,8 +1844,632 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-10T17:00:03",
+  "built_at": "2026-07-11T07:00:06",
   "orders": [
+    {
+      "shopify_order_id": "7050117021778",
+      "shopify_order_name": "36517",
+      "shopify_order_number": "36517",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 1021.84,
+      "ship_by_date": null,
+      "latest_ship_by": "August 7, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-07-10T21:55:51-05:00",
+      "tags": "redo, trade",
+      "total_price": 544.24,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7050117021778",
+          "shopify_order_name": "36517",
+          "shopify_order_number": "36517",
+          "key": [
+            "color",
+            "Ochre",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Ochre",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60226-17"
+          ],
+          "variant_skus": [
+            "60226-17-2H",
+            "BULB-G25-W"
+          ],
+          "line_item_titles": [
+            "Color Pilot Sconce 17\"",
+            "LED G25 Bulb - Matte White"
+          ],
+          "lines": [
+            {
+              "title": "Color Pilot Sconce 17\"",
+              "variant_title": "Nickel / Ochre / Hardwired (no switch)",
+              "variant_sku": "60226-17-2H",
+              "parent_sku": "60226-17",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-pilot-sconce-17-nickel-ochre_9800f2e9-4b7a-418d-b462-0f3f29d7c0d8.jpg?v=1757597120&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17038316404818,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "LED G25 Bulb - Matte White",
+              "variant_title": "550 lumens",
+              "variant_sku": "BULB-G25-W",
+              "parent_sku": "BULB-G25-W",
+              "qty": 2,
+              "category": "accessory",
+              "category_label": "Bulb",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/BULB-G25.jpg?v=1782229459&width=120",
+              "properties": [],
+              "line_item_id": 17038316372050,
+              "is_bulb": true,
+              "bulb_type": "G25",
+              "bulb_count": 2,
+              "fold_bulb": true
+            }
+          ],
+          "total_qty": 4,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Ochre|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7050117021778",
+          "shopify_order_name": "36517",
+          "shopify_order_number": "36517",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-10T21:55:51-05:00",
+          "parent_sku": "60226-17",
+          "color": "Ochre",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            17038316404818
+          ],
+          "item_titles": [
+            "Color Pilot Sconce 17\""
+          ],
+          "variant_skus": [
+            "60226-17-2H"
+          ],
+          "lines": [
+            {
+              "sku": "60226-17-2H",
+              "title": "Color Pilot Sconce 17\"",
+              "qty": 2,
+              "finish": "Nickel",
+              "color": "Ochre",
+              "category": "fixture",
+              "variant_title": "Nickel / Ochre / Hardwired (no switch)",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-pilot-sconce-17-nickel-ochre_9800f2e9-4b7a-418d-b462-0f3f29d7c0d8.jpg?v=1757597120&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
+    {
+      "shopify_order_id": "7050066133074",
+      "shopify_order_name": "36516",
+      "shopify_order_number": "36516",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 388.78,
+      "ship_by_date": null,
+      "latest_ship_by": "August 7, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-07-10T21:00:17-05:00",
+      "tags": "redo",
+      "total_price": 346.69,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7050066133074",
+          "shopify_order_name": "36516",
+          "shopify_order_number": "36516",
+          "key": [
+            "color",
+            "Lagoon",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "70220"
+          ],
+          "variant_skus": [
+            "70220-2D"
+          ],
+          "line_item_titles": [
+            "Color Bianca Sconce 12\""
+          ],
+          "lines": [
+            {
+              "title": "Color Bianca Sconce 12\"",
+              "variant_title": "Nickel / Lagoon",
+              "variant_sku": "70220-2D",
+              "parent_sku": "70220",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-bianca-sconce-12-nickel-lagoon.jpg?v=1775636613&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17038201028690,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Lagoon|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7050066133074",
+          "shopify_order_name": "36516",
+          "shopify_order_number": "36516",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-10T21:00:17-05:00",
+          "parent_sku": "70220",
+          "color": "Lagoon",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17038201028690
+          ],
+          "item_titles": [
+            "Color Bianca Sconce 12\""
+          ],
+          "variant_skus": [
+            "70220-2D"
+          ],
+          "lines": [
+            {
+              "sku": "70220-2D",
+              "title": "Color Bianca Sconce 12\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Lagoon",
+              "category": "fixture",
+              "variant_title": "Nickel / Lagoon",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-bianca-sconce-12-nickel-lagoon.jpg?v=1775636613&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
+    {
+      "shopify_order_id": "7049967534162",
+      "shopify_order_name": "36515",
+      "shopify_order_number": "36515",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 7,
+      "customer_total_spent": 7327.09,
+      "ship_by_date": null,
+      "latest_ship_by": "August 7, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-07-10T19:32:29-05:00",
+      "tags": "trade",
+      "total_price": 2368.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7049967534162",
+          "shopify_order_name": "36515",
+          "shopify_order_number": "36515",
+          "key": [
+            "color",
+            "Lagoon",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60601-48-D"
+          ],
+          "variant_skus": [
+            "60601-48-D"
+          ],
+          "line_item_titles": [
+            "Color Commander Chandelier 47\""
+          ],
+          "lines": [
+            {
+              "title": "Color Commander Chandelier 47\"",
+              "variant_title": "Lagoon / 48\"",
+              "variant_sku": "60601-48-D",
+              "parent_sku": "60601-48-D",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-commander-chandelier-47-lagoon_7f3dc6fa-89f6-4c38-82f8-d1f53c1c966f.jpg?v=1747968125&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17037933445202,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Lagoon|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7049967534162",
+          "shopify_order_name": "36515",
+          "shopify_order_number": "36515",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-10T19:32:29-05:00",
+          "parent_sku": "60601-48-D",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            17037933445202
+          ],
+          "item_titles": [
+            "Color Commander Chandelier 47\""
+          ],
+          "variant_skus": [
+            "60601-48-D"
+          ],
+          "lines": [
+            {
+              "sku": "60601-48-D",
+              "title": "Color Commander Chandelier 47\"",
+              "qty": 2,
+              "finish": null,
+              "color": "Lagoon",
+              "category": "fixture",
+              "variant_title": "Lagoon / 48\"",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-commander-chandelier-47-lagoon_7f3dc6fa-89f6-4c38-82f8-d1f53c1c966f.jpg?v=1747968125&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
+    {
+      "shopify_order_id": "7049871687762",
+      "shopify_order_name": "36514",
+      "shopify_order_number": "36514",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 240.0,
+      "ship_by_date": null,
+      "latest_ship_by": "July 17, 2026",
+      "lead_time_label": "Within 1 week",
+      "is_expedited": false,
+      "created_at": "2026-07-10T18:09:22-05:00",
+      "tags": "",
+      "total_price": 240.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Finish-Only",
+        "Hardware-Only"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7049871687762",
+          "shopify_order_name": "36514",
+          "shopify_order_number": "36514",
+          "key": [
+            "finish",
+            "Nickel"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": "Nickel",
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H71",
+            "H60-18"
+          ],
+          "variant_skus": [
+            "H71-2",
+            "H60-18-2"
+          ],
+          "line_item_titles": [
+            "Throne Hand Towel Bar",
+            "Throne Towel Rack 18\""
+          ],
+          "lines": [
+            {
+              "title": "Throne Hand Towel Bar",
+              "variant_title": "Nickel",
+              "variant_sku": "H71-2",
+              "parent_sku": "H71",
+              "qty": 1,
+              "category": "hardware",
+              "category_label": "Hardware",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/throne-hand-towel-bar-6-hardware-nickel-1_4d938738-81b9-4088-bcb6-8b570b789a1b.jpg?v=1775636810&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Within 1 week",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17037685489746,
+              "in_stock": {
+                "have": 1,
+                "name": "Throne Hnad Towel Bar",
+                "notes": "",
+                "flags": []
+              }
+            },
+            {
+              "title": "Throne Towel Rack 18\"",
+              "variant_title": "Nickel",
+              "variant_sku": "H60-18-2",
+              "parent_sku": "H60-18",
+              "qty": 1,
+              "category": "holder",
+              "category_label": "Holder",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/office-towel-rack-20-nickel-1_d5449507-d121-4d02-bc8d-7b05ceb78f71.jpg?v=1775636814&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Within 1 week",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17037685522514,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "finish",
+          "traveler_key": "finish|Nickel",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7049871687762",
+          "shopify_order_name": "36514",
+          "shopify_order_number": "36514",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-10T18:09:22-05:00",
+          "parent_sku": "H71",
+          "color": null,
+          "finish": "Nickel",
+          "category": "hardware",
+          "category_label": "Hardware",
+          "qty": 1,
+          "line_item_ids": [
+            17037685489746
+          ],
+          "item_titles": [
+            "Throne Hand Towel Bar"
+          ],
+          "variant_skus": [
+            "H71-2"
+          ],
+          "lines": [
+            {
+              "sku": "H71-2",
+              "title": "Throne Hand Towel Bar",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": null,
+              "category": "hardware",
+              "variant_title": "Nickel",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/throne-hand-towel-bar-6-hardware-nickel-1_4d938738-81b9-4088-bcb6-8b570b789a1b.jpg?v=1775636810&width=120"
+            }
+          ],
+          "tags": [
+            "Finish-Only",
+            "Hardware-Only"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7049871687762",
+          "shopify_order_name": "36514",
+          "shopify_order_number": "36514",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-10T18:09:22-05:00",
+          "parent_sku": "H60-18",
+          "color": null,
+          "finish": "Nickel",
+          "category": "holder",
+          "category_label": "Holder",
+          "qty": 1,
+          "line_item_ids": [
+            17037685522514
+          ],
+          "item_titles": [
+            "Throne Towel Rack 18\""
+          ],
+          "variant_skus": [
+            "H60-18-2"
+          ],
+          "lines": [
+            {
+              "sku": "H60-18-2",
+              "title": "Throne Towel Rack 18\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": null,
+              "category": "holder",
+              "variant_title": "Nickel",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/office-towel-rack-20-nickel-1_d5449507-d121-4d02-bc8d-7b05ceb78f71.jpg?v=1775636814&width=120"
+            }
+          ],
+          "tags": [
+            "Finish-Only",
+            "Hardware-Only"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
     {
       "shopify_order_id": "7049745039442",
       "shopify_order_name": "36513",
@@ -1860,8 +2514,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -1989,6 +2643,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
+              "line_item_id": 17037383794770,
+              "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-A15"
             }
@@ -2121,6 +2777,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
+              "line_item_id": 17037336510546,
+              "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-A"
             }
@@ -2256,6 +2914,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
+              "line_item_id": 17037300564050,
+              "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-A"
             },
@@ -2274,7 +2934,9 @@ const QUEUE = {
                   "value": "Same as fixture",
                   "is_image": false
                 }
-              ]
+              ],
+              "line_item_id": 17037300531282,
+              "in_stock": null
             }
           ],
           "total_qty": 4,
@@ -2452,6 +3114,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
+              "line_item_id": 17037208354898,
+              "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-A"
             },
@@ -2599,7 +3263,9 @@ const QUEUE = {
                   "value": "3 - 4 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "line_item_id": 17036972326994,
+              "in_stock": null
             }
           ],
           "total_qty": 2,
@@ -2731,6 +3397,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
+              "line_item_id": 17036179439698,
+              "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-A15"
             }
@@ -2870,6 +3538,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
+              "line_item_id": 17036122128466,
+              "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-PAR16"
             },
@@ -2889,6 +3559,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
+              "line_item_id": 17036122161234,
+              "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-PAR16"
             },
@@ -2908,6 +3580,8 @@ const QUEUE = {
                   "is_image": false
                 }
               ],
+              "line_item_id": 17036122194002,
+              "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-PAR16"
             }
@@ -3151,7 +3825,9 @@ const QUEUE = {
                   "value": "3 - 4 weeks",
                   "is_image": false
                 }
-              ]
+              ],
+              "line_item_id": 17035897241682,
+              "in_stock": null
             }
           ],
           "total_qty": 1,
@@ -3282,7 +3958,9 @@ const QUEUE = {
                   "value": "Within 1 week",
                   "is_image": false
                 }
-              ]
+              ],
+              "line_item_id": 17035298340946,
+              "in_stock": null
             }
           ],
           "total_qty": 2,
@@ -3348,11 +4026,11 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 10,
-    "printouts": 10,
-    "notion_rows": 12,
+    "orders": 14,
+    "printouts": 14,
+    "notion_rows": 17,
     "skipped_already_printed": 221,
-    "printed_today": 18,
+    "printed_today": 0,
     "needs_attention": 0,
     "printed_review": 0
   },
@@ -4071,6 +4749,20 @@ function renderLine(line, ctxColor, ctxFinish, forceLabels){
   }
   if(sizeOpt){
     tags.push(`<span class="line-variant" title="Option: ${sizeOpt}">${sizeOpt}</span>`);
+  }
+  // Finished-goods shelf hit — dashed amber until the pull/build decision is
+  // made (on the traveler at release), then green PULL / gray BUILD NEW.
+  if(line.in_stock || line.stock_decision){
+    const d = line.stock_decision;
+    if(d && d.action === "pull"){
+      tags.push(`<span class="tag tag-stock-pull" title="Pull from finished-goods stock (decided at release)">PULL ${d.qty || 1} FROM STOCK</span>`);
+    } else if(d && d.action === "build"){
+      tags.push(`<span class="tag tag-stock-build" title="Stock ignored — building new (manager decision)">BUILD NEW</span>`);
+    } else if(line.in_stock){
+      const hint = [line.in_stock.flags && line.in_stock.flags.length ? line.in_stock.flags.join(", ") : "",
+                    line.in_stock.notes || ""].filter(Boolean).join(" — ");
+      tags.push(`<span class="tag tag-stock" title="${escapeHtml(hint || "On the finished-goods shelf — decide pull vs build at release")}">IN STOCK ×${line.in_stock.have}</span>`);
+    }
   }
   const variantTag = tags.length ? " " + tags.join(" ") : "";
   return `
@@ -4899,6 +5591,100 @@ function trvColorFinishChip(p){
   return `<span class="color-chip color-chip-plain">${escapeHtml(name)}</span>`;
 }
 
+// ── Finished-goods STOCK box ─────────────────────────────────────────────────
+// Rendered on any traveler whose build lines include a finished-goods shelf
+// hit (line.in_stock, from the hourly Notion cache) or a recorded decision
+// (line.stock_decision, from the console server). The box PRINTS; the
+// pull/build buttons are no-print and live here because release happens from
+// this view — decide, then print, and the sheet carries the instruction.
+// Decrement happens later at pick-confirm on the jobs board, not here.
+function trvStockBox(o, p){
+  const lines = (p.lines||[]).filter(ln => ln.in_stock || ln.stock_decision);
+  if(!lines.length) return "";
+  const rows = lines.map(ln => {
+    const have = ln.in_stock ? ln.in_stock.have : 0;
+    const need = ln.qty || 1;
+    const sku  = escapeHtml(ln.variant_sku || ln.parent_sku || "?");
+    const d = ln.stock_decision;
+    const meta = [];
+    if(ln.in_stock && ln.in_stock.flags && ln.in_stock.flags.length) meta.push(ln.in_stock.flags.join(", "));
+    if(ln.in_stock && ln.in_stock.notes) meta.push(ln.in_stock.notes);
+    const note = meta.length ? `<div class="trv-stock-note">${escapeHtml(meta.join(" — "))}</div>` : "";
+    const customCaution = (ln.properties||[]).length
+      ? " CUSTOM OPTIONS on this line — verify the shelf unit matches before pulling." : "";
+    let text;
+    if(d && d.action === "pull"){
+      const pq = d.qty || 1;
+      const rest = need - pq;
+      text = `<b>PULL ${pq} FROM STOCK:</b> ${sku} (on hand ${have}).` +
+             (rest > 0 ? ` <b>Build the other ${rest}.</b>` : " No build — confirm pick on the jobs board, then route to QC / Testing.");
+    } else if(d && d.action === "build"){
+      text = `<b>BUILD NEW:</b> stock ignored for ${sku} (manager decision).`;
+    } else {
+      text = `<b>STOCK CHECK:</b> ${sku} — ${have} on hand, need ${need}. Pull or build? Confirm with manager.${customCaution}`;
+    }
+    const ds = `data-order="${escapeHtml(String(o.shopify_order_id||""))}" data-ordername="${escapeHtml(o.shopify_order_name||"")}" data-line="${escapeHtml(String(ln.line_item_id||""))}" data-sku="${sku}"`;
+    const maxPull = Math.max(1, Math.min(have, need));
+    const actions = d
+      ? `<div class="trv-stock-actions no-print" ${ds}>
+           <button type="button" class="trv-btn trv-btn-ghost" onclick="stockDecision(this,'clear')">Change decision</button>
+         </div>`
+      : `<div class="trv-stock-actions no-print" ${ds}>
+           ${maxPull > 1 ? `<input type="number" class="trv-stock-qty" value="${maxPull}" min="1" max="${maxPull}" title="Qty to pull from stock">` : ""}
+           <button type="button" class="trv-btn" onclick="stockDecision(this,'pull')">Pull from stock</button>
+           <button type="button" class="trv-btn trv-btn-ghost" onclick="stockDecision(this,'build')">Build new</button>
+         </div>`;
+    return `<div class="trv-stock-line">${text}${note}${actions}</div>`;
+  }).join("");
+  return `<div class="trv-stock"><span class="trv-stock-tag">Finished goods — in stock</span>${rows}</div>`;
+}
+
+// POST the pull/build decision to the console server (:8766 via hooks /prod),
+// then patch the in-memory queue and re-render so the sheet prints with the
+// instruction immediately. Idempotent per (order, line) on the server.
+async function stockDecision(btn, action){
+  if(!PROD_API_BASE){
+    alert("Stock decisions need the live hub (hooks bridge). Open this board on hub.duttonbrown.com.");
+    return;
+  }
+  const wrap = btn.closest(".trv-stock-actions");
+  const orderId = wrap.dataset.order, lineId = wrap.dataset.line, sku = wrap.dataset.sku;
+  let qty = 1;
+  const qtyEl = wrap.querySelector(".trv-stock-qty");
+  if(qtyEl) qty = Math.max(1, parseInt(qtyEl.value, 10) || 1);
+  btn.disabled = true; const label = btn.textContent; btn.textContent = "…";
+  try{
+    const resp = await fetch(`${PROD_API_BASE}/api/stock/decision`, {
+      method: "POST", credentials: "include",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({order_id: orderId, order_name: wrap.dataset.ordername || "",
+                            line_item_id: lineId, sku, action, qty}),
+    });
+    const data = await resp.json();
+    if(!data || data.ok !== true) throw new Error((data && data.message) || `Error ${resp.status}`);
+    applyStockDecisionLocal(orderId, lineId, action, qty);
+    renderTravelers();
+  }catch(e){
+    btn.textContent = label;
+    alert("Stock decision failed: " + e.message);
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+function applyStockDecisionLocal(orderId, lineId, action, qty){
+  for(const o of (QUEUE && QUEUE.orders) || []){
+    if(String(o.shopify_order_id) !== String(orderId)) continue;
+    for(const p of (o.printouts || [])){
+      for(const ln of (p.lines || [])){
+        if(String(ln.line_item_id) !== String(lineId)) continue;
+        if(action === "clear") delete ln.stock_decision;
+        else ln.stock_decision = {action, qty, status: "pending-pick"};
+      }
+    }
+  }
+}
+
 function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
   const multi = (total || 1) >= 2;   // only number travelers when there's >1
   // A Shipping traveler is already past QC + the ship-by milestone (it's just
@@ -4958,6 +5744,7 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
           ${trvChangePill(o)}
         </div>
         ${expedite}
+        ${trvStockBox(o, p)}
         <div class="trv-ordernum-row">
           <h2 class="trv-ordernum">Order ${orderName}</h2>
           <p class="trv-eyebrow">Traveler${multi ? ` <span class="trv-count-of">${(idx||0)+1}/${total}</span>` : ""}</p>
