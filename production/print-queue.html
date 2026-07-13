@@ -1661,14 +1661,14 @@
     body.printing-travelers .app-shell,
     body.printing-travelers .app-main,
     body.printing-travelers .card,
-    body.printing-travelers #content-travelers,
+    body.printing-travelers #content-print,
     body.printing-travelers .trv-list {
       display: block !important;
       width: 100% !important; max-width: none !important;
       padding: 0 !important; margin: 0 !important;
       border: none !important; box-shadow: none !important;
     }
-    body.printing-travelers .tab-content:not(#content-travelers) { display: none !important; }
+    body.printing-travelers .tab-content:not(#content-print) { display: none !important; }
     /* Belt-and-suspenders: hide EVERY direct child of the card wrapper except the
        travelers content. The wrapper chrome (page-intro, banners, kpi-row,
        needs-attention / printed-review, the other tabs) is screen-only — and one
@@ -1676,7 +1676,7 @@
        (a NUL char in Poppins) at the page's top-left corner of every printed PDF.
        Scoping print to ONLY #content-travelers kills it at the source, whatever
        the exact emitter, and guarantees the paper is the work orders alone. */
-    body.printing-travelers .card-wide > *:not(#content-travelers) { display: none !important; }
+    body.printing-travelers .card-wide > *:not(#content-print) { display: none !important; }
 
     .traveler {
       box-shadow: none; border: none; border-radius: 0;
@@ -1778,14 +1778,9 @@
        copied-tag accident. Populated by renderPrintedReview(); hidden when empty. -->
   <div class="needs-attention printed-review" id="printedReview" hidden></div>
 
-  <!-- ── Order queue ── -->
-  <div class="tab-content" id="content-order">
-    <div class="oq-cutoff-info" id="oqCutoff"></div>
-    <div class="order-queue-list" id="orderQueue"></div>
-  </div>
-
-  <!-- ── Print queue (existing content) ── -->
-  <div class="tab-content active" id="content-print">
+  <!-- ── Plan (was "Print Queue"; absorbs the old Order Queue as the
+       "New since cutoff" sort mode below) ── -->
+  <div class="tab-content active" id="content-plan">
     <div class="filter-bar">
       <span class="label">Sort</span>
       <div class="filter-pills" id="sortPills">
@@ -1795,6 +1790,9 @@
                 onclick="setSort(this,'samplesfirst')">Samples + Quick first</button>
         <button type="button" class="filter-pill" data-sort="chrono"
                 onclick="setSort(this,'chrono')">Chronological</button>
+        <button type="button" class="filter-pill" data-sort="sincecutoff"
+                onclick="setSort(this,'sincecutoff')"
+                title="Orders that arrived since the last release (falls back to today 6 AM) — the old Order Queue view.">New since cutoff</button>
       </div>
       <span class="release-hint" id="releaseHint">
         Release: run <code>python release_queue.py</code>
@@ -1803,8 +1801,9 @@
     <div id="sections"></div>
   </div>
 
-  <!-- ── Travelers (one work-order sheet per printout — screen == print) ── -->
-  <div class="tab-content" id="content-travelers">
+  <!-- ── Print (was "Travelers") — one work-order sheet per printout;
+       screen == print. This is where printing/releasing happens. ── -->
+  <div class="tab-content" id="content-print">
     <div class="trv-toolbar no-print">
       <div class="trv-search-wrap">
         <input type="search" id="trvSearch" class="trv-search" placeholder="Search order #, customer, SKU, color, job…"
@@ -1844,8 +1843,144 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-13T13:24:37",
+  "built_at": "2026-07-13T14:00:05",
   "orders": [
+    {
+      "shopify_order_id": "7055219949650",
+      "shopify_order_name": "36540",
+      "shopify_order_number": "36540",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 346.8,
+      "ship_by_date": null,
+      "latest_ship_by": "August 10, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-07-13T13:35:47-05:00",
+      "tags": "",
+      "total_price": 346.8,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7055219949650",
+          "shopify_order_name": "36540",
+          "shopify_order_number": "36540",
+          "key": [
+            "color",
+            "Lagoon",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Lagoon",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "70110"
+          ],
+          "variant_skus": [
+            "70110-3D"
+          ],
+          "line_item_titles": [
+            "Color Bling Pendant"
+          ],
+          "lines": [
+            {
+              "title": "Color Bling Pendant",
+              "variant_title": "Black / Lagoon / Flat ceiling",
+              "variant_sku": "70110-3D",
+              "parent_sku": "70110",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Black",
+              "color": "Lagoon",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-bling-pendant-black-lagoon.jpg?v=1758455190&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17048664375378,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Lagoon|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7055219949650",
+          "shopify_order_name": "36540",
+          "shopify_order_number": "36540",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-13T13:35:47-05:00",
+          "parent_sku": "70110",
+          "color": "Lagoon",
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17048664375378
+          ],
+          "item_titles": [
+            "Color Bling Pendant"
+          ],
+          "variant_skus": [
+            "70110-3D"
+          ],
+          "lines": [
+            {
+              "sku": "70110-3D",
+              "title": "Color Bling Pendant",
+              "qty": 1,
+              "finish": "Black",
+              "color": "Lagoon",
+              "category": "fixture",
+              "variant_title": "Black / Lagoon / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/6-bling-pendant-black-lagoon.jpg?v=1758455190&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
     {
       "shopify_order_id": "7055192981586",
       "shopify_order_name": "36539",
@@ -2274,14 +2409,14 @@ const QUEUE = {
       "customer_name": "",
       "customer_email": "",
       "customer_orders_count": 17,
-      "customer_total_spent": 13160.39,
+      "customer_total_spent": 13117.79,
       "ship_by_date": null,
-      "latest_ship_by": "August 10, 2026",
-      "lead_time_label": "3 - 4 weeks",
+      "latest_ship_by": "\u2014",
+      "lead_time_label": "",
       "is_expedited": false,
       "created_at": "2026-07-13T12:48:43-05:00",
       "tags": "$10K Club, trade",
-      "total_price": 522.6,
+      "total_price": 1002.6,
       "priority": null,
       "is_large_order": false,
       "auto_tags": [
@@ -2330,14 +2465,8 @@ const QUEUE = {
               "finish": "Brass",
               "color": "Riding Hood Red",
               "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-supreme-flush-mount-brass-ridinghoodred.jpg?v=1747968314&width=120",
-              "properties": [
-                {
-                  "name": "Lead Time",
-                  "value": "3 - 4 weeks",
-                  "is_image": false
-                }
-              ],
-              "line_item_id": 17048517115986,
+              "properties": [],
+              "line_item_id": 17048720998482,
               "in_stock": null,
               "rod_finish": "Finish",
               "lampholder": "L-A15"
@@ -2366,7 +2495,7 @@ const QUEUE = {
           "category_label": "Fixture",
           "qty": 1,
           "line_item_ids": [
-            17048517115986
+            17048720998482
           ],
           "item_titles": [
             "Color Supreme Flush Mount"
@@ -2447,9 +2576,9 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-B",
-            "SAC-BO",
+            "SAC-A",
             "SAC-K",
-            "SAC-A"
+            "SAC-BO"
           ],
           "variant_skus": [
             "SAC-K",
@@ -2796,8 +2925,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -3036,8 +3165,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -7049,10 +7178,10 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 34,
-    "printouts": 34,
-    "notion_rows": 39,
-    "skipped_already_printed": 209,
+    "orders": 35,
+    "printouts": 35,
+    "notion_rows": 40,
+    "skipped_already_printed": 208,
     "printed_today": 0,
     "needs_attention": 0,
     "printed_review": 0
@@ -8098,52 +8227,63 @@ function splitPage(orderId, idx){
   recalcOrderTotal(order);
 }
 // ── Tab switching ────────────────────────────────────────────────────────────
-const TAB_NAMES = ["order","print","travelers"];
+// Two tabs now: "plan" (was "Print Queue" — the location-grouped planning board,
+// which also hosts the old Order Queue as its "New since cutoff" sort mode) and
+// "print" (was "Travelers" — the printable sheets, where release happens).
+const TAB_NAMES = ["plan","print"];
+// Old bookmarks/links still in the wild resolve to the renamed tabs:
+//   #order → planning board (Order Queue folded into Plan)
+//   #print (old = Print Queue) → #plan
+//   #travelers → #print (the sheets)
+const TAB_ALIASES = { order: "plan", travelers: "print" };
+function resolveTab(name){
+  if(TAB_ALIASES.hasOwnProperty(name)) return TAB_ALIASES[name];
+  return TAB_NAMES.includes(name) ? name : null;
+}
 
 function setTab(name, updateHash = true){
-  if(!TAB_NAMES.includes(name)) name = "print";
+  name = resolveTab(name) || "plan";
   TAB_NAMES.forEach(n => {
     const tab = document.getElementById(`tab-${n}`);
     const content = document.getElementById(`content-${n}`);
     if(!tab || !content) return;
-    // The rail tabs are now Print sub-links; mark the active one with the
-    // sub-link current style (is-subcurrent), matching the hub rail elsewhere.
+    // The rail tabs are Manage sub-links; mark the active one with the sub-link
+    // current style (is-subcurrent), matching the hub rail elsewhere.
     tab.classList.toggle("is-subcurrent", n === name);
     content.classList.toggle("active", n === name);
   });
   // Reflect the active tab in the URL so a tab is bookmarkable / shareable
-  // (e.g. hub.duttonbrown.com/print-queue#travelers). Guard the write so the
-  // hashchange listener below doesn't re-fire setTab in a loop, and so the
+  // (e.g. hub.duttonbrown.com/production/print-queue.html#print). Guard the write
+  // so the hashchange listener below doesn't re-fire setTab in a loop, and so the
   // init() call that honors an incoming hash doesn't rewrite it.
   if(updateHash && location.hash.replace("#","") !== name){
     history.replaceState(null, "", `#${name}`);
   }
-  if(name === "order")     renderOrderQueue();
-  if(name === "travelers") renderTravelers();
+  if(name === "plan")  render();
+  if(name === "print") renderTravelers();
 }
 
 // Back/forward and manual hash edits switch tabs without a full reload.
 window.addEventListener("hashchange", () => {
-  const hash = (location.hash || "").replace("#","");
-  if(TAB_NAMES.includes(hash)) setTab(hash, false);
+  const name = resolveTab((location.hash || "").replace("#",""));
+  if(name) setTab(name, false);
 });
 
-// The Print sub-links (Order Queue / Print Queue / Travelers) are
-// in-page tabs rendered by /_shared/nav.js as <a data-tab="…">. Switch the panel
-// in place via a delegated handler (replaces the old inline onclick that lived on
-// the hand-coded rail). data-sub disclosure toggles stay owned by nav.js.
+// The Manage sub-links (Plan / Print) are in-page tabs rendered by
+// /_shared/nav.js as <a data-tab="…">. Switch the panel in place via a delegated
+// handler (replaces the old inline onclick that lived on the hand-coded rail).
+// data-sub disclosure toggles stay owned by nav.js.
 document.addEventListener("click", e => {
   const a = e.target.closest('.side-nav a[data-tab]');
   if(!a) return;
-  const name = a.getAttribute("data-tab");
-  if(TAB_NAMES.includes(name)){ e.preventDefault(); setTab(name); }
+  const name = resolveTab(a.getAttribute("data-tab"));
+  if(name){ e.preventDefault(); setTab(name); }
 });
 // nav.js injects the rail after this script runs; re-assert the active tab on its
 // freshly-rendered controls so the current tab shows is-subcurrent, and fill the
 // rail's count badges (they didn't exist when render() first ran).
 document.addEventListener("hub:railready", () => {
-  const hash = (location.hash || "").replace("#","");
-  setTab(TAB_NAMES.includes(hash) ? hash : "order", false);
+  setTab(resolveTab((location.hash || "").replace("#","")) || "plan", false);
   if (typeof updateTabCounts === "function") updateTabCounts();
 });
 
@@ -9814,17 +9954,20 @@ function showTrvToast(msg, undoFn){
 document.addEventListener("keydown", (e) => {
   const mod = e.ctrlKey || e.metaKey;
   if(!mod) return;
-  const onTravelers = document.getElementById("content-travelers")?.classList.contains("active");
-  const onPrint = document.getElementById("content-print")?.classList.contains("active");
-  if(onTravelers){
+  // Two panels, two undo stacks. content-print = the sheets view (was
+  // "Travelers"): Ctrl+Z undoes line moves. content-plan = the planning view
+  // (was "Print Queue"): Ctrl+Z undoes a sheet merge.
+  const onSheets = document.getElementById("content-print")?.classList.contains("active");
+  const onPlan   = document.getElementById("content-plan")?.classList.contains("active");
+  if(onSheets){
     if(e.key.toLowerCase() === "z" && !e.shiftKey){
       e.preventDefault(); undoLastMove();
     } else if(e.key.toLowerCase() === "y" || (e.key.toLowerCase() === "z" && e.shiftKey)){
       e.preventDefault(); redoLastMove();
     }
-  } else if(onPrint && e.key.toLowerCase() === "z" && !e.shiftKey){
-    // Ctrl+Z on the Print queue undoes the most recent sheet MERGE (the
-    // drag-to-combine), matching the undo muscle memory from Travelers.
+  } else if(onPlan && e.key.toLowerCase() === "z" && !e.shiftKey){
+    // Ctrl+Z on the Plan queue undoes the most recent sheet MERGE (the
+    // drag-to-combine), matching the undo muscle memory from the sheets view.
     const merges = loadMerges();
     let latest = null;
     for(const orderId in merges){
@@ -11046,39 +11189,38 @@ function trvChangePill(o){
   return "";
 }
 
+// The old "Order Queue" tab is now the Plan tab's "New since cutoff" sort mode.
+// render() calls this when SORT === "sincecutoff"; it paints the since-cutoff
+// order list into the Plan panel's #sections mount (read-only triage — no
+// location toggle or Pages control, same as the old Order Queue).
 function renderOrderQueue(){
-  const cutoffEl = document.getElementById("oqCutoff");
-  const listEl = document.getElementById("orderQueue");
+  const listEl = document.getElementById("sections");
+  if(!listEl) return;
   if(!QUEUE || !QUEUE.orders){ listEl.innerHTML = ""; return; }
 
   // Cutoff for "new since" — last release if set, else falls back to today 6 AM.
-  // The cutoff drives the filter below; the "Built …" timestamp by the title
-  // already tells the manager when the list was last refreshed, so we don't
-  // surface a separate cutoff label here.
+  // The "Built …" timestamp by the title already tells the manager when the list
+  // was last refreshed, so we don't surface a separate cutoff label here.
   let cutoff = getLastReleaseAt();
   if(!cutoff){
     const today6 = new Date();
     today6.setHours(6,0,0,0);
     cutoff = today6.toISOString();
   }
-  if(cutoffEl) cutoffEl.style.display = "none";
 
   const cutoffMs = new Date(cutoff).getTime();
   const since = (QUEUE.orders||[])
     .filter(o => new Date(o.created_at).getTime() >= cutoffMs)
     .sort((a,b) => (b.created_at||"").localeCompare(a.created_at||""));
 
-  document.getElementById("cnt-order").textContent = since.length;
-
   if(since.length === 0){
-    listEl.innerHTML = `<div class="oq-empty"><strong>No new orders since cutoff.</strong>You're caught up.</div>`;
+    listEl.innerHTML = `<div class="order-queue-list"><div class="oq-empty"><strong>No new orders since cutoff.</strong>You're caught up.</div></div>`;
     return;
   }
-  // Render each order using the SAME column grid as the Print queue so
+  // Render each order using the SAME column grid as the Plan queue so
   // order# / date / time-ago / customer / amount / tags cascade down the
-  // page in tidy vertical columns. No location toggle or Pages control —
-  // Order queue is read-only triage.
-  listEl.innerHTML = since.map(o => {
+  // page in tidy vertical columns.
+  listEl.innerHTML = `<div class="order-queue-list">` + since.map(o => {
     const orderName = `#${String(o.shopify_order_number || o.shopify_order_name || "?").replace(/^#/, "")}`;
     const orderLinkInner = o.shopify_url
       ? `<a href="${o.shopify_url}" target="_blank">${orderName}</a>`
@@ -11108,7 +11250,7 @@ function renderOrderQueue(){
           ${allLines.map(({line,color,finish}) => renderLine(line, color, finish, /*forceLabels*/true)).join("")}
         </ul>
       </div>`;
-  }).join("");
+  }).join("") + `</div>`;
 }
 
 // ── Qty distribution helper (used by the Travelers split) ───────────────────
@@ -11261,6 +11403,14 @@ function render(){
   `;
   renderNeedsAttention();
   renderPrintedReview();
+  // "New since cutoff" (the old Order Queue) is a flat, read-only, chronological
+  // list of orders that landed since the last release — not the location-grouped
+  // board. Paint it and stop; the KPI row + attention panels above still apply.
+  if(SORT === "sincecutoff"){
+    renderOrderQueue();
+    updateTabCounts(t);
+    return;
+  }
   // "Samples + Quick first" reorders the whole SECTION stack so the quick-ship
   // work (Shipping = samples, then Assembly) prints before Powder Coating — not
   // just within each section. Otherwise sections keep their default order.
@@ -11276,19 +11426,16 @@ function render(){
   updateTabCounts(t);
 }
 
-// Rail tab counts (Order / Print / Travelers). The rail is injected by nav.js
-// AFTER this script runs, so every id lookup must be null-safe: render() at
-// init time finds no rail (counts re-applied on hub:railready below).
+// Rail tab counts (Plan / Print). The rail is injected by nav.js AFTER this
+// script runs, so every id lookup must be null-safe: render() at init time finds
+// no rail (counts re-applied on hub:railready below).
+//   cnt-plan  = orders to plan/print (the planning backlog).
+//   cnt-print = traveler sheets those orders produce (the sheets to print).
 function updateTabCounts(t){
   t = t || (QUEUE && QUEUE.totals) || {};
   const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
-  set("cnt-print", t.printouts || 0);
-  set("cnt-travelers", (QUEUE.orders||[]).reduce((s,o)=>s+(o.printouts||[]).length, 0));
-  // Order count: simple — orders since last release / 6 AM
-  let cutoff = getLastReleaseAt();
-  if(!cutoff){ const d = new Date(); d.setHours(6,0,0,0); cutoff = d.toISOString(); }
-  const cMs = new Date(cutoff).getTime();
-  set("cnt-order", (QUEUE.orders||[]).filter(o => new Date(o.created_at).getTime() >= cMs).length);
+  set("cnt-plan", (QUEUE.orders||[]).length || t.orders || 0);
+  set("cnt-print", (QUEUE.orders||[]).reduce((s,o)=>s+(o.printouts||[]).length, 0));
 }
 
 function init(){
