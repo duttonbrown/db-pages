@@ -1371,6 +1371,36 @@
     border: 1px solid var(--border); border-radius: 6px;
   }
 
+  /* Request-parts mini-form (on a pulled stock line) — screen only. Lets the
+     manager add replacement/extra parts they decide on in the moment (e.g.
+     extension rods when converting a chandelier to a flush mount), tied back to
+     this Order + Job + SKU. color-part -> Powder Coating (PR), finish-part ->
+     Assembly (RW). */
+  .trv-reqparts { margin-top: 6px; }
+  .trv-reqparts-toggle {
+    font-size: 11px; font-weight: 600; color: var(--accent-dark, #b45f04);
+    background: none; border: none; font-family: inherit; cursor: pointer; padding: 0;
+  }
+  .trv-reqparts-form { margin-top: 6px; padding: 8px 10px; border: 1px dashed var(--accent, #FF9912);
+    border-radius: 6px; background: #FFFCF6; display: none; }
+  .trv-reqparts-form.on { display: block; }
+  .trv-rp-line { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 6px; }
+  .trv-rp-line input, .trv-rp-line select { font-family: inherit; font-size: 12px; padding: 4px 7px;
+    border: 1px solid var(--border); border-radius: 6px; }
+  .trv-rp-part { width: 150px; }
+  .trv-rp-note { width: 190px; max-width: 40vw; }
+  .trv-rp-qty { width: 48px; text-align: center; }
+  .trv-rp-hint { color: var(--muted, #888); font-size: 10.5px; margin-top: 2px; }
+
+  /* Requested-parts block — PRINTS on the traveler so the floor sees the adds. */
+  .trv-added-parts { margin-top: 6px; padding: 5px 0 0; border-top: 1px solid #ccc; }
+  .trv-added-parts b { font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
+  .trv-added-parts .ap-row { font-size: 12px; margin: 2px 0; }
+  .trv-added-parts .ap-tag { display: inline-block; font-size: 9.5px; font-weight: 700; padding: 0 5px;
+    border-radius: 4px; margin-left: 6px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .trv-added-parts .ap-tag.finish { background: #E9F0FA; color: #2C5A9E; }
+  .trv-added-parts .ap-tag.color  { background: #FBEEE0; color: #A85A12; }
+
   /* Bill to / Ship to */
   .trv-addresses { display: flex; gap: 40px; margin: 10px 0 6px; }
   .trv-addr { flex: 1; }
@@ -1843,7 +1873,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-13T15:00:35",
+  "built_at": "2026-07-13T16:00:05",
   "orders": [],
   "needs_attention": [],
   "printed_review": [],
@@ -1946,8 +1976,15 @@ function decodeVariantSku(sku){
   // Last hyphen-token = "<digit>[suffix]"
   const idx = sku.lastIndexOf("-");
   if(idx < 0) return {finish:null, color:null};
-  const tail = sku.slice(idx + 1);
-  if(!tail || !/^\d/.test(tail)) return {finish:null, color:null};
+  const head = sku.slice(0, idx), tail = sku.slice(idx + 1);
+  if(!tail) return {finish:null, color:null};
+  // Color-only fixture: bare color letter tail, no finish digit (e.g.
+  // 60401-18-A → White, 60431-A → White, 60401-36-BO → Bone). Only when the
+  // head is still a lighting/hardware parent (samples/accessories excluded).
+  if(!/^\d/.test(tail)){
+    return (COLOR_SUFFIX_TO_NAME[tail] && (/^[1-9]\d{4}/.test(head) || /^H\d{2}/i.test(head)))
+      ? {finish:null, color:COLOR_SUFFIX_TO_NAME[tail]} : {finish:null, color:null};
+  }
   const finish = FINISH_DIGIT_TO_NAME[tail[0]] || null;
   const colorSuffix = tail.slice(1);
   const color = colorSuffix ? (COLOR_SUFFIX_TO_NAME[colorSuffix] || null) : null;
@@ -3480,9 +3517,67 @@ function trvStockBox(o, p){
            <button type="button" class="trv-btn" onclick="stockDecision(this,'pull')">Pull from stock</button>
            <button type="button" class="trv-btn trv-btn-ghost" onclick="stockDecision(this,'build')">Build new</button>
          </div>`;
-    return `<div class="trv-stock-line">${text}${note}${actions}</div>`;
+    // On a PULLED line the manager may need extra/replacement parts they decide
+    // in the moment (rods, canopy, etc.). Colour + finish + job come from THIS
+    // line so a request ties back to the exact Order+Job+SKU. Only pulls get it.
+    const reqParts = (d && d.action === "pull")
+      ? trvReqPartsUi(o, p, ln, sku) : "";
+    const printedAdds = trvAddedPartsBlock(ln);
+    return `<div class="trv-stock-line">${text}${note}${printedAdds}${reqParts}${actions}</div>`;
   }).join("");
   return `<div class="trv-stock"><span class="trv-stock-tag">Finished goods — in stock</span>${rows}</div>`;
+}
+
+// The Request-parts control (screen-only) on a pulled stock line. Part comes
+// from the Part Families autocomplete (PART_CODES, loaded once); the finish/
+// color toggle chooses the route: color -> Powder Coating (Parts Request, keyed
+// to the unit's colour so it lands on the right batch), finish -> Assembly
+// (Rework). The colour is pre-derived from the line so the PR groups correctly.
+function trvReqPartsUi(o, p, ln, sku){
+  const dec = decodeVariantSku(sku);
+  const lineColor  = (Object.prototype.hasOwnProperty.call(ln, "color") ? ln.color : null) || dec.color || "";
+  const jobs = (p.jobs || []).map(j => j.job).filter(Boolean);
+  const job = jobs.length === 1 ? jobs[0] : "";   // ambiguous → let PR resolve by order
+  const ds = `data-order="${escapeHtml(String(o.shopify_order_number||o.shopify_order_id||""))}"`
+           + ` data-sku="${escapeHtml(sku)}" data-color="${escapeHtml(lineColor)}" data-job="${escapeHtml(job)}"`;
+  const partOpts = (window.PART_CODES || []).map(c => `<option value="${escapeHtml(c)}">`).join("");
+  return `<div class="trv-reqparts no-print" ${ds}>
+    <button type="button" class="trv-reqparts-toggle" onclick="toggleReqParts(this)">+ Request replacement / extra parts</button>
+    <div class="trv-reqparts-form">
+      <div class="trv-rp-line">
+        <input class="trv-rp-part" list="rp-parts-list" placeholder="Part code (e.g. LC1)" title="Part Families code">
+        <input class="trv-rp-qty" type="number" value="1" min="1" title="Qty">
+        <select class="trv-rp-kind" title="Where this part is made">
+          <option value="color">Color part → Powder Coating</option>
+          <option value="finish">Finish part → Assembly</option>
+        </select>
+        <input class="trv-rp-note" placeholder="Note (optional)">
+        <button type="button" class="trv-btn" onclick="submitReqPart(this)">Request</button>
+      </div>
+      <datalist id="rp-parts-list">${partOpts}</datalist>
+      <div class="trv-rp-hint">Color parts go to powder coating on this unit's colour${lineColor ? " (" + escapeHtml(lineColor) + ")" : ""}; finish parts go to assembly. Ties back to this order &amp; job.</div>
+    </div>
+  </div>`;
+}
+
+// The requested parts created for a pulled line — PRINTS on the sheet so the
+// floor sees the adds and their PR/RW reference (the item row stays intact; this
+// annotates it, like the PULL stamp). Reads ln.added_parts, appended by
+// submitReqPart after a successful create. Color parts point at their Parts
+// Request (its own slip is auto-rendered + archived by the PR endpoint); finish
+// parts point at their Rework.
+function trvAddedPartsBlock(ln){
+  const adds = ln.added_parts || [];
+  if(!adds.length) return "";
+  const rows = adds.map(a => {
+    const route = a.kind === "finish" ? "Assembly" : "Powder Coating";
+    const see = a.kind === "finish" ? "Rework" : "Parts Request";
+    return `<div class="ap-row">&rarr; <b>See ${see} ${escapeHtml(a.ref||"")}</b>`
+      + ` — ${escapeHtml(a.qty)}&times; ${escapeHtml(a.part)}`
+      + (a.note ? ` (${escapeHtml(a.note)})` : "")
+      + `<span class="ap-tag ${a.kind==="finish"?"finish":"color"}">${escapeHtml(route)}</span></div>`;
+  }).join("");
+  return `<div class="trv-added-parts"><b>Added / replacement parts</b>${rows}</div>`;
 }
 
 // POST the pull/build decision to the console server (:8766 via hooks /prod),
@@ -3526,6 +3621,91 @@ function applyStockDecisionLocal(orderId, lineId, action, qty){
         if(String(ln.line_item_id) !== String(lineId)) continue;
         if(action === "clear") delete ln.stock_decision;
         else ln.stock_decision = {action, qty, status: "pending-pick"};
+      }
+    }
+  }
+}
+
+// ── Request parts on a pulled stock line ─────────────────────────────────────
+// Part Families codes for the autocomplete, loaded once from the console.
+window.PART_CODES = window.PART_CODES || [];
+async function loadPartCodes(){
+  if(!PROD_API_BASE || window.PART_CODES.length) return;
+  try{
+    const r = await fetch(`${PROD_API_BASE}/api/parts-requests/options`, {credentials:"include"});
+    const d = await r.json();
+    if(d && d.ok && Array.isArray(d.parts)){ window.PART_CODES = d.parts; }
+  }catch(e){ /* autocomplete is a convenience; free text still works */ }
+}
+
+function toggleReqParts(btn){
+  const form = btn.parentElement.querySelector(".trv-reqparts-form");
+  form.classList.toggle("on");
+  if(form.classList.contains("on")) form.querySelector(".trv-rp-part").focus();
+}
+
+// Create the part request against the EXISTING console endpoints:
+//   color part -> POST /api/parts-requests  (Powder Coating, grouped by colour)
+//   finish part-> POST /api/reworks         (Assembly)
+// Both carry Order (+ Job) + SKU so the request ties back to this exact pull.
+async function submitReqPart(btn){
+  if(!PROD_API_BASE){
+    alert("Requesting parts needs the live hub (hooks bridge). Open this board on hub.duttonbrown.com.");
+    return;
+  }
+  const wrap = btn.closest(".trv-reqparts");
+  const line = btn.closest(".trv-rp-line");
+  const order = wrap.dataset.order, sku = wrap.dataset.sku, color = wrap.dataset.color, job = wrap.dataset.job;
+  const part = line.querySelector(".trv-rp-part").value.trim();
+  const qty  = Math.max(1, parseInt(line.querySelector(".trv-rp-qty").value, 10) || 1);
+  const kind = line.querySelector(".trv-rp-kind").value;
+  const note = line.querySelector(".trv-rp-note").value.trim();
+  if(!part){ alert("Enter a part code first."); return; }
+  if(kind === "color" && !color){
+    if(!window.confirm("This unit has no decoded colour, so the powder-coat request can't auto-group onto a colour batch. Create it anyway?")) return;
+  }
+  btn.disabled = true; const label = btn.textContent; btn.textContent = "…";
+  try{
+    let ref = "";
+    if(kind === "color"){
+      const resp = await fetch(`${PROD_API_BASE}/api/parts-requests`, {
+        method:"POST", credentials:"include", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({part, color, qty, order, sku, job,
+                              reason:"Extra part",
+                              notes:`From finished-goods pull ${sku}${note ? " — " + note : ""}`}),
+      });
+      const data = await resp.json();
+      if(!data || data.ok !== true) throw new Error((data && data.message) || `Error ${resp.status}`);
+      ref = data.pr_number || "PR";
+      (data.warnings || []).forEach(w => console.warn("PR:", w));
+    } else {
+      const resp = await fetch(`${PROD_API_BASE}/api/reworks`, {
+        method:"POST", credentials:"include", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({product: `${sku} — ${part}`, qty, order, job,
+                              notes:`Finish part for finished-goods pull ${sku}${note ? " — " + note : ""}`}),
+      });
+      const data = await resp.json();
+      if(!data || data.ok !== true) throw new Error((data && data.message) || `Error ${resp.status}`);
+      ref = data.rw_number || "RW";
+    }
+    // Record on the line so it PRINTS, then re-render this traveler.
+    recordAddedPartLocal(order, sku, {part, qty, kind, note, ref});
+    renderTravelers();
+  }catch(e){
+    btn.textContent = label; btn.disabled = false;
+    alert("Part request failed: " + e.message);
+  }
+}
+
+// Append the created part to the matching line's added_parts (matched by order
+// number + variant SKU) so trvAddedPartsBlock prints it.
+function recordAddedPartLocal(orderNo, sku, add){
+  for(const o of (QUEUE && QUEUE.orders) || []){
+    if(String(o.shopify_order_number) !== String(orderNo) && String(o.shopify_order_id) !== String(orderNo)) continue;
+    for(const p of (o.printouts || [])){
+      for(const ln of (p.lines || [])){
+        if((ln.variant_sku || "") !== sku) continue;
+        (ln.added_parts = ln.added_parts || []).push(add);
       }
     }
   }
@@ -6151,6 +6331,9 @@ function init(){
 
   // Gate the Release button to Shipping + management (async; disables on resolve).
   enforceReleaseGate();
+
+  // Warm the Part Families autocomplete for the stock-line Request-parts control.
+  loadPartCodes();
 }
 init();
 </script>
