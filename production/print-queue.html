@@ -1674,7 +1674,7 @@
        needs-attention / printed-review, the other tabs) is screen-only — and one
        of those hidden-but-still-laid-out nodes was painting a stray .notdef glyph
        (a NUL char in Poppins) at the page's top-left corner of every printed PDF.
-       Scoping print to ONLY #content-travelers kills it at the source, whatever
+       Scoping print to ONLY #content-print kills it at the source, whatever
        the exact emitter, and guarantees the paper is the work orders alone. */
     body.printing-travelers .card-wide > *:not(#content-print) { display: none !important; }
 
@@ -1727,21 +1727,21 @@
 <div class="app-shell">
 
 <!-- Production rail — identical structure to /production/log/ so this page stays
-     part of the same navigation (no "solo page" jump). Print is expanded with its
-     three in-page tabs (Order queue / Print queue / Travelers) wired to setTab()
-     — they switch the panel in place; every other rail item navigates. The
-     active in-page tab is marked is-subcurrent by setTab(). -->
+     part of the same navigation (no "solo page" jump). Manage holds two in-page
+     tabs on this page (Plan / Print) wired to setTab() — they switch the panel in
+     place; every other rail item navigates. The active in-page tab is marked
+     is-subcurrent by setTab(). -->
 <!-- Rail rendered by /_shared/nav.js from the single RAILS config (data-dept).
-     data-page="board" => the Print sub-links (Order/Print/Travelers) are this
-     page's in-page tabs; everything else is a cross-page link. Do not hand-code
-     rail markup. -->
+     data-page="board" => the Manage sub-links Plan (#plan) and Print (#print) are
+     this page's in-page tabs; everything else is a cross-page link. Do not
+     hand-code rail markup. -->
 <nav class="side-nav" data-rail aria-label="Production sections"></nav>
 
 <div class="app-main">
 <main class="card card-wide">
   <header class="page-intro">
     <div class="page-intro-text">
-      <p class="page-eyebrow">Production · Print queue</p>
+      <p class="page-eyebrow">Production · Plan</p>
       <h1 class="page-lead" id="pageLead">Today's printout plan</h1>
       <p class="page-sub" id="pageSub">Loading…</p>
     </div>
@@ -1843,8 +1843,591 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-07-13T14:00:05",
+  "built_at": "2026-07-13T14:33:06",
   "orders": [
+    {
+      "shopify_order_id": "7055255961682",
+      "shopify_order_name": "36542",
+      "shopify_order_number": "36542",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 3960.0,
+      "ship_by_date": null,
+      "latest_ship_by": "August 10, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-07-13T14:00:18-05:00",
+      "tags": "",
+      "total_price": 3960.0,
+      "priority": null,
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "FedEx Ground",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 2,
+      "printouts": [
+        {
+          "shopify_order_id": "7055255961682",
+          "shopify_order_name": "36542",
+          "shopify_order_number": "36542",
+          "key": [
+            "color",
+            "White",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60222",
+            "50120-10"
+          ],
+          "variant_skus": [
+            "60222-1A",
+            "50120-10-1A"
+          ],
+          "line_item_titles": [
+            "Color Monarch Sconce",
+            "Color Cadbury Sconce 10\""
+          ],
+          "lines": [
+            {
+              "title": "Color Monarch Sconce",
+              "variant_title": "Brass / White",
+              "variant_sku": "60222-1A",
+              "parent_sku": "60222",
+              "qty": 5,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Brass",
+              "color": "White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-monarch-sconce-brass-white.jpg?v=1747968445&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17048748359762,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "Color Cadbury Sconce 10\"",
+              "variant_title": "Brass / White",
+              "variant_sku": "50120-10-1A",
+              "parent_sku": "50120-10",
+              "qty": 4,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Brass",
+              "color": "White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-cadburry-sconce-10-brass-white.jpg?v=1747968560&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17048748458066,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 9,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|lighting",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7055255961682",
+          "shopify_order_name": "36542",
+          "shopify_order_number": "36542",
+          "key": [
+            "color",
+            "Bone",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Bone",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60121",
+            "60224"
+          ],
+          "variant_skus": [
+            "60121-1BO",
+            "60224-2BO"
+          ],
+          "line_item_titles": [
+            "Color Snug Sconce",
+            "Color Ruler Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Snug Sconce",
+              "variant_title": "Brass / Bone / Hardwired (no switch)",
+              "variant_sku": "60121-1BO",
+              "parent_sku": "60121",
+              "qty": 4,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Brass",
+              "color": "Bone",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-snug-sconce-brass-bone.jpg?v=1747968540&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17048748392530,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "Color Ruler Sconce",
+              "variant_title": "Nickel / Bone",
+              "variant_sku": "60224-2BO",
+              "parent_sku": "60224",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Bone",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-reader-sconce-nickel-bone.jpg?v=1757447397&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17048748425298,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-PAR16"
+            }
+          ],
+          "total_qty": 6,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Bone|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7055255961682",
+          "shopify_order_name": "36542",
+          "shopify_order_number": "36542",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-13T14:00:18-05:00",
+          "parent_sku": "60222",
+          "color": "White",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 5,
+          "line_item_ids": [
+            17048748359762
+          ],
+          "item_titles": [
+            "Color Monarch Sconce"
+          ],
+          "variant_skus": [
+            "60222-1A"
+          ],
+          "lines": [
+            {
+              "sku": "60222-1A",
+              "title": "Color Monarch Sconce",
+              "qty": 5,
+              "finish": "Brass",
+              "color": "White",
+              "category": "fixture",
+              "variant_title": "Brass / White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-monarch-sconce-brass-white.jpg?v=1747968445&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7055255961682",
+          "shopify_order_name": "36542",
+          "shopify_order_number": "36542",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-13T14:00:18-05:00",
+          "parent_sku": "60121",
+          "color": "Bone",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 4,
+          "line_item_ids": [
+            17048748392530
+          ],
+          "item_titles": [
+            "Color Snug Sconce"
+          ],
+          "variant_skus": [
+            "60121-1BO"
+          ],
+          "lines": [
+            {
+              "sku": "60121-1BO",
+              "title": "Color Snug Sconce",
+              "qty": 4,
+              "finish": "Brass",
+              "color": "Bone",
+              "category": "fixture",
+              "variant_title": "Brass / Bone / Hardwired (no switch)",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-snug-sconce-brass-bone.jpg?v=1747968540&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7055255961682",
+          "shopify_order_name": "36542",
+          "shopify_order_number": "36542",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-13T14:00:18-05:00",
+          "parent_sku": "60224",
+          "color": "Bone",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            17048748425298
+          ],
+          "item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "variant_skus": [
+            "60224-2BO"
+          ],
+          "lines": [
+            {
+              "sku": "60224-2BO",
+              "title": "Color Ruler Sconce",
+              "qty": 2,
+              "finish": "Nickel",
+              "color": "Bone",
+              "category": "fixture",
+              "variant_title": "Nickel / Bone",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-reader-sconce-nickel-bone.jpg?v=1757447397&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7055255961682",
+          "shopify_order_name": "36542",
+          "shopify_order_number": "36542",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-13T14:00:18-05:00",
+          "parent_sku": "50120-10",
+          "color": "White",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 4,
+          "line_item_ids": [
+            17048748458066
+          ],
+          "item_titles": [
+            "Color Cadbury Sconce 10\""
+          ],
+          "variant_skus": [
+            "50120-10-1A"
+          ],
+          "lines": [
+            {
+              "sku": "50120-10-1A",
+              "title": "Color Cadbury Sconce 10\"",
+              "qty": 4,
+              "finish": "Brass",
+              "color": "White",
+              "category": "fixture",
+              "variant_title": "Brass / White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-cadburry-sconce-10-brass-white.jpg?v=1747968560&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
+    {
+      "shopify_order_id": "7055255568466",
+      "shopify_order_name": "36541",
+      "shopify_order_number": "36541",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 8,
+      "customer_total_spent": 1462.88,
+      "ship_by_date": null,
+      "latest_ship_by": "July 20, 2026",
+      "lead_time_label": "Within 1 week",
+      "is_expedited": false,
+      "created_at": "2026-07-13T14:00:00-05:00",
+      "tags": "redo, trade",
+      "total_price": 104.17,
+      "priority": "Redo",
+      "is_large_order": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7055255568466",
+          "shopify_order_name": "36541",
+          "shopify_order_number": "36541",
+          "key": [
+            "color",
+            "Black",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Black",
+          "finish": null,
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H1A-3",
+            "H43"
+          ],
+          "variant_skus": [
+            "H1A-3",
+            "H43-3"
+          ],
+          "line_item_titles": [
+            "Head Hook",
+            "Head Tissue Holder"
+          ],
+          "lines": [
+            {
+              "title": "Head Hook",
+              "variant_title": "Black",
+              "variant_sku": "H1A-3",
+              "parent_sku": "H1A-3",
+              "qty": 1,
+              "category": "hook",
+              "category_label": "Hook",
+              "finish": null,
+              "color": "Black",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/head-wall-hook-hardware-black-1.jpg?v=1775636790&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Within 1 week",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17048747475026,
+              "in_stock": null
+            },
+            {
+              "title": "Head Tissue Holder",
+              "variant_title": "Black",
+              "variant_sku": "H43-3",
+              "parent_sku": "H43",
+              "qty": 1,
+              "category": "holder",
+              "category_label": "Holder",
+              "finish": "Black",
+              "color": null,
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/head-holder-hardware-black-1.jpg?v=1775636793&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Within 1 week",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17048747507794,
+              "in_stock": null,
+              "fold_noncolor": true
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Black|hardware",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7055255568466",
+          "shopify_order_name": "36541",
+          "shopify_order_number": "36541",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-13T14:00:00-05:00",
+          "parent_sku": "H1A-3",
+          "color": "Black",
+          "finish": null,
+          "category": "hook",
+          "category_label": "Hook",
+          "qty": 1,
+          "line_item_ids": [
+            17048747475026
+          ],
+          "item_titles": [
+            "Head Hook"
+          ],
+          "variant_skus": [
+            "H1A-3"
+          ],
+          "lines": [
+            {
+              "sku": "H1A-3",
+              "title": "Head Hook",
+              "qty": 1,
+              "finish": null,
+              "color": "Black",
+              "category": "hook",
+              "variant_title": "Black",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/head-wall-hook-hardware-black-1.jpg?v=1775636790&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7055255568466",
+          "shopify_order_name": "36541",
+          "shopify_order_number": "36541",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-07-13T14:00:00-05:00",
+          "parent_sku": "H43",
+          "color": null,
+          "finish": "Black",
+          "category": "holder",
+          "category_label": "Holder",
+          "qty": 1,
+          "line_item_ids": [
+            17048747507794
+          ],
+          "item_titles": [
+            "Head Tissue Holder"
+          ],
+          "variant_skus": [
+            "H43-3"
+          ],
+          "lines": [
+            {
+              "sku": "H43-3",
+              "title": "Head Tissue Holder",
+              "qty": 1,
+              "finish": "Black",
+              "color": null,
+              "category": "holder",
+              "variant_title": "Black",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/head-holder-hardware-black-1.jpg?v=1775636793&width=120"
+            }
+          ],
+          "tags": [
+            "Finish-Only",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": []
+    },
     {
       "shopify_order_id": "7055219949650",
       "shopify_order_name": "36540",
@@ -2575,10 +3158,10 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-B",
             "SAC-A",
+            "SAC-BO",
             "SAC-K",
-            "SAC-BO"
+            "SAC-B"
           ],
           "variant_skus": [
             "SAC-K",
@@ -7178,10 +7761,10 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 35,
-    "printouts": 35,
-    "notion_rows": 40,
-    "skipped_already_printed": 208,
+    "orders": 37,
+    "printouts": 38,
+    "notion_rows": 46,
+    "skipped_already_printed": 207,
     "printed_today": 0,
     "needs_attention": 0,
     "printed_review": 0
