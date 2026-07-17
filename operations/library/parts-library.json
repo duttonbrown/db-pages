@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T07:05:47",
+  "generated_at": "2026-07-17T12:00:58",
   "counts": {
     "parts": 475,
     "supplies": 139,
@@ -58350,7 +58350,8 @@
       "materials": [],
       "raw_or_prefinished": "Both",
       "in_house_processes": [
-        "Black Batch"
+        "Black Batch",
+        "Powder Coat"
       ],
       "vendor": [
         "Grand Brass Lamp Parts"
