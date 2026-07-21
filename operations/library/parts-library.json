@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T12:00:53",
+  "generated_at": "2026-07-21T07:05:48",
   "counts": {
     "parts": 475,
     "supplies": 139,
@@ -2814,7 +2814,20 @@
         "definition": "A solid cylindrical rod of varying lengths with threaded holes near ends drilled toward the center to hold arms for drawer pulls.",
         "image": "glossary-images/glossary-Rod.jpg"
       },
-      "products": []
+      "products": [
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
+        }
+      ]
     },
     "318ffa52-4c5b-802c-ad88-fd1431d0ec66": {
       "part_number": "RO5/8x20",
@@ -2837,7 +2850,32 @@
         "definition": "A solid cylindrical rod of varying lengths with threaded holes near ends drilled toward the center to hold arms for drawer pulls.",
         "image": "glossary-images/glossary-Rod.jpg"
       },
-      "products": []
+      "products": [
+        {
+          "id": "ab5ffa524c5b8343abb1014279de7cbd",
+          "sku": "H53",
+          "title": "Color Swift Towel Bar",
+          "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b801f993cec8f3a0fdabe",
+          "sku": "H63",
+          "title": "Color Swift Towel Rack",
+          "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        }
+      ]
     },
     "2e5ffa52-4c5b-80c1-8543-e4aa56140962": {
       "part_number": "SS3/16BL",
@@ -5543,6 +5581,24 @@
           "sku": "30330",
           "title": "Color Ballsy Flush Mount 6\"",
           "url": "https://app.notion.com/p/30330-2aeffa524c5b8095b799f64bddd4e6bf"
+        },
+        {
+          "id": "ab5ffa524c5b8343abb1014279de7cbd",
+          "sku": "H53",
+          "title": "Color Swift Towel Bar",
+          "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
         }
       ]
     },
@@ -13015,8 +13071,20 @@
         {
           "id": "ab5ffa524c5b8343abb1014279de7cbd",
           "sku": "H53",
-          "title": "Color Swift Towel Rack",
+          "title": "Color Swift Towel Bar",
           "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
         },
         {
           "id": "2aeffa524c5b806a8661f467f6dc7888",
@@ -13071,6 +13139,18 @@
           "sku": "H63",
           "title": "Color Swift Towel Rack",
           "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
@@ -20143,8 +20223,20 @@
         {
           "id": "ab5ffa524c5b8343abb1014279de7cbd",
           "sku": "H53",
-          "title": "Color Swift Towel Rack",
+          "title": "Color Swift Towel Bar",
           "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
         },
         {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
@@ -20187,6 +20279,18 @@
           "sku": "H63",
           "title": "Color Swift Towel Rack",
           "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
@@ -22216,12 +22320,6 @@
           "url": "https://app.notion.com/p/H52-24-C-2e5ffa524c5b8042ba47feff48578dd3"
         },
         {
-          "id": "ab5ffa524c5b8343abb1014279de7cbd",
-          "sku": "H53",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
-        },
-        {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
           "sku": "H62",
           "title": "Head Towel Rack",
@@ -22256,12 +22354,6 @@
           "sku": "H62-24 (C)",
           "title": "Color Head Towel Rack 24\"",
           "url": "https://app.notion.com/p/H62-24-C-2c9ffa524c5b805b9092e2d8b0f40236"
-        },
-        {
-          "id": "318ffa524c5b801f993cec8f3a0fdabe",
-          "sku": "H63",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
@@ -31474,8 +31566,20 @@
         {
           "id": "ab5ffa524c5b8343abb1014279de7cbd",
           "sku": "H53",
-          "title": "Color Swift Towel Rack",
+          "title": "Color Swift Towel Bar",
           "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
         },
         {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
@@ -31518,6 +31622,18 @@
           "sku": "H63",
           "title": "Color Swift Towel Rack",
           "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
@@ -38236,8 +38352,20 @@
         {
           "id": "ab5ffa524c5b8343abb1014279de7cbd",
           "sku": "H53",
-          "title": "Color Swift Towel Rack",
+          "title": "Color Swift Towel Bar",
           "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
         },
         {
           "id": "2aeffa524c5b806a8661f467f6dc7888",
@@ -38292,6 +38420,18 @@
           "sku": "H63",
           "title": "Color Swift Towel Rack",
           "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
@@ -43684,8 +43824,20 @@
         {
           "id": "ab5ffa524c5b8343abb1014279de7cbd",
           "sku": "H53",
-          "title": "Color Swift Towel Rack",
+          "title": "Color Swift Towel Bar",
           "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
         },
         {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
@@ -43728,6 +43880,18 @@
           "sku": "H63",
           "title": "Color Swift Towel Rack",
           "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
@@ -44226,8 +44390,20 @@
         {
           "id": "ab5ffa524c5b8343abb1014279de7cbd",
           "sku": "H53",
-          "title": "Color Swift Towel Rack",
+          "title": "Color Swift Towel Bar",
           "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
         },
         {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
@@ -44270,6 +44446,18 @@
           "sku": "H63",
           "title": "Color Swift Towel Rack",
           "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
@@ -47496,12 +47684,6 @@
           "url": "https://app.notion.com/p/70221-C-2c8ffa524c5b809f8a4dc071db019be2"
         },
         {
-          "id": "ab5ffa524c5b8343abb1014279de7cbd",
-          "sku": "H53",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
-        },
-        {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
           "sku": "H62",
           "title": "Head Towel Rack",
@@ -47542,6 +47724,18 @@
           "sku": "H63",
           "title": "Color Swift Towel Rack",
           "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
         }
       ]
     },
@@ -48518,12 +48712,6 @@
           "url": "https://app.notion.com/p/H52-24-C-2e5ffa524c5b8042ba47feff48578dd3"
         },
         {
-          "id": "ab5ffa524c5b8343abb1014279de7cbd",
-          "sku": "H53",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
-        },
-        {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
           "sku": "H62",
           "title": "Head Towel Rack",
@@ -48558,12 +48746,6 @@
           "sku": "H62-24 (C)",
           "title": "Color Head Towel Rack 24\"",
           "url": "https://app.notion.com/p/H62-24-C-2c9ffa524c5b805b9092e2d8b0f40236"
-        },
-        {
-          "id": "318ffa524c5b801f993cec8f3a0fdabe",
-          "sku": "H63",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
         }
       ]
     },
@@ -48854,12 +49036,6 @@
           "url": "https://app.notion.com/p/H52-18-C-2ecffa524c5b80f1ab3beda07b188aa9"
         },
         {
-          "id": "ab5ffa524c5b8343abb1014279de7cbd",
-          "sku": "H53",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
-        },
-        {
           "id": "2aeffa524c5b80bd932de6b06c65df15",
           "sku": "H60",
           "title": "Throne Towel Rack",
@@ -48900,12 +49076,6 @@
           "sku": "H62-18 (C)",
           "title": "Color Head Towel Rack 18\"",
           "url": "https://app.notion.com/p/H62-18-C-2c9ffa524c5b80bdb63bc0af4d077bd6"
-        },
-        {
-          "id": "318ffa524c5b801f993cec8f3a0fdabe",
-          "sku": "H63",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
         }
       ]
     },
@@ -56699,12 +56869,6 @@
           "url": "https://app.notion.com/p/H52-24-C-2e5ffa524c5b8042ba47feff48578dd3"
         },
         {
-          "id": "ab5ffa524c5b8343abb1014279de7cbd",
-          "sku": "H53",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
-        },
-        {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
           "sku": "H62",
           "title": "Head Towel Rack",
@@ -56739,12 +56903,6 @@
           "sku": "H62-24 (C)",
           "title": "Color Head Towel Rack 24\"",
           "url": "https://app.notion.com/p/H62-24-C-2c9ffa524c5b805b9092e2d8b0f40236"
-        },
-        {
-          "id": "318ffa524c5b801f993cec8f3a0fdabe",
-          "sku": "H63",
-          "title": "Color Swift Towel Rack",
-          "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
@@ -58691,8 +58849,20 @@
         {
           "id": "ab5ffa524c5b8343abb1014279de7cbd",
           "sku": "H53",
-          "title": "Color Swift Towel Rack",
+          "title": "Color Swift Towel Bar",
           "url": "https://app.notion.com/p/H53-ab5ffa524c5b8343abb1014279de7cbd"
+        },
+        {
+          "id": "318ffa524c5b802394f6c148406d8818",
+          "sku": "H53-18",
+          "title": "Color Swift Towel Bar 18\"",
+          "url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818"
+        },
+        {
+          "id": "318ffa524c5b80ada4c5d5e1f6c7d7dc",
+          "sku": "H53-24",
+          "title": "Color Swift Towel Bar 24\"",
+          "url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc"
         },
         {
           "id": "2aeffa524c5b80da9a65c69824aaed3c",
@@ -58735,6 +58905,18 @@
           "sku": "H63",
           "title": "Color Swift Towel Rack",
           "url": "https://app.notion.com/p/H63-318ffa524c5b801f993cec8f3a0fdabe"
+        },
+        {
+          "id": "346ffa524c5b83c192e9810bf1db16a1",
+          "sku": "H63-18",
+          "title": "Color Swift Towel Rack 18\"",
+          "url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1"
+        },
+        {
+          "id": "c4dffa524c5b822dac8d0193b838d38b",
+          "sku": "H63-24",
+          "title": "Color Swift Towel Rack 24\"",
+          "url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b"
         },
         {
           "id": "2aeffa524c5b80f68c40ff67085ece05",
