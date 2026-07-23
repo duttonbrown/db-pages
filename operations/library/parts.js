@@ -68,6 +68,23 @@ function fmtPrice(n) {
     : `$${num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
+// One-line provenance under the Price keyfact: "as of Jun 2026 · high" plus a
+// truncated source. Only rendered when the overlay carried provenance.
+function priceProvenance(rec) {
+  if (rec.price == null) return null;
+  const bits = [];
+  if (rec.price_as_of) {
+    const d = new Date(rec.price_as_of + 'T00:00:00');
+    if (!Number.isNaN(d.getTime())) {
+      bits.push('as of ' + d.toLocaleDateString(undefined, { month: 'short', year: 'numeric' }));
+    }
+  }
+  if (rec.price_confidence) bits.push(rec.price_confidence);
+  const src = (rec.price_source || '').split('@')[0].trim();
+  if (src) bits.push(src.length > 42 ? src.slice(0, 40) + '…' : src);
+  return bits.length ? bits.join(' · ') : null;
+}
+
 // A part "needs attention" when it's an active/introducing SKU that's missing
 // the operational data this library exists to surface — no storage location, or
 // no price — or it's being discontinued while still showing real recent demand
@@ -167,9 +184,10 @@ function renderQuickFilters() {
 }
 
 // Merge the private price overlay onto DATA.parts/supplies when configured.
-// The public JSON may carry prices already (acceptable short-term); the overlay
-// lets the gated copy show prices even if the public JSON is later stripped of
-// them. Same-origin fetch from the private repo; failures are non-fatal.
+// The public JSON is REDACTED (no price fields as of 2026-07-22); the overlay
+// is the ONLY price source for the gated copy. Values are either a bare number
+// (legacy) or {price, as_of, confidence, source} (provenance-carrying, current
+// shape) — handle both so a stale overlay never blanks the page.
 async function applyPriceOverlay() {
   if (!LIBRARY_CONFIG.priceOverlay || !DATA) return;
   try {
@@ -178,12 +196,16 @@ async function applyPriceOverlay() {
     const overlay = await resp.json();
     const pp = overlay.parts || {};
     const sp = overlay.supplies || {};
-    (DATA.parts || []).forEach(p => {
-      if (pp[p.part_number] != null) p.price = pp[p.part_number];
-    });
-    (DATA.supplies || []).forEach(s => {
-      if (s.sku && sp[s.sku] != null) s.price = sp[s.sku];
-    });
+    const merge = (rec, entry) => {
+      if (entry == null) return;
+      if (typeof entry === 'number') { rec.price = entry; return; }
+      rec.price = entry.price;
+      rec.price_as_of = entry.as_of || null;
+      rec.price_confidence = entry.confidence || null;
+      rec.price_source = entry.source || null;
+    };
+    (DATA.parts || []).forEach(p => merge(p, pp[p.part_number]));
+    (DATA.supplies || []).forEach(s => { if (s.sku) merge(s, sp[s.sku]); });
   } catch (e) {
     /* overlay is best-effort; the page works without prices */
   }
@@ -734,7 +756,7 @@ function renderSpec(p) {
   // The In-House cell renders pills via the `html` field; the other cells are
   // plain values via `val`.
   const keyFacts = [
-    { label: 'Price',        val: fmtPrice(p.price) },
+    { label: 'Price',        val: fmtPrice(p.price), sub: priceProvenance(p) },
     { label: 'Lead time',    val: p.lead_time },
     { label: 'Last ordered', val: fmtDate(p.last_ordered), sub: p.last_ordered ? relTime(p.last_ordered) : null },
     { label: 'MOQ',          val: p.moq },
