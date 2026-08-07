@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-07T07:05:54",
+  "generated_at": "2026-08-07T12:01:05",
   "counts": {
     "parts": 475,
-    "supplies": 151,
+    "supplies": 152,
     "families": 284,
     "glossary": 83,
     "locations": 40,
@@ -72914,6 +72914,28 @@
       "last_edited_at": "2026-06-24T00:44:00.000Z"
     },
     {
+      "sku": "JM-1",
+      "title": "part-hook-J1",
+      "description": "Powder-coat hanging hook \u2014 reusable",
+      "page_id": "3b4ffa52-4c5b-817e-9b28-f8a5d3701188",
+      "page_url": "https://app.notion.com/p/part-hook-J1-3b4ffa524c5b817e9b28f8a5d3701188",
+      "image": "supply-images/JM-1.jpg",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "500 (1 box)",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T16:26:00.000Z"
+    },
+    {
       "sku": "PLSS410319PT",
       "title": "Barely Powder Coat",
       "description": "CSP-410 Lost Locket",
@@ -73556,7 +73578,7 @@
     {
       "sku": "S-15856",
       "title": "Simple Green Extreme",
-      "description": "Simple Green Extreme - 5 Gallon Bottle",
+      "description": "Simple Green Extreme Aircraft and Precision Cleaner",
       "page_id": "349ffa52-4c5b-80bf-9cf8-e25f991a0928",
       "page_url": "https://app.notion.com/p/Simple-Green-Extreme-349ffa524c5b80bf9cf8e25f991a0928",
       "image": null,
@@ -73573,7 +73595,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-06-24T00:44:00.000Z"
+      "last_edited_at": "2026-08-07T16:08:00.000Z"
     },
     {
       "sku": "S-16699",
@@ -75305,21 +75327,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
-    },
-    {
-      "sku": "",
-      "title": "part-hook-J1",
-      "description": "Powder-coat hanging hook \u2014 reusable",
-      "page_id": "3b4ffa52-4c5b-817e-9b28-f8a5d3701188",
-      "page_url": "https://app.notion.com/p/part-hook-J1-3b4ffa524c5b817e9b28f8a5d3701188",
-      "image": "supply-images/part-hook-J1.jpg",
-      "status": "Active",
-      "type": "Fixtures",
-      "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T15:19:00.000Z"
     },
     {
       "sku": "",
@@ -75331,8 +75349,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T15:20:00.000Z"
     },
     {
       "sku": "",
@@ -75344,8 +75371,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T15:20:00.000Z"
     },
     {
       "sku": "",
@@ -75357,8 +75393,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T16:26:00.000Z"
     },
     {
       "sku": "",
@@ -75370,8 +75415,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T16:44:00.000Z"
     },
     {
       "sku": "",
@@ -75383,8 +75437,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T16:44:00.000Z"
     },
     {
       "sku": "",
@@ -75396,8 +75459,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T15:31:00.000Z"
     },
     {
       "sku": "",
@@ -75409,8 +75481,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T16:43:00.000Z"
     },
     {
       "sku": "",
@@ -75422,8 +75503,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T15:20:00.000Z"
     },
     {
       "sku": "",
@@ -75435,8 +75525,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T15:20:00.000Z"
     },
     {
       "sku": "",
@@ -75448,8 +75547,17 @@
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
-      "locations": [],
-      "last_edited_at": "2026-08-06T19:58:00.000Z"
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T16:44:00.000Z"
     },
     {
       "sku": "",
@@ -75581,6 +75689,28 @@
       "reorder_qty": "6 rolls / case",
       "locations": [],
       "last_edited_at": "2026-06-24T00:44:00.000Z"
+    },
+    {
+      "sku": "SMP13005",
+      "title": "Simple Green Regular",
+      "description": "Simple Green Industrial Cleaner & Degreaser - 1 Gallon Bottle",
+      "page_id": "3b5ffa52-4c5b-8053-89e0-df3b2256d34c",
+      "page_url": "https://app.notion.com/p/Simple-Green-Regular-3b5ffa524c5b805389e0df3b2256d34c",
+      "image": null,
+      "status": null,
+      "type": "Chemicals",
+      "reorder_qty": "1 Gallon",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T16:08:00.000Z"
     },
     {
       "sku": "Various suppliers",
