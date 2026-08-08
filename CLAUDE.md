@@ -12,6 +12,10 @@ Public static HTML hosted via GitHub Pages. Dutton Brown content organized by te
 - Repo: https://github.com/duttonbrown/db-pages
 - Branch: `main`
 
+## .nojekyll — do not remove
+
+The root `.nojekyll` (added 2026-08-08) makes GitHub Pages serve the repo as-is. Without it, Pages runs Jekyll, which **silently excludes any file or folder starting with `_`** — `operations/library/supply-images/_1208-1-A.png` (from `#`-prefixed Magic Rack supplier SKUs, `#` sanitizes to `_`) 404'd while sitting in the repo. Nothing here uses Jekyll (no `_config.yml`, no markdown pages), so the file is pure win: underscore files serve, and deploys skip the Jekyll build.
+
 ## Structure
 
 ```
