@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-08T14:17:02",
+  "generated_at": "2026-08-08T14:31:16",
   "counts": {
     "parts": 474,
     "supplies": 158,
@@ -72373,6 +72373,8 @@
   "supplies": [
     {
       "sku": "#1208-1-A",
+      "part_number": "",
+      "supplier_sku": "#1208-1-A",
       "title": "Conveyor hooks, Magic Rack",
       "description": "Magic Rack conveyor hook assembly, 8\" - hangs the rack from the conveyor",
       "page_id": "3b5ffa52-4c5b-8137-ab17-f1c0d09d55a6",
@@ -72395,6 +72397,8 @@
     },
     {
       "sku": "#1497-P",
+      "part_number": "",
+      "supplier_sku": "#1497-P",
       "title": "Punched crossbar, Magic Rack",
       "description": "Magic Rack punched top crossbar, 19-3/8\" - top bar of the rack, punched to accept side hangers",
       "page_id": "3b5ffa52-4c5b-814f-9851-ec5e42b70105",
@@ -72417,6 +72421,8 @@
     },
     {
       "sku": "#1497-S",
+      "part_number": "",
+      "supplier_sku": "#1497-S",
       "title": "Standard crossbar, Magic Rack",
       "description": "Magic Rack standard crossbar, 19-3/8\" - carries the parts hooks",
       "page_id": "3b5ffa52-4c5b-8194-9315-cf3828006bac",
@@ -72439,6 +72445,8 @@
     },
     {
       "sku": "#1505-SH",
+      "part_number": "",
+      "supplier_sku": "#1505-SH",
       "title": "Side hangers, Magic Rack",
       "description": "Magic Rack side hanger, 5\" - vertical link between the upper and lower crossbars",
       "page_id": "3b5ffa52-4c5b-8179-9294-f6b8efc0aa83",
@@ -72461,6 +72469,8 @@
     },
     {
       "sku": "#1590",
+      "part_number": "",
+      "supplier_sku": "#1590",
       "title": "Retainer rod, Magic Rack",
       "description": "Magic Rack retainer rod - rod plus interlocking piece that locks the bottom crossbar",
       "page_id": "3b5ffa52-4c5b-8170-88f7-c10d20260f0d",
@@ -72482,29 +72492,9 @@
       "last_edited_at": "2026-08-07T17:57:00.000Z"
     },
     {
-      "sku": "#4210-SS-060",
-      "title": "Powder-coat hook, magic-rack, style 2",
-      "description": "Powder-coat hanging hook \u2014 reusable",
-      "page_id": "3b4ffa52-4c5b-810f-af6d-ddd689e95c94",
-      "page_url": "https://app.notion.com/p/Powder-coat-hook-magic-rack-style-2-3b4ffa524c5b810faf6dddd689e95c94",
-      "image": "supply-images/_4210-SS-060.jpg",
-      "status": "Active",
-      "type": "Fixtures",
-      "reorder_qty": "100",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
-          "code": "WP1",
-          "group": "Washing & Prep",
-          "description": "Racks, tables, shelves",
-          "color": "#0E7490",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-08-07T17:53:00.000Z"
-    },
-    {
       "sku": "44x44x10",
+      "part_number": "",
+      "supplier_sku": "44x44x10",
       "title": "44 x 44 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80d5-a5f0-dd81dff05470",
@@ -72527,6 +72517,8 @@
     },
     {
       "sku": "45967",
+      "part_number": "",
+      "supplier_sku": "45967",
       "title": "34 x 34 x 13",
       "description": "",
       "page_id": "2c3ffa52-4c5b-800a-996b-c7de363841ea",
@@ -72549,6 +72541,8 @@
     },
     {
       "sku": "56986",
+      "part_number": "",
+      "supplier_sku": "56986",
       "title": "30.5 x 30.5 x 16",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80e0-ae42-d85e92fa5a84",
@@ -72571,6 +72565,8 @@
     },
     {
       "sku": "BX01",
+      "part_number": "",
+      "supplier_sku": "BX01",
       "title": "BX01",
       "description": "",
       "page_id": "2c3ffa52-4c5b-801a-a68c-ea9adfa9dd16",
@@ -72593,6 +72589,8 @@
     },
     {
       "sku": "BX02",
+      "part_number": "",
+      "supplier_sku": "BX02",
       "title": "BX02-14",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80db-b60e-fae2c4618926",
@@ -72615,6 +72613,8 @@
     },
     {
       "sku": "BX02-08",
+      "part_number": "",
+      "supplier_sku": "BX02-08",
       "title": "BX02-08",
       "description": "",
       "page_id": "388ffa52-4c5b-8032-a65a-c94d37a08743",
@@ -72645,6 +72645,8 @@
     },
     {
       "sku": "BX02-15",
+      "part_number": "",
+      "supplier_sku": "BX02-15",
       "title": "BX02-15",
       "description": "",
       "page_id": "388ffa52-4c5b-8072-87b0-dce03ea16d84",
@@ -72675,6 +72677,8 @@
     },
     {
       "sku": "BX02-26",
+      "part_number": "",
+      "supplier_sku": "BX02-26",
       "title": "BX02-26",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80a3-9f8a-ce97eddaf3d5",
@@ -72697,6 +72701,8 @@
     },
     {
       "sku": "BX02-38",
+      "part_number": "",
+      "supplier_sku": "BX02-38",
       "title": "BX02-38",
       "description": "",
       "page_id": "2c3ffa52-4c5b-804c-b359-e1a71c90113a",
@@ -72719,6 +72725,8 @@
     },
     {
       "sku": "BX03",
+      "part_number": "",
+      "supplier_sku": "BX03",
       "title": "BX03",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80cf-99fe-ce2ef83aa3d5",
@@ -72741,6 +72749,8 @@
     },
     {
       "sku": "BX04",
+      "part_number": "",
+      "supplier_sku": "BX04",
       "title": "BX04",
       "description": "",
       "page_id": "2c3ffa52-4c5b-801f-ba88-ecf9bd9d1d57",
@@ -72763,6 +72773,8 @@
     },
     {
       "sku": "BX06",
+      "part_number": "",
+      "supplier_sku": "BX06",
       "title": "BX05",
       "description": "",
       "page_id": "2e0ffa52-4c5b-8079-9af8-fa690f9a7e18",
@@ -72785,6 +72797,8 @@
     },
     {
       "sku": "BX06",
+      "part_number": "",
+      "supplier_sku": "BX06",
       "title": "BX06",
       "description": "",
       "page_id": "2c3ffa52-4c5b-805e-b23b-f49bf9051d11",
@@ -72807,6 +72821,8 @@
     },
     {
       "sku": "BX07",
+      "part_number": "",
+      "supplier_sku": "BX07",
       "title": "BX07",
       "description": "",
       "page_id": "2c3ffa52-4c5b-809b-916f-ce7ddf075575",
@@ -72829,6 +72845,8 @@
     },
     {
       "sku": "BX08",
+      "part_number": "",
+      "supplier_sku": "BX08",
       "title": "BX08",
       "description": "",
       "page_id": "2c3ffa52-4c5b-808a-854d-c677baa0086e",
@@ -72851,6 +72869,8 @@
     },
     {
       "sku": "BX09",
+      "part_number": "",
+      "supplier_sku": "BX09",
       "title": "BX09",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80fd-abfa-fbb4985ebae0",
@@ -72873,6 +72893,8 @@
     },
     {
       "sku": "BX10",
+      "part_number": "",
+      "supplier_sku": "BX10",
       "title": "BX10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8079-ad65-edd5f537ce84",
@@ -72895,6 +72917,8 @@
     },
     {
       "sku": "BX11",
+      "part_number": "",
+      "supplier_sku": "BX11",
       "title": "BX11",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8042-b53a-f1b7dfc9b74c",
@@ -72917,6 +72941,8 @@
     },
     {
       "sku": "BX12",
+      "part_number": "",
+      "supplier_sku": "BX12",
       "title": "BX12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-809a-b57a-ff8aec170652",
@@ -72939,6 +72965,8 @@
     },
     {
       "sku": "EQP-BTH-CCBF8020",
+      "part_number": "",
+      "supplier_sku": "EQP-BTH-CCBF8020",
       "title": "Filter, Powder Coating Booth",
       "description": "",
       "page_id": "348ffa52-4c5b-8092-b41c-f90c75da93cd",
@@ -72961,6 +72989,8 @@
     },
     {
       "sku": "FEIN 31345251010",
+      "part_number": "",
+      "supplier_sku": "FEIN 31345251010",
       "title": "Filter Bag, Powder Vacuum",
       "description": "",
       "page_id": "348ffa52-4c5b-8066-aa35-d062a21e7e18",
@@ -72983,6 +73013,8 @@
     },
     {
       "sku": "HT1",
+      "part_number": "",
+      "supplier_sku": "HT1",
       "title": "Hang Tag, Branded",
       "description": "",
       "page_id": "30affa52-4c5b-8034-bc7d-c6e70b382f79",
@@ -73005,6 +73037,8 @@
     },
     {
       "sku": "HT2",
+      "part_number": "",
+      "supplier_sku": "HT2",
       "title": "Hang Tag, Prop65",
       "description": "",
       "page_id": "30affa52-4c5b-8006-aeb8-ea93a35375e2",
@@ -73026,33 +73060,13 @@
       "last_edited_at": "2026-06-24T00:44:00.000Z"
     },
     {
-      "sku": "JM-1",
-      "title": "Powder-coat hook, jam-style, 1\u201d",
-      "description": "Powder-coat hanging hook \u2014 reusable",
-      "page_id": "3b4ffa52-4c5b-817e-9b28-f8a5d3701188",
-      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-1-3b4ffa524c5b817e9b28f8a5d3701188",
-      "image": "supply-images/JM-1.jpg",
-      "status": "Active",
-      "type": "Fixtures",
-      "reorder_qty": "500 (1 box)",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
-          "code": "WP1",
-          "group": "Washing & Prep",
-          "description": "Racks, tables, shelves",
-          "color": "#0E7490",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-08-07T17:22:00.000Z"
-    },
-    {
-      "sku": "PLSS410319PT",
-      "title": "Barely Powder Coat",
-      "description": "CSP-410 Lost Locket",
-      "page_id": "6c7887c9-7a45-44f3-a486-eff67ba9257e",
-      "page_url": "https://app.notion.com/p/Barely-Powder-Coat-6c7887c97a4544f3a486eff67ba9257e",
+      "sku": "POW-3",
+      "part_number": "POW-3",
+      "supplier_sku": "SRSL11386CN",
+      "title": "Black Powder Coat",
+      "description": "2604 Black",
+      "page_id": "9aabf358-4dda-411c-90f5-7a5ca925304c",
+      "page_url": "https://app.notion.com/p/Black-Powder-Coat-9aabf3584dda411c90f57a5ca925304c",
       "image": null,
       "status": "Active",
       "type": "Powder Coats",
@@ -73070,117 +73084,9 @@
       "last_edited_at": "2026-06-05T14:56:00.000Z"
     },
     {
-      "sku": "PRSS32180PB",
-      "title": "Python Green Powder Coat",
-      "description": "S.G. RAL 6025",
-      "page_id": "79743bb9-c1a8-4cea-a65b-36932d18c4ad",
-      "page_url": "https://app.notion.com/p/Python-Green-Powder-Coat-79743bb9c1a84ceaa65b36932d18c4ad",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-06-05T14:56:00.000Z"
-    },
-    {
-      "sku": "PRSS64289",
-      "title": "Riding Hood Red Powder Coat",
-      "description": "S.G. RAL 3013",
-      "page_id": "fe2790fe-53c5-45cd-bdd6-5b16d393fd77",
-      "page_url": "https://app.notion.com/p/Riding-Hood-Red-Powder-Coat-fe2790fe53c545cdbdd65b16d393fd77",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-06-05T14:56:00.000Z"
-    },
-    {
-      "sku": "PSB-4304",
-      "title": "Slate Blue Powder Coat",
-      "description": "Reef Blue",
-      "page_id": "754182a8-4892-4950-b535-c5b057d162c4",
-      "page_url": "https://app.notion.com/p/Slate-Blue-Powder-Coat-754182a848924950b535c5b057d162c4",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-07-23T01:41:00.000Z"
-    },
-    {
-      "sku": "PSB-5906",
-      "title": "Lagoon Powder Coat",
-      "description": "ABC Teal",
-      "page_id": "91308017-d50d-4d30-84e6-535469d30e13",
-      "page_url": "https://app.notion.com/p/Lagoon-Powder-Coat-91308017d50d4d3084e6535469d30e13",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-07-23T01:41:00.000Z"
-    },
-    {
-      "sku": "PSS 4041",
-      "title": "Spa Powder Coat",
-      "description": "Mortar",
-      "page_id": "e04caf69-a6c0-4bea-95ce-9a8874cb32a3",
-      "page_url": "https://app.notion.com/p/Spa-Powder-Coat-e04caf69a6c04bea95ce9a8874cb32a3",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-06-05T14:56:00.000Z"
-    },
-    {
-      "sku": "PSS 5690",
+      "sku": "POW-A",
+      "part_number": "POW-A",
+      "supplier_sku": "PSS 5690",
       "title": "White Powder Coat",
       "description": "Gloss White",
       "page_id": "c20a7b8a-06f5-4e0c-8d48-f7e8aec5bff8",
@@ -73202,11 +73108,13 @@
       "last_edited_at": "2026-06-05T14:56:00.000Z"
     },
     {
-      "sku": "RAL 3015",
-      "title": "Pinkaboo Powder Coat",
-      "description": "S.G. RAL 3015, Satin 30-45% Gloss Smooth Finish",
-      "page_id": "308ffa52-4c5b-80e9-af1d-ea063433fb37",
-      "page_url": "https://app.notion.com/p/Pinkaboo-Powder-Coat-308ffa524c5b80e9af1dea063433fb37",
+      "sku": "POW-B",
+      "part_number": "POW-B",
+      "supplier_sku": "PSS 4041",
+      "title": "Spa Powder Coat",
+      "description": "Mortar",
+      "page_id": "e04caf69-a6c0-4bea-95ce-9a8874cb32a3",
+      "page_url": "https://app.notion.com/p/Spa-Powder-Coat-e04caf69a6c04bea95ce9a8874cb32a3",
       "image": null,
       "status": "Active",
       "type": "Powder Coats",
@@ -73224,11 +73132,13 @@
       "last_edited_at": "2026-06-05T14:56:00.000Z"
     },
     {
-      "sku": "RAL 7047",
-      "title": "Chalk Powder Coat",
-      "description": "Telegray 4",
-      "page_id": "78736520-469b-4749-a948-5a1b9991c832",
-      "page_url": "https://app.notion.com/p/Chalk-Powder-Coat-78736520469b4749a9485a1b9991c832",
+      "sku": "POW-BO",
+      "part_number": "POW-BO",
+      "supplier_sku": "SRSL45892CN",
+      "title": "Bone Powder Coat",
+      "description": "2604 Sandstone",
+      "page_id": "6fbe6af1-c0ac-4c56-8abd-6bceaca58b5f",
+      "page_url": "https://app.notion.com/p/Bone-Powder-Coat-6fbe6af1c0ac4c568abd6bceaca58b5f",
       "image": null,
       "status": "Active",
       "type": "Powder Coats",
@@ -73246,11 +73156,13 @@
       "last_edited_at": "2026-06-05T14:56:00.000Z"
     },
     {
-      "sku": "RAL-POW-LBS-1005-SFG",
-      "title": "Ochre Powder Coat",
-      "description": "RAL 1005 Honey Yellow Powder Coating Powder, Semi Gloss 50-75%",
-      "page_id": "0124342b-881c-473a-afec-3ecbe8602a98",
-      "page_url": "https://app.notion.com/p/Ochre-Powder-Coat-0124342b881c473aafec3ecbe8602a98",
+      "sku": "POW-CL",
+      "part_number": "POW-CL",
+      "supplier_sku": "SD1799522",
+      "title": "Clear Powder Coat",
+      "description": "Super Durable Wet Clear",
+      "page_id": "566d7f61-b500-4b9b-bf57-ee3c7fb78f37",
+      "page_url": "https://app.notion.com/p/Clear-Powder-Coat-566d7f61b5004b9bbf57ee3c7fb78f37",
       "image": null,
       "status": "Active",
       "type": "Powder Coats",
@@ -73268,7 +73180,33 @@
       "last_edited_at": "2026-06-05T14:56:00.000Z"
     },
     {
-      "sku": "RAL-POW-LBS-5003-SG",
+      "sku": "POW-D",
+      "part_number": "POW-D",
+      "supplier_sku": "PSB-5906",
+      "title": "Lagoon Powder Coat",
+      "description": "ABC Teal",
+      "page_id": "91308017-d50d-4d30-84e6-535469d30e13",
+      "page_url": "https://app.notion.com/p/Lagoon-Powder-Coat-91308017d50d4d3084e6535469d30e13",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-07-23T01:41:00.000Z"
+    },
+    {
+      "sku": "POW-E",
+      "part_number": "POW-E",
+      "supplier_sku": "RAL-POW-LBS-5003-SG",
       "title": "Cobalt Powder Coat",
       "description": "S/G RAL 5003 \u2014 Semi Gloss 50\u201375% (LVP Paints)",
       "page_id": "ba67d9c8-d079-4fbe-95b1-32d844e3e530",
@@ -73290,7 +73228,225 @@
       "last_edited_at": "2026-07-14T19:24:00.000Z"
     },
     {
+      "sku": "POW-F",
+      "part_number": "POW-F",
+      "supplier_sku": "PSB-4304",
+      "title": "Slate Blue Powder Coat",
+      "description": "Reef Blue",
+      "page_id": "754182a8-4892-4950-b535-c5b057d162c4",
+      "page_url": "https://app.notion.com/p/Slate-Blue-Powder-Coat-754182a848924950b535c5b057d162c4",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-07-23T01:41:00.000Z"
+    },
+    {
+      "sku": "POW-GO",
+      "part_number": "POW-GO",
+      "supplier_sku": "URSS90072",
+      "title": "Gold Powder Coat",
+      "description": "OB Gold Bonded",
+      "page_id": "f42525d0-9d51-46dc-97c5-6fda7442cfa8",
+      "page_url": "https://app.notion.com/p/Gold-Powder-Coat-f42525d09d5146dc97c56fda7442cfa8",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-06-05T14:55:00.000Z"
+    },
+    {
+      "sku": "POW-H",
+      "part_number": "POW-H",
+      "supplier_sku": "RAL-POW-LBS-1005-SFG",
+      "title": "Ochre Powder Coat",
+      "description": "RAL 1005 Honey Yellow Powder Coating Powder, Semi Gloss 50-75%",
+      "page_id": "0124342b-881c-473a-afec-3ecbe8602a98",
+      "page_url": "https://app.notion.com/p/Ochre-Powder-Coat-0124342b881c473aafec3ecbe8602a98",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-06-05T14:56:00.000Z"
+    },
+    {
+      "sku": "POW-I",
+      "part_number": "POW-I",
+      "supplier_sku": "SRSL64369CN",
+      "title": "Orange Powder Coat",
+      "description": "2604 RAL 2010",
+      "page_id": "308ffa52-4c5b-80f9-bc48-fee632b815e1",
+      "page_url": "https://app.notion.com/p/Orange-Powder-Coat-308ffa524c5b80f9bc48fee632b815e1",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-06-05T14:56:00.000Z"
+    },
+    {
+      "sku": "POW-K",
+      "part_number": "POW-K",
+      "supplier_sku": "PLSS410319PT",
+      "title": "Barely Powder Coat",
+      "description": "CSP-410 Lost Locket",
+      "page_id": "6c7887c9-7a45-44f3-a486-eff67ba9257e",
+      "page_url": "https://app.notion.com/p/Barely-Powder-Coat-6c7887c97a4544f3a486eff67ba9257e",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-06-05T14:56:00.000Z"
+    },
+    {
+      "sku": "POW-L",
+      "part_number": "POW-L",
+      "supplier_sku": "RAL 7047",
+      "title": "Chalk Powder Coat",
+      "description": "Telegray 4",
+      "page_id": "78736520-469b-4749-a948-5a1b9991c832",
+      "page_url": "https://app.notion.com/p/Chalk-Powder-Coat-78736520469b4749a9485a1b9991c832",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-06-05T14:56:00.000Z"
+    },
+    {
+      "sku": "POW-PG",
+      "part_number": "POW-PG",
+      "supplier_sku": "PRSS32180PB",
+      "title": "Python Green Powder Coat",
+      "description": "S.G. RAL 6025",
+      "page_id": "79743bb9-c1a8-4cea-a65b-36932d18c4ad",
+      "page_url": "https://app.notion.com/p/Python-Green-Powder-Coat-79743bb9c1a84ceaa65b36932d18c4ad",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-06-05T14:56:00.000Z"
+    },
+    {
+      "sku": "POW-Q",
+      "part_number": "POW-Q",
+      "supplier_sku": "RAL 3015",
+      "title": "Pinkaboo Powder Coat",
+      "description": "S.G. RAL 3015, Satin 30-45% Gloss Smooth Finish",
+      "page_id": "308ffa52-4c5b-80e9-af1d-ea063433fb37",
+      "page_url": "https://app.notion.com/p/Pinkaboo-Powder-Coat-308ffa524c5b80e9af1dea063433fb37",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-06-05T14:56:00.000Z"
+    },
+    {
+      "sku": "POW-RH",
+      "part_number": "POW-RH",
+      "supplier_sku": "PRSS64289",
+      "title": "Riding Hood Red Powder Coat",
+      "description": "S.G. RAL 3013",
+      "page_id": "fe2790fe-53c5-45cd-bdd6-5b16d393fd77",
+      "page_url": "https://app.notion.com/p/Riding-Hood-Red-Powder-Coat-fe2790fe53c545cdbdd65b16d393fd77",
+      "image": null,
+      "status": "Active",
+      "type": "Powder Coats",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
+          "code": "P2",
+          "group": "Powder Coating",
+          "description": "Powder coating rack, east wall",
+          "color": "#6B5BA8",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-06-05T14:56:00.000Z"
+    },
+    {
       "sku": "Reli",
+      "part_number": "",
+      "supplier_sku": "Reli",
       "title": "Trash Bags, 40-45 gal, black",
       "description": "",
       "page_id": "348ffa52-4c5b-8057-a204-fef769748325",
@@ -73313,6 +73469,8 @@
     },
     {
       "sku": "Reli",
+      "part_number": "",
+      "supplier_sku": "Reli",
       "title": "Trash Bags, 30-33 gal, clear",
       "description": "",
       "page_id": "348ffa52-4c5b-8089-9eea-e21e16831a92",
@@ -73335,6 +73493,8 @@
     },
     {
       "sku": "Reli",
+      "part_number": "",
+      "supplier_sku": "Reli",
       "title": "Trash Bags, 6-10 gal, clear",
       "description": "",
       "page_id": "348ffa52-4c5b-80f5-bce6-df0f8dc772a6",
@@ -73357,6 +73517,8 @@
     },
     {
       "sku": "S-1007",
+      "part_number": "",
+      "supplier_sku": "S-1007",
       "title": "8 x 12\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-80f5-ae1a-dbbaa0a727d2",
@@ -73379,6 +73541,8 @@
     },
     {
       "sku": "S-1011",
+      "part_number": "",
+      "supplier_sku": "S-1011",
       "title": "18 x 24\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-8049-ba51-c4f9ff177c5a",
@@ -73401,6 +73565,8 @@
     },
     {
       "sku": "S-10666",
+      "part_number": "",
+      "supplier_sku": "S-10666",
       "title": "48 x 10 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80f4-8502-dcecf303be04",
@@ -73423,6 +73589,8 @@
     },
     {
       "sku": "S-10702",
+      "part_number": "",
+      "supplier_sku": "S-10702",
       "title": "10 x 6 x 4",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80a9-ae9c-c63821989b3a",
@@ -73453,6 +73621,8 @@
     },
     {
       "sku": "S-11244",
+      "part_number": "",
+      "supplier_sku": "S-11244",
       "title": "12 x 12 x 4",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8078-b199-cc4ffceed009",
@@ -73483,6 +73653,8 @@
     },
     {
       "sku": "S-11382",
+      "part_number": "",
+      "supplier_sku": "S-11382",
       "title": "24 x 24 x 8",
       "description": "",
       "page_id": "2c3ffa52-4c5b-805c-8f2e-d969d121e943",
@@ -73505,6 +73677,8 @@
     },
     {
       "sku": "S-12654",
+      "part_number": "",
+      "supplier_sku": "S-12654",
       "title": "26 x 16 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8012-b6ec-e7ca0cd51711",
@@ -73527,6 +73701,8 @@
     },
     {
       "sku": "S-12656",
+      "part_number": "",
+      "supplier_sku": "S-12656",
       "title": "26 x 26 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80bd-bd8b-d6d3da8ddd42",
@@ -73549,6 +73725,8 @@
     },
     {
       "sku": "S-1291",
+      "part_number": "",
+      "supplier_sku": "S-1291",
       "title": "2 x 3\u201d Zip Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-8077-9cfc-fe1c73114c51",
@@ -73571,6 +73749,8 @@
     },
     {
       "sku": "S-1294",
+      "part_number": "",
+      "supplier_sku": "S-1294",
       "title": "4 x 6\u201d Zip Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-8050-a51b-c322da49818b",
@@ -73593,6 +73773,8 @@
     },
     {
       "sku": "S-14283",
+      "part_number": "",
+      "supplier_sku": "S-14283",
       "title": "26 x 26 x 16",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80b8-9879-e7c51f714487",
@@ -73615,6 +73797,8 @@
     },
     {
       "sku": "S-1451",
+      "part_number": "",
+      "supplier_sku": "S-1451",
       "title": "14 x 24\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-8058-b642-f471e4accbc4",
@@ -73637,6 +73821,8 @@
     },
     {
       "sku": "S-15052",
+      "part_number": "",
+      "supplier_sku": "S-15052",
       "title": "16 x 4 x 4",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8068-97e9-e39fc9bb8b2d",
@@ -73667,6 +73853,8 @@
     },
     {
       "sku": "S-15102",
+      "part_number": "",
+      "supplier_sku": "S-15102",
       "title": "15 x 2 x 2",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80f6-af19-e54b0aac7c48",
@@ -73689,6 +73877,8 @@
     },
     {
       "sku": "S-15856",
+      "part_number": "",
+      "supplier_sku": "S-15856",
       "title": "Simple Green Extreme",
       "description": "Simple Green Extreme Aircraft and Precision Cleaner",
       "page_id": "349ffa52-4c5b-80bf-9cf8-e25f991a0928",
@@ -73711,6 +73901,8 @@
     },
     {
       "sku": "S-16699",
+      "part_number": "",
+      "supplier_sku": "S-16699",
       "title": "6 x 6 x 30",
       "description": "",
       "page_id": "2c3ffa52-4c5b-800f-9070-f7fcebc20269",
@@ -73741,6 +73933,8 @@
     },
     {
       "sku": "S-1719",
+      "part_number": "",
+      "supplier_sku": "S-1719",
       "title": "4 x 4 x 4",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80f7-bb6b-de510897a379",
@@ -73771,6 +73965,8 @@
     },
     {
       "sku": "S-1749",
+      "part_number": "",
+      "supplier_sku": "S-1749",
       "title": "24 x 48\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-802c-8d77-eb561c3332c9",
@@ -73793,6 +73989,8 @@
     },
     {
       "sku": "S-17545",
+      "part_number": "",
+      "supplier_sku": "S-17545",
       "title": "4 x 52\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-80b5-ad87-e88acbb8a7ba",
@@ -73815,6 +74013,8 @@
     },
     {
       "sku": "S-1757",
+      "part_number": "",
+      "supplier_sku": "S-1757",
       "title": "36 x 42\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-8070-9509-d785510be2ab",
@@ -73837,6 +74037,8 @@
     },
     {
       "sku": "S-17997",
+      "part_number": "",
+      "supplier_sku": "S-17997",
       "title": "8 x 4 x 46",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80e1-9982-cf59915c27fd",
@@ -73859,6 +74061,8 @@
     },
     {
       "sku": "S-18368",
+      "part_number": "",
+      "supplier_sku": "S-18368",
       "title": "26 x 16 x 16",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80e6-9963-fd71ecbc22ee",
@@ -73881,6 +74085,8 @@
     },
     {
       "sku": "S-18379",
+      "part_number": "",
+      "supplier_sku": "S-18379",
       "title": "32 x 10 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8012-9446-c6d6c12aabda",
@@ -73903,6 +74109,8 @@
     },
     {
       "sku": "S-18427",
+      "part_number": "",
+      "supplier_sku": "S-18427",
       "title": "36 x 8 x 4",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80fa-9889-c97d684bb185",
@@ -73925,6 +74133,8 @@
     },
     {
       "sku": "S-1993",
+      "part_number": "",
+      "supplier_sku": "S-1993",
       "title": "2 x 6\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-8040-8f8d-cc3fc7963599",
@@ -73947,6 +74157,8 @@
     },
     {
       "sku": "S-1994",
+      "part_number": "",
+      "supplier_sku": "S-1994",
       "title": "2 x 8\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-805a-a97f-cfa1fb8d4baf",
@@ -73969,6 +74181,8 @@
     },
     {
       "sku": "S-220",
+      "part_number": "",
+      "supplier_sku": "S-220",
       "title": "1-1/2 x 2\u201d Zip Bag",
       "description": "",
       "page_id": "2e5ffa52-4c5b-80c1-9001-d6b9c50a1a33",
@@ -73991,6 +74205,8 @@
     },
     {
       "sku": "S-2385",
+      "part_number": "",
+      "supplier_sku": "S-2385",
       "title": "12 x 15\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-80c6-af10-d042360ff8b0",
@@ -74013,6 +74229,8 @@
     },
     {
       "sku": "S-23977",
+      "part_number": "",
+      "supplier_sku": "S-23977",
       "title": "18 x 7 x 7",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80cd-9c52-d38c69471f41",
@@ -74035,6 +74253,8 @@
     },
     {
       "sku": "S-3069",
+      "part_number": "",
+      "supplier_sku": "S-3069",
       "title": "3 x 16\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-8085-9b26-dccf160da95b",
@@ -74057,6 +74277,8 @@
     },
     {
       "sku": "S-3601",
+      "part_number": "",
+      "supplier_sku": "S-3601",
       "title": "8 x 36\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-80ac-8ee7-d084ca94f433",
@@ -74079,6 +74301,8 @@
     },
     {
       "sku": "S-4062",
+      "part_number": "",
+      "supplier_sku": "S-4062",
       "title": "6 x 6 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80ac-970e-e1087bdf2e65",
@@ -74101,6 +74325,8 @@
     },
     {
       "sku": "S-4084",
+      "part_number": "",
+      "supplier_sku": "S-4084",
       "title": "8 x 8 x 8",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8021-97aa-d246b47709f2",
@@ -74123,6 +74349,8 @@
     },
     {
       "sku": "S-4105",
+      "part_number": "",
+      "supplier_sku": "S-4105",
       "title": "10 x 10 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8000-859c-c1a5f8b4b01f",
@@ -74145,6 +74373,8 @@
     },
     {
       "sku": "S-4123",
+      "part_number": "",
+      "supplier_sku": "S-4123",
       "title": "12 x 10 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8050-9d0f-f439bfcb6024",
@@ -74167,6 +74397,8 @@
     },
     {
       "sku": "S-4125",
+      "part_number": "",
+      "supplier_sku": "S-4125",
       "title": "12 x 12 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80be-b0a1-d07a639a87f6",
@@ -74189,6 +74421,8 @@
     },
     {
       "sku": "S-4128",
+      "part_number": "",
+      "supplier_sku": "S-4128",
       "title": "12 x 6 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8001-b256-e64cb4d924e6",
@@ -74211,6 +74445,8 @@
     },
     {
       "sku": "S-4138",
+      "part_number": "",
+      "supplier_sku": "S-4138",
       "title": "14 x 6 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-802c-bfc3-e50e3ac9ec30",
@@ -74233,6 +74469,8 @@
     },
     {
       "sku": "S-4142",
+      "part_number": "",
+      "supplier_sku": "S-4142",
       "title": "14 x 14 x 14",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80bb-b485-e413d04d462d",
@@ -74255,6 +74493,8 @@
     },
     {
       "sku": "S-4144",
+      "part_number": "",
+      "supplier_sku": "S-4144",
       "title": "14 x 10 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8062-89ab-d9937f0676a2",
@@ -74277,6 +74517,8 @@
     },
     {
       "sku": "S-4148",
+      "part_number": "",
+      "supplier_sku": "S-4148",
       "title": "14 x 14 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8007-ba92-f8bacbcdc715",
@@ -74299,6 +74541,8 @@
     },
     {
       "sku": "S-4162",
+      "part_number": "",
+      "supplier_sku": "S-4162",
       "title": "24 x 16 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8077-9fd2-fc90fd826582",
@@ -74321,6 +74565,8 @@
     },
     {
       "sku": "S-4163",
+      "part_number": "",
+      "supplier_sku": "S-4163",
       "title": "16 x 12 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8044-8707-fa1100d41fb7",
@@ -74343,6 +74589,8 @@
     },
     {
       "sku": "S-4165",
+      "part_number": "",
+      "supplier_sku": "S-4165",
       "title": "16 x 16 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-802b-bd16-dcf6438cde5a",
@@ -74365,6 +74613,8 @@
     },
     {
       "sku": "S-4166",
+      "part_number": "",
+      "supplier_sku": "S-4166",
       "title": "16 x 16 x 16",
       "description": "",
       "page_id": "2c3ffa52-4c5b-808c-ba7b-d85e2aa3f7a0",
@@ -74387,6 +74637,8 @@
     },
     {
       "sku": "S-4181",
+      "part_number": "",
+      "supplier_sku": "S-4181",
       "title": "18 x 12 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80bb-88c6-e7b45f50b3ed",
@@ -74409,6 +74661,8 @@
     },
     {
       "sku": "S-4185",
+      "part_number": "",
+      "supplier_sku": "S-4185",
       "title": "18 x 18 x 18",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8080-a281-d7933e830749",
@@ -74431,6 +74685,8 @@
     },
     {
       "sku": "S-4191",
+      "part_number": "",
+      "supplier_sku": "S-4191",
       "title": "18 x 14 x 14",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8012-bf23-c62cc6a224fd",
@@ -74453,6 +74709,8 @@
     },
     {
       "sku": "S-4201",
+      "part_number": "",
+      "supplier_sku": "S-4201",
       "title": "20 x 20 x 20",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80e5-92e7-e50cdf8e4a83",
@@ -74475,6 +74733,8 @@
     },
     {
       "sku": "S-4203",
+      "part_number": "",
+      "supplier_sku": "S-4203",
       "title": "20 x 12 x 10",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80fc-b0ee-ece829024329",
@@ -74497,6 +74757,8 @@
     },
     {
       "sku": "S-4207",
+      "part_number": "",
+      "supplier_sku": "S-4207",
       "title": "20 x 14 x 14",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8056-a91b-fbcea7c62c16",
@@ -74519,6 +74781,8 @@
     },
     {
       "sku": "S-4243",
+      "part_number": "",
+      "supplier_sku": "S-4243",
       "title": "24 x 14 x14",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8043-8776-f51064bedd46",
@@ -74541,6 +74805,8 @@
     },
     {
       "sku": "S-4307",
+      "part_number": "",
+      "supplier_sku": "S-4307",
       "title": "6 x 6 x 2",
       "description": "",
       "page_id": "2c3ffa52-4c5b-801e-84ef-f1e6f7c8b50e",
@@ -74563,6 +74829,8 @@
     },
     {
       "sku": "S-4315",
+      "part_number": "",
+      "supplier_sku": "S-4315",
       "title": "7 x 7 x 7",
       "description": "",
       "page_id": "2c3ffa52-4c5b-807d-ba01-ee8bb7c92d99",
@@ -74585,6 +74853,8 @@
     },
     {
       "sku": "S-432",
+      "part_number": "",
+      "supplier_sku": "S-432",
       "title": "8 x 4 x 4",
       "description": "",
       "page_id": "2c3ffa52-4c5b-802e-9ee0-dd0d0b1acc22",
@@ -74615,6 +74885,8 @@
     },
     {
       "sku": "S-4320",
+      "part_number": "",
+      "supplier_sku": "S-4320",
       "title": "24 x 24 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8041-adff-c025b617bf00",
@@ -74637,6 +74909,8 @@
     },
     {
       "sku": "S-4348",
+      "part_number": "",
+      "supplier_sku": "S-4348",
       "title": "16 x 6 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8057-bdd1-e08fc3475286",
@@ -74659,6 +74933,8 @@
     },
     {
       "sku": "S-4349",
+      "part_number": "",
+      "supplier_sku": "S-4349",
       "title": "20 x 12 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8059-99ed-dbeb25d25e85",
@@ -74681,6 +74957,8 @@
     },
     {
       "sku": "S-4361",
+      "part_number": "",
+      "supplier_sku": "S-4361",
       "title": "36 x 8 x 8",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80e2-b197-d04f66f412dd",
@@ -74694,6 +74972,8 @@
     },
     {
       "sku": "S-4399",
+      "part_number": "",
+      "supplier_sku": "S-4399",
       "title": "18 x 18 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-804e-8805-f613d6f7cfda",
@@ -74716,6 +74996,8 @@
     },
     {
       "sku": "S-4417",
+      "part_number": "",
+      "supplier_sku": "S-4417",
       "title": "30 x 24 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-807a-9cab-c2ed50cade01",
@@ -74738,6 +75020,8 @@
     },
     {
       "sku": "S-4500",
+      "part_number": "",
+      "supplier_sku": "S-4500",
       "title": "20 x 20 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-801a-897f-c0f2dadbfe6d",
@@ -74760,6 +75044,8 @@
     },
     {
       "sku": "S-4557",
+      "part_number": "",
+      "supplier_sku": "S-4557",
       "title": "8 x 8 x 48",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8049-9b7f-d13c11b021b4",
@@ -74790,6 +75076,8 @@
     },
     {
       "sku": "S-4566",
+      "part_number": "",
+      "supplier_sku": "S-4566",
       "title": "18 x 16 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80f1-b80f-e6cd8c83529d",
@@ -74812,6 +75100,8 @@
     },
     {
       "sku": "S-4578",
+      "part_number": "",
+      "supplier_sku": "S-4578",
       "title": "4 x 4 x 30",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8049-a2f4-c1e7d15162d4",
@@ -74834,6 +75124,8 @@
     },
     {
       "sku": "S-4585",
+      "part_number": "",
+      "supplier_sku": "S-4585",
       "title": "7 x 7 x 3",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80fe-a6b8-f1c882dae5a7",
@@ -74847,6 +75139,8 @@
     },
     {
       "sku": "S-4637",
+      "part_number": "",
+      "supplier_sku": "S-4637",
       "title": "18 x 18 x 20",
       "description": "",
       "page_id": "2c3ffa52-4c5b-807c-8aee-e3612fcd384a",
@@ -74869,6 +75163,8 @@
     },
     {
       "sku": "S-4639",
+      "part_number": "",
+      "supplier_sku": "S-4639",
       "title": "20 x 6 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8006-998d-d8a3f25cd305",
@@ -74891,6 +75187,8 @@
     },
     {
       "sku": "S-4645",
+      "part_number": "",
+      "supplier_sku": "S-4645",
       "title": "20 x 16 x 16",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8080-8715-c30f33cf861e",
@@ -74913,6 +75211,8 @@
     },
     {
       "sku": "S-4651",
+      "part_number": "",
+      "supplier_sku": "S-4651",
       "title": "22 x 22 x 8",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80dc-8026-fa64448cfad6",
@@ -74935,6 +75235,8 @@
     },
     {
       "sku": "S-4654",
+      "part_number": "",
+      "supplier_sku": "S-4654",
       "title": "24 x 14 x 14",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8055-bba5-fad7eb863a18",
@@ -74957,6 +75259,8 @@
     },
     {
       "sku": "S-4669",
+      "part_number": "",
+      "supplier_sku": "S-4669",
       "title": "32 x 6 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80b5-8bfc-ca50cc8b3e33",
@@ -74979,6 +75283,8 @@
     },
     {
       "sku": "S-4799",
+      "part_number": "",
+      "supplier_sku": "S-4799",
       "title": "24 x 16 x 8",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8059-8e2b-ebae1065f1ee",
@@ -74992,6 +75298,8 @@
     },
     {
       "sku": "S-4905",
+      "part_number": "",
+      "supplier_sku": "S-4905",
       "title": "24 x 14 x 6",
       "description": "",
       "page_id": "2c3ffa52-4c5b-802c-9ffb-dd90414c36a8",
@@ -75014,6 +75322,8 @@
     },
     {
       "sku": "S-4912",
+      "part_number": "",
+      "supplier_sku": "S-4912",
       "title": "26 x 26 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80c5-8230-d4b4e8fd753a",
@@ -75027,6 +75337,8 @@
     },
     {
       "sku": "S-4959",
+      "part_number": "",
+      "supplier_sku": "S-4959",
       "title": "26 x 14 x 14",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8004-8366-c0d28f2fff8a",
@@ -75049,6 +75361,8 @@
     },
     {
       "sku": "S-6321",
+      "part_number": "",
+      "supplier_sku": "S-6321",
       "title": "2 x 14\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-80cf-a108-d376bf4e1f11",
@@ -75071,6 +75385,8 @@
     },
     {
       "sku": "S-6327",
+      "part_number": "",
+      "supplier_sku": "S-6327",
       "title": "4 x 36\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-80f1-a69b-cb9630a7846e",
@@ -75093,6 +75409,8 @@
     },
     {
       "sku": "S-6340",
+      "part_number": "",
+      "supplier_sku": "S-6340",
       "title": "2 x 16\u201d Bag",
       "description": "",
       "page_id": "2e6ffa52-4c5b-807d-b1d3-d6fa6e1900f6",
@@ -75115,6 +75433,8 @@
     },
     {
       "sku": "S-8266",
+      "part_number": "",
+      "supplier_sku": "S-8266",
       "title": "12 x 6 x 4",
       "description": "",
       "page_id": "2c3ffa52-4c5b-808a-b66b-c07533fab780",
@@ -75136,29 +75456,9 @@
       "last_edited_at": "2026-06-24T00:45:00.000Z"
     },
     {
-      "sku": "SD1799522",
-      "title": "Clear Powder Coat",
-      "description": "Super Durable Wet Clear",
-      "page_id": "566d7f61-b500-4b9b-bf57-ee3c7fb78f37",
-      "page_url": "https://app.notion.com/p/Clear-Powder-Coat-566d7f61b5004b9bbf57ee3c7fb78f37",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-06-05T14:56:00.000Z"
-    },
-    {
       "sku": "SK1930",
+      "part_number": "",
+      "supplier_sku": "SK1930",
       "title": "Stripper",
       "description": "Quick Strip 2000 - 5 Gallon",
       "page_id": "2f2ffa52-4c5b-80fc-84d7-c76b02ac5333",
@@ -75180,73 +75480,9 @@
       "last_edited_at": "2026-06-24T00:44:00.000Z"
     },
     {
-      "sku": "SRSL11386CN",
-      "title": "Black Powder Coat",
-      "description": "2604 Black",
-      "page_id": "9aabf358-4dda-411c-90f5-7a5ca925304c",
-      "page_url": "https://app.notion.com/p/Black-Powder-Coat-9aabf3584dda411c90f57a5ca925304c",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-06-05T14:56:00.000Z"
-    },
-    {
-      "sku": "SRSL45892CN",
-      "title": "Bone Powder Coat",
-      "description": "2604 Sandstone",
-      "page_id": "6fbe6af1-c0ac-4c56-8abd-6bceaca58b5f",
-      "page_url": "https://app.notion.com/p/Bone-Powder-Coat-6fbe6af1c0ac4c568abd6bceaca58b5f",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-06-05T14:56:00.000Z"
-    },
-    {
-      "sku": "SRSL64369CN",
-      "title": "Orange Powder Coat",
-      "description": "2604 RAL 2010",
-      "page_id": "308ffa52-4c5b-80f9-bc48-fee632b815e1",
-      "page_url": "https://app.notion.com/p/Orange-Powder-Coat-308ffa524c5b80f9bc48fee632b815e1",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-06-05T14:56:00.000Z"
-    },
-    {
       "sku": "Tnuocke (various suppliers)",
+      "part_number": "",
+      "supplier_sku": "Tnuocke (various suppliers)",
       "title": "Filter, Air Compressor Intake",
       "description": "",
       "page_id": "348ffa52-4c5b-808d-a8ea-fb2aba0d04c0",
@@ -75268,29 +75504,9 @@
       "last_edited_at": "2026-06-24T00:44:00.000Z"
     },
     {
-      "sku": "URSS90072",
-      "title": "Gold Powder Coat",
-      "description": "OB Gold Bonded",
-      "page_id": "f42525d0-9d51-46dc-97c5-6fda7442cfa8",
-      "page_url": "https://app.notion.com/p/Gold-Powder-Coat-f42525d09d5146dc97c56fda7442cfa8",
-      "image": null,
-      "status": "Active",
-      "type": "Powder Coats",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81af-adcd-cf46acc8d411",
-          "code": "P2",
-          "group": "Powder Coating",
-          "description": "Powder coating rack, east wall",
-          "color": "#6B5BA8",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-06-05T14:55:00.000Z"
-    },
-    {
       "sku": "Various suppliers",
+      "part_number": "",
+      "supplier_sku": "Various suppliers",
       "title": "Printer paper",
       "description": "",
       "page_id": "36cffa52-4c5b-80ce-b95b-d2e975de3f72",
@@ -75321,6 +75537,8 @@
     },
     {
       "sku": "Various suppliers",
+      "part_number": "",
+      "supplier_sku": "Various suppliers",
       "title": "String, hang-tag, orange or black",
       "description": "",
       "page_id": "348ffa52-4c5b-8094-be38-c56eb8f94f33",
@@ -75343,6 +75561,8 @@
     },
     {
       "sku": "Various suppliers",
+      "part_number": "",
+      "supplier_sku": "Various suppliers",
       "title": "Twist ties, orange, 4\u201d",
       "description": "",
       "page_id": "348ffa52-4c5b-80c9-9186-c515a5a868cf",
@@ -75365,6 +75585,8 @@
     },
     {
       "sku": "Various suppliers",
+      "part_number": "",
+      "supplier_sku": "Various suppliers",
       "title": "Gloves, disposable, large",
       "description": "",
       "page_id": "348ffa52-4c5b-8012-9bbe-d127ea6b6865",
@@ -75387,6 +75609,8 @@
     },
     {
       "sku": "Various suppliers",
+      "part_number": "",
+      "supplier_sku": "Various suppliers",
       "title": "Gloves, disposable, medium",
       "description": "",
       "page_id": "348ffa52-4c5b-80db-b44a-f0e16f866a21",
@@ -75409,6 +75633,8 @@
     },
     {
       "sku": "Various suppliers",
+      "part_number": "",
+      "supplier_sku": "Various suppliers",
       "title": "Gloves, disposable, small",
       "description": "",
       "page_id": "348ffa52-4c5b-8020-8099-c142122e3931",
@@ -75431,6 +75657,8 @@
     },
     {
       "sku": "hook-CV3",
+      "part_number": "hook-CV3",
+      "supplier_sku": "",
       "title": "Powder-coat hook, CV style, 3\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81b7-823d-eab4ba079a97",
@@ -75452,11 +75680,37 @@
       "last_edited_at": "2026-08-07T17:22:00.000Z"
     },
     {
+      "sku": "hook-J1",
+      "part_number": "hook-J1",
+      "supplier_sku": "JM-1",
+      "title": "Powder-coat hook, jam-style, 1\u201d",
+      "description": "Powder-coat hanging hook \u2014 reusable",
+      "page_id": "3b4ffa52-4c5b-817e-9b28-f8a5d3701188",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-1-3b4ffa524c5b817e9b28f8a5d3701188",
+      "image": "supply-images/hook-J1.jpg",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "500 (1 box)",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:22:00.000Z"
+    },
+    {
       "sku": "hook-J2",
-      "title": "Powder-coat hook, jam-style, 5\u201d",
+      "part_number": "hook-J2",
+      "supplier_sku": "",
+      "title": "Powder-coat hook, jam-style, 2\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-8189-94b6-ef6a5dfd6958",
-      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-5-3b4ffa524c5b818994b6ef6a5dfd6958",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-2-3b4ffa524c5b818994b6ef6a5dfd6958",
       "image": "supply-images/hook-J2.jpg",
       "status": "Active",
       "type": "Fixtures",
@@ -75471,14 +75725,16 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T17:23:00.000Z"
+      "last_edited_at": "2026-08-08T19:30:00.000Z"
     },
     {
       "sku": "hook-J5",
-      "title": "Powder-coat hook, jam-style, 1\u201d",
+      "part_number": "hook-J5",
+      "supplier_sku": "",
+      "title": "Powder-coat hook, jam-style, 5\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-8174-9ddc-ee22a3cd7cf2",
-      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-1-3b4ffa524c5b81749ddcee22a3cd7cf2",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-5-3b4ffa524c5b81749ddcee22a3cd7cf2",
       "image": "supply-images/hook-J5.jpg",
       "status": "Active",
       "type": "Fixtures",
@@ -75493,10 +75749,12 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T17:23:00.000Z"
+      "last_edited_at": "2026-08-08T19:30:00.000Z"
     },
     {
       "sku": "hook-M1",
+      "part_number": "hook-M1",
+      "supplier_sku": "",
       "title": "Powder-coat hook, magic-rack, style 1",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81b9-a930-ec8db74ddf98",
@@ -75518,7 +75776,33 @@
       "last_edited_at": "2026-08-07T17:24:00.000Z"
     },
     {
+      "sku": "hook-M2",
+      "part_number": "hook-M2",
+      "supplier_sku": "#4210-SS-060",
+      "title": "Powder-coat hook, magic-rack, style 2",
+      "description": "Powder-coat hanging hook \u2014 reusable",
+      "page_id": "3b4ffa52-4c5b-810f-af6d-ddd689e95c94",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-magic-rack-style-2-3b4ffa524c5b810faf6dddd689e95c94",
+      "image": "supply-images/hook-M2.jpg",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "100",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:53:00.000Z"
+    },
+    {
       "sku": "hook-M3",
+      "part_number": "hook-M3",
+      "supplier_sku": "",
       "title": "Powder-coat hook, magic-rack, style 3",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81d4-8bbf-e82176ab2a29",
@@ -75541,6 +75825,8 @@
     },
     {
       "sku": "hook-P3",
+      "part_number": "hook-P3",
+      "supplier_sku": "",
       "title": "Powder-coat hook, paper-clip",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81ab-a764-e7914d113103",
@@ -75563,6 +75849,8 @@
     },
     {
       "sku": "hook-S1",
+      "part_number": "hook-S1",
+      "supplier_sku": "",
       "title": "Powder-coat hook, spring hook, bent legs",
       "description": ".04 x 1.77\" Spring Tube Pipe Hooks-5lb test",
       "page_id": "3b4ffa52-4c5b-81f2-a0ae-e965eb6525fb",
@@ -75585,6 +75873,8 @@
     },
     {
       "sku": "hook-V4",
+      "part_number": "hook-V4",
+      "supplier_sku": "",
       "title": "Powder-coat hook, VV style, 4\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-813f-96d4-fce1cdd22c89",
@@ -75607,6 +75897,8 @@
     },
     {
       "sku": "hook-V4L",
+      "part_number": "hook-V4L",
+      "supplier_sku": "",
       "title": "Powder-coat hook, VV style, 4\u201d, light",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81fd-8670-e119c4f06726",
@@ -75629,6 +75921,8 @@
     },
     {
       "sku": "hook-v6",
+      "part_number": "hook-v6",
+      "supplier_sku": "",
       "title": "Powder-coat hook, VV style, 6\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-8192-8cea-f2329cf5fd31",
@@ -75651,6 +75945,8 @@
     },
     {
       "sku": "",
+      "part_number": "",
+      "supplier_sku": "",
       "title": "24 x 12 x 12",
       "description": "",
       "page_id": "314ffa52-4c5b-80d5-90a1-cd202e8f4fe3",
@@ -75664,6 +75960,8 @@
     },
     {
       "sku": "BX13",
+      "part_number": "",
+      "supplier_sku": "BX13",
       "title": "BX13",
       "description": "",
       "page_id": "2c3ffa52-4c5b-80c8-9e2f-caa58f6cc55f",
@@ -75686,6 +75984,8 @@
     },
     {
       "sku": "",
+      "part_number": "",
+      "supplier_sku": "",
       "title": "Bubble Wrap, ",
       "description": "",
       "page_id": "2f7ffa52-4c5b-80d8-8e39-ef9d1f4a8c60",
@@ -75699,6 +75999,8 @@
     },
     {
       "sku": "S-21585",
+      "part_number": "",
+      "supplier_sku": "S-21585",
       "title": "9 x 9 x 48",
       "description": "",
       "page_id": "2c3ffa52-4c5b-806e-94a0-ed24e6f249fc",
@@ -75712,6 +76014,8 @@
     },
     {
       "sku": "S-4218",
+      "part_number": "",
+      "supplier_sku": "S-4218",
       "title": "24 x 16 x 16",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8029-910c-dfcfae86b27b",
@@ -75734,6 +76038,8 @@
     },
     {
       "sku": "S-4511",
+      "part_number": "",
+      "supplier_sku": "S-4511",
       "title": "4 x 4 x 40",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8015-be3c-cea097c352c3",
@@ -75756,6 +76062,8 @@
     },
     {
       "sku": "S-7711",
+      "part_number": "",
+      "supplier_sku": "S-7711",
       "title": "Paper towels, kitchen",
       "description": "",
       "page_id": "37cffa52-4c5b-803e-8834-cba0fbe55076",
@@ -75769,6 +76077,8 @@
     },
     {
       "sku": "SM-89460",
+      "part_number": "",
+      "supplier_sku": "SM-89460",
       "title": "Paper towels, bathroom",
       "description": "",
       "page_id": "37cffa52-4c5b-8002-a9bf-c40d00d6be3b",
@@ -75782,6 +76092,8 @@
     },
     {
       "sku": "SMP13005",
+      "part_number": "",
+      "supplier_sku": "SMP13005",
       "title": "Simple Green Regular",
       "description": "Simple Green Industrial Cleaner & Degreaser - 1 Gallon Bottle",
       "page_id": "3b5ffa52-4c5b-8053-89e0-df3b2256d34c",
@@ -75804,6 +76116,8 @@
     },
     {
       "sku": "Various suppliers",
+      "part_number": "",
+      "supplier_sku": "Various suppliers",
       "title": "Zip ties, clear, 4\u201d",
       "description": "",
       "page_id": "36dffa52-4c5b-803d-a79c-f2f1444290d9",
@@ -75817,6 +76131,8 @@
     },
     {
       "sku": "rack-1",
+      "part_number": "rack-1",
+      "supplier_sku": "",
       "title": "Powder-coat Magic rack system",
       "description": "Magic rack, customizable by length, position, style",
       "page_id": "3b5ffa52-4c5b-800d-8112-fb2882e81c76",
