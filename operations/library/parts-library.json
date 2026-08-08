@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-07T12:01:05",
+  "generated_at": "2026-08-08T14:17:02",
   "counts": {
-    "parts": 475,
-    "supplies": 152,
+    "parts": 474,
+    "supplies": 158,
     "families": 284,
     "glossary": 83,
     "locations": 40,
@@ -71843,26 +71843,6 @@
       "last_edited_at": "2026-07-23T01:39:00.000Z"
     },
     {
-      "part_number": "",
-      "page_id": "391ffa52-4c5b-80a1-8517-d561e0e489db",
-      "page_url": "https://app.notion.com/p/391ffa524c5b80a18517d561e0e489db",
-      "image": null,
-      "finish": null,
-      "status": null,
-      "use_2024": 0,
-      "use_2025": 0,
-      "last_ordered": null,
-      "lead_time": "",
-      "moq": null,
-      "reorder_qty": null,
-      "reorder_point": null,
-      "raw_input": null,
-      "in_house_processes": [],
-      "locations": [],
-      "family_id": null,
-      "last_edited_at": "2026-07-02T18:47:00.000Z"
-    },
-    {
       "part_number": "BO1BR",
       "page_id": "324ffa52-4c5b-8172-844d-f1ccc94ee2f5",
       "page_url": "https://app.notion.com/p/BO1BR-324ffa524c5b8172844df1ccc94ee2f5",
@@ -72392,6 +72372,138 @@
   ],
   "supplies": [
     {
+      "sku": "#1208-1-A",
+      "title": "Conveyor hooks, Magic Rack",
+      "description": "Magic Rack conveyor hook assembly, 8\" - hangs the rack from the conveyor",
+      "page_id": "3b5ffa52-4c5b-8137-ab17-f1c0d09d55a6",
+      "page_url": "https://app.notion.com/p/Conveyor-hooks-Magic-Rack-3b5ffa524c5b8137ab17f1c0d09d55a6",
+      "image": "supply-images/_1208-1-A.png",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:56:00.000Z"
+    },
+    {
+      "sku": "#1497-P",
+      "title": "Punched crossbar, Magic Rack",
+      "description": "Magic Rack punched top crossbar, 19-3/8\" - top bar of the rack, punched to accept side hangers",
+      "page_id": "3b5ffa52-4c5b-814f-9851-ec5e42b70105",
+      "page_url": "https://app.notion.com/p/Punched-crossbar-Magic-Rack-3b5ffa524c5b814f9851ec5e42b70105",
+      "image": "supply-images/_1497-P.png",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:56:00.000Z"
+    },
+    {
+      "sku": "#1497-S",
+      "title": "Standard crossbar, Magic Rack",
+      "description": "Magic Rack standard crossbar, 19-3/8\" - carries the parts hooks",
+      "page_id": "3b5ffa52-4c5b-8194-9315-cf3828006bac",
+      "page_url": "https://app.notion.com/p/Standard-crossbar-Magic-Rack-3b5ffa524c5b81949315cf3828006bac",
+      "image": "supply-images/_1497-S.png",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:56:00.000Z"
+    },
+    {
+      "sku": "#1505-SH",
+      "title": "Side hangers, Magic Rack",
+      "description": "Magic Rack side hanger, 5\" - vertical link between the upper and lower crossbars",
+      "page_id": "3b5ffa52-4c5b-8179-9294-f6b8efc0aa83",
+      "page_url": "https://app.notion.com/p/Side-hangers-Magic-Rack-3b5ffa524c5b81799294f6b8efc0aa83",
+      "image": "supply-images/_1505-SH.png",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:55:00.000Z"
+    },
+    {
+      "sku": "#1590",
+      "title": "Retainer rod, Magic Rack",
+      "description": "Magic Rack retainer rod - rod plus interlocking piece that locks the bottom crossbar",
+      "page_id": "3b5ffa52-4c5b-8170-88f7-c10d20260f0d",
+      "page_url": "https://app.notion.com/p/Retainer-rod-Magic-Rack-3b5ffa524c5b817088f7c10d20260f0d",
+      "image": "supply-images/_1590.png",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:57:00.000Z"
+    },
+    {
+      "sku": "#4210-SS-060",
+      "title": "Powder-coat hook, magic-rack, style 2",
+      "description": "Powder-coat hanging hook \u2014 reusable",
+      "page_id": "3b4ffa52-4c5b-810f-af6d-ddd689e95c94",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-magic-rack-style-2-3b4ffa524c5b810faf6dddd689e95c94",
+      "image": "supply-images/_4210-SS-060.jpg",
+      "status": "Active",
+      "type": "Fixtures",
+      "reorder_qty": "100",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:53:00.000Z"
+    },
+    {
       "sku": "44x44x10",
       "title": "44 x 44 x 10",
       "description": "",
@@ -72915,10 +73027,10 @@
     },
     {
       "sku": "JM-1",
-      "title": "part-hook-J1",
+      "title": "Powder-coat hook, jam-style, 1\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-817e-9b28-f8a5d3701188",
-      "page_url": "https://app.notion.com/p/part-hook-J1-3b4ffa524c5b817e9b28f8a5d3701188",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-1-3b4ffa524c5b817e9b28f8a5d3701188",
       "image": "supply-images/JM-1.jpg",
       "status": "Active",
       "type": "Fixtures",
@@ -72933,7 +73045,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T16:26:00.000Z"
+      "last_edited_at": "2026-08-07T17:22:00.000Z"
     },
     {
       "sku": "PLSS410319PT",
@@ -75318,12 +75430,12 @@
       "last_edited_at": "2026-04-20T21:59:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-CV3",
+      "sku": "hook-CV3",
+      "title": "Powder-coat hook, CV style, 3\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81b7-823d-eab4ba079a97",
-      "page_url": "https://app.notion.com/p/part-hook-CV3-3b4ffa524c5b81b7823deab4ba079a97",
-      "image": "supply-images/part-hook-CV3.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-CV-style-3-3b4ffa524c5b81b7823deab4ba079a97",
+      "image": "supply-images/hook-CV3.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75337,15 +75449,15 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T15:19:00.000Z"
+      "last_edited_at": "2026-08-07T17:22:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-J2",
+      "sku": "hook-J2",
+      "title": "Powder-coat hook, jam-style, 5\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-8189-94b6-ef6a5dfd6958",
-      "page_url": "https://app.notion.com/p/part-hook-J2-3b4ffa524c5b818994b6ef6a5dfd6958",
-      "image": "supply-images/part-hook-J2.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-5-3b4ffa524c5b818994b6ef6a5dfd6958",
+      "image": "supply-images/hook-J2.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75359,15 +75471,15 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T15:20:00.000Z"
+      "last_edited_at": "2026-08-07T17:23:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-J5",
+      "sku": "hook-J5",
+      "title": "Powder-coat hook, jam-style, 1\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-8174-9ddc-ee22a3cd7cf2",
-      "page_url": "https://app.notion.com/p/part-hook-J5-3b4ffa524c5b81749ddcee22a3cd7cf2",
-      "image": "supply-images/part-hook-J5.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-jam-style-1-3b4ffa524c5b81749ddcee22a3cd7cf2",
+      "image": "supply-images/hook-J5.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75381,15 +75493,15 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T15:20:00.000Z"
+      "last_edited_at": "2026-08-07T17:23:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-M1",
+      "sku": "hook-M1",
+      "title": "Powder-coat hook, magic-rack, style 1",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81b9-a930-ec8db74ddf98",
-      "page_url": "https://app.notion.com/p/part-hook-M1-3b4ffa524c5b81b9a930ec8db74ddf98",
-      "image": "supply-images/part-hook-M1.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-magic-rack-style-1-3b4ffa524c5b81b9a930ec8db74ddf98",
+      "image": "supply-images/hook-M1.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75403,37 +75515,15 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T16:26:00.000Z"
+      "last_edited_at": "2026-08-07T17:24:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-M2",
-      "description": "Powder-coat hanging hook \u2014 reusable",
-      "page_id": "3b4ffa52-4c5b-810f-af6d-ddd689e95c94",
-      "page_url": "https://app.notion.com/p/part-hook-M2-3b4ffa524c5b810faf6dddd689e95c94",
-      "image": "supply-images/part-hook-M2.jpg",
-      "status": "Active",
-      "type": "Fixtures",
-      "reorder_qty": "",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
-          "code": "WP1",
-          "group": "Washing & Prep",
-          "description": "Racks, tables, shelves",
-          "color": "#0E7490",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-08-07T16:44:00.000Z"
-    },
-    {
-      "sku": "",
-      "title": "part-hook-M3",
+      "sku": "hook-M3",
+      "title": "Powder-coat hook, magic-rack, style 3",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81d4-8bbf-e82176ab2a29",
-      "page_url": "https://app.notion.com/p/part-hook-M3-3b4ffa524c5b81d48bbfe82176ab2a29",
-      "image": "supply-images/part-hook-M3.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-magic-rack-style-3-3b4ffa524c5b81d48bbfe82176ab2a29",
+      "image": "supply-images/hook-M3.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75447,15 +75537,15 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T16:44:00.000Z"
+      "last_edited_at": "2026-08-07T17:30:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-P3",
+      "sku": "hook-P3",
+      "title": "Powder-coat hook, paper-clip",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81ab-a764-e7914d113103",
-      "page_url": "https://app.notion.com/p/part-hook-P3-3b4ffa524c5b81aba764e7914d113103",
-      "image": "supply-images/part-hook-P3.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-paper-clip-3b4ffa524c5b81aba764e7914d113103",
+      "image": "supply-images/hook-P3.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75469,18 +75559,18 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T15:31:00.000Z"
+      "last_edited_at": "2026-08-07T17:25:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-S1",
-      "description": "Powder-coat hanging hook \u2014 reusable",
+      "sku": "hook-S1",
+      "title": "Powder-coat hook, spring hook, bent legs",
+      "description": ".04 x 1.77\" Spring Tube Pipe Hooks-5lb test",
       "page_id": "3b4ffa52-4c5b-81f2-a0ae-e965eb6525fb",
-      "page_url": "https://app.notion.com/p/part-hook-S1-3b4ffa524c5b81f2a0aee965eb6525fb",
-      "image": "supply-images/part-hook-S1.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-spring-hook-bent-legs-3b4ffa524c5b81f2a0aee965eb6525fb",
+      "image": "supply-images/hook-S1.jpg",
       "status": "Active",
       "type": "Fixtures",
-      "reorder_qty": "",
+      "reorder_qty": "25 (1 box)",
       "locations": [
         {
           "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
@@ -75491,15 +75581,15 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T16:43:00.000Z"
+      "last_edited_at": "2026-08-07T17:27:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-V4",
+      "sku": "hook-V4",
+      "title": "Powder-coat hook, VV style, 4\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-813f-96d4-fce1cdd22c89",
-      "page_url": "https://app.notion.com/p/part-hook-V4-3b4ffa524c5b813f96d4fce1cdd22c89",
-      "image": "supply-images/part-hook-V4.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-VV-style-4-3b4ffa524c5b813f96d4fce1cdd22c89",
+      "image": "supply-images/hook-V4.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75513,15 +75603,15 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T15:20:00.000Z"
+      "last_edited_at": "2026-08-07T17:26:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-V4L",
+      "sku": "hook-V4L",
+      "title": "Powder-coat hook, VV style, 4\u201d, light",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-81fd-8670-e119c4f06726",
-      "page_url": "https://app.notion.com/p/part-hook-V4L-3b4ffa524c5b81fd8670e119c4f06726",
-      "image": "supply-images/part-hook-V4L.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-VV-style-4-light-3b4ffa524c5b81fd8670e119c4f06726",
+      "image": "supply-images/hook-V4L.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75535,15 +75625,15 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T15:20:00.000Z"
+      "last_edited_at": "2026-08-07T17:26:00.000Z"
     },
     {
-      "sku": "",
-      "title": "part-hook-V6",
+      "sku": "hook-v6",
+      "title": "Powder-coat hook, VV style, 6\u201d",
       "description": "Powder-coat hanging hook \u2014 reusable",
       "page_id": "3b4ffa52-4c5b-8192-8cea-f2329cf5fd31",
-      "page_url": "https://app.notion.com/p/part-hook-V6-3b4ffa524c5b81928ceaf2329cf5fd31",
-      "image": "supply-images/part-hook-V6.jpg",
+      "page_url": "https://app.notion.com/p/Powder-coat-hook-VV-style-6-3b4ffa524c5b81928ceaf2329cf5fd31",
+      "image": "supply-images/hook-v6.jpg",
       "status": "Active",
       "type": "Fixtures",
       "reorder_qty": "",
@@ -75557,7 +75647,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-07T16:44:00.000Z"
+      "last_edited_at": "2026-08-07T17:26:00.000Z"
     },
     {
       "sku": "",
@@ -75724,6 +75814,28 @@
       "reorder_qty": "3000",
       "locations": [],
       "last_edited_at": "2026-06-24T00:44:00.000Z"
+    },
+    {
+      "sku": "rack-1",
+      "title": "Powder-coat Magic rack system",
+      "description": "Magic rack, customizable by length, position, style",
+      "page_id": "3b5ffa52-4c5b-800d-8112-fb2882e81c76",
+      "page_url": "https://app.notion.com/p/Powder-coat-Magic-rack-system-3b5ffa524c5b800d8112fb2882e81c76",
+      "image": "supply-images/rack-1.jpg",
+      "status": null,
+      "type": "Fixtures",
+      "reorder_qty": "1",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-819f-8566-cb09acdacf70",
+          "code": "WP1",
+          "group": "Washing & Prep",
+          "description": "Racks, tables, shelves",
+          "color": "#0E7490",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-08-07T17:34:00.000Z"
     }
   ],
   "locations": {
