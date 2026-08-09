@@ -4,9 +4,9 @@
 > **Owns:** Dutton Brown static published pages (public GitHub Pages). No PII — customer data lives in `db-private`, never here.
 > Master cross-repo rules & area map: `~/repos/CLAUDE.md` (source: `systems/repos-CLAUDE.md`). Keep out-of-scope work in its home repo.
 > **Sync:** `syncpull` at session start · `syncpush` after edits (`dbpush`/`ilypush` brand-scoped, `dbs` status) — see `~/repos/SYNC-GUIDE.md`.
-> **Cowork:** Claude edits files (they sync to disk) but does **NOT** run git — the mount corrupts `.git/index`. Thomas runs the sync commands; read-only git inspection is fine.
+> **Cowork:** Claude edits files (they sync to disk) but does **NOT** run git — not even read-only; any git command in the Cowork mount strands `.git/index.lock` (fix: `rm -f .git/index.lock`). Thomas runs the sync commands.
 
-Public static HTML hosted via GitHub Pages. Dutton Brown content organized by team under `dutton-brown/`. Other brands (iloveyouth, etc.) get their own top-level folders.
+Public static HTML hosted via GitHub Pages, organized by team at the repo root.
 
 - URL: https://duttonbrown.github.io/db-pages/
 - Repo: https://github.com/duttonbrown/db-pages
@@ -16,28 +16,23 @@ Public static HTML hosted via GitHub Pages. Dutton Brown content organized by te
 
 The root `.nojekyll` (added 2026-08-08) makes GitHub Pages serve the repo as-is. Without it, Pages runs Jekyll, which **silently excludes any file or folder starting with `_`** — `operations/library/supply-images/_1208-1-A.png` (from `#`-prefixed Magic Rack supplier SKUs, `#` sanitizes to `_`) 404'd while sitting in the repo. Nothing here uses Jekyll (no `_config.yml`, no markdown pages), so the file is pure win: underscore files serve, and deploys skip the Jekyll build.
 
-## Structure
+## Structure (team folders live at repo ROOT — verified 2026-08-08)
 
 ```
-dutton-brown/
-  company-wide/    — roadmap, annual report, team pillars
-  admin-hr/        — (empty for now)
-  operations/      — QB rollout, inventory/PO build, parts usage, open orders
-  production/      — KPI map, BOMs, color queue, wash lists, fulfillment
-  design-dev/      — (empty for now)
-  marketing/       — KPI map, trade program, dashboards
-    data/          — JSON files written by n8n workflows (powering dashboards)
-      omnisend/    — campaigns.json, automations.json, goals.json (future)
-  shared/          — Chart.js, brand tokens, common CSS
-
-brand-site/        — Dutton Brown brand concepts (kept at root for URL stability)
-iloveyouth-brand/  — iloveyouth logo preview (eventually moves to ily-public)
-swiftbladefelix/   — external/personal project
-index.html         — landing page with team-grouped catalog
+company-wide/    — roadmap, annual report, team pillars
+admin-hr/
+operations/      — QB rollout, inventory/PO build, parts usage, open orders, parts library
+production/      — KPI map, print-queue pages, fulfillment dashboards, parts-images/
+design-dev/
+marketing/       — KPI map, trade program, dashboards (data/ JSON written by n8n)
+shared/          — Chart.js, brand tokens, common CSS
+brand-site/      — Dutton Brown brand concepts (kept at root for URL stability)
+dutton-brown/    — legacy leftover (operations/open-orders only) — do not add new content here
+index.html       — landing page with team-grouped catalog
 ```
 
 ## On privacy
 
-This repo is **public**. Content is accessible to anyone who finds the URL. Do NOT commit anything that's truly sensitive (customer PII, unreleased financials, private strategic plans that competitors could weaponize).
+This repo is **public** — anyone with the URL can read it. Never commit: customer PII, unreleased financials, private strategic plans, or parts **prices** (the public `parts-library.json` is redacted; costs live only in the db-private overlay — see db-operations/CLAUDE.md).
 
-Most operational content (KPI maps, BOMs, color queues, open orders) is low-sensitivity — the realistic threat of a random stranger finding these URLs is low. For convenience and iframe-friendly embedding in Notion, public hosting is the right tradeoff.
+**BOMs, color queues, and wash lists are NOT low-sensitivity** — they contain customer-order data and live on the gated hub (`db-private`), never here. If a page needs PII or order detail, it belongs in db-private. Low-sensitivity operational dashboards (KPI maps, open-order counts, fulfillment stats) are fine here for Notion iframe embedding.
