@@ -9,393 +9,371 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-  /* ============================================================
-     Dutton Brown — Fulfillment Report (brand-only stylesheet)
-     Tokens mirror ~/repos/db-brand/tokens.css. Poppins 300/400/600.
-     ============================================================ */
-  :root {
-    --db-primary: #4A4A4A;
-    --db-accent: #FF9912;
-    --db-accent-hover: #D97706;
-    --db-accent-soft: #FFF4E0;
-    --db-surface: #F7F5F2;
-    --db-surface-mid: #EDE9E3;
-    --db-text: #4A4A4A;
-    --db-text-muted: #6B6B6B;
-    --db-text-light: #8A8A8A;
-    --db-border: #E6E6E6;
-    --db-radius: 4px;
-    --db-radius-full: 9999px;
-    --db-pos: #4E782F;
-    --db-neg: #9F2C00;
-    --db-neu: #8A8A8A;
-    --db-warn: #B89111;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-weight: 300;
-    color: var(--db-text);
-    background: var(--db-surface);
-    line-height: 1.55;
-    font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-  }
-  table, .kpi-val, .kpi-cell-sub, .kpi-period-label,
-  .kpi-compare td, .kpi-compare th { font-variant-numeric: tabular-nums; }
 
-  /* ===== Header — dark surface, brand-issue ===== */
-  .header {
-    background: var(--db-primary);
-    color: #fff;
-    padding: 56px 32px 32px;
-    text-align: left;
-    position: relative;
-  }
-  .header::before {
-    content: 'OPERATIONS REPORT';
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--db-accent);
-    margin-bottom: 14px;
-  }
-  .header h1 {
-    color: #fff;
-    font-weight: 600;
-    font-size: 2rem;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    max-width: 900px;
-  }
-  .header p {
-    color: rgba(255,255,255,0.65);
-    font-size: 0.95rem;
-    font-weight: 300;
-    margin-top: 8px;
-  }
-  .header .updated {
-    display: inline-block;
-    font-size: 0.68rem;
-    color: rgba(255,255,255,0.5);
-    margin-top: 18px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    padding-top: 14px;
-  }
+:root {
+  --db-ink: #4A4A4A;
+  --db-muted: #6B6B6B;
+  --db-accent: #FF9912;
+  --db-accent-text: #D97706;
+  --db-accent-soft: #FFF4E0;
+  --db-surface: #FAFAFA;
+  --db-surface-mid: #F1EFEC;
+  --db-card: #FFFFFF;
+  --db-border: #E6E6E6;
+  --db-hairline: #F2F0EE;
+  --db-pos: #4E782F;
+  --db-neg: #9F2C00;
+  --db-warn: #B45309;
+  --db-neu: #6B6B6B;
+  --db-radius: 6px;
+  --db-radius-sm: 4px;
+  /* Back-compat aliases so existing markup keeps resolving. --db-text-light
+     deliberately now points at the AA-passing muted grey, not the old #8A8A8A. */
+  --db-primary: #4A4A4A;
+  --db-text: #4A4A4A;
+  --db-text-muted: #6B6B6B;
+  --db-text-light: #6B6B6B;
+  --db-accent-hover: #D97706;
+}
 
-  /* ===== Report nav (cross-link between fulfillment reports) ===== */
-  .report-nav {
-    display: flex;
-    gap: 24px;
-    justify-content: flex-start;
-    padding: 0 32px 24px;
-    background: var(--db-primary);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  .report-nav a {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    color: rgba(255,255,255,0.55);
-    font-size: 0.78rem;
-    font-weight: 400;
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 8px 0;
-    border-bottom: 1px solid transparent;
-    transition: color 0.15s, border-color 0.15s;
-  }
-  .report-nav a:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
-  .report-nav a.current {
-    color: var(--db-accent);
-    border-bottom: 1px solid var(--db-accent);
-    font-weight: 600;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .container { max-width: 1200px; margin: 0 auto; padding: 32px; }
+body {
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 300;
+  color: var(--db-ink);
+  background: var(--db-surface);
+  line-height: 1.55;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+table, .kpi-val, .kpi-cell-sub, .kpi-period-label, .num,
+.kpi-compare td, .kpi-compare th { font-variant-numeric: tabular-nums; }
 
-  /* ===== Tabs ===== */
-  .tab-bar {
-    display: flex;
-    gap: 0;
-    border-bottom: 1px solid var(--db-border);
-    margin-bottom: 32px;
-    overflow-x: auto;
-  }
-  .tab-btn {
-    background: none;
-    border: none;
-    padding: 14px 22px;
-    font-family: inherit;
-    font-weight: 400;
-    font-size: 0.85rem;
-    color: var(--db-text-light);
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    white-space: nowrap;
-    transition: color 0.15s;
-  }
-  .tab-btn:hover { color: var(--db-text); }
-  .tab-btn.active {
-    color: var(--db-text);
-    font-weight: 600;
-    border-bottom-color: var(--db-primary);
-  }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+a { color: var(--db-accent-text); }
 
-  /* ===== Tab subtitle (working days context) ===== */
-  .tab-subtitle {
-    font-size: 0.82rem;
-    color: var(--db-text-muted);
-    margin: 0 0 18px;
-    letter-spacing: 0.01em;
-  }
-  .tab-subtitle strong { font-weight: 600; color: var(--db-text); }
+/* ===== Header — light, dense, left-aligned. One treatment for all reports. */
+.header {
+  background: var(--db-card);
+  border-bottom: 1px solid var(--db-border);
+  padding: 26px 32px 20px;
+  text-align: left;
+}
+.header h1 {
+  font-weight: 300;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--db-ink);
+}
+.header h1 b, .header h1 strong { font-weight: 600; }
+.header p, .header .meta {
+  font-size: 12px;
+  color: var(--db-muted);
+  margin-top: 6px;
+  font-weight: 300;
+}
+.header .updated {
+  display: block;
+  font-size: 11px;
+  color: var(--db-muted);
+  margin-top: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
-  /* ===== Filter pills above each tab ===== */
-  .pill-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    margin: 0 0 20px;
-  }
-  .pill {
-    background: #fff;
-    border: 1px solid var(--db-border);
-    border-radius: var(--db-radius);
-    padding: 8px 16px;
-    font-family: inherit;
-    font-size: 0.78rem;
-    font-weight: 400;
-    color: var(--db-text-muted);
-    cursor: pointer;
-    letter-spacing: 0.03em;
-    transition: all 0.15s;
-  }
-  .pill:hover { border-color: var(--db-text); color: var(--db-text); }
-  .pill.active {
-    background: var(--db-primary);
-    color: #fff;
-    border-color: var(--db-primary);
-    font-weight: 600;
-  }
-  .pill .pill-note { font-weight: 300; font-size: 0.7rem; opacity: 0.7; margin-left: 4px; }
-  .pill-hint {
-    font-size: 0.7rem;
-    color: var(--db-text-light);
-    font-weight: 300;
-    letter-spacing: 0.03em;
-    margin-left: auto;
-  }
-  @media (max-width: 700px) { .pill-hint { display: none; } }
+/* ===== Cross-report nav — underline tabs, never pills ===== */
+.report-nav {
+  display: flex;
+  gap: 22px;
+  justify-content: flex-start;
+  padding: 0 32px;
+  background: var(--db-card);
+  border-bottom: 1px solid var(--db-border);
+}
+.report-nav a {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: var(--db-muted);
+  font-size: 11.5px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 11px 0;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+.report-nav a:hover { color: var(--db-ink); border-bottom-color: var(--db-border); }
+.report-nav a.current {
+  color: var(--db-ink);
+  font-weight: 600;
+  border-bottom-color: var(--db-accent);
+}
 
-  /* ===== KPI comparison table (top of each tab) ===== */
-  .kpi-compare-wrap {
-    background: #fff;
-    border: 1px solid var(--db-border);
-    border-radius: var(--db-radius);
-    padding: 8px 24px;
-    margin-bottom: 32px;
-    overflow-x: auto;
-  }
-  table.kpi-compare { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  table.kpi-compare th {
-    font-weight: 600;
-    font-size: 0.65rem;
-    color: var(--db-text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--db-border);
-    text-align: right;
-  }
-  table.kpi-compare th.kpi-period-label { text-align: left; }
-  table.kpi-compare td {
-    padding: 18px 16px;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--db-text);
-    border-bottom: 1px solid var(--db-border);
-  }
-  table.kpi-compare tr:last-child td { border-bottom: none; }
-  table.kpi-compare td.kpi-period-label {
-    font-size: 0.65rem;
-    color: var(--db-text-light);
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-align: left;
-  }
-  table.kpi-compare .kpi-cell-sub {
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: var(--db-text-light);
-    margin-top: 4px;
-    letter-spacing: 0.01em;
-  }
-  /* Brand-friendly delta colors — script writes raw colors inline; remap them */
-  table span[style*="#7A9B76"] { color: var(--db-pos) !important; }
-  table span[style*="#D4726A"] { color: var(--db-neg) !important; }
-  table span[style*="#999"] { color: var(--db-neu) !important; }
-  table span[style*="#C9A84C"] { color: var(--db-warn) !important; }
+.container, .wrap { max-width: 1180px; margin: 0 auto; padding: 26px 32px 64px; }
 
-  /* ===== Generic tables (non-KPI: product mix, carriers, methods, etc.) ===== */
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  th {
-    font-weight: 600;
-    text-align: left;
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--db-border);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--db-text-light);
-  }
-  td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--db-border);
-    color: var(--db-text);
-    font-size: 0.88rem;
-  }
-  tr:hover td { background: var(--db-surface); }
-  .r { text-align: right; }
-  .cell-sub { font-size: 0.68rem; font-weight: 300; color: var(--db-text-light); margin-top: 2px; }
-  .table-note { font-size: 0.75rem; color: var(--db-text-light); margin-top: 10px; line-height: 1.5; }
+h2, .section h2 {
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--db-ink);
+  margin: 34px 0 12px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.section { margin-bottom: 34px; }
+.section h2:first-child, h2:first-of-type { margin-top: 0; }
 
-  /* ===== KPI cards (Samples section) ===== */
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-  .kpi {
-    background: #fff;
-    border: 1px solid var(--db-border);
-    border-radius: var(--db-radius);
-    padding: 22px 18px;
-    text-align: center;
-  }
-  .kpi-val { font-weight: 600; font-size: 1.6rem; color: var(--db-text); }
-  .kpi-sub { font-weight: 400; font-size: 0.72rem; margin-top: 3px; }
-  .kpi-sub.pos { color: var(--db-pos); }
-  .kpi-sub.neg { color: var(--db-neg); }
-  .kpi-sub.neu { color: var(--db-neu); }
-  .kpi-label {
-    font-weight: 400;
-    font-size: 0.65rem;
-    color: var(--db-text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 6px;
-  }
+/* ===== In-report tabs ===== */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--db-border);
+  margin-bottom: 26px;
+  overflow-x: auto;
+}
+.tab-btn {
+  background: none; border: none;
+  padding: 11px 18px;
+  font-family: inherit; font-weight: 400; font-size: 12px;
+  color: var(--db-muted); cursor: pointer;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px; white-space: nowrap;
+  transition: color .15s;
+}
+.tab-btn:hover { color: var(--db-ink); }
+.tab-btn.active { color: var(--db-ink); font-weight: 600; border-bottom-color: var(--db-accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-subtitle { font-size: 12.5px; color: var(--db-muted); margin: 0 0 16px; }
+.tab-subtitle strong { font-weight: 600; color: var(--db-ink); }
 
-  /* ===== Sections ===== */
-  .section { margin-bottom: 40px; }
-  .section h2 {
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin-bottom: 18px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--db-border);
-    color: var(--db-text);
-    letter-spacing: 0.02em;
-  }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .chart-container { position: relative; margin: 16px 0; }
+/* ===== Segmented filter buttons (rounded, never pills) ===== */
+.pill-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 18px; }
+.pill, .toggle-btn {
+  background: var(--db-card);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius-sm);
+  padding: 7px 14px;
+  font-family: inherit; font-size: 12px; font-weight: 400;
+  color: var(--db-muted); cursor: pointer;
+  letter-spacing: 0.03em; transition: all .15s;
+}
+.pill:hover, .toggle-btn:hover { border-color: var(--db-ink); color: var(--db-ink); }
+.pill.active, .toggle-btn.active {
+  background: var(--db-ink); color: #fff; border-color: var(--db-ink); font-weight: 600;
+}
+.pill .pill-note { font-weight: 300; font-size: 11px; opacity: .75; margin-left: 4px; }
+.pill-hint { font-size: 11px; color: var(--db-muted); font-weight: 300; margin-left: auto; }
+@media (max-width: 700px) { .pill-hint { display: none; } }
 
-  /* ===== Collapsible "Other" row in shipping-method table ===== */
-  tr.other-toggle { cursor: pointer; user-select: none; color: var(--db-text); }
-  tr.other-toggle:hover td { background: var(--db-surface-mid); }
-  tr.other-toggle .caret {
-    display: inline-block;
-    font-size: 0.7rem;
-    margin-right: 4px;
-    color: var(--db-text-light);
-    transition: transform 0.15s;
-  }
+/* ===== KPI cards ===== */
+.kpis, .kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.kpi {
+  background: var(--db-card);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius);
+  padding: 12px 16px;
+  text-align: left;
+}
+.kpi .l, .kpi-label {
+  font-size: 11px; color: var(--db-muted); font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0;
+}
+/* Ink by DEFAULT. Accent is opt-in via .accent and should be spent on the one
+   or two metrics the report is actually about — colouring every card orange
+   highlights nothing. Values are >=18.66px bold, the only size at which
+   --db-accent-text (3.19:1) clears AA. */
+.kpi .v, .kpi-val {
+  font-size: 26px; font-weight: 600; color: var(--db-ink);
+  line-height: 1.25; margin-top: 3px;
+}
+.kpi .v.accent, .kpi-val.accent { color: var(--db-accent-text); }
+.kpi .v.ink, .kpi-val.ink { color: var(--db-ink); }   /* back-compat no-op */
+.kpi .d, .kpi-sub { font-size: 11.5px; margin-top: 4px; color: var(--db-muted); font-weight: 400; }
+.kpi-sub.pos, .up, .pos { color: var(--db-pos); font-weight: 600; }
+.kpi-sub.neg, .down, .neg { color: var(--db-neg); font-weight: 600; }
+.kpi-sub.neu, .flat, .neu { color: var(--db-neu); font-weight: 600; }
+.warn { color: var(--db-warn); font-weight: 600; }
 
-  /* ===== Inline info bubble (hover/focus tooltip) ===== */
-  .info-bubble {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    margin-left: 8px;
-    border-radius: 50%;
-    background: var(--db-border);
-    color: var(--db-text-muted);
-    font-size: 0.65rem;
-    font-weight: 600;
-    cursor: help;
-    position: relative;
-    vertical-align: middle;
-    outline: none;
-  }
-  .info-bubble:hover, .info-bubble:focus { background: var(--db-primary); color: #fff; }
-  .info-bubble .info-tip {
-    display: none;
-    position: absolute;
-    left: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 320px;
-    max-width: calc(100vw - 60px);
-    background: var(--db-primary);
-    color: #fff;
-    padding: 12px 14px;
-    border-radius: var(--db-radius);
-    font-size: 0.78rem;
-    font-weight: 300;
-    line-height: 1.5;
-    letter-spacing: normal;
-    text-transform: none;
-    z-index: 10;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-  .info-bubble .info-tip code {
-    background: rgba(255,255,255,0.15);
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-size: 0.72rem;
-  }
-  .info-bubble .info-tip strong { color: var(--db-accent); font-weight: 600; }
-  .info-bubble:hover .info-tip, .info-bubble:focus .info-tip { display: block; }
+/* ===== KPI comparison table ===== */
+.kpi-compare-wrap {
+  background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); padding: 4px 20px;
+  margin-bottom: 26px; overflow-x: auto;
+}
+table.kpi-compare { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.kpi-compare th {
+  font-weight: 600; font-size: 10.5px; color: var(--db-muted);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 12px 14px; border-bottom: 1px solid var(--db-border); text-align: right;
+}
+table.kpi-compare th.kpi-period-label { text-align: left; }
+table.kpi-compare td {
+  padding: 15px 14px; font-size: 16px; font-weight: 600;
+  color: var(--db-ink); border-bottom: 1px solid var(--db-hairline);
+}
+table.kpi-compare tr:last-child td { border-bottom: none; }
+table.kpi-compare td.kpi-period-label {
+  font-size: 10.5px; color: var(--db-muted); font-weight: 600;
+  letter-spacing: 0.09em; text-transform: uppercase; text-align: left;
+}
+table.kpi-compare .kpi-cell-sub {
+  font-size: 11px; font-weight: 400; color: var(--db-muted); margin-top: 4px;
+}
+/* Legacy inline colours emitted by older code paths. Remapped here rather than
+   chased through every call site — note these match ANY element, not just
+   <span>: several are on <td>, where the old greys (#888 = 3.45:1, #999 =
+   2.85:1) failed AA outright. */
+[style*="#7A9B76"] { color: var(--db-pos) !important; }
+[style*="#D4726A"] { color: var(--db-neg) !important; }
+[style*="#C9A84C"] { color: var(--db-warn) !important; }
+[style*="#999"], [style*="#888"], [style*="#666"],
+[style*="#8a8a8a"], [style*="#8A8A8A"] { color: var(--db-muted) !important; }
 
-  /* ===== Reconciliation tab specifics ===== */
-  #recon table { font-size: 0.92rem; }
-  #recon p code {
-    background: var(--db-surface-mid);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 0.85em;
-  }
+/* ===== Tables ===== */
+table {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+  background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); overflow: hidden;
+}
+th {
+  font-weight: 600; text-align: left; padding: 9px 12px;
+  border-bottom: 1px solid var(--db-border);
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--db-muted); background: #FBFAF9; white-space: nowrap;
+}
+td { padding: 8px 12px; border-bottom: 1px solid var(--db-hairline); color: var(--db-ink); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--db-surface); }
+tfoot td, tr.total td { font-weight: 600; border-top: 1px solid var(--db-border); }
+.r, th.num, td.num, .num { text-align: right; }
+td.k { font-weight: 400; }
+td.strong, .strong { font-weight: 600; }
+.cell-sub { font-size: 11px; font-weight: 300; color: var(--db-muted); margin-top: 2px; }
+.table-note, .note {
+  font-size: 12px; color: var(--db-muted); margin-top: 10px; line-height: 1.55;
+}
+.kpi-compare-wrap table, table.kpi-compare { border: none; border-radius: 0; background: none; }
 
-  /* ===== Mobile ===== */
-  @media (max-width: 700px) {
-    .header { padding: 40px 20px 24px; }
-    .header h1 { font-size: 1.4rem; }
-    .report-nav { padding: 0 20px 20px; gap: 16px; }
-    .container { padding: 24px 20px; }
-    .grid-2 { grid-template-columns: 1fr; }
-    .kpi-row { grid-template-columns: repeat(2, 1fr); }
-    .tab-btn { padding: 12px 14px; font-size: 0.75rem; }
-    .pill-bar { gap: 6px; }
-    .pill { padding: 6px 12px; font-size: 0.72rem; }
-    .kpi-compare-wrap { padding: 4px 12px; }
-    table.kpi-compare td { padding: 14px 10px; font-size: 0.95rem; }
-    .info-bubble .info-tip { left: auto; right: 0; top: 24px; transform: none; }
-  }
+/* ===== Badges — rounded, never pills ===== */
+.badge {
+  display: inline-block; border-radius: 5px; padding: 2px 7px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.badge.real { background: #E7F0E4; color: #3B5C24; }
+.badge.junk { background: #FBEAE4; color: #8A2600; }
+
+/* ===== Callout banner ===== */
+.banner {
+  border: 1px solid var(--db-border); border-left: 4px solid var(--db-accent);
+  background: var(--db-card); border-radius: var(--db-radius);
+  padding: 12px 16px; font-size: 13px; margin: 0 0 22px; line-height: 1.6;
+}
+.banner b { font-weight: 600; }
+.banner.warn { border-left-color: var(--db-neg); }
+
+/* ===== Charts ===== */
+.chart, .chart-container {
+  position: relative; background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); padding: 16px 18px; margin: 0 0 6px;
+}
+.legend { font-size: 11.5px; color: var(--db-muted); margin-top: 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; margin-right: 18px; }
+.sw, .legend-dot {
+  display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+  margin-right: 5px; vertical-align: -1px;
+}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+
+/* ===== Funnel ===== */
+.funnel {
+  background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); padding: 18px 20px;
+}
+.frow {
+  display: grid; grid-template-columns: 168px 1fr 132px;
+  align-items: center; gap: 12px; margin-bottom: 9px; font-size: 13px;
+}
+.frow:last-of-type { margin-bottom: 0; }
+.fbar { height: 22px; border-radius: var(--db-radius-sm); background: var(--db-accent); min-width: 2px; }
+.fbar.muted { background: #DED9D2; }
+.fnum { text-align: right; font-weight: 600; font-size: 13px; }
+.fpct { color: var(--db-muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===== Disclosure ===== */
+details {
+  background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); padding: 14px 18px; margin: 26px 0 0;
+  font-size: 12.5px; line-height: 1.6;
+}
+summary { font-weight: 600; cursor: pointer; font-size: 12.5px; }
+details li { margin: 7px 0 0 18px; }
+
+/* ===== Info bubble ===== */
+.info-bubble {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; margin-left: 8px; border-radius: 50%;
+  /* Ink, not muted: #6B6B6B on the #E6E6E6 chip is only 4.27:1 and fails AA. */
+  background: var(--db-border); color: var(--db-ink);
+  font-size: 10.5px; font-weight: 600; cursor: help;
+  position: relative; vertical-align: middle; outline: none;
+}
+.info-bubble:hover, .info-bubble:focus { background: var(--db-ink); color: #fff; }
+.info-bubble .info-tip {
+  display: none; position: absolute; left: 24px; top: 50%;
+  transform: translateY(-50%); width: 320px; max-width: calc(100vw - 60px);
+  background: var(--db-ink); color: #fff; padding: 12px 14px;
+  border-radius: var(--db-radius); font-size: 12.5px; font-weight: 300;
+  line-height: 1.5; letter-spacing: normal; text-transform: none;
+  z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+.info-bubble .info-tip code { background: rgba(255,255,255,.15); padding: 1px 5px; border-radius: 3px; }
+.info-bubble .info-tip strong { color: var(--db-accent); font-weight: 600; }
+.info-bubble:hover .info-tip, .info-bubble:focus .info-tip { display: block; }
+
+tr.other-toggle { cursor: pointer; user-select: none; color: var(--db-ink); }
+tr.other-toggle:hover td { background: var(--db-surface-mid); }
+tr.other-toggle .caret {
+  display: inline-block; font-size: 11px; margin-right: 4px;
+  color: var(--db-muted); transition: transform .15s;
+}
+#recon table { font-size: 13px; }
+#recon p code { background: var(--db-surface-mid); padding: 2px 6px; border-radius: 3px; }
+
+/* ===== Mobile ===== */
+@media (max-width: 860px) { .grid-2, .cols { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+  .header { padding: 20px; }
+  .header h1 { font-size: 20px; }
+  .report-nav { padding: 0 20px; gap: 16px; }
+  .container, .wrap { padding: 20px; }
+  .kpi-row, .kpis { grid-template-columns: repeat(2, 1fr); }
+  .tab-btn { padding: 10px 12px; font-size: 11px; }
+  .pill { padding: 6px 11px; font-size: 11.5px; }
+  .kpi-compare-wrap { padding: 4px 12px; }
+  table.kpi-compare td { padding: 12px 9px; font-size: 14px; }
+  .frow { grid-template-columns: 120px 1fr 104px; }
+  .info-bubble .info-tip { left: auto; right: 0; top: 24px; transform: none; }
+}
+
+@media print {
+  body { background: #fff; }
+  .report-nav, .pill-bar, .tab-bar { display: none; }
+  .tab-content { display: block !important; }
+  .kpi, .chart, table, .funnel { break-inside: avoid; }
+}
+
 </style>
 </head>
 <body>
@@ -403,7 +381,7 @@
 <div class="header">
   <h1>Dutton Brown — 2026 Fulfillment Report</h1>
   <p>Fulfillment &amp; Shipping Dashboard &nbsp;&middot;&nbsp; Dutton Brown Design</p>
-  <div class="updated">Updated August 08, 2026 — through July</div>
+  <div class="updated">Updated August 10, 2026 — through July</div>
 </div>
 
 <div class="report-nav">
@@ -1505,7 +1483,7 @@
     <button class="pill" data-pill="xlarge" onclick="setPill('m07', 'xlarge')">Very Large <span class="pill-note">(&gt;$20k)</span></button>
     <span class="pill-hint">Filters KPIs &amp; fulfillment-time chart</span>
   </div>
-  <div class="kpi-compare-wrap kpi-views" data-tab="m07"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">July 2026</td><td class="r">282 <span style="color:#D4726A;font-weight:400">(-27.5%)</span><div class="kpi-cell-sub">vs 389 in 2025</div></td><td class="r">1,511 <span style="color:#D4726A;font-weight:400">(-11.3%)</span><div class="kpi-cell-sub">vs 1,703 in 2025</div></td><td class="r">$257,600 <span style="color:#7A9B76;font-weight:400">(+31.3%)</span><div class="kpi-cell-sub">vs $196,138 in 2025</div></td><td class="r">12.9 <span style="color:#7A9B76;font-weight:400">(-0.6%)</span><div class="kpi-cell-sub">vs 13.0 in 2025</div></td><td class="r">$913 <span style="color:#7A9B76;font-weight:400">(+81.2%)</span><div class="kpi-cell-sub">vs $504 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through July</td><td class="r">2,943 <span style="color:#7A9B76;font-weight:400">(+0.3%)</span><div class="kpi-cell-sub">vs 2,934 in 2025</div></td><td class="r">14,391 <span style="color:#7A9B76;font-weight:400">(+14.3%)</span><div class="kpi-cell-sub">vs 12,591 in 2025</div></td><td class="r">$2,220,918 <span style="color:#7A9B76;font-weight:400">(+27.1%)</span><div class="kpi-cell-sub">vs $1,747,656 in 2025</div></td><td class="r">11.4 <span style="color:#7A9B76;font-weight:400">(-10.3%)</span><div class="kpi-cell-sub">vs 12.7 in 2025</div></td><td class="r">$755 <span style="color:#7A9B76;font-weight:400">(+26.7%)</span><div class="kpi-cell-sub">vs $596 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">July 2026</td><td class="r">245 <span style="color:#D4726A;font-weight:400">(-29.4%)</span><div class="kpi-cell-sub">vs 347 in 2025</div></td><td class="r">1,403 <span style="color:#D4726A;font-weight:400">(-14.2%)</span><div class="kpi-cell-sub">vs 1,636 in 2025</div></td><td class="r">$245,237 <span style="color:#7A9B76;font-weight:400">(+25.1%)</span><div class="kpi-cell-sub">vs $196,055 in 2025</div></td><td class="r">14.6 <span style="color:#D4726A;font-weight:400">(+1.9%)</span><div class="kpi-cell-sub">vs 14.3 in 2025</div></td><td class="r">$1,001 <span style="color:#7A9B76;font-weight:400">(+77.2%)</span><div class="kpi-cell-sub">vs $565 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through July</td><td class="r">2,579 <span style="color:#7A9B76;font-weight:400">(+0.5%)</span><div class="kpi-cell-sub">vs 2,565 in 2025</div></td><td class="r">11,316 <span style="color:#7A9B76;font-weight:400">(+3.2%)</span><div class="kpi-cell-sub">vs 10,962 in 2025</div></td><td class="r">$1,629,150 <span style="color:#7A9B76;font-weight:400">(+6.6%)</span><div class="kpi-cell-sub">vs $1,528,689 in 2025</div></td><td class="r">12.5 <span style="color:#7A9B76;font-weight:400">(-10.9%)</span><div class="kpi-cell-sub">vs 14.1 in 2025</div></td><td class="r">$632 <span style="color:#7A9B76;font-weight:400">(+6.0%)</span><div class="kpi-cell-sub">vs $596 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">July 2026</td><td class="r">0<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">36<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">$12,159<div class="kpi-cell-sub">vs $0 in 2025</div></td><td class="r">0.0<div class="kpi-cell-sub">vs 0.0 in 2025</div></td><td class="r">$0<div class="kpi-cell-sub">vs $0 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through July</td><td class="r">26 <span style="color:#7A9B76;font-weight:400">(+8.3%)</span><div class="kpi-cell-sub">vs 24 in 2025</div></td><td class="r">2,316 <span style="color:#7A9B76;font-weight:400">(+162.9%)</span><div class="kpi-cell-sub">vs 881 in 2025</div></td><td class="r">$590,268 <span style="color:#7A9B76;font-weight:400">(+171.3%)</span><div class="kpi-cell-sub">vs $217,593 in 2025</div></td><td class="r">26.5 <span style="color:#7A9B76;font-weight:400">(-4.8%)</span><div class="kpi-cell-sub">vs 27.8 in 2025</div></td><td class="r">$22,703 <span style="color:#7A9B76;font-weight:400">(+150.4%)</span><div class="kpi-cell-sub">vs $9,066 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="xlarge" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">July 2026</td><td class="r">0<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">0<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">$0<div class="kpi-cell-sub">vs $0 in 2025</div></td><td class="r">0.0<div class="kpi-cell-sub">vs 0.0 in 2025</div></td><td class="r">$0<div class="kpi-cell-sub">vs $0 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through July</td><td class="r">3 <span style="color:#7A9B76;font-weight:400">(+200.0%)</span><div class="kpi-cell-sub">vs 1 in 2025</div></td><td class="r">1,395 <span style="color:#7A9B76;font-weight:400">(+896.4%)</span><div class="kpi-cell-sub">vs 140 in 2025</div></td><td class="r">$358,024 <span style="color:#7A9B76;font-weight:400">(+1469.2%)</span><div class="kpi-cell-sub">vs $22,816 in 2025</div></td><td class="r">53.0 <span style="color:#7A9B76;font-weight:400">(-11.9%)</span><div class="kpi-cell-sub">vs 60.1 in 2025</div></td><td class="r">$119,341 <span style="color:#7A9B76;font-weight:400">(+423.1%)</span><div class="kpi-cell-sub">vs $22,816 in 2025</div></td></tr></tbody></table></div></div>
+  <div class="kpi-compare-wrap kpi-views" data-tab="m07"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">July 2026</td><td class="r">295 <span style="color:#D4726A;font-weight:400">(-24.2%)</span><div class="kpi-cell-sub">vs 389 in 2025</div></td><td class="r">1,512 <span style="color:#D4726A;font-weight:400">(-11.2%)</span><div class="kpi-cell-sub">vs 1,703 in 2025</div></td><td class="r">$258,320 <span style="color:#7A9B76;font-weight:400">(+31.7%)</span><div class="kpi-cell-sub">vs $196,138 in 2025</div></td><td class="r">13.4 <span style="color:#D4726A;font-weight:400">(+3.5%)</span><div class="kpi-cell-sub">vs 13.0 in 2025</div></td><td class="r">$876 <span style="color:#7A9B76;font-weight:400">(+73.7%)</span><div class="kpi-cell-sub">vs $504 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through July</td><td class="r">2,956 <span style="color:#7A9B76;font-weight:400">(+0.7%)</span><div class="kpi-cell-sub">vs 2,934 in 2025</div></td><td class="r">14,392 <span style="color:#7A9B76;font-weight:400">(+14.3%)</span><div class="kpi-cell-sub">vs 12,591 in 2025</div></td><td class="r">$2,221,638 <span style="color:#7A9B76;font-weight:400">(+27.1%)</span><div class="kpi-cell-sub">vs $1,747,656 in 2025</div></td><td class="r">11.5 <span style="color:#7A9B76;font-weight:400">(-9.8%)</span><div class="kpi-cell-sub">vs 12.7 in 2025</div></td><td class="r">$752 <span style="color:#7A9B76;font-weight:400">(+26.2%)</span><div class="kpi-cell-sub">vs $596 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">July 2026</td><td class="r">258 <span style="color:#D4726A;font-weight:400">(-25.6%)</span><div class="kpi-cell-sub">vs 347 in 2025</div></td><td class="r">1,404 <span style="color:#D4726A;font-weight:400">(-14.2%)</span><div class="kpi-cell-sub">vs 1,636 in 2025</div></td><td class="r">$245,957 <span style="color:#7A9B76;font-weight:400">(+25.5%)</span><div class="kpi-cell-sub">vs $196,055 in 2025</div></td><td class="r">15.1 <span style="color:#D4726A;font-weight:400">(+5.6%)</span><div class="kpi-cell-sub">vs 14.3 in 2025</div></td><td class="r">$953 <span style="color:#7A9B76;font-weight:400">(+68.7%)</span><div class="kpi-cell-sub">vs $565 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through July</td><td class="r">2,592 <span style="color:#7A9B76;font-weight:400">(+1.1%)</span><div class="kpi-cell-sub">vs 2,565 in 2025</div></td><td class="r">11,317 <span style="color:#7A9B76;font-weight:400">(+3.2%)</span><div class="kpi-cell-sub">vs 10,962 in 2025</div></td><td class="r">$1,629,870 <span style="color:#7A9B76;font-weight:400">(+6.6%)</span><div class="kpi-cell-sub">vs $1,528,689 in 2025</div></td><td class="r">12.6 <span style="color:#7A9B76;font-weight:400">(-10.4%)</span><div class="kpi-cell-sub">vs 14.1 in 2025</div></td><td class="r">$629 <span style="color:#7A9B76;font-weight:400">(+5.5%)</span><div class="kpi-cell-sub">vs $596 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">July 2026</td><td class="r">0<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">36<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">$12,159<div class="kpi-cell-sub">vs $0 in 2025</div></td><td class="r">0.0<div class="kpi-cell-sub">vs 0.0 in 2025</div></td><td class="r">$0<div class="kpi-cell-sub">vs $0 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through July</td><td class="r">26 <span style="color:#7A9B76;font-weight:400">(+8.3%)</span><div class="kpi-cell-sub">vs 24 in 2025</div></td><td class="r">2,316 <span style="color:#7A9B76;font-weight:400">(+162.9%)</span><div class="kpi-cell-sub">vs 881 in 2025</div></td><td class="r">$590,268 <span style="color:#7A9B76;font-weight:400">(+171.3%)</span><div class="kpi-cell-sub">vs $217,593 in 2025</div></td><td class="r">26.5 <span style="color:#7A9B76;font-weight:400">(-4.8%)</span><div class="kpi-cell-sub">vs 27.8 in 2025</div></td><td class="r">$22,703 <span style="color:#7A9B76;font-weight:400">(+150.4%)</span><div class="kpi-cell-sub">vs $9,066 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="xlarge" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">July 2026</td><td class="r">0<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">0<div class="kpi-cell-sub">vs 0 in 2025</div></td><td class="r">$0<div class="kpi-cell-sub">vs $0 in 2025</div></td><td class="r">0.0<div class="kpi-cell-sub">vs 0.0 in 2025</div></td><td class="r">$0<div class="kpi-cell-sub">vs $0 in 2025</div></td></tr><tr><td class="kpi-period-label">YTD through July</td><td class="r">3 <span style="color:#7A9B76;font-weight:400">(+200.0%)</span><div class="kpi-cell-sub">vs 1 in 2025</div></td><td class="r">1,395 <span style="color:#7A9B76;font-weight:400">(+896.4%)</span><div class="kpi-cell-sub">vs 140 in 2025</div></td><td class="r">$358,024 <span style="color:#7A9B76;font-weight:400">(+1469.2%)</span><div class="kpi-cell-sub">vs $22,816 in 2025</div></td><td class="r">53.0 <span style="color:#7A9B76;font-weight:400">(-11.9%)</span><div class="kpi-cell-sub">vs 60.1 in 2025</div></td><td class="r">$119,341 <span style="color:#7A9B76;font-weight:400">(+423.1%)</span><div class="kpi-cell-sub">vs $22,816 in 2025</div></td></tr></tbody></table></div></div>
 
   <div class="section">
     <h2>Order Mix vs 2025</h2>
@@ -1540,15 +1518,15 @@
       <div>
         <table>
           <thead><tr><th>Product Type</th><th class="r">Units</th><th class="r">Qty Share</th><th class="r">2025 Units</th><th class="r">YoY</th><th class="r">Revenue</th><th class="r">Rev Share</th></tr></thead>
-          <tbody><tr><td>Sconce</td><td class="r">338</td><td class="r">22.4%</td><td class="r">301</td><td class="r"><span style="color:#7A9B76">+12%</span></td><td class="r">$126,029</td><td class="r">41.3%</td></tr>
+          <tbody><tr><td>Sconce</td><td class="r">338</td><td class="r">22.4%</td><td class="r">301</td><td class="r"><span style="color:#7A9B76">+12%</span></td><td class="r">$126,029</td><td class="r">41.2%</td></tr>
 <tr><td>Other</td><td class="r">295</td><td class="r">19.5%</td><td class="r">323</td><td class="r"><span style="color:#D4726A">-9%</span></td><td class="r">$6,665</td><td class="r">2.2%</td></tr>
 <tr><td>Hardware</td><td class="r">264</td><td class="r">17.5%</td><td class="r">584</td><td class="r"><span style="color:#D4726A">-55%</span></td><td class="r">$16,126</td><td class="r">5.3%</td></tr>
 <tr><td>Bulb</td><td class="r">157</td><td class="r">10.4%</td><td class="r">113</td><td class="r"><span style="color:#7A9B76">+39%</span></td><td class="r">$2,656</td><td class="r">0.9%</td></tr>
-<tr><td>Flush Mount</td><td class="r">140</td><td class="r">9.3%</td><td class="r">149</td><td class="r"><span style="color:#D4726A">-6%</span></td><td class="r">$70,087</td><td class="r">22.9%</td></tr>
+<tr><td>Flush Mount</td><td class="r">141</td><td class="r">9.3%</td><td class="r">149</td><td class="r"><span style="color:#D4726A">-5%</span></td><td class="r">$70,807</td><td class="r">23.1%</td></tr>
 <tr><td>Sample</td><td class="r">139</td><td class="r">9.2%</td><td class="r">135</td><td class="r"><span style="color:#7A9B76">+3%</span></td><td class="r">$1,041</td><td class="r">0.3%</td></tr>
 <tr><td>Accessory</td><td class="r">78</td><td class="r">5.2%</td><td class="r">46</td><td class="r"><span style="color:#7A9B76">+70%</span></td><td class="r">$2,380</td><td class="r">0.8%</td></tr>
 <tr><td>Pendant</td><td class="r">52</td><td class="r">3.4%</td><td class="r">23</td><td class="r"><span style="color:#7A9B76">+126%</span></td><td class="r">$20,730</td><td class="r">6.8%</td></tr>
-<tr><td>Chandelier</td><td class="r">42</td><td class="r">2.8%</td><td class="r">15</td><td class="r"><span style="color:#7A9B76">+180%</span></td><td class="r">$57,320</td><td class="r">18.8%</td></tr>
+<tr><td>Chandelier</td><td class="r">42</td><td class="r">2.8%</td><td class="r">15</td><td class="r"><span style="color:#7A9B76">+180%</span></td><td class="r">$57,320</td><td class="r">18.7%</td></tr>
 <tr><td>Plug-In</td><td class="r">6</td><td class="r">0.4%</td><td class="r">11</td><td class="r"><span style="color:#D4726A">-45%</span></td><td class="r">$2,380</td><td class="r">0.8%</td></tr>
 </tbody>
         </table>
@@ -1557,7 +1535,7 @@
   </div>
 
   <div class="section"><div class="grid-2"><div><h2>Lighting Breakdown</h2><table><thead><tr><th>Type</th><th class="r">Units</th></tr></thead><tbody><tr><td>Sconce</td><td class="r">338</td></tr>
-<tr><td>Flush Mount</td><td class="r">140</td></tr>
+<tr><td>Flush Mount</td><td class="r">141</td></tr>
 <tr><td>Pendant</td><td class="r">52</td></tr>
 <tr><td>Chandelier</td><td class="r">42</td></tr>
 <tr><td>Plug-In</td><td class="r">6</td></tr>
@@ -1607,9 +1585,9 @@
       <div>
         <table>
           <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
-          <tbody><tr><td>No carrier set</td><td class="r">175</td><td class="r">38.1%</td></tr>
-<tr><td>FedEx</td><td class="r">157</td><td class="r">34.2%</td></tr>
-<tr><td>USPS</td><td class="r">124</td><td class="r">27.0%</td></tr>
+          <tbody><tr><td>No carrier set</td><td class="r">185</td><td class="r">38.4%</td></tr>
+<tr><td>FedEx</td><td class="r">170</td><td class="r">35.3%</td></tr>
+<tr><td>USPS</td><td class="r">124</td><td class="r">25.7%</td></tr>
 <tr><td>UPS</td><td class="r">2</td><td class="r">0.4%</td></tr>
 <tr><td>Other</td><td class="r">1</td><td class="r">0.2%</td></tr>
 </tbody>
@@ -1679,7 +1657,7 @@
     <button class="pill" data-pill="xlarge" onclick="setPill('ytd', 'xlarge')">Very Large <span class="pill-note">(&gt;$20k)</span></button>
     <span class="pill-hint">Filters KPIs &amp; fulfillment-time chart</span>
   </div>
-  <div class="kpi-compare-wrap kpi-views" data-tab="ytd"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">2,943 <span style="color:#7A9B76;font-weight:400">(+0.3%)</span><div class="kpi-cell-sub">vs 2,934 in 2025</div></td><td class="r">14,391 <span style="color:#7A9B76;font-weight:400">(+14.3%)</span><div class="kpi-cell-sub">vs 12,591 in 2025</div></td><td class="r">$2,220,918 <span style="color:#7A9B76;font-weight:400">(+27.1%)</span><div class="kpi-cell-sub">vs $1,747,656 in 2025</div></td><td class="r">11.4 <span style="color:#7A9B76;font-weight:400">(-10.3%)</span><div class="kpi-cell-sub">vs 12.7 in 2025</div></td><td class="r">$755 <span style="color:#7A9B76;font-weight:400">(+26.7%)</span><div class="kpi-cell-sub">vs $596 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">2,579 <span style="color:#7A9B76;font-weight:400">(+0.5%)</span><div class="kpi-cell-sub">vs 2,565 in 2025</div></td><td class="r">11,316 <span style="color:#7A9B76;font-weight:400">(+3.2%)</span><div class="kpi-cell-sub">vs 10,962 in 2025</div></td><td class="r">$1,629,150 <span style="color:#7A9B76;font-weight:400">(+6.6%)</span><div class="kpi-cell-sub">vs $1,528,689 in 2025</div></td><td class="r">12.5 <span style="color:#7A9B76;font-weight:400">(-10.9%)</span><div class="kpi-cell-sub">vs 14.1 in 2025</div></td><td class="r">$632 <span style="color:#7A9B76;font-weight:400">(+6.0%)</span><div class="kpi-cell-sub">vs $596 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">26 <span style="color:#7A9B76;font-weight:400">(+8.3%)</span><div class="kpi-cell-sub">vs 24 in 2025</div></td><td class="r">2,316 <span style="color:#7A9B76;font-weight:400">(+162.9%)</span><div class="kpi-cell-sub">vs 881 in 2025</div></td><td class="r">$590,268 <span style="color:#7A9B76;font-weight:400">(+171.3%)</span><div class="kpi-cell-sub">vs $217,593 in 2025</div></td><td class="r">26.5 <span style="color:#7A9B76;font-weight:400">(-4.8%)</span><div class="kpi-cell-sub">vs 27.8 in 2025</div></td><td class="r">$22,703 <span style="color:#7A9B76;font-weight:400">(+150.4%)</span><div class="kpi-cell-sub">vs $9,066 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="xlarge" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">3 <span style="color:#7A9B76;font-weight:400">(+200.0%)</span><div class="kpi-cell-sub">vs 1 in 2025</div></td><td class="r">1,395 <span style="color:#7A9B76;font-weight:400">(+896.4%)</span><div class="kpi-cell-sub">vs 140 in 2025</div></td><td class="r">$358,024 <span style="color:#7A9B76;font-weight:400">(+1469.2%)</span><div class="kpi-cell-sub">vs $22,816 in 2025</div></td><td class="r">53.0 <span style="color:#7A9B76;font-weight:400">(-11.9%)</span><div class="kpi-cell-sub">vs 60.1 in 2025</div></td><td class="r">$119,341 <span style="color:#7A9B76;font-weight:400">(+423.1%)</span><div class="kpi-cell-sub">vs $22,816 in 2025</div></td></tr></tbody></table></div></div>
+  <div class="kpi-compare-wrap kpi-views" data-tab="ytd"><div class="kpi-view" data-pill="all" style="display:block"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">2,956 <span style="color:#7A9B76;font-weight:400">(+0.7%)</span><div class="kpi-cell-sub">vs 2,934 in 2025</div></td><td class="r">14,392 <span style="color:#7A9B76;font-weight:400">(+14.3%)</span><div class="kpi-cell-sub">vs 12,591 in 2025</div></td><td class="r">$2,221,638 <span style="color:#7A9B76;font-weight:400">(+27.1%)</span><div class="kpi-cell-sub">vs $1,747,656 in 2025</div></td><td class="r">11.5 <span style="color:#7A9B76;font-weight:400">(-9.8%)</span><div class="kpi-cell-sub">vs 12.7 in 2025</div></td><td class="r">$752 <span style="color:#7A9B76;font-weight:400">(+26.2%)</span><div class="kpi-cell-sub">vs $596 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="core" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">2,592 <span style="color:#7A9B76;font-weight:400">(+1.1%)</span><div class="kpi-cell-sub">vs 2,565 in 2025</div></td><td class="r">11,317 <span style="color:#7A9B76;font-weight:400">(+3.2%)</span><div class="kpi-cell-sub">vs 10,962 in 2025</div></td><td class="r">$1,629,870 <span style="color:#7A9B76;font-weight:400">(+6.6%)</span><div class="kpi-cell-sub">vs $1,528,689 in 2025</div></td><td class="r">12.6 <span style="color:#7A9B76;font-weight:400">(-10.4%)</span><div class="kpi-cell-sub">vs 14.1 in 2025</div></td><td class="r">$629 <span style="color:#7A9B76;font-weight:400">(+5.5%)</span><div class="kpi-cell-sub">vs $596 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="large" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">26 <span style="color:#7A9B76;font-weight:400">(+8.3%)</span><div class="kpi-cell-sub">vs 24 in 2025</div></td><td class="r">2,316 <span style="color:#7A9B76;font-weight:400">(+162.9%)</span><div class="kpi-cell-sub">vs 881 in 2025</div></td><td class="r">$590,268 <span style="color:#7A9B76;font-weight:400">(+171.3%)</span><div class="kpi-cell-sub">vs $217,593 in 2025</div></td><td class="r">26.5 <span style="color:#7A9B76;font-weight:400">(-4.8%)</span><div class="kpi-cell-sub">vs 27.8 in 2025</div></td><td class="r">$22,703 <span style="color:#7A9B76;font-weight:400">(+150.4%)</span><div class="kpi-cell-sub">vs $9,066 in 2025</div></td></tr></tbody></table></div><div class="kpi-view" data-pill="xlarge" style="display:none"><table class="kpi-compare"><thead><tr><th class="kpi-period-label"></th><th class="r">Orders Shipped</th><th class="r">Units Shipped</th><th class="r">Revenue Shipped</th><th class="r">Avg Days to Ship</th><th class="r">Avg Revenue / Shipment</th></tr></thead><tbody><tr><td class="kpi-period-label">2026</td><td class="r">3 <span style="color:#7A9B76;font-weight:400">(+200.0%)</span><div class="kpi-cell-sub">vs 1 in 2025</div></td><td class="r">1,395 <span style="color:#7A9B76;font-weight:400">(+896.4%)</span><div class="kpi-cell-sub">vs 140 in 2025</div></td><td class="r">$358,024 <span style="color:#7A9B76;font-weight:400">(+1469.2%)</span><div class="kpi-cell-sub">vs $22,816 in 2025</div></td><td class="r">53.0 <span style="color:#7A9B76;font-weight:400">(-11.9%)</span><div class="kpi-cell-sub">vs 60.1 in 2025</div></td><td class="r">$119,341 <span style="color:#7A9B76;font-weight:400">(+423.1%)</span><div class="kpi-cell-sub">vs $22,816 in 2025</div></td></tr></tbody></table></div></div>
 
   <div class="section">
     <h2>Order Mix vs 2025</h2>
@@ -1714,11 +1692,11 @@
       <div>
         <table>
           <thead><tr><th>Product Type</th><th class="r">Units</th><th class="r">Qty Share</th><th class="r">2025 Units</th><th class="r">YoY</th><th class="r">Revenue</th><th class="r">Rev Share</th></tr></thead>
-          <tbody><tr><td>Sconce</td><td class="r">3,346</td><td class="r">23.3%</td><td class="r">2,492</td><td class="r"><span style="color:#7A9B76">+34%</span></td><td class="r">$1,179,119</td><td class="r">44.2%</td></tr>
+          <tbody><tr><td>Sconce</td><td class="r">3,346</td><td class="r">23.2%</td><td class="r">2,492</td><td class="r"><span style="color:#7A9B76">+34%</span></td><td class="r">$1,179,119</td><td class="r">44.2%</td></tr>
 <tr><td>Hardware</td><td class="r">3,338</td><td class="r">23.2%</td><td class="r">2,935</td><td class="r"><span style="color:#7A9B76">+14%</span></td><td class="r">$179,710</td><td class="r">6.7%</td></tr>
 <tr><td>Other</td><td class="r">2,300</td><td class="r">16.0%</td><td class="r">2,249</td><td class="r"><span style="color:#7A9B76">+2%</span></td><td class="r">$47,288</td><td class="r">1.8%</td></tr>
 <tr><td>Sample</td><td class="r">1,389</td><td class="r">9.7%</td><td class="r">1,123</td><td class="r"><span style="color:#7A9B76">+24%</span></td><td class="r">$11,471</td><td class="r">0.4%</td></tr>
-<tr><td>Flush Mount</td><td class="r">1,140</td><td class="r">7.9%</td><td class="r">890</td><td class="r"><span style="color:#7A9B76">+28%</span></td><td class="r">$576,638</td><td class="r">21.6%</td></tr>
+<tr><td>Flush Mount</td><td class="r">1,141</td><td class="r">7.9%</td><td class="r">890</td><td class="r"><span style="color:#7A9B76">+28%</span></td><td class="r">$577,358</td><td class="r">21.6%</td></tr>
 <tr><td>Bulb</td><td class="r">826</td><td class="r">5.7%</td><td class="r">1,077</td><td class="r"><span style="color:#D4726A">-23%</span></td><td class="r">$18,097</td><td class="r">0.7%</td></tr>
 <tr><td>Accessory</td><td class="r">768</td><td class="r">5.3%</td><td class="r">827</td><td class="r"><span style="color:#D4726A">-7%</span></td><td class="r">$19,785</td><td class="r">0.7%</td></tr>
 <tr><td>Pendant</td><td class="r">604</td><td class="r">4.2%</td><td class="r">577</td><td class="r"><span style="color:#7A9B76">+5%</span></td><td class="r">$224,932</td><td class="r">8.4%</td></tr>
@@ -1732,7 +1710,7 @@
   </div>
 
   <div class="section"><div class="grid-2"><div><h2>Lighting Breakdown</h2><table><thead><tr><th>Type</th><th class="r">Units</th></tr></thead><tbody><tr><td>Sconce</td><td class="r">3,346</td></tr>
-<tr><td>Flush Mount</td><td class="r">1,140</td></tr>
+<tr><td>Flush Mount</td><td class="r">1,141</td></tr>
 <tr><td>Pendant</td><td class="r">604</td></tr>
 <tr><td>Plug-In</td><td class="r">352</td></tr>
 <tr><td>Chandelier</td><td class="r">323</td></tr>
@@ -1782,9 +1760,9 @@
       <div>
         <table>
           <thead><tr><th>Carrier</th><th class="r">Shipments</th><th class="r">Share</th></tr></thead>
-          <tbody><tr><td>FedEx</td><td class="r">2,185</td><td class="r">42.0%</td></tr>
-<tr><td>No carrier set</td><td class="r">1,833</td><td class="r">35.2%</td></tr>
-<tr><td>USPS</td><td class="r">1,124</td><td class="r">21.6%</td></tr>
+          <tbody><tr><td>FedEx</td><td class="r">2,198</td><td class="r">42.1%</td></tr>
+<tr><td>No carrier set</td><td class="r">1,843</td><td class="r">35.3%</td></tr>
+<tr><td>USPS</td><td class="r">1,124</td><td class="r">21.5%</td></tr>
 <tr><td>Other</td><td class="r">44</td><td class="r">0.8%</td></tr>
 <tr><td>UPS</td><td class="r">16</td><td class="r">0.3%</td></tr>
 <tr><td>Filemonk - Digital Downloads</td><td class="r">1</td><td class="r">0.0%</td></tr>
@@ -1918,8 +1896,8 @@
 <tr><td>April</td><td class="r">$281,130</td><td class="r">$273,042</td><td class="r"><span style="color:#7A9B76">+$8,087 (+3.0%)</span></td><td class="r">$265,103</td><td class="r"><span style="color:#7A9B76">+3.0%</span></td></tr>
 <tr><td>May</td><td class="r">$384,441</td><td class="r"><span style="color:#999">—</span></td><td class="r"><span style="color:#999">QB not yet closed</span></td><td class="r">$260,762</td><td class="r"><span style="color:#999">—</span></td></tr>
 <tr><td>June</td><td class="r">$325,827</td><td class="r"><span style="color:#999">—</span></td><td class="r"><span style="color:#999">QB not yet closed</span></td><td class="r">$289,598</td><td class="r"><span style="color:#999">—</span></td></tr>
-<tr><td>July</td><td class="r">$257,600</td><td class="r"><span style="color:#999">—</span></td><td class="r"><span style="color:#999">QB not yet closed</span></td><td class="r">$211,151</td><td class="r"><span style="color:#999">—</span></td></tr>
-<tr style="font-weight:600;border-top:2px solid #4A4A4A"><td>YTD</td><td class="r">$2,220,918</td><td class="r">$1,254,018</td><td class="r"><span style="color:#D4726A">+$966,901 (+77.1%)</span></td><td class="r">$1,816,253</td><td class="r"><span style="color:#D4726A">-31.0%</span></td></tr>
+<tr><td>July</td><td class="r">$258,320</td><td class="r"><span style="color:#999">—</span></td><td class="r"><span style="color:#999">QB not yet closed</span></td><td class="r">$211,151</td><td class="r"><span style="color:#999">—</span></td></tr>
+<tr style="font-weight:600;border-top:2px solid #4A4A4A"><td>YTD</td><td class="r">$2,221,638</td><td class="r">$1,254,018</td><td class="r"><span style="color:#D4726A">+$967,621 (+77.2%)</span></td><td class="r">$1,816,253</td><td class="r"><span style="color:#D4726A">-31.0%</span></td></tr>
 </tbody>
     </table>
   </div>
@@ -1953,10 +1931,35 @@
 </div>
 
 <script>
-const COLORS = ['#4A4A4A','#8A8078','#B0A898','#FF9912','#D6D0C8','#5C554E','#3D3832','#728384','#a0af9c','#B89111'];
-Chart.defaults.font.family = 'Poppins, -apple-system, sans-serif';
-Chart.defaults.font.size = 12;
-Chart.defaults.color = '#888';
+
+if (typeof Chart !== 'undefined') {
+  Chart.defaults.font.family = "Poppins, -apple-system, 'Segoe UI', sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.font.weight = 400;
+  Chart.defaults.color = '#6B6B6B';
+  Chart.defaults.borderColor = '#EEEAE6';
+  Chart.defaults.plugins.legend.labels.boxWidth = 10;
+  Chart.defaults.plugins.legend.labels.boxHeight = 10;
+  Chart.defaults.plugins.legend.labels.usePointStyle = false;
+  Chart.defaults.plugins.tooltip.backgroundColor = '#4A4A4A';
+  Chart.defaults.plugins.tooltip.titleFont = { weight: '600', size: 12 };
+  Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
+  Chart.defaults.plugins.tooltip.padding = 10;
+  Chart.defaults.plugins.tooltip.cornerRadius = 6;
+  Chart.defaults.elements.bar.borderRadius = 3;
+  Chart.defaults.elements.line.borderWidth = 2;
+  Chart.defaults.elements.point.radius = 2.5;
+  Chart.defaults.elements.point.hitRadius = 12;
+  // Deliberately NOT setting maintainAspectRatio: every existing canvas sizes
+  // itself via its height="" attribute, which only takes effect while the
+  // default (true) is in force. Overriding it collapses all charts to ~0px
+  // because .chart-container has no explicit height.
+}
+window.DB_COLORS = ['#FF9912', '#5B7C99', '#4E782F', '#9F2C00', '#8C7AA9', '#B0A99F', '#2F6B7C', '#B45309'];
+window.DB_PRIOR = '#B0A99F';
+window.DB_CURRENT = '#FF9912';
+
+const COLORS = window.DB_COLORS;
 
 const charts = {};
 const fulfillData = {};   // tabId -> {pill: [bucket counts]}
@@ -2095,56 +2098,56 @@ fulfillLabels['m01'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u2
 initFulfillChart('m01', 'all');
 initChart('chart-product-m01', 'doughnut', ["Sconce", "Hardware", "Other", "Sample", "Accessory", "Bulb", "Flush Mount", "Pendant", "Chandelier", "Plug-In"], [[595, 307, 299, 241, 150, 142, 137, 112, 31, 6]], COLORS, true);
 initChart('chart-carrier-m01', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[324, 264, 168, 5, 1]], COLORS, true);
-initChart('chart-state-m01', 'bar', ["NY", "CA", "FL", "TX", "MA", "NJ", "IL", "CT", "GA", "MN", "VA", "CO", "MI", "NC", "WA"], [[67, 65, 29, 28, 27, 24, 19, 15, 12, 12, 11, 10, 8, 8, 7]], ['#C5B9A8'], false, null, null, true);
+initChart('chart-state-m01', 'bar', ["NY", "CA", "FL", "TX", "MA", "NJ", "IL", "CT", "GA", "MN", "VA", "CO", "MI", "NC", "WA"], [[67, 65, 29, 28, 27, 24, 19, 15, 12, 12, 11, 10, 8, 8, 7]], [window.DB_CURRENT], false, null, null, true);
 
 fulfillData['m02'] = {"all": [153, 41, 81, 140, 8, 16], "core": [96, 36, 80, 140, 7, 16], "large": [0, 1, 0, 0, 1, 0], "xlarge": [0, 0, 0, 0, 0, 0]};
 fulfillLabels['m02'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
 initFulfillChart('m02', 'all');
 initChart('chart-product-m02', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Bulb", "Pendant", "Accessory", "Chandelier", "Plug-In"], [[423, 364, 331, 258, 147, 117, 91, 68, 31, 10]], COLORS, true);
 initChart('chart-carrier-m02', 'doughnut', ["FedEx", "No carrier set", "USPS", "UPS", "Other"], [[340, 261, 171, 6, 6]], COLORS, true);
-initChart('chart-state-m02', 'bar', ["CA", "NY", "TX", "FL", "MA", "NJ", "IL", "CT", "WA", "GA", "VA", "NC", "PA", "MN", "OR"], [[60, 58, 33, 29, 24, 21, 19, 16, 15, 13, 13, 10, 10, 10, 9]], ['#C5B9A8'], false, null, null, true);
+initChart('chart-state-m02', 'bar', ["CA", "NY", "TX", "FL", "MA", "NJ", "IL", "CT", "WA", "GA", "VA", "NC", "PA", "MN", "OR"], [[60, 58, 33, 29, 24, 21, 19, 16, 15, 13, 13, 10, 10, 10, 9]], [window.DB_CURRENT], false, null, null, true);
 
 fulfillData['m03'] = {"all": [130, 33, 55, 190, 33, 5], "core": [86, 32, 54, 190, 33, 3], "large": [0, 0, 0, 0, 0, 2], "xlarge": [0, 0, 0, 0, 0, 1]};
 fulfillLabels['m03'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
 initFulfillChart('m03', 'all');
 initChart('chart-product-m03', 'doughnut', ["Hardware", "Sconce", "Other", "Flush Mount", "Sample", "Accessory", "Bulb", "Chandelier", "Pendant", "Plug-In"], [[725, 558, 363, 283, 186, 111, 97, 75, 55, 5]], COLORS, true);
 initChart('chart-carrier-m03', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[336, 279, 173, 7, 2]], COLORS, true);
-initChart('chart-state-m03', 'bar', ["NY", "CA", "MA", "TX", "FL", "NJ", "CT", "NC", "MN", "GA", "IL", "VA", "WA", "CO", "TN"], [[70, 63, 38, 26, 23, 23, 17, 15, 15, 15, 14, 14, 13, 12, 9]], ['#C5B9A8'], false, null, null, true);
+initChart('chart-state-m03', 'bar', ["NY", "CA", "MA", "TX", "FL", "NJ", "CT", "NC", "MN", "GA", "IL", "VA", "WA", "CO", "TN"], [[70, 63, 38, 26, 23, 23, 17, 15, 15, 15, 14, 14, 13, 12, 9]], [window.DB_CURRENT], false, null, null, true);
 
 fulfillData['m04'] = {"all": [128, 36, 152, 122, 9, 4], "core": [73, 35, 151, 118, 5, 3], "large": [0, 0, 1, 1, 4, 1], "xlarge": [0, 0, 0, 0, 0, 0]};
 fulfillLabels['m04'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
 initFulfillChart('m04', 'all');
 initChart('chart-product-m04', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Flush Mount", "Pendant", "Bulb", "Accessory", "Chandelier", "Plug-In"], [[506, 422, 316, 186, 99, 86, 85, 82, 43, 6]], COLORS, true);
 initChart('chart-carrier-m04', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[339, 272, 177, 7, 1]], COLORS, true);
-initChart('chart-state-m04', 'bar', ["NY", "CA", "TX", "NJ", "FL", "WA", "CT", "MA", "IL", "MN", "CO", "GA", "TN", "NC", "PA"], [[66, 51, 38, 28, 26, 23, 22, 22, 21, 15, 12, 11, 11, 10, 8]], ['#C5B9A8'], false, null, null, true);
+initChart('chart-state-m04', 'bar', ["NY", "CA", "TX", "NJ", "FL", "WA", "CT", "MA", "IL", "MN", "CO", "GA", "TN", "NC", "PA"], [[66, 51, 38, 28, 26, 23, 22, 22, 21, 15, 12, 11, 11, 10, 8]], [window.DB_CURRENT], false, null, null, true);
 
 fulfillData['m05'] = {"all": [124, 52, 85, 197, 29, 3], "core": [86, 50, 85, 196, 26, 3], "large": [0, 0, 0, 0, 3, 0], "xlarge": [0, 0, 0, 0, 0, 0]};
 fulfillLabels['m05'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
 initFulfillChart('m05', 'all');
 initChart('chart-product-m05', 'doughnut', ["Sconce", "Hardware", "Other", "Plug-In", "Sample", "Flush Mount", "Bulb", "Accessory", "Pendant", "Chandelier"], [[719, 639, 367, 314, 192, 176, 132, 99, 52, 44]], COLORS, true);
 initChart('chart-carrier-m05', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS"], [[392, 318, 178, 8, 1]], COLORS, true);
-initChart('chart-state-m05', 'bar', ["NY", "CA", "MA", "TX", "NJ", "CT", "FL", "WA", "MN", "PA", "MI", "IL", "VA", "MD", "NC"], [[66, 61, 45, 32, 31, 22, 22, 20, 19, 17, 13, 13, 11, 11, 11]], ['#C5B9A8'], false, null, null, true);
+initChart('chart-state-m05', 'bar', ["NY", "CA", "MA", "TX", "NJ", "CT", "FL", "WA", "MN", "PA", "MI", "IL", "VA", "MD", "NC"], [[66, 61, 45, 32, 31, 22, 22, 20, 19, 17, 13, 13, 11, 11, 11]], [window.DB_CURRENT], false, null, null, true);
 
 fulfillData['m06'] = {"all": [119, 43, 10, 138, 95, 5], "core": [80, 40, 7, 136, 93, 4], "large": [0, 0, 2, 2, 2, 1], "xlarge": [0, 0, 0, 0, 0, 1]};
 fulfillLabels['m06'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
 initFulfillChart('m06', 'all');
 initChart('chart-product-m06', 'doughnut', ["Hardware", "Sconce", "Other", "Sample", "Accessory", "Flush Mount", "Pendant", "Bulb", "Chandelier", "Plug-In"], [[474, 350, 329, 187, 180, 158, 156, 96, 57, 5]], COLORS, true);
 initChart('chart-carrier-m06', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS", "Filemonk - Digital Downloads"], [[297, 264, 133, 10, 3, 1]], COLORS, true);
-initChart('chart-state-m06', 'bar', ["NY", "CA", "TX", "MA", "FL", "NJ", "CT", "IL", "CO", "NC", "WA", "MI", "PA", "VA", "MN"], [[69, 53, 33, 23, 23, 21, 18, 17, 17, 15, 12, 10, 9, 9, 8]], ['#C5B9A8'], false, null, null, true);
+initChart('chart-state-m06', 'bar', ["NY", "CA", "TX", "MA", "FL", "NJ", "CT", "IL", "CO", "NC", "WA", "MI", "PA", "VA", "MN"], [[69, 53, 33, 23, 23, 21, 18, 17, 17, 15, 12, 10, 9, 9, 8]], [window.DB_CURRENT], false, null, null, true);
 
-fulfillData['m07'] = {"all": [102, 34, 6, 34, 105, 1], "core": [67, 33, 6, 33, 105, 1], "large": [0, 0, 0, 0, 0, 0], "xlarge": [0, 0, 0, 0, 0, 0]};
+fulfillData['m07'] = {"all": [102, 34, 6, 35, 117, 1], "core": [67, 33, 6, 34, 117, 1], "large": [0, 0, 0, 0, 0, 0], "xlarge": [0, 0, 0, 0, 0, 0]};
 fulfillLabels['m07'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
 initFulfillChart('m07', 'all');
-initChart('chart-product-m07', 'doughnut', ["Sconce", "Other", "Hardware", "Bulb", "Flush Mount", "Sample", "Accessory", "Pendant", "Chandelier", "Plug-In"], [[338, 295, 264, 157, 140, 139, 78, 52, 42, 6]], COLORS, true);
-initChart('chart-carrier-m07', 'doughnut', ["No carrier set", "FedEx", "USPS", "UPS", "Other"], [[175, 157, 124, 2, 1]], COLORS, true);
-initChart('chart-state-m07', 'bar', ["NY", "CA", "TX", "FL", "MA", "NJ", "CT", "IL", "WA", "CO", "MI", "PA", "OR", "MN", "NC"], [[68, 63, 36, 26, 21, 20, 15, 14, 14, 11, 10, 10, 8, 8, 7]], ['#C5B9A8'], false, null, null, true);
+initChart('chart-product-m07', 'doughnut', ["Sconce", "Other", "Hardware", "Bulb", "Flush Mount", "Sample", "Accessory", "Pendant", "Chandelier", "Plug-In"], [[338, 295, 264, 157, 141, 139, 78, 52, 42, 6]], COLORS, true);
+initChart('chart-carrier-m07', 'doughnut', ["No carrier set", "FedEx", "USPS", "UPS", "Other"], [[185, 170, 124, 2, 1]], COLORS, true);
+initChart('chart-state-m07', 'bar', ["NY", "CA", "TX", "FL", "MA", "NJ", "CT", "IL", "WA", "CO", "MI", "PA", "OR", "MN", "NC"], [[68, 63, 36, 26, 21, 20, 15, 14, 14, 11, 10, 10, 8, 8, 7]], [window.DB_CURRENT], false, null, null, true);
 
-fulfillData['ytd'] = {"all": [892, 286, 519, 921, 283, 42], "core": [578, 269, 512, 912, 272, 36], "large": [0, 1, 4, 4, 11, 6], "xlarge": [0, 0, 0, 0, 0, 3]};
+fulfillData['ytd'] = {"all": [892, 286, 519, 922, 295, 42], "core": [578, 269, 512, 913, 284, 36], "large": [0, 1, 4, 4, 11, 6], "xlarge": [0, 0, 0, 0, 0, 3]};
 fulfillLabels['ytd'] = ["\u20133", "4\u20137", "8\u201314", "15\u201321", "22\u201330", "30+"];
 initFulfillChart('ytd', 'all');
-initChart('chart-product-ytd', 'doughnut', ["Sconce", "Hardware", "Other", "Sample", "Flush Mount", "Bulb", "Accessory", "Pendant", "Plug-In", "Chandelier"], [[3346, 3338, 2300, 1389, 1140, 826, 768, 604, 352, 323]], COLORS, true);
-initChart('chart-carrier-ytd', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS", "Filemonk - Digital Downloads"], [[2185, 1833, 1124, 44, 16, 1]], COLORS, true);
-initChart('chart-state-ytd', 'bar', ["NY", "CA", "TX", "MA", "FL", "NJ", "CT", "IL", "WA", "MN", "NC", "CO", "VA", "GA", "PA"], [[464, 416, 226, 200, 178, 168, 125, 117, 104, 87, 76, 75, 70, 69, 68]], ['#C5B9A8'], false, null, null, true);
+initChart('chart-product-ytd', 'doughnut', ["Sconce", "Hardware", "Other", "Sample", "Flush Mount", "Bulb", "Accessory", "Pendant", "Plug-In", "Chandelier"], [[3346, 3338, 2300, 1389, 1141, 826, 768, 604, 352, 323]], COLORS, true);
+initChart('chart-carrier-ytd', 'doughnut', ["FedEx", "No carrier set", "USPS", "Other", "UPS", "Filemonk - Digital Downloads"], [[2198, 1843, 1124, 44, 16, 1]], COLORS, true);
+initChart('chart-state-ytd', 'bar', ["NY", "CA", "TX", "MA", "FL", "NJ", "CT", "IL", "WA", "MN", "NC", "CO", "VA", "GA", "PA"], [[464, 416, 226, 200, 178, 168, 125, 117, 104, 87, 76, 75, 70, 69, 68]], [window.DB_CURRENT], false, null, null, true);
 
 
 // Show first tab

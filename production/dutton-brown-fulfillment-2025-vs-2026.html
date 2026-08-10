@@ -9,38 +9,371 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: "Poppins", -apple-system, "Segoe UI", sans-serif; font-weight: 400; color: #4A4A4A; background: #FAFAFA; line-height: 1.5; font-size: 14px; }
-  .header { background: #F7F5F2; padding: 28px 32px; text-align: center; border-bottom: 1px solid #E0DDD9; }
-  .header h1 { font-weight: 600; font-size: 1.4rem; }
-  .header p { font-weight: 400; font-size: 0.85rem; margin-top: 4px; opacity: 0.6; }
-  .header .updated { font-weight: 400; font-size: 0.72rem; margin-top: 6px; color: #999; letter-spacing: 0.04em; text-transform: uppercase; }
-  .report-nav { display: flex; gap: 8px; justify-content: center; padding: 14px 24px 0; background: #FAFAFA; }
-  .report-nav a { font-size: 0.78rem; font-weight: 400; color: #888; text-decoration: none; padding: 6px 14px; border-radius: 999px; border: 1px solid #E0DDD9; background: #fff; transition: all 0.15s; }
-  .report-nav a:hover { color: #4A4A4A; border-color: #4A4A4A; }
-  .report-nav a.current { color: #4A4A4A; font-weight: 600; border-color: #4A4A4A; background: #F7F5F2; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
-  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 28px; }
-  .kpi { background: #fff; border: 1px solid #E0DDD9; border-radius: 8px; padding: 18px 14px; text-align: center; }
-  .kpi-val { font-weight: 600; font-size: 1.4rem; }
-  .kpi-sub { font-size: 0.8rem; margin-top: 2px; }
-  .kpi-label { font-weight: 400; font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
-  .pos { color: #7A9B76; }
-  .neg { color: #D4726A; }
-  .section { margin-bottom: 36px; }
-  .section h2 { font-weight: 600; font-size: 1.1rem; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #E0DDD9; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-  th { font-weight: 600; text-align: left; padding: 8px 10px; border-bottom: 2px solid #E0DDD9; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: #888; }
-  td { padding: 7px 10px; border-bottom: 1px solid #F0EDEA; }
-  tr:hover td { background: #FAFAF8; }
-  .r { text-align: right; }
-  .chart-container { position: relative; margin: 16px 0; }
-  .legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; font-size: 0.85rem; }
-  .legend span { display: flex; align-items: center; gap: 6px; }
-  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
-  tfoot td { font-weight: 600; border-top: 2px solid #E0DDD9; }
-  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+
+:root {
+  --db-ink: #4A4A4A;
+  --db-muted: #6B6B6B;
+  --db-accent: #FF9912;
+  --db-accent-text: #D97706;
+  --db-accent-soft: #FFF4E0;
+  --db-surface: #FAFAFA;
+  --db-surface-mid: #F1EFEC;
+  --db-card: #FFFFFF;
+  --db-border: #E6E6E6;
+  --db-hairline: #F2F0EE;
+  --db-pos: #4E782F;
+  --db-neg: #9F2C00;
+  --db-warn: #B45309;
+  --db-neu: #6B6B6B;
+  --db-radius: 6px;
+  --db-radius-sm: 4px;
+  /* Back-compat aliases so existing markup keeps resolving. --db-text-light
+     deliberately now points at the AA-passing muted grey, not the old #8A8A8A. */
+  --db-primary: #4A4A4A;
+  --db-text: #4A4A4A;
+  --db-text-muted: #6B6B6B;
+  --db-text-light: #6B6B6B;
+  --db-accent-hover: #D97706;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 300;
+  color: var(--db-ink);
+  background: var(--db-surface);
+  line-height: 1.55;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+table, .kpi-val, .kpi-cell-sub, .kpi-period-label, .num,
+.kpi-compare td, .kpi-compare th { font-variant-numeric: tabular-nums; }
+
+a { color: var(--db-accent-text); }
+
+/* ===== Header — light, dense, left-aligned. One treatment for all reports. */
+.header {
+  background: var(--db-card);
+  border-bottom: 1px solid var(--db-border);
+  padding: 26px 32px 20px;
+  text-align: left;
+}
+.header h1 {
+  font-weight: 300;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--db-ink);
+}
+.header h1 b, .header h1 strong { font-weight: 600; }
+.header p, .header .meta {
+  font-size: 12px;
+  color: var(--db-muted);
+  margin-top: 6px;
+  font-weight: 300;
+}
+.header .updated {
+  display: block;
+  font-size: 11px;
+  color: var(--db-muted);
+  margin-top: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ===== Cross-report nav — underline tabs, never pills ===== */
+.report-nav {
+  display: flex;
+  gap: 22px;
+  justify-content: flex-start;
+  padding: 0 32px;
+  background: var(--db-card);
+  border-bottom: 1px solid var(--db-border);
+}
+.report-nav a {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: var(--db-muted);
+  font-size: 11.5px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 11px 0;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+.report-nav a:hover { color: var(--db-ink); border-bottom-color: var(--db-border); }
+.report-nav a.current {
+  color: var(--db-ink);
+  font-weight: 600;
+  border-bottom-color: var(--db-accent);
+}
+
+.container, .wrap { max-width: 1180px; margin: 0 auto; padding: 26px 32px 64px; }
+
+h2, .section h2 {
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--db-ink);
+  margin: 34px 0 12px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.section { margin-bottom: 34px; }
+.section h2:first-child, h2:first-of-type { margin-top: 0; }
+
+/* ===== In-report tabs ===== */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--db-border);
+  margin-bottom: 26px;
+  overflow-x: auto;
+}
+.tab-btn {
+  background: none; border: none;
+  padding: 11px 18px;
+  font-family: inherit; font-weight: 400; font-size: 12px;
+  color: var(--db-muted); cursor: pointer;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px; white-space: nowrap;
+  transition: color .15s;
+}
+.tab-btn:hover { color: var(--db-ink); }
+.tab-btn.active { color: var(--db-ink); font-weight: 600; border-bottom-color: var(--db-accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-subtitle { font-size: 12.5px; color: var(--db-muted); margin: 0 0 16px; }
+.tab-subtitle strong { font-weight: 600; color: var(--db-ink); }
+
+/* ===== Segmented filter buttons (rounded, never pills) ===== */
+.pill-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 18px; }
+.pill, .toggle-btn {
+  background: var(--db-card);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius-sm);
+  padding: 7px 14px;
+  font-family: inherit; font-size: 12px; font-weight: 400;
+  color: var(--db-muted); cursor: pointer;
+  letter-spacing: 0.03em; transition: all .15s;
+}
+.pill:hover, .toggle-btn:hover { border-color: var(--db-ink); color: var(--db-ink); }
+.pill.active, .toggle-btn.active {
+  background: var(--db-ink); color: #fff; border-color: var(--db-ink); font-weight: 600;
+}
+.pill .pill-note { font-weight: 300; font-size: 11px; opacity: .75; margin-left: 4px; }
+.pill-hint { font-size: 11px; color: var(--db-muted); font-weight: 300; margin-left: auto; }
+@media (max-width: 700px) { .pill-hint { display: none; } }
+
+/* ===== KPI cards ===== */
+.kpis, .kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.kpi {
+  background: var(--db-card);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius);
+  padding: 12px 16px;
+  text-align: left;
+}
+.kpi .l, .kpi-label {
+  font-size: 11px; color: var(--db-muted); font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0;
+}
+/* Ink by DEFAULT. Accent is opt-in via .accent and should be spent on the one
+   or two metrics the report is actually about — colouring every card orange
+   highlights nothing. Values are >=18.66px bold, the only size at which
+   --db-accent-text (3.19:1) clears AA. */
+.kpi .v, .kpi-val {
+  font-size: 26px; font-weight: 600; color: var(--db-ink);
+  line-height: 1.25; margin-top: 3px;
+}
+.kpi .v.accent, .kpi-val.accent { color: var(--db-accent-text); }
+.kpi .v.ink, .kpi-val.ink { color: var(--db-ink); }   /* back-compat no-op */
+.kpi .d, .kpi-sub { font-size: 11.5px; margin-top: 4px; color: var(--db-muted); font-weight: 400; }
+.kpi-sub.pos, .up, .pos { color: var(--db-pos); font-weight: 600; }
+.kpi-sub.neg, .down, .neg { color: var(--db-neg); font-weight: 600; }
+.kpi-sub.neu, .flat, .neu { color: var(--db-neu); font-weight: 600; }
+.warn { color: var(--db-warn); font-weight: 600; }
+
+/* ===== KPI comparison table ===== */
+.kpi-compare-wrap {
+  background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); padding: 4px 20px;
+  margin-bottom: 26px; overflow-x: auto;
+}
+table.kpi-compare { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.kpi-compare th {
+  font-weight: 600; font-size: 10.5px; color: var(--db-muted);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 12px 14px; border-bottom: 1px solid var(--db-border); text-align: right;
+}
+table.kpi-compare th.kpi-period-label { text-align: left; }
+table.kpi-compare td {
+  padding: 15px 14px; font-size: 16px; font-weight: 600;
+  color: var(--db-ink); border-bottom: 1px solid var(--db-hairline);
+}
+table.kpi-compare tr:last-child td { border-bottom: none; }
+table.kpi-compare td.kpi-period-label {
+  font-size: 10.5px; color: var(--db-muted); font-weight: 600;
+  letter-spacing: 0.09em; text-transform: uppercase; text-align: left;
+}
+table.kpi-compare .kpi-cell-sub {
+  font-size: 11px; font-weight: 400; color: var(--db-muted); margin-top: 4px;
+}
+/* Legacy inline colours emitted by older code paths. Remapped here rather than
+   chased through every call site — note these match ANY element, not just
+   <span>: several are on <td>, where the old greys (#888 = 3.45:1, #999 =
+   2.85:1) failed AA outright. */
+[style*="#7A9B76"] { color: var(--db-pos) !important; }
+[style*="#D4726A"] { color: var(--db-neg) !important; }
+[style*="#C9A84C"] { color: var(--db-warn) !important; }
+[style*="#999"], [style*="#888"], [style*="#666"],
+[style*="#8a8a8a"], [style*="#8A8A8A"] { color: var(--db-muted) !important; }
+
+/* ===== Tables ===== */
+table {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+  background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); overflow: hidden;
+}
+th {
+  font-weight: 600; text-align: left; padding: 9px 12px;
+  border-bottom: 1px solid var(--db-border);
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--db-muted); background: #FBFAF9; white-space: nowrap;
+}
+td { padding: 8px 12px; border-bottom: 1px solid var(--db-hairline); color: var(--db-ink); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--db-surface); }
+tfoot td, tr.total td { font-weight: 600; border-top: 1px solid var(--db-border); }
+.r, th.num, td.num, .num { text-align: right; }
+td.k { font-weight: 400; }
+td.strong, .strong { font-weight: 600; }
+.cell-sub { font-size: 11px; font-weight: 300; color: var(--db-muted); margin-top: 2px; }
+.table-note, .note {
+  font-size: 12px; color: var(--db-muted); margin-top: 10px; line-height: 1.55;
+}
+.kpi-compare-wrap table, table.kpi-compare { border: none; border-radius: 0; background: none; }
+
+/* ===== Badges — rounded, never pills ===== */
+.badge {
+  display: inline-block; border-radius: 5px; padding: 2px 7px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.badge.real { background: #E7F0E4; color: #3B5C24; }
+.badge.junk { background: #FBEAE4; color: #8A2600; }
+
+/* ===== Callout banner ===== */
+.banner {
+  border: 1px solid var(--db-border); border-left: 4px solid var(--db-accent);
+  background: var(--db-card); border-radius: var(--db-radius);
+  padding: 12px 16px; font-size: 13px; margin: 0 0 22px; line-height: 1.6;
+}
+.banner b { font-weight: 600; }
+.banner.warn { border-left-color: var(--db-neg); }
+
+/* ===== Charts ===== */
+.chart, .chart-container {
+  position: relative; background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); padding: 16px 18px; margin: 0 0 6px;
+}
+.legend { font-size: 11.5px; color: var(--db-muted); margin-top: 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; margin-right: 18px; }
+.sw, .legend-dot {
+  display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+  margin-right: 5px; vertical-align: -1px;
+}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+
+/* ===== Funnel ===== */
+.funnel {
+  background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); padding: 18px 20px;
+}
+.frow {
+  display: grid; grid-template-columns: 168px 1fr 132px;
+  align-items: center; gap: 12px; margin-bottom: 9px; font-size: 13px;
+}
+.frow:last-of-type { margin-bottom: 0; }
+.fbar { height: 22px; border-radius: var(--db-radius-sm); background: var(--db-accent); min-width: 2px; }
+.fbar.muted { background: #DED9D2; }
+.fnum { text-align: right; font-weight: 600; font-size: 13px; }
+.fpct { color: var(--db-muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===== Disclosure ===== */
+details {
+  background: var(--db-card); border: 1px solid var(--db-border);
+  border-radius: var(--db-radius); padding: 14px 18px; margin: 26px 0 0;
+  font-size: 12.5px; line-height: 1.6;
+}
+summary { font-weight: 600; cursor: pointer; font-size: 12.5px; }
+details li { margin: 7px 0 0 18px; }
+
+/* ===== Info bubble ===== */
+.info-bubble {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; margin-left: 8px; border-radius: 50%;
+  /* Ink, not muted: #6B6B6B on the #E6E6E6 chip is only 4.27:1 and fails AA. */
+  background: var(--db-border); color: var(--db-ink);
+  font-size: 10.5px; font-weight: 600; cursor: help;
+  position: relative; vertical-align: middle; outline: none;
+}
+.info-bubble:hover, .info-bubble:focus { background: var(--db-ink); color: #fff; }
+.info-bubble .info-tip {
+  display: none; position: absolute; left: 24px; top: 50%;
+  transform: translateY(-50%); width: 320px; max-width: calc(100vw - 60px);
+  background: var(--db-ink); color: #fff; padding: 12px 14px;
+  border-radius: var(--db-radius); font-size: 12.5px; font-weight: 300;
+  line-height: 1.5; letter-spacing: normal; text-transform: none;
+  z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+.info-bubble .info-tip code { background: rgba(255,255,255,.15); padding: 1px 5px; border-radius: 3px; }
+.info-bubble .info-tip strong { color: var(--db-accent); font-weight: 600; }
+.info-bubble:hover .info-tip, .info-bubble:focus .info-tip { display: block; }
+
+tr.other-toggle { cursor: pointer; user-select: none; color: var(--db-ink); }
+tr.other-toggle:hover td { background: var(--db-surface-mid); }
+tr.other-toggle .caret {
+  display: inline-block; font-size: 11px; margin-right: 4px;
+  color: var(--db-muted); transition: transform .15s;
+}
+#recon table { font-size: 13px; }
+#recon p code { background: var(--db-surface-mid); padding: 2px 6px; border-radius: 3px; }
+
+/* ===== Mobile ===== */
+@media (max-width: 860px) { .grid-2, .cols { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+  .header { padding: 20px; }
+  .header h1 { font-size: 20px; }
+  .report-nav { padding: 0 20px; gap: 16px; }
+  .container, .wrap { padding: 20px; }
+  .kpi-row, .kpis { grid-template-columns: repeat(2, 1fr); }
+  .tab-btn { padding: 10px 12px; font-size: 11px; }
+  .pill { padding: 6px 11px; font-size: 11.5px; }
+  .kpi-compare-wrap { padding: 4px 12px; }
+  table.kpi-compare td { padding: 12px 9px; font-size: 14px; }
+  .frow { grid-template-columns: 120px 1fr 104px; }
+  .info-bubble .info-tip { left: auto; right: 0; top: 24px; transform: none; }
+}
+
+@media print {
+  body { background: #fff; }
+  .report-nav, .pill-bar, .tab-bar { display: none; }
+  .tab-content { display: block !important; }
+  .kpi, .chart, table, .funnel { break-inside: avoid; }
+}
+
 </style>
 </head>
 <body>
@@ -48,7 +381,7 @@
 <div class="header">
   <h1>Dutton Brown — 2025 vs 2026 Fulfillment Comparison</h1>
   <p>Jan–Jul &nbsp;&middot;&nbsp; Dutton Brown Design</p>
-  <div class="updated">Updated August 08, 2026 — through July</div>
+  <div class="updated">Updated August 10, 2026 — through July</div>
 </div>
 
 <div class="report-nav">
@@ -60,8 +393,8 @@
 
 <!-- Summary KPIs -->
 <div class="legend">
-  <span><div class="legend-dot" style="background:#8BB8D9"></div> 2025</span>
-  <span><div class="legend-dot" style="background:#D4726A"></div> 2026</span>
+  <span><div class="legend-dot" style="background:#B0A99F"></div> 2025</span>
+  <span><div class="legend-dot" style="background:#FF9912"></div> 2026</span>
 </div>
 
 <div class="kpi-row">
@@ -81,12 +414,12 @@
     <div class="kpi-label">Revenue Shipped</div>
   </div>
   <div class="kpi">
-    <div class="kpi-val">11.4 days</div>
+    <div class="kpi-val">11.5 days</div>
     <div class="kpi-sub">vs 12.7 days</div>
     <div class="kpi-label">Avg Fulfillment Time</div>
   </div>
   <div class="kpi">
-    <div class="kpi-val">$767</div>
+    <div class="kpi-val">$763</div>
     <div class="kpi-sub">vs $604</div>
     <div class="kpi-label">Avg Revenue / Shipment</div>
   </div>
@@ -212,14 +545,14 @@
   <h2>Carrier Mix Comparison</h2>
   <table style="max-width:600px">
     <thead><tr><th>Carrier</th><th class="r">2025</th><th class="r">2026</th><th class="r">YoY</th></tr></thead>
-    <tbody><tr><td>FedEx</td><td class="r">2,283</td><td class="r">2,185</td><td class="r">-4.3%</td></tr>
-<tr><td>No carrier set</td><td class="r">1,662</td><td class="r">1,833</td><td class="r">+10.3%</td></tr>
+    <tbody><tr><td>FedEx</td><td class="r">2,283</td><td class="r">2,198</td><td class="r">-3.7%</td></tr>
+<tr><td>No carrier set</td><td class="r">1,662</td><td class="r">1,843</td><td class="r">+10.9%</td></tr>
 <tr><td>USPS</td><td class="r">1,136</td><td class="r">1,124</td><td class="r">-1.1%</td></tr>
 <tr><td>Other</td><td class="r">25</td><td class="r">44</td><td class="r">+76.0%</td></tr>
 <tr><td>UPS</td><td class="r">15</td><td class="r">16</td><td class="r">+6.7%</td></tr>
 <tr><td>TForce Logistics</td><td class="r">15</td><td class="r">0</td><td class="r">-100.0%</td></tr>
-<tr><td>Dropoff</td><td class="r">2</td><td class="r">0</td><td class="r">-100.0%</td></tr>
 <tr><td>Filemonk - Digital Downloads</td><td class="r">1</td><td class="r">1</td><td class="r">+0.0%</td></tr>
+<tr><td>Dropoff</td><td class="r">2</td><td class="r">0</td><td class="r">-100.0%</td></tr>
 <tr><td>TForce Final Mile</td><td class="r">1</td><td class="r">0</td><td class="r">-100.0%</td></tr>
 </tbody>
   </table>
@@ -257,8 +590,37 @@
 </div>
 
 <script>
-const C_A = '#8BB8D9', C_B = '#D4726A', C_GREEN = '#7A9B76', C_SAND = '#C5B9A8';
-const COLORS = ['#D4726A','#8BB8D9','#C5B9A8','#7A9B76','#C9A84C','#A8A8A8','#3A3A3A','#E8B4B8','#B8D4E3','#D4C5A8'];
+
+if (typeof Chart !== 'undefined') {
+  Chart.defaults.font.family = "Poppins, -apple-system, 'Segoe UI', sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.font.weight = 400;
+  Chart.defaults.color = '#6B6B6B';
+  Chart.defaults.borderColor = '#EEEAE6';
+  Chart.defaults.plugins.legend.labels.boxWidth = 10;
+  Chart.defaults.plugins.legend.labels.boxHeight = 10;
+  Chart.defaults.plugins.legend.labels.usePointStyle = false;
+  Chart.defaults.plugins.tooltip.backgroundColor = '#4A4A4A';
+  Chart.defaults.plugins.tooltip.titleFont = { weight: '600', size: 12 };
+  Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
+  Chart.defaults.plugins.tooltip.padding = 10;
+  Chart.defaults.plugins.tooltip.cornerRadius = 6;
+  Chart.defaults.elements.bar.borderRadius = 3;
+  Chart.defaults.elements.line.borderWidth = 2;
+  Chart.defaults.elements.point.radius = 2.5;
+  Chart.defaults.elements.point.hitRadius = 12;
+  // Deliberately NOT setting maintainAspectRatio: every existing canvas sizes
+  // itself via its height="" attribute, which only takes effect while the
+  // default (true) is in force. Overriding it collapses all charts to ~0px
+  // because .chart-container has no explicit height.
+}
+window.DB_COLORS = ['#FF9912', '#5B7C99', '#4E782F', '#9F2C00', '#8C7AA9', '#B0A99F', '#2F6B7C', '#B45309'];
+window.DB_PRIOR = '#B0A99F';
+window.DB_CURRENT = '#FF9912';
+
+const C_A = window.DB_PRIOR, C_B = window.DB_CURRENT,
+      C_GREEN = '#4E782F', C_SAND = '#B0A99F';
+const COLORS = window.DB_COLORS;
 Chart.defaults.font.family = '"Poppins", -apple-system, "Segoe UI", sans-serif';
 Chart.defaults.font.size = 12;
 Chart.defaults.color = '#888';
@@ -323,7 +685,7 @@ new Chart(document.getElementById('daysChart'), {
     labels: labels,
     datasets: [
       { label: '2025', data: [12.2, 11.8, 14.9, 13.1, 12.2, 11.9, 13.0], borderColor: C_A, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
-      { label: '2026', data: [9.5, 10.5, 12.1, 10.0, 11.8, 13.6, 12.9], borderColor: C_B, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
+      { label: '2026', data: [9.5, 10.5, 12.1, 10.0, 11.8, 13.6, 13.4], borderColor: C_B, backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
     ]
   },
   options: {
