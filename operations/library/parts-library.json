@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T12:01:05",
+  "generated_at": "2026-08-11T07:07:30",
   "counts": {
     "parts": 474,
     "supplies": 158,
@@ -13176,7 +13176,6 @@
       "raw_or_prefinished": "Pre-Finished",
       "in_house_processes": [],
       "vendor": [
-        "Grand Brass Lamp Parts",
         "Bolt Depot"
       ],
       "glossary": {
@@ -13409,8 +13408,7 @@
       "raw_or_prefinished": "Pre-Finished",
       "in_house_processes": [],
       "vendor": [
-        "Bolt Depot",
-        "Grand Brass Lamp Parts"
+        "Bolt Depot"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-81d9-b13f-c4d5d2283e0a",
@@ -14296,8 +14294,7 @@
       "raw_or_prefinished": "Pre-Finished",
       "in_house_processes": [],
       "vendor": [
-        "Aspen Fasteners",
-        "Bolt Depot"
+        "Aspen Fasteners"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-81d9-b13f-c4d5d2283e0a",
@@ -62431,13 +62428,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 43,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bb-bd17-cdcb304bc64e",
-      "last_edited_at": "2026-08-09T18:55:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "A-CO1",
@@ -62451,13 +62448,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 200,
       "reorder_point": 29,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2dfffa52-4c5b-8013-932a-d9707ec57512",
-      "last_edited_at": "2026-08-09T18:55:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "A-DI1.5",
@@ -62471,13 +62468,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 100,
       "reorder_point": 2,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-811f-98cd-ec5e61dcaa58",
-      "last_edited_at": "2026-08-09T18:55:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "A-DI3",
@@ -62491,13 +62488,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 74,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8191-a76b-c39082cee732",
-      "last_edited_at": "2026-08-09T18:55:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "A-DI6",
@@ -62531,13 +62528,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2200,
       "reorder_point": 67,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8198-a72f-f4e2323196c8",
-      "last_edited_at": "2026-08-09T18:55:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "AN8",
@@ -62551,13 +62548,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1400,
       "reorder_point": 52,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-818b-a873-dd32905f482a",
-      "last_edited_at": "2026-08-09T18:55:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "AR1BL",
@@ -62593,13 +62590,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1000,
       "reorder_point": 234,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81dc-a67c-e72690d04028",
-      "last_edited_at": "2026-08-09T18:55:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "AR1NI",
@@ -62613,13 +62610,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1200,
       "reorder_point": 514,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81dc-a67c-e72690d04028",
-      "last_edited_at": "2026-08-09T18:55:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "AR1RB",
@@ -62759,7 +62756,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 50,
       "raw_input": null,
       "in_house_processes": [
@@ -62767,7 +62764,7 @@
       ],
       "locations": [],
       "family_id": "2daffa52-4c5b-809f-a1c0-ecb8181d4dc6",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BOP3L",
@@ -62781,7 +62778,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 50,
       "raw_input": null,
       "in_house_processes": [
@@ -62789,7 +62786,7 @@
       ],
       "locations": [],
       "family_id": "2daffa52-4c5b-80b2-ad6f-e3841d67f3cc",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BOS18-M2",
@@ -62803,7 +62800,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 52,
       "raw_input": null,
       "in_house_processes": [
@@ -62811,7 +62808,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-816b-8afe-c99a0a021534",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BOS18-M3",
@@ -62848,7 +62845,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 200,
       "reorder_point": 37,
       "raw_input": null,
       "in_house_processes": [
@@ -62856,7 +62853,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a0-ba49-e606b5e10f9b",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BOS18L",
@@ -62870,7 +62867,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 102,
       "raw_input": null,
       "in_house_processes": [
@@ -62878,7 +62875,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8109-803b-d79bc2434005",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BOS30-M6",
@@ -62892,7 +62889,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 119,
       "reorder_point": 9,
       "raw_input": null,
       "in_house_processes": [
@@ -62900,7 +62897,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-817a-8842-c7593cda43f6",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BOS30-M8",
@@ -62914,7 +62911,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 100,
       "reorder_point": 17,
       "raw_input": null,
       "in_house_processes": [
@@ -62922,7 +62919,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814e-aba0-c758501d6681",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BOS30L",
@@ -62936,7 +62933,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 150,
       "reorder_point": 26,
       "raw_input": null,
       "in_house_processes": [
@@ -62944,7 +62941,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81e2-a5b9-ca979e6adc8c",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BR1",
@@ -62958,13 +62955,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1200,
       "reorder_point": 335,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81f0-97aa-c95f90f2669f",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:58:00.000Z"
     },
     {
       "part_number": "BS1-M0",
@@ -62978,7 +62975,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 85,
       "raw_input": null,
       "in_house_processes": [
@@ -62986,7 +62983,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8163-8535-daec87970686",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "BU1",
@@ -63000,7 +62997,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 100,
       "reorder_point": 16,
       "raw_input": null,
       "in_house_processes": [
@@ -63008,7 +63005,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814b-a4b4-f1a94d80e2e2",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "BU1L",
@@ -63022,7 +63019,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 100,
       "reorder_point": 16,
       "raw_input": null,
       "in_house_processes": [
@@ -63030,7 +63027,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814e-962e-e18085e9f8ef",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "BU4",
@@ -63064,13 +63061,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 24000,
       "reorder_point": 4812,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ec-a508-c4a9f88f3d69",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "BUK8BR",
@@ -63164,13 +63161,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1200,
       "reorder_point": 381,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "4d23c003-4edb-469a-b90c-6792f5ef035e",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "BULB-T45-W",
@@ -63204,13 +63201,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1400,
       "reorder_point": 437,
       "raw_input": "C14RB",
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b7-bf17-d176b2abadc4",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "C14BR",
@@ -63224,13 +63221,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 3200,
       "reorder_point": 807,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b7-bf17-d176b2abadc4",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "C14NI",
@@ -63306,13 +63303,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 38,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8194-9f26-ffdd84dcb508",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "C18-2RB",
@@ -63390,13 +63387,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 800,
       "reorder_point": 213,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8133-9574-dbc58d6a3700",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "C18NI",
@@ -63410,13 +63407,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 231,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8133-9574-dbc58d6a3700",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "C18RB",
@@ -63473,13 +63470,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 127,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8122-9b7d-fecc6a6b47f2",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "C38NI",
@@ -63493,13 +63490,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 165,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8122-9b7d-fecc6a6b47f2",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "C38RB",
@@ -63536,7 +63533,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 150,
       "reorder_point": 23,
       "raw_input": null,
       "in_house_processes": [
@@ -63544,7 +63541,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a0-9a3f-f648e534694a",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CA5-M0",
@@ -63693,7 +63690,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 93,
       "raw_input": "CA5RB",
       "in_house_processes": [
@@ -63701,7 +63698,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ab-9ab5-e4074c7392df",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CA5BR",
@@ -63715,13 +63712,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 800,
       "reorder_point": 164,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ab-9ab5-e4074c7392df",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CA5NI",
@@ -63735,13 +63732,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 163,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ab-9ab5-e4074c7392df",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CA5RB",
@@ -63755,7 +63752,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2400,
       "reorder_point": 869,
       "raw_input": null,
       "in_house_processes": [
@@ -63763,7 +63760,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ab-9ab5-e4074c7392df",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CAT5-M2",
@@ -63777,7 +63774,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 74,
       "raw_input": null,
       "in_house_processes": [
@@ -63785,7 +63782,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81c5-81c1-c86fdbbf00bf",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CAT5-M3",
@@ -63799,7 +63796,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 100,
       "reorder_point": 25,
       "raw_input": null,
       "in_house_processes": [
@@ -63807,7 +63804,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8127-828e-c63939fae7fa",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CB1_8",
@@ -63821,13 +63818,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2200,
       "reorder_point": 72,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8192-bb70-de57a41c7112",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CR3BL",
@@ -63863,13 +63860,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 126,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8121-a5a5-ef1a1f5fd845",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CR3NI",
@@ -63883,13 +63880,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 146,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8121-a5a5-ef1a1f5fd845",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CR3RB",
@@ -63925,7 +63922,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 19,
       "raw_input": null,
       "in_house_processes": [
@@ -63933,7 +63930,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8118-b65e-f938fc8c91ae",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CRC5BL",
@@ -64249,13 +64246,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 150,
       "reorder_point": 4,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814b-a2dd-cb5454108c0b",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CRT5_8NI",
@@ -64333,13 +64330,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 700,
       "reorder_point": 182,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8130-a0e4-e7952ac7a14e",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CY1NI",
@@ -64353,13 +64350,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 84,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8130-a0e4-e7952ac7a14e",
-      "last_edited_at": "2026-08-09T18:54:00.000Z"
+      "last_edited_at": "2026-08-10T21:59:00.000Z"
     },
     {
       "part_number": "CY1RB",
@@ -64395,7 +64392,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 100,
       "reorder_point": null,
       "raw_input": null,
       "in_house_processes": [
@@ -64412,7 +64409,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-817e-b02b-f1baba22a511",
-      "last_edited_at": "2026-08-09T18:47:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "DO10AL",
@@ -64457,7 +64454,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 150,
       "reorder_point": null,
       "raw_input": null,
       "in_house_processes": [
@@ -64474,7 +64471,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-8151-98e4-de89c365ca4b",
-      "last_edited_at": "2026-08-09T18:47:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "DO12AL",
@@ -64581,7 +64578,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 100,
       "reorder_point": null,
       "raw_input": null,
       "in_house_processes": [
@@ -64598,7 +64595,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-8152-8856-eb4d69695702",
-      "last_edited_at": "2026-08-09T18:47:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "DO8AL",
@@ -64674,7 +64671,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 177,
       "raw_input": "FC1RB",
       "in_house_processes": [
@@ -64682,7 +64679,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8135-94e5-fb29f6170ce3",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "FC1BR",
@@ -64696,13 +64693,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1200,
       "reorder_point": 388,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8135-94e5-fb29f6170ce3",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "FC1NI",
@@ -64716,13 +64713,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1200,
       "reorder_point": 526,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8135-94e5-fb29f6170ce3",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "FC1RB",
@@ -64736,7 +64733,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1800,
       "reorder_point": 572,
       "raw_input": null,
       "in_house_processes": [
@@ -64744,7 +64741,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8135-94e5-fb29f6170ce3",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "FC2BL",
@@ -64780,13 +64777,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 41,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8135-a833-e614209eef24",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "FC2NI",
@@ -64800,13 +64797,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 250,
       "reorder_point": 36,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8135-a833-e614209eef24",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "FC2RB",
@@ -65054,13 +65051,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 150,
       "reorder_point": 4,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8150-9cf9-c671652c5346",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "FP2RB",
@@ -65319,13 +65316,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 43,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-817e-a31c-de201840e64f",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "GC10NI",
@@ -65359,13 +65356,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 170,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-817e-a31c-de201840e64f",
-      "last_edited_at": "2026-08-09T18:47:00.000Z"
+      "last_edited_at": "2026-08-10T22:00:00.000Z"
     },
     {
       "part_number": "GC6BL",
@@ -65402,13 +65399,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 70,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81cc-9acb-ccd8e45f3d3c",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "GC6NI",
@@ -65442,13 +65439,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 3000,
       "reorder_point": 605,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81cc-9acb-ccd8e45f3d3c",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "GC8BL",
@@ -65508,13 +65505,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 900,
       "reorder_point": 158,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81e1-8585-e2e946aff663",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "GC8BR-M1",
@@ -65548,13 +65545,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 69,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81e1-8585-e2e946aff663",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "GC8NI-M1",
@@ -65588,13 +65585,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2000,
       "reorder_point": 326,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81e1-8585-e2e946aff663",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "GC8RB-M1",
@@ -65716,7 +65713,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8159-9fa8-db692db01d9d",
-      "last_edited_at": "2026-08-09T18:53:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "HO1BL",
@@ -66424,13 +66421,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 3000,
       "reorder_point": 147,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81e1-b939-c83304b20512",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "LW4",
@@ -66524,7 +66521,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 250,
       "reorder_point": 46,
       "raw_input": null,
       "in_house_processes": [
@@ -66532,7 +66529,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a3-a44e-c777f08191d9",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "MO2",
@@ -66546,7 +66543,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 103,
       "raw_input": null,
       "in_house_processes": [
@@ -66554,7 +66551,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8111-a7c1-c3a81121765e",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "MO3",
@@ -66654,13 +66651,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 6000,
       "reorder_point": 591,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81dd-97ab-d5451bbc5b0c",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NH2",
@@ -66674,13 +66671,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 6000,
       "reorder_point": 614,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8156-a66c-d9618e22e983",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NH3",
@@ -66794,13 +66791,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1600,
       "reorder_point": 130,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8190-9db9-c6b99e59eee5",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NI0-7_8",
@@ -66834,13 +66831,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2800,
       "reorder_point": 195,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8117-8f2a-f4abcc199bee",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NI1-1_2",
@@ -66854,13 +66851,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2000,
       "reorder_point": 147,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a1-b223-f1bab650fbf2",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NI1-1_4",
@@ -66894,13 +66891,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1600,
       "reorder_point": 102,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8127-a239-f47d6516cdbd",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NI1-3_4",
@@ -66914,13 +66911,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 800,
       "reorder_point": 59,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8173-a155-c9e27f879de7",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NI2",
@@ -66974,13 +66971,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 28,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2d9ffa52-4c5b-8007-8c69-ca827d45b8a2",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NI3-3_4",
@@ -67034,13 +67031,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": 2000,
-      "reorder_qty": null,
+      "reorder_qty": 2000,
       "reorder_point": 92,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-816a-af31-c88655e8929b",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NK1RB",
@@ -67074,13 +67071,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2000,
       "reorder_point": 130,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8150-9aa0-f2c87e0fe5c4",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NO1BL",
@@ -67116,13 +67113,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 900,
       "reorder_point": 224,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8191-93e3-f130c370154c",
-      "last_edited_at": "2026-08-09T18:52:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NO1NI",
@@ -67318,13 +67315,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 25,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81df-a34f-e1ed93b3cffe",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NR1RB",
@@ -67378,13 +67375,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 33,
       "raw_input": "NS1RB",
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a5-b41b-ea856015a344",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NS1NI",
@@ -67398,13 +67395,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 900,
       "reorder_point": 37,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a5-b41b-ea856015a344",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "NS1RB",
@@ -67482,7 +67479,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 150,
       "reorder_point": 31,
       "raw_input": null,
       "in_house_processes": [
@@ -67490,7 +67487,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ac-8927-dd52148b71b6",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PA12-M3",
@@ -67636,7 +67633,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 72,
       "raw_input": null,
       "in_house_processes": [
@@ -67644,7 +67641,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8149-8b74-c8c65908b5bb",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PA30-M1",
@@ -67746,7 +67743,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 56,
       "raw_input": null,
       "in_house_processes": [
@@ -67754,7 +67751,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8116-9053-d9345dff6fb7",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PA6-M3",
@@ -67790,7 +67787,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 73,
       "raw_input": null,
       "in_house_processes": [
@@ -67798,7 +67795,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-819c-83bf-fbb58d07ef14",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PAT12-M1",
@@ -67835,7 +67832,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 59,
       "raw_input": null,
       "in_house_processes": [
@@ -67843,7 +67840,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814e-bd4f-c8cd0971b2d8",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PAT18-M1",
@@ -67880,7 +67877,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 250,
       "reorder_point": 46,
       "raw_input": null,
       "in_house_processes": [
@@ -67888,7 +67885,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8129-aad2-c6df8864f3b1",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PC8LBR",
@@ -68028,7 +68025,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 115,
       "raw_input": "PF12RB",
       "in_house_processes": [
@@ -68036,7 +68033,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8120-ba8c-d21463bb4297",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF12BR",
@@ -68050,13 +68047,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 198,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8120-ba8c-d21463bb4297",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF12NI",
@@ -68070,13 +68067,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 103,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8120-ba8c-d21463bb4297",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF12RB",
@@ -68090,7 +68087,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 800,
       "reorder_point": 253,
       "raw_input": null,
       "in_house_processes": [
@@ -68098,7 +68095,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8120-ba8c-d21463bb4297",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF18BL",
@@ -68135,13 +68132,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 250,
       "reorder_point": 48,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a2-9be7-d85c78b9f434",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF18NI",
@@ -68155,13 +68152,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 66,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a2-9be7-d85c78b9f434",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF18RB",
@@ -68241,13 +68238,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 66,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8126-8a90-c13107c1738f",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF24RB",
@@ -68261,7 +68258,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 51,
       "raw_input": null,
       "in_house_processes": [
@@ -68270,7 +68267,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8126-8a90-c13107c1738f",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF2BL",
@@ -68284,7 +68281,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 90,
       "raw_input": "PF2RB",
       "in_house_processes": [
@@ -68292,7 +68289,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-812c-901d-d801ad7dce2a",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF2BR",
@@ -68306,13 +68303,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 800,
       "reorder_point": 210,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-812c-901d-d801ad7dce2a",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:01:00.000Z"
     },
     {
       "part_number": "PF2NI",
@@ -68326,13 +68323,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 126,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-812c-901d-d801ad7dce2a",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PF2RB",
@@ -68452,7 +68449,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 109,
       "raw_input": "PF4RB",
       "in_house_processes": [
@@ -68460,7 +68457,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b3-9a6d-e45678040b38",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PF4BR",
@@ -68474,13 +68471,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 700,
       "reorder_point": 250,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b3-9a6d-e45678040b38",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PF4NI",
@@ -68494,13 +68491,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 126,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b3-9a6d-e45678040b38",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PF4RB",
@@ -68514,7 +68511,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 800,
       "reorder_point": 202,
       "raw_input": null,
       "in_house_processes": [
@@ -68522,7 +68519,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b3-9a6d-e45678040b38",
-      "last_edited_at": "2026-08-09T18:51:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PF6BL",
@@ -68558,13 +68555,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 800,
       "reorder_point": 283,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bc-88c0-d71136fd01df",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PF6NI",
@@ -68578,13 +68575,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 142,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bc-88c0-d71136fd01df",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PF6RB",
@@ -68598,7 +68595,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1400,
       "reorder_point": 427,
       "raw_input": null,
       "in_house_processes": [
@@ -68606,7 +68603,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bc-88c0-d71136fd01df",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PFB2BL",
@@ -68643,13 +68640,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1000,
       "reorder_point": 185,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814f-8ddc-f8b3d83410ca",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PFB2NI",
@@ -68663,13 +68660,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 700,
       "reorder_point": 187,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814f-8ddc-f8b3d83410ca",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PFB2RB",
@@ -68683,7 +68680,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 82,
       "raw_input": null,
       "in_house_processes": [
@@ -68692,7 +68689,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814f-8ddc-f8b3d83410ca",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PLG1BL",
@@ -68768,13 +68765,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2000,
       "reorder_point": 538,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81c7-b10d-d810c6f86cab",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM1.5NI",
@@ -68788,13 +68785,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1400,
       "reorder_point": 571,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81c7-b10d-d810c6f86cab",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM1.5RB",
@@ -68872,13 +68869,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 77,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8053-a2c6-cc4345478642",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM2NI",
@@ -68892,13 +68889,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 250,
       "reorder_point": 62,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8053-a2c6-cc4345478642",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM2RB",
@@ -68932,7 +68929,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 73,
       "raw_input": "PM3RB",
       "in_house_processes": [
@@ -68940,7 +68937,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8121-ae19-f1fff5cbb09f",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM3BR",
@@ -68954,13 +68951,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 800,
       "reorder_point": 218,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8121-ae19-f1fff5cbb09f",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM3NI",
@@ -68974,13 +68971,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 114,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8121-ae19-f1fff5cbb09f",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM3RB",
@@ -69060,13 +69057,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 63,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-811c-89e2-f4b40c85d4b4",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM5NI",
@@ -69080,13 +69077,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 48,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-811c-89e2-f4b40c85d4b4",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM5RB",
@@ -69166,13 +69163,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 54,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8193-8b15-cf094d7719bb",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM6NI",
@@ -69186,13 +69183,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 200,
       "reorder_point": 50,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8193-8b15-cf094d7719bb",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM6RB",
@@ -69206,7 +69203,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": null,
       "raw_input": null,
       "in_house_processes": [
@@ -69214,7 +69211,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8193-8b15-cf094d7719bb",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PM7AL",
@@ -69312,13 +69309,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 250,
       "reorder_point": 58,
       "raw_input": "PMB1.5RB",
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bc-a216-d9c4e7cba288",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PMB1.5BR",
@@ -69352,13 +69349,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 161,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bc-a216-d9c4e7cba288",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PMB1.5RB",
@@ -69452,13 +69449,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 48,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8176-a8f0-ef564ddc6f50",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PT1BR",
@@ -69472,13 +69469,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 102,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8176-a8f0-ef564ddc6f50",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PT1NI",
@@ -69492,13 +69489,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 99,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8176-a8f0-ef564ddc6f50",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PT1SBL",
@@ -69512,13 +69509,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 50,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ab-88c5-edc231354824",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PT1SBR",
@@ -69532,13 +69529,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 86,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ab-88c5-edc231354824",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PT1SNI",
@@ -69552,13 +69549,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 110,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ab-88c5-edc231354824",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "PUF24AL",
@@ -69762,13 +69759,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 150,
       "reorder_point": 27,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-816a-9afe-dead54e5129b",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "RB2NI",
@@ -69782,13 +69779,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 100,
       "reorder_point": 12,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-816a-9afe-dead54e5129b",
-      "last_edited_at": "2026-08-09T18:50:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "RB2RB",
@@ -69824,13 +69821,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 200,
       "reorder_point": 5,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2e5ffa52-4c5b-8035-aa77-d8f5b482ca8d",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "RE84X1",
@@ -70160,7 +70157,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 92,
       "raw_input": null,
       "in_house_processes": [
@@ -70168,7 +70165,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8155-8d2b-f173115112c2",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "RO5_8x8",
@@ -70182,7 +70179,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 102,
       "raw_input": null,
       "in_house_processes": [
@@ -70190,7 +70187,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b5-8233-fdd5d9446260",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "ROK5_8",
@@ -70204,7 +70201,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 600,
       "reorder_point": 171,
       "raw_input": null,
       "in_house_processes": [
@@ -70212,7 +70209,7 @@
       ],
       "locations": [],
       "family_id": "bf45a790-2cdd-49b3-8565-5c8c81b1f508",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "SC1",
@@ -70246,13 +70243,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2200,
       "reorder_point": 67,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bf-889b-d7d4f1474dcf",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "SCA8",
@@ -70266,13 +70263,13 @@
       "last_ordered": null,
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1400,
       "reorder_point": 52,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8163-b149-f466b0057574",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "SCBBL",
@@ -70346,13 +70343,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 2600,
       "reorder_point": 89,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8115-bd3c-e51e1cce6506",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "SCFBR",
@@ -70366,13 +70363,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 4000,
       "reorder_point": 163,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8115-bd3c-e51e1cce6506",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "SCFNI",
@@ -70386,13 +70383,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "1 week",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 4000,
       "reorder_point": 166,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8115-bd3c-e51e1cce6506",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "SCG",
@@ -70486,13 +70483,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 300,
       "reorder_point": 46,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8101-9ef4-faeb35ecc960",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:02:00.000Z"
     },
     {
       "part_number": "SJ2BR",
@@ -70506,13 +70503,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 108,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8101-9ef4-faeb35ecc960",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SJ2NI",
@@ -70526,13 +70523,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 95,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8101-9ef4-faeb35ecc960",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SL3",
@@ -70606,13 +70603,13 @@
       "last_ordered": null,
       "lead_time": "12 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 3000,
       "reorder_point": 1071,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8188-b132-e214ff772cb6",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SO1D-24",
@@ -70626,13 +70623,13 @@
       "last_ordered": null,
       "lead_time": "12 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 6000,
       "reorder_point": 3381,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81fe-89b7-c6a002c4d438",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SO1G",
@@ -70706,13 +70703,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 400,
       "reorder_point": 13,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-818e-b747-d27a26e87bb1",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SO6",
@@ -70830,13 +70827,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1800,
       "reorder_point": 377,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b2-bcdf-db405e033b77",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SR1NI",
@@ -70910,13 +70907,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1400,
       "reorder_point": 350,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8158-9984-d4ee41471037",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SR2NI",
@@ -70930,13 +70927,13 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1400,
       "reorder_point": 643,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8158-9984-d4ee41471037",
-      "last_edited_at": "2026-08-09T18:49:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SS1_4BL",
@@ -71250,13 +71247,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 150,
       "reorder_point": 4,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-811f-8c25-cff0cd84ed01",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SU12x1",
@@ -71410,7 +71407,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": 500,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 122,
       "raw_input": null,
       "in_house_processes": [
@@ -71418,7 +71415,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81e2-b31f-ca607b12bd71",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "SWR1M",
@@ -71432,7 +71429,7 @@
       "last_ordered": null,
       "lead_time": "10 weeks",
       "moq": 500,
-      "reorder_qty": null,
+      "reorder_qty": 500,
       "reorder_point": 122,
       "raw_input": null,
       "in_house_processes": [
@@ -71440,7 +71437,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8123-b12e-de37dd586ede",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "WA0-3_4",
@@ -71574,13 +71571,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 3000,
       "reorder_point": 293,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81d8-be50-f0c703563824",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "WA3",
@@ -71594,13 +71591,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1000,
       "reorder_point": 49,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-814c-8e57-f587507c5820",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "WC2",
@@ -71614,13 +71611,13 @@
       "last_ordered": "2026-05-11",
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1000,
       "reorder_point": 23,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-818a-b3f7-c98f6967877e",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "WC3",
@@ -71654,13 +71651,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 250,
       "reorder_point": 10,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-817d-92b5-e0d94f04ca35",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "WFW",
@@ -71794,13 +71791,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 1600,
       "reorder_point": 105,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81d5-83c0-fc2c08bf1061",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "WNR",
@@ -71834,13 +71831,13 @@
       "last_ordered": null,
       "lead_time": "2 weeks",
       "moq": null,
-      "reorder_qty": null,
+      "reorder_qty": 8000,
       "reorder_point": 1296,
       "raw_input": null,
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8146-85a1-ff27b5c74467",
-      "last_edited_at": "2026-08-09T18:48:00.000Z"
+      "last_edited_at": "2026-08-10T22:03:00.000Z"
     },
     {
       "part_number": "BO1BR",
