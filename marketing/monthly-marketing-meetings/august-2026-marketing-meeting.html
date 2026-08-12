@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>August 2026 Marketing Meeting — Dutton Brown</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  :root {
+    --primary: #4A4A4A;
+    --muted: #6B6B6B;
+    --surface: #E6E6E6;
+    --bg: #FAFAF9;
+    --white: #FFFFFF;
+    --accent: #FF9912;
+    --accent-hover: #D97706;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    background: var(--bg);
+    color: var(--primary);
+    padding: 40px 24px 24px;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent-hover);
+    margin-bottom: 6px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  /* POWDER COAT STRIP */
+  .color-strip {
+    display: flex;
+    height: 6px;
+    margin: 18px 0 28px;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .color-strip div { flex: 1; }
+
+  /* SECTIONS */
+  .section {
+    background: var(--white);
+    border: 1px solid var(--surface);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    margin-bottom: 16px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .section-head .tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-hover);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 2px 7px;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .section-sub {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* STAT BLOCKS */
+  .stat-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .stat {
+    flex: 1;
+    min-width: 110px;
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .stat-value {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .stat-delta { font-size: 11px; font-weight: 600; }
+  .up { color: #2E7D32; }
+  .down { color: #B3261E; }
+
+  /* LISTS */
+  ul { padding-left: 18px; }
+  li {
+    font-size: 12.5px;
+    line-height: 1.6;
+    margin-bottom: 4px;
+    color: var(--primary);
+  }
+  li::marker { color: var(--accent-hover); }
+  li strong { font-weight: 600; }
+
+  .callout {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #FFF6E9;
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    font-size: 12px;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .callout strong { color: var(--accent-hover); }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 12px;
+    font-size: 12px;
+  }
+  th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 6px 8px;
+    border-bottom: 1.5px solid var(--surface);
+  }
+  td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--surface);
+    color: var(--primary);
+    font-weight: 400;
+  }
+  tr:last-child td { border-bottom: none; }
+  td.metric-name { font-weight: 600; }
+
+  .takeaway {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--primary);
+    margin-top: 8px;
+  }
+  .takeaway strong { color: var(--accent-hover); }
+
+  /* FOOTER */
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--surface);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 720px) {
+    .two-col { grid-template-columns: 1fr; }
+    header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .header-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div class="eyebrow">Marketing Update</div>
+      <h1>August 2026 Marketing Meeting</h1>
+    </div>
+    <div class="header-meta">
+      Dutton Brown Design, LLC<br>
+      Prepared by Hannah
+    </div>
+  </header>
+
+  <div class="color-strip">
+    <div style="background:#C1440E"></div>
+    <div style="background:#E07A5F"></div>
+    <div style="background:#F2A65A"></div>
+    <div style="background:#FF9912"></div>
+    <div style="background:#F4D35E"></div>
+    <div style="background:#8AB17D"></div>
+    <div style="background:#3D8361"></div>
+    <div style="background:#2A6F77"></div>
+    <div style="background:#3A6EA5"></div>
+    <div style="background:#5B5F97"></div>
+    <div style="background:#7B506F"></div>
+    <div style="background:#9B2226"></div>
+    <div style="background:#4A4A4A"></div>
+  </div>
+
+  <!-- BIMOBJECT -->
+  <div class="section">
+    <div class="section-head">
+      <h2>BIMobject</h2>
+      <span class="tag">Pro Tier · Apr 15–Aug 10</span>
+    </div>
+    <div class="section-sub">Steady, healthy growth since going Pro — downloads, views, and audience quality all trending up.</div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="stat-label">Downloads</div><div class="stat-value">3,485</div><div class="stat-delta up">↑ 3%</div></div>
+      <div class="stat"><div class="stat-label">Page Views</div><div class="stat-value">3,544</div><div class="stat-delta up">↑ 12%</div></div>
+      <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">5/5</div><div class="stat-delta up">↑ 0.4</div></div>
+      <div class="stat"><div class="stat-label">Downloaders</div><div class="stat-value">2,449</div><div class="stat-delta up">↑ 5%</div></div>
+      <div class="stat"><div class="stat-label">Viewers</div><div class="stat-value">2,130</div><div class="stat-delta up">↑ 10%</div></div>
+      <div class="stat"><div class="stat-label">Followers</div><div class="stat-value">14</div><div class="stat-delta down">↓ 12%</div></div>
+    </div>
+
+    <ul>
+      <li><strong>Audience quality:</strong> 80.8% of downloaders are architects or interior designers (48.2% + 32.6%) — exactly the trade audience we're targeting</li>
+      <li>92.1% US-based, 7.9% Canada</li>
+      <li>73.2% download in Revit, 16% SketchUp — confirms our audience is spec'ing in professional CAD tools, not just browsing</li>
+      <li><strong>Top products/categories:</strong> Color Ruler Series and Color Cap Pendant lead downloads; Wall Mounted, Pendant, and Chandelier are the top categories by a wide margin</li>
+    </ul>
+
+    <div class="callout"><strong>Note:</strong> the visible dip into August on the trend charts is because Aug 10 is only 10 days into the month — not an actual decline. May, June, and July were each strong months.</div>
+  </div>
+
+  <!-- BIMOBJECT EMAILS -->
+  <div class="section">
+    <div class="section-head">
+      <h2>BIMobject Emails</h2>
+      <span class="tag">Native Platform</span>
+    </div>
+    <div class="section-sub">Campaigns sent directly through BIMobject (separate from Omnisend) continue to perform well above typical benchmarks.</div>
+
+    <table>
+      <tr><th>Date</th><th>Campaign</th><th>Delivered</th><th>Open Rate</th><th>Click Rate</th><th>Unsub Rate</th></tr>
+      <tr><td>06 Aug</td><td>New: lighting & hardware fixtures, now on...</td><td>3,694/4,210</td><td>30.78%</td><td>3.82%</td><td>0.14%</td></tr>
+      <tr><td>23 Jun</td><td>A lighting brand built for the way you work</td><td>1,011/1,078</td><td>32.64%</td><td>4.45%</td><td>0.4%</td></tr>
+      <tr><td>05 Jun</td><td>Not attending AIA? No problem.</td><td>1,855/2,018</td><td>32.88%</td><td>3.45%</td><td>0.11%</td></tr>
+      <tr><td>28 May</td><td>Cap Pendant Resources + Lighting Options</td><td>568/616</td><td>38.38%</td><td>4.93%</td><td>0.18%</td></tr>
+    </table>
+
+    <div class="takeaway">Open rates in the 30–38% range and click rates 3.4–4.9% are strong for this channel — our highly qualified BIMobject audience continues to engage well with targeted sends.</div>
+  </div>
+
+  <!-- OMNISEND -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Omnisend</h2>
+      <span class="tag">Jul 8–Aug 11</span>
+    </div>
+    <div class="section-sub">Automations continue to massively outperform campaigns on a per-message basis — this is our biggest lever.</div>
+
+    <table>
+      <tr><th>Metric</th><th>Campaigns</th><th>Automations</th></tr>
+      <tr><td class="metric-name">Emails Sent</td><td>61.4K</td><td>2,509</td></tr>
+      <tr><td class="metric-name">Attributed Orders</td><td>68</td><td>68</td></tr>
+      <tr><td class="metric-name">Attributed Revenue</td><td>$58,536.24</td><td>$64,092.56</td></tr>
+      <tr><td class="metric-name">Open Rate</td><td>36.1%</td><td>65.1%</td></tr>
+      <tr><td class="metric-name">Click Rate</td><td>2.3%</td><td>12%</td></tr>
+    </table>
+
+    <div class="takeaway"><strong>Key takeaway:</strong> Automations matched campaigns dollar-for-dollar on orders (68 each) and generated more revenue — while sending to 24x fewer people. Open and click rates are roughly double. This confirms what we flagged after the May flow expansion (3 → 13+ workflows): automated flows are punching well above their weight and are worth continued investment.</div>
+
+    <div class="callout">Period-over-period comparisons show campaign revenue down ~$50K vs. the prior period — likely an artifact of comparing against the pre-expansion baseline, not a real performance decline.</div>
+  </div>
+
+  <div class="two-col">
+    <!-- PRODUCT DESCRIPTIONS -->
+    <div class="section">
+      <div class="section-head"><h2>Product Descriptions</h2></div>
+      <div class="section-sub">Rewriting website product descriptions in tiers, prioritized by impact.</div>
+      <ul>
+        <li>Tiers reflect the importance/priority of each section</li>
+        <li><strong>Tier 1</strong> (high sales, poorly written descriptions) — complete</li>
+        <li><strong>Tier 2</strong> — in progress</li>
+        <li>Pace: 5–10 descriptions written per week</li>
+      </ul>
+    </div>
+
+    <!-- ADSCALE / GOOGLE ADS -->
+    <div class="section">
+      <div class="section-head"><h2>Adscale / Google Ads</h2></div>
+      <div class="section-sub">Access issues are currently blocking progress on Google Ads.</div>
+      <ul>
+        <li>Best option: request Logical Position transfer access to us</li>
+        <li>LP ad campaigns are now paused</li>
+        <li>Brian's request can't be accepted until we have full platform access</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LABOR DAY SALE -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Labor Day Sale</h2>
+      <span class="tag">Upcoming</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat" style="flex:none; min-width: 260px;">
+        <div class="stat-label">Dates</div>
+        <div class="stat-value" style="font-size:14px;">Thu, Sept 3 – Tue, Sept 8</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>Dutton Brown · Designed in Color. Proudly Made in Minnesota.</div>
+    <div>Confidential · Internal Use Only</div>
+  </footer>
+
+</div>
+</body>
+</html>
