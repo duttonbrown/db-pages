@@ -61,6 +61,34 @@ async function bootstrap() {
   });
   window.addEventListener('hashchange', routeFromHash);
   routeFromHash();
+  applyQueryDeepLink();
+}
+
+// A SKU clicked elsewhere in the hub (the jobs board's Job Summary, a traveler)
+// arrives here as ?q=30223. The page used to ignore it entirely: you clicked a
+// number and landed on a cold library, then retyped the number you just
+// clicked. Prefill the box, and when the query resolves to a single fixture,
+// open it outright. A #hash wins — it names one product; ?q= is only a search.
+function applyQueryDeepLink() {
+  if (location.hash) return;
+  let q = '';
+  try { q = (new URLSearchParams(location.search).get('q') || '').trim(); }
+  catch { return; }
+  if (!q) return;
+  const inp = $('search');
+  inp.value = q;
+  const hits = search(q);
+  const ql = q.toLowerCase();
+  const exact = hits.filter(p =>
+    (p.bom_parent_sku || '').toLowerCase() === ql ||
+    (p.title || '').toLowerCase() === ql ||
+    (p.handle || '').toLowerCase() === ql ||
+    (p.variants || []).some(v => (v.sku || '').toLowerCase() === ql));
+  const only = exact.length === 1 ? exact[0] : (hits.length === 1 ? hits[0] : null);
+  if (only) { location.hash = '#' + encodeURIComponent(only.handle); return; }
+  renderSearchResults(hits);
+  inp.focus();
+  inp.setSelectionRange(inp.value.length, inp.value.length);
 }
 
 // ---------------------------------------------------------------- routing
@@ -295,8 +323,13 @@ function search(q) {
     const tags = (p.tags || []).join(' ').toLowerCase();
     const type = (p.type || '').toLowerCase();
     const skus = (p.variants || []).map(v => v.sku.toLowerCase()).join(' ');
-    const hay = `${title} ${handle} ${tags} ${type} ${skus}`;
-    if (title === q || skus.split(' ').includes(q)) exact.push(p);
+    // The parent SKU is what the rest of the business calls a fixture (jobs
+    // board, travelers, BOM Master all say "30223"), but it isn't any variant's
+    // SKU — without it, typing the number people actually use only ever scored
+    // as a substring match.
+    const parent = (p.bom_parent_sku || '').toLowerCase();
+    const hay = `${title} ${handle} ${tags} ${type} ${skus} ${parent}`;
+    if (title === q || parent === q || skus.split(' ').includes(q)) exact.push(p);
     else if (title.startsWith(q) || handle.startsWith(q)) prefix.push(p);
     else if (hay.includes(q)) contains.push(p);
     else if (type.includes(q)) other.push(p);
