@@ -1279,6 +1279,16 @@
      above the item table); Shipping and Email stack on their own lines below. */
   .trv-meta-row { display: flex; flex-wrap: wrap; column-gap: 26px; row-gap: 2px; }
   .trv-meta-row span { white-space: nowrap; }
+  /* Signature on delivery — a shipping INSTRUCTION, so it rides the Shipping
+     line rather than becoming another banner. Charged once on the order,
+     honoured on every carton; the chip states the rule so nobody has to guess. */
+  .trv-sig {
+    display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 4px;
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+    background: #FDECEA; color: #B3261E; border: 1px solid #F2C4BE; vertical-align: middle;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .trv-sig-note { font-size: 11px; color: #B3261E; margin-left: 6px; }
   /* Customer trade + club badges on the traveler's Customer line. */
   .trv-cust-badges { display: inline-flex; align-items: center; gap: 5px; vertical-align: middle; margin-left: 4px; }
   .trv-cust-badges .tag-trade {
@@ -1345,6 +1355,20 @@
      "Traveler" eyebrow) it gets no top margin and a little breathing room below
      so it reads as the first thing on the sheet. */
   .trv-head .trv-expedite { margin: 0 0 12px; }
+
+  /* SHIP FIRST — only on the samples sheet, where it replaces the Latest Ship
+     By line. An instruction, not an exception, so it is deliberately NOT the red
+     EXPEDITE bar or an amber alarm: dark rule + caps, loud enough to be the
+     first thing read, quiet enough that a red banner still means expedite.
+     Hex, not var(--accent-dark) — the custom props aren't inlined when a
+     traveler renders standalone for PDF. */
+  .trv-shipfirst {
+    font-size: 13px; font-weight: 600; color: #1a1a1a;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 6px 0 5px; margin: 10px 0 0;
+    border-top: 2px solid #1a1a1a; border-bottom: 1px solid #1a1a1a;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
 
   /* Finished-goods STOCK box — prints on the traveler when a build line's SKU
      is on the shelf. Advisory (undecided) or instructional (after a PULL /
@@ -1474,6 +1498,9 @@
   .trv-refs .trv-table { margin-top: 0; }
   .trv-refs .trv-table td.trv-img-col { width: 60px; }
   .trv-refs .trv-build-row { cursor: default; }
+  /* One line under the "Samples — shipped separately" header: the do-not-pack
+     instruction. Sits above the rows so it is read before the item list. */
+  .trv-sample-note { font-size: 12px; color: #333; padding: 6px 0 2px; }
 
   /* Where the referenced line lives — its sheet's color/finish + location,
      pilled inline after the item name. */
@@ -1873,8 +1900,544 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-08-11T16:00:05",
+  "built_at": "2026-08-12T07:00:04",
   "orders": [
+    {
+      "shopify_order_id": "7104529629266",
+      "shopify_order_name": "36904",
+      "shopify_order_number": "36904",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 1107.98,
+      "ship_by_date": null,
+      "latest_ship_by": "September 8, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-11T20:50:28-05:00",
+      "tags": "discount",
+      "total_price": 1107.98,
+      "priority": null,
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7104529629266",
+          "shopify_order_name": "36904",
+          "shopify_order_number": "36904",
+          "key": [
+            "color",
+            "Orange",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Orange",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30332"
+          ],
+          "variant_skus": [
+            "30332-2I"
+          ],
+          "line_item_titles": [
+            "Color Supreme Flush Mount"
+          ],
+          "lines": [
+            {
+              "title": "Color Supreme Flush Mount",
+              "variant_title": "Nickel / Orange / Flat ceiling",
+              "variant_sku": "30332-2I",
+              "parent_sku": "30332",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Orange",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-supreme-flush-mount-nickel-orange.jpg?v=1747968315&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17165362823250,
+              "in_stock": {
+                "have": 1,
+                "name": "Color Supreme Flush Mount - Nickel / Orange",
+                "notes": "",
+                "flags": []
+              },
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Orange|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7104529629266",
+          "shopify_order_name": "36904",
+          "shopify_order_number": "36904",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-11T20:50:28-05:00",
+          "parent_sku": "30332",
+          "color": "Orange",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            17165362823250
+          ],
+          "item_titles": [
+            "Color Supreme Flush Mount"
+          ],
+          "variant_skus": [
+            "30332-2I"
+          ],
+          "lines": [
+            {
+              "sku": "30332-2I",
+              "title": "Color Supreme Flush Mount",
+              "qty": 2,
+              "finish": "Nickel",
+              "color": "Orange",
+              "category": "fixture",
+              "variant_title": "Nickel / Orange / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-supreme-flush-mount-nickel-orange.jpg?v=1747968315&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7104475988050",
+      "shopify_order_name": "36903",
+      "shopify_order_number": "36903",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 441.61,
+      "ship_by_date": null,
+      "latest_ship_by": "September 8, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-11T19:59:46-05:00",
+      "tags": "discount, redo",
+      "total_price": 441.61,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 2,
+      "printouts": [
+        {
+          "shopify_order_id": "7104475988050",
+          "shopify_order_name": "36903",
+          "shopify_order_number": "36903",
+          "key": [
+            "color",
+            "White",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H13"
+          ],
+          "variant_skus": [
+            "H13-2A"
+          ],
+          "line_item_titles": [
+            "Color Persona Hook"
+          ],
+          "lines": [
+            {
+              "title": "Color Persona Hook",
+              "variant_title": "Nickel / White",
+              "variant_sku": "H13-2A",
+              "parent_sku": "H13",
+              "qty": 2,
+              "category": "hook",
+              "category_label": "Hook",
+              "finish": "Nickel",
+              "color": "White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/persona-hook-hardware-nickel-white-1.jpg?v=1776738292&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17165235486802,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|hardware",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7104475988050",
+          "shopify_order_name": "36903",
+          "shopify_order_number": "36903",
+          "key": [
+            "color",
+            "White",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60226S-17"
+          ],
+          "variant_skus": [
+            "60226S-17-2A",
+            "BULB-G25-W"
+          ],
+          "line_item_titles": [
+            "Color Pilot Sconce 17\"",
+            "LED G25 Bulb - Matte White"
+          ],
+          "lines": [
+            {
+              "title": "Color Pilot Sconce 17\"",
+              "variant_title": "Nickel / White / Hardwired with dimmer switch",
+              "variant_sku": "60226S-17-2A",
+              "parent_sku": "60226S-17",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-pilot-sconce-17-nickel-white_3feffcab-9727-4e6e-b04d-c28c76914951.jpg?v=1757597120&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17165235552338,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "LED G25 Bulb - Matte White",
+              "variant_title": "550 lumens",
+              "variant_sku": "BULB-G25-W",
+              "parent_sku": "BULB-G25-W",
+              "qty": 2,
+              "category": "accessory",
+              "category_label": "Bulb",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/BULB-G25.jpg?v=1782229459&width=120",
+              "properties": [],
+              "line_item_id": 17165235519570,
+              "is_bulb": true,
+              "bulb_type": "G25",
+              "bulb_count": 2,
+              "fold_bulb": true
+            }
+          ],
+          "total_qty": 3,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7104475988050",
+          "shopify_order_name": "36903",
+          "shopify_order_number": "36903",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-11T19:59:46-05:00",
+          "parent_sku": "H13",
+          "color": "White",
+          "finish": "Nickel",
+          "category": "hook",
+          "category_label": "Hook",
+          "qty": 2,
+          "line_item_ids": [
+            17165235486802
+          ],
+          "item_titles": [
+            "Color Persona Hook"
+          ],
+          "variant_skus": [
+            "H13-2A"
+          ],
+          "lines": [
+            {
+              "sku": "H13-2A",
+              "title": "Color Persona Hook",
+              "qty": 2,
+              "finish": "Nickel",
+              "color": "White",
+              "category": "hook",
+              "variant_title": "Nickel / White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/persona-hook-hardware-nickel-white-1.jpg?v=1776738292&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7104475988050",
+          "shopify_order_name": "36903",
+          "shopify_order_number": "36903",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-11T19:59:46-05:00",
+          "parent_sku": "60226S-17",
+          "color": "White",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17165235552338
+          ],
+          "item_titles": [
+            "Color Pilot Sconce 17\""
+          ],
+          "variant_skus": [
+            "60226S-17-2A"
+          ],
+          "lines": [
+            {
+              "sku": "60226S-17-2A",
+              "title": "Color Pilot Sconce 17\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "White",
+              "category": "fixture",
+              "variant_title": "Nickel / White / Hardwired with dimmer switch",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-pilot-sconce-17-nickel-white_3feffcab-9727-4e6e-b04d-c28c76914951.jpg?v=1757597120&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7103498944594",
+      "shopify_order_name": "36902",
+      "shopify_order_number": "36902",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 4,
+      "customer_total_spent": 1691.86,
+      "ship_by_date": null,
+      "latest_ship_by": "September 8, 2026",
+      "lead_time_label": "3 - 4 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-11T16:07:00-05:00",
+      "tags": "trade",
+      "total_price": 216.0,
+      "priority": null,
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7103498944594",
+          "shopify_order_name": "36902",
+          "shopify_order_number": "36902",
+          "key": [
+            "color",
+            "Ochre",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Ochre",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "50121-8"
+          ],
+          "variant_skus": [
+            "50121-8-2H"
+          ],
+          "line_item_titles": [
+            "Color Hemi Sconce 8\""
+          ],
+          "lines": [
+            {
+              "title": "Color Hemi Sconce 8\"",
+              "variant_title": "Nickel / Ochre",
+              "variant_sku": "50121-8-2H",
+              "parent_sku": "50121-8",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Ochre",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-hemi-sconce-8-nickel-ochre.jpg?v=1772314020&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "3 - 4 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17163547181138,
+              "in_stock": null,
+              "rod_finish": "No Rod",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Ochre|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7103498944594",
+          "shopify_order_name": "36902",
+          "shopify_order_number": "36902",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-11T16:07:00-05:00",
+          "parent_sku": "50121-8",
+          "color": "Ochre",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17163547181138
+          ],
+          "item_titles": [
+            "Color Hemi Sconce 8\""
+          ],
+          "variant_skus": [
+            "50121-8-2H"
+          ],
+          "lines": [
+            {
+              "sku": "50121-8-2H",
+              "title": "Color Hemi Sconce 8\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Ochre",
+              "category": "fixture",
+              "variant_title": "Nickel / Ochre",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-hemi-sconce-8-nickel-ochre.jpg?v=1772314020&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
     {
       "shopify_order_id": "7103483773010",
       "shopify_order_name": "36901",
@@ -1893,6 +2456,7 @@ const QUEUE = {
       "total_price": 191.73,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color"
       ],
@@ -2008,7 +2572,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7103441993810",
@@ -2028,6 +2593,7 @@ const QUEUE = {
       "total_price": 244.74,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [],
       "billing_address": null,
       "shipping_address": null,
@@ -2140,7 +2706,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7103390842962",
@@ -2160,6 +2727,7 @@ const QUEUE = {
       "total_price": 8.72,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color",
         "Sample"
@@ -2244,7 +2812,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7103324618834",
@@ -2264,6 +2833,7 @@ const QUEUE = {
       "total_price": 716.74,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color"
       ],
@@ -2527,7 +3097,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7103309283410",
@@ -2547,6 +3118,7 @@ const QUEUE = {
       "total_price": 2087.56,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color"
       ],
@@ -2762,7 +3334,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7103284805714",
@@ -2782,6 +3355,7 @@ const QUEUE = {
       "total_price": 80.07,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color"
       ],
@@ -3032,7 +3606,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7103195054162",
@@ -3052,6 +3627,7 @@ const QUEUE = {
       "total_price": 1500.68,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [],
       "billing_address": null,
       "shipping_address": null,
@@ -3165,7 +3741,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7103009390674",
@@ -3185,6 +3762,7 @@ const QUEUE = {
       "total_price": 1296.0,
       "priority": null,
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color"
       ],
@@ -3319,8 +3897,8 @@ const QUEUE = {
           "category": "accessory",
           "category_label": "Bulb",
           "parent_skus": [
-            "BULB-9992",
-            "BULB-G25-W"
+            "BULB-G25-W",
+            "BULB-9992"
           ],
           "variant_skus": [
             "BULB-G25-W",
@@ -3465,7 +4043,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7102872354898",
@@ -3485,6 +4064,7 @@ const QUEUE = {
       "total_price": 14.48,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color",
         "Sample"
@@ -3512,8 +4092,8 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-A",
-            "SAC-D",
-            "SAC-B"
+            "SAC-B",
+            "SAC-D"
           ],
           "variant_skus": [
             "SAC-A",
@@ -3589,7 +4169,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7102855348306",
@@ -3609,6 +4190,7 @@ const QUEUE = {
       "total_price": 179.94,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color"
       ],
@@ -3724,7 +4306,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7102744395858",
@@ -3744,6 +4327,7 @@ const QUEUE = {
       "total_price": 878.49,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color"
       ],
@@ -3860,7 +4444,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7102660313170",
@@ -3880,8 +4465,10 @@ const QUEUE = {
       "total_price": 1582.26,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": true,
       "auto_tags": [
-        "Color"
+        "Color",
+        "SIGREQ"
       ],
       "billing_address": null,
       "shipping_address": null,
@@ -4007,7 +4594,8 @@ const QUEUE = {
             }
           ],
           "tags": [
-            "Color"
+            "Color",
+            "SIGREQ"
           ],
           "priority": "Redo",
           "is_large_order": false,
@@ -4020,7 +4608,8 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     },
     {
       "shopify_order_id": "7102630821970",
@@ -4040,6 +4629,7 @@ const QUEUE = {
       "total_price": 585.28,
       "priority": "Redo",
       "is_large_order": false,
+      "signature_required": false,
       "auto_tags": [
         "Color"
       ],
@@ -4156,17 +4746,18 @@ const QUEUE = {
       "traveler_pdf_url": "",
       "no_traveler_reason": null,
       "ships_with": [],
-      "samples": []
+      "samples": [],
+      "samples_shipped_separately": false
     }
   ],
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 13,
-    "printouts": 18,
-    "notion_rows": 16,
+    "orders": 16,
+    "printouts": 22,
+    "notion_rows": 20,
     "skipped_already_printed": 191,
-    "printed_today": 21,
+    "printed_today": 0,
     "needs_attention": 0,
     "printed_review": 0
   },
@@ -4711,6 +5302,22 @@ function fmtShipMethod(s){
   return m ? `Free Ground Over ${m[1]}` : s;
 }
 
+// The Shipping line, plus the signature-on-delivery reminder when the order
+// bought one. The SIG line item is excluded from production entirely (there's
+// nothing to build or pack), so without this the fact never reaches the floor —
+// and it's charged ONCE but honoured on EVERY carton of the order, which is
+// exactly the kind of thing shipping needs told at the box, not in an email.
+// Prints on every traveler for the order, beside the shipping method.
+function trvShipMethodLi(o){
+  if (!o.shipping_method && !o.signature_required) return "";
+  const method = o.shipping_method ? escapeHtml(fmtShipMethod(o.shipping_method)) : "—";
+  const sig = o.signature_required
+    ? ` <span class="trv-sig">Signature required</span>`
+      + `<span class="trv-sig-note">every package on this order</span>`
+    : "";
+  return `<li><b>Shipping:</b> ${method}${sig}</li>`;
+}
+
 // Light-fixture vs hardware unit counts for an order (sum of line qty across
 // all printouts — printouts partition the order's lines, so no double count).
 // Accessories and samples count as neither. Mirrors classify.py's buckets;
@@ -4773,6 +5380,8 @@ function buildGroups(){
         eyebrow = `Finish-only`;
       }
       else if(p.source === "sample-only"){ label = "Samples"; labelType = "sample"; eyebrow = "Samples"; }
+      // Samples split off a mixed order onto their own ship-first sheet.
+      else if(p.source === "samples"){ label = "Samples"; labelType = "sample"; eyebrow = "Samples — ship first"; }
       else { label = (p.parent_skus||[]).join(", ") || "Accessory"; labelType = "accessory"; eyebrow = "Accessory"; }
       const key = `${loc}::${label}::${labelType}`;
       if(!groups[key]){
@@ -4934,7 +5543,7 @@ function renderLine(line, ctxColor, ctxFinish, forceLabels){
 // the same key used to split color sheets. Falls back to the legacy
 // Lighting/Hardware/Accessory/Sample bucketing for older queue payloads.
 function printoutType(p){
-  if(p.source === "sample-only") return "Sample";
+  if(p.source === "sample-only" || p.source === "samples") return "Sample";
   if(p.category_label) return p.category_label;
   const lines = (p.lines && p.lines.length) ? p.lines :
                 (p.line_item_titles||[]).map((t,i)=>(
@@ -5036,7 +5645,8 @@ function renderRow(r){
   const siblingPreview = (orderPrintoutCount > 1)
     ? (o.printouts||[]).map((sp, sIdx) => {
         if(sIdx === idx) return null;
-        const colorish = sp.color || sp.finish || (sp.source === "sample-only" ? "Samples" : "");
+        const colorish = sp.color || sp.finish
+                         || (sp.source === "sample-only" || sp.source === "samples" ? "Samples" : "");
         const titles = (sp.line_item_titles||[]).slice(0,2).join(", ")
                        || (sp.parent_skus||[]).slice(0,2).join(", ")
                        || "(item)";
@@ -5526,7 +6136,13 @@ function trvReferences(o, p){
   // Reference siblings in the SAME color-sorted order used for numbering, so
   // the "Also on this order" rows read 2/5, 3/5, 4/5 … in sequence and the
   // badge matches each sibling traveler's eyebrow number.
-  const siblings = (o.printouts||[]).filter(x => x !== p)
+  // The samples sheet is deliberately NOT referenced here: its items already
+  // left the building, and the dedicated "Samples — shipped separately" block
+  // below says so. Listing them in the pack reference too printed each sample
+  // twice on one sheet — one row saying "also on this order", one saying "do not
+  // pack". (The samples sheet itself still references the build siblings, so
+  // whoever ships it knows the rest of the order is still coming.)
+  const siblings = (o.printouts||[]).filter(x => x !== p && x.source !== "samples")
     .sort((a,b) => (a._travelerNum||0) - (b._travelerNum||0));
   siblings.forEach(other => {
     if(!(other.lines||[]).length) return;             // emptied sheets aren't anywhere
@@ -5552,20 +6168,40 @@ function trvReferences(o, p){
     </div>`;
 }
 
-// "Include samples" — a plain section at the very bottom of the order, below
-// "Also on this order". Same formatting as the refs list (uppercase header +
-// hairline rule + rows), but hyper-simple: no orange edge, no "pack" pill, no
-// traveler badge. Samples are NOT built and need no traveler of their own — this
-// is just the reminder to drop them in the box before it ships. o.samples is
-// order-level (finish above color, pre-sorted upstream), so it renders on every
-// sheet of the order like the refs list so it can't be missed.
-function trvSampleSection(o){
+// Samples section at the very bottom of the order, below "Also on this order".
+// Same formatting as the refs list (uppercase header + hairline rule + rows),
+// but hyper-simple: no orange edge, no "pack" pill, no traveler badge. o.samples
+// is order-level (finish above color, pre-sorted upstream), so it renders on
+// every sheet of the order like the refs list so it can't be missed.
+//
+// Two readings, and they are OPPOSITE instructions — get this wrong and someone
+// packs a sample that already left the building:
+//   samples_shipped_separately  → the samples went out first on their own
+//        traveler (the normal case whenever the rest of the order is built).
+//        This section is then a RECORD: what shipped, and do not pack it again.
+//   otherwise → nothing on the order is built, so it all ships in one box today
+//        and this is the old packing reminder.
+// Never rendered on the samples sheet itself — there the samples ARE the build
+// table (p is passed so we can tell).
+function trvSampleSection(o, p){
   const samples = o.samples || [];
   if(!samples.length) return "";
+  if(p && p.source === "samples") return "";
   const rows = samples.map(ln => trvRefRow(ln, "", "", false)).join("");
+  if(!o.samples_shipped_separately){
+    return `<div class="trv-refs">
+        <div class="trv-refs-head">Include samples</div>
+        <table class="trv-table"><tbody>${rows}</tbody></table>
+      </div>`;
+  }
+  // The MASTER sheet already lists every line of the order with its traveler
+  // number — including the samples sheet's — so it takes the note alone. Rows
+  // here would print the same samples twice on one page.
+  const body = o._master ? "" : `<table class="trv-table"><tbody>${rows}</tbody></table>`;
   return `<div class="trv-refs">
-      <div class="trv-refs-head">Include samples</div>
-      <table class="trv-table"><tbody>${rows}</tbody></table>
+      <div class="trv-refs-head">Samples — shipped separately</div>
+      <div class="trv-sample-note">Shipped ahead on their own traveler. Do not pack with this order.</div>
+      ${body}
     </div>`;
 }
 
@@ -5680,8 +6316,7 @@ function renderMasterTraveler(o, calloutHtml, showSelect){
   const shipBy = o.latest_ship_by && o.latest_ship_by !== "—"
     ? `${escapeHtml(o.latest_ship_by)}${o.lead_time_label ? ` (${escapeHtml(o.lead_time_label)})` : ""}`
     : "—";
-  const shipMethod = o.shipping_method
-    ? `<li><b>Shipping:</b> ${escapeHtml(fmtShipMethod(o.shipping_method))}</li>` : "";
+  const shipMethod = trvShipMethodLi(o);
   const email = o.customer_email
     ? `<li><b>Email:</b> ${escapeHtml(o.customer_email)}</li>` : "";
   const tradeTag = (o.tags||"").toLowerCase().includes("trade")
@@ -5802,7 +6437,7 @@ function trvStockBox(o, p){
            <button type="button" class="trv-btn trv-btn-ghost" onclick="stockDecision(this,'build')">Build new</button>
          </div>`;
     // On a PULLED line the manager may need extra/replacement parts they decide
-    // in the moment (rods, canopy, etc.). Colour + finish + job come from THIS
+    // in the moment (rods, canopy, etc.). Color + finish + job come from THIS
     // line so a request ties back to the exact Order+Job+SKU. Only pulls get it.
     const reqParts = (d && d.action === "pull")
       ? trvReqPartsUi(o, p, ln, sku) : "";
@@ -5815,8 +6450,8 @@ function trvStockBox(o, p){
 // The Request-parts control (screen-only) on a pulled stock line. Part comes
 // from the Part Families autocomplete (PART_CODES, loaded once); the finish/
 // color toggle chooses the route: color -> Powder Coating (Parts Request, keyed
-// to the unit's colour so it lands on the right batch), finish -> Assembly
-// (Rework). The colour is pre-derived from the line so the PR groups correctly.
+// to the unit's color so it lands on the right batch), finish -> Assembly
+// (Rework). The color is pre-derived from the line so the PR groups correctly.
 function trvReqPartsUi(o, p, ln, sku){
   const dec = decodeVariantSku(sku);
   const lineColor  = (Object.prototype.hasOwnProperty.call(ln, "color") ? ln.color : null) || dec.color || "";
@@ -5839,7 +6474,7 @@ function trvReqPartsUi(o, p, ln, sku){
         <button type="button" class="trv-btn" onclick="submitReqPart(this)">Request</button>
       </div>
       <datalist id="rp-parts-list">${partOpts}</datalist>
-      <div class="trv-rp-hint">Color parts go to powder coating on this unit's colour${lineColor ? " (" + escapeHtml(lineColor) + ")" : ""}; finish parts go to assembly. Ties back to this order &amp; job.</div>
+      <div class="trv-rp-hint">Color parts go to powder coating on this unit's color${lineColor ? " (" + escapeHtml(lineColor) + ")" : ""}; finish parts go to assembly. Ties back to this order &amp; job.</div>
     </div>
   </div>`;
 }
@@ -5929,7 +6564,7 @@ function toggleReqParts(btn){
 }
 
 // Create the part request against the EXISTING console endpoints:
-//   color part -> POST /api/parts-requests  (Powder Coating, grouped by colour)
+//   color part -> POST /api/parts-requests  (Powder Coating, grouped by color)
 //   finish part-> POST /api/reworks         (Assembly)
 // Both carry Order (+ Job) + SKU so the request ties back to this exact pull.
 async function submitReqPart(btn){
@@ -5946,7 +6581,7 @@ async function submitReqPart(btn){
   const note = line.querySelector(".trv-rp-note").value.trim();
   if(!part){ alert("Enter a part code first."); return; }
   if(kind === "color" && !color){
-    if(!window.confirm("This unit has no decoded colour, so the powder-coat request can't auto-group onto a colour batch. Create it anyway?")) return;
+    if(!window.confirm("This unit has no decoded color, so the powder-coat request can't auto-group onto a color batch. Create it anyway?")) return;
   }
   btn.disabled = true; const label = btn.textContent; btn.textContent = "…";
   try{
@@ -6015,11 +6650,18 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
                   + foldDivider
                   + foldedLines.map(ln => trvBuildRow(ln, p)).join("");
   const expedite = o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : "";
+  // The samples sheet goes out ahead of the build as its own shipment. The
+  // order's Latest Ship By is the BUILD's lead-time date — printing it here
+  // would tell shipping this sheet can wait weeks, which is the opposite of the
+  // instruction — so it's replaced by the SHIP FIRST line.
+  const isSampleSheet = p.source === "samples";
   const shipBy = o.latest_ship_by && o.latest_ship_by !== "—"
     ? `${escapeHtml(o.latest_ship_by)}${o.lead_time_label ? ` (${escapeHtml(o.lead_time_label)})` : ""}`
     : "—";
-  const shipMethod = o.shipping_method
-    ? `<li><b>Shipping:</b> ${escapeHtml(fmtShipMethod(o.shipping_method))}</li>` : "";
+  const shipByLi = isSampleSheet ? "" : `<span><b>Latest Ship By:</b> ${shipBy}</span>`;
+  const shipFirst = isSampleSheet
+    ? `<div class="trv-shipfirst">SHIP FIRST — send ahead of the rest of this order</div>` : "";
+  const shipMethod = trvShipMethodLi(o);
   const email = o.customer_email
     ? `<li><b>Email:</b> ${escapeHtml(o.customer_email)}</li>` : "";
   // TRADE tag (trade-account orders) + lifetime-spend club badge (10K/20K/50K)
@@ -6050,7 +6692,7 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
       <div>
         <div class="trv-tags">
           <span class="trv-loc-pill loc-${(p.location||'').toLowerCase().replace(/\s+/g,'-')}">${escapeHtml(p.location||"")}</span>
-          ${trvColorFinishChip(p)}
+          ${isSampleSheet ? `<span class="color-chip color-chip-plain">Samples</span>` : trvColorFinishChip(p)}
           ${trvChangePill(o)}
         </div>
         ${expedite}
@@ -6064,10 +6706,11 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
       </div>
       <div class="trv-logo"><img src="${DB_LOGO}" alt="Dutton Brown"></div>
     </div>
+    ${shipFirst}
     <ul class="trv-meta">
       <li class="trv-meta-row">
         <span><b>Order Date:</b> ${escapeHtml(fmtDateLong(o.created_at))}</span>
-        <span><b>Latest Ship By:</b> ${shipBy}</span>
+        ${shipByLi}
       </li>
       ${shipMethod}
       ${email}
@@ -6084,7 +6727,7 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
       <tbody class="trv-drop" ondragover="trvDragOver(event)" ondragleave="trvDragLeave(event)" ondrop="trvDrop(event)">${buildRows}${emptyHint}</tbody>
     </table>
     ${o._master ? trvMasterRefNote(total) : trvReferences(o, p)}
-    ${o._master ? "" : trvSampleSection(o)}
+    ${o._master ? "" : trvSampleSection(o, p)}
     ${trvNotes(o)}
     <div class="trv-spacer"></div>
     <div class="trv-foot">
@@ -7196,9 +7839,12 @@ function renderTravelers(){
   // with Orange (3/5) wedged between. Sorting by color keeps a color's
   // travelers together and in order (Bone 2/5, 3/5).
   function orderColorRank(p){
+    // A samples sheet leaves the building before anything else on the order, so
+    // it takes traveler 1/N — the number has to agree with the ship sequence.
+    if(p.source === "samples") return -1;
     if(p.color){ const i = COLOR_ORDER.indexOf(p.color); return i === -1 ? 900 : i; }
     if(p.finish) return 1000;        // finish-only after colors
-    return 2000;                     // samples / accessories last
+    return 2000;                     // accessories last
   }
   const pairs = [];
   // Rods bought alongside fixtures never get their own traveler — they're an
@@ -8313,7 +8959,14 @@ function trvChangePill(o){
   const r = o.reissue || null;
   const isVoid    = tg.includes("traveler-void")    || (r && r.kind === "void");
   const isChanged = tg.includes("traveler-changed") || (r && r.kind === "changed");
-  const when = r && r.at ? `<span class="trv-change-when">${fmtDateTimeShort(r.at)}</span>` : "";
+  // Timestamp: prefer the board's `reissue` stamp, else edited_at_traveler,
+  // which build_unfulfilled_dataset reads from the DURABLE traveler_state
+  // metafield. The hourly rebuild drops released orders and wipes `reissue`,
+  // so without this fallback a reissued order kept its tag-driven pill but lost
+  // its date — "Order changed · Jun 25, 12:49 PM" silently became a bare
+  // "Order changed" with no way to tell if that happened today or in June.
+  const at = (r && r.at) || o.edited_at_traveler || "";
+  const when = at ? `<span class="trv-change-when">${fmtDateTimeShort(at)}</span>` : "";
   if(isVoid){
     return `<span class="trv-change-pill is-void">Order cancelled${when ? " · " : ""}${when}</span>`;
   }
