@@ -36,3 +36,15 @@ index.html       — landing page with team-grouped catalog
 This repo is **public** — anyone with the URL can read it. Never commit: customer PII, unreleased financials, private strategic plans, or parts **prices** (the public `parts-library.json` is redacted; costs live only in the db-private overlay — see db-operations/CLAUDE.md).
 
 **BOMs, color queues, and wash lists are NOT low-sensitivity** — they contain customer-order data and live on the gated hub (`db-private`), never here. If a page needs PII or order detail, it belongs in db-private. Low-sensitivity operational dashboards (KPI maps, open-order counts, fulfillment stats) are fine here for Notion iframe embedding.
+
+## Show Your Work
+
+**Show Thomas whatever you make, in the same turn, without being asked.** A file path is not a deliverable — if he has to ask "how do I look at this?", it wasn't delivered.
+
+- Image / screenshot / chart / render → read it back so it renders inline
+- Video / audio / several files → build a small local `review.html` that plays them all, then `Start-Process` it
+- HTML page / dashboard / prototype → open it in the browser; publish an Artifact if it should be shareable
+- Report / analysis → lead with the findings in the response, don't just link the file
+- Data / query result → show the actual numbers, formatted
+
+Then open it yourself and confirm it renders. Full rule: `~/repos/CLAUDE.md` → Show Your Work Rule.
