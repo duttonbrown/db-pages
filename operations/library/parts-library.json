@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-11T12:01:02",
+  "generated_at": "2026-08-12T07:05:54",
   "counts": {
     "parts": 474,
-    "supplies": 158,
+    "supplies": 162,
     "families": 284,
     "glossary": 83,
     "locations": 40,
@@ -73632,6 +73632,21 @@
       "last_edited_at": "2026-08-09T21:38:00.000Z"
     },
     {
+      "sku": "S-1101",
+      "part_number": "",
+      "supplier_sku": "S-1101",
+      "title": "18 x 24\u201d Bag",
+      "description": "",
+      "page_id": "3baffa52-4c5b-8154-a100-ce62c4da85f4",
+      "page_url": "https://app.notion.com/p/18-x-24-Bag-3baffa524c5b8154a100ce62c4da85f4",
+      "image": null,
+      "status": "Active",
+      "type": "Poly Bag",
+      "reorder_qty": "",
+      "locations": [],
+      "last_edited_at": "2026-08-12T03:35:00.000Z"
+    },
+    {
       "sku": "S-11244",
       "part_number": "",
       "supplier_sku": "S-11244",
@@ -73686,6 +73701,21 @@
         }
       ],
       "last_edited_at": "2026-08-09T21:38:00.000Z"
+    },
+    {
+      "sku": "S-1143",
+      "part_number": "",
+      "supplier_sku": "S-1143",
+      "title": "4\u201d Tube Bag",
+      "description": "",
+      "page_id": "3baffa52-4c5b-81bd-af9f-e0b7d83dd4a8",
+      "page_url": "https://app.notion.com/p/4-Tube-Bag-3baffa524c5b81bdaf9fe0b7d83dd4a8",
+      "image": null,
+      "status": "Active",
+      "type": "Poly Bag",
+      "reorder_qty": "",
+      "locations": [],
+      "last_edited_at": "2026-08-12T03:35:00.000Z"
     },
     {
       "sku": "S-12654",
@@ -73782,6 +73812,21 @@
         }
       ],
       "last_edited_at": "2026-08-09T21:37:00.000Z"
+    },
+    {
+      "sku": "S-1337",
+      "part_number": "",
+      "supplier_sku": "S-1337",
+      "title": "8 x 8\u201d Bag",
+      "description": "",
+      "page_id": "3baffa52-4c5b-8150-8060-d820f95af5f2",
+      "page_url": "https://app.notion.com/p/8-x-8-Bag-3baffa524c5b81508060d820f95af5f2",
+      "image": null,
+      "status": "Active",
+      "type": "Poly Bag",
+      "reorder_qty": "",
+      "locations": [],
+      "last_edited_at": "2026-08-12T03:35:00.000Z"
     },
     {
       "sku": "S-14283",
@@ -74286,6 +74331,21 @@
         }
       ],
       "last_edited_at": "2026-08-09T21:48:00.000Z"
+    },
+    {
+      "sku": "S-3094",
+      "part_number": "",
+      "supplier_sku": "S-3094",
+      "title": "10 x 36\u201d Bag",
+      "description": "",
+      "page_id": "3baffa52-4c5b-817d-8c07-c5c6f34084f3",
+      "page_url": "https://app.notion.com/p/10-x-36-Bag-3baffa524c5b817d8c07c5c6f34084f3",
+      "image": null,
+      "status": "Active",
+      "type": "Poly Bag",
+      "reorder_qty": "",
+      "locations": [],
+      "last_edited_at": "2026-08-12T03:35:00.000Z"
     },
     {
       "sku": "S-3601",
@@ -74795,10 +74855,10 @@
       "sku": "S-4243",
       "part_number": "",
       "supplier_sku": "S-4243",
-      "title": "24 x 14 x14",
+      "title": "24 x 12 x 12",
       "description": "",
       "page_id": "2c3ffa52-4c5b-8043-8776-f51064bedd46",
-      "page_url": "https://app.notion.com/p/24-x-14-x14-2c3ffa524c5b80438776f51064bedd46",
+      "page_url": "https://app.notion.com/p/24-x-12-x-12-2c3ffa524c5b80438776f51064bedd46",
       "image": null,
       "status": "Active",
       "type": "Box/Cardboard",
@@ -74813,7 +74873,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-09T21:38:00.000Z"
+      "last_edited_at": "2026-08-12T02:44:00.000Z"
     },
     {
       "sku": "S-4307",
