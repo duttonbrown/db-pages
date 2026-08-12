@@ -1281,14 +1281,19 @@
   .trv-meta-row span { white-space: nowrap; }
   /* Signature on delivery — a shipping INSTRUCTION, so it rides the Shipping
      line rather than becoming another banner. Charged once on the order,
-     honoured on every carton; the chip states the rule so nobody has to guess. */
-  .trv-sig {
+     honoured on every carton; the chip states the rule so nobody has to guess.
+     NAMED `trv-sigreq`, NOT `trv-sig`: `.trv-sig` is the footer sign-off CELL
+     (see "Sign-off strip" below) and this chip's pink pill leaked onto all four
+     of them — red boxes behind the Order Date / Ship By / QC line, uppercased
+     labels, and the signature rule bumped off the Shipping line by `display:
+     flex`. Keep the two families distinct. */
+  .trv-sigreq {
     display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 4px;
     font-size: 9.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
     background: #FDECEA; color: #B3261E; border: 1px solid #F2C4BE; vertical-align: middle;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
-  .trv-sig-note { font-size: 11px; color: #B3261E; margin-left: 6px; }
+  .trv-sigreq-note { font-size: 11px; color: #B3261E; margin-left: 6px; }
   /* Customer trade + club badges on the traveler's Customer line. */
   .trv-cust-badges { display: inline-flex; align-items: center; gap: 5px; vertical-align: middle; margin-left: 4px; }
   .trv-cust-badges .tag-trade {
@@ -1551,6 +1556,8 @@
   }
   /* Sign-off cells share row 2; the EXPEDITE banner (when present) sits on row 1
      ABOVE the Order Date / Ship By / QC strip. */
+  /* `.trv-sig` is THIS family only (cell + -label/-value/-fill). The signature-
+     on-delivery chip is `.trv-sigreq` — don't name anything else `trv-sig*`. */
   .trv-sig { display: flex; align-items: baseline; min-width: 0; grid-row: 2; }
   .trv-sig-date      { grid-column: 1; }
   .trv-sig-shipby    { grid-column: 2; }
@@ -1900,7 +1907,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-08-12T09:00:04",
+  "built_at": "2026-08-12T09:37:44",
   "orders": [
     {
       "shopify_order_id": "7105096384594",
@@ -5362,8 +5369,8 @@ function trvShipMethodLi(o){
   if (!o.shipping_method && !o.signature_required) return "";
   const method = o.shipping_method ? escapeHtml(fmtShipMethod(o.shipping_method)) : "—";
   const sig = o.signature_required
-    ? ` <span class="trv-sig">Signature required</span>`
-      + `<span class="trv-sig-note">every package on this order</span>`
+    ? ` <span class="trv-sigreq">Signature required</span>`
+      + `<span class="trv-sigreq-note">every package on this order</span>`
     : "";
   return `<li><b>Shipping:</b> ${method}${sig}</li>`;
 }
