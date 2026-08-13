@@ -28,8 +28,52 @@ let activeGlossary = 'all';
 let activeFamily = null;         // family_id filter (deep-linked via #family/<id>)
 let activeProcesses = new Set(); // in-house process filters: 'Powder Coat', 'Black Batch', etc.
 let attentionFilter = false;     // needs-attention lens (missing location/price, etc.)
+let activeQuery = '';            // free-text term ALSO applied to the browse grid
 let activeResultIdx = -1;
 let currentPart = null;
+
+// --- Shareable filter state in the URL hash ----------------------------------
+// Every filter the page can be in is expressible as a link, so a prefiltered
+// view can be pasted into Teams/Notion instead of described in words:
+//   #proc=Black%20Batch          every Black Batch part
+//   #q=globe&cat=Globe%20Cap     a search inside one category
+//   #proc=Powder%20Coat,Black%20Batch   parts in BOTH (filters intersect)
+// The two older routes still win when the hash carries no '=' :
+//   #<PART_NUMBER>   opens that part's spec card
+//   #family/<id>     one part family, all finish variants
+// Nothing here re-fetches — parts-library.json is already in memory, so a
+// filtered link costs exactly what the unfiltered page costs.
+// `cat` is written as the category NAME (readable, hand-editable) but a raw
+// glossary id is still accepted, so links minted before this read fine.
+function syncHash() {
+  if (!DATA) return;
+  const parts = [];
+  if (activeQuery) parts.push('q=' + encodeURIComponent(activeQuery));
+  if (activeGlossary !== 'all') {
+    const g = (DATA.glossary || []).find(x => x.id === activeGlossary);
+    parts.push('cat=' + encodeURIComponent((g && g.name) || activeGlossary));
+  }
+  if (activeProcesses.size) {
+    parts.push('proc=' + [...activeProcesses].map(encodeURIComponent).join(','));
+  }
+  if (attentionFilter) parts.push('attn=1');
+  if (activeFamily) parts.push('family=' + encodeURIComponent(activeFamily));
+  const hash = parts.length ? '#' + parts.join('&') : '';
+  // replaceState never fires hashchange, so this cannot re-enter routeFromHash.
+  history.replaceState(null, '', location.pathname + location.search + hash);
+}
+
+// Resolve a `cat=` value to a glossary id: exact id first, then case-insensitive
+// name. Unknown values are dropped rather than left to render an empty grid a
+// reader would read as "we don't stock any of those".
+function glossaryIdFor(value) {
+  if (!value || value === 'all') return 'all';
+  const list = DATA.glossary || [];
+  if (list.some(g => g.id === value)) return value;
+  const want = value.trim().toLowerCase();
+  const byName = list.find(g => (g.name || '').trim().toLowerCase() === want);
+  return byName ? byName.id : 'all';
+}
 
 function partProcesses(p) {
   const fam = DATA.families[p.family_id];
@@ -99,29 +143,32 @@ function partNeedsAttention(p) {
 }
 
 function clearFiltersIfShowingPart() {
-  if (currentPart) {
-    currentPart = null;
-    history.replaceState(null, '', location.pathname + location.search);
-  }
+  // The URL is rewritten by the syncHash() that follows every state change —
+  // clearing it here too would briefly drop the filters out of the address bar.
+  currentPart = null;
   $('spec-slot').hidden = true;
   $('grid-slot').hidden = false;
+}
+
+// Re-render everything that depends on filter state, then mirror it into the URL.
+function applyFilters() {
+  renderQuickFilters();
+  renderGlossary();
+  renderGrid();
+  syncHash();
 }
 
 function toggleProcessFilter(proc) {
   if (activeProcesses.has(proc)) activeProcesses.delete(proc);
   else activeProcesses.add(proc);
   clearFiltersIfShowingPart();
-  renderQuickFilters();
-  renderGlossary();
-  renderGrid();
+  applyFilters();
 }
 
 function toggleAttention() {
   attentionFilter = !attentionFilter;
   clearFiltersIfShowingPart();
-  renderQuickFilters();
-  renderGlossary();
-  renderGrid();
+  applyFilters();
 }
 
 // --- Quick filters (prominent top pills) -------------------------------------
@@ -308,6 +355,7 @@ function countWith(opts) {
   const glossary = opts.glossary != null ? opts.glossary : activeGlossary;
   const procs = opts.processes || activeProcesses;
   const attention = opts.attention != null ? opts.attention : attentionFilter;
+  const query = (opts.query != null ? opts.query : activeQuery).toLowerCase();
   return DATA.parts.filter(p => {
     if (glossary !== 'all') {
       const fam = DATA.families[p.family_id];
@@ -318,6 +366,7 @@ function countWith(opts) {
       for (const wanted of procs) if (!pp.includes(wanted)) return false;
     }
     if (attention && !partNeedsAttention(p)) return false;
+    if (query && !matchesQuery(p, query)) return false;
     return true;
   }).length;
 }
@@ -363,6 +412,17 @@ function renderActiveFilter(entries) {
       key: 'attention',
     });
   }
+  if (activeQuery) {
+    // The search term is a real filter on the grid now, so it has to be
+    // visible and clearable like every other one — otherwise arriving on a
+    // #q= link looks like the library simply lost most of its parts.
+    pills.push({
+      name: `“${activeQuery}”`,
+      count: countWith({}),
+      kind: 'query',
+      key: 'query',
+    });
+  }
 
   if (!pills.length) { row.classList.add('hidden'); row.innerHTML = ''; return; }
   row.classList.remove('hidden');
@@ -378,14 +438,13 @@ function renderActiveFilter(entries) {
       if (btn.dataset.kind === 'glossary') activeGlossary = 'all';
       else if (btn.dataset.kind === 'process') activeProcesses.delete(btn.dataset.key);
       else if (btn.dataset.kind === 'attention') attentionFilter = false;
-      else if (btn.dataset.kind === 'family') {
-        activeFamily = null;
-        history.replaceState(null, '', location.pathname + location.search);
+      else if (btn.dataset.kind === 'family') activeFamily = null;
+      else if (btn.dataset.kind === 'query') {
+        activeQuery = '';
+        $('search').value = '';
       }
       clearFiltersIfShowingPart();
-      renderQuickFilters();
-      renderGlossary();
-      renderGrid();
+      applyFilters();
     };
   });
 }
@@ -407,19 +466,12 @@ function renderGlossary() {
   $('glossary').querySelectorAll('.glossary-chip').forEach(b => {
     b.onclick = () => {
       activeGlossary = b.dataset.gid;
-      renderGlossary();
       // The whole point of clicking a chip is "show me this category" — so
       // whatever's currently showing (grid OR spec card), switch back to the
       // grid filtered by this chip. Previously if you were viewing a part
       // the spec card stayed put and the click looked like a no-op.
-      if (currentPart) {
-        currentPart = null;
-        history.replaceState(null, '', location.pathname + location.search);
-      }
-      $('spec-slot').hidden = true;
-      $('grid-slot').hidden = false;
-      renderQuickFilters();
-      renderGrid();
+      clearFiltersIfShowingPart();
+      applyFilters();
     };
   });
 
@@ -480,13 +532,17 @@ function filteredParts() {
   if (attentionFilter) {
     list = list.filter(partNeedsAttention);
   }
+  if (activeQuery) {
+    const q = activeQuery.toLowerCase();
+    list = list.filter(p => matchesQuery(p, q));
+  }
   return list;
 }
 
 function renderGrid() {
   const list = filteredParts();
   if (!list.length) {
-    $('grid-slot').innerHTML = `<div class="empty-grid">No parts match the current filter.</div>`;
+    $('grid-slot').innerHTML = `<div class="empty-grid">No parts match the current filter.${activeQuery ? ` Searching for “${escapeHtml(activeQuery)}”.` : ''}</div>`;
     return;
   }
   const html = list.map(p => previewCardHtml(p)).join('');
@@ -549,15 +605,29 @@ function previewCardHtml(p) {
 }
 
 // --- Search ---
+// The searchable text of a part, lowercased. ONE definition, shared by the
+// typeahead dropdown and the grid filter — if they diverged, a #q= link would
+// show a different set than typing the same term.
+function queryFields(p) {
+  const fam = DATA.families[p.family_id] || {};
+  return {
+    pn: p.part_number.toLowerCase(),
+    desc: (fam.description || '').toLowerCase(),
+    gloss: ((fam.glossary && fam.glossary.name) || '').toLowerCase(),
+  };
+}
+
+function matchesQuery(p, q) {
+  const f = queryFields(p);
+  return f.pn.includes(q) || f.desc.includes(q) || f.gloss.includes(q);
+}
+
 function search(q) {
   q = q.toLowerCase().trim();
   if (!q) return [];
   const exact = [], prefix = [], contains = [], descMatch = [];
   for (const p of DATA.parts) {
-    const pn = p.part_number.toLowerCase();
-    const fam = DATA.families[p.family_id] || {};
-    const desc = (fam.description || '').toLowerCase();
-    const gloss = (fam.glossary && fam.glossary.name || '').toLowerCase();
+    const { pn, desc, gloss } = queryFields(p);
     if (pn === q) exact.push(p);
     else if (pn.startsWith(q)) prefix.push(p);
     else if (pn.includes(q)) contains.push(p);
@@ -593,9 +663,28 @@ function renderSearchResults(items) {
   });
 }
 
+// Typing narrows the GRID as well as opening the typeahead — the dropdown caps
+// at 15 and is for jumping to a known part; the grid behind it is the browsable
+// answer, and it's what a #q= link has to reproduce. Debounced because a
+// keystroke can re-render up to ~470 cards.
+let queryTimer = null;
+function scheduleQueryFilter(value) {
+  clearTimeout(queryTimer);
+  queryTimer = setTimeout(() => {
+    const next = value.trim();
+    if (next === activeQuery) return;
+    activeQuery = next;
+    clearFiltersIfShowingPart();
+    applyFilters();
+  }, 200);
+}
+
 function wireSearch() {
   const inp = $('search');
-  inp.addEventListener('input', () => renderSearchResults(search(inp.value)));
+  inp.addEventListener('input', () => {
+    renderSearchResults(search(inp.value));
+    scheduleQueryFilter(inp.value);
+  });
   inp.addEventListener('focus', () => { if (inp.value) renderSearchResults(search(inp.value)); });
   inp.addEventListener('keydown', (e) => {
     const items = $('results').querySelectorAll('.lib-result');
@@ -656,8 +745,13 @@ function backToBrowse() {
   currentPart = null;
   $('spec-slot').hidden = true;
   $('grid-slot').hidden = false;
-  history.replaceState(null, '', location.pathname + location.search);
+  // showPart() empties the search box on the way in; put the term back so the
+  // box agrees with the grid it's filtering (and with the URL).
+  $('search').value = activeQuery;
+  renderQuickFilters();
+  renderGlossary();
   renderGrid();
+  syncHash();
 }
 
 function fmtDate(iso) {
@@ -923,8 +1017,38 @@ function renderSpec(p) {
 }
 
 function routeFromHash() {
+  const rawHash = location.hash.slice(1);
+
+  // Filter-state form — anything carrying '='. Checked first because a part
+  // number never contains one, so the two older routes below stay reachable.
+  if (rawHash.includes('=')) {
+    const params = new URLSearchParams(rawHash);
+    activeQuery = (params.get('q') || '').trim();
+    activeGlossary = glossaryIdFor(params.get('cat'));
+    activeProcesses = new Set(
+      (params.get('proc') || '').split(',').map(s => s.trim()).filter(Boolean)
+    );
+    attentionFilter = params.get('attn') === '1';
+    const fam = params.get('family');
+    activeFamily = (fam && DATA && DATA.families && DATA.families[fam]) ? fam : null;
+    currentPart = null;
+    $('search').value = activeQuery;
+    // A reload can restore a stale value into the box and pop the typeahead
+    // open before we get here; the grid is the answer for a filter link.
+    $('results').hidden = true;
+    $('spec-slot').hidden = true;
+    $('grid-slot').hidden = false;
+    renderQuickFilters();
+    renderGlossary();
+    renderGrid();
+    // Rewrite rather than trust the incoming string: a hand-typed cat name or a
+    // dropped param normalizes to the canonical link the user can copy back out.
+    syncHash();
+    return;
+  }
+
   if (location.hash) {
-    const raw = decodeURIComponent(location.hash.slice(1));
+    const raw = decodeURIComponent(rawHash);
     // #family/<family_id> — show the grid filtered to one part family (all
     // finish variants). Deep-linked from the production wash list so a part
     // code opens its whole family.
@@ -945,11 +1069,20 @@ function routeFromHash() {
       showPart(raw); return;
     }
   }
-  // No hash: show browse grid
+  // No hash: the unfiltered browse grid. Every filter now lives in the URL, so
+  // a bare address has to mean a bare page — leaving stale filters in memory
+  // would make the link the user just pasted show something else.
   activeFamily = null;
+  activeQuery = '';
+  activeGlossary = 'all';
+  activeProcesses = new Set();
+  attentionFilter = false;
+  currentPart = null;
+  const inp = $('search');
+  if (inp) inp.value = '';
   $('spec-slot').hidden = true;
   $('grid-slot').hidden = false;
-  if (DATA) { renderActiveFilter(DATA.glossary); renderGrid(); }
+  if (DATA) { renderQuickFilters(); renderGlossary(); renderGrid(); }
 }
 
 bootstrap();
