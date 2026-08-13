@@ -1854,8 +1854,12 @@
 <main class="card card-wide">
   <header class="page-intro">
     <div class="page-intro-text">
-      <p class="page-eyebrow">Production · Plan</p>
-      <h1 class="page-lead" id="pageLead">Today's printout plan</h1>
+      <!-- Was "Production · Plan" / "Today's printout plan" until 2026-08-13.
+           With the Plan panel gone this page is only the print interface, and a
+           heading naming a panel that no longer exists is the same mistake as
+           renaming a rail item without renaming the page it opens. -->
+      <p class="page-eyebrow">Production · Print</p>
+      <h1 class="page-lead" id="pageLead">Traveler print queue</h1>
       <p class="page-sub" id="pageSub">Loading…</p>
     </div>
     <div class="page-intro-actions no-print">
@@ -1890,32 +1894,29 @@
        copied-tag accident. Populated by renderPrintedReview(); hidden when empty. -->
   <div class="needs-attention printed-review" id="printedReview" hidden></div>
 
-  <!-- ── Plan (was "Print Queue"; absorbs the old Order Queue as the
-       "New since cutoff" sort mode below) ── -->
-  <div class="tab-content active" id="content-plan">
-    <div class="filter-bar">
-      <span class="label">Sort</span>
-      <div class="filter-pills" id="sortPills">
-        <button type="button" class="filter-pill active" data-sort="bycolor"
-                onclick="setSort(this,'bycolor')">Group by color</button>
-        <button type="button" class="filter-pill" data-sort="samplesfirst"
-                onclick="setSort(this,'samplesfirst')">Samples + Quick first</button>
-        <button type="button" class="filter-pill" data-sort="chrono"
-                onclick="setSort(this,'chrono')">Chronological</button>
-        <button type="button" class="filter-pill" data-sort="sincecutoff"
-                onclick="setSort(this,'sincecutoff')"
-                title="Orders that arrived since the last release (falls back to today 6 AM) — the old Order Queue view.">New since cutoff</button>
-      </div>
-      <span class="release-hint" id="releaseHint">
-        Release: run <code>python release_queue.py</code>
-      </span>
-    </div>
-    <div id="sections"></div>
-  </div>
+  <!-- ── The PLAN panel was REMOVED from this page on 2026-08-13 (Thomas).
+       It came off the rail earlier the same day because Alex goes straight to
+       Print; leaving the panel mounted meant a bare load still painted a
+       location-grouped order board above the sheets, which is the "top area"
+       nobody was using.
+
+       Nothing about the planning board was deleted, so this stays a small
+       revert: renderSection / renderRow / renderOrderQueue / setSort /
+       splitPage / locToggleHtml / sortRows and the whole SORT vocabulary are
+       all still defined below and still correct. Restoring the panel is this
+       markup block plus the two lines render() no longer runs (see the note
+       there). Full prior markup is in git — the commit that removed it is the
+       one carrying this comment.
+
+       `releaseHint` moved with it; init()'s lookup of it is already null-safe.
+       ── -->
 
   <!-- ── Print (was "Travelers") — one work-order sheet per printout;
-       screen == print. This is where printing/releasing happens. ── -->
-  <div class="tab-content" id="content-print">
+       screen == print. This is where printing/releasing happens, and as of
+       2026-08-13 it is the tab the board opens on. Carrying `active` statically
+       matters: without it a no-hash load paints Plan and then flips, and where
+       nav.js isn't served there is nothing to flip it. ── -->
+  <div class="tab-content active" id="content-print">
     <div class="trv-toolbar no-print">
       <div class="trv-search-wrap">
         <input type="search" id="trvSearch" class="trv-search" placeholder="Search order #, customer, SKU, color, job…"
@@ -2098,8 +2099,779 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-08-13T16:00:07",
+  "built_at": "2026-08-13T18:31:49",
   "orders": [
+    {
+      "shopify_order_id": "7110243975250",
+      "shopify_order_name": "36942",
+      "shopify_order_number": "36942",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 5,
+      "customer_total_spent": 1733.03,
+      "ship_by_date": null,
+      "latest_ship_by": "September 3, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-13T18:12:44-05:00",
+      "tags": "redo, trade",
+      "total_price": 306.54,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7110243975250",
+          "shopify_order_name": "36942",
+          "shopify_order_number": "36942",
+          "key": [
+            "color",
+            "Slate Blue",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Slate Blue",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60224"
+          ],
+          "variant_skus": [
+            "60224-2F"
+          ],
+          "line_item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Ruler Sconce",
+              "variant_title": "Nickel / Slate Blue",
+              "variant_sku": "60224-2F",
+              "parent_sku": "60224",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Slate Blue",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-reader-sconce-nickel-slateblue_73dea34c-d632-4ed3-88b9-f798e256acad.jpg?v=1757447397&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17175341563986,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-PAR16"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Slate Blue|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7110243975250",
+          "shopify_order_name": "36942",
+          "shopify_order_number": "36942",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-13T18:12:44-05:00",
+          "parent_sku": "60224",
+          "color": "Slate Blue",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17175341563986
+          ],
+          "item_titles": [
+            "Color Ruler Sconce"
+          ],
+          "variant_skus": [
+            "60224-2F"
+          ],
+          "lines": [
+            {
+              "sku": "60224-2F",
+              "title": "Color Ruler Sconce",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Slate Blue",
+              "category": "fixture",
+              "variant_title": "Nickel / Slate Blue",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-reader-sconce-nickel-slateblue_73dea34c-d632-4ed3-88b9-f798e256acad.jpg?v=1757447397&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7110210158674",
+      "shopify_order_name": "36941",
+      "shopify_order_number": "36941",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 1098.71,
+      "ship_by_date": null,
+      "latest_ship_by": "September 3, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-13T17:43:09-05:00",
+      "tags": "redo, trade",
+      "total_price": 706.48,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7110210158674",
+          "shopify_order_name": "36941",
+          "shopify_order_number": "36941",
+          "key": [
+            "color",
+            "Slate Blue",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Slate Blue",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60430"
+          ],
+          "variant_skus": [
+            "60430-F"
+          ],
+          "line_item_titles": [
+            "Color Captain Flush Mount 29\""
+          ],
+          "lines": [
+            {
+              "title": "Color Captain Flush Mount 29\"",
+              "variant_title": "Slate Blue",
+              "variant_sku": "60430-F",
+              "parent_sku": "60430",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": null,
+              "color": "Slate Blue",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-captain-flush-mount-29-slateblue.jpg?v=1747967911&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17175261053010,
+              "in_stock": null,
+              "rod_finish": "Color",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Slate Blue|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7110210158674",
+          "shopify_order_name": "36941",
+          "shopify_order_number": "36941",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-13T17:43:09-05:00",
+          "parent_sku": "60430",
+          "color": "Slate Blue",
+          "finish": null,
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17175261053010
+          ],
+          "item_titles": [
+            "Color Captain Flush Mount 29\""
+          ],
+          "variant_skus": [
+            "60430-F"
+          ],
+          "lines": [
+            {
+              "sku": "60430-F",
+              "title": "Color Captain Flush Mount 29\"",
+              "qty": 1,
+              "finish": null,
+              "color": "Slate Blue",
+              "category": "fixture",
+              "variant_title": "Slate Blue",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-captain-flush-mount-29-slateblue.jpg?v=1747967911&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7110140559442",
+      "shopify_order_name": "36940",
+      "shopify_order_number": "36940",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 348.41,
+      "ship_by_date": null,
+      "latest_ship_by": "September 3, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-13T16:44:42-05:00",
+      "tags": "",
+      "total_price": 348.41,
+      "priority": null,
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color",
+        "Hardware-Only"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7110140559442",
+          "shopify_order_name": "36940",
+          "shopify_order_number": "36940",
+          "key": [
+            "color",
+            "Cobalt",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Cobalt",
+          "finish": null,
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H33-6",
+            "H28"
+          ],
+          "variant_skus": [
+            "H33-6-1E",
+            "H28-1E"
+          ],
+          "line_item_titles": [
+            "Color Swift Pull - Brass",
+            "Color Swift Knob"
+          ],
+          "lines": [
+            {
+              "title": "Color Swift Pull - Brass",
+              "variant_title": "6\" (C-C 4\") / Cobalt / Brass",
+              "variant_sku": "H33-6-1E",
+              "parent_sku": "H33-6",
+              "qty": 4,
+              "category": "pull",
+              "category_label": "Pull",
+              "finish": "Brass",
+              "color": "Cobalt",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-swift-pulls-brass-cobalt.jpg?v=1747967586&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17175092166738,
+              "in_stock": {
+                "have": 8,
+                "name": "Color Swift Pull 6\" - Cobalt",
+                "notes": "Can change finish",
+                "flags": [
+                  "Finish Swappable"
+                ]
+              }
+            },
+            {
+              "title": "Color Swift Knob",
+              "variant_title": "Brass / Cobalt",
+              "variant_sku": "H28-1E",
+              "parent_sku": "H28",
+              "qty": 6,
+              "category": "knob",
+              "category_label": "Knob",
+              "finish": "Brass",
+              "color": "Cobalt",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-swift-knob-brass-cobalt.jpg?v=1747967596&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17175092199506,
+              "in_stock": {
+                "have": 20,
+                "name": "Color Swift Knob - Brass/Cobalt",
+                "notes": "",
+                "flags": []
+              }
+            }
+          ],
+          "total_qty": 10,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Cobalt|hardware",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7110140559442",
+          "shopify_order_name": "36940",
+          "shopify_order_number": "36940",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-13T16:44:42-05:00",
+          "parent_sku": "H33-6",
+          "color": "Cobalt",
+          "finish": "Brass",
+          "category": "pull",
+          "category_label": "Pull",
+          "qty": 4,
+          "line_item_ids": [
+            17175092166738
+          ],
+          "item_titles": [
+            "Color Swift Pull - Brass"
+          ],
+          "variant_skus": [
+            "H33-6-1E"
+          ],
+          "lines": [
+            {
+              "sku": "H33-6-1E",
+              "title": "Color Swift Pull - Brass",
+              "qty": 4,
+              "finish": "Brass",
+              "color": "Cobalt",
+              "category": "pull",
+              "variant_title": "6\" (C-C 4\") / Cobalt / Brass",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-swift-pulls-brass-cobalt.jpg?v=1747967586&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7110140559442",
+          "shopify_order_name": "36940",
+          "shopify_order_number": "36940",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-13T16:44:42-05:00",
+          "parent_sku": "H28",
+          "color": "Cobalt",
+          "finish": "Brass",
+          "category": "knob",
+          "category_label": "Knob",
+          "qty": 6,
+          "line_item_ids": [
+            17175092199506
+          ],
+          "item_titles": [
+            "Color Swift Knob"
+          ],
+          "variant_skus": [
+            "H28-1E"
+          ],
+          "lines": [
+            {
+              "sku": "H28-1E",
+              "title": "Color Swift Knob",
+              "qty": 6,
+              "finish": "Brass",
+              "color": "Cobalt",
+              "category": "knob",
+              "variant_title": "Brass / Cobalt",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-swift-knob-brass-cobalt.jpg?v=1747967596&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7110090195026",
+      "shopify_order_name": "36939",
+      "shopify_order_number": "36939",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 15,
+      "customer_total_spent": 11043.39,
+      "ship_by_date": null,
+      "latest_ship_by": "September 3, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-13T16:03:56-05:00",
+      "tags": "redo, trade",
+      "total_price": 124.95,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7110090195026",
+          "shopify_order_name": "36939",
+          "shopify_order_number": "36939",
+          "key": [
+            "color",
+            "Orange",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Orange",
+          "finish": null,
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H32-4"
+          ],
+          "variant_skus": [
+            "H32-4-1I"
+          ],
+          "line_item_titles": [
+            "Color Caliber Pull - Brass"
+          ],
+          "lines": [
+            {
+              "title": "Color Caliber Pull - Brass",
+              "variant_title": "4\" (C-C 2\") / Orange / Brass",
+              "variant_sku": "H32-4-1I",
+              "parent_sku": "H32-4",
+              "qty": 4,
+              "category": "pull",
+              "category_label": "Pull",
+              "finish": "Brass",
+              "color": "Orange",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-caliber-pull-hardware-brass-orange_2d09330e-b9ef-4dd2-9388-d8e49886d71c.jpg?v=1777589390&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17174970499154,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 4,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Orange|hardware",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7110090195026",
+          "shopify_order_name": "36939",
+          "shopify_order_number": "36939",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-13T16:03:56-05:00",
+          "parent_sku": "H32-4",
+          "color": "Orange",
+          "finish": "Brass",
+          "category": "pull",
+          "category_label": "Pull",
+          "qty": 4,
+          "line_item_ids": [
+            17174970499154
+          ],
+          "item_titles": [
+            "Color Caliber Pull - Brass"
+          ],
+          "variant_skus": [
+            "H32-4-1I"
+          ],
+          "lines": [
+            {
+              "sku": "H32-4-1I",
+              "title": "Color Caliber Pull - Brass",
+              "qty": 4,
+              "finish": "Brass",
+              "color": "Orange",
+              "category": "pull",
+              "variant_title": "4\" (C-C 2\") / Orange / Brass",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-caliber-pull-hardware-brass-orange_2d09330e-b9ef-4dd2-9388-d8e49886d71c.jpg?v=1777589390&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7110089211986",
+      "shopify_order_name": "36938",
+      "shopify_order_number": "36938",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 256.0,
+      "ship_by_date": null,
+      "latest_ship_by": "September 3, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-13T16:03:11-05:00",
+      "tags": "trade",
+      "total_price": 256.0,
+      "priority": null,
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7110089211986",
+          "shopify_order_name": "36938",
+          "shopify_order_number": "36938",
+          "key": [
+            "color",
+            "Orange",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Orange",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "40120-0"
+          ],
+          "variant_skus": [
+            "40120-0-2I"
+          ],
+          "line_item_titles": [
+            "Color Boom Sconce - No Arm"
+          ],
+          "lines": [
+            {
+              "title": "Color Boom Sconce - No Arm",
+              "variant_title": "Nickel / Orange",
+              "variant_sku": "40120-0-2I",
+              "parent_sku": "40120-0",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Orange",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-boom-sconce-nickel-orange.jpg?v=1747967818&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17174967812178,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Orange|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7110089211986",
+          "shopify_order_name": "36938",
+          "shopify_order_number": "36938",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-13T16:03:11-05:00",
+          "parent_sku": "40120-0",
+          "color": "Orange",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17174967812178
+          ],
+          "item_titles": [
+            "Color Boom Sconce - No Arm"
+          ],
+          "variant_skus": [
+            "40120-0-2I"
+          ],
+          "lines": [
+            {
+              "sku": "40120-0-2I",
+              "title": "Color Boom Sconce - No Arm",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Orange",
+              "category": "fixture",
+              "variant_title": "Nickel / Orange",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-boom-sconce-nickel-orange.jpg?v=1747967818&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
     {
       "shopify_order_id": "7109984190546",
       "shopify_order_name": "36430-EXC",
@@ -3085,8 +3857,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -3426,9 +4198,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 11,
-    "printouts": 11,
-    "notion_rows": 7,
+    "orders": 16,
+    "printouts": 16,
+    "notion_rows": 13,
     "skipped_already_printed": 208,
     "printed_today": 16,
     "needs_attention": 0,
@@ -4515,16 +5287,29 @@ function resolveTab(name){
   return TAB_NAMES.includes(name) ? name : null;
 }
 
+// DEFAULT_TAB was "plan" until 2026-08-13. Alex stopped using the planning board
+// and goes straight to Print, so Plan came out of the hub rail — and a bare
+// /production/print-queue.html that still opened on Plan would have left her on a
+// panel with no rail item pointing at it. The plan tab, its #plan URL, render()
+// and cnt-plan are all untouched: flip this back and restore the rail entry (see
+// db-private/_shared/nav.js, Production > Operating) to undo the whole change.
+const DEFAULT_TAB = "print";
+
 function setTab(name, updateHash = true){
-  name = resolveTab(name) || "plan";
+  name = resolveTab(name) || DEFAULT_TAB;
   TAB_NAMES.forEach(n => {
     const tab = document.getElementById(`tab-${n}`);
     const content = document.getElementById(`content-${n}`);
-    if(!tab || !content) return;
+    // The rail CONTROL is optional; the PANEL is not. These used to share one
+    // `if(!tab || !content) return;` guard, which meant a tab with no rail
+    // control could never be shown at all — #plan went blank the moment Plan
+    // left the rail (2026-08-13), and before that, every setTab() call during
+    // init() silently did nothing because nav.js injects the rail afterwards,
+    // so a #print bookmark painted Plan and only flipped on hub:railready.
     // The rail tabs are Manage sub-links; mark the active one with the sub-link
     // current style (is-subcurrent), matching the hub rail elsewhere.
-    tab.classList.toggle("is-subcurrent", n === name);
-    content.classList.toggle("active", n === name);
+    if(tab) tab.classList.toggle("is-subcurrent", n === name);
+    if(content) content.classList.toggle("active", n === name);
   });
   // Reflect the active tab in the URL so a tab is bookmarkable / shareable
   // (e.g. hub.duttonbrown.com/production/print-queue.html#print). Guard the write
@@ -4557,7 +5342,7 @@ document.addEventListener("click", e => {
 // freshly-rendered controls so the current tab shows is-subcurrent, and fill the
 // rail's count badges (they didn't exist when render() first ran).
 document.addEventListener("hub:railready", () => {
-  setTab(resolveTab((location.hash || "").replace("#","")) || "plan", false);
+  setTab(resolveTab((location.hash || "").replace("#","")) || DEFAULT_TAB, false);
   if (typeof updateTabCounts === "function") updateTabCounts();
 });
 
@@ -7844,9 +8629,14 @@ function renderPrintedReview(){
 }
 
 function render(){
-  const sectionsEl = document.getElementById("sections");
+  // The Plan panel and its #sections mount were removed 2026-08-13, so this
+  // function now paints ONLY the page furniture the Print panel also uses: the
+  // KPI row, the two attention lists, and the rail counts. Every id lookup here
+  // must stay null-safe — an early `sectionsEl.innerHTML` on the no-QUEUE path
+  // is exactly what would have thrown and blanked the whole board.
   if(!QUEUE){
-    sectionsEl.innerHTML = `<div class="empty-state"><h2>No queue data</h2><p>Run <code>python print_queue.py --publish</code> to populate.</p></div>`;
+    const kpi = document.getElementById("kpiRow");
+    if(kpi) kpi.innerHTML = `<div class="empty-state"><h2>No queue data</h2><p>Run <code>python print_queue.py --publish</code> to populate.</p></div>`;
     return;
   }
   const t = QUEUE.totals || {};
@@ -7863,26 +8653,12 @@ function render(){
   `;
   renderNeedsAttention();
   renderPrintedReview();
-  // "New since cutoff" (the old Order Queue) is a flat, read-only, chronological
-  // list of orders that landed since the last release — not the location-grouped
-  // board. Paint it and stop; the KPI row + attention panels above still apply.
-  if(SORT === "sincecutoff"){
-    renderOrderQueue();
-    updateTabCounts(t);
-    return;
-  }
-  // "Samples + Quick first" reorders the whole SECTION stack so the quick-ship
-  // work (Shipping = samples, then Assembly) prints before Powder Coating — not
-  // just within each section. Otherwise sections keep their default order.
-  const sectionOrder = (SORT === "samplesfirst")
-    ? ["shipping", "assembly", "powder"]
-    : ["powder", "assembly", "shipping"];
-  const orderedLocations = sectionOrder
-    .map(key => LOCATIONS.find(l => l.key === key))
-    .filter(Boolean);
-  const html = orderedLocations.map(renderSection).join("");
-  sectionsEl.innerHTML = html || `<div class="empty-state"><h2>All clear</h2><p>No orders pending print.</p></div>`;
-
+  // ── Plan panel removal (2026-08-13) ──
+  // Two things used to happen here and no longer do, because #sections is gone:
+  //   1. SORT === "sincecutoff" -> renderOrderQueue()
+  //   2. otherwise -> orderedLocations.map(renderSection) into #sections
+  // Both renderers still exist, unchanged. Put those back alongside the markup
+  // block above to restore the planning board.
   updateTabCounts(t);
 }
 
@@ -7931,13 +8707,19 @@ function init(){
   document.getElementById("pageSub").innerHTML = suffix;
   render();
 
-  // Honor a #tab hash so a shared/bookmarked link lands on the right tab
-  // (Order queue / Print queue / Travelers / Job Preview). Pass updateHash=
-  // false so we don't churn history on load — the hash is already correct.
-  const hash = (location.hash || "").replace("#","");
-  if(TAB_NAMES.includes(hash)){
-    setTab(hash, false);
-  }
+  // Honor a #tab hash so a shared/bookmarked link lands on the right tab. Pass
+  // updateHash=false so we don't churn history on load — the hash is already
+  // correct.
+  //
+  // UNCONDITIONAL as of 2026-08-13. It used to run only when the hash named a
+  // real tab, so a NO-hash load simply left whichever panel carried the static
+  // `active` class showing, with that panel's renderer never called. Two things
+  // made that unsafe once the default became Print: the hub:railready handler
+  // that would otherwise correct it does not fire where nav.js isn't served
+  // (the public db-pages copy), and going through resolveTab() here also means
+  // the #order / #travelers aliases finally work at load instead of being
+  // ignored until railready.
+  setTab(resolveTab((location.hash || "").replace("#","")) || DEFAULT_TAB, false);
 
   // Gate the Release button to Shipping + management (async; disables on resolve).
   enforceReleaseGate();
