@@ -1155,6 +1155,55 @@
   .trv-vt-btn:hover { color: var(--ink); }
   .trv-vt-btn.is-active { background: var(--ink); color: #fff; }
 
+  /* "How to use this page" — the house collapsible (same component as the
+     Receive console, jobs board and purchase-requests pages). Screen-only:
+     it carries `no-print`, so it never reaches paper. */
+  .how-to { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 16px; max-width: 660px; }
+  .how-to summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 8px 0; cursor: pointer; list-style: none;
+    font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.15s;
+  }
+  .how-to summary::-webkit-details-marker { display: none; }
+  .how-to summary:hover, .how-to[open] summary { color: var(--text); }
+  .how-to-chevron { transition: transform 0.2s ease; flex-shrink: 0; }
+  .how-to[open] .how-to-chevron { transform: rotate(180deg); }
+  .how-to-body { padding: 8px 0 4px; font-size: 13px; line-height: 1.55; color: var(--text); font-weight: 400; }
+  .how-to-steps { list-style: decimal; padding-left: 22px; margin: 8px 0 18px; display: grid; gap: 10px; }
+  .how-to-steps li { padding-left: 4px; }
+  .how-to-steps li strong { display: block; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .how-to-steps em { font-style: normal; font-weight: 500; color: var(--text); }
+  .how-to-callout {
+    display: block; margin-top: 6px; padding: 8px 12px;
+    background: #FFF7EB; border-left: 3px solid var(--accent); border-radius: 4px;
+    font-size: 12px; font-weight: 500; color: var(--accent-dark);
+  }
+  .how-to-tips { background: var(--bg); border-radius: var(--radius); padding: 12px 16px; margin-top: 4px; }
+  .how-to-tips strong {
+    display: block; font-weight: 600; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--muted); margin-bottom: 6px;
+  }
+  .how-to-tips ul { list-style: disc; padding-left: 20px; margin: 0; display: grid; gap: 6px; font-size: 12.5px; }
+  .how-to-tips li strong {
+    display: inline; font-weight: 600; text-transform: none; letter-spacing: 0;
+    color: var(--text); margin-bottom: 0; font-size: inherit;
+  }
+  .how-to-tips em { font-style: normal; font-weight: 500; color: var(--text); }
+  /* Section heading inside the how-to. This block absorbed the old
+     order-release.html + release.html hub pages (2026-08-12), so it needs
+     structure — one flat list of 15 steps is not readable. */
+  .how-to-sec {
+    font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--muted); margin: 22px 0 0; padding-top: 14px; border-top: 1px solid var(--border);
+  }
+  .how-to-sec:first-of-type { margin-top: 8px; padding-top: 0; border-top: none; }
+  .how-to-body > p { margin: 8px 0 0; }
+  .how-to-defs { list-style: none; padding: 0; margin: 8px 0 14px; display: grid; gap: 6px; }
+  .how-to-defs li { font-size: 12.5px; }
+  .how-to-defs b { font-weight: 600; color: var(--text); }
+  .how-to-links { margin-top: 14px; font-size: 12.5px; display: flex; flex-wrap: wrap; gap: 14px; }
+  .how-to-pii { margin-top: 14px; font-size: 12px; color: var(--muted); }
+
   /* Hidden-by-filter sheet (search miss). Display:none drops it from print too. */
   .traveler.trv-filtered-out { display: none !important; }
   /* "Loading unfulfilled…" + empty-search states inside the list. */
@@ -1810,7 +1859,6 @@
       <p class="page-sub" id="pageSub">Loading…</p>
     </div>
     <div class="page-intro-actions no-print">
-      <a class="intro-help-link" href="/production/order-release.html">Guide</a>
       <a class="intro-help-link" href="/production/print-queue-rules.html">Rules</a>
       <button type="button" class="trv-btn" id="refreshBoardBtn" onclick="refreshBoard()"
               title="Rebuild the board from live Shopify right now instead of waiting for the next hourly update — pulls in just-placed orders on demand. Takes ~45s.">↻ Refresh</button>
@@ -1889,8 +1937,6 @@
                 title="Print only the orders you've checked (use the Select boxes on each order) — every traveler on each selected order. After the paper's out, it asks whether to mark them released too (tag PRINTED + archive PDFs), so printed orders don't stay invisible to Shopify. Cancel that prompt to print for reference only.">Print selected (0)</button>
         <button type="button" class="trv-btn" id="releaseSelectedBtn" onclick="releaseSelected()" disabled
                 title="Release only the orders you've checked (use the Select boxes on each order). Same as Release batch, but scoped to your selection — for pushing a few orders out together without releasing everything.">Release selected (0)</button>
-        <a class="trv-release-help" href="release.html" target="_blank" rel="noopener"
-           title="The Traveler Release guide — everyday flow, offline fallback, troubleshooting">how release works</a>
         <a class="trv-release-help" href="https://duttonbrown.sharepoint.com/:f:/s/production/IgAZ-bheKxyoR7TbpPHEv-vqATQPA4WB_8f0y0veRld62Bw?e=SttYAo"
            target="_blank" rel="noopener"
            title="All released traveler records on SharePoint (shared with the team)">traveler records &#8599;</a>
@@ -1899,7 +1945,152 @@
       <span class="trv-toolbar-hint">Drag a line (⋮⋮) to move it to another traveler on the same order — multi-qty lines ask how many move (answer less to <strong>split</strong>, e.g. 2 rods per pendant). <strong>Ctrl+Z</strong> undoes. Print = exactly what you see.</span>
     </div>
     <div id="travelers"></div>
+
   </div>
+
+  <!-- ── How to use this page ─────────────────────────────────────
+       THE single source of truth for this interface (2026-08-12). It absorbed the
+       two hub guide pages it replaced — /production/order-release.html ("Order
+       Release") and /production/release.html ("Traveler Release") — which had
+       drifted into contradicting each other and this page: the Guide implied a
+       reopened traveler shows the RELEASED arrangement (it is recomputed) and
+       that a changed order updates "within a couple of minutes" (true of the
+       main board and the re-attached PDF, but the Unfulfilled list rebuilds
+       hourly). Both are corrected here. Docs that live one click away from the
+       thing they document are docs that drift — keep this here.
+       Sits OUTSIDE the tab panels so it shows on both Plan and Print, and
+       carries `no-print` so it never reaches paper. ── -->
+  <details class="how-to no-print">
+    <summary>
+      <span class="how-to-label">How to use this page</span>
+      <svg class="how-to-chevron" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 6l4 4 4-4"/>
+      </svg>
+    </summary>
+    <div class="how-to-body">
+
+      <h4 class="how-to-sec">The daily routine</h4>
+      <ol class="how-to-steps">
+        <li>
+          <strong>Plan &mdash; skim what's coming.</strong>
+          Each order is split into <em>printouts</em>, one per color or finish, sorted by where the
+          work starts: Powder Coating, Assembly, or Shipping. Powder Coating groups by color so each
+          color's stack prints collated. Most days nothing here needs changing.
+        </li>
+        <li>
+          <strong>Print &mdash; check the sheets, then print.</strong>
+          One traveler = one work-order sheet, and it prints exactly as it looks on screen. If the
+          orange rod bar appears, click <em>&#8644; assign</em> and spread the rods across the
+          fixtures &mdash; the boxes pre-fill from the order note; a green chip means that fixture's
+          own rod matches, red means wrong type or it ships with no rod.
+        </li>
+        <li>
+          <strong>Print the sheets.</strong>
+          Use <em>Print all travelers</em>, or tick the Select boxes on the orders you want and use
+          <em>Print selected</em>.
+        </li>
+        <li>
+          <strong>Release batch.</strong>
+          Always print first, then release &mdash; the release records the board exactly as it looks,
+          including any lines you dragged or assigned. Confirm the pop-up; it tells you how many
+          orders are in the batch.
+          <span class="how-to-callout">Every print run ends with the Release click. Printing makes paper; releasing makes it official.</span>
+        </li>
+        <li>
+          <strong>Watch for the Teams card.</strong>
+          "Release queued&hellip; running on the release PC" means you're done. A minute or two later
+          a confirmation card posts to Teams &rarr; Automations &rarr; Production. That card is your proof.
+        </li>
+      </ol>
+
+      <h4 class="how-to-sec">What one release does</h4>
+      <ul class="how-to-defs">
+        <li><b>Tags every order PRINTED</b> in Shopify, and enrols it in change-watching &mdash; if the order changes later, the board flags a reprint.</li>
+        <li><b>Attaches each traveler PDF to its Shopify order</b>, so anyone can pull up the exact sheet that was made.</li>
+        <li><b>Files one combined batch PDF in SharePoint &rarr; Travelers</b> (by month) as the permanent record.</li>
+        <li><b>Posts the Teams card</b> &mdash; success or failure, you always get one.</li>
+      </ul>
+
+      <h4 class="how-to-sec">Reprinting an order that's already out</h4>
+      <ol class="how-to-steps">
+        <li>
+          <strong>Switch to Unfulfilled and search.</strong>
+          <em>To print</em> is today's release queue; <em>Unfulfilled</em> is every unfulfilled order
+          that already has a released traveler, including printed ones. Type the order number in the
+          search box and print that sheet. It renders live from the current order, so it reflects any
+          change since it was first printed.
+          <span class="how-to-callout">Reprint from here, not from the PDF on the Shopify order. A PDF's size is locked in when it's made &mdash; scaling it in Acrobat shrinks the whole page and leaves a white border. This is a web page, so the print dialog's Scale actually refits the sheet.</span>
+        </li>
+        <li>
+          <strong>Set the size in the print dialog.</strong>
+          Put <em>Scale</em> at whatever the order needs &mdash; 75%, 60%, anything. The text resizes,
+          more lines fit per page, and the sheet still fills the paper. Printing changes nothing in
+          Shopify, so print as many times and at as many sizes as you like.
+        </li>
+        <li>
+          <strong>Order changed in the last few minutes?</strong>
+          Click <em>&#8635; Refresh</em> at the top first. The Unfulfilled list rebuilds hourly from
+          7am to 4pm; Refresh pulls the current version from Shopify on demand and takes about two
+          minutes. (The order's attached PDF and its status pill update on their own within a couple
+          of minutes &mdash; it's this list that waits for the rebuild.)
+        </li>
+      </ol>
+
+      <h4 class="how-to-sec">When an order changes after it printed</h4>
+      <p>Removed items drop off the sheet, a fresh versioned PDF is re-attached to the order, and a pill
+      appears on the traveler. You don't have to do anything to <em>get</em> the update. Each reopened
+      sheet carries its provenance:</p>
+      <ul class="how-to-defs">
+        <li><b>created &hellip; &middot; edited &hellip; (rev2)</b> &mdash; when the traveler was first released, when it was last reissued, and which revision you're looking at.</li>
+        <li><b>ORDER CHANGED</b> (amber) &mdash; the order was edited since it printed. Reprint before building.</li>
+        <li><b>ORDER CANCELLED</b> (red) &mdash; pull and discard the printed copy. Don't build it.</li>
+        <li><b>Job: J-&lt;order&gt;-&lt;n&gt;</b> &mdash; the job number(s) tied to this traveler.</li>
+      </ul>
+
+      <h4 class="how-to-sec">Fixing how a traveler is split</h4>
+      <ol class="how-to-steps">
+        <li>
+          <strong>Edit reopens one order.</strong>
+          Click <em>Edit</em> at the top-right of an Unfulfilled sheet, then drag lines between its
+          travelers, split a line, or assign rods and bulbs, exactly like before release. The sheet
+          gets an accent ring; everything else stays locked. One order at a time, Shipping and
+          management only.
+        </li>
+        <li>
+          <strong>Save issues a new version.</strong>
+          It renders a new versioned PDF, makes it the latest on the Shopify order, and keeps the prior
+          version in SharePoint. It then asks whether to print the updated traveler, and tells you which
+          jobs are already issued &mdash; so if parts are in production you can reconcile before building
+          to the new sheet. <em>Cancel</em> throws the edits away.
+          <span class="how-to-callout">Only use Edit when the layout is genuinely wrong. Save issues a NEW official version of the work order. If you just need another copy on paper, skip Edit and print.</span>
+        </li>
+      </ol>
+
+      <h4 class="how-to-sec">If something looks wrong</h4>
+      <ul class="how-to-defs">
+        <li><b>"Release PC unreachable"</b> &mdash; that computer is off or asleep. Nothing is lost: message Thomas, then click Release batch again once it's back. (The downloaded <code>release-&hellip;.json</code> is only useful on the release PC itself, via the <em>DB Finalize Release</em> icon. Otherwise ignore it.)</li>
+        <li><b>No Teams card after ~10 minutes</b> &mdash; tell Thomas. It is always safe to click Release batch again; re-running never double-tags or double-attaches anything.</li>
+      </ul>
+
+      <div class="how-to-tips">
+        <strong>Tips</strong>
+        <ul>
+          <li><strong>Print = exactly what you see.</strong> The sheet on screen is the sheet that comes out of the printer.</li>
+          <li><strong>Drag a line</strong> (&#8942;&#8942;) to move it to another traveler on the same order. Multi-qty lines ask how many move, so answering less <em>splits</em> the line. <strong>Ctrl+Z</strong> undoes.</li>
+          <li><strong>Printout controls on Plan:</strong> <em>Location toggle</em> re-routes a printout if the auto-pick is wrong &middot; <em>Pages / +1</em> adds sheets &middot; <em>PART 1/2</em> means the order has more printouts (hover to see them) &middot; <em>SOLO</em> means this is the whole order.</li>
+          <li><strong>Can't find an order under Unfulfilled?</strong> It has either shipped, or it has no traveler at all (bulb-only, fee-only, or excluded). Shipped orders drop off this list &mdash; the PDF on the order is all that's left.</li>
+          <li><strong>A traveler's split may not match the paper.</strong> This page recomputes the layout, so an order that was hand-arranged before printing can come back grouped differently. Check it against the sheet you're holding before you build from it.</li>
+        </ul>
+      </div>
+
+      <div class="how-to-links">
+        <a class="intro-help-link" href="/production/print-queue-rules.html">Rules &mdash; how orders are split and routed</a>
+        <a class="intro-help-link" href="/production/log/#jobsummary">Job Summary &mdash; where every job for an order is</a>
+      </div>
+      <p class="how-to-pii">This page carries customer PII &mdash; do not screenshot or forward it outside the team.</p>
+
+    </div>
+  </details>
 </main>
 </div>
 
@@ -1907,8 +2098,986 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-08-12T16:00:04",
+  "built_at": "2026-08-12T21:48:41",
   "orders": [
+    {
+      "shopify_order_id": "7108851531858",
+      "shopify_order_name": "36923",
+      "shopify_order_number": "36923",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 1176.82,
+      "ship_by_date": null,
+      "latest_ship_by": "September 2, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-12T20:29:04-05:00",
+      "tags": "redo",
+      "total_price": 313.59,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7108851531858",
+          "shopify_order_name": "36923",
+          "shopify_order_number": "36923",
+          "key": [
+            "color",
+            "Slate Blue",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Slate Blue",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "50131-10"
+          ],
+          "variant_skus": [
+            "50131-10-2F"
+          ],
+          "line_item_titles": [
+            "Color Hemi Flush Mount 10\""
+          ],
+          "lines": [
+            {
+              "title": "Color Hemi Flush Mount 10\"",
+              "variant_title": "Nickel / Slate Blue",
+              "variant_sku": "50131-10-2F",
+              "parent_sku": "50131-10",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Slate Blue",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-hemi-flush-mount-10-nickel-slateblue.jpg?v=1747968424&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17172060635218,
+              "in_stock": null,
+              "rod_finish": "No Rod",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Slate Blue|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7108851531858",
+          "shopify_order_name": "36923",
+          "shopify_order_number": "36923",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-12T20:29:04-05:00",
+          "parent_sku": "50131-10",
+          "color": "Slate Blue",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17172060635218
+          ],
+          "item_titles": [
+            "Color Hemi Flush Mount 10\""
+          ],
+          "variant_skus": [
+            "50131-10-2F"
+          ],
+          "lines": [
+            {
+              "sku": "50131-10-2F",
+              "title": "Color Hemi Flush Mount 10\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Slate Blue",
+              "category": "fixture",
+              "variant_title": "Nickel / Slate Blue",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/8-hemi-flush-mount-10-nickel-slateblue.jpg?v=1747968424&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7108791959634",
+      "shopify_order_name": "36922",
+      "shopify_order_number": "36922",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 2450.74,
+      "ship_by_date": null,
+      "latest_ship_by": "August 14, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-08-12T19:32:39-05:00",
+      "tags": "redo",
+      "total_price": 110.74,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "FedEx Home Delivery\u00ae",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7108791959634",
+          "shopify_order_name": "36922",
+          "shopify_order_number": "36922",
+          "key": [
+            "simple",
+            "G10W"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "parent_skus": [
+            "G10W"
+          ],
+          "variant_skus": [
+            "G10W"
+          ],
+          "line_item_titles": [
+            "Replacement Neckless Glass Globe"
+          ],
+          "lines": [
+            {
+              "title": "Replacement Neckless Glass Globe",
+              "variant_title": "10\" / White Glass",
+              "variant_sku": "G10W",
+              "parent_sku": "G10W",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "finish": null,
+              "color": null,
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/globe-listing-white-1_00d441c9-5341-45c5-bec8-e0dd32d3b3f7.jpg?v=1747968726&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17171921371218,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "accessory",
+          "traveler_key": "simple|G10W",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7108791959634",
+          "shopify_order_name": "36922",
+          "shopify_order_number": "36922",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-12T19:32:39-05:00",
+          "parent_sku": "G10W",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Accessory",
+          "qty": 1,
+          "line_item_ids": [
+            17171921371218
+          ],
+          "item_titles": [
+            "Replacement Neckless Glass Globe"
+          ],
+          "variant_skus": [
+            "G10W"
+          ],
+          "lines": [
+            {
+              "sku": "G10W",
+              "title": "Replacement Neckless Glass Globe",
+              "qty": 1,
+              "finish": null,
+              "color": null,
+              "category": "accessory",
+              "variant_title": "10\" / White Glass",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/globe-listing-white-1_00d441c9-5341-45c5-bec8-e0dd32d3b3f7.jpg?v=1747968726&width=120"
+            }
+          ],
+          "tags": [
+            "Accessory"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": true,
+          "is_color": false,
+          "location": "Shipping",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7108757586002",
+      "shopify_order_name": "36921",
+      "shopify_order_number": "36921",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 4,
+      "customer_total_spent": 2466.93,
+      "ship_by_date": null,
+      "latest_ship_by": "August 14, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-08-12T19:02:02-05:00",
+      "tags": "trade",
+      "total_price": 5.72,
+      "priority": null,
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color",
+        "Sample"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7108757586002",
+          "shopify_order_name": "36921",
+          "shopify_order_number": "36921",
+          "key": [
+            "sample-only",
+            "7108757586002"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "sample",
+          "category_label": "Sample",
+          "parent_skus": [
+            "SAC-ALL",
+            "SAC-K"
+          ],
+          "variant_skus": [
+            "SAC-ALL",
+            "SAC-K"
+          ],
+          "line_item_titles": [
+            "Color Samples",
+            "Color Samples"
+          ],
+          "lines": [
+            {
+              "title": "Color Samples",
+              "variant_title": "All Colors",
+              "variant_sku": "SAC-ALL",
+              "parent_sku": "SAC-ALL",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/All-Colors_98189f34-7443-4ffd-bcfa-5cdbf76adba6.png?v=1763242187&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Samples",
+              "variant_title": "Barely",
+              "variant_sku": "SAC-K",
+              "parent_sku": "SAC-K",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/14-dutton-brown-swatches-barely.jpg?v=1774454749&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "sample-only",
+          "traveler_key": "sample-only|7108757586002",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7108731568210",
+      "shopify_order_name": "36920",
+      "shopify_order_number": "36920",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 686.41,
+      "ship_by_date": null,
+      "latest_ship_by": "August 14, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-08-12T18:38:45-05:00",
+      "tags": "redo",
+      "total_price": 75.92,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7108731568210",
+          "shopify_order_name": "36920",
+          "shopify_order_number": "36920",
+          "key": [
+            "catch-all",
+            "7108731568210"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Ship / Review",
+          "parent_skus": [
+            "BULB-G25-W"
+          ],
+          "variant_skus": [
+            "BULB-G25-W"
+          ],
+          "line_item_titles": [
+            "LED G25 Bulb - Matte White"
+          ],
+          "lines": [
+            {
+              "title": "LED G25 Bulb - Matte White",
+              "variant_title": "550 lumens",
+              "variant_sku": "BULB-G25-W",
+              "parent_sku": "BULB-G25-W",
+              "qty": 4,
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/BULB-G25.jpg?v=1782229459&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 4,
+          "notes": "No standard build \u2014 bulbs/globes, custom, or one-time items. Pull, pack, and ship; confirm with the manager if anything needs building.",
+          "source": "catch-all",
+          "traveler_key": "catch-all|7108731568210",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7107942547538",
+      "shopify_order_name": "36919",
+      "shopify_order_number": "36919",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 400.54,
+      "ship_by_date": null,
+      "latest_ship_by": "September 2, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-12T16:42:44-05:00",
+      "tags": "discount, redo",
+      "total_price": 191.8,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Ground Advantage",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7107942547538",
+          "shopify_order_name": "36919",
+          "shopify_order_number": "36919",
+          "key": [
+            "color",
+            "White",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H28"
+          ],
+          "variant_skus": [
+            "H28-2A"
+          ],
+          "line_item_titles": [
+            "Color Swift Knob"
+          ],
+          "lines": [
+            {
+              "title": "Color Swift Knob",
+              "variant_title": "Nickel / White",
+              "variant_sku": "H28-2A",
+              "parent_sku": "H28",
+              "qty": 7,
+              "category": "knob",
+              "category_label": "Knob",
+              "finish": "Nickel",
+              "color": "White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-swift-knob-nickel-white.jpg?v=1747967596&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17170461622354,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 7,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|hardware",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7107942547538",
+          "shopify_order_name": "36919",
+          "shopify_order_number": "36919",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-12T16:42:44-05:00",
+          "parent_sku": "H28",
+          "color": "White",
+          "finish": "Nickel",
+          "category": "knob",
+          "category_label": "Knob",
+          "qty": 7,
+          "line_item_ids": [
+            17170461622354
+          ],
+          "item_titles": [
+            "Color Swift Knob"
+          ],
+          "variant_skus": [
+            "H28-2A"
+          ],
+          "lines": [
+            {
+              "sku": "H28-2A",
+              "title": "Color Swift Knob",
+              "qty": 7,
+              "finish": "Nickel",
+              "color": "White",
+              "category": "knob",
+              "variant_title": "Nickel / White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-swift-knob-nickel-white.jpg?v=1747967596&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7107937304658",
+      "shopify_order_name": "36918",
+      "shopify_order_number": "36918",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 2,
+      "customer_total_spent": 400.54,
+      "ship_by_date": null,
+      "latest_ship_by": "September 2, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-12T16:38:39-05:00",
+      "tags": "discount, redo",
+      "total_price": 208.74,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7107937304658",
+          "shopify_order_name": "36918",
+          "shopify_order_number": "36918",
+          "key": [
+            "color",
+            "White",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H28"
+          ],
+          "variant_skus": [
+            "H28-2A"
+          ],
+          "line_item_titles": [
+            "Color Swift Knob"
+          ],
+          "lines": [
+            {
+              "title": "Color Swift Knob",
+              "variant_title": "Nickel / White",
+              "variant_sku": "H28-2A",
+              "parent_sku": "H28",
+              "qty": 8,
+              "category": "knob",
+              "category_label": "Knob",
+              "finish": "Nickel",
+              "color": "White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-swift-knob-nickel-white.jpg?v=1747967596&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17170447990866,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 8,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|hardware",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7107937304658",
+          "shopify_order_name": "36918",
+          "shopify_order_number": "36918",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-12T16:38:39-05:00",
+          "parent_sku": "H28",
+          "color": "White",
+          "finish": "Nickel",
+          "category": "knob",
+          "category_label": "Knob",
+          "qty": 8,
+          "line_item_ids": [
+            17170447990866
+          ],
+          "item_titles": [
+            "Color Swift Knob"
+          ],
+          "variant_skus": [
+            "H28-2A"
+          ],
+          "lines": [
+            {
+              "sku": "H28-2A",
+              "title": "Color Swift Knob",
+              "qty": 8,
+              "finish": "Nickel",
+              "color": "White",
+              "category": "knob",
+              "variant_title": "Nickel / White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-swift-knob-nickel-white.jpg?v=1747967596&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7107935404114",
+      "shopify_order_name": "36917",
+      "shopify_order_number": "36917",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 20.0,
+      "ship_by_date": null,
+      "latest_ship_by": "August 14, 2026",
+      "lead_time_label": "1 - 2 days",
+      "is_expedited": false,
+      "created_at": "2026-08-12T16:36:55-05:00",
+      "tags": "",
+      "total_price": 20.0,
+      "priority": null,
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color",
+        "Sample"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "FedEx 2Day One Rate (2 Business Days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7107935404114",
+          "shopify_order_name": "36917",
+          "shopify_order_number": "36917",
+          "key": [
+            "sample-only",
+            "7107935404114"
+          ],
+          "page_count": 1,
+          "location": "Shipping",
+          "color": null,
+          "finish": null,
+          "category": "sample",
+          "category_label": "Sample",
+          "parent_skus": [
+            "SAC-3",
+            "SAC-D"
+          ],
+          "variant_skus": [
+            "SAC-3",
+            "SAC-D"
+          ],
+          "line_item_titles": [
+            "Color Samples",
+            "Color Samples"
+          ],
+          "lines": [
+            {
+              "title": "Color Samples",
+              "variant_title": "Black",
+              "variant_sku": "SAC-3",
+              "parent_sku": "SAC-3",
+              "qty": 2,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/17-dutton-brown-swatches-black.jpg?v=1774454749&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            },
+            {
+              "title": "Color Samples",
+              "variant_title": "Lagoon",
+              "variant_sku": "SAC-D",
+              "parent_sku": "SAC-D",
+              "qty": 2,
+              "category": "accessory",
+              "category_label": "Accessory",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/6-dutton-brown-swatches-lagoon.jpg?v=1763242187&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ]
+            }
+          ],
+          "total_qty": 4,
+          "notes": null,
+          "source": "sample-only",
+          "traveler_key": "sample-only|7107935404114",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7107930685522",
+      "shopify_order_name": "36916",
+      "shopify_order_number": "36916",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 26,
+      "customer_total_spent": 7380.87,
+      "ship_by_date": null,
+      "latest_ship_by": "August 19, 2026",
+      "lead_time_label": "Expedited \u2014 within 1 week",
+      "is_expedited": true,
+      "created_at": "2026-08-12T16:32:53-05:00",
+      "tags": "expedite, redo, trade",
+      "total_price": 471.62,
+      "priority": "Expedites",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7107930685522",
+          "shopify_order_name": "36916",
+          "shopify_order_number": "36916",
+          "key": [
+            "color",
+            "Chalk",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Chalk",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "40120-6"
+          ],
+          "variant_skus": [
+            "40120-6-1L"
+          ],
+          "line_item_titles": [
+            "Color Boom Sconce - 6\" Arm"
+          ],
+          "lines": [
+            {
+              "title": "Color Boom Sconce - 6\" Arm",
+              "variant_title": "Brass / Chalk",
+              "variant_sku": "40120-6-1L",
+              "parent_sku": "40120-6",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Brass",
+              "color": "Chalk",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/2-boom-sconce-6-brass-chalk.jpg?v=1747967811&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17170432163922,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Chalk|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7107930685522",
+          "shopify_order_name": "36916",
+          "shopify_order_number": "36916",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-12T16:32:53-05:00",
+          "parent_sku": "40120-6",
+          "color": "Chalk",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17170432163922
+          ],
+          "item_titles": [
+            "Color Boom Sconce - 6\" Arm"
+          ],
+          "variant_skus": [
+            "40120-6-1L"
+          ],
+          "lines": [
+            {
+              "sku": "40120-6-1L",
+              "title": "Color Boom Sconce - 6\" Arm",
+              "qty": 1,
+              "finish": "Brass",
+              "color": "Chalk",
+              "category": "fixture",
+              "variant_title": "Brass / Chalk",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/2-boom-sconce-6-brass-chalk.jpg?v=1747967811&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Expedites",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
     {
       "shopify_order_id": "7107845455954",
       "shopify_order_name": "36915",
@@ -2571,9 +3740,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 5,
-    "printouts": 5,
-    "notion_rows": 4,
+    "orders": 13,
+    "printouts": 13,
+    "notion_rows": 9,
     "skipped_already_printed": 206,
     "printed_today": 20,
     "needs_attention": 0,
