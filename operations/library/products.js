@@ -753,12 +753,13 @@ function renderCost(p) {
   }
   if (c.loaded_margin != null) {
     const drop = c.material_margin != null
-      ? `<span class="margin-drop">−${((c.material_margin - c.loaded_margin) * 100).toFixed(1)} pts to labor</span>` : '';
+      ? `<span class="margin-drop">labor takes ${((c.material_margin - c.loaded_margin) * 100).toFixed(1)} pts</span>` : '';
     mBits.push(`<span class="margin-pair"><span class="margin-key">Material + labor</span>
       <span class="margin-num is-loaded">${pct(c.loaded_margin)}</span>${drop}</span>`);
   }
   const marginHtml = mBits.length
-    ? `<div class="margin-line">${mBits.join('<span class="margin-sep">·</span>')}</div>` : '';
+    ? `<div class="margin-line"><span class="margin-head">Margin</span>${
+        mBits.join('<span class="margin-sep">·</span>')}</div>` : '';
 
   const skus = (c.skus || []).length > 1
     ? `<span class="spec-section-aside">covers ${c.skus.map(escapeHtml).join(', ')}</span>` : '';
@@ -795,14 +796,23 @@ function renderShipping(p) {
   // is simply not rendered; a blank tier BELOW the max still shows a real gap.
   const maxQty = parseInt(s.max_qty_per_box, 10);
   const labels = ['Qty 1', 'Qty 2', 'Qty 3', 'Qty 4', 'Qty 5 & up'];
+  const boxes = s.boxes || [];
   const rows = [];
-  (s.boxes || []).forEach((b, i) => {
-    if (!b && maxQty && (i + 1) > maxQty) return;
-    rows.push(`<div class="ship-tier ${b ? '' : 'gap'}">
-        <span class="ship-tier-q">${labels[i]}</span>
-        <span class="ship-tier-b">${b ? escapeHtml(b) : 'no box on file'}</span>
-      </div>`);
-  });
+  if (!boxes.some(Boolean)) {
+    // Nothing on file at any tier is ONE fact, not five. Repeating it per tier
+    // reads as five separate problems and drowns the fixtures that have a
+    // partial answer worth completing.
+    rows.push(`<div class="ship-tier gap"><span class="ship-tier-b">
+        No carton on file at any quantity</span></div>`);
+  } else {
+    boxes.forEach((b, i) => {
+      if (!b && maxQty && (i + 1) > maxQty) return;
+      rows.push(`<div class="ship-tier ${b ? '' : 'gap'}">
+          <span class="ship-tier-q">${labels[i]}</span>
+          <span class="ship-tier-b">${b ? escapeHtml(b) : 'no box on file'}</span>
+        </div>`);
+    });
+  }
   if (!rows.length && !s.weight_lb) return '';
 
   const facts = [];

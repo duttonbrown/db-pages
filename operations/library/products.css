@@ -813,6 +813,14 @@
   padding-top: 10px;
   border-top: 1px solid var(--border);
 }
+.margin-head {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 4px;
+}
 .margin-pair { display: inline-flex; align-items: baseline; gap: 7px; }
 .margin-key {
   font-size: 10px;
