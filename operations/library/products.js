@@ -14,11 +14,20 @@ const escapeHtml = (s) =>
 // while the gated page resolves the data JSON against the public origin. Product
 // images are already absolute Shopify CDN URLs, so libUrl only rewrites the
 // relative data fetches; it leaves http(s)/data URLs alone.
+//
+// The gated copy ALSO sets `costOverlay: 'products-costing.json'` — a same-origin
+// file in db-private carrying material cost, assembly minutes, labor and margin.
+// Exactly the arrangement parts.js has with `parts-prices.json`, and for the same
+// reason: db-pages is public GitHub Pages, and what a fixture costs us and how
+// long it takes to build are not public facts. The public page renders without
+// those sections and is never told they exist.
 const LIBRARY_CONFIG = (typeof window !== 'undefined' && window.LIBRARY_CONFIG) || {};
 const LIBRARY_BASE = LIBRARY_CONFIG.base || '';
 const libUrl = (rel) => (rel && LIBRARY_BASE && !/^https?:|^data:/.test(rel)) ? LIBRARY_BASE + rel : rel;
 
 let DATA = null;
+let COSTING = {};          // handle -> {assembly…, cost…, margin…, shipping}
+let COSTING_META = null;   // {generated, labor_rate, dim_divisor}
 let BY_HANDLE = {};
 let CURRENT = null;
 let activeBucket = 'lighting';    // 'lighting' | 'hardware'
@@ -27,6 +36,27 @@ let activeConfig = null;          // a configuration_options value, or null = an
 let activeResultIdx = -1;
 
 // ---------------------------------------------------------------- bootstrap
+
+// Merge the private costing overlay. Best-effort by design — if the file is
+// missing, stale or unreadable, the page renders exactly as the public one does
+// rather than breaking. Built by
+// db-operations/projects/inventory-valuation/build_product_facts.py.
+async function applyCostOverlay() {
+  if (!LIBRARY_CONFIG.costOverlay) return;
+  try {
+    const resp = await fetch(LIBRARY_CONFIG.costOverlay, { cache: 'no-store' });
+    if (!resp.ok) return;
+    const o = await resp.json();
+    COSTING = o.products || {};
+    COSTING_META = {
+      generated: o.generated || null,
+      labor_rate: o.labor_rate || null,
+      dim_divisor: o.dim_divisor || 192,
+    };
+  } catch (e) {
+    /* overlay is optional; the page works without it */
+  }
+}
 
 async function bootstrap() {
   try {
@@ -39,6 +69,11 @@ async function bootstrap() {
   }
 
   DATA.products.forEach(p => { BY_HANDLE[p.handle] = p; });
+
+  // Awaited, not fired-and-forgotten: routeFromHash() below can open a spec
+  // card immediately on a deep link, and a card rendered before the overlay
+  // lands would silently omit the cost sections with no way to notice.
+  await applyCostOverlay();
 
   // Sidebar counts — also fetch the parts library so all 4 tabs show counts
   $('lighting-count').textContent = (DATA.counts.lighting || 0).toLocaleString();
@@ -466,6 +501,12 @@ function renderSpec(p) {
   // ---- Sales section — 2024 vs 2025 totals, units + revenue
   const salesSection = renderSales(p);
 
+  // ---- Build & cost, then how it ships. Both render only on the gated copy
+  // (they need the private overlay) and both sit right under Sales: what it
+  // sells for and what it costs to build belong in one eyeline.
+  const costSection = renderCost(p);
+  const shippingSection = renderShipping(p);
+
   // ---- Assembly diagrams / downloads — assembly diagram and tearsheet
   // are the visual references a QC person reaches for first.
   const diagramsSection = renderDiagrams(p);
@@ -511,6 +552,8 @@ function renderSpec(p) {
       </div>
 
       ${salesSection}
+      ${costSection}
+      ${shippingSection}
       ${diagramsSection}
       ${qcSection}
       ${bomSection}
@@ -615,6 +658,196 @@ function renderSales(p) {
         </span>
         ${yoy}
       </div>
+    </section>`;
+}
+
+// ---------- Build & cost (private overlay only) --------------------------
+//
+// Everything in this section is INTERNAL and arrives only via the gated
+// overlay, so on the public page these functions return '' and nothing hints
+// that they exist.
+//
+// Two rules govern how it renders, and both come from being burnt before:
+//
+//   1. A cost without its coverage is a lie. `21800FH` resolves 19 of 35 BOM
+//      lines; rendering that as a bare "$247.80" next to a 100%-covered product
+//      invites someone to reprice off a lower bound. Coverage travels with the
+//      number, always, in the same eyeline.
+//   2. Margin is shown TWICE. Material-only reads ~89% because it counts no
+//      labor; loaded subtracts assembly too. Showing only the first flatters
+//      every product; showing only the second buries a hard number under a
+//      labor estimate that, for 43% of products, is inferred from a sibling.
+
+const ASM_BASIS = {
+  MEASURED: { chip: 'MEASURED', cls: 'ok',
+              tip: 'Median of this product’s own timed builds in the Assembly Log.' },
+  VARIANT:  { chip: 'ESTIMATED', cls: 'warn',
+              tip: 'From its hang-straight / Color twin — the same physical assembly. Not timed for this SKU.' },
+  SIZE:     { chip: 'ESTIMATED', cls: 'warn',
+              tip: 'From a same-family sibling at another size or height. Assembly does differ somewhat.' },
+  MODEL:    { chip: 'MODELLED', cls: 'weak',
+              tip: 'No builds logged. Median of comparable products by type. Weakest basis — expect to correct it.' },
+};
+
+const money = (n, dp = 2) =>
+  n == null ? null : '$' + n.toLocaleString(undefined,
+    { minimumFractionDigits: dp, maximumFractionDigits: dp });
+
+function renderCost(p) {
+  const c = COSTING[p.handle];
+  if (!c) return '';
+
+  const basis = ASM_BASIS[c.assembly_basis] || ASM_BASIS.MODEL;
+  const cells = [];
+
+  if (c.assembly_minutes != null) {
+    // Show the IQR, not the full range: the log's outliers are timers left
+    // running, and a "3–373 min" range describes the data entry, not the work.
+    const spread = (c.assembly_p25 != null && c.assembly_p75 != null &&
+                    c.assembly_p75 > c.assembly_p25)
+      ? `${+c.assembly_p25.toFixed(1)}–${+c.assembly_p75.toFixed(1)} min typical` : '';
+    const n = c.assembly_builds
+      ? `${c.assembly_builds} timed build${c.assembly_builds === 1 ? '' : 's'}`
+      : (c.assembly_basis_sku ? `from ${c.assembly_basis_sku}` : '');
+    cells.push({
+      label: 'Assembly time',
+      val: `${+c.assembly_minutes.toFixed(c.assembly_minutes < 2 ? 2 : 1)} min`,
+      chip: basis, sub: [n, spread].filter(Boolean).join(' · '),
+    });
+  }
+  if (c.material_cost_est != null) {
+    const pct = c.cost_coverage == null ? null : Math.round(c.cost_coverage * 100);
+    cells.push({
+      label: 'Material', val: money(c.material_cost_est),
+      sub: pct == null ? '' :
+        `${pct}% of ${c.cost_lines} lines at real prices` + (pct < 100 ? ', rest assumed' : ''),
+      cls: pct != null && pct < 70 ? 'thin' : '',
+    });
+  }
+  if (c.labor_cost != null) {
+    cells.push({ label: 'Labor', val: money(c.labor_cost),
+                 sub: `${+c.assembly_minutes.toFixed(1)} min @ $${c.labor_rate}/hr loaded` });
+  }
+  if (c.unit_cost_est != null) {
+    cells.push({ label: 'Unit cost', val: money(c.unit_cost_est),
+                 sub: 'material + assembly labor', accent: true });
+  }
+  if (c.sell_price != null) {
+    cells.push({ label: 'Sell price', val: money(c.sell_price, 0), sub: 'list, one unit' });
+  }
+  if (!cells.length) return '';
+
+  const cellHtml = cells.map(q => `
+    <div class="cost-cell">
+      <div class="cost-label">${escapeHtml(q.label)}</div>
+      <div class="cost-val ${q.accent ? 'accent' : ''} ${q.cls || ''}">${escapeHtml(q.val)}</div>
+      ${q.chip ? `<span class="cost-chip ${q.chip.cls}" title="${escapeHtml(q.chip.tip)}">${escapeHtml(q.chip.chip)}</span>` : ''}
+      ${q.sub ? `<div class="cost-sub">${escapeHtml(q.sub)}</div>` : ''}
+    </div>`).join('');
+
+  const pct = (v) => (v * 100).toFixed(1) + '%';
+  const mBits = [];
+  if (c.material_margin != null) {
+    mBits.push(`<span class="margin-pair"><span class="margin-key">Material only</span>
+      <span class="margin-num">${pct(c.material_margin)}</span></span>`);
+  }
+  if (c.loaded_margin != null) {
+    const drop = c.material_margin != null
+      ? `<span class="margin-drop">−${((c.material_margin - c.loaded_margin) * 100).toFixed(1)} pts to labor</span>` : '';
+    mBits.push(`<span class="margin-pair"><span class="margin-key">Material + labor</span>
+      <span class="margin-num is-loaded">${pct(c.loaded_margin)}</span>${drop}</span>`);
+  }
+  const marginHtml = mBits.length
+    ? `<div class="margin-line">${mBits.join('<span class="margin-sep">·</span>')}</div>` : '';
+
+  const skus = (c.skus || []).length > 1
+    ? `<span class="spec-section-aside">covers ${c.skus.map(escapeHtml).join(', ')}</span>` : '';
+  const asOf = COSTING_META && COSTING_META.generated
+    ? `<span class="spec-section-aside">recalculated ${escapeHtml(COSTING_META.generated)}</span>` : '';
+
+  return `
+    <section class="spec-section spec-cost">
+      <header class="spec-section-head">
+        <h3>Build &amp; cost</h3>
+        <span class="spec-section-aside gated">Internal</span>
+        ${skus}
+        ${asOf}
+      </header>
+      <div class="cost-strip">${cellHtml}</div>
+      ${marginHtml}
+      <p class="cost-note">Machine-calculated from the BOM, live part prices and the
+        Assembly Log — regenerated every refresh, so it is never hand-edited.
+        Assembly time is bench time for one assembler; powder coat, wash, QC,
+        testing and packing are not in it.</p>
+    </section>`;
+}
+
+// ---------- Shipping & packaging (private overlay only) ------------------
+
+function renderShipping(p) {
+  const c = COSTING[p.handle];
+  const s = c && c.shipping;
+  if (!s) return '';
+
+  // "A blank tier ABOVE a covered tier is shallow, not a gap." Max Qty 2 means
+  // tiers 3-5 SHOULD be empty — printing "—" there manufactures ~450 rows of
+  // noise and buries the genuinely unpackaged fixtures. So a tier past the max
+  // is simply not rendered; a blank tier BELOW the max still shows a real gap.
+  const maxQty = parseInt(s.max_qty_per_box, 10);
+  const labels = ['Qty 1', 'Qty 2', 'Qty 3', 'Qty 4', 'Qty 5 & up'];
+  const rows = [];
+  (s.boxes || []).forEach((b, i) => {
+    if (!b && maxQty && (i + 1) > maxQty) return;
+    rows.push(`<div class="ship-tier ${b ? '' : 'gap'}">
+        <span class="ship-tier-q">${labels[i]}</span>
+        <span class="ship-tier-b">${b ? escapeHtml(b) : 'no box on file'}</span>
+      </div>`);
+  });
+  if (!rows.length && !s.weight_lb) return '';
+
+  const facts = [];
+  if (s.max_qty_per_box) facts.push(`<b>${escapeHtml(s.max_qty_per_box)}</b> max per box`);
+  if (s.bag) facts.push(`bagged in ${escapeHtml(s.bag)}`);
+  if (s.dims && s.dims.some(v => v != null)) {
+    facts.push('fixture ' + s.dims.map(v => v == null ? '?' : v + '"').join(' × '));
+  }
+  if (s.wire_length) facts.push(`wire ${escapeHtml(s.wire_length)}`);
+
+  // FedEx bills the greater of actual and dimensional weight. A light, bulky
+  // fixture ships on its carton, not its scale — surfacing that here is the
+  // difference between quoting freight off 4 lb and off the 20 lb we're billed.
+  let wHtml = '';
+  if (s.weight_lb != null || s.dim_weight_lb != null) {
+    const bits = [];
+    if (s.weight_lb != null) bits.push(`<span class="ship-w"><b>${s.weight_lb}</b> lb actual</span>`);
+    if (s.dim_weight_lb != null) {
+      const div = (COSTING_META && COSTING_META.dim_divisor) || 192;
+      bits.push(`<span class="ship-w"><b>${s.dim_weight_lb}</b> lb dim <span class="cost-sub">(qty-1 carton ÷ ${div})</span></span>`);
+    }
+    if (s.billable_weight_lb != null) {
+      const dimWins = s.dim_weight_lb != null && s.dim_weight_lb > (s.weight_lb || 0);
+      bits.push(`<span class="ship-w billable"><b>${s.billable_weight_lb}</b> lb billable${
+        dimWins ? ' <span class="cost-chip warn" title="Dimensional weight exceeds actual weight, so FedEx bills the carton, not the scale.">DIM</span>' : ''}</span>`);
+    }
+    wHtml = `<div class="ship-weights">${bits.join('')}</div>`;
+  }
+
+  const notes = s.packing_notes
+    ? `<p class="cost-note">${escapeHtml(s.packing_notes)}</p>` : '';
+
+  return `
+    <section class="spec-section spec-ship">
+      <header class="spec-section-head">
+        <h3>Shipping &amp; packaging</h3>
+        <span class="spec-section-aside gated">Internal</span>
+        <a class="spec-section-aside ship-link"
+           href="https://hub.duttonbrown.com/production/packing-sheet"
+           target="_blank" rel="noopener">Packing sheet ↗</a>
+      </header>
+      <div class="ship-tiers">${rows.join('')}</div>
+      ${facts.length ? `<div class="ship-facts">${facts.join(' <span class="margin-sep">·</span> ')}</div>` : ''}
+      ${wHtml}
+      ${notes}
     </section>`;
 }
 

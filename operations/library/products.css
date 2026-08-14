@@ -737,3 +737,146 @@
   color: var(--ink);
   line-height: 1.4;
 }
+
+/* ── Build & cost + Shipping (gated overlay only) ─────────────────────────
+   Palette follows scripts/report_style.py, which is contrast-verified rather
+   than chosen by eye: ink #4A4A4A 8.86:1 · pos #4E782F 5.18 · neg #9F2C00 7.41
+   · warn #B45309 5.02. `--accent` #FF9912 is FILL ONLY — 2.14:1, it fails AA at
+   every text size, so no small text is ever painted with it here. `--muted`
+   (#888) is likewise avoided below 11px. */
+.spec-cost .cost-strip,
+.spec-ship .ship-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+}
+.cost-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 118px;
+}
+.cost-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.cost-val {
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+/* Accent is opt-in and spent on the one figure the section is about. Colouring
+   every number orange highlights nothing. 19px/500 clears AA for #D97706. */
+.cost-val.accent { color: #D97706; }
+.cost-val.thin   { color: #9F2C00; }
+.cost-sub {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.35;
+}
+.cost-chip {
+  align-self: flex-start;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 1px 6px;
+  border-radius: 4px;          /* rounded, not a pill — house rule */
+  border: 1px solid;
+  cursor: help;
+}
+.cost-chip.ok   { color: #4E782F; border-color: #C4D9B4; background: #F1F7EC; }
+.cost-chip.warn { color: #B45309; border-color: #F3D9AE; background: #FFF7EB; }
+.cost-chip.weak { color: #9F2C00; border-color: #F2C4BE; background: #FDECEA; }
+.spec-section-aside.gated {
+  color: #B45309;
+  font-weight: 500;
+  border: 1px solid #F3D9AE;
+  background: #FFF7EB;
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.margin-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.margin-pair { display: inline-flex; align-items: baseline; gap: 7px; }
+.margin-key {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.margin-num {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.margin-num.is-loaded { color: #4E782F; }
+.margin-drop { font-size: 11px; font-weight: 300; color: #B45309; }
+.margin-sep { color: var(--border); }
+.cost-note {
+  margin: 10px 0 0;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.5;
+  max-width: 70ch;
+}
+
+/* Shipping */
+.ship-tier {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.ship-tier-q {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+  min-width: 54px;
+}
+.ship-tier-b { font-variant-numeric: tabular-nums; }
+.ship-tier.gap .ship-tier-b {
+  color: #9F2C00;
+  font-weight: 300;
+  font-style: italic;
+}
+.ship-facts {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text);
+}
+.ship-facts b { font-weight: 600; color: var(--ink); }
+.ship-weights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 8px;
+}
+.ship-w { font-size: 12px; font-weight: 300; color: var(--text); }
+.ship-w b { font-size: 14px; font-weight: 500; color: var(--ink); }
+.ship-w.billable b { color: #D97706; }
+.ship-w .cost-chip { margin-left: 4px; vertical-align: 1px; }
+.ship-link { color: #B45309; font-weight: 500; text-decoration: none; }
+.ship-link:hover { text-decoration: underline; }
