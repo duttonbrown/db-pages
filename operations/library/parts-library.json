@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T12:00:56",
+  "generated_at": "2026-08-18T07:05:58",
   "counts": {
     "parts": 479,
     "supplies": 162,
@@ -7,7 +7,7 @@
     "glossary": 83,
     "locations": 40,
     "parts_with_location": 10,
-    "parts_with_price": 314
+    "parts_with_price": 329
   },
   "glossary": [
     {
@@ -62831,7 +62831,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a7-9189-df369794af28",
-      "last_edited_at": "2026-08-14T00:44:00.000Z"
+      "last_edited_at": "2026-08-17T21:52:00.000Z"
     },
     {
       "part_number": "BOS18-M5",
@@ -63563,7 +63563,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81fd-905d-e731497a8b20",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "CA5-M1",
@@ -63585,7 +63585,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8141-b608-ef48cfb3bb18",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "CA5-M2",
@@ -63607,7 +63607,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ef-a652-e5b81d8e9f3b",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "CA5-M3",
@@ -63630,7 +63630,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-817c-884a-e5c58f7b9a4c",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "CA5-M6",
@@ -63653,7 +63653,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81aa-811d-e1385c33977e",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "CA5-M7",
@@ -63676,7 +63676,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81d0-a8ae-e5d47a5da1b0",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "CA5BL",
@@ -63974,7 +63974,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bd-a5fd-c157a8f91c1d",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T21:52:00.000Z"
     },
     {
       "part_number": "CRS5BR",
@@ -65611,7 +65611,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8151-a5b9-ee8c71249108",
-      "last_edited_at": "2026-08-14T00:55:00.000Z"
+      "last_edited_at": "2026-08-17T20:37:00.000Z"
     },
     {
       "part_number": "HI0-1_2",
@@ -67655,7 +67655,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-812e-bf1e-c7c0a5386f04",
-      "last_edited_at": "2026-08-14T00:46:00.000Z"
+      "last_edited_at": "2026-08-17T22:10:00.000Z"
     },
     {
       "part_number": "PA24-M1",
@@ -67876,7 +67876,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-818f-81b6-dc633d84b1ba",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T21:52:00.000Z"
     },
     {
       "part_number": "PAT18",
@@ -67921,7 +67921,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81ff-8d9d-fbd3e86a3edb",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T21:52:00.000Z"
     },
     {
       "part_number": "PC4",
@@ -70487,7 +70487,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2dcffa52-4c5b-8043-a6d6-fe328688605d",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "SCT1",
@@ -70627,7 +70627,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2dcffa52-4c5b-80b9-bcdb-d0998967f7cc",
-      "last_edited_at": "2026-08-13T23:39:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "SL3",
@@ -72175,7 +72175,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-816b-8240-dbd4e2c648f7",
-      "last_edited_at": "2026-07-02T16:32:00.000Z"
+      "last_edited_at": "2026-08-17T20:36:00.000Z"
     },
     {
       "part_number": "FC3BL",
