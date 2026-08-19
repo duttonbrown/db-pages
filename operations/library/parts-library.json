@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-18T12:01:06",
+  "generated_at": "2026-08-19T07:06:01",
   "counts": {
-    "parts": 479,
+    "parts": 480,
     "supplies": 162,
     "families": 284,
     "glossary": 83,
@@ -66305,7 +66305,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-815f-ab2c-f0e2526c82ec",
-      "last_edited_at": "2026-08-14T00:46:00.000Z"
+      "last_edited_at": "2026-08-18T17:12:00.000Z"
     },
     {
       "part_number": "LCZ1BL",
@@ -72340,6 +72340,26 @@
       "locations": [],
       "family_id": "2ceffa52-4c5b-81a7-a7db-d577a4e43eb2",
       "last_edited_at": "2026-08-14T00:47:00.000Z"
+    },
+    {
+      "part_number": "New Item Request: isopropyl alcohol",
+      "page_id": "3c0ffa52-4c5b-81c0-a6e1-f2dc7154fda2",
+      "page_url": "https://app.notion.com/p/New-Item-Request-isopropyl-alcohol-3c0ffa524c5b81c0a6e1f2dc7154fda2",
+      "image": null,
+      "finish": null,
+      "status": null,
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": null,
+      "in_house_processes": [],
+      "locations": [],
+      "family_id": null,
+      "last_edited_at": "2026-08-18T17:35:00.000Z"
     },
     {
       "part_number": "PF8RB",
