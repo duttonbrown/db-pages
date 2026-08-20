@@ -1455,6 +1455,29 @@
      color is dropped (the standing print-color rule on these sheets). */
   .trv-stock-claim { color: #B45309; font-weight: 600;
     -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* ── "N in stock" — the whole point, in one bubble (2026-08-20) ───────────
+     Thomas: "on the traveler in a bubble next to the quantity on the line for
+     that item. it should just say 'X in stock' … All that verbiage is just
+     confusing. I just need a tag."
+     It sits in the QTY cell on purpose: the question it answers is "how many of
+     this do I actually have to build", which is a question about the quantity.
+     Prints — a chip the floor can only see on screen is not on the traveler. */
+  .trv-stock-chip {
+    display: inline-block; margin-top: 3px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+    line-height: 1.5; white-space: nowrap;
+    padding: 1px 6px; border-radius: 4px;
+    border: 1px solid #9DBE8E; background: #F1F7ED; color: #3D5C24;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  /* Decided pull — same bubble, stronger, because now it is an instruction
+     ("this many are coming off the shelf") rather than an availability note. */
+  .trv-stock-chip.is-pull { border-color: #4E782F; background: #E4F0DB; }
+  /* On the shelf but every unit is spoken for by another order. Same shape so
+     the eye reads one kind of tag, muted so it cannot be mistaken for stock you
+     can take. Never hidden: someone WILL walk to the shelf, see units, and need
+     to know why the sheet didn't offer them. */
+  .trv-stock-chip.is-none { border-color: #D8D4CC; background: #F5F4F1; color: #6B6B6B; }
   .trv-stock-actions { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
   .trv-stock-qty {
     width: 52px; font-family: inherit; font-size: 12px; padding: 3px 6px;
@@ -2111,8 +2134,280 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-08-20T16:00:04",
+  "built_at": "2026-08-20T17:05:04",
   "orders": [
+    {
+      "shopify_order_id": "7124023083090",
+      "shopify_order_name": "37027",
+      "shopify_order_number": "37027",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 204.74,
+      "ship_by_date": null,
+      "latest_ship_by": "August 27, 2026",
+      "lead_time_label": "Within 1 week",
+      "is_expedited": false,
+      "created_at": "2026-08-20T17:01:39-05:00",
+      "tags": "redo",
+      "total_price": 204.74,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7124023083090",
+          "shopify_order_name": "37027",
+          "shopify_order_number": "37027",
+          "key": [
+            "finish",
+            "Nickel",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": "Nickel",
+          "category": "holder",
+          "category_label": "Holder",
+          "parent_skus": [
+            "H60-24"
+          ],
+          "variant_skus": [
+            "H60-24-2"
+          ],
+          "line_item_titles": [
+            "Throne Towel Rack 24\""
+          ],
+          "lines": [
+            {
+              "title": "Throne Towel Rack 24\"",
+              "variant_title": "Nickel",
+              "variant_sku": "H60-24-2",
+              "parent_sku": "H60-24",
+              "qty": 1,
+              "category": "holder",
+              "category_label": "Holder",
+              "finish": "Nickel",
+              "color": null,
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/office-towel-rack-28-nickel-1.jpg?v=1775636816&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Within 1 week",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17205444968530,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "finish",
+          "traveler_key": "finish|Nickel|hardware",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7124023083090",
+          "shopify_order_name": "37027",
+          "shopify_order_number": "37027",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-20T17:01:39-05:00",
+          "parent_sku": "H60-24",
+          "color": null,
+          "finish": "Nickel",
+          "category": "holder",
+          "category_label": "Holder",
+          "qty": 1,
+          "line_item_ids": [
+            17205444968530
+          ],
+          "item_titles": [
+            "Throne Towel Rack 24\""
+          ],
+          "variant_skus": [
+            "H60-24-2"
+          ],
+          "lines": [
+            {
+              "sku": "H60-24-2",
+              "title": "Throne Towel Rack 24\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": null,
+              "category": "holder",
+              "variant_title": "Nickel",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/office-towel-rack-28-nickel-1.jpg?v=1775636816&width=120"
+            }
+          ],
+          "tags": [
+            "Finish-Only",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7123948863570",
+      "shopify_order_name": "37026",
+      "shopify_order_number": "37026",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 245.49,
+      "ship_by_date": null,
+      "latest_ship_by": "September 10, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-08-20T16:04:42-05:00",
+      "tags": "redo",
+      "total_price": 245.49,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7123948863570",
+          "shopify_order_name": "37026",
+          "shopify_order_number": "37026",
+          "key": [
+            "color",
+            "White",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "White",
+          "finish": null,
+          "category": "hardware",
+          "category_label": "Hardware",
+          "parent_skus": [
+            "H19"
+          ],
+          "variant_skus": [
+            "H19-2A"
+          ],
+          "line_item_titles": [
+            "Color Caliber Hook"
+          ],
+          "lines": [
+            {
+              "title": "Color Caliber Hook",
+              "variant_title": "Nickel / White",
+              "variant_sku": "H19-2A",
+              "parent_sku": "H19",
+              "qty": 6,
+              "category": "hook",
+              "category_label": "Hook",
+              "finish": "Nickel",
+              "color": "White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/1-caliber-wall-hook-hardware-nickel-white-1.jpg?v=1747967883&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17205266808914,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 6,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|White|hardware",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7123948863570",
+          "shopify_order_name": "37026",
+          "shopify_order_number": "37026",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-08-20T16:04:42-05:00",
+          "parent_sku": "H19",
+          "color": "White",
+          "finish": "Nickel",
+          "category": "hook",
+          "category_label": "Hook",
+          "qty": 6,
+          "line_item_ids": [
+            17205266808914
+          ],
+          "item_titles": [
+            "Color Caliber Hook"
+          ],
+          "variant_skus": [
+            "H19-2A"
+          ],
+          "lines": [
+            {
+              "sku": "H19-2A",
+              "title": "Color Caliber Hook",
+              "qty": 6,
+              "finish": "Nickel",
+              "color": "White",
+              "category": "hook",
+              "variant_title": "Nickel / White",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/1-caliber-wall-hook-hardware-nickel-white-1.jpg?v=1747967883&width=120"
+            }
+          ],
+          "tags": [
+            "Color",
+            "Hardware-Only"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
     {
       "shopify_order_id": "7123939983442",
       "shopify_order_name": "37025",
@@ -4327,9 +4622,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 12,
-    "printouts": 14,
-    "notion_rows": 18,
+    "orders": 14,
+    "printouts": 16,
+    "notion_rows": 20,
     "skipped_already_printed": 164,
     "printed_today": 15,
     "needs_attention": 0,
@@ -5673,7 +5968,7 @@ function trvBuildRow(ln, p){
         <p class="trv-li-title">${escapeHtml(ln.title)}${variant}${bulbChip}</p>
         ${sku}${trvLineProps(ln.properties)}
       </td>
-      <td class="trv-qty">× ${ln.qty}
+      <td class="trv-qty">× ${ln.qty}${stockChip(ln)}
         ${assignBtn}${splitBtns}
       </td>
     </tr>`;
@@ -5980,6 +6275,47 @@ function trvColorFinishChip(p){
   return `<span class="color-chip color-chip-plain">${escapeHtml(name)}</span>`;
 }
 
+// ── "N in stock" bubble ─────────────────────────────────────────────────────
+// ONE renderer for the tag, so the traveler, the release board and every other
+// surface say the same words. The wording and the hover text are mirrored in
+// production-console (jobs board) and parts-wash-list (batch preview + sort
+// back) — if you change them here, change them there: this tag's whole value is
+// that it reads identically wherever someone meets it.
+//
+// THE NUMBER IS `free`, NOT `have`. The shelf count overstates what this order
+// can actually take, because another order may already have reserved units onto
+// the claimed cart. Printing the shelf count is the exact lie the claim
+// subtraction was added to remove (2026-08-19) — two orders each told "1 on
+// hand" for the same unit.
+function stockChipText(ln){
+  const d = ln.stock_decision;
+  if (d && d.action === "pull") return { n: d.qty || 1, kind: "pull" };
+  if (d && d.action === "build") return null;      // decided: build it, no tag
+  const s = ln.in_stock;
+  if (!s) return null;
+  const free = (typeof s.free === "number") ? s.free : (s.have || 0);
+  return { n: free, kind: free > 0 ? "have" : "none", have: s.have || 0 };
+}
+
+function stockChip(ln){
+  const c = stockChipText(ln);
+  if (!c) return "";
+  if (c.kind === "pull")
+    return `<span class="trv-stock-chip is-pull" title="${escapeHtml(
+      c.n + (c.n === 1 ? " unit is" : " units are") + " being pulled from finished goods"
+      + " — already built, on the claimed cart outside powder coat. Build only the balance.")
+      }">${c.n} from stock</span>`;
+  if (c.kind === "none")
+    return `<span class="trv-stock-chip is-none" title="${escapeHtml(
+      "On the finished-goods shelf, but all " + c.have + " are already claimed for other orders."
+      + " Nothing free for this one — build it.")
+      }">0 in stock</span>`;
+  return `<span class="trv-stock-chip" title="${escapeHtml(
+    c.n + " already built and on the finished-goods shelf. Pull from finished goods instead of"
+    + " building — you only need parts for the rest of the order.")
+    }">${c.n} in stock</span>`;
+}
+
 // ── Finished-goods STOCK box ─────────────────────────────────────────────────
 // Rendered on any traveler whose build lines include a finished-goods shelf
 // hit (line.in_stock, from the hourly Notion cache) or a recorded decision
@@ -6000,7 +6336,7 @@ function trvStockBox(o, p){
     if(ln.in_stock && ln.in_stock.notes) meta.push(ln.in_stock.notes);
     const note = meta.length ? `<div class="trv-stock-note">${escapeHtml(meta.join(" — "))}</div>` : "";
     const customCaution = (ln.properties||[]).length
-      ? " CUSTOM OPTIONS on this line — verify the shelf unit matches before pulling." : "";
+      ? " &middot; <b>CUSTOM — check the shelf unit matches</b>" : "";
     // What is actually free once other orders' claims are set aside. `free`
     // and `claimed` arrive from classify.stock_lookup; older cached payloads
     // have neither, so fall back to the raw count rather than print 0.
@@ -6008,26 +6344,28 @@ function trvStockBox(o, p){
     const free = (ln.in_stock && typeof ln.in_stock.free === "number")
       ? ln.in_stock.free : have;
     const claimNote = claimed
-      ? ` <span class="trv-stock-claim">${claimed} of these ${claimed === 1 ? "is" : "are"} already claimed for another order.</span>`
+      ? ` <span class="trv-stock-claim">(${claimed} claimed elsewhere)</span>`
       : "";
+    // ONE SHORT LINE EACH (2026-08-20). This block used to run three or four
+    // sentences per item — "far too verbose… all that verbiage is just
+    // confusing. I just need a tag" (Thomas). The at-a-glance answer now lives
+    // in the `N in stock` chip beside the quantity; what is left here is the
+    // decision and the single operational fact that goes with it.
+    //
+    // The pull line still NAMES THE PLACE, in a clause rather than a sentence:
+    // a pulled unit does not stay on the shelf, it waits on the claimed cart
+    // outside powder coat, and assembly / powder coat / shipping all read this
+    // sheet (Alex, 2026-08-19). "1 of 3" means nothing without where the 1 is.
     let text;
     if(d && d.action === "pull"){
       const pq = d.qty || 1;
       const rest = need - pq;
-      // NAME THE PLACE. A pulled unit does not stay on the shelf — it goes to
-      // the CLAIMED FINISHED GOODS cart outside powder coat and waits there for
-      // the rest of the order. Assembly, powder coat and shipping all read this
-      // sheet, and "1 of 3" means nothing unless it says where the 1 is (Alex,
-      // 2026-08-19).
-      text = `<b>PULL ${pq} FROM STOCK:</b> ${sku} (on hand ${have}).` +
-             ` <b>Pulled ${pq === 1 ? "unit is" : "units are"} on the CLAIMED FINISHED GOODS cart outside powder coat.</b>` +
-             (rest > 0
-               ? ` <b>Build the other ${rest}</b> — this order does not ship until ${rest === 1 ? "it is" : "they are"} done and reunited with the pulled ${pq === 1 ? "unit" : "units"}.`
-               : " No build — confirm pick on the jobs board, then route to QC / Testing.");
+      text = `<b>PULL ${pq}</b> ${sku} &middot; on the claimed cart outside powder coat`
+           + (rest > 0 ? ` &middot; <b>build the other ${rest}</b>` : " &middot; no build");
     } else if(d && d.action === "build"){
-      text = `<b>BUILD NEW:</b> stock ignored for ${sku} (manager decision).`;
+      text = `<b>BUILD NEW</b> ${sku} &middot; stock ignored`;
     } else {
-      text = `<b>STOCK CHECK:</b> ${sku} — ${free} of ${have} free, need ${need}. Pull or build? Confirm with manager.${claimNote}${customCaution}`;
+      text = `<b>${sku}</b> &middot; ${free} of ${have} free, need ${need}${claimNote}${customCaution}`;
     }
     const ds = `data-order="${escapeHtml(String(o.shopify_order_id||""))}" data-ordername="${escapeHtml(o.shopify_order_name||"")}" data-line="${escapeHtml(String(ln.line_item_id||""))}" data-sku="${sku}"`;
     const maxPull = Math.max(1, Math.min(have, need));
