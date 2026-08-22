@@ -693,6 +693,39 @@ const money = (n, dp = 2) =>
   n == null ? null : '$' + n.toLocaleString(undefined,
     { minimumFractionDigits: dp, maximumFractionDigits: dp });
 
+const FINISH_BASIS = {
+  real:    { chip: 'REAL', cls: 'ok',
+             tip: 'This finish has its own priced part — not a blend.' },
+  derived: { chip: 'DERIVED', cls: 'warn',
+             tip: 'No price for this exact finish yet — family average across whatever IS priced.' },
+  assumed: { chip: 'ASSUMED', cls: 'weak',
+             tip: 'Nothing priced anywhere in this family — deepest fallback (sibling/catalog/category/global).' },
+};
+
+function renderFinishStrip(c) {
+  if (!c.by_finish) return '';
+  const order = [['brass', 'Brass'], ['nickel', 'Nickel'], ['black', 'Black']];
+  const cellHtml = order.map(([key, label]) => {
+    const f = c.by_finish[key];
+    if (!f || f.material_est == null) return '';
+    const basisKey = f.real_lines > 0 ? 'real' : (f.derived_lines > 0 ? 'derived' : 'assumed');
+    const basis = FINISH_BASIS[basisKey];
+    return `
+      <div class="cost-cell">
+        <div class="cost-label">${escapeHtml(label)}</div>
+        <div class="cost-val">${escapeHtml(money(f.material_est))}</div>
+        <span class="cost-chip ${basis.cls}" title="${escapeHtml(basis.tip)}">${basis.chip}</span>
+      </div>`;
+  }).filter(Boolean).join('');
+  if (!cellHtml) return '';
+  const method = c.finish_weighting && c.finish_weighting.method === 'sales-mix'
+    ? 'Material above is weighted by actual 2025 sales mix across these three.'
+    : 'Material above is a plain average of these three — no sales history yet to weight by.';
+  return `
+    <div class="cost-strip cost-strip-finish">${cellHtml}</div>
+    <p class="cost-note cost-note-finish">${escapeHtml(method)}</p>`;
+}
+
 function renderCost(p) {
   const c = COSTING[p.handle];
   if (!c) return '';
@@ -775,6 +808,7 @@ function renderCost(p) {
         ${asOf}
       </header>
       <div class="cost-strip">${cellHtml}</div>
+      ${renderFinishStrip(c)}
       ${marginHtml}
       <p class="cost-note">Machine-calculated from the BOM, live part prices and the
         Assembly Log — regenerated every refresh, so it is never hand-edited.
