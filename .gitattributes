@@ -1,0 +1,9 @@
+# Product feeds are fetched byte-for-byte by Google and Pinterest, and the
+# publisher verifies the served copy against a sha256 in feeds/manifest.json.
+# Git's EOL conversion breaks that: a Windows checkout gets CRLF while GitHub
+# serves the LF bytes as committed, so the hashes disagree by ~200KB of line
+# endings and every freshness check fails with "STALE SERVE" on a healthy feed.
+#
+# -text disables all EOL translation, so the working tree, the commit and the
+# served file are the same bytes on every machine.
+feeds/** -text
