@@ -24,7 +24,7 @@ admin-hr/
 operations/      — QB rollout, inventory/PO build, parts usage, open orders, parts library
 production/      — KPI map, print-queue pages, fulfillment dashboards, parts-images/
 design-dev/
-marketing/       — KPI map, trade program, dashboards (data/ JSON written by n8n)
+marketing/       — KPI map, trade program, dashboards (data/ holds legacy Omnisend JSON, untouched since 2026-04 — no live writer; the old n8n feed is gone)
 shared/          — Chart.js, brand tokens, common CSS
 brand-site/      — Dutton Brown brand concepts (kept at root for URL stability)
 dutton-brown/    — legacy leftover (operations/open-orders only) — do not add new content here
