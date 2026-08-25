@@ -24,6 +24,7 @@ let DATA = null;
 let PARTS_BY_NUM = {};        // part_number -> part
 let FAMILY_BY_PARTNUM = {};   // part_number -> family object
 let GLOSSARY_BY_ID = {};      // id -> glossary entry
+let FAMILY_BY_CODE = {};      // family code (GC8, SS1/8) -> family id
 let activeGlossary = 'all';
 let activeFamily = null;         // family_id filter (deep-linked via #family/<id>)
 let activeProcesses = new Set(); // in-house process filters: 'Powder Coat', 'Black Batch', etc.
@@ -270,9 +271,36 @@ async function bootstrap() {
     return;
   }
 
-  DATA.parts.forEach((p) => { PARTS_BY_NUM[p.part_number] = p; });
-  Object.values(DATA.families).forEach((f) => {
+  // A PART NUMBER'S SLASH AND UNDERSCORE ARE THE SAME CHARACTER HERE.
+  // Notion stores this family as `NI0-7_8` while the BOM, the packing sheet and
+  // the floor all say `NI0-7/8` — and it is not even consistent inside Notion:
+  // NI2-1/4, NI2-3/4 and NI3-1/4 keep the real slash. So a deep link built from
+  // the BOM (`#NI0-7/8`) missed PARTS_BY_NUM entirely and fell through to the
+  // unfiltered browse grid, which reads as "we don't stock that part".
+  // Indexing BOTH spellings fixes every consumer at once — deep link, search,
+  // Enter-to-open and recents — and keeps working whichever way the data drifts
+  // next. Fixing it here rather than renaming the Notion rows deliberately:
+  // other systems match those strings, and image filenames are underscored by
+  // `safe_filename()` regardless.
+  DATA.parts.forEach((p) => {
+    PARTS_BY_NUM[p.part_number] = p;
+    const alt = String(p.part_number || '').replace(/_/g, '/');
+    if (alt !== p.part_number && !PARTS_BY_NUM[alt]) PARTS_BY_NUM[alt] = p;
+    const alt2 = String(p.part_number || '').replace(/\//g, '_');
+    if (alt2 !== p.part_number && !PARTS_BY_NUM[alt2]) PARTS_BY_NUM[alt2] = p;
+  });
+  Object.entries(DATA.families).forEach(([fid, f]) => {
     GLOSSARY_BY_ID[f.glossary && f.glossary.id] = f.glossary;
+    // THE PACKING SHEET SPEAKS FAMILIES, NOT PART NUMBERS. bom-master names the
+    // FAMILY (SS1/8, GC8, SSC3/16) and the sheet links `#<CODE>`, but families
+    // were only reachable as `#family/<page-id>` — so every family-level chip
+    // on that sheet landed on the unfiltered browse grid. Index the code here,
+    // both spellings, so a bare hash resolves a part OR a family.
+    const code = f.part_number;
+    if (!code) return;
+    [code, code.replace(/_/g, '/'), code.replace(/\//g, '_')].forEach((k) => {
+      if (k && !FAMILY_BY_CODE[k]) FAMILY_BY_CODE[k] = fid;
+    });
   });
   // Map every part to its family
   DATA.parts.forEach((p) => {
@@ -731,6 +759,10 @@ function showPart(pn, opts) {
   const p = PARTS_BY_NUM[pn];
   if (!p) return;
   currentPart = p;
+  // Resolve to the part's OWN spelling before anything is stored or shown: a
+  // link may arrive as NI0-7/8 while the record is NI0-7_8, and a recents chip
+  // built from the link would then be a second entry for one part.
+  pn = p.part_number;
   pushRecent(pn);
   $('search').value = '';
   $('results').hidden = true;
@@ -1067,6 +1099,18 @@ function routeFromHash() {
     if (PARTS_BY_NUM[raw]) {
       activeFamily = null;
       showPart(raw); return;
+    }
+    // Then the family code. A part number wins when both exist, because a
+    // specific variant is a better answer than its whole family.
+    const fid = FAMILY_BY_CODE[raw];
+    if (fid && DATA.families[fid]) {
+      activeFamily = fid;
+      currentPart = null;
+      $('spec-slot').hidden = true;
+      $('grid-slot').hidden = false;
+      renderActiveFilter(DATA.glossary);
+      renderGrid();
+      return;
     }
   }
   // No hash: the unfiltered browse grid. Every filter now lives in the URL, so
