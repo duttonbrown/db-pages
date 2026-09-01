@@ -2134,7 +2134,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-08-31T21:34:46",
+  "built_at": "2026-08-31T22:08:42",
   "orders": [
     {
       "shopify_order_id": "7144151711826",
@@ -5308,12 +5308,12 @@ const QUEUE = {
           "category_label": "Sample",
           "parent_skus": [
             "SAC-L",
-            "SAF-3",
-            "SAF-2",
-            "SAC-D",
             "SAC-PG",
             "SAC-F",
-            "SAC-B"
+            "SAF-3",
+            "SAC-B",
+            "SAF-2",
+            "SAC-D"
           ],
           "variant_skus": [
             "SAF-3",
@@ -5873,8 +5873,8 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
-            "SAC-ALL",
-            "SAF-ALL"
+            "SAF-ALL",
+            "SAC-ALL"
           ],
           "variant_skus": [
             "SAF-ALL",
@@ -9786,12 +9786,18 @@ async function printAllTravelers(){
   window.print();
 }
 // Release the whole board. Primary path: POST the release JSON (current
-// post-drag arrangement) to the n8n webhook, which forwards it through the
-// Cloudflare Tunnel to release_listener.py on the release PC — release_queue.py
+// post-drag arrangement) to the hub's own doorbell, which forwards it through
+// the Cloudflare Tunnel to release_listener.py on the mini — release_queue.py
 // runs there (tags printed, attaches PDFs, archives to SharePoint) and a Teams
-// card confirms. Fallback (PC offline / webhook unreachable): download the
+// card confirms. Fallback (mini offline / doorbell unreachable): download the
 // release.json for the "DB Finalize Release" .bat, exactly as before.
 // Append ?dryrun=1 to the board URL to send a dry-run (renders, writes nothing).
+//
+// Same-origin on the hub: db-private/functions/api/board-release.js, which
+// holds the CF Access service token a browser cannot send. Replaced the public
+// n8n webhook 2026-08-31 (n8n retirement Phase 5). The PUBLIC db-pages copy of
+// this board gets this constant rewritten to a dead path at publish time —
+// see print_queue.py render_html(public=True); don't defeat that.
 const RELEASE_WEBHOOK = "/disabled-on-public-board";
 
 // ── Release allowlist ────────────────────────────────────────────────────────
@@ -9916,6 +9922,9 @@ async function releaseBatch(){
 // which forwards through the tunnel to release_listener.py's /refresh-board
 // (runs the same publish chain the hourly task runs). Reloads on success so the
 // freshly published board is what's on screen.
+//
+// Same-origin doorbell on the hub: db-private/functions/api/board-refresh.js.
+// Replaced the public n8n webhook 2026-08-31 (n8n retirement Phase 5).
 const REFRESH_WEBHOOK = "/disabled-on-public-board";
 
 // The rebuild now takes ~2+ min (the unfulfilled dataset grew), longer than the
