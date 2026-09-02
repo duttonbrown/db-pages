@@ -28,6 +28,7 @@ const libUrl = (rel) => (rel && LIBRARY_BASE && !/^https?:|^data:/.test(rel)) ? 
 let DATA = null;
 let COSTING = {};          // handle -> {assembly…, cost…, margin…, shipping}
 let COSTING_META = null;   // {generated, labor_rate, dim_divisor}
+let CONTENT = {};          // handle -> SharePoint Content folder webUrl
 let BY_HANDLE = {};
 let CURRENT = null;
 let activeBucket = 'lighting';    // 'lighting' | 'hardware'
@@ -58,6 +59,27 @@ async function applyCostOverlay() {
   }
 }
 
+// Merge the private content-library overlay: handle -> the product's folder in
+// SharePoint 30_assets/Content (photos, renders, video). Same best-effort shape
+// as the costing overlay — the public page is never told it exists, and a
+// missing file just means no link. Built by
+// db-operations/projects/onedrive-reorg/content_library_sync.py.
+//
+// Keyed by handle, not SKU, deliberately: matching a listing to its folder
+// needs the H / (C) / size-variant rules in sku_family.py, and that resolution
+// happens in the generator so this page never has to know the SKU scheme.
+async function applyContentOverlay() {
+  if (!LIBRARY_CONFIG.contentOverlay) return;
+  try {
+    const resp = await fetch(LIBRARY_CONFIG.contentOverlay, { cache: 'no-store' });
+    if (!resp.ok) return;
+    const o = await resp.json();
+    CONTENT = o.by_handle || {};
+  } catch (e) {
+    /* overlay is optional; the page works without it */
+  }
+}
+
 async function bootstrap() {
   try {
     const resp = await fetch(libUrl('products-library.json'), { cache: 'no-store' });
@@ -74,6 +96,7 @@ async function bootstrap() {
   // card immediately on a deep link, and a card rendered before the overlay
   // lands would silently omit the cost sections with no way to notice.
   await applyCostOverlay();
+  await applyContentOverlay();
 
   // Sidebar counts — also fetch the parts library so all 4 tabs show counts
   $('lighting-count').textContent = (DATA.counts.lighting || 0).toLocaleString();
@@ -490,10 +513,12 @@ function renderSpec(p) {
       ${q.sub ? `<div class="quality-sub">${escapeHtml(q.sub)}</div>` : ''}
     </div>`).join('')}</div>`;
 
-  // ---- CTAs (open BOM in Notion + live product page)
+  // ---- CTAs (open BOM in Notion + live product page + content folder)
+  const contentUrl = CONTENT[p.handle];
   const ctaRow = `
     <div class="product-cta-row">
       ${p.bom_page_url ? `<a class="product-cta" href="${escapeHtml(p.bom_page_url)}" target="_blank" rel="noopener">Open BOM in Notion <span class="product-cta-icon">↗</span></a>` : ''}
+      ${contentUrl ? `<a class="product-cta secondary" href="${escapeHtml(contentUrl)}" target="_blank" rel="noopener">Photos &amp; renders <span class="product-cta-icon">↗</span></a>` : ''}
       <a class="product-cta secondary" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">Customer-facing page <span class="product-cta-icon">↗</span></a>
     </div>
   `;
@@ -525,6 +550,7 @@ function renderSpec(p) {
   if (p.bom_last_edited_at) adminBits.push(`BOM edited ${escapeHtml(p.bom_last_edited_at.split('T')[0])}`);
   if (DATA.generated_at) adminBits.push(`Library updated ${escapeHtml(DATA.generated_at.split('T')[0])}`);
   if (p.bom_page_url) adminBits.push(`<a href="${escapeHtml(p.bom_page_url)}" target="_blank" rel="noopener">BOM page ↗</a>`);
+  if (contentUrl) adminBits.push(`<a href="${escapeHtml(contentUrl)}" target="_blank" rel="noopener">Content folder ↗</a>`);
   adminBits.push(`<a href="${escapeHtml(p.url)}" target="_blank" rel="noopener">Customer page ↗</a>`);
   const adminHtml = `<footer class="spec-admin">${adminBits.join(' · ')}</footer>`;
 
