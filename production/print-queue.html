@@ -1429,6 +1429,15 @@
   .trv-changed-body .f { font-weight: 600; }
   .trv-changed-body .arrow { color: #B45309; font-weight: 600; padding: 0 2px; }
   .trv-changed-body .sep { color: #B9B2A6; padding: 0 5px; }
+  /* The affected item row, boxed in the same thin orange line as the callout
+     above it (Thomas, 2026-09-03). No fill, for the same reason: the ink on
+     this sheet belongs to the finish and color swatches. Drawn on the CELLS,
+     not the <tr> - a border on a table row is ignored under border-collapse,
+     and an outline on one bleeds over its neighbours. */
+  .trv-build-row.trv-line-changed > td { border-top: 1px solid #D97706;
+    border-bottom: 1px solid #D97706; }
+  .trv-build-row.trv-line-changed > td:first-child { border-left: 1px solid #D97706; }
+  .trv-build-row.trv-line-changed > td:last-child { border-right: 1px solid #D97706; }
 
   /* Expedite banner — OPP styling, faithful red */
   .trv-expedite {
@@ -2161,8 +2170,709 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-09-03T10:17:16",
+  "built_at": "2026-09-03T10:39:53",
   "orders": [
+    {
+      "shopify_order_id": "7148762202194",
+      "shopify_order_name": "37216",
+      "shopify_order_number": "37216",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 710.95,
+      "ship_by_date": null,
+      "latest_ship_by": "September 24, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-09-03T10:35:26-05:00",
+      "tags": "discount",
+      "total_price": 710.95,
+      "priority": null,
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 4,
+      "printouts": [
+        {
+          "shopify_order_id": "7148762202194",
+          "shopify_order_name": "37216",
+          "shopify_order_number": "37216",
+          "key": [
+            "finish",
+            "Nickel",
+            "hardware"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": "Nickel",
+          "category": "hook",
+          "category_label": "Hook",
+          "parent_skus": [
+            "H16"
+          ],
+          "variant_skus": [
+            "H16-2"
+          ],
+          "line_item_titles": [
+            "Snug Hook"
+          ],
+          "lines": [
+            {
+              "title": "Snug Hook",
+              "variant_title": "Nickel",
+              "variant_sku": "H16-2",
+              "parent_sku": "H16",
+              "qty": 1,
+              "category": "hook",
+              "category_label": "Hook",
+              "finish": "Nickel",
+              "color": null,
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/H16-snug-hook-nickel-1.jpg?v=1747968002&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Within 1 week",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17264687284306,
+              "in_stock": null
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "finish",
+          "traveler_key": "finish|Nickel|hardware",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7148762202194",
+          "shopify_order_name": "37216",
+          "shopify_order_number": "37216",
+          "key": [
+            "color",
+            "Spa",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Spa",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60132",
+            "60226-11"
+          ],
+          "variant_skus": [
+            "60132-2B",
+            "60226-11-2B"
+          ],
+          "line_item_titles": [
+            "Color Twink Flush Mount",
+            "Color Pilot Sconce 11\""
+          ],
+          "lines": [
+            {
+              "title": "Color Twink Flush Mount",
+              "variant_title": "Nickel / Spa",
+              "variant_sku": "60132-2B",
+              "parent_sku": "60132",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-twink-flush-mount-nickel-spa.jpg?v=1747968340&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17264687349842,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "Color Pilot Sconce 11\"",
+              "variant_title": "Nickel / Spa / Hardwired (no switch)",
+              "variant_sku": "60226-11-2B",
+              "parent_sku": "60226-11",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-pilot-sconce-11-nickel-spa.jpg?v=1757596779&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17264687382610,
+              "in_stock": {
+                "have": 1,
+                "claimed": 0,
+                "free": 1,
+                "name": "Color Pilot Sconce 11\" - Nickel/Spa",
+                "notes": "",
+                "flags": []
+              },
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Spa|lighting",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7148762202194",
+          "shopify_order_name": "37216",
+          "shopify_order_number": "37216",
+          "key": [
+            "finish",
+            "Nickel",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "parent_skus": [
+            "60121"
+          ],
+          "variant_skus": [
+            "60121-2"
+          ],
+          "line_item_titles": [
+            "Snug Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Snug Sconce",
+              "variant_title": "Nickel",
+              "variant_sku": "60121-2",
+              "parent_sku": "60121",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": null,
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/snug-sconce-nickel-nickel_8b58c046-bcb5-486e-9cf9-83cba444908e.jpg?v=1757419133&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "Within 1 week",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17264687415378,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "finish",
+          "traveler_key": "finish|Nickel|lighting",
+          "jobs": []
+        },
+        {
+          "shopify_order_id": "7148762202194",
+          "shopify_order_name": "37216",
+          "shopify_order_number": "37216",
+          "key": [
+            "bulbs",
+            "7148762202194"
+          ],
+          "page_count": 1,
+          "location": "Assembly",
+          "color": null,
+          "finish": null,
+          "category": "accessory",
+          "category_label": "Bulb",
+          "parent_skus": [
+            "BULB-G16-W",
+            "BULB-G25-W"
+          ],
+          "variant_skus": [
+            "BULB-G25-W",
+            "BULB-G16-W"
+          ],
+          "line_item_titles": [
+            "LED G25 Bulb - Matte White",
+            "LED G16 Bulb"
+          ],
+          "lines": [
+            {
+              "title": "LED G25 Bulb - Matte White",
+              "variant_title": "550 lumens",
+              "variant_sku": "BULB-G25-W",
+              "parent_sku": "BULB-G25-W",
+              "qty": 1,
+              "category": "accessory",
+              "category_label": "Bulb",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/BULB-G25.jpg?v=1782229459&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17264687251538,
+              "is_bulb": true,
+              "bulb_type": "G25",
+              "bulb_count": 1
+            },
+            {
+              "title": "LED G16 Bulb",
+              "variant_title": "White / 320 lumens",
+              "variant_sku": "BULB-G16-W",
+              "parent_sku": "BULB-G16-W",
+              "qty": 4,
+              "category": "accessory",
+              "category_label": "Bulb",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/BULB-G16-W.jpg?v=1786584726&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "1 - 2 days",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17264687317074,
+              "is_bulb": true,
+              "bulb_type": "G16",
+              "bulb_count": 4
+            }
+          ],
+          "total_qty": 5,
+          "notes": "BULB ASSIGNMENT: multiple fixtures on this order take bulbs \u2014 use the \u21c4 Assign task at the top of the Travelers tab to distribute these bulbs onto each fixture's traveler (ranked by lampholder fit) BEFORE printing.",
+          "source": "bulbs",
+          "is_bulb_sheet": true,
+          "traveler_key": "bulbs|7148762202194",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7148762202194",
+          "shopify_order_name": "37216",
+          "shopify_order_number": "37216",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-09-03T10:35:26-05:00",
+          "parent_sku": "H16",
+          "color": null,
+          "finish": "Nickel",
+          "category": "hook",
+          "category_label": "Hook",
+          "qty": 1,
+          "line_item_ids": [
+            17264687284306
+          ],
+          "item_titles": [
+            "Snug Hook"
+          ],
+          "variant_skus": [
+            "H16-2"
+          ],
+          "lines": [
+            {
+              "sku": "H16-2",
+              "title": "Snug Hook",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": null,
+              "category": "hook",
+              "variant_title": "Nickel",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/products/H16-snug-hook-nickel-1.jpg?v=1747968002&width=120"
+            }
+          ],
+          "tags": [
+            "Finish-Only",
+            "Hardware-Only"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7148762202194",
+          "shopify_order_name": "37216",
+          "shopify_order_number": "37216",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-09-03T10:35:26-05:00",
+          "parent_sku": "60132",
+          "color": "Spa",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17264687349842
+          ],
+          "item_titles": [
+            "Color Twink Flush Mount"
+          ],
+          "variant_skus": [
+            "60132-2B"
+          ],
+          "lines": [
+            {
+              "sku": "60132-2B",
+              "title": "Color Twink Flush Mount",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Spa",
+              "category": "fixture",
+              "variant_title": "Nickel / Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-twink-flush-mount-nickel-spa.jpg?v=1747968340&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7148762202194",
+          "shopify_order_name": "37216",
+          "shopify_order_number": "37216",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-09-03T10:35:26-05:00",
+          "parent_sku": "60226-11",
+          "color": "Spa",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17264687382610
+          ],
+          "item_titles": [
+            "Color Pilot Sconce 11\""
+          ],
+          "variant_skus": [
+            "60226-11-2B"
+          ],
+          "lines": [
+            {
+              "sku": "60226-11-2B",
+              "title": "Color Pilot Sconce 11\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Spa",
+              "category": "fixture",
+              "variant_title": "Nickel / Spa / Hardwired (no switch)",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-pilot-sconce-11-nickel-spa.jpg?v=1757596779&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7148762202194",
+          "shopify_order_name": "37216",
+          "shopify_order_number": "37216",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-09-03T10:35:26-05:00",
+          "parent_sku": "60121",
+          "color": null,
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17264687415378
+          ],
+          "item_titles": [
+            "Snug Sconce"
+          ],
+          "variant_skus": [
+            "60121-2"
+          ],
+          "lines": [
+            {
+              "sku": "60121-2",
+              "title": "Snug Sconce",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": null,
+              "category": "fixture",
+              "variant_title": "Nickel",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/snug-sconce-nickel-nickel_8b58c046-bcb5-486e-9cf9-83cba444908e.jpg?v=1757419133&width=120"
+            }
+          ],
+          "tags": [
+            "Finish-Only"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": false,
+          "location": "Assembly",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7148751421522",
+      "shopify_order_name": "37215",
+      "shopify_order_number": "37215",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 2868.99,
+      "ship_by_date": null,
+      "latest_ship_by": "September 24, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-09-03T10:27:55-05:00",
+      "tags": "redo",
+      "total_price": 2868.99,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7148751421522",
+          "shopify_order_name": "37215",
+          "shopify_order_number": "37215",
+          "key": [
+            "color",
+            "Spa",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Spa",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30110-8",
+            "51000"
+          ],
+          "variant_skus": [
+            "30110-8-1B",
+            "51000-2B"
+          ],
+          "line_item_titles": [
+            "Color Cap Pendant 8\"",
+            "Color Alegria Chandelier 30\""
+          ],
+          "lines": [
+            {
+              "title": "Color Cap Pendant 8\"",
+              "variant_title": "Brass / Spa / Flat ceiling",
+              "variant_sku": "30110-8-1B",
+              "parent_sku": "30110-8",
+              "qty": 3,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Brass",
+              "color": "Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-cap-globe-pendant-8-brass-spa.jpg?v=1757842898&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17264660742226,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            },
+            {
+              "title": "Color Alegria Chandelier 30\"",
+              "variant_title": "Nickel / Spa / Flat ceiling",
+              "variant_sku": "51000-2B",
+              "parent_sku": "51000",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Spa",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-alegria-chandelier-nickel-spa.jpg?v=1758372930&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17264660774994,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A"
+            }
+          ],
+          "total_qty": 4,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Spa|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7148751421522",
+          "shopify_order_name": "37215",
+          "shopify_order_number": "37215",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-09-03T10:27:55-05:00",
+          "parent_sku": "30110-8",
+          "color": "Spa",
+          "finish": "Brass",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 3,
+          "line_item_ids": [
+            17264660742226
+          ],
+          "item_titles": [
+            "Color Cap Pendant 8\""
+          ],
+          "variant_skus": [
+            "30110-8-1B"
+          ],
+          "lines": [
+            {
+              "sku": "30110-8-1B",
+              "title": "Color Cap Pendant 8\"",
+              "qty": 3,
+              "finish": "Brass",
+              "color": "Spa",
+              "category": "fixture",
+              "variant_title": "Brass / Spa / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-cap-globe-pendant-8-brass-spa.jpg?v=1757842898&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        },
+        {
+          "shopify_order_id": "7148751421522",
+          "shopify_order_name": "37215",
+          "shopify_order_number": "37215",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-09-03T10:27:55-05:00",
+          "parent_sku": "51000",
+          "color": "Spa",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17264660774994
+          ],
+          "item_titles": [
+            "Color Alegria Chandelier 30\""
+          ],
+          "variant_skus": [
+            "51000-2B"
+          ],
+          "lines": [
+            {
+              "sku": "51000-2B",
+              "title": "Color Alegria Chandelier 30\"",
+              "qty": 1,
+              "finish": "Nickel",
+              "color": "Spa",
+              "category": "fixture",
+              "variant_title": "Nickel / Spa / Flat ceiling",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/4-alegria-chandelier-nickel-spa.jpg?v=1758372930&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
     {
       "shopify_order_id": "7148674547794",
       "shopify_order_name": "37214",
@@ -2542,9 +3252,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 2,
-    "printouts": 3,
-    "notion_rows": 3,
+    "orders": 4,
+    "printouts": 8,
+    "notion_rows": 9,
     "skipped_already_printed": 138,
     "printed_today": 20,
     "needs_attention": 0,
@@ -3829,7 +4539,7 @@ function trvLineProps(props){
   }).join("");
 }
 
-function trvBuildRow(ln, p){
+function trvBuildRow(ln, p, changed){
   // Thumbnails load EAGERLY (not lazy): they're small and must always be
   // present on print — lazy off-screen images were rendering blank.
   const img = ln.image_url
@@ -3856,7 +4566,8 @@ function trvBuildRow(ln, p){
   // hand-assigned via the dialog (_att, Case B) — nest like rod sub-rows and
   // carry a fit chip when the bulb may not fit the fixture's lampholder.
   const isFoldBulb = !!ln.fold_bulb;
-  const rowCls = ((ln._att || isFoldBulb) ? " trv-row-attached" : "") + addOnRowCls(ln);
+  const rowCls = ((ln._att || isFoldBulb) ? " trv-row-attached" : "")
+                 + addOnRowCls(ln) + trvLineChangedCls(ln, changed);
   const bulbChip = (isFoldBulb || (ln._att && isBulbLine(ln))) && p ? foldBulbFitChip(p, ln) : "";
   // ⇄ assign is an accessories-only affordance: lighting and hardware are the
   // builds themselves — they're never distributed onto other items' travelers.
@@ -4510,9 +5221,10 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
   const foldDivider = foldedLines.length
     ? `<tr class="trv-fold-divider"><td colspan="3">Building alongside · no powder coating</td></tr>`
     : "";
-  const buildRows = coatedLines.map(ln => trvBuildRow(ln, p)).join("")
+  const changedSkus = trvChangedSkus(o);
+  const buildRows = coatedLines.map(ln => trvBuildRow(ln, p, changedSkus)).join("")
                   + foldDivider
-                  + foldedLines.map(ln => trvBuildRow(ln, p)).join("");
+                  + foldedLines.map(ln => trvBuildRow(ln, p, changedSkus)).join("");
   const expedite = o.is_expedited ? `<div class="trv-expedite">EXPEDITE</div>` : "";
   // The samples sheet goes out ahead of the build as its own shipment. The
   // order's Latest Ship By is the BUILD's lead-time date — printing it here
@@ -6893,6 +7605,38 @@ function trvChangeCallout(o){
       (when ? ` &middot; ${escapeHtml(fmtDateTimeShort(when))}` : "") + `</div>
       <div class="trv-changed-body">${items}</div>
     </div>`;
+}
+
+// Which SKUs the last change actually touched, so the affected item rows can
+// carry the same thin orange box as the callout (Thomas, 2026-09-03: "add the
+// box to any items below that are affected"). Read off the SAME structured
+// diff the callout renders - never a second opinion computed some other way,
+// or the box and the sentence above it could disagree about which line moved.
+function trvChangedSkus(o){
+  const out = new Set();
+  const skuIn = s => String(s || "").split(",").map(x => {
+    // "4x 30223-1K (Spa)" -> "30223-1K". A qty prefix and a variant suffix are
+    // display, not identity.
+    const m = x.trim().match(/^\d+x\s+([^(]+?)(?:\s*\(.*\))?$/);
+    return m ? m[1].trim() : "";
+  }).filter(Boolean);
+  for(const d of trvChangeDiff(o)){
+    const f = String(d.field || "");
+    if(f.startsWith("Qty ")){ out.add(f.slice(4).trim()); continue; }
+    if(f === "Line items"){
+      // Only what ENTERED or LEFT: a SKU on both sides at the same quantity is
+      // untouched and must not be boxed just for sharing a line with one that moved.
+      const was = skuIn(d.was), now = skuIn(d.now);
+      for(const s of now) if(!was.includes(s)) out.add(s);
+      for(const s of was) if(!now.includes(s)) out.add(s);
+    }
+  }
+  return out;
+}
+function trvLineChangedCls(ln, changed){
+  if(!changed || !changed.size) return "";
+  const sku = String((ln && ln.variant_sku) || "").trim();
+  return sku && changed.has(sku) ? " trv-line-changed" : "";
 }
 
 // The old "Order Queue" tab is now the Plan tab's "New since cutoff" sort mode.
