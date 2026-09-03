@@ -1413,10 +1413,16 @@
     -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   /* WHAT CHANGED. Directly under the header, above the meta rows, so it is
      read before the order is started rather than after it is built. Amber is
-     right here: this IS the exception. */
-  .trv-changed-box { border: 1px solid #F2DDB8; background: #FFF8EC;
-    border-radius: 8px; padding: 9px 13px; margin: 10px 0 4px;
-    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+     right here: this IS the exception.
+     A THIN ORANGE LINE, NO FILL (Thomas, 2026-09-03: "maybe you just box the
+     change in a thin orange line") - the ink on this sheet belongs to the
+     finish and color swatches, which carry actual work. Nothing else about the
+     block changed. It no longer declares print-color-adjust and no longer needs
+     to: that property only stops a browser dropping a BACKGROUND, and there is
+     no background left to drop. Borders print whether or not the print
+     dialog's background graphics are on. */
+  .trv-changed-box { border: 1px solid #D97706; background: none;
+    border-radius: 8px; padding: 9px 13px; margin: 10px 0 4px; }
   .trv-changed-hd { font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em;
     text-transform: uppercase; color: #B45309; margin-bottom: 3px; }
   .trv-changed-body { font-size: 12.5px; line-height: 1.5; color: #4A4A4A; }
@@ -2155,7 +2161,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-09-03T10:00:04",
+  "built_at": "2026-09-03T10:17:16",
   "orders": [
     {
       "shopify_order_id": "7148674547794",
