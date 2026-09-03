@@ -1422,22 +1422,33 @@
      no background left to drop. Borders print whether or not the print
      dialog's background graphics are on. */
   .trv-changed-box { border: 1px solid #D97706; background: none;
-    border-radius: 8px; padding: 9px 13px; margin: 10px 0 4px; }
+    border-radius: 8px; padding: 9px 13px; margin: 10px 0 4px;
+    position: relative; /* anchors the dismiss ✕ */ }
+  /* Dismiss, before printing (Thomas, 2026-09-03: "add an x in case Alex wants
+     to remove it before printing"). Screen-only twice over: hidden under
+     @media print AND clicking it removes the box from the DOM, so a dismissed
+     box cannot print either way. Removal is per-render — a tab switch or data
+     refresh draws the box again, which is correct: the dismissal means "not on
+     THIS printout", never "stop telling me the order changed". The cancellation
+     banner deliberately has NO dismiss — hiding "do not build" invites
+     building it. */
+  .trv-changed-x { position: absolute; top: 4px; right: 6px; border: 0;
+    background: none; color: #B45309; font: 600 15px/1 Poppins, sans-serif;
+    padding: 3px 6px; cursor: pointer; opacity: 0.55; }
+  .trv-changed-x:hover { opacity: 1; }
+  @media print { .trv-changed-x { display: none !important; } }
   .trv-changed-hd { font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em;
     text-transform: uppercase; color: #B45309; margin-bottom: 3px; }
   .trv-changed-body { font-size: 12.5px; line-height: 1.5; color: #4A4A4A; }
   .trv-changed-body .f { font-weight: 600; }
   .trv-changed-body .arrow { color: #B45309; font-weight: 600; padding: 0 2px; }
   .trv-changed-body .sep { color: #B9B2A6; padding: 0 5px; }
-  /* The affected item row, boxed in the same thin orange line as the callout
-     above it (Thomas, 2026-09-03). No fill, for the same reason: the ink on
-     this sheet belongs to the finish and color swatches. Drawn on the CELLS,
-     not the <tr> - a border on a table row is ignored under border-collapse,
-     and an outline on one bleeds over its neighbours. */
-  .trv-build-row.trv-line-changed > td { border-top: 1px solid #D97706;
-    border-bottom: 1px solid #D97706; }
-  .trv-build-row.trv-line-changed > td:first-child { border-left: 1px solid #D97706; }
-  .trv-build-row.trv-line-changed > td:last-child { border-right: 1px solid #D97706; }
+  /* .trv-line-changed draws NOTHING as of 2026-09-03 — Thomas, the same day he
+     asked for the row boxes: "changed my mind. I only want the box at the top.
+     It's not hard to find what is being referred to." The class still lands on
+     the row (trvChangedSkus/trvLineChangedCls keep computing it off the
+     structured diff), so it stays a machine-readable hook and a one-rule
+     revert if a per-row mark is ever wanted back. */
 
   /* Expedite banner — OPP styling, faithful red */
   .trv-expedite {
@@ -2170,7 +2181,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-09-03T10:39:53",
+  "built_at": "2026-09-03T10:51:01",
   "orders": [
     {
       "shopify_order_id": "7148762202194",
@@ -7601,11 +7612,21 @@ function trvChangeCallout(o){
     `<span class="arrow">&rarr;</span><span class="f">${escapeHtml(String(d.now||""))}</span>`
   ).join('<span class="sep">&middot;</span>');
   return `<div class="trv-changed-box">
+      <button class="trv-changed-x" type="button"
+        title="Remove this box before printing (it comes back on the next refresh)">&times;</button>
       <div class="trv-changed-hd">Changed since rev ${Math.max(1, rev-1)}` +
       (when ? ` &middot; ${escapeHtml(fmtDateTimeShort(when))}` : "") + `</div>
       <div class="trv-changed-body">${items}</div>
     </div>`;
 }
+// The ✕ above. Delegated so it works on every sheet without per-render wiring;
+// removing the node (not hiding it) means the box cannot reach the printout in
+// any media. See the .trv-changed-x CSS comment for why re-appearing on the
+// next render is the intended behavior.
+document.addEventListener("click", (e) => {
+  const x = e.target.closest && e.target.closest(".trv-changed-x");
+  if(x){ const box = x.closest(".trv-changed-box"); if(box) box.remove(); }
+});
 
 // Which SKUs the last change actually touched, so the affected item rows can
 // carry the same thin orange box as the callout (Thomas, 2026-09-03: "add the
