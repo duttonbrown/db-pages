@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Meeting — September 2026 | Dutton Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#4A4A4A;
+    --accent:#FF9912;
+    --bg:#FDFCFA;
+    --panel:#FFFFFF;
+    --line:#E7E3DC;
+    --muted:#8A8A85;
+    --radius:4px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    font-weight:400;
+    color:var(--primary);
+    background:var(--bg);
+    line-height:1.55;
+  }
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .swatch-strip{display:flex;width:100%;height:8px;}
+  .swatch-strip span{flex:1;}
+  header.hero{padding:56px 8vw 40px;background:var(--panel);border-bottom:1px solid var(--line);}
+  .eyebrow{font-size:13px;color:var(--muted);margin:0 0 10px;font-weight:400;}
+  h1.title{font-size:clamp(32px,5vw,52px);font-weight:600;margin:0 0 12px;letter-spacing:-0.01em;}
+  h1.title em{color:var(--accent);font-style:normal;}
+  .hero-sub{font-size:16px;color:var(--muted);max-width:640px;margin:0;}
+  nav.jumpnav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(253,252,250,0.96);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:0 8vw;display:flex;gap:22px;overflow-x:auto;font-size:13px;
+  }
+  nav.jumpnav a{color:var(--primary);padding:14px 0;white-space:nowrap;border-bottom:2px solid transparent;}
+  nav.jumpnav a:hover{color:var(--accent);text-decoration:none;border-bottom-color:var(--accent);}
+  main{max-width:1080px;margin:0 auto;padding:0 8vw;}
+  section{padding:56px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:28px;}
+  .section-num{font-size:13px;color:var(--accent);font-weight:600;}
+  h2{font-size:26px;font-weight:600;margin:0;}
+  h3{font-size:16px;font-weight:600;margin:0 0 10px;}
+  p{margin:0 0 12px;font-size:15px;}
+  .subblock{margin-bottom:36px;}
+  .subblock:last-child{margin-bottom:0;}
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin:18px 0 24px;}
+  .stat-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 14px;}
+  .stat-num{font-size:22px;font-weight:600;color:var(--primary);display:block;}
+  .stat-num.accent{color:var(--accent);}
+  .stat-label{font-size:12px;color:var(--muted);margin-top:4px;display:block;}
+  .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;}
+  @media (max-width:760px){.cols{grid-template-columns:1fr;}}
+  ol.ranked{list-style:none;margin:0;padding:0;counter-reset:rank;}
+  ol.ranked li{counter-increment:rank;display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  ol.ranked li:last-child{border-bottom:none;}
+  ol.ranked li::before{content:counter(rank);font-weight:600;color:var(--accent);font-size:14px;width:20px;}
+  ul.takeaways{margin:0;padding:0;list-style:none;}
+  ul.takeaways li{position:relative;padding-left:16px;margin-bottom:10px;font-size:14px;}
+  ul.takeaways li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;background:var(--accent);border-radius:1px;}
+  .chart{margin:18px 0 8px;}
+  .chart-title{font-size:12px;color:var(--muted);margin-bottom:10px;}
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px;}
+  .bar-label{width:170px;flex-shrink:0;color:var(--primary);}
+  .bar-track{flex:1;background:var(--line);border-radius:var(--radius);height:14px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--accent);border-radius:var(--radius);}
+  .bar-fill.muted{background:#C9C4B8;}
+  .bar-value{width:100px;flex-shrink:0;text-align:right;font-weight:600;color:var(--primary);}
+  img{max-width:100%;height:auto;display:block;margin-bottom:14px;border-radius:4px;}
+  .img-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  @media (max-width:600px){.img-grid{grid-template-columns:1fr;}}
+  .callout{background:#FFF6EA;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:14px 16px;font-size:14px;margin-bottom:14px;}
+  .callout strong{font-weight:600;}
+  .focus-list{display:flex;flex-direction:column;gap:14px;}
+  .focus-item{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;}
+  .focus-item .tag{flex-shrink:0;font-size:11px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:var(--radius);padding:3px 8px;height:fit-content;white-space:nowrap;}
+  .focus-item .tag.cost{color:#7C9A45;border-color:#7C9A45;}
+  .focus-item h4{margin:0 0 4px;font-size:15px;font-weight:600;}
+  .focus-item p{margin:0;font-size:13.5px;color:var(--primary);}
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .kpi-card{background:var(--primary);color:#fff;border-radius:var(--radius);padding:20px 18px;}
+  .kpi-card h4{margin:0 0 6px;font-size:15px;font-weight:600;color:#fff;}
+  .kpi-card p{margin:0;font-size:13px;color:#D8D5CE;}
+  .kpi-card.accent{background:var(--accent);}
+  .kpi-card.accent p{color:#FFE9CC;}
+  footer{padding:32px 8vw 48px;font-size:12px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="swatch-strip">
+  <span style="background:#C6403C"></span><span style="background:#E8792A"></span>
+  <span style="background:#F0B429"></span><span style="background:#7C9A45"></span>
+  <span style="background:#3F7A5B"></span><span style="background:#2F6F80"></span>
+  <span style="background:#3B6EA5"></span><span style="background:#4C4F91"></span>
+  <span style="background:#7A4F91"></span><span style="background:#B15098"></span>
+  <span style="background:#8C5A3C"></span><span style="background:#4A4A4A"></span>
+  <span style="background:#D8D3C6"></span>
+</div>
+
+<header class="hero">
+  <p class="eyebrow">Dutton Brown · Owner &amp; Marketing Review</p>
+  <h1 class="title">Marketing Meeting <em>— September 2026</em></h1>
+  <p class="hero-sub">August 2026 performance across BIM, email, advertising, and social — plus where marketing is focused for the rest of the growth push toward the 20–40% revenue target.</p>
+</header>
+
+<nav class="jumpnav">
+  <a href="#bim">BIM</a>
+  <a href="#email">Email</a>
+  <a href="#ads">Advertising</a>
+  <a href="#social">Social</a>
+  <a href="#focus">Revenue Focuses</a>
+  <a href="#kpis">KPIs</a>
+</nav>
+
+<main>
+
+  <section id="bim">
+    <div class="section-head"><span class="section-num">01</span><h2>BIM</h2></div>
+    <p style="color:var(--muted);font-size:13px;margin-top:-14px;margin-bottom:24px;">August 1 – September 1, 2026</p>
+
+    <div class="subblock">
+      <h3>Product downloads &amp; product page views</h3>
+      <img src="assets/bim-01-downloads-views.png" alt="Product downloads and page views">
+    </div>
+
+    <div class="cols subblock">
+      <div>
+        <h3>Top downloaded products</h3>
+        <ol class="ranked">
+          <li>Color Ruler Sconce</li>
+          <li>Color Cap Pendant</li>
+          <li>Color Crown Chandelier</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Top downloaded categories</h3>
+        <ol class="ranked">
+          <li>Wall Mounted (sconces)</li>
+          <li>Chandelier <span style="color:var(--muted);font-weight:400;font-size:12px;">— very close to sconces</span></li>
+          <li>Pendant</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="subblock">
+      <h3>Audience</h3>
+      <div class="img-grid">
+        <img src="assets/bim-02-audience-a.png" alt="Audience">
+        <img src="assets/bim-03-audience-b.png" alt="Audience">
+      </div>
+    </div>
+
+    <div class="subblock">
+      <h3>Collection promotions</h3>
+      <div class="callout"><strong>Sconces</strong> promo led in impressions. <strong>Chandeliers</strong> promo led in page visits and downloads.</div>
+      <div class="img-grid">
+        <img src="assets/bim-04-promo-a.png" alt="Collection promotion">
+        <img src="assets/bim-05-promo-b.png" alt="Collection promotion">
+        <img src="assets/bim-06-promo-c.png" alt="Collection promotion">
+        <img src="assets/bim-07-promo-d.png" alt="Collection promotion">
+      </div>
+    </div>
+  </section>
+
+  <section id="email">
+    <div class="section-head"><span class="section-num">02</span><h2>Email (Omnisend)</h2></div>
+
+    <div class="subblock">
+      <h3>Campaigns — quick overview</h3>
+      <p>Across 10 campaigns, August drove <strong>$74,853.65</strong> in attributed revenue from <strong>113 orders</strong> — with Trade campaigns doing the heavy lifting: roughly <strong>75% of revenue from only ~37% of sends</strong>.</p>
+      <div class="stat-row">
+        <div class="stat-card"><span class="stat-num">35%</span><span class="stat-label">Avg. open rate</span></div>
+        <div class="stat-card"><span class="stat-num">1.6%</span><span class="stat-label">Avg. click rate</span></div>
+        <div class="stat-card"><span class="stat-num">113</span><span class="stat-label">Orders</span></div>
+        <div class="stat-card"><span class="stat-num accent">$74,853</span><span class="stat-label">Revenue</span></div>
+      </div>
+      <div class="img-grid">
+        <img src="assets/email-01-campaigns-a.png" alt="Campaign performance">
+        <img src="assets/email-02-campaigns-b.png" alt="Campaign performance">
+      </div>
+
+      <div class="chart">
+        <p class="chart-title">Open rate: Trade vs. Main</p>
+        <div class="bar-row"><span class="bar-label">Trade campaigns</span><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div><span class="bar-value">43–47%</span></div>
+        <div class="bar-row"><span class="bar-label">Main campaigns</span><div class="bar-track"><div class="bar-fill muted" style="width:62%"></div></div><span class="bar-value">28–33%</span></div>
+      </div>
+
+      <h3 style="margin-top:22px;">Key takeaways</h3>
+      <ul class="takeaways">
+        <li><strong>Trade outperformed Main</strong> across the board — order rates were 6–9× higher for Trade.</li>
+        <li><strong>Trade, Week 3</strong> hit an exceptional 6.1% click rate (~3× the next-highest Trade send). Content was an expert "how to choose the best lighting" blog post — expert advice resonates with Trade audiences.</li>
+        <li><strong>Main, Week 3</strong> had elevated clicks (2.5%) but very low revenue ($1,040.14 from 6 orders) on the same content — Main may be interested but not ready to buy. Worth examining the landing experience for that send.</li>
+      </ul>
+    </div>
+
+    <div class="subblock">
+      <h3>Automations</h3>
+      <p>14 automations generated <strong>$42,559.08</strong> in attributed revenue from <strong>83 orders</strong>.</p>
+      <div class="stat-row">
+        <div class="stat-card"><span class="stat-num">67%</span><span class="stat-label">Avg. open rate</span></div>
+        <div class="stat-card"><span class="stat-num">12%</span><span class="stat-label">Avg. click rate</span></div>
+        <div class="stat-card"><span class="stat-num">83</span><span class="stat-label">Orders</span></div>
+        <div class="stat-card"><span class="stat-num accent">$42,559</span><span class="stat-label">Revenue</span></div>
+      </div>
+
+      <div class="callout">
+        Welcome Flow is the top revenue driver ($23K) with the most orders (39). <strong>Added to Cart</strong> has the highest open rate (81%). <strong>Trade Welcome</strong> has the highest click rate (24%).
+      </div>
+      <div class="img-grid">
+        <img src="assets/email-03-automations-a.png" alt="Automation performance">
+        <img src="assets/email-04-automations-b.png" alt="Automation performance">
+      </div>
+
+      <div class="chart">
+        <p class="chart-title">Revenue by automation flow</p>
+        <div class="bar-row"><span class="bar-label">🏆 Welcome Flow</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-value">$23,076.91</span></div>
+        <div class="bar-row"><span class="bar-label">Trade Welcome Email</span><div class="bar-track"><div class="bar-fill" style="width:36%"></div></div><span class="bar-value">$8,307.83</span></div>
+        <div class="bar-row"><span class="bar-label">Browse Abandonment</span><div class="bar-track"><div class="bar-fill muted" style="width:22%"></div></div><span class="bar-value">$5,088.16</span></div>
+        <div class="bar-row"><span class="bar-label">Cart + Checkout recovery</span><div class="bar-track"><div class="bar-fill muted" style="width:15%"></div></div><span class="bar-value">$3,442.97</span></div>
+      </div>
+
+      <ul class="takeaways" style="margin-top:14px;">
+        <li><strong>Welcome Flow</strong> — $23,076.91 from just 233 sends, with strong engagement across the board (67% open, 15.9% click).</li>
+        <li><strong>Trade Welcome Email</strong> — highest click rate of any automation (24.4%), converting $8,307.83 across 13 orders.</li>
+        <li><strong>Browse Abandonment</strong> — quietly added $5,088.16 from 391 sends, a solid recovery flow worth keeping healthy.</li>
+        <li><strong>Abandoned Checkout + Added to Cart</strong> — together added another $3,442.97 in recovery revenue.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ads">
+    <div class="section-head"><span class="section-num">03</span><h2>Advertising</h2></div>
+
+    <div class="cols subblock">
+      <div>
+        <h3>Pinterest</h3>
+        <ul class="takeaways">
+          <li>Testing the new AI tool "Performance+" in a one-for-one A/B test against the current manual campaign.</li>
+          <li>Plan to meet with Pinterest reps monthly and refresh creative every 3–4 weeks, starting once the A/B test wraps.</li>
+          <li>Budget still being finalized — current spend is around $6,000/month.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>AdScale</h3>
+        <ul class="takeaways">
+          <li><strong>Meta:</strong> conversion value up ~21% on incremental spend; some efficiency lost, but ROAS still near 10.</li>
+          <li><strong>PMAX:</strong> stronger in August, helped by one large month-end order (est. $2,000–$3,000).</li>
+          <li><strong>Google Search:</strong> continued to be strong.</li>
+          <li><strong>AOV:</strong> solid but below this month's pace — the Labor Day sale was a factor.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="chart subblock">
+      <p class="chart-title">August spend vs. target</p>
+      <div class="bar-row"><span class="bar-label">Actual spend</span><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div><span class="bar-value">$22.25K</span></div>
+      <div class="bar-row"><span class="bar-label">Target</span><div class="bar-track"><div class="bar-fill muted" style="width:100%"></div></div><span class="bar-value">$25K</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;">The only mark against August — Brian is working to lift Meta volume.</p>
+    </div>
+
+    <div class="callout">
+      <strong>Questions from meeting:</strong> Do we have access to Google Merchant Center? What's the timeline for new products?
+    </div>
+  </section>
+
+  <section id="social">
+    <div class="section-head"><span class="section-num">04</span><h2>Social</h2></div>
+    <p style="color:var(--muted);font-size:13px;margin-top:-14px;">Aug 11 – Sept 7 (Meta Business Suite doesn't allow custom date ranges)</p>
+
+    <div class="cols subblock">
+      <div>
+        <h3>Instagram</h3>
+        <img src="assets/social-01-instagram.png" alt="Instagram stats">
+        <div class="callout">Followers grew from 20.3 to 20.5.</div>
+      </div>
+      <div>
+        <h3>Facebook</h3>
+        <img src="assets/social-02-facebook.png" alt="Facebook stats">
+        <div class="callout">Views up almost 26%.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="focus">
+    <div class="section-head"><span class="section-num">05</span><h2>Revenue focuses for marketing</h2></div>
+    <div class="focus-list">
+      <div class="focus-item">
+        <span class="tag cost">Low cost</span>
+        <div><h4>All products on BIM</h4><p>Little to no cost — just time.</p></div>
+      </div>
+      <div class="focus-item">
+        <span class="tag">Investment</span>
+        <div><h4>Add more email automations</h4><p>Estimate: 13 more flows at ~$6,000.</p></div>
+      </div>
+      <div class="focus-item">
+        <span class="tag">Investment</span>
+        <div><h4>Ad spend</h4><p>Increasing 20% across the board (placeholder — % can be adjusted).</p></div>
+      </div>
+      <div class="focus-item">
+        <span class="tag cost">Low cost</span>
+        <div><h4>Trade program revamp</h4><p>Little to no cost if done in-house.</p></div>
+      </div>
+      <div class="focus-item">
+        <span class="tag">In progress</span>
+        <div><h4>High-quality content focus</h4><p>Primarily for social and ads. Researching AEO (Answer Engine Optimization) best practices — Q&amp;A-style blog posts, people-first content, etc. See the <a href="https://app.notion.com/p/Research-on-revenue-driving-streams-for-marketing-dept-3cfffa524c5b80aa95ddff1b6658232d?source=copy_link" target="_blank">Notion research doc</a>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kpis">
+    <div class="section-head"><span class="section-num">06</span><h2>KPIs to focus on</h2></div>
+    <div class="kpi-grid">
+      <div class="kpi-card accent"><h4>Ad revenue</h4><p>Meta, PMAX (Google), and Pinterest</p></div>
+      <div class="kpi-card"><h4>Email revenue</h4><p>Campaigns &amp; automations — automations are priority</p></div>
+      <div class="kpi-card"><h4>New trade customers / trade revenue</h4><p>Growth in accounts and dollars</p></div>
+      <div class="kpi-card"><h4>Blended ROAS</h4><p>Across all paid channels</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Dutton Brown Marketing · Prepared for the September 2026 owner &amp; marketing review
+</footer>
+
+</body>
+</html>
