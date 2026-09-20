@@ -1782,6 +1782,49 @@
   .trv-task-order { color: var(--accent-dark, #D97706); font-weight: 500; }
   .trv-task-spacer { flex: 1; }
 
+  /* ── Assignment progress (2026-09-19) ──────────────────────────────────────
+     The top bar is a COUNT, not a to-do list: the doing moved to a per-order
+     strip above each order's first sheet. Thomas, 9/19: "the scrolling is not
+     annoying, it is necessary" — going order by order IS the job, so this
+     sticks to the top of the viewport and ticks down instead of being a
+     jump list. Never prints. */
+  .trv-progress { position: sticky; top: 0; z-index: 30;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    background: #FFF8EC; border: 1px solid #F0C064; border-radius: 10px;
+    padding: 10px 16px; margin: 0 0 16px; }
+  .trv-progress.is-clear { background: #EFF5F1; border-color: #C4DBCE; }
+  .trv-progress-n { font-size: 19px; font-weight: 600; line-height: 1; color: #8A5A00;
+    font-variant-numeric: tabular-nums; }
+  .trv-progress.is-clear .trv-progress-n { color: #2F6B4F; }
+  .trv-progress-txt { font-size: 12.5px; color: #8A5A00; }
+  .trv-progress.is-clear .trv-progress-txt { color: #2F6B4F; }
+  .trv-progress-track { flex: 1 1 120px; min-width: 80px; height: 5px;
+    border-radius: 3px; background: rgba(138,90,0,.18); overflow: hidden; }
+  .trv-progress.is-clear .trv-progress-track { background: rgba(47,107,79,.18); }
+  .trv-progress-fill { display: block; height: 100%; border-radius: 3px;
+    background: #FF9912; transition: width .25s ease; }
+  .trv-progress.is-clear .trv-progress-fill { background: #2F6B4F; }
+
+  /* The per-order strip rides directly above that order's first sheet. .trv-list
+     is a 28px-gap flex column, so pull it back down onto its traveler. */
+  .trv-order-tasks { margin-bottom: -18px; }
+  .trv-order-tasks .trv-tasks { margin-bottom: 0; }
+  .trv-tasks-done { display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    background: #EFF5F1; border: 1px solid #C4DBCE; border-radius: 10px;
+    padding: 8px 16px; font-size: 12.5px; font-weight: 600; color: #2F6B4F; }
+  .trv-next-link { background: #fff; border: 1px solid #C4DBCE; color: #2F6B4F;
+    border-radius: 6px; padding: 3px 9px; font-size: 12px; font-weight: 600;
+    cursor: pointer; font-family: inherit; }
+  .trv-next-link:hover { border-color: #2F6B4F; }
+  .trv-next-link:focus-visible { outline: 2px solid #2F6B4F; outline-offset: 2px; }
+  .trv-jump-flash { animation: trvJumpFlash 1.2s ease; }
+  @keyframes trvJumpFlash {
+    0%, 100% { box-shadow: none; }
+    25% { box-shadow: 0 0 0 4px rgba(255,153,18,.45); } }
+  @media (prefers-reduced-motion: reduce) {
+    .trv-jump-flash { animation: none; }
+    .trv-progress-fill { transition: none; } }
+
   /* Lines nested under their assigned fixture — indented + vertically tight
      (compact thumb, no gap to the row above), PRINTS. */
   .trv-build-row:has(+ .trv-row-attached) td { border-bottom: none; padding-bottom: 2px; }
@@ -2181,8 +2224,284 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-09-19T19:06:16",
+  "built_at": "2026-09-19T20:31:56",
   "orders": [
+    {
+      "shopify_order_id": "7180332040274",
+      "shopify_order_name": "37452",
+      "shopify_order_number": "37452",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 550.8,
+      "ship_by_date": null,
+      "latest_ship_by": "October 9, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-09-19T19:26:34-05:00",
+      "tags": "discount",
+      "total_price": 550.8,
+      "priority": null,
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7180332040274",
+          "shopify_order_name": "37452",
+          "shopify_order_number": "37452",
+          "key": [
+            "color",
+            "Orange",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Orange",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "30321"
+          ],
+          "variant_skus": [
+            "30321-3I"
+          ],
+          "line_item_titles": [
+            "Color Icon 3 Sconce"
+          ],
+          "lines": [
+            {
+              "title": "Color Icon 3 Sconce",
+              "variant_title": "Black / Orange",
+              "variant_sku": "30321-3I",
+              "parent_sku": "30321",
+              "qty": 1,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Black",
+              "color": "Orange",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-icon-sconce-3-orange_ac21f9f3-d0b4-4768-87f6-60c9d52a8d30.jpg?v=1747968133&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17344024969298,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-A15"
+            }
+          ],
+          "total_qty": 1,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Orange|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7180332040274",
+          "shopify_order_name": "37452",
+          "shopify_order_number": "37452",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-09-19T19:26:34-05:00",
+          "parent_sku": "30321",
+          "color": "Orange",
+          "finish": "Black",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 1,
+          "line_item_ids": [
+            17344024969298
+          ],
+          "item_titles": [
+            "Color Icon 3 Sconce"
+          ],
+          "variant_skus": [
+            "30321-3I"
+          ],
+          "lines": [
+            {
+              "sku": "30321-3I",
+              "title": "Color Icon 3 Sconce",
+              "qty": 1,
+              "finish": "Black",
+              "color": "Orange",
+              "category": "fixture",
+              "variant_title": "Black / Orange",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/10-icon-sconce-3-orange_ac21f9f3-d0b4-4768-87f6-60c9d52a8d30.jpg?v=1747968133&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": null,
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
+    {
+      "shopify_order_id": "7180326469714",
+      "shopify_order_name": "37451",
+      "shopify_order_number": "37451",
+      "shopify_url": "",
+      "customer_name": "",
+      "customer_email": "",
+      "customer_orders_count": 1,
+      "customer_total_spent": 755.74,
+      "ship_by_date": null,
+      "latest_ship_by": "October 9, 2026",
+      "lead_time_label": "2 - 3 weeks",
+      "is_expedited": false,
+      "created_at": "2026-09-19T19:23:07-05:00",
+      "tags": "redo",
+      "total_price": 755.74,
+      "priority": "Redo",
+      "is_large_order": false,
+      "signature_required": false,
+      "auto_tags": [
+        "Color"
+      ],
+      "billing_address": null,
+      "shipping_address": null,
+      "shipping_method": "Free Ground Shipping Over $200 (1 - 4 days)",
+      "note": "",
+      "note_attributes": [],
+      "predicted_page_count": 1,
+      "printouts": [
+        {
+          "shopify_order_id": "7180326469714",
+          "shopify_order_name": "37451",
+          "shopify_order_number": "37451",
+          "key": [
+            "color",
+            "Ochre",
+            "lighting"
+          ],
+          "page_count": 1,
+          "location": "Powder Coating",
+          "color": "Ochre",
+          "finish": null,
+          "category": "lighting",
+          "category_label": "Lighting",
+          "parent_skus": [
+            "60124S-10"
+          ],
+          "variant_skus": [
+            "60124S-10-2H"
+          ],
+          "line_item_titles": [
+            "Color Reader Sconce - 10\" Arm"
+          ],
+          "lines": [
+            {
+              "title": "Color Reader Sconce - 10\" Arm",
+              "variant_title": "Nickel / Ochre / Hardwired with dimmer switch",
+              "variant_sku": "60124S-10-2H",
+              "parent_sku": "60124S-10",
+              "qty": 2,
+              "category": "fixture",
+              "category_label": "Fixture",
+              "finish": "Nickel",
+              "color": "Ochre",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-reader-sconce-10-nickel-ochre.jpg?v=1747967823&width=120",
+              "properties": [
+                {
+                  "name": "Lead Time",
+                  "value": "2 - 3 weeks",
+                  "is_image": false
+                }
+              ],
+              "line_item_id": 17344015106130,
+              "in_stock": null,
+              "rod_finish": "Finish",
+              "lampholder": "L-PAR16"
+            }
+          ],
+          "total_qty": 2,
+          "notes": null,
+          "source": "color",
+          "traveler_key": "color|Ochre|lighting",
+          "jobs": []
+        }
+      ],
+      "notion_rows": [
+        {
+          "shopify_order_id": "7180326469714",
+          "shopify_order_name": "37451",
+          "shopify_order_number": "37451",
+          "shopify_url": "",
+          "customer_name": "",
+          "ship_by_date": null,
+          "created_at": "2026-09-19T19:23:07-05:00",
+          "parent_sku": "60124S-10",
+          "color": "Ochre",
+          "finish": "Nickel",
+          "category": "fixture",
+          "category_label": "Fixture",
+          "qty": 2,
+          "line_item_ids": [
+            17344015106130
+          ],
+          "item_titles": [
+            "Color Reader Sconce - 10\" Arm"
+          ],
+          "variant_skus": [
+            "60124S-10-2H"
+          ],
+          "lines": [
+            {
+              "sku": "60124S-10-2H",
+              "title": "Color Reader Sconce - 10\" Arm",
+              "qty": 2,
+              "finish": "Nickel",
+              "color": "Ochre",
+              "category": "fixture",
+              "variant_title": "Nickel / Ochre / Hardwired with dimmer switch",
+              "image_url": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-reader-sconce-10-nickel-ochre.jpg?v=1747967823&width=120"
+            }
+          ],
+          "tags": [
+            "Color"
+          ],
+          "priority": "Redo",
+          "is_large_order": false,
+          "is_accessory": false,
+          "is_color": true,
+          "location": "Powder Coating",
+          "review_note": null
+        }
+      ],
+      "traveler_pdf_url": "",
+      "no_traveler_reason": null,
+      "ships_with": [],
+      "samples": [],
+      "samples_shipped_separately": false
+    },
     {
       "shopify_order_id": "7179732189266",
       "shopify_order_name": "37450",
@@ -3391,9 +3710,9 @@ const QUEUE = {
           "category": "sample",
           "category_label": "Sample",
           "parent_skus": [
+            "SAC-L",
             "SAC-E",
-            "SAC-F",
-            "SAC-L"
+            "SAC-F"
           ],
           "variant_skus": [
             "SAC-F",
@@ -4151,9 +4470,9 @@ const QUEUE = {
   "needs_attention": [],
   "printed_review": [],
   "totals": {
-    "orders": 12,
-    "printouts": 14,
-    "notion_rows": 14,
+    "orders": 14,
+    "printouts": 16,
+    "notion_rows": 16,
     "skipped_already_printed": 124,
     "printed_today": 0,
     "needs_attention": 0,
@@ -6225,8 +6544,28 @@ function renderTraveler(o, p, idx, total, calloutHtml, showSelect){
 const TRV_MOVES_KEY = "db-traveler-line-moves-v1";
 let TRV_UNDO = [];          // stack of applied moves (for Ctrl+Z)
 let TRV_REDO = [];          // stack of undone moves (for redo)
-let TRV_ROD_TASKS = 0;      // unassigned rod lines (the Travelers task bar)
+let TRV_ROD_TASKS = 0;      // unassigned rod lines (drives the top count)
 let TRV_BULB_TASKS = 0;     // unassigned bulb lines (multi-fixture orders)
+// High-water mark of assignment tasks this page load, so the top count can say
+// how many are DONE. Re-arms upward when a reload brings more (view switch,
+// refresh) — it never ratchets down, or "done" would read 0 after every assign.
+let TRV_TASK_BASELINE = 0;
+// Orders that have carried an assignment task at any point this page load.
+// DATA alone cannot tell "just finished it" from "never had one": a sheet that
+// is fully assigned away is emptied and drops out of the render entirely. This
+// is what lets a cleared order show the green strip instead of nothing.
+const TRV_TASKS_SEEN = new Set();
+
+// Scroll to an order's assignment strip and flash it. Used by "Next order
+// needing work" so a 40-order batch with 3 problems is three jumps.
+function trvJumpToTasks(anchorId){
+  const el = document.getElementById(anchorId);
+  if(!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  el.classList.remove("trv-jump-flash");
+  void el.offsetWidth;                 // reflow so the animation restarts
+  el.classList.add("trv-jump-flash");
+}
 
 // ── Per-order Edit session (Unfulfilled view) ──────────────────────────────
 // Editing a released traveler is a scoped session on ONE order. The single
@@ -7339,13 +7678,15 @@ function renderTravelers(){
         if(isPendingRodSheet(o, p)){
           p._pendingRod = true;
           p._travelerNum = null; p._travelerTotal = null;
-          (p.lines||[]).forEach(ln => rodTasks.push({ o, ln }));
+          // `p` rides along so the per-order strip can count this line's
+          // possible fixtures without re-finding its sheet.
+          (p.lines||[]).forEach(ln => rodTasks.push({ o, p, ln }));
           return false;
         }
         if(isPendingBulbSheet(o, p)){
           p._pendingBulb = true;
           p._travelerNum = null; p._travelerTotal = null;
-          (p.lines||[]).forEach(ln => bulbTasks.push({ o, ln }));
+          (p.lines||[]).forEach(ln => bulbTasks.push({ o, p, ln }));
           return false;
         }
         return true;
@@ -7367,6 +7708,21 @@ function renderTravelers(){
   });
   TRV_ROD_TASKS = rodTasks.length;
   TRV_BULB_TASKS = bulbTasks.length;
+  // ── Assignment tasks, grouped by ORDER (2026-09-19) ───────────────────────
+  // Each order's rods and bulbs render beside that order instead of in one pile
+  // at the top. The top keeps the count only.
+  const tasksByOrder = new Map();
+  const noteTask = (t, kind) => {
+    const id = String(t.o.shopify_order_id);
+    if(!tasksByOrder.has(id)) tasksByOrder.set(id, { o: t.o, rods: [], bulbs: [] });
+    tasksByOrder.get(id)[kind].push(t);
+    TRV_TASKS_SEEN.add(id);
+  };
+  rodTasks.forEach(t => noteTask(t, "rods"));
+  bulbTasks.forEach(t => noteTask(t, "bulbs"));
+  const tasksLeft = rodTasks.length + bulbTasks.length;
+  if(tasksLeft > TRV_TASK_BASELINE) TRV_TASK_BASELINE = tasksLeft;
+  const tasksDone = Math.max(0, TRV_TASK_BASELINE - tasksLeft);
   // Print order matches the Print Queue page's section model:
   //   bucket 0 = Shipping  (incl. samples) — keep received order
   //   bucket 1 = Assembly                   — keep received order
@@ -7431,30 +7787,113 @@ function renderTravelers(){
     seenOrderCheck.add(id);
     return true;
   };
+  // ── Where each order's assignment strip goes ──────────────────────────────
+  // Above that order's FIRST sheet in print sequence. Same idea as the Select
+  // checkbox above, but on its own pass and its own Set: `firstOfOrder` mutates
+  // as it goes, so sharing it would make whichever ran second see nothing.
+  // Computed after the master-cover splice so the indexes match `pairs`.
+  const stripAt = new Map();          // index in `pairs` -> order id
+  const stripPlaced = new Set();
+  pairs.forEach((x, i) => {
+    const id = String(x.o.shopify_order_id);
+    if(stripPlaced.has(id)) return;
+    stripPlaced.add(id);
+    if(TRV_TASKS_SEEN.has(id)) stripAt.set(i, id);
+  });
+  const stripOrderIds = [...stripAt.values()];   // page order
+  // The next order BELOW this one that still needs work; wraps to the first so
+  // the last cleared order still points somewhere useful. null = all clear.
+  function nextPendingAfter(id){
+    const at = stripOrderIds.indexOf(id);
+    for(let j = at + 1; j < stripOrderIds.length; j++)
+      if(tasksByOrder.has(stripOrderIds[j])) return stripOrderIds[j];
+    for(let j = 0; j < at; j++)
+      if(tasksByOrder.has(stripOrderIds[j])) return stripOrderIds[j];
+    return null;
+  }
+  // "→ 3 fixtures": how many fixture lines this task could land on. Mirrors
+  // openDistribute's own row build (other sheets only, same two tests), so the
+  // number on the strip is the number of rows in the dialog.
+  function taskTargetCount(t){
+    const bulb = isBulbLine(t.ln);
+    let n = 0;
+    (t.o.printouts||[]).forEach(q => {
+      if(q === t.p) return;
+      (q.lines||[]).forEach(ln => {
+        if(bulb ? isBulbTargetLine(ln) : ROD_TARGET_RE.test(ln.title||"")) n++;
+      });
+    });
+    return n;
+  }
+  function orderTaskRow(t){
+    const n = taskTargetCount(t);
+    return `<div class="trv-task">
+        <span class="trv-task-qty">${t.ln.qty} ×</span>
+        <span class="trv-task-title">${escapeHtml(t.ln.title)}</span>
+        <span class="trv-task-sku">${escapeHtml(t.ln.variant_sku||"")}</span>
+        <span class="trv-task-order">${n ? `to ${n} fixture${n===1?"":"s"}` : ""}</span>
+        <span class="trv-task-spacer"></span>
+        <button type="button" class="trv-btn trv-btn-primary" onclick="openDistribute('${escapeHtml(t.ln._lid)}')">⇄ Assign</button>
+      </div>`;
+  }
+  function renderOrderTasks(id){
+    const anchor = `trv-otasks-${id}`;
+    const g = tasksByOrder.get(id);
+    if(!g){
+      // Had tasks earlier this page load and has none now.
+      const nextId = nextPendingAfter(id);
+      const next = nextId
+        ? `<button type="button" class="trv-next-link" onclick="trvJumpToTasks('trv-otasks-${nextId}')">Next order needing work ↓</button>`
+        : `<span class="trv-task-order">nothing left to assign</span>`;
+      return `<div class="trv-order-tasks no-print" id="${anchor}">
+        <div class="trv-tasks-done">✓ All rods and bulbs assigned`
+        + `<span class="trv-task-spacer"></span>${next}</div></div>`;
+    }
+    const bits = [];
+    if(g.rods.length) bits.push(`${g.rods.length} rod line${g.rods.length===1?"":"s"}`);
+    if(g.bulbs.length) bits.push(`${g.bulbs.length} bulb line${g.bulbs.length===1?"":"s"}`);
+    const many = g.rods.length + g.bulbs.length !== 1;
+    const head = `${bits.join(" and ")} on this order need${many?"":"s"} assigning `
+      + `before it prints — ${many?"they print":"it prints"} on ${many?"their fixtures'":"its fixture's"} `
+      + `traveler${many?"s":""}, not ${many?"their":"its"} own.`;
+    return `<div class="trv-order-tasks no-print" id="${anchor}">
+      <div class="trv-tasks">
+        <div class="trv-tasks-head">${head}</div>
+        ${g.rods.map(orderTaskRow).join("")}${g.bulbs.map(orderTaskRow).join("")}
+      </div></div>`;
+  }
   // callout no longer rides inside the first sheet — it's a sibling banner below.
-  const sheets = pairs.map((x, i) =>
-    x.master ? renderMasterTraveler(x.o, "", firstOfOrder(x.o))
-             : renderTraveler(x.o, x.p, x.idx, x.total, "", firstOfOrder(x.o)));
-  // Rod + bulb assignment task bars share identical markup (one builder). Both
-  // list lines that must be assigned onto fixtures before printing.
-  function renderTaskBar(tasks, head){
-    if(!tasks.length) return "";
-    return `<div class="trv-tasks no-print">
-      <div class="trv-tasks-head">${head}</div>
-      ${tasks.map(t => `<div class="trv-task">
-          <span class="trv-task-qty">${t.ln.qty} ×</span>
-          <span class="trv-task-title">${escapeHtml(t.ln.title)}</span>
-          <span class="trv-task-sku">${escapeHtml(t.ln.variant_sku||"")}</span>
-          <span class="trv-task-order">${escapeHtml(t.o.shopify_order_name || ("#"+(t.o.shopify_order_number||"")))}</span>
-          <span class="trv-task-spacer"></span>
-          <button type="button" class="trv-btn trv-btn-primary" onclick="openDistribute('${escapeHtml(t.ln._lid)}')">⇄ Assign</button>
-        </div>`).join("")}
+  // NOTE: firstOfOrder() mutates, so it must be called exactly once per pair —
+  // keep it inside the ternary, never hoisted above it.
+  const sheets = pairs.map((x, i) => {
+    const sheet = x.master ? renderMasterTraveler(x.o, "", firstOfOrder(x.o))
+                           : renderTraveler(x.o, x.p, x.idx, x.total, "", firstOfOrder(x.o));
+    const stripId = stripAt.get(i);
+    return stripId ? renderOrderTasks(stripId) + sheet : sheet;
+  });
+  // The top is a COUNT now — the task rows live on their orders. It sticks to
+  // the viewport so the size of the job stays visible the whole way down.
+  function renderProgress(){
+    if(!TRV_TASK_BASELINE) return "";       // nothing ever needed assigning
+    if(!tasksLeft){
+      const n = sheets.length;
+      return `<div class="trv-progress is-clear no-print">
+        <span class="trv-progress-n">✓</span>
+        <span class="trv-progress-txt">Everything assigned · ${n} traveler${n===1?"":"s"} ready to print</span>
+        <span class="trv-progress-track"><span class="trv-progress-fill" style="width:100%"></span></span>
+      </div>`;
+    }
+    const pct = Math.round((tasksDone / TRV_TASK_BASELINE) * 100);
+    const orders = tasksByOrder.size;
+    return `<div class="trv-progress no-print">
+      <span class="trv-progress-n">${tasksLeft}</span>
+      <span class="trv-progress-txt">line${tasksLeft===1?"":"s"} still to assign · `
+      + `across ${orders} order${orders===1?"":"s"}`
+      + `${tasksDone ? ` · ${tasksDone} done` : ""} — marked on each order below</span>
+      <span class="trv-progress-track"><span class="trv-progress-fill" style="width:${pct}%"></span></span>
     </div>`;
   }
-  const taskBar =
-    renderTaskBar(rodTasks, "Rod assignment needed — these print on their fixtures' travelers, not their own. Assign BEFORE printing.")
-    + renderTaskBar(bulbTasks, "Bulb assignment needed — multiple fixtures take bulbs. Distribute onto each fixture's traveler (ranked by lampholder fit) BEFORE printing.");
-  mount.innerHTML = `${callout}${taskBar}<div class="trv-list">${sheets.join("")}</div>`;
+  mount.innerHTML = `${renderProgress()}${callout}<div class="trv-list">${sheets.join("")}</div>`;
   const n = sheets.length;
   document.getElementById("trvCount").textContent = n;
   document.getElementById("trvCountPlural").textContent = n === 1 ? "" : "s";
@@ -7779,8 +8218,9 @@ function confirmUnassignedTasks(verb){
   if(TRV_BULB_TASKS > 0) bits.push(`${TRV_BULB_TASKS} bulb line${TRV_BULB_TASKS===1?"":"s"}`);
   if(!bits.length) return true;
   return window.confirm(
-    `${bits.join(" and ")} still need assignment (top of the Travelers tab) and ` +
-    `will NOT appear on any traveler.\n\n${verb} anyway?`);
+    `${bits.join(" and ")} still need assignment (marked on each order, and ` +
+    `counted at the top of the Travelers tab) and will NOT appear on any ` +
+    `traveler.\n\n${verb} anyway?`);
 }
 
 // ── Job split ────────────────────────────────────────────────────────────────
