@@ -285,6 +285,7 @@
     .contrast-badge-aaa { background: #e8f5e9; color: #2e7d32; }
     .contrast-badge-aa { background: #e3f2fd; color: #1565c0; }
     .contrast-badge-aa-lg { background: #fff8e1; color: #f57f17; }
+    .contrast-badge-fail { background: #fbe9e7; color: #9F2C00; }
 
     /* Practical rules list */
     .rules-list {
@@ -600,7 +601,7 @@
           </div>
 
           <div class="role-tip">
-            <strong>The 14-Color Rule:</strong> Signature brand colors (Cobalt, Lagoon, Pinkaboo, Barely, Python Green, etc.)
+            <strong>The 13-Color Rule:</strong> Signature brand colors (Cobalt, Lagoon, Pinkaboo, Python Green, etc.)
             appear only in the color strip and on products. They are never used as hero backgrounds, section fills,
             benefit circle colors, testimonial backgrounds, or email template accents. This keeps them special &mdash;
             when a customer sees Python Green, they think of the product, not the UI.
@@ -768,7 +769,7 @@
               <div class="role-card-body">
                 <h4>Accent</h4>
                 <code>--db-accent</code>
-                <p>CTAs, active states, badges, highlights. The &ldquo;look here&rdquo; color. Use boldly but not everywhere &mdash; if everything is orange, nothing is.</p>
+                <p>CTAs, active states, badges, highlights. The &ldquo;look here&rdquo; color. A fill, never text &mdash; 2.14:1 on white. Use boldly but not everywhere: if everything is orange, nothing is.</p>
               </div>
             </div>
             <div class="role-card">
@@ -778,7 +779,7 @@
               <div class="role-card-body">
                 <h4>Accent Deep</h4>
                 <code>--db-accent-hover</code>
-                <p>Hover and pressed states. Also the safer choice when accent text sits on a white background (passes WCAG AA at 4.56:1).</p>
+                <p>Hover and pressed states. Also the safer choice when accent text sits on a white background &mdash; 3.19:1, so text at 24px+ and hover fills only. Small accent-colored text is Primary.</p>
               </div>
             </div>
           </div>
@@ -834,7 +835,7 @@
                 </div>
                 <div class="color-pair-item">
                   <div class="color-pair-swatches">
-                    <span class="color-pair-swatch" style="background: linear-gradient(to right, #f7b6c0, #CCB8B8, #D4713B, #B89111, #4E782F, #728384, #203955);"></span>
+                    <span class="color-pair-swatch" style="background: linear-gradient(to right, #f7b6c0, #D4713B, #B89111, #4E782F, #728384, #1D1E33);"></span>
                   </div>
                   <span class="color-pair-text">Use the 13 powder coat colors in decorative strips &mdash; top-to-bottom gradients or thin section separators that showcase our range</span>
                 </div>
@@ -845,7 +846,7 @@
               <div class="db-voice-example db-voice-dont">
                 <div class="color-pair-item">
                   <div class="color-pair-swatches">
-                    <span class="color-pair-swatch" style="background: #203955;"></span>
+                    <span class="color-pair-swatch" style="background: #1D1E33;"></span>
                     <span class="color-pair-swatch" style="background: #728384;"></span>
                   </div>
                   <span class="color-pair-text">Use signature colors (Cobalt, Lagoon, etc.) as section backgrounds or UI fills &mdash; they belong on products only</span>
@@ -861,7 +862,7 @@
                     <span class="color-pair-swatch" style="background: #FF9912;"></span>
                     <span class="color-pair-swatch" style="background: #F7F5F2; box-shadow: 0 0 0 1px var(--db-gray-300);"></span>
                   </div>
-                  <span class="color-pair-text">Put Accent text on Surface backgrounds &mdash; only 2.1:1 contrast (fails WCAG)</span>
+                  <span class="color-pair-text">Put Accent text on Surface backgrounds &mdash; only 1.97:1 contrast (fails WCAG)</span>
                 </div>
                 <div class="color-pair-item">
                   <div class="color-pair-swatches">
@@ -923,9 +924,9 @@
                     Accent on White
                   </span>
                 </td>
-                <td><strong>3.14:1</strong></td>
-                <td><span class="contrast-badge contrast-badge-aa-lg">AA Large</span></td>
-                <td>Large text (18px+) and icons only</td>
+                <td><strong>2.14:1</strong></td>
+                <td><span class="contrast-badge contrast-badge-fail">Fails AA</span></td>
+                <td>Fill only &mdash; never text at any size</td>
               </tr>
               <tr>
                 <td>
@@ -934,9 +935,9 @@
                     Accent Deep on White
                   </span>
                 </td>
-                <td><strong>4.56:1</strong></td>
-                <td><span class="contrast-badge contrast-badge-aa">AA</span></td>
-                <td>Safe for any text size</td>
+                <td><strong>3.19:1</strong></td>
+                <td><span class="contrast-badge contrast-badge-aa-lg">AA Large</span></td>
+                <td>Text at 24px+, and hover fills. Small accent text is Primary #4A4A4A</td>
               </tr>
               <tr>
                 <td>
@@ -945,18 +946,18 @@
                     White on Accent
                   </span>
                 </td>
-                <td><strong>3.14:1</strong></td>
-                <td><span class="contrast-badge contrast-badge-aa-lg">AA Large</span></td>
-                <td>Button text at 14px semibold+ or 18px+</td>
+                <td><strong>2.14:1</strong></td>
+                <td><span class="contrast-badge contrast-badge-fail">Fails AA</span></td>
+                <td>White-on-accent buttons fail AA; the storefront decision is still open</td>
               </tr>
               <tr>
                 <td>
                   <span class="contrast-preview">
-                    <span class="contrast-dot" style="background: #203955;"></span>
+                    <span class="contrast-dot" style="background: #1D1E33;"></span>
                     White on Cobalt
                   </span>
                 </td>
-                <td><strong>11.2:1</strong></td>
+                <td><strong>15.4:1</strong></td>
                 <td><span class="contrast-badge contrast-badge-aaa">AAA</span></td>
                 <td>Trade CTA sections &mdash; excellent</td>
               </tr>
@@ -965,7 +966,7 @@
 
           <h3 class="db-h4" style="margin-bottom: var(--db-space-4); margin-top: var(--db-space-8);">Practical Rules</h3>
           <ul class="rules-list">
-            <li>Never use Accent (<code>#FF9912</code>) for small body text on white &mdash; switch to Accent Deep (<code>#D97706</code>)</li>
+            <li>Accent (<code>#FF9912</code>) is a fill, never text. Accent Deep (<code>#D97706</code>) is for text at 24px+ and hover fills. Small accent-colored text is Primary (<code>#4A4A4A</code>)</li>
             <li>All images require alt text. All buttons lead with a verb</li>
             <li>Interactive elements need visible focus states &mdash; a 2px Accent outline works everywhere</li>
             <li>Don&rsquo;t rely on color alone to communicate meaning (e.g., success/error). Pair color with icons or text labels</li>
@@ -1456,14 +1457,13 @@
 
           <h3 class="db-h4" style="margin: var(--db-space-6) 0 var(--db-space-3);">Powder Coat Swatches <span style="font-size: var(--db-text-xs); font-weight: var(--db-font-regular); color: var(--db-text-muted);">(product graphics &amp; decorative separators only)</span></h3>
           <div class="token-block">
-<span class="comment">/* Powder Coat Swatches — 14 Product Colors */</span>
+<span class="comment">/* Powder Coat Swatches — 13 Product Colors */</span>
 <span class="comment">/* For product color graphics, decorative color strips, and separators ONLY */</span>
-<span class="prop">--db-barely:</span>         <span class="val">#CCB8B8</span>;
 <span class="prop">--db-pinkaboo:</span>       <span class="val">#f7b6c0</span>;
 <span class="prop">--db-black:</span>          <span class="val">#000000</span>;
 <span class="prop">--db-bone:</span>           <span class="val">#e5e4cf</span>;
 <span class="prop">--db-chalk:</span>          <span class="val">#D0D0D0</span>;
-<span class="prop">--db-cobalt:</span>         <span class="val">#203955</span>;
+<span class="prop">--db-cobalt:</span>         <span class="val">#1D1E33</span>;
 <span class="prop">--db-lagoon:</span>         <span class="val">#728384</span>;
 <span class="prop">--db-ochre:</span>          <span class="val">#B89111</span>;
 <span class="prop">--db-orange:</span>         <span class="val">#D4713B</span>;
@@ -1573,14 +1573,13 @@
     const brandGrid = document.getElementById('brandSwatchGrid');
     if (brandGrid) renderSwatches(brandColors, brandGrid);
 
-    // ---- POWDER COAT SWATCHES (14 product colors) ----
+    // ---- POWDER COAT SWATCHES (13 product colors) ----
     const powderCoatColors = [
-      { name: 'Barely',          hex: '#CCB8B8', var: '--db-barely',          dark: false },
       { name: 'Pinkaboo',        hex: '#f7b6c0', var: '--db-pinkaboo',        dark: false },
       { name: 'Black',           hex: '#000000', var: '--db-black',           dark: true },
       { name: 'Bone',            hex: '#e5e4cf', var: '--db-bone',            dark: false },
       { name: 'Chalk',           hex: '#D0D0D0', var: '--db-chalk',           dark: false },
-      { name: 'Cobalt',          hex: '#203955', var: '--db-cobalt',          dark: true },
+      { name: 'Cobalt',          hex: '#1D1E33', var: '--db-cobalt',          dark: true },
       { name: 'Lagoon',          hex: '#728384', var: '--db-lagoon',          dark: true },
       { name: 'Ochre',           hex: '#B89111', var: '--db-ochre',           dark: true },
       { name: 'Orange',          hex: '#D4713B', var: '--db-orange',          dark: false },
