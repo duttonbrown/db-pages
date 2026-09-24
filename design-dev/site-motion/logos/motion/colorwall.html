@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dutton Brown, lighting that's never boring</title>
+<meta name="description" content="Made-to-order, color-forward lighting and hardware, handcrafted in Minneapolis. Pick one of 14 powder coats and we build the rest.">
+<link rel="icon" href="../favicons/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+/* ------------------------------------------------------------------
+   The color machine. The 14 powder coats are a fixed rail on the left
+   edge of the viewport; it is the picker in the hero, thins to a
+   hairline as you scroll, and widens the coats of whichever family
+   section is on screen. Grounds stay white / surface / charcoal.
+   ------------------------------------------------------------------ */
+@property --rail-w { syntax: '<length>'; inherits: true; initial-value: 88px; }
+@property --labels-o { syntax: '<number>'; inherits: true; initial-value: 1; }
+
+:root {
+  --rail-wide: 88px;
+  --rail-thin: 8px;
+  --rail-w: var(--rail-wide);
+  --labels-o: 1;
+  --hover-w: 0px;
+  --header-h: 88px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --content-left: calc(var(--rail-wide) + 14px + 118px + 40px); /* rail + gap + label column + air */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: #FFFFFF;
+  color: var(--db-text);
+  font-family: var(--db-font-primary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+strong { font-weight: 600; }
+
+:focus-visible { outline: 2px solid var(--db-focus-ring); outline-offset: 2px; }
+
+/* Links and buttons: the two brand actions */
+.link {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--db-accent-line);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-underline-offset var(--db-transition-fast), text-decoration-thickness var(--db-transition-fast);
+}
+.link:hover { text-decoration-thickness: 3px; }
+.on-dark .link { color: #FFFFFF; text-decoration-color: var(--db-accent); }
+.btn {
+  display: inline-block;
+  padding: 14px 22px;
+  border: 0;
+  border-radius: var(--db-radius);
+  background: var(--db-primary);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--db-transition-fast);
+}
+.btn:hover { background: var(--db-primary-hover); }
+.btn--accent { background: var(--db-accent); color: var(--db-on-accent); }
+.btn--accent:hover { background: var(--db-accent-hover); }
+.actions { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+
+/* ---------------- The rail ---------------- */
+.rail {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  width: max(var(--rail-w), var(--hover-w));
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  transition: width var(--db-transition-normal);
+}
+.rail:hover, .rail:focus-within { --hover-w: 40px; }
+.band {
+  position: relative;
+  flex: 1 1 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--c);
+  cursor: pointer;
+  touch-action: none;
+  transition: width 200ms var(--ease-out);
+}
+.band[data-coat="White"] { box-shadow: inset 0 0 0 1px var(--db-border); }
+.band[aria-pressed="true"] { width: calc(100% + 14px); }
+.rail[data-family="warm"] .band[data-family="warm"],
+.rail[data-family="cool"] .band[data-family="cool"],
+.rail[data-family="neutral"] .band[data-family="neutral"] { width: calc(100% + 12px); }
+.band:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--db-focus-ring), inset 0 0 0 4px #FFFFFF;
+}
+.band[data-coat="White"]:focus-visible { box-shadow: inset 0 0 0 2px var(--db-focus-ring), inset 0 0 0 4px #FFFFFF, inset 0 0 0 1px var(--db-border); }
+.band-label {
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  translate: 0 -50%;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--db-text);
+  opacity: var(--labels-o);
+  pointer-events: none;
+  transition: font-weight 0s, text-decoration-color var(--db-transition-fast);
+}
+.band[aria-pressed="true"] .band-label {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--db-accent-line);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.rail.is-thin .band-label { visibility: hidden; }
+
+/* Rail thins over the first 480px of scroll: CSS scroll timeline, JS fallback below. */
+@supports (animation-timeline: scroll()) {
+  html { animation: rail-thin linear both; animation-timeline: scroll(root); animation-range: 0px 360px; }
+  @keyframes rail-thin {
+    0%   { --rail-w: 88px; --labels-o: 1; }
+    30%  { --labels-o: 0; }
+    100% { --rail-w: 8px; --labels-o: 0; }
+  }
+}
+
+/* ---------------- Header ---------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-left: var(--content-left);
+  padding-right: var(--gutter);
+  background: #FFFFFF;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--db-transition-fast);
+}
+.site-header.is-scrolled { border-bottom-color: var(--db-border); }
+.logo { display: block; width: 136px; flex: 0 0 auto; }
+.logo img { width: 100%; }
+.nav { display: flex; gap: 28px; margin-left: auto; font-size: 14px; }
+.nav a, .util a { text-decoration: none; padding: 6px 0; }
+.nav a:hover, .util a:hover { text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.util { display: flex; gap: 22px; font-size: 14px; }
+.menu-btn { display: none; }
+
+/* ---------------- Hero ---------------- */
+.hero {
+  min-height: min(calc(100vh - var(--header-h)), 860px);
+  min-height: min(calc(100svh - var(--header-h)), 860px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 46%);
+  align-items: end;
+  gap: clamp(32px, 5vw, 80px);
+  padding: 24px var(--gutter) 64px var(--content-left);
+}
+.hero-copy { max-width: 640px; padding-bottom: 8px; }
+.hero-tag { font-size: 18px; margin-bottom: 18px; }
+.hero-name {
+  --name-size: clamp(64px, 9.6vw, 150px);
+  position: relative;
+  font-size: var(--name-size);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 26px;
+}
+.hero-name .layer { display: block; }
+.hero-name .layer.is-out { position: absolute; inset: 0; pointer-events: none; }
+.hero-name .word { display: inline-block; white-space: nowrap; margin-right: 0.22em; }
+.hero-name .word:last-child { margin-right: 0; }
+.hero-name .clip { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.hero-name .ch { display: inline-block; will-change: transform; }
+.hero-sub { font-size: 17px; max-width: 46ch; margin-bottom: 30px; }
+.hero-sub .fixture { font-weight: 600; }
+.hero-hint { display: none; }
+
+.hero-photo {
+  position: relative;
+  align-self: center;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-height: 78vh;
+  margin-left: auto;
+  overflow: hidden;
+}
+.hero-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.hero-photo img.is-on { opacity: 1; }
+
+/* Load-in: the rail fills from White up to Black, the name rises, the photo fades. Once. */
+@media (prefers-reduced-motion: no-preference) {
+  .rail.is-loading .band { animation: band-in 420ms var(--ease-out) both; animation-delay: calc(var(--i) * 34ms); }
+  @keyframes band-in { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+  .hero-photo img.is-on { animation: photo-in 400ms ease both 240ms; }
+  @keyframes photo-in { from { opacity: 0; } }
+  .hero-name .ch.is-in { animation: ch-in 320ms var(--ease-out) both; animation-delay: calc(var(--i) * 14ms); }
+  @keyframes ch-in { from { transform: translateY(110%); } to { transform: translateY(0); } }
+  .hero-name .layer.is-out .ch { animation: ch-out 240ms cubic-bezier(.4, 0, .6, 1) both; animation-delay: calc(var(--i) * 10ms); }
+  @keyframes ch-out { to { transform: translateY(-110%); } }
+}
+
+/* ---------------- Sections ---------------- */
+/* Sections clear the live rail width, so the page slides over as the rail folds away. */
+.section { padding: clamp(72px, 9vw, 128px) var(--gutter) clamp(72px, 9vw, 128px) calc(var(--rail-w) + var(--gutter) + 8px); }
+.section--surface { background: var(--db-surface); }
+.section--charcoal { background: var(--db-primary); color: #FFFFFF; }
+.section--charcoal .muted { color: var(--db-gray-300); }
+.muted { color: var(--db-text-muted); }
+.h2 { font-size: clamp(30px, 3.6vw, 48px); font-weight: 300; line-height: 1.1; letter-spacing: -0.015em; }
+.lede { font-size: 17px; max-width: 48ch; }
+
+/* Families: name column left, tiles right */
+.family { display: grid; grid-template-columns: minmax(190px, 20%) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+.family-head { position: sticky; top: calc(var(--header-h) + 24px); }
+.family-head .h2 { margin-bottom: 14px; }
+.family-head p { font-size: 15px; max-width: 30ch; }
+.tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 24px); }
+.tiles--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tile a { display: block; text-decoration: none; }
+.tile-img { aspect-ratio: 1 / 1; background: #FFFFFF; border-radius: var(--db-radius); overflow: hidden; margin-bottom: 12px; }
+.tile-img img { width: 100%; height: 100%; object-fit: cover; }
+.tile-name { display: block; font-size: 14px; line-height: 1.3; text-decoration: underline transparent 2px; text-underline-offset: 4px; transition: text-decoration-color var(--db-transition-fast); }
+.tile a:hover .tile-name { text-decoration-color: var(--db-accent-line); }
+.tile-coat { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--db-text-muted); margin-top: 4px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(74,74,74,.14); flex: 0 0 auto; }
+
+/* Minneapolis: charcoal, photo bleeding to the right edge */
+.studio { padding-right: 0; display: grid; grid-template-columns: minmax(300px, 38%) minmax(0, 1fr); gap: clamp(32px, 5vw, 96px); align-items: center; }
+.studio .h2 { margin-bottom: 22px; }
+.studio .lede { margin-bottom: 28px; }
+.facts { display: grid; gap: 12px; margin-bottom: 34px; font-size: 15px; max-width: 42ch; }
+.facts li { padding-left: 18px; position: relative; }
+.facts li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 8px; height: 2px; background: var(--db-accent); }
+.studio-photo { position: relative; }
+.studio-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--db-radius) 0 0 var(--db-radius); }
+.credit { font-size: 13px; margin-top: 10px; }
+
+/* Trade */
+.trade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 54%); gap: clamp(32px, 5vw, 96px); align-items: center; }
+.trade .h2 { margin-bottom: 22px; }
+.trade .lede { margin-bottom: 30px; }
+.trade-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--db-radius); }
+
+/* Closer: the 14 named swatches, product-page size */
+.closer .h2 { margin-bottom: 14px; }
+.closer .lede { margin-bottom: 40px; }
+.swatches { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 10px; max-width: 1180px; margin-bottom: 44px; }
+.swatch { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 6px 2px; border: 0; background: none; cursor: pointer; border-radius: var(--db-radius); }
+.swatch i { width: 38px; height: 38px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(74,74,74,.14); transition: box-shadow var(--db-transition-fast); }
+.swatch span { font-size: 12px; line-height: 1.2; text-align: center; }
+.swatch:hover i, .swatch[aria-pressed="true"] i { box-shadow: 0 0 0 2px var(--db-surface), 0 0 0 4px var(--db-primary); }
+.swatch[aria-pressed="true"] span { font-weight: 600; }
+
+/* Footer colophon */
+.footer { padding: 72px var(--gutter) 40px calc(var(--rail-w) + var(--gutter) + 8px); border-top: 1px solid var(--db-border); }
+.footer-top { display: grid; grid-template-columns: minmax(200px, 1.3fr) repeat(3, minmax(0, 1fr)) minmax(240px, 1.4fr); gap: 32px; margin-bottom: 56px; }
+.footer .logo { width: 140px; margin-bottom: 16px; }
+.footer-col h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.footer-col li { font-size: 14px; margin-bottom: 8px; }
+.footer-col a { text-decoration: none; }
+.footer-col a:hover { text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.footer-addr { font-size: 14px; max-width: 26ch; }
+.signup label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.signup p { font-size: 14px; margin-bottom: 14px; }
+.signup form { display: flex; gap: 8px; }
+.signup input {
+  flex: 1 1 auto; min-width: 0; font: inherit; font-size: 15px; padding: 12px 14px;
+  border: 1px solid var(--db-input-border); border-radius: var(--db-radius); color: var(--db-text); background: #FFFFFF;
+}
+.signup input::placeholder { color: var(--db-placeholder); }
+.signup input:focus { border-color: var(--db-primary); outline: 2px solid var(--db-focus-ring); outline-offset: 2px; }
+.footer-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--db-text-muted); }
+
+/* Mobile menu: full-screen white overlay, centered */
+.menu { position: fixed; inset: 0; z-index: 60; background: #FFFFFF; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 22px; font-size: 28px; font-weight: 300; }
+.menu.is-open { display: flex; }
+.menu a { text-decoration: none; }
+.menu .close { position: absolute; top: 20px; right: 20px; font-size: 14px; font-weight: 600; background: none; border: 0; padding: 8px; cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) {
+  .menu.is-open { animation: menu-in 250ms var(--ease-out) both; }
+  @keyframes menu-in { from { opacity: 0; transform: translateY(12px); } }
+}
+
+/* ---------------- Breakpoints ---------------- */
+@media (max-width: 1100px) {
+  .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tiles .tile:nth-child(5) { display: none; }
+}
+@media (max-width: 900px) {
+  :root { --rail-wide: 28px; --rail-thin: 6px; --header-h: 68px; --content-left: calc(var(--rail-wide) + 20px); }
+  @supports (animation-timeline: scroll()) {
+    @keyframes rail-thin { 0% { --rail-w: 28px; --labels-o: 1; } 30% { --labels-o: 0; } 100% { --rail-w: 6px; --labels-o: 0; } }
+  }
+  .rail:hover, .rail:focus-within { --hover-w: 28px; }
+  .band-label { display: none; }
+  .band[aria-pressed="true"] { width: calc(100% + 8px); }
+  .site-header { padding-left: calc(var(--rail-w) + 16px); padding-right: 16px; gap: 16px; }
+  .logo { width: 120px; }
+  .nav, .util .hide-m { display: none; }
+  .menu-btn { display: inline-block; margin-left: auto; background: none; border: 0; padding: 8px 0; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .util { margin-left: 0; }
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 20px 16px 48px var(--content-left); min-height: 0; }
+  .hero-copy { padding-bottom: 0; }
+  .hero-tag { font-size: 16px; margin-bottom: 10px; }
+  .hero-name { --name-size: clamp(52px, 15vw, 96px); margin-bottom: 8px; min-height: 0; }
+  .hero-photo { max-height: none; aspect-ratio: 1 / 1; width: min(100%, 420px); margin: 0 auto 8px 0; }
+  .hero-sub { font-size: 16px; margin-bottom: 22px; }
+  .hero-hint { display: block; font-size: 13px; color: var(--db-text-muted); margin-bottom: 22px; }
+  .actions { gap: 20px; }
+  .section { padding: 64px 16px 64px calc(var(--rail-w) + 16px); }
+  .family { grid-template-columns: 1fr; gap: 24px; }
+  .family-head { position: static; }
+  .family-head p { max-width: 40ch; }
+  .tiles, .tiles--4 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-right: -16px; padding-right: 16px; scrollbar-width: none; }
+  .tiles::-webkit-scrollbar { display: none; }
+  .tiles .tile { flex: 0 0 62vw; max-width: 300px; scroll-snap-align: start; }
+  .tiles .tile:nth-child(5) { display: block; }
+  .studio { grid-template-columns: minmax(0, 1fr); padding-right: 16px; gap: 28px; }
+  .studio-photo img { border-radius: var(--db-radius); }
+  .trade { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .trade-photo { order: -1; }
+  .family { grid-template-columns: minmax(0, 1fr); }
+  .swatches { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px 4px; }
+  .swatch span { font-size: 11px; }
+  .footer { padding: 56px 16px 32px calc(var(--rail-w) + 16px); }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+  .footer-top .footer-brand, .footer-top .signup { grid-column: 1 / -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; animation: none; }
+  .rail, .band, .hero-photo img, .link, .btn, .site-header, .swatch i { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- The rail: 14 powder coats, Black at the top, White at the bottom. It is the hero picker. -->
+<div class="rail is-loading" id="rail" role="group" aria-label="Powder coat picker">
+  <button class="band" type="button" data-coat="Black" data-family="neutral" style="--c: var(--db-black); --i: 13" aria-pressed="false"><span class="band-label">Black</span></button>
+  <button class="band" type="button" data-coat="Barely" data-family="warm" style="--c: var(--db-barely); --i: 12" aria-pressed="false"><span class="band-label">Barely</span></button>
+  <button class="band" type="button" data-coat="Pinkaboo" data-family="warm" style="--c: var(--db-pinkaboo); --i: 11" aria-pressed="false"><span class="band-label">Pinkaboo</span></button>
+  <button class="band" type="button" data-coat="Riding Hood Red" data-family="warm" style="--c: var(--db-riding-hood-red); --i: 10" aria-pressed="false"><span class="band-label">Riding Hood Red</span></button>
+  <button class="band" type="button" data-coat="Orange" data-family="warm" style="--c: var(--db-orange); --i: 9" aria-pressed="false"><span class="band-label">Orange</span></button>
+  <button class="band" type="button" data-coat="Ochre" data-family="warm" style="--c: var(--db-ochre); --i: 8" aria-pressed="false"><span class="band-label">Ochre</span></button>
+  <button class="band" type="button" data-coat="Slate Blue" data-family="cool" style="--c: var(--db-slate-blue); --i: 7" aria-pressed="false"><span class="band-label">Slate Blue</span></button>
+  <button class="band" type="button" data-coat="Cobalt" data-family="cool" style="--c: var(--db-cobalt); --i: 6" aria-pressed="true"><span class="band-label">Cobalt</span></button>
+  <button class="band" type="button" data-coat="Lagoon" data-family="cool" style="--c: var(--db-lagoon); --i: 5" aria-pressed="false"><span class="band-label">Lagoon</span></button>
+  <button class="band" type="button" data-coat="Python Green" data-family="cool" style="--c: var(--db-python-green); --i: 4" aria-pressed="false"><span class="band-label">Python Green</span></button>
+  <button class="band" type="button" data-coat="Spa" data-family="cool" style="--c: var(--db-spa); --i: 3" aria-pressed="false"><span class="band-label">Spa</span></button>
+  <button class="band" type="button" data-coat="Bone" data-family="neutral" style="--c: var(--db-bone); --i: 2" aria-pressed="false"><span class="band-label">Bone</span></button>
+  <button class="band" type="button" data-coat="Chalk" data-family="neutral" style="--c: var(--db-chalk); --i: 1" aria-pressed="false"><span class="band-label">Chalk</span></button>
+  <button class="band" type="button" data-coat="White" data-family="neutral" style="--c: var(--db-white); --i: 0" aria-pressed="false"><span class="band-label">White</span></button>
+</div>
+
+<header class="site-header" id="header">
+  <a class="logo" href="/" aria-label="Dutton Brown home"><img src="../tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="Dutton Brown" width="136" height="67"></a>
+  <nav class="nav" aria-label="Main">
+    <a href="/collections/lighting">Lighting</a>
+    <a href="/collections/hardware">Hardware</a>
+    <a href="/pages/colors">Colors</a>
+    <a href="/pages/trade">Trade</a>
+    <a href="/pages/about">About</a>
+  </nav>
+  <button class="menu-btn" type="button" id="menuBtn" aria-controls="menu" aria-expanded="false">Menu</button>
+  <div class="util">
+    <a class="hide-m" href="/search">Search</a>
+    <a class="hide-m" href="/account">Account</a>
+    <a href="/cart">Cart 0</a>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <button class="close" type="button" id="menuClose">Close</button>
+  <a href="/collections/lighting">Lighting</a>
+  <a href="/collections/hardware">Hardware</a>
+  <a href="/pages/colors">Colors</a>
+  <a href="/pages/trade">Trade</a>
+  <a href="/pages/about">About</a>
+  <a href="/search">Search</a>
+  <a href="/account">Account</a>
+</div>
+
+<main>
+  <section class="hero" id="hero" aria-labelledby="coatName">
+    <div class="hero-copy">
+      <p class="hero-tag">Lighting that's never boring.</p>
+      <h1 class="hero-name" id="coatName" aria-live="polite"><span class="layer"></span></h1>
+      <p class="hero-sub"><span class="fixture">Color Lure Pendant 10"</span> in <span id="subCoat">Cobalt</span>, one of 14 powder coats. Made to order and handcrafted in Minneapolis, with hand-blown opal glass and solid brass.</p>
+      <p class="hero-hint">Tap the strip on the left to change the color.</p>
+      <div class="actions">
+        <a class="btn" id="cta" href="/products/color-lure-globe-pendant-10?color=Cobalt">Shop in Cobalt</a>
+        <a class="link" href="/pages/colors">See every color</a>
+      </div>
+    </div>
+    <div class="hero-photo" id="heroPhoto">
+      <img data-coat="White" src="https://cdn.shopify.com/s/files/1/0229/6239/files/1-lure-pendant-10-brass-white.jpg?width=1100" alt="Color Lure Pendant 10 inch in White with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Chalk" src="https://cdn.shopify.com/s/files/1/0229/6239/files/2-lure-pendant-10-brass-chalk.jpg?width=1100" alt="Color Lure Pendant 10 inch in Chalk with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Bone" src="https://cdn.shopify.com/s/files/1/0229/6239/files/3-lure-pendant-10-brass-bone.jpg?width=1100" alt="Color Lure Pendant 10 inch in Bone with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Spa" src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-lure-pendant-10-brass-spa.jpg?width=1100" alt="Color Lure Pendant 10 inch in Spa with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Python Green" src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-lure-pendant-10-brass-pythongreen.jpg?width=1100" alt="Color Lure Pendant 10 inch in Python Green with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Lagoon" src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-lure-pendant-10-brass-lagoon.jpg?width=1100" alt="Color Lure Pendant 10 inch in Lagoon with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Cobalt" class="is-on" src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-lure-pendant-10-brass-cobalt.jpg?width=1100" alt="Color Lure Pendant 10 inch in Cobalt with brass hardware" width="1100" height="1100" loading="eager" fetchpriority="high">
+      <img data-coat="Slate Blue" src="https://cdn.shopify.com/s/files/1/0229/6239/files/8-lure-pendant-10-brass-slateblue.jpg?width=1100" alt="Color Lure Pendant 10 inch in Slate Blue with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Ochre" src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-lure-pendant-10-brass-ochre.jpg?width=1100" alt="Color Lure Pendant 10 inch in Ochre with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Orange" src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-lure-pendant-10-brass-orange.jpg?width=1100" alt="Color Lure Pendant 10 inch in Orange with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Riding Hood Red" src="https://cdn.shopify.com/s/files/1/0229/6239/files/11-lure-pendant-10-brass-ridinghoodred_e7e2ec21-b69c-4a70-bffe-4f3b8837ee56.jpg?width=1100" alt="Color Lure Pendant 10 inch in Riding Hood Red with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Pinkaboo" src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-lure-pendant-10-brass-pinkaboo.jpg?width=1100" alt="Color Lure Pendant 10 inch in Pinkaboo with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Barely" src="https://cdn.shopify.com/s/files/1/0229/6239/files/12-lure-pendant-10-brass-barely.jpg?width=1100" alt="Color Lure Pendant 10 inch in Barely with brass hardware" width="1100" height="1100" loading="lazy">
+      <img data-coat="Black" src="https://cdn.shopify.com/s/files/1/0229/6239/files/13-lure-pendant-10-brass-black.jpg?width=1100" alt="Color Lure Pendant 10 inch in Black with brass hardware" width="1100" height="1100" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Warm -->
+  <section class="section section--surface family" data-family="warm" aria-labelledby="warm">
+    <div class="family-head">
+      <h2 class="h2" id="warm">Warm</h2>
+      <p>Ochre, Orange, Riding Hood Red, Pinkaboo and Barely. The five coats that make a room look like it has a fireplace, even when it does not.</p>
+    </div>
+    <ul class="tiles">
+      <li class="tile"><a href="/products/color-cadbury-dome-pendant-10?color=Ochre"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-cadburry-pendant-10-brass-ochre.jpg?width=800" alt="Color Cadbury Pendant 10 inch in Ochre" width="800" height="800" loading="lazy"></span><span class="tile-name">Cadbury Pendant 10"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-ochre)"></i>Ochre</span></a></li>
+      <li class="tile"><a href="/products/color-big-prisma-globe-chandelier-42?color=Riding%20Hood%20Red"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-big-prisma-chandelier-brass-ridinghoodred-1.jpg?width=800" alt="Color Big Prisma Chandelier 42 inch in Riding Hood Red" width="800" height="800" loading="lazy"></span><span class="tile-name">Big Prisma Chandelier 42"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-riding-hood-red)"></i>Riding Hood Red</span></a></li>
+      <li class="tile"><a href="/products/color-boom-sconce-6-arm?color=Orange"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-boom-sconce-6-brass-orange.jpg?width=800" alt="Color Boom Sconce with 6 inch arm in Orange" width="800" height="800" loading="lazy"></span><span class="tile-name">Boom Sconce 6"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-orange)"></i>Orange</span></a></li>
+      <li class="tile"><a href="/products/color-twink-pendant?color=Pinkaboo"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-twink-pendant-brass-pinkaboo.jpg?width=800" alt="Color Twink Pendant in Pinkaboo" width="800" height="800" loading="lazy"></span><span class="tile-name">Twink Pendant</span><span class="tile-coat"><i class="dot" style="--c: var(--db-pinkaboo)"></i>Pinkaboo</span></a></li>
+      <li class="tile"><a href="/products/color-reader-sconce-6-arm?color=Barely"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/12-reader-sconce-6-brass-barely.jpg?width=800" alt="Color Reader Sconce with 6 inch arm in Barely" width="800" height="800" loading="lazy"></span><span class="tile-name">Reader Sconce 6"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-barely)"></i>Barely</span></a></li>
+    </ul>
+  </section>
+
+  <!-- Cool -->
+  <section class="section family" data-family="cool" aria-labelledby="cool">
+    <div class="family-head">
+      <h2 class="h2" id="cool">Cool</h2>
+      <p>Spa, Python Green, Lagoon, Cobalt and Slate Blue. Calm on the wall, serious on a ceiling, and the coats designers order in threes.</p>
+    </div>
+    <ul class="tiles">
+      <li class="tile"><a href="/products/color-bling-pendant?color=Cobalt"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-bling-pendant-brass-cobalt.jpg?width=800" alt="Color Bling Pendant in Cobalt" width="800" height="800" loading="lazy"></span><span class="tile-name">Bling Pendant</span><span class="tile-coat"><i class="dot" style="--c: var(--db-cobalt)"></i>Cobalt</span></a></li>
+      <li class="tile"><a href="/products/color-crown-globe-chandelier-32?color=Lagoon"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-crown-chandelier-32-brass-lagoon.jpg?width=800" alt="Color Crown Chandelier 32 inch in Lagoon" width="800" height="800" loading="lazy"></span><span class="tile-name">Crown Chandelier 32"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-lagoon)"></i>Lagoon</span></a></li>
+      <li class="tile"><a href="/products/color-supreme-globe-flush-mount?color=Python%20Green"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-supreme-flush-mount-brass-pythongreen.jpg?width=800" alt="Color Supreme Flush Mount in Python Green" width="800" height="800" loading="lazy"></span><span class="tile-name">Supreme Flush Mount</span><span class="tile-coat"><i class="dot" style="--c: var(--db-python-green)"></i>Python Green</span></a></li>
+      <li class="tile"><a href="/products/color-pilot-sconce-23?color=Spa"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-pilot-sconce-23-brass-spa_ca58d5f3-1f23-4fc3-a8ff-3d13eaac180c.jpg?width=800" alt="Color Pilot Sconce 23 inch in Spa" width="800" height="800" loading="lazy"></span><span class="tile-name">Pilot Sconce 23"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-spa)"></i>Spa</span></a></li>
+      <li class="tile"><a href="/products/color-echo-dome-pendant-10?color=Slate%20Blue"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/8-echo-pendant-10-brass-slateblue.jpg?width=800" alt="Color Echo Pendant 10 inch in Slate Blue" width="800" height="800" loading="lazy"></span><span class="tile-name">Echo Pendant 10"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-slate-blue)"></i>Slate Blue</span></a></li>
+    </ul>
+  </section>
+
+  <!-- Neutral -->
+  <section class="section section--surface family" data-family="neutral" aria-labelledby="neutral">
+    <div class="family-head">
+      <h2 class="h2" id="neutral">Neutral</h2>
+      <p>White, Chalk, Bone and Black. For the rooms where the brass does the talking, and the clients who say they are not ready for color yet.</p>
+    </div>
+    <ul class="tiles tiles--4">
+      <li class="tile"><a href="/products/color-orbi-globe-chandelier?color=Black"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/13-orbi-chandelier-brass-black.jpg?width=800" alt="Color Orbi Chandelier in Black" width="800" height="800" loading="lazy"></span><span class="tile-name">Orbi Chandelier</span><span class="tile-coat"><i class="dot" style="--c: var(--db-black)"></i>Black</span></a></li>
+      <li class="tile"><a href="/products/color-cap-globe-pendant-8?color=White"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/1-cap-globe-pendant-8-brass-white_9ae8ec4e-295f-4683-aba5-e06ef614b928.jpg?width=800" alt="Color Cap Pendant 8 inch in White" width="800" height="800" loading="lazy"></span><span class="tile-name">Cap Pendant 8"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-white)"></i>White</span></a></li>
+      <li class="tile"><a href="/products/color-alegria-chandelier?color=Bone"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/3-alegria-chandelier-brass-bone.jpg?width=800" alt="Color Alegria Chandelier 30 inch in Bone" width="800" height="800" loading="lazy"></span><span class="tile-name">Alegria Chandelier 30"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-bone)"></i>Bone</span></a></li>
+      <li class="tile"><a href="/products/color-cap-globe-sconce-i-6?color=Chalk"><span class="tile-img"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/2-cap-sconce-6-brass-chalk.jpg?width=800" alt="Color Cap Sconce 6 inch in Chalk" width="800" height="800" loading="lazy"></span><span class="tile-name">Cap Sconce 6"</span><span class="tile-coat"><i class="dot" style="--c: var(--db-chalk)"></i>Chalk</span></a></li>
+    </ul>
+  </section>
+
+  <!-- Minneapolis -->
+  <section class="section section--charcoal studio on-dark" aria-labelledby="studio">
+    <div>
+      <h2 class="h2" id="studio">Built when you order it, in Minneapolis.</h2>
+      <p class="lede">Nothing here comes off a shelf. Every fixture is designed, finished, assembled and boxed in our Minneapolis studio, in the coat you picked, by people who will notice if the brass is a hair off.</p>
+      <ul class="facts">
+        <li>Solid brass, high-gauge steel and aluminum, hand-blown opal glass.</li>
+        <li>14 powder coats and three metal finishes, on every fixture we make.</li>
+        <li>Made to order, so nothing sits in a warehouse waiting to be the wrong color.</li>
+      </ul>
+      <a class="link" href="/pages/about">See how we build</a>
+    </div>
+    <figure class="studio-photo">
+      <img src="https://cdn.shopify.com/s/files/1/0229/6239/products/supreme-brass-redflush-mount-dutton-brown-space-by-maggie-richmond-design-photo-by-genevieve-garruppo.jpg?width=1600" alt="Supreme Flush Mount in Riding Hood Red in a foyer, space by Maggie Richmond Design, photo by Genevieve Garruppo" width="1600" height="1200" loading="lazy">
+      <figcaption class="credit muted">Supreme Flush Mount in Riding Hood Red. Space by Maggie Richmond Design, photo by Genevieve Garruppo.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Trade -->
+  <section class="section trade" aria-labelledby="trade">
+    <div>
+      <h2 class="h2" id="trade">Designers spec us in multiples.</h2>
+      <p class="lede">Trade pricing, coat samples, spec sheets and a person who answers email the same day. Pair a Cobalt chandelier with Bone sconces, or run one coat across a whole floor. Both are correct.</p>
+      <div class="actions">
+        <a class="btn" href="/pages/trade">Apply for trade</a>
+        <a class="link" href="/pages/projects">See projects</a>
+      </div>
+    </div>
+    <figure class="trade-photo">
+      <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/scene-urchin_cadbury_persona-blue-kitchen-dining-room-dutton-brown-1.jpg?width=1600" alt="Beaded Urchin Chandelier over a dining table, Cadbury Pendants over the island and Persona pulls on the cabinets, all in one blue kitchen" width="1600" height="1067" loading="lazy">
+      <figcaption class="credit muted">Beaded Urchin Chandelier, Cadbury Pendants and Persona pulls, specified together in one kitchen.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Closer -->
+  <section class="section section--surface closer" aria-labelledby="closer">
+    <h2 class="h2" id="closer">Pick a color. We build the rest.</h2>
+    <p class="lede">Every fixture comes in all 14 coats and three finishes. Choose one here and the pendant at the top changes to match.</p>
+    <div class="swatches" id="swatches" role="group" aria-label="Powder coats">
+      <button class="swatch" type="button" data-coat="White" style="--c: var(--db-white)" aria-pressed="false"><i></i><span>White</span></button>
+      <button class="swatch" type="button" data-coat="Chalk" style="--c: var(--db-chalk)" aria-pressed="false"><i></i><span>Chalk</span></button>
+      <button class="swatch" type="button" data-coat="Bone" style="--c: var(--db-bone)" aria-pressed="false"><i></i><span>Bone</span></button>
+      <button class="swatch" type="button" data-coat="Spa" style="--c: var(--db-spa)" aria-pressed="false"><i></i><span>Spa</span></button>
+      <button class="swatch" type="button" data-coat="Python Green" style="--c: var(--db-python-green)" aria-pressed="false"><i></i><span>Python Green</span></button>
+      <button class="swatch" type="button" data-coat="Lagoon" style="--c: var(--db-lagoon)" aria-pressed="false"><i></i><span>Lagoon</span></button>
+      <button class="swatch" type="button" data-coat="Cobalt" style="--c: var(--db-cobalt)" aria-pressed="true"><i></i><span>Cobalt</span></button>
+      <button class="swatch" type="button" data-coat="Slate Blue" style="--c: var(--db-slate-blue)" aria-pressed="false"><i></i><span>Slate Blue</span></button>
+      <button class="swatch" type="button" data-coat="Ochre" style="--c: var(--db-ochre)" aria-pressed="false"><i></i><span>Ochre</span></button>
+      <button class="swatch" type="button" data-coat="Orange" style="--c: var(--db-orange)" aria-pressed="false"><i></i><span>Orange</span></button>
+      <button class="swatch" type="button" data-coat="Riding Hood Red" style="--c: var(--db-riding-hood-red)" aria-pressed="false"><i></i><span>Riding Hood Red</span></button>
+      <button class="swatch" type="button" data-coat="Pinkaboo" style="--c: var(--db-pinkaboo)" aria-pressed="false"><i></i><span>Pinkaboo</span></button>
+      <button class="swatch" type="button" data-coat="Barely" style="--c: var(--db-barely)" aria-pressed="false"><i></i><span>Barely</span></button>
+      <button class="swatch" type="button" data-coat="Black" style="--c: var(--db-black)" aria-pressed="false"><i></i><span>Black</span></button>
+    </div>
+    <div class="actions">
+      <a class="btn btn--accent" href="/collections/lighting">Shop all lighting</a>
+      <a class="link" href="/collections/hardware">Shop hardware</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="logo" href="/" aria-label="Dutton Brown home"><img src="../tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="Dutton Brown" width="140" height="69"></a>
+      <p class="footer-addr">Made-to-order lighting and hardware, handcrafted in Minneapolis, Minnesota.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="/collections/pendants">Pendants</a></li>
+        <li><a href="/collections/sconces">Sconces</a></li>
+        <li><a href="/collections/chandeliers">Chandeliers</a></li>
+        <li><a href="/collections/flush-mounts">Flush mounts</a></li>
+        <li><a href="/collections/hardware">Hardware</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Company</h3>
+      <ul>
+        <li><a href="/pages/about">About</a></li>
+        <li><a href="/pages/trade">Trade</a></li>
+        <li><a href="/pages/projects">Projects</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Help</h3>
+      <ul>
+        <li><a href="/pages/shipping">Shipping</a></li>
+        <li><a href="/pages/returns">Returns</a></li>
+        <li><a href="/pages/care">Care</a></li>
+        <li><a href="/pages/specs">Spec sheets</a></li>
+      </ul>
+    </div>
+    <div class="signup">
+      <label for="email">New colors, new fixtures, no noise.</label>
+      <p class="muted">One email a month or so.</p>
+      <form action="/contact#newsletter" method="post">
+        <input type="email" id="email" name="contact[email]" placeholder="Email address" autocomplete="email" required>
+        <button class="btn" type="submit">Sign up</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Dutton Brown, Minneapolis. Lighting that's never boring.</span>
+    <span>2026</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rail = document.getElementById('rail');
+  var bands = Array.prototype.slice.call(rail.querySelectorAll('.band'));
+  var photos = Array.prototype.slice.call(document.querySelectorAll('#heroPhoto img'));
+  var nameEl = document.getElementById('coatName');
+  var subCoat = document.getElementById('subCoat');
+  var cta = document.getElementById('cta');
+  var swatches = Array.prototype.slice.call(document.querySelectorAll('#swatches .swatch'));
+  var header = document.getElementById('header');
+  var hero = document.getElementById('hero');
+  var ctaBase = '/products/color-lure-globe-pendant-10?color=';
+  var current = 'Cobalt';
+
+  /* ---- Kinetic coat name ---- */
+  function buildLayer(name) {
+    var layer = document.createElement('span');
+    layer.className = 'layer';
+    var i = 0;
+    name.split(' ').forEach(function (word) {
+      var w = document.createElement('span');
+      w.className = 'word';
+      Array.prototype.forEach.call(word, function (chr) {
+        var clip = document.createElement('span');
+        clip.className = 'clip';
+        var ch = document.createElement('span');
+        ch.className = 'ch is-in';
+        ch.style.setProperty('--i', i++);
+        ch.textContent = chr;
+        clip.appendChild(ch);
+        w.appendChild(clip);
+      });
+      layer.appendChild(w);
+    });
+    return layer;
+  }
+  function fitName(layer) {
+    nameEl.style.fontSize = '';
+    var base = parseFloat(getComputedStyle(nameEl).fontSize);
+    var size = base;
+    var maxLines = window.innerWidth > 900 ? 2 : 3;
+    for (var k = 0; k < 12; k++) {
+      var lh = size * 0.95;
+      var lines = Math.round(layer.getBoundingClientRect().height / lh);
+      var overflow = layer.scrollWidth > nameEl.clientWidth + 1;
+      if (!overflow && lines <= maxLines) break;
+      size = size * 0.9;
+      nameEl.style.fontSize = size + 'px';
+    }
+  }
+  function setName(name, animate) {
+    var old = nameEl.querySelector('.layer:not(.is-out)');
+    var fresh = buildLayer(name);
+    if (!animate || reduce) {
+      nameEl.querySelectorAll('.layer').forEach(function (l) { l.remove(); });
+      fresh.querySelectorAll('.ch').forEach(function (c) { c.classList.remove('is-in'); });
+      nameEl.appendChild(fresh);
+      fitName(fresh);
+      return;
+    }
+    nameEl.querySelectorAll('.layer.is-out').forEach(function (l) { l.remove(); });
+    if (old) {
+      old.classList.add('is-out');
+      old.setAttribute('aria-hidden', 'true');
+      setTimeout(function () { old.remove(); }, 420);
+    }
+    nameEl.appendChild(fresh);
+    fitName(fresh);
+  }
+
+  /* ---- Select a coat ---- */
+  function select(name, animate) {
+    if (name === current && animate !== 'force') return;
+    current = name;
+    bands.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.coat === name ? 'true' : 'false'); });
+    swatches.forEach(function (s) { s.setAttribute('aria-pressed', s.dataset.coat === name ? 'true' : 'false'); });
+    photos.forEach(function (p) { p.classList.toggle('is-on', p.dataset.coat === name); });
+    subCoat.textContent = name;
+    cta.textContent = 'Shop in ' + name;
+    cta.href = ctaBase + encodeURIComponent(name);
+    setName(name, animate !== false);
+  }
+
+  bands.forEach(function (b, idx) {
+    b.addEventListener('click', function () { select(b.dataset.coat); });
+    b.addEventListener('keydown', function (e) {
+      var next = null;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = bands[Math.min(idx + 1, bands.length - 1)];
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = bands[Math.max(idx - 1, 0)];
+      if (e.key === 'Home') next = bands[0];
+      if (e.key === 'End') next = bands[bands.length - 1];
+      if (next) { e.preventDefault(); next.focus(); select(next.dataset.coat); }
+    });
+  });
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    bands.forEach(function (b) {
+      b.addEventListener('mouseenter', function () { if (!rail.classList.contains('is-thin')) select(b.dataset.coat); });
+    });
+  }
+
+  /* Drag along the rail */
+  var dragging = false;
+  rail.addEventListener('pointerdown', function (e) {
+    if (rail.classList.contains('is-thin')) return;
+    dragging = true;
+    rail.setPointerCapture(e.pointerId);
+  });
+  rail.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var el = document.elementFromPoint(e.clientX, e.clientY);
+    var band = el && el.closest('.band');
+    if (band) select(band.dataset.coat);
+  });
+  ['pointerup', 'pointercancel'].forEach(function (t) { rail.addEventListener(t, function () { dragging = false; }); });
+
+  /* Wheel over the rail steps through the coats while the hero is in view */
+  var wheelAt = 0;
+  rail.addEventListener('wheel', function (e) {
+    if (rail.classList.contains('is-thin')) return;
+    e.preventDefault();
+    var now = Date.now();
+    if (now - wheelAt < 140) return;
+    wheelAt = now;
+    var idx = bands.findIndex(function (b) { return b.dataset.coat === current; });
+    var next = bands[Math.max(0, Math.min(bands.length - 1, idx + (e.deltaY > 0 ? 1 : -1)))];
+    select(next.dataset.coat);
+  }, { passive: false });
+
+  /* The closer swatches feed the hero */
+  swatches.forEach(function (s) {
+    s.addEventListener('click', function () {
+      select(s.dataset.coat);
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ---- Scroll: header rule, thin rail, JS fallback for the scroll timeline ---- */
+  var supportsTimeline = CSS.supports('animation-timeline: scroll()');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY;
+      header.classList.toggle('is-scrolled', y > 8);
+      rail.classList.toggle('is-thin', y > 300);
+      if (!supportsTimeline) {
+        var mobile = window.innerWidth <= 900;
+        var wide = mobile ? 28 : 88, thin = mobile ? 6 : 8;
+        var t = Math.max(0, Math.min(1, y / 360));
+        document.documentElement.style.setProperty('--rail-w', (wide + (thin - wide) * t) + 'px');
+        document.documentElement.style.setProperty('--labels-o', String(Math.max(0, 1 - t / 0.3)));
+      }
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { onScroll(); fitName(nameEl.querySelector('.layer:not(.is-out)')); });
+  onScroll();
+
+  /* ---- The rail knows which family you are looking at ---- */
+  if ('IntersectionObserver' in window) {
+    var fams = document.querySelectorAll('.family');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) rail.dataset.family = en.target.dataset.family;
+        else if (rail.dataset.family === en.target.dataset.family) rail.dataset.family = '';
+      });
+    }, { threshold: 0.35 });
+    fams.forEach(function (f) { io.observe(f); });
+  }
+
+  /* ---- Mobile menu ---- */
+  var menu = document.getElementById('menu');
+  var menuBtn = document.getElementById('menuBtn');
+  function openMenu(open) {
+    menu.hidden = !open;
+    menu.classList.toggle('is-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) menu.querySelector('a').focus(); else menuBtn.focus();
+  }
+  menuBtn.addEventListener('click', function () { openMenu(true); });
+  document.getElementById('menuClose').addEventListener('click', function () { openMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) openMenu(false); });
+
+  /* ---- First paint: ?coat=Ochre deep-links a coat, for campaigns and shared links ---- */
+  var wanted = new URLSearchParams(location.search).get('coat');
+  var valid = bands.some(function (b) { return b.dataset.coat === wanted; });
+  select(valid ? wanted : 'Cobalt', 'force');
+  setTimeout(function () { rail.classList.remove('is-loading'); }, 1200);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitName(nameEl.querySelector('.layer:not(.is-out)')); });
+})();
+</script>
+</body>
+</html>

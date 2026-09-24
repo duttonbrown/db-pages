@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dutton Brown, lighting that's never boring</title>
+<meta name="description" content="Made-to-order, color-forward lighting and hardware, handcrafted in Minneapolis. Pick one of 14 powder coat colors and it follows you to the product page.">
+<link rel="icon" href="../favicons/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+/* ------------------------------------------------------------------
+   Dutton Brown home, direction "cinematic": one continuous scroll.
+   The hero pins while the coats cycle with scroll, the wordmark's bar
+   carries on as the progress line, sections stack like cards, and the
+   last scene opens from a small plate to a full-bleed room.
+   Ports to an Impact section: no build step, no libraries.
+   ------------------------------------------------------------------ */
+
+/* Cross-document page changes: the header wordmark carries across. */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
+::view-transition-old(db-logo), ::view-transition-new(db-logo) { object-fit: contain; height: 100%; animation-duration: 220ms; }
+
+:root {
+  --hdr: 76px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --logo-w: 132px;
+  /* the bar sits at x = 480.44 / 938.364 of the wordmark's width */
+  --bar-x: calc(var(--gutter) + var(--logo-w) * 0.512);
+  --bar-w: calc(var(--logo-w) * 0.0186);
+  --vh: 100vh;
+  --coat-step: 22vh;          /* scroll per coat while the hero is pinned */
+  --stack-gap: 16px;
+  --pin: 1;
+}
+@supports (height: 100svh) { :root { --vh: 100svh; --coat-step: 22svh; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: #FFFFFF;
+  color: var(--db-text);
+  font-family: var(--db-font-primary);
+  font-weight: var(--db-font-regular);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+h1, h2, h3, p, ul, dl { margin: 0; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--db-focus-ring); outline-offset: 2px; }
+.on-dark :focus-visible { outline-color: #FFFFFF; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: var(--gutter); top: -60px; background: #FFFFFF; padding: 8px 12px; border-radius: var(--db-radius); z-index: 100; }
+.skip:focus { top: 12px; }
+
+/* Type ------------------------------------------------------------- */
+.h1 { font-weight: var(--db-font-light); font-size: clamp(38px, 3.9vw, 58px); line-height: 1.04; letter-spacing: -0.01em; }
+.h2 { font-weight: var(--db-font-light); font-size: clamp(34px, 3.9vw, 56px); line-height: 1.06; letter-spacing: -0.01em; }
+.h3 { font-weight: var(--db-font-light); font-size: clamp(22px, 2.1vw, 28px); line-height: 1.2; }
+.lede { font-size: 17px; max-width: 42ch; }
+.lede--short { display: none; }
+.jump { position: absolute; left: 0; width: 0; height: 0; }
+.small { font-size: 14px; }
+.muted { color: var(--db-text-muted); }
+
+/* Buttons and links ------------------------------------------------- */
+.btn {
+  display: inline-block; padding: 13px 22px; border: 0; border-radius: var(--db-radius);
+  background: var(--db-primary); color: #FFFFFF; font-weight: var(--db-font-semibold);
+  font-size: 15px; line-height: 1.2; letter-spacing: normal; text-decoration: none; cursor: pointer;
+  transition: background-color var(--db-transition-fast);
+}
+.btn:hover { background: var(--db-primary-hover); }
+.btn--accent { background: var(--db-accent); color: var(--db-on-accent); }
+.btn--accent:hover { background: var(--db-accent-hover); }
+.link {
+  font-weight: var(--db-font-semibold); font-size: 15px; text-decoration: underline;
+  text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 5px;
+  transition: text-decoration-thickness var(--db-transition-fast);
+}
+.link:hover { text-decoration-thickness: 3px; }
+.on-dark .link { color: #FFFFFF; text-decoration-color: var(--db-accent); }
+.ctas { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+
+/* Header ------------------------------------------------------------ */
+.hdr {
+  position: fixed; inset: 0 0 auto 0; height: var(--hdr); z-index: 50;
+  background: #FFFFFF; border-bottom: 1px solid var(--db-border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--gutter);
+}
+.hdr__logo { display: block; width: var(--logo-w); }
+.hdr__logo img { width: 100%; height: auto; view-transition-name: db-logo; }
+.nav { display: flex; gap: 32px; }
+.nav a, .hdr__tools a, .hdr__menu {
+  font-size: 14px; text-decoration: none; padding: 6px 0; border: 0; background: none; cursor: pointer;
+  text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 6px;
+}
+.nav a:hover, .hdr__tools a:hover { text-decoration: underline; }
+.hdr__tools { display: flex; gap: 24px; }
+.hdr__menu { display: none; }
+/* The wordmark's bar continues as the page's progress line. */
+.progress {
+  position: fixed; top: calc(var(--hdr) - 2px); left: var(--bar-x); right: 0; height: 2px; z-index: 51;
+  background: var(--db-accent); transform-origin: 0 50%; scale: 0 1; pointer-events: none;
+}
+@supports (animation-timeline: scroll()) {
+  .progress { animation: grow linear both; animation-timeline: scroll(root); }
+}
+@keyframes grow { from { scale: 0 1; } to { scale: 1 1; } }
+
+.nav-overlay {
+  position: fixed; inset: 0; z-index: 60; background: #FFFFFF; display: grid; place-content: center; text-align: center;
+  gap: 8px;
+}
+.nav-overlay[hidden] { display: none; }
+.nav-overlay a { display: block; font-size: 28px; font-weight: var(--db-font-light); text-decoration: none; padding: 8px 20px; }
+.nav-overlay .nav-overlay__close { position: absolute; top: 20px; right: var(--gutter); border: 0; background: none; font-size: 14px; padding: 8px; cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) {
+  .nav-overlay:not([hidden]) a { animation: rise 250ms ease both; animation-delay: calc(var(--i) * 40ms); }
+}
+@keyframes rise { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+
+/* Hero: pinned color story ------------------------------------------ */
+.hero-track { position: relative; height: calc(var(--vh) + 14 * var(--coat-step)); view-timeline: --hero block; }
+.hero {
+  position: sticky; top: 0; height: var(--vh); padding-top: var(--hdr); background: #FFFFFF;
+  display: grid; align-items: center; overflow: hidden;
+}
+.hero__grid {
+  display: grid; grid-template-columns: minmax(300px, 1fr) minmax(360px, 1.55fr) minmax(170px, 0.45fr);
+  gap: clamp(16px, 2.5vw, 40px); align-items: center; padding: 0 var(--gutter); width: 100%; max-width: 1440px; margin: 0 auto;
+}
+.hero__copy { display: grid; gap: 22px; }
+.hero__coat { font-weight: var(--db-font-light); font-size: clamp(24px, 2.3vw, 32px); line-height: 1.25; }
+.hero__coat b { font-weight: var(--db-font-light); }
+.hero__fixture { position: relative; aspect-ratio: 1; width: 100%; max-height: calc(var(--vh) - var(--hdr) - 24px); margin: 0 auto; overflow: hidden; }
+/* The studio shots carry wide white margins; scaling the square trims them. */
+.hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; scale: 1.24; transform-origin: 50% 50%; }
+.hero__img.is-base, .hero__img.is-active { opacity: 1; }
+/* Each coat owns a slice of the pinned scroll. Fill mode none, so
+   outside its slice an image falls back to opacity 0 and the base shows. */
+@supports (animation-timeline: view()) {
+  .hero__img[data-i] { animation: show linear; animation-fill-mode: none; animation-timeline: --hero; }
+  .hero__img[data-i="0"]  { animation-range: contain -20%    contain 7.143%;  }
+  .hero__img[data-i="1"]  { animation-range: contain 7.143%  contain 14.286%; }
+  .hero__img[data-i="2"]  { animation-range: contain 14.286% contain 21.429%; }
+  .hero__img[data-i="3"]  { animation-range: contain 21.429% contain 28.571%; }
+  .hero__img[data-i="4"]  { animation-range: contain 28.571% contain 35.714%; }
+  .hero__img[data-i="5"]  { animation-range: contain 35.714% contain 42.857%; }
+  .hero__img[data-i="6"]  { animation-range: contain 42.857% contain 50%;     }
+  .hero__img[data-i="7"]  { animation-range: contain 50%     contain 57.143%; }
+  .hero__img[data-i="8"]  { animation-range: contain 57.143% contain 64.286%; }
+  .hero__img[data-i="9"]  { animation-range: contain 64.286% contain 71.429%; }
+  .hero__img[data-i="10"] { animation-range: contain 71.429% contain 78.571%; }
+  .hero__img[data-i="11"] { animation-range: contain 78.571% contain 85.714%; }
+  .hero__img[data-i="12"] { animation-range: contain 85.714% contain 92.857%; }
+}
+@keyframes show { from, to { opacity: 1; } }
+
+/* The coat rail: the strip stood on end, Black at the top, White at the bottom. */
+.rail { position: relative; display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; justify-self: start; }
+.rail::before { content: ""; position: absolute; left: 18px; top: 19px; bottom: 19px; width: 1px; background: var(--db-border); }
+.rail li { position: relative; }
+.swatch {
+  display: flex; align-items: center; gap: 14px; padding: 0; border: 0; background: none; cursor: pointer; text-align: left;
+  font-size: 14px; line-height: 1; color: var(--db-text);
+}
+.swatch__dot {
+  flex: none; width: 37px; height: 37px; border-radius: 50%; background: var(--c);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.14);
+  transition: box-shadow var(--db-transition-fast);
+}
+.swatch[aria-checked="true"] .swatch__dot { box-shadow: inset 0 0 0 1px rgba(0,0,0,.14), 0 0 0 2px #FFFFFF, 0 0 0 4px var(--db-primary); }
+.swatch:hover .swatch__dot { box-shadow: inset 0 0 0 1px rgba(0,0,0,.14), 0 0 0 2px #FFFFFF, 0 0 0 3px var(--db-gray-400); }
+.swatch:focus-visible { outline: none; }
+.swatch:focus-visible .swatch__name { text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+/* Stacked cards ------------------------------------------------------ */
+/* Every item is sticky inside the one stack, so the next card slides over the
+   one before it. A card presses back as the next item enters, read through
+   timeline-scope from that item's own view timeline. */
+.stack { position: relative; background: #FFFFFF; timeline-scope: --c1, --c2, --c3, --c4, --c5; }
+.stack__item {
+  position: sticky; top: 0; height: var(--vh);
+  padding: calc(var(--hdr) + var(--n) * 12px) var(--stack-gap) var(--stack-gap);
+}
+.stack__item:nth-child(1) { view-timeline: --c1 block; }
+.stack__item:nth-child(2) { view-timeline: --c2 block; }
+.stack__item:nth-child(3) { view-timeline: --c3 block; }
+.stack__item:nth-child(4) { view-timeline: --c4 block; }
+.stack__item:nth-child(5) { view-timeline: --c5 block; }
+.card {
+  position: relative; height: 100%; border-radius: var(--db-radius); overflow: hidden;
+  transform-origin: 50% 0; display: grid; align-items: center;
+}
+.card--mid { background: var(--db-surface-mid); }
+.card--surface { background: var(--db-surface); }
+.card--white { background: #FFFFFF; border: 1px solid var(--db-border); }
+.card--dark { background: var(--db-primary); color: #FFFFFF; }
+.card--dark .muted { color: var(--db-gray-300); }
+@supports (animation-timeline: view()) {
+  .card { animation: press linear both; animation-range: entry 0% entry 100%; }
+  .stack__item:nth-child(1) .card { animation-timeline: --c2; }
+  .stack__item:nth-child(2) .card { animation-timeline: --c3; }
+  .stack__item:nth-child(3) .card { animation-timeline: --c4; }
+  .stack__item:nth-child(4) .card { animation-timeline: --c5; }
+  .stack__item:nth-child(5) .card { animation: none; }
+}
+@keyframes press { to { scale: 0.95; filter: brightness(0.9); } }
+.card__grid {
+  display: grid; grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr); gap: clamp(24px, 4vw, 72px); align-items: center;
+  padding: 0 clamp(24px, 5vw, 80px); width: 100%; max-width: 1320px; margin: 0 auto;
+}
+.card__copy { display: grid; gap: 22px; max-width: 46ch; }
+.card .h2 { font-size: clamp(40px, 4.8vw, 72px); }
+/* Every other family card puts the fixture on the left, so the stack reads as a sequence, not a repeat. */
+.card--flip .card__media { order: -1; }
+.card--flip .card__copy { justify-self: end; }
+.card__media { justify-self: center; width: min(100%, calc(var(--vh) - var(--hdr) - 140px)); display: grid; gap: 12px; }
+/* The photo's white ground multiplies away on the surface cards. */
+.card--mid .card__media img, .card--surface .card__media img { mix-blend-mode: multiply; }
+.card__media img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; border-radius: var(--db-radius); }
+.card__caption { font-size: 13px; color: var(--db-text-muted); text-align: center; }
+
+/* The craft card: copy beside the strip, Black at the top. */
+.card--dark .card__grid { grid-template-columns: minmax(280px, 1.4fr) minmax(120px, 0.5fr); }
+.facts { display: grid; grid-template-columns: max-content 1fr; column-gap: 28px; row-gap: 10px; font-size: 15px; }
+.facts dt { color: var(--db-gray-300); }
+.facts dd { margin: 0; }
+.strip { display: grid; grid-template-rows: repeat(14, 1fr); height: calc(var(--vh) - var(--hdr) - 200px); max-height: 640px; width: min(100%, 140px); justify-self: end; border-radius: var(--db-radius); overflow: hidden; }
+.strip span { background: var(--c); }
+
+/* Trade ----------------------------------------------------------------- */
+.trade { position: relative; background: #FFFFFF; padding: clamp(80px, 12vh, 140px) var(--gutter) clamp(40px, 6vh, 64px); }
+.trade__grid { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr); gap: clamp(32px, 6vw, 96px); max-width: 1200px; margin: 0 auto; align-items: start; }
+.trade__copy { display: grid; gap: 20px; }
+.trade__list { list-style: none; padding: 0; display: grid; }
+.trade__list li { padding: 16px 0; border-top: 1px solid var(--db-border); }
+.trade__list li:last-child { border-bottom: 1px solid var(--db-border); }
+.trade .ctas { margin-top: 28px; }
+
+/* Room reveal ----------------------------------------------------------- */
+.room-track { position: relative; height: calc(var(--vh) * 2.4); view-timeline: --room block; background: #FFFFFF; }
+.room { position: sticky; top: 0; height: var(--vh); overflow: hidden; background: #FFFFFF; }
+.room__img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%;
+  clip-path: inset(28% 30% round var(--db-radius));
+}
+.room__lead {
+  position: absolute; left: 0; right: 0; top: calc(var(--hdr) + 4vh); text-align: center; padding: 0 var(--gutter);
+  font-size: clamp(30px, 3.6vw, 50px); line-height: 1.1;
+}
+.room__panel {
+  position: absolute; left: var(--gutter); bottom: var(--gutter); max-width: 440px; padding: 28px 32px 32px;
+  background: #FFFFFF; border-radius: var(--db-radius); display: grid; gap: 16px; opacity: 0;
+}
+.room__credit { position: absolute; right: var(--gutter); bottom: var(--gutter); font-size: 12px; color: #FFFFFF; background: rgba(42,38,34,.72); padding: 6px 10px; border-radius: var(--db-radius); opacity: 0; }
+@supports (animation-timeline: view()) {
+  .room__img { animation: open linear both; animation-timeline: --room; animation-range: contain 0% contain 100%; }
+  .room__lead { animation: fadeout linear both; animation-timeline: --room; animation-range: contain 10% contain 35%; }
+  .room__panel, .room__credit { animation: fadein linear both; animation-timeline: --room; animation-range: contain 68% contain 88%; }
+}
+@keyframes open { from { clip-path: inset(28% 30% round var(--db-radius)); } 78%, to { clip-path: inset(0 0 round 0); } }
+@keyframes fadeout { from { opacity: 1; } to { opacity: 0; } }
+@keyframes fadein { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+
+/* Footer ---------------------------------------------------------------- */
+.ftr { background: var(--db-surface); padding: clamp(64px, 9vh, 112px) var(--gutter) 40px; }
+.ftr__in { max-width: 1200px; margin: 0 auto; display: grid; gap: 56px; }
+.ftr__top { display: grid; grid-template-columns: minmax(260px, 1.2fr) repeat(3, minmax(120px, 0.6fr)); gap: 40px; }
+.ftr__brand { display: grid; gap: 20px; align-content: start; }
+.ftr__brand img { width: 132px; height: auto; }
+.ftr__line { font-weight: var(--db-font-light); font-size: clamp(26px, 2.6vw, 36px); line-height: 1.15; }
+.ftr h3 { font-size: 14px; font-weight: var(--db-font-semibold); margin-bottom: 14px; }
+.ftr ul { list-style: none; padding: 0; display: grid; gap: 10px; font-size: 14px; }
+.ftr ul a { text-decoration: none; }
+.ftr ul a:hover { text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.signup { display: grid; gap: 10px; max-width: 420px; }
+.signup label { font-size: 14px; }
+.signup__row { display: flex; gap: 8px; }
+.signup input {
+  flex: 1; min-width: 0; font: inherit; font-size: 15px; padding: 11px 12px; border: 1px solid var(--db-input-border);
+  border-radius: var(--db-radius); background: #FFFFFF; color: var(--db-text);
+}
+.signup input::placeholder { color: var(--db-placeholder); }
+.signup input:focus { border-color: var(--db-primary); outline: 2px solid var(--db-focus-ring); outline-offset: 2px; }
+.ftr__bottom { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--db-text-muted); border-top: 1px solid var(--db-border); padding-top: 24px; }
+.ftr__bottom a { text-decoration: none; }
+.ftr__bottom a:hover { text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.ftr__bottom span + span::before { content: ""; display: inline-block; width: 24px; }
+
+/* Mobile ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+  :root { --hdr: 64px; --logo-w: 120px; --coat-step: 20vh; --stack-gap: 10px; }
+  @supports (height: 100svh) { :root { --coat-step: 20svh; } }
+  .nav, .hdr__tools { display: none; }
+  .hdr__menu { display: inline-block; }
+  .hero { align-items: start; }
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "title title" "fixture rail" "coat coat" "cta cta";
+    gap: 14px 12px; padding-top: 12px; align-items: center;
+  }
+  .hero__copy { display: contents; }
+  .hero__copy > .h1 { grid-area: title; }
+  .hero__copy > .hero__coat { grid-area: coat; }
+  .hero__copy > .lede { display: none; }
+  .lede--short { display: block; width: 100%; }
+  .hero__fixture { grid-area: fixture; max-height: none; }
+  .hero__img { scale: 1.3; }
+  .rail { grid-area: rail; gap: 3px; justify-self: end; }
+  .rail::before { left: 11px; top: 12px; bottom: 12px; }
+  .swatch { gap: 10px; font-size: 13px; }
+  .swatch__dot { width: 23px; height: 23px; }
+  .hero__cta { grid-area: cta; display: grid; gap: 12px; }
+  .hero__cta .lede { font-size: 14px; }
+  .h1 { font-size: clamp(32px, 9vw, 38px); }
+  .hero__coat { font-size: 20px; }
+  .card { display: block; overflow: auto; }
+  .card .h2 { font-size: clamp(36px, 10vw, 44px); }
+  .card__grid { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 16px; padding: 28px 22px; align-content: start; height: 100%; }
+  .card__copy, .card--flip .card__copy { order: 2; justify-self: start; }
+  .card__media, .card--flip .card__media { order: 1; width: min(62vw, calc(var(--vh) - 420px)); }
+  .card--dark .card__grid { grid-template-columns: 1fr; }
+  .strip { width: 100%; height: 44px; grid-template-rows: none; grid-template-columns: repeat(14, 1fr); direction: rtl; }
+  .trade__grid { grid-template-columns: 1fr; }
+  .room__img { clip-path: inset(36% 14% round var(--db-radius)); }
+  @keyframes open { from { clip-path: inset(36% 14% round var(--db-radius)); } 78%, to { clip-path: inset(0 0 round 0); } }
+  .room__panel { left: 16px; right: 16px; bottom: 16px; padding: 22px 22px 24px; }
+  .room__credit { display: none; }
+  .ftr__top { grid-template-columns: 1fr 1fr; }
+  .ftr__brand { grid-column: 1 / -1; }
+}
+@media (max-width: 380px) {
+  .swatch__dot { width: 20px; height: 20px; }
+  .swatch { font-size: 11px; }
+}
+
+/* Very tall viewports (a portrait 4K screen): no pinning, plain flow. */
+@media (min-height: 1500px) {
+  :root { --pin: 0; }
+  .hero-track { height: auto; }
+  .hero { position: relative; height: auto; min-height: 900px; }
+  .hero__fixture { max-height: 700px; }
+  .hero__img[data-i] { animation: none; }
+  .stack__item { position: relative; height: auto; padding-top: var(--stack-gap); }
+  .card { height: auto; min-height: 720px; animation: none; }
+  .card__media { width: min(100%, 560px); }
+  .strip { height: 560px; }
+  .room-track { height: auto; }
+  .room { position: relative; height: 900px; }
+  .room__img { animation: none; clip-path: inset(0 0 round 0); }
+  .room__lead { animation: none; opacity: 0; }
+  .room__panel, .room__credit { animation: none; opacity: 1; }
+  .progress { animation: none; }
+}
+
+/* Reduced motion: everything settled, nothing pinned, colors switch on tap. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  :root { --pin: 0; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  .hero-track { height: auto; }
+  .hero { position: relative; height: auto; min-height: calc(var(--vh)); }
+  .hero__fixture { max-height: calc(var(--vh) - var(--hdr) - 48px); }
+  .hero__img[data-i] { animation: none; }
+  .stack__item { position: relative; height: auto; padding-top: var(--stack-gap); }
+  .card { height: auto; min-height: 70vh; animation: none; padding: 40px 0; }
+  .card__media { width: min(100%, 520px); }
+  .room-track { height: auto; }
+  .room { position: relative; height: 80vh; }
+  .room__img { animation: none; clip-path: inset(0 0 round 0); }
+  .room__lead { animation: none; opacity: 0; }
+  .room__panel, .room__credit { animation: none; opacity: 1; translate: none; }
+  .progress { animation: none; }
+  .nav-overlay a { animation: none; }
+  * { transition-duration: 0ms !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <a class="hdr__logo" href="/" aria-label="Dutton Brown, home">
+    <img src="../tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="" width="938" height="463">
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="/collections/lighting">Lighting</a>
+    <a href="/collections/hardware">Hardware</a>
+    <a href="/pages/colors">Colors</a>
+    <a href="/pages/trade">Trade</a>
+    <a href="/pages/about">About</a>
+  </nav>
+  <div class="hdr__tools">
+    <a href="/search">Search</a>
+    <a href="/cart">Cart</a>
+  </div>
+  <button class="hdr__menu" type="button" aria-expanded="false" aria-controls="navOverlay" id="menuBtn">Menu</button>
+</header>
+<div class="progress" aria-hidden="true" id="progress"></div>
+<div class="nav-overlay" id="navOverlay" hidden>
+  <button class="nav-overlay__close" type="button" id="menuClose">Close</button>
+  <a href="/collections/lighting" style="--i:0">Lighting</a>
+  <a href="/collections/hardware" style="--i:1">Hardware</a>
+  <a href="/pages/colors" style="--i:2">Colors</a>
+  <a href="/pages/trade" style="--i:3">Trade</a>
+  <a href="/pages/about" style="--i:4">About</a>
+  <a href="/search" style="--i:5">Search</a>
+  <a href="/cart" style="--i:6">Cart</a>
+</div>
+
+<main id="main">
+
+<!-- Hero: the pinned color story. Scroll walks the strip from Black to White. -->
+<div class="hero-track" id="heroTrack">
+  <span class="jump" id="coat-3" style="top: calc(3.5 / 14 * (100% - var(--vh)))"></span>
+  <span class="jump" id="coat-7" style="top: calc(7.5 / 14 * (100% - var(--vh)))"></span>
+  <span class="jump" id="coat-12" style="top: calc(12.5 / 14 * (100% - var(--vh)))"></span>
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <h1 class="h1" id="heroTitle">Lighting that's never boring.</h1>
+        <p class="hero__coat">Lure Pendant 10″ in <b id="coatName">Black</b>.</p>
+        <p class="lede">One fixture, 14 powder coat colors, made to order in Minneapolis. Scroll and watch it change, or pick a color and it follows you to the product page.</p>
+        <div class="ctas hero__cta">
+          <a class="btn" id="coatCta" href="/products/color-lure-globe-pendant-10?coat=black" aria-label="Shop the Lure Pendant in Black">Shop this color</a>
+          <a class="link" href="/pages/samples">Request samples</a>
+          <p class="lede lede--short">One fixture, 14 colors, made to order in Minneapolis. Pick one and it follows you to the product page.</p>
+        </div>
+      </div>
+
+      <div class="hero__fixture" id="fixture">
+        <img class="hero__img is-base" src="https://cdn.shopify.com/s/files/1/0229/6239/files/1-lure-pendant-10-brass-white.jpg?width=1000" alt="Lure Pendant 10 inch in White powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img is-active" data-i="0" src="https://cdn.shopify.com/s/files/1/0229/6239/files/13-lure-pendant-10-brass-black.jpg?width=1000" alt="Lure Pendant 10 inch in Black powder coat with brass" width="1000" height="1000" fetchpriority="high">
+        <img class="hero__img" data-i="1" src="https://cdn.shopify.com/s/files/1/0229/6239/files/12-lure-pendant-10-brass-barely.jpg?width=1000" alt="Lure Pendant 10 inch in Barely powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="2" src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-lure-pendant-10-brass-pinkaboo.jpg?width=1000" alt="Lure Pendant 10 inch in Pinkaboo powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="3" src="https://cdn.shopify.com/s/files/1/0229/6239/files/11-lure-pendant-10-brass-ridinghoodred_e7e2ec21-b69c-4a70-bffe-4f3b8837ee56.jpg?width=1000" alt="Lure Pendant 10 inch in Riding Hood Red powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="4" src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-lure-pendant-10-brass-orange.jpg?width=1000" alt="Lure Pendant 10 inch in Orange powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="5" src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-lure-pendant-10-brass-ochre.jpg?width=1000" alt="Lure Pendant 10 inch in Ochre powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="6" src="https://cdn.shopify.com/s/files/1/0229/6239/files/8-lure-pendant-10-brass-slateblue.jpg?width=1000" alt="Lure Pendant 10 inch in Slate Blue powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="7" src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-lure-pendant-10-brass-cobalt.jpg?width=1000" alt="Lure Pendant 10 inch in Cobalt powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="8" src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-lure-pendant-10-brass-lagoon.jpg?width=1000" alt="Lure Pendant 10 inch in Lagoon powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="9" src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-lure-pendant-10-brass-pythongreen.jpg?width=1000" alt="Lure Pendant 10 inch in Python Green powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="10" src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-lure-pendant-10-brass-spa.jpg?width=1000" alt="Lure Pendant 10 inch in Spa powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="11" src="https://cdn.shopify.com/s/files/1/0229/6239/files/3-lure-pendant-10-brass-bone.jpg?width=1000" alt="Lure Pendant 10 inch in Bone powder coat with brass" width="1000" height="1000" decoding="async">
+        <img class="hero__img" data-i="12" src="https://cdn.shopify.com/s/files/1/0229/6239/files/2-lure-pendant-10-brass-chalk.jpg?width=1000" alt="Lure Pendant 10 inch in Chalk powder coat with brass" width="1000" height="1000" decoding="async">
+      </div>
+
+      <ul class="rail" id="rail" role="radiogroup" aria-label="Powder coat color">
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="true" data-i="0" data-slug="black"><span class="swatch__dot" style="--c: var(--db-black)"></span><span class="swatch__name">Black</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="1" data-slug="barely"><span class="swatch__dot" style="--c: var(--db-barely)"></span><span class="swatch__name">Barely</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="2" data-slug="pinkaboo"><span class="swatch__dot" style="--c: var(--db-pinkaboo)"></span><span class="swatch__name">Pinkaboo</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="3" data-slug="riding-hood-red"><span class="swatch__dot" style="--c: var(--db-riding-hood-red)"></span><span class="swatch__name">Riding Hood Red</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="4" data-slug="orange"><span class="swatch__dot" style="--c: var(--db-orange)"></span><span class="swatch__name">Orange</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="5" data-slug="ochre"><span class="swatch__dot" style="--c: var(--db-ochre)"></span><span class="swatch__name">Ochre</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="6" data-slug="slate-blue"><span class="swatch__dot" style="--c: var(--db-slate-blue)"></span><span class="swatch__name">Slate Blue</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="7" data-slug="cobalt"><span class="swatch__dot" style="--c: var(--db-cobalt)"></span><span class="swatch__name">Cobalt</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="8" data-slug="lagoon"><span class="swatch__dot" style="--c: var(--db-lagoon)"></span><span class="swatch__name">Lagoon</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="9" data-slug="python-green"><span class="swatch__dot" style="--c: var(--db-python-green)"></span><span class="swatch__name">Python Green</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="10" data-slug="spa"><span class="swatch__dot" style="--c: var(--db-spa)"></span><span class="swatch__name">Spa</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="11" data-slug="bone"><span class="swatch__dot" style="--c: var(--db-bone)"></span><span class="swatch__name">Bone</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="12" data-slug="chalk"><span class="swatch__dot" style="--c: var(--db-chalk)"></span><span class="swatch__name">Chalk</span></button></li>
+        <li role="none"><button class="swatch" type="button" role="radio" aria-checked="false" data-i="13" data-slug="white"><span class="swatch__dot" style="--c: var(--db-white)"></span><span class="swatch__name">White</span></button></li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- Families and craft: cards that stack as you scroll. -->
+<div class="stack" id="families">
+  <div class="stack__item" style="--n:0">
+    <section class="card card--mid" aria-labelledby="c1">
+      <div class="card__grid">
+        <div class="card__copy">
+          <h2 class="h2" id="c1">Pendants</h2>
+          <p class="lede">Globes, domes and caps, sized for over the island, the bar and the bedside. Hang one, or hang three and call it a plan.</p>
+          <p><a class="link" href="/collections/pendants">Shop pendants</a></p>
+        </div>
+        <div class="card__media">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-bling-pendant-brass-cobalt.jpg?width=800" alt="Bling Pendant in Cobalt powder coat with brass" width="800" height="800" loading="lazy" decoding="async">
+          <p class="card__caption">Bling Pendant in Cobalt</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="stack__item" style="--n:1">
+    <section class="card card--white card--flip" aria-labelledby="c2">
+      <div class="card__grid">
+        <div class="card__copy">
+          <h2 class="h2" id="c2">Sconces</h2>
+          <p class="lede">Wall lights that mount up, down or sideways, so a pair reads as a set and a row reads as a decision.</p>
+          <p><a class="link" href="/collections/sconces">Shop sconces</a></p>
+        </div>
+        <div class="card__media">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-boom-sconce-6-brass-spa.jpg?width=800" alt="Boom Sconce with 6 inch arm in Spa powder coat with brass" width="800" height="800" loading="lazy" decoding="async">
+          <p class="card__caption">Boom Sconce in Spa</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="stack__item" style="--n:2">
+    <section class="card card--surface" aria-labelledby="c3">
+      <div class="card__grid">
+        <div class="card__copy">
+          <h2 class="h2" id="c3">Chandeliers</h2>
+          <p class="lede">The one the dinner guests ask about. Opal globes on solid brass arms, cups in the color you chose.</p>
+          <p><a class="link" href="/collections/chandeliers">Shop chandeliers</a></p>
+        </div>
+        <div class="card__media">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-big-prisma-chandelier-brass-ridinghoodred-1.jpg?width=800" alt="Big Prisma Chandelier 42 inch in Riding Hood Red powder coat with brass" width="800" height="800" loading="lazy" decoding="async">
+          <p class="card__caption">Big Prisma Chandelier in Riding Hood Red</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="stack__item" style="--n:3">
+    <section class="card card--mid card--flip" aria-labelledby="c4">
+      <div class="card__grid">
+        <div class="card__copy">
+          <h2 class="h2" id="c4">Flush mounts</h2>
+          <p class="lede">Low ceilings, same standards. The globes and colors from the pendants, held close to the plaster.</p>
+          <p><a class="link" href="/collections/flush-mounts">Shop flush mounts</a></p>
+        </div>
+        <div class="card__media">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-supreme-flush-mount-brass-pythongreen.jpg?width=800" alt="Supreme Flush Mount in Python Green powder coat with brass" width="800" height="800" loading="lazy" decoding="async">
+          <p class="card__caption">Supreme Flush Mount in Python Green</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="stack__item" style="--n:4">
+    <section class="card card--dark on-dark" aria-labelledby="c5">
+      <div class="card__grid">
+        <div class="card__copy">
+          <h2 class="h2" id="c5">Handcrafted in Minneapolis.</h2>
+          <p class="lede">Every fixture is cut, powder coated, wired and packed in our Minneapolis studio. Made to order means yours starts when you order it, in the color you chose, and nothing sits in a warehouse being almost right.</p>
+          <dl class="facts">
+            <dt>Powder coat</dt><dd>14 colors, applied in-house</dd>
+            <dt>Metal</dt><dd>Solid brass and high-gauge steel</dd>
+            <dt>Glass</dt><dd>Hand-blown opal</dd>
+            <dt>Listing</dt><dd>UL listed</dd>
+          </dl>
+          <p><a class="link" href="/pages/about">See how it's made</a></p>
+        </div>
+        <div class="strip" role="img" aria-label="The 14 powder coat colors, Black to White">
+          <span style="--c: var(--db-black)"></span>
+          <span style="--c: var(--db-barely)"></span>
+          <span style="--c: var(--db-pinkaboo)"></span>
+          <span style="--c: var(--db-riding-hood-red)"></span>
+          <span style="--c: var(--db-orange)"></span>
+          <span style="--c: var(--db-ochre)"></span>
+          <span style="--c: var(--db-slate-blue)"></span>
+          <span style="--c: var(--db-cobalt)"></span>
+          <span style="--c: var(--db-lagoon)"></span>
+          <span style="--c: var(--db-python-green)"></span>
+          <span style="--c: var(--db-spa)"></span>
+          <span style="--c: var(--db-bone)"></span>
+          <span style="--c: var(--db-chalk)"></span>
+          <span style="--c: var(--db-white)"></span>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Trade -->
+<section class="trade" id="trade" aria-labelledby="tradeTitle">
+  <div class="trade__grid">
+    <div class="trade__copy">
+      <h2 class="h2" id="tradeTitle">For the trade.</h2>
+      <p class="lede">Designers, architects and builders get a person who answers, and pricing that starts on the first order, not the tenth.</p>
+    </div>
+    <div>
+      <ul class="trade__list">
+        <li>Samples of all 14 powder coats</li>
+        <li>Spec sheets and CAD files on every product page</li>
+        <li>Lead times quoted before you order, not after</li>
+        <li>Trade pricing from the first order</li>
+      </ul>
+      <div class="ctas">
+        <a class="btn" href="/pages/trade">Apply for trade</a>
+        <a class="link" href="/pages/contact">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Closing scene: a room, from a small plate to full bleed. -->
+<div class="room-track" id="room">
+  <span class="jump" id="room-mid" style="top: calc(0.45 * (100% - var(--vh)))"></span>
+  <span class="jump" id="room-end" style="top: calc(0.95 * (100% - var(--vh)))"></span>
+  <section class="room" aria-labelledby="roomTitle">
+    <p class="room__lead h2">Then see it in a room.</p>
+    <img class="room__img" id="roomImg" src="https://cdn.shopify.com/s/files/1/0229/6239/files/scene-urchin_cadbury_persona-blue-kitchen-dining-room-dutton-brown-1.jpg?width=2000" alt="Kitchen and dining room with a Beaded Urchin Chandelier, two Cadbury sconces and Persona pulls, all in Cobalt" width="2000" height="1333" loading="lazy" decoding="async">
+    <div class="room__panel" id="roomPanel">
+      <h2 class="h2" id="roomTitle" style="font-size: clamp(30px, 3vw, 40px)">Your room. Your color.</h2>
+      <p>Start with samples of all 14 and decide at home, in your light.</p>
+      <div class="ctas">
+        <a class="btn btn--accent" href="/pages/samples">Start with samples</a>
+        <a class="link" href="/collections/lighting">Shop all lighting</a>
+      </div>
+    </div>
+    <p class="room__credit" id="roomCredit">Beaded Urchin Chandelier, Cadbury sconces and Persona pulls in Cobalt</p>
+  </section>
+</div>
+
+</main>
+
+<footer class="ftr">
+  <div class="ftr__in">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <img src="../tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="Dutton Brown" width="938" height="463">
+        <p class="ftr__line">Lighting that's never boring.</p>
+        <form class="signup" action="/contact" method="post" onsubmit="return false">
+          <label for="email">New colors first, about once a month.</label>
+          <div class="signup__row">
+            <input type="email" id="email" name="email" placeholder="you@studio.com" autocomplete="email" required>
+            <button class="btn" type="submit">Sign up</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="/collections/pendants">Pendants</a></li>
+          <li><a href="/collections/sconces">Sconces</a></li>
+          <li><a href="/collections/chandeliers">Chandeliers</a></li>
+          <li><a href="/collections/flush-mounts">Flush mounts</a></li>
+          <li><a href="/collections/hardware">Hardware</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/pages/about">About</a></li>
+          <li><a href="/pages/colors">Colors</a></li>
+          <li><a href="/pages/trade">Trade</a></li>
+          <li><a href="/pages/projects">Projects</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Help</h3>
+        <ul>
+          <li><a href="/pages/shipping">Shipping and lead times</a></li>
+          <li><a href="/pages/returns">Returns</a></li>
+          <li><a href="/pages/care">Care</a></li>
+          <li><a href="/pages/specs">Specs and downloads</a></li>
+          <li><a href="/pages/accessibility">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr__bottom">
+      <p>Dutton Brown, Minneapolis, Minnesota. Made to order, handcrafted here.</p>
+      <p><span>© 2026 Dutton Brown</span><span><a href="/policies/privacy-policy">Privacy</a></span><span><a href="/policies/terms-of-service">Terms</a></span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var coats = [
+    ["Black", "black"], ["Barely", "barely"], ["Pinkaboo", "pinkaboo"], ["Riding Hood Red", "riding-hood-red"],
+    ["Orange", "orange"], ["Ochre", "ochre"], ["Slate Blue", "slate-blue"], ["Cobalt", "cobalt"],
+    ["Lagoon", "lagoon"], ["Python Green", "python-green"], ["Spa", "spa"], ["Bone", "bone"], ["Chalk", "chalk"], ["White", "white"]
+  ];
+  var track = document.getElementById("heroTrack");
+  var imgs = Array.prototype.slice.call(document.querySelectorAll(".hero__img[data-i]"));
+  var base = document.querySelector(".hero__img.is-base");
+  var swatches = Array.prototype.slice.call(document.querySelectorAll(".swatch"));
+  var nameEl = document.getElementById("coatName");
+  var cta = document.getElementById("coatCta");
+  var progress = document.getElementById("progress");
+  var cssScroll = CSS.supports("animation-timeline: view()");
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  var current = -1;
+
+  function pinned() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--pin").trim() === "1";
+  }
+  function vh() { return window.innerHeight; }
+  function storyLength() { return Math.max(1, track.offsetHeight - vh()); }
+
+  // The state the page reads: headline, CTA, rail. Images too when CSS cannot.
+  function setCoat(i, force) {
+    if (i === current && !force) return;
+    current = i;
+    nameEl.textContent = coats[i][0];
+    cta.href = "/products/color-lure-globe-pendant-10?coat=" + coats[i][1];
+    cta.setAttribute("aria-label", "Shop the Lure Pendant in " + coats[i][0]);
+    swatches.forEach(function (b, k) { b.setAttribute("aria-checked", k === i ? "true" : "false"); });
+    var drive = !cssScroll || !pinned();
+    imgs.forEach(function (img, k) { img.classList.toggle("is-active", drive ? k === i : false); });
+    if (drive && base) base.classList.toggle("is-active", i === 13);
+    if (!drive) imgs.forEach(function (img) { img.classList.remove("is-active"); });
+  }
+
+  function indexFromScroll() {
+    var p = window.scrollY / storyLength();
+    if (p < 0) p = 0;
+    return Math.min(13, Math.floor(p * 14));
+  }
+
+  // Fallbacks for browsers without scroll-driven animations.
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".stack__item"));
+  var roomTrack = document.getElementById("room");
+  var roomImg = document.getElementById("roomImg");
+  var roomPanel = document.getElementById("roomPanel");
+  var roomCredit = document.getElementById("roomCredit");
+  var roomLead = document.querySelector(".room__lead");
+  function clamp01(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function fallbackFrame() {
+    var docH = document.documentElement.scrollHeight - vh();
+    progress.style.scale = clamp01(window.scrollY / Math.max(1, docH)) + " 1";
+    cards.forEach(function (item, k) {
+      var next = cards[k + 1];
+      if (!next) return;
+      var r = next.getBoundingClientRect();
+      var p = clamp01((vh() - r.top) / r.height);
+      var card = item.firstElementChild;
+      card.style.scale = 1 - 0.05 * p;
+      card.style.filter = "brightness(" + (1 - 0.1 * p) + ")";
+    });
+    var rr = roomTrack.getBoundingClientRect();
+    var rp = clamp01((0 - rr.top) / (rr.height - vh()));
+    var open = clamp01(rp / 0.78);
+    var narrow = matchMedia("(max-width: 900px)").matches;
+    var top = (narrow ? 36 : 28) * (1 - open), side = (narrow ? 14 : 30) * (1 - open);
+    roomImg.style.clipPath = "inset(" + top + "% " + side + "% round " + (4 * (1 - open)) + "px)";
+    var show = clamp01((rp - 0.68) / 0.2);
+    roomPanel.style.opacity = show; roomCredit.style.opacity = show;
+    roomPanel.style.translate = "0 " + (10 * (1 - show)) + "px";
+    roomLead.style.opacity = 1 - clamp01((rp - 0.1) / 0.25);
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      if (pinned()) setCoat(indexFromScroll());
+      if (!cssScroll && pinned()) fallbackFrame();
+    });
+  }
+
+  swatches.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var i = +b.dataset.i;
+      if (!pinned()) { setCoat(i); return; }
+      var y = Math.round(((i + 0.5) / 14) * storyLength());
+      window.scrollTo({ top: y, behavior: reduced.matches ? "auto" : "smooth" });
+      setCoat(i);
+    });
+  });
+  // Arrow keys walk the rail like a radio group.
+  document.getElementById("rail").addEventListener("keydown", function (e) {
+    var i = swatches.indexOf(document.activeElement);
+    if (i < 0) return;
+    var next = e.key === "ArrowDown" || e.key === "ArrowRight" ? i + 1 : e.key === "ArrowUp" || e.key === "ArrowLeft" ? i - 1 : -1;
+    if (next < 0 || next > 13) return;
+    e.preventDefault();
+    swatches[next].focus();
+    swatches[next].click();
+  });
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  setCoat(pinned() ? indexFromScroll() : 0, true);
+  if (!cssScroll && pinned()) fallbackFrame();
+
+  // ?at=<id> opens the page scrolled to that point (review and QA links).
+  var at = new URLSearchParams(location.search).get("at");
+  if (at) {
+    window.addEventListener("load", function () {
+      var el = document.getElementById(at);
+      if (!el) return;
+      window.scrollTo({ top: Math.round(el.getBoundingClientRect().top + window.scrollY), behavior: "auto" });
+      onScroll();
+    });
+  }
+
+  // Mobile menu: a full-screen white overlay.
+  var btn = document.getElementById("menuBtn"), overlay = document.getElementById("navOverlay"), close = document.getElementById("menuClose");
+  function openMenu(open) {
+    overlay.hidden = !open;
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.style.overflow = open ? "hidden" : "";
+    (open ? close : btn).focus();
+  }
+  btn.addEventListener("click", function () { openMenu(true); });
+  close.addEventListener("click", function () { openMenu(false); });
+  overlay.addEventListener("keydown", function (e) { if (e.key === "Escape") openMenu(false); });
+})();
+</script>
+</body>
+</html>

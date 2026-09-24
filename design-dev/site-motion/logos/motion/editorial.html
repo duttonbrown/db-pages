@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dutton Brown. Lighting that's never boring.</title>
+<meta name="description" content="Made-to-order lighting and hardware, powder coated in 14 colors, built in Minneapolis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="icon" href="../favicons/favicon.svg">
+<style>
+  /* =====================================================================
+     THE MAGAZINE. Direction "editorial", prototype for duttonbrown.com.
+     White ground, asymmetric 12-column grid, Poppins 300 display type,
+     product photos placed like plates. The coat list on the left of the
+     hero is the picker; it rewrites the headline, the photo and the CTA.
+     Everything ports to an Impact section: vanilla JS, no build step.
+     ===================================================================== */
+  :root {
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --t-fast: 150ms;
+    --t-base: 250ms;
+    --t-slow: 400ms;
+    --t-hero: 800ms;
+    --gutter: clamp(16px, 4vw, 56px);
+    --hdr-h: 76px;
+    --col: minmax(0, 1fr);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :root { --t-fast: 0ms; --t-base: 0ms; --t-slow: 0ms; --t-hero: 0ms; }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font: 400 17px/1.6 var(--db-font-primary);
+    color: var(--db-text);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  button, input { font: inherit; color: inherit; }
+  img { display: block; max-width: 100%; height: auto; }
+  strong { font-weight: 600; }
+  :focus-visible { outline: 2px solid var(--db-focus-ring); outline-offset: 2px; }
+  .skip { position: absolute; left: var(--gutter); top: -60px; padding: 8px 12px; background: #fff; border-radius: var(--db-radius); z-index: 100; }
+  .skip:focus { top: 12px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  /* the grid every section shares */
+  .grid { display: grid; grid-template-columns: repeat(12, var(--col)); column-gap: clamp(12px, 1.6vw, 24px); padding-inline: var(--gutter); }
+
+  /* type roles: size makes hierarchy, weight stays at 300 for display */
+  .display { font-weight: 300; line-height: .98; letter-spacing: -.025em; text-wrap: balance; }
+  .h2 { font-weight: 300; font-size: clamp(2rem, 4.4vw, 3.9rem); line-height: 1.02; letter-spacing: -.02em; text-wrap: balance; }
+  .h3 { font-weight: 300; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.1; letter-spacing: -.01em; }
+  .lede { font-size: clamp(1.0625rem, 1.25vw, 1.2rem); line-height: 1.6; max-width: 46ch; }
+  .muted { color: var(--db-text-muted); }
+  .small { font-size: 14px; line-height: 1.5; }
+
+  /* links and buttons */
+  .link { font-weight: 600; text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 4px; transition: text-underline-offset var(--t-fast) ease; }
+  .link:hover { text-underline-offset: 3px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 0; border-radius: var(--db-radius); font-weight: 600; font-size: 16px; letter-spacing: normal; cursor: pointer; text-align: center; transition: background var(--t-fast) ease; }
+  .btn--primary { background: var(--db-primary); color: #fff; }
+  .btn--primary:hover { background: var(--db-primary-hover); }
+  .btn--accent { background: var(--db-accent); color: var(--db-on-accent); }
+  .btn--accent:hover { background: var(--db-accent-hover); }
+
+  /* masked line reveal: each .line wraps a span that slides up into view */
+  .line { display: block; overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
+  .line > span { display: block; transform: translateY(110%); transition: transform var(--t-slow) var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+  .is-in .line > span, .line.is-in > span { transform: none; }
+  .hero .line > span { transition-duration: var(--t-hero); }
+
+  /* ------------------------------------------------------------------
+     header (masthead)
+     ------------------------------------------------------------------ */
+  .hdr { position: sticky; top: 0; z-index: 30; height: var(--hdr-h); background: #fff; box-shadow: inset 0 -1px 0 transparent; transition: box-shadow var(--t-fast) ease; }
+  .hdr.is-scrolled { box-shadow: inset 0 -1px 0 var(--db-border); }
+  .hdr__in { height: 100%; display: flex; align-items: center; gap: 40px; padding-inline: var(--gutter); }
+  .hdr__logo { flex: none; width: 140px; display: block; }
+  .hdr__logo img { width: 100%; }
+  .nav { display: flex; gap: 32px; }
+  .nav a, .hdr__util a { position: relative; padding: 6px 0; font-size: 15px; }
+  .nav a::after, .hdr__util a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; background: var(--db-accent-line); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--t-base) var(--ease); }
+  .nav a:hover::after, .nav a:focus-visible::after, .hdr__util a:hover::after, .hdr__util a:focus-visible::after { transform: none; }
+  .hdr__util { margin-left: auto; display: flex; gap: 28px; }
+  .hdr__menu { display: none; margin-left: auto; padding: 8px 0; background: none; border: 0; font-size: 15px; font-weight: 600; cursor: pointer; }
+
+  .menu { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; background: #fff; opacity: 0; visibility: hidden; transition: opacity var(--t-base) ease, visibility 0s var(--t-base); }
+  .menu.is-open { opacity: 1; visibility: visible; transition: opacity var(--t-base) ease; }
+  .menu__list { text-align: center; transform: translateY(16px); transition: transform var(--t-slow) var(--ease); }
+  .menu.is-open .menu__list { transform: none; }
+  .menu__list a { display: block; padding: 10px; font-weight: 300; font-size: 2rem; }
+  .menu__close { position: absolute; top: 20px; right: var(--gutter); padding: 8px 0; background: none; border: 0; font-weight: 600; cursor: pointer; }
+
+  /* ------------------------------------------------------------------
+     hero: the color picker as a table of contents
+     ------------------------------------------------------------------ */
+  .hero { padding-block: clamp(28px, 4vw, 48px) clamp(48px, 6vw, 88px); row-gap: clamp(20px, 2.4vw, 32px); }
+  .hero__head { grid-column: 1 / 11; font-size: clamp(2.75rem, 6.4vw, 6rem); }
+  .hero__head .coat { display: inline-block; vertical-align: top; overflow: hidden; }
+  .hero__head .coat > span { display: block; }
+
+  .picker { grid-column: 1 / 4; align-self: start; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .picker legend { padding: 0; margin-bottom: 14px; font-size: 14px; color: var(--db-text-muted); }
+  .picker__list { display: grid; row-gap: 6px; }
+  .coat-row { position: relative; display: flex; align-items: center; gap: 14px; min-height: 40px; padding-left: 0; cursor: pointer; transition: padding-left var(--t-base) var(--ease); }
+  .coat-row input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+  .coat-row__dot { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(74,74,74,.16); transition: box-shadow var(--t-base) ease; }
+  .coat-row__name { font-size: clamp(1rem, 1.35vw, 1.2rem); color: var(--db-text-muted); transition: color var(--t-fast) ease; }
+  .coat-row:hover .coat-row__name { color: var(--db-text); }
+  .coat-row::before { content: ""; position: absolute; left: -36px; top: 50%; width: 22px; height: 2px; margin-top: -1px; background: var(--db-accent-line); transform: scaleX(0); transform-origin: 100% 50%; transition: transform var(--t-base) var(--ease); }
+  .coat-row:has(input:checked) { padding-left: 10px; }
+  .coat-row:has(input:checked)::before { transform: none; }
+  .coat-row:has(input:checked) .coat-row__dot { box-shadow: inset 0 0 0 1px rgba(74,74,74,.16), 0 0 0 3px #fff, 0 0 0 4px var(--db-primary); }
+  .coat-row:has(input:checked) .coat-row__name { color: var(--db-text); font-weight: 600; }
+  .coat-row:has(input:focus-visible) { outline: 2px solid var(--db-focus-ring); outline-offset: 2px; border-radius: var(--db-radius); }
+  /* page-load stagger for the rows */
+  .coat-row { opacity: 0; transform: translateY(8px); transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease), padding-left var(--t-base) var(--ease); transition-delay: calc(240ms + var(--i, 0) * 28ms); }
+  .is-in .coat-row { opacity: 1; transform: none; transition-delay: 0ms; }
+
+  .plate { grid-column: 4 / 13; position: relative; margin-right: calc(var(--gutter) * -1); background: var(--db-surface); border-radius: var(--db-radius) 0 0 var(--db-radius); min-height: 640px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); isolation: isolate; clip-path: inset(0 100% 0 0); transition: clip-path var(--t-hero) var(--ease); }
+  .is-in .plate { clip-path: inset(0 0 0 0); }
+  .plate__media { position: relative; aspect-ratio: 1; align-self: center; margin: 24px 0 24px 24px; }
+  .plate__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; opacity: 0; transition: opacity 300ms ease; }
+  .plate__media img.is-on { opacity: 1; }
+  .plate__side { align-self: end; padding: 32px 40px 36px 8px; }
+  .plate__name { font-weight: 300; font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.15; letter-spacing: -.01em; }
+  .plate__side p { margin-top: 10px; max-width: 30ch; }
+  .plate__cta { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; margin-top: 22px; }
+
+  /* ------------------------------------------------------------------
+     plates: made one at a time
+     ------------------------------------------------------------------ */
+  .made { padding-block: clamp(80px, 10vw, 150px) clamp(40px, 5vw, 70px); row-gap: clamp(28px, 3vw, 48px); }
+  .made__head { grid-column: 1 / 9; }
+  .made__copy { grid-column: 9 / 13; align-self: end; }
+  .made__copy p + p { margin-top: 14px; }
+  .made__copy .link { display: inline-block; margin-top: 18px; }
+  .made__plates { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, var(--col)); column-gap: clamp(12px, 1.6vw, 24px); row-gap: 40px; margin-top: clamp(20px, 3vw, 40px); }
+  .figure { position: relative; }
+  .figure__box { background: var(--db-surface); border-radius: var(--db-radius); overflow: hidden; isolation: isolate; clip-path: inset(0 0 100% 0); transition: clip-path var(--t-slow) var(--ease); }
+  .figure.is-in .figure__box { clip-path: inset(0 0 0 0); }
+  .figure__box img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+  .figure__box--studio img { object-fit: contain; mix-blend-mode: multiply; padding: 6%; }
+  .figure figcaption { margin-top: 12px; font-size: 14px; line-height: 1.5; color: var(--db-text-muted); max-width: 42ch; }
+  .fig-a { grid-column: 1 / 8; }
+  .fig-a .figure__box { aspect-ratio: 4 / 3; }
+  .fig-b { grid-column: 9 / 13; align-self: end; }
+  .fig-b .figure__box { aspect-ratio: 1; }
+  .fig-c { grid-column: 4 / 13; margin-top: 20px; }
+  .fig-c .figure__box { aspect-ratio: 4 / 3; }
+
+  /* ------------------------------------------------------------------
+     strip: every family, all 14 colors
+     ------------------------------------------------------------------ */
+  .families { padding: clamp(64px, 8vw, 120px) 0 0; }
+  .families__head { grid-column: 1 / 8; }
+  .families__note { grid-column: 9 / 13; align-self: end; }
+  .strip { display: flex; gap: 56px; margin-top: clamp(32px, 4vw, 56px); padding: 4px var(--gutter) 28px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: var(--gutter); scrollbar-width: thin; scrollbar-color: var(--db-gray-300) transparent; }
+  .family { flex: none; }
+  .family__name { font-weight: 300; font-size: clamp(1.5rem, 2.2vw, 2rem); line-height: 1.1; margin-bottom: 18px; }
+  .family__name a { display: inline-block; }
+  .family__name span { font-size: 15px; font-weight: 400; color: var(--db-text-muted); margin-left: 10px; letter-spacing: 0; }
+  .family__row { display: flex; gap: 20px; }
+  .card { flex: none; width: clamp(200px, 20vw, 250px); scroll-snap-align: start; }
+  .card__link { display: block; }
+  .card__media { position: relative; display: block; aspect-ratio: 1; background: var(--db-surface); border-radius: var(--db-radius); overflow: hidden; isolation: isolate; }
+  .card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 8%; mix-blend-mode: multiply; transition: opacity var(--t-base) ease; }
+  .card__media .alt { opacity: 0; }
+  .card__link:hover .card__media .alt, .card__link:focus-visible .card__media .alt { opacity: 1; }
+  .card__name { display: block; margin-top: 12px; font-size: 15px; line-height: 1.35; }
+  .card__meta { display: block; font-size: 13px; color: var(--db-text-muted); }
+  .card__coats { display: flex; gap: 5px; margin-top: 10px; }
+  .card__coats i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(74,74,74,.14); }
+
+  /* ------------------------------------------------------------------
+     pull quotes
+     ------------------------------------------------------------------ */
+  .quotes { padding-block: clamp(80px, 11vw, 170px); row-gap: clamp(48px, 7vw, 110px); }
+  .quote { font-weight: 300; line-height: 1.04; letter-spacing: -.02em; }
+  .quote--a { grid-column: 1 / 9; grid-row: 1; font-size: clamp(2.4rem, 6.2vw, 5.6rem); }
+  .quote--b { grid-column: 4 / 13; grid-row: 2; font-size: clamp(2rem, 4.6vw, 4.2rem); }
+  .quote footer { margin-top: 18px; font-size: 15px; font-weight: 400; letter-spacing: 0; color: var(--db-text-muted); }
+  .quotes__fig { grid-column: 10 / 13; grid-row: 1; align-self: start; }
+  .quotes__fig .figure__box { aspect-ratio: 4 / 5; }
+
+  /* ------------------------------------------------------------------
+     Minneapolis: charcoal band with the coat strip on its edge
+     ------------------------------------------------------------------ */
+  .studio { position: relative; background: var(--db-primary); color: #fff; padding-block: clamp(72px, 9vw, 140px); row-gap: 40px; }
+  .studio .muted { color: var(--db-gray-300); }
+  .studio .link { text-decoration-color: var(--db-accent); }
+  .coat-strip { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; display: grid; grid-template-rows: repeat(14, 1fr); }
+  .coat-strip i { background: var(--c); }
+  .studio__head { grid-column: 2 / 8; }
+  .studio__copy { grid-column: 2 / 7; }
+  .studio__copy p + p { margin-top: 16px; }
+  .studio__facts { grid-column: 2 / 7; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 8px; }
+  .fact { border-top: 1px solid rgba(255,255,255,.28); padding-top: 12px; font-size: 15px; line-height: 1.5; color: #fff; }
+  .studio__fig { grid-column: 8 / 13; grid-row: 1 / span 3; align-self: start; }
+  .studio__fig .figure__box { background: #fff; aspect-ratio: 4 / 5; }
+  .studio__fig figcaption { color: var(--db-gray-300); }
+
+  /* ------------------------------------------------------------------
+     trade
+     ------------------------------------------------------------------ */
+  .trade { background: var(--db-surface); padding-block: clamp(72px, 9vw, 140px); row-gap: 32px; }
+  .trade__fig { grid-column: 1 / 6; grid-row: 1 / span 3; align-self: start; }
+  .trade__fig .figure__box { background: var(--db-surface-mid); aspect-ratio: 4 / 5; }
+  .trade__head { grid-column: 7 / 13; }
+  .trade__copy { grid-column: 7 / 12; }
+  .trade__list { grid-column: 7 / 12; display: grid; gap: 14px; }
+  .trade__list li { padding-left: 22px; position: relative; }
+  .trade__list li::before { content: ""; position: absolute; left: 0; top: .72em; width: 10px; height: 2px; background: var(--db-accent-line); }
+  .trade__cta { grid-column: 7 / 12; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; margin-top: 8px; }
+
+  /* ------------------------------------------------------------------
+     closing
+     ------------------------------------------------------------------ */
+  .close { padding-block: clamp(96px, 13vw, 200px) clamp(72px, 9vw, 140px); row-gap: 32px; }
+  .close__head { grid-column: 1 / 12; font-size: clamp(2.75rem, 7.6vw, 7rem); }
+  .close__cta { grid-column: 1 / 7; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+  .close__news { grid-column: 8 / 13; align-self: end; }
+  .news { display: flex; gap: 10px; margin-top: 12px; }
+  .news input { flex: 1; min-width: 0; height: 48px; padding: 0 14px; border: 1px solid var(--db-input-border); border-radius: var(--db-radius); background: #fff; }
+  .news input::placeholder { color: var(--db-placeholder); }
+  .news input:focus { outline: none; border-color: var(--db-primary); box-shadow: 0 0 0 1px var(--db-primary); }
+
+  /* ------------------------------------------------------------------
+     footer (colophon)
+     ------------------------------------------------------------------ */
+  .ftr { border-top: 1px solid var(--db-border); padding-block: clamp(48px, 6vw, 88px) 40px; row-gap: 48px; font-size: 14px; }
+  .ftr__brand { grid-column: 1 / 6; }
+  .ftr__brand img { width: 160px; margin-bottom: 22px; }
+  .ftr__line { font-weight: 300; font-size: clamp(1.6rem, 2.4vw, 2.2rem); line-height: 1.1; letter-spacing: -.01em; }
+  .ftr__cols { grid-column: 7 / 13; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .ftr__cols h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+  .ftr__cols li + li { margin-top: 8px; }
+  .ftr__cols a:hover { text-decoration: underline; text-decoration-color: var(--db-accent-line); text-underline-offset: 3px; }
+  .ftr__meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 32px; padding-top: 24px; border-top: 1px solid var(--db-border); color: var(--db-text-muted); font-size: 13px; }
+
+  /* ------------------------------------------------------------------
+     responsive
+     ------------------------------------------------------------------ */
+  @media (max-width: 1100px) {
+    .picker { grid-column: 1 / 5; }
+    .plate { grid-column: 5 / 13; grid-template-columns: 1fr; min-height: 0; }
+    .plate__media { margin: 24px; }
+    .plate__side { padding: 0 24px 28px; }
+  }
+  @media (max-width: 900px) {
+    :root { --hdr-h: 64px; }
+    .nav, .hdr__util { display: none; }
+    .hdr__menu { display: block; }
+    .hdr__logo { width: 124px; }
+    .hero { row-gap: 20px; }
+    .hero__head { grid-column: 1 / -1; font-size: clamp(2rem, 8.4vw, 4.2rem); }
+    .plate { grid-column: 1 / -1; grid-row: 2; position: sticky; top: var(--hdr-h); z-index: 2; margin-right: 0; border-radius: var(--db-radius); grid-template-columns: 1fr; min-height: 0; }
+    .plate__media { width: min(52vw, 260px); margin: 8px auto 0; }
+    .plate__side { display: grid; gap: 8px; padding: 0 14px 14px; max-width: none; }
+    .plate__side p { display: none; }
+    .plate__cta { margin-top: 0; gap: 10px; }
+    .plate__cta .link { display: none; }
+    .plate__cta .btn { width: 100%; min-height: 44px; padding: 0 16px; font-size: 15px; }
+    .plate__name { font-size: 1rem; line-height: 1.25; }
+    .picker { grid-column: 1 / -1; grid-row: 3; padding-top: 12px; }
+    .coat-row::before { left: auto; right: 0; transform-origin: 0 50%; }
+    .coat-row:has(input:checked) { padding-left: 0; }
+    .made__head, .made__copy, .families__head, .families__note, .studio__head, .studio__copy, .studio__facts, .studio__fig, .trade__fig, .trade__head, .trade__copy, .trade__list, .trade__cta, .close__head, .close__cta, .close__news, .ftr__brand, .ftr__cols, .quote--a, .quote--b, .quotes__fig { grid-column: 1 / -1; }
+    .fig-a, .fig-c { grid-column: 1 / -1; }
+    .fig-b { grid-column: 6 / 13; }
+    .fig-c { margin-top: 0; }
+    .studio__fig, .trade__fig { grid-row: auto; }
+    .studio__head, .studio__copy, .studio__facts { grid-column: 1 / -1; padding-left: 12px; }
+    .studio__facts { grid-template-columns: repeat(2, 1fr); }
+    .ftr__cols { grid-template-columns: repeat(2, 1fr); }
+    .quotes__fig { grid-column: 3 / 12; grid-row: auto; }
+    .quotes { row-gap: 48px; }
+  }
+  @media (max-width: 480px) {
+    .plate__media { width: 50vw; }
+    .fig-b { grid-column: 5 / 13; }
+    .families__note { margin-top: -8px; }
+    .news { flex-direction: column; }
+    .studio__facts { grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+
+  /* reduced motion: everything settled, nothing revealing */
+  @media (prefers-reduced-motion: reduce) {
+    .line > span, .coat-row { transform: none; opacity: 1; }
+    .plate, .figure__box { clip-path: none; }
+    .plate__media img { transition: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="hdr__in">
+    <a class="hdr__logo" href="/" aria-label="Dutton Brown home">
+      <img src="../tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="Dutton Brown" width="140" height="69">
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/collections/lighting">Lighting</a>
+      <a href="/collections/hardware">Hardware</a>
+      <a href="/pages/colors">Colors</a>
+      <a href="/pages/projects">Projects</a>
+      <a href="/pages/trade">Trade</a>
+    </nav>
+    <div class="hdr__util">
+      <a href="/search">Search</a>
+      <a href="/account">Account</a>
+      <a href="/cart">Cart</a>
+    </div>
+    <button class="hdr__menu" type="button" aria-expanded="false" aria-controls="menu" id="menuBtn">Menu</button>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="menu__close" type="button" id="menuClose">Close</button>
+  <nav class="menu__list" aria-label="Mobile">
+    <a href="/collections/lighting">Lighting</a>
+    <a href="/collections/hardware">Hardware</a>
+    <a href="/pages/colors">Colors</a>
+    <a href="/pages/projects">Projects</a>
+    <a href="/pages/trade">Trade</a>
+    <a href="/search">Search</a>
+    <a href="/account">Account</a>
+    <a href="/cart">Cart</a>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- =========================== HERO =========================== -->
+  <section class="hero grid" id="hero" aria-labelledby="heroTitle">
+    <h1 class="hero__head display" id="heroTitle">
+      <span class="line" style="--i:0"><span>The Lure Pendant,</span></span>
+      <span class="line" style="--i:1"><span>in <span class="coat" id="coatWord"><span>Cobalt</span></span>.</span></span>
+    </h1>
+
+    <fieldset class="picker" id="picker">
+      <legend>Pick a powder coat. The pendant follows.</legend>
+      <div class="picker__list" id="pickerList"></div>
+    </fieldset>
+
+    <figure class="plate" id="plate">
+      <div class="plate__media" id="plateMedia" aria-live="polite">
+        <img id="plateA" class="is-on" src="" alt="" width="1200" height="1200" fetchpriority="high" decoding="async">
+        <img id="plateB" src="" alt="" width="1200" height="1200" decoding="async">
+      </div>
+      <figcaption class="plate__side">
+        <div class="plate__name">Color Lure Pendant 10"</div>
+        <p class="muted">Hand-blown opal glass on a solid brass cap, powder coated in the color you picked. Made to order in Minneapolis.</p>
+        <div class="plate__cta">
+          <a class="btn btn--accent" id="heroCta" href="/products/color-lure-globe-pendant-10?color=Cobalt">Shop it in Cobalt</a>
+          <a class="link" href="/pages/colors">See all 14 colors</a>
+        </div>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- =========================== MADE =========================== -->
+  <section class="made grid" aria-labelledby="madeTitle">
+    <h2 class="made__head h2" id="madeTitle">
+      <span class="line" style="--i:0"><span>Made one at a time,</span></span>
+      <span class="line" style="--i:1"><span>in the color you picked.</span></span>
+    </h2>
+    <div class="made__copy">
+      <p>Every fixture starts as brass, steel and hand-blown opal glass on a bench in our Minneapolis studio. It gets its color last, in our own powder coat booth, so the coat you choose is the coat that ships.</p>
+      <p>Lead times run in weeks, not seasons. Fourteen colors, every fixture, no minimums.</p>
+      <a class="link" href="/pages/how-its-made">See how a fixture is made</a>
+    </div>
+
+    <div class="made__plates">
+      <figure data-reveal class="figure fig-a">
+        <div class="figure__box figure__box--studio">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-big-prisma-chandelier-brass-ridinghoodred-1.jpg?width=1200" alt="Color Big Prisma Chandelier 42 inch in Riding Hood Red with brass, studio photo" loading="lazy" width="1200" height="1200">
+        </div>
+        <figcaption>Big Prisma Chandelier 42", Riding Hood Red. Opal globes on brass arms, in a color nobody will call safe.</figcaption>
+      </figure>
+      <figure data-reveal class="figure fig-b">
+        <div class="figure__box figure__box--studio">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-boom-sconce-6-brass-spa.jpg?width=800" alt="Color Boom Sconce with 6 inch arm in Spa with brass, studio photo" loading="lazy" width="800" height="800">
+        </div>
+        <figcaption>Boom Sconce, 6" arm, Spa. Mounts up or down. Order two and call it a vanity.</figcaption>
+      </figure>
+      <figure data-reveal class="figure fig-c">
+        <div class="figure__box">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/products/supreme-brass-redflush-mount-dutton-brown-space-by-maggie-richmond-design-photo-by-genevieve-garruppo.jpg?width=1600" alt="Supreme Flush Mount in red with brass in a foyer, space by Maggie Richmond Design, photo by Genevieve Garruppo" loading="lazy" width="1600" height="1067">
+        </div>
+        <figcaption>Supreme Flush Mount in a nursery. Space by Maggie Richmond Design, photo by Genevieve Garruppo.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- =========================== FAMILIES =========================== -->
+  <section class="families" aria-labelledby="famTitle">
+    <div class="grid">
+      <h2 class="families__head h2" id="famTitle">Every family, all 14 colors.</h2>
+      <p class="families__note muted">Pendants, sconces, chandeliers and flush mounts share the same coats, so a whole house can match without matching. Hover a fixture to see it in a second color.</p>
+    </div>
+
+    <div class="strip" id="strip" tabindex="0" aria-label="Fixtures by family, scroll sideways">
+      <section class="family" aria-labelledby="famPendants">
+        <h3 class="family__name" id="famPendants"><a href="/collections/pendants">Pendants<span>See all</span></a></h3>
+        <ul class="family__row">
+          <li class="card"><a class="card__link" href="/products/color-cap-globe-pendant-8?color=Riding%20Hood%20Red"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11-cap-globe-pendant-8-brass-ridinghoodred.jpg?width=600" alt="Color Cap Pendant 8 inch in Riding Hood Red" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-cap-globe-pendant-8-brass-ochre.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Cap Pendant 8"</span><span class="card__meta">Shown in Riding Hood Red, then Ochre</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-lure-globe-pendant-10?color=Spa"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-lure-pendant-10-brass-spa.jpg?width=600" alt="Color Lure Pendant 10 inch in Spa" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-lure-pendant-10-brass-orange.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Lure Pendant 10"</span><span class="card__meta">Shown in Spa, then Orange</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-bling-pendant?color=Cobalt"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-bling-pendant-brass-cobalt.jpg?width=600" alt="Color Bling Pendant in Cobalt" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-bling-pendant-brass-pinkaboo.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Bling Pendant</span><span class="card__meta">Shown in Cobalt, then Pinkaboo</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-echo-dome-pendant-10?color=Slate%20Blue"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/8-echo-pendant-10-brass-slateblue.jpg?width=600" alt="Color Echo Pendant 10 inch in Slate Blue" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-echo-pendant-10-brass-ochre.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Echo Pendant 10"</span><span class="card__meta">Shown in Slate Blue, then Ochre</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-cadbury-dome-pendant-10?color=Ochre"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-cadburry-pendant-10-brass-ochre.jpg?width=600" alt="Color Cadbury Pendant 10 inch in Ochre" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-cadburry-pendant-10-brass-pythongreen.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Cadbury Pendant 10"</span><span class="card__meta">Shown in Ochre, then Python Green</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-twink-pendant?color=Pinkaboo"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-twink-pendant-brass-pinkaboo.jpg?width=600" alt="Color Twink Pendant in Pinkaboo" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/13-twink-pendant-brass-black.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Twink Pendant</span><span class="card__meta">Shown in Pinkaboo, then Black</span><span class="card__coats" aria-hidden="true"></span></a></li>
+        </ul>
+      </section>
+
+      <section class="family" aria-labelledby="famSconces">
+        <h3 class="family__name" id="famSconces"><a href="/collections/sconces">Sconces<span>See all</span></a></h3>
+        <ul class="family__row">
+          <li class="card"><a class="card__link" href="/products/color-pilot-sconce-23?color=Python%20Green"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-pilot-sconce-23-brass-pythongreen.jpg?width=600" alt="Color Pilot Sconce 23 inch in Python Green" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/12-pilot-sconce-23-brass-barely.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Pilot Sconce 23"</span><span class="card__meta">Shown in Python Green, then Barely</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-boom-sconce-6-arm?color=Spa"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-boom-sconce-6-brass-spa.jpg?width=600" alt="Color Boom Sconce 6 inch arm in Spa" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-boom-sconce-6-brass-cobalt.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Boom Sconce, 6" arm</span><span class="card__meta">Shown in Spa, then Cobalt</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-reader-sconce-6-arm?color=Orange"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-reader-sconce-6-brass-orange.jpg?width=600" alt="Color Reader Sconce 6 inch arm in Orange" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-reader-sconce-6-brass-lagoon.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Reader Sconce, 6" arm</span><span class="card__meta">Shown in Orange, then Lagoon</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-cap-globe-sconce-i-6?color=Cobalt"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-cap-sconce-6-brass-cobalt_c2223498-7da7-4428-9124-d07d09a4bbe5.jpg?width=600" alt="Color Cap Sconce 6 inch in Cobalt" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-cap-sconce-6-brass-pinkaboo_8cd5ff8f-9cf0-4454-bf8f-e0bc0eaf4cbe.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Cap Sconce 6"</span><span class="card__meta">Shown in Cobalt, then Pinkaboo</span><span class="card__coats" aria-hidden="true"></span></a></li>
+        </ul>
+      </section>
+
+      <section class="family" aria-labelledby="famChand">
+        <h3 class="family__name" id="famChand"><a href="/collections/chandeliers">Chandeliers<span>See all</span></a></h3>
+        <ul class="family__row">
+          <li class="card"><a class="card__link" href="/products/color-big-prisma-globe-chandelier-42?color=Cobalt"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-big-prisma-chandelier-brass-cobalt-1.jpg?width=600" alt="Color Big Prisma Chandelier 42 inch in Cobalt" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/8-big-prisma-chandelier-brass-ochre-1.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Big Prisma Chandelier 42"</span><span class="card__meta">Shown in Cobalt, then Ochre</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-crown-globe-chandelier-32?color=Lagoon"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-crown-chandelier-32-brass-lagoon.jpg?width=600" alt="Color Crown Chandelier 32 inch in Lagoon" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-crown-chandelier-32-brass-ochre.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Crown Chandelier 32"</span><span class="card__meta">Shown in Lagoon, then Ochre</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-orbi-globe-chandelier?color=Riding%20Hood%20Red"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11-orbi-chandelier-brass-ridinghoodred.jpg?width=600" alt="Color Orbi Chandelier in Riding Hood Red" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-orbi-chandelier-brass-spa.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Orbi Chandelier</span><span class="card__meta">Shown in Riding Hood Red, then Spa</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-beaded-urchin-chandelier?color=Ochre"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/products/8-color-beaded-urchin-chandelier-27-brass-ochre.jpg?width=600" alt="Color Beaded Urchin Chandelier 27 inch in Ochre" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-color-beaded-urchin-chandelier-27-brass-lagoon.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Beaded Urchin Chandelier 27"</span><span class="card__meta">Shown in Ochre, then Lagoon</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-alegria-chandelier?color=Pinkaboo"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-alegria-chandelier-brass-pinkaboo_436296e2-fb06-4849-81f3-a35388973292.jpg?width=600" alt="Color Alegria Chandelier 30 inch in Pinkaboo" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-alegria-chandelier-brass-cobalt.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Alegria Chandelier 30"</span><span class="card__meta">Shown in Pinkaboo, then Cobalt</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-commander-chandelier-47?color=Python%20Green"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-commander-chandelier-47-pythongreen.jpg?width=600" alt="Color Commander Chandelier 47 inch in Python Green" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-commander-chandelier-47-orange_eb04c671-3557-4e2e-9094-43b0d338a077.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Commander Chandelier 47"</span><span class="card__meta">Shown in Python Green, then Orange</span><span class="card__coats" aria-hidden="true"></span></a></li>
+        </ul>
+      </section>
+
+      <section class="family" aria-labelledby="famFlush">
+        <h3 class="family__name" id="famFlush"><a href="/collections/flush-mounts">Flush mounts<span>See all</span></a></h3>
+        <ul class="family__row">
+          <li class="card"><a class="card__link" href="/products/color-supreme-globe-flush-mount?color=Python%20Green"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-supreme-flush-mount-brass-pythongreen.jpg?width=600" alt="Color Supreme Flush Mount in Python Green" loading="lazy" width="600" height="600"><img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/11-supreme-flush-mount-brass-ridinghoodred.jpg?width=600" alt="" loading="lazy" width="600" height="600"></span><span class="card__name">Supreme Flush Mount</span><span class="card__meta">Shown in Python Green, then Riding Hood Red</span><span class="card__coats" aria-hidden="true"></span></a></li>
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <!-- =========================== QUOTES =========================== -->
+  <section class="quotes grid" aria-label="How customers describe us">
+    <blockquote class="quote quote--a">
+      <p><span class="line" style="--i:0"><span>“High-end</span></span><span class="line" style="--i:1"><span>but fun.”</span></span></p>
+      <footer>How a customer described us. We had it framed.</footer>
+    </blockquote>
+    <figure data-reveal class="figure quotes__fig">
+      <div class="figure__box">
+        <img src="https://cdn.shopify.com/s/files/1/0229/6239/products/crown-globe-chandelier-brass-turquoise-entry-lighting-dutton-brown.jpg?width=1000" alt="Crown Chandelier in turquoise with brass over an entryway" loading="lazy" width="1000" height="1250">
+      </div>
+      <figcaption>Crown Chandelier 32" in an entry.</figcaption>
+    </figure>
+    <blockquote class="quote quote--b">
+      <p><span class="line" style="--i:0"><span>“Colorful lighting</span></span><span class="line" style="--i:1"><span>that is actually well-made.”</span></span></p>
+      <footer>Another customer. Actually is doing a lot of work in that sentence, and we earned it.</footer>
+    </blockquote>
+  </section>
+
+  <!-- =========================== STUDIO =========================== -->
+  <section class="studio grid" aria-labelledby="studioTitle">
+    <div class="coat-strip" id="coatStrip" aria-hidden="true"></div>
+    <h2 class="studio__head h2" id="studioTitle">Built in our Minneapolis studio. All of it.</h2>
+    <div class="studio__copy">
+      <p>Bent, machined, wired, coated and packed under one roof in Roseville, north of Minneapolis. The powder coat booth is ours, so a color is never “close enough” and a fixture never waits on a subcontractor.</p>
+      <p class="muted">Solid brass, high-gauge steel and aluminum, hand-blown opal glass. UL listed. Warrantied by the people who built it.</p>
+    </div>
+    <ul class="studio__facts">
+      <li class="fact">Fourteen powder coats, mixed and sprayed in our own booth.</li>
+      <li class="fact">One roof, from raw brass to the box on your porch.</li>
+      <li class="fact">Weeks from order to ship, because nothing sits in a warehouse.</li>
+    </ul>
+    <figure data-reveal class="figure studio__fig">
+      <div class="figure__box">
+        <img src="https://cdn.shopify.com/s/files/1/0229/6239/products/leslie-mckellar-photo-beaded-urchin-chandelier-1.jpg?width=1200" alt="Beaded Urchin Chandelier installed in a bedroom, photo by Leslie McKellar" loading="lazy" width="1200" height="1500">
+      </div>
+      <figcaption>Beaded Urchin Chandelier 27". Photo by Leslie McKellar.</figcaption>
+    </figure>
+  </section>
+
+  <!-- =========================== TRADE =========================== -->
+  <section class="trade grid" aria-labelledby="tradeTitle">
+    <figure data-reveal class="figure trade__fig">
+      <div class="figure__box">
+        <img src="https://cdn.shopify.com/s/files/1/0229/6239/products/cap-globe-sconce-brass-red-lighting-by-dutton-brown-space-by-room-secret-photo-by-amanda-villarosa-1.jpg?width=1200" alt="Cap Sconce in red with brass in a bathroom, space by Room Secret, photo by Amanda Villarosa" loading="lazy" width="1200" height="1500">
+      </div>
+      <figcaption>Cap Sconce 6" in a bath. Space by Room Secret, photo by Amanda Villarosa.</figcaption>
+    </figure>
+    <h2 class="trade__head h2" id="tradeTitle">For designers and architects who specify in multiples.</h2>
+    <p class="trade__copy lede">The trade program is the whole catalog with the friction removed. Samples of every coat, files for every fixture, and a person on the phone who knows the difference between Lagoon and Slate Blue.</p>
+    <ul class="trade__list">
+      <li>Powder coat sample chips of all 14 colors, shipped in a set.</li>
+      <li>CAD, Revit and spec sheets on every product page.</li>
+      <li>Trade pricing, net terms and one point of contact.</li>
+      <li>Custom sizes and coordinated palettes across families.</li>
+    </ul>
+    <div class="trade__cta">
+      <a class="btn btn--primary" href="/pages/trade">Apply for trade</a>
+      <a class="link" href="/products/color-samples">Order color samples</a>
+    </div>
+  </section>
+
+  <!-- =========================== CLOSE =========================== -->
+  <section class="close grid" aria-labelledby="closeTitle">
+    <h2 class="close__head display" id="closeTitle">
+      <span class="line" style="--i:0"><span>Pick a color.</span></span>
+      <span class="line" style="--i:1"><span>We build the rest.</span></span>
+    </h2>
+    <div class="close__cta">
+      <a class="btn btn--primary" href="/collections/lighting">Shop lighting</a>
+      <a class="link" href="/collections/hardware">Shop hardware</a>
+    </div>
+    <form class="close__news" action="/contact#newsletter" method="post" onsubmit="return false">
+      <label for="newsEmail">New colors and new fixtures, a few times a year. No noise.</label>
+      <div class="news">
+        <input id="newsEmail" type="email" name="email" placeholder="you@studio.com" autocomplete="email" required>
+        <button class="btn btn--primary" type="submit">Sign up</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="ftr grid">
+  <div class="ftr__brand">
+    <img src="../tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="Dutton Brown" width="160" height="79">
+    <p class="ftr__line">Lighting that's never boring.</p>
+    <p class="muted" style="margin-top:14px">Made to order in Roseville, Minnesota.</p>
+  </div>
+  <div class="ftr__cols">
+    <div><h3>Shop</h3><ul><li><a href="/collections/pendants">Pendants</a></li><li><a href="/collections/sconces">Sconces</a></li><li><a href="/collections/chandeliers">Chandeliers</a></li><li><a href="/collections/flush-mounts">Flush mounts</a></li><li><a href="/collections/hardware">Hardware</a></li><li><a href="/products/color-samples">Color samples</a></li></ul></div>
+    <div><h3>Studio</h3><ul><li><a href="/pages/about">About</a></li><li><a href="/pages/how-its-made">How it's made</a></li><li><a href="/pages/projects">Projects</a></li><li><a href="/pages/press">Press</a></li></ul></div>
+    <div><h3>Trade</h3><ul><li><a href="/pages/trade">Trade program</a></li><li><a href="/pages/files">CAD and spec files</a></li><li><a href="/pages/quote">Request a quote</a></li></ul></div>
+    <div><h3>Help</h3><ul><li><a href="/pages/shipping">Shipping and lead times</a></li><li><a href="/pages/returns">Returns</a></li><li><a href="/pages/care">Care</a></li><li><a href="/pages/contact">Contact</a></li></ul></div>
+  </div>
+  <div class="ftr__meta">
+    <span>Dutton Brown, Roseville, Minnesota</span>
+    <span>Photography by the studio and the designers credited beside each room.</span>
+    <a href="/policies/privacy">Privacy</a>
+    <a href="/policies/terms">Terms</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var motionOK = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* The 14 powder coats in strip order (White at the bottom of the strip, Black at the top).
+     Hex values come from tokens.css; only the names and the hero photo per coat live here. */
+  var CDN = 'https://cdn.shopify.com/s/files/1/0229/6239/files/';
+  var COATS = [
+    ['White', '--db-white', '1-lure-pendant-10-brass-white.jpg'],
+    ['Chalk', '--db-chalk', '2-lure-pendant-10-brass-chalk.jpg'],
+    ['Bone', '--db-bone', '3-lure-pendant-10-brass-bone.jpg'],
+    ['Spa', '--db-spa', '4-lure-pendant-10-brass-spa.jpg'],
+    ['Python Green', '--db-python-green', '5-lure-pendant-10-brass-pythongreen.jpg'],
+    ['Lagoon', '--db-lagoon', '6-lure-pendant-10-brass-lagoon.jpg'],
+    ['Cobalt', '--db-cobalt', '7-lure-pendant-10-brass-cobalt.jpg'],
+    ['Slate Blue', '--db-slate-blue', '8-lure-pendant-10-brass-slateblue.jpg'],
+    ['Ochre', '--db-ochre', '9-lure-pendant-10-brass-ochre.jpg'],
+    ['Orange', '--db-orange', '10-lure-pendant-10-brass-orange.jpg'],
+    ['Riding Hood Red', '--db-riding-hood-red', '11-lure-pendant-10-brass-ridinghoodred_e7e2ec21-b69c-4a70-bffe-4f3b8837ee56.jpg'],
+    ['Pinkaboo', '--db-pinkaboo', '11.5-lure-pendant-10-brass-pinkaboo.jpg'],
+    ['Barely', '--db-barely', '12-lure-pendant-10-brass-barely.jpg'],
+    ['Black', '--db-black', '13-lure-pendant-10-brass-black.jpg']
+  ];
+  var HERO_W = '?width=1200';
+  var DEFAULT = 'Cobalt';
+  var PRODUCT = '/products/color-lure-globe-pendant-10';
+
+  function heroSrc(c) { return CDN + c[2] + HERO_W; }
+  function heroAlt(name) { return 'Color Lure Pendant 10 inch in ' + name + ' with brass, on white'; }
+
+  /* ---------- hero picker ---------- */
+  var list = document.getElementById('pickerList');
+  var frag = document.createDocumentFragment();
+  COATS.forEach(function (c, i) {
+    var label = document.createElement('label');
+    label.className = 'coat-row';
+    label.style.setProperty('--i', i);
+    var input = document.createElement('input');
+    input.type = 'radio'; input.name = 'coat'; input.value = c[0];
+    if (c[0] === DEFAULT) input.checked = true;
+    var dot = document.createElement('span');
+    dot.className = 'coat-row__dot'; dot.style.setProperty('--c', 'var(' + c[1] + ')');
+    var name = document.createElement('span');
+    name.className = 'coat-row__name'; name.textContent = c[0];
+    label.appendChild(input); label.appendChild(dot); label.appendChild(name);
+    frag.appendChild(label);
+  });
+  list.appendChild(frag);
+
+  var plateA = document.getElementById('plateA');
+  var plateB = document.getElementById('plateB');
+  var coatWord = document.getElementById('coatWord');
+  var cta = document.getElementById('heroCta');
+  var current = COATS.filter(function (c) { return c[0] === DEFAULT; })[0];
+  plateA.src = heroSrc(current); plateA.alt = heroAlt(current[0]);
+
+  var swapToken = 0;
+  function select(name) {
+    var c = COATS.filter(function (x) { return x[0] === name; })[0];
+    if (!c || c === current) return;
+    current = c;
+    var token = ++swapToken;
+
+    /* CTA carries the coat */
+    cta.textContent = 'Shop it in ' + name;
+    cta.href = PRODUCT + '?color=' + encodeURIComponent(name);
+
+    /* headline word: old line slides up and out, new one rises in (350 ms) */
+    var oldSpan = coatWord.firstElementChild;
+    var newSpan = document.createElement('span');
+    newSpan.textContent = name;
+    if (motionOK && oldSpan.animate) {
+      coatWord.appendChild(newSpan);
+      newSpan.style.position = 'absolute';
+      coatWord.style.position = 'relative';
+      var w = Math.max(oldSpan.offsetWidth, newSpan.offsetWidth);
+      coatWord.style.width = w + 'px';
+      newSpan.style.position = '';
+      oldSpan.style.position = 'absolute'; oldSpan.style.left = '0'; oldSpan.style.top = '0';
+      oldSpan.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-110%)' }], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }).onfinish = function () { oldSpan.remove(); };
+      newSpan.animate([{ transform: 'translateY(110%)' }, { transform: 'translateY(0)' }], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)' }).onfinish = function () { coatWord.style.width = ''; };
+    } else {
+      oldSpan.textContent = name;
+    }
+
+    /* photo: decode the new coat, then crossfade the two layers (300 ms) */
+    var showing = plateA.classList.contains('is-on') ? plateA : plateB;
+    var hidden = showing === plateA ? plateB : plateA;
+    hidden.src = heroSrc(c); hidden.alt = heroAlt(name);
+    var go = function () {
+      if (token !== swapToken) return;
+      hidden.classList.add('is-on');
+      showing.classList.remove('is-on');
+    };
+    if (hidden.decode) { hidden.decode().then(go, go); } else { hidden.onload = go; }
+  }
+  list.addEventListener('change', function (e) { if (e.target.name === 'coat') select(e.target.value); });
+
+  /* warm the other 13 photos once the page is idle, so a swap never waits on the network */
+  var warm = function () { COATS.forEach(function (c) { if (c !== current) { var im = new Image(); im.decoding = 'async'; im.src = heroSrc(c); } }); };
+  if ('requestIdleCallback' in window) { window.addEventListener('load', function () { requestIdleCallback(warm, { timeout: 2000 }); }); }
+  else { window.addEventListener('load', function () { setTimeout(warm, 800); }); }
+
+  /* the one orchestrated moment: headline lines, coat rows, plate wipe */
+  var hero = document.getElementById('hero');
+  var start = function () { hero.classList.add('is-in'); };
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(start); setTimeout(start, 900); } else { start(); }
+
+  /* ---------- 12px coat rows on cards, and the strip on the charcoal band ---------- */
+  var rowHTML = COATS.map(function (c) { return '<i style="--c:var(' + c[1] + ')"></i>'; }).join('');
+  document.querySelectorAll('.card__coats').forEach(function (el) { el.innerHTML = rowHTML; });
+  var strip = document.getElementById('coatStrip');
+  if (strip) { strip.innerHTML = COATS.slice().reverse().map(function (c) { return '<i style="--c:var(' + c[1] + ')"></i>'; }).join(''); }
+
+  /* ---------- scroll reveals: plates wipe open, quote and heading lines rise ---------- */
+  var targets = document.querySelectorAll('[data-reveal], .made__head, .quote, .close__head');
+  if ('IntersectionObserver' in window && motionOK) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+    targets.forEach(function (t) { io.observe(t); });
+  } else {
+    targets.forEach(function (t) { t.classList.add('is-in'); });
+  }
+
+  /* ---------- header ---------- */
+  var hdr = document.getElementById('hdr');
+  var onScroll = function () { hdr.classList.toggle('is-scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ---------- mobile menu ---------- */
+  var menu = document.getElementById('menu'), btn = document.getElementById('menuBtn'), closeBtn = document.getElementById('menuClose');
+  function setMenu(open) {
+    menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    btn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    (open ? closeBtn : btn).focus();
+  }
+  btn.addEventListener('click', function () { setMenu(true); });
+  closeBtn.addEventListener('click', function () { setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('is-open')) setMenu(false); });
+
+  /* ---------- strip: arrow keys scroll it when it has focus ---------- */
+  var scroller = document.getElementById('strip');
+  scroller.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); scroller.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * 320, behavior: motionOK ? 'smooth' : 'auto' }); }
+  });
+})();
+</script>
+</body>
+</html>

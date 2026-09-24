@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dutton Brown. Lighting that's never boring.</title>
+<meta name="description" content="Made-to-order lighting and hardware, powder coated in 14 colors, handcrafted in Minneapolis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="icon" href="favicons/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="https://cdn.shopify.com/s/files/1/0229/6239/files/7-lure-pendant-10-brass-cobalt.jpg?width=1200" fetchpriority="high">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* =====================================================================
+     THE TABLE OF CONTENTS. Final direction for the duttonbrown.com home.
+     White ground, 12-column grid, Poppins 300 display type, product photos
+     placed like plates. The hero is a fieldset of fourteen native radios:
+     pick a coat, the pendant follows, the headline and the button re-label.
+     Everything ports to an Impact section: vanilla JS, no build step.
+
+     Porting notes for db-dev:
+     - The CTA carries the coat as ?coat=<name>; Impact preselects a variant
+       by ?variant=<id>, so the section maps coat -> variant id in Liquid.
+     - The default coat's image has a real src, fetchpriority=high and a
+       preload; the other 13 warm on idle. Load only the default eagerly.
+     - Sticky elements (the index panel) offset by the header height;
+       in Impact use --sticky-area-height and keep hide_on_scroll off.
+     ===================================================================== */
+  :root {
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --t-fast: 150ms;
+    --t-base: 250ms;
+    --t-slow: 400ms;
+    --t-hero: 800ms;
+    --gutter: clamp(16px, 4vw, 56px);
+    --hdr-h: 72px;
+    --col: minmax(0, 1fr);
+    --gap: clamp(12px, 1.6vw, 24px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :root { --t-fast: 0ms; --t-base: 0ms; --t-slow: 0ms; --t-hero: 0ms; }
+  }
+  html.reduce-motion { --t-fast: 0ms; --t-base: 0ms; --t-slow: 0ms; --t-hero: 0ms; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--hdr-h); }
+  body {
+    margin: 0;
+    font: 400 16px/1.6 var(--db-font-primary);
+    color: var(--db-text);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  h1, h2, h3, p, ul, ol, figure, blockquote, fieldset { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  button, input { font: inherit; color: inherit; }
+  img { display: block; max-width: 100%; height: auto; }
+  strong { font-weight: 600; }
+  :focus-visible { outline: 2px solid var(--db-focus-ring); outline-offset: 2px; }
+  .skip { position: absolute; left: var(--gutter); top: -60px; padding: 8px 12px; background: #fff; border-radius: var(--db-radius); z-index: 100; }
+  .skip:focus { top: 12px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  /* the grid every section shares */
+  .grid { display: grid; grid-template-columns: repeat(12, var(--col)); column-gap: var(--gap); padding-inline: var(--gutter); }
+
+  /* type roles: size makes hierarchy, weight stays at 300 for display */
+  .display { font-weight: 300; line-height: 1; letter-spacing: -.025em; text-wrap: balance; }
+  .h2 { font-weight: 300; font-size: clamp(2rem, 3.8vw, 3.4rem); line-height: 1.04; letter-spacing: -.02em; text-wrap: balance; }
+  .lede { font-size: clamp(1.0625rem, 1.2vw, 1.15rem); line-height: 1.6; max-width: 48ch; }
+  .muted { color: var(--db-text-muted); }
+  .small { font-size: 14px; line-height: 1.5; }
+
+  /* links and buttons */
+  .link { font-weight: 600; text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 4px; transition: text-underline-offset var(--t-fast) ease; }
+  .link:hover { text-underline-offset: 3px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 0; border-radius: var(--db-radius); font-weight: 600; font-size: 16px; letter-spacing: normal; cursor: pointer; text-align: center; white-space: nowrap; transition: background var(--t-fast) ease; }
+  .btn--primary { background: var(--db-primary); color: #fff; }
+  .btn--primary:hover { background: var(--db-primary-hover); }
+  .btn--accent { background: var(--db-accent); color: var(--db-on-accent); }
+  .btn--accent:hover { background: var(--db-accent-hover); }
+  .btn--light { background: #fff; color: var(--db-primary); }
+  .btn--light:hover { background: var(--db-surface-mid); }
+
+  /* masked line reveal, hero only: each .line wraps a span that rises into view */
+  .line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+  html.js .hero:not(.is-in) .line > span { transform: translateY(110%); }
+  .line > span { display: block; transition: transform var(--t-hero) var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+
+  /* ------------------------------------------------------------------
+     header (masthead)
+     ------------------------------------------------------------------ */
+  .hdr { position: sticky; top: 0; z-index: 30; height: var(--hdr-h); background: #fff; box-shadow: inset 0 -1px 0 transparent; transition: box-shadow var(--t-fast) ease; }
+  .hdr.is-scrolled { box-shadow: inset 0 -1px 0 var(--db-border); }
+  .hdr__in { height: 100%; display: flex; align-items: center; gap: 40px; padding-inline: var(--gutter); }
+  .hdr__logo { flex: none; width: 136px; display: block; }
+  .hdr__logo img { width: 100%; }
+  .nav { display: flex; gap: 32px; }
+  .nav a, .hdr__util a { position: relative; padding: 6px 0; font-size: 15px; }
+  .nav a::after, .hdr__util a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; background: var(--db-accent-line); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--t-base) var(--ease); }
+  .nav a:hover::after, .nav a:focus-visible::after, .hdr__util a:hover::after, .hdr__util a:focus-visible::after { transform: none; }
+  .hdr__util { margin-left: auto; display: flex; gap: 28px; }
+  .hdr__menu { display: none; margin-left: auto; padding: 8px 0; background: none; border: 0; font-size: 15px; font-weight: 600; cursor: pointer; }
+
+  .menu { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; background: #fff; opacity: 0; visibility: hidden; transition: opacity var(--t-base) ease, visibility 0s var(--t-base); }
+  .menu.is-open { opacity: 1; visibility: visible; transition: opacity var(--t-base) ease; }
+  .menu__list { text-align: center; transform: translateY(16px); transition: transform var(--t-slow) var(--ease); }
+  .menu.is-open .menu__list { transform: none; }
+  .menu__list a { display: block; padding: 10px; font-weight: 300; font-size: 2rem; }
+  .menu__close { position: absolute; top: 20px; right: var(--gutter); padding: 8px 0; background: none; border: 0; font-weight: 600; cursor: pointer; }
+
+  /* ------------------------------------------------------------------
+     hero: the color picker as a table of contents
+     ------------------------------------------------------------------ */
+  .hero { padding-block: clamp(20px, 2vw, 28px) clamp(40px, 4vw, 48px); row-gap: clamp(20px, 2vw, 28px); }
+  .hero__head { grid-column: 1 / -1; font-size: clamp(2.4rem, 4.7vw, 4.3rem); }
+  .hero__head .coat { display: inline-block; vertical-align: top; overflow: hidden; }
+  .hero__head .coat > span { display: block; }
+
+  .hero__left { grid-column: 1 / 6; display: flex; flex-direction: column; gap: clamp(20px, 2vw, 28px); align-self: start; }
+  .picker { padding: 0; border: 0; min-width: 0; }
+  .picker legend { padding: 0; margin-bottom: 12px; font-size: 15px; color: var(--db-text-muted); }
+  .picker__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(7, auto); grid-auto-flow: column; gap: 4px 16px; }
+  .coat-row { position: relative; display: flex; align-items: center; gap: 12px; min-height: 44px; padding-left: 0; cursor: pointer; border-radius: var(--db-radius); transition: padding-left var(--t-base) var(--ease); }
+  .coat-row input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+  .coat-row__dot { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(74,74,74,.16); transition: box-shadow var(--t-base) ease; }
+  .coat-row__name { font-size: 16px; line-height: 1.2; white-space: nowrap; color: var(--db-text-muted); transition: color var(--t-fast) ease; }
+  .coat-row:hover .coat-row__name { color: var(--db-text); }
+  .coat-row:hover .coat-row__dot { box-shadow: inset 0 0 0 1px rgba(74,74,74,.16), 0 0 0 2px #fff, 0 0 0 3px var(--db-gray-400); }
+  /* the tick: a 22px line in --db-accent-line grows from the left as the row indents */
+  .coat-row::before { content: ""; position: absolute; left: 0; top: 50%; width: 22px; height: 2px; margin-top: -1px; background: var(--db-accent-line); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--t-base) var(--ease); }
+  .coat-row:has(input:checked) { padding-left: 32px; }
+  .coat-row:has(input:checked)::before { transform: none; }
+  .coat-row:has(input:checked) .coat-row__dot { box-shadow: inset 0 0 0 1px rgba(74,74,74,.16), 0 0 0 3px #fff, 0 0 0 4px var(--db-primary); }
+  .coat-row:has(input:checked) .coat-row__name { color: var(--db-text); font-weight: 600; }
+  .coat-row:has(input:focus-visible) { outline: 2px solid var(--db-focus-ring); outline-offset: 2px; }
+  /* page-load stagger for the rows */
+  html.js .hero:not(.is-in) .coat-row { opacity: 0; transform: translateY(8px); }
+  .coat-row { transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease), padding-left var(--t-base) var(--ease); transition-delay: calc(240ms + var(--i, 0) * 26ms), calc(240ms + var(--i, 0) * 26ms), 0ms; }
+  .hero.is-in .coat-row { transition-delay: 0ms; }
+
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+  html.js .hero:not(.is-in) .hero__cta { opacity: 0; }
+  .hero__cta { transition: opacity var(--t-slow) ease 600ms; }
+  .hero.is-in .hero__cta { transition-delay: 0ms; }
+
+  .plate { --plate-h: clamp(460px, 62vh, 560px); grid-column: 6 / 13; position: relative; margin-right: calc(var(--gutter) * -1); background: var(--db-surface); border-radius: var(--db-radius) 0 0 var(--db-radius); height: var(--plate-h); display: grid; grid-template-columns: auto minmax(0, 1fr); }
+  html.js .hero:not(.is-in) .plate { clip-path: inset(0 100% 0 0); }
+  .plate { transition: clip-path var(--t-hero) var(--ease); }
+  .plate__media { position: relative; margin: 20px; width: calc(var(--plate-h) - 40px); height: calc(var(--plate-h) - 40px); background: #fff; border-radius: var(--db-radius); overflow: hidden; }
+  .plate__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 300ms ease; }
+  .plate__media img.is-on { opacity: 1; }
+  .plate__side { align-self: end; min-width: 0; padding: 24px 40px 32px 12px; }
+  .plate__name { font-weight: 300; font-size: clamp(1.4rem, 1.9vw, 1.7rem); line-height: 1.15; letter-spacing: -.01em; }
+  .plate__side p { margin-top: 10px; max-width: 28ch; font-size: 15px; line-height: 1.55; }
+  .plate__side .small { margin-top: 14px; }
+
+  /* ------------------------------------------------------------------
+     families: every family, all 14 colors (surface band, white cards)
+     ------------------------------------------------------------------ */
+  .families { background: var(--db-surface); padding: clamp(56px, 7vw, 96px) 0 clamp(40px, 5vw, 64px); }
+  .families__head { grid-column: 1 / 8; }
+  .families__note { grid-column: 9 / 13; align-self: end; }
+  .strip { display: flex; gap: 56px; margin-top: clamp(28px, 3.6vw, 48px); padding: 4px var(--gutter) 24px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: var(--gutter); scrollbar-width: thin; scrollbar-color: var(--db-gray-300) transparent; }
+  .family { flex: none; }
+  .family__name { font-weight: 300; font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.1; margin-bottom: 16px; }
+  .family__name a { display: inline-block; }
+  .family__name span { font-size: 15px; font-weight: 600; margin-left: 12px; letter-spacing: 0; text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .family__row { display: flex; gap: 20px; }
+  .card { flex: none; width: clamp(200px, 19vw, 240px); scroll-snap-align: start; }
+  .card__link { display: block; border-radius: var(--db-radius); }
+  .card__media { position: relative; display: block; aspect-ratio: 1; background: #fff; border-radius: var(--db-radius); overflow: hidden; }
+  .card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 8%; }
+  .card__name { display: block; margin-top: 12px; font-size: 15px; line-height: 1.35; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 2px; text-underline-offset: 4px; transition: text-decoration-color var(--t-fast) ease; }
+  .card__link:hover .card__name { text-decoration-color: var(--db-accent-line); }
+  .card__meta { display: block; font-size: 13px; color: var(--db-text-muted); }
+  .card__coats { display: flex; gap: 5px; margin-top: 10px; }
+  .card__coats i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(74,74,74,.14); }
+
+  /* ------------------------------------------------------------------
+     the color index: seventeen fixtures, a hairline table, a sticky plate
+     ------------------------------------------------------------------ */
+  .index { padding-block: clamp(72px, 9vw, 130px) clamp(64px, 8vw, 110px); row-gap: clamp(28px, 3vw, 40px); }
+  .index__head { grid-column: 1 / 7; }
+  .index__note { grid-column: 8 / 13; align-self: end; max-width: 46ch; }
+  .index__panel { grid-column: 1 / 6; position: sticky; top: calc(var(--hdr-h) + 16px); align-self: start; }
+  .panel { position: relative; background: #fff; border: 1px solid var(--db-border); border-radius: var(--db-radius); aspect-ratio: 1; overflow: hidden; }
+  .panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 4%; opacity: 0; transition: opacity var(--t-base) ease; }
+  .panel img.is-on { opacity: 1; }
+  .panel__cap { display: flex; justify-content: space-between; gap: 16px; padding: 14px 2px; border-bottom: 1px solid var(--db-border); font-size: 15px; }
+  .panel__cap .muted { font-size: 14px; text-align: right; }
+  .index__table { grid-column: 6 / 13; }
+  .tbl { width: 100%; border-collapse: collapse; border-top: 1px solid var(--db-input-border); font-variant-numeric: tabular-nums; }
+  .tbl th { font-weight: 400; font-size: 13px; color: var(--db-text-muted); text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--db-border); }
+  .tbl td { padding: 0 12px 0 0; height: 52px; border-bottom: 1px solid var(--db-border); vertical-align: middle; font-size: 15px; }
+  .tbl tbody tr { position: relative; transition: background-color var(--t-fast) ease; }
+  .tbl tbody tr:hover, .tbl tbody tr.is-on { background: var(--db-surface); }
+  .tbl tbody tr.is-on td:first-child { box-shadow: inset 2px 0 var(--db-accent-line); }
+  .tbl tbody tr:has(a:focus-visible) { outline: 2px solid var(--db-focus-ring); outline-offset: -2px; }
+  .tbl td:first-child, .tbl th:first-child { padding-left: 12px; color: var(--db-text-muted); width: 92px; font-size: 13px; white-space: nowrap; }
+  .tbl td.nm a { display: inline-block; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .tbl td.nm a:focus { outline: none; }
+  .tbl td.nm a::after { content: ""; position: absolute; inset: 0; }
+  .tbl tbody tr.is-on td.nm a { text-decoration-color: var(--db-accent-line); }
+  .tbl td.type { color: var(--db-text-muted); font-size: 14px; }
+  .tbl td.col { width: 160px; white-space: nowrap; font-size: 14px; }
+  .tbl td.col i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -1px; margin-right: 8px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(74,74,74,.16); }
+  .tbl th.col { width: 160px; }
+  .index__foot { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; padding-top: 20px; }
+
+  /* ------------------------------------------------------------------
+     lights off: charcoal band, a cursor-sized pool of light
+     ------------------------------------------------------------------ */
+  @property --mx { syntax: "<length-percentage>"; inherits: true; initial-value: 50%; }
+  @property --my { syntax: "<length-percentage>"; inherits: true; initial-value: 40%; }
+  @property --spot { syntax: "<length>"; inherits: true; initial-value: 300px; }
+  .dark { position: relative; background: var(--db-primary); color: #fff; padding-block: clamp(64px, 8vw, 120px); row-gap: 28px; }
+  .dark .muted { color: var(--db-gray-300); }
+  .dark .link { text-decoration-color: var(--db-accent); }
+  .dark :focus-visible { outline-color: #fff; }
+  .coat-strip { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; display: grid; grid-template-rows: repeat(14, 1fr); }
+  .coat-strip i { background: var(--c); }
+  .dark__head { grid-column: 2 / 8; }
+  .dark__side { grid-column: 8 / 13; align-self: end; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+  .scene { grid-column: 2 / 13; position: relative; overflow: hidden; border-radius: var(--db-radius); aspect-ratio: 16 / 9; max-height: 640px; width: 100%; cursor: crosshair; --mx: 50%; --my: 40%; --spot: 300px; }
+  .scene img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.16); }
+  .scene__lit { position: absolute; inset: 0; background-size: cover; background-position: center; -webkit-mask-image: radial-gradient(circle var(--spot) at var(--mx) var(--my), #000 0%, rgba(0,0,0,.9) 45%, transparent 100%); mask-image: radial-gradient(circle var(--spot) at var(--mx) var(--my), #000 0%, rgba(0,0,0,.9) 45%, transparent 100%); transition: --mx 120ms linear, --my 120ms linear, --spot 300ms ease; }
+  .scene:hover .scene__lit { --spot: 340px; }
+  .scene.is-lit .scene__lit, .scene.is-lit:hover .scene__lit { --spot: 4000px; }
+  .scene.is-lit { cursor: default; }
+  @media (hover: none) { .scene { cursor: default; } }
+  .dark__credit { grid-column: 2 / 13; display: flex; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; margin-top: -8px; }
+
+  /* ------------------------------------------------------------------
+     studio: surface band with a white vitrine
+     ------------------------------------------------------------------ */
+  .studio { background: var(--db-surface); padding-block: clamp(64px, 8vw, 120px); row-gap: 32px; }
+  .studio__fig { grid-column: 1 / 6; grid-row: 1 / span 3; align-self: start; }
+  .studio__fig .panel { aspect-ratio: 4 / 5; border: 0; }
+  .studio__fig .panel img { opacity: 1; padding: 6%; }
+  .studio__fig figcaption { margin-top: 12px; font-size: 14px; line-height: 1.5; color: var(--db-text-muted); max-width: 42ch; }
+  .studio__head { grid-column: 7 / 13; }
+  .studio__copy { grid-column: 7 / 12; }
+  .studio__copy p + p { margin-top: 14px; }
+  .studio__facts { grid-column: 7 / 13; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 8px; }
+  .fact { border-top: 1px solid var(--db-input-border); padding-top: 12px; font-size: 15px; line-height: 1.5; }
+  .fact strong { display: block; font-size: 1.6rem; font-weight: 300; line-height: 1.1; letter-spacing: -.01em; margin-bottom: 6px; }
+
+  /* ------------------------------------------------------------------
+     trade
+     ------------------------------------------------------------------ */
+  .trade { padding-block: clamp(64px, 8vw, 120px); row-gap: 28px; }
+  .trade__head { grid-column: 1 / 7; }
+  .trade__copy { grid-column: 1 / 6; }
+  .trade__list { grid-column: 1 / 6; display: grid; gap: 12px; }
+  .trade__list li { padding-left: 22px; position: relative; }
+  .trade__list li::before { content: ""; position: absolute; left: 0; top: .72em; width: 10px; height: 2px; background: var(--db-accent-line); }
+  .trade__cta { grid-column: 1 / 6; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; margin-top: 8px; }
+  .trade__fig { grid-column: 7 / 13; grid-row: 1 / span 4; align-self: start; }
+  .trade__fig .figure__box { background: var(--db-surface); border-radius: var(--db-radius); overflow: hidden; aspect-ratio: 4 / 5; }
+  .trade__fig .figure__box img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+  .trade__fig figcaption { margin-top: 12px; font-size: 14px; line-height: 1.5; color: var(--db-text-muted); max-width: 46ch; }
+
+  /* ------------------------------------------------------------------
+     closing
+     ------------------------------------------------------------------ */
+  .close { border-top: 1px solid var(--db-border); padding-block: clamp(72px, 10vw, 150px) clamp(64px, 8vw, 120px); row-gap: 32px; }
+  .close__head { grid-column: 1 / 12; font-size: clamp(2.6rem, 6.6vw, 6rem); }
+  .close__cta { grid-column: 1 / 7; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+  .close__news { grid-column: 8 / 13; align-self: end; }
+  .news { display: flex; gap: 10px; margin-top: 12px; }
+  .news input { flex: 1; min-width: 0; height: 48px; padding: 0 14px; border: 1px solid var(--db-input-border); border-radius: var(--db-radius); background: #fff; }
+  .news input::placeholder { color: var(--db-placeholder); }
+  .news input:focus { outline: none; border-color: var(--db-primary); box-shadow: 0 0 0 1px var(--db-primary); }
+
+  /* ------------------------------------------------------------------
+     footer (colophon)
+     ------------------------------------------------------------------ */
+  .ftr { border-top: 1px solid var(--db-border); padding-block: clamp(48px, 6vw, 88px) 40px; row-gap: 48px; font-size: 14px; }
+  .ftr__brand { grid-column: 1 / 6; }
+  .ftr__brand img { width: 160px; margin-bottom: 22px; }
+  .ftr__line { font-weight: 300; font-size: clamp(1.5rem, 2.2vw, 2rem); line-height: 1.1; letter-spacing: -.01em; }
+  .ftr__cols { grid-column: 7 / 13; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .ftr__cols h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+  .ftr__cols li + li { margin-top: 8px; }
+  .ftr__cols a:hover { text-decoration: underline; text-decoration-color: var(--db-accent-line); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .ftr__meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 32px; padding-top: 24px; border-top: 1px solid var(--db-border); color: var(--db-text-muted); font-size: 13px; }
+
+  /* ------------------------------------------------------------------
+     prototype toolbar: replay the hello, or turn motion off
+     ------------------------------------------------------------------ */
+  .proto { position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; gap: 6px; padding: 6px; background: #fff; border: 1px solid var(--db-border); border-radius: var(--db-radius); box-shadow: var(--db-shadow-md); }
+  .proto button { padding: 6px 10px; background: #fff; border: 1px solid var(--db-input-border); border-radius: var(--db-radius); font-size: 13px; font-weight: 600; cursor: pointer; }
+  .proto button:hover { background: var(--db-surface); }
+  .proto button[aria-pressed="true"] { background: var(--db-primary); color: #fff; border-color: var(--db-primary); }
+
+  /* ------------------------------------------------------------------
+     responsive
+     ------------------------------------------------------------------ */
+  @media (max-width: 1100px) {
+    .hero__left { grid-column: 1 / 6; }
+    .plate { grid-column: 6 / 13; grid-template-columns: 1fr; height: auto; }
+    .plate__media { width: min(100% - 40px, 380px); height: auto; aspect-ratio: 1; margin: 20px auto 0; }
+    .plate__side { padding: 16px 24px 24px; }
+    .plate__side p { display: none; }
+    .index__panel { grid-column: 1 / 6; }
+    .index__table { grid-column: 6 / 13; }
+    .tbl td.type, .tbl th.type { display: none; }
+  }
+  @media (max-width: 900px) {
+    :root { --hdr-h: 64px; }
+    .nav, .hdr__util { display: none; }
+    .hdr__menu { display: block; }
+    .hdr__logo { width: 124px; }
+    .hero { row-gap: 16px; padding-bottom: 32px; }
+    .hero__head { font-size: clamp(2rem, 8.6vw, 3.2rem); }
+    .plate { grid-column: 1 / -1; grid-row: 2; margin-right: 0; border-radius: var(--db-radius); grid-template-columns: auto minmax(0, 1fr); align-items: end; }
+    .plate__media { width: min(46vw, 190px); height: auto; aspect-ratio: 1; margin: 12px 0 12px 12px; }
+    .plate__side { padding: 0 16px 16px 0; }
+    .plate__name { font-size: 1.05rem; line-height: 1.25; }
+    .plate__side .small { margin-top: 6px; font-size: 13px; }
+    .hero__left { grid-column: 1 / -1; grid-row: 3; gap: 16px; }
+    .picker legend { margin-bottom: 8px; font-size: 14px; }
+    .picker__list { gap: 2px 12px; }
+    .coat-row { min-height: 38px; gap: 10px; }
+    .coat-row__dot { width: 30px; height: 30px; }
+    .coat-row__name { font-size: 15px; }
+    .coat-row:has(input:checked) { padding-left: 28px; }
+    .coat-row::before { width: 18px; }
+    .hero__cta .btn { flex: 1 1 auto; }
+    .families__head, .families__note, .index__head, .index__note, .index__panel, .index__table, .studio__head, .studio__copy, .studio__facts, .studio__fig, .trade__head, .trade__copy, .trade__list, .trade__cta, .trade__fig, .close__head, .close__cta, .close__news, .ftr__brand, .ftr__cols { grid-column: 1 / -1; }
+    .dark__head, .dark__side, .scene, .dark__credit { grid-column: 1 / -1; }
+    .dark { padding-left: 14px; }
+    .studio__fig, .trade__fig { grid-row: auto; }
+    .studio__facts { grid-template-columns: repeat(2, 1fr); }
+    .index__panel { position: sticky; top: var(--hdr-h); z-index: 5; background: #fff; padding-top: 12px; }
+    .index__panel .panel { aspect-ratio: auto; height: 170px; }
+    .panel__cap { padding: 10px 2px; }
+    .tbl td, .tbl th { font-size: 14px; }
+    .tbl td:first-child, .tbl th:first-child { width: 64px; padding-left: 8px; font-size: 12px; }
+    .tbl td.col, .tbl th.col { width: 118px; font-size: 13px; }
+    .tbl td { height: 48px; padding-right: 8px; }
+    .scene { aspect-ratio: 4 / 5; max-height: none; }
+    .ftr__cols { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .news { flex-direction: column; }
+    .studio__facts { gap: 16px; }
+    .card { width: 196px; }
+  }
+
+  /* reduced motion: everything settled, nothing revealing, nothing cycling */
+  @media (prefers-reduced-motion: reduce) {
+    html.js .hero:not(.is-in) .line > span, html.js .hero:not(.is-in) .coat-row { transform: none; opacity: 1; }
+    html.js .hero:not(.is-in) .plate { clip-path: none; }
+    html.js .hero:not(.is-in) .hero__cta { opacity: 1; }
+    .plate__media img, .panel img, .scene__lit { transition: none; }
+  }
+  html.reduce-motion.js .hero:not(.is-in) .line > span, html.reduce-motion.js .hero:not(.is-in) .coat-row { transform: none; opacity: 1; }
+  html.reduce-motion.js .hero:not(.is-in) .plate { clip-path: none; }
+  html.reduce-motion.js .hero:not(.is-in) .hero__cta { opacity: 1; }
+  html.reduce-motion .plate__media img, html.reduce-motion .panel img, html.reduce-motion .scene__lit { transition: none; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="hdr__in">
+    <a class="hdr__logo" href="/" aria-label="Dutton Brown home">
+      <img src="tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="Dutton Brown" width="136" height="67">
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/collections/lighting">Lighting</a>
+      <a href="/collections/hardware">Hardware</a>
+      <a href="/pages/colors">Colors</a>
+      <a href="/pages/projects">Projects</a>
+      <a href="/pages/trade">Trade</a>
+    </nav>
+    <div class="hdr__util">
+      <a href="/search">Search</a>
+      <a href="/account">Account</a>
+      <a href="/cart">Cart</a>
+    </div>
+    <button class="hdr__menu" type="button" aria-expanded="false" aria-controls="menu" id="menuBtn">Open menu</button>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="menu__close" type="button" id="menuClose">Close</button>
+  <nav class="menu__list" aria-label="Mobile">
+    <a href="/collections/lighting">Lighting</a>
+    <a href="/collections/hardware">Hardware</a>
+    <a href="/pages/colors">Colors</a>
+    <a href="/pages/projects">Projects</a>
+    <a href="/pages/trade">Trade</a>
+    <a href="/search">Search</a>
+    <a href="/account">Account</a>
+    <a href="/cart">Cart</a>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- =========================== HERO =========================== -->
+  <section class="hero grid" id="hero" aria-labelledby="heroTitle">
+    <h1 class="hero__head display" id="heroTitle">
+      <span class="line" style="--i:0"><span>The Lure Pendant,</span></span>
+      <span class="line" style="--i:1"><span>in <span class="coat" id="coatWord"><span>Cobalt</span></span>.</span></span>
+    </h1>
+
+    <div class="hero__left">
+      <fieldset class="picker" id="picker">
+        <legend>Pick a powder coat. The pendant follows.</legend>
+        <div class="picker__list" id="pickerList"></div>
+      </fieldset>
+      <div class="hero__cta">
+        <a class="btn btn--accent" id="heroCta" href="/products/color-lure-globe-pendant-10?coat=Cobalt">Shop this color</a>
+        <a class="link" href="/pages/colors">See all 14 colors</a>
+      </div>
+    </div>
+
+    <figure class="plate" id="plate">
+      <div class="plate__media" id="plateMedia" aria-live="polite">
+        <img id="plateA" class="is-on" src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-lure-pendant-10-brass-cobalt.jpg?width=1200" alt="Color Lure Pendant 10 inch in Cobalt with brass, on white" width="1200" height="1200" fetchpriority="high" decoding="async">
+        <img id="plateB" src="" alt="" width="1200" height="1200" decoding="async" aria-hidden="true">
+      </div>
+      <figcaption class="plate__side">
+        <div class="plate__name">Color Lure Pendant 10"</div>
+        <p class="muted">Hand-blown opal glass under a solid brass cap, powder coated in the color you picked.</p>
+        <div class="small muted">Shown with brass hardware. Made to order in Minneapolis.</div>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- =========================== FAMILIES =========================== -->
+  <section class="families" aria-labelledby="famTitle">
+    <div class="grid">
+      <h2 class="families__head h2" id="famTitle">Every family, all 14 colors.</h2>
+      <p class="families__note muted">Pendants, sconces, chandeliers and flush mounts share one color chart, so a whole house can match without matching. The dots under each fixture are its menu.</p>
+    </div>
+
+    <div class="strip" id="strip" tabindex="0" aria-label="Fixtures by family, scroll sideways">
+      <section class="family" aria-labelledby="famPendants">
+        <h3 class="family__name" id="famPendants"><a href="/collections/pendants">Pendants<span>See all</span></a></h3>
+        <ul class="family__row">
+          <li class="card"><a class="card__link" href="/products/color-cap-globe-pendant-8?coat=Riding%20Hood%20Red"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11-cap-globe-pendant-8-brass-ridinghoodred.jpg?width=600" alt="Color Cap Pendant 8 inch in Riding Hood Red" loading="lazy" width="600" height="600"></span><span class="card__name">Cap Pendant 8"</span><span class="card__meta">Shown in Riding Hood Red</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-lure-globe-pendant-10?coat=Spa"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-lure-pendant-10-brass-spa.jpg?width=600" alt="Color Lure Pendant 10 inch in Spa" loading="lazy" width="600" height="600"></span><span class="card__name">Lure Pendant 10"</span><span class="card__meta">Shown in Spa</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-bling-pendant?coat=Ochre"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-bling-pendant-brass-ochre.jpg?width=600" alt="Color Bling Pendant in Ochre" loading="lazy" width="600" height="600"></span><span class="card__name">Bling Pendant</span><span class="card__meta">Shown in Ochre</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-echo-dome-pendant-10?coat=Slate%20Blue"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/8-echo-pendant-10-brass-slateblue.jpg?width=600" alt="Color Echo Pendant 10 inch in Slate Blue" loading="lazy" width="600" height="600"></span><span class="card__name">Echo Pendant 10"</span><span class="card__meta">Shown in Slate Blue</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-cadbury-dome-pendant-10?coat=Python%20Green"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-cadburry-pendant-10-brass-pythongreen.jpg?width=600" alt="Color Cadbury Pendant 10 inch in Python Green" loading="lazy" width="600" height="600"></span><span class="card__name">Cadbury Pendant 10"</span><span class="card__meta">Shown in Python Green</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-twink-pendant?coat=Pinkaboo"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-twink-pendant-brass-pinkaboo.jpg?width=600" alt="Color Twink Pendant in Pinkaboo" loading="lazy" width="600" height="600"></span><span class="card__name">Twink Pendant</span><span class="card__meta">Shown in Pinkaboo</span><span class="card__coats" aria-hidden="true"></span></a></li>
+        </ul>
+      </section>
+
+      <section class="family" aria-labelledby="famSconces">
+        <h3 class="family__name" id="famSconces"><a href="/collections/sconces">Sconces<span>See all</span></a></h3>
+        <ul class="family__row">
+          <li class="card"><a class="card__link" href="/products/color-pilot-sconce-23?coat=Lagoon"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-pilot-sconce-23-brass-lagoon.jpg?width=600" alt="Color Pilot Sconce 23 inch in Lagoon" loading="lazy" width="600" height="600"></span><span class="card__name">Pilot Sconce 23"</span><span class="card__meta">Shown in Lagoon</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-boom-sconce-6-arm?coat=Orange"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-boom-sconce-6-brass-orange.jpg?width=600" alt="Color Boom Sconce 6 inch arm in Orange" loading="lazy" width="600" height="600"></span><span class="card__name">Boom Sconce, 6" arm</span><span class="card__meta">Shown in Orange</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-reader-sconce-6-arm?coat=Cobalt"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-reader-sconce-6-brass-cobalt.jpg?width=600" alt="Color Reader Sconce 6 inch arm in Cobalt" loading="lazy" width="600" height="600"></span><span class="card__name">Reader Sconce, 6" arm</span><span class="card__meta">Shown in Cobalt</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-cap-globe-sconce-i-6?coat=Bone"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/3-cap-sconce-6-brass-bone.jpg?width=600" alt="Color Cap Sconce 6 inch in Bone" loading="lazy" width="600" height="600"></span><span class="card__name">Cap Sconce 6"</span><span class="card__meta">Shown in Bone</span><span class="card__coats" aria-hidden="true"></span></a></li>
+        </ul>
+      </section>
+
+      <section class="family" aria-labelledby="famChand">
+        <h3 class="family__name" id="famChand"><a href="/collections/chandeliers">Chandeliers<span>See all</span></a></h3>
+        <ul class="family__row">
+          <li class="card"><a class="card__link" href="/products/color-big-prisma-globe-chandelier-42?coat=Cobalt"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-big-prisma-chandelier-brass-cobalt-1.jpg?width=600" alt="Color Big Prisma Chandelier 42 inch in Cobalt" loading="lazy" width="600" height="600"></span><span class="card__name">Big Prisma Chandelier 42"</span><span class="card__meta">Shown in Cobalt</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-crown-globe-chandelier-32?coat=Spa"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-crown-chandelier-32-brass-spa.jpg?width=600" alt="Color Crown Chandelier 32 inch in Spa" loading="lazy" width="600" height="600"></span><span class="card__name">Crown Chandelier 32"</span><span class="card__meta">Shown in Spa</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-orbi-globe-chandelier?coat=Riding%20Hood%20Red"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11-orbi-chandelier-brass-ridinghoodred.jpg?width=600" alt="Color Orbi Chandelier in Riding Hood Red" loading="lazy" width="600" height="600"></span><span class="card__name">Orbi Chandelier</span><span class="card__meta">Shown in Riding Hood Red</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-alegria-chandelier?coat=Black"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/13-alegria-chandelier-brass-black.jpg?width=600" alt="Color Alegria Chandelier 30 inch in Black" loading="lazy" width="600" height="600"></span><span class="card__name">Alegria Chandelier 30"</span><span class="card__meta">Shown in Black</span><span class="card__coats" aria-hidden="true"></span></a></li>
+          <li class="card"><a class="card__link" href="/products/color-commander-chandelier-47?coat=Python%20Green"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-commander-chandelier-47-pythongreen.jpg?width=600" alt="Color Commander Chandelier 47 inch in Python Green" loading="lazy" width="600" height="600"></span><span class="card__name">Commander Chandelier 47"</span><span class="card__meta">Shown in Python Green</span><span class="card__coats" aria-hidden="true"></span></a></li>
+        </ul>
+      </section>
+
+      <section class="family" aria-labelledby="famFlush">
+        <h3 class="family__name" id="famFlush"><a href="/collections/flush-mounts">Flush mounts<span>See all</span></a></h3>
+        <ul class="family__row">
+          <li class="card"><a class="card__link" href="/products/color-supreme-globe-flush-mount?coat=Orange"><span class="card__media"><img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-supreme-flush-mount-brass-orange.jpg?width=600" alt="Color Supreme Flush Mount in Orange" loading="lazy" width="600" height="600"></span><span class="card__name">Supreme Flush Mount</span><span class="card__meta">Shown in Orange</span><span class="card__coats" aria-hidden="true"></span></a></li>
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <!-- =========================== THE COLOR INDEX =========================== -->
+  <section class="index grid" id="index" aria-labelledby="indexTitle">
+    <h2 class="index__head h2" id="indexTitle">The color index.</h2>
+    <p class="index__note muted">Seventeen fixtures across the 14 coats. Rest on a row and that fixture cycles through its colors on the plate. Choose a fixture to open its page.</p>
+
+    <div class="index__panel">
+      <div class="panel" id="idxPanel">
+        <img id="idxA" class="is-on" src="" alt="" width="800" height="800" loading="lazy" decoding="async">
+        <img id="idxB" src="" alt="" width="800" height="800" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
+      <div class="panel__cap" aria-live="polite"><span id="idxName">Bling Pendant</span><span class="muted" id="idxCoat">Cobalt, brass</span></div>
+    </div>
+
+    <div class="index__table">
+      <table class="tbl" id="idxTable">
+        <thead><tr>
+          <th scope="col">SKU</th>
+          <th scope="col">Fixture</th>
+          <th scope="col" class="type">Family</th>
+          <th scope="col" class="col">On the plate</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="index__foot">
+        <a class="link" href="/collections/lighting">Open the full catalog</a>
+        <span class="small muted">Cabinet pulls and knobs carry the same 14 coats.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== LIGHTS OFF =========================== -->
+  <section class="dark grid" aria-labelledby="darkTitle">
+    <div class="coat-strip" id="coatStrip" aria-hidden="true"></div>
+    <h2 class="dark__head h2" id="darkTitle">Lights off. Now find ours.</h2>
+    <div class="dark__side">
+      <p class="lede muted">A bath hung with Twink pendants and fitted with Caliber pulls, both in Orange. Move your cursor to look around. The bright parts are ours.</p>
+      <button class="btn btn--light" type="button" id="sceneToggle" aria-pressed="false">Light it up</button>
+    </div>
+    <div class="scene" id="scene">
+      <img src="https://cdn.shopify.com/s/files/1/0229/6239/products/twink-pendants-caliber-pulls-bathroom-scene-dutton-brown-1_4e84cc21-c908-467c-b26e-9b1c9df69f10.jpg?width=1800" alt="A bath with a double vanity, three Twink pendants in Orange over two round mirrors, and Caliber pulls in Orange on every drawer" width="1800" height="1200" loading="lazy" decoding="async">
+      <div class="scene__lit" style="background-image:url('https://cdn.shopify.com/s/files/1/0229/6239/products/twink-pendants-caliber-pulls-bathroom-scene-dutton-brown-1_4e84cc21-c908-467c-b26e-9b1c9df69f10.jpg?width=1800')" aria-hidden="true"></div>
+    </div>
+    <div class="dark__credit small">
+      <span class="muted">Twink pendants and Caliber pulls, Orange on brass. Studio scene.</span>
+      <a class="link" href="/products/color-twink-pendant">Shop the Twink</a>
+    </div>
+  </section>
+
+  <!-- =========================== STUDIO =========================== -->
+  <section class="studio grid" aria-labelledby="studioTitle">
+    <figure class="studio__fig">
+      <div class="panel">
+        <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-big-prisma-chandelier-brass-ridinghoodred-1.jpg?width=1000" alt="Color Big Prisma Chandelier 42 inch in Riding Hood Red with brass, studio photo" loading="lazy" width="1000" height="1000">
+      </div>
+      <figcaption>Big Prisma Chandelier 42" in Riding Hood Red. Opal globes on brass arms, in a color nobody will call safe.</figcaption>
+    </figure>
+    <h2 class="studio__head h2" id="studioTitle">Built in our Minneapolis studio. All of it.</h2>
+    <div class="studio__copy">
+      <p>Every fixture starts as brass, steel and hand-blown opal glass on a bench in Roseville, just north of Minneapolis. It gets its color last, in our own powder coat booth, so the coat you choose is the coat that ships.</p>
+      <p class="muted">Solid brass, high-gauge steel and aluminum. UL listed. Warrantied by the people who built it.</p>
+    </div>
+    <ul class="studio__facts">
+      <li class="fact"><strong>14</strong>powder coats, mixed and sprayed in our own booth.</li>
+      <li class="fact"><strong>1</strong>roof, from raw brass to the box on your porch.</li>
+      <li class="fact"><strong>0</strong>warehouses. Every order is built for the person who placed it.</li>
+    </ul>
+  </section>
+
+  <!-- =========================== TRADE =========================== -->
+  <section class="trade grid" aria-labelledby="tradeTitle">
+    <h2 class="trade__head h2" id="tradeTitle">For designers and architects who specify in multiples.</h2>
+    <p class="trade__copy lede">The trade program is the whole catalog with the friction removed. Samples of every coat, files for every fixture, and a person on the phone who knows the difference between Lagoon and Slate Blue.</p>
+    <ul class="trade__list">
+      <li>Powder coat sample chips of all 14 colors, shipped as a set.</li>
+      <li>Cut sheets, CAD and Revit files on every product page.</li>
+      <li>Trade pricing, net terms and one point of contact.</li>
+      <li>One coat batch per project, so a run of twelve sconces matches.</li>
+    </ul>
+    <div class="trade__cta">
+      <a class="btn btn--primary" href="/pages/trade">Apply for trade</a>
+      <a class="link" href="/products/color-samples">Order color samples</a>
+    </div>
+    <figure class="trade__fig">
+      <div class="figure__box">
+        <img src="https://cdn.shopify.com/s/files/1/0229/6239/products/cap-globe-sconce-brass-red-lighting-by-dutton-brown-space-by-room-secret-photo-by-amanda-villarosa-1.jpg?width=1200" alt="Cap Sconce in red with brass beside a mirror in a bath, space by Room Secret, photo by Amanda Villarosa" loading="lazy" width="1200" height="1500">
+      </div>
+      <figcaption>Cap Sconce 6" in Riding Hood Red, in a client's home. Space by Room Secret, photo by Amanda Villarosa.</figcaption>
+    </figure>
+  </section>
+
+  <!-- =========================== CLOSE =========================== -->
+  <section class="close grid" aria-labelledby="closeTitle">
+    <h2 class="close__head display" id="closeTitle">Pick a color. We build the rest.</h2>
+    <div class="close__cta">
+      <a class="btn btn--primary" href="/collections/lighting">Shop lighting</a>
+      <a class="link" href="/collections/hardware">Shop hardware</a>
+    </div>
+    <form class="close__news" action="/contact#newsletter" method="post" onsubmit="return false">
+      <label for="newsEmail">New colors and new fixtures, a few times a year. No noise.</label>
+      <div class="news">
+        <input id="newsEmail" type="email" name="email" placeholder="you@studio.com" autocomplete="email" required>
+        <button class="btn btn--primary" type="submit">Sign up</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="ftr grid">
+  <div class="ftr__brand">
+    <img src="tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="Dutton Brown" width="160" height="79">
+    <p class="ftr__line">Lighting that's never boring.</p>
+    <p class="muted" style="margin-top:14px">Made to order in Roseville, Minnesota.</p>
+  </div>
+  <div class="ftr__cols">
+    <div><h3>Shop</h3><ul><li><a href="/collections/pendants">Pendants</a></li><li><a href="/collections/sconces">Sconces</a></li><li><a href="/collections/chandeliers">Chandeliers</a></li><li><a href="/collections/flush-mounts">Flush mounts</a></li><li><a href="/collections/hardware">Hardware</a></li><li><a href="/products/color-samples">Color samples</a></li></ul></div>
+    <div><h3>Studio</h3><ul><li><a href="/pages/about">About</a></li><li><a href="/pages/how-its-made">How it's made</a></li><li><a href="/pages/projects">Projects</a></li><li><a href="/pages/press">Press</a></li></ul></div>
+    <div><h3>Trade</h3><ul><li><a href="/pages/trade">Trade program</a></li><li><a href="/pages/files">CAD and spec files</a></li><li><a href="/pages/quote">Request a quote</a></li></ul></div>
+    <div><h3>Help</h3><ul><li><a href="/pages/shipping">Shipping and lead times</a></li><li><a href="/pages/returns">Returns</a></li><li><a href="/pages/care">Care</a></li><li><a href="/pages/contact">Contact</a></li></ul></div>
+  </div>
+  <div class="ftr__meta">
+    <span>Dutton Brown, Roseville, Minnesota</span>
+    <span>Product photography by the studio. Rooms credited to the designers and photographers beside each one.</span>
+    <a href="/policies/privacy">Privacy</a>
+    <a href="/policies/terms">Terms</a>
+  </div>
+</footer>
+
+<div class="proto" aria-label="Prototype controls">
+  <button type="button" id="protoReplay">Replay</button>
+  <button type="button" id="protoReduce" aria-pressed="false">Reduce motion</button>
+</div>
+
+<script id="fixtures" type="application/json">[{"h":"color-supreme-globe-flush-mount","t":"Supreme Flush Mount","k":"Flush Mounts","sku":"30332","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/products/supreme-flush-mount-brass-red-white-foyer-lighting-dutton-brown-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-supreme-flush-mount-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-supreme-flush-mount-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-supreme-flush-mount-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-supreme-flush-mount-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-supreme-flush-mount-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-supreme-flush-mount-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-supreme-flush-mount-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-supreme-flush-mount-brass-ochre_e200f314-3c52-4006-be20-5ed232fd4f19.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-supreme-flush-mount-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-supreme-flush-mount-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-supreme-flush-mount-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-supreme-flush-mount-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-supreme-flush-mount-brass-black.jpg"]},{"h":"color-bling-pendant","t":"Bling Pendant","k":"Pendants","sku":"70110","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-bling-pendant-brass-white_b1a30502-f717-4d80-90b5-214b53dfa652.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-bling-pendant-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-bling-pendant-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-bling-pendant-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-bling-pendant-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-bling-pendant-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-bling-pendant-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-bling-pendant-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-bling-pendant-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-bling-pendant-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-bling-pendant-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-bling-pendant-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-bling-pendant-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-bling-pendant-brass-black.jpg"]},{"h":"color-lure-globe-pendant-10","t":"Lure Pendant 10\"","k":"Pendants","sku":"30112","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-lure-pendant-10-brass-white.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-lure-pendant-10-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-lure-pendant-10-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-lure-pendant-10-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-lure-pendant-10-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-lure-pendant-10-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-lure-pendant-10-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-lure-pendant-10-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-lure-pendant-10-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-lure-pendant-10-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-lure-pendant-10-brass-ridinghoodred_e7e2ec21-b69c-4a70-bffe-4f3b8837ee56.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-lure-pendant-10-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-lure-pendant-10-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-lure-pendant-10-brass-black.jpg"]},{"h":"color-echo-dome-pendant-10","t":"Echo Pendant 10\"","k":"Pendants","sku":"50111","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-echo-pendant-10-brass-white_15edf8a2-3f0e-4885-be82-83db7348454e.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-echo-pendant-10-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-echo-pendant-10-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-echo-pendant-10-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-echo-pendant-10-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/echo-dome-pendant-brass-lagoon-kitchen-lighting-by-dutton-brown.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-echo-pendant-10-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-echo-pendant-10-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-echo-pendant-10-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-echo-pendant-10-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-echo-pendant-10-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-echo-pendant-10-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-echo-pendant-10-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-echo-pendant-10-brass-black.jpg"]},{"h":"color-commander-chandelier-47","t":"Commander Chandelier 47\"","k":"Chandeliers","sku":"60601","fin":["Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-commander-chandelier-47-white_3819ef1e-08fd-4c64-9d56-b29e84a65e44.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-commander-chandelier-47-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/commander-chandelier_major-sconce-9-brass-bone-bedroom-scene-dutton-brown-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-commander-chandelier-47-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-commander-chandelier-47-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-commander-chandelier-47-lagoon_3f52bbdc-86ed-4dc4-8d87-ffc254c7b757.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-commander-chandelier-47-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-commander-chandelier-47-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-commander-chandelier-47-ochre_827b191e-b22d-4eaa-8d21-08a0c4267168.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-commander-chandelier-47-orange_eb04c671-3557-4e2e-9094-43b0d338a077.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-commander-chandelier-47-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-commander-chandelier-47-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-commander-chandelier-47-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-commander-chandelier-47-black_ce8678fc-52ff-45f9-b7f3-b65136adf488.jpg"]},{"h":"color-boom-sconce-6-arm","t":"Boom Sconce 6\" Arm","k":"Sconces","sku":"40120","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-boom-sconce-6-brass-white_2ed3bd2b-9baa-45b9-92d0-d8d29c32a48e.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-boom-sconce-6-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-boom-sconce-6-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-boom-sconce-6-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-boom-sconce-6-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-boom-sconce-6-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-boom-sconce-6-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-boom-sconce-6-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-boom-sconce-6-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-boom-sconce-6-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-boom-sconce-6-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-boom-sconce-6-brass-pinkaboo_150b7b79-2f50-4718-961c-5a7fc9b4ec34.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-boom-sconce-6-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-boom-sconce-6-brass-black_3a2479e2-b525-4e69-85c5-ce6a8d297b9d.jpg"]},{"h":"color-cap-globe-sconce-i-6","t":"Cap Sconce 6\"","k":"Sconces","sku":"30120","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/products/cap-globe-sconce-6-brass-white-lighting-by-dutton-brown-space-by-collective-studio-photo-by-kiely-ramos-3.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-cap-sconce-6-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-cap-sconce-6-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-cap-sconce-6-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-cap-sconce-6-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-cap-sconce-6-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-cap-sconce-6-brass-cobalt_c2223498-7da7-4428-9124-d07d09a4bbe5.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-cap-sconce-6-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/cap-globe-sconce-6-brass-ochre-lighting-dutton-brown-space-by-peace-love_enneagram-2.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-cap-sconce-6-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-cap-sconce-6-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-cap-sconce-6-brass-pinkaboo_8cd5ff8f-9cf0-4454-bf8f-e0bc0eaf4cbe.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-cap-sconce-6-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-cap-sconce-6-brass-black.jpg"]},{"h":"color-reader-sconce-6-arm","t":"Reader Sconce 6\" Arm","k":"Sconces","sku":"60124","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-reader-sconce-6-brass-white_ecdd502a-f556-408e-9139-8256e41292d3.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-reader-sconce-6-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-reader-sconce-6-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-reader-sconce-6-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-reader-sconce-6-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-reader-sconce-6-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-reader-sconce-6-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-reader-sconce-6-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-reader-sconce-6-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-reader-sconce-6-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-reader-sconce-6-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-reader-sconce-6-brass-pinkaboo_5e6e5552-25ca-40d2-b273-990ab4f3e49f.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-reader-sconce-6-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-reader-sconce-6-brass-black.jpg"]},{"h":"color-alegria-chandelier","t":"Alegria Chandelier 30\"","k":"Chandeliers","sku":"51000","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-alegria-chandelier-brass-white.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-alegria-chandelier-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-alegria-chandelier-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/scene-alegria-chandelier-brass-spa-1x1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-alegria-chandelier-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-alegria-chandelier-brass-lagoon_a348c8c9-3dd3-4fe7-b659-7b96c7aa7c84.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-alegria-chandelier-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-alegria-chandelier-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-alegria-chandelier-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-alegria-chandelier-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-alegria-chandelier-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-alegria-chandelier-brass-pinkaboo_436296e2-fb06-4849-81f3-a35388973292.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-alegria-chandelier-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-alegria-chandelier-brass-black.jpg"]},{"h":"color-crown-globe-chandelier-32","t":"Crown Chandelier 32\"","k":"Chandeliers","sku":"31000","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-crown-chandelier-32-brass-white.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-crown-chandelier-32-brass-chalk_16eda255-6c29-403c-9db8-b98e3cbdf4fe.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-crown-chandelier-32-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-crown-chandelier-32-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-crown-chandelier-32-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-crown-chandelier-32-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-crown-chandelier-32-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-crown-chandelier-32-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-crown-chandelier-32-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-crown-chandelier-32-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-crown-chandelier-32-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-crown-chandelier-32-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/color-crown-brass-barely-chandelier-dutton-brown-space-by-grassroots-design-photo-by-jvl-photo-square.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-crown-chandelier-32-brass-black.jpg"]},{"h":"color-orbi-globe-chandelier","t":"Orbi Chandelier","k":"Chandeliers","sku":"30402","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/products/orbi-globe-flush-mount-20-brass-red-white-2.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-orbi-chandelier-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-orbi-chandelier-brass-bone_cc85ade1-f2a7-47cf-a137-2c12741d2303.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-orbi-chandelier-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-orbi-chandelier-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-orbi-chandelier-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-orbi-chandelier-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-orbi-chandelier-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-orbi-chandelier-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-orbi-chandelier-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-orbi-chandelier-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-orbi-chandelier-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-orbi-chandelier-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-orbi-chandelier-brass-black.jpg"]},{"h":"color-twink-pendant","t":"Twink Pendant","k":"Pendants","sku":"60112","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-twink-pendant-brass-white.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-twink-pendant-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-twink-pendant-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-twink-pendant-brass-spa_3599ba7d-484e-493f-9ddf-aaca32739278.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-twink-pendant-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-twink-pendant-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-twink-pendant-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-twink-pendant-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-twink-pendant-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-twink-pendant-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-twink-pendant-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-twink-pendant-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-twink-pendant-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-twink-pendant-brass-black.jpg"]},{"h":"color-cadbury-dome-pendant-10","t":"Cadbury Pendant 10\"","k":"Pendants","sku":"50110","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-cadburry-pendant-10-brass-white.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-cadburry-pendant-10-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-cadburry-pendant-10-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-cadburry-pendant-10-brass-spa_bfdf9ecc-5f67-42b0-b309-1b876d426886.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-cadburry-pendant-10-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-cadburry-pendant-10-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-cadburry-pendant-10-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-cadburry-pendant-10-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-cadburry-pendant-10-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-cadburry-pendant-10-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-cadburry-pendant-10-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-cadbury-pendant-10-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-cadburry-pendant-10-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-cadburry-pendant-10-brass-black.jpg"]},{"h":"color-beaded-urchin-chandelier","t":"Beaded Urchin Chandelier 27\"","k":"Chandeliers","sku":"10403-27","fin":["Brass"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/products/1-color-beaded-urchin-chandelier-27-brass-white.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-color-beaded-urchin-chandelier-27-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/2-color-beaded-urchin-chandelier-27-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/3-color-beaded-urchin-chandelier-27-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/4-color-beaded-urchin-chandelier-27-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-color-beaded-urchin-chandelier-27-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/color-beaded-urchin-chandelier-27-brass-cobalt-bedroom-scene.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/7-color-beaded-urchin-chandelier-27-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/8-color-beaded-urchin-chandelier-27-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-color-beaded-urchin-chandelier-27-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/10-color-beaded-urchin-chandelier-27-brass-ridinghoodred_6207e3b9-44c0-4772-96be-19bee0ccddc9.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-beaded-urchin-chandelier-27-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/11-color-beaded-urchin-chandelier-27-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/14-color-beaded-urchin-chandelier-27-brass-black.jpg"]},{"h":"color-pilot-sconce-23","t":"Pilot Sconce 23\"","k":"Sconces","sku":null,"fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-pilot-sconce-23-brass-white.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-pilot-sconce-23-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-pilot-sconce-23-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-pilot-sconce-23-brass-spa_ca58d5f3-1f23-4fc3-a8ff-3d13eaac180c.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-pilot-sconce-23-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-pilot-sconce-23-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-pilot-sconce-23-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-pilot-sconce-23-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-pilot-sconce-23-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-pilot-sconce-23-brass-orange.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-pilot-sconce-23-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-pilot-sconce-23-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-pilot-sconce-23-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-pilot-sconce-23-brass-black.jpg"]},{"h":"color-big-prisma-globe-chandelier-42","t":"Big Prisma Chandelier 42\"","k":"Chandeliers","sku":"30503","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-big-prisma-chandelier-brass-white-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/0-big-prisma-chandelier-brass-chalk-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-big-prisma-chandelier-brass-bone-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-big-prisma-chandelier-brass-spa-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-big-prisma-chandelier-brass-Pythongreen-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-big-prisma-chandelier-brass-Lagoon-1_9c033677-434f-4004-9bd6-dbdf7d8b5629.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-big-prisma-chandelier-brass-cobalt-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-big-prisma-chandelier-brass-slateblue-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-big-prisma-chandelier-brass-ochre-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-big-prisma-chandelier-brass-orange-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-big-prisma-chandelier-brass-ridinghoodred-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-big-prisma-chandelier-brass-pinkaboo-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-big-prisma-chandelier-brass-barely-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-big-prisma-chandelier-brass-black-1.jpg"]},{"h":"color-elliptical-sputnik-chandelier","t":"Elliptical Sputnik Chandelier","k":"Chandeliers","sku":"21800","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-white-brass-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/15-sputnik-chandelier-elliptical-chalk-brass_926f3d1b-f686-4d12-99b0-6fcd92aa7dc8.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/2-sputnik-chandelier-elliptical-bone-brass.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-spa-brass-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/4-sputnik-chandelier-elliptical-pythongreen-brass.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-lagoon-brass-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-cobalt-brass-1.jpg",null,"https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-ochre-brass-1_a8cb6be3-b643-42f5-b78b-08ef4cab9851.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-orange-brass-1.jpg",null,"https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-sputnik-chandelier-elliptical-pinkaboo-brass.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/sputnik-chandelier-elliptical-black-barely-1.jpg","https://cdn.shopify.com/s/files/1/0229/6239/products/sputnik-chandelier-elliptical-black-brass-1.jpg"]},{"h":"color-cap-globe-pendant-8","t":"Cap Pendant 8\"","k":"Pendants","sku":"30110","fin":["Brass","Nickel","Black"],"c":["https://cdn.shopify.com/s/files/1/0229/6239/files/1-cap-globe-pendant-8-brass-white_9ae8ec4e-295f-4683-aba5-e06ef614b928.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/2-cap-globe-pendant-8-brass-chalk.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/3-cap-globe-pendant-8-brass-bone.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/4-cap-globe-pendant-8-brass-spa.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/5-cap-globe-pendant-8-brass-pythongreen.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/6-cap-globe-pendant-8-brass-lagoon.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/7-cap-globe-pendant-8-brass-cobalt.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/8-cap-globe-pendant-8-brass-slateblue.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/9-cap-globe-pendant-8-brass-ochre.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/10-cap-globe-pendant-8-brass-orange_2a549fca-3327-4c13-bf8a-be75ee8ae6b6.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11-cap-globe-pendant-8-brass-ridinghoodred.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-cap-globe-pendant-8-brass-pinkaboo.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/12-cap-globe-pendant-8-brass-barely.jpg","https://cdn.shopify.com/s/files/1/0229/6239/files/13-cap-globe-pendant-8-brass-black.jpg"]}]</script>
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var mq = matchMedia('(prefers-reduced-motion: reduce)');
+  function motionOK() { return !mq.matches && !root.classList.contains('reduce-motion'); }
+
+  /* The 14 powder coats in strip order (White at the bottom of the strip, Black at the top).
+     Hex values come from tokens.css; only the names and the hero photo per coat live here. */
+  var CDN = 'https://cdn.shopify.com/s/files/1/0229/6239/files/';
+  var COATS = [
+    ['White', '--db-white', '1-lure-pendant-10-brass-white.jpg'],
+    ['Chalk', '--db-chalk', '2-lure-pendant-10-brass-chalk.jpg'],
+    ['Bone', '--db-bone', '3-lure-pendant-10-brass-bone.jpg'],
+    ['Spa', '--db-spa', '4-lure-pendant-10-brass-spa.jpg'],
+    ['Python Green', '--db-python-green', '5-lure-pendant-10-brass-pythongreen.jpg'],
+    ['Lagoon', '--db-lagoon', '6-lure-pendant-10-brass-lagoon.jpg'],
+    ['Cobalt', '--db-cobalt', '7-lure-pendant-10-brass-cobalt.jpg'],
+    ['Slate Blue', '--db-slate-blue', '8-lure-pendant-10-brass-slateblue.jpg'],
+    ['Ochre', '--db-ochre', '9-lure-pendant-10-brass-ochre.jpg'],
+    ['Orange', '--db-orange', '10-lure-pendant-10-brass-orange.jpg'],
+    ['Riding Hood Red', '--db-riding-hood-red', '11-lure-pendant-10-brass-ridinghoodred_e7e2ec21-b69c-4a70-bffe-4f3b8837ee56.jpg'],
+    ['Pinkaboo', '--db-pinkaboo', '11.5-lure-pendant-10-brass-pinkaboo.jpg'],
+    ['Barely', '--db-barely', '12-lure-pendant-10-brass-barely.jpg'],
+    ['Black', '--db-black', '13-lure-pendant-10-brass-black.jpg']
+  ];
+  var HERO_W = '?width=1200';
+  var DEFAULT = 'Cobalt';
+  var PRODUCT = '/products/color-lure-globe-pendant-10';
+  function heroSrc(c) { return CDN + c[2] + HERO_W; }
+  function heroAlt(name) { return 'Color Lure Pendant 10 inch in ' + name + ' with brass, on white'; }
+  function byName(name) { name = String(name || '').toLowerCase(); return COATS.filter(function (c) { return c[0].toLowerCase() === name; })[0]; }
+
+  /* a coat named in the URL (?coat=Ochre or #coat=Ochre) opens preselected */
+  var m = /coat=([^&]+)/.exec(location.search) || /coat=([^&]+)/.exec(location.hash);
+  var pre = m && byName(decodeURIComponent(m[1]).replace(/\+/g, ' '));
+  if (pre) DEFAULT = pre[0];
+
+  /* ---------- hero picker: native radios in a fieldset ---------- */
+  var list = document.getElementById('pickerList');
+  var frag = document.createDocumentFragment();
+  COATS.forEach(function (c, i) {
+    var label = document.createElement('label');
+    label.className = 'coat-row';
+    label.style.setProperty('--i', i);
+    var input = document.createElement('input');
+    input.type = 'radio'; input.name = 'coat'; input.value = c[0];
+    if (c[0] === DEFAULT) input.checked = true;
+    var dot = document.createElement('span');
+    dot.className = 'coat-row__dot'; dot.style.setProperty('--c', 'var(' + c[1] + ')');
+    var name = document.createElement('span');
+    name.className = 'coat-row__name'; name.textContent = c[0];
+    label.appendChild(input); label.appendChild(dot); label.appendChild(name);
+    frag.appendChild(label);
+  });
+  list.appendChild(frag);
+
+  var plateA = document.getElementById('plateA');
+  var plateB = document.getElementById('plateB');
+  var coatWord = document.getElementById('coatWord');
+  var cta = document.getElementById('heroCta');
+  var current = byName('Cobalt');
+
+  var swapToken = 0;
+  function select(name, instant) {
+    var c = byName(name);
+    if (!c || c === current) return;
+    current = c;
+    var token = ++swapToken;
+
+    /* the CTA carries the coat */
+    cta.textContent = 'Shop this color';
+    cta.href = PRODUCT + '?coat=' + encodeURIComponent(c[0]);
+
+    /* headline word: the old one slides up and out, the new one rises in (350 ms) */
+    var oldSpan = coatWord.firstElementChild;
+    var newSpan = document.createElement('span');
+    newSpan.textContent = c[0];
+    if (!instant && motionOK() && oldSpan.animate) {
+      coatWord.appendChild(newSpan);
+      newSpan.style.position = 'absolute';
+      coatWord.style.position = 'relative';
+      var w = Math.max(oldSpan.offsetWidth, newSpan.offsetWidth);
+      coatWord.style.width = w + 'px';
+      newSpan.style.position = '';
+      oldSpan.style.position = 'absolute'; oldSpan.style.left = '0'; oldSpan.style.top = '0';
+      oldSpan.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-110%)' }], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }).onfinish = function () { oldSpan.remove(); };
+      newSpan.animate([{ transform: 'translateY(110%)' }, { transform: 'translateY(0)' }], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)' }).onfinish = function () { coatWord.style.width = ''; };
+    } else {
+      oldSpan.textContent = c[0];
+    }
+
+    /* photo: decode the new coat, then crossfade the two layers (300 ms) */
+    var showing = plateA.classList.contains('is-on') ? plateA : plateB;
+    var hidden = showing === plateA ? plateB : plateA;
+    hidden.src = heroSrc(c); hidden.alt = heroAlt(c[0]);
+    var go = function () {
+      if (token !== swapToken) return;
+      hidden.classList.add('is-on'); hidden.removeAttribute('aria-hidden');
+      showing.classList.remove('is-on'); showing.setAttribute('aria-hidden', 'true');
+    };
+    if (hidden.decode) { hidden.decode().then(go, go); } else { hidden.onload = go; }
+  }
+  list.addEventListener('change', function (e) { if (e.target.name === 'coat') select(e.target.value); });
+  if (DEFAULT !== 'Cobalt') select(DEFAULT, true);
+
+  /* warm the other 13 photos once the page is idle, so a swap never waits on the network */
+  var warm = function () { COATS.forEach(function (c) { if (c !== current) { var im = new Image(); im.decoding = 'async'; im.src = heroSrc(c); } }); };
+  window.addEventListener('load', function () {
+    if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 2000 }); else setTimeout(warm, 800);
+  });
+
+  /* ---------- the one orchestrated moment: headline lines, coat rows, plate wipe, button ---------- */
+  var hero = document.getElementById('hero');
+  var start = function () { hero.classList.add('is-in'); };
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(start); setTimeout(start, 900); } else { start(); }
+  document.getElementById('protoReplay').addEventListener('click', function () {
+    hero.classList.remove('is-in');
+    void hero.offsetWidth;
+    requestAnimationFrame(function () { requestAnimationFrame(start); });
+  });
+  var reduceBtn = document.getElementById('protoReduce');
+  reduceBtn.addEventListener('click', function () {
+    var on = !root.classList.contains('reduce-motion');
+    root.classList.toggle('reduce-motion', on);
+    reduceBtn.setAttribute('aria-pressed', String(on));
+    if (on) disarm();
+  });
+
+  /* ---------- 12px coat rows on cards, and the strip on the charcoal band ---------- */
+  var rowHTML = COATS.map(function (c) { return '<i style="--c:var(' + c[1] + ')"></i>'; }).join('');
+  document.querySelectorAll('.card__coats').forEach(function (el) { el.innerHTML = rowHTML; });
+  var strip = document.getElementById('coatStrip');
+  if (strip) { strip.innerHTML = COATS.slice().reverse().map(function (c) { return '<i style="--c:var(' + c[1] + ')"></i>'; }).join(''); }
+
+  /* ---------- the color index: hairline table, sticky plate, a row cycles its coats on hover or focus ---------- */
+  var FIX = JSON.parse(document.getElementById('fixtures').textContent);
+  var ORDER = { 'Pendants': 0, 'Sconces': 1, 'Flush Mounts': 2, 'Chandeliers': 3 };
+  var IDX = FIX.filter(function (f) { return f.sku; }).sort(function (x, y) { return (ORDER[x.k] - ORDER[y.k]) || x.t.localeCompare(y.t); });
+  var tb = document.querySelector('#idxTable tbody');
+  var idxA = document.getElementById('idxA'), idxB = document.getElementById('idxB');
+  var idxName = document.getElementById('idxName'), idxCoat = document.getElementById('idxCoat');
+  var timer = null, activeRow = null, idxToken = 0;
+  var coarse = matchMedia('(hover: none)').matches;
+  function src8(f, i) { return f.c[i] + '?width=800'; }
+  function idxShow(src, alt) {
+    var my = ++idxToken;
+    var showing = idxA.classList.contains('is-on') ? idxA : idxB;
+    var hidden = showing === idxA ? idxB : idxA;
+    if (showing.getAttribute('src') === src) return;
+    var im = new Image();
+    im.onload = function () {
+      if (my !== idxToken) return;
+      hidden.src = src; hidden.alt = alt || '';
+      hidden.classList.add('is-on'); hidden.removeAttribute('aria-hidden');
+      showing.classList.remove('is-on'); showing.setAttribute('aria-hidden', 'true');
+    };
+    im.src = src;
+  }
+  IDX.forEach(function (f, n) {
+    var tr = document.createElement('tr');
+    var startCoat = (n * 5 + 6) % 14; if (!f.c[startCoat]) startCoat = f.c.findIndex(function (x) { return !!x; });
+    tr.dataset.coat = startCoat;
+    tr.innerHTML = '<td>' + f.sku + '</td>' +
+      '<td class="nm"><a href="/products/' + f.h + '">' + f.t + '</a></td>' +
+      '<td class="type">' + f.k.replace('Flush Mounts', 'Flush mounts') + '</td>' +
+      '<td class="col"><i style="--c:var(' + COATS[startCoat][1] + ')"></i><span>' + COATS[startCoat][0] + '</span></td>';
+    tb.appendChild(tr);
+    var on = function () { arm(tr, f); }, off = function () { disarm(); };
+    if (!coarse) { tr.addEventListener('pointerenter', on); tr.addEventListener('pointerleave', off); }
+    var a = tr.querySelector('a');
+    a.addEventListener('focus', on); a.addEventListener('blur', off);
+    if (coarse) { tr.addEventListener('click', function (e) { if (activeRow !== tr) { e.preventDefault(); arm(tr, f); } }); }
+  });
+  function setRowCoat(tr, f, i) {
+    tr.dataset.coat = i;
+    var cell = tr.querySelector('td.col');
+    cell.querySelector('i').style.setProperty('--c', 'var(' + COATS[i][1] + ')');
+    cell.querySelector('span').textContent = COATS[i][0];
+    idxName.textContent = f.t; idxCoat.textContent = COATS[i][0] + ', brass';
+    idxShow(src8(f, i), f.t + ' in ' + COATS[i][0] + ', brass');
+  }
+  function arm(tr, f) {
+    disarm();
+    activeRow = tr; tr.classList.add('is-on');
+    var i = +tr.dataset.coat; setRowCoat(tr, f, i);
+    if (!motionOK()) return;
+    timer = setInterval(function () {
+      var k = i, guard = 0; do { k = (k + 1) % 14; guard++; } while (!f.c[k] && guard < 15);
+      i = k; setRowCoat(tr, f, i);
+    }, 520);
+  }
+  function disarm() {
+    if (timer) { clearInterval(timer); timer = null; }
+    if (activeRow) { activeRow.classList.remove('is-on'); activeRow = null; }
+  }
+  (function () {
+    var f = IDX[0], tr = tb.rows[0], i = +tr.dataset.coat;
+    idxName.textContent = f.t; idxCoat.textContent = COATS[i][0] + ', brass';
+    idxA.src = src8(f, i); idxA.alt = f.t + ' in ' + COATS[i][0] + ', brass';
+  })();
+
+  /* ---------- lights off: a pool of light follows the pointer; the button lights the room for keyboard and touch ---------- */
+  var scene = document.getElementById('scene');
+  var toggle = document.getElementById('sceneToggle');
+  var raf = null, px = 0, py = 0;
+  scene.addEventListener('pointermove', function (e) {
+    if (scene.classList.contains('is-lit')) return;
+    var r = scene.getBoundingClientRect();
+    px = e.clientX - r.left; py = e.clientY - r.top;
+    if (raf) return;
+    raf = requestAnimationFrame(function () {
+      scene.style.setProperty('--mx', px + 'px');
+      scene.style.setProperty('--my', py + 'px');
+      raf = null;
+    });
+  });
+  function setLit(lit) {
+    scene.classList.toggle('is-lit', lit);
+    toggle.setAttribute('aria-pressed', String(lit));
+    toggle.textContent = lit ? 'Turn lights off' : 'Light it up';
+  }
+  toggle.addEventListener('click', function () { setLit(!scene.classList.contains('is-lit')); });
+  if (coarse) setLit(true);
+
+  /* ---------- header ---------- */
+  var hdr = document.getElementById('hdr');
+  var onScroll = function () { hdr.classList.toggle('is-scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ---------- mobile menu ---------- */
+  var menu = document.getElementById('menu'), btn = document.getElementById('menuBtn'), closeBtn = document.getElementById('menuClose');
+  function setMenu(open) {
+    menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    btn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    (open ? closeBtn : btn).focus();
+  }
+  btn.addEventListener('click', function () { setMenu(true); });
+  closeBtn.addEventListener('click', function () { setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('is-open')) setMenu(false); });
+
+  /* ---------- families strip: arrow keys scroll it when it has focus ---------- */
+  var scroller = document.getElementById('strip');
+  scroller.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); scroller.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * 320, behavior: motionOK() ? 'smooth' : 'auto' }); }
+  });
+})();
+</script>
+</body>
+</html>

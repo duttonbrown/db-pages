@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dutton Brown, lighting that's never boring</title>
+<meta name="description" content="Made-to-order, color-forward lighting and hardware. Fourteen powder coats, handcrafted in Minneapolis.">
+<link rel="icon" href="../favicons/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+/* ------------------------------------------------------------------
+   Showroom: lights off. The ground is charcoal everywhere; the only
+   bright objects are the fixtures, each sitting in a lit white panel.
+   ------------------------------------------------------------------ */
+@property --mx { syntax: "<length-percentage>"; inherits: true; initial-value: 50%; }
+@property --my { syntax: "<length-percentage>"; inherits: true; initial-value: 22%; }
+@property --spot { syntax: "<length>"; inherits: true; initial-value: 300px; }
+
+:root {
+  --ground: var(--db-primary);
+  --ink: #FFFFFF;
+  --ink-2: var(--db-gray-300);
+  --hair: rgba(255, 255, 255, 0.18);
+  --gutter: clamp(16px, 4vw, 56px);
+  --max: 1400px;
+  --header-h: 84px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--ground); scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--db-font-primary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 300; letter-spacing: -0.01em; }
+
+:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; border-radius: var(--db-radius); }
+.panel :focus-visible, .nav-overlay :focus-visible { outline-color: var(--db-focus-ring); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.band { padding-block: clamp(72px, 9vw, 128px); }
+.lead { font-size: 18px; color: var(--ink-2); max-width: 54ch; }
+.small { font-size: 13px; color: var(--ink-2); }
+
+/* Buttons and links. On charcoal the primary button inverts (white fill,
+   charcoal text); the accent button is used once per view. */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 22px;
+  font-weight: 600; font-size: 15px; letter-spacing: normal; text-transform: none;
+  border-radius: var(--db-radius); border: 0; text-decoration: none; cursor: pointer;
+  transition: background-color var(--db-transition-fast), color var(--db-transition-fast);
+}
+.btn-accent { background: var(--db-accent); color: var(--db-on-accent); }
+.btn-accent:hover { background: var(--db-accent-hover); }
+.btn-light { background: #FFFFFF; color: var(--db-primary); }
+.btn-light:hover { background: var(--db-surface-mid); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid rgba(255,255,255,0.5); min-height: 40px; padding: 0 16px; font-size: 14px; }
+.btn-ghost:hover { border-color: #FFFFFF; }
+.link {
+  font-weight: 600; color: var(--ink); text-decoration: underline;
+  text-decoration-color: var(--db-accent); text-decoration-thickness: 2px; text-underline-offset: 5px;
+  transition: text-decoration-thickness var(--db-transition-fast);
+}
+.link:hover { text-decoration-thickness: 3px; }
+
+/* ---------------- Header ---------------- */
+.header {
+  position: fixed; inset: 0 0 auto 0; z-index: 20; height: var(--header-h);
+  display: flex; align-items: center;
+  padding-inline: var(--gutter);
+  transition: background-color var(--db-transition-normal), box-shadow var(--db-transition-normal);
+}
+.header.is-scrolled { background: var(--ground); box-shadow: 0 1px 0 var(--hair); }
+.header__inner { width: 100%; max-width: var(--max); margin-inline: auto; display: flex; align-items: center; gap: 32px; }
+.header__logo { display: block; width: 128px; flex: none; }
+.header__logo img { width: 128px; height: auto; }
+.header__nav { display: flex; gap: 28px; margin-left: 24px; }
+.header__nav a, .header__util a, .header__menu {
+  font-size: 14px; text-decoration: none; padding: 6px 2px;
+  text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 2px; text-underline-offset: 6px;
+  transition: text-decoration-color var(--db-transition-fast);
+}
+.header__nav a:hover, .header__util a:hover { text-decoration-color: var(--db-accent); }
+.header__util { margin-left: auto; display: flex; gap: 24px; }
+.header__menu { display: none; background: none; border: 0; cursor: pointer; margin-left: auto; }
+
+/* Mobile nav: full-screen white overlay, centered, fade-up. */
+.nav-overlay {
+  position: fixed; inset: 0; z-index: 30; background: #FFFFFF; color: var(--db-text);
+  display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  padding: 24px;
+}
+.nav-overlay.is-open { display: flex; }
+.nav-overlay img { width: 140px; margin-bottom: 32px; }
+.nav-overlay a { font-size: 28px; font-weight: 300; text-decoration: none; padding: 8px 12px; }
+.nav-overlay .nav-overlay__close { position: absolute; top: 20px; right: 20px; background: none; border: 0; font-size: 14px; font-weight: 600; cursor: pointer; padding: 8px; }
+@media (prefers-reduced-motion: no-preference) {
+  .nav-overlay.is-open a, .nav-overlay.is-open img { animation: rise 300ms var(--ease-out) both; }
+}
+
+/* ---------------- Hero: the color picker ---------------- */
+.hero {
+  min-height: clamp(640px, 100svh, 960px);
+  padding: calc(var(--header-h) + 24px) var(--gutter) 40px;
+  display: grid;
+  grid-template-columns: 176px minmax(0, 1fr) clamp(360px, 40vw, 560px);
+  column-gap: clamp(24px, 3vw, 48px);
+  align-items: stretch;
+  max-width: var(--max); margin-inline: auto;
+}
+/* Coat rail: the brand strip stood on end. Black on top, White at the bottom. */
+.rail { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.rail li { display: flex; }
+.coat {
+  --sw: clamp(28px, 4vh, 38px);
+  display: flex; align-items: center; gap: 12px;
+  background: none; border: 0; padding: 2px 4px 2px 2px; cursor: pointer;
+  font-size: 13px; color: var(--ink-2); text-align: left; white-space: nowrap;
+  border-radius: var(--db-radius);
+}
+.coat::before {
+  content: ""; width: var(--sw); height: var(--sw); border-radius: 50%; flex: none;
+  background: var(--c);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.22) inset, 0 0 0 0 #FFFFFF;
+  transition: box-shadow var(--db-transition-normal);
+}
+.coat:hover::before { box-shadow: 0 0 0 1px rgba(255,255,255,0.22) inset, 0 0 0 2px var(--ground), 0 0 0 3px rgba(255,255,255,0.6); }
+.coat[aria-pressed="true"] { color: var(--ink); font-weight: 600; }
+.coat[aria-pressed="true"]::before { box-shadow: 0 0 0 1px rgba(255,255,255,0.22) inset, 0 0 0 3px var(--ground), 0 0 0 4px #FFFFFF; }
+
+.hero__copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding-right: 8px; }
+.hero__kicker { font-size: 18px; color: var(--ink-2); margin-bottom: 8px; }
+.hero__name {
+  font-size: clamp(56px, 7.6vw, 112px); line-height: 0.98; letter-spacing: -0.02em; font-weight: 300;
+  min-height: 1.96em; overflow-wrap: anywhere;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.hero__name.is-switching { opacity: 0; transform: translateY(6px); }
+.hero__lead { margin-top: 28px; }
+.hero__actions { display: flex; align-items: center; gap: 28px; margin-top: 32px; flex-wrap: wrap; }
+
+/* The vitrine: a lit white box on the dark floor. */
+.vitrine {
+  position: relative; background: #FFFFFF; border-radius: var(--db-radius); overflow: hidden;
+  min-height: 520px; isolation: isolate;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 0 60px rgba(255,255,255,0.10), 0 0 180px rgba(255,255,255,0.18);
+}
+.vitrine img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;
+  opacity: 0; transition: opacity 320ms ease;
+}
+.vitrine img.is-on { opacity: 1; }
+.hero__vit { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.hero__vit .vitrine { flex: 1; }
+.vitrine__caption {
+  position: absolute; left: 20px; right: 20px; bottom: 16px; z-index: 4;
+  display: flex; justify-content: space-between; gap: 12px;
+  font-size: 13px; color: var(--db-text-muted);
+}
+.vitrine::after {
+  /* the lights-on moment: charcoal lifts off the panel once, on load */
+  content: ""; position: absolute; inset: 0; background: var(--ground); z-index: 3; opacity: 0; pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .vitrine::after { animation: lights-on 700ms ease-out 150ms both; }
+  .hero__copy > * { animation: rise 420ms var(--ease-out) both; animation-delay: calc(360ms + var(--i, 0) * 90ms); }
+  .rail li { animation: rise 320ms var(--ease-out) both; animation-delay: calc(560ms + var(--n) * 24ms); }
+}
+@keyframes lights-on { from { opacity: 1; } to { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* ---------------- Families: four lit boxes ---------------- */
+.families__head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(32px, 6vw, 96px); align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+.families__head h2 { font-size: clamp(34px, 3.6vw, 52px); line-height: 1.05; }
+.families__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
+.panel { text-decoration: none; display: block; color: inherit; }
+.panel__box { position: relative; aspect-ratio: 1; background: #FFFFFF; border-radius: var(--db-radius); overflow: hidden; }
+.panel__box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.panel__box img.alt { opacity: 0; transition: opacity 300ms ease; }
+.panel:hover .panel__box img.alt, .panel:focus-visible .panel__box img.alt { opacity: 1; }
+.panel__name { margin-top: 14px; font-size: 18px; }
+.panel__meta { font-size: 13px; color: var(--ink-2); display: grid; }
+.panel__meta span { grid-area: 1 / 1; transition: opacity 300ms ease; }
+.panel__meta .alt { opacity: 0; }
+.panel:hover .panel__meta .alt, .panel:focus-visible .panel__meta .alt { opacity: 1; }
+.panel:hover .panel__meta .base, .panel:focus-visible .panel__meta .base { opacity: 0; }
+.families__note { margin-top: clamp(32px, 4vw, 56px); max-width: 60ch; }
+
+/* ---------------- Spotlight scene ---------------- */
+.spot__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px clamp(32px, 6vw, 96px); align-items: end; margin-bottom: 32px; }
+.spot__head h2 { font-size: clamp(34px, 3.6vw, 52px); line-height: 1.05; }
+.spot__side { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.scene {
+  position: relative; overflow: hidden; border-radius: var(--db-radius);
+  aspect-ratio: 3 / 2; max-height: 82vh; width: 100%;
+  cursor: crosshair;
+  --mx: 50%; --my: 22%; --spot: 300px;
+}
+.scene img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.16); }
+.scene__lit {
+  position: absolute; inset: 0; background-size: cover; background-position: center;
+  -webkit-mask-image: radial-gradient(circle var(--spot) at var(--mx) var(--my), #000 0%, rgba(0,0,0,0.9) 45%, transparent 100%);
+          mask-image: radial-gradient(circle var(--spot) at var(--mx) var(--my), #000 0%, rgba(0,0,0,0.9) 45%, transparent 100%);
+  transition: --mx 120ms linear, --my 120ms linear, --spot 300ms ease;
+}
+.scene:hover .scene__lit { --spot: 340px; }
+.scene.is-lit .scene__lit, .scene.is-lit:hover .scene__lit { --spot: 4000px; }
+@media (hover: none) { .scene { cursor: default; } .scene__lit { --spot: 4000px; } }
+.spot__credit { margin-top: 16px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* ---------------- Craft ---------------- */
+.craft { border-top: 1px solid var(--hair); }
+.craft__grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px clamp(40px, 8vw, 120px); }
+.craft h2 { font-size: clamp(40px, 4.6vw, 68px); line-height: 1.02; max-width: 14ch; }
+.craft__lead { margin-top: 28px; }
+.facts { list-style: none; margin: 0; padding: 0; align-self: center; }
+.facts li { padding: 22px 0; border-top: 1px solid var(--hair); display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; }
+.facts li:last-child { border-bottom: 1px solid var(--hair); }
+.facts dt, .facts .facts__k { font-weight: 600; font-size: 15px; }
+.facts .facts__v { font-size: 15px; color: var(--ink-2); }
+
+/* ---------------- Trade ---------------- */
+.trade__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px clamp(40px, 6vw, 96px); align-items: center; }
+.trade h2 { font-size: clamp(34px, 3.6vw, 52px); line-height: 1.05; }
+.trade__actions { display: flex; align-items: center; gap: 28px; margin-top: 32px; flex-wrap: wrap; }
+.trade__figure { margin: 0; }
+.trade__figure .frame { background: #FFFFFF; padding: 12px; border-radius: var(--db-radius); }
+.trade__figure img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 2px; }
+.trade__figure figcaption { margin-top: 12px; }
+
+/* ---------------- Closing ---------------- */
+.closing { border-top: 1px solid var(--hair); text-align: left; }
+.closing h2 { font-size: clamp(44px, 7vw, 108px); line-height: 0.98; letter-spacing: -0.02em; max-width: 12ch; }
+.closing p { margin-top: 24px; }
+.closing .btn { margin-top: 32px; }
+
+/* ---------------- Footer ---------------- */
+.footer { border-top: 1px solid var(--hair); padding: clamp(48px, 6vw, 80px) 0 40px; font-size: 13px; color: var(--ink-2); }
+.footer__top { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(4, minmax(0, 1fr)); gap: 40px 24px; }
+.footer__brand img { width: 150px; height: auto; }
+.footer__brand p { margin-top: 20px; max-width: 26ch; }
+.footer h3 { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+.footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.footer a { text-decoration: none; }
+.footer a:hover { text-decoration: underline; text-decoration-color: var(--db-accent); text-underline-offset: 4px; }
+.footer__news { grid-column: 1 / -1; margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr); gap: 16px 24px; align-items: center; }
+.footer__form { display: flex; gap: 8px; max-width: 460px; }
+.footer__form input {
+  flex: 1; min-width: 0; min-height: 44px; padding: 0 12px; font: inherit; font-size: 14px; color: var(--ink);
+  background: transparent; border: 1px solid var(--db-gray-300); border-radius: var(--db-radius);
+}
+.footer__form input::placeholder { color: var(--ink-2); }
+.footer__form input:focus { border-color: #FFFFFF; outline: none; }
+.footer__form .btn { min-height: 44px; }
+.footer__bottom { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--hair); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.footer__bottom ul { display: flex; gap: 20px; }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: 150px minmax(0, 1fr) clamp(300px, 38vw, 440px); }
+  .families__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer__top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer__brand { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  :root { --header-h: 64px; }
+  .header__nav, .header__util { display: none; }
+  .header__menu { display: inline-block; }
+  .hero {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "vitrine" "copy" "rail";
+    row-gap: 24px;
+    padding-top: calc(var(--header-h) + 12px);
+    padding-bottom: 32px;
+  }
+  .hero__vit { grid-area: vitrine; }
+  .vitrine { flex: none; min-height: 0; aspect-ratio: 1 / 1; max-height: 52vh; }
+  .vitrine__caption { position: static; margin-top: 10px; color: var(--ink-2); }
+  .hero__copy { grid-area: copy; }
+  .hero__name { min-height: 0; }
+  .rail { grid-area: rail; flex-direction: row; justify-content: flex-start; gap: 4px; overflow-x: auto; padding: 4px 0 8px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail li { flex: none; order: calc(13 - var(--n)); }
+  .coat { --sw: 38px; flex-direction: column; gap: 8px; width: 64px; white-space: normal; text-align: center; font-size: 12px; line-height: 1.2; padding: 4px 2px; }
+  .families__head, .spot__head, .craft__grid, .trade__grid { grid-template-columns: minmax(0, 1fr); }
+  .families__grid { gap: 16px; }
+  .scene { aspect-ratio: 4 / 5; }
+  .facts li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .footer__news { grid-template-columns: minmax(0, 1fr); }
+  .band { padding-block: 72px; }
+}
+@media (max-width: 480px) {
+  .families__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panel__name { font-size: 16px; }
+  .footer__top { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<a class="sr-only" href="#main">Skip to content</a>
+
+<header class="header" id="header">
+  <div class="header__inner">
+    <a class="header__logo" href="/" aria-label="Dutton Brown home">
+      <img src="../tight/wordmark/db-wordmark-white-rect-tight.svg" alt="Dutton Brown" width="128" height="63">
+    </a>
+    <nav class="header__nav" aria-label="Primary">
+      <a href="/collections/lighting">Lighting</a>
+      <a href="/collections/hardware">Hardware</a>
+      <a href="/pages/colors">Colors</a>
+      <a href="/pages/trade">Trade</a>
+      <a href="/pages/about">About</a>
+    </nav>
+    <div class="header__util">
+      <a href="/search">Search</a>
+      <a href="/cart">Cart 0</a>
+    </div>
+    <button class="header__menu" type="button" aria-expanded="false" aria-controls="nav-overlay" id="menu-open">Menu</button>
+  </div>
+</header>
+
+<div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+  <button class="nav-overlay__close" type="button" id="menu-close">Close</button>
+  <img src="../tight/wordmark/db-wordmark-gray-rect-tight.svg" alt="Dutton Brown" width="140" height="69">
+  <a href="/collections/lighting">Lighting</a>
+  <a href="/collections/hardware">Hardware</a>
+  <a href="/pages/colors">Colors</a>
+  <a href="/pages/trade">Trade</a>
+  <a href="/pages/about">About</a>
+  <a href="/search">Search</a>
+  <a href="/cart">Cart</a>
+</div>
+
+<main id="main">
+
+<!-- HERO: one pendant, fourteen coats. The rail is the brand strip stood on end. -->
+<section class="hero" id="hero" aria-labelledby="hero-heading">
+  <ul class="rail" aria-label="Powder coat" id="rail">
+    <li style="--n:0"><button class="coat" type="button" data-coat="Black" style="--c:var(--db-black)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/13-lure-pendant-10-brass-black.jpg" aria-pressed="false">Black</button></li>
+    <li style="--n:1"><button class="coat" type="button" data-coat="Barely" style="--c:var(--db-barely)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/12-lure-pendant-10-brass-barely.jpg" aria-pressed="false">Barely</button></li>
+    <li style="--n:2"><button class="coat" type="button" data-coat="Pinkaboo" style="--c:var(--db-pinkaboo)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-lure-pendant-10-brass-pinkaboo.jpg" aria-pressed="false">Pinkaboo</button></li>
+    <li style="--n:3"><button class="coat" type="button" data-coat="Riding Hood Red" style="--c:var(--db-riding-hood-red)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/11-lure-pendant-10-brass-ridinghoodred_e7e2ec21-b69c-4a70-bffe-4f3b8837ee56.jpg" aria-pressed="false">Riding Hood Red</button></li>
+    <li style="--n:4"><button class="coat" type="button" data-coat="Orange" style="--c:var(--db-orange)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-lure-pendant-10-brass-orange.jpg" aria-pressed="false">Orange</button></li>
+    <li style="--n:5"><button class="coat" type="button" data-coat="Ochre" style="--c:var(--db-ochre)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/9-lure-pendant-10-brass-ochre.jpg" aria-pressed="false">Ochre</button></li>
+    <li style="--n:6"><button class="coat" type="button" data-coat="Slate Blue" style="--c:var(--db-slate-blue)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/8-lure-pendant-10-brass-slateblue.jpg" aria-pressed="false">Slate Blue</button></li>
+    <li style="--n:7"><button class="coat" type="button" data-coat="Cobalt" style="--c:var(--db-cobalt)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-lure-pendant-10-brass-cobalt.jpg" aria-pressed="true">Cobalt</button></li>
+    <li style="--n:8"><button class="coat" type="button" data-coat="Lagoon" style="--c:var(--db-lagoon)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/6-lure-pendant-10-brass-lagoon.jpg" aria-pressed="false">Lagoon</button></li>
+    <li style="--n:9"><button class="coat" type="button" data-coat="Python Green" style="--c:var(--db-python-green)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-lure-pendant-10-brass-pythongreen.jpg" aria-pressed="false">Python Green</button></li>
+    <li style="--n:10"><button class="coat" type="button" data-coat="Spa" style="--c:var(--db-spa)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-lure-pendant-10-brass-spa.jpg" aria-pressed="false">Spa</button></li>
+    <li style="--n:11"><button class="coat" type="button" data-coat="Bone" style="--c:var(--db-bone)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/3-lure-pendant-10-brass-bone.jpg" aria-pressed="false">Bone</button></li>
+    <li style="--n:12"><button class="coat" type="button" data-coat="Chalk" style="--c:var(--db-chalk)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/2-lure-pendant-10-brass-chalk.jpg" aria-pressed="false">Chalk</button></li>
+    <li style="--n:13"><button class="coat" type="button" data-coat="White" style="--c:var(--db-white)" data-src="https://cdn.shopify.com/s/files/1/0229/6239/files/1-lure-pendant-10-brass-white.jpg" aria-pressed="false">White</button></li>
+  </ul>
+
+  <div class="hero__copy">
+    <p class="hero__kicker" style="--i:0">The Lure pendant, this time in</p>
+    <h1 class="hero__name" id="hero-heading" style="--i:1"><span id="coat-name">Cobalt</span>.</h1>
+    <p class="hero__lead lead" style="--i:2">One fixture, fourteen powder coats, made to order in Minneapolis. Pick the color and we build it.</p>
+    <div class="hero__actions" style="--i:3">
+      <a class="btn btn-accent" id="hero-cta" href="https://duttonbrown.com/products/color-lure-globe-pendant-10?Color=Cobalt"><span id="cta-label">Shop in Cobalt</span></a>
+      <a class="link" href="/pages/colors">See all fourteen</a>
+    </div>
+  </div>
+
+  <div class="hero__vit">
+  <div class="vitrine" id="vitrine">
+    <img id="vit-a" class="is-on" src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-lure-pendant-10-brass-cobalt.jpg?width=1600" alt="Lure Pendant 10 inch in Cobalt with brass hardware and an opal glass globe" width="1600" height="1600" fetchpriority="high" decoding="async">
+    <img id="vit-b" src="" alt="" width="1600" height="1600" aria-hidden="true" decoding="async">
+  </div>
+  <div class="vitrine__caption"><span>Lure Pendant, 10 inch</span><span>Brass, hand-blown opal glass</span></div>
+  </div>
+</section>
+
+<!-- FAMILIES: four lit boxes -->
+<section class="band families" aria-labelledby="families-heading">
+  <div class="wrap">
+    <div class="families__head">
+      <h2 id="families-heading">Four families,<br>one color chart.</h2>
+      <p class="lead">Every fixture we make comes in all fourteen coats, so the pendant in the hall and the sconce in the bath can match. Or not. Your call.</p>
+    </div>
+    <div class="families__grid">
+      <a class="panel" href="/collections/pendants">
+        <div class="panel__box">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-cap-globe-pendant-8-brass-pinkaboo.jpg?width=800" alt="Cap Pendant 8 inch in Pinkaboo" width="800" height="800" loading="lazy" decoding="async">
+          <img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-cap-globe-pendant-8-brass-cobalt.jpg?width=800" alt="" width="800" height="800" loading="lazy" decoding="async">
+        </div>
+        <p class="panel__name">Pendants</p>
+        <p class="panel__meta"><span class="base">Cap Pendant 8 inch, shown in Pinkaboo</span><span class="alt">Cap Pendant 8 inch, shown in Cobalt</span></p>
+      </a>
+      <a class="panel" href="/collections/sconces">
+        <div class="panel__box">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/5-pilot-sconce-23-brass-pythongreen.jpg?width=800" alt="Pilot Sconce 23 inch in Python Green" width="800" height="800" loading="lazy" decoding="async">
+          <img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-pilot-sconce-23-brass-orange.jpg?width=800" alt="" width="800" height="800" loading="lazy" decoding="async">
+        </div>
+        <p class="panel__name">Sconces</p>
+        <p class="panel__meta"><span class="base">Pilot Sconce 23 inch, shown in Python Green</span><span class="alt">Pilot Sconce 23 inch, shown in Orange</span></p>
+      </a>
+      <a class="panel" href="/collections/chandeliers">
+        <div class="panel__box">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/10-big-prisma-chandelier-brass-ridinghoodred-1.jpg?width=800" alt="Big Prisma Chandelier 42 inch in Riding Hood Red" width="800" height="800" loading="lazy" decoding="async">
+          <img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/8-big-prisma-chandelier-brass-ochre-1.jpg?width=800" alt="" width="800" height="800" loading="lazy" decoding="async">
+        </div>
+        <p class="panel__name">Chandeliers</p>
+        <p class="panel__meta"><span class="base">Big Prisma 42 inch, shown in Riding Hood Red</span><span class="alt">Big Prisma 42 inch, shown in Ochre</span></p>
+      </a>
+      <a class="panel" href="/collections/flush-mounts">
+        <div class="panel__box">
+          <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/7-supreme-flush-mount-brass-cobalt.jpg?width=800" alt="Supreme Flush Mount in Cobalt" width="800" height="800" loading="lazy" decoding="async">
+          <img class="alt" src="https://cdn.shopify.com/s/files/1/0229/6239/files/4-supreme-flush-mount-brass-spa.jpg?width=800" alt="" width="800" height="800" loading="lazy" decoding="async">
+        </div>
+        <p class="panel__name">Flush mounts</p>
+        <p class="panel__meta"><span class="base">Supreme Flush Mount, shown in Cobalt</span><span class="alt">Supreme Flush Mount, shown in Spa</span></p>
+      </a>
+    </div>
+    <p class="families__note lead">Cabinet pulls and knobs come in the same fourteen coats, so the drawer can match the pendant. <a class="link" href="/collections/hardware">See hardware</a></p>
+  </div>
+</section>
+
+<!-- SPOTLIGHT: a dark room, a cursor-sized pool of light -->
+<section class="band spot" aria-labelledby="spot-heading">
+  <div class="wrap">
+    <div class="spot__head">
+      <h2 id="spot-heading">Lights off. Now find ours.</h2>
+      <div class="spot__side">
+        <p class="lead">A bathroom hung with Twink pendants and fitted with Caliber pulls, both in Orange. Move your cursor to look around. The bright parts are ours.</p>
+        <button class="btn btn-ghost" type="button" id="scene-toggle" aria-pressed="false">Light it up</button>
+      </div>
+    </div>
+    <div class="scene" id="scene">
+      <img src="https://cdn.shopify.com/s/files/1/0229/6239/products/twink-pendants-caliber-pulls-bathroom-scene-dutton-brown-1_4e84cc21-c908-467c-b26e-9b1c9df69f10.jpg?width=2000" alt="A bathroom with a double vanity in navy, three Twink pendants in Orange hanging over two round mirrors, and Caliber pulls in Orange on every drawer" width="2000" height="1333" loading="lazy" decoding="async">
+      <div class="scene__lit" style="background-image:url('https://cdn.shopify.com/s/files/1/0229/6239/products/twink-pendants-caliber-pulls-bathroom-scene-dutton-brown-1_4e84cc21-c908-467c-b26e-9b1c9df69f10.jpg?width=2000')" aria-hidden="true"></div>
+    </div>
+    <div class="spot__credit small">
+      <span>Twink pendants and Caliber pulls, Orange on brass.</span>
+      <a class="link" href="/products/color-twink-pendant">Shop the Twink</a>
+    </div>
+  </div>
+</section>
+
+<!-- CRAFT: text only, on purpose -->
+<section class="band craft" aria-labelledby="craft-heading">
+  <div class="wrap craft__grid">
+    <div>
+      <h2 id="craft-heading">Built in Minneapolis, one order at a time.</h2>
+      <p class="craft__lead lead">Nothing sits on a shelf waiting for you. When you order, a fixture gets made: brass cut, glass fitted, coat applied, then boxed by the people who built it.</p>
+    </div>
+    <ul class="facts">
+      <li><span class="facts__k">Fourteen coats</span><span class="facts__v">From Chalk to Riding Hood Red, the same chart on every fixture and every pull. Request a sample of any coat before you commit.</span></li>
+      <li><span class="facts__k">Materials</span><span class="facts__v">Solid brass, hand-blown opal glass, high-gauge steel and aluminum. CNC-machined where it counts.</span></li>
+      <li><span class="facts__k">Lead times</span><span class="facts__v">Posted on every product page. Made to order means made for you, not pulled from a warehouse.</span></li>
+      <li><span class="facts__k">Designed to be customized</span><span class="facts__v">Sizes, cord lengths, canopies and coats mix freely. If the combination is not on the page, ask.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- TRADE -->
+<section class="band trade" aria-labelledby="trade-heading">
+  <div class="wrap trade__grid">
+    <div>
+      <h2 id="trade-heading">To the trade.</h2>
+      <p class="lead" style="margin-top:20px">Designers and architects get trade pricing, CAD and spec files, samples of every coat, and a person to call when the install date moves.</p>
+      <div class="trade__actions">
+        <a class="btn btn-light" href="/pages/trade">Apply for trade</a>
+        <a class="link" href="/pages/spec-sheets">Download spec sheets</a>
+      </div>
+    </div>
+    <figure class="trade__figure">
+      <div class="frame">
+        <img src="https://cdn.shopify.com/s/files/1/0229/6239/files/scene-urchin_cadbury_persona-blue-kitchen-dining-room-dutton-brown-1.jpg?width=1600" alt="A kitchen and dining room with a Beaded Urchin chandelier over the table and Persona sconces above the shelf, all in Cobalt" width="1600" height="1067" loading="lazy" decoding="async">
+      </div>
+      <figcaption class="small">Beaded Urchin, Cadbury and Persona, all in Cobalt, sharing one kitchen.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="band closing" aria-labelledby="closing-heading">
+  <div class="wrap">
+    <h2 id="closing-heading">Lighting that's never boring.</h2>
+    <p class="lead">Start with the color. The fixture will follow.</p>
+    <a class="btn btn-accent" href="#hero" id="closing-cta">Pick a color</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="../tight/wordmark/db-wordmark-white-rect-tight.svg" alt="Dutton Brown" width="150" height="74">
+        <p>Made-to-order, color-forward lighting and hardware. Handcrafted in Minneapolis, shipped everywhere.</p>
+      </div>
+      <div>
+        <h3>Lighting</h3>
+        <ul>
+          <li><a href="/collections/pendants">Pendants</a></li>
+          <li><a href="/collections/sconces">Sconces</a></li>
+          <li><a href="/collections/chandeliers">Chandeliers</a></li>
+          <li><a href="/collections/flush-mounts">Flush mounts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Hardware</h3>
+        <ul>
+          <li><a href="/collections/pulls">Pulls</a></li>
+          <li><a href="/collections/knobs">Knobs</a></li>
+          <li><a href="/collections/hardware">All hardware</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Colors</h3>
+        <ul>
+          <li><a href="/pages/colors">All fourteen coats</a></li>
+          <li><a href="/products/color-sample">Request a sample</a></li>
+          <li><a href="/pages/color-guide">Pairing guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/pages/about">About</a></li>
+          <li><a href="/pages/trade">Trade</a></li>
+          <li><a href="/blogs/journal">Journal</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__news">
+        <p>New colors and new fixtures, a few times a year. No noise.</p>
+        <form class="footer__form" action="/contact#newsletter" method="post">
+          <label class="sr-only" for="news-email">Email address</label>
+          <input id="news-email" type="email" name="contact[email]" placeholder="you@studio.com" autocomplete="email" required>
+          <button class="btn btn-light" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>Dutton Brown, Minneapolis, Minnesota. 2026.</span>
+      <ul>
+        <li><a href="https://www.instagram.com/duttonbrown">Instagram</a></li>
+        <li><a href="https://www.pinterest.com/duttonbrown">Pinterest</a></li>
+        <li><a href="/policies/privacy-policy">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Header: solid once the hero starts to leave */
+  var header = document.getElementById('header');
+  function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Mobile menu */
+  var overlay = document.getElementById('nav-overlay');
+  var openBtn = document.getElementById('menu-open');
+  var closeBtn = document.getElementById('menu-close');
+  function setMenu(open) {
+    overlay.classList.toggle('is-open', open);
+    openBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    (open ? closeBtn : openBtn).focus();
+  }
+  openBtn.addEventListener('click', function () { setMenu(true); });
+  closeBtn.addEventListener('click', function () { setMenu(false); });
+  overlay.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  /* Hero: the color picker. Real per-coat photo, crossfaded. */
+  var rail = document.getElementById('rail');
+  var coats = Array.prototype.slice.call(rail.querySelectorAll('.coat'));
+  var imgA = document.getElementById('vit-a');
+  var imgB = document.getElementById('vit-b');
+  var nameEl = document.getElementById('coat-name');
+  var heading = document.getElementById('hero-heading');
+  var cta = document.getElementById('hero-cta');
+  var ctaLabel = document.getElementById('cta-label');
+  var product = 'https://duttonbrown.com/products/color-lure-globe-pendant-10';
+  var current = coats.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0];
+  var visible = imgA, hidden = imgB, token = 0;
+
+  function sized(src) { return src + '?width=1600'; }
+
+  function select(btn) {
+    if (btn === current) return;
+    var coat = btn.dataset.coat;
+    var my = ++token;
+    current.setAttribute('aria-pressed', 'false');
+    btn.setAttribute('aria-pressed', 'true');
+    current = btn;
+
+    heading.classList.add('is-switching');
+    window.setTimeout(function () {
+      if (my !== token) return;
+      nameEl.textContent = coat;
+      ctaLabel.textContent = 'Shop in ' + coat;
+      cta.href = product + '?Color=' + encodeURIComponent(coat);
+      heading.classList.remove('is-switching');
+    }, reduce ? 0 : 160);
+
+    var next = hidden;
+    var swap = function () {
+      if (my !== token) return;
+      next.alt = 'Lure Pendant 10 inch in ' + coat + ' with brass hardware and an opal glass globe';
+      next.removeAttribute('aria-hidden');
+      next.classList.add('is-on');
+      visible.classList.remove('is-on');
+      visible.setAttribute('aria-hidden', 'true');
+      hidden = visible; visible = next;
+    };
+    next.onload = swap;
+    next.src = sized(btn.dataset.src);
+    if (next.complete && next.naturalWidth) swap();
+  }
+
+  rail.addEventListener('click', function (e) {
+    var btn = e.target.closest('.coat');
+    if (btn) select(btn);
+  });
+  rail.addEventListener('keydown', function (e) {
+    var i = coats.indexOf(document.activeElement);
+    if (i < 0) return;
+    var d = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    var n = coats[(i + d + coats.length) % coats.length];
+    n.focus(); select(n);
+  });
+
+  /* A coat named in the URL hash (#coat=Riding%20Hood%20Red) opens preselected */
+  var m = /coat=([^&]+)/.exec(window.location.hash);
+  if (m) {
+    var want = decodeURIComponent(m[1]).toLowerCase();
+    var pre = coats.filter(function (b) { return b.dataset.coat.toLowerCase() === want; })[0];
+    if (pre) select(pre);
+  }
+
+  /* On a scrolling rail, start with the chosen coat in view */
+  function centerRail() {
+    if (rail.scrollWidth <= rail.clientWidth + 2) return;
+    var li = current.parentNode;
+    rail.scrollLeft = li.offsetLeft - (rail.clientWidth - li.offsetWidth) / 2;
+  }
+  centerRail();
+  window.addEventListener('resize', centerRail);
+
+  /* Warm the other thirteen photos once the page is idle */
+  function warm() {
+    coats.forEach(function (b) { if (b !== current) { var im = new Image(); im.src = sized(b.dataset.src); } });
+  }
+  if ('requestIdleCallback' in window) window.requestIdleCallback(warm, { timeout: 2500 });
+  else window.setTimeout(warm, 1200);
+
+  /* Closing CTA: back to the picker, focus on the current coat */
+  document.getElementById('closing-cta').addEventListener('click', function () {
+    window.setTimeout(function () { current.focus({ preventScroll: true }); }, reduce ? 0 : 500);
+  });
+
+  /* Spotlight: a pool of light that follows the pointer */
+  var scene = document.getElementById('scene');
+  var toggle = document.getElementById('scene-toggle');
+  var raf = null, px = 0, py = 0;
+  scene.addEventListener('pointermove', function (e) {
+    var r = scene.getBoundingClientRect();
+    px = e.clientX - r.left; py = e.clientY - r.top;
+    if (raf) return;
+    raf = window.requestAnimationFrame(function () {
+      scene.style.setProperty('--mx', px + 'px');
+      scene.style.setProperty('--my', py + 'px');
+      raf = null;
+    });
+  });
+  toggle.addEventListener('click', function () {
+    var lit = !scene.classList.contains('is-lit');
+    scene.classList.toggle('is-lit', lit);
+    toggle.setAttribute('aria-pressed', String(lit));
+    toggle.textContent = lit ? 'Lights off' : 'Light it up';
+  });
+})();
+</script>
+</body>
+</html>
