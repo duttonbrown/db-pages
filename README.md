@@ -29,7 +29,7 @@ production/     index, KPI map, print-queue board + rules page, parts-family.jso
   production-dashboard/  dashboard page + dashboard.json
 marketing/      index, marketing KPI map, trust coefficients, website design directions
   trade-program/    three trade-program concepts
-  monthly-marketing-meetings/  May and August 2026 meetings + assets
+  monthly-marketing-meetings/  redirect stubs to the hub; the decks (revenue detail) left public 2026-09-28
   omnisend/         email dashboard; its data.json stopped updating 2026-04 (no live writer)
   hb/               example page and setup notes for Hannah
 brand-site/     published copy of db-marketing/branding-site/: brand site concept pages,
