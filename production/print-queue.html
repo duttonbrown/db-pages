@@ -953,8 +953,12 @@
   .tag-redo    { background: #EDE9FE; color: #6D28D9; }
   .tag-printed { background: #E8F5E9; color: var(--success); }
   /* Resync alerts — loud, solid fills so a stale/voided traveler can't be
-     missed on a dense board. VOID = discard the paperwork; CHANGED = reprint. */
-  .tag-void    { background: var(--error); color: #fff; }
+     missed on a dense board. VOID = discard the paperwork; CHANGED = reprint.
+     VOID is the cancelled yellow with ink text, as on the jobs board and the
+     wash sheet (2026-09-29): red means EXPEDITE and nothing else. */
+  .tag-void    { background: var(--cancel, #E8FF00); color: #1E1C1A;
+    box-shadow: inset 0 0 0 1px #C9DD00;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .tag-changed { background: var(--accent-dark); color: #fff; }
   /* Finished-goods stock chips — the line's exact SKU is on the shelf.
      Dashed amber = undecided (check stock), green = pull decided, gray = build. */
@@ -1386,8 +1390,9 @@
   /* Discreet "order changed / cancelled" pill — rides in the top .trv-tags row
      to the right of the location + color bubbles, NOT a full-width banner. Small
      and outline-only so it reads as a status flag, not an alarm bar. CHANGED =
-     amber outline; VOID = red, the louder of the two (a cancelled order's sheet
-     must be discarded). Prints. */
+     amber outline; VOID = the cancelled yellow fill with ink text, the louder
+     of the two (a cancelled order's sheet must be discarded) — never red, which
+     means EXPEDITE (2026-09-29). Prints. */
   .trv-change-pill {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
@@ -1401,7 +1406,7 @@
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   .trv-change-pill .trv-change-when { font-weight: 500; text-transform: none; letter-spacing: 0; color: #555; }
-  .trv-change-pill.is-void { border-color: #D40000; color: #D40000; }
+  .trv-change-pill.is-void { background: var(--cancel, #E8FF00); border-color: #C9DD00; color: #1E1C1A; }
   /* REVISION CHIP. On EVERY traveler, changed or not (rev1 included): the
      question it answers is "is the sheet in my hand the current one", and a
      chip that only appears on reprints cannot answer it for the copy that has
@@ -2224,7 +2229,7 @@
 
 <script>
 const QUEUE = {
-  "built_at": "2026-09-29T20:36:10",
+  "built_at": "2026-09-29T21:06:52",
   "orders": [
     {
       "shopify_order_id": "7201737539666",
@@ -2547,8 +2552,8 @@ const QUEUE = {
           "category": "accessory",
           "category_label": "Ship / Review",
           "parent_skus": [
-            "BULB-G16-W",
-            "BULB-G25-W"
+            "BULB-G25-W",
+            "BULB-G16-W"
           ],
           "variant_skus": [
             "BULB-G16-W",
