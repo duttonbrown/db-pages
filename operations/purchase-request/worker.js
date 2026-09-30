@@ -151,7 +151,7 @@ const DB = {
 
 const REQUESTOR_OPTIONS = [
   "Alex", "Catherine", "Chase", "Emma", "Eric", "Hannah",
-  "Janet", "Sarah", "Scott", "Thomas", "Willy", "Zach"
+  "Janet", "Sarah", "Thomas", "Willy", "Zach"
 ];
 
 const corsHeaders = {
