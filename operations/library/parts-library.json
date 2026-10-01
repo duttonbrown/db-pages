@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-30T07:05:58",
+  "generated_at": "2026-10-01T12:01:16",
   "counts": {
-    "parts": 477,
+    "parts": 481,
     "supplies": 163,
-    "families": 284,
+    "families": 285,
     "glossary": 83,
     "locations": 40,
     "parts_with_location": 10,
-    "parts_with_price": 427
+    "parts_with_price": 431
   },
   "glossary": [
     {
@@ -593,6 +593,103 @@
     }
   ],
   "families": {
+    "3ecffa52-4c5b-812d-90bb-fccdc61618bc": {
+      "part_number": "FP1S",
+      "page_id": "3ecffa52-4c5b-812d-90bb-fccdc61618bc",
+      "page_url": "https://app.notion.com/p/FP1S-3ecffa524c5b812d90bbfccdc61618bc",
+      "description": "Finial plug, 1/8IPS, slot facing out. Brass, nickel or raw brass; black from the black batch. Never in a color.",
+      "definition": "A threaded closure used to seal threaded open holes in a fixture or serve as a decorative accent.",
+      "materials": [],
+      "raw_or_prefinished": "Both",
+      "in_house_processes": [
+        "Powder Coat",
+        "Black Batch"
+      ],
+      "vendor": [
+        "Sailei - Zhongshan Tuer Precision Manufacturing Co., Ltd."
+      ],
+      "glossary": {
+        "id": "2ccffa52-4c5b-8124-aee7-cf94ede2b904",
+        "name": "Finial Plug",
+        "abbr": "FP",
+        "definition": "A threaded closure used to seal threaded open holes in a fixture or serve as a decorative accent.",
+        "image": "glossary-images/glossary-Finial_Plug.jpg"
+      },
+      "products": [
+        {
+          "id": "2aeffa524c5b80d9a9fbeedf4db08a0b",
+          "sku": "90220",
+          "title": "Pearl Sconce Left (Room & Board)",
+          "url": "https://app.notion.com/p/90220-2aeffa524c5b80d9a9fbeedf4db08a0b"
+        },
+        {
+          "id": "2aeffa524c5b8074833ee96515ef7c30",
+          "sku": "90221",
+          "title": "Pearl Sconce Right (Room & Board)",
+          "url": "https://app.notion.com/p/90221-2aeffa524c5b8074833ee96515ef7c30"
+        },
+        {
+          "id": "2aeffa524c5b80cb9f53c73323a16c76",
+          "sku": "H19",
+          "title": "Caliber Hook",
+          "url": "https://app.notion.com/p/H19-2aeffa524c5b80cb9f53c73323a16c76"
+        },
+        {
+          "id": "2c9ffa524c5b80f18685ecf6e4a09b44",
+          "sku": "H19 (C)",
+          "title": "Color Caliber Hook",
+          "url": "https://app.notion.com/p/H19-C-2c9ffa524c5b80f18685ecf6e4a09b44"
+        },
+        {
+          "id": "2aeffa524c5b8095b350d532364959e6",
+          "sku": "H32",
+          "title": "Caliber Pull",
+          "url": "https://app.notion.com/p/H32-2aeffa524c5b8095b350d532364959e6"
+        },
+        {
+          "id": "2c9ffa524c5b8084a79ed592903842c3",
+          "sku": "H32 (C)",
+          "title": "Color Caliber Pull",
+          "url": "https://app.notion.com/p/H32-C-2c9ffa524c5b8084a79ed592903842c3"
+        },
+        {
+          "id": "2aeffa524c5b80168e88c502152ec213",
+          "sku": "H32-12",
+          "title": "Caliber 12\" Pull",
+          "url": "https://app.notion.com/p/H32-12-2aeffa524c5b80168e88c502152ec213"
+        },
+        {
+          "id": "2c9ffa524c5b8016b49bd0d3c401cc26",
+          "sku": "H32-12 (C)",
+          "title": "Color Caliber 12\" Pull",
+          "url": "https://app.notion.com/p/H32-12-C-2c9ffa524c5b8016b49bd0d3c401cc26"
+        },
+        {
+          "id": "2ecffa524c5b80539406fe866d31f9b9",
+          "sku": "H32-4",
+          "title": "Caliber 4\" Pull",
+          "url": "https://app.notion.com/p/H32-4-2ecffa524c5b80539406fe866d31f9b9"
+        },
+        {
+          "id": "2ecffa524c5b80b089a8d53160e3ab8c",
+          "sku": "H32-4 (C)",
+          "title": "Color Caliber 4\" Pull",
+          "url": "https://app.notion.com/p/H32-4-C-2ecffa524c5b80b089a8d53160e3ab8c"
+        },
+        {
+          "id": "2aeffa524c5b808991cdeac2e07edc00",
+          "sku": "H32-6",
+          "title": "Caliber 6\" Pull",
+          "url": "https://app.notion.com/p/H32-6-2aeffa524c5b808991cdeac2e07edc00"
+        },
+        {
+          "id": "2c9ffa524c5b80978db6df179f6f8fbd",
+          "sku": "H32-6 (C)",
+          "title": "Color Caliber 6\" Pull",
+          "url": "https://app.notion.com/p/H32-6-C-2c9ffa524c5b80978db6df179f6f8fbd"
+        }
+      ]
+    },
     "392ffa52-4c5b-80f7-8288-fecf64c7e7df": {
       "part_number": "SC1",
       "page_id": "392ffa52-4c5b-80f7-8288-fecf64c7e7df",
@@ -56884,30 +56981,6 @@
       },
       "products": [
         {
-          "id": "2aeffa524c5b80d9a9fbeedf4db08a0b",
-          "sku": "90220",
-          "title": "Pearl Sconce Left (Room & Board)",
-          "url": "https://app.notion.com/p/90220-2aeffa524c5b80d9a9fbeedf4db08a0b"
-        },
-        {
-          "id": "2aeffa524c5b8074833ee96515ef7c30",
-          "sku": "90221",
-          "title": "Pearl Sconce Right (Room & Board)",
-          "url": "https://app.notion.com/p/90221-2aeffa524c5b8074833ee96515ef7c30"
-        },
-        {
-          "id": "2aeffa524c5b80cb9f53c73323a16c76",
-          "sku": "H19",
-          "title": "Caliber Hook",
-          "url": "https://app.notion.com/p/H19-2aeffa524c5b80cb9f53c73323a16c76"
-        },
-        {
-          "id": "2c9ffa524c5b80f18685ecf6e4a09b44",
-          "sku": "H19 (C)",
-          "title": "Color Caliber Hook",
-          "url": "https://app.notion.com/p/H19-C-2c9ffa524c5b80f18685ecf6e4a09b44"
-        },
-        {
           "id": "2aeffa524c5b80e4ba32e0bac10bed81",
           "sku": "H1A",
           "title": "Head Hook",
@@ -56930,54 +57003,6 @@
           "sku": "H27 (C)",
           "title": "Color Head Knob",
           "url": "https://app.notion.com/p/H27-C-2c9ffa524c5b803f8a09db9336b54576"
-        },
-        {
-          "id": "2aeffa524c5b8095b350d532364959e6",
-          "sku": "H32",
-          "title": "Caliber Pull",
-          "url": "https://app.notion.com/p/H32-2aeffa524c5b8095b350d532364959e6"
-        },
-        {
-          "id": "2c9ffa524c5b8084a79ed592903842c3",
-          "sku": "H32 (C)",
-          "title": "Color Caliber Pull",
-          "url": "https://app.notion.com/p/H32-C-2c9ffa524c5b8084a79ed592903842c3"
-        },
-        {
-          "id": "2aeffa524c5b80168e88c502152ec213",
-          "sku": "H32-12",
-          "title": "Caliber 12\" Pull",
-          "url": "https://app.notion.com/p/H32-12-2aeffa524c5b80168e88c502152ec213"
-        },
-        {
-          "id": "2c9ffa524c5b8016b49bd0d3c401cc26",
-          "sku": "H32-12 (C)",
-          "title": "Color Caliber 12\" Pull",
-          "url": "https://app.notion.com/p/H32-12-C-2c9ffa524c5b8016b49bd0d3c401cc26"
-        },
-        {
-          "id": "2ecffa524c5b80539406fe866d31f9b9",
-          "sku": "H32-4",
-          "title": "Caliber 4\" Pull",
-          "url": "https://app.notion.com/p/H32-4-2ecffa524c5b80539406fe866d31f9b9"
-        },
-        {
-          "id": "2ecffa524c5b80b089a8d53160e3ab8c",
-          "sku": "H32-4 (C)",
-          "title": "Color Caliber 4\" Pull",
-          "url": "https://app.notion.com/p/H32-4-C-2ecffa524c5b80b089a8d53160e3ab8c"
-        },
-        {
-          "id": "2aeffa524c5b808991cdeac2e07edc00",
-          "sku": "H32-6",
-          "title": "Caliber 6\" Pull",
-          "url": "https://app.notion.com/p/H32-6-2aeffa524c5b808991cdeac2e07edc00"
-        },
-        {
-          "id": "2c9ffa524c5b80978db6df179f6f8fbd",
-          "sku": "H32-6 (C)",
-          "title": "Color Caliber 6\" Pull",
-          "url": "https://app.notion.com/p/H32-6-C-2c9ffa524c5b80978db6df179f6f8fbd"
         },
         {
           "id": "2aeffa524c5b80658130f1c1ba3e699a",
@@ -64664,7 +64689,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-8174-a244-cf35ea99feb7",
-      "last_edited_at": "2026-08-14T00:47:00.000Z"
+      "last_edited_at": "2026-10-01T02:21:00.000Z"
     },
     {
       "part_number": "DO6-M1",
@@ -64726,7 +64751,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-8127-9986-d4584ba0eae8",
-      "last_edited_at": "2026-08-27T18:55:00.000Z"
+      "last_edited_at": "2026-10-01T02:21:00.000Z"
     },
     {
       "part_number": "DO8-M1",
@@ -64819,7 +64844,7 @@
         }
       ],
       "family_id": "391ffa52-4c5b-80a5-8039-cbb83ea0edee",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-10-01T02:21:00.000Z"
     },
     {
       "part_number": "FC1BL",
@@ -65160,6 +65185,92 @@
       "locations": [],
       "family_id": "2ceffa52-4c5b-8115-8444-ed71c3cd0eab",
       "last_edited_at": "2026-08-14T00:47:00.000Z"
+    },
+    {
+      "part_number": "FP1SBL",
+      "page_id": "3ecffa52-4c5b-818a-a550-c9bb5fcc63a1",
+      "page_url": "https://app.notion.com/p/FP1SBL-3ecffa524c5b818aa550c9bb5fcc63a1",
+      "image": null,
+      "finish": "Black",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "FP1SRB",
+      "in_house_processes": [
+        "Powder Coat",
+        "Black Batch"
+      ],
+      "locations": [],
+      "family_id": "3ecffa52-4c5b-812d-90bb-fccdc61618bc",
+      "last_edited_at": "2026-10-01T02:15:00.000Z"
+    },
+    {
+      "part_number": "FP1SBR",
+      "page_id": "3ecffa52-4c5b-815f-a3ca-e1d34820a874",
+      "page_url": "https://app.notion.com/p/FP1SBR-3ecffa524c5b815fa3cae1d34820a874",
+      "image": null,
+      "finish": "Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": null,
+      "in_house_processes": [],
+      "locations": [],
+      "family_id": "3ecffa52-4c5b-812d-90bb-fccdc61618bc",
+      "last_edited_at": "2026-10-01T03:34:00.000Z"
+    },
+    {
+      "part_number": "FP1SNI",
+      "page_id": "3ecffa52-4c5b-812f-828f-ebdc52f46ac4",
+      "page_url": "https://app.notion.com/p/FP1SNI-3ecffa524c5b812f828febdc52f46ac4",
+      "image": null,
+      "finish": "Nickel",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": null,
+      "in_house_processes": [],
+      "locations": [],
+      "family_id": "3ecffa52-4c5b-812d-90bb-fccdc61618bc",
+      "last_edited_at": "2026-10-01T03:34:00.000Z"
+    },
+    {
+      "part_number": "FP1SRB",
+      "page_id": "3ecffa52-4c5b-811c-908c-da95421a0313",
+      "page_url": "https://app.notion.com/p/FP1SRB-3ecffa524c5b811c908cda95421a0313",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "10 weeks",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "FP1SBL",
+      "in_house_processes": [
+        "Powder Coat",
+        "Black Batch"
+      ],
+      "locations": [],
+      "family_id": "3ecffa52-4c5b-812d-90bb-fccdc61618bc",
+      "last_edited_at": "2026-10-01T03:34:00.000Z"
     },
     {
       "part_number": "FP2BL",
@@ -76774,6 +76885,12 @@
     }
   },
   "siblings": {
+    "3ecffa52-4c5b-812d-90bb-fccdc61618bc": [
+      "FP1SBR",
+      "FP1SNI",
+      "FP1SBL",
+      "FP1SRB"
+    ],
     "c588178d-6b0f-4116-a126-54fca84f0953": [
       "NI4"
     ],
