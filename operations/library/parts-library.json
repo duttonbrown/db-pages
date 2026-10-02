@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T07:05:55",
+  "generated_at": "2026-10-02T10:33:39",
   "counts": {
     "parts": 481,
     "supplies": 163,
@@ -62883,11 +62883,13 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": 1,
-      "raw_input": null,
-      "in_house_processes": [],
+      "raw_input": "BO3RB",
+      "in_house_processes": [
+        "Polish & Lacquer"
+      ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81b9-b283-d86de688fb19",
-      "last_edited_at": "2026-08-20T21:26:00.000Z"
+      "last_edited_at": "2026-10-02T15:28:00.000Z"
     },
     {
       "part_number": "BO3NI",
@@ -62923,7 +62925,7 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": 1,
-      "raw_input": null,
+      "raw_input": "BO3BR",
       "in_house_processes": [
         "Black Batch"
       ],
@@ -64177,14 +64179,14 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": null,
-      "raw_input": null,
+      "raw_input": "CRS5RB",
       "in_house_processes": [
         "Machine",
         "Polish & Lacquer"
       ],
       "locations": [],
       "family_id": "2dfffa52-4c5b-80e3-881c-e059b696716f",
-      "last_edited_at": "2026-08-14T00:44:00.000Z"
+      "last_edited_at": "2026-10-02T15:28:00.000Z"
     },
     {
       "part_number": "CRS5NI",
@@ -64222,7 +64224,7 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": null,
-      "raw_input": null,
+      "raw_input": "CRS5BR",
       "in_house_processes": [
         "Machine",
         "Polish & Lacquer"
@@ -66123,11 +66125,13 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": null,
-      "raw_input": null,
-      "in_house_processes": [],
+      "raw_input": "HS2RB",
+      "in_house_processes": [
+        "Polish & Lacquer"
+      ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81f4-b49f-f8c1500184a5",
-      "last_edited_at": "2026-08-14T00:46:00.000Z"
+      "last_edited_at": "2026-10-02T15:28:00.000Z"
     },
     {
       "part_number": "HS2NI",
@@ -66163,7 +66167,7 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": null,
-      "raw_input": null,
+      "raw_input": "HS2BR",
       "in_house_processes": [
         "Polish & Lacquer",
         "Black Batch"
@@ -66529,13 +66533,13 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": 17,
-      "raw_input": null,
+      "raw_input": "LC4RB",
       "in_house_processes": [
         "Polish & Lacquer"
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-815f-ab2c-f0e2526c82ec",
-      "last_edited_at": "2026-08-20T21:25:00.000Z"
+      "last_edited_at": "2026-10-02T15:29:00.000Z"
     },
     {
       "part_number": "LC4NI",
@@ -66571,7 +66575,7 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": 9,
-      "raw_input": null,
+      "raw_input": "LC4BR",
       "in_house_processes": [
         "Polish & Lacquer",
         "Black Batch"
@@ -69687,11 +69691,13 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": 1,
-      "raw_input": null,
-      "in_house_processes": [],
+      "raw_input": "PMB5BR",
+      "in_house_processes": [
+        "Polish & Lacquer"
+      ],
       "locations": [],
       "family_id": "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47",
-      "last_edited_at": "2026-08-14T00:45:00.000Z"
+      "last_edited_at": "2026-10-02T15:29:00.000Z"
     },
     {
       "part_number": "PMB5NI",
