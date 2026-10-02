@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-02T11:10:47",
+  "generated_at": "2026-10-02T14:47:23",
   "counts": {
-    "parts": 481,
+    "parts": 484,
     "supplies": 163,
     "families": 285,
     "glossary": 83,
@@ -20078,7 +20078,7 @@
       "part_number": "SCA8",
       "page_id": "2ceffa52-4c5b-8163-b149-f466b0057574",
       "page_url": "https://app.notion.com/p/SCA8-2ceffa524c5b8163b149f466b0057574",
-      "description": "Anchor screw, #6, use with AN8",
+      "description": "Anchor screw, #8, use with AN8",
       "definition": "A threaded fastener used to join or secure parts of a fixture. Can be flathead, Phillips, hexagonal, among others. Included often in kits.",
       "materials": [],
       "raw_or_prefinished": null,
@@ -64144,28 +64144,6 @@
       "last_edited_at": "2026-08-14T00:47:00.000Z"
     },
     {
-      "part_number": "CRS5-M1",
-      "page_id": "391ffa52-4c5b-8190-9125-ce570d86edbf",
-      "page_url": "https://app.notion.com/p/CRS5-M1-391ffa524c5b81909125ce570d86edbf",
-      "image": null,
-      "finish": "Raw Brass",
-      "status": "Active",
-      "use_2024": 0,
-      "use_2025": 0,
-      "last_ordered": null,
-      "lead_time": "",
-      "moq": null,
-      "reorder_qty": null,
-      "reorder_point": null,
-      "raw_input": "CRS5RB",
-      "in_house_processes": [
-        "Polish & Lacquer"
-      ],
-      "locations": [],
-      "family_id": "2ceffa52-4c5b-81bd-a5fd-c157a8f91c1d",
-      "last_edited_at": "2026-08-17T21:52:00.000Z"
-    },
-    {
       "part_number": "CRS5BR",
       "page_id": "358ffa52-4c5b-8050-be2c-f42bffa9db68",
       "page_url": "https://app.notion.com/p/CRS5BR-358ffa524c5b8050be2cf42bffa9db68",
@@ -64189,6 +64167,29 @@
       "last_edited_at": "2026-10-02T15:28:00.000Z"
     },
     {
+      "part_number": "CRS5BR-M1",
+      "page_id": "3edffa52-4c5b-81e2-9798-e01e6f5ae8ef",
+      "page_url": "https://app.notion.com/p/CRS5BR-M1-3edffa524c5b81e29798e01e6f5ae8ef",
+      "image": null,
+      "finish": "Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CRS5RB-M1",
+      "in_house_processes": [
+        "Machine",
+        "Polish & Lacquer"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-81bd-a5fd-c157a8f91c1d",
+      "last_edited_at": "2026-10-02T16:38:00.000Z"
+    },
+    {
       "part_number": "CRS5NI",
       "page_id": "324ffa52-4c5b-81a1-94c5-dd6ba5cc9fbc",
       "page_url": "https://app.notion.com/p/CRS5NI-324ffa524c5b81a194c5dd6ba5cc9fbc",
@@ -64202,13 +64203,35 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": null,
-      "raw_input": null,
+      "raw_input": "CRS5NI-M1",
       "in_house_processes": [
         "Machine"
       ],
       "locations": [],
       "family_id": "2dfffa52-4c5b-80e3-881c-e059b696716f",
       "last_edited_at": "2026-08-14T00:47:00.000Z"
+    },
+    {
+      "part_number": "CRS5NI-M1",
+      "page_id": "391ffa52-4c5b-8190-9125-ce570d86edbf",
+      "page_url": "https://app.notion.com/p/CRS5NI-M1-391ffa524c5b81909125ce570d86edbf",
+      "image": null,
+      "finish": "Nickel",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CRS5NI",
+      "in_house_processes": [
+        "Machine"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-81bd-a5fd-c157a8f91c1d",
+      "last_edited_at": "2026-10-02T16:38:00.000Z"
     },
     {
       "part_number": "CRS5RB",
@@ -64232,6 +64255,29 @@
       "locations": [],
       "family_id": "2dfffa52-4c5b-80e3-881c-e059b696716f",
       "last_edited_at": "2026-08-14T00:47:00.000Z"
+    },
+    {
+      "part_number": "CRS5RB-M1",
+      "page_id": "3edffa52-4c5b-8136-afb0-e3d635347cc8",
+      "page_url": "https://app.notion.com/p/CRS5RB-M1-3edffa524c5b8136afb0e3d635347cc8",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "CRS5RB",
+      "in_house_processes": [
+        "Machine",
+        "Polish & Lacquer"
+      ],
+      "locations": [],
+      "family_id": "2ceffa52-4c5b-81bd-a5fd-c157a8f91c1d",
+      "last_edited_at": "2026-10-02T16:38:00.000Z"
     },
     {
       "part_number": "CRT1BL",
@@ -69691,13 +69737,13 @@
       "moq": null,
       "reorder_qty": null,
       "reorder_point": 1,
-      "raw_input": "PMB5BR",
+      "raw_input": "PMB5RB",
       "in_house_processes": [
         "Polish & Lacquer"
       ],
       "locations": [],
       "family_id": "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47",
-      "last_edited_at": "2026-10-02T15:29:00.000Z"
+      "last_edited_at": "2026-10-02T16:40:00.000Z"
     },
     {
       "part_number": "PMB5NI",
@@ -69718,6 +69764,28 @@
       "locations": [],
       "family_id": "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47",
       "last_edited_at": "2026-08-14T00:45:00.000Z"
+    },
+    {
+      "part_number": "PMB5RB",
+      "page_id": "3edffa52-4c5b-81d5-b17d-f39778435247",
+      "page_url": "https://app.notion.com/p/PMB5RB-3edffa524c5b81d5b17df39778435247",
+      "image": null,
+      "finish": "Raw Brass",
+      "status": "Active",
+      "use_2024": 0,
+      "use_2025": 0,
+      "last_ordered": null,
+      "lead_time": "1 week",
+      "moq": null,
+      "reorder_qty": null,
+      "reorder_point": null,
+      "raw_input": "PMB5BR",
+      "in_house_processes": [
+        "Polish & Lacquer"
+      ],
+      "locations": [],
+      "family_id": "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47",
+      "last_edited_at": "2026-10-02T16:39:00.000Z"
     },
     {
       "part_number": "PT1BL",
@@ -76891,6 +76959,17 @@
     }
   },
   "siblings": {
+    "2ceffa52-4c5b-81bd-a5fd-c157a8f91c1d": [
+      "CRS5BR-M1",
+      "CRS5NI-M1",
+      "CRS5RB-M1"
+    ],
+    "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47": [
+      "PMB5BR",
+      "PMB5NI",
+      "PMB5BL",
+      "PMB5RB"
+    ],
     "3ecffa52-4c5b-812d-90bb-fccdc61618bc": [
       "FP1SBR",
       "FP1SNI",
@@ -76939,9 +77018,6 @@
     ],
     "2ceffa52-4c5b-8141-be96-db45014f0bb7": [
       "DO6-M1"
-    ],
-    "2ceffa52-4c5b-81bd-a5fd-c157a8f91c1d": [
-      "CRS5-M1"
     ],
     "391ffa52-4c5b-80a5-8039-cbb83ea0edee": [
       "DT1"
@@ -77316,11 +77392,6 @@
       "PT1BR",
       "PT1NI",
       "PT1BL"
-    ],
-    "2e5ffa52-4c5b-8013-bb92-d80cdc8ecd47": [
-      "PMB5BR",
-      "PMB5NI",
-      "PMB5BL"
     ],
     "2ceffa52-4c5b-81bc-a216-d9c4e7cba288": [
       "PMB1.5BR",
