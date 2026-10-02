@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T12:01:16",
+  "generated_at": "2026-10-02T07:05:55",
   "counts": {
     "parts": 481,
     "supplies": 163,
@@ -68618,9 +68618,18 @@
       "reorder_point": 210,
       "raw_input": null,
       "in_house_processes": [],
-      "locations": [],
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81a4-9613-f8c16a568f47",
+          "code": "L1",
+          "group": "Lighting Assembly",
+          "description": "Lighting shelf 1",
+          "color": "#B85C00",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
       "family_id": "2ceffa52-4c5b-812c-901d-d801ad7dce2a",
-      "last_edited_at": "2026-08-28T19:17:00.000Z"
+      "last_edited_at": "2026-10-02T03:18:00.000Z"
     },
     {
       "part_number": "PF2NI",
@@ -72373,18 +72382,9 @@
         "Powder Coat",
         "Machine"
       ],
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-8140-95c0-ffd3b7a0e9bb",
-          "code": "R1 (Receiving)",
-          "group": "Receiving",
-          "description": "Table, floor area",
-          "color": "#BE185D",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
+      "locations": [],
       "family_id": "2ceffa52-4c5b-816b-8240-dbd4e2c648f7",
-      "last_edited_at": "2026-08-17T20:36:00.000Z"
+      "last_edited_at": "2026-10-02T03:20:00.000Z"
     },
     {
       "part_number": "FC3BL",
@@ -76082,7 +76082,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-09T21:37:00.000Z"
+      "last_edited_at": "2026-10-01T21:05:00.000Z"
     },
     {
       "sku": "Various suppliers",
