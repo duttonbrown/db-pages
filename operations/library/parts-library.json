@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-06T07:07:53",
+  "generated_at": "2026-10-06T12:01:20",
   "counts": {
     "parts": 484,
     "supplies": 163,
-    "families": 285,
+    "families": 286,
     "glossary": 83,
     "locations": 43,
     "parts_with_location": 192,
@@ -593,6 +593,25 @@
     }
   ],
   "families": {
+    "3f1ffa52-4c5b-81fe-9e07-fdb0ae9852b8": {
+      "part_number": "LC1AL",
+      "page_id": "3f1ffa52-4c5b-81fe-9e07-fdb0ae9852b8",
+      "page_url": "https://app.notion.com/p/LC1AL-3f1ffa524c5b81fe9e07fdb0ae9852b8",
+      "description": "",
+      "definition": "A decorative cylindrical or conical cover that slides over a socket and attaches on a fixture on one side and is open on the other side where a bulb or lamp is inserted.",
+      "materials": [],
+      "raw_or_prefinished": null,
+      "in_house_processes": [],
+      "vendor": [],
+      "glossary": {
+        "id": "2ccffa52-4c5b-8102-bf5f-dc2f37c8d2fb",
+        "name": "Lamp Cup",
+        "abbr": "LC",
+        "definition": "A decorative cylindrical or conical cover that slides over a socket and attaches on a fixture on one side and is open on the other side where a bulb or lamp is inserted.",
+        "image": "glossary-images/glossary-Lamp_Cup.jpg"
+      },
+      "products": []
+    },
     "3ecffa52-4c5b-812d-90bb-fccdc61618bc": {
       "part_number": "FP1S",
       "page_id": "3ecffa52-4c5b-812d-90bb-fccdc61618bc",
@@ -62621,7 +62640,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81bb-bd17-cdcb304bc64e",
-      "last_edited_at": "2026-08-14T00:48:00.000Z"
+      "last_edited_at": "2026-10-06T15:52:00.000Z"
     },
     {
       "part_number": "A-CO1",
@@ -62641,7 +62660,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2dfffa52-4c5b-8013-932a-d9707ec57512",
-      "last_edited_at": "2026-08-14T00:48:00.000Z"
+      "last_edited_at": "2026-10-06T15:51:00.000Z"
     },
     {
       "part_number": "A-DI1.5",
@@ -62681,7 +62700,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8191-a76b-c39082cee732",
-      "last_edited_at": "2026-08-14T00:48:00.000Z"
+      "last_edited_at": "2026-10-06T15:51:00.000Z"
     },
     {
       "part_number": "A-DI6",
@@ -62701,7 +62720,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81d5-b2ec-cb018c388a95",
-      "last_edited_at": "2026-08-14T00:48:00.000Z"
+      "last_edited_at": "2026-10-06T15:52:00.000Z"
     },
     {
       "part_number": "AN6",
@@ -64029,7 +64048,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-81ab-9ab5-e4074c7392df",
-      "last_edited_at": "2026-10-05T19:25:00.000Z"
+      "last_edited_at": "2026-10-06T16:11:00.000Z"
     },
     {
       "part_number": "CA5BR",
@@ -64058,7 +64077,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-81ab-9ab5-e4074c7392df",
-      "last_edited_at": "2026-10-05T19:25:00.000Z"
+      "last_edited_at": "2026-10-06T16:12:00.000Z"
     },
     {
       "part_number": "CA5NI",
@@ -64087,7 +64106,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-81ab-9ab5-e4074c7392df",
-      "last_edited_at": "2026-10-05T19:25:00.000Z"
+      "last_edited_at": "2026-10-06T16:12:00.000Z"
     },
     {
       "part_number": "CA5RB",
