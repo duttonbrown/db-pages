@@ -176,12 +176,14 @@
 .quick-filter.qf-powder:not(.is-active):hover  { border-color: #B85C00; color: #B85C00; }
 .quick-filter.qf-black:not(.is-active):hover   { border-color: #2B2B2B; color: #2B2B2B; }
 .quick-filter.qf-attention:not(.is-active):hover { border-color: var(--accent-dark); color: var(--accent-dark); }
+.quick-filter.qf-inactive:not(.is-active):hover { border-color: #6B6B6B; color: #4A4A4A; }
 /* Active = filled in the pill's color (matches hub's .fpill.on weight bump). */
 .quick-filter.is-active { color: white; border-color: transparent; font-weight: 500; }
 .quick-filter.is-active .qf-count { opacity: 0.8; }
 .quick-filter.qf-powder.is-active    { background: #B85C00; }
 .quick-filter.qf-black.is-active     { background: #2B2B2B; }
 .quick-filter.qf-attention.is-active { background: var(--accent-dark); }
+.quick-filter.qf-inactive.is-active  { background: #4A4A4A; }
 /* Attention lens "all clear" state — calm green, non-interactive, reads as
    "nothing to do" rather than an actionable nag at zero. */
 .quick-filter.qf-clear {

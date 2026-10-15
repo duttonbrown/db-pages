@@ -36,6 +36,19 @@ let activeType = 'all';
 let activeConfig = null;          // a configuration_options value, or null = any
 let activeResultIdx = -1;
 
+// Archived products (Shopify status "archived") stay in the data but are hidden
+// from the grid, chips, counts and search until "Show archived" is on. A deep
+// link to an archived handle still opens it: BY_HANDLE is built from the full list.
+let ALL_PRODUCTS = [];
+let showArchived = false;
+const isArchived = (p) => p.status === 'archived';
+
+function applyArchivedView() {
+  DATA.products = showArchived ? ALL_PRODUCTS : ALL_PRODUCTS.filter(p => !isArchived(p));
+  DATA.counts.lighting = DATA.products.filter(p => p.bucket === 'lighting').length;
+  DATA.counts.hardware = DATA.products.filter(p => p.bucket === 'hardware').length;
+}
+
 // ---------------------------------------------------------------- bootstrap
 
 // Merge the private costing overlay. Best-effort by design — if the file is
@@ -91,6 +104,8 @@ async function bootstrap() {
   }
 
   DATA.products.forEach(p => { BY_HANDLE[p.handle] = p; });
+  ALL_PRODUCTS = DATA.products;
+  applyArchivedView();
 
   // Awaited, not fired-and-forgotten: routeFromHash() below can open a spec
   // card immediately on a deep link, and a card rendered before the overlay
@@ -105,8 +120,9 @@ async function bootstrap() {
     .then(r => r.ok ? r.json() : null)
     .then(pl => {
       if (!pl) return;
-      $('parts-count').textContent = (pl.counts.parts || 0).toLocaleString();
-      $('supplies-count').textContent = (pl.counts.supplies || 0).toLocaleString();
+      const live = (rows) => (rows || []).filter(r => r.status !== 'Inactive').length;
+      $('parts-count').textContent = live(pl.parts).toLocaleString();
+      $('supplies-count').textContent = live(pl.supplies).toLocaleString();
     })
     .catch(() => {});
 
@@ -244,10 +260,26 @@ function renderTypeFilters() {
   const entries = [{ id: 'all', name: 'All', count: total }]
     .concat(Object.keys(counts).sort((a, b) => counts[b] - counts[a])
       .map(t => ({ id: t, name: t, count: counts[t] })));
+  const archivedHere = ALL_PRODUCTS.filter(p => p.bucket === activeBucket && isArchived(p)).length;
+  const archivedChip = archivedHere
+    ? `<button class="glossary-chip${showArchived ? ' is-active' : ''}" id="archived-toggle" aria-pressed="${showArchived}">${showArchived ? 'Hide' : 'Show'} archived <span class="gc-count">${archivedHere}</span></button>`
+    : '';
   $('type-filters').innerHTML = entries.map(e => {
     const cls = `glossary-chip${activeType === e.id ? ' is-active' : ''}`;
     return `<button class="${cls}" data-type="${escapeHtml(e.id)}">${escapeHtml(e.name)} <span class="gc-count">${e.count}</span></button>`;
-  }).join('');
+  }).join('') + archivedChip;
+  const toggle = $('archived-toggle');
+  if (toggle) toggle.onclick = () => {
+    showArchived = !showArchived;
+    applyArchivedView();
+    $('lighting-count').textContent = DATA.counts.lighting.toLocaleString();
+    $('hardware-count').textContent = DATA.counts.hardware.toLocaleString();
+    if (activeType !== 'all' && !DATA.products.some(p => p.bucket === activeBucket && p.type === activeType)) activeType = 'all';
+    updateLead();
+    renderTypeFilters();
+    renderConfigFilters();
+    renderGrid();
+  };
   $('type-filters').querySelectorAll('[data-type]').forEach(b => {
     b.onclick = () => {
       activeType = b.dataset.type;

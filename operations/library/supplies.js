@@ -41,14 +41,15 @@ async function bootstrap() {
   SUPPLIES.forEach(s => { BY_KEY[keyOf(s)] = s; });
 
   // Sidebar counts — Parts/Supplies from this file, Lighting/Hardware from products
-  $('parts-count').textContent = (DATA.counts.parts || 0).toLocaleString();
+  $('parts-count').textContent = (DATA.parts || []).filter(p => p.status !== 'Inactive').length.toLocaleString();
   $('supplies-count').textContent = SUPPLIES.length.toLocaleString();
   fetch(libUrl('products-library.json'), { cache: 'no-store' })
     .then(r => r.ok ? r.json() : null)
     .then(pl => {
       if (!pl) return;
-      $('nav-lighting-count').textContent = (pl.counts.lighting || 0).toLocaleString();
-      $('nav-hardware-count').textContent = (pl.counts.hardware || 0).toLocaleString();
+      const live = (b) => pl.products.filter(p => p.bucket === b && p.status !== 'archived').length;
+      $('nav-lighting-count').textContent = live('lighting').toLocaleString();
+      $('nav-hardware-count').textContent = live('hardware').toLocaleString();
     })
     .catch(() => {});
 

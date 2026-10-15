@@ -33,6 +33,26 @@ let activeQuery = '';            // free-text term ALSO applied to the browse gr
 let activeResultIdx = -1;
 let currentPart = null;
 
+// Inactive parts (Notion Status "Inactive") stay in the data but are hidden from
+// the grid, chips, counts and search until "Show inactive" is on. A deep link to
+// one still opens it: PARTS_BY_NUM is built from the full list.
+let ALL_PARTS = [];
+let showInactive = false;
+const isInactive = (p) => p.status === 'Inactive';
+
+function applyInactiveView() {
+  DATA.parts = showInactive ? ALL_PARTS : ALL_PARTS.filter(p => !isInactive(p));
+  DATA.counts.parts = DATA.parts.length;
+}
+
+function toggleInactive() {
+  showInactive = !showInactive;
+  applyInactiveView();
+  $('parts-count').textContent = DATA.counts.parts.toLocaleString();
+  $('lib-count').innerHTML = `<b>${DATA.counts.parts}</b> parts · <b>${DATA.counts.glossary}</b> categories`;
+  applyFilters();
+}
+
 // --- Shareable filter state in the URL hash ----------------------------------
 // Every filter the page can be in is expressible as a link, so a prefiltered
 // view can be pasted into Teams/Notion instead of described in words:
@@ -204,6 +224,11 @@ function renderQuickFilters() {
     // attentionFilter, and the filteredParts/countWith/active-filter branches —
     // is left intact so it can be re-added here later by restoring this entry.
   ];
+  const inactiveCount = ALL_PARTS.filter(isInactive).length;
+  if (inactiveCount) pills.push({
+    key: 'inactive', kind: 'inactive', label: showInactive ? 'Hide inactive' : 'Show inactive',
+    active: showInactive, count: inactiveCount, cls: 'qf-inactive',
+  });
 
   row.innerHTML =
     `<span class="quick-filter-label">Quick filters</span>` +
@@ -226,6 +251,7 @@ function renderQuickFilters() {
   row.querySelectorAll('.quick-filter').forEach(btn => {
     btn.onclick = () => {
       if (btn.dataset.kind === 'attention') toggleAttention();
+      else if (btn.dataset.kind === 'inactive') toggleInactive();
       else toggleProcessFilter(btn.dataset.key);
     };
   });
@@ -308,19 +334,22 @@ async function bootstrap() {
       FAMILY_BY_PARTNUM[p.part_number] = DATA.families[p.family_id];
     }
   });
+  ALL_PARTS = DATA.parts;
+  applyInactiveView();
   // Add 'all' faux glossary
   DATA.glossary.unshift({ id: 'all', name: 'All', abbr: '', definition: '' });
 
   // Sidebar counts — Parts/Supplies from this file, Lighting/Hardware from products
   $('parts-count').textContent = DATA.counts.parts.toLocaleString();
   const sideSuppliesCount = $('supplies-count');
-  if (sideSuppliesCount) sideSuppliesCount.textContent = (DATA.counts.supplies || 0).toLocaleString();
+  if (sideSuppliesCount) sideSuppliesCount.textContent = (DATA.supplies || []).filter(s => s.status !== 'Inactive').length.toLocaleString();
   fetch(libUrl('products-library.json'), { cache: 'no-store' })
     .then(r => r.ok ? r.json() : null)
     .then(pl => {
       if (!pl) return;
-      const lc = $('nav-lighting-count'); if (lc) lc.textContent = (pl.counts.lighting || 0).toLocaleString();
-      const hc = $('nav-hardware-count'); if (hc) hc.textContent = (pl.counts.hardware || 0).toLocaleString();
+      const live = (b) => pl.products.filter(p => p.bucket === b && p.status !== 'archived').length;
+      const lc = $('nav-lighting-count'); if (lc) lc.textContent = live('lighting').toLocaleString();
+      const hc = $('nav-hardware-count'); if (hc) hc.textContent = live('hardware').toLocaleString();
     })
     .catch(() => {});
   $('lib-count').innerHTML = `<b>${DATA.counts.parts}</b> parts · <b>${DATA.counts.glossary}</b> categories`;
