@@ -24,7 +24,7 @@ operations/     index, QuickBooks classes rollout brief
   parts-usage/    2025 parts usage, product sales, year-over-year dashboards
   purchase-request/  request form and purchaser console
   mrpeasy-migration/ the June 2026 build-vs-buy decision and the superseded March brief
-production/     index, KPI map, print-queue board + rules page, parts-family.json
+production/     index, KPI map, parts-family.json, the brandmark the hub board copies
   parts-images/     part photos used by the board
   production-dashboard/  dashboard page + dashboard.json
 marketing/      index, marketing KPI map, trust coefficients, website design directions
