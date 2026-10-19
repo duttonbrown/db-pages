@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-16T12:01:25",
+  "generated_at": "2026-10-19T07:05:54",
   "counts": {
     "parts": 484,
     "supplies": 163,
-    "families": 286,
+    "families": 287,
     "glossary": 83,
     "locations": 43,
     "parts_with_location": 192,
@@ -593,6 +593,25 @@
     }
   ],
   "families": {
+    "3fcffa52-4c5b-8198-90f6-f7232659defc": {
+      "part_number": "SWR2M",
+      "page_id": "3fcffa52-4c5b-8198-90f6-f7232659defc",
+      "page_url": "https://app.notion.com/p/SWR2M-3fcffa524c5b819890f6f7232659defc",
+      "description": "Swivel, rotating, male, threaded stud, use with SWR1F",
+      "definition": "A threaded connector with two parts adjoined by an internal spring or set screws that installs between parts of a fixture to allow it to be repositioned.",
+      "materials": [],
+      "raw_or_prefinished": null,
+      "in_house_processes": [],
+      "vendor": [],
+      "glossary": {
+        "id": "2ccffa52-4c5b-81d5-bb72-e2afa02eb295",
+        "name": "Swivel",
+        "abbr": "SW",
+        "definition": "A threaded connector with two parts adjoined by an internal spring or set screws that installs between parts of a fixture to allow it to be repositioned.",
+        "image": "glossary-images/glossary-Swivel.jpg"
+      },
+      "products": []
+    },
     "3f1ffa52-4c5b-81fe-9e07-fdb0ae9852b8": {
       "part_number": "LC1AL",
       "page_id": "3f1ffa52-4c5b-81fe-9e07-fdb0ae9852b8",
@@ -53814,7 +53833,8 @@
         "Black Batch"
       ],
       "vendor": [
-        "B&P Lamp Supply"
+        "B&P Lamp Supply",
+        "Grand Brass Lamp Parts"
       ],
       "glossary": {
         "id": "2ccffa52-4c5b-8102-bf5f-dc2f37c8d2fb",
@@ -67360,7 +67380,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-815f-ab2c-f0e2526c82ec",
-      "last_edited_at": "2026-10-05T19:24:00.000Z"
+      "last_edited_at": "2026-10-16T19:42:00.000Z"
     },
     {
       "part_number": "LC4RB",
@@ -74766,10 +74786,10 @@
       "sku": "45967",
       "part_number": "",
       "supplier_sku": "45967",
-      "title": "34 x 34 x 13",
+      "title": "33.5 x 33.5 x 13",
       "description": "",
       "page_id": "2c3ffa52-4c5b-800a-996b-c7de363841ea",
-      "page_url": "https://app.notion.com/p/34-x-34-x-13-2c3ffa524c5b800a996bc7de363841ea",
+      "page_url": "https://app.notion.com/p/33-5-x-33-5-x-13-2c3ffa524c5b800a996bc7de363841ea",
       "image": null,
       "status": "Active",
       "type": "Box/Cardboard",
@@ -74784,7 +74804,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-09T18:56:00.000Z"
+      "last_edited_at": "2026-10-17T16:21:00.000Z"
     },
     {
       "sku": "56986",
@@ -74832,31 +74852,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-09T18:56:00.000Z"
-    },
-    {
-      "sku": "BX02",
-      "part_number": "",
-      "supplier_sku": "BX02",
-      "title": "BX02-14",
-      "description": "",
-      "page_id": "2c3ffa52-4c5b-80db-b60e-fae2c4618926",
-      "page_url": "https://app.notion.com/p/BX02-14-2c3ffa524c5b80dbb60efae2c4618926",
-      "image": "supply-images/BX02.jpg",
-      "status": "Active",
-      "type": "Box/Thick Paper",
-      "reorder_qty": "2000",
-      "locations": [
-        {
-          "id": "2b8ffa52-4c5b-81b4-8b01-c33b89d934db",
-          "code": "T1",
-          "group": "Testing",
-          "description": "Racks or tables in testing area",
-          "color": "#374151",
-          "floor_plan": "library-assets/floor-plan.pdf"
-        }
-      ],
-      "last_edited_at": "2026-08-09T18:56:00.000Z"
+      "last_edited_at": "2026-10-17T16:40:00.000Z"
     },
     {
       "sku": "BX02-08",
@@ -74889,6 +74885,30 @@
         }
       ],
       "last_edited_at": "2026-08-09T18:55:00.000Z"
+    },
+    {
+      "sku": "BX02-14",
+      "part_number": "",
+      "supplier_sku": "BX02-14",
+      "title": "BX02-14",
+      "description": "",
+      "page_id": "2c3ffa52-4c5b-80db-b60e-fae2c4618926",
+      "page_url": "https://app.notion.com/p/BX02-14-2c3ffa524c5b80dbb60efae2c4618926",
+      "image": "supply-images/BX02-14.jpg",
+      "status": "Active",
+      "type": "Box/Thick Paper",
+      "reorder_qty": "2000",
+      "locations": [
+        {
+          "id": "2b8ffa52-4c5b-81b4-8b01-c33b89d934db",
+          "code": "T1",
+          "group": "Testing",
+          "description": "Racks or tables in testing area",
+          "color": "#374151",
+          "floor_plan": "library-assets/floor-plan.pdf"
+        }
+      ],
+      "last_edited_at": "2026-10-17T16:40:00.000Z"
     },
     {
       "sku": "BX02-15",
@@ -75019,14 +75039,14 @@
       "last_edited_at": "2026-08-09T18:56:00.000Z"
     },
     {
-      "sku": "BX06",
+      "sku": "BX05",
       "part_number": "",
-      "supplier_sku": "BX06",
+      "supplier_sku": "BX05",
       "title": "BX05",
       "description": "",
       "page_id": "2e0ffa52-4c5b-8079-9af8-fa690f9a7e18",
       "page_url": "https://app.notion.com/p/BX05-2e0ffa524c5b80799af8fa690f9a7e18",
-      "image": "supply-images/BX06.jpg",
+      "image": "supply-images/BX05.jpg",
       "status": "Active",
       "type": "Box/Thick Paper",
       "reorder_qty": "300",
@@ -75040,7 +75060,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-08-09T18:56:00.000Z"
+      "last_edited_at": "2026-10-17T16:40:00.000Z"
     },
     {
       "sku": "BX06",
@@ -78367,7 +78387,7 @@
       "page_id": "2c3ffa52-4c5b-80c8-9e2f-caa58f6cc55f",
       "page_url": "https://app.notion.com/p/BX13-2c3ffa524c5b80c89e2fcaa58f6cc55f",
       "image": null,
-      "status": null,
+      "status": "Introducing",
       "type": "Box/Thick Paper",
       "reorder_qty": "500",
       "locations": [
@@ -78380,7 +78400,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-06-24T00:44:00.000Z"
+      "last_edited_at": "2026-10-17T17:38:00.000Z"
     },
     {
       "sku": "S-21585",
