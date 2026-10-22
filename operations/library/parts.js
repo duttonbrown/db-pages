@@ -29,6 +29,7 @@ let activeGlossary = 'all';
 let activeFamily = null;         // family_id filter (deep-linked via #family/<id>)
 let activeProcesses = new Set(); // in-house process filters: 'Powder Coat', 'Black Batch', etc.
 let attentionFilter = false;     // needs-attention lens (missing location/price, etc.)
+let unusedFilter = false;        // orphan lens: parts on no product's BOM (#unused=1)
 let activeQuery = '';            // free-text term ALSO applied to the browse grid
 let activeResultIdx = -1;
 let currentPart = null;
@@ -78,6 +79,7 @@ function syncHash() {
     parts.push('proc=' + [...activeProcesses].map(encodeURIComponent).join(','));
   }
   if (attentionFilter) parts.push('attn=1');
+  if (unusedFilter) parts.push('unused=1');
   if (activeFamily) parts.push('family=' + encodeURIComponent(activeFamily));
   const hash = parts.length ? '#' + parts.join('&') : '';
   // replaceState never fires hashchange, so this cannot re-enter routeFromHash.
@@ -150,6 +152,14 @@ function priceProvenance(rec) {
   return bits.length ? bits.join(' · ') : null;
 }
 
+// A part is UNUSED when no product's BOM uses its family: the build joins the
+// BOM Lines to each family (fam.products), so an empty list means an orphan.
+// A part with no family can't be on a BOM either, so it counts as unused.
+function partIsUnused(p) {
+  const fam = DATA.families[p.family_id];
+  return !fam || !(fam.products && fam.products.length);
+}
+
 // A part "needs attention" when it's an active/introducing SKU that's missing
 // the operational data this library exists to surface — no storage location, or
 // no price — or it's being discontinued while still showing real recent demand
@@ -182,6 +192,12 @@ function applyFilters() {
 function toggleProcessFilter(proc) {
   if (activeProcesses.has(proc)) activeProcesses.delete(proc);
   else activeProcesses.add(proc);
+  clearFiltersIfShowingPart();
+  applyFilters();
+}
+
+function toggleUnused() {
+  unusedFilter = !unusedFilter;
   clearFiltersIfShowingPart();
   applyFilters();
 }
@@ -224,6 +240,11 @@ function renderQuickFilters() {
     // attentionFilter, and the filteredParts/countWith/active-filter branches —
     // is left intact so it can be re-added here later by restoring this entry.
   ];
+  // Orphan lens: parts no product's BOM uses. Counts respect the other filters.
+  pills.push({
+    key: 'unused', kind: 'unused', label: 'Unused',
+    active: unusedFilter, count: countWith({ unused: true }), cls: 'qf-unused',
+  });
   const inactiveCount = ALL_PARTS.filter(isInactive).length;
   if (inactiveCount) pills.push({
     key: 'inactive', kind: 'inactive', label: showInactive ? 'Hide inactive' : 'Show inactive',
@@ -242,7 +263,7 @@ function renderQuickFilters() {
       return `
       <button type="button" class="quick-filter ${cls}${p.active ? ' is-active' : ''}"${allClear ? ' disabled' : ''}
               data-kind="${p.kind}" data-key="${escapeHtml(p.key)}"
-              ${p.kind === 'attention' ? 'title="Active/Introducing parts missing a location or price, or discontinuing parts still in use"' : ''}>
+              ${p.kind === 'attention' ? 'title="Active/Introducing parts missing a location or price, or discontinuing parts still in use"' : ''}${p.kind === 'unused' ? 'title="Parts that are on no fixture BOM"' : ''}>
         <span class="qf-label">${escapeHtml(label)}</span>
         ${countHtml}
       </button>`;
@@ -251,6 +272,7 @@ function renderQuickFilters() {
   row.querySelectorAll('.quick-filter').forEach(btn => {
     btn.onclick = () => {
       if (btn.dataset.kind === 'attention') toggleAttention();
+      else if (btn.dataset.kind === 'unused') toggleUnused();
       else if (btn.dataset.kind === 'inactive') toggleInactive();
       else toggleProcessFilter(btn.dataset.key);
     };
@@ -412,6 +434,7 @@ function countWith(opts) {
   const glossary = opts.glossary != null ? opts.glossary : activeGlossary;
   const procs = opts.processes || activeProcesses;
   const attention = opts.attention != null ? opts.attention : attentionFilter;
+  const unused = opts.unused != null ? opts.unused : unusedFilter;
   const query = (opts.query != null ? opts.query : activeQuery).toLowerCase();
   return DATA.parts.filter(p => {
     if (glossary !== 'all') {
@@ -423,6 +446,7 @@ function countWith(opts) {
       for (const wanted of procs) if (!pp.includes(wanted)) return false;
     }
     if (attention && !partNeedsAttention(p)) return false;
+    if (unused && !partIsUnused(p)) return false;
     if (query && !matchesQuery(p, query)) return false;
     return true;
   }).length;
@@ -469,6 +493,14 @@ function renderActiveFilter(entries) {
       key: 'attention',
     });
   }
+  if (unusedFilter) {
+    pills.push({
+      name: 'Unused',
+      count: countWith({}),
+      kind: 'unused',
+      key: 'unused',
+    });
+  }
   if (activeQuery) {
     // The search term is a real filter on the grid now, so it has to be
     // visible and clearable like every other one — otherwise arriving on a
@@ -495,6 +527,7 @@ function renderActiveFilter(entries) {
       if (btn.dataset.kind === 'glossary') activeGlossary = 'all';
       else if (btn.dataset.kind === 'process') activeProcesses.delete(btn.dataset.key);
       else if (btn.dataset.kind === 'attention') attentionFilter = false;
+      else if (btn.dataset.kind === 'unused') unusedFilter = false;
       else if (btn.dataset.kind === 'family') activeFamily = null;
       else if (btn.dataset.kind === 'query') {
         activeQuery = '';
@@ -588,6 +621,9 @@ function filteredParts() {
   }
   if (attentionFilter) {
     list = list.filter(partNeedsAttention);
+  }
+  if (unusedFilter) {
+    list = list.filter(partIsUnused);
   }
   if (activeQuery) {
     const q = activeQuery.toLowerCase();
@@ -1004,19 +1040,43 @@ function renderSpec(p) {
   // ---------- Used In. Compact two-line list (SKU on top, name beneath),
   // arranged in a multi-column flow — no boxes, no big gaps. Stays inside
   // a <details> so the section collapses if the user wants quiet.
+  // Each product links to its BOM Master row (?q=<SKU>) — every BOM SKU lives
+  // there, while the products library lacks a page for ~40% of them (sub-items,
+  // finish twins). The build tags each product with `group` (its fixture name)
+  // and sorts by it; an older JSON without `group` falls back to one flat list.
   const products = fam.products || [];
+  const bomHref = (sku) => `/design-dev/library/bom-master.html?q=${encodeURIComponent(sku)}`;
+  const productItem = (prod) => `
+          <li><a class="product-line" href="${escapeHtml(bomHref(prod.sku))}" target="_blank" rel="noopener" title="${escapeHtml(prod.title || '')} · open in BOM Master">
+            <span class="product-sku">${escapeHtml(prod.sku)}</span>
+            <span class="product-title">${escapeHtml(prod.title || '—')}</span>
+          </a></li>`;
+  const productGroups = [];
+  for (const prod of products) {
+    const last = productGroups[productGroups.length - 1];
+    if (last && last.name === (prod.group || '')) last.items.push(prod);
+    else productGroups.push({ name: prod.group || '', items: [prod] });
+  }
+  const usedInBody = productGroups.length > 1 || (productGroups[0] && productGroups[0].name)
+    ? productGroups.map(g => `
+        <div class="product-group">
+          <h4 class="product-group-name">${escapeHtml(g.name)} <span class="product-group-count">${g.items.length}</span></h4>
+          <ul class="product-list">${g.items.map(productItem).join('')}</ul>
+        </div>`).join('')
+    : `<ul class="product-list">${products.map(productItem).join('')}</ul>`;
   const usedInHtml = products.length
     ? `<details class="spec-section spec-usedin">
         <summary class="spec-section-head">
-          <h3>Used in <span class="spec-section-count">${products.length}</span></h3>
+          <h3>Used in <span class="spec-section-count">${products.length}</span> ${products.length === 1 ? 'product' : 'products'}</h3>
         </summary>
-        <ul class="product-list">${products.map(prod => `
-          <li><a class="product-line" href="${escapeHtml(prod.url || '#')}" target="_blank" rel="noopener" title="${escapeHtml(prod.title || '')}">
-            <span class="product-sku">${escapeHtml(prod.sku)}</span>
-            <span class="product-title">${escapeHtml(prod.title || '—')}</span>
-          </a></li>`).join('')}</ul>
+        ${usedInBody}
       </details>`
-    : '';
+    : `<section class="spec-section spec-usedin spec-unused">
+        <div class="spec-section-head">
+          <h3>Used in <span class="spec-section-count">0</span> products</h3>
+        </div>
+        <p class="unused-note">No product's BOM uses this part.</p>
+      </section>`;
 
   // ---------- Admin footer (faded). Last edited + Notion deep links.
   const adminBits = [];
@@ -1090,6 +1150,7 @@ function routeFromHash() {
       (params.get('proc') || '').split(',').map(s => s.trim()).filter(Boolean)
     );
     attentionFilter = params.get('attn') === '1';
+    unusedFilter = params.get('unused') === '1';
     const fam = params.get('family');
     activeFamily = (fam && DATA && DATA.families && DATA.families[fam]) ? fam : null;
     currentPart = null;
@@ -1150,6 +1211,7 @@ function routeFromHash() {
   activeGlossary = 'all';
   activeProcesses = new Set();
   attentionFilter = false;
+  unusedFilter = false;
   currentPart = null;
   const inp = $('search');
   if (inp) inp.value = '';
