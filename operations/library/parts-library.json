@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T07:05:45",
+  "generated_at": "2026-10-27T12:00:53",
   "counts": {
     "parts": 484,
     "supplies": 163,
@@ -76396,7 +76396,7 @@
       ],
       "locations": [],
       "family_id": "2ceffa52-4c5b-81f4-b49f-f8c1500184a5",
-      "last_edited_at": "2026-10-12T15:41:00.000Z"
+      "last_edited_at": "2026-10-27T12:26:00.000Z"
     },
     {
       "part_number": "KN1AL",
@@ -76877,7 +76877,7 @@
         }
       ],
       "family_id": "2ceffa52-4c5b-815f-ab2c-f0e2526c82ec",
-      "last_edited_at": "2026-10-16T19:42:00.000Z"
+      "last_edited_at": "2026-10-27T12:26:00.000Z"
     },
     {
       "part_number": "LC4RB",
@@ -82716,7 +82716,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8166-a72b-e0a547d48b48",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-10-27T12:26:00.000Z"
     },
     {
       "part_number": "SSC3_16BR",
@@ -82736,7 +82736,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8166-a72b-e0a547d48b48",
-      "last_edited_at": "2026-08-14T00:44:00.000Z"
+      "last_edited_at": "2026-10-27T12:26:00.000Z"
     },
     {
       "part_number": "SSC3_16NI",
@@ -82756,7 +82756,7 @@
       "in_house_processes": [],
       "locations": [],
       "family_id": "2ceffa52-4c5b-8166-a72b-e0a547d48b48",
-      "last_edited_at": "2026-08-14T00:43:00.000Z"
+      "last_edited_at": "2026-10-27T12:26:00.000Z"
     },
     {
       "part_number": "ST1BL",
@@ -84277,7 +84277,7 @@
           "floor_plan": "library-assets/floor-plan.pdf"
         }
       ],
-      "last_edited_at": "2026-10-22T23:32:00.000Z"
+      "last_edited_at": "2026-10-27T12:26:00.000Z"
     },
     {
       "sku": "45967",
