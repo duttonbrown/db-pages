@@ -1,17 +1,21 @@
+/* MIRROR of db-brand/tokens.css — written by db-brand/scripts/sync_tokens.py.
+   Never edit here: change db-brand/tokens.css and run the script. */
 /* ==========================================================================
    DUTTON BROWN — Design Tokens
-   MIRROR COPY — Source of truth is db-brand/tokens.css
-   Do not edit here. Update db-brand first, then copy here.
+   The single source of truth for colors, typography, spacing, and more.
    ========================================================================== */
 
 :root {
   /* -------------------------------------------------------------------
-     POWDER COAT SWATCHES — 13 Product Colors
+     POWDER COAT SWATCHES — 14 Product Colors
      For product graphics, decorative color strips, and section separators
-     only. NOT for UI elements, backgrounds, buttons, or text.
+     only. NOT for UI elements, backgrounds, buttons, or text — with ONE
+     ruled exception (Thomas, 2026-09-02): python-green and riding-hood-red
+     double as the UI status tokens below (--db-success / --db-error),
+     because they are the two swatches that clear AA on white.
      ------------------------------------------------------------------- */
-  --db-barely:         #CCB8B8;
   --db-pinkaboo:       #f7b6c0;
+  --db-barely:         #CCB8B8;
   --db-black:          #000000;
   --db-bone:           #e5e4cf;
   --db-chalk:          #D0D0D0;
@@ -41,20 +45,37 @@
   /* -------------------------------------------------------------------
      BRAND COLORS — The 5 Official Brand Colors (Oranges + Grays)
      These are the ONLY colors for all UI, layouts, text, buttons, and
-     branding. The 13 powder coat swatches above are strictly for product
+     branding. The 14 powder coat swatches above are strictly for product
      graphics, decorative color strips, and section separators.
      ------------------------------------------------------------------- */
   --db-primary:        #4A4A4A;
-  --db-accent:         #FF9912;
-  --db-accent-hover:   #D97706;
+  --db-primary-hover:  #3D3832;   /* primary button hover (decided 2026-09-24) */
+  --db-accent:         #FF9912;   /* a fill, never text and never a line on a light ground (2.14:1) */
+  --db-accent-hover:   #D97706;   /* accent fill hover; text only at 24px+ (3.19:1) */
+  --db-accent-line:    #BF6600;   /* underlines and active markers on light grounds: 4.1:1 on white,
+                                     3.8:1 on surface. On --db-primary grounds use --db-accent (4.1:1).
+                                     Decided 2026-09-24 (outside review). */
   --db-accent-soft:    #FFF4E0;
+  --db-on-accent:      #2A2622;   /* text on an accent fill (7.0:1); never white (decided 2026-09-24) */
   --db-surface:        #F7F5F2;
   --db-surface-mid:    #EDE9E3;
   --db-text:           #4A4A4A;
   --db-text-muted:     #6B6B6B;
-  --db-text-light:     #8A8A8A;
+  --db-text-light:     #6B6B6B;   /* RETIRED 2026-09-24 — #8A8A8A failed AA (3.45:1); now an alias of text-muted. Use --db-text-muted. */
   --db-text-inverse:   var(--db-white);
   --db-border:         #E6E6E6;
+  --db-border-structural: #8A8078;
+  --db-input-border:   #8A8078;   /* form field border at rest: 3.9:1 on white, 3.6:1 on surface (decided 2026-09-24) */
+  --db-placeholder:    #6B6B6B;   /* placeholder text = --db-text-muted, 5.3:1 (decided 2026-09-24) */
+  --db-focus-ring:     #4A4A4A;   /* keyboard focus: 2px solid, 2px offset. Orange fails the 3:1 floor */
+
+  /* Status — the only non-orange, non-gray UI colors. AA on white, verified in
+     db-operations/scripts/report_style.py; live in every hub report since
+     2026-08 and ratified as brand tokens 2026-09-02 (hub-ia D8f). Pair with
+     an icon or a +/- sign — never color alone. */
+  --db-success:        #4E782F;   /* 5.18:1 — done, in stock */
+  --db-error:          #9F2C00;   /* 7.41:1 — failed, late */
+  --db-warn:           #B45309;   /* 5.02:1 — caution, needs attention */
 
   /* -------------------------------------------------------------------
      TYPOGRAPHY — Poppins

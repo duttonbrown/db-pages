@@ -1,7 +1,8 @@
+/* MIRROR of db-brand/components.css — written by db-brand/scripts/sync_tokens.py.
+   Never edit here: change db-brand/components.css and run the script. */
 /* ==========================================================================
    DUTTON BROWN — Component Library
-   MIRROR COPY — Source of truth is db-brand/components.css
-   Do not edit here. Update db-brand first, then copy here.
+   Reusable UI components built on top of design tokens.
    ========================================================================== */
 
 /* -------------------------------------------------------------------
@@ -99,23 +100,33 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--db-primary);
 }
 .db-btn-primary:hover {
-  background: var(--db-gray-700);
-  border-color: var(--db-gray-700);
+  background: var(--db-primary-hover);
+  border-color: var(--db-primary-hover);
 }
 
+/* Secondary is an underlined text action, not a box (decided 2026-09-24), so the
+   primary leads when two sit together. The line is --db-accent-line: --db-accent
+   is 2.14:1 on white, too faint to carry the affordance on its own. */
 .db-btn-secondary {
   background: transparent;
-  color: var(--db-primary);
-  border-color: var(--db-primary);
+  color: var(--db-text);
+  border-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  text-decoration: underline;
+  text-decoration-color: var(--db-accent-line);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 .db-btn-secondary:hover {
-  background: var(--db-primary);
-  color: var(--db-white);
+  background: transparent;
+  color: var(--db-text);
+  text-decoration-thickness: 3px;
 }
 
 .db-btn-accent {
   background: var(--db-accent);
-  color: var(--db-white);
+  color: var(--db-on-accent);   /* 7.0:1; white on orange is 2.14:1 */
   border-color: var(--db-accent);
 }
 .db-btn-accent:hover {
@@ -207,23 +218,40 @@ a { color: inherit; text-decoration: none; }
 .db-swatch .copy-toast.show { opacity: 1; }
 
 /* -------------------------------------------------------------------
-   PILLS / TAGS
+   TAGS & BADGES (spec: brand-identity.md → Tags & badges)
+   Poppins 600, 12px, sentence case, no tracking, 4px corners.
+   Compact by default (images, cards, beside labels); -lg beside prices.
+   .db-pill is the old name, kept so existing pages pick up the spec.
    ------------------------------------------------------------------- */
+.db-tag,
 .db-pill {
-  display: inline-block;
-  padding: var(--db-space-1) var(--db-space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--db-space-1);
+  padding: var(--db-space-1) var(--db-space-2);
+  font-family: var(--db-font-primary);
   font-size: var(--db-text-xs);
   font-weight: var(--db-font-semibold);
-  letter-spacing: var(--db-tracking-wide);
-  text-transform: uppercase;
-  border-radius: var(--db-radius-full);
-  background: var(--db-gray-200);
-  color: var(--db-gray-700);
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: var(--db-radius);
+  background: var(--db-surface);      /* info: Retail price, Trade price */
+  color: var(--db-text);              /* 8.1:1 */
 }
 
-.db-pill-accent {
+.db-tag-lg { padding: 6px var(--db-space-3); }
+
+.db-tag-status {                      /* "New", "New color", "Updated" */
+  background: var(--db-primary);
+  color: var(--db-white);             /* 8.9:1 */
+}
+
+.db-tag-accent,
+.db-pill-accent {                     /* action or urgent only (sale, 3D) */
   background: var(--db-accent);
-  color: var(--db-white);
+  color: var(--db-on-accent);         /* 7.0:1, never white */
 }
 
 /* -------------------------------------------------------------------
@@ -305,8 +333,11 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   transition: color var(--db-transition-fast);
 }
-.db-nav-links a:hover { color: var(--db-accent); }
-.db-nav-links a.active { color: var(--db-accent); }
+/* Orange is never text: hover and current items darken to --db-text, and the
+   current item carries a 2px --db-accent-line underline. */
+.db-nav-links a { padding-bottom: 2px; border-bottom: 2px solid transparent; }
+.db-nav-links a:hover { color: var(--db-text); }
+.db-nav-links a.active { color: var(--db-text); border-bottom-color: var(--db-accent-line); }
 
 .db-nav-hamburger {
   display: none;
@@ -353,7 +384,7 @@ a { color: inherit; text-decoration: none; }
 
 .db-section-header .db-overline {
   margin-bottom: var(--db-space-3);
-  color: var(--db-accent);
+  color: var(--db-text-muted);   /* never orange: 12px text at 2.14:1 fails AA */
 }
 
 /* -------------------------------------------------------------------
@@ -401,8 +432,8 @@ a { color: inherit; text-decoration: none; }
 }
 .db-tab:hover { color: var(--db-text); }
 .db-tab.active {
-  color: var(--db-accent);
-  border-bottom-color: var(--db-accent);
+  color: var(--db-text);
+  border-bottom-color: var(--db-accent-line);
 }
 
 .db-tab-panel { display: none; }
@@ -440,7 +471,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--db-gray-200);
   transition: color var(--db-transition-fast);
 }
-.db-footer a:hover { color: var(--db-accent); }
+.db-footer a:hover { color: var(--db-white); text-decoration: underline; text-decoration-color: var(--db-accent); }   /* on --db-primary the accent line is 4.1:1 */
 
 .db-footer-grid {
   display: grid;
