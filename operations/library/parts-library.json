@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T12:00:50",
+  "generated_at": "2026-10-29T07:05:43",
   "counts": {
     "parts": 484,
     "supplies": 163,
@@ -3991,6 +3991,13 @@
         "image": "glossary-images/glossary-Rod_Knob.jpg"
       },
       "products": [
+        {
+          "id": "2e8ffa524c5b80539527e04bf6454b8a",
+          "sku": "H1D",
+          "title": "Color Swift Hook",
+          "url": "https://app.notion.com/p/H1D-2e8ffa524c5b80539527e04bf6454b8a",
+          "group": "Swift Hook"
+        },
         {
           "id": "2aeffa524c5b803ca24ccc7dc6fc6a62",
           "sku": "H28",
@@ -25803,13 +25810,6 @@
           "group": "Head Hook"
         },
         {
-          "id": "2e8ffa524c5b80539527e04bf6454b8a",
-          "sku": "H1D",
-          "title": "Color Swift Hook",
-          "url": "https://app.notion.com/p/H1D-2e8ffa524c5b80539527e04bf6454b8a",
-          "group": "Head Hook"
-        },
-        {
           "id": "2aeffa524c5b80658130f1c1ba3e699a",
           "sku": "H43",
           "title": "Head Tissue Holder",
@@ -32462,13 +32462,6 @@
           "title": "Color Persona Hook",
           "url": "https://app.notion.com/p/H13-C-2c9ffa524c5b80c19346c0238e7d364e",
           "group": "Persona Hook"
-        },
-        {
-          "id": "2e8ffa524c5b80539527e04bf6454b8a",
-          "sku": "H1D",
-          "title": "Color Swift Hook",
-          "url": "https://app.notion.com/p/H1D-2e8ffa524c5b80539527e04bf6454b8a",
-          "group": "Swift Hook"
         }
       ]
     },
@@ -66789,13 +66782,6 @@
           "title": "Color Stud Hook",
           "url": "https://app.notion.com/p/H10-C-2c9ffa524c5b80bab3e8eb13eda03018",
           "group": "Stud Hook"
-        },
-        {
-          "id": "2e8ffa524c5b80539527e04bf6454b8a",
-          "sku": "H1D",
-          "title": "Color Swift Hook",
-          "url": "https://app.notion.com/p/H1D-2e8ffa524c5b80539527e04bf6454b8a",
-          "group": "Swift Hook"
         },
         {
           "id": "2aeffa524c5b807388f8f7c1bf8896fa",
