@@ -65,7 +65,7 @@ async function applyCostOverlay() {
     COSTING_META = {
       generated: o.generated || null,
       labor_rate: o.labor_rate || null,
-      dim_divisor: o.dim_divisor || 192,
+      dim_divisor: o.dim_divisor || 194,
     };
   } catch (e) {
     /* overlay is optional; the page works without it */
@@ -923,7 +923,7 @@ function renderShipping(p) {
     const bits = [];
     if (s.weight_lb != null) bits.push(`<span class="ship-w"><b>${s.weight_lb}</b> lb actual</span>`);
     if (s.dim_weight_lb != null) {
-      const div = (COSTING_META && COSTING_META.dim_divisor) || 192;
+      const div = (COSTING_META && COSTING_META.dim_divisor) || 194;
       bits.push(`<span class="ship-w"><b>${s.dim_weight_lb}</b> lb dim <span class="cost-sub">(qty-1 carton ÷ ${div})</span></span>`);
     }
     if (s.billable_weight_lb != null) {
