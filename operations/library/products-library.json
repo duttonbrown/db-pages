@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-11-11T20:00:06",
+  "generated_at": "2026-11-13T16:41:31",
   "counts": {
-    "products": 308,
+    "products": 310,
     "lighting": 205,
-    "hardware": 61,
+    "hardware": 63,
     "other": 42,
-    "with_bom": 251
+    "with_bom": 253
   },
   "types": [
     {
@@ -15,16 +15,16 @@
       "bucket": "lighting"
     },
     {
+      "id": "Hardware",
+      "name": "Hardware",
+      "count": 63,
+      "bucket": "hardware"
+    },
+    {
       "id": "Flush Mounts",
       "name": "Flush Mounts",
       "count": 62,
       "bucket": "lighting"
-    },
-    {
-      "id": "Hardware",
-      "name": "Hardware",
-      "count": 61,
-      "bucket": "hardware"
     },
     {
       "id": "Chandeliers",
@@ -34544,38 +34544,38 @@
           "pos": 17
         },
         {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-chandelier-brass-pinkaboo-white_9b241a05-8d9e-488b-88ae-de5aa255668b.jpg?v=1776738268",
-          "alt": "Brass and pinkaboo color Tetra chandelier Dutton Brown lighting",
-          "pos": 18
-        },
-        {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-chandelier-nickel-pinkaboo-white.jpg?v=1776738268",
           "alt": "Nickel and pinkaboo color Tetra chandelier Dutton Brown lighting",
-          "pos": 19
-        },
-        {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-chandelier-nickel-pinkaboo-white_1806fc34-75f7-492d-9e7b-dc295465cd22.jpg?v=1776738268",
-          "alt": "Nickel and pinkaboo color Tetra chandelier Dutton Brown lighting",
-          "pos": 20
+          "pos": 18
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-chandelier-black-pinkaboo-white.jpg?v=1776738268",
           "alt": "Black and pinkaboo color Tetra chandelier Dutton Brown lighting",
-          "pos": 21
-        },
-        {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-chandelier-black-pinkaboo-white_71b9892f-6e24-4c3e-b02c-35740145f978.jpg?v=1776738268",
-          "alt": "Black and pinkaboo color Tetra chandelier Dutton Brown lighting",
-          "pos": 22
+          "pos": 19
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/tetra-globe-chandelier-brass-barely-white-1.jpg?v=1776738268",
           "alt": "Brass and barely color Tetra chandelier Dutton Brown lighting",
-          "pos": 23
+          "pos": 20
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/tetra-globe-chandelier-brass-black-white-1.jpg?v=1776738268",
           "alt": "Brass and black color Tetra chandelier Dutton Brown lighting",
+          "pos": 21
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/tetra-globe-chandelier-nickel-white-white-1.jpg?v=1776738268",
+          "alt": "Nickel and white color Tetra chandelier Dutton Brown lighting",
+          "pos": 22
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/tetra-globe-chandelier-nickel-chalk-white-1.jpg?v=1776738268",
+          "alt": "Nickel and white color Tetra chandelier Dutton Brown lighting",
+          "pos": 23
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/2-tetra-globe-chandelier-nickel-bone-white.jpg?v=1776738268",
+          "alt": "Nickel and white color Tetra chandelier Dutton Brown lighting",
           "pos": 24
         }
       ],
@@ -41535,7 +41535,7 @@
         "cap-globe-flush-mount-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30130-10",
@@ -42060,7 +42060,7 @@
         "cap-globe-flush-mount-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30130-12",
@@ -42603,7 +42603,6 @@
         "cap-globe-flush-mount-12"
       ],
       "complementary_handles": [
-        "led-bulb-a15-3-pack",
         "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
@@ -45951,7 +45950,7 @@
           "sku": "30330-2F",
           "price": "500.00",
           "compare_price": null,
-          "qty": -18,
+          "qty": -28,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -50650,38 +50649,38 @@
           "pos": 17
         },
         {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-big-status-flush-mount-brass-pinkaboo-1_89f9970a-faaf-43e7-9684-9ade16d2a479.jpg?v=1776738287",
-          "alt": "Brass and pinkaboo color Big Status flush mount Dutton Brown lighting",
-          "pos": 18
-        },
-        {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-big-status-flush-mount-nickel-pinkaboo-1.jpg?v=1776738287",
           "alt": "Nickel and pinkaboo color Big Status flush mount Dutton Brown lighting",
-          "pos": 19
-        },
-        {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-big-status-flush-mount-nickel-pinkaboo-1_898d7771-0440-4c83-a1a6-85d755d0f684.jpg?v=1776738287",
-          "alt": "Nickel and pinkaboo color Big Status flush mount Dutton Brown lighting",
-          "pos": 20
+          "pos": 18
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-big-status-flush-mount-black-pinkaboo-1.jpg?v=1776738287",
           "alt": "Black and pinkaboo color Big Status flush mount Dutton Brown lighting",
-          "pos": 21
-        },
-        {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-big-status-flush-mount-black-pinkaboo-1_bf078421-3768-4acc-b187-c25312059fc1.jpg?v=1776738287",
-          "alt": "Black and pinkaboo color Big Status flush mount Dutton Brown lighting",
-          "pos": 22
+          "pos": 19
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-big-status-flush-mount-brass-barely-1.jpg?v=1776738287",
           "alt": "Brass and barely color Big Status flush mount Dutton Brown lighting",
-          "pos": 23
+          "pos": 20
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/12-big-status-flush-mount-brass-black-1.jpg?v=1776738287",
           "alt": "Brass and black color Big Status flush mount Dutton Brown lighting",
+          "pos": 21
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/1-big-status-flush-mount-nickel-white-1.jpg?v=1776738287",
+          "alt": "Nickel and white color Big Status flush mount Dutton Brown lighting",
+          "pos": 22
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/0-big-status-flush-mount-nickel-chalk-1.jpg?v=1776738287",
+          "alt": "nickel and chalk color Big Status flush mount Dutton Brown lighting",
+          "pos": 23
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/2-big-status-flush-mount-nickel-bone-1.jpg?v=1776738287",
+          "alt": "Nickel and bone color Big Status flush mount Dutton Brown lighting",
           "pos": 24
         }
       ],
@@ -55454,7 +55453,7 @@
       "variation_handles": [],
       "complementary_handles": [
         "led-g25-bulb-matte-white",
-        "led-bulb-a15-3-pack"
+        "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "50130-10",
@@ -58903,7 +58902,7 @@
       "variation_handles": [],
       "complementary_handles": [
         "led-g25-bulb-matte-white",
-        "led-bulb-a15-3-pack"
+        "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "50130-8",
@@ -60631,7 +60630,7 @@
         "color-cap-globe-flush-mount-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30130-10 (C)",
@@ -61272,7 +61271,7 @@
           "sku": "30130-12-3BO",
           "price": "400.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -2,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -62345,7 +62344,7 @@
         "color-cap-globe-flush-mount-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30130-12 (C)",
@@ -76983,7 +76982,7 @@
           "sku": "50131-10-1F",
           "price": "290.00",
           "compare_price": null,
-          "qty": -24,
+          "qty": -25,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -77025,7 +77024,7 @@
           "sku": "50131-10-1H",
           "price": "290.00",
           "compare_price": null,
-          "qty": -32,
+          "qty": -33,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -78061,7 +78060,7 @@
           "sku": "50131-12-3H",
           "price": "320.00",
           "compare_price": null,
-          "qty": -6,
+          "qty": -8,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -83772,7 +83771,7 @@
         "color-lure-globe-flush-mount-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30112F-10",
@@ -85486,7 +85485,7 @@
         "color-lure-globe-flush-mount-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30112F-12",
@@ -87231,7 +87230,7 @@
         "color-lure-globe-flush-mount-12"
       ],
       "complementary_handles": [
-        "led-bulb-a15-3-pack"
+        "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30112F-6",
@@ -88221,7 +88220,7 @@
           "sku": "30112F-8-2RH",
           "price": "330.00",
           "compare_price": null,
-          "qty": -8,
+          "qty": -9,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -88972,7 +88971,7 @@
         "color-lure-globe-flush-mount-10"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30112F-8",
@@ -90116,7 +90115,7 @@
         "color-maxo-flush-mount-13"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "40131-13",
@@ -91248,7 +91247,7 @@
         "color-maxo-flush-mount-13"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "40131-8",
@@ -92829,7 +92828,7 @@
           "sku": "30402F-3D",
           "price": "800.00",
           "compare_price": null,
-          "qty": -6,
+          "qty": -7,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -103068,42 +103067,42 @@
           "pos": 16
         },
         {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-flush-mount-brass-pinkaboo-white_351d82c6-8114-400d-bbed-62051e650b7b.jpg?v=1776738268",
-          "alt": "Brass and pinkaboo color Tetra flush mount Dutton Brown lighting",
-          "pos": 17
-        },
-        {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-flush-mount-nickel-pinkaboo-white.jpg?v=1776738268",
           "alt": "Nickel and pinkaboo color Tetra flush mount Dutton Brown lighting",
-          "pos": 18
-        },
-        {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-flush-mount-nickel-pinkaboo-white_3b516114-2918-4439-97d2-fb8b48beabbf.jpg?v=1776738268",
-          "alt": "Nickel and pinkaboo color Tetra flush mount Dutton Brown lighting",
-          "pos": 19
+          "pos": 17
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-flush-mount-black-pinkaboo-white.jpg?v=1776738268",
           "alt": "Black and pinkaboo color Tetra flush mount Dutton Brown lighting",
-          "pos": 20
-        },
-        {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-tetra-globe-flush-mount-black-pinkaboo-white_ac453806-5ed1-4749-8479-80292a648fbe.jpg?v=1776738268",
-          "alt": "Black and pinkaboo color Tetra flush mount Dutton Brown lighting",
-          "pos": 21
+          "pos": 18
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/tetra-globe-flush-mount-brass-barely-white-1.jpg?v=1776738268",
           "alt": "Brass and barely color Tetra flush mount Dutton Brown lighting",
-          "pos": 22
+          "pos": 19
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/tetra-globe-flush-mount-brass-black-white-1.jpg?v=1776738268",
           "alt": "Brass and black color Tetra flush mount Dutton Brown lighting",
-          "pos": 23
+          "pos": 20
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/tetra-globe-flush-mount-nickel-white-white-1.jpg?v=1776738268",
+          "alt": "Nickel and white color Tetra flush mount Dutton Brown lighting",
+          "pos": 21
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/15-tetra-globe-flush-mount-nickel-chalk-white.jpg?v=1776738268",
+          "alt": "Nickel and White color Tetra flush mount Dutton Brown lighting",
+          "pos": 22
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/2-tetra-globe-flush-mount-nickel-bone-white.jpg?v=1776738268",
+          "alt": "Nickel and white color Tetra flush mount Dutton Brown lighting",
+          "pos": 23
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/tetra-globe-flush-mount-nickel-spa-white-1.jpg?v=1776738268",
           "alt": "Nickel and white color Tetra flush mount Dutton Brown lighting",
           "pos": 24
         }
@@ -113865,7 +113864,7 @@
         "cap-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30110-10",
@@ -114481,7 +114480,7 @@
         "cap-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30110-12",
@@ -115100,7 +115099,6 @@
         "cap-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-a15-3-pack",
         "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
@@ -115718,7 +115716,6 @@
         "cap-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-a15-3-pack",
         "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
@@ -124490,7 +124487,7 @@
         "color-cap-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30110-10 (C)",
@@ -126290,7 +126287,7 @@
         "color-cap-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30110-12 (C)",
@@ -132368,7 +132365,7 @@
           "sku": "50111-12-2B",
           "price": "350.00",
           "compare_price": null,
-          "qty": -4,
+          "qty": -5,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -137888,7 +137885,7 @@
           "sku": "30112-10-2RH",
           "price": "390.00",
           "compare_price": null,
-          "qty": -3,
+          "qty": -5,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -138639,7 +138636,7 @@
         "color-lure-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30112-10",
@@ -139687,7 +139684,7 @@
           "sku": "30112-12-2RH",
           "price": "440.00",
           "compare_price": null,
-          "qty": -9,
+          "qty": -11,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -140438,7 +140435,7 @@
         "color-lure-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30112-12",
@@ -142235,7 +142232,7 @@
         "color-lure-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-a15-3-pack"
+        "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30112-6",
@@ -143142,7 +143139,7 @@
           "sku": "30112-8-1F",
           "price": "350.00",
           "compare_price": null,
-          "qty": -11,
+          "qty": -13,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -143282,7 +143279,7 @@
           "sku": "30112-8-2RH",
           "price": "350.00",
           "compare_price": null,
-          "qty": -1,
+          "qty": -2,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -144033,7 +144030,7 @@
         "color-lure-globe-pendant-12"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30112-8",
@@ -146047,7 +146044,7 @@
         "color-maxo-pendant-13"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "40111-13-23",
@@ -148091,7 +148088,7 @@
         "color-maxo-pendant-13"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack"
+        "led-g25-bulb-matte-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "40111-8-23",
@@ -163050,7 +163047,7 @@
         "color-boom-swing-arm-plug-in-sconce"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack",
+        "led-g25-bulb-matte-white",
         "led-bulb-g16-white-3000k-320lm"
       ],
       "related_handles": [],
@@ -164363,7 +164360,7 @@
         "color-boom-swing-arm-plug-in-sconce"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack",
+        "led-g25-bulb-matte-white",
         "led-bulb-g16-white-3000k-320lm"
       ],
       "related_handles": [],
@@ -173239,7 +173236,6 @@
         "cap-globe-sconce-ii-8"
       ],
       "complementary_handles": [
-        "led-bulb-a15-3-pack",
         "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
@@ -173706,7 +173702,6 @@
         "cap-globe-sconce-ii-8"
       ],
       "complementary_handles": [
-        "led-bulb-a15-3-pack",
         "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
@@ -174196,7 +174191,6 @@
       "configuration_options": [],
       "variation_handles": [],
       "complementary_handles": [
-        "led-bulb-a15-3-pack",
         "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
@@ -174686,8 +174680,7 @@
       "configuration_options": [],
       "variation_handles": [],
       "complementary_handles": [
-        "led-a15-bulb-frosted-white",
-        "led-bulb-a15-3-pack"
+        "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30121",
@@ -181063,7 +181056,7 @@
         "color-boom-sconce-10-arm"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack",
+        "led-g25-bulb-matte-white",
         "led-bulb-g16-white-3000k-320lm"
       ],
       "related_handles": [],
@@ -182198,7 +182191,7 @@
         "color-boom-sconce-10-arm"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack",
+        "led-g25-bulb-matte-white",
         "led-bulb-g16-white-3000k-320lm"
       ],
       "related_handles": [],
@@ -183334,7 +183327,7 @@
         "color-boom-sconce-10-arm"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack",
+        "led-g25-bulb-matte-white",
         "led-bulb-g16-white-3000k-320lm"
       ],
       "related_handles": [],
@@ -184469,7 +184462,7 @@
         "color-boom-sconce-10-arm"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack",
+        "led-g25-bulb-matte-white",
         "led-bulb-g16-white-3000k-320lm"
       ],
       "related_handles": [],
@@ -185569,7 +185562,7 @@
         "color-boom-swing-arm-sconce"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack",
+        "led-g25-bulb-matte-white",
         "led-bulb-g16-white-3000k-320lm"
       ],
       "related_handles": [],
@@ -186870,7 +186863,7 @@
         "color-boom-swing-arm-sconce"
       ],
       "complementary_handles": [
-        "led-bulb-g25-3000k-500lm-3-pack",
+        "led-g25-bulb-matte-white",
         "led-bulb-g16-white-3000k-320lm"
       ],
       "related_handles": [],
@@ -187815,7 +187808,7 @@
           "sku": "50120-10-3D",
           "price": "300.00",
           "compare_price": null,
-          "qty": -18,
+          "qty": -19,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -190011,7 +190004,7 @@
           "sku": "30220-3D",
           "price": "390.00",
           "compare_price": null,
-          "qty": -13,
+          "qty": -15,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -196221,7 +196214,7 @@
           "sku": "60127S-2BO",
           "price": "320.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -4,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -196277,7 +196270,7 @@
           "sku": "60127S-3B",
           "price": "320.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -2,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -199850,7 +199843,7 @@
           "sku": "50121-8-1B",
           "price": "270.00",
           "compare_price": null,
-          "qty": -73,
+          "qty": -77,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -201071,7 +201064,7 @@
           "sku": "30224-2H",
           "price": "530.00",
           "compare_price": null,
-          "qty": -69,
+          "qty": -71,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -202253,7 +202246,7 @@
           "sku": "30321-2I",
           "price": "600.00",
           "compare_price": null,
-          "qty": -32,
+          "qty": -33,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -204217,7 +204210,7 @@
           "sku": "30320-2L",
           "price": "600.00",
           "compare_price": null,
-          "qty": -21,
+          "qty": -23,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -204525,7 +204518,7 @@
           "sku": "30320-3H",
           "price": "600.00",
           "compare_price": null,
-          "qty": -10,
+          "qty": -11,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -204665,7 +204658,7 @@
           "sku": "30320-1K",
           "price": "600.00",
           "compare_price": null,
-          "qty": -24,
+          "qty": -25,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -208404,7 +208397,7 @@
           "sku": "60129S-21-1PG",
           "price": "340.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -2,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -211026,7 +211019,7 @@
           "sku": "60222-2A",
           "price": "320.00",
           "compare_price": null,
-          "qty": -59,
+          "qty": -61,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -218375,7 +218368,7 @@
           "sku": "60226-29-1E",
           "price": "360.00",
           "compare_price": null,
-          "qty": -3,
+          "qty": -4,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -231184,7 +231177,7 @@
           "sku": "60221-1A",
           "price": "300.00",
           "compare_price": null,
-          "qty": -20,
+          "qty": -22,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -238771,7 +238764,7 @@
       "configuration_options": [],
       "variation_handles": [],
       "complementary_handles": [
-        "led-bulb-a15-3-pack"
+        "led-a15-bulb-frosted-white"
       ],
       "related_handles": [],
       "bom_parent_sku": "30222 (C)",
@@ -240758,7 +240751,7 @@
           "sku": "60720-1RH",
           "price": "570.00",
           "compare_price": null,
-          "qty": -3,
+          "qty": -5,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -246414,24 +246407,19 @@
           "pos": 18
         },
         {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11-beyond-towel-rack-36-hardware-pinkaboo.jpg?v=1776738294",
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-beyond-towel-rack-36-hardware-pinkaboo.jpg?v=1776738294",
           "alt": "Pinkaboo color Beyond towel rack 36\" Dutton Brown hardware",
           "pos": 19
         },
         {
-          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/11.5-beyond-towel-rack-36-hardware-pinkaboo.jpg?v=1776738294",
-          "alt": "Pinkaboo color Beyond towel rack 36\" Dutton Brown hardware",
-          "pos": 20
-        },
-        {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/beyond-towel-rack-36-hardware-barely-1.jpg?v=1776738294",
           "alt": "Barely color Beyond towel rack 36\" Dutton Brown hardware",
-          "pos": 21
+          "pos": 20
         },
         {
           "src": "https://cdn.shopify.com/s/files/1/0229/6239/products/beyond-towel-rack-36-hardware-black-1.jpg?v=1776738294",
           "alt": "Black color Beyond towel rack 36\" Dutton Brown hardware",
-          "pos": 22
+          "pos": 21
         }
       ],
       "url": "https://www.duttonbrown.com/products/color-beyond-towel-rack-36-hardware",
@@ -249681,7 +249669,7 @@
           "sku": "H32-6-1F",
           "price": "45.00",
           "compare_price": null,
-          "qty": -98,
+          "qty": -99,
           "option1_name": "Size",
           "option1": "6\" (C-C 4\")",
           "option2_name": "Color",
@@ -250648,7 +250636,7 @@
           "sku": "H32-4-2I",
           "price": "35.00",
           "compare_price": null,
-          "qty": -27,
+          "qty": -39,
           "option1_name": "Size",
           "option1": "4\" (C-C 2\")",
           "option2_name": "Color",
@@ -250976,6 +250964,948 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
+      "tagline": "Two heads are better than one, and our Color Head Hand Towel Bar has the posts to prove it.",
+      "body_html": "<p>Two heads are better than one, and our Color Head Hand Towel Bar has the posts to prove it.</p><p>CNC-machined solid brass holds the bar at both ends, so it stays put when wet hands grab the towel, with the circular inlay that marks the whole Head collection capping each post in your pick of 14 signature colors. Hang it beside the sink in a powder room, guest bath or primary vanity, or spec it in boutique hotel and restaurant restrooms where every detail gets a second look. Choose brass, nickel or black, each one made to order in our Minneapolis studio.</p><p>Twice the head, and still the smallest bar in the room.</p>",
+      "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-cobalt-lead.jpg?v=1794534838",
+      "image_alt": "Brass and Cobalt color Head Hand Towel Bar Dutton Brown hardware",
+      "gallery": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-cobalt-lead.jpg?v=1794534838",
+          "alt": "Brass and Cobalt color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 1
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-ochre-lead.jpg?v=1794534838",
+          "alt": "Nickel and Ochre color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 2
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-chalk-lead.jpg?v=1794534838",
+          "alt": "Black and Chalk color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 3
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/color-head-hand-towel-bar-h73-four-views-cobalt-brass.png?v=1794608247",
+          "alt": "Head Hand Towel Bar in Cobalt with Brass hardware, front, side and three-quarter views. Dutton Brown lighting",
+          "pos": 4
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/ISO-H73-Head-Hand-Towel-Bar.jpg?v=1794607137",
+          "alt": "ISO drawing Head Hand Towel Bar with measurements, Dutton Brown hardware",
+          "pos": 5
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-white.jpg?v=1794534757",
+          "alt": "Brass and White color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 6
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-chalk.jpg?v=1794534757",
+          "alt": "Brass and Chalk color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 7
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-bone.jpg?v=1794534757",
+          "alt": "Brass and Bone color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 8
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-spa.jpg?v=1794534757",
+          "alt": "Brass and Spa color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 9
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-pythongreen.jpg?v=1794534766",
+          "alt": "Brass and Python Green color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 10
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-lagoon.jpg?v=1794534766",
+          "alt": "Brass and Lagoon color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 11
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-cobalt.jpg?v=1794534757",
+          "alt": "Brass and Cobalt color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 12
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-slateblue.jpg?v=1794534766",
+          "alt": "Brass and Slate Blue color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 13
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-ochre.jpg?v=1794534766",
+          "alt": "Brass and Ochre color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 14
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-orange.jpg?v=1794534766",
+          "alt": "Brass and Orange color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 15
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-ridinghoodred.jpg?v=1794534766",
+          "alt": "Brass and Riding Hood Red color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 16
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-pinkaboo.jpg?v=1794534766",
+          "alt": "Brass and Pinkaboo color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 17
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-barely.jpg?v=1794534775",
+          "alt": "Brass and Barely color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 18
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-black.jpg?v=1794534775",
+          "alt": "Brass and Black color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 19
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-white.jpg?v=1794534775",
+          "alt": "Nickel and White color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 20
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-chalk.jpg?v=1794534775",
+          "alt": "Nickel and Chalk color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 21
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-bone.jpg?v=1794534775",
+          "alt": "Nickel and Bone color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 22
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-spa.jpg?v=1794534775",
+          "alt": "Nickel and Spa color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 23
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-pythongreen.jpg?v=1794534775",
+          "alt": "Nickel and Python Green color Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 24
+        }
+      ],
+      "url": "https://www.duttonbrown.com/products/color-head-hand-towel-bar",
+      "google_category": "Home & Garden > Bathroom Accessories > Towel Racks & Holders",
+      "tags": [
+        "head-tissue-holder-hardware",
+        "lt:quick-build",
+        "quick build",
+        "throne-tissue-holder-hardware",
+        "throne-towel-bar-hardware-24",
+        "throne-towel-rack-28-hardware",
+        "YGroup_HeadHandTowelBarH73"
+      ],
+      "price": "110.00",
+      "compare_price": null,
+      "rating_count": "",
+      "rating": "",
+      "materials": "Brass. Mounting hardware included.",
+      "lead_time": "[\"Within 1 week\"]",
+      "configuration": "Holds one hand towel. The two posts mount 8-5/8\" apart, center to center (C-C). Mark and drill the wall to match the C-C.",
+      "certification": "",
+      "product_specs": "Length: 10-5/8\", C-C: 8-5/8\", Rod: 6\", Depth: 2-3/8\", Bracket: 2\"",
+      "product_note": "",
+      "product_description": "The Color Head Hand Towel Bar is a modern hand towel bar CNC-machined from solid brass in brass, nickel or black, held on two posts with a circle of color capping each one in one of 14 powder coat colors. Made to order in our Minneapolis studio.",
+      "custom_title": "",
+      "care_guide": "",
+      "weight": "",
+      "socket_type": "",
+      "hanging_height": "",
+      "mounting_type": "",
+      "light_temperature": "",
+      "bulb_cap_type": "",
+      "bulb_shape": "",
+      "bulb_size": "",
+      "hardware_finish": "",
+      "handle_material": "",
+      "knob_handle_design": "",
+      "style": "",
+      "color_options": [
+        "white",
+        "bone",
+        "spa",
+        "python-green",
+        "lagoon-1",
+        "cobalt",
+        "slate-blue",
+        "ochre",
+        "orange-1",
+        "riding-hood-red",
+        "barely",
+        "black",
+        "chalk"
+      ],
+      "downloads": {
+        "tearsheet": null,
+        "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
+        "revit": null,
+        "warehouse_3d": null,
+        "collection": null,
+        "collection_title": null
+      },
+      "variants": [
+        {
+          "sku": "H73-1A",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "White",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-white.jpg?v=1794534757",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2A",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "White",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-white.jpg?v=1794534775",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3A",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "White",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-white.jpg?v=1794534793",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1L",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Chalk",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-chalk.jpg?v=1794534757",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2L",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Chalk",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-chalk.jpg?v=1794534775",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3L",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Chalk",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-chalk.jpg?v=1794534757",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1BO",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Bone",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-bone.jpg?v=1794534757",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2BO",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Bone",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-bone.jpg?v=1794534775",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3BO",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Bone",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-bone.jpg?v=1794534793",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1B",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Spa",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-spa.jpg?v=1794534757",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2B",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Spa",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-spa.jpg?v=1794534775",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3B",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Spa",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-spa.jpg?v=1794534793",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1PG",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Python Green",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-pythongreen.jpg?v=1794534766",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2PG",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Python Green",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-pythongreen.jpg?v=1794534775",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3PG",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Python Green",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-pythongreen.jpg?v=1794534793",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1D",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Lagoon",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-lagoon.jpg?v=1794534766",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2D",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Lagoon",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-lagoon.jpg?v=1794534784",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3D",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Lagoon",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-lagoon.jpg?v=1794534793",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1E",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Cobalt",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-cobalt.jpg?v=1794534757",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2E",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Cobalt",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-cobalt.jpg?v=1794534784",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3E",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Cobalt",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-cobalt.jpg?v=1794534793",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1F",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Slate Blue",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-slateblue.jpg?v=1794534766",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2F",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Slate Blue",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-slateblue.jpg?v=1794534784",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3F",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Slate Blue",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-slateblue.jpg?v=1794534802",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1H",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Ochre",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-ochre.jpg?v=1794534766",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2H",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Ochre",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-ochre.jpg?v=1794534757",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3H",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Ochre",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-ochre.jpg?v=1794534802",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1I",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Orange",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-orange.jpg?v=1794534766",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2I",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Orange",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-orange.jpg?v=1794534784",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3I",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Orange",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-orange.jpg?v=1794534802",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1RH",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Riding Hood Red",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-ridinghoodred.jpg?v=1794534766",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2RH",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Riding Hood Red",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-ridinghoodred.jpg?v=1794534784",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3RH",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Riding Hood Red",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-ridinghoodred.jpg?v=1794534802",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1Q",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Pinkaboo",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-pinkaboo.jpg?v=1794534766",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2Q",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Pinkaboo",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-pinkaboo.jpg?v=1794534784",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3Q",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Pinkaboo",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-pinkaboo.jpg?v=1794534802",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-1K",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Barely",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-barely.jpg?v=1794534775",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2K",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Barely",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-barely.jpg?v=1794534784",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3K",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Barely",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-barely.jpg?v=1794534802",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-13",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "Color",
+          "option2": "Black",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-black.jpg?v=1794534775",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-23",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "Color",
+          "option2": "Black",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-black.jpg?v=1794534793",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "Color",
+          "option2": "Black",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-black.jpg?v=1794534802",
+          "weight_g": "453.59237"
+        }
+      ],
+      "variant_count": 42,
+      "configuration_options": [],
+      "variation_handles": [],
+      "complementary_handles": [
+        "color-head-towel-bar-24",
+        "color-head-tissue-holder",
+        "color-head-wall-hook"
+      ],
+      "related_handles": [],
+      "bom_parent_sku": "H73 (C)",
+      "bom_canonical_sku": "H73",
+      "bom_page_url": "https://app.notion.com/p/H73-C-417ffa524c5b81208a70cf056bc2882c",
+      "bom_last_edited_at": "2026-11-13T22:32:00.000Z",
+      "parts_by_section": {
+        "Assembly Parts": [
+          {
+            "part_number": "PT1",
+            "qty": 2,
+            "desc": "Pipe tee, 1”, 1/8IPS",
+            "role": "Finish Only",
+            "effective_role": "Finish",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "FP1",
+            "qty": 2,
+            "desc": "Finial plug, 1/8IPS, flat side out",
+            "role": "Finish+Color",
+            "effective_role": "Color",
+            "category": "Misc",
+            "rack_size": 1,
+            "black_batch_stocked": true,
+            "is_color": true
+          },
+          {
+            "part_number": "PM1.5",
+            "qty": 4,
+            "desc": "Pipe, male, 1.5”",
+            "role": "Finish+Color",
+            "effective_role": "Finish",
+            "category": "Pipes",
+            "rack_size": 5,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "PF6",
+            "qty": 1,
+            "desc": "Pipe, female, 6”",
+            "role": "Finish+Color",
+            "effective_role": "Finish",
+            "category": "Pipes",
+            "rack_size": 5,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "CR3",
+            "qty": 2,
+            "desc": "Check ring, 50mm x 10mm",
+            "role": "Finish Only",
+            "effective_role": "Finish",
+            "category": "Black Batch",
+            "rack_size": 1,
+            "black_batch_stocked": true,
+            "is_color": false
+          },
+          {
+            "part_number": "NH1",
+            "qty": 2,
+            "desc": "Hex nut, thin, 1/8IPS",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "BR1",
+            "qty": 2,
+            "desc": "Bracket, hardware",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "SSC3/16",
+            "qty": 2,
+            "desc": "Set screw, 10-32, 3/16”",
+            "role": "Finish+Color",
+            "effective_role": "Finish",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          }
+        ],
+        "Installation Parts": [
+          {
+            "part_number": "SCA6",
+            "qty": 4,
+            "desc": "Screw, Anchor, #6",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "AN6",
+            "qty": 4,
+            "desc": "Anchor, #6",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "HK3/32",
+            "qty": 1,
+            "desc": "Hex key, 3/32”",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          }
+        ]
+      },
+      "parts_total": 11,
+      "has_canopy_kit": false,
+      "bom_role_source": "listing",
+      "bom_match": "sku",
+      "bom_key": "H73 (C)",
+      "bom_subitem_span": [],
+      "bom_is_color_row": true,
+      "has_color_parts": true,
+      "qc": {
+        "wire_lengths": [],
+        "extension_rods": [],
+        "canopy_configs": [],
+        "needs_pre_test": false
+      },
+      "sales_2024_units": 0,
+      "sales_2025_units": 0,
+      "sales_2024_revenue": 0.0,
+      "sales_2025_revenue": 0.0
+    },
+    {
+      "handle": "color-head-hand-towel-bar-one-post",
+      "title": "Color Head Hand Towel Bar (One Post)",
+      "type": "Hardware",
+      "bucket": "hardware",
+      "vendor": "Dutton Brown",
+      "status": "draft",
+      "published": false,
       "tagline": "What comes to mind when you hear the word “head”?",
       "body_html": "<p dir=\"ltr\">What comes to mind when you hear the word “head”? Good. Our Color Head Hand Towel Bar is a modern hand towel bar with a name you won’t forget.</p>\n<p dir=\"ltr\">CNC-machined solid brass keeps it compact and crisp, finished with the circular inlay that marks the whole Head collection, here in your pick of 14 signature colors. Hang it beside the sink in a powder room, guest bath, or primary vanity, or spec it in boutique hotel and restaurant restrooms where every detail gets a second look. Choose from brass, nickel, or black finishes, each one made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">The smallest bar in the room, and the one everyone notices.</p>\n<ul></ul>\n<ul></ul>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-head-hand-towel-bar-hardware-brass-orange-1.jpg?v=1775629988",
@@ -251102,7 +252032,7 @@
           "pos": 24
         }
       ],
-      "url": "https://www.duttonbrown.com/products/color-head-hand-towel-bar",
+      "url": "https://www.duttonbrown.com/products/color-head-hand-towel-bar-one-post",
       "google_category": "Home & Garden > Bathroom Accessories > Towel Racks & Holders",
       "tags": [
         "head-tissue-holder-hardware",
@@ -254324,7 +255254,7 @@
           "sku": "H43-3H",
           "price": "70.00",
           "compare_price": null,
-          "qty": -12,
+          "qty": -13,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -261525,7 +262455,7 @@
           "sku": "H13-2F",
           "price": "45.00",
           "compare_price": null,
-          "qty": -63,
+          "qty": -64,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -263296,7 +264226,7 @@
           "sku": "H30-13-3E",
           "price": "65.00",
           "compare_price": null,
-          "qty": -12,
+          "qty": -16,
           "option1_name": "Size",
           "option1": "13\" (C-C 11-5/8\")",
           "option2_name": "Color",
@@ -264111,7 +265041,7 @@
           "sku": "H30-5-1D",
           "price": "35.00",
           "compare_price": null,
-          "qty": -58,
+          "qty": -64,
           "option1_name": "Size",
           "option1": "5\" (C-C 3-5/8\")",
           "option2_name": "Color",
@@ -264125,7 +265055,7 @@
           "sku": "H30-7-1D",
           "price": "45.00",
           "compare_price": null,
-          "qty": -170,
+          "qty": -176,
           "option1_name": "Size",
           "option1": "7\" (C-C 5-5/8\")",
           "option2_name": "Color",
@@ -266062,7 +266992,7 @@
           "sku": "H16-3H",
           "price": "45.00",
           "compare_price": null,
-          "qty": -15,
+          "qty": -16,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -272356,7 +273286,7 @@
           "sku": "H33-14-2F",
           "price": "55.00",
           "compare_price": null,
-          "qty": -2,
+          "qty": -3,
           "option1_name": "Size",
           "option1": "14\" (C-C 12\")",
           "option2_name": "Color",
@@ -278924,6 +279854,303 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
+      "tagline": "Two heads are better than one, and our Head Hand Towel Bar has the posts to prove it.",
+      "body_html": "<p>Two heads are better than one, and our Head Hand Towel Bar has the posts to prove it.</p><p>CNC-machined solid brass holds the bar at both ends, so it stays put when wet hands grab the towel, with the circular inlay that marks the whole Head collection on each post. Hang it beside the sink in a powder room, guest bath or primary vanity, or spec it in boutique hotel and restaurant restrooms where every detail gets a second look. Choose brass, nickel or black, each one made to order in our Minneapolis studio.</p><p>Twice the head, and still the smallest bar in the room.</p>",
+      "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-lead.jpg?v=1794534849",
+      "image_alt": "Brass Head Hand Towel Bar Dutton Brown hardware",
+      "gallery": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass-lead.jpg?v=1794534849",
+          "alt": "Brass Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 1
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel-lead.jpg?v=1794534849",
+          "alt": "Nickel Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 2
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black-lead.jpg?v=1794534849",
+          "alt": "Black Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 3
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/ISO-H73-Head-Hand-Towel-Bar.jpg?v=1794607137",
+          "alt": "ISO drawing Head Hand Towel Bar with measurements, Dutton Brown hardware",
+          "pos": 4
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass.jpg?v=1794534816",
+          "alt": "Brass Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 5
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel.jpg?v=1794534817",
+          "alt": "Nickel Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 6
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black.jpg?v=1794534816",
+          "alt": "Black Head Hand Towel Bar Dutton Brown hardware",
+          "pos": 7
+        }
+      ],
+      "url": "https://www.duttonbrown.com/products/head-hand-towel-bar",
+      "google_category": "Home & Garden > Bathroom Accessories > Towel Racks & Holders",
+      "tags": [
+        "head-tissue-holder-hardware",
+        "lt:quick-build",
+        "quick build",
+        "throne-tissue-holder-hardware",
+        "throne-towel-bar-hardware-24",
+        "throne-towel-rack-28-hardware",
+        "YGroup_HeadHandTowelBarH73"
+      ],
+      "price": "110.00",
+      "compare_price": null,
+      "rating_count": "",
+      "rating": "",
+      "materials": "Brass. Mounting hardware included.",
+      "lead_time": "[\"Within 1 week\"]",
+      "configuration": "Holds one hand towel. The two posts mount 8-5/8\" apart, center to center (C-C). Mark and drill the wall to match the C-C.",
+      "certification": "",
+      "product_specs": "Length: 10-5/8\", C-C: 8-5/8\", Rod: 6\", Depth: 2-3/8\", Bracket: 2\"",
+      "product_note": "",
+      "product_description": "The Head Hand Towel Bar is a modern hand towel bar CNC-machined from solid brass in brass, nickel or black, held on two posts, each capped with the signature Head circular inlay. Made to order in our Minneapolis studio.",
+      "custom_title": "",
+      "care_guide": "",
+      "weight": "",
+      "socket_type": "",
+      "hanging_height": "",
+      "mounting_type": "",
+      "light_temperature": "",
+      "bulb_cap_type": "",
+      "bulb_shape": "",
+      "bulb_size": "",
+      "hardware_finish": "",
+      "handle_material": "",
+      "knob_handle_design": "",
+      "style": "",
+      "color_options": [],
+      "downloads": {
+        "tearsheet": null,
+        "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
+        "revit": null,
+        "warehouse_3d": null,
+        "collection": null,
+        "collection_title": null
+      },
+      "variants": [
+        {
+          "sku": "H73-1",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Brass",
+          "option2_name": "",
+          "option2": "",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-brass.jpg?v=1794534816",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-2",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Nickel",
+          "option2_name": "",
+          "option2": "",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-nickel.jpg?v=1794534817",
+          "weight_g": "453.59237"
+        },
+        {
+          "sku": "H73-3",
+          "price": "110.00",
+          "compare_price": null,
+          "qty": 0,
+          "option1_name": "Finish",
+          "option1": "Black",
+          "option2_name": "",
+          "option2": "",
+          "option3_name": "",
+          "option3": "",
+          "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-black.jpg?v=1794534816",
+          "weight_g": "453.59237"
+        }
+      ],
+      "variant_count": 3,
+      "configuration_options": [],
+      "variation_handles": [],
+      "complementary_handles": [
+        "head-towel-bar-24",
+        "head-tissue-holder-hardware",
+        "head-wall-hook"
+      ],
+      "related_handles": [],
+      "bom_parent_sku": "H73",
+      "bom_canonical_sku": "H73",
+      "bom_page_url": "https://app.notion.com/p/H73-416ffa524c5b815d8a22c12569696bcc",
+      "bom_last_edited_at": "2026-11-13T02:08:00.000Z",
+      "parts_by_section": {
+        "Assembly Parts": [
+          {
+            "part_number": "PT1",
+            "qty": 2,
+            "desc": "Pipe tee, 1”, 1/8IPS",
+            "role": "Finish Only",
+            "effective_role": "Finish",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "FP1",
+            "qty": 2,
+            "desc": "Finial plug, 1/8IPS, flat side out",
+            "role": "Finish+Color",
+            "effective_role": "Finish",
+            "category": "Misc",
+            "rack_size": 1,
+            "black_batch_stocked": true,
+            "is_color": false
+          },
+          {
+            "part_number": "PM1.5",
+            "qty": 4,
+            "desc": "Pipe, male, 1.5”",
+            "role": "Finish+Color",
+            "effective_role": "Finish",
+            "category": "Pipes",
+            "rack_size": 5,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "PF6",
+            "qty": 1,
+            "desc": "Pipe, female, 6”",
+            "role": "Finish+Color",
+            "effective_role": "Finish",
+            "category": "Pipes",
+            "rack_size": 5,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "CR3",
+            "qty": 2,
+            "desc": "Check ring, 50mm x 10mm",
+            "role": "Finish Only",
+            "effective_role": "Finish",
+            "category": "Black Batch",
+            "rack_size": 1,
+            "black_batch_stocked": true,
+            "is_color": false
+          },
+          {
+            "part_number": "NH1",
+            "qty": 2,
+            "desc": "Hex nut, thin, 1/8IPS",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "BR1",
+            "qty": 2,
+            "desc": "Bracket, hardware",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "SSC3/16",
+            "qty": 2,
+            "desc": "Set screw, 10-32, 3/16”",
+            "role": "Finish+Color",
+            "effective_role": "Finish",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          }
+        ],
+        "Installation Parts": [
+          {
+            "part_number": "SCA6",
+            "qty": 4,
+            "desc": "Screw, Anchor, #6",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "AN6",
+            "qty": 4,
+            "desc": "Anchor, #6",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          },
+          {
+            "part_number": "HK3/32",
+            "qty": 1,
+            "desc": "Hex key, 3/32”",
+            "role": "Standard",
+            "effective_role": "Standard",
+            "category": "Uncategorized",
+            "rack_size": 1,
+            "black_batch_stocked": false,
+            "is_color": false
+          }
+        ]
+      },
+      "parts_total": 11,
+      "has_canopy_kit": false,
+      "bom_role_source": "listing",
+      "bom_match": "sku",
+      "bom_key": "H73",
+      "bom_subitem_span": [],
+      "bom_is_color_row": false,
+      "has_color_parts": false,
+      "qc": {
+        "wire_lengths": [],
+        "extension_rods": [],
+        "canopy_configs": [],
+        "needs_pre_test": false
+      },
+      "sales_2024_units": 0,
+      "sales_2025_units": 0,
+      "sales_2024_revenue": 0.0,
+      "sales_2025_revenue": 0.0
+    },
+    {
+      "handle": "head-hand-towel-bar-one-post",
+      "title": "Head Hand Towel Bar (One Post)",
+      "type": "Hardware",
+      "bucket": "hardware",
+      "vendor": "Dutton Brown",
+      "status": "draft",
+      "published": false,
       "tagline": "What comes to mind when you hear the word “head”?",
       "body_html": "<p dir=\"ltr\">What comes to mind when you hear the word “head”? Good. Our Head Hand Towel Bar is a modern hand towel bar with a name you won’t forget.</p>\n<p dir=\"ltr\">CNC-machined solid brass keeps it compact and crisp, finished with the circular inlay that marks the whole Head collection. Hang it beside the sink in a powder room, guest bath, or primary vanity, or spec it in boutique hotel and restaurant restrooms where every detail gets a second look. Choose from brass, nickel, or black finishes, each one made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">The smallest bar in the room, and the one everyone notices.</p>\n<ul></ul>\n<ul></ul>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/head-hand-towel-bar-hardware-brass-1.jpg?v=1775630051",
@@ -278970,7 +280197,7 @@
           "pos": 8
         }
       ],
-      "url": "https://www.duttonbrown.com/products/head-hand-towel-bar",
+      "url": "https://www.duttonbrown.com/products/head-hand-towel-bar-one-post",
       "google_category": "Home & Garden > Bathroom Accessories > Towel Racks & Holders",
       "tags": [
         "head-tissue-holder-hardware",
@@ -284545,7 +285772,7 @@
           "sku": "H60-36-1",
           "price": "240.00",
           "compare_price": null,
-          "qty": -153,
+          "qty": -154,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "",
@@ -285776,7 +287003,7 @@
           "sku": "SAC-ALL",
           "price": "24.00",
           "compare_price": null,
-          "qty": -3244,
+          "qty": -3249,
           "option1_name": "Color",
           "option1": "All Colors",
           "option2_name": "",
@@ -285784,7 +287011,7 @@
           "option3_name": "",
           "option3": "",
           "image": "https://cdn.shopify.com/s/files/1/0229/6239/products/powder-coat-sample-colors-ring-dutton-brown-updated-1.jpg?v=1775675927",
-          "weight_g": "0"
+          "weight_g": "2.2679618500000003"
         },
         {
           "sku": "SAC-A",
@@ -285804,7 +287031,7 @@
           "sku": "SAC-L",
           "price": "2.00",
           "compare_price": null,
-          "qty": -241,
+          "qty": -242,
           "option1_name": "Color",
           "option1": "Chalk",
           "option2_name": "",
@@ -285832,7 +287059,7 @@
           "sku": "SAC-B",
           "price": "2.00",
           "compare_price": null,
-          "qty": -674,
+          "qty": -675,
           "option1_name": "Color",
           "option1": "Spa",
           "option2_name": "",
@@ -285846,7 +287073,7 @@
           "sku": "SAC-PG",
           "price": "2.00",
           "compare_price": null,
-          "qty": -353,
+          "qty": -354,
           "option1_name": "Color",
           "option1": "Python Green",
           "option2_name": "",
@@ -285860,7 +287087,7 @@
           "sku": "SAC-D",
           "price": "2.00",
           "compare_price": null,
-          "qty": -759,
+          "qty": -761,
           "option1_name": "Color",
           "option1": "Lagoon",
           "option2_name": "",
@@ -285874,7 +287101,7 @@
           "sku": "SAC-E",
           "price": "2.00",
           "compare_price": null,
-          "qty": -487,
+          "qty": -489,
           "option1_name": "Color",
           "option1": "Cobalt",
           "option2_name": "",
@@ -285888,7 +287115,7 @@
           "sku": "SAC-F",
           "price": "2.00",
           "compare_price": null,
-          "qty": -722,
+          "qty": -723,
           "option1_name": "Color",
           "option1": "Slate Blue",
           "option2_name": "",
@@ -285902,7 +287129,7 @@
           "sku": "SAC-H",
           "price": "2.00",
           "compare_price": null,
-          "qty": -438,
+          "qty": -439,
           "option1_name": "Color",
           "option1": "Ochre",
           "option2_name": "",
@@ -285930,7 +287157,7 @@
           "sku": "SAC-RH",
           "price": "2.00",
           "compare_price": null,
-          "qty": -189,
+          "qty": -190,
           "option1_name": "Color",
           "option1": "Riding Hood Red",
           "option2_name": "",
@@ -285958,7 +287185,7 @@
           "sku": "SAC-K",
           "price": "2.00",
           "compare_price": null,
-          "qty": -406,
+          "qty": -407,
           "option1_name": "Color",
           "option1": "Barely",
           "option2_name": "",
@@ -286284,7 +287511,7 @@
           "sku": "ER1-3-1",
           "price": "9.00",
           "compare_price": null,
-          "qty": -109,
+          "qty": -111,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Size",
@@ -286396,7 +287623,7 @@
           "sku": "ER1-6-2",
           "price": "13.00",
           "compare_price": null,
-          "qty": -232,
+          "qty": -233,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Size",
@@ -288602,7 +289829,7 @@
           "sku": "SAF-ALL",
           "price": "10.00",
           "compare_price": null,
-          "qty": -2150,
+          "qty": -2155,
           "option1_name": "Finish",
           "option1": "All Finishes",
           "option2_name": "",
@@ -288610,7 +289837,7 @@
           "option3_name": "",
           "option3": "",
           "image": "https://cdn.shopify.com/s/files/1/0229/6239/products/finish-sample-ring-dutton-brown-1_815f8606-ec32-4056-85f0-88949151d0e0.jpg?v=1747968599",
-          "weight_g": "0"
+          "weight_g": "2.2679618500000003"
         },
         {
           "sku": "SAF-1",
@@ -289823,7 +291050,7 @@
           "sku": "BULB-A15-W",
           "price": "12.00",
           "compare_price": null,
-          "qty": 1877,
+          "qty": 1867,
           "option1_name": "Brightness",
           "option1": "600 lumens",
           "option2_name": "",
@@ -290189,7 +291416,7 @@
           "sku": "BULB-G25-W",
           "price": "15.00",
           "compare_price": null,
-          "qty": 1385,
+          "qty": 1371,
           "option1_name": "Brightness",
           "option1": "550 lumens",
           "option2_name": "",
@@ -290596,8 +291823,8 @@
       "type": "Bulbs",
       "bucket": "other",
       "vendor": "Home Depot",
-      "status": "active",
-      "published": true,
+      "status": "draft",
+      "published": false,
       "tagline": "This is a high-quality white LED bulb designed for use in our enclosed fixtures.",
       "body_html": "<p>This is a high-quality white LED bulb designed for use in our enclosed fixtures. The bulb is small enough to fit into all globe sizes we offer, and its color temperature provides relaxing, crisp \"bright white\" light.</p>",
       "image": "",
@@ -292874,7 +294101,7 @@
           "sku": "x-redo-pp",
           "price": "3.00",
           "compare_price": "3.00",
-          "qty": 999624,
+          "qty": 999622,
           "option1_name": "Price",
           "option1": "A6L8H",
           "option2_name": "",
@@ -295048,7 +296275,7 @@
           "sku": "x-redo",
           "price": "3.99",
           "compare_price": "3.99",
-          "qty": 999737,
+          "qty": 999735,
           "option1_name": "Price",
           "option1": "K8D7L",
           "option2_name": "",
@@ -295062,7 +296289,7 @@
           "sku": "x-redo",
           "price": "4.74",
           "compare_price": "4.74",
-          "qty": 999848,
+          "qty": 999847,
           "option1_name": "Price",
           "option1": "E4Q9N",
           "option2_name": "",
@@ -295076,7 +296303,7 @@
           "sku": "x-redo",
           "price": "5.49",
           "compare_price": "5.49",
-          "qty": 999885,
+          "qty": 999884,
           "option1_name": "Price",
           "option1": "L6S5P",
           "option2_name": "",
@@ -295118,7 +296345,7 @@
           "sku": "x-redo",
           "price": "8.99",
           "compare_price": "8.99",
-          "qty": 999894,
+          "qty": 999893,
           "option1_name": "Price",
           "option1": "W6Q4O",
           "option2_name": "",
@@ -295132,7 +296359,7 @@
           "sku": "x-redo",
           "price": "10.24",
           "compare_price": "10.24",
-          "qty": 999894,
+          "qty": 999892,
           "option1_name": "Price",
           "option1": "J8T4R",
           "option2_name": "",
@@ -295146,7 +296373,7 @@
           "sku": "x-redo",
           "price": "11.74",
           "compare_price": "11.74",
-          "qty": 999879,
+          "qty": 999877,
           "option1_name": "Price",
           "option1": "T6C8C",
           "option2_name": "",
@@ -295160,7 +296387,7 @@
           "sku": "x-redo",
           "price": "13.24",
           "compare_price": "13.24",
-          "qty": 999912,
+          "qty": 999910,
           "option1_name": "Price",
           "option1": "X7U1Q",
           "option2_name": "",
@@ -295174,7 +296401,7 @@
           "sku": "x-redo",
           "price": "14.74",
           "compare_price": "14.74",
-          "qty": 999936,
+          "qty": 999935,
           "option1_name": "Price",
           "option1": "B7V8H",
           "option2_name": "",
@@ -295188,7 +296415,7 @@
           "sku": "x-redo",
           "price": "16.23",
           "compare_price": "16.23",
-          "qty": 999946,
+          "qty": 999945,
           "option1_name": "Price",
           "option1": "H2E2F",
           "option2_name": "",
@@ -295202,7 +296429,7 @@
           "sku": "x-redo",
           "price": "17.73",
           "compare_price": "17.73",
-          "qty": 999948,
+          "qty": 999947,
           "option1_name": "Price",
           "option1": "M5K7T",
           "option2_name": "",
@@ -295216,7 +296443,7 @@
           "sku": "x-redo",
           "price": "19.48",
           "compare_price": "19.48",
-          "qty": 999960,
+          "qty": 999959,
           "option1_name": "Price",
           "option1": "S2C0M",
           "option2_name": "",
@@ -295230,7 +296457,7 @@
           "sku": "x-redo",
           "price": "20.99",
           "compare_price": "20.99",
-          "qty": 999958,
+          "qty": 999957,
           "option1_name": "Price",
           "option1": "O9F5T",
           "option2_name": "",
@@ -295244,7 +296471,7 @@
           "sku": "x-redo",
           "price": "22.74",
           "compare_price": "22.74",
-          "qty": 999964,
+          "qty": 999963,
           "option1_name": "Price",
           "option1": "U5L2D",
           "option2_name": "",
@@ -295300,7 +296527,7 @@
           "sku": "x-redo",
           "price": "29.99",
           "compare_price": "29.99",
-          "qty": 999982,
+          "qty": 999981,
           "option1_name": "Price",
           "option1": "D6I1N",
           "option2_name": "",
@@ -295328,7 +296555,7 @@
           "sku": "x-redo",
           "price": "33.74",
           "compare_price": "33.74",
-          "qty": 999984,
+          "qty": 999983,
           "option1_name": "Price",
           "option1": "H1X2O",
           "option2_name": "",
