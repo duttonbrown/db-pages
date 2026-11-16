@@ -224,11 +224,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "astar-3-globe-chandelier",
@@ -399,11 +395,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 1,
-      "sales_2024_revenue": 559.2,
-      "sales_2025_revenue": 700.0
+      }
     },
     {
       "handle": "astar-5-globe-chandelier",
@@ -579,11 +571,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "big-orbi-globe-chandelier",
@@ -1224,11 +1212,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 799.0,
-      "sales_2025_revenue": 1600.0
+      }
     },
     {
       "handle": "color-alegria-chandelier",
@@ -3181,11 +3165,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 50,
-      "sales_2025_units": 58,
-      "sales_2024_revenue": 68551.0,
-      "sales_2025_revenue": 84995.0
+      }
     },
     {
       "handle": "color-astar-3-globe-chandelier",
@@ -3953,11 +3933,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 13,
-      "sales_2025_units": 9,
-      "sales_2024_revenue": 8807.4,
-      "sales_2025_revenue": 6020.0
+      }
     },
     {
       "handle": "color-astar-5-globe-chandelier",
@@ -4725,11 +4701,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 3,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 3357.2,
-      "sales_2025_revenue": 2400.0
+      }
     },
     {
       "handle": "color-axia-chandelier",
@@ -6049,11 +6021,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 10,
-      "sales_2025_units": 19,
-      "sales_2024_revenue": 9490.0,
-      "sales_2025_revenue": 18949.0
+      }
     },
     {
       "handle": "color-beaded-urchin-chandelier-20",
@@ -7075,11 +7043,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 14,
-      "sales_2025_units": 3,
-      "sales_2024_revenue": 12226.4,
-      "sales_2025_revenue": 2700.0
+      }
     },
     {
       "handle": "color-beaded-urchin-chandelier",
@@ -8122,11 +8086,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 23,
-      "sales_2025_units": 16,
-      "sales_2024_revenue": 24837.4,
-      "sales_2025_revenue": 17597.0
+      }
     },
     {
       "handle": "color-big-axia-chandelier",
@@ -9446,11 +9406,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 12,
-      "sales_2024_revenue": 6245.0,
-      "sales_2025_revenue": 15600.0
+      }
     },
     {
       "handle": "color-big-orbi-globe-chandelier",
@@ -11326,11 +11282,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 57,
-      "sales_2025_units": 47,
-      "sales_2024_revenue": 45383.2,
-      "sales_2025_revenue": 37610.44
+      }
     },
     {
       "handle": "color-big-prisma-globe-chandelier-42",
@@ -13227,11 +13179,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 33,
-      "sales_2025_units": 22,
-      "sales_2024_revenue": 39087.4,
-      "sales_2025_revenue": 27398.0
+      }
     },
     {
       "handle": "color-big-status-globe-chandelier-42",
@@ -15124,11 +15072,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 54,
-      "sales_2025_units": 25,
-      "sales_2024_revenue": 53746.2,
-      "sales_2025_revenue": 26148.0
+      }
     },
     {
       "handle": "color-captain-chandelier-29",
@@ -17167,11 +17111,7 @@
           }
         ],
         "needs_pre_test": true
-      },
-      "sales_2024_units": 11,
-      "sales_2025_units": 27,
-      "sales_2024_revenue": 8069.0,
-      "sales_2025_revenue": 22420.0
+      }
     },
     {
       "handle": "color-captain-chandelier-47",
@@ -19210,11 +19150,7 @@
           }
         ],
         "needs_pre_test": true
-      },
-      "sales_2024_units": 37,
-      "sales_2025_units": 14,
-      "sales_2024_revenue": 33943.0,
-      "sales_2025_revenue": 14300.0
+      }
     },
     {
       "handle": "color-commander-chandelier-29",
@@ -21086,11 +21022,7 @@
           }
         ],
         "needs_pre_test": true
-      },
-      "sales_2024_units": 3,
-      "sales_2025_units": 8,
-      "sales_2024_revenue": 2757.0,
-      "sales_2025_revenue": 7938.0
+      }
     },
     {
       "handle": "color-commander-chandelier-47",
@@ -22949,11 +22881,7 @@
           }
         ],
         "needs_pre_test": true
-      },
-      "sales_2024_units": 21,
-      "sales_2025_units": 16,
-      "sales_2024_revenue": 23559.0,
-      "sales_2025_revenue": 21659.0
+      }
     },
     {
       "handle": "color-crown-globe-chandelier-32",
@@ -24910,11 +24838,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 36,
-      "sales_2025_units": 23,
-      "sales_2024_revenue": 50084.2,
-      "sales_2025_revenue": 34096.0
+      }
     },
     {
       "handle": "color-crown-globe-chandelier-46",
@@ -26863,11 +26787,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 14,
-      "sales_2025_units": 27,
-      "sales_2024_revenue": 27586.2,
-      "sales_2025_revenue": 58998.0
+      }
     },
     {
       "handle": "color-elliptical-sputnik-chandelier",
@@ -28751,11 +28671,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 10,
-      "sales_2025_units": 3,
-      "sales_2024_revenue": 9690.0,
-      "sales_2025_revenue": 2699.0
+      }
     },
     {
       "handle": "color-orbi-globe-chandelier",
@@ -30611,11 +30527,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 14,
-      "sales_2025_units": 11,
-      "sales_2024_revenue": 9786.0,
-      "sales_2025_revenue": 7697.0
+      }
     },
     {
       "handle": "color-prisma-globe-chandelier",
@@ -32541,11 +32453,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 30,
-      "sales_2025_units": 28,
-      "sales_2024_revenue": 26790.2,
-      "sales_2025_revenue": 26447.0
+      }
     },
     {
       "handle": "color-status-globe-chandelier-35",
@@ -34439,11 +34347,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 66,
-      "sales_2025_units": 76,
-      "sales_2024_revenue": 52414.4,
-      "sales_2025_revenue": 64345.0
+      }
     },
     {
       "handle": "color-tetra-globe-chandelier",
@@ -36263,11 +36167,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 18,
-      "sales_2025_units": 15,
-      "sales_2024_revenue": 13482.0,
-      "sales_2025_revenue": 11847.0
+      }
     },
     {
       "handle": "crown-globe-chandelier",
@@ -37040,11 +36940,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 25,
-      "sales_2025_units": 8,
-      "sales_2024_revenue": 34695.2,
-      "sales_2025_revenue": 12000.0
+      }
     },
     {
       "handle": "crown-globe-chandelier-46",
@@ -37839,11 +37735,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 22,
-      "sales_2025_units": 1,
-      "sales_2024_revenue": 43978.0,
-      "sales_2025_revenue": 2200.0
+      }
     },
     {
       "handle": "orbi-globe-chandelier",
@@ -38467,11 +38359,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 1,
-      "sales_2024_revenue": 699.0,
-      "sales_2025_revenue": 700.0
+      }
     },
     {
       "handle": "tetra-globe-chandelier",
@@ -39093,11 +38981,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 3,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 2247.0,
-      "sales_2025_revenue": 1600.0
+      }
     },
     {
       "handle": "urchin-chandelier-20",
@@ -39657,11 +39541,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 3,
-      "sales_2024_revenue": 3495.0,
-      "sales_2025_revenue": 2100.0
+      }
     },
     {
       "handle": "urchin-chandelier-27",
@@ -40231,11 +40111,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 4634.2,
-      "sales_2025_revenue": 4798.0
+      }
     },
     {
       "handle": "big-orbi-globe-flush-mount",
@@ -40865,11 +40741,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 799.0,
-      "sales_2025_revenue": 1600.0
+      }
     },
     {
       "handle": "bling-flush-mount",
@@ -41327,11 +41199,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 1800.0
+      }
     },
     {
       "handle": "cap-globe-flush-mount-10",
@@ -41852,11 +41720,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 20,
-      "sales_2024_revenue": 2961.0,
-      "sales_2025_revenue": 7169.0
+      }
     },
     {
       "handle": "cap-globe-flush-mount-12",
@@ -42388,11 +42252,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 14,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 5177.38,
-      "sales_2025_revenue": 1600.0
+      }
     },
     {
       "handle": "cap-globe-flush-mount-6",
@@ -42920,11 +42780,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 7,
-      "sales_2025_units": 5,
-      "sales_2024_revenue": 1625.2,
-      "sales_2025_revenue": 1510.04
+      }
     },
     {
       "handle": "cap-globe-flush-mount-8",
@@ -43451,11 +43307,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 23,
-      "sales_2025_units": 39,
-      "sales_2024_revenue": 6305.4,
-      "sales_2025_revenue": 12495.21
+      }
     },
     {
       "handle": "color-alegria-flush-mount",
@@ -45428,11 +45280,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 32,
-      "sales_2025_units": 32,
-      "sales_2024_revenue": 43369.0,
-      "sales_2025_revenue": 47899.0
+      }
     },
     {
       "handle": "color-ballsy-globe-flush-mount",
@@ -46634,11 +46482,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 54,
-      "sales_2025_units": 48,
-      "sales_2024_revenue": 25482.8,
-      "sales_2025_revenue": 23945.12
+      }
     },
     {
       "handle": "color-beaded-urchin-flush-mount-20",
@@ -47639,11 +47483,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 8,
-      "sales_2024_revenue": 5394.0,
-      "sales_2025_revenue": 7196.0
+      }
     },
     {
       "handle": "color-beaded-urchin-flush-mount-27",
@@ -48674,11 +48514,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 8,
-      "sales_2025_units": 15,
-      "sales_2024_revenue": 8792.0,
-      "sales_2025_revenue": 15399.0
+      }
     },
     {
       "handle": "color-big-orbi-globe-flush-mount",
@@ -50544,11 +50380,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 22,
-      "sales_2025_units": 28,
-      "sales_2024_revenue": 17258.4,
-      "sales_2025_revenue": 22398.0
+      }
     },
     {
       "handle": "color-big-status-globe-flush-mount-42",
@@ -52420,11 +52252,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 17,
-      "sales_2024_revenue": 5794.2,
-      "sales_2025_revenue": 17799.0
+      }
     },
     {
       "handle": "color-bling-flush-mount",
@@ -54057,11 +53885,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 16,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 4587.0
+      }
     },
     {
       "handle": "color-cadbury-dome-flush-mount-10",
@@ -55781,11 +55605,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 19,
-      "sales_2025_units": 12,
-      "sales_2024_revenue": 5111.0,
-      "sales_2025_revenue": 3538.0
+      }
     },
     {
       "handle": "color-cadbury-dome-flush-mount-12",
@@ -57505,11 +57325,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 20,
-      "sales_2025_units": 15,
-      "sales_2024_revenue": 6123.55,
-      "sales_2025_revenue": 4908.0
+      }
     },
     {
       "handle": "color-cadbury-dome-flush-mount-8",
@@ -59230,11 +59046,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 249.0,
-      "sales_2025_revenue": 1960.0
+      }
     },
     {
       "handle": "color-cap-globe-flush-mount-10",
@@ -60944,11 +60756,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 12,
-      "sales_2025_units": 46,
-      "sales_2024_revenue": 3948.0,
-      "sales_2025_revenue": 16529.0
+      }
     },
     {
       "handle": "color-cap-globe-flush-mount-12",
@@ -62672,11 +62480,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 11,
-      "sales_2025_units": 23,
-      "sales_2024_revenue": 4120.38,
-      "sales_2025_revenue": 9179.0
+      }
     },
     {
       "handle": "color-cap-globe-flush-mount-6",
@@ -64388,11 +64192,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 19,
-      "sales_2025_units": 14,
-      "sales_2024_revenue": 4493.2,
-      "sales_2025_revenue": 4200.0
+      }
     },
     {
       "handle": "color-cap-globe-flush-mount-8",
@@ -66102,11 +65902,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 41,
-      "sales_2025_units": 59,
-      "sales_2024_revenue": 11271.6,
-      "sales_2025_revenue": 18675.0
+      }
     },
     {
       "handle": "color-captain-flush-mount-29",
@@ -66987,11 +66783,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 37,
-      "sales_2025_units": 30,
-      "sales_2024_revenue": 25303.8,
-      "sales_2025_revenue": 22500.0
+      }
     },
     {
       "handle": "color-captain-flush-mount-47",
@@ -67872,11 +67664,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 16,
-      "sales_2025_units": 14,
-      "sales_2024_revenue": 13104.0,
-      "sales_2025_revenue": 12519.0
+      }
     },
     {
       "handle": "color-commander-flush-mount-29",
@@ -68784,11 +68572,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 12,
-      "sales_2025_units": 18,
-      "sales_2024_revenue": 10201.36,
-      "sales_2025_revenue": 16738.0
+      }
     },
     {
       "handle": "color-commander-flush-mount-47",
@@ -69696,11 +69480,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 11,
-      "sales_2025_units": 42,
-      "sales_2024_revenue": 11113.2,
-      "sales_2025_revenue": 50058.0
+      }
     },
     {
       "handle": "color-crown-globe-flush-mount-32",
@@ -71632,11 +71412,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 10,
-      "sales_2025_units": 9,
-      "sales_2024_revenue": 13990.0,
-      "sales_2025_revenue": 13298.0
+      }
     },
     {
       "handle": "color-crown-globe-flush-mount-46",
@@ -73581,11 +73357,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 7996.0,
-      "sales_2025_revenue": 15400.0
+      }
     },
     {
       "handle": "color-elliptical-sputnik-flush-mount",
@@ -75454,11 +75226,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 4595.2,
-      "sales_2025_revenue": 1800.0
+      }
     },
     {
       "handle": "color-eureka-flush-mount",
@@ -76472,11 +76240,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 51,
-      "sales_2025_units": 27,
-      "sales_2024_revenue": 9336.6,
-      "sales_2025_revenue": 6210.0
+      }
     },
     {
       "handle": "color-hemi-dome-flush-mount-10",
@@ -77480,11 +77244,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 109,
-      "sales_2025_units": 88,
-      "sales_2024_revenue": 28023.8,
-      "sales_2025_revenue": 23650.0
+      }
     },
     {
       "handle": "color-hemi-flush-mount-12",
@@ -78488,11 +78248,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 212,
-      "sales_2025_units": 50,
-      "sales_2024_revenue": 58645.8,
-      "sales_2025_revenue": 14790.0
+      }
     },
     {
       "handle": "color-hemi-dome-flush-mount-8",
@@ -79496,11 +79252,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 45,
-      "sales_2025_units": 44,
-      "sales_2024_revenue": 10659.4,
-      "sales_2025_revenue": 10967.0
+      }
     },
     {
       "handle": "color-icon-2-flush-mount",
@@ -80634,11 +80386,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 2880.0
+      }
     },
     {
       "handle": "color-icon-3-flush-mount",
@@ -81772,11 +81520,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 8,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 3832.0,
-      "sales_2025_revenue": 3229.0
+      }
     },
     {
       "handle": "color-lepore-flush-mount",
@@ -82367,11 +82111,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 16,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 3504.0,
-      "sales_2025_revenue": 1500.0
+      }
     },
     {
       "handle": "color-lure-globe-flush-mount-10",
@@ -84109,11 +83849,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 33,
-      "sales_2025_units": 31,
-      "sales_2024_revenue": 11447.2,
-      "sales_2025_revenue": 11218.0
+      }
     },
     {
       "handle": "color-lure-globe-flush-mount-12",
@@ -85856,11 +85592,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 16,
-      "sales_2025_units": 14,
-      "sales_2024_revenue": 6224.2,
-      "sales_2025_revenue": 5880.0
+      }
     },
     {
       "handle": "color-lure-globe-flush-mount-6",
@@ -87568,11 +87300,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 12,
-      "sales_2025_units": 10,
-      "sales_2024_revenue": 3236.8,
-      "sales_2025_revenue": 2923.0
+      }
     },
     {
       "handle": "color-lure-globe-flush-mount-8",
@@ -89309,11 +89037,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 33,
-      "sales_2025_units": 27,
-      "sales_2024_revenue": 10197.0,
-      "sales_2025_revenue": 8868.0
+      }
     },
     {
       "handle": "color-maxo-flush-mount-13",
@@ -90455,11 +90179,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 13,
-      "sales_2025_units": 20,
-      "sales_2024_revenue": 6487.0,
-      "sales_2025_revenue": 10796.0
+      }
     },
     {
       "handle": "color-maxo-flush-mount-8",
@@ -91587,11 +91307,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 19,
-      "sales_2024_revenue": 898.0,
-      "sales_2025_revenue": 9296.0
+      }
     },
     {
       "handle": "color-mino-flush-mount",
@@ -92365,11 +92081,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 778.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-orbi-globe-flush-mount",
@@ -94211,11 +93923,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 45,
-      "sales_2025_units": 75,
-      "sales_2024_revenue": 31315.2,
-      "sales_2025_revenue": 52489.0
+      }
     },
     {
       "handle": "color-pilot-flush-mount-29",
@@ -95152,11 +94860,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 5,
-      "sales_2024_revenue": 1212.2,
-      "sales_2025_revenue": 1750.0
+      }
     },
     {
       "handle": "color-pilot-flush-mount-47",
@@ -96093,11 +95797,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 1695.0,
-      "sales_2025_revenue": 1600.0
+      }
     },
     {
       "handle": "color-pose-flush-mount",
@@ -97252,11 +96952,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 19,
-      "sales_2025_units": 31,
-      "sales_2024_revenue": 8065.2,
-      "sales_2025_revenue": 13845.0
+      }
     },
     {
       "handle": "color-reader-flush-mount",
@@ -98268,11 +97964,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 84,
-      "sales_2025_units": 101,
-      "sales_2024_revenue": 17472.4,
-      "sales_2025_revenue": 24594.0
+      }
     },
     {
       "handle": "color-sputnik-flush-mount",
@@ -99339,11 +99031,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 12,
-      "sales_2025_units": 17,
-      "sales_2024_revenue": 3408.6,
-      "sales_2025_revenue": 5096.0
+      }
     },
     {
       "handle": "color-status-globe-flush-mount-35",
@@ -101212,11 +100900,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 45,
-      "sales_2025_units": 60,
-      "sales_2024_revenue": 35955.0,
-      "sales_2025_revenue": 50592.0
+      }
     },
     {
       "handle": "color-supreme-globe-flush-mount",
@@ -102967,11 +102651,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 71,
-      "sales_2025_units": 120,
-      "sales_2024_revenue": 31609.6,
-      "sales_2025_revenue": 58980.0
+      }
     },
     {
       "handle": "color-tetra-globe-flush-mount",
@@ -104755,11 +104435,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 18,
-      "sales_2025_units": 13,
-      "sales_2024_revenue": 13182.4,
-      "sales_2025_revenue": 10400.0
+      }
     },
     {
       "handle": "color-twink-flush-mount",
@@ -105748,11 +105424,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 151,
-      "sales_2025_units": 156,
-      "sales_2024_revenue": 24009.0,
-      "sales_2025_revenue": 27639.0
+      }
     },
     {
       "handle": "color-vogue-4-flush-mount",
@@ -106833,11 +106505,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 15,
-      "sales_2025_units": 22,
-      "sales_2024_revenue": 5235.0,
-      "sales_2025_revenue": 8800.0
+      }
     },
     {
       "handle": "color-vogue-7-flush-mount",
@@ -107935,11 +107603,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 18,
-      "sales_2024_revenue": 2994.0,
-      "sales_2025_revenue": 9747.0
+      }
     },
     {
       "handle": "crown-globe-flush-mount",
@@ -108696,11 +108360,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 2798.0,
-      "sales_2025_revenue": 3000.0
+      }
     },
     {
       "handle": "crown-globe-flush-mount-46",
@@ -109470,11 +109130,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 1,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 2200.0
+      }
     },
     {
       "handle": "lepore-flush-mount",
@@ -109845,11 +109501,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 25,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 5475.0,
-      "sales_2025_revenue": 969.0
+      }
     },
     {
       "handle": "orbi-globe-flush-mount",
@@ -110454,11 +110106,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 3,
-      "sales_2025_units": 8,
-      "sales_2024_revenue": 1957.2,
-      "sales_2025_revenue": 5598.0
+      }
     },
     {
       "handle": "supreme-globe-flush-mount",
@@ -111029,11 +110677,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 16,
-      "sales_2025_units": 21,
-      "sales_2024_revenue": 7184.0,
-      "sales_2025_revenue": 10245.0
+      }
     },
     {
       "handle": "tetra-globe-flush-mount",
@@ -111620,11 +111264,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 4494.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "twink-flush-mount",
@@ -111977,11 +111617,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 60,
-      "sales_2025_units": 43,
-      "sales_2024_revenue": 9540.0,
-      "sales_2025_revenue": 7740.0
+      }
     },
     {
       "handle": "urchin-flush-mount-20",
@@ -112525,11 +112161,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 1,
-      "sales_2024_revenue": 1398.0,
-      "sales_2025_revenue": 700.0
+      }
     },
     {
       "handle": "urchin-flush-mount-27",
@@ -113068,11 +112700,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 1598.0,
-      "sales_2025_revenue": 1599.0
+      }
     },
     {
       "handle": "bling-pendant",
@@ -113644,11 +113272,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 996.0,
-      "sales_2025_revenue": 1800.0
+      }
     },
     {
       "handle": "cap-globe-pendant-10",
@@ -114261,11 +113885,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 8,
-      "sales_2025_units": 25,
-      "sales_2024_revenue": 2652.4,
-      "sales_2025_revenue": 9000.0
+      }
     },
     {
       "handle": "cap-globe-pendant-12",
@@ -114877,11 +114497,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 57,
-      "sales_2025_units": 61,
-      "sales_2024_revenue": 22171.4,
-      "sales_2025_revenue": 24400.0
+      }
     },
     {
       "handle": "cap-globe-pendant-6",
@@ -115496,11 +115112,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 31,
-      "sales_2024_revenue": 2331.0,
-      "sales_2025_revenue": 8972.0
+      }
     },
     {
       "handle": "cap-globe-pendant-8",
@@ -116113,11 +115725,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 19,
-      "sales_2025_units": 27,
-      "sales_2024_revenue": 5681.0,
-      "sales_2025_revenue": 8535.0
+      }
     },
     {
       "handle": "color-bling-pendant",
@@ -117858,11 +117466,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 23,
-      "sales_2024_revenue": 996.0,
-      "sales_2025_revenue": 6900.0
+      }
     },
     {
       "handle": "color-cadbury-dome-pendant-10",
@@ -119600,11 +119204,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 28,
-      "sales_2025_units": 25,
-      "sales_2024_revenue": 8034.2,
-      "sales_2025_revenue": 7500.0
+      }
     },
     {
       "handle": "color-cadbury-dome-pendant-12",
@@ -121342,11 +120942,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 32,
-      "sales_2025_units": 60,
-      "sales_2024_revenue": 10330.6,
-      "sales_2025_revenue": 19786.0
+      }
     },
     {
       "handle": "color-cadbury-dome-pendant-8",
@@ -123084,11 +122680,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 13,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 3497.0,
-      "sales_2025_revenue": 1960.0
+      }
     },
     {
       "handle": "color-cap-globe-pendant-10",
@@ -124884,11 +124476,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 54,
-      "sales_2025_units": 92,
-      "sales_2024_revenue": 18706.4,
-      "sales_2025_revenue": 33098.0
+      }
     },
     {
       "handle": "color-cap-globe-pendant-12",
@@ -126684,11 +126272,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 137,
-      "sales_2025_units": 148,
-      "sales_2024_revenue": 52720.8,
-      "sales_2025_revenue": 59194.0
+      }
     },
     {
       "handle": "color-cap-globe-pendant-6",
@@ -128483,11 +128067,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 20,
-      "sales_2025_units": 40,
-      "sales_2024_revenue": 5180.0,
-      "sales_2025_revenue": 11918.0
+      }
     },
     {
       "handle": "color-cap-globe-pendant-8",
@@ -130283,11 +129863,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 90,
-      "sales_2025_units": 66,
-      "sales_2024_revenue": 26910.0,
-      "sales_2025_revenue": 21015.0
+      }
     },
     {
       "handle": "color-echo-dome-pendant-10",
@@ -132017,11 +131593,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 34,
-      "sales_2025_units": 47,
-      "sales_2024_revenue": 9826.0,
-      "sales_2025_revenue": 14045.0
+      }
     },
     {
       "handle": "color-echo-pendant-12",
@@ -133751,11 +133323,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 73,
-      "sales_2025_units": 50,
-      "sales_2024_revenue": 22371.6,
-      "sales_2025_revenue": 16500.0
+      }
     },
     {
       "handle": "color-echo-dome-pendant-8",
@@ -135485,11 +135053,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 21,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 5649.0,
-      "sales_2025_revenue": 1960.0
+      }
     },
     {
       "handle": "color-eureka-pendant",
@@ -137233,11 +136797,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 45,
-      "sales_2025_units": 33,
-      "sales_2024_revenue": 8955.0,
-      "sales_2025_revenue": 8148.0
+      }
     },
     {
       "handle": "color-lure-globe-pendant-10",
@@ -139032,11 +138592,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 49,
-      "sales_2025_units": 28,
-      "sales_2024_revenue": 17564.4,
-      "sales_2025_revenue": 10360.0
+      }
     },
     {
       "handle": "color-lure-globe-pendant-12",
@@ -140831,11 +140387,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 70,
-      "sales_2025_units": 62,
-      "sales_2024_revenue": 28590.6,
-      "sales_2025_revenue": 26029.0
+      }
     },
     {
       "handle": "color-lure-globe-pendant-6",
@@ -142628,11 +142180,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 14,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 4046.0,
-      "sales_2025_revenue": 600.0
+      }
     },
     {
       "handle": "color-lure-globe-pendant-8",
@@ -144426,11 +143974,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 38,
-      "sales_2025_units": 25,
-      "sales_2024_revenue": 11742.0,
-      "sales_2025_revenue": 8208.0
+      }
     },
     {
       "handle": "color-maxo-pendant-13",
@@ -146470,11 +146014,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 11,
-      "sales_2024_revenue": 4911.0,
-      "sales_2025_revenue": 7000.0
+      }
     },
     {
       "handle": "color-maxo-pendant-8",
@@ -148503,11 +148043,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 3,
-      "sales_2024_revenue": 529.0,
-      "sales_2025_revenue": 1650.0
+      }
     },
     {
       "handle": "color-mino-pendant",
@@ -149827,11 +149363,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 898.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-pilot-pendant-29",
@@ -151785,11 +151317,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 25,
-      "sales_2025_units": 13,
-      "sales_2024_revenue": 7995.0,
-      "sales_2025_revenue": 4729.0
+      }
     },
     {
       "handle": "color-pilot-pendant-47",
@@ -153766,11 +153294,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 23,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 7189.0,
-      "sales_2025_revenue": 759.0
+      }
     },
     {
       "handle": "color-reader-pendant",
@@ -155510,11 +155034,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 37,
-      "sales_2025_units": 35,
-      "sales_2024_revenue": 8103.0,
-      "sales_2025_revenue": 8838.0
+      }
     },
     {
       "handle": "color-twink-pendant",
@@ -157185,11 +156705,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 48,
-      "sales_2025_units": 52,
-      "sales_2024_revenue": 8592.0,
-      "sales_2025_revenue": 11126.84
+      }
     },
     {
       "handle": "twink-pendant",
@@ -157679,11 +157195,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 895.0,
-      "sales_2025_revenue": 440.0
+      }
     },
     {
       "handle": "color-boom-plug-in-sconce-3-arm",
@@ -158828,11 +158340,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 178,
-      "sales_2025_units": 26,
-      "sales_2024_revenue": 55002.0,
-      "sales_2025_revenue": 9156.0
+      }
     },
     {
       "handle": "color-boom-plug-in-sconce-10-arm",
@@ -159975,11 +159483,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 1316.0,
-      "sales_2025_revenue": 1600.0
+      }
     },
     {
       "handle": "color-boom-plug-in-sconce-6-arm",
@@ -161122,11 +160626,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 9,
-      "sales_2024_revenue": 2871.0,
-      "sales_2025_revenue": 3420.0
+      }
     },
     {
       "handle": "color-boom-plug-in-sconce-no-arm",
@@ -162248,11 +161748,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 13,
-      "sales_2025_units": 13,
-      "sales_2024_revenue": 3887.0,
-      "sales_2025_revenue": 4379.0
+      }
     },
     {
       "handle": "color-boom-swing-arm-plug-in-sconce",
@@ -163560,11 +163056,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 9,
-      "sales_2024_revenue": 838.0,
-      "sales_2025_revenue": 4410.0
+      }
     },
     {
       "handle": "color-boom-swing-arm-plug-in-sconce-9-arm",
@@ -164862,11 +164354,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 1880.0
+      }
     },
     {
       "handle": "color-reader-plug-in-sconce-10-arm",
@@ -166010,11 +165498,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 5,
-      "sales_2024_revenue": 558.0,
-      "sales_2025_revenue": 1578.0
+      }
     },
     {
       "handle": "color-reader-plug-in-sconce-3-arm",
@@ -167158,11 +166642,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 17,
-      "sales_2025_units": 46,
-      "sales_2024_revenue": 4403.0,
-      "sales_2025_revenue": 13677.0
+      }
     },
     {
       "handle": "color-reader-plug-in-sconce-6-arm",
@@ -168306,11 +167786,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 13,
-      "sales_2025_units": 9,
-      "sales_2024_revenue": 3497.0,
-      "sales_2025_revenue": 2560.0
+      }
     },
     {
       "handle": "color-reader-plug-in-sconce-no-arm",
@@ -169432,11 +168908,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 21,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 5229.0,
-      "sales_2025_revenue": 1960.0
+      }
     },
     {
       "handle": "color-reader-swing-arm-plug-in-sconce",
@@ -170726,11 +170198,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 8,
-      "sales_2024_revenue": 1476.0,
-      "sales_2025_revenue": 3520.0
+      }
     },
     {
       "handle": "color-reader-swing-arm-plug-in-sconce-9-arm",
@@ -172020,11 +171488,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "adore-sconce",
@@ -172171,11 +171635,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "bianca-sconce-12",
@@ -172611,11 +172071,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 12,
-      "sales_2024_revenue": 1345.0,
-      "sales_2025_revenue": 3476.0
+      }
     },
     {
       "handle": "bianca-sconce-20",
@@ -173054,11 +172510,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 16,
-      "sales_2025_units": 8,
-      "sales_2024_revenue": 4784.0,
-      "sales_2025_revenue": 2800.0
+      }
     },
     {
       "handle": "cap-globe-sconce-ii-6",
@@ -173534,11 +172986,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 41,
-      "sales_2025_units": 47,
-      "sales_2024_revenue": 12199.2,
-      "sales_2025_revenue": 16144.0
+      }
     },
     {
       "handle": "cap-globe-sconce-ii-8",
@@ -174022,11 +173470,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 63,
-      "sales_2025_units": 11,
-      "sales_2024_revenue": 21987.0,
-      "sales_2025_revenue": 4265.0
+      }
     },
     {
       "handle": "cap-globe-sconce-i-6",
@@ -174516,11 +173960,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 7,
-      "sales_2025_units": 13,
-      "sales_2024_revenue": 1603.0,
-      "sales_2025_revenue": 3250.0
+      }
     },
     {
       "handle": "cap-globe-sconce-i-8",
@@ -175016,11 +174456,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 3,
-      "sales_2024_revenue": 1494.0,
-      "sales_2025_revenue": 840.0
+      }
     },
     {
       "handle": "carrera-globe-sconce",
@@ -175220,11 +174656,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-adore-sconce",
@@ -175960,11 +175392,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-amigo-sconce",
@@ -177020,11 +176448,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 57,
-      "sales_2025_units": 100,
-      "sales_2024_revenue": 13844.4,
-      "sales_2025_revenue": 26895.0
+      }
     },
     {
       "handle": "color-beso-sconce",
@@ -178089,11 +177513,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 15,
-      "sales_2025_units": 10,
-      "sales_2024_revenue": 3486.0,
-      "sales_2025_revenue": 2679.0
+      }
     },
     {
       "handle": "color-bianca-sconce-12",
@@ -179167,11 +178587,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 37,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 10945.0
+      }
     },
     {
       "handle": "color-bianca-sconce-20",
@@ -180244,11 +179660,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 38,
-      "sales_2024_revenue": 1495.0,
-      "sales_2025_revenue": 13300.0
+      }
     },
     {
       "handle": "color-boom-sconce-10-arm",
@@ -181379,11 +180791,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 7,
-      "sales_2025_units": 16,
-      "sales_2024_revenue": 2093.0,
-      "sales_2025_revenue": 5699.0
+      }
     },
     {
       "handle": "color-boom-sconce-3-arm",
@@ -182514,11 +181922,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 301,
-      "sales_2025_units": 43,
-      "sales_2024_revenue": 83700.0,
-      "sales_2025_revenue": 13473.0
+      }
     },
     {
       "handle": "color-boom-sconce-6-arm",
@@ -183650,11 +183054,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 25,
-      "sales_2025_units": 39,
-      "sales_2024_revenue": 7109.4,
-      "sales_2025_revenue": 13005.0
+      }
     },
     {
       "handle": "color-boom-sconce-no-arm",
@@ -184763,11 +184163,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 132,
-      "sales_2025_units": 75,
-      "sales_2024_revenue": 35292.8,
-      "sales_2025_revenue": 21973.0
+      }
     },
     {
       "handle": "color-boom-swing-arm-sconce",
@@ -186064,11 +185460,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 17,
-      "sales_2025_units": 23,
-      "sales_2024_revenue": 6783.0,
-      "sales_2025_revenue": 10248.0
+      }
     },
     {
       "handle": "color-boom-swing-arm-sconce-9-arm",
@@ -187354,11 +186746,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 32,
-      "sales_2024_revenue": 758.0,
-      "sales_2025_revenue": 13440.0
+      }
     },
     {
       "handle": "color-cadbury-dome-sconce-10",
@@ -188451,11 +187839,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 84,
-      "sales_2025_units": 115,
-      "sales_2024_revenue": 24817.0,
-      "sales_2025_revenue": 33880.0
+      }
     },
     {
       "handle": "color-cadbury-dome-sconce-8",
@@ -189548,11 +188932,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 69,
-      "sales_2025_units": 81,
-      "sales_2024_revenue": 18561.0,
-      "sales_2025_revenue": 22570.0
+      }
     },
     {
       "handle": "color-cap-globe-sconce-ii-6",
@@ -190656,11 +190036,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 94,
-      "sales_2025_units": 59,
-      "sales_2024_revenue": 27926.6,
-      "sales_2025_revenue": 20293.0
+      }
     },
     {
       "handle": "color-cap-globe-sconce-ii-8",
@@ -191787,11 +191163,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 80,
-      "sales_2025_units": 24,
-      "sales_2024_revenue": 27920.0,
-      "sales_2025_revenue": 9938.0
+      }
     },
     {
       "handle": "color-cap-globe-sconce-i-6",
@@ -192923,11 +192295,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 47,
-      "sales_2025_units": 100,
-      "sales_2024_revenue": 10763.0,
-      "sales_2025_revenue": 24916.0
+      }
     },
     {
       "handle": "color-cap-globe-sconce-i-8",
@@ -194069,11 +193437,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 29,
-      "sales_2025_units": 29,
-      "sales_2024_revenue": 7221.0,
-      "sales_2025_revenue": 8120.0
+      }
     },
     {
       "handle": "color-carrera-globe-sconce",
@@ -195313,11 +194677,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-display-sconce",
@@ -196941,11 +196301,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 183,
-      "sales_2025_units": 357,
-      "sales_2024_revenue": 36177.0,
-      "sales_2025_revenue": 83793.0
+      }
     },
     {
       "handle": "color-elite-sconce-left",
@@ -197716,11 +197072,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 43,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 13686.4,
-      "sales_2025_revenue": 658.0
+      }
     },
     {
       "handle": "color-elite-sconce-right",
@@ -198492,11 +197844,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 30,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 9870.0,
-      "sales_2025_revenue": 658.0
+      }
     },
     {
       "handle": "color-hemi-dome-sconce-10",
@@ -199500,11 +198848,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 70,
-      "sales_2025_units": 48,
-      "sales_2024_revenue": 17871.0,
-      "sales_2025_revenue": 13038.0
+      }
     },
     {
       "handle": "color-hemi-dome-sconce-8",
@@ -200508,11 +199852,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 87,
-      "sales_2025_units": 107,
-      "sales_2024_revenue": 20697.4,
-      "sales_2025_revenue": 26673.0
+      }
     },
     {
       "handle": "color-icon-2-globe-sconce",
@@ -201648,11 +200988,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 245,
-      "sales_2025_units": 244,
-      "sales_2024_revenue": 97356.0,
-      "sales_2025_revenue": 114615.0
+      }
     },
     {
       "handle": "color-icon-3-globe-sconce",
@@ -202777,11 +202113,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 148,
-      "sales_2025_units": 197,
-      "sales_2024_revenue": 69838.2,
-      "sales_2025_revenue": 103896.0
+      }
     },
     {
       "handle": "color-legend-2-globe-sconce",
@@ -203949,11 +203281,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 165,
-      "sales_2025_units": 243,
-      "sales_2024_revenue": 70270.2,
-      "sales_2025_revenue": 115977.0
+      }
     },
     {
       "handle": "color-legend-3-globe-sconce",
@@ -205132,11 +204460,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 151,
-      "sales_2025_units": 182,
-      "sales_2024_revenue": 73951.8,
-      "sales_2025_revenue": 98946.64
+      }
     },
     {
       "handle": "color-lepore-sconce",
@@ -205737,11 +205061,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 22,
-      "sales_2024_revenue": 1971.0,
-      "sales_2025_revenue": 5500.0
+      }
     },
     {
       "handle": "color-major-sconce-15",
@@ -207421,11 +206741,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 20,
-      "sales_2025_units": 33,
-      "sales_2024_revenue": 4488.4,
-      "sales_2025_revenue": 8166.0
+      }
     },
     {
       "handle": "color-major-sconce-21",
@@ -209105,11 +208421,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 20,
-      "sales_2024_revenue": 259.0,
-      "sales_2025_revenue": 5268.0
+      }
     },
     {
       "handle": "color-major-sconce-9",
@@ -210789,11 +210101,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 63,
-      "sales_2025_units": 51,
-      "sales_2024_revenue": 12463.92,
-      "sales_2025_revenue": 11668.0
+      }
     },
     {
       "handle": "color-monarch-sconce",
@@ -211852,11 +211160,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 225,
-      "sales_2025_units": 217,
-      "sales_2024_revenue": 60487.92,
-      "sales_2025_revenue": 67970.0
+      }
     },
     {
       "handle": "color-phoenix-sconce",
@@ -212907,11 +212211,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 60,
-      "sales_2025_units": 41,
-      "sales_2024_revenue": 17700.8,
-      "sales_2025_revenue": 14197.0
+      }
     },
     {
       "handle": "color-pilot-sconce-11",
@@ -214570,11 +213870,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 104,
-      "sales_2025_units": 193,
-      "sales_2024_revenue": 26832.4,
-      "sales_2025_revenue": 53935.0
+      }
     },
     {
       "handle": "color-pilot-sconce-17",
@@ -216233,11 +215529,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 104,
-      "sales_2025_units": 106,
-      "sales_2024_revenue": 28917.6,
-      "sales_2025_revenue": 31506.0
+      }
     },
     {
       "handle": "color-pilot-sconce-23",
@@ -217896,11 +217188,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 59,
-      "sales_2025_units": 95,
-      "sales_2024_revenue": 17342.0,
-      "sales_2025_revenue": 30274.0
+      }
     },
     {
       "handle": "color-pilot-sconce-29",
@@ -219559,11 +218847,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 36,
-      "sales_2025_units": 39,
-      "sales_2024_revenue": 11484.0,
-      "sales_2025_revenue": 13218.0
+      }
     },
     {
       "handle": "color-reader-sconce-10-arm",
@@ -221236,11 +220520,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 20,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 4783.94,
-      "sales_2025_revenue": 1800.0
+      }
     },
     {
       "handle": "color-reader-sconce-3-arm",
@@ -222913,11 +222193,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 111,
-      "sales_2025_units": 103,
-      "sales_2024_revenue": 24221.4,
-      "sales_2025_revenue": 26452.0
+      }
     },
     {
       "handle": "color-reader-sconce-6-arm",
@@ -224590,11 +223866,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 55,
-      "sales_2025_units": 39,
-      "sales_2024_revenue": 12320.2,
-      "sales_2025_revenue": 10767.0
+      }
     },
     {
       "handle": "color-reader-sconce-no-arm",
@@ -226245,11 +225517,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 145,
-      "sales_2025_units": 168,
-      "sales_2024_revenue": 29928.8,
-      "sales_2025_revenue": 39471.45
+      }
     },
     {
       "handle": "color-reader-swing-arm-sconce-17-arm",
@@ -227531,11 +226799,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 10,
-      "sales_2025_units": 35,
-      "sales_2024_revenue": 3690.0,
-      "sales_2025_revenue": 13827.0
+      }
     },
     {
       "handle": "color-reader-swing-arm-sconce-9-arm",
@@ -228817,11 +228081,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 48,
-      "sales_2024_revenue": 698.0,
-      "sales_2025_revenue": 17718.0
+      }
     },
     {
       "handle": "color-ruler-sconce",
@@ -229890,11 +229150,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 223,
-      "sales_2025_units": 176,
-      "sales_2024_revenue": 65062.4,
-      "sales_2025_revenue": 59866.0
+      }
     },
     {
       "handle": "color-scepter-sconce-10",
@@ -230957,11 +230213,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 117,
-      "sales_2025_units": 84,
-      "sales_2024_revenue": 25535.4,
-      "sales_2025_revenue": 20628.0
+      }
     },
     {
       "handle": "color-scepter-sconce-18",
@@ -232025,11 +231277,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 132,
-      "sales_2025_units": 42,
-      "sales_2024_revenue": 32718.6,
-      "sales_2025_revenue": 12447.0
+      }
     },
     {
       "handle": "color-snug-sconce",
@@ -233648,11 +232896,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 184,
-      "sales_2025_units": 95,
-      "sales_2024_revenue": 30933.34,
-      "sales_2025_revenue": 18783.0
+      }
     },
     {
       "handle": "color-sputnik-sconce",
@@ -234719,11 +233963,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 1794.0,
-      "sales_2025_revenue": 1200.0
+      }
     },
     {
       "handle": "color-tall-snug-sconce",
@@ -236365,11 +235605,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 39,
-      "sales_2025_units": 12,
-      "sales_2024_revenue": 7301.92,
-      "sales_2025_revenue": 2578.0
+      }
     },
     {
       "handle": "color-twink-sconce",
@@ -237956,11 +237192,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 112,
-      "sales_2025_units": 135,
-      "sales_2024_revenue": 17649.0,
-      "sales_2025_revenue": 24132.0
+      }
     },
     {
       "handle": "color-visage-sconce-6",
@@ -239051,11 +238283,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 24,
-      "sales_2025_units": 17,
-      "sales_2024_revenue": 8376.0,
-      "sales_2025_revenue": 6800.0
+      }
     },
     {
       "handle": "color-vogue-4-sconce",
@@ -240126,11 +239354,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 295,
-      "sales_2025_units": 105,
-      "sales_2024_revenue": 102047.6,
-      "sales_2025_revenue": 41184.0
+      }
     },
     {
       "handle": "color-vogue-7-sconce",
@@ -241228,11 +240452,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 18,
-      "sales_2025_units": 40,
-      "sales_2024_revenue": 8982.0,
-      "sales_2025_revenue": 21847.0
+      }
     },
     {
       "handle": "elite-sconce-left",
@@ -241412,11 +240632,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 25,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 7896.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "elite-sconce-right",
@@ -241596,11 +240812,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 15,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 4935.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "lepore-acrylic-sconce",
@@ -241972,11 +241184,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 219.0,
-      "sales_2025_revenue": 500.0
+      }
     },
     {
       "handle": "phoenix-sconce",
@@ -242387,11 +241595,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 20,
-      "sales_2025_units": 10,
-      "sales_2024_revenue": 5980.0,
-      "sales_2025_revenue": 3500.0
+      }
     },
     {
       "handle": "scepter-sconce-10",
@@ -242815,11 +242019,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 138,
-      "sales_2025_units": 34,
-      "sales_2024_revenue": 30222.0,
-      "sales_2025_revenue": 8469.0
+      }
     },
     {
       "handle": "scepter-sconce-18",
@@ -243258,11 +242458,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 34,
-      "sales_2025_units": 32,
-      "sales_2024_revenue": 8466.0,
-      "sales_2025_revenue": 9600.0
+      }
     },
     {
       "handle": "snug-sconce",
@@ -243639,11 +242835,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 12,
-      "sales_2025_units": 9,
-      "sales_2024_revenue": 2028.0,
-      "sales_2025_revenue": 1800.0
+      }
     },
     {
       "handle": "tall-snug-sconce",
@@ -244058,11 +243250,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 8,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 1512.0,
-      "sales_2025_revenue": 880.0
+      }
     },
     {
       "handle": "twink-sconce",
@@ -244419,11 +243607,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 25,
-      "sales_2025_units": 37,
-      "sales_2024_revenue": 3879.6,
-      "sales_2025_revenue": 6618.0
+      }
     },
     {
       "handle": "visage-globe-sconce-6",
@@ -244875,11 +244059,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 698.0,
-      "sales_2025_revenue": 2800.0
+      }
     },
     {
       "handle": "bling-wall-hook-hardware",
@@ -245142,11 +244322,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 12,
-      "sales_2024_revenue": 195.0,
-      "sales_2025_revenue": 480.0
+      }
     },
     {
       "handle": "caliber-hook",
@@ -245465,11 +244641,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 3,
-      "sales_2024_revenue": 156.0,
-      "sales_2025_revenue": 118.0
+      }
     },
     {
       "handle": "caliber-pull-hardware",
@@ -245810,11 +244982,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 36,
-      "sales_2025_units": 53,
-      "sales_2024_revenue": 1604.0,
-      "sales_2025_revenue": 2426.0
+      }
     },
     {
       "handle": "color-beyond-towel-rack-24-hardware",
@@ -246297,11 +245465,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 80,
-      "sales_2025_units": 93,
-      "sales_2024_revenue": 13418.6,
-      "sales_2025_revenue": 15781.0
+      }
     },
     {
       "handle": "color-beyond-towel-rack-36-hardware",
@@ -246789,11 +245953,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 47,
-      "sales_2025_units": 23,
-      "sales_2024_revenue": 9353.0,
-      "sales_2025_revenue": 4598.0
+      }
     },
     {
       "handle": "color-bling-wall-hook-hardware",
@@ -247301,11 +246461,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 49,
-      "sales_2025_units": 50,
-      "sales_2024_revenue": 1872.0,
-      "sales_2025_revenue": 1993.0
+      }
     },
     {
       "handle": "color-caliber-hook",
@@ -248273,11 +247429,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 58,
-      "sales_2025_units": 56,
-      "sales_2024_revenue": 2246.4,
-      "sales_2025_revenue": 2235.0
+      }
     },
     {
       "handle": "color-caliber-pull-hardware-black",
@@ -249157,11 +248309,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 169,
-      "sales_2025_units": 188,
-      "sales_2024_revenue": 7706.0,
-      "sales_2025_revenue": 9690.0
+      }
     },
     {
       "handle": "color-caliber-pull-hardware-brass",
@@ -250053,11 +249201,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 382,
-      "sales_2025_units": 235,
-      "sales_2024_revenue": 16028.4,
-      "sales_2025_revenue": 11963.0
+      }
     },
     {
       "handle": "color-caliber-pull-hardware-nickel",
@@ -250950,11 +250094,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 563,
-      "sales_2025_units": 456,
-      "sales_2024_revenue": 26897.2,
-      "sales_2025_revenue": 21006.0
+      }
     },
     {
       "handle": "color-head-hand-towel-bar",
@@ -251892,11 +251032,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-head-hand-towel-bar-one-post",
@@ -252856,11 +251992,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 92,
-      "sales_2025_units": 64,
-      "sales_2024_revenue": 7078.4,
-      "sales_2025_revenue": 5114.0
+      }
     },
     {
       "handle": "color-head-wall-hook",
@@ -253818,11 +252950,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 67,
-      "sales_2025_units": 29,
-      "sales_2024_revenue": 2895.2,
-      "sales_2025_revenue": 1303.0
+      }
     },
     {
       "handle": "color-head-knob-hardware",
@@ -254690,11 +253818,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 73,
-      "sales_2025_units": 85,
-      "sales_2024_revenue": 2166.0,
-      "sales_2025_revenue": 2550.0
+      }
     },
     {
       "handle": "color-head-tissue-holder",
@@ -255650,11 +254774,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 115,
-      "sales_2025_units": 100,
-      "sales_2024_revenue": 7672.8,
-      "sales_2025_revenue": 6995.0
+      }
     },
     {
       "handle": "color-head-towel-bar-18",
@@ -256595,11 +255715,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 25,
-      "sales_2025_units": 20,
-      "sales_2024_revenue": 3199.2,
-      "sales_2025_revenue": 2600.0
+      }
     },
     {
       "handle": "color-head-towel-bar-18-old-draft",
@@ -257490,11 +256606,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 25,
-      "sales_2025_units": 20,
-      "sales_2024_revenue": 3199.2,
-      "sales_2025_revenue": 2600.0
+      }
     },
     {
       "handle": "color-head-towel-bar-24",
@@ -258435,11 +257547,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 44,
-      "sales_2025_units": 37,
-      "sales_2024_revenue": 5740.2,
-      "sales_2025_revenue": 5148.0
+      }
     },
     {
       "handle": "color-head-towel-rack-18",
@@ -259389,11 +258497,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 358.0,
-      "sales_2025_revenue": 1080.0
+      }
     },
     {
       "handle": "color-head-towel-rack-24",
@@ -260343,11 +259447,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 13,
-      "sales_2024_revenue": 1791.0,
-      "sales_2025_revenue": 2599.0
+      }
     },
     {
       "handle": "color-highness-knob-hardware",
@@ -261228,11 +260328,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 94,
-      "sales_2025_units": 12,
-      "sales_2024_revenue": 2726.0,
-      "sales_2025_revenue": 358.0
+      }
     },
     {
       "handle": "color-nip-knob-hardware",
@@ -261947,11 +261043,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-persona-wall-hook-hardware",
@@ -262885,11 +261977,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 148,
-      "sales_2025_units": 207,
-      "sales_2024_revenue": 6388.8,
-      "sales_2025_revenue": 9298.0
+      }
     },
     {
       "handle": "color-persona-knob-hardware",
@@ -263767,11 +262855,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 795,
-      "sales_2025_units": 453,
-      "sales_2024_revenue": 23031.8,
-      "sales_2025_revenue": 13518.0
+      }
     },
     {
       "handle": "color-persona-pull-hardware-black",
@@ -264649,11 +263733,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 177,
-      "sales_2025_units": 123,
-      "sales_2024_revenue": 7212.4,
-      "sales_2025_revenue": 4993.0
+      }
     },
     {
       "handle": "color-persona-pull-hardware-brass",
@@ -265534,11 +264614,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 189,
-      "sales_2025_units": 257,
-      "sales_2024_revenue": 8338.8,
-      "sales_2025_revenue": 11026.0
+      }
     },
     {
       "handle": "color-persona-pull-hardware-nickel",
@@ -266425,11 +265501,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 692,
-      "sales_2025_units": 460,
-      "sales_2024_revenue": 29830.8,
-      "sales_2025_revenue": 20567.0
+      }
     },
     {
       "handle": "color-snug-wall-hook",
@@ -267377,11 +266449,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 296,
-      "sales_2025_units": 294,
-      "sales_2024_revenue": 12927.2,
-      "sales_2025_revenue": 13215.0
+      }
     },
     {
       "handle": "color-stud-hook-hardware",
@@ -268259,11 +267327,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 129,
-      "sales_2025_units": 84,
-      "sales_2024_revenue": 3741.0,
-      "sales_2025_revenue": 2516.0
+      }
     },
     {
       "handle": "color-swift-hook",
@@ -269175,11 +268239,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-swift-knob",
@@ -270028,11 +269088,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 190,
-      "sales_2025_units": 592,
-      "sales_2024_revenue": 4750.0,
-      "sales_2025_revenue": 16955.0
+      }
     },
     {
       "handle": "color-swift-pull-black",
@@ -271283,11 +270339,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 123,
-      "sales_2025_units": 244,
-      "sales_2024_revenue": 4557.0,
-      "sales_2025_revenue": 8993.0
+      }
     },
     {
       "handle": "color-swift-pull-brass",
@@ -272538,11 +271590,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 180,
-      "sales_2025_units": 282,
-      "sales_2024_revenue": 6525.0,
-      "sales_2025_revenue": 10877.0
+      }
     },
     {
       "handle": "color-swift-pull-nickel",
@@ -273793,11 +272841,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 132,
-      "sales_2025_units": 700,
-      "sales_2024_revenue": 4968.0,
-      "sales_2025_revenue": 26007.7
+      }
     },
     {
       "handle": "color-swift-towel-bar-18",
@@ -274712,11 +273756,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-swift-towel-bar-24",
@@ -275631,11 +274671,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-swift-towel-rack-18",
@@ -276550,11 +275586,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-swift-towel-rack-24",
@@ -277469,11 +276501,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-tux-wall-hook-hardware",
@@ -278349,11 +277377,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 77,
-      "sales_2025_units": 39,
-      "sales_2024_revenue": 3352.8,
-      "sales_2025_revenue": 1750.0
+      }
     },
     {
       "handle": "color-tux-knob-hardware",
@@ -279161,11 +278185,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 109,
-      "sales_2025_units": 79,
-      "sales_2024_revenue": 3808.0,
-      "sales_2025_revenue": 2765.0
+      }
     },
     {
       "handle": "dapper-hook",
@@ -279533,11 +278553,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 43,
-      "sales_2025_units": 27,
-      "sales_2024_revenue": 3187.0,
-      "sales_2025_revenue": 1966.0
+      }
     },
     {
       "handle": "ghost-tissue-holder-hardware",
@@ -279840,11 +278856,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 276.0,
-      "sales_2025_revenue": 140.0
+      }
     },
     {
       "handle": "head-hand-towel-bar",
@@ -280137,11 +279149,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "head-hand-towel-bar-one-post",
@@ -280461,11 +279469,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 8,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 568.8,
-      "sales_2025_revenue": 560.0
+      }
     },
     {
       "handle": "head-wall-hook",
@@ -280778,11 +279782,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 15,
-      "sales_2025_units": 9,
-      "sales_2024_revenue": 624.8,
-      "sales_2025_revenue": 405.0
+      }
     },
     {
       "handle": "head-knob-hardware",
@@ -281014,11 +280014,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 120.0
+      }
     },
     {
       "handle": "head-tissue-holder-hardware",
@@ -281329,11 +280325,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 17,
-      "sales_2025_units": 21,
-      "sales_2024_revenue": 1090.2,
-      "sales_2025_revenue": 1469.0
+      }
     },
     {
       "handle": "head-towel-bar-18",
@@ -281629,11 +280621,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 10,
-      "sales_2024_revenue": 258.0,
-      "sales_2025_revenue": 1300.0
+      }
     },
     {
       "handle": "head-towel-bar-24",
@@ -281934,11 +280922,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 5,
-      "sales_2024_revenue": 1084.2,
-      "sales_2025_revenue": 700.0
+      }
     },
     {
       "handle": "head-towel-rack-18",
@@ -282243,11 +281227,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 5,
-      "sales_2024_revenue": 1094.0,
-      "sales_2025_revenue": 898.0
+      }
     },
     {
       "handle": "head-towel-rack-24",
@@ -282557,11 +281537,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 16,
-      "sales_2024_revenue": 1791.0,
-      "sales_2025_revenue": 3197.0
+      }
     },
     {
       "handle": "highness-knob-hardware",
@@ -282792,11 +281768,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 5,
-      "sales_2024_revenue": 58.0,
-      "sales_2025_revenue": 150.0
+      }
     },
     {
       "handle": "persona-wall-hook",
@@ -283072,11 +282044,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 36,
-      "sales_2025_units": 28,
-      "sales_2024_revenue": 1584.0,
-      "sales_2025_revenue": 1252.0
+      }
     },
     {
       "handle": "persona-knob-hardware",
@@ -283315,11 +282283,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 55,
-      "sales_2025_units": 69,
-      "sales_2024_revenue": 1595.0,
-      "sales_2025_revenue": 2029.0
+      }
     },
     {
       "handle": "persona-pull-hardware",
@@ -283666,11 +282630,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 121,
-      "sales_2025_units": 39,
-      "sales_2024_revenue": 6064.0,
-      "sales_2025_revenue": 1792.0
+      }
     },
     {
       "handle": "persona-tissue-holder-hardware",
@@ -283828,11 +282788,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 26,
-      "sales_2025_units": 14,
-      "sales_2024_revenue": 1534.0,
-      "sales_2025_revenue": 834.0
+      }
     },
     {
       "handle": "snug-wall-hook",
@@ -284131,11 +283087,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 29,
-      "sales_2025_units": 35,
-      "sales_2024_revenue": 1276.0,
-      "sales_2025_revenue": 1573.0
+      }
     },
     {
       "handle": "stud-hook-hardware",
@@ -284366,11 +283318,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 18,
-      "sales_2025_units": 13,
-      "sales_2024_revenue": 522.0,
-      "sales_2025_revenue": 390.0
+      }
     },
     {
       "handle": "throne-hand-towel-bar-hardware",
@@ -284659,11 +283607,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 11,
-      "sales_2024_revenue": 621.0,
-      "sales_2025_revenue": 767.0
+      }
     },
     {
       "handle": "throne-towel-bar-24-hardware",
@@ -284958,11 +283902,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 119.0,
-      "sales_2025_revenue": 838.0
+      }
     },
     {
       "handle": "throne-towel-rack-18-hardware",
@@ -285301,11 +284241,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 63,
-      "sales_2025_units": 58,
-      "sales_2024_revenue": 9387.0,
-      "sales_2025_revenue": 8691.0
+      }
     },
     {
       "handle": "throne-towel-rack-24-hardware",
@@ -285644,11 +284580,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 100,
-      "sales_2025_units": 155,
-      "sales_2024_revenue": 17795.56,
-      "sales_2025_revenue": 27878.0
+      }
     },
     {
       "handle": "throne-towel-rack-36-hardware",
@@ -286001,11 +284933,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 61,
-      "sales_2025_units": 76,
-      "sales_2024_revenue": 13319.17,
-      "sales_2025_revenue": 16703.0
+      }
     },
     {
       "handle": "canopy-kit-kl2a",
@@ -286844,11 +285772,7 @@
           }
         ],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "color-sample",
@@ -287236,11 +286160,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1464,
-      "sales_2025_units": 1564,
-      "sales_2024_revenue": 13755.5,
-      "sales_2025_revenue": 14238.71
+      }
     },
     {
       "handle": "custom-color",
@@ -287336,11 +286256,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 35,
-      "sales_2025_units": 16,
-      "sales_2024_revenue": 17400.0,
-      "sales_2025_revenue": 8000.0
+      }
     },
     {
       "handle": "extension-rod",
@@ -288904,11 +287820,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1388,
-      "sales_2025_units": 1203,
-      "sales_2024_revenue": 39382.4,
-      "sales_2025_revenue": 30600.37
+      }
     },
     {
       "handle": "extension-rod-maxo-pendant",
@@ -289749,11 +288661,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 2,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 60.0,
-      "sales_2025_revenue": 240.0
+      }
     },
     {
       "handle": "finish-sample-order",
@@ -289908,11 +288816,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 400,
-      "sales_2025_units": 412,
-      "sales_2024_revenue": 3650.0,
-      "sales_2025_revenue": 3770.18
+      }
     },
     {
       "handle": "hang-straight-attachment",
@@ -290096,11 +289000,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 86,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 2580.0
+      }
     },
     {
       "handle": "canopy-and-hang-straight-kit",
@@ -290258,11 +289158,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 5,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 250.0
+      }
     },
     {
       "handle": "switches-hardwired",
@@ -290364,11 +289260,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 404,
-      "sales_2025_units": 271,
-      "sales_2024_revenue": 9152.0,
-      "sales_2025_revenue": 6775.0
+      }
     },
     {
       "handle": "maxo-shades",
@@ -290490,11 +289382,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "plug-in-cord-switch",
@@ -290675,11 +289563,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 8,
-      "sales_2025_units": 6,
-      "sales_2024_revenue": 335.0,
-      "sales_2025_revenue": 240.0
+      }
     },
     {
       "handle": "replacement-glass-globe-neckless",
@@ -290844,11 +289728,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 189,
-      "sales_2025_units": 187,
-      "sales_2024_revenue": 8818.93,
-      "sales_2025_revenue": 9090.0
+      }
     },
     {
       "handle": "led-bulb-a15-3-pack",
@@ -290963,11 +289843,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 415,
-      "sales_2025_units": 428,
-      "sales_2024_revenue": 10310.0,
-      "sales_2025_revenue": 10700.96
+      }
     },
     {
       "handle": "led-a15-bulb-frosted-white",
@@ -291080,11 +289956,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "led-bulb-g16-white-3000k-320lm",
@@ -291204,11 +290076,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 497,
-      "sales_2025_units": 649,
-      "sales_2024_revenue": 4958.0,
-      "sales_2025_revenue": 6660.0
+      }
     },
     {
       "handle": "led-bulb-g25-3000k-500lm-3-pack",
@@ -291324,11 +290192,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 621,
-      "sales_2025_units": 710,
-      "sales_2024_revenue": 15442.68,
-      "sales_2025_revenue": 17751.68
+      }
     },
     {
       "handle": "led-g25-bulb-matte-white",
@@ -291446,11 +290310,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "led-par16-bulb",
@@ -291571,11 +290431,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "led-par16-bulb-2-pack",
@@ -291689,11 +290545,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1,
-      "sales_2025_units": 3,
-      "sales_2024_revenue": 25.0,
-      "sales_2025_revenue": 75.0
+      }
     },
     {
       "handle": "led-t45-bulb-matte-white",
@@ -291811,11 +290663,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "satco-led-a15-bulb",
@@ -291910,11 +290758,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "blot-abstract-shag-pillow-cover-12x20",
@@ -292027,11 +290871,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 3,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 90.0,
-      "sales_2025_revenue": 120.0
+      }
     },
     {
       "handle": "blot-abstract-shag-pillow-cover-18x18",
@@ -292139,11 +290979,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 126.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "frill-boho-fringe-pillow-cover-amber",
@@ -292244,11 +291080,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "frill-boho-fringe-pillow-cover-rose-quartz",
@@ -292349,11 +291181,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 4,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 120.0
+      }
     },
     {
       "handle": "mongolian-faux-fur-pillow-cover-arctic-fox",
@@ -292452,11 +291280,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "mongolian-faux-fur-pillow-cover-wolfy",
@@ -292565,11 +291389,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "ripple-abstract-shag-pillow-cover-12x20",
@@ -292682,11 +291502,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 120.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "ripple-abstract-shag-pillow-cover-18x18",
@@ -292792,11 +291608,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 4,
-      "sales_2025_units": 1,
-      "sales_2024_revenue": 140.0,
-      "sales_2025_revenue": 35.0
+      }
     },
     {
       "handle": "threaded-swedish-tuft-pillow-cover-12x20",
@@ -292907,11 +291719,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 9,
-      "sales_2025_units": 3,
-      "sales_2024_revenue": 270.0,
-      "sales_2025_revenue": 90.0
+      }
     },
     {
       "handle": "threaded-swedish-tuft-pillow-cover",
@@ -293024,11 +291832,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 8,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 280.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "velvet-pillow-cover-blush",
@@ -293147,11 +291951,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 84.0,
-      "sales_2025_revenue": 30.0
+      }
     },
     {
       "handle": "velvet-pillow-cover-camel",
@@ -293280,11 +292080,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 105.0
+      }
     },
     {
       "handle": "velvet-pillow-cover-copper",
@@ -293413,11 +292209,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "velvet-pillow-cover-rose",
@@ -293536,11 +292328,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 6,
-      "sales_2025_units": 7,
-      "sales_2024_revenue": 90.0,
-      "sales_2025_revenue": 105.0
+      }
     },
     {
       "handle": "velvet-pillow-cover-royal-navy",
@@ -293659,11 +292447,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "velvet-pillow-cover-shark",
@@ -293786,11 +292570,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 5,
-      "sales_2025_units": 0,
-      "sales_2024_revenue": 75.0,
-      "sales_2025_revenue": 0.0
+      }
     },
     {
       "handle": "velvet-pillow-cover-teal",
@@ -293909,11 +292689,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 30.0
+      }
     },
     {
       "handle": "velvet-pillow-cover-yolk",
@@ -294032,11 +292808,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 0,
-      "sales_2025_units": 2,
-      "sales_2024_revenue": 0.0,
-      "sales_2025_revenue": 30.0
+      }
     },
     {
       "handle": "package-protection-valid-in-us-and-ca",
@@ -295517,11 +294289,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 20400,
-      "sales_2025_units": 62400,
-      "sales_2024_revenue": 78333.0,
-      "sales_2025_revenue": 198162.0
+      }
     },
     {
       "handle": "free-unlimited-return-labels",
@@ -296192,11 +294960,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 1680,
-      "sales_2025_units": 126,
-      "sales_2024_revenue": 5006.4,
-      "sales_2025_revenue": 375.48
+      }
     },
     {
       "handle": "free-return-label-for-refunds-package-protection-valid-in-us",
@@ -297677,11 +296441,7 @@
         "extension_rods": [],
         "canopy_configs": [],
         "needs_pre_test": false
-      },
-      "sales_2024_units": 93300,
-      "sales_2025_units": 239800,
-      "sales_2024_revenue": 770544.0,
-      "sales_2025_revenue": 2611553.0
+      }
     }
   ]
 }

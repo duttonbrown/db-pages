@@ -81,6 +81,22 @@ async function applyCostOverlay() {
 // Keyed by handle, not SKU, deliberately: matching a listing to its folder
 // needs the H / (C) / size-variant rules in sku_family.py, and that resolution
 // happens in the generator so this page never has to know the SKU scheme.
+// Merge the private sales overlay (units and revenue per product). Not on the
+// public page: db-pages is public, so the sales fields live only in db-private.
+async function applySalesOverlay() {
+  if (!LIBRARY_CONFIG.salesOverlay) return;
+  try {
+    const resp = await fetch(LIBRARY_CONFIG.salesOverlay, { cache: 'no-store' });
+    if (!resp.ok) return;
+    const o = await resp.json();
+    Object.entries(o.products || {}).forEach(([h, s]) => {
+      if (BY_HANDLE[h]) Object.assign(BY_HANDLE[h], s);
+    });
+  } catch (e) {
+    /* overlay is optional; the page works without it */
+  }
+}
+
 async function applyContentOverlay() {
   if (!LIBRARY_CONFIG.contentOverlay) return;
   try {
@@ -111,6 +127,7 @@ async function bootstrap() {
   // card immediately on a deep link, and a card rendered before the overlay
   // lands would silently omit the cost sections with no way to notice.
   await applyCostOverlay();
+  await applySalesOverlay();
   await applyContentOverlay();
 
   // Sidebar counts — also fetch the parts library so all 4 tabs show counts
