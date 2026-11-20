@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T15:47:16",
+  "generated_at": "2026-11-20T07:20:20",
   "counts": {
     "products": 311,
     "lighting": 205,
@@ -5097,7 +5097,7 @@
           "sku": "30605-1PG",
           "price": "1100.00",
           "compare_price": null,
-          "qty": -1,
+          "qty": -2,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -6194,7 +6194,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-10403-20-beaded-urchin-chandelier-20-lighting-dutton-brown.pdf?v=1754445113",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-10401_10403-urchin-chandelier-installation-guide_3030a55a-d610-4a97-bdac-a035686d2fb3.pdf?v=1749831931",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/10403-color-beaded-urchin-chandelier-lighting-revit-family.rfa?v=1795147038",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -7248,7 +7248,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-10403-27-beaded-urchin-chandelier-27-lighting-dutton-brown.pdf?v=1754445112",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-10401_10403-urchin-chandelier-installation-guide_3030a55a-d610-4a97-bdac-a035686d2fb3.pdf?v=1749831931",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/10403-color-beaded-urchin-chandelier-lighting-revit-family.rfa?v=1795147038",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -39078,7 +39078,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-10401-20-urchin-chandelier-20-lighting-dutton-brown.pdf?v=1754445070",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-10401_10403-urchin-chandelier-installation-guide_3030a55a-d610-4a97-bdac-a035686d2fb3.pdf?v=1749831931",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/10401-urchin-chandelier-lighting-revit-family.rfa?v=1795147029",
         "warehouse_3d": "https://3dwarehouse.sketchup.com/model/3bb3cc96-f00f-468b-a033-8ee2152ae1ca/Urchin-Chandelier-20-Dynamic-Options-by-Dutton-Brown",
         "collection": null,
         "collection_title": null
@@ -39648,7 +39648,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-10401-27-urchin-chandelier-27-lighting-dutton-brown_20.pdf?v=1754445112",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-10401_10403-urchin-chandelier-installation-guide_3030a55a-d610-4a97-bdac-a035686d2fb3.pdf?v=1749831931",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/10401-urchin-chandelier-lighting-revit-family.rfa?v=1795147029",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -46645,7 +46645,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-10403F-20-beaded-urchin-flush-mount-20-lighting-dutton-brown.pdf?v=1754625868",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-10401F_10403F-urchin-flush-mount-installation-guide_c89dfc34-269f-4149-8e27-46555cfa1571.pdf?v=1749831931",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/10403F-color-beaded-urchin-flush-mount-lighting-revit-family.rfa?v=1795147043",
         "warehouse_3d": null,
         "collection": "https://www.duttonbrown.com/collections/urchin-chandeliers",
         "collection_title": "See Urchin Collection"
@@ -47687,7 +47687,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-10403F-27-beaded-urchin-flush-mount-27-lighting-dutton-brown.pdf?v=1754625868",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-10401F_10403F-urchin-flush-mount-installation-guide_c89dfc34-269f-4149-8e27-46555cfa1571.pdf?v=1749831931",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/10403F-color-beaded-urchin-flush-mount-lighting-revit-family.rfa?v=1795147043",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -48863,7 +48863,7 @@
           "sku": "30403F-1B",
           "price": "900.00",
           "compare_price": null,
-          "qty": -3,
+          "qty": -5,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -77582,7 +77582,7 @@
           "sku": "50131-12-1B",
           "price": "320.00",
           "compare_price": null,
-          "qty": -52,
+          "qty": -53,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -111868,7 +111868,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-30332-supreme-flush-mount-lighting-dutton-brown.pdf?v=1754625868",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-30332-supreme-flush-mount-installation-guide.pdf?v=1749760924",
-        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/30332-color-supreme-flush-mount-lighting-revit-family.rfa?v=1784169690",
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/30332-supreme-flush-mount-lighting-revit-family_1a0e562c-a3ef-401b-926c-056771242eb5.rfa?v=1795147047",
         "warehouse_3d": "https://3dwarehouse.sketchup.com/model/49ccc421-5849-4927-82dc-0443d54e8357/Supreme-Flush-Mount-Dynamic-Options-by-Dutton-Brown",
         "collection": null,
         "collection_title": null
@@ -113359,7 +113359,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-10401F-20-urchin-flush-mount-20-lighting-dutton-brown.pdf?v=1754625868",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-10401F_10403F-urchin-flush-mount-installation-guide_c89dfc34-269f-4149-8e27-46555cfa1571.pdf?v=1749831931",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/10401F-urchin-flush-mount-lighting-revit-family.rfa?v=1795147033",
         "warehouse_3d": null,
         "collection": "https://www.duttonbrown.com/collections/urchin-chandeliers",
         "collection_title": "See Urchin Collection"
@@ -113898,7 +113898,7 @@
       "downloads": {
         "tearsheet": "https://cdn.shopify.com/s/files/1/0229/6239/files/tearsheet-10401F-27-urchin-flush-mount-27-lighting-dutton-brown.pdf?v=1754625868",
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/IG-10401F_10403F-urchin-flush-mount-installation-guide_c89dfc34-269f-4149-8e27-46555cfa1571.pdf?v=1749831931",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/10401F-urchin-flush-mount-lighting-revit-family.rfa?v=1795147033",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -121150,7 +121150,7 @@
           "sku": "50110-12-1BO",
           "price": "350.00",
           "compare_price": null,
-          "qty": -11,
+          "qty": -13,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -122888,7 +122888,7 @@
           "sku": "50110-8-1BO",
           "price": "300.00",
           "compare_price": null,
-          "qty": -1,
+          "qty": -3,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -140792,7 +140792,7 @@
           "sku": "30112-12-1H",
           "price": "440.00",
           "compare_price": null,
-          "qty": -40,
+          "qty": -43,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -162036,7 +162036,7 @@
       "bom_parent_sku": "40120P-6",
       "bom_canonical_sku": "40120P-6",
       "bom_page_url": "https://app.notion.com/p/40120P-6-2aeffa524c5b80c0a0d6f536a76e229b",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-19T16:51:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -183036,7 +183036,7 @@
           "sku": "40120-3-1F",
           "price": "340.00",
           "compare_price": null,
-          "qty": -47,
+          "qty": -48,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -201959,7 +201959,7 @@
           "sku": "30224-1PG",
           "price": "530.00",
           "compare_price": null,
-          "qty": -19,
+          "qty": -21,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -204135,7 +204135,7 @@
           "sku": "30223-1BO",
           "price": "530.00",
           "compare_price": null,
-          "qty": -26,
+          "qty": -27,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -205387,7 +205387,7 @@
           "sku": "30320-1PG",
           "price": "600.00",
           "compare_price": null,
-          "qty": -25,
+          "qty": -27,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -205429,7 +205429,7 @@
           "sku": "30320-1D",
           "price": "600.00",
           "compare_price": null,
-          "qty": -34,
+          "qty": -35,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -230133,7 +230133,7 @@
           "sku": "60224-3BO",
           "price": "350.00",
           "compare_price": null,
-          "qty": -14,
+          "qty": -16,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -247105,7 +247105,7 @@
       "bom_parent_sku": "H61-24",
       "bom_canonical_sku": "H61-24",
       "bom_page_url": "https://app.notion.com/p/H61-24-2aeffa524c5b806a8661f467f6dc7888",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -247593,7 +247593,7 @@
       "bom_parent_sku": "H61-36",
       "bom_canonical_sku": "H61-36",
       "bom_page_url": "https://app.notion.com/p/H61-36-2aeffa524c5b80c2a616e0370c9b0880",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -249956,7 +249956,7 @@
       "bom_parent_sku": "H32-4 (C)",
       "bom_canonical_sku": "H32-4",
       "bom_page_url": "https://app.notion.com/p/H32-4-C-2ecffa524c5b80b089a8d53160e3ab8c",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -250848,7 +250848,7 @@
       "bom_parent_sku": "H32-4 (C)",
       "bom_canonical_sku": "H32-4",
       "bom_page_url": "https://app.notion.com/p/H32-4-C-2ecffa524c5b80b089a8d53160e3ab8c",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -251741,7 +251741,7 @@
       "bom_parent_sku": "H32-4 (C)",
       "bom_canonical_sku": "H32-4",
       "bom_page_url": "https://app.notion.com/p/H32-4-C-2ecffa524c5b80b089a8d53160e3ab8c",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -252021,7 +252021,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H73-color-head-hand-towel-bar-revit-family.rfa?v=1795147094",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -255741,7 +255741,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x1-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H43-color-head-tissue-holder-revit-family.rfa?v=1795147054",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -256701,7 +256701,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H52-color-head-towel-bar-revit-family.rfa?v=1795147063",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -257351,7 +257351,7 @@
             "part_number": "PF18",
             "qty": 1,
             "desc": "Pipe, female, 18”",
-            "role": "Finish Only",
+            "role": "Finish+Color",
             "effective_role": "Finish",
             "category": "Pipes",
             "rack_size": 5,
@@ -258242,7 +258242,7 @@
             "part_number": "PF18",
             "qty": 1,
             "desc": "Pipe, female, 18”",
-            "role": "Finish Only",
+            "role": "Finish+Color",
             "effective_role": "Finish",
             "category": "Pipes",
             "rack_size": 5,
@@ -258533,7 +258533,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H52-color-head-towel-bar-revit-family.rfa?v=1795147063",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -259472,7 +259472,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H62-color-head-towel-rack-revit-family.rfa?v=1795147079",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -260133,7 +260133,7 @@
             "part_number": "PF18",
             "qty": 2,
             "desc": "Pipe, female, 18”",
-            "role": "Finish Only",
+            "role": "Finish+Color",
             "effective_role": "Finish",
             "category": "Pipes",
             "rack_size": 5,
@@ -260422,7 +260422,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H62-color-head-towel-rack-revit-family.rfa?v=1795147079",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -269250,7 +269250,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H74-color-swift-hand-towel-bar-revit-family.rfa?v=1795147101",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -270162,7 +270162,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x1-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H1D-color-swift-hook-revit-family.rfa?v=1795147050",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -275676,7 +275676,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H53-color-swift-towel-bar-revit-family.rfa?v=1795147071",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -276591,7 +276591,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H53-color-swift-towel-bar-revit-family.rfa?v=1795147071",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -277506,7 +277506,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H63-color-swift-towel-rack-revit-family.rfa?v=1795147087",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -278421,7 +278421,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H63-color-swift-towel-rack-revit-family.rfa?v=1795147087",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -280034,7 +280034,7 @@
       "type": "Hardware",
       "bucket": "hardware",
       "vendor": "Dutton Brown",
-      "status": "draft",
+      "status": "archived",
       "published": false,
       "tagline": "This personalizable, luxe knob is a classic born of exclusively-designed CNC-machined solid brass.",
       "body_html": "<p>This personalizable, luxe knob is a classic born of exclusively-designed CNC-machined solid brass. As easy to personalize as it is to install, this colorful hardware design combines sumptuous finish options with soft or bold knurled color options enabling you to add a personal touch to any space or piece of furniture.</p>\n<ul></ul>",
@@ -280772,7 +280772,7 @@
       "bom_parent_sku": "H25",
       "bom_canonical_sku": "H25",
       "bom_page_url": "https://app.notion.com/p/H25-2aeffa524c5b80f7a4c5ff6f8bbaa8ad",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-19T20:50:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -281601,7 +281601,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H73-head-hand-towel-bar-revit-family.rfa?v=1795147097",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -282238,7 +282238,7 @@
           "sku": "H1A-2",
           "price": "45.00",
           "compare_price": null,
-          "qty": -14,
+          "qty": -15,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "",
@@ -282252,7 +282252,7 @@
           "sku": "H1A-3",
           "price": "45.00",
           "compare_price": null,
-          "qty": -33,
+          "qty": -34,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "",
@@ -282755,7 +282755,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x1-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H43-head-tissue-holder-revit-family.rfa?v=1795147056",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -283070,7 +283070,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H52-head-towel-bar-revit-family.rfa?v=1795147067",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -283174,7 +283174,7 @@
             "part_number": "PF18",
             "qty": 1,
             "desc": "Pipe, female, 18”",
-            "role": "Finish Only",
+            "role": "Finish+Color",
             "effective_role": "Finish",
             "category": "Pipes",
             "rack_size": 5,
@@ -283371,7 +283371,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H52-head-towel-bar-revit-family.rfa?v=1795147067",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -283665,7 +283665,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H62-head-towel-rack-revit-family.rfa?v=1795147083",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -283780,7 +283780,7 @@
             "part_number": "PF18",
             "qty": 2,
             "desc": "Pipe, female, 18”",
-            "role": "Finish Only",
+            "role": "Finish+Color",
             "effective_role": "Finish",
             "category": "Pipes",
             "rack_size": 5,
@@ -283975,7 +283975,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH2x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H62-head-towel-rack-revit-family.rfa?v=1795147083",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -286061,7 +286061,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH3x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H71-throne-hand-towel-bar-revit-family.rfa?v=1795147091",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -286356,7 +286356,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH3x2-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H50-throne-towel-bar-revit-family.rfa?v=1795147060",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -286667,7 +286667,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH3x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H60-throne-towel-rack-revit-family.rfa?v=1795147075",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -286739,7 +286739,7 @@
             "part_number": "PF18",
             "qty": 2,
             "desc": "Pipe, female, 18”",
-            "role": "Finish Only",
+            "role": "Finish+Color",
             "effective_role": "Finish",
             "category": "Pipes",
             "rack_size": 5,
@@ -287006,7 +287006,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH3x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H60-throne-towel-rack-revit-family.rfa?v=1795147075",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -287044,7 +287044,7 @@
           "sku": "H60-24-3",
           "price": "200.00",
           "compare_price": null,
-          "qty": -284,
+          "qty": -285,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "",
@@ -287348,7 +287348,7 @@
       "downloads": {
         "tearsheet": null,
         "installation_guide": "https://cdn.shopify.com/s/files/1/0229/6239/files/KH3x4-hardware-installation-guide.pdf",
-        "revit": null,
+        "revit": "https://cdn.shopify.com/s/files/1/0229/6239/files/H60-throne-towel-rack-revit-family.rfa?v=1795147075",
         "warehouse_3d": null,
         "collection": null,
         "collection_title": null
@@ -287420,7 +287420,7 @@
             "part_number": "PF18",
             "qty": 4,
             "desc": "Pipe, female, 18”",
-            "role": "Finish Only",
+            "role": "Finish+Color",
             "effective_role": "Finish",
             "category": "Pipes",
             "rack_size": 5,
@@ -288581,7 +288581,7 @@
           "sku": "SAC-ALL",
           "price": "24.00",
           "compare_price": null,
-          "qty": -3251,
+          "qty": -3252,
           "option1_name": "Color",
           "option1": "All Colors",
           "option2_name": "",
@@ -288623,7 +288623,7 @@
           "sku": "SAC-BO",
           "price": "2.00",
           "compare_price": null,
-          "qty": -394,
+          "qty": -396,
           "option1_name": "Color",
           "option1": "Bone",
           "option2_name": "",
@@ -288651,7 +288651,7 @@
           "sku": "SAC-PG",
           "price": "2.00",
           "compare_price": null,
-          "qty": -356,
+          "qty": -357,
           "option1_name": "Color",
           "option1": "Python Green",
           "option2_name": "",
@@ -288665,7 +288665,7 @@
           "sku": "SAC-D",
           "price": "2.00",
           "compare_price": null,
-          "qty": -762,
+          "qty": -763,
           "option1_name": "Color",
           "option1": "Lagoon",
           "option2_name": "",
@@ -288777,7 +288777,7 @@
           "sku": "SAC-3",
           "price": "2.00",
           "compare_price": null,
-          "qty": -97,
+          "qty": -98,
           "option1_name": "Color",
           "option1": "Black",
           "option2_name": "",
@@ -289067,7 +289067,7 @@
           "sku": "ER1-2-1",
           "price": "7.00",
           "compare_price": null,
-          "qty": -320,
+          "qty": -324,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Size",
@@ -289081,7 +289081,7 @@
           "sku": "ER1-3-1",
           "price": "9.00",
           "compare_price": null,
-          "qty": -111,
+          "qty": -113,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Size",
@@ -289095,7 +289095,7 @@
           "sku": "ER1-4-1",
           "price": "10.00",
           "compare_price": null,
-          "qty": -223,
+          "qty": -225,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Size",
@@ -289109,7 +289109,7 @@
           "sku": "ER1-6-1",
           "price": "13.00",
           "compare_price": null,
-          "qty": -395,
+          "qty": -399,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Size",
@@ -289123,7 +289123,7 @@
           "sku": "ER1-12-1",
           "price": "25.00",
           "compare_price": null,
-          "qty": -700,
+          "qty": -702,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Size",
@@ -289137,7 +289137,7 @@
           "sku": "ER1-18-1",
           "price": "40.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -3,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Size",
@@ -290517,6 +290517,7 @@
       "bom_key": "ER1-2",
       "bom_subitem_span": [
         "ER1-12",
+        "ER1-18",
         "ER1-2",
         "ER1-24",
         "ER1-3",
@@ -291461,7 +291462,7 @@
           "sku": "SAF-1",
           "price": "5.00",
           "compare_price": null,
-          "qty": -368,
+          "qty": -370,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "",
@@ -292990,7 +292991,7 @@
           "sku": "BULB-G25-W",
           "price": "15.00",
           "compare_price": null,
-          "qty": 1338,
+          "qty": 1337,
           "option1_name": "Brightness",
           "option1": "550 lumens",
           "option2_name": "",
@@ -297791,7 +297792,7 @@
           "sku": "x-redo",
           "price": "6.74",
           "compare_price": "6.74",
-          "qty": 999890,
+          "qty": 999889,
           "option1_name": "Price",
           "option1": "F8W4F",
           "option2_name": "",
@@ -297987,7 +297988,7 @@
           "sku": "x-redo",
           "price": "28.24",
           "compare_price": "28.24",
-          "qty": 999981,
+          "qty": 999980,
           "option1_name": "Price",
           "option1": "E8Y9P",
           "option2_name": "",
@@ -298169,7 +298170,7 @@
           "sku": "x-redo",
           "price": "54.49",
           "compare_price": "54.49",
-          "qty": 999999,
+          "qty": 999998,
           "option1_name": "Price",
           "option1": "L8Y1S",
           "option2_name": "",
@@ -298323,7 +298324,7 @@
           "sku": "x-redo",
           "price": "79.73",
           "compare_price": "79.73",
-          "qty": 1000000,
+          "qty": 999999,
           "option1_name": "Price",
           "option1": "K9C3L",
           "option2_name": "",
