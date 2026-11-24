@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T07:20:13",
+  "generated_at": "2026-11-24T07:20:13",
   "counts": {
     "products": 311,
     "lighting": 205,
@@ -747,7 +747,7 @@
       "bom_parent_sku": "30403",
       "bom_canonical_sku": "30403",
       "bom_page_url": "https://app.notion.com/p/30403-2aeffa524c5b80c397eadbb294bea603",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -2623,7 +2623,7 @@
       "bom_parent_sku": "51000",
       "bom_canonical_sku": "51000",
       "bom_page_url": "https://app.notion.com/p/51000-2aeffa524c5b80ffa54cef30daab0f1a",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -5527,7 +5527,7 @@
       "bom_parent_sku": "30605",
       "bom_canonical_sku": "30605",
       "bom_page_url": "https://app.notion.com/p/30605-2aeffa524c5b8054a978c41b4e58cd63",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -6611,7 +6611,7 @@
       "bom_parent_sku": "10403-20",
       "bom_canonical_sku": "10403-20",
       "bom_page_url": "https://app.notion.com/p/10403-20-2aeffa524c5b8004bd2cee770b78e941",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -7665,7 +7665,7 @@
       "bom_parent_sku": "10403-27",
       "bom_canonical_sku": "10403-27",
       "bom_page_url": "https://app.notion.com/p/10403-27-2aeffa524c5b800eac80c8e751ab56c2",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -8912,7 +8912,7 @@
       "bom_parent_sku": "30606",
       "bom_canonical_sku": "30606",
       "bom_page_url": "https://app.notion.com/p/30606-2aeffa524c5b808d9c25c66229981037",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -9992,7 +9992,7 @@
           "sku": "30403-3H",
           "price": "900.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -1,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -10817,7 +10817,7 @@
       "bom_parent_sku": "30403 (C)",
       "bom_canonical_sku": "30403",
       "bom_page_url": "https://app.notion.com/p/30403-C-2c8ffa524c5b800ab758cdf91da3ea8e",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -12681,7 +12681,7 @@
       "bom_parent_sku": "30503",
       "bom_canonical_sku": "30503",
       "bom_page_url": "https://app.notion.com/p/30503-2aeffa524c5b80208289f340f606adc7",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -14574,7 +14574,7 @@
       "bom_parent_sku": "30407",
       "bom_canonical_sku": "30407",
       "bom_page_url": "https://app.notion.com/p/30407-2aeffa524c5b807c92c9e5f9e57555bf",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -16657,7 +16657,7 @@
       "bom_parent_sku": "60400-18",
       "bom_canonical_sku": "60400-18",
       "bom_page_url": "https://app.notion.com/p/60400-18-2ecffa524c5b8090ac27dc7ccbdbad01",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -18696,7 +18696,7 @@
       "bom_parent_sku": "60401-18",
       "bom_canonical_sku": "60401-18",
       "bom_page_url": "https://app.notion.com/p/60401-18-2ecffa524c5b8097b271c1882d45bd00",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -20553,7 +20553,7 @@
       "bom_parent_sku": "60600-24",
       "bom_canonical_sku": "60600-24",
       "bom_page_url": "https://app.notion.com/p/60600-24-2ecffa524c5b809ea60ad9a7a744f316",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -22412,7 +22412,7 @@
       "bom_parent_sku": "60601-24",
       "bom_canonical_sku": "60601-24",
       "bom_page_url": "https://app.notion.com/p/60601-24-2ecffa524c5b806a8682c873f68b88ac",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -24296,7 +24296,7 @@
       "bom_parent_sku": "31000 (C)",
       "bom_canonical_sku": "31000",
       "bom_page_url": "https://app.notion.com/p/31000-C-2c8ffa524c5b80acbf38dcf1612cb318",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -26234,7 +26234,7 @@
       "bom_parent_sku": "31001 (C)",
       "bom_canonical_sku": "31001",
       "bom_page_url": "https://app.notion.com/p/31001-C-2c8ffa524c5b80478126e77aa841df24",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -28195,7 +28195,7 @@
       "bom_parent_sku": "21800",
       "bom_canonical_sku": "21800",
       "bom_page_url": "https://app.notion.com/p/21800-2aeffa524c5b80d5a784ea1ddda979d7",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -30084,7 +30084,7 @@
       "bom_parent_sku": "30402 (C)",
       "bom_canonical_sku": "30402",
       "bom_page_url": "https://app.notion.com/p/30402-C-2c8ffa524c5b80fa9d24f23d9a4ea35d",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -31944,7 +31944,7 @@
       "bom_parent_sku": "30502",
       "bom_canonical_sku": "30502",
       "bom_page_url": "https://app.notion.com/p/30502-2aeffa524c5b8019acf4e22ffb80b79d",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -33010,7 +33010,7 @@
           "sku": "30405-2H",
           "price": "950.00",
           "compare_price": null,
-          "qty": -5,
+          "qty": -6,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -33849,7 +33849,7 @@
       "bom_parent_sku": "30405",
       "bom_canonical_sku": "30405",
       "bom_page_url": "https://app.notion.com/p/30405-2aeffa524c5b8041bb4bf99991aa1fed",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -35760,7 +35760,7 @@
       "bom_parent_sku": "30404 (C)",
       "bom_canonical_sku": "30404",
       "bom_page_url": "https://app.notion.com/p/30404-C-2c8ffa524c5b806ca7ebc4fbbad62402",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -36398,7 +36398,7 @@
       "bom_parent_sku": "31000",
       "bom_canonical_sku": "31000",
       "bom_page_url": "https://app.notion.com/p/31000-2aeffa524c5b80b490fdd35ebbb07da8",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -37182,7 +37182,7 @@
       "bom_parent_sku": "31001",
       "bom_canonical_sku": "31001",
       "bom_page_url": "https://app.notion.com/p/31001-2aeffa524c5b80c0b3bbfb0098861100",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -37916,7 +37916,7 @@
       "bom_parent_sku": "30402",
       "bom_canonical_sku": "30402",
       "bom_page_url": "https://app.notion.com/p/30402-2aeffa524c5b8026b645f93a1e6e3350",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -38571,7 +38571,7 @@
       "bom_parent_sku": "30404",
       "bom_canonical_sku": "30404",
       "bom_page_url": "https://app.notion.com/p/30404-2aeffa524c5b8064ae2bf14c39b387eb",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -39131,7 +39131,7 @@
       "bom_parent_sku": "10401-20",
       "bom_canonical_sku": "10401-20",
       "bom_page_url": "https://app.notion.com/p/10401-20-2aeffa524c5b807ca23ac2aee6d49ba6",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -39701,7 +39701,7 @@
       "bom_parent_sku": "10401-27",
       "bom_canonical_sku": "10401-27",
       "bom_page_url": "https://app.notion.com/p/10401-27-2aeffa524c5b804c89e0d086517302dc",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -40287,7 +40287,7 @@
       "bom_parent_sku": "30403F",
       "bom_canonical_sku": "30403F",
       "bom_page_url": "https://app.notion.com/p/30403F-2aeffa524c5b809eb80ff0d26351069c",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -40956,7 +40956,7 @@
       "bom_parent_sku": "70110F",
       "bom_canonical_sku": "70110F",
       "bom_page_url": "https://app.notion.com/p/70110F-2aeffa524c5b803f8b78f0092813ce4d",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -41409,7 +41409,7 @@
       "bom_parent_sku": "30130-10",
       "bom_canonical_sku": "30130-10",
       "bom_page_url": "https://app.notion.com/p/30130-10-2aeffa524c5b80b69c0df88009c44f07",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -41930,7 +41930,7 @@
       "bom_parent_sku": "30130-12",
       "bom_canonical_sku": "30130-12",
       "bom_page_url": "https://app.notion.com/p/30130-12-2aeffa524c5b804690a4e04cd787e846",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -42469,7 +42469,7 @@
       "bom_parent_sku": "30130-6",
       "bom_canonical_sku": "30130-6",
       "bom_page_url": "https://app.notion.com/p/30130-6-2aeffa524c5b80a08a09fec5934a4ad6",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -42996,7 +42996,7 @@
       "bom_parent_sku": "30130-8",
       "bom_canonical_sku": "30130-8",
       "bom_page_url": "https://app.notion.com/p/30130-8-2aeffa524c5b8078a9c1fd99869c5e56",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -44716,7 +44716,7 @@
       "bom_parent_sku": "51000F",
       "bom_canonical_sku": "51000F",
       "bom_page_url": "https://app.notion.com/p/51000F-2aeffa524c5b804aa751e22b23bc0277",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -46085,7 +46085,7 @@
       "bom_parent_sku": "30330",
       "bom_canonical_sku": "30330",
       "bom_page_url": "https://app.notion.com/p/30330-2aeffa524c5b8095b799f64bddd4e6bf",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -46492,8 +46492,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "Our color beaded \"urchin\" is the ultimate combination of captivating design and colorful charm.",
-      "body_html": "<p>Our color beaded \"urchin\" is the ultimate combination of captivating design and colorful charm. Each flush mount is carefully assembled by adorning a CNC-machined aluminum core with 316 individually threaded solid brass rods. What makes this fixture special though are its colorful beads, all powder coated here in-house, that create an explosive supernova effect. Choose from our array of colors or a custom color and learn why our customers oft call this \"my urchin\".</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Color Beaded Urchin Flush Mount 20\" is the brass starburst flush mount where Dutton Brown began, now in full color.</p>\n<p dir=\"ltr\">The urchin was the very first fixture our founders designed, and it sold within a day of going online. This one adds a supernova of color: solid brass spines threaded by hand, then dotted with beads powder coated in-house in your pick of our 14 signature colors or a custom shade. It's a mid-century modern classic with our own contemporary spin, and it sits close to the ceiling, so low ceilings never have to settle for boring. Give an entryway, hallway, bedroom, or bathroom a little drama, or let it steal the show in boutique hotel corridors, cafés, and salons. Each one is made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Our customers don't call it \"the urchin.\" They call it \"my urchin.\"</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-beaded-urchin-flush-mount-brass-orange.jpg?v=1792176707",
       "image_alt": "Brass and orange color Beaded Urchin flush mount 20\" Dutton Brown lighting",
       "gallery": [
@@ -47062,7 +47062,7 @@
       "bom_parent_sku": "10403F-20",
       "bom_canonical_sku": "10403F-20",
       "bom_page_url": "https://app.notion.com/p/10403F-20-2aeffa524c5b8078bc82f2e937af3292",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -47493,8 +47493,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "Our color beaded \"urchin\" is the ultimate combination of captivating design and colorful charm.",
-      "body_html": "<p>Our color beaded \"urchin\" is the ultimate combination of captivating design and colorful charm. Each flush mount is built on a CNC-machined aluminum core adorned with 316 individually threaded solid brass rods. What makes this fixture special though are its 124 colorful beads, all powder coated here in-house, that create an explosive supernova effect. Choose from our array of colors or a custom color and learn why our customers oft call this \"my urchin\".</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Color Beaded Urchin Flush Mount 27\" is the brass starburst flush mount where Dutton Brown began, now in full color.</p>\n<p dir=\"ltr\">The urchin was the very first fixture our founders designed, and it sold within a day of going online. This one adds a supernova of color: solid brass spines threaded by hand, then dotted with beads powder coated in-house in your pick of our 14 signature colors or a custom shade. It's a mid-century modern classic with our own contemporary spin, and it sits close to the ceiling, so low ceilings never have to settle for boring. Give an entryway, hallway, bedroom, or bathroom a little drama, or let it steal the show in boutique hotel corridors, cafés, and salons. Each one is made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Our customers don't call it \"the urchin.\" They call it \"my urchin.\"</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/3-beaded-urchin-flush-mount-27-brass-spa.jpg?v=1792129657",
       "image_alt": "Brass and spa color Beaded Urchin flush mount 27\" Dutton Brown lighting",
       "gallery": [
@@ -48104,7 +48104,7 @@
       "bom_parent_sku": "10403F-27",
       "bom_canonical_sku": "10403F-27",
       "bom_page_url": "https://app.notion.com/p/10403F-27-2aeffa524c5b807ba5ebe5543c3732ae",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -49926,7 +49926,7 @@
       "bom_parent_sku": "30403F (C)",
       "bom_canonical_sku": "30403F",
       "bom_page_url": "https://app.notion.com/p/30403F-C-2c8ffa524c5b80d7b025e9860f2ff3b7",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -51776,7 +51776,7 @@
       "bom_parent_sku": "30407F",
       "bom_canonical_sku": "30407F",
       "bom_page_url": "https://app.notion.com/p/30407F-2aeffa524c5b8075b696edfc9a36eadf",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -53642,7 +53642,7 @@
       "bom_parent_sku": "70110F (C)",
       "bom_canonical_sku": "70110F",
       "bom_page_url": "https://app.notion.com/p/70110F-C-2c8ffa524c5b80b6a392e463d16d2e88",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -55283,7 +55283,7 @@
       "bom_parent_sku": "50130-10",
       "bom_canonical_sku": "50130-10",
       "bom_page_url": "https://app.notion.com/p/50130-10-2aeffa524c5b8066b686df178c33d703",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -57003,7 +57003,7 @@
       "bom_parent_sku": "50130-12",
       "bom_canonical_sku": "50130-12",
       "bom_page_url": "https://app.notion.com/p/50130-12-2aeffa524c5b80ec9d5dce7fbe9f9b73",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -58724,7 +58724,7 @@
       "bom_parent_sku": "50130-8",
       "bom_canonical_sku": "50130-8",
       "bom_page_url": "https://app.notion.com/p/50130-8-2aeffa524c5b807d8855c5d01f8038b5",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -60448,7 +60448,7 @@
       "bom_parent_sku": "30130-10 (C)",
       "bom_canonical_sku": "30130-10",
       "bom_page_url": "https://app.notion.com/p/30130-10-C-2c8ffa524c5b803980d1d6e7c6175ae3",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -62158,7 +62158,7 @@
       "bom_parent_sku": "30130-12 (C)",
       "bom_canonical_sku": "30130-12",
       "bom_page_url": "https://app.notion.com/p/30130-12-C-2c8ffa524c5b80ea812df4d9ad07a958",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -63881,7 +63881,7 @@
       "bom_parent_sku": "30130-6 (C)",
       "bom_canonical_sku": "30130-6",
       "bom_page_url": "https://app.notion.com/p/30130-6-C-2c8ffa524c5b80e8905dc805add881ad",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -65594,7 +65594,7 @@
       "bom_parent_sku": "30130-8 (C)",
       "bom_canonical_sku": "30130-8",
       "bom_page_url": "https://app.notion.com/p/30130-8-C-2c8ffa524c5b801da5f4e9324e582f66",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -66286,7 +66286,7 @@
       "bom_parent_sku": "60430",
       "bom_canonical_sku": "60430",
       "bom_page_url": "https://app.notion.com/p/60430-2aeffa524c5b80e3a27fcfd2c0211b5f",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Tier Assembly": [
           {
@@ -67167,7 +67167,7 @@
       "bom_parent_sku": "60431",
       "bom_canonical_sku": "60431",
       "bom_page_url": "https://app.notion.com/p/60431-2aeffa524c5b80acb9fdd20620ecfa5f",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Tier Assembly": [
           {
@@ -68048,7 +68048,7 @@
       "bom_parent_sku": "60630",
       "bom_canonical_sku": "60630",
       "bom_page_url": "https://app.notion.com/p/60630-2aeffa524c5b8038be4fd6add732b468",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Tier Assembly": [
           {
@@ -68956,7 +68956,7 @@
       "bom_parent_sku": "60631",
       "bom_canonical_sku": "60631",
       "bom_page_url": "https://app.notion.com/p/60631-2aeffa524c5b8021a28ac1b02ddbd8ed",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Tier Assembly": [
           {
@@ -70881,7 +70881,7 @@
       "bom_parent_sku": "31000F (C)",
       "bom_canonical_sku": "31000F",
       "bom_page_url": "https://app.notion.com/p/31000F-C-2c8ffa524c5b80c7ba62c6fd55b6793e",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -72815,7 +72815,7 @@
       "bom_parent_sku": "31001F (C)",
       "bom_canonical_sku": "31001F",
       "bom_page_url": "https://app.notion.com/p/31001F-C-2c8ffa524c5b80d68605e9bd5ab37454",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -74761,7 +74761,7 @@
       "bom_parent_sku": "21800F",
       "bom_canonical_sku": "21800F",
       "bom_page_url": "https://app.notion.com/p/21800F-2aeffa524c5b80bb92f1d0d513bb6559",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -76036,7 +76036,7 @@
       "bom_parent_sku": "60131",
       "bom_canonical_sku": "60131",
       "bom_page_url": "https://app.notion.com/p/60131-2aeffa524c5b8030b1a1ed287ce48112",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -77051,7 +77051,7 @@
       "bom_parent_sku": "50131-10",
       "bom_canonical_sku": "50131-10",
       "bom_page_url": "https://app.notion.com/p/50131-10-2aeffa524c5b8075bc73ed1bc00acb54",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -78055,7 +78055,7 @@
       "bom_parent_sku": "50131-12",
       "bom_canonical_sku": "50131-12",
       "bom_page_url": "https://app.notion.com/p/50131-12-2aeffa524c5b80cf9fc5cad8ffd486ae",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -79059,7 +79059,7 @@
       "bom_parent_sku": "50131-8",
       "bom_canonical_sku": "50131-8",
       "bom_page_url": "https://app.notion.com/p/50131-8-2aeffa524c5b80248e64c0a637c39b13",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -79262,8 +79262,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "A contemporary take on classic globe lighting, this flush mount combines exclusively-designed CNC-machined parts with a minimalist aluminum body.",
-      "body_html": "<p>A contemporary take on classic globe lighting, this flush mount combines exclusively-designed CNC-machined parts with a minimalist aluminum body. This fixture can also be installed as a wall sconce.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Some globe flush mounts are just created to be better than the rest, and our Color Icon 2 Flush Mount is one of them.</p>\n<p dir=\"ltr\">Two hand-blown opal glass globes hang from a sleek bar in the color of your choice, for a fixture people notice and remember. It sits close to the ceiling in hallways, kitchens, and bedrooms, or mounts on the wall as a vanity light, and its damp rating covers the bathroom too. Designers use it to give boutique hotel suites, cafés, and salons instant icon status. Choose from our 14 signature colors and 3 finishes, each made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Not every flush mount becomes iconic. This one was born for it.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/13-icon-flush-mount-2-black-black_d23aa809-a118-4b9b-b047-c209da3708a4.jpg?v=1759252381",
       "image_alt": "black black color icon 2 flush mount dutton brown lighting",
       "gallery": [
@@ -80050,7 +80050,7 @@
       "bom_parent_sku": "30230",
       "bom_canonical_sku": "30230",
       "bom_page_url": "https://app.notion.com/p/30230-2aeffa524c5b8092b130f67b9b2a0170",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -80396,8 +80396,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "A contemporary take on classic globe lighting, this flush mount combines exclusively-designed CNC-machined parts with a minimalist aluminum body.",
-      "body_html": "<p>A contemporary take on classic globe lighting, this flush mount combines exclusively-designed CNC-machined parts with a minimalist aluminum body. This fixture can also be installed as a wall sconce.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Some globe flush mounts are just created to be better than the rest, and our Color Icon 3 Flush Mount is one of them.</p>\n<p dir=\"ltr\">Three hand-blown opal glass globes hang from a sleek bar in the color of your choice, for a fixture people notice and remember. It sits close to the ceiling in hallways, kitchens, and bedrooms, or mounts on the wall as a vanity light, and its damp rating covers the bathroom too. Designers use it to give boutique hotel suites, cafés, and salons instant icon status. Choose from our 14 signature colors and 3 finishes, each made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Not every flush mount becomes iconic. This one was born for it.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/7-icon-flush-mount-3-nickel-cobalt_3a78a80d-c894-4a7c-8038-6dd875885280.jpg?v=1759252392",
       "image_alt": "Nickel and cobalt color Icon 3 flush mount Dutton Brown lighting",
       "gallery": [
@@ -81184,7 +81184,7 @@
       "bom_parent_sku": "30333",
       "bom_canonical_sku": "30333",
       "bom_page_url": "https://app.notion.com/p/30333-2aeffa524c5b80078319ee88b9ad8a4c",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -81530,8 +81530,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "The Color Lepore Flush Mount couples captivating color options with high-clarity acrylic to create a stunning flush mount light fixture.",
-      "body_html": "<p>The Color Lepore Flush Mount couples captivating color options with high-clarity acrylic to create a stunning flush mount light fixture. This colorful fixture adds a \"notice-me\" touch to any space as its laser-cut crystal-clear acrylic structure refracts the light reflected on the colorful disk contained within its canopy. Available in variety of soft or bold colors, the disk can be customized to contain a picture, matching wall paper, or more.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Color Lepore Flush Mount is a modern acrylic flush mount that's iconic, glamorous, and completely unapologetic about it.</p>\n<p dir=\"ltr\">A canopy of laser-cut, crystal-clear acrylic catches the light from every angle, while a holder and inner disk in your choice of 14 colors put the bulb front and center. Want it even more personal? The disk can carry a photo or your matching wallpaper. It sits close to the ceiling, bringing a little glitz to entryways, hallways, closets, and laundry rooms that usually settle for a bare bulb. In salons, cocktail bars, and boutique hotel corridors, it's the light guests stop to photograph. Each one is made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Iconic, glamorous, and never sorry for stealing the spotlight.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-lepore-flush-mount-ochre_4b98a94e-4f0a-41f5-9254-9eca26ab8aef.jpg?v=1747968350",
       "image_alt": "Ochre color Lepore flush mount Dutton Brown lighting",
       "gallery": [
@@ -81907,7 +81907,7 @@
       "bom_parent_sku": "70130 (C)",
       "bom_canonical_sku": "70130",
       "bom_page_url": "https://app.notion.com/p/70130-C-2c8ffa524c5b80049b89fb8cda8c6150",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -83517,7 +83517,7 @@
       "bom_parent_sku": "30112F-10",
       "bom_canonical_sku": "30112F-10",
       "bom_page_url": "https://app.notion.com/p/30112F-10-2aeffa524c5b803cacfcf822b8d7437b",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -85227,7 +85227,7 @@
       "bom_parent_sku": "30112F-12",
       "bom_canonical_sku": "30112F-12",
       "bom_page_url": "https://app.notion.com/p/30112F-12-2aeffa524c5b8095af44ce8d24b74f80",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -86968,7 +86968,7 @@
       "bom_parent_sku": "30112F-6",
       "bom_canonical_sku": "30112F-6",
       "bom_page_url": "https://app.notion.com/p/30112F-6-2aeffa524c5b80a697b5d4c87f8645cd",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -88705,7 +88705,7 @@
       "bom_parent_sku": "30112F-8",
       "bom_canonical_sku": "30112F-8",
       "bom_page_url": "https://app.notion.com/p/30112F-8-2aeffa524c5b80669875d98224a57b7a",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -89845,7 +89845,7 @@
       "bom_parent_sku": "40131-13",
       "bom_canonical_sku": "40131-13",
       "bom_page_url": "https://app.notion.com/p/40131-13-2aeffa524c5b80de8038e7b02dc51b10",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -90973,7 +90973,7 @@
       "bom_parent_sku": "40131-8",
       "bom_canonical_sku": "40131-8",
       "bom_page_url": "https://app.notion.com/p/40131-8-2aeffa524c5b8057be8dfa192caf1509",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -93491,7 +93491,7 @@
       "bom_parent_sku": "30402F (C)",
       "bom_canonical_sku": "30402F",
       "bom_page_url": "https://app.notion.com/p/30402F-C-2c8ffa524c5b80e1b220c8f82c3cf3c3",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -93933,8 +93933,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "This simple, modern flush mount offers a T-shaped silhouette energized by colorful powder coat options.",
-      "body_html": "<p>This simple, modern flush mount offers a T-shaped silhouette energized by colorful powder coat options. Each fixture features two exposed bulbs on an expansive tier crafted from exclusively-designed aluminum parts. Perfect for use above long, narrow islands and tables and hallways, the fixture also creates impactful perpendicular and parallel formations when used in groups.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Color Pilot Flush Mount 29\" is a modern linear flush mount that's cleared for takeoff.</p>\n<p dir=\"ltr\">A short drop from the ceiling leads to a slim T-shaped arm with an exposed bulb at each end, for a crisp line of light that keeps things streamlined but far from boring. It flies low, so it fits kitchens, hallways, and bedrooms where a pendant would get in the way, and its damp rating covers the bathroom too. Designers line them up in parallel or perpendicular formations over café counters, retail aisles, and office corridors. Choose from our 14 signature colors and 3 finishes, with a sloped-ceiling option, each made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">No turbulence, just smooth, effortless design.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/products/6-color-pilot-flush-mount-29-cobalt_8ce7a5da-632e-4146-a1c6-9ce313a62eed.jpg?v=1794966265",
       "image_alt": "Cobalt color Pilot flush mount 29\" Dutton Brown lighting _hover",
       "gallery": [
@@ -95314,7 +95314,7 @@
       "bom_parent_sku": "60230",
       "bom_canonical_sku": "60230",
       "bom_page_url": "https://app.notion.com/p/60230-2aeffa524c5b80d2a6fcefd1ebbd4f08",
-      "bom_last_edited_at": "2026-11-18T01:55:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -95695,8 +95695,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "This simple, modern flush mount offers a T-shaped silhouette energized by colorful powder coat options.",
-      "body_html": "<p>This simple, modern flush mount offers a T-shaped silhouette energized by colorful powder coat options. Each fixture features two exposed bulbs on an expansive tier crafted from exclusively-designed aluminum parts. Perfect for use above long, narrow islands and tables and hallways, the fixture also creates impactful perpendicular and parallel formations when used in groups.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Color Pilot Flush Mount 47\" is a modern linear flush mount that's cleared for takeoff.</p>\n<p dir=\"ltr\">A short drop from the ceiling leads to a slim T-shaped arm with an exposed bulb at each end, for a crisp line of light that keeps things streamlined but far from boring. It flies low, so it fits kitchens, hallways, and bedrooms where a pendant would get in the way, and its damp rating covers the bathroom too. Designers line them up in parallel or perpendicular formations over café counters, retail aisles, and office corridors. Choose from our 14 signature colors and 3 finishes, with a sloped-ceiling option, each made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">No turbulence, just smooth, effortless design.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/products/10-color-pilot-flush-mount-47-ridinghoodred_7f7ee651-a776-4436-bb0f-7df4d2562032.jpg?v=1794966382",
       "image_alt": "Riding hood red color Pilot flush mount 47\" Dutton Brown lighting _hover",
       "gallery": [
@@ -97076,7 +97076,7 @@
       "bom_parent_sku": "60231",
       "bom_canonical_sku": "60231",
       "bom_page_url": "https://app.notion.com/p/60231-2aeffa524c5b8078a4dec154789410d9",
-      "bom_last_edited_at": "2026-11-18T01:55:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -98104,7 +98104,7 @@
           "sku": "60330-3RH",
           "price": "450.00",
           "compare_price": null,
-          "qty": -1,
+          "qty": -2,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -98249,7 +98249,7 @@
       "bom_parent_sku": "60330",
       "bom_canonical_sku": "60330",
       "bom_page_url": "https://app.notion.com/p/60330-2aeffa524c5b80568fdbfac1c45ff4f9",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -99399,7 +99399,7 @@
       "bom_parent_sku": "60130",
       "bom_canonical_sku": "60130",
       "bom_page_url": "https://app.notion.com/p/60130-2aeffa524c5b80b9a095c951117d47a2",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -102074,7 +102074,7 @@
       "bom_parent_sku": "30405F",
       "bom_canonical_sku": "30405F",
       "bom_page_url": "https://app.notion.com/p/30405F-2aeffa524c5b80e799bdc08b1b874d7c",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -102561,7 +102561,7 @@
       "status": "active",
       "published": true,
       "tagline": "Our Color Supreme Flush Mount is the globe fixture for anyone tired of seeing the same ceiling light in every house on the block.",
-      "body_html": "<p dir=\"ltr\">Our Color Supreme Flush Mount is the globe fixture for anyone tired of seeing the same ceiling light in every house on the block.</p>\n<p dir=\"ltr\">Most globe flush mounts follow the same cookie-cutter formula. The Supreme breaks it. Hand-blown opal glass globes branch out at off-kilter angles, held together by sharp, faceted connectors that turn a basic ceiling light into a piece of modern sculpture. It sits close to the ceiling, so it brings statement style to hallways, bedrooms, kitchens, and entryways where a pendant would get in the way. For designers, it’s an easy way to give boutique hotel corridors, caf��s, and offices a signature look overhead. Choose from our 14 signature colors and 3 finishes, each one made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">In a sea of globe flush mounts, there’s only one Supreme.</p>",
+      "body_html": "<p dir=\"ltr\">Our Color Supreme Flush Mount is the globe fixture for anyone tired of seeing the same ceiling light in every house on the block.</p>\n<p dir=\"ltr\">Most globe flush mounts follow the same cookie-cutter formula. The Supreme breaks it. Hand-blown opal glass globes branch out at off-kilter angles, held together by sharp, faceted connectors that turn a basic ceiling light into a piece of modern sculpture. It sits close to the ceiling, so it brings statement style to hallways, bedrooms, kitchens, and entryways where a pendant would get in the way. For designers, it’s an easy way to give boutique hotel corridors, cafés, and offices a signature look overhead. Choose from our 14 signature colors and 3 finishes, each one made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">In a sea of globe flush mounts, there’s only one Supreme.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/9-supreme-flush-mount-brass-ochre_e200f314-3c52-4006-be20-5ed232fd4f19.jpg?v=1757867724",
       "image_alt": "brass ochre color Supreme flush mount Dutton Brown lighting",
       "gallery": [
@@ -103946,7 +103946,7 @@
       "bom_parent_sku": "30332 (C)",
       "bom_canonical_sku": "30332",
       "bom_page_url": "https://app.notion.com/p/30332-C-2c8ffa524c5b802cb96cee39b6d7bd4c",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -105700,7 +105700,7 @@
       "bom_parent_sku": "30404F (C)",
       "bom_canonical_sku": "30404F",
       "bom_page_url": "https://app.notion.com/p/30404F-C-2c8ffa524c5b807aa643ccc3da609ecf",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -106892,7 +106892,7 @@
       "bom_parent_sku": "60132 (C)",
       "bom_canonical_sku": "60132",
       "bom_page_url": "https://app.notion.com/p/60132-C-2c8ffa524c5b8050afa0e66dd84499c5",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -107874,7 +107874,7 @@
       "bom_parent_sku": "60432",
       "bom_canonical_sku": "60432",
       "bom_page_url": "https://app.notion.com/p/60432-2aeffa524c5b8004b2c4e855319e2617",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -108954,7 +108954,7 @@
       "bom_parent_sku": "60730",
       "bom_canonical_sku": "60730",
       "bom_page_url": "https://app.notion.com/p/60730-2aeffa524c5b802598d9f57a50fc19ca",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -109479,7 +109479,7 @@
       "bom_parent_sku": "31000F",
       "bom_canonical_sku": "31000F",
       "bom_page_url": "https://app.notion.com/p/31000F-2aeffa524c5b8058819fe454b40342c1",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -110238,7 +110238,7 @@
       "bom_parent_sku": "31001F",
       "bom_canonical_sku": "31001F",
       "bom_page_url": "https://app.notion.com/p/31001F-2aeffa524c5b8016bdb6d77ee4b8a91e",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -110790,8 +110790,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "The Lepore Flush Mount couples captivating high-end finish with high-clarity acrylic to create a stunning flush mount light fixture.",
-      "body_html": "<p>The Lepore Flush Mount couples captivating high-end finish with high-clarity acrylic to create a stunning flush mount light fixture. This acrylic light fixture adds a \"notice-me\" touch to any space as its laser-cut crystal-clear acrylic structure refracts the light reflected on the matching disk contained within its canopy. Available in variety of soft or bold colors, the disk can be customized to contain a picture, matching wallpaper, or more.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Lepore Flush Mount is a modern acrylic flush mount that's iconic, glamorous, and completely unapologetic about it.</p>\n<p dir=\"ltr\">A canopy of laser-cut, crystal-clear acrylic catches the light from every angle, while a holder and inner disk in your choice of brass, nickel, or black put the bulb front and center. It sits close to the ceiling, bringing a little glitz to entryways, hallways, closets, and laundry rooms that usually settle for a bare bulb. In salons, cocktail bars, and boutique hotel corridors, it's the light guests stop to photograph. Each one is made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Iconic, glamorous, and never sorry for stealing the spotlight.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/lepore-flush-mount-brass_7042bbff-76e3-4df1-83d3-fe2c8c47b63e.jpg?v=1747968344",
       "image_alt": "Brass Lepore flush mount Dutton Brown lighting",
       "gallery": [
@@ -110947,7 +110947,7 @@
       "bom_parent_sku": "70130",
       "bom_canonical_sku": "70130",
       "bom_page_url": "https://app.notion.com/p/70130-2aeffa524c5b8038bbcde55a10643104",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -111324,7 +111324,7 @@
       "bom_parent_sku": "30402F",
       "bom_canonical_sku": "30402F",
       "bom_page_url": "https://app.notion.com/p/30402F-2aeffa524c5b8048bf4ff2158ec215ae",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -111878,7 +111878,7 @@
           "sku": "30332-1",
           "price": "600.00",
           "compare_price": null,
-          "qty": -61,
+          "qty": -62,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Configuration",
@@ -111972,7 +111972,7 @@
       "bom_parent_sku": "30332",
       "bom_canonical_sku": "30332",
       "bom_page_url": "https://app.notion.com/p/30332-2aeffa524c5b802fa346e934ee98b5a4",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -112526,7 +112526,7 @@
       "bom_parent_sku": "30404F",
       "bom_canonical_sku": "30404F",
       "bom_page_url": "https://app.notion.com/p/30404F-2aeffa524c5b803d93d5c72aff1546dd",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -113085,7 +113085,7 @@
       "bom_parent_sku": "60132",
       "bom_canonical_sku": "60132",
       "bom_page_url": "https://app.notion.com/p/60132-2aeffa524c5b80c6bc67c8bb05702c7e",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -113277,8 +113277,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "Our \"urchin\" fixture is the ultimate eye-catching mid-century modern light fixture.",
-      "body_html": "<p>Our \"urchin\" fixture is the ultimate eye-catching mid-century modern light fixture. Each flush mount is built on a CNC-machined aluminum core adorned with 316 individually threaded solid brass rods; we call them \"spines\". Your search ends here for a showstopping statement piece configured with a short rod to install snug to the ceiling for spaces with low ceilings, high-swinging doors, and tall visitors.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\"><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\"><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Urchin Flush Mount 20\" is the brass starburst flush mount where Dutton Brown began.</p>\n<p dir=\"ltr\">The urchin was the very first fixture our founders designed, and it sold within a day of going online. Its solid brass spines are threaded by hand into a burst that reads as sculpture first, light fixture second, a mid-century modern classic with our own contemporary spin. It sits close to the ceiling, so low ceilings never have to settle for boring. Give an entryway, hallway, bedroom, or bathroom a little drama, or let it steal the show in boutique hotel corridors, cafés, and salons. Each one is made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Our first fixture, and it's still showing off.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/products/1-urchin-flush-mount-20-brass_cd4c7eeb-356b-4036-bcac-a29bc2e08f73.jpg?v=1792129926",
       "image_alt": "Brass Urchin flush mount 20\" Dutton Brown lighting",
       "gallery": [
@@ -113412,7 +113412,7 @@
       "bom_parent_sku": "10401F-20",
       "bom_canonical_sku": "10401F-20",
       "bom_page_url": "https://app.notion.com/p/10401F-20-2aeffa524c5b8001a6dde799d8726521",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -113821,8 +113821,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "Our \"urchin\" fixture is the ultimate captivating mid-century modern light fixture.",
-      "body_html": "<p>Our \"urchin\" fixture is the ultimate captivating mid-century modern light fixture. Each flush mount is built on a CNC-machined aluminum core adorned with 316 individually threaded solid brass rods; we call them \"spines\". Your search ends here for a showstopping statement piece configured with a short rod to install snug to the ceiling for spaces with low ceilings, high-swinging doors, and tall visitors.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Urchin Flush Mount 27\" is the brass starburst flush mount where Dutton Brown began.</p>\n<p dir=\"ltr\">The urchin was the very first fixture our founders designed, and it sold within a day of going online. Its solid brass spines are threaded by hand into a burst that reads as sculpture first, light fixture second, a mid-century modern classic with our own contemporary spin. It sits close to the ceiling, so low ceilings never have to settle for boring. Give an entryway, hallway, bedroom, or bathroom a little drama, or let it steal the show in boutique hotel corridors, cafés, and salons. Each one is made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Our first fixture, and it's still showing off.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/products/1-urchin-flush-mount-27-brass_2bb72a5d-78fb-448a-a13d-caa62077e19f.jpg?v=1792129908",
       "image_alt": "Brass Urchin flush mount 27\" Dutton Brown lighting",
       "gallery": [
@@ -113908,7 +113908,7 @@
           "sku": "10401F-27-1",
           "price": "900.00",
           "compare_price": null,
-          "qty": -72,
+          "qty": -73,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Configuration",
@@ -113951,7 +113951,7 @@
       "bom_parent_sku": "10401F-27",
       "bom_canonical_sku": "10401F-27",
       "bom_page_url": "https://app.notion.com/p/10401F-27-2aeffa524c5b809aaf12f40a1fea55b0",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -114570,7 +114570,7 @@
       "bom_parent_sku": "70110",
       "bom_canonical_sku": "70110",
       "bom_page_url": "https://app.notion.com/p/70110-2aeffa524c5b802181c6ed9aaaf98c8d",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -115144,7 +115144,7 @@
       "bom_parent_sku": "30110-10",
       "bom_canonical_sku": "30110-10",
       "bom_page_url": "https://app.notion.com/p/30110-10-2aeffa524c5b804ab024e28a6f0f1116",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -115756,7 +115756,7 @@
       "bom_parent_sku": "30110-12",
       "bom_canonical_sku": "30110-12",
       "bom_page_url": "https://app.notion.com/p/30110-12-2aeffa524c5b80d8885dc891d182045c",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -116371,7 +116371,7 @@
       "bom_parent_sku": "30110-6",
       "bom_canonical_sku": "30110-6",
       "bom_page_url": "https://app.notion.com/p/30110-6-2aeffa524c5b80d78a93e5495a03dd62",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -116984,7 +116984,7 @@
       "bom_parent_sku": "30110-8",
       "bom_canonical_sku": "30110-8",
       "bom_page_url": "https://app.notion.com/p/30110-8-2aeffa524c5b8005b1c7ef1476d62de8",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:07:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -118764,7 +118764,7 @@
       "bom_parent_sku": "70110 (C)",
       "bom_canonical_sku": "70110",
       "bom_page_url": "https://app.notion.com/p/70110-C-2c8ffa524c5b80b98a3bced51e5c7264",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -120518,7 +120518,7 @@
       "bom_parent_sku": "50110-10",
       "bom_canonical_sku": "50110-10",
       "bom_page_url": "https://app.notion.com/p/50110-10-2aeffa524c5b8016a0a6d959ad3e4951",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -122256,7 +122256,7 @@
       "bom_parent_sku": "50110-12",
       "bom_canonical_sku": "50110-12",
       "bom_page_url": "https://app.notion.com/p/50110-12-2aeffa524c5b8064855bc2de8a220673",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -123994,7 +123994,7 @@
       "bom_parent_sku": "50110-8",
       "bom_canonical_sku": "50110-8",
       "bom_page_url": "https://app.notion.com/p/50110-8-2aeffa524c5b809a99caec0401428b50",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -125735,7 +125735,7 @@
       "bom_parent_sku": "30110-10 (C)",
       "bom_canonical_sku": "30110-10",
       "bom_page_url": "https://app.notion.com/p/30110-10-C-2c8ffa524c5b807ebe82cc740e08dca3",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -127531,7 +127531,7 @@
       "bom_parent_sku": "30110-12 (C)",
       "bom_canonical_sku": "30110-12",
       "bom_page_url": "https://app.notion.com/p/30110-12-C-320ffa524c5b80cda6fcdb7abf117896",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -129326,7 +129326,7 @@
       "bom_parent_sku": "30110-6 (C)",
       "bom_canonical_sku": "30110-6",
       "bom_page_url": "https://app.notion.com/p/30110-6-C-2c8ffa524c5b800aba05d962f76a024e",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -131122,7 +131122,7 @@
       "bom_parent_sku": "30110-8 (C)",
       "bom_canonical_sku": "30110-8",
       "bom_page_url": "https://app.notion.com/p/30110-8-C-2c8ffa524c5b80b68ed2da293eb141e2",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -132165,7 +132165,7 @@
           "sku": "50111-10-3RH",
           "price": "320.00",
           "compare_price": null,
-          "qty": -2,
+          "qty": -4,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -132907,7 +132907,7 @@
       "bom_parent_sku": "50111-10",
       "bom_canonical_sku": "50111-10",
       "bom_page_url": "https://app.notion.com/p/50111-10-2aeffa524c5b80b0b23ddd4ee741557e",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -133853,7 +133853,7 @@
           "sku": "50111-12-3I",
           "price": "350.00",
           "compare_price": null,
-          "qty": -9,
+          "qty": -15,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -134637,7 +134637,7 @@
       "bom_parent_sku": "50111-12",
       "bom_canonical_sku": "50111-12",
       "bom_page_url": "https://app.notion.com/p/50111-12-2aeffa524c5b806b9d19f3e82a3353ec",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -136367,7 +136367,7 @@
       "bom_parent_sku": "50111-8",
       "bom_canonical_sku": "50111-8",
       "bom_page_url": "https://app.notion.com/p/50111-8-2aeffa524c5b80df9aede0c0642710d5",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -138106,7 +138106,7 @@
       "bom_parent_sku": "60111",
       "bom_canonical_sku": "60111",
       "bom_page_url": "https://app.notion.com/p/60111-2aeffa524c5b80ea9cf7f95260e46ad9",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -139852,7 +139852,7 @@
       "bom_parent_sku": "30112-10",
       "bom_canonical_sku": "30112-10",
       "bom_page_url": "https://app.notion.com/p/30112-10-2aeffa524c5b807a87fdfe1c7ce23fa5",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -141647,7 +141647,7 @@
       "bom_parent_sku": "30112-12",
       "bom_canonical_sku": "30112-12",
       "bom_page_url": "https://app.notion.com/p/30112-12-2aeffa524c5b80cd90f1e1edc781541e",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -143440,7 +143440,7 @@
       "bom_parent_sku": "30112-6",
       "bom_canonical_sku": "30112-6",
       "bom_page_url": "https://app.notion.com/p/30112-6-2aeffa524c5b8046ad59ce7b09c0cab8",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -145234,7 +145234,7 @@
       "bom_parent_sku": "30112-8",
       "bom_canonical_sku": "30112-8",
       "bom_page_url": "https://app.notion.com/p/30112-8-2aeffa524c5b8037acfce14356148488",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -147244,7 +147244,7 @@
       "bom_parent_sku": "40111-13-23",
       "bom_canonical_sku": "40111-13-23",
       "bom_page_url": "https://app.notion.com/p/40111-13-23-2aeffa524c5b8015b31afbb87e03f0bb",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -149284,7 +149284,7 @@
       "bom_parent_sku": "40111-8-23",
       "bom_canonical_sku": "40111-8-23",
       "bom_page_url": "https://app.notion.com/p/40111-8-23-2aeffa524c5b80b593b6c35d584b7bf1",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -152625,7 +152625,7 @@
       "bom_parent_sku": "60210-16",
       "bom_canonical_sku": "60210-16",
       "bom_page_url": "https://app.notion.com/p/60210-16-2aeffa524c5b80669cf6c9f801ce68c8",
-      "bom_last_edited_at": "2026-11-18T01:46:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -154634,7 +154634,7 @@
       "bom_parent_sku": "60211-16",
       "bom_canonical_sku": "60211-16",
       "bom_page_url": "https://app.notion.com/p/60211-16-2ecffa524c5b805db7f3dcc896e280fe",
-      "bom_last_edited_at": "2026-11-18T01:46:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -156419,7 +156419,7 @@
       "bom_parent_sku": "60110",
       "bom_canonical_sku": "60110",
       "bom_page_url": "https://app.notion.com/p/60110-2aeffa524c5b80feadf3cfa5d61a741a",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -158169,7 +158169,7 @@
       "bom_parent_sku": "60112 (C)",
       "bom_canonical_sku": "60112",
       "bom_page_url": "https://app.notion.com/p/60112-C-2c8ffa524c5b80278e52d9cdcbe6415d",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -158659,7 +158659,7 @@
       "bom_parent_sku": "60112",
       "bom_canonical_sku": "60112",
       "bom_page_url": "https://app.notion.com/p/60112-2aeffa524c5b803e9debcd21d2ca6e6a",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -159750,7 +159750,7 @@
       "bom_parent_sku": "40120P-3",
       "bom_canonical_sku": "40120P-3",
       "bom_page_url": "https://app.notion.com/p/40120P-3-2aeffa524c5b8078abdee8d9838a5b22",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -160893,7 +160893,7 @@
       "bom_parent_sku": "40120P-10",
       "bom_canonical_sku": "40120P-10",
       "bom_page_url": "https://app.notion.com/p/40120P-10-2aeffa524c5b80689051c9697348d5e3",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -162036,7 +162036,7 @@
       "bom_parent_sku": "40120P-6",
       "bom_canonical_sku": "40120P-6",
       "bom_page_url": "https://app.notion.com/p/40120P-6-2aeffa524c5b80c0a0d6f536a76e229b",
-      "bom_last_edited_at": "2026-11-19T16:51:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -163180,7 +163180,7 @@
       "bom_parent_sku": "40120P-0",
       "bom_canonical_sku": "40120P-0",
       "bom_page_url": "https://app.notion.com/p/40120P-0-2aeffa524c5b80fa95d0f25bfbeb6023",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -164287,7 +164287,7 @@
       "bom_parent_sku": "40121P-17",
       "bom_canonical_sku": "40121P-17",
       "bom_page_url": "https://app.notion.com/p/40121P-17-2aeffa524c5b80ed82b8c5969c25cbed",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -165596,7 +165596,7 @@
       "bom_parent_sku": "40121P-9",
       "bom_canonical_sku": "40121P-9",
       "bom_page_url": "https://app.notion.com/p/40121P-9-2aeffa524c5b80618733e975d51e1354",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -166897,7 +166897,7 @@
       "bom_parent_sku": "60124P-10",
       "bom_canonical_sku": "60124P-10",
       "bom_page_url": "https://app.notion.com/p/60124P-10-2aeffa524c5b808c8edced45950d700c",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -167751,7 +167751,7 @@
           "sku": "60124P-3-2F",
           "price": "320.00",
           "compare_price": null,
-          "qty": -25,
+          "qty": -26,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -168041,7 +168041,7 @@
       "bom_parent_sku": "60124P-3",
       "bom_canonical_sku": "60124P-3",
       "bom_page_url": "https://app.notion.com/p/60124P-3-2aeffa524c5b80f9a08bd6ce8d7380ae",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -169185,7 +169185,7 @@
       "bom_parent_sku": "60124P-6",
       "bom_canonical_sku": "60124P-6",
       "bom_page_url": "https://app.notion.com/p/60124P-6-2aeffa524c5b803fb3e3d66f7b89bf17",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -170329,7 +170329,7 @@
       "bom_parent_sku": "60124P-0",
       "bom_canonical_sku": "60124P-0",
       "bom_page_url": "https://app.notion.com/p/60124P-0-2aeffa524c5b80308784e4eaf7a1c746",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -171440,7 +171440,7 @@
       "bom_parent_sku": "60128P-17",
       "bom_canonical_sku": "60128P-17",
       "bom_page_url": "https://app.notion.com/p/60128P-17-2aeffa524c5b80099810eafdcc8b4706",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -172730,7 +172730,7 @@
       "bom_parent_sku": "60128P-9",
       "bom_canonical_sku": "60128P-9",
       "bom_page_url": "https://app.notion.com/p/60128P-9-2aeffa524c5b80c890e0ece58c06a6fd",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -173538,7 +173538,7 @@
       "bom_parent_sku": "70220",
       "bom_canonical_sku": "70220",
       "bom_page_url": "https://app.notion.com/p/70220-2aeffa524c5b8013b54fcd0fd405497a",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -173977,7 +173977,7 @@
       "bom_parent_sku": "70222",
       "bom_canonical_sku": "70222",
       "bom_page_url": "https://app.notion.com/p/70222-2aeffa524c5b807fb14dc23814473a87",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -174431,7 +174431,7 @@
       "bom_parent_sku": "30220",
       "bom_canonical_sku": "30220",
       "bom_page_url": "https://app.notion.com/p/30220-2aeffa524c5b80e39f25c0d879fc2516",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -174893,7 +174893,7 @@
       "bom_parent_sku": "30221",
       "bom_canonical_sku": "30221",
       "bom_page_url": "https://app.notion.com/p/30221-2aeffa524c5b80199868d75e4596526a",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -175378,7 +175378,7 @@
       "bom_parent_sku": "30120",
       "bom_canonical_sku": "30120",
       "bom_page_url": "https://app.notion.com/p/30120-2aeffa524c5b8097b61cd4389a10e60e",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -175863,7 +175863,7 @@
       "bom_parent_sku": "30121",
       "bom_canonical_sku": "30121",
       "bom_page_url": "https://app.notion.com/p/30121-2aeffa524c5b80e8be56d2337a34e23b",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -177937,7 +177937,7 @@
       "bom_parent_sku": "50220",
       "bom_canonical_sku": "50220",
       "bom_page_url": "https://app.notion.com/p/50220-2aeffa524c5b80ffac63c7237b26a839",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -178991,7 +178991,7 @@
       "bom_parent_sku": "50221",
       "bom_canonical_sku": "50221",
       "bom_page_url": "https://app.notion.com/p/50221-2aeffa524c5b80a88360c635b514b796",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -180054,7 +180054,7 @@
       "bom_parent_sku": "70220 (C)",
       "bom_canonical_sku": "70220",
       "bom_page_url": "https://app.notion.com/p/70220-C-2c8ffa524c5b806dab3bd2b521639466",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -181127,7 +181127,7 @@
       "bom_parent_sku": "70222 (C)",
       "bom_canonical_sku": "70222",
       "bom_page_url": "https://app.notion.com/p/70222-C-2c8ffa524c5b80049549c86c0cfb33e1",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -182212,7 +182212,7 @@
       "bom_parent_sku": "40120-10",
       "bom_canonical_sku": "40120-10",
       "bom_page_url": "https://app.notion.com/p/40120-10-2aeffa524c5b80d7baf2dba5d39f99ac",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -183036,7 +183036,7 @@
           "sku": "40120-3-1F",
           "price": "340.00",
           "compare_price": null,
-          "qty": -48,
+          "qty": -49,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -183343,7 +183343,7 @@
       "bom_parent_sku": "40120-3",
       "bom_canonical_sku": "40120-3",
       "bom_page_url": "https://app.notion.com/p/40120-3-2aeffa524c5b8093a537d915fdb31c62",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -184475,7 +184475,7 @@
       "bom_parent_sku": "40120-6",
       "bom_canonical_sku": "40120-6",
       "bom_page_url": "https://app.notion.com/p/40120-6-2aeffa524c5b80a2b18bdd3eaff08908",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -185606,7 +185606,7 @@
       "bom_parent_sku": "40120-0",
       "bom_canonical_sku": "40120-0",
       "bom_page_url": "https://app.notion.com/p/40120-0-2aeffa524c5b80ae981aedd5ba1b4efb",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -186702,7 +186702,7 @@
       "bom_parent_sku": "40121-17",
       "bom_canonical_sku": "40121-17",
       "bom_page_url": "https://app.notion.com/p/40121-17-2aeffa524c5b80ee8ebdcfb8edfab90d",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -187999,7 +187999,7 @@
       "bom_parent_sku": "40121-9",
       "bom_canonical_sku": "40121-9",
       "bom_page_url": "https://app.notion.com/p/40121-9-2aeffa524c5b80a186aece88ce6e53ac",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -189295,7 +189295,7 @@
       "bom_parent_sku": "50120-10",
       "bom_canonical_sku": "50120-10",
       "bom_page_url": "https://app.notion.com/p/50120-10-2aeffa524c5b80af832aede14060b887",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -190388,7 +190388,7 @@
       "bom_parent_sku": "50120-8",
       "bom_canonical_sku": "50120-8",
       "bom_page_url": "https://app.notion.com/p/50120-8-2aeffa524c5b803b8fc7e057d2a114ed",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -191481,7 +191481,7 @@
       "bom_parent_sku": "30220 (C)",
       "bom_canonical_sku": "30220",
       "bom_page_url": "https://app.notion.com/p/30220-C-2c8ffa524c5b805a954efedd3131c699",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -192586,7 +192586,7 @@
       "bom_parent_sku": "30221 (C)",
       "bom_canonical_sku": "30221",
       "bom_page_url": "https://app.notion.com/p/30221-C-2c8ffa524c5b8060a379ce770c982bb5",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -193713,7 +193713,7 @@
       "bom_parent_sku": "30120 (C)",
       "bom_canonical_sku": "30120",
       "bom_page_url": "https://app.notion.com/p/30120-C-2c8ffa524c5b80658172d319f1368200",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -194844,7 +194844,7 @@
       "bom_parent_sku": "30121 (C)",
       "bom_canonical_sku": "30121",
       "bom_page_url": "https://app.notion.com/p/30121-C-2c8ffa524c5b8049beabf89c800e7d00",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -197809,7 +197809,7 @@
       "bom_parent_sku": "60127",
       "bom_canonical_sku": "60127",
       "bom_page_url": "https://app.notion.com/p/60127-2aeffa524c5b802aaf33f8882c13e42a",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -200392,7 +200392,7 @@
       "bom_parent_sku": "50121-10",
       "bom_canonical_sku": "50121-10",
       "bom_page_url": "https://app.notion.com/p/50121-10-2aeffa524c5b8051b248c254b67efeb2",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -201396,7 +201396,7 @@
       "bom_parent_sku": "50121-8",
       "bom_canonical_sku": "50121-8",
       "bom_page_url": "https://app.notion.com/p/50121-8-2aeffa524c5b806cb46ef00cccb5fff5",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -202389,7 +202389,7 @@
       "bom_parent_sku": "30224",
       "bom_canonical_sku": "30224",
       "bom_page_url": "https://app.notion.com/p/30224-2aeffa524c5b801c98facef98a9c1ea2",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -203319,7 +203319,7 @@
           "sku": "30321-2I",
           "price": "600.00",
           "compare_price": null,
-          "qty": -33,
+          "qty": -34,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -203525,7 +203525,7 @@
       "bom_parent_sku": "30321",
       "bom_canonical_sku": "30321",
       "bom_page_url": "https://app.notion.com/p/30321-2aeffa524c5b807a8211ff76c63cdae5",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -204177,7 +204177,7 @@
           "sku": "30223-1B",
           "price": "530.00",
           "compare_price": null,
-          "qty": -73,
+          "qty": -74,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -204649,7 +204649,7 @@
       "bom_parent_sku": "30223",
       "bom_canonical_sku": "30223",
       "bom_page_url": "https://app.notion.com/p/30223-2aeffa524c5b8004a27fe4711ff14fd7",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -205233,7 +205233,7 @@
           "sku": "30320-2A",
           "price": "600.00",
           "compare_price": null,
-          "qty": -33,
+          "qty": -34,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -205817,7 +205817,7 @@
       "bom_parent_sku": "30320",
       "bom_canonical_sku": "30320",
       "bom_page_url": "https://app.notion.com/p/30320-2aeffa524c5b8000b0f0e893619e948e",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -206594,7 +206594,7 @@
       "bom_parent_sku": "70122 (C)",
       "bom_canonical_sku": "70122",
       "bom_page_url": "https://app.notion.com/p/70122-C-2c8ffa524c5b809689b0de4d05fa0505",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -208205,7 +208205,7 @@
       "bom_parent_sku": "60129-15",
       "bom_canonical_sku": "60129-15",
       "bom_page_url": "https://app.notion.com/p/60129-15-2aeffa524c5b8070b14fe4704acb3618",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -209885,7 +209885,7 @@
       "bom_parent_sku": "60129-21",
       "bom_canonical_sku": "60129-21",
       "bom_page_url": "https://app.notion.com/p/60129-21-2aeffa524c5b80728d93ca141cfb75c0",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -211565,7 +211565,7 @@
       "bom_parent_sku": "60129-9",
       "bom_canonical_sku": "60129-9",
       "bom_page_url": "https://app.notion.com/p/60129-9-2aeffa524c5b80e299a7e0f3f1a26861",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -212190,7 +212190,7 @@
           "sku": "60222-2B",
           "price": "320.00",
           "compare_price": null,
-          "qty": -69,
+          "qty": -71,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -212568,7 +212568,7 @@
           "sku": "60222-2K",
           "price": "320.00",
           "compare_price": null,
-          "qty": -52,
+          "qty": -54,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -212649,7 +212649,7 @@
       "bom_parent_sku": "60222",
       "bom_canonical_sku": "60222",
       "bom_page_url": "https://app.notion.com/p/60222-2aeffa524c5b80c9ac33c8d34eab856b",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -213700,7 +213700,7 @@
       "bom_parent_sku": "70221 (C)",
       "bom_canonical_sku": "70221",
       "bom_page_url": "https://app.notion.com/p/70221-C-2c8ffa524c5b809f8a4dc071db019be2",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -215356,7 +215356,7 @@
       "bom_parent_sku": "60226-11",
       "bom_canonical_sku": "60226-11",
       "bom_page_url": "https://app.notion.com/p/60226-11-2aeffa524c5b80f29a93ef5fab59f72b",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -217015,7 +217015,7 @@
       "bom_parent_sku": "60226-17",
       "bom_canonical_sku": "60226-17",
       "bom_page_url": "https://app.notion.com/p/60226-17-2aeffa524c5b8047955ad781d00a643d",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -218674,7 +218674,7 @@
       "bom_parent_sku": "60226-23",
       "bom_canonical_sku": "60226-23",
       "bom_page_url": "https://app.notion.com/p/60226-23-2aeffa524c5b80a0b4e0ca8ada0fc144",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -220333,7 +220333,7 @@
       "bom_parent_sku": "60226-29",
       "bom_canonical_sku": "60226-29",
       "bom_page_url": "https://app.notion.com/p/60226-29-2aeffa524c5b8039990dce05de5948cd",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -221984,7 +221984,7 @@
       "bom_parent_sku": "60124-10",
       "bom_canonical_sku": "60124-10",
       "bom_page_url": "https://app.notion.com/p/60124-10-2aeffa524c5b803faaaad639a17f4bf3",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -223657,7 +223657,7 @@
       "bom_parent_sku": "60124-3",
       "bom_canonical_sku": "60124-3",
       "bom_page_url": "https://app.notion.com/p/60124-3-2aeffa524c5b8078b4c9d3f093b57ffd",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -225330,7 +225330,7 @@
       "bom_parent_sku": "60124-6",
       "bom_canonical_sku": "60124-6",
       "bom_page_url": "https://app.notion.com/p/60124-6-2aeffa524c5b80c2abdafe390ee7006d",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -227003,7 +227003,7 @@
       "bom_parent_sku": "60124-0",
       "bom_canonical_sku": "60124-0",
       "bom_page_url": "https://app.notion.com/p/60124-0-2aeffa524c5b8012b048c818ab5ad3a7",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -228052,7 +228052,7 @@
       "bom_parent_sku": "60128-17",
       "bom_canonical_sku": "60128-17",
       "bom_page_url": "https://app.notion.com/p/60128-17-2aeffa524c5b809dae9bcff72726ee16",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -229242,7 +229242,7 @@
           "sku": "60128-9-1K",
           "price": "390.00",
           "compare_price": null,
-          "qty": -5,
+          "qty": -9,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -229334,7 +229334,7 @@
       "bom_parent_sku": "60128-9",
       "bom_canonical_sku": "60128-9",
       "bom_page_url": "https://app.notion.com/p/60128-9-2aeffa524c5b80789054c2e2175d877c",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -230617,7 +230617,7 @@
       "bom_parent_sku": "60224",
       "bom_canonical_sku": "60224",
       "bom_page_url": "https://app.notion.com/p/60224-2aeffa524c5b80ccb187c710e1a44f11",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -231702,7 +231702,7 @@
       "bom_parent_sku": "60220 (C)",
       "bom_canonical_sku": "60220",
       "bom_page_url": "https://app.notion.com/p/60220-C-2c8ffa524c5b8091b372fc87b6b6711e",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -232766,7 +232766,7 @@
       "bom_parent_sku": "60221 (C)",
       "bom_canonical_sku": "60221",
       "bom_page_url": "https://app.notion.com/p/60221-C-2c8ffa524c5b80efaac4c945cef0de5b",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Parts List (For Assembly)": [
           {
@@ -234415,7 +234415,7 @@
       "bom_parent_sku": "60121 (C)",
       "bom_canonical_sku": "60121",
       "bom_page_url": "https://app.notion.com/p/60121-C-2c8ffa524c5b80e4a653d20735dca87d",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -237102,7 +237102,7 @@
       "bom_parent_sku": "60123 (C)",
       "bom_canonical_sku": "60123",
       "bom_page_url": "https://app.notion.com/p/60123-C-2c8ffa524c5b80098f3cf5298a564823",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -238744,7 +238744,7 @@
       "bom_parent_sku": "60125 (C)",
       "bom_canonical_sku": "60125",
       "bom_page_url": "https://app.notion.com/p/60125-C-2c8ffa524c5b80b9b01df09fac45815b",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -239739,7 +239739,7 @@
       "bom_parent_sku": "30222 (C)",
       "bom_canonical_sku": "30222",
       "bom_page_url": "https://app.notion.com/p/30222-C-2c8ffa524c5b8014ba90f7d26a6719b0",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -240268,7 +240268,7 @@
           "sku": "60420-2L",
           "price": "420.00",
           "compare_price": "0.00",
-          "qty": -9,
+          "qty": -10,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -240422,7 +240422,7 @@
           "sku": "60420-1D",
           "price": "420.00",
           "compare_price": null,
-          "qty": -15,
+          "qty": -16,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -240810,7 +240810,7 @@
       "bom_parent_sku": "60420",
       "bom_canonical_sku": "60420",
       "bom_page_url": "https://app.notion.com/p/60420-2aeffa524c5b80ea94b5fca32d176bfd",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -241866,7 +241866,7 @@
           "sku": "60720-3",
           "price": "570.00",
           "compare_price": null,
-          "qty": -5,
+          "qty": -6,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -241890,7 +241890,7 @@
       "bom_parent_sku": "60720",
       "bom_canonical_sku": "60720",
       "bom_page_url": "https://app.notion.com/p/60720-2aeffa524c5b80cc9a3cd21d68ff8d9b",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -242717,7 +242717,7 @@
       "bom_parent_sku": "70122",
       "bom_canonical_sku": "70122",
       "bom_page_url": "https://app.notion.com/p/70122-2aeffa524c5b8096bd41ef71811285a8",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -243084,7 +243084,7 @@
       "bom_parent_sku": "70221",
       "bom_canonical_sku": "70221",
       "bom_page_url": "https://app.notion.com/p/70221-2aeffa524c5b8050a666df3710ad81b8",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -243508,7 +243508,7 @@
       "bom_parent_sku": "60220",
       "bom_canonical_sku": "60220",
       "bom_page_url": "https://app.notion.com/p/60220-2aeffa524c5b802881a7c1da8299f370",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -243947,7 +243947,7 @@
       "bom_parent_sku": "60221",
       "bom_canonical_sku": "60221",
       "bom_page_url": "https://app.notion.com/p/60221-2aeffa524c5b8092a926fe1c3f23d7a3",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Parts List (For Assembly)": [
           {
@@ -244357,7 +244357,7 @@
       "bom_parent_sku": "60121",
       "bom_canonical_sku": "60121",
       "bom_page_url": "https://app.notion.com/p/60121-2aeffa524c5b80a8a411c2dfb5115279",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -244750,7 +244750,7 @@
       "bom_parent_sku": "60123",
       "bom_canonical_sku": "60123",
       "bom_page_url": "https://app.notion.com/p/60123-2aeffa524c5b804194acfabf14233149",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -245162,7 +245162,7 @@
       "bom_parent_sku": "60125",
       "bom_canonical_sku": "60125",
       "bom_page_url": "https://app.notion.com/p/60125-2aeffa524c5b80f58bb0c4a82866014f",
-      "bom_last_edited_at": "2026-11-16T14:05:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:05:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -245515,7 +245515,7 @@
       "bom_parent_sku": "30222",
       "bom_canonical_sku": "30222",
       "bom_page_url": "https://app.notion.com/p/30222-2aeffa524c5b80e89294dde5bab39abb",
-      "bom_last_edited_at": "2026-11-16T14:06:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:06:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -245929,7 +245929,7 @@
       "bom_parent_sku": "H18",
       "bom_canonical_sku": "H18",
       "bom_page_url": "https://app.notion.com/p/H18-2aeffa524c5b8018b11cc5363b1433f1",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -246206,7 +246206,7 @@
       "bom_parent_sku": "H19",
       "bom_canonical_sku": "H19",
       "bom_page_url": "https://app.notion.com/p/H19-2aeffa524c5b80cb9f53c73323a16c76",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -246629,7 +246629,7 @@
       "bom_parent_sku": "H32-4",
       "bom_canonical_sku": "H32-4",
       "bom_page_url": "https://app.notion.com/p/H32-4-2ecffa524c5b80539406fe866d31f9b9",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -247105,7 +247105,7 @@
       "bom_parent_sku": "H61-24",
       "bom_canonical_sku": "H61-24",
       "bom_page_url": "https://app.notion.com/p/H61-24-2aeffa524c5b806a8661f467f6dc7888",
-      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -247593,7 +247593,7 @@
       "bom_parent_sku": "H61-36",
       "bom_canonical_sku": "H61-36",
       "bom_page_url": "https://app.notion.com/p/H61-36-2aeffa524c5b80c2a616e0370c9b0880",
-      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -248068,7 +248068,7 @@
       "bom_parent_sku": "H18 (C)",
       "bom_canonical_sku": "H18",
       "bom_page_url": "https://app.notion.com/p/H18-C-2c9ffa524c5b80f3ad19c4a56c6d03c7",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -248994,7 +248994,7 @@
       "bom_parent_sku": "H19 (C)",
       "bom_canonical_sku": "H19",
       "bom_page_url": "https://app.notion.com/p/H19-C-2c9ffa524c5b80f18685ecf6e4a09b44",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -249956,7 +249956,7 @@
       "bom_parent_sku": "H32-4 (C)",
       "bom_canonical_sku": "H32-4",
       "bom_page_url": "https://app.notion.com/p/H32-4-C-2ecffa524c5b80b089a8d53160e3ab8c",
-      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -250848,7 +250848,7 @@
       "bom_parent_sku": "H32-4 (C)",
       "bom_canonical_sku": "H32-4",
       "bom_page_url": "https://app.notion.com/p/H32-4-C-2ecffa524c5b80b089a8d53160e3ab8c",
-      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -251741,7 +251741,7 @@
       "bom_parent_sku": "H32-4 (C)",
       "bom_canonical_sku": "H32-4",
       "bom_page_url": "https://app.notion.com/p/H32-4-C-2ecffa524c5b80b089a8d53160e3ab8c",
-      "bom_last_edited_at": "2026-11-19T16:52:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -252628,7 +252628,7 @@
       "bom_parent_sku": "H73 (C)",
       "bom_canonical_sku": "H73",
       "bom_page_url": "https://app.notion.com/p/H73-C-417ffa524c5b81208a70cf056bc2882c",
-      "bom_last_edited_at": "2026-11-15T07:59:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:00:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -254526,7 +254526,7 @@
       "bom_parent_sku": "H1A (C)",
       "bom_canonical_sku": "H1A",
       "bom_page_url": "https://app.notion.com/p/H1A-C-2c9ffa524c5b80e59452fe584b3c0624",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -255480,7 +255480,7 @@
       "bom_parent_sku": "H27 (C)",
       "bom_canonical_sku": "H27",
       "bom_page_url": "https://app.notion.com/p/H27-C-2c9ffa524c5b803f8a09db9336b54576",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -255835,7 +255835,7 @@
           "sku": "H43-1BO",
           "price": "70.00",
           "compare_price": null,
-          "qty": -4,
+          "qty": -5,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -256348,7 +256348,7 @@
       "bom_parent_sku": "H43 (C)",
       "bom_canonical_sku": "H43",
       "bom_page_url": "https://app.notion.com/p/H43-C-2c9ffa524c5b8038bf85c16cb7608e41",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -256907,7 +256907,7 @@
           "sku": "H52-18-3PG",
           "price": "130.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -1,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -257311,7 +257311,7 @@
       "bom_parent_sku": "H52-18 (C)",
       "bom_canonical_sku": "H52-18",
       "bom_page_url": "https://app.notion.com/p/H52-18-C-2ecffa524c5b80f1ab3beda07b188aa9",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -258202,7 +258202,7 @@
       "bom_parent_sku": "H52-18 (C)",
       "bom_canonical_sku": "H52-18",
       "bom_page_url": "https://app.notion.com/p/H52-18-C-2ecffa524c5b80f1ab3beda07b188aa9",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -259143,7 +259143,7 @@
       "bom_parent_sku": "H52-24 (C)",
       "bom_canonical_sku": "H52-24",
       "bom_page_url": "https://app.notion.com/p/H52-24-C-2e5ffa524c5b8042ba47feff48578dd3",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -260082,7 +260082,7 @@
       "bom_parent_sku": "H62-18 (C)",
       "bom_canonical_sku": "H62-18",
       "bom_page_url": "https://app.notion.com/p/H62-18-C-2c9ffa524c5b80bdb63bc0af4d077bd6",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -261032,7 +261032,7 @@
       "bom_parent_sku": "H62-24 (C)",
       "bom_canonical_sku": "H62-24",
       "bom_page_url": "https://app.notion.com/p/H62-24-C-2c9ffa524c5b805b9092e2d8b0f40236",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -261979,7 +261979,7 @@
       "bom_parent_sku": "H26 (C)",
       "bom_canonical_sku": "H26",
       "bom_page_url": "https://app.notion.com/p/H26-C-2c9ffa524c5b80fc9f96dd626b3174c7",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -263368,7 +263368,7 @@
           "sku": "H13-2I",
           "price": "45.00",
           "compare_price": null,
-          "qty": -28,
+          "qty": -30,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -263573,7 +263573,7 @@
       "bom_parent_sku": "H13 (C)",
       "bom_canonical_sku": "H13",
       "bom_page_url": "https://app.notion.com/p/H13-C-2c9ffa524c5b80c19346c0238e7d364e",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -264506,7 +264506,7 @@
       "bom_parent_sku": "H20 (C)",
       "bom_canonical_sku": "H20",
       "bom_page_url": "https://app.notion.com/p/H20-C-2c9ffa524c5b8028bed8cde758a746ce",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -265369,7 +265369,7 @@
       "bom_parent_sku": "H30-5 (C)",
       "bom_canonical_sku": "H30-5",
       "bom_page_url": "https://app.notion.com/p/H30-5-C-2ecffa524c5b8030af11f03f0713e80d",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -266250,7 +266250,7 @@
       "bom_parent_sku": "H30-5 (C)",
       "bom_canonical_sku": "H30-5",
       "bom_page_url": "https://app.notion.com/p/H30-5-C-2ecffa524c5b8030af11f03f0713e80d",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -267137,7 +267137,7 @@
       "bom_parent_sku": "H30-5 (C)",
       "bom_canonical_sku": "H30-5",
       "bom_page_url": "https://app.notion.com/p/H30-5-C-2ecffa524c5b8030af11f03f0713e80d",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -267521,7 +267521,7 @@
           "sku": "H16-1BO",
           "price": "45.00",
           "compare_price": null,
-          "qty": -34,
+          "qty": -35,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -268034,7 +268034,7 @@
       "bom_parent_sku": "H16 (C)",
       "bom_canonical_sku": "H16",
       "bom_page_url": "https://app.notion.com/p/H16-C-2c9ffa524c5b8012b10cf1d216ba9532",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -268773,7 +268773,7 @@
           "sku": "H10-2I",
           "price": "30.00",
           "compare_price": null,
-          "qty": -47,
+          "qty": -48,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -268978,7 +268978,7 @@
       "bom_parent_sku": "H10 (C)",
       "bom_canonical_sku": "H10",
       "bom_page_url": "https://app.notion.com/p/H10-C-2c9ffa524c5b80bab3e8eb13eda03018",
-      "bom_last_edited_at": "2026-11-16T14:03:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -269857,7 +269857,7 @@
       "bom_parent_sku": "H74",
       "bom_canonical_sku": "H74",
       "bom_page_url": "https://app.notion.com/p/H74-41affa524c5b81799b0cc8dcb395fe74",
-      "bom_last_edited_at": "2026-11-17T01:30:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:00:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -270256,7 +270256,7 @@
           "sku": "H1D-1BO",
           "price": "45.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -2,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -270368,7 +270368,7 @@
           "sku": "H1D-3PG",
           "price": "45.00",
           "compare_price": null,
-          "qty": 0,
+          "qty": -2,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Color",
@@ -270769,7 +270769,7 @@
       "bom_parent_sku": "H1D",
       "bom_canonical_sku": "H1D",
       "bom_page_url": "https://app.notion.com/p/H1D-2e8ffa524c5b80539527e04bf6454b8a",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -271334,7 +271334,7 @@
           "sku": "H28-1E",
           "price": "30.00",
           "compare_price": null,
-          "qty": -43,
+          "qty": -45,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -271684,7 +271684,7 @@
       "bom_parent_sku": "H28",
       "bom_canonical_sku": "H28",
       "bom_page_url": "https://app.notion.com/p/H28-2aeffa524c5b803ca24ccc7dc6fc6a62",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -272929,7 +272929,7 @@
       "bom_parent_sku": "H33-5",
       "bom_canonical_sku": "H33-5",
       "bom_page_url": "https://app.notion.com/p/H33-5-2ecffa524c5b80abbfe3dbd84c8412a2",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -274180,7 +274180,7 @@
       "bom_parent_sku": "H33-5",
       "bom_canonical_sku": "H33-5",
       "bom_page_url": "https://app.notion.com/p/H33-5-2ecffa524c5b80abbfe3dbd84c8412a2",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -275431,7 +275431,7 @@
       "bom_parent_sku": "H33-5",
       "bom_canonical_sku": "H33-5",
       "bom_page_url": "https://app.notion.com/p/H33-5-2ecffa524c5b80abbfe3dbd84c8412a2",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -276078,7 +276078,7 @@
           "sku": "H53-18-2I",
           "price": "130.00",
           "compare_price": null,
-          "qty": -4,
+          "qty": -5,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -276286,7 +276286,7 @@
       "bom_parent_sku": "H53-18",
       "bom_canonical_sku": "H53-18",
       "bom_page_url": "https://app.notion.com/p/H53-18-318ffa524c5b802394f6c148406d8818",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -276685,7 +276685,7 @@
           "sku": "H53-24-1BO",
           "price": "150.00",
           "compare_price": null,
-          "qty": -2,
+          "qty": -3,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "Color",
@@ -276867,7 +276867,7 @@
           "sku": "H53-24-2E",
           "price": "150.00",
           "compare_price": null,
-          "qty": -4,
+          "qty": -5,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Color",
@@ -277201,7 +277201,7 @@
       "bom_parent_sku": "H53-24",
       "bom_canonical_sku": "H53-24",
       "bom_page_url": "https://app.notion.com/p/H53-24-318ffa524c5b80ada4c5d5e1f6c7d7dc",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -278116,7 +278116,7 @@
       "bom_parent_sku": "H63-18",
       "bom_canonical_sku": "H63-18",
       "bom_page_url": "https://app.notion.com/p/H63-18-346ffa524c5b83c192e9810bf1db16a1",
-      "bom_last_edited_at": "2026-11-16T14:00:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:00:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -279031,7 +279031,7 @@
       "bom_parent_sku": "H63-24",
       "bom_canonical_sku": "H63-24",
       "bom_page_url": "https://app.notion.com/p/H63-24-c4dffa524c5b822dac8d0193b838d38b",
-      "bom_last_edited_at": "2026-11-16T14:00:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:00:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -279896,7 +279896,7 @@
       "bom_parent_sku": "H15",
       "bom_canonical_sku": "H15",
       "bom_page_url": "https://app.notion.com/p/H15-2aeffa524c5b80b5a452ee7fe3e8b436",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -280772,7 +280772,7 @@
       "bom_parent_sku": "H25",
       "bom_canonical_sku": "H25",
       "bom_page_url": "https://app.notion.com/p/H25-2aeffa524c5b80f7a4c5ff6f8bbaa8ad",
-      "bom_last_edited_at": "2026-11-19T20:50:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -281047,7 +281047,7 @@
       "bom_parent_sku": "H1C-5",
       "bom_canonical_sku": "H1C-5",
       "bom_page_url": "https://app.notion.com/p/H1C-5-2aeffa524c5b8081a55eccc7c07f3a27",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -281212,8 +281212,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "Each holder is crafted from a combination of CNC-machined brass parts and high-clarity laser-cut acrylic adornments.",
-      "body_html": "<p>Each holder is crafted from a combination of CNC-machined brass parts and high-clarity laser-cut acrylic adornments. It's so pretty you'll hope you run out of toilet paper.</p>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Ghost Tissue Holder is a modern toilet paper holder that's barely there, in the best way.</p>\n<p dir=\"ltr\">Clear, laser-cut acrylic caps float on a CNC-machined brass post, so the holder all but disappears and your bathroom gets all the credit. Mount it in a powder room, primary bath, or guest bath that deserves an upgrade. In boutique hotels, spas, and restaurant restrooms, it's the small detail guests notice twice. Choose from brass, nickel, or black finishes, with mounting hardware included, each made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">It's so pretty you'll hope you run out of toilet paper.</p>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/ghost-toilet-paper-holder-hardware-acrylic-nickel-1.jpg?v=1775630045",
       "image_alt": "Nickel Ghost tissue holder Dutton Brown hardware _hover",
       "gallery": [
@@ -281353,7 +281353,7 @@
       "bom_parent_sku": "H44",
       "bom_canonical_sku": "H44",
       "bom_page_url": "https://app.notion.com/p/H44-2aeffa524c5b80338faac009c2c9fbb0",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -281662,7 +281662,7 @@
       "bom_parent_sku": "H73",
       "bom_canonical_sku": "H73",
       "bom_page_url": "https://app.notion.com/p/H73-416ffa524c5b815d8a22c12569696bcc",
-      "bom_last_edited_at": "2026-11-16T14:00:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:00:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -282275,7 +282275,7 @@
       "bom_parent_sku": "H1A",
       "bom_canonical_sku": "H1A",
       "bom_page_url": "https://app.notion.com/p/H1A-2aeffa524c5b80e4ba32e0bac10bed81",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -282593,7 +282593,7 @@
       "bom_parent_sku": "H27",
       "bom_canonical_sku": "H27",
       "bom_page_url": "https://app.notion.com/p/H27-2aeffa524c5b8052a538c525724fa023",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -282816,7 +282816,7 @@
       "bom_parent_sku": "H43",
       "bom_canonical_sku": "H43",
       "bom_page_url": "https://app.notion.com/p/H43-2aeffa524c5b80658130f1c1ba3e699a",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -283134,7 +283134,7 @@
       "bom_parent_sku": "H52-18",
       "bom_canonical_sku": "H52-18",
       "bom_page_url": "https://app.notion.com/p/H52-18-2e5ffa524c5b80afac90cf4e3410f166",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:03:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -283435,7 +283435,7 @@
       "bom_parent_sku": "H52-24",
       "bom_canonical_sku": "H52-24",
       "bom_page_url": "https://app.notion.com/p/H52-24-2aeffa524c5b80978956fd6a7f1f47e7",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -283729,7 +283729,7 @@
       "bom_parent_sku": "H62-18",
       "bom_canonical_sku": "H62-18",
       "bom_page_url": "https://app.notion.com/p/H62-18-2ecffa524c5b807b9c3ae1d842217537",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -284039,7 +284039,7 @@
       "bom_parent_sku": "H62-24",
       "bom_canonical_sku": "H62-24",
       "bom_page_url": "https://app.notion.com/p/H62-24-2aeffa524c5b80ef89aeeff7c698dada",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -284336,7 +284336,7 @@
       "bom_parent_sku": "H26",
       "bom_canonical_sku": "H26",
       "bom_page_url": "https://app.notion.com/p/H26-2aeffa524c5b8022a05ec0bafc511f16",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -284557,7 +284557,7 @@
       "bom_parent_sku": "H13",
       "bom_canonical_sku": "H13",
       "bom_page_url": "https://app.notion.com/p/H13-2aeffa524c5b8047bee9d4ea0b576a7e",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -284851,7 +284851,7 @@
       "bom_parent_sku": "H20",
       "bom_canonical_sku": "H20",
       "bom_page_url": "https://app.notion.com/p/H20-2aeffa524c5b80f69bd9d2654fe3ba76",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -285183,7 +285183,7 @@
       "bom_parent_sku": "H30-5",
       "bom_canonical_sku": "H30-5",
       "bom_page_url": "https://app.notion.com/p/H30-5-2ecffa524c5b80bd8a27eb92e4f5ac76",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -285589,7 +285589,7 @@
       "bom_parent_sku": "H16",
       "bom_canonical_sku": "H16",
       "bom_page_url": "https://app.notion.com/p/H16-2aeffa524c5b80d3bc08ff1ba6b3ca9b",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -285886,7 +285886,7 @@
       "bom_parent_sku": "H10",
       "bom_canonical_sku": "H10",
       "bom_page_url": "https://app.notion.com/p/H10-2aeffa524c5b802a9573dcb6e6a12539",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -286071,7 +286071,7 @@
           "sku": "H71-1",
           "price": "70.00",
           "compare_price": null,
-          "qty": -33,
+          "qty": -35,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "",
@@ -286122,7 +286122,7 @@
       "bom_parent_sku": "H71",
       "bom_canonical_sku": "H71",
       "bom_page_url": "https://app.notion.com/p/H71-2aeffa524c5b807388f8f7c1bf8896fa",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -286271,8 +286271,8 @@
       "vendor": "Dutton Brown",
       "status": "active",
       "published": true,
-      "tagline": "Our minimalist towel bar is perfect for the everyday boss who likes a nicely hung towel.",
-      "body_html": "<p>Our minimalist towel bar is perfect for the everyday boss who likes a nicely hung towel. Each bar is crafted from exclusively-designed CNC-machined solid brass.</p>\n<ul></ul>\n<ul></ul>",
+      "tagline": "",
+      "body_html": "<p><meta charset=\"utf-8\"></p>\n<p dir=\"ltr\">Our Throne Towel Bar 24\" is a modern towel bar fit for bathroom royalty.</p>\n<p dir=\"ltr\">CNC-machined from solid brass, it's a clean, minimal bar on two round posts that gives your bath towels the royal treatment they deserve. Mount it beside a tub or shower, across from a vanity, or in a guest bath that deserves an upgrade. In boutique hotels, spas, and fitness studios, it keeps towels tidy and on display. Choose from brass, nickel, or black finishes, with mounting hardware included, each made to order in our Minneapolis studio.</p>\n<p dir=\"ltr\">Long live the bath towel.</p>\n<ul></ul>\n<ul></ul>",
       "image": "https://cdn.shopify.com/s/files/1/0229/6239/files/throne-towel-bar-24-hardware-nickel-1.jpg?v=1775630074",
       "image_alt": "Nickel Throne towel bar 24\" Dutton Brown hardware _hover",
       "gallery": [
@@ -286417,7 +286417,7 @@
       "bom_parent_sku": "H50-24",
       "bom_canonical_sku": "H50-24",
       "bom_page_url": "https://app.notion.com/p/H50-24-2aeffa524c5b800b965cee7978353db6",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -286732,7 +286732,7 @@
       "bom_parent_sku": "H60-18",
       "bom_canonical_sku": "H60-18",
       "bom_page_url": "https://app.notion.com/p/H60-18-2ecffa524c5b806890f6e4545235ac26",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -287016,7 +287016,7 @@
           "sku": "H60-24-1",
           "price": "200.00",
           "compare_price": null,
-          "qty": -343,
+          "qty": -345,
           "option1_name": "Finish",
           "option1": "Brass",
           "option2_name": "",
@@ -287071,7 +287071,7 @@
       "bom_parent_sku": "H60-24",
       "bom_canonical_sku": "H60-24",
       "bom_page_url": "https://app.notion.com/p/H60-24-2aeffa524c5b8016852ff48878fb00f0",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -287413,7 +287413,7 @@
       "bom_parent_sku": "H60-36",
       "bom_canonical_sku": "H60-36",
       "bom_page_url": "https://app.notion.com/p/H60-36-2aeffa524c5b80e2968edb28b62dd728",
-      "bom_last_edited_at": "2026-11-16T14:04:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:04:00.000Z",
       "parts_by_section": {
         "Assembly Parts": [
           {
@@ -288273,7 +288273,7 @@
       "bom_parent_sku": "KL2A",
       "bom_canonical_sku": "KL2A",
       "bom_page_url": "https://app.notion.com/p/KL2A-40fffa524c5b81c08af6e02df62c02df",
-      "bom_last_edited_at": "2026-11-16T14:00:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:00:00.000Z",
       "parts_by_section": {
         "Canopy Parts (KL2A)": [
           {
@@ -289193,7 +289193,7 @@
           "sku": "ER1-4-2",
           "price": "10.00",
           "compare_price": null,
-          "qty": -99,
+          "qty": -100,
           "option1_name": "Finish",
           "option1": "Nickel",
           "option2_name": "Size",
@@ -289319,7 +289319,7 @@
           "sku": "ER1-12-3",
           "price": "25.00",
           "compare_price": null,
-          "qty": -560,
+          "qty": -562,
           "option1_name": "Finish",
           "option1": "Black",
           "option2_name": "Size",
@@ -290472,7 +290472,7 @@
       "bom_parent_sku": "ER1-2",
       "bom_canonical_sku": "ER1-2",
       "bom_page_url": "https://app.notion.com/p/ER1-2-324ffa524c5b81c99fc3fab4d9b06477",
-      "bom_last_edited_at": "2026-11-16T14:02:00.000Z",
+      "bom_last_edited_at": "2026-11-23T14:02:00.000Z",
       "parts_by_section": {
         "🔩 Parts List": [
           {
@@ -292637,7 +292637,7 @@
           "sku": "BULB-A15-W",
           "price": "12.00",
           "compare_price": null,
-          "qty": 1825,
+          "qty": 1827,
           "option1_name": "Brightness",
           "option1": "600 lumens",
           "option2_name": "",
@@ -292757,7 +292757,7 @@
           "sku": "BULB-G16-W",
           "price": "15.00",
           "compare_price": null,
-          "qty": 1545,
+          "qty": 1541,
           "option1_name": "Bulb Finish",
           "option1": "White",
           "option2_name": "Brightness",
@@ -292991,7 +292991,7 @@
           "sku": "BULB-G25-W",
           "price": "15.00",
           "compare_price": null,
-          "qty": 1328,
+          "qty": 1324,
           "option1_name": "Brightness",
           "option1": "550 lumens",
           "option2_name": "",
@@ -297750,7 +297750,7 @@
           "sku": "x-redo",
           "price": "3.99",
           "compare_price": "3.99",
-          "qty": 999732,
+          "qty": 999731,
           "option1_name": "Price",
           "option1": "K8D7L",
           "option2_name": "",
@@ -297764,7 +297764,7 @@
           "sku": "x-redo",
           "price": "4.74",
           "compare_price": "4.74",
-          "qty": 999843,
+          "qty": 999841,
           "option1_name": "Price",
           "option1": "E4Q9N",
           "option2_name": "",
@@ -297778,7 +297778,7 @@
           "sku": "x-redo",
           "price": "5.49",
           "compare_price": "5.49",
-          "qty": 999878,
+          "qty": 999876,
           "option1_name": "Price",
           "option1": "L6S5P",
           "option2_name": "",
@@ -297792,7 +297792,7 @@
           "sku": "x-redo",
           "price": "6.74",
           "compare_price": "6.74",
-          "qty": 999889,
+          "qty": 999888,
           "option1_name": "Price",
           "option1": "F8W4F",
           "option2_name": "",
@@ -297806,7 +297806,7 @@
           "sku": "x-redo",
           "price": "7.74",
           "compare_price": "7.74",
-          "qty": 999865,
+          "qty": 999863,
           "option1_name": "Price",
           "option1": "Z5U4V",
           "option2_name": "",
@@ -297820,7 +297820,7 @@
           "sku": "x-redo",
           "price": "8.99",
           "compare_price": "8.99",
-          "qty": 999887,
+          "qty": 999886,
           "option1_name": "Price",
           "option1": "W6Q4O",
           "option2_name": "",
@@ -297862,7 +297862,7 @@
           "sku": "x-redo",
           "price": "13.24",
           "compare_price": "13.24",
-          "qty": 999908,
+          "qty": 999907,
           "option1_name": "Price",
           "option1": "X7U1Q",
           "option2_name": "",
@@ -297960,7 +297960,7 @@
           "sku": "x-redo",
           "price": "24.49",
           "compare_price": "24.49",
-          "qty": 999978,
+          "qty": 999977,
           "option1_name": "Price",
           "option1": "B1O2X",
           "option2_name": "",
@@ -298016,7 +298016,7 @@
           "sku": "x-redo",
           "price": "31.99",
           "compare_price": "31.99",
-          "qty": 999987,
+          "qty": 999986,
           "option1_name": "Price",
           "option1": "J7E5K",
           "option2_name": "",
@@ -298058,7 +298058,7 @@
           "sku": "x-redo",
           "price": "37.74",
           "compare_price": "37.74",
-          "qty": 999995,
+          "qty": 999994,
           "option1_name": "Price",
           "option1": "U3P1Q",
           "option2_name": "",
